@@ -2,6 +2,9 @@
 
 Sys4AI Memory Service provides project memory for Sys4AI agents.
 
+Public source repository:
+[Omegapy/Sys4AI-Memory-Service](https://github.com/Omegapy/Sys4AI-Memory-Service).
+
 For project specifications, see [SPECS.md](./SPECS.md).
 
 ## Current status
@@ -26,10 +29,40 @@ parent plan `PLAN-20260903-2DA243C0`. It is not a production deployment.
 | Real Cognee bounded run verified | Cognee 1.5.3 created project-confined relational and graph representations, remembered two typed records and one relation, and returned a public record through a stable metadata rejoin. Populated-dataset rebuild, native COGX migration, sustained load, and production recovery remain separate evidence gaps. |
 | Local model checks recorded | Bounded model, cache, and semantic checks are recorded in [the local-model evidence spike](docs/verification/MEM-OQ-004-local-model-spike.md). |
 | Network disabled | The tracked profile uses in-process transport and does not bind a listener. `MemoryService` has no deployment bootstrap, and the HTTP adapter constructs an application but never starts a server. |
-| Not published | This product has no project-local Git repository. It is ignored by the parent depot repository and has no product remote, package publication, deployment, or hosted service. |
+| Source repository | This product has its own Git repository and public origin at `Omegapy/Sys4AI-Memory-Service`. Source installation is supported by `pyproject.toml`; package-index releases, GitHub Pages and a hosted service are separate from source publication. |
 
 A module, passing unit test, installed dependency, or benchmark does not grant
 authority for further action.
+
+## Install the Python package
+
+The package requires Python 3.12. Clone the source, create a local environment
+and install the core package:
+
+```bash
+git clone https://github.com/Omegapy/Sys4AI-Memory-Service.git
+cd Sys4AI-Memory-Service
+python3.12 -m venv .venv
+.venv/bin/python -m pip install .
+.venv/bin/sys4ai-memory --help
+```
+
+With `uv`, the equivalent environment and installation steps are
+`uv venv --python 3.12` and `uv pip install .`.
+
+For a consuming project, install into that project's own environment and pin
+the dependency to a tested full Git commit. Pip supports the requirement form
+`sys4ai-memory-service @ git+https://github.com/Omegapy/Sys4AI-Memory-Service.git@COMMIT_SHA`,
+with `COMMIT_SHA` replaced by the actual revision. Keep the project's resolved
+dependencies in its own lockfile when reproducible installation is required.
+The package imports as `sys4ai_memory` and provides the `sys4ai-memory` command.
+
+Installation supplies the software. Each consumer still needs its own
+configuration, permissions, source registration and memory initialization;
+follow [installation and configuration](docs/operations/installation-and-configuration.md)
+and [memory readiness](docs/operations/memory-readiness-and-activation.md).
+The core installation does not activate Cognee or download models. The Sys4AI
+template's portable clone bootstrap remains separate work.
 
 ## Install the locked environment
 

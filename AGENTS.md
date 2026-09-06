@@ -115,6 +115,14 @@ Task creation, delegation, publication, or external action.
 
 ## Memory readiness handoff
 
+The memory package is `sys4ai-memory-service`; its public home is
+[Omegapy/Sys4AI-Memory-Service](https://github.com/Omegapy/Sys4AI-Memory-Service).
+Explain the installed package in the consumer's `.venv` separately from that
+project's `.sys4ai/memory/` data. For project creation and GitHub sharing, follow
+the template's [package and clone guidance](./Projects/Sys4AI-Template-Project/INIT_MEMORY.md#package-location-and-github-clones).
+A public repository or GitHub Pages documentation link does not establish an
+installable release or working memory after a clone.
+
 Before installing, initializing or relying on project memory, read the
 project-owned [memory control guide](./control_records/memory/README.md) and the
 [readiness and activation procedure](./Projects/Sys4AI-Memory-Service/docs/operations/memory-readiness-and-activation.md).

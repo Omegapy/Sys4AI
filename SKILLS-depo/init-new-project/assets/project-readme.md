@@ -24,6 +24,20 @@ owns those role files and keeps task acceptance with its Director.
 
 ## Local memory
 
+This project uses the `sys4ai-memory-service` Python package, maintained at
+[Sys4AI-Memory-Service on GitHub](https://github.com/Omegapy/Sys4AI-Memory-Service).
+The depot setup installs a locally built wheel into this project's own `.venv`.
+Python imports `sys4ai_memory` there; this project's derived memory data stays
+under `.sys4ai/memory/` and is excluded from Git.
+
+After a GitHub clone, check the project's pinned dependency and local setup
+instructions before using memory. Install the declared package with `pip` or
+`uv pip`, then initialize, synchronize and verify memory for this environment.
+A repository link, requirements file or copied receipt does not establish a
+working installation. If the dependency or clone setup is missing, report that
+gap; the current depot initializer does not generate those sharing components.
+GitHub Pages, if provided, hosts documentation; the memory package runs locally.
+
 For setup, readiness checks and activation decisions, follow the project-owned
 [Memory control guide](./control_records/memory/README.md).
 {manual_guide}

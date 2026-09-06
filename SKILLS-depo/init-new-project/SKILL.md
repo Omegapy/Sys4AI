@@ -2,7 +2,7 @@
 name: init-new-project
 description: Create a new project beneath this Sys4AI depot's Projects folder from its registered template, or prepare an explicitly selected clean manual copy, with the six baseline skills and isolated local memory.
 metadata:
-  version: 1.0.1
+  version: 1.0.2
 ---
 
 # Initialize a Sys4AI project
@@ -99,6 +99,16 @@ command under the user's manual initialization authority, then use the installed
 receipt does not claim initialization. The generic template remains uninitialized.
 
 ## Required readiness handoff to the user and the project agent
+
+Identify the software as `sys4ai-memory-service`, with public home
+[Omegapy/Sys4AI-Memory-Service](https://github.com/Omegapy/Sys4AI-Memory-Service).
+Explain that this route installs a local wheel into the consumer's `.venv`,
+while `.sys4ai/memory/` holds that consumer's data. Carry the template's package
+and GitHub clone guidance through the existing copied `INIT_MEMORY.md` and
+generated README. A successful local creation is not a verified GitHub handoff:
+the shared project needs a real pinned downloadable dependency and supported
+clone setup, which this initializer does not yet generate. Report those gaps
+when present; do not invent a release or present GitHub Pages as the runtime.
 
 After installation, preparation, initialization, or a readiness check in an
 existing project, read that project's current `config/memory.toml`, installed

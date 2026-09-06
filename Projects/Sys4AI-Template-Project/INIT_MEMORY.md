@@ -1,14 +1,71 @@
 # Initialize memory in a real copied project
 
-**This template is not initialized. Keep it uninitialized.** This guide applies
-to a separately selected product copy under this Sys4AI depot's `Projects/`
-folder. Do not run initialization against the template directory.
+**This template is not initialized. Keep it uninitialized.** The depot
+preparation commands below apply to a separately selected product copy under
+Sys4AI's `Projects/` folder. For a shared project cloned elsewhere, use the
+package and clone guidance first. Do not initialize the template directory.
 
 For normal project creation, use the depot's
 [init-new-project skill](../../.agents/skills/init-new-project/SKILL.md). Its
 `create` route completes preparation and direct memory initialization in one
 authorized run. The procedure below covers a clean project that was copied
 manually.
+
+## Package location and GitHub clones
+
+| Item | Location or name |
+| --- | --- |
+| Memory Service public repository | [Omegapy/Sys4AI-Memory-Service](https://github.com/Omegapy/Sys4AI-Memory-Service) |
+| Python distribution | `sys4ai-memory-service` |
+| Python import and installed command | `sys4ai_memory` and `sys4ai-memory` |
+| Installed software | The real project's own `.venv` |
+| Project configuration | `config/memory.toml`, registries, profiles and memory control records |
+| Derived memory data | The real project's `.sys4ai/memory/`, excluded from Git |
+
+**Creating a personal project in the depot:** the current root initializer
+builds or selects an immutable local wheel, installs it with `uv pip` into the
+new project's environment, then prepares and initializes that project's memory.
+The manual preparation route installs the same kind of wheel and returns the
+direct initialization command. Python imports the installed package; it does
+not import the sibling Memory Service source tree.
+
+**Sharing or cloning a project through GitHub:** the recipient needs an
+accessible package revision or release and project-local setup instructions.
+Before calling the project ready to share, provide a pinned Memory Service
+dependency in `requirements.txt` or the project's dependency manifest and lock,
+using a verified GitHub source commit or release wheel. Preserve the real
+dependency filename in the README and setup instructions. Do not commit a
+dependency pointing at the creator's local wheel path or invent a release tag.
+An authorized local development installation can still use a local wheel;
+record that installed origin separately from the portable dependency.
+
+After a real dependency has been declared in `requirements.txt`, install it
+inside the clone's own environment using either `python -m pip install -r
+requirements.txt` or `uv pip install -r requirements.txt`. A requirements file
+only declares dependencies; it does not execute installation. The setup
+procedure must also initialize this clone's memory, synchronize approved
+sources and verify source-backed retrieval. A receipt from another machine is
+historical evidence, not proof of this environment's installation or readiness.
+Use a supported clone/repair procedure when needed; do not edit or delete
+success receipts to bypass an existing-state check.
+
+When taking over a clone, the agent must inspect its dependency declaration,
+installed package and setup procedure before relying on memory. If the package
+has not been published, the dependency declaration is missing, or no supported
+clone setup exists, identify that exact gap. Do not run the depot's
+`prepare-existing` command outside its supported depot or claim that a public
+repository alone makes the cloned project functional. The current depot
+initializer does not yet supply a portable GitHub dependency or clone setup
+command; those need implementation before a new project meets this sharing
+contract. Test the complete setup without access to the original depot.
+
+The public repository is the package's discovery address. Check its current
+contents and releases before selecting an installation target. GitHub Pages,
+if configured later, can host human-facing documentation and installation
+links. A Pages site does not run this Python memory service; the installed
+package runs locally in each consumer project. No Pages URL is assumed here.
+See [pip's Git installation support](https://pip.pypa.io/en/stable/topics/vcs-support/)
+and [GitHub's description of Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
 
 ## Readiness notice for humans and AI agents
 

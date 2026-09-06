@@ -92,14 +92,16 @@ The project container is [Projects](./Projects):
 | --- | --- | --- | --- |
 | Sys4AI depot | `.` | Initialized on `main` | `git@github-omegapy:Omegapy/Sys4AI.git` |
 | Sys4AI Template Project | `Projects/Sys4AI-Template-Project` | Not initialized | Not configured |
-| Sys4AI Memory Service | `Projects/Sys4AI-Memory-Service` | Not initialized | Not configured |
+| Sys4AI Memory Service | `Projects/Sys4AI-Memory-Service` | Initialized on `main` | `git@github-omegapy:Omegapy/Sys4AI-Memory-Service.git` |
 
-The Memory Service and template files are tracked in this root repository and
-published to `Omegapy/Sys4AI`. Their local ignore rules exclude environments,
-credentials, caches and generated runtime data. The root repository excludes
-all other child project working trees. A child can own its own Git history,
-remote and deployment through a separately authorized workflow; storing these
-two projects here does not create independent child repositories.
+The Memory Service now owns an independent repository at
+[Omegapy/Sys4AI-Memory-Service](https://github.com/Omegapy/Sys4AI-Memory-Service).
+The parent still tracks its existing Memory Service snapshot and the template;
+removing that snapshot from parent tracking is a separate migration. Local
+ignore rules exclude environments, credentials, caches and generated runtime
+data. The root repository excludes all other child project working trees.
+The template still has no independent repository. GitHub Pages and deployment
+remain separate from repository publication.
 
 ## Add a future Sys4AI project
 
@@ -142,6 +144,13 @@ later asset refreshes remain separately scoped project work.
 For project memory specifications, see [SPECS.md](./SPECS.md#project-memory).
 For setup, readiness checks and activation decisions, follow the
 [project memory control guide](./control_records/memory/README.md).
+
+The memory software is the `sys4ai-memory-service` Python package, whose public
+home is [Sys4AI-Memory-Service](https://github.com/Omegapy/Sys4AI-Memory-Service).
+The current depot initializer installs a locally built wheel with `uv pip` into
+each project's own `.venv`; each project keeps its memory in `.sys4ai/memory/`.
+For the package location, GitHub clone requirements and the role of GitHub Pages,
+read the template's [package and sharing guide](./Projects/Sys4AI-Template-Project/INIT_MEMORY.md#package-location-and-github-clones).
 
 ## Agent roles
 

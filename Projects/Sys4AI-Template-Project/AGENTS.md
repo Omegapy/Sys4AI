@@ -19,6 +19,18 @@ agent governance and workflow components; it does not supply a product identity.
 
 ## Memory readiness handoff
 
+The software dependency is `sys4ai-memory-service`, imported as
+`sys4ai_memory` from this project's own environment. Its public home is
+[Omegapy/Sys4AI-Memory-Service](https://github.com/Omegapy/Sys4AI-Memory-Service);
+this project's `.sys4ai/memory/` holds its separate derived memory data.
+Use the [package and clone guidance](./INIT_MEMORY.md#package-location-and-github-clones)
+to distinguish depot creation from setup after a GitHub clone. For clone setup,
+inspect the actual pinned dependency and project-local setup instructions;
+report missing distribution or setup support explicitly. Do not interpret a
+copied installation receipt, repository link or requirements file as proof that
+the current environment has working memory. GitHub Pages may provide
+documentation; install a verified package artifact or source revision.
+
 Read [INIT_MEMORY.md](./INIT_MEMORY.md) before installing, initializing or relying
 on memory in a real copied project. The template itself remains uninitialized.
 At setup completion or the first memory-dependent work in an existing project,

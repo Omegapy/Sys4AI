@@ -140,11 +140,14 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertEqual("not_initialized", template_repository["status"])
         self.assertIsNone(template_repository["remote"])
         memory_repository = entries["sys4ai-memory-service"]["repository"]
-        self.assertEqual("not_initialized", memory_repository["status"])
-        self.assertIsNone(memory_repository["remote"])
+        self.assertEqual("initialized", memory_repository["status"])
+        self.assertEqual(
+            "git@github-omegapy:Omegapy/Sys4AI-Memory-Service.git",
+            memory_repository["remote"],
+        )
         self.assertTrue((ROOT / ".git").exists())
         self.assertFalse((TEMPLATE / ".git").exists())
-        self.assertFalse(
+        self.assertTrue(
             (ROOT / "Projects/Sys4AI-Memory-Service/.git").exists()
         )
         for entry in entries.values():

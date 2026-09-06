@@ -13,6 +13,13 @@ manually, follow [Initialize memory in a copied project](./INIT_MEMORY.md).
 The guide uses the depot's shared preparation helper and one direct
 initialization command for the selected copy.
 
+The software package is `sys4ai-memory-service`, maintained at
+[Sys4AI-Memory-Service on GitHub](https://github.com/Omegapy/Sys4AI-Memory-Service).
+Each real project installs its own copy and stores its own memory. The guide's
+[package location and GitHub clone section](./INIT_MEMORY.md#package-location-and-github-clones)
+explains local wheel installation, published dependencies, and what a recipient
+must set up after cloning. Repository existence alone does not supply a package.
+
 **After default setup in a real project, semantic memory is still not ready.**
 Basic exact/keyword memory can work while semantic search is disabled and the
 Cognee backend/models remain inactive. The guide tells both the human and AI
