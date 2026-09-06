@@ -40,13 +40,15 @@ Step-by-step-Comments/
 
 
 # ============================================================
-# Independent Sys4AI project working trees
+# Sys4AI project tracking boundary
 # ============================================================
 
-# Projects below this directory own separate repositories. Keep the container
-# documentation in the root repository, but do not double-track child files.
+# Track the two explicitly included projects and the container guide.
+# All other project working trees remain excluded.
 /Projects/*
 !/Projects/README.md
+!/Projects/Sys4AI-Memory-Service/
+!/Projects/Sys4AI-Template-Project/
 
 
 # ============================================================
@@ -322,6 +324,9 @@ id_ed25519.*
 # ============================================================
 
 .python-version
+
+# The Memory Service Python selector is part of its runtime specification.
+!/Projects/Sys4AI-Memory-Service/.python-version
 
 
 # ============================================================

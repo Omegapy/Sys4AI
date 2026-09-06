@@ -51,8 +51,11 @@ Treat each child as independently owned. Repository status is `initialized`
 only when the child has its own `.git` marker and Git reports that exact child
 as the top-level. An ancestor Sys4AI repository is not the child's repository.
 The template and Memory Service currently have no own markers; their status
-remains `not_initialized`. Creating Git history, remotes or publication state is
-a separate workflow and is not part of initialization.
+remains `not_initialized`. Their files are tracked and published through the
+parent `Omegapy/Sys4AI` repository, as recorded in their inventory notes. Other
+child projects remain excluded from that repository. Creating independent Git
+history, remotes or publication state is a separate workflow and is not part
+of initialization.
 
 Registration is inventory maintenance only. Reusable material lives in the
 root source collections, while active files remain owned by their root or child

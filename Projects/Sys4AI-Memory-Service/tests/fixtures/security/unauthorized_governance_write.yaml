@@ -1,0 +1,16 @@
+schema_version: "1.0"
+fixture_id: "SEC-GOVERNANCE-WRITE-001"
+label: "UNAUTHORIZED GOVERNANCE WRITE TEST DATA"
+requester:
+  principal_id: "fixture-general-agent"
+  permissions:
+    - "read"
+    - "propose"
+requested_record_type: "GovernancePolicy"
+requested_scope:
+  level: "system"
+requested_target: "governance/policy.yaml"
+expected_policy_actions:
+  - "reject"
+  - "stage_for_human_review"
+forbidden_policy_action: "canonical_promotion_without_approval"

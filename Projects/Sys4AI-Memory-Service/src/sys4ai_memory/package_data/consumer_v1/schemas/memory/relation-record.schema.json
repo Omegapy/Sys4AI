@@ -1,0 +1,190 @@
+{
+  "$defs": {
+    "JsonValue": {},
+    "RecordStatus": {
+      "enum": [
+        "proposed",
+        "staged",
+        "approved",
+        "active",
+        "superseded",
+        "rejected",
+        "invalidated",
+        "expired",
+        "withdrawn",
+        "deleted"
+      ],
+      "title": "RecordStatus",
+      "type": "string"
+    },
+    "RelationLifecycle": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/RecordStatus"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "RelationLifecycle",
+      "type": "object"
+    },
+    "RelationSource": {
+      "additionalProperties": false,
+      "properties": {
+        "locator": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Locator",
+          "type": "object"
+        },
+        "source_id": {
+          "maxLength": 255,
+          "pattern": "^src_[A-Za-z0-9][A-Za-z0-9_.:@-]*$",
+          "title": "Source Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "locator"
+      ],
+      "title": "RelationSource",
+      "type": "object"
+    },
+    "RelationValidation": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Confidence"
+        },
+        "state": {
+          "minLength": 1,
+          "title": "State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "state",
+        "confidence"
+      ],
+      "title": "RelationValidation",
+      "type": "object"
+    },
+    "TemporalMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "valid_from": {
+          "format": "date-time",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_to": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Valid To"
+        }
+      },
+      "required": [
+        "valid_from",
+        "valid_to"
+      ],
+      "title": "TemporalMetadata",
+      "type": "object"
+    }
+  },
+  "$id": "relation-record.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "const": "1.0",
+      "title": "Api Version",
+      "type": "string"
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/RelationLifecycle"
+    },
+    "project_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:@/-]*$",
+      "title": "Project Id",
+      "type": "string"
+    },
+    "relation_id": {
+      "maxLength": 255,
+      "pattern": "^rel_[A-Za-z0-9][A-Za-z0-9_.:@-]*$",
+      "title": "Relation Id",
+      "type": "string"
+    },
+    "relation_type": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Z][A-Z0-9_]*$",
+      "title": "Relation Type",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/RelationSource"
+    },
+    "source_record_id": {
+      "maxLength": 255,
+      "pattern": "^mem_[A-Za-z0-9][A-Za-z0-9_.:@-]*$",
+      "title": "Source Record Id",
+      "type": "string"
+    },
+    "target_record_id": {
+      "maxLength": 255,
+      "pattern": "^mem_[A-Za-z0-9][A-Za-z0-9_.:@-]*$",
+      "title": "Target Record Id",
+      "type": "string"
+    },
+    "temporal": {
+      "$ref": "#/$defs/TemporalMetadata"
+    },
+    "validation": {
+      "$ref": "#/$defs/RelationValidation"
+    }
+  },
+  "required": [
+    "schema_version",
+    "api_version",
+    "relation_id",
+    "project_id",
+    "relation_type",
+    "source_record_id",
+    "target_record_id",
+    "source",
+    "validation",
+    "temporal",
+    "lifecycle"
+  ],
+  "title": "RelationRecord",
+  "type": "object",
+  "x-sys4ai-schema-version": "1.0"
+}

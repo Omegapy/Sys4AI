@@ -1,0 +1,127 @@
+schema_version: "1.0"
+api_version: "1.0"
+profile_id: base@1
+version: 1.0.0
+extends: []
+compatibility:
+  sys4ai_memory_api: ">=1.0,<2.0"
+  required_capabilities:
+    - service_health
+    - source_registry
+    - ingestion
+    - exact
+    - lexical
+    - provenance_explanation
+record_types:
+  - name: SourceArtifact
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, source.source_id, source.path, source.content_sha256]
+    semantic_fields: [title, content.exact, content.summary]
+  - name: SourceFragment
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, source.source_id, source.path, source.content_sha256]
+    semantic_fields: [title, content.exact, content.summary]
+  - name: Entity
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, title]
+    semantic_fields: [title, content.exact, content.summary]
+  - name: Statement
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, title]
+    semantic_fields: [title, content.exact, content.summary]
+  - name: Requirement
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, title, content.structured]
+    semantic_fields: [title, content.exact, content.summary]
+  - name: Decision
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, title, content.structured]
+    semantic_fields: [title, content.exact, content.summary]
+  - name: Procedure
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, title]
+    semantic_fields: [title, content.exact, content.summary]
+  - name: Event
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, title]
+    semantic_fields: [title, content.exact, content.summary]
+  - name: Observation
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, title]
+    semantic_fields: [title, content.exact, content.summary]
+  - name: Outcome
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, title]
+    semantic_fields: [title, content.exact, content.summary]
+  - name: Feedback
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, title]
+    semantic_fields: [title, content.exact, content.summary]
+  - name: Relation
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, title]
+    semantic_fields: [title, content.exact, content.summary]
+  - name: Tombstone
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, source.source_id, source.content_sha256]
+    semantic_fields: []
+  - name: ExtensionRecord
+    schema_ref: schemas/memory/memory-record.schema.json
+    exact_fields: [record_id, title]
+    semantic_fields: [title, content.exact, content.summary]
+relations:
+  - CONTAINS
+  - DEFINES
+  - DESCRIBES
+  - IMPLEMENTS
+  - VALIDATES
+  - DEPENDS_ON
+  - BLOCKS
+  - ENABLES
+  - DERIVED_FROM
+  - GENERATED_FROM
+  - CITES
+  - SUPPORTS
+  - CONTRADICTS
+  - SUPERSEDES
+  - INVALIDATES
+  - APPLIES_TO
+  - OWNED_BY
+  - CREATED_BY
+  - REVIEWED_BY
+  - OBSERVED_DURING
+  - RESULTED_IN
+  - SIMILAR_TO
+  - RELATED_TO
+  - HAS_SOURCE
+  - HAS_EVIDENCE
+  - HAS_STATUS
+  - USES
+  - PRODUCES
+source_adapters:
+  - id: markdown
+    formats: [markdown]
+  - id: yaml
+    formats: [yaml]
+  - id: csv
+    formats: [csv]
+  - id: toml
+    formats: [toml]
+  - id: json
+    formats: [json]
+  - id: json_schema
+    formats: [json_schema]
+  - id: jsonl
+    formats: [jsonl]
+  - id: text
+    formats: [text]
+  - id: python
+    formats: [python, source_code]
+  - id: source_code
+    formats: [source_code, javascript, typescript, rust, go, java, c, cpp, shell]
+write_policies:
+  - ref: base-write-policy@1
+retrieval_strategies:
+  - ref: base-hybrid-ranking@1
+evaluations:
+  - ref: tests/golden_queries/queries.jsonl

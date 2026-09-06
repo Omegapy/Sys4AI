@@ -19,8 +19,9 @@ The reusable `SKILLS-depo/` collection contains source packages that can be
 reviewed for later project-local adoption. It is not an installation manager.
 The project template is at `Projects/Sys4AI-Template-Project/`. The independent
 Sys4AI Memory Service product is at `Projects/Sys4AI-Memory-Service/`. Both are
-registered as workspace inventory, excluded from ordinary root-repository
-tracking, and currently have no independent Git repository.
+registered as workspace inventory and stored as ordinary directories in this
+repository. Neither currently has its own Git repository. Other projects remain
+excluded from root-repository tracking.
 
 ## Workspace layout
 
@@ -87,16 +88,18 @@ give the parent authority over a child project's content.
 
 The project container is [Projects](./Projects):
 
-| Project | Local path | Repository | Remote |
+| Project | Local path | Own repository | Own remote |
 | --- | --- | --- | --- |
 | Sys4AI depot | `.` | Initialized on `main` | `git@github-omegapy:Omegapy/Sys4AI.git` |
 | Sys4AI Template Project | `Projects/Sys4AI-Template-Project` | Not initialized | Not configured |
 | Sys4AI Memory Service | `Projects/Sys4AI-Memory-Service` | Not initialized | Not configured |
 
-Each child project can own its own Git history, remote, commits, pushes, and
-deployment. The root repository ignores child working-tree files to avoid
-double-tracking them. Repository creation, submodules, remotes, commits, pushes,
-and deployment require separate explicit authority.
+The Memory Service and template files are tracked in this root repository and
+published to `Omegapy/Sys4AI`. Their local ignore rules exclude environments,
+credentials, caches and generated runtime data. The root repository excludes
+all other child project working trees. A child can own its own Git history,
+remote and deployment through a separately authorized workflow; storing these
+two projects here does not create independent child repositories.
 
 ## Add a future Sys4AI project
 

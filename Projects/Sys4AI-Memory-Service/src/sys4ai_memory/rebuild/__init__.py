@@ -1,0 +1,51 @@
+"""Rollback-safe derived-memory generation rebuilds."""
+
+from .models import (
+    AuthorizedRebuildImpact,
+    DriftItem,
+    DriftKind,
+    DriftReport,
+    GenerationFingerprints,
+    RebuildCheckpoint,
+    RebuildExecutionReceipt,
+    RebuildImpact,
+    RebuildMode,
+    RebuildOutcome,
+    RebuildPreview,
+    RebuildProgress,
+    RebuildStage,
+    SourceDeltaSummary,
+    SourceRevision,
+)
+from .service import (
+    GenerationRebuilder,
+    ProviderStage,
+    ProviderStageFactory,
+    RebuildAuthorizationError,
+    RebuildConflictError,
+    RebuildError,
+)
+
+__all__ = [
+    "AuthorizedRebuildImpact",
+    "DriftItem",
+    "DriftKind",
+    "DriftReport",
+    "GenerationFingerprints",
+    "GenerationRebuilder",
+    "ProviderStage",
+    "ProviderStageFactory",
+    "RebuildAuthorizationError",
+    "RebuildCheckpoint",
+    "RebuildConflictError",
+    "RebuildError",
+    "RebuildExecutionReceipt",
+    "RebuildImpact",
+    "RebuildMode",
+    "RebuildOutcome",
+    "RebuildPreview",
+    "RebuildProgress",
+    "RebuildStage",
+    "SourceDeltaSummary",
+    "SourceRevision",
+]

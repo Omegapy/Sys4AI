@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling==1.32.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sys4ai-memory-service"
+version = "0.1.0"
+description = "Local-first, source-first memory service for Sys4AI projects"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+authors = [{ name = "AngryOwlAI" }]
+dependencies = [
+  "fastapi>=0.116.2,<1",
+  "packaging>=24,<27",
+  "pydantic>=2.10.5,<3",
+  "PyYAML>=6.0.2,<7",
+  "uvicorn>=0.34,<1",
+]
+
+[project.optional-dependencies]
+cognee = [
+  "cognee[fastembed,ollama]==1.5.3",
+]
+dev = [
+  "coverage>=7.6,<8",
+  "httpx>=0.28,<1",
+  "jsonschema>=4.23,<5",
+  "mypy>=1.15,<2",
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.24,<1",
+  "ruff>=0.16,<0.17",
+  "types-PyYAML>=6.0.12,<7",
+]
+
+[project.scripts]
+sys4ai-memory = "sys4ai_memory.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sys4ai_memory"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = [
+  "acceptance: PRD acceptance-case coverage",
+  "benchmark: reference-corpus performance checks",
+  "cognee: requires the real Cognee provider",
+  "integration: multi-component behavior",
+  "security: authority, isolation, secret, and destructive-operation controls",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = [".sys4ai", ".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "S"]
+ignore = ["S101"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["sys4ai_memory"]
+
+[tool.coverage.run]
+branch = true
+source = ["sys4ai_memory"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 85

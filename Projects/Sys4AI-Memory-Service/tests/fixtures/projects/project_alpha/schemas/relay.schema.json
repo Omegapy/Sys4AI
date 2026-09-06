@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sys4ai:fixture-alpha:relay:1",
+  "title": "Alpha relay record",
+  "type": "object",
+  "required": ["relay_id", "project_id", "route_label"],
+  "properties": {
+    "relay_id": {"const": "COMP-ALPHA-RELAY"},
+    "project_id": {"const": "fixture-alpha"},
+    "route_label": {"type": "string", "pattern": "^ALPHA-ROUTE-"}
+  },
+  "additionalProperties": false
+}

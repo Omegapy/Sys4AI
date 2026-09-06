@@ -1,0 +1,86 @@
+"""Versioned provider-neutral contracts for the Sys4AI Memory Service."""
+
+from __future__ import annotations
+
+from ._base import API_VERSION, SCHEMA_VERSION
+from .enums import (
+    AuthorityTier,
+    CoreRecordType,
+    CoreRelation,
+    EpistemicStatus,
+    EvidenceState,
+    MemoryScope,
+    Permission,
+    PolicyAction,
+    RecordStatus,
+    RetrievalMode,
+    Sensitivity,
+    SourceRole,
+    TrustClass,
+)
+from .errors import ErrorCategory, ErrorDetail, ErrorEnvelope
+from .models import (
+    MemoryProfile,
+    MemoryRecord,
+    RebuildReceipt,
+    RelationRecord,
+    RetrievalResult,
+    ScopeReference,
+    SourceRecord,
+    WriteProposal,
+)
+from .operations import (
+    CAPABILITY_CATALOG,
+    MCP_TOOL_CATALOG,
+    PUBLIC_OPERATION_CATALOG,
+    CapabilityDefinition,
+    CapabilityName,
+    McpAnnotations,
+    McpToolDefinition,
+    McpToolName,
+    OperationDefinition,
+    OperationName,
+)
+from .schema import PUBLIC_CONTRACT_MODELS, public_contract_schema, public_contract_schemas
+
+__all__ = [
+    "API_VERSION",
+    "SCHEMA_VERSION",
+    "AuthorityTier",
+    "CAPABILITY_CATALOG",
+    "CapabilityDefinition",
+    "CapabilityName",
+    "CoreRecordType",
+    "CoreRelation",
+    "EpistemicStatus",
+    "ErrorCategory",
+    "ErrorDetail",
+    "ErrorEnvelope",
+    "EvidenceState",
+    "MCP_TOOL_CATALOG",
+    "MemoryProfile",
+    "MemoryRecord",
+    "MemoryScope",
+    "McpAnnotations",
+    "McpToolDefinition",
+    "McpToolName",
+    "OperationDefinition",
+    "OperationName",
+    "PUBLIC_CONTRACT_MODELS",
+    "PUBLIC_OPERATION_CATALOG",
+    "Permission",
+    "PolicyAction",
+    "RebuildReceipt",
+    "RecordStatus",
+    "RelationRecord",
+    "RetrievalMode",
+    "RetrievalResult",
+    "ScopeReference",
+    "Sensitivity",
+    "SourceRecord",
+    "SourceRole",
+    "TrustClass",
+    "WriteProposal",
+    "public_contract_schema",
+    "public_contract_schemas",
+]
