@@ -1,0 +1,29 @@
+<!-- Generated from canonical task.json files. Do not edit directly. -->
+
+# Tasks
+
+- Generated: 2026-09-04T22:06:32-06:00
+- Integrity: valid
+- Counts: open=0, paused=0, awaiting_user=1, blocked=0, completed=14, cancelled=0, close-old-task=0
+
+| Task ID | Name | Status | Created | Updated | Parent | Latest response | Next step |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| TASK-20260902-FFF5E32B | Define Task-triggered Project Director orchestration | awaiting_user | 2026-09-02T10:00:08-06:00 | 2026-09-02T10:23:52-06:00 | None | [RESP-0003](Task-define-task-triggered-project-director-orchestration-2026-09-02--FFF5E32B/responses/Task-Response-0003-2026-09-02T10-23-52-06-00.md) | Confirm whether the user wants the reusable depot sources implemented now or only wanted the TRD scope corrected; if implementation is authorized, create the separately governed implementation plan before editing source assets. |
+| TASK-20260904-3D199F0B | Implement Sys4AI project initialization and Memory System adoption | completed | 2026-09-04T18:02:24-06:00 | 2026-09-04T22:06:31-06:00 | TASK-20260904-87DC2798 | [RESP-0006](Task-implement-sys4ai-project-initialization-and-memory-system-ad-2026-09-04--3D199F0B/responses/Task-Response-0006-2026-09-04T22-06-31-06-00.md) | None |
+| TASK-20260904-5D29651E | Implement automatic Task intake and close-old-task lifecycle | completed | 2026-09-04T17:36:19-06:00 | 2026-09-04T18:06:04-06:00 | None | [RESP-0001](Task-implement-automatic-task-intake-and-close-old-task-lifecycle-2026-09-04--5D29651E/responses/Task-Response-0001-2026-09-04T18-06-04-06-00.md) | None |
+| TASK-20260904-87DC2798 | Plan project initialization with independent repository boundaries | completed | 2026-09-04T17:03:57-06:00 | 2026-09-04T17:17:18-06:00 | None | [RESP-0001](Task-plan-project-initialization-with-independent-repository-boun-2026-09-04--87DC2798/responses/Task-Response-0001-2026-09-04T17-17-18-06-00.md) | None |
+| TASK-20260904-D252517F | Plan Sys4AI project initialization and Memory System adoption | completed | 2026-09-04T12:54:14-06:00 | 2026-09-04T13:16:36-06:00 | TASK-20260904-08E13458 | [RESP-0001](Task-plan-sys4ai-project-initialization-and-memory-system-adoptio-2026-09-04--D252517F/responses/Task-Response-0001-2026-09-04T13-16-36-06-00.md) | None |
+| TASK-20260904-9702FDD5 | Define document-centric To-TRD lifecycle | completed | 2026-09-04T12:40:31-06:00 | 2026-09-04T13:07:06-06:00 | None | [RESP-0007](Task-define-document-centric-to-trd-lifecycle-2026-09-04--9702FDD5/responses/Task-Response-0007-2026-09-04T13-07-06-06-00.md) | None |
+| TASK-20260904-08E13458 | Define project initialization and Memory System adoption | completed | 2026-09-04T08:31:00-06:00 | 2026-09-04T11:54:00-06:00 | None | [RESP-0011](Task-define-project-initialization-and-memory-system-adoption-2026-09-04--08E13458/responses/Task-Response-0011-2026-09-04T11-54-00-06-00.md) | None |
+| TASK-20260903-686CF0D5 | Implement Sys4AI Memory Service | completed | 2026-09-03T12:11:25-06:00 | 2026-09-03T22:56:17-06:00 | TASK-20260903-3F32963C | [RESP-0013](Task-implement-sys4ai-memory-service-2026-09-03--686CF0D5/responses/Task-Response-0013-2026-09-03T22-56-17-06-00.md) | None |
+| TASK-20260903-3F32963C | Plan Sys4AI Memory Service implementation | completed | 2026-09-03T09:42:39-06:00 | 2026-09-03T11:08:14-06:00 | None | [RESP-0001](Task-plan-sys4ai-memory-service-implementation-2026-09-03--3F32963C/responses/Task-Response-0001-2026-09-03T11-08-14-06-00.md) | None |
+| TASK-20260902-1720B124 | Install To-TRD v1.1.0 in root and template project | completed | 2026-09-02T19:00:17-06:00 | 2026-09-02T19:04:59-06:00 | None | [RESP-0001](Task-install-to-trd-v1-1-0-in-root-and-template-project-2026-09-02--1720B124/responses/Task-Response-0001-2026-09-02T19-04-59-06-00.md) | None |
+| TASK-20260902-DBCB8294 | Refine To-TRD Wayfinder clarification flow | completed | 2026-09-02T18:32:33-06:00 | 2026-09-02T18:42:57-06:00 | None | [RESP-0001](Task-refine-to-trd-wayfinder-clarification-flow-2026-09-02--DBCB8294/responses/Task-Response-0001-2026-09-02T18-42-57-06-00.md) | None |
+| TASK-20260902-917EBF9F | Adopt Task-triggered Project Director orchestration across Sys4AI projects | completed | 2026-09-02T17:16:40-06:00 | 2026-09-02T17:29:15-06:00 | TASK-20260902-DC826C26 | [RESP-0001](Task-adopt-task-triggered-project-director-orchestration-across-s-2026-09-02--917EBF9F/responses/Task-Response-0001-2026-09-02T17-29-15-06-00.md) | None |
+| TASK-20260902-DC826C26 | Implement Task-triggered Project Director orchestration | completed | 2026-09-02T11:24:07-06:00 | 2026-09-02T16:13:30-06:00 | TASK-20260902-FFF5E32B | [RESP-0005](Task-implement-task-triggered-project-director-orchestration-2026-09-02--DC826C26/responses/Task-Response-0005-2026-09-02T16-13-30-06-00.md) | None |
+| TASK-20260902-78DA0614 | Plan Task-triggered Project Director orchestration | completed | 2026-09-02T10:39:42-06:00 | 2026-09-02T11:07:25-06:00 | TASK-20260902-FFF5E32B | [RESP-0001](Task-plan-task-triggered-project-director-orchestration-2026-09-02--78DA0614/responses/Task-Response-0001-2026-09-02T11-07-25-06-00.md) | None |
+| TASK-20260829-C695D62A | Install to-implementation-plan in three Sys4AI projects | completed | 2026-08-29T14:25:45-06:00 | 2026-08-29T14:35:40-06:00 | None | [RESP-0001](Task-install-to-implementation-plan-in-three-sys4ai-projects-2026-08-29--C695D62A/responses/Task-Response-0001-2026-08-29T14-35-40-06-00.md) | None |
+
+Use `$task list` or `$task status` to inspect this catalog. `$task <work>` reuses
+a matching active Task or creates one automatically. Work intake closes Tasks
+inactive for 30 days as `close-old-task`; inspection commands never close them.

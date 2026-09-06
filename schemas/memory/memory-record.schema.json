@@ -1,0 +1,645 @@
+{
+  "$defs": {
+    "AuthorityBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical": {
+          "title": "Canonical",
+          "type": "boolean"
+        },
+        "tier": {
+          "$ref": "#/$defs/AuthorityTier"
+        },
+        "trust_class": {
+          "$ref": "#/$defs/TrustClass"
+        }
+      },
+      "required": [
+        "tier",
+        "trust_class",
+        "canonical"
+      ],
+      "title": "AuthorityBinding",
+      "type": "object"
+    },
+    "AuthorityTier": {
+      "enum": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "A7"
+      ],
+      "title": "AuthorityTier",
+      "type": "string"
+    },
+    "EpistemicMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Confidence"
+        },
+        "status": {
+          "$ref": "#/$defs/EpistemicStatus"
+        },
+        "verification": {
+          "minLength": 1,
+          "title": "Verification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "verification",
+        "confidence"
+      ],
+      "title": "EpistemicMetadata",
+      "type": "object"
+    },
+    "EpistemicStatus": {
+      "enum": [
+        "source_statement",
+        "observation",
+        "claim",
+        "fact_candidate",
+        "verified_fact",
+        "hypothesis",
+        "inference",
+        "decision",
+        "procedure",
+        "preference",
+        "constraint",
+        "result",
+        "counterexample",
+        "unknown"
+      ],
+      "title": "EpistemicStatus",
+      "type": "string"
+    },
+    "IndexingMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "exact_fields": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9_.]*$",
+            "type": "string"
+          },
+          "title": "Exact Fields",
+          "type": "array"
+        },
+        "graph_enabled": {
+          "title": "Graph Enabled",
+          "type": "boolean"
+        },
+        "lexical_fields": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9_.]*$",
+            "type": "string"
+          },
+          "title": "Lexical Fields",
+          "type": "array"
+        },
+        "semantic_fields": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9_.]*$",
+            "type": "string"
+          },
+          "title": "Semantic Fields",
+          "type": "array"
+        }
+      },
+      "required": [
+        "exact_fields",
+        "lexical_fields",
+        "semantic_fields",
+        "graph_enabled"
+      ],
+      "title": "IndexingMetadata",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "LifecycleMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/RecordStatus"
+        },
+        "superseded_by": {
+          "items": {
+            "maxLength": 255,
+            "pattern": "^mem_[A-Za-z0-9][A-Za-z0-9_.:@-]*$",
+            "type": "string"
+          },
+          "title": "Superseded By",
+          "type": "array"
+        },
+        "supersedes": {
+          "items": {
+            "maxLength": 255,
+            "pattern": "^mem_[A-Za-z0-9][A-Za-z0-9_.:@-]*$",
+            "type": "string"
+          },
+          "title": "Supersedes",
+          "type": "array"
+        },
+        "valid_from": {
+          "format": "date-time",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_to": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Valid To"
+        }
+      },
+      "required": [
+        "status",
+        "valid_from",
+        "valid_to",
+        "supersedes",
+        "superseded_by"
+      ],
+      "title": "LifecycleMetadata",
+      "type": "object"
+    },
+    "MemoryContent": {
+      "additionalProperties": false,
+      "properties": {
+        "exact": {
+          "minLength": 1,
+          "title": "Exact",
+          "type": "string"
+        },
+        "structured": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Structured",
+          "type": "object"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Summary"
+        }
+      },
+      "required": [
+        "exact",
+        "summary",
+        "structured"
+      ],
+      "title": "MemoryContent",
+      "type": "object"
+    },
+    "MemoryScope": {
+      "enum": [
+        "system",
+        "workspace",
+        "project",
+        "agent_type",
+        "agent_instance",
+        "task",
+        "session",
+        "user"
+      ],
+      "title": "MemoryScope",
+      "type": "string"
+    },
+    "ProcessingMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_version": {
+          "minLength": 1,
+          "title": "Adapter Version",
+          "type": "string"
+        },
+        "deterministic_fields": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9_.]*$",
+            "type": "string"
+          },
+          "title": "Deterministic Fields",
+          "type": "array"
+        },
+        "model_extracted_fields": {
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9_.]*$",
+            "type": "string"
+          },
+          "title": "Model Extracted Fields",
+          "type": "array"
+        },
+        "model_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Model Id"
+        },
+        "parsed_by": {
+          "minLength": 1,
+          "title": "Parsed By",
+          "type": "string"
+        },
+        "processed_at": {
+          "format": "date-time",
+          "title": "Processed At",
+          "type": "string"
+        },
+        "profile_id": {
+          "minLength": 1,
+          "title": "Profile Id",
+          "type": "string"
+        },
+        "prompt_fingerprint": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Prompt Fingerprint"
+        }
+      },
+      "required": [
+        "parsed_by",
+        "adapter_version",
+        "profile_id",
+        "deterministic_fields",
+        "model_extracted_fields",
+        "model_id",
+        "prompt_fingerprint",
+        "processed_at"
+      ],
+      "title": "ProcessingMetadata",
+      "type": "object"
+    },
+    "RecordStatus": {
+      "enum": [
+        "proposed",
+        "staged",
+        "approved",
+        "active",
+        "superseded",
+        "rejected",
+        "invalidated",
+        "expired",
+        "withdrawn",
+        "deleted"
+      ],
+      "title": "RecordStatus",
+      "type": "string"
+    },
+    "ScopeReference": {
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "$ref": "#/$defs/MemoryScope"
+        },
+        "parent_scopes": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ScopeReference"
+          },
+          "title": "Parent Scopes",
+          "type": "array"
+        },
+        "scope_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.:@/-]*$",
+          "title": "Scope Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "level",
+        "scope_id"
+      ],
+      "title": "ScopeReference",
+      "type": "object"
+    },
+    "SecurityMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "contains_secret": {
+          "title": "Contains Secret",
+          "type": "boolean"
+        },
+        "retention_policy": {
+          "minLength": 1,
+          "title": "Retention Policy",
+          "type": "string"
+        },
+        "sensitivity": {
+          "$ref": "#/$defs/Sensitivity"
+        }
+      },
+      "required": [
+        "sensitivity",
+        "contains_secret",
+        "retention_policy"
+      ],
+      "title": "SecurityMetadata",
+      "type": "object"
+    },
+    "Sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "secret-prohibited"
+      ],
+      "title": "Sensitivity",
+      "type": "string"
+    },
+    "SourceAnchor": {
+      "additionalProperties": false,
+      "properties": {
+        "content_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "git_blob_sha": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Git Blob Sha"
+        },
+        "git_commit": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Git Commit"
+        },
+        "locator": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Locator",
+          "type": "object"
+        },
+        "origin_uri": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Origin Uri"
+        },
+        "path": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path"
+        },
+        "source_id": {
+          "maxLength": 255,
+          "pattern": "^src_[A-Za-z0-9][A-Za-z0-9_.:@-]*$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_kind": {
+          "minLength": 1,
+          "title": "Source Kind",
+          "type": "string"
+        },
+        "working_tree_state": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Working Tree State"
+        }
+      },
+      "required": [
+        "source_id",
+        "source_kind",
+        "locator",
+        "content_sha256"
+      ],
+      "title": "SourceAnchor",
+      "type": "object"
+    },
+    "TrustClass": {
+      "enum": [
+        "system-controlled",
+        "human-approved",
+        "schema-validated",
+        "project-authored",
+        "externally-authenticated",
+        "external-unverified",
+        "agent-generated",
+        "model-extracted",
+        "user-supplied",
+        "untrusted"
+      ],
+      "title": "TrustClass",
+      "type": "string"
+    }
+  },
+  "$id": "memory-record.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "const": "1.0",
+      "title": "Api Version",
+      "type": "string"
+    },
+    "authority": {
+      "$ref": "#/$defs/AuthorityBinding"
+    },
+    "content": {
+      "$ref": "#/$defs/MemoryContent"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "epistemic": {
+      "$ref": "#/$defs/EpistemicMetadata"
+    },
+    "indexing": {
+      "$ref": "#/$defs/IndexingMetadata"
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/LifecycleMetadata"
+    },
+    "namespace": {
+      "minLength": 1,
+      "title": "Namespace",
+      "type": "string"
+    },
+    "processing": {
+      "$ref": "#/$defs/ProcessingMetadata"
+    },
+    "profile_type": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Profile Type"
+    },
+    "project_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:@/-]*$",
+      "title": "Project Id",
+      "type": "string"
+    },
+    "record_id": {
+      "maxLength": 255,
+      "pattern": "^mem_[A-Za-z0-9][A-Za-z0-9_.:@-]*$",
+      "title": "Record Id",
+      "type": "string"
+    },
+    "record_type": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Z][A-Za-z0-9_]*$",
+      "title": "Record Type",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/ScopeReference"
+    },
+    "security": {
+      "$ref": "#/$defs/SecurityMetadata"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceAnchor"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "version": {
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "api_version",
+    "record_id",
+    "record_type",
+    "profile_type",
+    "project_id",
+    "namespace",
+    "scope",
+    "title",
+    "content",
+    "source",
+    "authority",
+    "epistemic",
+    "lifecycle",
+    "security",
+    "processing",
+    "indexing",
+    "created_at",
+    "updated_at",
+    "version"
+  ],
+  "title": "MemoryRecord",
+  "type": "object",
+  "x-sys4ai-schema-version": "1.0"
+}

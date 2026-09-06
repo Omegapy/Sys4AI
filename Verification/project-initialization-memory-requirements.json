@@ -1,0 +1,255 @@
+[
+  {
+    "requirement_id": "REQ-001",
+    "title": "Shared canonical/manual architecture",
+    "acceptance_criteria": [
+      "The implemented canonical and manual workflows both start from `Projects/Sys4AI-Template-Project/` and converge on the same required project identity, governed assets, Memory System procedure, and verification outcomes."
+    ],
+    "observed_result": "Final source and active 17-case suites plus independent direct/nested routes use one template, six assets and installed bootstrap.",
+    "evidence_locator": "Verification/project-initialization-memory-forward-verification.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-002",
+    "title": "Source and active initializer packages",
+    "acceptance_criteria": [
+      "Both skill packages exist at their approved source and active paths, have a documented source-to-destination relationship, pass their package checks, and do not claim automatic synchronization after adoption."
+    ],
+    "observed_result": "Nine-file exact source/active manifests, recorded reviewed adoption and both final 17-case suites; no ongoing asset propagation.",
+    "evidence_locator": "Verification/project-initialization-memory-integrated-verification.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-003",
+    "title": "Exact registered template",
+    "acceptance_criteria": [
+      "The root workflow resolves that exact registered path, verifies that it is still identified as `kind: project-template`, and rejects an ambiguous, missing, or substituted template path."
+    ],
+    "observed_result": "Production resolver and registry schema/substitution/identity cases require the exact registered project-template path.",
+    "evidence_locator": "Verification/project-initialization-memory-initializer.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-004",
+    "title": "Clean seed before new runtime",
+    "acceptance_criteria": [
+      "A created project contains the approved starter inventory and does not contain `.venv`, `.ruff_cache`, `.DS_Store`, `__pycache__`, `.sys4ai/memory`, provider databases, model caches, or template-generated runtime state."
+    ],
+    "observed_result": "Allowlist tests exclude every template environment, cache, OS/Git and derived artifact before publication. Subsequent newly created .venv and .sys4ai are required by REQ-018, not copied template state.",
+    "evidence_locator": "Verification/project-initialization-memory-initializer.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-005",
+    "title": "Specialized identity",
+    "acceptance_criteria": [
+      "The resulting README and governed configuration contain the approved project identity, no active artifact identifies the product as \u201cSys4AI Template Project,\u201d and the stable ID is unique in the registry."
+    ],
+    "observed_result": "Direct and manual README/project.json/config, unique registry IDs and source/destination receipts verified, including malformed/reserved/collision refusals.",
+    "evidence_locator": "Verification/project-initialization-memory-forward-verification.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-006",
+    "title": "Factual transactional inventory",
+    "acceptance_criteria": [
+      "The registry contains one schema-valid entry with the approved stable ID and real root-relative path, and it does not invent a repository, remote, publication, or deployment state."
+    ],
+    "observed_result": "One schema-valid exact relative entry; stale/hash/ID/path conflicts refuse and reruns do not duplicate. Own Git marker/top-level required; no parent identity inheritance.",
+    "evidence_locator": "Verification/project-initialization-memory-forward-verification.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-007",
+    "title": "Six complete baseline skills",
+    "acceptance_criteria": [
+      "A new project contains complete validated copies of exactly the six baseline packages from their reviewed source versions, and no additional or future skill package is installed without explicit selection."
+    ],
+    "observed_result": "Exact package content hashes and per-package source/destination versions for exactly six adopted packages. Portable adopted-package checks pass; unchanged producer-only failures explicitly classified.",
+    "evidence_locator": "Verification/project-initialization-memory-initializer.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-008",
+    "title": "Baseline soul copy",
+    "acceptance_criteria": [
+      "The new project\u2019s `SOUL.md` is a verified project-local copy of the reviewed `SOULS-depo/SOUL.md` source, no additional or alternative soul is installed without explicit selection, and later source changes do not silently alter the project copy."
+    ],
+    "observed_result": "All actual consumer SOUL hashes match the reviewed SOULS-depo source, no alternative installed, later source edits leave copies unchanged.",
+    "evidence_locator": "Verification/project-initialization-memory-forward-verification.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-009",
+    "title": "Independent project ownership",
+    "acceptance_criteria": [
+      "Documentation and behavior state that no reusable-source change propagates automatically and that every later refresh requires a new exact project-local adoption decision and verification."
+    ],
+    "observed_result": "Explicit adoption records and source-edit/no-op tests preserve project-owned copies. Current docs require separately scoped later refresh.",
+    "evidence_locator": "Verification/project-initialization-memory-template-and-adoption.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-010",
+    "title": "One shared memory procedure",
+    "acceptance_criteria": [
+      "All three entry paths resolve the same configuration, path-isolation, validation, and verification contracts without duplicating executable initialization logic, while entry-specific authorization behavior follows the applicable requirements."
+    ],
+    "observed_result": "Direct create/manual and live root reviewed entry delegate to the same installed configuration/preflight/storage code; only root uses impact digest.",
+    "evidence_locator": "Verification/project-initialization-memory-direct-bootstrap.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-011",
+    "title": "Portable manual guide",
+    "acceptance_criteria": [
+      "The template README has a valid relative link to `INIT_MEMORY.md`, the guide clearly states that the template itself is not initialized, and a copied project agent can identify the canonical initialization procedure and required approvals from the local files."
+    ],
+    "observed_result": "Prominent template README link, actual shared preparation/init commands, tested direct and nested portable guide links; permission context and template-uninitialized statement.",
+    "evidence_locator": "Verification/project-initialization-memory-template-and-adoption.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-012",
+    "title": "Uninitialized template",
+    "acceptance_criteria": [
+      "Template validation confirms that no `.sys4ai/memory` state, Cognee database, project-specific memory identity, runtime log, model cache, or initialization receipt exists after documentation and skill changes."
+    ],
+    "observed_result": "Actual template seven-case suite and complete protected manifest: no specialized memory identity/config, index, provider/model state, logs or receipt.",
+    "evidence_locator": "Verification/project-initialization-memory-template-and-adoption.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-013",
+    "title": "Independent depot memory",
+    "acceptance_criteria": [
+      "The depot has reviewed project-specific configuration, a digest-bound initialization receipt, and derived storage beneath `/Volumes/P-SSD/AngryOwl/Sys4AI/.sys4ai/memory/` without borrowing the Memory Service product\u2019s dataset or storage."
+    ],
+    "observed_result": "Live sys4ai-depot/sys4ai-depot-memory configuration and accepted digest b5b34a4a... receipt; root-local private exact index and successful canonical-backed recall.",
+    "evidence_locator": "Verification/sys4ai-depot-functional-memory.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-014",
+    "title": "Child exclusion",
+    "acceptance_criteria": [
+      "Root source discovery and recall tests show that content beneath independent child-project roots is absent unless a separately authorized cross-project request and canonical grant explicitly permits it."
+    ],
+    "observed_result": "All Projects descendants excluded independent of registration/Git; live SQLite has zero child-source records, only root project, and explicit cross-project request is permission denied.",
+    "evidence_locator": "Verification/sys4ai-depot-functional-memory.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-015",
+    "title": "Private per-project paths",
+    "acceptance_criteria": [
+      "Two independently initialized projects resolve all listed state to different roots beneath their respective projects, and neither creates or uses `~/.cognee/logs` or another account-wide memory/log directory."
+    ],
+    "observed_result": "Controlled real Cognee processes use distinct data/system/cache/log/model roots and no user-wide writes; seven installed consumers have distinct private paths and 0700/0600 modes.",
+    "evidence_locator": "Verification/project-initialization-memory-two-projects.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-016",
+    "title": "Distinct runtime and dataset identities",
+    "acceptance_criteria": [
+      "Cross-project requests fail closed, each initialized runtime reports the expected project and dataset, and a two-project test finds no record, graph relation, cache entry, or provider handle crossing the boundary."
+    ],
+    "observed_result": "Seven independent consumer footprints and two-provider tests; four crossed project/dataset contexts refuse and own/foreign retrieval is one/zero.",
+    "evidence_locator": "Verification/project-initialization-memory-forward-verification.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-017",
+    "title": "Preflight before derived writes",
+    "acceptance_criteria": [
+      "A non-mutating preflight proves that `.sys4ai/memory`, model caches, provider paths, credentials, environments, and excluded transient files cannot enter canonical source discovery or version control before initialization apply is offered."
+    ],
+    "observed_result": "Canonical preparation installs ignore/exclusion and path/secret protections; invalid paths/identity/config fail before storage; installed provider module config smoke does not import Cognee.",
+    "evidence_locator": "Verification/project-initialization-memory-provider-isolation.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-018",
+    "title": "Direct no-preview bootstrap",
+    "acceptance_criteria": [
+      "The canonical path produces initialized project-local Memory System state in its single authorized run; the manual path produces the equivalent state after one explicit `init-memory` invocation; neither path generates, stores, displays, or requests approval of a preview or preview digest; and required identity, path, configuration, secret, and isolation checks fail closed before writes."
+    ],
+    "observed_result": "One canonical create run or manual returned init-memory argv once yields exact-ready receipt; no preview fields. All internal validation/failure atomicity cases pass.",
+    "evidence_locator": "Verification/project-initialization-memory-forward-verification.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-019",
+    "title": "Safe convergence and reruns",
+    "acceptance_criteria": [
+      "Tests cover a new empty destination, an equivalent rerun, a conflicting nonempty destination, an existing registry ID/path, and a manual-template project; equivalent state is reported without duplication and conflicts stop before mutation."
+    ],
+    "observed_result": "Empty/manual/occupied/duplicate/stale/failure scenarios verified; 21 forbidden commands preserve full fixture manifests, four equivalent no-ops and owned recovery verified.",
+    "evidence_locator": "Verification/project-initialization-memory-forward-verification.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-020",
+    "title": "Reviewable initialization outcomes",
+    "acceptance_criteria": [
+      "A created project has a reviewable result or receipt listing actual source versions, destination paths, project and dataset IDs, checks run, pass/fail outcomes, and any deliberately deferred provider/model activation without recording secrets."
+    ],
+    "observed_result": "Actual schema-checked project/asset/registry/runtime/functional-memory receipts include hashes, paths, IDs, checks and truthful deferred model/provider state without credentials.",
+    "evidence_locator": "Verification/project-initialization-memory-forward-verification.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-021",
+    "title": "Immutable per-consumer runtime",
+    "acceptance_criteria": [
+      "The package artifact has a recorded version and SHA-256 digest, the consumer environment installs and loads that exact artifact without an editable sibling-path dependency or copied source tree, and later edits in the Memory Service checkout do not change the installed consumer runtime."
+    ],
+    "observed_result": "Final wheel4970a7... binds source manifest f2fa121... and null own Git metadata. Root and fixtures install noneditable exact members; independent builds match hash and source edits do not change installed bytes.",
+    "evidence_locator": "Verification/project-initialization-memory-integrated-verification.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-022",
+    "title": "Bounded Projects destinations",
+    "acceptance_criteria": [
+      "A valid new destination beneath the registered `Projects/` container is accepted; the depot root, the template\u2019s own path, existing unrelated paths, symlink escapes, traversal attempts, and destinations outside the depot are rejected before any filesystem or registry mutation."
+    ],
+    "observed_result": "Production helper pins owning depot; direct/nested valid destinations accepted; root/template/occupied/symlink/traversal/outside and registry-substitution refusals preserve state.",
+    "evidence_locator": "Verification/project-initialization-memory-forward-verification.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-023",
+    "title": "All 16 tiered root source categories",
+    "acceptance_criteria": [
+      "The root source registry covers every named source, distinguishes active root authority from reusable depot material and evidential records, preserves canonical-file reread for execution-critical state, and excludes every independent child project and all derived, environment, cache, model, secret, temporary, and raw-log paths."
+    ],
+    "observed_result": "432-row reviewed root registry distinguishes active A1/A2, ordinary A3 and evidence/reusable A5 namespaces. Six fixture tests, canonical reread tests and actual 263-source sync pass with all prohibited classes excluded.",
+    "evidence_locator": "Verification/sys4ai-depot-functional-memory.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-024",
+    "title": "Reviewed future-folder registration",
+    "acceptance_criteria": [
+      "A representative eligible future root-owned folder enters memory only after a reviewed registration records its owner, relevance, path, format, namespace, canonicality, authority, trust, sensitivity, retention, and write policy; the same unregistered folder is not ingested; and child-project, derived, cache, environment, secret, temporary, and raw-log folders remain excluded."
+    ],
+    "observed_result": "Installed default-deny to reviewed admission, complete metadata/current grant/hash CAS, canonical reread, own-only recall, preserved exclusions and no-op; corrected unauthorized CLI emits JSON/exit2.",
+    "evidence_locator": "Verification/project-initialization-memory-forward-verification.md",
+    "verification_level": "end_to_end_verified"
+  },
+  {
+    "requirement_id": "REQ-025",
+    "title": "Independent repository boundaries",
+    "acceptance_criteria": [
+      "Each affected project has a recorded resolved path, observed Git top-level, repository marker, current HEAD where available, and its own protected-work baseline. An ancestor Git root is never reported as the child project repository.",
+      "Sys4AI root memory excludes Projects and every independently owned child tree regardless of registry membership or whether a Git marker is present.",
+      "Template copying excludes .git directories and gitfiles, remotes, indexes, worktree metadata, and repository history; no Git initialization or repository mutation occurs under project creation authority.",
+      "The template and Memory Service repository mismatch and the future-project Git provisioning boundary have an explicit user disposition or separate prerequisite before dependent work is accepted."
+    ],
+    "observed_result": "User explicitly resolved Q-001 to current folders/Git separate. Root/Electronics own roots and HEADs inspected, template/product own Git null; source/package manifests bind product provenance. All .git metadata/protected work remains unchanged.",
+    "evidence_locator": "Verification/project-initialization-memory-impact-matrix.md",
+    "verification_level": "end_to_end_verified"
+  }
+]

@@ -1,0 +1,292 @@
+{
+  "$defs": {
+    "AuthorityTier": {
+      "enum": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "A7"
+      ],
+      "title": "AuthorityTier",
+      "type": "string"
+    },
+    "ProfileBehaviorReference": {
+      "additionalProperties": false,
+      "description": "Opaque behavior reference with an explicit maximum authority tier.",
+      "properties": {
+        "authority_tier": {
+          "$ref": "#/$defs/AuthorityTier",
+          "default": "A7"
+        },
+        "ref": {
+          "minLength": 1,
+          "title": "Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref"
+      ],
+      "title": "ProfileBehaviorReference",
+      "type": "object"
+    },
+    "ProfileCompatibility": {
+      "additionalProperties": false,
+      "properties": {
+        "required_capabilities": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Required Capabilities",
+          "type": "array"
+        },
+        "sys4ai_memory_api": {
+          "minLength": 1,
+          "title": "Sys4Ai Memory Api",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sys4ai_memory_api",
+        "required_capabilities"
+      ],
+      "title": "ProfileCompatibility",
+      "type": "object"
+    },
+    "ProfileRecordTypeDefinition": {
+      "additionalProperties": false,
+      "description": "Record declaration with fields for every supported index channel.",
+      "properties": {
+        "exact_fields": {
+          "default": [],
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9_.]*$",
+            "type": "string"
+          },
+          "title": "Exact Fields",
+          "type": "array"
+        },
+        "lexical_fields": {
+          "default": [],
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9_.]*$",
+            "type": "string"
+          },
+          "title": "Lexical Fields",
+          "type": "array"
+        },
+        "name": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Z][A-Za-z0-9_]*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "schema_ref": {
+          "minLength": 1,
+          "title": "Schema Ref",
+          "type": "string"
+        },
+        "semantic_fields": {
+          "default": [],
+          "items": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9_.]*$",
+            "type": "string"
+          },
+          "title": "Semantic Fields",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "schema_ref"
+      ],
+      "title": "ProfileRecordTypeDefinition",
+      "type": "object"
+    },
+    "ProfileReference": {
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "minLength": 1,
+          "title": "Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref"
+      ],
+      "title": "ProfileReference",
+      "type": "object"
+    },
+    "ProfileSourceAdapter": {
+      "additionalProperties": false,
+      "properties": {
+        "formats": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Formats",
+          "type": "array"
+        },
+        "id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.:@/-]*$",
+          "title": "Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "formats"
+      ],
+      "title": "ProfileSourceAdapter",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Loaded profile plus optional, backward-compatible extension declarations.",
+  "properties": {
+    "api_version": {
+      "const": "1.0",
+      "title": "Api Version",
+      "type": "string"
+    },
+    "compatibility": {
+      "$ref": "#/$defs/ProfileCompatibility"
+    },
+    "context_assembly_rules": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ProfileBehaviorReference"
+      },
+      "title": "Context Assembly Rules",
+      "type": "array"
+    },
+    "evaluations": {
+      "items": {
+        "$ref": "#/$defs/ProfileReference"
+      },
+      "title": "Evaluations",
+      "type": "array"
+    },
+    "extends": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Extends",
+      "type": "array"
+    },
+    "instructions": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ProfileBehaviorReference"
+      },
+      "title": "Instructions",
+      "type": "array"
+    },
+    "profile_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:@/-]*$",
+      "title": "Profile Id",
+      "type": "string"
+    },
+    "record_types": {
+      "items": {
+        "$ref": "#/$defs/ProfileRecordTypeDefinition"
+      },
+      "title": "Record Types",
+      "type": "array"
+    },
+    "relations": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[A-Z][A-Z0-9_]*$",
+        "type": "string"
+      },
+      "title": "Relations",
+      "type": "array"
+    },
+    "reranking_rules": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ProfileBehaviorReference"
+      },
+      "title": "Reranking Rules",
+      "type": "array"
+    },
+    "retention_policies": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ProfileBehaviorReference"
+      },
+      "title": "Retention Policies",
+      "type": "array"
+    },
+    "retrieval_strategies": {
+      "items": {
+        "$ref": "#/$defs/ProfileBehaviorReference"
+      },
+      "title": "Retrieval Strategies",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_adapters": {
+      "items": {
+        "$ref": "#/$defs/ProfileSourceAdapter"
+      },
+      "title": "Source Adapters",
+      "type": "array"
+    },
+    "version": {
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$",
+      "title": "Version",
+      "type": "string"
+    },
+    "write_policies": {
+      "items": {
+        "$ref": "#/$defs/ProfileBehaviorReference"
+      },
+      "title": "Write Policies",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "api_version",
+    "profile_id",
+    "version",
+    "extends",
+    "compatibility",
+    "record_types",
+    "relations",
+    "source_adapters",
+    "write_policies",
+    "retrieval_strategies",
+    "evaluations"
+  ],
+  "title": "ProfileDefinition",
+  "type": "object"
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "task_id": "TASK-20260902-DBCB8294",
+  "name": "Refine To-TRD Wayfinder clarification flow",
+  "original_name": "Refine To-TRD Wayfinder clarification flow",
+  "slug": "refine-to-trd-wayfinder-clarification-flow",
+  "folder_name": "Task-refine-to-trd-wayfinder-clarification-flow-2026-09-02--DBCB8294",
+  "description": "Modify only the reusable SKILLS-depo/to-trd source package so optional Wayfinder-style clarification happens conversationally and user answers are translated into the TRD requirements baseline without embedding unresolved interview questions for downstream planning.",
+  "definition_of_done": [
+    "The source skill uses the fast path when the user's intent is already clear and asks clarification questions only when a material ambiguity affects the requirements.",
+    "When clarification is needed, the source skill asks one material question at a time, uses each answer to choose any necessary follow-up, and never answers a human preference question for the user.",
+    "Newly created or updated TRDs capture clarified answers as sourced user intent, decisions, scope, requirements, assumptions, or acceptance criteria and do not persist unresolved clarification-question prompts.",
+    "Draft handling preserves known intent and unresolved scope truthfully without presenting the draft as implementation-ready or losing compatibility with existing TRDs.",
+    "SKILLS-depo/to-trd documentation, template, example, helper behavior, and focused regression tests are internally consistent and all relevant validation passes.",
+    "Only SKILLS-depo/to-trd and this new Task's governed ledger records change; TASK-20260902-FFF5E32B and .agents/skills/to-trd remain unchanged."
+  ],
+  "created_at": "2026-09-02T18:32:33-06:00",
+  "updated_at": "2026-09-02T18:42:57-06:00",
+  "status": "completed",
+  "parent_task_id": null,
+  "revision": 2,
+  "response_count": 1,
+  "last_response": {
+    "response_id": "RESP-0001",
+    "sequence": 1,
+    "created_at": "2026-09-02T18:42:57-06:00",
+    "path": "responses/Task-Response-0001-2026-09-02T18-42-57-06-00.md",
+    "supersedes_response_id": null
+  },
+  "current_summary": "The reusable SKILLS-depo/to-trd package is updated to version 1.1.0. Clarification questions stay in the conversation; material answers flow into sourced TRD intent, decisions, scope, requirements, assumptions, and acceptance criteria. New and updated TRDs cannot persist Open questions or question-form Not yet specified entries. Legacy TRDs remain readable, and focused verification passes.",
+  "next_step": null,
+  "blockers": [],
+  "open_questions": [],
+  "thread_refs": []
+}

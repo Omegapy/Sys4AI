@@ -1,0 +1,332 @@
+{
+  "$defs": {
+    "EvidenceReference": {
+      "additionalProperties": false,
+      "properties": {
+        "record_id": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "pattern": "^mem_[A-Za-z0-9][A-Za-z0-9_.:@-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Record Id"
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "pattern": "^src_[A-Za-z0-9][A-Za-z0-9_.:@-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Id"
+        }
+      },
+      "title": "EvidenceReference",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "MemoryScope": {
+      "enum": [
+        "system",
+        "workspace",
+        "project",
+        "agent_type",
+        "agent_instance",
+        "task",
+        "session",
+        "user"
+      ],
+      "title": "MemoryScope",
+      "type": "string"
+    },
+    "PolicyAction": {
+      "enum": [
+        "reject",
+        "session_only",
+        "episodic_commit",
+        "derived_commit",
+        "stage_for_review",
+        "canonical_promotion"
+      ],
+      "title": "PolicyAction",
+      "type": "string"
+    },
+    "PolicyResult": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/PolicyAction"
+        },
+        "policy_id": {
+          "minLength": 1,
+          "title": "Policy Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Reasons",
+          "type": "array"
+        }
+      },
+      "required": [
+        "action",
+        "policy_id",
+        "reasons"
+      ],
+      "title": "PolicyResult",
+      "type": "object"
+    },
+    "ProposalPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "content"
+      ],
+      "title": "ProposalPayload",
+      "type": "object"
+    },
+    "RecordStatus": {
+      "enum": [
+        "proposed",
+        "staged",
+        "approved",
+        "active",
+        "superseded",
+        "rejected",
+        "invalidated",
+        "expired",
+        "withdrawn",
+        "deleted"
+      ],
+      "title": "RecordStatus",
+      "type": "string"
+    },
+    "RequestedTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "title": "RequestedTarget",
+      "type": "object"
+    },
+    "RequesterIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "agent_type": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.:@/-]*$",
+          "title": "Agent Type",
+          "type": "string"
+        },
+        "principal_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.:@/-]*$",
+          "title": "Principal Id",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.:@/-]*$",
+          "title": "Run Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "principal_id",
+        "agent_type",
+        "run_id"
+      ],
+      "title": "RequesterIdentity",
+      "type": "object"
+    },
+    "ScopeReference": {
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "$ref": "#/$defs/MemoryScope"
+        },
+        "parent_scopes": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ScopeReference"
+          },
+          "title": "Parent Scopes",
+          "type": "array"
+        },
+        "scope_id": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z][A-Za-z0-9_.:@/-]*$",
+          "title": "Scope Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "level",
+        "scope_id"
+      ],
+      "title": "ScopeReference",
+      "type": "object"
+    },
+    "Sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "secret-prohibited"
+      ],
+      "title": "Sensitivity",
+      "type": "string"
+    },
+    "TrustClass": {
+      "enum": [
+        "system-controlled",
+        "human-approved",
+        "schema-validated",
+        "project-authored",
+        "externally-authenticated",
+        "external-unverified",
+        "agent-generated",
+        "model-extracted",
+        "user-supplied",
+        "untrusted"
+      ],
+      "title": "TrustClass",
+      "type": "string"
+    }
+  },
+  "$id": "write-proposal.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "const": "1.0",
+      "title": "Api Version",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/EvidenceReference"
+      },
+      "minItems": 1,
+      "title": "Evidence",
+      "type": "array"
+    },
+    "idempotency_key": {
+      "minLength": 1,
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "policy_result": {
+      "$ref": "#/$defs/PolicyResult"
+    },
+    "project_id": {
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:@/-]*$",
+      "title": "Project Id",
+      "type": "string"
+    },
+    "proposal": {
+      "$ref": "#/$defs/ProposalPayload"
+    },
+    "proposal_id": {
+      "maxLength": 255,
+      "pattern": "^mwp_[A-Za-z0-9][A-Za-z0-9_.:@-]*$",
+      "title": "Proposal Id",
+      "type": "string"
+    },
+    "requested_record_type": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Z][A-Za-z0-9_]*$",
+      "title": "Requested Record Type",
+      "type": "string"
+    },
+    "requested_scope": {
+      "$ref": "#/$defs/ScopeReference"
+    },
+    "requested_target": {
+      "$ref": "#/$defs/RequestedTarget"
+    },
+    "requester": {
+      "$ref": "#/$defs/RequesterIdentity"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sensitivity": {
+      "$ref": "#/$defs/Sensitivity"
+    },
+    "status": {
+      "$ref": "#/$defs/RecordStatus"
+    },
+    "trust_class": {
+      "$ref": "#/$defs/TrustClass"
+    }
+  },
+  "required": [
+    "schema_version",
+    "api_version",
+    "proposal_id",
+    "idempotency_key",
+    "project_id",
+    "requester",
+    "requested_record_type",
+    "requested_scope",
+    "requested_target",
+    "proposal",
+    "evidence",
+    "trust_class",
+    "sensitivity",
+    "policy_result",
+    "status",
+    "created_at"
+  ],
+  "title": "WriteProposal",
+  "type": "object",
+  "x-sys4ai-schema-version": "1.0"
+}
