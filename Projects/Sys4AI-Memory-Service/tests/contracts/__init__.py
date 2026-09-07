@@ -1,2 +1,0 @@
-"""Focused public-contract tests."""
-

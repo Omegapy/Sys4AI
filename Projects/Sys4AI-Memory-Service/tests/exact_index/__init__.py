@@ -1,1 +1,0 @@
-"""Focused deterministic-index tests."""

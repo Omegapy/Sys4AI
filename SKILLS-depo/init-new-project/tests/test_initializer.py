@@ -1,13 +1,14 @@
-"""Boundary and recovery contracts, exercised only in test-owned depot copies."""
+"""Governance setup boundaries and recovery in disposable depot fixtures."""
 
 from __future__ import annotations
 
+import ast
+import fcntl
 import importlib.util
 import json
 import os
-import re
+import select
 import shutil
-import sqlite3
 import subprocess
 import sys
 import tempfile
@@ -16,181 +17,88 @@ from pathlib import Path
 from unittest.mock import patch
 
 SOURCE_SKILL = Path(__file__).resolve().parents[1]
-if SOURCE_SKILL.parent.name == "SKILLS-depo":
-    SOURCE_DEPOT = SOURCE_SKILL.parents[1]
-elif SOURCE_SKILL.parent.name == "skills" and SOURCE_SKILL.parents[1].name == ".agents":
-    SOURCE_DEPOT = SOURCE_SKILL.parents[2]
-else:
-    raise RuntimeError("Initializer tests must run from a source or active depot package")
-BASELINE = (
-    "agent-task",
-    "communication",
-    "manage-subagent-roles",
-    "task",
-    "to-implementation-plan",
-    "to-trd",
-)
+BASELINE = ("agent-task", "communication", "init-new-project", "manage-subagent-roles",
+            "task", "to-implementation-plan", "to-trd")
 
 
 def load_helper(skill: Path):
-    spec = importlib.util.spec_from_file_location(
-        "fixture_initializer", skill / "scripts/init_new_project.py"
-    )
+    spec = importlib.util.spec_from_file_location("fixture_initializer", skill / "scripts/init_new_project.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 
 
+SOURCE_DEPOT = load_helper(SOURCE_SKILL).installed_locations()[0]
+
+
 def fixture_depot(base: Path) -> Path:
     root = base / "Sys4AI"
-    root.mkdir()
+    root.mkdir(parents=True)
     (root / "depot").mkdir()
     (root / "Projects").mkdir()
-    shutil.copytree(
-        SOURCE_SKILL,
-        root / "SKILLS-depo/init-new-project",
-        ignore=shutil.ignore_patterns("__pycache__", ".DS_Store"),
-    )
-    for name in BASELINE:
-        shutil.copytree(
-            SOURCE_DEPOT / "SKILLS-depo" / name,
-            root / "SKILLS-depo" / name,
-            ignore=shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc"),
-        )
-    (root / "SOULS-depo").mkdir()
-    shutil.copyfile(SOURCE_DEPOT / "SOULS-depo/SOUL.md", root / "SOULS-depo/SOUL.md")
     template = root / "Projects/Sys4AI-Template-Project"
     template.mkdir()
-    specification = json.loads(
-        (SOURCE_SKILL / "assets/baseline-assets.json").read_text()
-    )
-    for relative in specification["starter_files"]:
+    ignore = shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc")
+    for name in BASELINE:
+        source = SOURCE_SKILL if name == "init-new-project" else SOURCE_DEPOT / "Projects/Sys4AI-Template-Project/.agents/skills" / name
+        shutil.copytree(source, root / "SKILLS-depo" / name, ignore=ignore)
+        shutil.copytree(source, template / ".agents/skills" / name, ignore=ignore)
+    (root / "SOULS-depo").mkdir()
+    shutil.copyfile(SOURCE_DEPOT / "Projects/Sys4AI-Template-Project/SOUL.md", root / "SOULS-depo/SOUL.md")
+    shutil.copyfile(root / "SOULS-depo/SOUL.md", template / "SOUL.md")
+    policy = json.loads((SOURCE_SKILL / "assets/baseline-assets.json").read_text())
+    for relative in policy["starter_files"]:
         target = template / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(
-            SOURCE_DEPOT / "Projects/Sys4AI-Template-Project" / relative, target
-        )
-    guide = SOURCE_DEPOT / "Projects/Sys4AI-Template-Project/INIT_MEMORY.md"
-    if guide.is_file():
-        shutil.copyfile(guide, template / "INIT_MEMORY.md")
-    else:
-        (template / "INIT_MEMORY.md").write_text(
-            "# Manual project memory\n\nThis starter is not initialized. Use shared preparation on a real copy.\n"
-        )
-    shutil.copyfile(root / "SOULS-depo/SOUL.md", template / "SOUL.md")
-    for name in BASELINE:
-        shutil.copytree(root / "SKILLS-depo" / name, template / ".agents/skills" / name)
-    (root / "Projects/Sys4AI-Memory-Service").mkdir()
+        shutil.copyfile(SOURCE_DEPOT / "Projects/Sys4AI-Template-Project" / relative, target)
+    shutil.copytree(SOURCE_DEPOT / "Projects/Sys4AI-Template-Project/sub-agent-roles/project-sub-agent",
+                    template / "sub-agent-roles/project-sub-agent", ignore=ignore)
+    (template / ".template").mkdir()
+    for name in ("baseline-assets.json", "project-readme.md"):
+        shutil.copyfile(SOURCE_SKILL / "assets" / name, template / ".template" / name)
     registry = json.loads((SOURCE_DEPOT / "depot/projects.json").read_text())
-    registry["projects"] = [
-        entry
-        for entry in registry["projects"]
-        if entry["id"]
-        in {"sys4ai-depot", "sys4ai-template-project", "sys4ai-memory-service"}
-    ]
+    registry["projects"] = [entry for entry in registry["projects"]
+                            if entry["id"] in {"sys4ai-depot", "sys4ai-template-project"}]
     (root / "depot/projects.json").write_text(json.dumps(registry, indent=2) + "\n")
     return root
 
 
 def manifest(root: Path) -> dict[str, str]:
+    import hashlib
     result = {}
-    if not root.exists():
-        return result
-    for path in root.rglob("*"):
-        if path.is_symlink():
-            result[path.relative_to(root).as_posix()] = "symlink:" + os.readlink(path)
-        elif path.is_file():
-            import hashlib
-
-            result[path.relative_to(root).as_posix()] = hashlib.sha256(
-                path.read_bytes()
-            ).hexdigest()
-        elif path.is_dir():
-            result[path.relative_to(root).as_posix()] = "directory"
+    if root.exists():
+        for path in root.rglob("*"):
+            name = path.relative_to(root).as_posix()
+            if path.is_symlink():
+                result[name] = "symlink:" + os.readlink(path)
+            elif path.is_file():
+                result[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+            elif path.is_dir():
+                result[name] = "directory"
     return result
 
 
 class InitializerTests(unittest.TestCase):
     def setUp(self):
-        self.temporary = tempfile.TemporaryDirectory(
-            prefix="sys4ai-initializer-unit-", dir="/private/tmp"
-        )
+        self.temporary = tempfile.TemporaryDirectory(prefix="sys4ai-governance-initializer-", dir="/private/tmp")
         self.addCleanup(self.temporary.cleanup)
         self.root = fixture_depot(Path(self.temporary.name))
         self.helper = load_helper(self.root / "SKILLS-depo/init-new-project")
         self.target = self.root / "Projects/Orchard"
-        self.arguments = {
-            "mode": "create",
-            "destination": self.target,
-            "project_id": "orchard",
-            "project_name": "Orchard",
-            "purpose": "Track orchard observations with ORCHARD_FIXTURE_MARKER.",
-            "principal_id": "fixture-owner",
-        }
-        self.artifact = (
-            self.root / "Projects/Sys4AI-Memory-Service/dist/consumer/1/artifact.json"
-        )
-        self.artifact.parent.mkdir(parents=True)
-        self.artifact.write_text("{}\n")
+        self.arguments = {"mode": "create", "destination": self.target, "project_id": "orchard",
+                          "project_name": "Orchard", "purpose": "Track orchard observations with ORCHARD_FIXTURE_MARKER."}
 
-    def stop_at_install(self, **overrides):
-        arguments = {**self.arguments, **overrides}
-        with (
-            patch.object(
-                self.helper, "artifact_selection", return_value=(self.artifact, {})
-            ),
-            patch.object(
-                self.helper,
-                "process",
-                side_effect=self.helper.InitializationError(
-                    "injected installation failure"
-                ),
-            ),
-            self.assertRaises(self.helper.InitializationError) as caught,
-        ):
-            self.helper.run_initialization(**arguments)
-        self.assertEqual(
-            "runtime-installation", caught.exception.report["recovery"]["stage"]
-        )
+    def run_setup(self, **overrides):
+        report = self.helper.run_initialization(**{**self.arguments, **overrides})
+        self.assertEqual("completed", report["status"])
+        return report
+
+    def fail_verification(self, **overrides):
+        with (patch.object(self.helper, "verify_project", side_effect=self.helper.InitializationError("injected verification failure")),
+              self.assertRaises(self.helper.InitializationError) as caught):
+            self.helper.run_initialization(**{**self.arguments, **overrides})
+        self.assertEqual("verification", caught.exception.report["recovery"]["stage"])
         return caught.exception.report
-
-    def test_nested_guide_links_keep_reviewed_targets_and_source_digest(self):
-        guide = self.root / "Projects/Sys4AI-Template-Project/INIT_MEMORY.md"
-        original = (
-            "[Skill](../../.agents/skills/init-new-project/SKILL.md)\n"
-            "[Builder](../Sys4AI-Memory-Service/tools/build_consumer_artifact.py#usage)\n"
-            "[Anchor](#manual) [Website](https://example.com/guide)\n"
-        )
-        guide.write_text(original)
-        identity = {
-            "project_id": "orchard", "project_name": "Orchard",
-            "purpose": "Track orchard observations.",
-            "relative_path": "Projects/Archive/Orchard",
-        }
-        proposed, records, originals = self.helper.source_snapshot(
-            self.root, self.root / "SKILLS-depo/init-new-project", identity
-        )
-        self.assertEqual(original.encode(), guide.read_bytes())
-        self.assertEqual(original.encode(), originals["INIT_MEMORY.md"])
-        copied = proposed["INIT_MEMORY.md"].decode()
-        self.assertIn("[Anchor](#manual) [Website](https://example.com/guide)", copied)
-        before = re.findall(r"\]\(([^)]+)\)", original)[:2]
-        after = re.findall(r"\]\(([^)]+)\)", copied)[:2]
-        for source_link, copied_link in zip(before, after):
-            self.assertEqual(
-                (guide.parent / source_link.split("#")[0]).resolve(),
-                (self.root / identity["relative_path"] / copied_link.split("#")[0]).resolve(),
-            )
-            self.assertEqual(source_link.partition("#")[2], copied_link.partition("#")[2])
-        evidence = next(x for x in records if x["destination"] == "INIT_MEMORY.md")
-        self.assertEqual(self.helper.sha(original.encode()), evidence["source_sha256"])
-        self.assertEqual(self.helper.sha(proposed["INIT_MEMORY.md"]), evidence["destination_sha256"])
-        self.assertNotEqual(evidence["source_sha256"], evidence["destination_sha256"])
-        identity["relative_path"] = "Projects/Orchard"
-        direct, _, _ = self.helper.source_snapshot(
-            self.root, self.root / "SKILLS-depo/init-new-project", identity
-        )
-        self.assertEqual(original.encode(), direct["INIT_MEMORY.md"])
 
     def test_forbidden_destinations_leave_every_byte_unchanged(self):
         outside = Path(self.temporary.name) / "outside"
@@ -204,7 +112,7 @@ class InitializerTests(unittest.TestCase):
             self.root,
             self.root / "Projects",
             self.root / "Projects/Sys4AI-Template-Project",
-            self.root / "Projects/Sys4AI-Memory-Service",
+            self.root / "Projects/Sys4AI-Template-Project/Nested",
             outside / "New",
             link / "New",
             self.root / "Projects/../New",
@@ -220,7 +128,7 @@ class InitializerTests(unittest.TestCase):
                 self.assertEqual(before, manifest(self.root))
 
     def test_invalid_identity_and_duplicate_registration_precede_writes(self):
-        self.stop_at_install()
+        self.run_setup()
         for updates in (
             {"project_id": "sys4ai-depot"},
             {"project_id": "UPPER"},
@@ -244,7 +152,7 @@ class InitializerTests(unittest.TestCase):
             ".git/objects/history",
             ".gitmodules",
             ".venv/bin/python",
-            ".sys4ai/memory/log",
+            ".sys4ai/private-state/log",
             "models/weights",
             "unknown.txt",
             ".DS_Store",
@@ -257,7 +165,7 @@ class InitializerTests(unittest.TestCase):
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text("must not copy")
         (self.root / "SKILLS-depo/future-opt-in").mkdir()
-        report = self.stop_at_install()
+        report = self.run_setup()
         self.assertEqual(
             list(BASELINE),
             sorted(path.name for path in (self.target / ".agents/skills").iterdir()),
@@ -283,20 +191,20 @@ class InitializerTests(unittest.TestCase):
         shutil.rmtree(template / ".git")
         (template / ".git").write_text("gitdir: /fixture-only/no-repository\n")
         other = self.root / "Projects/Second"
-        self.stop_at_install(
+        self.run_setup(
             destination=other, project_id="second", project_name="Second"
         )
         self.assertFalse((other / ".git").exists())
 
     def test_asset_copies_are_complete_pinned_and_do_not_synchronize(self):
-        report = self.stop_at_install()
+        report = self.run_setup()
         for name in BASELINE:
             self.assertEqual(
-                self.helper.package_files(self.root / "SKILLS-depo" / name),
+                self.helper.package_files(self.root / self.helper.TEMPLATE / ".agents/skills" / name),
                 self.helper.package_files(self.target / ".agents/skills" / name),
             )
         before = manifest(self.target)
-        source = self.root / "SKILLS-depo/communication/SKILL.md"
+        source = self.root / self.helper.TEMPLATE / ".agents/skills/communication/SKILL.md"
         source.write_text(source.read_text() + "\nLater source edit.\n")
         self.assertEqual(before, manifest(self.target))
         self.assertTrue(
@@ -307,40 +215,96 @@ class InitializerTests(unittest.TestCase):
             )
         )
 
-    def test_source_drift_rejected_before_project_publication(self):
-        def changed_artifact(*arguments):
-            (self.root / "SOULS-depo/SOUL.md").write_text("changed during preflight")
-            return self.artifact, {}
+    def test_legacy_private_provider_directories_are_never_copied(self):
+        template = self.root / self.helper.TEMPLATE
+        excluded_files = []
+        for collection in (".agents/skills/communication", "sub-agent-roles/project-sub-agent", "reference-assets"):
+            for private_directory in (".cognee", ".cognee_system"):
+                relative = Path(collection) / private_directory / "db.sqlite"
+                target = template / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(b"private legacy state must remain in its original project")
+                excluded_files.append(relative)
+                self.assertTrue(self.helper.excluded(relative), str(relative))
+        self.run_setup()
+        for relative in excluded_files:
+            self.assertFalse((self.target / relative.parent).exists(), str(relative))
 
-        before = (self.root / "depot/projects.json").read_bytes()
-        with (
-            patch.object(
-                self.helper, "artifact_selection", side_effect=changed_artifact
-            ),
-            self.assertRaisesRegex(self.helper.InitializationError, "source changed"),
-        ):
+    def test_template_assets_and_renderer_win_over_reusable_depot_editions(self):
+        template = self.root / self.helper.TEMPLATE
+        (self.root / "SOULS-depo/SOUL.md").write_text("unused reusable soul\n")
+        (self.root / "SKILLS-depo/communication/SKILL.md").write_text("unused reusable skill\n")
+        (self.root / "SKILLS-depo/init-new-project/assets/project-readme.md").write_text("unused renderer\n")
+        (template / "SOUL.md").write_text("Template soul selected.\n")
+        renderer = template / ".template/project-readme.md"
+        renderer.write_text(renderer.read_text() + "\nTEMPLATE_RENDERER_MARKER\n")
+        report = self.run_setup()
+        self.assertEqual("Template soul selected.\n", (self.target / "SOUL.md").read_text())
+        self.assertIn("TEMPLATE_RENDERER_MARKER", (self.target / "README.md").read_text())
+        self.assertEqual(
+            (template / ".agents/skills/communication/SKILL.md").read_bytes(),
+            (self.target / ".agents/skills/communication/SKILL.md").read_bytes(),
+        )
+        self.assertTrue(all(item["source"].startswith(self.helper.TEMPLATE + "/") for item in report["sources"]))
+        self.assertIn(self.helper.TEMPLATE + "/.template/baseline-assets.json", {item["source"] for item in report["sources"]})
+        self.assertFalse((self.target / ".template").exists())
+
+    def test_installed_helper_works_when_all_reusable_collections_are_missing(self):
+        active = self.root / ".agents/skills/init-new-project"
+        shutil.copytree(self.root / "SKILLS-depo/init-new-project", active)
+        self.helper = load_helper(active)
+        shutil.rmtree(self.root / "SKILLS-depo")
+        shutil.rmtree(self.root / "SOULS-depo")
+        self.run_setup()
+        manual = self.root / "Projects/Manual"
+        shutil.copytree(self.root / self.helper.TEMPLATE, manual)
+        (manual / "notes.txt").write_text("keep manual notes")
+        self.run_setup(mode="prepare-existing", destination=manual, project_id="manual", project_name="Manual")
+        self.assertEqual("keep manual notes", (manual / "notes.txt").read_text())
+        self.assertFalse((self.root / "SKILLS-depo").exists())
+        self.assertFalse((self.root / "SOULS-depo").exists())
+
+    def test_template_package_additions_deletions_roles_and_reference_assets_are_adopted(self):
+        template = self.root / self.helper.TEMPLATE
+        package = template / ".agents/skills/new-skill"
+        package.mkdir()
+        (package / "SKILL.md").write_text("---\nname: new-skill\ndescription: Template addition.\n---\nUse this skill.\n")
+        (package / "resource.md").write_text("complete added package")
+        role = template / "sub-agent-roles/new-role"
+        shutil.copytree(template / "sub-agent-roles/project-sub-agent", role)
+        (role / "reference.md").write_text("complete role reference")
+        reference = template / "reference-assets/SOULS-depo/alternative.md"
+        reference.parent.mkdir(parents=True)
+        reference.write_text("template reference asset")
+        self.run_setup()
+        self.assertEqual("complete added package", (self.target / ".agents/skills/new-skill/resource.md").read_text())
+        self.assertTrue((self.target / ".agents/skills/init-new-project/SKILL.md").is_file())
+        self.assertEqual("complete role reference", (self.target / "sub-agent-roles/new-role/reference.md").read_text())
+        self.assertEqual("template reference asset", (self.target / "reference-assets/SOULS-depo/alternative.md").read_text())
+
+    def test_missing_required_template_dependencies_refuse_without_mutation(self):
+        template = self.root / self.helper.TEMPLATE
+        for relative in (".agents/skills/task", "sub-agent-roles/project-sub-agent", "AGENTS.md"):
+            with self.subTest(relative=relative):
+                selected = template / relative
+                backup = Path(self.temporary.name) / "required-backup"
+                selected.rename(backup)
+                before = manifest(self.root)
+                with self.assertRaises((self.helper.InitializationError, OSError)):
+                    self.helper.run_initialization(**self.arguments)
+                self.assertEqual(before, manifest(self.root))
+                backup.rename(selected)
+        policy = template / ".template/baseline-assets.json"
+        current = json.loads(policy.read_text())
+        current["starter_files"].remove("AGENTS.md")
+        policy.write_text(json.dumps(current))
+        before = manifest(self.root)
+        with self.assertRaisesRegex(self.helper.InitializationError, "allowlist is invalid"):
             self.helper.run_initialization(**self.arguments)
-        self.assertFalse(self.target.exists())
-        self.assertEqual(before, (self.root / "depot/projects.json").read_bytes())
-
-    def test_package_file_addition_during_adoption_is_source_drift(self):
-        def changed_artifact(*arguments):
-            (self.root / "SKILLS-depo/communication/new-resource.md").write_text(
-                "added after snapshot"
-            )
-            return self.artifact, {}
-
-        with (
-            patch.object(
-                self.helper, "artifact_selection", side_effect=changed_artifact
-            ),
-            self.assertRaisesRegex(self.helper.InitializationError, "file set changed"),
-        ):
-            self.helper.run_initialization(**self.arguments)
-        self.assertFalse(self.target.exists())
+        self.assertEqual(before, manifest(self.root))
 
     def test_symlink_and_hardlinked_allowed_sources_are_refused(self):
-        soul = self.root / "SOULS-depo/SOUL.md"
+        soul = self.root / self.helper.TEMPLATE / "SOUL.md"
         backup = self.root / "soul-original"
         soul.rename(backup)
         for symlink in (True, False):
@@ -357,7 +321,7 @@ class InitializerTests(unittest.TestCase):
             soul.unlink()
 
     def test_registry_stale_conflict_and_atomic_failure_preserve_inventory(self):
-        record = self.stop_at_install()
+        record = self.run_setup()
         candidate = record["registry"]["entry"]
         registry, raw = self.helper.read_registry(self.root)
         equivalent = self.helper.register_project(self.root, candidate, raw)
@@ -381,7 +345,10 @@ class InitializerTests(unittest.TestCase):
         ):
             self.helper.register_project(self.root, candidate, without)
         self.assertEqual(without, (self.root / "depot/projects.json").read_bytes())
-        self.assertFalse(list((self.root / "depot").glob(".*initializer*")))
+        locks = list((self.root / "depot").glob(".*initializer*"))
+        self.assertEqual([self.root / "depot/.projects-initializer.lock"], locks)
+        with self.helper.exclusive(locks[0]):
+            self.assertEqual(b"", locks[0].read_bytes())
 
     def test_registry_rejects_schema_duplicates_and_source_substitution(self):
         _registry, raw = self.helper.read_registry(self.root)
@@ -393,7 +360,7 @@ class InitializerTests(unittest.TestCase):
         bad["projects"].append(bad["projects"][1])
         cases.append(bad)
         bad = json.loads(raw)
-        bad["projects"][1]["path"] = "Projects/Sys4AI-Memory-Service"
+        bad["projects"][1]["path"] = "Projects"
         cases.append(bad)
         bad = json.loads(raw)
         bad["projects"][1]["repository"]["remote"] = "invented"
@@ -408,112 +375,33 @@ class InitializerTests(unittest.TestCase):
                 self.helper.run_initialization(**self.arguments)
             self.assertEqual(before, manifest(self.root))
 
-    def test_manual_preparation_adopts_current_sources_and_preserves_extra_files(self):
+    def test_manual_preparation_uses_template_and_preserves_extra_files(self):
         shutil.copytree(self.root / "Projects/Sys4AI-Template-Project", self.target)
         (self.target / "notes.txt").write_text("project-owned note")
+        (self.target / ".agents/skills/communication/local-reference.md").write_text("project-owned reference")
         source = self.root / "SKILLS-depo/communication/SKILL.md"
         source.write_text(source.read_text() + "\nCurrent depot edition.\n")
-        self.stop_at_install(mode="prepare-existing")
+        self.run_setup(mode="prepare-existing")
         self.assertEqual("project-owned note", (self.target / "notes.txt").read_text())
+        self.assertEqual("project-owned reference", (self.target / ".agents/skills/communication/local-reference.md").read_text())
         self.assertEqual(
-            source.read_bytes(),
+            (self.root / self.helper.TEMPLATE / ".agents/skills/communication/SKILL.md").read_bytes(),
             (self.target / ".agents/skills/communication/SKILL.md").read_bytes(),
         )
+        self.assertNotEqual(source.read_bytes(), (self.target / ".agents/skills/communication/SKILL.md").read_bytes())
         self.assertIn("Orchard", (self.target / "README.md").read_text())
         self.assertEqual(
             "orchard",
             json.loads((self.target / "project.json").read_text())["project_id"],
         )
 
-    def test_manual_customized_content_refuses_before_any_mutation(self):
+    def test_manual_customized_skill_is_preserved_during_setup(self):
         shutil.copytree(self.root / "Projects/Sys4AI-Template-Project", self.target)
         (self.target / ".agents/skills/communication/SKILL.md").write_text(
             "custom project skill"
         )
-        before = manifest(self.root)
-        with self.assertRaises(self.helper.InitializationError):
-            self.helper.run_initialization(
-                **{**self.arguments, "mode": "prepare-existing"}
-            )
-        self.assertEqual(before, manifest(self.root))
-
-    def test_install_failure_recovery_records_exact_owned_state(self):
-        record = self.stop_at_install()
-        self.assertEqual("partial", record["status"])
-        self.assertEqual(["assets", "registration"], record["completed_stages"])
-        self.assertTrue(record["recovery"]["observed_owned_files"])
-        (self.target / "unrelated.txt").write_text("preserve on retry")
-        self.stop_at_install()
-        self.assertEqual(
-            "preserve on retry", (self.target / "unrelated.txt").read_text()
-        )
-        registry, _ = self.helper.read_registry(self.root)
-        self.assertEqual(
-            1, sum(entry["id"] == "orchard" for entry in registry["projects"])
-        )
-
-    def test_completed_rerun_refuses_changed_receipt_context_without_mutation(self):
-        record = self.stop_at_install()
-        receipt = {
-            "project_id": "orchard",
-            "dataset_id": "orchard-memory",
-            "configuration_fingerprint": "1" * 64,
-            "exact_index_initialized": True,
-        }
-        observed = {
-            "version": "0.1.0",
-            "origin": str(self.target / ".venv/fixture/sys4ai_memory/__init__.py"),
-            "direct_url": {"url": "file:///fixture/immutable.whl"},
-            "dependencies": {"sys4ai-memory-service": "0.1.0"},
-        }
-        record.update(
-            status="completed",
-            initialization=receipt,
-            runtime={"version": "0.1.0", "observed": observed},
-            installed_package_files={},
-        )
-        configuration = self.target / "config/memory.toml"
-        configuration.parent.mkdir()
-        configuration.write_text(
-            '[memory.exact_index]\npath = ".sys4ai/memory/exact_index/index.sqlite3"\n'
-        )
-        record["owned_files"]["config/memory.toml"] = self.helper.sha(
-            configuration.read_bytes()
-        )
-        index = self.target / ".sys4ai/memory/exact_index/index.sqlite3"
-        index.parent.mkdir(parents=True)
-        with sqlite3.connect(index) as connection:
-            connection.execute("CREATE TABLE records(project_id TEXT)")
-            connection.execute("INSERT INTO records VALUES ('orchard')")
-        receipt_path = self.target / ".sys4ai/memory/receipts/initialization.json"
-        receipt_path.parent.mkdir()
-        receipt_path.write_bytes(self.helper.encoded(receipt))
-        (self.target / self.helper.RECORD).write_bytes(self.helper.encoded(record))
-        with patch.object(self.helper, "process", return_value=observed) as processes:
-            before = manifest(self.root)
-            completed = self.helper.run_initialization(**self.arguments)
-            self.assertEqual("verified-existing", completed["rerun"])
-            self.assertEqual(before, manifest(self.root))
-            for field, value in (
-                ("dataset_id", "another-project-memory"),
-                ("configuration_fingerprint", "2" * 64),
-            ):
-                with self.subTest(field=field):
-                    receipt_path.write_bytes(
-                        self.helper.encoded({**receipt, field: value})
-                    )
-                    before = manifest(self.root)
-                    with self.assertRaisesRegex(
-                        self.helper.InitializationError, "differs from recorded context"
-                    ):
-                        self.helper.run_initialization(**self.arguments)
-                    self.assertEqual(before, manifest(self.root))
-            for call in processes.call_args_list:
-                argv = call.args[0]
-                self.assertEqual(str(self.target / ".venv/bin/python"), argv[0])
-                self.assertEqual(["-I", "-c"], argv[1:3])
-                self.assertIn("importlib.metadata", argv[3])
-                self.assertNotIn("sys4ai_memory.cli", argv[3])
+        self.run_setup(mode="prepare-existing")
+        self.assertEqual("custom project skill", (self.target / ".agents/skills/communication/SKILL.md").read_text())
 
     def test_helper_location_cannot_retarget_the_depot(self):
         with (
@@ -546,6 +434,21 @@ class InitializerTests(unittest.TestCase):
         installed = load_helper(active)
         self.assertEqual((self.root, active), installed.installed_locations())
         self.assertFalse(active.is_symlink())
+
+    def test_template_and_registered_child_installations_find_only_the_owning_depot(self):
+        template_skill = self.root / self.helper.TEMPLATE / ".agents/skills/init-new-project"
+        self.helper = load_helper(template_skill)
+        self.assertEqual((self.root, template_skill), self.helper.installed_locations())
+        self.run_setup()
+        child_skill = self.target / ".agents/skills/init-new-project"
+        self.helper = load_helper(child_skill)
+        self.assertEqual((self.root, child_skill), self.helper.installed_locations())
+        self.run_setup(destination=self.root / "Projects/Second", project_id="second", project_name="Second")
+        unregistered = self.root / "Projects/Unregistered/.agents/skills/init-new-project"
+        shutil.copytree(child_skill, unregistered)
+        unregistered_helper = load_helper(unregistered)
+        with self.assertRaisesRegex(unregistered_helper.InitializationError, "owner is not a registered project"):
+            unregistered_helper.installed_locations()
 
     def test_git_observation_requires_exact_child_marker_and_never_mutates_git(self):
         self.target.mkdir()
@@ -580,6 +483,37 @@ class InitializerTests(unittest.TestCase):
                 ["git", "-C", str(self.target), "config", "--get", "remote.origin.url"],
                 remote.call_args.args[0],
             )
+
+    def test_initializer_lock_excludes_live_writer_and_releases_after_abrupt_exit(self):
+        lock = self.root / "depot/abrupt-initializer.lock"
+        script = """import importlib.util,os,sys
+from pathlib import Path
+spec=importlib.util.spec_from_file_location('initializer',sys.argv[1])
+helper=importlib.util.module_from_spec(spec);spec.loader.exec_module(helper)
+with helper.exclusive(Path(sys.argv[2])):
+ print('locked',flush=True)
+ sys.stdin.read(1)
+ os._exit(9)
+"""
+        child = subprocess.Popen([sys.executable, "-c", script, self.helper.__file__, str(lock)],
+                                 stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        try:
+            self.assertTrue(select.select([child.stdout], [], [], 10)[0], "lock child did not become ready")
+            self.assertEqual("locked\n", child.stdout.readline())
+            inode = lock.stat().st_ino
+            with self.assertRaisesRegex(self.helper.InitializationError, "operation is active"):
+                with self.helper.exclusive(lock):
+                    self.fail("a competing writer entered the locked section")
+            child.communicate("x", timeout=10)
+            self.assertEqual(9, child.returncode)
+            with self.helper.exclusive(lock):
+                self.assertEqual(inode, lock.stat().st_ino)
+            with self.helper.exclusive(lock):
+                self.assertEqual(inode, lock.stat().st_ino)
+        finally:
+            if child.poll() is None:
+                child.kill()
+            child.communicate(timeout=10)
 
 
 if __name__ == "__main__":

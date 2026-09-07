@@ -43,11 +43,10 @@ Step-by-step-Comments/
 # Sys4AI project tracking boundary
 # ============================================================
 
-# Track the two explicitly included projects and the container guide.
+# Track the Template and the container guide.
 # All other project working trees remain excluded.
 /Projects/*
 !/Projects/README.md
-!/Projects/Sys4AI-Memory-Service/
 !/Projects/Sys4AI-Template-Project/
 
 
@@ -325,8 +324,6 @@ id_ed25519.*
 
 .python-version
 
-# The Memory Service Python selector is part of its runtime specification.
-!/Projects/Sys4AI-Memory-Service/.python-version
 
 
 # ============================================================
@@ -395,15 +392,13 @@ pip-delete-this-directory.txt
 #
 # tests/
 
-# Project-local memory, environments, caches and secrets
-/.sys4ai/memory/
+# Project-local environments, caches, generated data and secrets
+/.sys4ai/template-update/
 .venv/
 __pycache__/
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
-/.cognee_system/
-/.data_storage/
 /models/
 /logs/
 /tmp/
@@ -428,4 +423,3 @@ id_ed25519*
 *.sqlite
 *.sqlite3
 *.db
-*.cogx

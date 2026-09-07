@@ -1,166 +1,104 @@
 ---
 name: init-new-project
-description: Create a new project beneath this Sys4AI depot's Projects folder from its registered template, or prepare an explicitly selected clean manual copy, with the six baseline skills and isolated local memory.
+description: Create or prepare a selected Sys4AI project using Template governance assets, preserved project content and factual registration.
 metadata:
-  version: 1.0.2
+  version: 3.0.0
 ---
 
 # Initialize a Sys4AI project
 
-Use the deterministic [helper](scripts/init_new_project.py) for a user-authorized
-project creation or manual preparation. A request to explain or plan this process
-is read-only. Automatic skill discovery does not itself authorize file changes.
+Use the [helper](scripts/init_new_project.py) for authorized project creation or
+preparation. An explanation or assessment request remains read-only. Both routes
+adopt governance starter assets, specialize identity, register the project and
+verify the resulting local files. Obtain the real destination, stable project
+ID, name and purpose from the user's request or existing project identity.
+Never place credentials in those inputs.
 
-Obtain the real destination, stable project ID, project name, product purpose,
-and memory owner principal from the user's request or established context. A
-missing product decision is a reason to clarify; an already authorized creation
-does not need another confirmation. Keep credentials out of all these inputs.
+## Scope and ownership
 
-The helper determines the depot from its own installation under
-`SKILLS-depo/init-new-project/` or `.agents/skills/init-new-project/` and validates
-`depot/projects.json`. In the Sys4AI workspace this constrains destinations to
-`/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/`. There is no external depot or template
-override. It rejects source projects, overlapping registrations, traversal,
-symlinks, ID collisions and occupied creation destinations before publication.
+The helper discovers its owning depot from its installation under
+`SKILLS-depo/init-new-project/` or a registered project's
+`.agents/skills/init-new-project/`. Destinations remain beneath that depot's
+`Projects/` folder. The registered Template cannot be a destination. Overlapping
+registrations, traversal, symbolic links, aliased files and identity collisions
+are rejected. There is no caller-controlled depot or Template override.
 
-The fixed sources are:
+Every starter input comes from the registered `Sys4AI-Template-Project`: its
+schema-2 `.template/baseline-assets.json`, README renderer, soul, complete skill
+and role packages, and selected reference assets. The seven required skills are
+`agent-task`, `communication`, `init-new-project`, `manage-subagent-roles`, `task`,
+`to-implementation-plan` and `to-trd`. The generic `project-sub-agent` role is
+required. The initializer reads the Template and does not refresh it.
 
-- Template: `Projects/Sys4AI-Template-Project/`, registered as
-  `sys4ai-template-project` with kind `project-template`.
-- Exactly six complete packages from `SKILLS-depo/`: `agent-task`,
-  `communication`, `manage-subagent-roles`, `task`, `to-implementation-plan`,
-  and `to-trd`.
-- Soul: `SOULS-depo/SOUL.md`.
-- Runtime: the immutable consumer wheel built by the registered
-  `Projects/Sys4AI-Memory-Service/tools/build_consumer_artifact.py`.
+Existing project identity, README, specifications, skills, roles, Tasks,
+configuration, data and registry metadata remain project-owned. Missing starter
+assets may be added. Existing packages remain intact as a whole, including
+custom resources and missing resources; do not combine editions automatically.
+A pristine Template README in a manual copy is specialized. A customized README
+is preserved. Existing `project.json` bytes and additional fields are preserved;
+its project ID and relative destination must agree with the request, and its
+existing display name and purpose take precedence.
 
-The [allowlist](assets/baseline-assets.json) supplies only static starter
-guidance, the generic role bundle, two workflow contracts and an empty Task
-index. It includes the template's `INIT_MEMORY.md` when present. Template Git
-directories/gitfiles, environments, old work, caches, model files, derived memory
-and unknown files are never copied. The README and `project.json` receive the
-actual project identity. Local links in the copied manual guide are rebased to
-the same depot assets for deeper destinations; the receipt keeps both original
-source and specialized destination hashes. Future depot assets remain optional
-project adoptions.
+## Run setup
 
-## Canonical creation
-
-Run the installed helper with the depot's Python 3.12 environment. Use explicit
-arguments rather than assembling shell text from the user's values:
+Use the depot's Python interpreter and explicit values:
 
 ```text
-python scripts/init_new_project.py create
+python scripts/init_new_project.py create|prepare-existing
   --destination ABSOLUTE_PROJECT_PATH
-  --project-id lowercase-hyphenated-id
+  --project-id STABLE_PROJECT_ID
   --project-name PROJECT_NAME
   --purpose PRODUCT_CONTEXT
-  --principal-id MEMORY_OWNER
-  [--artifact-receipt EXACT_RECORDED_ARTIFACT_JSON]
 ```
 
-An explicit artifact receipt must be beneath this depot's registered Memory
-Service `dist/consumer/`. Without that argument, the approved builder creates a
-versioned local artifact. Building and installing the isolated runtime are part
-of the requested canonical creation; Git, remotes, publication, credentials,
-network services and semantic model activation have separate authority.
+Use `create` for an absent or empty destination, or to resume its recorded setup.
+Use `prepare-existing` for a selected existing directory or a manual Template
+copy. The helper requires Python 3.12 and uses its standard library. Git is used
+only to observe an existing child repository. Dependency installation, model
+preparation, service startup, Git creation, publication and deployment are
+separately scoped work.
 
-One execution specializes the project, adopts the reviewed assets, records its
-factual registration, installs the exact non-editable wheel in the final
-destination's `.venv`, invokes installed
-`python -I -m sys4ai_memory.bootstrap prepare`, and calls installed
-`sys4ai-memory ... init-memory` directly once. The common Memory Service code
-owns configuration validation and initialization. Do not reproduce it or import
-Cognee from this skill. The same execution synchronizes registered sources and
-verifies exact recall from a separate installed process.
+Version 3 deliberately removes the former `--principal-id`, `--dataset-id` and
+`--artifact-receipt` arguments and their Python API parameters. They are rejected,
+not ignored. The starter policy has no optional root guide or runtime bundle.
 
-Read the JSON result. Success means `status: completed`, with the actual wheel
-hash, version, installation origin, project/dataset IDs, source/destination
-hashes, checks and functional memory evidence. The final receipt is
-`.sys4ai/memory/receipts/project-initialization.json`; its durable operation
-record is `control_records/project-initialization.json`. Exact retrieval is
-initialized. Semantic provider/model activation is explicitly deferred. A
-`completed` creation result does not mean semantic memory is ready. Give the
-readiness handoff below before closing the conversation.
+## Completion and receipts
 
-## Manual copied-project preparation
+The durable receipt is `control_records/project-setup.json`, schema version 1,
+with setup contract `governance-starter-v1`. Its stages are `assets`,
+`registration` and `verification`. A completed result contains all three stages
+and passed checks for project identity, project files and factual registration.
+The receipt retains source hashes and the original adoption hashes separately
+from the hashes observed during the latest verification. A preserved or skipped
+resource is identified explicitly; copied Template bytes are not claimed for it.
+The receipt must account for every source destination in both directions:
+adopted files match `owned_files`, preserved files match `preserved_files`, and
+both maps match the source adoption hashes. Only explicitly skipped resources
+inside an existing package or nonempty Task tree may be absent from both maps.
+Standalone starters and the required source inventory cannot be omitted.
 
-Use `prepare-existing` with the same identity arguments only after the user
-selects and authorizes the real clean copied project. It uses the same identity,
-asset, registry, installer and canonical-memory preparation functions. It never
-recopies the tree. Existing baseline files may be replaced only when they match
-the inspected template or current source; customized conflicts stop first.
-Unrelated project files remain intact.
-
-The result is `status: prepared`, with `next_command` as an exact argv list and
-`next_command_shell` for a human terminal. Execute that one direct `init-memory`
-command under the user's manual initialization authority, then use the installed
-`sync` and `recall --mode exact` commands to check functional memory. A prepared
-receipt does not claim initialization. The generic template remains uninitialized.
-
-## Required readiness handoff to the user and the project agent
-
-Identify the software as `sys4ai-memory-service`, with public home
-[Omegapy/Sys4AI-Memory-Service](https://github.com/Omegapy/Sys4AI-Memory-Service).
-Explain that this route installs a local wheel into the consumer's `.venv`,
-while `.sys4ai/memory/` holds that consumer's data. Carry the template's package
-and GitHub clone guidance through the existing copied `INIT_MEMORY.md` and
-generated README. A successful local creation is not a verified GitHub handoff:
-the shared project needs a real pinned downloadable dependency and supported
-clone setup, which this initializer does not yet generate. Report those gaps
-when present; do not invent a release or present GitHub Pages as the runtime.
-
-After installation, preparation, initialization, or a readiness check in an
-existing project, read that project's current `config/memory.toml`, installed
-package metadata and matching initialization receipt. Distinguish installation,
-verified exact/keyword memory, the semantic setting, and verified Cognee/model
-operation. Missing or stale evidence means unknown/unverified. A true setting
-or a successful creation receipt alone is not proof of semantic readiness.
-
-For the default successfully initialized consumer, state plainly:
-
-> Basic exact/keyword memory is working. Semantic memory is not ready:
-> semantic search is disabled, and the Cognee backend and models have not
-> been activated for this project.
-
-For a merely prepared project, say that exact memory still needs initialization
-and verification. For an existing project, report its observed state instead of
-repeating the default notice. Always include the next step and point both the
-human and incoming project agent to `INIT_MEMORY.md` and
-`control_records/memory/README.md` in that project.
-
-When semantic/backend readiness is disabled or unverified and the user has not
-already decided, ask:
-
-> Would you like me to configure and activate semantic memory and the Cognee
-> backend for this project now, or keep exact/keyword memory for now?
-
-Honor an existing activation instruction without asking again. Record a yes,
-later or decline in the normal project handoff/work record; an unanswered
-question is not consent. Keep a deferred choice visible without repeating the
-question on every turn or blocking unrelated work. Never activate models as a
-side effect of this notice or rerun.
-
-If activation is requested, inspect the project's supported activation path and
-model prerequisites first. For already initialized projects, a configuration
-change can invalidate the initialization receipt. Do not prescribe a bare
-boolean flip, delete/edit receipts, or invent an activation command. Use the
-documented project activation procedure and report a missing migration capability
-as a concrete blocker while preserving working exact memory.
+Reinspect the result and affected files before reporting completion. State the
+actual checks performed and any unresolved conflict. The receipt establishes
+local starter setup, not readiness of future project software. Existing setup
+records at other paths and project-specific configuration or data are preserved.
+Prior receipts from this helper are retained under
+`control_records/project-setup-history/` by content hash.
 
 ## Reruns and recovery
 
-An identical completed or prepared rerun verifies saved asset/configuration
-hashes, registry identity and installed wheel bytes. It performs no duplicate
-registration, asset refresh, installation or memory operation. Later source edits
-do not change project-owned copies. Refreshing those copies is a separate action.
+An equivalent rerun verifies current files and registration. It preserves normal
+project edits and existing registry metadata, adds no duplicate registration and
+does not adopt a later Template edition. An incomplete asset stage retains its
+exact source inventory and before/after hashes. A retry accepts already-published
+bytes, publishes remaining unchanged targets and rejects conflicting edits or
+changed Template input. Once asset adoption has completed, remaining stages can
+resume without the original Template edition.
 
-A partial result reports the failed stage, completed stages, observed owned
-files and environment/memory presence. Inspect the operation record and repeat
-the identical command to resume. A lock indicates an active or interrupted
-coordinated operation; inspect its ownership and process state before separate
-recovery. Never delete unrelated work, silently accept source drift, rewrite a
-customized conflict, or claim that a directory proves functional memory.
+A partial result identifies the failed stage and the saved receipt. Resolve the
+reported cause and repeat the same request. Preserve working project files;
+never delete a receipt to evade an identity or ownership conflict. Per-project
+and registry advisory locks reject live competing writers and release after
+process exit. The shared Template lock prevents adoption during an updater
+transaction and is released after asset adoption.
 
-See [README.md](README.md) for the package's verification commands and evidence
-limits. Source publication and active skill adoption are separate operations.
+See [README.md](README.md) for verification commands and boundaries.

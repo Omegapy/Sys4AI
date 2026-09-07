@@ -28,9 +28,15 @@ workspace.
 
 `SKILLS-depo/`, `SOULS-depo/`, `AGENTS-depo/`, `ROLES-depo/`, and
 [`SPECS-depo/`](./SPECS-depo/SPECS.md) contain reusable source material.
-They do not automatically govern active root files or
-files in a registered project. Root and child project files are project-local
-unless a separate, explicit change says otherwise.
+They do not automatically govern active root files or ordinary product
+projects. Reusable additions, modifications and deletions belong in these
+source collections. The explicit template update pipeline is the exception:
+[`depot/template-update.json`](./depot/template-update.json) maps these sources
+into `Projects/Sys4AI-Template-Project/`, and the local filesystem watcher keeps
+that template current. Follow [the update guide](./depot/template-update.md).
+Edit mapped content in its source collection, then check the template update.
+Create and prepare product projects using only that template's starter assets.
+Active root and product-project copies remain project-local.
 
 When the user authorizes a project to adopt or refresh a reusable asset:
 
@@ -112,33 +118,6 @@ The installed `to-trd` skill is explicit-only. Do not create or mutate a managed
 TRD unless the user explicitly invokes `$to-trd` or explicitly asks to use that
 named skill. A TRD captures requirements; it does not authorize implementation,
 Task creation, delegation, publication, or external action.
-
-## Memory readiness handoff
-
-The memory package is `sys4ai-memory-service`; its public home is
-[Omegapy/Sys4AI-Memory-Service](https://github.com/Omegapy/Sys4AI-Memory-Service).
-Explain the installed package in the consumer's `.venv` separately from that
-project's `.sys4ai/memory/` data. For project creation and GitHub sharing, follow
-the template's [package and clone guidance](./Projects/Sys4AI-Template-Project/INIT_MEMORY.md#package-location-and-github-clones).
-A public repository or GitHub Pages documentation link does not establish an
-installable release or working memory after a clone.
-
-Before installing, initializing or relying on project memory, read the
-project-owned [memory control guide](./control_records/memory/README.md) and the
-[readiness and activation procedure](./Projects/Sys4AI-Memory-Service/docs/operations/memory-readiness-and-activation.md).
-At setup completion or the first memory-dependent work in an existing project,
-inspect its current configuration, matching receipts and capability evidence.
-Tell the human user and incoming project agent which parts are working:
-exact/keyword memory, semantic search, and the Cognee backend/models.
-
-When semantic memory is disabled or unverified, say that semantic memory is not
-ready; do not hide that behind an installation or basic-memory success. Ask
-whether to configure and activate semantic memory and Cognee now or keep
-exact/keyword memory for now, unless a current user instruction or recorded
-yes/later/decline already settles it. Preserve that decision in the normal project
-handoff, avoid repeated prompts, and continue unrelated work. The notice does not
-activate anything. Configuration changes in an initialized project need a
-supported migration path; never bypass this by editing/deleting success receipts.
 
 ## Completion standard
 

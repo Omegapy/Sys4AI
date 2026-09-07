@@ -7,15 +7,13 @@ projects keep their own root `SPECS.md`; this file describes the depot.
 ## Python environment and dependencies
 
 Use Python 3.12 in this root's `.venv/`. Run Python helpers with
-`.venv/bin/python`; run the installed memory command with
-`.venv/bin/sys4ai-memory`. The installed Memory Service requires Python
-`>=3.12,<3.13`. Do not copy or move another project's environment here.
+`.venv/bin/python`. Do not copy or move another project's environment here.
 
 | Component | Dependency specification |
 | --- | --- |
 | Task, role, document and project-initialization helpers | Python standard library. |
+| Template update engine and macOS watcher | Python standard library, including POSIX advisory locks; macOS `launchd` manages the local watcher. |
 | `pdf-pymupdf` skill | `PyMuPDF`, providing `pymupdf` and `fitz`. The skill is available through the personal skill catalog, separately from the depot's installed skill packages. |
-| Memory runtime | Installed `sys4ai-memory-service` consumer wheel. Exact package origin, version and dependency profile belong to the [installation record](./control_records/memory/runtime-installation.json); product dependency constraints belong to its [manifest](./Projects/Sys4AI-Memory-Service/pyproject.toml). |
 
 The root currently has no `requirements.txt` or `pyproject.toml`. PyMuPDF is
 installed in its environment but has no root dependency declaration. When
@@ -42,25 +40,28 @@ local environments, generated files, caches, secrets and independent child
 working trees. Preserve its project-specific rules. The reusable copy in
 `SPECS-depo/` is a source for later adoption, not a replacement for this file.
 
-## Project memory
+## Template update pipeline
 
-The root consumes the installed Memory Service package. Its
-[configuration](./config/memory.toml) identifies project `sys4ai-depot`, dataset
-`sys4ai-depot-memory`, default profile `base@1`, and currently disables semantic
-memory. Canonical configuration, permissions, registries and profiles remain
-project-owned. Derived indexes, receipts, logs and caches belong beneath
-`.sys4ai/memory/`.
+Reusable assets are authored in the `*-depo` collections. The
+[mapping](./depot/template-update.json) and
+[update guide](./depot/template-update.md) define their automatic publication
+into the template. Only that template supplies project-initialization assets.
+Update state and recovery data belong in `.sys4ai/template-update/`.
+Host logs belong in `~/Library/Logs/Sys4AI/`. The watcher is a local
+user launch agent; a clone requires its own explicit watcher installation.
 
-The depot's adoption used `init preview` followed by digest-bound `init apply`;
-new and manually prepared projects use the shared `init-memory` route.
-Installation and configuration are not evidence of current retrieval or model
-readiness. Follow the [memory control guide](./control_records/memory/README.md)
-and [readiness procedure](./Projects/Sys4AI-Memory-Service/docs/operations/memory-readiness-and-activation.md)
-for checks and the existing activation-decision handoff.
+## Project initialization
 
-The [source registration policy](./control_records/memory/source-registration-policy.md)
-owns memory source boundaries and registration procedures. Specification
-adoption does not register or synchronize new files into memory.
+Both `init-new-project create` and `prepare-existing` copy reviewed governance
+assets from the registered Template, specialize project identity, and maintain
+factual project registration. They preserve customized project files and
+existing independent state. The helpers use the Python standard library and
+read-only Git observations. They do not provision a product runtime.
+
+The setup receipt at `control_records/project-setup.json` records source hashes,
+asset adoption, registration, and verification. A partial operation must resume
+through the helper's checked same-request flow. Product dependencies, virtual
+environments, Git initialization, and publication are separate project work.
 
 ## Documentation ownership
 

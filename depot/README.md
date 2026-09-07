@@ -8,6 +8,10 @@ The registry does not copy or update files. It does not make a reusable source
 authoritative over a project, and it does not grant permission to initialize a
 repository, configure a remote, publish, deploy, or change a child's content.
 
+The separate [template update mapping](./template-update.json) and
+[update guide](./template-update.md) govern automatic publication of `*-depo`
+changes into the template. They do not update existing product projects.
+
 ## Registry schema
 
 Schema version 2 contains:
@@ -28,7 +32,6 @@ use `not_initialized`, `not_configured`, and `null` rather than guessing.
 | --- | --- | --- | --- |
 | `sys4ai-depot` | `.` | Depot manager | Initialized |
 | `sys4ai-template-project` | `Projects/Sys4AI-Template-Project` | Project template | Not initialized |
-| `sys4ai-memory-service` | `Projects/Sys4AI-Memory-Service` | Product project | Not initialized |
 
 ## Add or update an entry
 
@@ -50,14 +53,13 @@ For a separately requested inventory correction:
 Treat each child as independently owned. Repository status is `initialized`
 only when the child has its own `.git` marker and Git reports that exact child
 as the top-level. An ancestor Sys4AI repository is not the child's repository.
-The template and Memory Service currently have no own markers; their status
-remains `not_initialized`. Their files are tracked and published through the
-parent `Omegapy/Sys4AI` repository, as recorded in their inventory notes. Other
-child projects remain excluded from that repository. Creating independent Git
+The Template has no independent Git marker; its status remains `not_initialized`.
+Its files are tracked by the parent `Omegapy/Sys4AI` repository, as recorded in
+its inventory notes. Other child projects remain excluded from that repository. Creating independent Git
 history, remotes or publication state is a separate workflow and is not part
 of initialization.
 
-Registration is inventory maintenance only. Reusable material lives in the
-root source collections, while active files remain owned by their root or child
-project. A future asset adoption or refresh requires its own exact scope and
-project-local verification.
+Registration is inventory maintenance only. Reusable material is authored in
+the root source collections and automatically published into the mapped
+template. Active root installations and product projects retain their own
+copies; their adoption or refresh requires an exact scope and verification.

@@ -1,5 +1,9 @@
 # Document-centric To-TRD implementation verification
 
+Historical verification record. The 2026-09-07 cleanup retired the Memory Service
+and ontology integration referenced below. Those paths and command results
+describe the earlier revision; they are not current setup instructions.
+
 Plan: `PLAN-20260904-D17393C2`. Approved requirements source:
 `TRD-20260904-E2BADD07` revision 3, SHA-256
 `a70f966da3c2e2f10b428228bc62a0b2f27bafe9500d5e0dbc1fcc6814959ed4`.

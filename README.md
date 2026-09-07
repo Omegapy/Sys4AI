@@ -9,19 +9,18 @@ For project specifications, see [SPECS.md](./SPECS.md).
 
 ## Current state
 
-The former synchronization capability was retired on 2026-08-29. The workspace
-now provides an explicitly requested project initializer. It copies a reviewed
-starter and records that one adoption; there is no background propagation.
-A later change in a reusable collection does not change an active root or
-child project, and a project change does not update a reusable collection.
+Reusable assets are maintained in the `*-depo` collections. The
+[template update pipeline](./depot/template-update.md) automatically updates
+`Projects/Sys4AI-Template-Project/` after source edits settle. Project creation
+and clean existing-project preparation copy starter assets only from that
+template. Active root installations and existing product projects keep their
+own copies and receive updates only through a separately scoped adoption.
 
-The reusable `SKILLS-depo/` collection contains source packages that can be
-reviewed for later project-local adoption. It is not an installation manager.
-The project template is at `Projects/Sys4AI-Template-Project/`. The independent
-Sys4AI Memory Service product is at `Projects/Sys4AI-Memory-Service/`. Both are
-registered as workspace inventory and stored as ordinary directories in this
-repository. Neither currently has its own Git repository. Other projects remain
-excluded from root-repository tracking.
+The reusable `SKILLS-depo/` collection is where skills are created, changed and
+removed. Its valid packages are published into the template automatically.
+The project template is at `Projects/Sys4AI-Template-Project/`. It is registered
+as workspace inventory and tracked by this repository. It has no independent
+Git repository. Other project working trees remain excluded from root tracking.
 
 ## Workspace layout
 
@@ -50,10 +49,11 @@ Sys4AI/
 
 ## Ownership model
 
-Active root files and files inside each child project are project-local. Files
-with the same name in a reusable collection are separate artifacts. Matching
-content, prior equality, or workspace registration does not grant overwrite or
-bulk-copy authority.
+Active root files and files inside ordinary product projects are project-local.
+The template has explicit source mappings in
+[`depot/template-update.json`](./depot/template-update.json). Author mapped
+template content in its source collection; the updater checks hashes before
+replacing or deleting any managed template file.
 
 If a future request asks a project to adopt or refresh a reusable asset:
 
@@ -64,7 +64,8 @@ If a future request asks a project to adopt or refresh a reusable asset:
 5. make the authorized project-local change; and
 6. run the destination project's relevant checks.
 
-This is a normal scoped project change. No update happens automatically.
+This procedure applies to existing product projects and active root copies.
+The template follows its automatic update mapping.
 
 ## Reusable collections
 
@@ -74,8 +75,7 @@ This is a normal scoped project change. No update happens automatically.
 - `ROLES-depo/` stores reusable Director and sub-agent role sources.
 - For reusable project specifications, see [SPECS-depo/SPECS.md](./SPECS-depo/SPECS.md).
 
-These collections can support a later explicit install, template update, or
-project-specific edit. They do not control active copies. Root-specific
+These collections own reusable changes and feed the template. Root-specific
 `AGENTS.md` and `ROLE.md` now exist only at the root; the redundant depot-source
 copies were removed with the retired control plane.
 
@@ -92,65 +92,39 @@ The project container is [Projects](./Projects):
 | --- | --- | --- | --- |
 | Sys4AI depot | `.` | Initialized on `main` | `git@github-omegapy:Omegapy/Sys4AI.git` |
 | Sys4AI Template Project | `Projects/Sys4AI-Template-Project` | Not initialized | Not configured |
-| Sys4AI Memory Service | `Projects/Sys4AI-Memory-Service` | Initialized on `main` | `git@github-omegapy:Omegapy/Sys4AI-Memory-Service.git` |
 
-The Memory Service now owns an independent repository at
-[Omegapy/Sys4AI-Memory-Service](https://github.com/Omegapy/Sys4AI-Memory-Service).
-The parent still tracks its existing Memory Service snapshot and the template;
-removing that snapshot from parent tracking is a separate migration. Local
-ignore rules exclude environments, credentials, caches and generated runtime
-data. The root repository excludes all other child project working trees.
-The template still has no independent repository. GitHub Pages and deployment
-remain separate from repository publication.
+The parent tracks the Template's source files. Local ignore rules protect
+environments, credentials, caches, and generated artifacts. Other child working
+trees remain excluded. GitHub Pages and deployment are separate actions.
 
 ## Add a future Sys4AI project
 
 Use the active [init-new-project skill](./.agents/skills/init-new-project/SKILL.md)
-with the destination, unique stable ID, name, product purpose and memory owner.
-Version 1 supports real projects beneath this depot's `Projects/` container.
-For example, after the user selects those values, the canonical command is:
+with the destination, unique stable ID, name, and product purpose. Both routes
+support projects beneath this depot's `Projects/` container.
 
 ```bash
 .venv/bin/python .agents/skills/init-new-project/scripts/init_new_project.py create \
   --destination /Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Example-Project \
   --project-id example-project --project-name 'Example Project' \
-  --purpose 'Describe the actual product and its users.' --principal-id example-owner
+  --purpose 'Describe the actual product and its users.'
 ```
 
-One execution copies the registered template's static starter, specializes its
-identity, adopts exactly six complete skill packages from `SKILLS-depo/` and
-`SOULS-depo/SOUL.md`, records factual inventory, installs an immutable Memory
-Service wheel into the final project's own `.venv`, and initializes local memory
-directly. It checks exact retrieval before reporting completion. Semantic
-provider and model activation are reported separately and remain deferred.
-The initializer skill itself and future optional packages are not added to the
-six-package consumer baseline.
+The helper copies the registered Template's selected starter files, complete
+skill and role packages, reference assets, and `SOUL.md`. It specializes project
+identity and records factual registration. All seven governance and setup
+skills are required; additional complete packages are discovered automatically.
 
-For a clean manual copy, follow the template's
-[INIT_MEMORY.md](./Projects/Sys4AI-Template-Project/INIT_MEMORY.md).
-The same helper's `prepare-existing` route refreshes the six reviewed depot
-packages, preserves unrelated files, registers inventory and installs the exact
-runtime. It returns one direct `init-memory` command. The template itself stays
-uninitialized. Neither route copies `.git`, environments, caches or memory
-databases, and neither configures Git or publication.
+Use `prepare-existing` for a manual copy or a customized existing project.
+It adopts missing assets and preserves project-owned content and identity.
+Equivalent reruns verify the retained setup without duplicate registration.
+The project-owned `control_records/project-setup.json` receipt records source
+hashes, asset adoption, registration, and verification; interrupted operations
+resume through the helper's checked same-request flow.
 
-Each result records immutable source/package hashes and project-owned outputs.
-An equivalent rerun verifies them without refreshing assets or repeating memory
-initialization. A conflict or interrupted stage gives bounded recovery evidence;
-later asset refreshes remain separately scoped project work.
-
-## Sys4AI depot memory
-
-For project memory specifications, see [SPECS.md](./SPECS.md#project-memory).
-For setup, readiness checks and activation decisions, follow the
-[project memory control guide](./control_records/memory/README.md).
-
-The memory software is the `sys4ai-memory-service` Python package, whose public
-home is [Sys4AI-Memory-Service](https://github.com/Omegapy/Sys4AI-Memory-Service).
-The current depot initializer installs a locally built wheel with `uv pip` into
-each project's own `.venv`; each project keeps its memory in `.sys4ai/memory/`.
-For the package location, GitHub clone requirements and the role of GitHub Pages,
-read the template's [package and sharing guide](./Projects/Sys4AI-Template-Project/INIT_MEMORY.md#package-location-and-github-clones).
+Project runtime dependencies, environment creation, Git configuration, and
+publication are separate work. Starter copying excludes environments, secrets,
+caches, and repository metadata. Existing products receive no automatic refresh.
 
 ## Agent roles
 
@@ -198,7 +172,6 @@ Run the root repository and independent skill checks with:
 .venv/bin/python -m unittest discover -s .agents/skills/to-trd/tests -v
 ```
 
-Installed-wheel initializer scenarios are opt-in via the exact
-`SYS4AI_INITIALIZER_ARTIFACT` receipt, as described in the skill README. They
-exercise disposable projects. Local checks and fixture creation do not establish
-GitHub Pages, publication, deployment or semantic model readiness.
+The retained helpers and tests use the Python standard library. Initializer
+checks use disposable depot fixtures. Local checks do not establish publication,
+deployment, or behavior in an independently customized product.

@@ -102,12 +102,11 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertEqual(2, self.projects["schema_version"])
         self.assertEqual("Sys4AI", self.projects["workspace_name"])
         entries = self.projects["projects"]
-        self.assertGreaterEqual(len(entries), 3)
+        self.assertGreaterEqual(len(entries), 2)
         self.assertTrue(
             {
                 "sys4ai-depot",
                 "sys4ai-template-project",
-                "sys4ai-memory-service",
             }.issubset({entry["id"] for entry in entries}),
         )
         self.assertEqual(len(entries), len({entry["id"] for entry in entries}))
@@ -120,13 +119,6 @@ class RepositoryContractTests(unittest.TestCase):
             entry for entry in entries if entry["id"] == "sys4ai-template-project"
         )
         self.assertEqual("Projects/Sys4AI-Template-Project", template["path"])
-        memory_service = next(
-            entry for entry in entries if entry["id"] == "sys4ai-memory-service"
-        )
-        self.assertEqual(
-            "Projects/Sys4AI-Memory-Service", memory_service["path"]
-        )
-        self.assertEqual("product-project", memory_service["kind"])
 
     def test_registered_external_state_is_truthful_and_bounded(self) -> None:
         entries = {entry["id"]: entry for entry in self.projects["projects"]}
@@ -139,17 +131,8 @@ class RepositoryContractTests(unittest.TestCase):
         template_repository = entries["sys4ai-template-project"]["repository"]
         self.assertEqual("not_initialized", template_repository["status"])
         self.assertIsNone(template_repository["remote"])
-        memory_repository = entries["sys4ai-memory-service"]["repository"]
-        self.assertEqual("initialized", memory_repository["status"])
-        self.assertEqual(
-            "git@github-omegapy:Omegapy/Sys4AI-Memory-Service.git",
-            memory_repository["remote"],
-        )
         self.assertTrue((ROOT / ".git").exists())
         self.assertFalse((TEMPLATE / ".git").exists())
-        self.assertTrue(
-            (ROOT / "Projects/Sys4AI-Memory-Service/.git").exists()
-        )
         for entry in entries.values():
             self.assertEqual("not_configured", entry["github_pages"]["status"])
             self.assertIsNone(entry["github_pages"]["url"])
@@ -175,10 +158,10 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertTrue(expected_skills.issubset(source_skills))
         self.assertTrue(expected_skills.issubset(root_skills))
         self.assertTrue(expected_skills.issubset(template_skills))
-        self.assertEqual(expected_skills, template_skills)
+        self.assertEqual(source_skills, template_skills)
         self.assertIn("init-new-project", source_skills)
         self.assertIn("init-new-project", root_skills)
-        self.assertNotIn("init-new-project", template_skills)
+        self.assertIn("init-new-project", template_skills)
 
         for required in (
             "SOUL.md",
@@ -257,8 +240,7 @@ class RepositoryContractTests(unittest.TestCase):
             TEMPLATE / "README.md",
         )
         forbidden = re.compile(
-            r"depot_sync\.py|depot/manifest\.json|sys4ai-project-sync|"
-            r"synchroni[sz](?:e|ed|es|ing|ation)",
+            r"depot_sync\.py|depot/manifest\.json|sys4ai-project-sync",
             re.IGNORECASE,
         )
         for document in active_guidance:
@@ -269,9 +251,9 @@ class RepositoryContractTests(unittest.TestCase):
         for document in (
             ROOT / "README.md",
             ROOT / "depot/README.md",
+            ROOT / "depot/template-update.md",
             ROOT / "Projects/README.md",
             TEMPLATE / "README.md",
-            TEMPLATE / "INIT_MEMORY.md",
             ROOT / "SKILLS-depo/init-new-project/SKILL.md",
             ROOT / ".agents/skills/init-new-project/SKILL.md",
         ):
@@ -295,32 +277,38 @@ class RepositoryContractTests(unittest.TestCase):
                 if item.is_file() and "__pycache__" not in item.parts and item.name != ".DS_Store"
             }
         self.assertEqual(manifest(source), manifest(active))
-        self.assertEqual(record["files"], manifest(source))
-        self.assertEqual(record["destination_files"], manifest(active))
-        self.assertEqual(str(active), record["destination"])
-        self.assertIn("No existing active package", record["overwrite_boundary"])
+        self.assertEqual(record["files_sha256"], manifest(source))
+        self.assertEqual("adopted", record["status"])
+        self.assertIn("no other active skills or projects", record["overwrite_boundary"])
 
-    def test_template_seed_and_memory_routes_preserve_project_boundaries(self) -> None:
+    def test_template_seed_and_setup_routes_preserve_project_boundaries(self) -> None:
         spec = json.loads((ROOT / "SKILLS-depo/init-new-project/assets/baseline-assets.json").read_text())
         expected = {"agent-task", "communication", "manage-subagent-roles", "task", "to-implementation-plan", "to-trd"}
-        self.assertEqual(expected, set(spec["skills"]))
-        self.assertEqual("SOULS-depo/SOUL.md", spec["soul"])
+        self.assertEqual(".agents/skills", spec["skills"])
+        self.assertTrue(expected.issubset({p.name for p in (TEMPLATE / spec["skills"]).iterdir() if p.is_dir()}))
+        self.assertEqual("SOUL.md", spec["soul"])
+        self.assertEqual(spec, json.loads((TEMPLATE / ".template/baseline-assets.json").read_text()))
         for relative in (*spec["starter_files"], *spec["optional_starter_files"]):
             self.assertTrue((TEMPLATE / relative).is_file(), relative)
             self.assertFalse({".git", ".gitmodules", ".venv", ".sys4ai", "__pycache__", ".ruff_cache"}.intersection(Path(relative).parts))
         for relative in (".sys4ai", "config/memory.toml", "registries/memory_source_registry.csv", "control_records/project-initialization.json", "project.json", "models"):
             self.assertFalse((TEMPLATE / relative).exists(), relative)
-        guide = (TEMPLATE / "INIT_MEMORY.md").read_text()
-        self.assertIn("prepare-existing", guide)
-        self.assertIn("init-memory", guide)
-        self.assertNotIn("init preview", guide)
-        self.assertNotIn("init apply", guide)
-        readme = (ROOT / "README.md").read_text()
-        self.assertIn("[SPECS.md](./SPECS.md)", readme)
-        specs = (ROOT / "SPECS.md").read_text()
-        self.assertIn("init preview", specs)
-        self.assertIn("init apply", specs)
-        self.assertIn("sys4ai-depot-memory", specs)
+        self.assertEqual(2, spec["schema_version"])
+        self.assertNotIn("ontology", spec)
+        for relative in ("Ontology", "INIT_MEMORY.md"):
+            self.assertFalse((TEMPLATE / relative).exists(), relative)
+        self.assertIn("[SPECS.md](./SPECS.md)", (ROOT / "README.md").read_text())
+        self.assertIn("control_records/project-setup.json", (ROOT / "SPECS.md").read_text())
+
+    def test_retired_service_files_and_entry_points_are_absent(self) -> None:
+        for relative in ("ONTOLOGY-depo", "Projects/Sys4AI-Memory-Service",
+                         "config/memory.toml", "config/context.toml", "control_records/memory",
+                         "schemas/memory", ".sys4ai/memory", ".sys4ai/ontology-artifacts",
+                         ".sys4ai/operational-verification"):
+            self.assertFalse((ROOT / relative).exists(), relative)
+        for command in ("sys4ai-memory", "sys4ai-ontology", "sys4ai-context"):
+            self.assertFalse((ROOT / ".venv/bin" / command).exists(), command)
+        self.assertNotIn("sys4ai-memory-service", {x["id"] for x in self.projects["projects"]})
 
     def test_state_systems_remain_separate(self) -> None:
         agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")

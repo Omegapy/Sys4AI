@@ -8,44 +8,29 @@ Pages site.
 
 For project specifications, see [SPECS.md](./SPECS.md).
 
-**Memory is not initialized in this template.** For a real project copied
-manually, follow [Initialize memory in a copied project](./INIT_MEMORY.md).
-The guide uses the depot's shared preparation helper and one direct
-initialization command for the selected copy.
-
-The software package is `sys4ai-memory-service`, maintained at
-[Sys4AI-Memory-Service on GitHub](https://github.com/Omegapy/Sys4AI-Memory-Service).
-Each real project installs its own copy and stores its own memory. The guide's
-[package location and GitHub clone section](./INIT_MEMORY.md#package-location-and-github-clones)
-explains local wheel installation, published dependencies, and what a recipient
-must set up after cloning. Repository existence alone does not supply a package.
-
-**After default setup in a real project, semantic memory is still not ready.**
-Basic exact/keyword memory can work while semantic search is disabled and the
-Cognee backend/models remain inactive. The guide tells both the human and AI
-agent how to check the actual state, report it clearly, and ask whether to
-activate semantic memory. Existing projects must check their current settings
-and evidence rather than assume the default or treat an enabled flag as proof.
-
-All files in this template are project-local. Reusable collections in the
-parent Sys4AI workspace are optional inputs and do not update the template. A
-future adoption or refresh must identify the exact source, destination, and
-overwrite boundary, then run this project's local checks.
+This template is maintained from the parent's reusable `*-depo` sources through
+the [automatic update pipeline](../../depot/template-update.md). Edit reusable
+content in its mapped source collection. The template is the sole source of
+starter assets for creation and missing assets in existing-project setup. Each
+resulting product copy is project-local and receives no automatic updates.
 
 ## Start a new Sys4AI project
 
 Use the depot's [init-new-project skill](../../.agents/skills/init-new-project/SKILL.md)
-with the real product name, stable ID, purpose, destination and memory owner.
-Canonical creation specializes a clean starter, adopts the six current baseline
-packages and soul, records factual inventory, installs the exact runtime and
-initializes project-local memory in the same authorized run.
+with the real product name, stable ID, purpose, and destination.
+The `create` route specializes this Template's starter files, complete skill
+and role packages, reference assets, and soul, then records factual inventory.
 
-If the project was copied manually, use [INIT_MEMORY.md](./INIT_MEMORY.md).
-Copy only the reviewed static starter files; exclude the template's development
-environment, caches, Git metadata and derived state. The manual preparation
-route preserves unrelated copied-project files and refreshes only the reviewed
-baseline assets. Add product source, tests and domain guidance through the
-project's own authorized work. Keep Git setup and publication separate.
+For a manual copy or a customized existing project, use the same helper's
+`prepare-existing` route. It adopts missing assets while preserving customized
+files and existing identity. Both routes record checked setup stages and source
+hashes in `control_records/project-setup.json`; equivalent reruns avoid duplicate
+registration. Runtime dependencies and environments are prepared separately for
+the real product. Keep Git setup and publication separate.
+
+Copy only reviewed static starter files; exclude environments, caches, Git
+metadata, and derived state. Add product source, tests, and domain guidance
+through the project's own authorized work.
 
 Do not keep the template name for a product. Do not invent repository or Pages
 values before they are configured and verified.

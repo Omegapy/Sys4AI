@@ -9,17 +9,13 @@ template.
    reasoning, engineering, and communication behavior for the agent.
 2. Read `./ROLE.md` before performing any work. It defines the agent's active
    role.
+3. Read [SPECS.md](./SPECS.md) before performing project work.
 
 ## Project identity
 
 Read the project README and local requirements before assuming the product,
 domain, repository state, runtime, or publication target. This template supplies
 agent governance and workflow components; it does not supply a product identity.
-
-All files in a project created from this template are project-local. Reusable
-material in a parent Sys4AI workspace does not automatically govern or update
-the project. Adopting or refreshing a reusable asset requires an explicit exact
-source, destination, overwrite boundary, and project-local verification.
 
 ## Requirements and implementation workflow
 

@@ -1,5 +1,9 @@
 # Project specifications adoption verification
 
+Historical verification record. The 2026-09-07 cleanup retired the Memory Service
+and ontology integration referenced below. Those paths and command results
+describe the earlier revision; they are not current setup instructions.
+
 Date: 2026-09-05. Scope and acceptance criteria:
 [implementation plan](../Implementation_Plans/project-specifications-adoption.md).
 
@@ -7,7 +11,7 @@ Date: 2026-09-05. Scope and acceptance criteria:
 
 | Requirement | Result | Current evidence |
 | --- | --- | --- |
-| SPEC-01 | Passed | Root specs exist for [the depot](../SPECS.md), [Template](../Projects/Sys4AI-Template-Project/SPECS.md), [Electronics](../Projects/Sys4AI-Electronics-Projects/SPECS.md) and [Memory Service](../Projects/Sys4AI-Memory-Service/SPECS.md). These are the three project roots directly under `Projects/`; the motor guide remains a document package within Electronics. |
+| SPEC-01 | Passed | Root specs exist for [the depot](../SPECS.md), [Template](../Projects/Sys4AI-Template-Project/SPECS.md), [Electronics](../Projects/Sys4AI-Electronics-Projects/SPECS.md) and Memory Service (retired project; historical path `../Projects/Sys4AI-Memory-Service/SPECS.md`). These are the three project roots directly under `Projects/`; the motor guide remains a document package within Electronics. |
 | SPEC-02 | Passed | Specifications were compared with local instructions, manifests, package metadata and each existing `.gitignore`. Dependency declaration and installation gaps remain explicit; no manifest or environment was changed. |
 | SPEC-03 | Passed | Template uses product-neutral specialization guidance. Its spec has only adjacent starter links, which remain valid in direct and nested copies. Template remains uninitialized. |
 | SPEC-04 | Passed | All four README files link to their own spec; all four AGENTS files require reading it. Existing runtime sections and duplicated Memory Service technical requirements were moved. Commands were preserved in their existing document or the new spec; detailed contracts are linked. |
