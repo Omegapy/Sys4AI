@@ -8,12 +8,12 @@ maintains factual registration and verifies local files.
 
 Both routes preserve existing project documents, packages, Tasks, configuration,
 data and repository metadata. New projects receive seven complete skill packages
-and the generic role. The helper does not create an environment, install software
+and the generic and task-manager roles with a generated index. The helper does not create an environment, install software
 or contact a service. It uses Git only for read-only observations when a child
 repository already exists.
 
 The [receipt schema](assets/initialization-receipt.schema.json) defines schema-1
-`governance-starter-v1` receipts at `control_records/project-setup.json`. Source
+`governance-starter-v2` receipts at `control_records/project-setup.json`. Source
 provenance, original adoption hashes and current observed hashes have separate
 fields. Partial asset adoption resumes only against the same source inventory
 and unchanged target bytes. Completed reruns preserve project edits and observe
@@ -22,7 +22,19 @@ Receipt validation binds every source adoption decision to the exact owned or
 preserved file inventory. An omitted entry, changed adoption digest, contradictory
 source decision or unsupported skipped starter rejects a rerun before mutation.
 
-Version 3 removes the former principal, dataset and runtime-artifact CLI/API
+Version 4 adopts `roles/` and validates each destination index using frozen role
+helper bytes without copying runtime locks or transition receipts. Existing
+`governance-starter-v1` receipts retain their old path and provenance rules;
+completed reruns preserve those projects without active-layout migration.
+A fresh prepare-existing request with legacy roles or an incompatible role
+helper stops before writes and identifies the required explicit transition.
+A completed copy-first transition is accepted with its retained legacy directory
+only after the strict receipt, old and active bytes, current index and role helper
+are verified. Missing, incomplete, corrupt or conflicting transition evidence
+blocks preparation before starter writes. Existing current role collections and
+their additional files are preserved.
+
+Version 3 removed the former principal, dataset and runtime-artifact CLI/API
 options. It accepts schema-2 starter policy only, with no optional root files.
 
 Run the focused tests using the depot's Python 3.12 interpreter:

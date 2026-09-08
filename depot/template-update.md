@@ -19,7 +19,8 @@ factual inventory and does not control the update mapping.
 | `SOULS-depo/SOUL.md` | `SOUL.md` |
 | `AGENTS-depo/project-template-AGENTS.md` | `AGENTS.md` |
 | `ROLES-depo/project-director-ROLE.md` | `ROLE.md` |
-| Generic sub-agent role pair in `ROLES-depo/` | `sub-agent-roles/project-sub-agent/` |
+| Generic and task-manager pairs in `ROLES-depo/` | `roles/project-sub-agent/` and `roles/task-manager/` |
+| Validated destination role pairs and role helper snapshot | Generated `roles/INDEX.md` |
 | `SPECS-depo/project-template-SPECS.md` | `SPECS.md` |
 | `SPECS-depo/project-template.gitignore` | `.gitignore` |
 | `SPECS-depo/project-template-README.md` and `template-tests/` | Template overview and its local contract test |
@@ -41,6 +42,22 @@ and generated data are excluded. Product dependencies are prepared separately.
 Every explicit override or mirror must refer to a current source file.
 
 ## Check or update now
+
+The updater validates the role pairs with frozen role-helper bytes in a
+disposable tree and generates `roles/INDEX.md` for their destination paths.
+No static override or mirror can own that index. Its state entry binds the
+helper, SOUL, and role-file digests. Pending updates include the exact generated
+bytes, and recovery regenerates and checks them against the saved inputs.
+No role-catalog runtime lock or transition receipt is placed in the Template.
+
+The reviewed role-layout mapping may retire old `sub-agent-roles/` destinations
+only when the same source has an exact `roles/` destination. The preview lists
+each old path, new path, source, and retained hash. Before deleting any old pair,
+apply retains those bytes and mappings in a content-addressed record under
+`.sys4ai/template-update/role-layout-history/`. The pending transaction binds
+that recovery record, so interruption resumes without losing legacy content.
+Customized old or new destinations still block the update. Review the entire
+preview before applying; product-project registration never authorizes migration.
 
 Run from the Sys4AI root:
 

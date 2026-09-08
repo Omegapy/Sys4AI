@@ -129,8 +129,9 @@ caches, and repository metadata. Existing products receive no automatic refresh.
 ## Agent roles
 
 The root [AGENTS.md](./AGENTS.md), [SOUL.md](./SOUL.md), and
-[ROLE.md](./ROLE.md) define the Sys4AI Depot Project Director. Reusable
-sub-agent roles live in [sub-agent-roles](./sub-agent-roles).
+[ROLE.md](./ROLE.md) define the Sys4AI Depot Project Director. Active role definitions live as paired files under [roles](./roles);
+[roles/INDEX.md](./roles/INDEX.md) provides generated navigation. Legacy
+`sub-agent-roles/` retains transition provenance and historical references.
 
 Before role-based delegation, the Project Director uses the root
 [manage-subagent-roles skill](./.agents/skills/manage-subagent-roles/SKILL.md)
@@ -175,3 +176,18 @@ Run the root repository and independent skill checks with:
 The retained helpers and tests use the Python standard library. Initializer
 checks use disposable depot fixtures. Local checks do not establish publication,
 deployment, or behavior in an independently customized product.
+
+## Task-manager execution
+
+Explicit Task work uses the installed [Task skill](./.agents/skills/task/SKILL.md).
+The host reserves one real native manager and transfers canonical writer
+ownership after its actual receipt and activation. Generic work uses one worker;
+complex work uses independent solvers and a distinct senior; extra-complex work
+adds one reviewer per solver. Current review, proposal acceptance, dedicated
+implementation when needed, and direct integration evidence govern completion.
+
+The [orchestration contract](./.agents/skills/agent-task/references/orchestration-contract.md)
+documents actual helper payloads, version and recovery gates. Root automatic
+work intake and 30-day inactivity closure remain local policies. Historical
+Tasks retain their original schema and meaning until an explicitly selected
+upgrade. Native goals, plans, TRDs and Task state remain separate.

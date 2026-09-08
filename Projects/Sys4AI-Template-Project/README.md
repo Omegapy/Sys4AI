@@ -41,7 +41,8 @@ The template currently includes these project-local categories:
 
 - `SOUL.md`
 - `AGENTS.md` and `ROLE.md` template variants
-- the generic `project-sub-agent` role bundle
+- the bounded `project-sub-agent` and confirmed `task-manager` role bundles
+- a deterministic `roles/INDEX.md` generated from those authoritative pairs
 - complete shared skill packages under `.agents/skills/`
 - the role-system and Task-system implementation contracts
 
@@ -54,7 +55,8 @@ publication settings are also project-owned.
 
 The root [AGENTS.md](./AGENTS.md), [SOUL.md](./SOUL.md), and
 [ROLE.md](./ROLE.md) define shared guidance and the generic Project Director.
-Reusable sub-agent roles live in [sub-agent-roles](./sub-agent-roles), with one
+Reusable roles live in [roles](./roles), with generated [navigation](./roles/INDEX.md)
+and one
 `AGENTS.md` and one `ROLE.md` per role.
 
 The Project Director uses the repository-local
@@ -62,8 +64,9 @@ The Project Director uses the repository-local
 to inventory the live role catalog, select or create a suitable role, and
 delegate bounded work through native Codex sub-agent orchestration.
 
-Every role-based child inherits the Director's exact model and reasoning effort.
-A role changes instructions and scope, not model settings. The Director reviews
+Every team member retains the confirmed manager's exact model and reasoning
+effort. Verify that inheritance separately from independent solver context.
+The responsible Director reviews
 and verifies child evidence before integration.
 
 ## Requirements and implementation
@@ -106,7 +109,7 @@ $task reopen <completed-task-id>
 ```
 
 Each Task lives directly under [Tasks](./Tasks). The canonical record is
-`task.json`; `TASK.md` and `Tasks/INDEX.md` are generated views. Child agents
+`task.json`; `TASK.md` and `Tasks/INDEX.md` are generated views. Ordinary child agents
 return evidence, while the Project Director owns Task state and final Task
 Responses.
 
@@ -123,3 +126,20 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s tests -v
 
 These checks verify local package behavior. They do not prove that the template
 has been specialized, published, or exercised in a live product environment.
+
+## Task-manager execution
+
+Authorized Task execution uses a real native manager distinct from the host.
+Bootstrap reserves it, records its actual receipt and transfers the sole
+canonical writer at activation. Generic work uses one worker; complex work uses
+independent solvers and a distinct senior; extra-complex work also assigns one
+reviewer per solver. Current passes and coherent manager acceptance precede
+a dedicated implementation child when multi-solution work needs authorized changes.
+
+Read the [orchestration contract](./.agents/skills/agent-task/references/orchestration-contract.md)
+for actual helper payloads, version and recovery gates. Historical schema-1
+Tasks remain readable; upgrade only an explicitly selected record. Role legacy
+transition and index repair use the [role skill](./.agents/skills/manage-subagent-roles/SKILL.md).
+New starter projects contain no active Task execution, native IDs or copied live
+history. The depot root's automatic intake and inactivity closure are separate
+local policies; this Template keeps its explicit selection policy.

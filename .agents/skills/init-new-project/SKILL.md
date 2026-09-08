@@ -2,7 +2,7 @@
 name: init-new-project
 description: Create or prepare a selected Sys4AI project using Template governance assets, preserved project content and factual registration.
 metadata:
-  version: 3.0.0
+  version: 4.0.0
 ---
 
 # Initialize a Sys4AI project
@@ -27,14 +27,21 @@ Every starter input comes from the registered `Sys4AI-Template-Project`: its
 schema-2 `.template/baseline-assets.json`, README renderer, soul, complete skill
 and role packages, and selected reference assets. The seven required skills are
 `agent-task`, `communication`, `init-new-project`, `manage-subagent-roles`, `task`,
-`to-implementation-plan` and `to-trd`. The generic `project-sub-agent` role is
-required. The initializer reads the Template and does not refresh it.
+`to-implementation-plan` and `to-trd`. The `project-sub-agent` and `task-manager` pairs and a validated `roles/INDEX.md`
+are required for new projects. The initializer reads the Template and does not refresh it.
 
 Existing project identity, README, specifications, skills, roles, Tasks,
 configuration, data and registry metadata remain project-owned. Missing starter
 assets may be added. Existing packages remain intact as a whole, including
 custom resources and missing resources; do not combine editions automatically.
-A pristine Template README in a manual copy is specialized. A customized README
+An existing `roles/` collection is preserved as a whole. A missing role index
+is generated from its actual pairs, including invalid-role diagnostics; an
+existing index that differs requires explicit reindex before setup. A legacy
+`sub-agent-roles/` tree or incompatible existing role helper requires a reviewed
+transition before adopting new starters. A completed copy-first transition may
+retain its legacy directory. Preparation verifies its strict receipt, retained
+source hashes, current active pairs and index, and compatible role helper before
+accepting that evidence. Both directories existing alone is insufficient. A pristine Template README in a manual copy is specialized. A customized README
 is preserved. Existing `project.json` bytes and additional fields are preserved;
 its project ID and relative destination must agree with the request, and its
 existing display name and purpose take precedence.
@@ -65,7 +72,9 @@ not ignored. The starter policy has no optional root guide or runtime bundle.
 ## Completion and receipts
 
 The durable receipt is `control_records/project-setup.json`, schema version 1,
-with setup contract `governance-starter-v1`. Its stages are `assets`,
+with setup contract `governance-starter-v2`. The earlier
+`governance-starter-v1` contract remains valid for its original legacy role
+layout; reruns do not convert those receipts or change their role paths. Its stages are `assets`,
 `registration` and `verification`. A completed result contains all three stages
 and passed checks for project identity, project files and factual registration.
 The receipt retains source hashes and the original adoption hashes separately

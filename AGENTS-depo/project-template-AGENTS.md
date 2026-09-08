@@ -26,8 +26,9 @@ Task state, TRD state, and native goal state distinct.
 
 ## Project Director workflow
 
-The root agent is the Project Director defined in `./ROLE.md`. Before selecting,
-creating, or spawning a role-based sub-agent, the Project Director must use the
+The host is the Project Director defined in `./ROLE.md`. Explicit Task execution
+uses a distinct native manager with a bounded bootstrap handoff. Before selecting,
+creating, or spawning any role-based agent, the responsible Director must use the
 [manage-subagent-roles skill](./.agents/skills/manage-subagent-roles/SKILL.md)
 to obtain and assess the current role catalog.
 
@@ -52,9 +53,18 @@ custom-agent configuration that replaces either value.
   [Agent Task skill](./.agents/skills/agent-task/SKILL.md). Use the Agent Task
   helper for every mutation; status, list, startup awareness, and unrelated
   prompts remain read-only.
-- The Project Director owns Task state, definition-of-done verification, and
-  final Task Responses. Child agents return evidence and do not mutate the Task
-  ledger.
+- Bootstrap reserves one manager before launch and records its actual native
+  receipt before activation. Activation transfers the sole canonical writer to
+  that exact manager and ends bootstrap writes. The host relays user steering.
+- The confirmed manager owns Task state, definition-of-done verification,
+  integration and final Task Responses. Ordinary workers, solvers, reviewers,
+  seniors and implementers return evidence without ledger or role-index writes.
+- Each executable subtask is generic, complex or extra-complex. Follow the
+  installed Task skill for required distinct agents, current-version review,
+  senior return, conditional implementation and native stopping/recovery.
+- Active role pairs are in `roles/`; `roles/INDEX.md` is generated navigation.
+  Fresh paired-file validity and function-specific fit govern each assignment.
+  Reading root guidance does not promote an ordinary child to manager.
 - Keep Task state separate from conversation threads, Codex memory, managed
   TRDs, and native goal state. Report any mismatch and do not silently merge or
   overwrite these sources.

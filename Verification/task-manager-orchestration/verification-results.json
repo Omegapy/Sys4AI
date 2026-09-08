@@ -1,0 +1,2531 @@
+{
+  "status": "passed",
+  "observed_at": "2026-09-08T12:47:49.543906+00:00",
+  "plan_id": "PLAN-20260908-6E6F545E",
+  "trd_id": "TRD-20260907-ED998433",
+  "trd_revision": 2,
+  "trd_sha256": "15a84798656e27a924011133fa74048977ca847690d7d7ff28d5c502e13a1949",
+  "requirement_count": 37,
+  "criterion_count": 96,
+  "implementation_artifact_count": 117,
+  "requirements": [
+    {
+      "requirement_id": "REQ-001",
+      "title": "One authorized intake route",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Equivalent prompt, file, and skill inputs retain the same objective, deliverables, acceptance criteria, constraints, source references, project root, and action-authority boundary.",
+          "result": "passed",
+          "observed_result": "The shared and installed intake contracts normalize prompt, inspected file and authorized skill handoff into the same objective, deliverables, criteria, constraints, references, owning root and authority. The native fixture carries the concrete normalized Task profile, source attachment and versioned common baselines through bootstrap and all category paths.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "An upstream handoff retains any supplied document or plan ID and its inspected revision or digest. Merely opening or approving a document does not start execution.",
+          "result": "passed",
+          "observed_result": "The actual native authority packet retains PLAN-20260908-6E6F545E with its inspected revision and SHA. Bootstrap is attributed to the separate implementation request and bounded test authority; the original approved TRD remains unchanged. Document inspection/approval alone does not execute the workflow.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-002",
+      "title": "Launch a real task manager",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "A native runtime receipt identifies the manager as an agent instance distinct from the calling host; relabeling the host does not satisfy the requirement.",
+          "result": "passed",
+          "observed_result": "Actual native spawn, readiness and activation receipts identify /root/task_manager_validation separately from /root. The installed Task changes writer only after the matching reservation, returned native ID and verified role reads.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The calling host relays user input and results after handoff without concurrently performing the same manager responsibilities. Repeated intake for the same live execution does not create a competing manager.",
+          "result": "passed",
+          "observed_result": "After activation, the manager records Task events while the host relays the controlled policy decision and independently audits delivery. Native reconnect targets the exact existing manager/execution; duplicate-manager storage and recovery controls reject competing accepted ownership.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-003",
+      "title": "Retain Director and systems-engineering responsibilities",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Before decomposition, its inspectable context identifies the owning project, relevant architecture and interfaces, state ownership, dependencies, constraints, protected behavior, change impact, risks, and verification needs.",
+          "result": "passed",
+          "observed_result": "The manager records project engineering context before executable baseline/assignment dispatch: fixture architecture, interfaces, dependencies, ownership, source authority, protected state, risk and direct verification. The current context files and canonical event order retain that evidence.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The applicable local guidance and relevant project artifacts support that context. The manager retains scope, role selection, coordination, acceptance, integration, and final verification responsibility.",
+          "result": "passed",
+          "observed_result": "Explicit readiness and assignment receipts bind the delivered project guidance and actual role pairs. The manager performs classification, fresh role selection, team coordination, exact proposal acceptance and direct main-task verification.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-004",
+      "title": "Decompose into bounded coordinated subtasks",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Each executable subtask identifies its objective, requirement links, inputs, dependencies, deliverable, accountable assignment, allowed reads and writes, protected scope, acceptance criteria, and stopping condition.",
+          "result": "passed",
+          "observed_result": "All three native subtasks retain versioned objectives, requirement/criterion links, inputs/dependencies, deliverables, function slots, read/write scopes, protected behavior and stopping conditions. Assignment receipts identify each accountable runtime producer.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Missing dependency targets and dependency cycles prevent dependent execution. A small objective may use one generic subtask; mixed-category tasks retain main-task integration checks.",
+          "result": "passed",
+          "observed_result": "Dependency and cycle fixtures reject missing/cyclic prerequisites. The native mixed Task verifies the generic fixture before dependent analysis and accepted analysis before coding, then checks the integrated original input and final module together.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-005",
+      "title": "Classify every executable subtask",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "No runnable subtask is uncategorized or substitutes `direct`, `decomposed`, or `adversarial` for the required category. Decomposition and category selection remain separate decisions.",
+          "result": "passed",
+          "observed_result": "The canonical native baseline set contains exactly generic, complex and extra-complex categories with separate decomposition and category rationales. Strict validator cases reject unsupported taxonomy and incomplete slot counts.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Reclassification records the changed evidence and applicable gates. It cannot silently bypass failed review, reduce a required team because of capacity, or split an inseparable decision solely to evade review.",
+          "result": "passed",
+          "observed_result": "Subtask revision retains prior definitions and rounds. Frozen-slot/reclassification tests reject dropping an unresolved solver or converting a failed cycle to evade gates. Native capacity queues the third complex solver without reducing the frozen team.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-006",
+      "title": "Execute generic work with one worker",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "One worker returns its deliverables, actual changes, proportionate checks, evidence, and limitations to the manager. The category adds no solver panel, reviewer agent, senior synthesizer, or separate implementation child.",
+          "result": "passed",
+          "observed_result": "The generic native subtask uses one fixture worker, whose result includes the exact delivered JSON, checks and limitations. The manager directly reopens and verifies the four ordered input records; no generic reviewer, senior or dedicated implementer is added.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Targeted corrections return to the responsible worker. Replacement after failure records revocation of the previous ownership before assigning a replacement; the manager directly verifies the result.",
+          "result": "passed",
+          "observed_result": "The installed workflow returns bounded corrections to the responsible worker. Same-instance input/resume and explicit revocation/replacement controls are tested; the native recovery case retains the original worker during delayed-receipt reconciliation and accounts for its actual stop.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-007",
+      "title": "Develop independent solutions for multi-solution work",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "All planned solvers receive the same versioned problem baseline and success criteria, with documented role differences. Two is a minimum, not a fixed required team size.",
+          "result": "passed",
+          "observed_result": "Three distinct complex solvers receive the same complete baseline and criteria with different documented perspectives. The extra-complex team separately has two originating solvers. Actual reservation and launch packets retain common hashes and required logical slots.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Initial candidate development excludes sibling drafts, including for queued solvers. Separate candidate artifacts identify each contribution; competing solvers do not implement conflicting production changes in the shared worktree.",
+          "result": "passed",
+          "observed_result": "Native initial returns contain paths, hashes and status only until every initial solver launches. The third complex solver is queued; the manager defers candidate reads. Each solver writes a distinct candidate directory and no solver performs production implementation.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "A missing required candidate blocks collection. A runtime that cannot preserve the required independence reports the limitation instead of claiming independent development.",
+          "result": "passed",
+          "observed_result": "Actual premature candidate import and incomplete senior dispatch fail without canonical mutation. The final collection includes every frozen solver candidate; capacity/independence cannot be repaired by pretending an absent solver ran.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-008",
+      "title": "Assign a distinct senior synthesizer",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "The senior is a distinct runtime instance from the manager and solvers; for extra-complex work it is also distinct from the assigned reviewers.",
+          "result": "passed",
+          "observed_result": "Actual native IDs prove each senior differs from its manager and originating solvers; the extra-complex senior also differs from both reviewers. Reusing the generic role definition does not merge function instances.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The senior receives every required current candidate, relevant evidence, limitations, and applicable review findings. Complex work has no mandatory per-candidate reviewer stage; extra-complex eligibility follows REQ-014.",
+          "result": "passed",
+          "observed_result": "Senior input references bind every current candidate and, for extra-complex work, both exact current review findings. Complex analysis passes directly from complete candidates to its senior, with no invented mandatory reviewer stage.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-009",
+      "title": "Fuse compatible contributions into a coherent solution",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "The proposal identifies its current source candidates, retained contributions, justified omissions, resolved differences, assumptions, interfaces, requirement coverage, residual risks, and verification approach.",
+          "result": "passed",
+          "observed_result": "The inspected senior proposals identify exact source versions, retained contributions and omissions, assumptions, interfaces, requirement coverage, risks and validation. The manager accepts the exact resulting artifact after direct inspection.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The result contains no unresolved mutually exclusive core commitments. Concatenation, majority vote, an unexplained preferred candidate, or an unsupported endorsement does not satisfy fusion.",
+          "result": "passed",
+          "observed_result": "The initial mutually exclusive invalid-input commitments generate an explicit shared conflict. Final fusion follows the relayed strict-policy decision and current solver/reviewer evidence; neither voting nor silent deletion supplies agreement.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-010",
+      "title": "Return unresolved opposition with a shared explanation",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "The conflict identifies the synthesis round, common problem baseline, candidate versions, incompatible claims, affected requirements, supporting evidence, and required resolution.",
+          "result": "passed",
+          "observed_result": "The native conflict record binds its synthesis round, common baseline, exact candidates, incompatible invalid-input commitments, affected criteria, evidence and required resolution. The immutable explanation remains referenced through the material revision.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "All solver assignments receive the same shared explanation; any role-specific action notes are separate. An opposing core commitment is not discarded merely to declare a winner.",
+          "result": "passed",
+          "observed_result": "Actual same-explanation delivery receipts cover both originating extra-complex solvers. Per-solver action packets retain the identical shared conflict artifact and the same authorized strict-policy steering.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-011",
+      "title": "Repeat solution and synthesis cycles with current evidence",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Affected originating solvers return materially revised candidates or resolving evidence. An unaffected solver may return a versioned revalidation explaining compatibility.",
+          "result": "passed",
+          "observed_result": "The originating native solvers return versioned corrections: first the controlled boolean defect, then the strict-policy conflict resolution or explicit compatibility evidence. Prior candidates and findings remain attributed history.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The next synthesis uses a consistent current candidate set and problem baseline. Repeated unchanged failure or exhausted authorized resources produces an honest non-complete state, never forced acceptance.",
+          "result": "passed",
+          "observed_result": "The next senior receives one current baseline/round and complete eligible versions. Contract and storage controls require a targeted change, new evidence or explicit blocker after unchanged failure; neither resources nor an old pass forces acceptance.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-012",
+      "title": "Assign one distinct reviewer to every extra-complex solver",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "The solver-to-reviewer mapping is one-to-one. Self-review and a single reviewer instance shared among solvers are rejected.",
+          "result": "passed",
+          "observed_result": "The extra-complex canonical slots and native receipts map two solvers to two different reviewer instances. Storage tests reject self-review, shared reviewers and incorrect solver mappings.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Reviewer role definitions may be reused when suitable, while reviewer runtime instances remain distinct. The assigned reviewer evaluates its own solver's current candidate against the common criteria.",
+          "result": "passed",
+          "observed_result": "Both reviewers may use the same suitable persisted general role while retaining different runtime identities. Each inspects only its assigned solver current candidate against the common criteria and records the bound finding version.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-013",
+      "title": "Revise rejected candidates through their reviewers",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "A rejection identifies failed criteria, evidence, and required changes, distinguishing mandatory defects from optional improvements.",
+          "result": "passed",
+          "observed_result": "The controlled initial omission of boolean validation receives a rejection tied to the failed criterion, evidence and required correction; it is identified as a seeded validation defect rather than a claimed organic discovery.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The originating solver returns a new candidate version and a response to findings. A rejected candidate cannot become passed through a manager override or without current review of the revision.",
+          "result": "passed",
+          "observed_result": "The originating solver produces a new candidate and response to findings. Its assigned reviewer evaluates that new version before a pass; the manager cannot turn the rejected version into an eligible proposal.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "The same reviewer assignment continues while its runtime session remains available; any necessary replacement preserves the mapping and review history.",
+          "result": "passed",
+          "observed_result": "The same native reviewer assignment continues for correction and later conflict re-review. Observed completed states, exact input handoffs and explicit resumes preserve its mapping and history.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-014",
+      "title": "Require all current review passes before extra-complex synthesis",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Any missing, rejected, blocked, or stale review prevents synthesis. A pass on an earlier version does not admit a changed candidate.",
+          "result": "passed",
+          "observed_result": "The actual extra-complex workflow cannot dispatch its senior while a required current candidate lacks its own pass. Rejected, changed-byte and material-baseline cases retain stale history without granting eligibility.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The synthesis input set corresponds exactly to the eligible reviewed versions.",
+          "result": "passed",
+          "observed_result": "Each synthesis record binds the exact candidate and reviewer finding set admitted by the gate. The root audit compares those canonical IDs/digests with the actual inspected versions and native producer identities.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-015",
+      "title": "Reapply review after extra-complex synthesis conflicts",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "The shared conflict reaches all solvers; revised or revalidated current candidates receive their associated reviewers' current attestations under the updated context.",
+          "result": "passed",
+          "observed_result": "The shared native conflict is delivered to both solvers, followed by current candidate revisions/revalidations and both associated reviewer attestations under the new strict-policy baseline.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "No conflict revision bypasses REQ-014 or retains a pass invalidated by a material baseline change.",
+          "result": "passed",
+          "observed_result": "The material baseline change increments the current round and invalidates earlier passes. The subsequent senior input set contains the new current reviews; no conflict revision bypasses the all-current-pass gate.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-016",
+      "title": "Return synthesis to the manager for acceptance",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "The manager records acceptance of the exact current proposal, requests a bounded correction, or records a specific blocker.",
+          "result": "passed",
+          "observed_result": "The actual manager records acceptance of the exact coherent current analysis/design proposal after direct artifact inspection. Rejected or stale versions remain history and are not accepted by filename alone.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The senior cannot authorize implementation, change the user's scope, or close the Task. There is no additional senior layer implied by wording in the source handoff.",
+          "result": "passed",
+          "observed_result": "The distinct senior returns synthesis evidence and does not mutate canonical Task state, authorize implementation or close the Task. The manager alone dispatches the accepted implementation target; no additional senior layer is introduced.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-017",
+      "title": "Use one dedicated implementation child when required",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "The implementation instance is distinct from the manager, solvers, reviewers, and senior, with one active owner for the accepted solution and an exact scope, protected state, checks, evidence, and stopping condition.",
+          "result": "passed",
+          "observed_result": "A distinct dedicated native implementer owns the accepted extra-complex coding solution with exact target acceptance, protected state, writes, checks and stop condition. Its instance differs from manager, solvers, reviewers and senior.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "An analysis or recommendation objective that is already satisfied by the accepted deliverable creates no unnecessary implementation child; a coding objective is not complete on a design alone.",
+          "result": "passed",
+          "observed_result": "The complex analysis ends at the manager-accepted delivered analysis with no unnecessary implementer. The coding path produces the actual ticket_ordering.py and meaningful standard-library tests, then passes direct integration.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "A material design defect returns to the manager for a bounded decision or reopened solution cycle. The implementer does not silently replace the accepted design; changed acceptance binds to the revised solution.",
+          "result": "passed",
+          "observed_result": "The implementation contract returns material design defects to the manager. Exact-target and changed-acceptance fixtures reject stale implementation targets; the native implementer works against the final strict-policy acceptance and does not choose a competing design.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-018",
+      "title": "Persist project-local roles and an accurate index",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py",
+        "SKILLS-depo/manage-subagent-roles/SKILL.md",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "The index resolves to current valid role bundles and exposes relevant invalid-role diagnostics. A missing, stale, or misleading entry cannot make a missing or invalid bundle eligible.",
+          "result": "passed",
+          "observed_result": "The actual source, Template and root role validators report current valid pairs/indexes. RoleCatalogTests exercises missing, stale and forged indexes and invalid pair diagnostics; eligibility comes from the live pair, and read-only inspection leaves bytes unchanged.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The existing paired-file format, valid role metadata and links, safe names, path confinement, and overwrite protections remain supported. New installations discover active roles under `roles/`, with any legacy lookup limited to explicit transition or diagnostics.",
+          "result": "passed",
+          "observed_result": "The 57 behavior tests preserve paired metadata, required sections/links, safe names, path and alias confinement, collision handling and overwrite protection. Delivered root/Template use roles/. Legacy discovery is explicit transition/diagnostics only; the fresh starter contains no legacy directory.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-019",
+      "title": "Select a suitable existing role before creating one",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py",
+        "SKILLS-depo/manage-subagent-roles/SKILL.md",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Manager, generic worker, solver, reviewer, senior, and implementer selection records identify the objective, domain capabilities, reads and writes, deliverable, tools and skills, authority, risk, stopping condition, selected role, both file paths, inspected revision or digests, and fit rationale.",
+          "result": "passed",
+          "observed_result": "Every native manager/function reservation contains a fresh filesystem role catalog, both pair paths/digests, objective, capabilities, scope, tools/skills, deliverable, authority, risk, stop condition and explicit fit rationale. The root checks these against the actual delivered pairs.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Role content is read and applied by the assigned agent. An unsuitable or invalid role is not accepted solely because it exists; a tool, permission, dependency, or runtime gap is reported separately from a role gap.",
+          "result": "passed",
+          "observed_result": "Native readiness/results confirm explicit reads of SOUL and both assigned role files. The manager role grants bounded coordination and writer authority; ordinary roles remain bounded producers. Capability and inheritance checks are separate from role suitability.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-020",
+      "title": "Create and persist roles for demonstrated gaps",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py",
+        "SKILLS-depo/manage-subagent-roles/SKILL.md",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Fresh inventory and fit evidence precede creation. The new paired-file bundle validates, appears accurately in the index, and is available for later tasks before an agent uses it.",
+          "result": "passed",
+          "observed_result": "The preimplementation catalog identified a general worker without manager delegation/writer authority. The source manager pair supplies that bounded reusable responsibility. It validates in source fixtures, Template, root and fresh starter before the native manager assignment. Creation fixtures require validated paired files and current navigation before use.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Creation preserves unrelated files and reusable-source ownership. It does not invent unavailable capabilities, duplicate a suitable role, or treat a missing tool or permission as a role-definition gap.",
+          "result": "passed",
+          "observed_result": "Role selection/creation contracts separate role gaps from absent tools, skills or permission. Existing role, unrelated-file and missing-skill tests pass. Source/adoption manifests attribute the new reusable manager pair and preserve unselected projects.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "A partial publication identifies the committed bundle and remaining index recovery without duplicate creation or deletion of valid work.",
+          "result": "passed",
+          "observed_result": "The publication regressions inject index failure after a valid pair is committed and retain the pair for reindex recovery. Concurrent same-byte replacement is preserved by inode checks; repeated creation cannot overwrite the committed bundle. Original failure observations and superseding corrections remain in role-publication-review.md.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-021",
+      "title": "Preserve exact model and reasoning identity",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Runtime-provided evidence or a named verified runtime inheritance guarantee establishes parity for each assignment. Prompt assertions and unverified aliases alone are insufficient.",
+          "result": "passed",
+          "observed_result": "Every native spawn uses a full-history fork with model and reasoning overrides omitted. The effective runtime contract explicitly guarantees exact parent model/effort inheritance for that mode, and allowlisted configuration inspection finds no selected conflicting defaults.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The workflow distinguishes direct observed identity matches, verified inheritance-contract evidence, and unverified settings. Known mismatches or insufficient guarantees prevent compliant dispatch.",
+          "result": "passed",
+          "observed_result": "Reports label this as verified inheritance-contract evidence, not literal model telemetry. The latter is unavailable. Known mismatch, unverified settings and unsupported context modes are rejected by the current assignment controls.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Model identity and context provision are checked separately. A user-requested mid-run model or reasoning change reconciles the active team before further assignments under the new identity; no automatic downgrade or user-configuration rewrite supplies an exception.",
+          "result": "passed",
+          "observed_result": "Context exclusion is independently demonstrated by queued solver launch/read ordering. The recovery scenario reconciles the team before replacement; the setting-change rejection is a labelled deterministic case. Actual model switching and user-configuration rewrites are not exercised or claimed.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-022",
+      "title": "Adapt to the owning project",
+      "result": "passed",
+      "primary_artifacts": [
+        "tools/template_update.py",
+        "depot/template-update.json",
+        "SKILLS-depo/init-new-project/scripts/init_new_project.py",
+        "ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Common orchestration does not hard-code a product domain or copy depot-only registration authority into ordinary product Directors.",
+          "result": "passed",
+          "observed_result": "The generic Director and manager contracts adapt to the owning project's interfaces, risks and authority. Depot registration and source-collection responsibilities remain in the separately adopted root contract, not the ordinary product Director.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "A clean temporary project created from the designated Template receives usable current starter contracts and roles without copied live Task history, coordinator assignments, native agent IDs, or execution state.",
+          "result": "passed",
+          "observed_result": "Actual initializer CLI creation from the delivered Template produced an 83-file fresh project, seven skills, two valid roles and a current relative index. The retained initial manifest proves no Task, execution, native ID, legacy tree or runtime state was copied before the later authorized native test created its own fixture Task.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-023",
+      "title": "Maintain one manager and one canonical writer",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Duplicate intake, stale manager results, competing writers, and replacement attempts cannot create competing accepted ownership or duplicate work. Live matching execution identity is checked before reconnection.",
+          "result": "passed",
+          "observed_result": "Native bootstrap/reconnect/recovery and deterministic duplicate/writer/revision cases preserve one accepted manager identity. Delayed receipt reconciliation uses the original reservation and runtime ID; old-generation operations cannot mutate the replacement execution.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The host's bootstrap write authority ends at handoff. Ordinary workers, reviewers, and seniors do not mutate canonical Task state, final Task Responses, or role indexes or promote themselves to manager by reading root guidance.",
+          "result": "passed",
+          "observed_result": "Actual activation ends host bootstrap writes. The manager is the only writer of its disposable Task, while workers/reviewers/seniors return scoped artifacts. Root performs an independent plan audit and authorized recovery, not concurrent ownership of the same execution.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Replacement reconciles outstanding agents and explicitly revokes the previous assignment. A claimed actor field or role prose is not described as operating-system authentication or filesystem isolation.",
+          "result": "passed",
+          "observed_result": "Native replacement includes actual stopped/completed owner observations and explicit revocation of the prior generation before a new manager activates. The contracts correctly describe cooperative protocol validation, not OS authentication or filesystem isolation.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-024",
+      "title": "Keep orchestration identities and provenance distinct",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Each accepted artifact or result resolves to its Task, subtask, responsible runtime instance, selected role revision, input baseline, and artifact version or digest as applicable.",
+          "result": "passed",
+          "observed_result": "Canonical artifact, candidate, review, synthesis, acceptance and result records resolve to their Task/subtask, native assignment, selected role digests, baseline/round and immutable artifact SHA. The root compares those references with delivered files.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Actual native IDs originate in tool receipts. Role names, subtask IDs, conversation IDs, placeholders, or child success text cannot substitute for runtime identity or completed work.",
+          "result": "passed",
+          "observed_result": "All accepted native IDs originate in actual spawn or roster receipts. Role names, candidate IDs and prose completion statements remain separate fields and never substitute for native identity or direct verification.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Duplicate, stale, or out-of-order results are identifiable and cannot repeat an already accepted transition; historical results retain their attribution.",
+          "result": "passed",
+          "observed_result": "Duplicate-event, stale-revision, old-generation and changed-current-result cases reject replay without mutation. Prior candidates, findings, conflicts, results and generation history retain their original attribution.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-025",
+      "title": "Bind reviews and acceptance to exact current versions",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "A change to candidate bytes invalidates a dependent pass even if its filename and title remain unchanged.",
+          "result": "passed",
+          "observed_result": "Changed candidate bytes invalidate passes/acceptance even at the same path; changed live outputs also invalidate direct verification. The corresponding deterministic regressions and independent positive/negative CLI replays pass.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "A material input, requirement, or problem-baseline change invalidates dependent review or acceptance until current evidence establishes eligibility again; stale records remain history.",
+          "result": "passed",
+          "observed_result": "The native strict-policy revision materializes a new baseline and round and requires current solver/reviewer evidence. Task-baseline, changed-upstream-dependency and live-output regressions reject stale current claims while preserving old history.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "A synthesis uses a mutually consistent current candidate set, and implementation identifies the exact manager-accepted current solution.",
+          "result": "passed",
+          "observed_result": "The native final synthesis has one consistent eligible input set, and the dedicated implementer reservation/result identifies the exact manager acceptance. Superseded acceptance and incomplete exact-input packets fail validation.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-026",
+      "title": "Distinguish reconcilable differences from contradictions",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Complementary contributions, terminology differences, scope alternatives, evidence disagreements, and mutually exclusive commitments receive an explicit evidence-based disposition.",
+          "result": "passed",
+          "observed_result": "The inspected senior artifacts give explicit dispositions for complementary contributions, terminology, scope alternatives, evidence disagreements and mutually exclusive commitments. The initial policy opposition is preserved as a shared conflict.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "A coherent result has consistent assumptions, compatible interfaces, non-conflicting authority and state ownership, and a feasible sequence that satisfies the criteria.",
+          "result": "passed",
+          "observed_result": "Final analysis/design and performed module use consistent ordering, stable ties, validation, nonmutation and authority assumptions. Direct integration checks the accepted interfaces against all four fixture records and boundary behavior.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Contradictory requirements return as a bounded user decision or blocker. Solvers and senior agents cannot invent user intent, lower criteria, or hide an opposing core commitment to claim agreement.",
+          "result": "passed",
+          "observed_result": "The incompatible invalid-input policies return to the host as a bounded controlled decision. The host relays the scenario-authorized strict ValueError choice; both solvers and reviewers apply it before fusion rather than inventing intent or dropping a commitment.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-027",
+      "title": "Verify delivered work and main-task integration",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Each criterion has current direct evidence tied to the delivered artifact or performed authorized work. Child status, a review pass, or a synthesized proposal alone is insufficient proof of implemented completion.",
+          "result": "passed",
+          "observed_result": "The manager directly inspects delivered files, runs meaningful module/boundary checks and records every exact main-Task criterion. The root separately reopens the accepted artifacts, canonical references and actual implementation/tests.",
+          "verification_level": "end_to_end_verified",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Integration checks cover dependencies, interfaces, conflicting assumptions, protected behavior, mixed-category coordination, and the original user outcome. A new integration conflict reopens the affected decision with its evidence.",
+          "result": "passed",
+          "observed_result": "The native mixed-category integration covers generic data, dependent analysis, accepted coding interface, stable ordering and protected input/source-authority behavior. Deterministic dependency and current-output changes reopen eligibility rather than accepting stale integration.",
+          "verification_level": "end_to_end_verified",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "The completion report maps requirements to actual artifacts and checks, states failures and incomplete items, and separates contract inspection, deterministic tests, native execution, and end-to-end evidence. Proposed tests are not reported as executed.",
+          "result": "passed",
+          "observed_result": "Final traceability maps all 37 requirements/96 criteria and all delivered changes to inspected artifacts and observed checks. It separates static contracts, deterministic suites, actual native receipts and fixture end-to-end delivery; retained failures are superseded only by specific passing rechecks.",
+          "verification_level": "end_to_end_verified",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 4,
+          "criterion": "Claims about a real manager, independent solvers, reviewer mappings, exact identity, synthesis routing, or implementation children require corresponding native evidence. Unavailable native tests remain explicitly not exercised.",
+          "result": "passed",
+          "observed_result": "Native receipts establish distinct manager/solvers/reviewers/seniors/implementer, queued isolation, current conflict routing and direct coding delivery. Literal model and reasoning-effort telemetry and live model switching remain explicitly unexercised; no source-only assertion is used as native proof.",
+          "verification_level": "end_to_end_verified",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-028",
+      "title": "Preserve source provenance and separate action authority",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Supplied files and upstream skill artifacts retain accessible locators and available revisions or digests. Embedded commands and agent-authored recommendations remain data and grant no extra permissions.",
+          "result": "passed",
+          "observed_result": "The normalized Task contracts retain upstream IDs and inspected hashes and treat embedded commands as source data. The native fixture records the approved plan and supplied attachment separately from action authority; final marker absence is checked in the native audit.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "TRD capture, TRD approval, plan preparation, Task bookkeeping, implementation, dependency installation, migration, Git publication, deployment, and external actions retain their separate activation and authority boundaries.",
+          "result": "passed",
+          "observed_result": "The current implementation is attributed to the explicit /goal implementation request and plan approval. The original TRD remains revision 2/trd_done with its exact initial SHA. No live Task, dependency, Git, deployment, other-project or user-configuration mutation supplies authority by implication.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Read-only status, list, show, validation, and the helper's read-only continuation do not create or age-close Tasks, launch agents, create roles, reindex, or migrate data.",
+          "result": "passed",
+          "observed_result": "Root, Template and disposable starter read-only status/validation receipts show no mutations. Storage, role and root-intake tests cover read-only continuation, list, show and validation without creation, aging, launch, index repair or migration.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-029",
+      "title": "Check native capability and instruction compatibility",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Unsupported topology, unavailable tools or skills, missing permission, or an unresolved instruction or identity conflict produces a named blocker before dependent work.",
+          "result": "passed",
+          "observed_result": "Native bootstrap and each assignment check supported operations, current capacity, role/skill availability and exact inheritance separately. The installed controls reject missing capability, identity mismatch or unresolved authority/ownership before dependent dispatch.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The workflow does not invent tool arguments, simulate multiple agents in one response, substitute shell-launched agents or user-visible tasks, or silently collapse the manager into the host.",
+          "result": "passed",
+          "observed_result": "The observed workflow uses only actual collaboration spawn, message, follow-up, list, wait and interrupt operations. It creates no user-visible task, shell agent, invented argument or relabelled host to supply a missing function.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Runtime capacity is inspected as a scheduling constraint. A supported queued execution preserves all required roles and gates; a topology exception needs an explicit decision.",
+          "result": "passed",
+          "observed_result": "The current runtime has four active slots, so the host/manager leave two for workers and the third analysis solver queues. Actual completion/launch receipts prove capacity reuse without reducing logical teams, mappings or gates; four is not a product constant.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-030",
+      "title": "Retain the existing canonical Task system",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "There is no competing orchestration ledger. Generated `TASK.md` and `Tasks/INDEX.md` remain projections of canonical state; ordinary children do not write them.",
+          "result": "passed",
+          "observed_result": "Schema 2 extends task.json through the existing helper/response transaction; TASK.md and Tasks/INDEX.md remain projections. Children return evidence and the designated manager owns canonical writes. The helper and installed validators check canonical/projection consistency.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Subtasks, candidates, reviews, and child assignments do not become separate top-level Tasks solely to track orchestration. Managed TRDs, plans, conversations, native goals, Git, deployment, and release states remain distinct.",
+          "result": "passed",
+          "observed_result": "The native mixed-category fixture uses one top-level Task for its internal subtasks, candidates, reviewers and implementations. Plan, TRD, live Task catalog, native goal and Git remain separately inspected state; no live historical record is transformed into runtime evidence.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Helper operations reject stale revisions and invalid payloads, preserve actual commit boundaries, and report partial publication with exact recovery. No fabricated cross-system atomicity or exactly-once native-launch guarantee is claimed.",
+          "result": "passed",
+          "observed_result": "The storage suites reject stale revisions, duplicate events, invalid keys, stale producers and changed references. Artifact and projection fault injection preserves real commit boundaries and exact recovery. The contract explicitly disclaims cross-system atomicity and exactly-once native launch.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 4,
+          "criterion": "Durable records contain concise decisions and necessary evidence, not hidden reasoning, full transcripts, credentials, secrets, or large raw logs.",
+          "result": "passed",
+          "observed_result": "Task artifacts are bounded regular files and versioned concise evidence. Canonical events contain decisions and necessary provenance. Retained reports and manifests exclude hidden reasoning, credentials and conversation transcripts; native audit summaries retain tool IDs, statuses and relevant digests.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-031",
+      "title": "Continue loops only with meaningful progress",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Repeated unchanged failure, irreducible conflict, missing capability or authority, and exhausted resources preserve current artifacts and produce an explicit non-complete blocker or required decision.",
+          "result": "passed",
+          "observed_result": "The controlled rejection and policy conflict progress through identified corrections and a bounded decision. The installed block/stop controls retain artifacts and non-complete state for unchanged failure, absent capability or unresolved ownership.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Resource pressure does not auto-pass a candidate, remove a required solver or reviewer, lower acceptance criteria, or change model or reasoning settings.",
+          "result": "passed",
+          "observed_result": "Capacity pressure queues the native third solver instead of dropping it. Every required extra-complex review remains mandatory, and all agents retain exact inherited settings. No candidate is passed simply to finish the test.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Optional improvements do not extend review indefinitely after mandatory criteria are met.",
+          "result": "passed",
+          "observed_result": "The native accepted analysis stops after mandatory criteria are met; final coding verification ends after meaningful required checks. The workflow distinguishes optional improvements from defects and does not add another review layer or open-ended improvement cycle.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-032",
+      "title": "Respect runtime capacity and write ownership",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "No two active assignments own the same accepted solution implementation or overlapping write scope. Solver candidates have distinct protected artifact ownership.",
+          "result": "passed",
+          "observed_result": "Native assignments have distinct candidate/review directories and one dedicated owner for the accepted coding target. Reservation/rebind tests reject overlapping active writes and competing implementation ownership.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Queued execution retains the required logical agent instances, role distinctions, candidate independence, review gates, and exact identity. No fixed concurrency number or simultaneous full-team launch is required.",
+          "result": "passed",
+          "observed_result": "Actual queued analysis retains three independent logical solvers and one distinct senior; extra-complex retains both solver/reviewer pairs and its distinct senior/implementer. Available active slots affect scheduling only, with no requirement for simultaneous full-team launch.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-033",
+      "title": "Preserve existing roles and Task history during transition",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py",
+        "SKILLS-depo/manage-subagent-roles/SKILL.md",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Existing valid roles remain recoverable and attributable after transition, with unchanged content retained where semantics are unchanged. Historical path references and completed records are not rewritten to simulate new behavior.",
+          "result": "passed",
+          "observed_result": "The active root retains both original legacy role files byte-for-byte. Its copy-first transition receipt attributes the initial copy, and the separate adoption manifest attributes later approved definitions. Template retires exactly two formerly managed legacy files only after retaining their recoverable bytes. All 42 protected historical paths compare unchanged.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Conflicting old and new role destinations are identified before overwrite. Read-only inspection does not migrate; any migration write requires explicit authority and exact reviewed scope.",
+          "result": "passed",
+          "observed_result": "The actual root transition used a reviewed root/hash-bound preview before mutation. Role tests reject stale previews and customized/concurrently appearing destinations without overwrite; read-only inspection never migrates. The root and Template manifests define the precise authorized scope.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Unsupported record versions or interrupted transitions fail safely with a documented recovery route. No old summary is used to invent live manager or child identities.",
+          "result": "passed",
+          "observed_result": "Strict unsupported-version, corrupt receipt, partial pair/index publication and interrupted transition tests pass. Selected schema-1 upgrade preserves original bytes/history; ordinary reads do not upgrade or invent live identities. Current receipt and historical entries require internally exact coverage.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-034",
+      "title": "Deliver to the confirmed Sys4AI destinations",
+      "result": "passed",
+      "primary_artifacts": [
+        "tools/template_update.py",
+        "depot/template-update.json",
+        "SKILLS-depo/init-new-project/scripts/init_new_project.py",
+        "ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Reusable additions, modifications, and deletions originate in the appropriate `SKILLS-depo/`, `ROLES-depo/`, `AGENTS-depo/`, `SOULS-depo/`, or `SPECS-depo/` source collection as applicable. The explicit mappings and checked update workflow produce the designated Template.",
+          "result": "passed",
+          "observed_result": "All reusable workflow, role, governance and specification changes originate in their depot sources. The reviewed updater preview applied 8 additions, 30 updates and 2 legacy deletions to the designated Template; its 81 managed destinations are current and the unchanged original watcher has a fresh successful check.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The active root receives a separately reviewed local adoption that reconciles the changed manager, taxonomy, role path, state-writer, and implementation-owner contracts while preserving its depot responsibilities and unrelated edits.",
+          "result": "passed",
+          "observed_result": "The active root received its separately reviewed 37-file adoption, after a copy-first role transition. Its depot responsibilities, prior ROLE edits, automatic work intake and 30-day age closure remain explicit; root-specific changes were not silently copied into source policy.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Template mappings and initialization produce the new role layout and current common workflow in a temporary new project, with destination-appropriate role-index validation.",
+          "result": "passed",
+          "observed_result": "The delivered Template passed 177 tests and actual role/Task validators. Its initializer created a fresh disposable project with current roles/index and prepared an existing customized project while preserving all 35 prior files. Both setup reruns retained project identity and edition.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 4,
+          "criterion": "Each selected destination has relevant checks and preservation evidence. Registration does not authorize propagation into any other project; the registry remains factual and unselected project files remain untouched.",
+          "result": "passed",
+          "observed_result": "All 117 implementation artifact hashes match reviewed manifests. Root checks pass 297 tests, source and pipeline checks pass, and protected paths including the live factual registry and unselected Electronics project remain unchanged. Only disposable registries were written for starter tests.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-035",
+      "title": "Account for outstanding agents when work stops or transfers",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "New dispatch stops when the controlling action requires it; applicable interruption is requested, actual runtime status and known changes are reconciled, and any uncontained or unconfirmed worker is reported explicitly.",
+          "result": "passed",
+          "observed_result": "The recovery Task requests stop, rejects dependent dispatch and unconfirmed stop completion, then records actual interruption and known marker bytes before transfer. Every started test instance has an explicit final native observation.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "A stopped or cancelled execution is not labeled completed. An old timestamp or expired observation alone does not prove that a manager or worker has stopped.",
+          "result": "passed",
+          "observed_result": "The recovery fixture deliberately cancels with an unfinished deliverable and remains distinct from the completed mixed-category Task. No timestamp or roster absence alone is used as proof of stopping or successful completion.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Replacement does not duplicate a still-active owner. Native launch or receipt uncertainty is reconciled against the original assignment before retrying.",
+          "result": "passed",
+          "observed_result": "Controlled delayed receipt import reconciles the original worker ID without relaunch. Manager replacement uses all required actual owner observations and revokes the old generation before a distinct replacement activates; stale operations are rejected.",
+          "verification_level": "runtime_observed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-036",
+      "title": "Preserve intentional intake and lifecycle policies",
+      "result": "passed",
+      "primary_artifacts": [
+        ".agents/skills/agent-task/scripts/task_state.py",
+        ".agents/skills/agent-task/tests/test_root_orchestration_intake.py",
+        ".agents/skills/task/SKILL.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Explicit work intake reuses a clearly matching active Task or creates one as the established root contract specifies. Completed history does not become a substitute for a new objective.",
+          "result": "passed",
+          "observed_result": "The installed root retains its matching/new-work intake path; the 108-test Agent Task suite includes prior intake behavior and new manager ownership cases. Completed history remains terminal and a new objective receives a distinct unassigned Task in fixtures.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "Read-only and unrelated requests do not run aging or create Tasks. Eligible age closure remains distinct from completion and preserves unfinished criteria and history.",
+          "result": "passed",
+          "observed_result": "Read-only routes and unrelated requests remain nonmutating. Boundary fixtures retain the intake-only 30-day policy, distinct close-old-task status, unfinished criteria and history. Actual root startup/status reports 21 terminal records and no nonterminal Tasks without running aging.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Known active manager or unresolved write-owning worker state is reconciled before inactivity closure. No scheduled background process is added, and intentional source/template versus root intake differences remain documented.",
+          "result": "passed",
+          "observed_result": "Root orchestration fixtures reject age closure with a live or unresolved manager/worker and allow it only with reconciled actual-provenance-shaped receipts. Unassigned schema-2 closure uses bounded bootstrap proof without inventing ownership. Shared source/Template selection and root-specific intake are documented separately; no aging schedule was added.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-037",
+      "title": "Extend the existing helper architecture proportionately",
+      "result": "passed",
+      "primary_artifacts": [
+        "SKILLS-depo/task/SKILL.md",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "SKILLS-depo/agent-task/scripts/task_state.py",
+        "ROLES-depo/task-manager-ROLE.md"
+      ],
+      "criteria": [
+        {
+          "criterion_index": 1,
+          "criterion": "Deterministic storage and validation stay within the existing helper architecture; actual agent spawning and messaging use available native agent tools through the agent or skill workflow.",
+          "result": "passed",
+          "observed_result": "The existing task_state.py transaction delegates deterministic validation to the sibling orchestration_state.py module. Native dispatch and messaging stay in the skills/agents, using available collaboration tools; no subprocess launches an agent.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 2,
+          "criterion": "The change does not introduce a replacement general-purpose agent framework, database or queue service, mandatory memory or ontology backend, new model provider, or production dependency solely to implement orchestration.",
+          "result": "passed",
+          "observed_result": "The changed helpers use the existing Python 3.12 standard-library architecture. No production dependency, database, queue service, memory/ontology backend, model provider or replacement orchestration framework was introduced. No package was installed for the optional unavailable PyYAML validator.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        },
+        {
+          "criterion_index": 3,
+          "criterion": "Proposed module names, CLI operations, packet fields, and schema numbers are checked against the live implementation and documented through separately authorized planning; illustrative payloads are never treated as already-supported APIs.",
+          "result": "passed",
+          "observed_result": "The approved plan defined the schema-2 extension and typed CLI contract before implementation. The current 29 documented event field sets were checked against the live validator and exercised by real CLI fixtures. Public help and actual native receipt examples are retained as inspected API evidence.",
+          "verification_level": "broader_suite_passed",
+          "evidence": [
+            "Verification/task-manager-orchestration/native-category-validation.md",
+            "Verification/task-manager-orchestration/native-category-receipts.json",
+            "Verification/task-manager-orchestration/native-recovery-validation.md",
+            "Verification/task-manager-orchestration/native-recovery-receipts.json",
+            "Verification/task-manager-orchestration/rebind-repair/report.md",
+            "Verification/task-manager-orchestration/rebind-repair/test-results.json",
+            "Verification/task-manager-orchestration/role-publication-review.md",
+            "Verification/task-manager-orchestration/storage-gate-review.md",
+            "Verification/task-manager-orchestration/root-adoption-verification.md",
+            "Verification/task-manager-orchestration/template-adoption.md",
+            "Verification/task-manager-orchestration/starter-project-validation.md",
+            "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+          ]
+        }
+      ]
+    }
+  ],
+  "current_test_compositions": {
+    "root": 297,
+    "designated_template": 177,
+    "native_ticket_module": 16
+  },
+  "verification_boundary": {
+    "static": "Current workflow/role/API contracts and precise source/adoption scope inspected.",
+    "deterministic": "Storage, role publication/transition, root intake, updater/watcher, initializer and negative controls passed; the native-discovered rebind repair has current reruns.",
+    "native": "Actual category team, current review/conflict/implementation routing, pause/interruption/reconnect/replacement and cancelled lifecycle observed in bounded disposable projects.",
+    "end_to_end": "Delivered Template created usable project fixtures; the mixed native Task produced, reviewed, implemented and directly verified its intended ticket outcome.",
+    "not_exercised": [
+      "Literal model/effort telemetry",
+      "Actual mid-run model switching",
+      "New Codex-session skill discovery",
+      "Unselected product adoption",
+      "Git publication, GitHub Pages or deployment"
+    ]
+  },
+  "retained_failures": [
+    "Earlier role and storage review findings were individually corrected and replayed; original reports remain.",
+    "The native same-ID rebind defect was reproduced, repaired, independently reviewed and successfully resumed on the same instance.",
+    "The optional PyYAML skill validator was unavailable; existing standard-library metadata validation passed and no dependency was installed.",
+    "The recovery host used one wrong logical assignment ID; the helper rejected it without mutation and the host corrected the mapping from canonical state."
+  ],
+  "unmet_criteria": [],
+  "artifact_reverse_map": "Verification/task-manager-orchestration/delivered-artifact-manifest.json"
+}

@@ -1,0 +1,36 @@
+{
+  "canonical_before_sha256": "096f9dee2902f4272c316a1ecad8468a0a5af220e7612475a4d066c7bfed41f6",
+  "revision_before": 84,
+  "payload": {
+    "event": {
+      "event_id": "event_9a420355f01344f5a878f7a853a5fb75",
+      "actor": "/root/task_manager_validation",
+      "execution_id": "ticket_validation_20260908",
+      "generation": 1,
+      "kind": "conflict.deliver",
+      "data": {
+        "conflict_id": "policy_conflict",
+        "solver_slot": "solver_a",
+        "receipt": {
+          "native_id": "/root/task_manager_validation/coding_a",
+          "explanation_sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7",
+          "evidence": "Actual native send_message queued the identical versioned conflict path/hash, same strict steering and current baseline for this originating solver without wake."
+        }
+      }
+    },
+    "response": {
+      "work_completed": [
+        "Observed conflict.deliver."
+      ],
+      "verification_evidence": [
+        "Exact current inputs and returned native/artifact evidence are retained."
+      ],
+      "user_response_summary": "Observed conflict.deliver.",
+      "current_summary": "Observed conflict.deliver.",
+      "next_step": "Continue the bounded approved validation.",
+      "blockers": [],
+      "open_questions": [],
+      "relevant_files": []
+    }
+  }
+}

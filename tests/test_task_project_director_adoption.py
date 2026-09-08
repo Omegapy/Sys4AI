@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 from pathlib import Path
 import re
 import unittest
@@ -26,38 +27,22 @@ DESTINATIONS = {
 }
 
 ROLE_HEADINGS = (
-    "## Task intake and execution-path selection",
-    "## Durable orchestration record and progress gate",
-    "## Task-system ownership",
-    "## Mandatory role-management skill workflow",
-    "## Independent adversarial candidate generation",
-    "## One-to-one review and revision cycle",
-    "## Senior synthesis and conflict recycling",
-    "## Implementation ownership and evidence-gated completion",
-    "## Role selection and role creation",
-    "## Delegation contract",
-    "## Model and reasoning identity",
-    "## Verification and validation",
-    "## Escalation and stopping conditions",
-    "## Completion report",
+    "## Authority and non-authority", "## Task activation and ownership",
+    "## Task decomposition and categories", "## Candidate review and senior synthesis",
+    "## Implementation and completion", "## Mandatory role-management skill workflow",
+    "## Delegation contract and settings", "## Supervision, stopping and recovery",
+    "## Evidence and final report",
 )
-
 ROLE_CLAUSE_GROUPS = (
-    ("user-given job or problem", "existing root project director"),
-    ("complexity", "uncertainty", "material unknowns", "decomposability"),
-    ("direct path", "decomposed path", "adversarial path"),
-    ("follow feasible explicit user instructions", "do not silently substitute"),
-    ("append-only task responses", "do not introduce a second orchestration ledger"),
-    ("fresh filesystem-backed role catalog", "every delegated solver"),
-    ("at least two solvers", "identical packet", "different suitable role or perspective"),
-    ("one-to-one mapping", "originating solver", "reviewer child"),
-    ("materially revised candidate", "repeat review"),
-    ("distinct senior synthesis agent", "every material review finding"),
-    ("exact shared conflict record", "every affected originating solver"),
-    ("case by case based on the task", "exactly one accountable implementation owner"),
-    ("reopen the live artifacts", "every definition-of-done criterion"),
-    ("only the project director", "agent task completion"),
-    ("material hypothesis", "repeated unchanged failure", "bounded user decision"),
+    ("confirmed manager", "canonical writer", "bootstrap"),
+    ("generic", "one worker", "complex", "extra-complex"),
+    ("at least two", "one distinct", "one-to-one"),
+    ("sibling drafts", "queued", "paths, hashes and status"),
+    ("same", "conflict", "all originating solvers", "review"),
+    ("exactly one dedicated implementation child", "analysis-only"),
+    ("candidate-byte edits", "dependency changes", "invalidate"),
+    ("mixed-category integration", "directly", "final task response"),
+    ("actual native", "reconcile", "unconfirmed", "non-overlapping"),
 )
 
 
@@ -90,8 +75,8 @@ class TaskProjectDirectorAdoptionTests(unittest.TestCase):
 
     def test_unchanged_child_task_skills_match_their_adopted_source(self) -> None:
         for name, project in DESTINATIONS.items():
-            if name == "sys4ai-root":
-                continue  # Root intake was separately revised in TASK-20260904-5D29651E.
+            if name != "template-project":
+                continue  # Only the Template adopts common sources automatically.
             with self.subTest(project=name):
                 skill_root = project / ".agents" / "skills" / "task"
                 self.assertEqual(self.source_skill, (skill_root / "SKILL.md").read_bytes())
@@ -106,7 +91,7 @@ class TaskProjectDirectorAdoptionTests(unittest.TestCase):
         source_text = self.source_skill.decode("utf-8")
         # The authorized local intake change leaves the adopted execution,
         # delegation, verification and final-response contract intact.
-        boundary = "## Record orchestration durably"
+        boundary = "## Bootstrap and the real manager"
         self.assertEqual(source_text.split(boundary, 1)[1], root_text.split(boundary, 1)[1])
         self.assertIn("intake --match-task SELECTOR", root_text)
         self.assertIn("close-old-task", root_text)
@@ -123,10 +108,12 @@ class TaskProjectDirectorAdoptionTests(unittest.TestCase):
             if "://" not in item
         ]
         self.assertEqual(
-            {"../agent-task/SKILL.md", "../manage-subagent-roles/SKILL.md"},
+            {"../agent-task/SKILL.md", "../manage-subagent-roles/SKILL.md", "../agent-task/references/orchestration-contract.md"},
             set(relative_links),
         )
         for name, project in DESTINATIONS.items():
+            if name == "electronics-project":
+                continue  # Unselected project keeps its historical contract.
             skill_file = project / ".agents" / "skills" / "task" / "SKILL.md"
             for relative in relative_links:
                 with self.subTest(project=name, relative=relative):
@@ -134,6 +121,8 @@ class TaskProjectDirectorAdoptionTests(unittest.TestCase):
 
     def test_every_project_role_contains_the_orchestration_contract(self) -> None:
         for name, project in DESTINATIONS.items():
+            if name == "electronics-project":
+                continue
             role = (project / "ROLE.md").read_text(encoding="utf-8")
             contract = normalized(
                 (project / ".agents" / "skills" / "task" / "SKILL.md").read_text(
@@ -156,8 +145,8 @@ class TaskProjectDirectorAdoptionTests(unittest.TestCase):
         template = DESTINATIONS["template-project"]
         self.assertEqual(self.source_role, (template / "ROLE.md").read_bytes())
         role = (template / "ROLE.md").read_text(encoding="utf-8")
-        self.assertIn("generic Project Director", role)
-        self.assertIn("intentionally project-neutral", role)
+        self.assertIn("Project Director", role)
+        self.assertIn("project-neutral", role)
 
     def test_root_preserves_workspace_and_depot_governance(self) -> None:
         role = (ROOT / "ROLE.md").read_text(encoding="utf-8")
@@ -184,6 +173,17 @@ class TaskProjectDirectorAdoptionTests(unittest.TestCase):
             "Never claim that a physical device",
         ):
             self.assertIn(text, role)
+
+    def test_unselected_electronics_retains_exact_prior_adoption(self):
+        # Verified against the preimplementation protected manifest. This goal
+        # does not authorize refreshing that product's Task or role contracts.
+        expected = {
+            "ROLE.md": "ab5b659b8e4427abfd5e7484ce803aad6675be8771e72ba25f8e4ceeb2847055",
+            ".agents/skills/task/SKILL.md": "836b025334143f912975ed076027fd22d4cbaf5c96e26104fa45f3f7d4fed023",
+            ".agents/skills/task/agents/openai.yaml": "3882fc74a4c4cfadc6256e2d79b912d706cc4435f64625fb74fc86e772f47ba3",
+        }
+        for relative, digest in expected.items():
+            self.assertEqual(digest, hashlib.sha256((DESTINATIONS["electronics-project"] / relative).read_bytes()).hexdigest())
 
     def test_all_twenty_three_requirement_ids_remain_contiguous(self) -> None:
         self.assertEqual(

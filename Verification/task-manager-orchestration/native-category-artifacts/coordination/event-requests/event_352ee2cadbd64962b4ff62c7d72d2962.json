@@ -1,0 +1,125 @@
+{
+  "canonical_before_sha256": "0df8f047f0e4203b12120a5c97d11c9a081f4b1f03d440cb4edef27f6a4d5424",
+  "revision_before": 97,
+  "payload": {
+    "event": {
+      "event_id": "event_352ee2cadbd64962b4ff62c7d72d2962",
+      "actor": "/root/task_manager_validation",
+      "execution_id": "ticket_validation_20260908",
+      "generation": 1,
+      "kind": "assignment.inputs",
+      "data": {
+        "assignment_id": "coding_reviewer_b",
+        "role": {
+          "name": "project-sub-agent",
+          "agents_path": "roles/project-sub-agent/AGENTS.md",
+          "role_path": "roles/project-sub-agent/ROLE.md",
+          "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+          "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+          "catalog": {
+            "path": "coordination/catalog_41e7970dba93497f81ef9eeb3382e71b.json",
+            "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+          }
+        },
+        "fit": {
+          "authority": "Only the exact disposable project assignment. No canonical ledger or role-index writes, nested delegation, external actions or other-project changes.",
+          "capabilities": [
+            "bounded project analysis",
+            "documentation",
+            "focused testing and verification"
+          ],
+          "deliverable": "Review the originating solver B revised candidate-v2 against current strict ValueError baseline and shared conflict; retain full current design criteria.",
+          "objective": "Review the originating solver B revised candidate-v2 against current strict ValueError baseline and shared conflict; retain full current design criteria.",
+          "rationale": "Same existing native reviewer receives exact revised inputs; the unchanged loaded generic pair supports this bounded function.",
+          "reads": [
+            "SOUL.md",
+            "AGENTS.md",
+            "ROLE.md",
+            "SPECS.md",
+            "roles/project-sub-agent/AGENTS.md",
+            "roles/project-sub-agent/ROLE.md",
+            "context",
+            "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration"
+          ],
+          "risk": "Controlled local fixture; writes are exclusive and bounded. No product or external state.",
+          "skills": [],
+          "stop": "Return exact role-read and artifact receipts when mandatory assigned criteria are met, or report a concrete blocker.",
+          "tools": [
+            "native assignment messages",
+            "Python standard library",
+            "filesystem inspection"
+          ],
+          "writes": [
+            "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_b"
+          ]
+        },
+        "runtime": {
+          "tools": [
+            "spawn_agent",
+            "send_message",
+            "followup_task",
+            "list_agents",
+            "wait_agent",
+            "interrupt_agent"
+          ],
+          "depth": 2,
+          "available_slots": 1,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+            },
+            {
+              "path": "coordination/roster_5d5c87c4b7b54b5da7f2697192e8b7b0.json",
+              "sha256": "e5e78aea373a841852190c504f6fd56131e581c4241ef406a4a7005aea648643"
+            }
+          ]
+        },
+        "context": [
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee.json",
+            "sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_b_v2.md",
+            "sha256": "5c7f2146a68b57d15e0d2a7a7cc69e6c878a52bbf517e9f0e09db495a6accc89"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_conflict_v1.md",
+            "sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7"
+          },
+          {
+            "path": "coordination/strict-policy-steering.json",
+            "sha256": "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+          }
+        ],
+        "receipt": {
+          "tool": "collaboration.send_message",
+          "native_id": "/root/task_manager_validation/coding_reviewer_b",
+          "artifact_sha256s": [
+            "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+            "5c7f2146a68b57d15e0d2a7a7cc69e6c878a52bbf517e9f0e09db495a6accc89",
+            "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7",
+            "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+          ],
+          "evidence": "Actual native send_message delivered this exact packet and its listed current artifact digests without waking the completed instance; native tool returned success."
+        },
+        "reason": "Review the originating solver B revised candidate-v2 against current strict ValueError baseline and shared conflict; retain full current design criteria."
+      }
+    },
+    "response": {
+      "work_completed": [
+        "Observed assignment.inputs."
+      ],
+      "verification_evidence": [
+        "Exact current inputs and returned native/artifact evidence are retained."
+      ],
+      "user_response_summary": "Observed assignment.inputs.",
+      "current_summary": "Observed assignment.inputs.",
+      "next_step": "Continue the bounded approved validation.",
+      "blockers": [],
+      "open_questions": [],
+      "relevant_files": []
+    }
+  }
+}

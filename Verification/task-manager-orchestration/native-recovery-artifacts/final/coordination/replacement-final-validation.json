@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-08T12:41:34.537263+00:00",
+  "task_id": "TASK-20260908-A8B65949",
+  "revision": 23,
+  "status": "cancelled",
+  "stage": "stopped",
+  "execution_outcome": "cancelled",
+  "task_validation": {
+    "schema_version": 1,
+    "command": "validate",
+    "status": "valid",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": false,
+    "task_id": "TASK-20260908-A8B65949",
+    "revision_before": 23,
+    "revision_after": 23,
+    "response_id": null,
+    "response_path": null,
+    "warnings": [],
+    "errors": [],
+    "recovery_required": false,
+    "integrity": "valid",
+    "validated_task_count": 1
+  },
+  "task_status": {
+    "schema_version": 1,
+    "command": "status",
+    "status": "ok",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": false,
+    "task_id": null,
+    "revision_before": null,
+    "revision_after": null,
+    "response_id": null,
+    "response_path": null,
+    "warnings": [],
+    "errors": [],
+    "recovery_required": false,
+    "counts": {
+      "open": 0,
+      "paused": 0,
+      "awaiting_user": 0,
+      "blocked": 0,
+      "completed": 0,
+      "cancelled": 1,
+      "nonterminal": 0,
+      "terminal": 1,
+      "total": 1
+    },
+    "integrity": "valid",
+    "projection_drift": [],
+    "nonterminal_candidates": []
+  },
+  "role_validation": {
+    "fingerprint": "ba709f463b90986b746525a49ed8dbf4bc5bb73cf65841eb92785e31e96aa45a",
+    "index_status": "current",
+    "invalid_roles": [],
+    "role_root": "roles",
+    "schema_version": 1,
+    "valid_roles": [
+      {
+        "agents_file": "roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "description": "General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.",
+        "diagnostics": [],
+        "folder": "roles/project-sub-agent",
+        "name": "project-sub-agent",
+        "role_file": "roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+        "valid": true
+      },
+      {
+        "agents_file": "roles/task-manager/AGENTS.md",
+        "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+        "description": "Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution.",
+        "diagnostics": [],
+        "folder": "roles/task-manager",
+        "name": "task-manager",
+        "role_file": "roles/task-manager/ROLE.md",
+        "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0",
+        "valid": true
+      }
+    ]
+  },
+  "canonical_unchanged_by_validation": true,
+  "protected_file_count": 86,
+  "protected_hashes_unchanged": true,
+  "prior_responses_unchanged": true,
+  "prior_response_count": 19,
+  "current_response_count": 22,
+  "unfinished_main_criterion_preserved": true,
+  "delivery_artifact_absent": true,
+  "delivery_completed": false,
+  "latest_response_read_directly": true,
+  "final_actual_native_observation": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root/recovery_manager",
+          "agent_status": "completed"
+        },
+        {
+          "agent_name": "/root/recovery_manager/marker_worker",
+          "agent_status": "interrupted"
+        },
+        {
+          "agent_name": "/root/recovery_replacement",
+          "agent_status": "running"
+        }
+      ]
+    }
+  },
+  "native_normalization": "Actual final first-manager-subtree and replacement-only roster calls combined; completed status object normalized to its completion discriminant.",
+  "remaining_native_gate": "Host observes replacement manager completed after this final handoff; it is currently running."
+}

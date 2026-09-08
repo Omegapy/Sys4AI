@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "reviewer_assignment_id": "coding_reviewer_a",
+  "native_id": "/root/task_manager_validation/coding_reviewer_a",
+  "outcome": "passed",
+  "candidate_id": "coding_a_v3",
+  "candidate_path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+  "candidate_sha256": "13655a83e362d3cb02bc81f407ffe7d0ce03a1a0c7734dd47f467b811665e4d3",
+  "baseline": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee.json",
+    "sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee"
+  },
+  "input_rebind": {
+    "path": "coordination/rebind_coding_reviewer_a_strict.json",
+    "sha256": "b861780123de5a6a0ea07b9348effcd4a6b4833a2c1eca4b30dd0751e694c67d"
+  },
+  "shared_conflict": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_conflict_v1.md",
+    "sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7"
+  },
+  "strict_policy_steering": {
+    "path": "coordination/strict-policy-steering.json",
+    "sha256": "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+  },
+  "review_scope": "Same independent reviewer re-reviews the complete current solver A design under the delivered strict-policy baseline and shared conflict. This is a new exact-version review, not reuse of the earlier pass.",
+  "criterion_evidence": [
+    {
+      "criterion": "For valid input, order_tickets returns a new list in descending urgency with stable ties and leaves input records and order unchanged.",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+          "section": "## API and validation contract",
+          "line": 19
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+          "section": "## Algorithm and invariants",
+          "line": 29
+        }
+      ],
+      "observation": "The design returns a distinct list of every original record, orders negative urgency and original position, retains stable ties and performs no caller-list or record writes. All six algorithm steps remain identical to v2 and preserve the accepted analysis."
+    },
+    {
+      "criterion": "IDs are nonblank unique strings; urgency is an integer in 0..3 and booleans are rejected.",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+          "section": "## API and validation contract",
+          "line": 19
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+          "section": "## Algorithm and invariants",
+          "line": 29
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_a/checks-v3.json",
+          "sha256": "95b73776e21986792a7ec9256fe645e814a9236b4fae81bf45f284170cb6c578"
+        }
+      ],
+      "observation": "IDs remain nonblank exact unique strings; urgency remains integer 0..3 excluding bool in both API and algorithm. Both boolean values independently fail the current written predicate. The shared conflict example validates its first urgency and rejects its second."
+    },
+    {
+      "criterion": "Empty input returns a new empty list; tests cover boundaries, ties, preservation, malformed records and all four example IDs.",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+          "section": "## Exact fixture and proposed tests",
+          "line": 42
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+          "section": "## Algorithm and invariants",
+          "line": 29
+        }
+      ],
+      "observation": "The design specifies a distinct new empty list and all four exact IDs t1,t3,t2,t4. Its full retained test matrix covers boundaries, all urgency values, ties, new-list and record identity, extra fields, input preservation, malformed records, duplicates, both booleans and invalid values after a valid prefix. Tests remain proposed for the later implementer."
+    },
+    {
+      "criterion": "For every invalid batch, raise ValueError with no partial result or rejection report, leaving the complete input unchanged.",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+          "section": "## Shared conflict disposition and current revalidation",
+          "line": 7
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+          "section": "## API and validation contract",
+          "line": 19
+        },
+        {
+          "path": "coordination/strict-policy-steering.json",
+          "sha256": "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_conflict_v1.md",
+          "sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7"
+        }
+      ],
+      "observation": "The current assigned steering authorizes the strict policy for this controlled test. The design explicitly requires ValueError for every invalid batch, no partial result or rejection report and unchanged complete input. It explains why the prior report alternative and a new wrapper or mode are outside the selected interface. No unsupported product preference is inferred."
+    },
+    {
+      "criterion": "The dedicated implementation follows the exact manager-accepted coherent proposal and its tests pass.",
+      "status": "later_required_gate",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+          "section": "## Scope, coverage and current evidence",
+          "line": 68
+        }
+      ],
+      "observation": "The candidate preserves the requirement for one distinct dedicated implementer to follow the exact manager-accepted coherent proposal and run its tests. No product code, exception behavior, suite pass or final acceptance is claimed by this design review."
+    }
+  ],
+  "mandatory_findings": [],
+  "resolved_findings": [
+    {
+      "id": "R-A-001",
+      "status": "remains_resolved_in_current_design",
+      "original_findings_sha256": "a3a5df3e0b266344d89355382599fbaf4d91155134394189d38f4c769f1275f4",
+      "evidence": "Current API and algorithm retain explicit boolean rejection, and both required boolean test forms remain present. Their inclusion was rechecked against exact v3 bytes."
+    }
+  ],
+  "conflict_disposition_evidence": {
+    "status": "current_candidate_conforms_to_delivered_resolution",
+    "observation": "The same shared explanation and exact steering are current inputs. Candidate A explicitly revalidates its existing exception design, preserves all other requirements and acknowledges the incompatible normal-report alternative without silently importing it.",
+    "limitation": "This reviewer attests only solver A current design; the manager must separately obtain every required current candidate review and senior synthesis."
+  },
+  "optional_observations": [],
+  "checked_inputs": [
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee.json",
+      "sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee"
+    },
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+      "sha256": "13655a83e362d3cb02bc81f407ffe7d0ce03a1a0c7734dd47f467b811665e4d3"
+    },
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_conflict_v1.md",
+      "sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7"
+    },
+    {
+      "path": "coordination/strict-policy-steering.json",
+      "sha256": "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+    },
+    {
+      "path": "context/scenario.md",
+      "sha256": "a9a04801f283389a870ccaa0b28926150d29be331b887c9bae9d505457bf5ede"
+    },
+    {
+      "path": "coordination/coding-design-contract.md",
+      "sha256": "7088f3aab4c526717afec811d53796f90c6350174304b16d8d995af2ca977246"
+    },
+    {
+      "path": "data/tickets.json",
+      "sha256": "3923fe6ee5e9c9cb40da4e53030be11844b3c9dc8bf22a620539576a163eea3d"
+    },
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/analysis_proposal_v1.md",
+      "sha256": "38a563ef628c0d052234931c71a459865f4a9b27886f242b3251423233cccb6f"
+    },
+    {
+      "path": "coordination/catalog_cf86df656f7b4f9691e0751b29d32a17.json",
+      "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+    }
+  ],
+  "highest_verification_level": "Targeted current-predicate and document checks passed; all revised design criteria inspected.",
+  "limitations": [
+    "No production implementation or exception path was executed.",
+    "No sibling candidate draft was inspected; the assigned shared conflict was read as authorized common context.",
+    "Senior synthesis, manager acceptance and dedicated implementation remain separate required gates."
+  ]
+}

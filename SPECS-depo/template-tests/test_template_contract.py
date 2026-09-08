@@ -145,7 +145,7 @@ class TemplateContractTests(unittest.TestCase):
         self.assertEqual([], self.allowlist["optional_starter_files"])
         self.assertEqual(2, self.allowlist["schema_version"])
         self.assertEqual(".agents/skills", self.allowlist["skills"])
-        self.assertEqual("sub-agent-roles", self.allowlist["roles"])
+        self.assertEqual("roles", self.allowlist["roles"])
         self.assertEqual("SOUL.md", self.allowlist["soul"])
         for relative in self.allowlist["starter_files"]:
             target = TEMPLATE / relative
@@ -193,8 +193,10 @@ class TemplateContractTests(unittest.TestCase):
         self.assertEqual([], self.allowlist["optional_starter_files"])
         for retired in ("Ontology", "INIT_MEMORY.md"):
             self.assertFalse((TEMPLATE / retired).exists(), retired)
-        roles = {p.name for p in (TEMPLATE / "sub-agent-roles").iterdir() if p.is_dir()}
-        self.assertEqual({"project-sub-agent"}, roles)
+        roles = {p.name for p in (TEMPLATE / "roles").iterdir() if p.is_dir()}
+        self.assertEqual({"project-sub-agent", "task-manager"}, roles)
+        self.assertEqual((TEMPLATE / "roles/INDEX.md").read_bytes(), self.helper.planned_role_index(TEMPLATE, {}, {}))
+        self.assertFalse((TEMPLATE / "roles/.transition.json").exists())
 
 
     def test_ignore_rules_protect_local_artifacts_and_secrets(self):

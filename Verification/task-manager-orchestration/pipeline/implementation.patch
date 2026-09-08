@@ -1,0 +1,1304 @@
+--- a/depot/template-update.json
++++ b/depot/template-update.json
+@@ -5,12 +5,14 @@
+     "AGENTS-depo/project-template-AGENTS.md": "AGENTS.md",
+     "SOULS-depo/SOUL.md": "SOUL.md",
+     "ROLES-depo/project-director-ROLE.md": "ROLE.md",
+-    "ROLES-depo/project-sub-agent-AGENTS.md": "sub-agent-roles/project-sub-agent/AGENTS.md",
+-    "ROLES-depo/project-sub-agent-ROLE.md": "sub-agent-roles/project-sub-agent/ROLE.md",
++    "ROLES-depo/project-sub-agent-AGENTS.md": "roles/project-sub-agent/AGENTS.md",
++    "ROLES-depo/project-sub-agent-ROLE.md": "roles/project-sub-agent/ROLE.md",
+     "SPECS-depo/project-template-SPECS.md": "SPECS.md",
+     "SPECS-depo/project-template.gitignore": ".gitignore",
+     "SPECS-depo/project-template-README.md": "README.md",
+-    "SPECS-depo/template-tests/test_template_contract.py": "tests/test_template_contract.py"
++    "SPECS-depo/template-tests/test_template_contract.py": "tests/test_template_contract.py",
++    "ROLES-depo/task-manager-AGENTS.md": "roles/task-manager/AGENTS.md",
++    "ROLES-depo/task-manager-ROLE.md": "roles/task-manager/ROLE.md"
+   },
+   "mirrors": {
+     "SKILLS-depo/init-new-project/assets/baseline-assets.json": ".template/baseline-assets.json",
+--- a/depot/template-update.md
++++ b/depot/template-update.md
+@@ -19,7 +19,8 @@
+ | `SOULS-depo/SOUL.md` | `SOUL.md` |
+ | `AGENTS-depo/project-template-AGENTS.md` | `AGENTS.md` |
+ | `ROLES-depo/project-director-ROLE.md` | `ROLE.md` |
+-| Generic sub-agent role pair in `ROLES-depo/` | `sub-agent-roles/project-sub-agent/` |
++| Generic and task-manager pairs in `ROLES-depo/` | `roles/project-sub-agent/` and `roles/task-manager/` |
++| Validated destination role pairs and role helper snapshot | Generated `roles/INDEX.md` |
+ | `SPECS-depo/project-template-SPECS.md` | `SPECS.md` |
+ | `SPECS-depo/project-template.gitignore` | `.gitignore` |
+ | `SPECS-depo/project-template-README.md` and `template-tests/` | Template overview and its local contract test |
+@@ -42,13 +43,21 @@
+ 
+ ## Check or update now
+ 
+-The approved task-manager transition changes active role destinations to
+-`roles/` and adds a destination-generated `roles/INDEX.md` after paired-role
+-validation. Its coordinated implementation and exact publication sequence are
+-recorded in [the role transition design](../Verification/task-manager-orchestration/role-transition-design.md).
+-The current mapping remains authoritative until that implementation is applied;
+-do not copy a static role index across projects or infer legacy migration from
+-project registration.
++The updater validates the role pairs with frozen role-helper bytes in a
++disposable tree and generates `roles/INDEX.md` for their destination paths.
++No static override or mirror can own that index. Its state entry binds the
++helper, SOUL, and role-file digests. Pending updates include the exact generated
++bytes, and recovery regenerates and checks them against the saved inputs.
++No role-catalog runtime lock or transition receipt is placed in the Template.
++
++The reviewed role-layout mapping may retire old `sub-agent-roles/` destinations
++only when the same source has an exact `roles/` destination. The preview lists
++each old path, new path, source, and retained hash. Before deleting any old pair,
++apply retains those bytes and mappings in a content-addressed record under
++`.sys4ai/template-update/role-layout-history/`. The pending transaction binds
++that recovery record, so interruption resumes without losing legacy content.
++Customized old or new destinations still block the update. Review the entire
++preview before applying; product-project registration never authorizes migration.
+ 
+ Run from the Sys4AI root:
+ 
+--- a/tools/template_update.py
++++ b/tools/template_update.py
+@@ -21,7 +21,9 @@
+ from pathlib import Path, PurePosixPath
+ import re
+ import stat
++import sys
+ import tempfile
++import types
+ import unicodedata
+ from typing import Any, Iterator
+ 
+@@ -35,13 +37,19 @@
+     "agent-task", "communication", "manage-subagent-roles", "task",
+     "to-implementation-plan", "to-trd",
+ )
+-BASELINE_FILES = {
++LEGACY_BASELINE_FILES = {
+     "SOUL.md", "AGENTS.md", "ROLE.md", "SPECS.md", ".gitignore",
+     "sub-agent-roles/project-sub-agent/AGENTS.md",
+     "sub-agent-roles/project-sub-agent/ROLE.md", ".template/baseline-assets.json",
+     ".template/project-readme.md",
+     *(f".agents/skills/{name}/SKILL.md" for name in BASELINE_SKILLS),
+ }
++ROLE_INDEX = "roles/INDEX.md"
++ROLE_HELPER = ".agents/skills/manage-subagent-roles/scripts/role_catalog.py"
++BASELINE_FILES = (LEGACY_BASELINE_FILES - {
++    "sub-agent-roles/project-sub-agent/AGENTS.md", "sub-agent-roles/project-sub-agent/ROLE.md",
++}) | {ROLE_INDEX, ROLE_HELPER, *(f"roles/{name}/{filename}" for name in
++      ("project-sub-agent", "task-manager") for filename in ("AGENTS.md", "ROLE.md"))}
+ EXCLUDED = {
+     ".git", ".gitmodules", ".gitignore_global", ".venv", "venv", "env",
+     ".sys4ai", "__pycache__", ".ds_store", ".pytest_cache", ".ruff_cache",
+@@ -49,7 +57,7 @@
+     ".data_storage", "dist", "build", "node_modules", ".env", ".envrc",
+     ".secrets", "secrets", "credentials", ".credentials", "credentials.json",
+     ".credentials.json", ".aws", ".ssh", ".netrc", ".pypirc", ".npmrc",
+-    "id_rsa", "id_ed25519",
++    "id_rsa", "id_ed25519", ".transition.json",
+ }
+ EXCLUDED_SUFFIXES = (
+     ".pyc", ".pyo", ".log", ".zip", ".whl", ".egg", ".pem", ".key",
+@@ -196,6 +204,51 @@
+         raise UpdateError(f"skill name must match its folder and have a description: {name}")
+ 
+ 
++def role_index_inputs(files: dict[str, Any]) -> dict[str, dict[str, str]]:
++    if not isinstance(files, dict) or any(not isinstance(name, str) for name in files):
++        raise UpdateError("invalid generated role index file inventory")
++    targets = {"SOUL.md", ROLE_HELPER} | {name for name in files if name.startswith("roles/") and name != ROLE_INDEX}
++    if not targets <= files.keys():
++        raise UpdateError("role index lacks its validator or instruction source")
++    if any(not isinstance(files[target], dict) or not {"source", "sha256"} <= files[target].keys()
++           or not all(isinstance(files[target][key], str) for key in ("source", "sha256")) for target in targets):
++        raise UpdateError("invalid generated role index input binding")
++    return {target: {key: files[target][key] for key in ("source", "sha256")} for target in sorted(targets)}
++
++
++def render_role_index(inputs: dict[str, bytes]) -> bytes:
++    """Validate and render from frozen bytes; never write into the Template."""
++    if not {"SOUL.md", ROLE_HELPER} <= inputs.keys():
++        raise UpdateError("role index lacks its frozen inputs")
++    module_name = "_template_role_catalog_" + digest(inputs[ROLE_HELPER])
++    helper = types.ModuleType(module_name)
++    helper.__file__ = ROLE_HELPER
++    sys.modules[module_name] = helper
++    try:
++        exec(compile(inputs[ROLE_HELPER], ROLE_HELPER, "exec"), helper.__dict__)
++        if helper.ROLE_ROOT_NAME != "roles":
++            raise UpdateError("role validator does not support the active roles layout")
++        with tempfile.TemporaryDirectory(prefix="sys4ai-role-index-") as temporary:
++            root = Path(temporary).resolve()
++            (root / "roles").mkdir()
++            for target, raw in inputs.items():
++                if target == ROLE_HELPER:
++                    continue
++                path = root / destination(target)
++                path.parent.mkdir(parents=True, exist_ok=True)
++                path.write_bytes(raw)
++            catalog = helper.build_catalog(root)
++            if catalog.invalid_roles or not {"project-sub-agent", "task-manager"} <= {entry.name for entry in catalog.valid_roles}:
++                raise UpdateError("template role pairs are invalid or required roles are missing")
++            return helper.render_index(catalog).encode()
++    except (AttributeError, RuntimeError, OSError, UnicodeError) as error:
++        if isinstance(error, UpdateError):
++            raise
++        raise UpdateError(f"role index validation failed: {error}") from error
++    finally:
++        sys.modules.pop(module_name, None)
++
++
+ def snapshot(root: Path) -> dict[str, Any]:
+     """Read one validated source snapshot without touching the template."""
+     safe(root)
+@@ -289,19 +342,31 @@
+     for key in identities:
+         if any(parent.as_posix() in identities for parent in PurePosixPath(key).parents):
+             raise UpdateError(f"template file/directory mapping collision: {identities[key]}")
+-    missing = sorted(BASELINE_FILES - files.keys())
++    reserved_index = unicodedata.normalize("NFD", ROLE_INDEX).casefold()
++    if reserved_index in identities:
++        raise UpdateError("roles/INDEX.md is generated; a static source mapping cannot own it")
++    if any(reserved_index in {parent.as_posix() for parent in PurePosixPath(name).parents}
++           or name in {parent.as_posix() for parent in PurePosixPath(reserved_index).parents} for name in identities):
++        raise UpdateError("generated role index has a file/directory mapping collision")
++    missing = sorted((BASELINE_FILES - {ROLE_INDEX}) - files.keys())
+     if missing:
+         raise UpdateError("required template governance source is missing: " + ", ".join(missing))
+-    for target in BASELINE_FILES:
++    for target in BASELINE_FILES - {ROLE_INDEX}:
+         if not blobs[files[target]["source"]].strip():
+             raise UpdateError(f"required template governance source is empty: {target}")
+     policy = json_document(blobs[files[".template/baseline-assets.json"]["source"]])
+     if (not isinstance(policy, dict) or type(policy.get("schema_version")) is not int
+             or policy["schema_version"] != 2):
+         raise UpdateError("template initialization policy must use schema 2")
++    if policy.get("roles") != "roles":
++        raise UpdateError("template initialization policy must use the active roles layout")
++    inputs = role_index_inputs(files)
++    index = render_role_index({target: blobs[entry["source"]] for target, entry in inputs.items()})
++    files[ROLE_INDEX] = {"source": files[ROLE_HELPER]["source"], "sha256": digest(index), "mode": 0o644,
++                         "generated": {"kind": "role-index-v1", "inputs": inputs}}
+     state = {"schema_version": 1, "template": TEMPLATE, "collections": collections, "files": files}
+     return {
+-        "state": state, "blobs": blobs,
++        "state": state, "blobs": blobs, "generated": {ROLE_INDEX: index},
+         "fingerprint": digest(manifest_raw + encoded(state)),
+     }
+ 
+@@ -332,6 +397,12 @@
+             raise UpdateError("invalid recorded destination ownership")
+         if source(entry.get("source")).split("/")[0] not in collections:
+             raise UpdateError("recorded source collection is missing")
++        if "generated" in entry and (target != ROLE_INDEX or entry["generated"] != {
++            "kind": "role-index-v1", "inputs": role_index_inputs(state["files"])
++        } or entry["source"] != state["files"][ROLE_HELPER]["source"]):
++            raise UpdateError("invalid generated role index ownership")
++    if ROLE_INDEX in state["files"] and "generated" not in state["files"][ROLE_INDEX]:
++        raise UpdateError("recorded role index must have generated ownership")
+     return state
+ 
+ 
+@@ -388,6 +459,7 @@
+         lost.remove(retire_collection)
+     if lost:
+         report["conflicts"].append("recorded source collection is missing: " + ", ".join(lost))
++    report["conflicts"].extend(role_scope_conflicts(template, before, after))
+     for target in sorted(before["files"].keys() | after["files"].keys()):
+         previous = before["files"].get(target)
+         desired = after["files"].get(target)
+@@ -415,7 +487,49 @@
+         report["status"] = "conflict"
+     elif before != after:
+         report["status"] = "outdated"
++    retired = role_retirements(before, after)
++    if retired:
++        report["role_retirements"] = retired
+     return report
++
++
++def role_retirements(before: dict[str, Any], after: dict[str, Any]) -> list[dict[str, str]]:
++    result = []
++    for target, entry in sorted(before["files"].items()):
++        if not target.startswith("sub-agent-roles/") or target in after["files"]:
++            continue
++        active = "roles/" + target.removeprefix("sub-agent-roles/")
++        if active not in after["files"] or after["files"][active]["source"] != entry["source"]:
++            raise UpdateError("legacy role retirement lacks an exact source-to-active mapping")
++        result.append({"legacy": target, "active": active, "source": entry["source"], "sha256": entry["sha256"]})
++    return result
++
++
++def role_scope_conflicts(template: Path, before: dict[str, Any], after: dict[str, Any]) -> list[str]:
++    """A managed index cannot silently omit project-owned role directories."""
++    conflicts = []
++    for prefix in ("roles", "sub-agent-roles"):
++        folder = safe(template / prefix)
++        if not folder.exists():
++            continue
++        if not folder.is_dir():
++            conflicts.append(f"role collection is not a directory: {prefix}")
++            continue
++        desired = {Path(name).parts[1] for name in after["files"] if name.startswith(prefix + "/") and len(Path(name).parts) > 2}
++        previous = {Path(name).parts[1] for name in before["files"] if name.startswith(prefix + "/") and len(Path(name).parts) > 2}
++        for child in folder.iterdir():
++            safe(child)
++            if not child.is_dir() or child.name in desired:
++                continue
++            if prefix == "sub-agent-roles":
++                if role_retirements(before, after) and child.name not in previous and any((child / name).exists() for name in ("AGENTS.md", "ROLE.md")):
++                    conflicts.append(f"unmanaged legacy role needs reviewed transition: {prefix}/{child.name}")
++                continue
++            files = [item for item in child.rglob("*") if safe(item).is_file()]
++            retiring = child.name in previous and all(item.relative_to(template).as_posix() in before["files"] and item.relative_to(template).as_posix() not in after["files"] for item in files)
++            if not retiring:
++                conflicts.append(f"unmanaged role directory needs explicit adoption: {prefix}/{child.name}")
++    return conflicts
+ 
+ 
+ def atomic_write(path: Path, data: bytes, mode: int = 0o644) -> None:
+@@ -467,17 +581,28 @@
+ 
+ def make_pending(
+     before: dict[str, Any], snap: dict[str, Any],
+-    *, retirement: dict[str, str] | None = None,
++    *, retirement: dict[str, str] | None = None, root: Path | None = None,
+ ) -> dict[str, Any]:
+     after = snap["state"]
+     payloads = {
+-        target: base64.b64encode(snap["blobs"][entry["source"]]).decode("ascii")
++        target: base64.b64encode(snap["generated"][target] if "generated" in entry else snap["blobs"][entry["source"]]).decode("ascii")
+         for target, entry in after["files"].items()
+         if before["files"].get(target) != entry
+     }
+     pending = {"schema_version": 1, "before": before, "after": after, "payloads": payloads}
+     if retirement is not None:
+         pending["retirement"] = retirement
++    retired = role_retirements(before, after)
++    if retired:
++        if root is None:
++            raise UpdateError("role retirement needs current legacy bytes for recovery")
++        retained = {}
++        for entry in retired:
++            raw = read_file(root / TEMPLATE / entry["legacy"])
++            if digest(raw) != entry["sha256"]:
++                raise UpdateError("legacy role changed before recovery capture")
++            retained[entry["legacy"]] = base64.b64encode(raw).decode("ascii")
++        pending["role_retirement"] = {"schema_version": 1, "mapping": retired, "payloads": retained}
+     return pending
+ 
+ 
+@@ -487,7 +612,8 @@
+         raise UpdateError("invalid pending template update")
+     before = validate_state(pending.get("before"))
+     after = validate_state(pending.get("after"))
+-    if not BASELINE_FILES.issubset(after["files"]):
++    required = BASELINE_FILES if any(name.startswith("roles/") for name in after["files"]) else LEGACY_BASELINE_FILES
++    if not required.issubset(after["files"]):
+         raise UpdateError("pending update would remove required template governance")
+     state_raw = read_file(root / STATE, optional=True)
+     current_state = load_state(root)
+@@ -527,6 +653,37 @@
+     template = safe(root / TEMPLATE)
+     if not template.is_dir():
+         raise UpdateError("template directory is missing during recovery")
++    scope_conflicts = role_scope_conflicts(template, before, after)
++    if scope_conflicts:
++        raise UpdateError("role ownership conflict", report={"status": "conflict", "conflicts": scope_conflicts})
++    if ROLE_INDEX in after["files"]:
++        inputs = {}
++        for target, binding in role_index_inputs(after["files"]).items():
++            raw = decoded[target] if target in decoded else read_file(template / target)
++            if digest(raw) != binding["sha256"]:
++                raise UpdateError("generated role index input changed during recovery")
++            inputs[target] = raw
++        if digest(render_role_index(inputs)) != after["files"][ROLE_INDEX]["sha256"]:
++            raise UpdateError("generated role index does not match its frozen role pairs")
++    retired = role_retirements(before, after)
++    retained = pending.get("role_retirement")
++    archive_raw = None
++    if retired:
++        if (not isinstance(retained, dict) or set(retained) != {"schema_version", "mapping", "payloads"}
++                or type(retained["schema_version"]) is not int or retained["schema_version"] != 1
++                or retained["mapping"] != retired or not isinstance(retained["payloads"], dict)
++                or set(retained["payloads"]) != {entry["legacy"] for entry in retired}):
++            raise UpdateError("legacy role retirement recovery inventory is invalid")
++        for entry in retired:
++            try:
++                raw = base64.b64decode(retained["payloads"][entry["legacy"]], validate=True)
++            except (ValueError, TypeError, binascii.Error) as error:
++                raise UpdateError("legacy role recovery payload is invalid") from error
++            if digest(raw) != entry["sha256"]:
++                raise UpdateError("legacy role recovery payload checksum mismatch")
++        archive_raw = encoded(retained)
++    elif retained is not None:
++        raise UpdateError("unexpected legacy role retirement record")
+     targets = sorted(before["files"].keys() | after["files"].keys())
+     conflicts = []
+     observed: dict[str, str | None] = {}
+@@ -538,6 +695,13 @@
+             conflicts.append(f"destination changed during interrupted update: {target}")
+     if conflicts:
+         raise UpdateError("recovery conflict", report={"status": "conflict", "conflicts": conflicts})
++    if archive_raw is not None:
++        archive = root / CONTROL / "role-layout-history" / (digest(archive_raw) + ".json")
++        existing = read_file(archive, optional=True)
++        if existing is not None and existing != archive_raw:
++            raise UpdateError("legacy role recovery archive was customized")
++        if existing is None:
++            atomic_write(archive, archive_raw, 0o600)
+     for target in targets:
+         desired = after["files"].get(target)
+         new = None if desired is None else desired["sha256"]
+@@ -562,6 +726,8 @@
+         expected_hash = after["files"].get(target, {}).get("sha256")
+         if file_hash(template / target) != expected_hash:
+             raise UpdateError(f"post-write verification failed: {target}")
++    if role_scope_conflicts(template, after, after):
++        raise UpdateError("role directory changed during update; preserve it for reviewed recovery")
+     if read_file(root / STATE, optional=True) != state_raw:
+         raise UpdateError("template state changed during update")
+     if current_state != after:
+@@ -615,7 +781,7 @@
+             retirement = None if retire_collection is None else {
+                 "collection": retire_collection, "state_sha256": expected_state_sha256,
+             }
+-            pending = make_pending(before, second, retirement=retirement)
++            pending = make_pending(before, second, retirement=retirement, root=root)
+             atomic_write(root / PENDING, encoded(pending), 0o600)
+             recover(root, pending)
+             report["status"] = "applied"
+--- a/tests/test_template_update.py
++++ b/tests/test_template_update.py
+@@ -40,18 +40,25 @@
+         "SOULS-depo/SOUL.md": "SOUL.md",
+         "AGENTS-depo/project-template-AGENTS.md": "AGENTS.md",
+         "ROLES-depo/project-director-ROLE.md": "ROLE.md",
+-        "ROLES-depo/project-sub-agent-AGENTS.md": "sub-agent-roles/project-sub-agent/AGENTS.md",
+-        "ROLES-depo/project-sub-agent-ROLE.md": "sub-agent-roles/project-sub-agent/ROLE.md",
++        "ROLES-depo/project-sub-agent-AGENTS.md": "roles/project-sub-agent/AGENTS.md",
++        "ROLES-depo/project-sub-agent-ROLE.md": "roles/project-sub-agent/ROLE.md",
+         "SPECS-depo/project-template-SPECS.md": "SPECS.md",
+         "SPECS-depo/project-template.gitignore": ".gitignore",
+     }
++    for role in ("project-sub-agent", "task-manager"):
++        for name in ("AGENTS", "ROLE"):
++            overrides[f"ROLES-depo/{role}-{name}.md"] = f"roles/{role}/{name}.md"
+     for origin, target in overrides.items():
+-        put(root, origin, "# Starter " + target + "\n")
++        actual = HELPER.parents[1] / origin
++        text = actual.read_text() if target.startswith("roles/") else "# Starter " + target + "\n"
++        put(root, origin, text)
++    put(root, "SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py",
++        (HELPER.parents[1] / "SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py").read_text())
+     mirrors = {
+         "SKILLS-depo/init-new-project/assets/baseline-assets.json": ".template/baseline-assets.json",
+         "SKILLS-depo/init-new-project/assets/project-readme.md": ".template/project-readme.md",
+     }
+-    put(root, next(iter(mirrors)), '{"schema_version": 2}\n')
++    put(root, next(iter(mirrors)), '{"schema_version": 2, "roles": "roles"}\n')
+     put(root, "SKILLS-depo/init-new-project/assets/project-readme.md", "# __PROJECT_NAME__\n")
+     put(root, engine.MANIFEST, json.dumps({
+         "schema_version": 1, "template": engine.TEMPLATE,
+@@ -76,6 +83,111 @@
+ 
+     def apply(self) -> dict:
+         return engine.update(self.root, "apply")
++
++    def test_role_index_is_generated_bound_and_customization_protected(self):
++        self.apply()
++        state = engine.load_state(self.root)
++        entry = state["files"][engine.ROLE_INDEX]
++        self.assertEqual("role-index-v1", entry["generated"]["kind"])
++        self.assertEqual(engine.role_index_inputs(state["files"]), entry["generated"]["inputs"])
++        original = (self.template / engine.ROLE_INDEX).read_bytes()
++        self.assertEqual(original, engine.snapshot(self.root)["generated"][engine.ROLE_INDEX])
++        role = self.root / "ROLES-depo/task-manager-ROLE.md"
++        role.write_bytes(role.read_bytes() + b"\nAdditional bounded fixture duty.\n")
++        self.assertIn(engine.ROLE_INDEX, engine.update(self.root, "check")["updates"])
++        self.apply()
++        self.assertNotEqual(original, (self.template / engine.ROLE_INDEX).read_bytes())
++        (self.template / engine.ROLE_INDEX).write_text("Project-owned navigation\n")
++        with self.assertRaises(engine.UpdateError):
++            self.apply()
++        self.assertEqual("Project-owned navigation\n", (self.template / engine.ROLE_INDEX).read_text())
++
++    def test_invalid_role_and_static_index_mapping_fail_without_template_writes(self):
++        role = self.root / "ROLES-depo/task-manager-ROLE.md"
++        good = role.read_bytes()
++        role.write_text("invalid role")
++        with self.assertRaisesRegex(engine.UpdateError, "role pairs"):
++            self.apply()
++        self.assertEqual({}, file_inventory(self.template))
++        role.write_bytes(good)
++        manifest = json.loads((self.root / engine.MANIFEST).read_bytes())
++        for destination in ("roles/INDEX.md", "roles/index.md", "roles/INDEX.md/child.md"):
++            manifest["mirrors"]["ROLES-depo/task-manager-ROLE.md"] = destination
++            put(self.root, engine.MANIFEST, json.dumps(manifest))
++            with self.assertRaisesRegex(engine.UpdateError, "generated|collision"):
++                self.apply()
++            self.assertEqual({}, file_inventory(self.template))
++
++    def test_generated_index_cannot_omit_an_unmanaged_destination_role(self):
++        self.apply()
++        owned = self.template / "roles/local-worker"
++        shutil.copytree(self.template / "roles/project-sub-agent", owned)
++        role = owned / "ROLE.md"
++        role.write_text(role.read_text().replace("name: project-sub-agent", "name: local-worker"))
++        before = file_inventory(self.template)
++        with self.assertRaises(engine.UpdateError) as caught:
++            self.apply()
++        self.assertTrue(any("unmanaged role directory" in error for error in caught.exception.report["conflicts"]))
++        self.assertEqual(before, file_inventory(self.template))
++
++    def test_pending_generated_bytes_are_validated_against_frozen_inputs(self):
++        import base64
++        self.apply()
++        before = engine.load_state(self.root)
++        role = self.root / "ROLES-depo/task-manager-ROLE.md"
++        role.write_bytes(role.read_bytes() + b"\nChanged bounded fixture duty.\n")
++        snap = engine.snapshot(self.root)
++        pending = engine.make_pending(before, snap)
++        corrupted = json.loads(json.dumps(pending))
++        fake = b"Forged index\n"
++        corrupted["payloads"][engine.ROLE_INDEX] = base64.b64encode(fake).decode()
++        corrupted["after"]["files"][engine.ROLE_INDEX]["sha256"] = engine.digest(fake)
++        original = file_inventory(self.template)
++        with self.assertRaisesRegex(engine.UpdateError, "frozen role pairs"):
++            engine.recover(self.root, corrupted)
++        self.assertEqual(original, file_inventory(self.template))
++        engine.atomic_write(self.root / engine.PENDING, engine.encoded(pending))
++        # Saved payloads, not a later depot edition, govern recovery.
++        role.write_bytes(role.read_bytes() + b"\nA later unrelated source edit.\n")
++        engine.recover(self.root, pending)
++        self.assertEqual(snap["generated"][engine.ROLE_INDEX], (self.template / engine.ROLE_INDEX).read_bytes())
++        self.assertFalse((self.root / engine.PENDING).exists())
++
++    def test_legacy_state_transition_retains_exact_pairs_before_interruption(self):
++        import base64
++        self.apply()
++        before = engine.load_state(self.root)
++        for name in list(before["files"]):
++            if name.startswith("roles/task-manager/") or name == engine.ROLE_INDEX:
++                before["files"].pop(name)
++                (self.template / name).unlink()
++            elif name.startswith("roles/project-sub-agent/"):
++                legacy = name.replace("roles/", "sub-agent-roles/", 1)
++                before["files"][legacy] = before["files"].pop(name)
++                (self.template / legacy).parent.mkdir(parents=True, exist_ok=True)
++                (self.template / name).rename(self.template / legacy)
++        (self.template / "roles/project-sub-agent").rmdir()
++        (self.template / "roles/task-manager").rmdir()
++        (self.template / "roles").rmdir()
++        engine.atomic_write(self.root / engine.STATE, engine.encoded(before))
++        old = {name: (self.template / name).read_bytes() for name in before["files"] if name.startswith("sub-agent-roles/")}
++        preview = engine.update(self.root, "check")
++        self.assertEqual(set(old), {entry["legacy"] for entry in preview["role_retirements"]})
++        write = engine.atomic_write
++        def interrupted(path, raw, mode=0o644):
++            if path == self.template / "roles/project-sub-agent/ROLE.md":
++                raise OSError("injected role transition interruption")
++            return write(path, raw, mode)
++        with patch.object(engine, "atomic_write", side_effect=interrupted), self.assertRaises(OSError):
++            self.apply()
++        archives = list((self.root / engine.CONTROL / "role-layout-history").glob("*.json"))
++        self.assertEqual(1, len(archives))
++        retained = json.loads(archives[0].read_bytes())
++        self.assertEqual(old, {name: base64.b64decode(raw) for name, raw in retained["payloads"].items()})
++        result = self.apply()
++        self.assertTrue(result["recovered"])
++        self.assertFalse((self.template / "sub-agent-roles").exists())
++        self.assertEqual("current", engine.update(self.root, "check")["status"])
+ 
+     def test_check_is_read_only_and_noop_apply_preserves_mtimes(self) -> None:
+         before = file_inventory(self.root)
+--- a/tests/test_template_watch.py
++++ b/tests/test_template_watch.py
+@@ -34,6 +34,26 @@
+         before = watcher.fingerprint(self.root)
+         target.unlink()
+         self.assertNotEqual(before, watcher.fingerprint(self.root))
++
++    def test_role_source_and_generated_template_index_changes_are_observed(self):
++        source = self.root / "ROLES-depo/task-manager-ROLE.md"
++        source.parent.mkdir()
++        source.write_bytes((Path(__file__).resolve().parents[1] / "ROLES-depo/task-manager-ROLE.md").read_bytes())
++        before = watcher.fingerprint(self.root)
++        source.write_bytes(source.read_bytes() + b"\nBounded fixture edit.\n")
++        self.assertNotEqual(before, watcher.fingerprint(self.root))
++        index = self.root / "Projects/Sys4AI-Template-Project/roles/INDEX.md"
++        index.parent.mkdir()
++        index.write_text("Generated fixture navigation\n")
++        before = watcher.fingerprint(self.root)
++        index.write_text("Changed generated fixture navigation\n")
++        self.assertNotEqual(before, watcher.fingerprint(self.root))
++        # Another product remains outside the watcher's designated boundary.
++        other = self.root / "Projects/Other/roles"
++        other.mkdir(parents=True)
++        before = watcher.fingerprint(self.root)
++        (other / "INDEX.md").write_text("Unselected project\n")
++        self.assertEqual(before, watcher.fingerprint(self.root))
+ 
+     def test_transients_ignored_and_symlinks_not_followed(self):
+         folder = self.root / 'SKILLS-depo/demo'
+--- a/SKILLS-depo/init-new-project/scripts/init_new_project.py
++++ b/SKILLS-depo/init-new-project/scripts/init_new_project.py
+@@ -19,6 +19,7 @@
+ import subprocess
+ import sys
+ import tempfile
++import types
+ from collections.abc import Iterator
+ from copy import deepcopy
+ from contextlib import ExitStack, contextmanager
+@@ -41,7 +42,10 @@
+ }
+ IDENTITY = "project.json"
+ RECORD = "control_records/project-setup.json"
+-SETUP_CONTRACT = "governance-starter-v1"
++SETUP_CONTRACT = "governance-starter-v2"
++LEGACY_CONTRACT = "governance-starter-v1"
++ROLE_INDEX = "roles/INDEX.md"
++ROLE_HELPER = ".agents/skills/manage-subagent-roles/scripts/role_catalog.py"
+ STAGES = ["assets", "registration", "verification"]
+ SHA256 = re.compile(r"[0-9a-f]{64}\Z")
+ ID_PATTERN = re.compile(r"[a-z][a-z0-9]*(?:-[a-z0-9]+)*\Z")
+@@ -73,6 +77,7 @@
+     ".envrc",
+     ".secrets",
+     "secrets",
++    ".transition.json",
+ }
+ EXCLUDED_SUFFIXES = (".pyc", ".pyo", ".log", ".zip", ".whl", ".egg")
+ RESERVED = {
+@@ -404,17 +409,57 @@
+             unique_json(raw)
+ 
+ 
++@contextmanager
++def role_validator(raw: bytes) -> Iterator[Any]:
++    """Use the reviewed Template helper bytes, including its receipt validator."""
++    module_name = "_initializer_role_catalog_" + sha(raw)
++    helper = types.ModuleType(module_name)
++    helper.__file__ = ROLE_HELPER
++    sys.modules[module_name] = helper
++    try:
++        exec(compile(raw, ROLE_HELPER, "exec"), helper.__dict__)
++        if helper.ROLE_ROOT_NAME != "roles":
++            raise InitializationError("role helper requires an explicit active-layout transition")
++        yield helper
++    except (RuntimeError, AttributeError, OSError, UnicodeError, SyntaxError, ValueError) as error:
++        if isinstance(error, InitializationError):
++            raise
++        raise InitializationError(f"role validation failed: {error}") from error
++    finally:
++        sys.modules.pop(module_name, None)
++
++
++def role_index_bytes(files: dict[str, bytes], *, required: bool = False) -> bytes:
++    """Render with one frozen role helper and disposable role files only."""
++    if not {ROLE_HELPER, "SOUL.md"} <= files.keys():
++        raise InitializationError("role index lacks its required helper or instruction source")
++    with role_validator(files[ROLE_HELPER]) as helper:
++        with tempfile.TemporaryDirectory(prefix="sys4ai-initializer-roles-") as temporary:
++            root = Path(temporary).resolve()
++            (root / "roles").mkdir()
++            for relative, raw in files.items():
++                if relative == "SOUL.md" or relative.startswith("roles/") and relative != ROLE_INDEX:
++                    target = destination_file(root, relative)
++                    target.parent.mkdir(parents=True, exist_ok=True)
++                    target.write_bytes(raw)
++            catalog = helper.build_catalog(root)
++            if required and (catalog.invalid_roles or not {"project-sub-agent", "task-manager"} <= {entry.name for entry in catalog.valid_roles}):
++                raise InitializationError("template role pairs are invalid or required roles are missing")
++            return helper.render_index(catalog).encode()
++
++
+ def template_sources(
+-    depot: Path,
++    depot: Path, *, contract: str = SETUP_CONTRACT,
+ ) -> tuple[dict[str, bytes], dict[str, Path], dict[str, str], bytes, bytes]:
+     template = safe(depot / TEMPLATE)
+     policy = file_bytes(template / TEMPLATE_POLICY)
+     specification = unique_json(policy)
++    role_root = "sub-agent-roles" if contract == LEGACY_CONTRACT else "roles"
+     if (
+         not isinstance(specification, dict)
+         or specification.get("schema_version") != 2
+         or specification.get("skills") != ".agents/skills"
+-        or specification.get("roles") != "sub-agent-roles"
++        or specification.get("roles") != role_root
+         or specification.get("soul") != "SOUL.md"
+         or specification.get("template") != TEMPLATE
+         or specification.get("readme_template") != README_RENDERER
+@@ -450,19 +495,24 @@
+             continue
+         include(relative, file_bytes(source))
+     include("SOUL.md", file_bytes(template / "SOUL.md"))
+-    for collection in (".agents/skills", "sub-agent-roles"):
++    for collection in (".agents/skills", role_root):
+         names = package_names(template / collection)
+-        required = REQUIRED_SKILLS if collection == ".agents/skills" else {"project-sub-agent"}
++        required = REQUIRED_SKILLS if collection == ".agents/skills" else ({"project-sub-agent"} if contract == LEGACY_CONTRACT else {"project-sub-agent", "task-manager"})
+         if not required.issubset(names):
+             raise InitializationError("template lacks required governance packages or generic role")
+         for name in names:
+             source = template / collection / name
+             package = package_files(source) if collection == ".agents/skills" else tree_files(source)
+-            if collection == "sub-agent-roles" and not {"AGENTS.md", "ROLE.md"}.issubset(package):
++            if collection == role_root and not {"AGENTS.md", "ROLE.md"}.issubset(package):
+                 raise InitializationError("template role bundle lacks AGENTS.md or ROLE.md")
+             version = "sha256:" + sha(encoded({relative: sha(raw) for relative, raw in package.items()}))
+             for relative, raw in package.items():
+                 include(f"{collection}/{name}/{relative}", raw, version=version)
++    if contract != LEGACY_CONTRACT:
++        index = file_bytes(template / ROLE_INDEX)
++        if index != role_index_bytes(copied, required=True):
++            raise InitializationError("template role index is stale; run the reviewed Template update")
++        include(ROLE_INDEX, index)
+     reference = safe(template / "reference-assets")
+     if reference.exists():
+         for relative, raw in tree_files(reference).items():
+@@ -472,11 +522,11 @@
+ 
+ 
+ def source_snapshot(
+-    depot: Path, skill: Path, identity: dict[str, Any]
++    depot: Path, skill: Path, identity: dict[str, Any], *, contract: str = SETUP_CONTRACT,
+ ) -> tuple[dict[str, bytes], list[dict[str, str]], dict[str, bytes]]:
+     # The installed skill provides code only. Every starter input, including the
+     # allowlist and README renderer, is read from the registered template.
+-    original, origins, versions, renderer, policy = template_sources(depot)
++    original, origins, versions, renderer, policy = template_sources(depot, contract=contract)
+     proposed = dict(original)
+     # Never copy a populated Task index as the new project's empty state.
+     if (
+@@ -513,10 +563,10 @@
+     return proposed, records, original
+ 
+ 
+-def check_sources(depot: Path, records: list[dict[str, str]]) -> None:
++def check_sources(depot: Path, records: list[dict[str, str]], *, contract: str = SETUP_CONTRACT) -> None:
+     expected = {entry["source"]: entry["source_sha256"] for entry in records}
+     try:
+-        copied, origins, _, renderer, policy = template_sources(depot)
++        copied, origins, _, renderer, policy = template_sources(depot, contract=contract)
+     except (InitializationError, OSError) as error:
+         raise InitializationError("reviewed template source changed during adoption") from error
+     actual = {
+@@ -772,8 +822,8 @@
+         parts = Path(name).parts
+         package_exists = ((name.startswith(".agents/skills/") and len(parts) > 3
+                            and (destination / Path(*parts[:3])).is_dir())
+-                          or (name.startswith("sub-agent-roles/") and len(parts) > 2
+-                              and (destination / Path(*parts[:2])).is_dir()))
++                          or (name.startswith("roles/") and name != ROLE_INDEX
++                              and (destination / "roles").is_dir()))
+         existing_tasks = (name.startswith("Tasks/") and (destination / "Tasks").is_dir()
+                           and any((destination / "Tasks").iterdir()))
+         if present is not None:
+@@ -783,12 +833,77 @@
+                 preserved[name] = sha(present)
+         elif not (package_exists or existing_tasks):
+             selected[name], before[name] = raw, None
++    if ROLE_INDEX in proposed:
++        index = planned_role_index(destination, proposed, selected)
++        present = file_bytes(destination / ROLE_INDEX) if (destination / ROLE_INDEX).exists() else None
++        if present is not None and present != index:
++            raise InitializationError("existing role index differs from current pairs; preserve it for explicit reindex")
++        if ROLE_INDEX in selected:
++            selected[ROLE_INDEX] = index
+     return selected, before, preserved
++
++
++def planned_role_index(destination: Path, proposed: dict[str, bytes], owned: dict[str, Any]) -> bytes:
++    effective = {name: proposed[name] if name in owned else file_bytes(destination / name) for name in ("SOUL.md", ROLE_HELPER)}
++    role_root = safe(destination / "roles")
++    if role_root.exists():
++        effective.update({"roles/" + name: raw for name, raw in tree_files(role_root).items() if name != "INDEX.md"})
++    effective.update({name: proposed[name] for name in owned if name.startswith("roles/") and name != ROLE_INDEX})
++    return role_index_bytes(effective)
++
++
++def check_existing_role_layout(destination: Path, validator_raw: bytes) -> None:
++    legacy = safe(destination / "sub-agent-roles")
++    package = safe(destination / ".agents/skills/manage-subagent-roles")
++    if legacy.exists() and not package.exists():
++        raise InitializationError("existing legacy roles require an explicit reviewed transition before new starter adoption")
++    if package.exists():
++        helper = destination / ROLE_HELPER
++        if not helper.is_file():
++            raise InitializationError("existing role helper package needs explicit compatibility review")
++        try:
++            tree = ast.parse(file_bytes(helper))
++        except (SyntaxError, ValueError) as error:
++            raise InitializationError("existing role helper package needs explicit compatibility review") from error
++        roots = [node.value.value for node in tree.body if isinstance(node, ast.Assign)
++                 and any(isinstance(target, ast.Name) and target.id == "ROLE_ROOT_NAME" for target in node.targets)
++                 and isinstance(node.value, ast.Constant)]
++        if roots != ["roles"]:
++            raise InitializationError("existing role helper requires an explicit active-layout transition")
++    if not legacy.exists():
++        return
++    # A copy-first transition retains the legacy directory. Its presence is not
++    # completion evidence; validate the exact receipt and live bytes read-only.
++    receipt_path = safe(destination / "roles/.transition.json")
++    if not receipt_path.is_file():
++        raise InitializationError("retained legacy roles lack an explicit completed transition receipt")
++    functions = {node.name for node in tree.body if isinstance(node, ast.FunctionDef)}
++    if not {"build_catalog", "render_index", "transition_apply", "validate_transition_receipt"} <= functions:
++        raise InitializationError("existing role helper lacks the current transition contract")
++    with role_validator(validator_raw) as validator:
++        receipt = validator.load_manifest(receipt_path)
++        destinations = validator.validate_transition_receipt(receipt, destination)
++        if receipt["status"] != "completed":
++            raise InitializationError("explicit role transition is incomplete; recover it before preparation")
++        preview = receipt["preview"]
++        fresh = validator.transition_preview(destination)
++        if fresh["legacy_fingerprint"] != preview["legacy_fingerprint"] or fresh["conflicts"]:
++            raise InitializationError("completed transition provenance changed or has a destination collision")
++        for pair in preview["pairs"]:
++            for entry in pair["files"]:
++                if sha(file_bytes(destination_file(destination, entry["source"]))) != entry["source_sha256"]:
++                    raise InitializationError("retained legacy role bytes changed after their reviewed transition")
++        if any(sha(file_bytes(destination_file(destination, name))) != checksum for name, checksum in destinations.items()):
++            raise InitializationError("active role bytes differ from the completed transition receipt")
++        catalog = validator.build_catalog(destination)
++        if catalog.invalid_roles or catalog.index_status != "current":
++            raise InitializationError("completed transition lacks current valid active roles and index")
+ 
+ 
+ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) -> None:
+     if (not isinstance(record, dict) or record.get("schema_version") != 1
+-            or record.get("setup_contract") != SETUP_CONTRACT):
++            or not isinstance(record.get("setup_contract"), str)
++            or record.get("setup_contract") not in {SETUP_CONTRACT, LEGACY_CONTRACT}):
+         raise InitializationError("existing setup receipt has an unsupported contract")
+     if record.get("project_root") != str(destination) or record.get("identity") != identity:
+         raise InitializationError("existing setup receipt belongs to another project or request")
+@@ -832,10 +947,15 @@
+             raise InitializationError("existing setup receipt has conflicting source adoption decisions")
+         source_adoptions[expected_destination] = adoption
+         seen_sources.add(entry["source"])
++    legacy = record["setup_contract"] == LEGACY_CONTRACT
++    role_sources = ({"sub-agent-roles/project-sub-agent/AGENTS.md", "sub-agent-roles/project-sub-agent/ROLE.md"} if legacy else
++        {ROLE_INDEX, ROLE_HELPER, *(f"roles/{role}/{filename}" for role in ("project-sub-agent", "task-manager") for filename in ("AGENTS.md", "ROLE.md"))})
++    if any(entry["destination"].startswith("roles/" if legacy else "sub-agent-roles/") for entry in record["sources"]):
++        raise InitializationError("existing setup receipt mixes incompatible role layouts")
+     required_sources = {TEMPLATE + "/" + name for name in
+         STARTER_FILES | {"SOUL.md", TEMPLATE_POLICY, README_RENDERER}
+         | {f".agents/skills/{name}/SKILL.md" for name in REQUIRED_SKILLS}
+-        | {"sub-agent-roles/project-sub-agent/AGENTS.md", "sub-agent-roles/project-sub-agent/ROLE.md"}}
++        | role_sources}
+     if not required_sources <= seen_sources:
+         raise InitializationError("existing setup receipt omits required starter source provenance")
+     for key in ("owned_files", "preserved_files"):
+@@ -863,8 +983,10 @@
+             parts = Path(name).parts
+             if name.startswith(".agents/skills/") and len(parts) > 3:
+                 preserved_root = destination / Path(*parts[:3])
+-            elif name.startswith("sub-agent-roles/") and len(parts) > 2:
++            elif legacy and name.startswith("sub-agent-roles/") and len(parts) > 2:
+                 preserved_root = destination / Path(*parts[:2])
++            elif not legacy and name.startswith("roles/") and len(parts) > 2:
++                preserved_root = destination / "roles"
+             elif name == "Tasks/INDEX.md":
+                 preserved_root = destination / "Tasks"
+             else:
+@@ -911,6 +1033,9 @@
+         ("project_id", "project_name", "purpose")}, relative=identity["relative_path"])
+     if saved is None or observed != identity:
+         raise InitializationError("project identity changed during setup")
++    if record["setup_contract"] == SETUP_CONTRACT:
++        if file_bytes(destination / ROLE_INDEX) != planned_role_index(destination, {}, {}):
++            raise InitializationError("project role index is stale; preserve role edits and explicitly reindex")
+     return current
+ 
+ 
+@@ -938,11 +1063,14 @@
+         validate_record(record, destination, identity)
+         record = deepcopy(record)
+         record["mode"] = mode
++    contract = record["setup_contract"] if record is not None else SETUP_CONTRACT
+     with ExitStack() as template_guard:
+         proposed = {}
+         if record is None or "assets" not in record["completed_stages"]:
+-            proposed_all, sources, original = source_snapshot(depot, skill, identity)
++            proposed_all, sources, original = source_snapshot(depot, skill, identity, contract=contract)
+             if record is None:
++                if mode == "prepare-existing":
++                    check_existing_role_layout(destination, proposed_all[ROLE_HELPER])
+                 proposed, before, preserved = asset_plan(destination, mode=mode,
+                     proposed=proposed_all, original=original, saved_identity=saved_identity)
+                 record = {"schema_version": 1, "setup_contract": SETUP_CONTRACT,
+@@ -960,17 +1088,20 @@
+                         entry.update(adoption="skipped-existing-package", destination_sha256=None)
+                     else:
+                         entry["adoption"] = "adopted"
++                        entry["destination_sha256"] = sha(proposed[name])
+             else:
+                 expected_sources = {(entry["source"], entry["source_sha256"]) for entry in record["sources"]}
+                 actual_sources = {(entry["source"], entry["source_sha256"]) for entry in sources}
+                 if expected_sources != actual_sources:
+                     raise InitializationError("partial asset adoption source changed; preserve existing owned state")
++                if contract == SETUP_CONTRACT:
++                    proposed_all[ROLE_INDEX] = planned_role_index(destination, proposed_all, record["owned_files"])
+                 for name, checksum in record["owned_files"].items():
+                     if name not in proposed_all or sha(proposed_all[name]) != checksum:
+                         raise InitializationError("partial asset adoption differs from the saved plan")
+                     proposed[name] = proposed_all[name]
+             template_guard.enter_context(template_read_lock(depot))
+-            check_sources(depot, record["sources"])
++            check_sources(depot, record["sources"], contract=contract)
+             if file_bytes(depot / "depot/projects.json") != registry_before:
+                 raise InitializationError("registry changed during preflight")
+         lock = depot / "depot" / (".initialize-" + sha(relative.encode())[:16] + ".lock")
+@@ -1007,7 +1138,7 @@
+             try:
+                 if "assets" not in record["completed_stages"]:
+                     begin("assets")
+-                    check_sources(depot, record["sources"])
++                    check_sources(depot, record["sources"], contract=contract)
+                     for name, checksum in record["preserved_files"].items():
+                         if sha(file_bytes(destination_file(destination, name))) != checksum:
+                             raise InitializationError("preserved project file changed during adoption")
+@@ -1019,7 +1150,7 @@
+                             if (sha(present) if present is not None else None) != expected:
+                                 raise InitializationError("owned asset changed during interrupted adoption")
+                             atomic_write(target, after, present)
+-                    check_sources(depot, record["sources"])
++                    check_sources(depot, record["sources"], contract=contract)
+                     checkpoint("assets")
+                 template_guard.close()
+                 begin("registration")
+--- a/SKILLS-depo/init-new-project/assets/baseline-assets.json
++++ b/SKILLS-depo/init-new-project/assets/baseline-assets.json
+@@ -1,7 +1,7 @@
+ {
+   "schema_version": 2,
+   "skills": ".agents/skills",
+-  "roles": "sub-agent-roles",
++  "roles": "roles",
+   "soul": "SOUL.md",
+   "template": "Projects/Sys4AI-Template-Project",
+   "readme_template": ".template/project-readme.md",
+--- a/SKILLS-depo/init-new-project/assets/initialization-receipt.schema.json
++++ b/SKILLS-depo/init-new-project/assets/initialization-receipt.schema.json
+@@ -24,7 +24,10 @@
+       "const": 1
+     },
+     "setup_contract": {
+-      "const": "governance-starter-v1"
++      "enum": [
++        "governance-starter-v1",
++        "governance-starter-v2"
++      ]
+     },
+     "status": {
+       "enum": [
+--- a/SKILLS-depo/init-new-project/assets/project-readme.md
++++ b/SKILLS-depo/init-new-project/assets/project-readme.md
+@@ -20,7 +20,7 @@
+ 
+ The [Project Director](./ROLE.md) uses the
+ [role management skill](./.agents/skills/manage-subagent-roles/SKILL.md) to inspect
+-the [local role bundles](./sub-agent-roles) before bounded delegation. The project
++the [local role bundles](./roles) and [role index](./roles/INDEX.md) before bounded delegation. The project
+ owns those role files and keeps task acceptance with its Director.
+ 
+ ## Project setup
+--- a/SKILLS-depo/init-new-project/SKILL.md
++++ b/SKILLS-depo/init-new-project/SKILL.md
+@@ -2,7 +2,7 @@
+ name: init-new-project
+ description: Create or prepare a selected Sys4AI project using Template governance assets, preserved project content and factual registration.
+ metadata:
+-  version: 3.0.0
++  version: 4.0.0
+ ---
+ 
+ # Initialize a Sys4AI project
+@@ -27,14 +27,21 @@
+ schema-2 `.template/baseline-assets.json`, README renderer, soul, complete skill
+ and role packages, and selected reference assets. The seven required skills are
+ `agent-task`, `communication`, `init-new-project`, `manage-subagent-roles`, `task`,
+-`to-implementation-plan` and `to-trd`. The generic `project-sub-agent` role is
+-required. The initializer reads the Template and does not refresh it.
++`to-implementation-plan` and `to-trd`. The `project-sub-agent` and `task-manager` pairs and a validated `roles/INDEX.md`
++are required for new projects. The initializer reads the Template and does not refresh it.
+ 
+ Existing project identity, README, specifications, skills, roles, Tasks,
+ configuration, data and registry metadata remain project-owned. Missing starter
+ assets may be added. Existing packages remain intact as a whole, including
+ custom resources and missing resources; do not combine editions automatically.
+-A pristine Template README in a manual copy is specialized. A customized README
++An existing `roles/` collection is preserved as a whole. A missing role index
++is generated from its actual pairs, including invalid-role diagnostics; an
++existing index that differs requires explicit reindex before setup. A legacy
++`sub-agent-roles/` tree or incompatible existing role helper requires a reviewed
++transition before adopting new starters. A completed copy-first transition may
++retain its legacy directory. Preparation verifies its strict receipt, retained
++source hashes, current active pairs and index, and compatible role helper before
++accepting that evidence. Both directories existing alone is insufficient. A pristine Template README in a manual copy is specialized. A customized README
+ is preserved. Existing `project.json` bytes and additional fields are preserved;
+ its project ID and relative destination must agree with the request, and its
+ existing display name and purpose take precedence.
+@@ -65,7 +72,9 @@
+ ## Completion and receipts
+ 
+ The durable receipt is `control_records/project-setup.json`, schema version 1,
+-with setup contract `governance-starter-v1`. Its stages are `assets`,
++with setup contract `governance-starter-v2`. The earlier
++`governance-starter-v1` contract remains valid for its original legacy role
++layout; reruns do not convert those receipts or change their role paths. Its stages are `assets`,
+ `registration` and `verification`. A completed result contains all three stages
+ and passed checks for project identity, project files and factual registration.
+ The receipt retains source hashes and the original adoption hashes separately
+--- a/SKILLS-depo/init-new-project/README.md
++++ b/SKILLS-depo/init-new-project/README.md
+@@ -8,12 +8,12 @@
+ 
+ Both routes preserve existing project documents, packages, Tasks, configuration,
+ data and repository metadata. New projects receive seven complete skill packages
+-and the generic role. The helper does not create an environment, install software
++and the generic and task-manager roles with a generated index. The helper does not create an environment, install software
+ or contact a service. It uses Git only for read-only observations when a child
+ repository already exists.
+ 
+ The [receipt schema](assets/initialization-receipt.schema.json) defines schema-1
+-`governance-starter-v1` receipts at `control_records/project-setup.json`. Source
++`governance-starter-v2` receipts at `control_records/project-setup.json`. Source
+ provenance, original adoption hashes and current observed hashes have separate
+ fields. Partial asset adoption resumes only against the same source inventory
+ and unchanged target bytes. Completed reruns preserve project edits and observe
+@@ -22,7 +22,19 @@
+ preserved file inventory. An omitted entry, changed adoption digest, contradictory
+ source decision or unsupported skipped starter rejects a rerun before mutation.
+ 
+-Version 3 removes the former principal, dataset and runtime-artifact CLI/API
++Version 4 adopts `roles/` and validates each destination index using frozen role
++helper bytes without copying runtime locks or transition receipts. Existing
++`governance-starter-v1` receipts retain their old path and provenance rules;
++completed reruns preserve those projects without active-layout migration.
++A fresh prepare-existing request with legacy roles or an incompatible role
++helper stops before writes and identifies the required explicit transition.
++A completed copy-first transition is accepted with its retained legacy directory
++only after the strict receipt, old and active bytes, current index and role helper
++are verified. Missing, incomplete, corrupt or conflicting transition evidence
++blocks preparation before starter writes. Existing current role collections and
++their additional files are preserved.
++
++Version 3 removed the former principal, dataset and runtime-artifact CLI/API
+ options. It accepts schema-2 starter policy only, with no optional root files.
+ 
+ Run the focused tests using the depot's Python 3.12 interpreter:
+--- a/SKILLS-depo/init-new-project/tests/test_initializer.py
++++ b/SKILLS-depo/init-new-project/tests/test_initializer.py
+@@ -51,8 +51,8 @@
+         target = template / relative
+         target.parent.mkdir(parents=True, exist_ok=True)
+         shutil.copyfile(SOURCE_DEPOT / "Projects/Sys4AI-Template-Project" / relative, target)
+-    shutil.copytree(SOURCE_DEPOT / "Projects/Sys4AI-Template-Project/sub-agent-roles/project-sub-agent",
+-                    template / "sub-agent-roles/project-sub-agent", ignore=ignore)
++    shutil.copytree(SOURCE_DEPOT / "Projects/Sys4AI-Template-Project/roles",
++                    template / "roles", ignore=ignore)
+     (template / ".template").mkdir()
+     for name in ("baseline-assets.json", "project-readme.md"):
+         shutil.copyfile(SOURCE_SKILL / "assets" / name, template / ".template" / name)
+@@ -156,7 +156,10 @@
+             "models/weights",
+             "unknown.txt",
+             ".DS_Store",
+-            "sub-agent-roles/project-sub-agent/__pycache__/compiled.pyc",
++            "roles/project-sub-agent/__pycache__/compiled.pyc",
++            "roles/.transition.json",
++            "roles/task-manager/.transition.json",
++            ".sys4ai/role-catalog.lock",
+             "Implementation_Plans/old-plan.md",
+             "Tasks/old-task/task.json",
+         )
+@@ -218,7 +221,7 @@
+     def test_legacy_private_provider_directories_are_never_copied(self):
+         template = self.root / self.helper.TEMPLATE
+         excluded_files = []
+-        for collection in (".agents/skills/communication", "sub-agent-roles/project-sub-agent", "reference-assets"):
++        for collection in (".agents/skills/communication", "roles/project-sub-agent", "reference-assets"):
+             for private_directory in (".cognee", ".cognee_system"):
+                 relative = Path(collection) / private_directory / "db.sqlite"
+                 target = template / relative
+@@ -270,21 +273,26 @@
+         package.mkdir()
+         (package / "SKILL.md").write_text("---\nname: new-skill\ndescription: Template addition.\n---\nUse this skill.\n")
+         (package / "resource.md").write_text("complete added package")
+-        role = template / "sub-agent-roles/new-role"
+-        shutil.copytree(template / "sub-agent-roles/project-sub-agent", role)
++        role = template / "roles/new-role"
++        shutil.copytree(template / "roles/project-sub-agent", role)
+         (role / "reference.md").write_text("complete role reference")
++        role_file = role / "ROLE.md"
++        role_file.write_text(role_file.read_text().replace("name: project-sub-agent", "name: new-role"))
++        inputs = {"SOUL.md": (template / "SOUL.md").read_bytes(), self.helper.ROLE_HELPER: (template / self.helper.ROLE_HELPER).read_bytes()}
++        inputs.update({"roles/" + name: raw for name, raw in self.helper.tree_files(template / "roles").items() if name != "INDEX.md"})
++        (template / "roles/INDEX.md").write_bytes(self.helper.role_index_bytes(inputs, required=True))
+         reference = template / "reference-assets/SOULS-depo/alternative.md"
+         reference.parent.mkdir(parents=True)
+         reference.write_text("template reference asset")
+         self.run_setup()
+         self.assertEqual("complete added package", (self.target / ".agents/skills/new-skill/resource.md").read_text())
+         self.assertTrue((self.target / ".agents/skills/init-new-project/SKILL.md").is_file())
+-        self.assertEqual("complete role reference", (self.target / "sub-agent-roles/new-role/reference.md").read_text())
++        self.assertEqual("complete role reference", (self.target / "roles/new-role/reference.md").read_text())
+         self.assertEqual("template reference asset", (self.target / "reference-assets/SOULS-depo/alternative.md").read_text())
+ 
+     def test_missing_required_template_dependencies_refuse_without_mutation(self):
+         template = self.root / self.helper.TEMPLATE
+-        for relative in (".agents/skills/task", "sub-agent-roles/project-sub-agent", "AGENTS.md"):
++        for relative in (".agents/skills/task", "roles/project-sub-agent", "AGENTS.md", self.helper.ROLE_HELPER):
+             with self.subTest(relative=relative):
+                 selected = template / relative
+                 backup = Path(self.temporary.name) / "required-backup"
+--- a/SKILLS-depo/init-new-project/tests/test_setup_recovery.py
++++ b/SKILLS-depo/init-new-project/tests/test_setup_recovery.py
+@@ -15,6 +15,148 @@
+     setUp = fixture.InitializerTests.setUp
+     run_setup = fixture.InitializerTests.run_setup
+     fail_verification = fixture.InitializerTests.fail_verification
++
++    def transitioned_project(self):
++        template = self.root / self.helper.TEMPLATE
++        self.target.mkdir()
++        shutil.copyfile(template / "SOUL.md", self.target / "SOUL.md")
++        shutil.copytree(template / ".agents/skills/manage-subagent-roles",
++                        self.target / ".agents/skills/manage-subagent-roles")
++        shutil.copytree(template / "roles/project-sub-agent",
++                        self.target / "sub-agent-roles/project-sub-agent")
++        raw = (template / self.helper.ROLE_HELPER).read_bytes()
++        with self.helper.role_validator(raw) as validator:
++            preview = validator.transition_preview(self.target)
++            result = validator.transition_apply(self.target, preview, confirmed=True)
++        self.assertEqual("current", result["index_status"])
++        return raw
++
++    def test_actual_completed_copy_first_transition_allows_preparation_and_rerun(self):
++        self.transitioned_project()
++        legacy = fixture.manifest(self.target / "sub-agent-roles")
++        receipt = self.target / "roles/.transition.json"
++        provenance = receipt.read_bytes()
++        first = self.run_setup(mode="prepare-existing")
++        self.assertEqual(self.helper.SETUP_CONTRACT, first["setup_contract"])
++        self.assertEqual(legacy, fixture.manifest(self.target / "sub-agent-roles"))
++        self.assertEqual(provenance, receipt.read_bytes())
++        self.assertEqual((self.target / self.helper.ROLE_INDEX).read_bytes(), self.helper.planned_role_index(self.target, {}, {}))
++        repeated = self.run_setup(mode="prepare-existing")
++        self.assertEqual(first["identity"], repeated["identity"])
++        self.assertEqual(provenance, receipt.read_bytes())
++        self.assertEqual(legacy, fixture.manifest(self.target / "sub-agent-roles"))
++
++    def test_transition_evidence_is_required_and_rechecked_before_preparation_writes(self):
++        self.transitioned_project()
++        receipt = self.target / "roles/.transition.json"
++        original = receipt.read_bytes()
++        active = self.target / "roles/project-sub-agent/ROLE.md"
++        active_bytes = active.read_bytes()
++        legacy = self.target / "sub-agent-roles/project-sub-agent/ROLE.md"
++        legacy_bytes = legacy.read_bytes()
++        for case in ("missing", "pending", "corrupt", "collision", "changed-legacy"):
++            altered = json.loads(original)
++            if case == "missing":
++                receipt.unlink()
++            elif case == "pending":
++                altered["status"] = "pending"
++                receipt.write_text(json.dumps(altered))
++            elif case == "corrupt":
++                altered["completed"] = []
++                receipt.write_text(json.dumps(altered))
++            elif case == "collision":
++                active.write_bytes(active_bytes + b"\nConcurrent active role customization.\n")
++            else:
++                legacy.write_bytes(legacy_bytes + b"\nChanged retained legacy role.\n")
++            before = fixture.manifest(self.root)
++            with self.subTest(case=case), self.assertRaises(self.helper.InitializationError):
++                self.helper.run_initialization(**{**self.arguments, "mode": "prepare-existing"})
++            self.assertEqual(before, fixture.manifest(self.root))
++            receipt.write_bytes(original)
++            active.write_bytes(active_bytes)
++            legacy.write_bytes(legacy_bytes)
++
++    def test_legacy_role_layout_and_old_helper_require_review_before_new_adoption(self):
++        self.target.mkdir()
++        legacy = self.target / "sub-agent-roles/custom-worker/ROLE.md"
++        legacy.parent.mkdir(parents=True)
++        legacy.write_text("Preserved legacy role\n")
++        before = fixture.manifest(self.root)
++        with self.assertRaisesRegex(self.helper.InitializationError, "explicit reviewed transition"):
++            self.helper.run_initialization(**{**self.arguments, "mode": "prepare-existing"})
++        self.assertEqual(before, fixture.manifest(self.root))
++        shutil.rmtree(self.target / "sub-agent-roles")
++        old_helper = self.target / self.helper.ROLE_HELPER
++        old_helper.parent.mkdir(parents=True)
++        old_helper.write_text('ROLE_ROOT_NAME = "sub-agent-roles"\n')
++        before = fixture.manifest(self.root)
++        with self.assertRaisesRegex(self.helper.InitializationError, "explicit active-layout transition"):
++            self.helper.run_initialization(**{**self.arguments, "mode": "prepare-existing"})
++        self.assertEqual(before, fixture.manifest(self.root))
++
++    def test_current_custom_role_collection_gets_its_own_index_without_package_fill(self):
++        self.target.mkdir()
++        template = self.root / self.helper.TEMPLATE
++        source = template / "roles/project-sub-agent"
++        owned = self.target / "roles/project-sub-agent"
++        shutil.copytree(source, owned)
++        role = owned / "ROLE.md"
++        role.write_bytes(role.read_bytes() + b"\nProject-owned role responsibility.\n")
++        original = fixture.manifest(owned)
++        report = self.run_setup(mode="prepare-existing")
++        self.assertEqual(original, fixture.manifest(owned))
++        self.assertFalse((self.target / "roles/task-manager").exists())
++        index = (self.target / self.helper.ROLE_INDEX).read_bytes()
++        self.assertNotEqual((template / self.helper.ROLE_INDEX).read_bytes(), index)
++        self.assertEqual(self.helper.planned_role_index(self.target, {}, {}), index)
++        self.assertEqual("governance-starter-v2", report["setup_contract"])
++        self.run_setup(mode="prepare-existing")
++        # An existing index is never overwritten to conceal a customization.
++        (self.target / self.helper.ROLE_INDEX).write_text("Owned index\n")
++        before = (self.target / self.helper.ROLE_INDEX).read_bytes()
++        with self.assertRaises(self.helper.InitializationError):
++            self.helper.run_initialization(**{**self.arguments, "mode": "prepare-existing"})
++        self.assertEqual(before, (self.target / self.helper.ROLE_INDEX).read_bytes())
++
++    def test_legacy_receipt_contract_resumes_and_reruns_without_layout_upgrade(self):
++        template = self.root / self.helper.TEMPLATE
++        backup = Path(self.temporary.name) / "current-template"
++        shutil.copytree(template, backup)
++        (template / "roles").rename(template / "sub-agent-roles")
++        shutil.rmtree(template / "sub-agent-roles/task-manager")
++        (template / "sub-agent-roles/INDEX.md").unlink()
++        policy_path = template / self.helper.TEMPLATE_POLICY
++        policy = json.loads(policy_path.read_text()); policy["roles"] = "sub-agent-roles"
++        policy_path.write_text(json.dumps(policy))
++        role_helper = template / self.helper.ROLE_HELPER
++        role_helper.write_text(role_helper.read_text().replace('ROLE_ROOT_NAME = "roles"', 'ROLE_ROOT_NAME = "sub-agent-roles"'))
++        identity = {"schema_version": 1, "project_id": "orchard", "project_name": "Orchard",
++                    "purpose": self.arguments["purpose"], "relative_path": "Projects/Orchard"}
++        proposed, sources, _ = self.helper.source_snapshot(self.root, fixture.SOURCE_SKILL, identity, contract=self.helper.LEGACY_CONTRACT)
++        for source in sources:
++            source["adoption"] = "adopted"
++        record = {"schema_version": 1, "setup_contract": self.helper.LEGACY_CONTRACT,
++                  "status": "partial", "mode": "create", "operation_id": "project-setup-" + "1" * 32,
++                  "identity": identity, "project_root": str(self.target), "sources": sources,
++                  "owned_files": {name: self.helper.sha(raw) for name, raw in proposed.items()},
++                  "preserved_files": {}, "recovery_before": {name: None for name in proposed},
++                  "completed_stages": [], "active_stage": "assets", "checks": [],
++                  "created_at": "2026-09-08T00:00:00+00:00", "git_setup": "separate"}
++        target = self.target / self.helper.RECORD
++        target.parent.mkdir(parents=True)
++        target.write_bytes(self.helper.encoded(record))
++        first = self.run_setup()
++        self.assertEqual(self.helper.LEGACY_CONTRACT, first["setup_contract"])
++        pair_before = fixture.manifest(self.target / "sub-agent-roles")
++        shutil.rmtree(template); backup.rename(template)
++        repeated = self.run_setup()
++        self.assertEqual(first["sources"], repeated["sources"])
++        self.assertEqual(pair_before, fixture.manifest(self.target / "sub-agent-roles"))
++        self.assertFalse((self.target / "roles").exists())
++        mixed = deepcopy(repeated)
++        mixed["setup_contract"] = self.helper.SETUP_CONTRACT
++        with self.assertRaisesRegex(self.helper.InitializationError, "mixes incompatible role layouts"):
++            self.helper.validate_record(mixed, self.target, identity)
+ 
+     def test_source_drift_rejected_before_destination_publication(self):
+         template = self.root / self.helper.TEMPLATE
+@@ -28,8 +170,8 @@
+         for name, change in changes.items():
+             backup = Path(self.temporary.name) / "template-backup"
+             shutil.copytree(template, backup)
+-            def changed_snapshot(*args):
+-                snapshot = original_snapshot(*args)
++            def changed_snapshot(*args, **kwargs):
++                snapshot = original_snapshot(*args, **kwargs)
+                 change()
+                 return snapshot
+             with (self.subTest(change=name), patch.object(self.helper, "source_snapshot", side_effect=changed_snapshot),
+@@ -45,7 +187,7 @@
+         identity = {"schema_version": 1, "project_id": "orchard", "project_name": "Orchard",
+                     "purpose": "Orchard observations.", "relative_path": "Projects/Orchard"}
+         _, records, _ = self.helper.source_snapshot(self.root, fixture.SOURCE_SKILL, identity)
+-        for relative in ("sub-agent-roles/project-sub-agent/new.md", "reference-assets/new.md",
++        for relative in ("roles/project-sub-agent/new.md", "reference-assets/new.md",
+                          ".agents/skills/communication/new.md"):
+             changed = template / relative
+             changed.parent.mkdir(parents=True, exist_ok=True)
+@@ -162,7 +304,7 @@
+             "README.md": b"Custom README",
+             "SPECS.md": b"Custom specs",
+             ".agents/skills/communication/SKILL.md": b"Custom skill",
+-            "sub-agent-roles/project-sub-agent/ROLE.md": b"Custom role",
++            "roles/project-sub-agent/ROLE.md": b"Custom role",
+             "Tasks/task-owned/task.json": b'{"preserve":true}',
+             "config/memory.toml": b"preserve original configuration bytes",
+             "control_records/project-initialization.json": b"legacy receipt remains untouched",
+@@ -178,7 +320,7 @@
+         for name, checksum in before.items():
+             self.assertEqual(checksum, after[name], name)
+         self.assertFalse((self.target / ".agents/skills/communication/README.md").exists())
+-        self.assertFalse((self.target / "sub-agent-roles/project-sub-agent/AGENTS.md").exists())
++        self.assertFalse((self.target / "roles/project-sub-agent/AGENTS.md").exists())
+         self.assertFalse((self.target / "Tasks/INDEX.md").exists())
+         self.assertEqual("Saved name", report["identity"]["project_name"])
+         self.assertNotIn("dataset_id", report["identity"])
+@@ -198,7 +340,7 @@
+         report = self.run_setup()
+         schema = json.loads((fixture.SOURCE_SKILL / "assets/initialization-receipt.schema.json").read_text())
+         self.assertTrue(set(schema["required"]) <= report.keys())
+-        self.assertEqual(schema["properties"]["setup_contract"]["const"], report["setup_contract"])
++        self.assertIn(report["setup_contract"], schema["properties"]["setup_contract"]["enum"])
+         self.helper.validate_record(report, self.target, report["identity"])
+         for change in ({"schema_version": 2}, {"completed_stages": ["assets"]},
+                        {"active_stage": "assets"}, {"owned_files": {"../outside": "0" * 64}},
+@@ -275,7 +417,7 @@
+ 
+     def test_minimum_saved_inventory_keeps_governance_and_renderer_sources(self):
+         original = self.run_setup()
+-        for name in (".agents/skills/task/SKILL.md", "sub-agent-roles/project-sub-agent/ROLE.md",
++        for name in (".agents/skills/task/SKILL.md", "roles/project-sub-agent/ROLE.md",
+                      self.helper.README_RENDERER, self.helper.TEMPLATE_POLICY):
+             altered = deepcopy(original)
+             source = self.helper.TEMPLATE + "/" + name
+--- a/SKILLS-depo/init-new-project/tests/test_end_to_end.py
++++ b/SKILLS-depo/init-new-project/tests/test_end_to_end.py
+@@ -47,7 +47,8 @@
+             self.assertEqual("completed", report["status"])
+             self.assertEqual("Projects/Group/Fresh", report["identity"]["relative_path"])
+             self.assertEqual(list(fixture.BASELINE), sorted(p.name for p in (fresh / ".agents/skills").iterdir()))
+-            self.assertEqual(["project-sub-agent"], sorted(p.name for p in (fresh / "sub-agent-roles").iterdir()))
++            self.assertEqual(["project-sub-agent", "task-manager"], sorted(p.name for p in (fresh / "roles").iterdir() if p.is_dir()))
++            self.assertTrue((fresh / "roles/INDEX.md").is_file())
+             for name in (".venv", ".sys4ai", "Ontology", "config", "models", "INIT_MEMORY.md"):
+                 self.assertFalse((fresh / name).exists(), name)
+             self.assertEqual(["assets", "registration", "verification"], report["completed_stages"])
+--- a/SPECS-depo/template-tests/test_template_contract.py
++++ b/SPECS-depo/template-tests/test_template_contract.py
+@@ -145,7 +145,7 @@
+         self.assertEqual([], self.allowlist["optional_starter_files"])
+         self.assertEqual(2, self.allowlist["schema_version"])
+         self.assertEqual(".agents/skills", self.allowlist["skills"])
+-        self.assertEqual("sub-agent-roles", self.allowlist["roles"])
++        self.assertEqual("roles", self.allowlist["roles"])
+         self.assertEqual("SOUL.md", self.allowlist["soul"])
+         for relative in self.allowlist["starter_files"]:
+             target = TEMPLATE / relative
+@@ -193,8 +193,10 @@
+         self.assertEqual([], self.allowlist["optional_starter_files"])
+         for retired in ("Ontology", "INIT_MEMORY.md"):
+             self.assertFalse((TEMPLATE / retired).exists(), retired)
+-        roles = {p.name for p in (TEMPLATE / "sub-agent-roles").iterdir() if p.is_dir()}
+-        self.assertEqual({"project-sub-agent"}, roles)
++        roles = {p.name for p in (TEMPLATE / "roles").iterdir() if p.is_dir()}
++        self.assertEqual({"project-sub-agent", "task-manager"}, roles)
++        self.assertEqual((TEMPLATE / "roles/INDEX.md").read_bytes(), self.helper.planned_role_index(TEMPLATE, {}, {}))
++        self.assertFalse((TEMPLATE / "roles/.transition.json").exists())
+ 
+ 
+     def test_ignore_rules_protect_local_artifacts_and_secrets(self):

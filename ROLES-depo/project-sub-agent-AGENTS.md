@@ -22,6 +22,9 @@ Before performing delegated work:
   unresolved items.
 - Do not expand the task, make Project Director decisions, or claim
   project-level completion.
+- A confirmed Task manager may delegate this bounded work. Reading root
+  guidance never promotes this worker to manager, canonical writer or role-index
+  owner. Return candidate and review artifacts through the assigned workflow.
 - Keep the exact model and reasoning effort inherited from the Project
   Director. Do not request or configure an override.
 - Do not create nested sub-agents unless the Project Director explicitly

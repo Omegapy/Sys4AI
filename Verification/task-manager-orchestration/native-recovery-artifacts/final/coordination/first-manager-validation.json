@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-08T12:22:41.446630+00:00",
+  "task_id": "TASK-20260908-A8B65949",
+  "execution_id": "recovery_validation_20260908",
+  "generation": 1,
+  "manager_assignment_id": "recovery_manager",
+  "manager_native_id": "/root/recovery_manager",
+  "scope": "Approved TASK-034 scenario steps1 through5 only; host performs later manager replacement and final cancellation.",
+  "highest_verification": "Runtime behavior observed through actual native spawning, roster, interruption and public Task CLI.",
+  "controlled_faults": [
+    "Actual worker spawn receipt deliberately delayed before canonical import; no organic network/native-service failure claimed.",
+    "Requested model/effort identities are synthetic negative-payload values; no real runtime or user setting changed."
+  ],
+  "controls": [
+    {
+      "label": "actual-paused-lifecycle",
+      "receipt": {
+        "path": "coordination/control-actual-paused-lifecycle.json",
+        "sha256": "beb13a50a89cc77c08e13ca0d77751dfe273de207fa671e8335ac5a615302ccf"
+      },
+      "exit_code": 0,
+      "expected_error": null,
+      "observed_errors": [],
+      "revision_before": 14,
+      "revision_after": 15,
+      "canonical_unchanged": false
+    },
+    {
+      "label": "define-marker-subtask",
+      "receipt": {
+        "path": "coordination/control-define-marker-subtask.json",
+        "sha256": "ded2e39be89aef78a03d62c08e26aa1b36b94c916d2783dff749e3071f7d4dad"
+      },
+      "exit_code": 0,
+      "expected_error": null,
+      "observed_errors": [],
+      "revision_before": 5,
+      "revision_after": 6,
+      "canonical_unchanged": false
+    },
+    {
+      "label": "dispatch-after-pause-rejected",
+      "receipt": {
+        "path": "coordination/control-dispatch-after-pause-rejected.json",
+        "sha256": "f0c249797a23c0fcdd6a35faa9a5b543ecb0d0e581665afabe1b30f03fc8a10c"
+      },
+      "exit_code": 2,
+      "expected_error": "ORCH_DISPATCH_STOPPED",
+      "observed_errors": [
+        "ORCH_DISPATCH_STOPPED"
+      ],
+      "revision_before": 12,
+      "revision_after": 12,
+      "canonical_unchanged": true
+    },
+    {
+      "label": "duplicate-manager-rejected",
+      "receipt": {
+        "path": "coordination/control-duplicate-manager-rejected.json",
+        "sha256": "59cc9cfe809069ab2b2632f5c5bdac6af58c71170f5b1a0081ebf1c4c4a58cb0"
+      },
+      "exit_code": 2,
+      "expected_error": "ORCH_DUPLICATE_MANAGER",
+      "observed_errors": [
+        "ORCH_DUPLICATE_MANAGER"
+      ],
+      "revision_before": 5,
+      "revision_after": 5,
+      "canonical_unchanged": true
+    },
+    {
+      "label": "manager-reconnect",
+      "receipt": {
+        "path": "coordination/control-manager-reconnect.json",
+        "sha256": "ed660813d577bbca01b659a4644d11c7ec4f7d3508513d9972adcc54b13dca5b"
+      },
+      "exit_code": 0,
+      "expected_error": null,
+      "observed_errors": [],
+      "revision_before": 4,
+      "revision_after": 5,
+      "canonical_unchanged": false
+    },
+    {
+      "label": "pause-before-observation-rejected",
+      "receipt": {
+        "path": "coordination/control-pause-before-observation-rejected.json",
+        "sha256": "13ee70f7fdb1bc9ed895ab6b148102decea65388527dd9fbec864d409986b973"
+      },
+      "exit_code": 2,
+      "expected_error": "ORCH_STOP_REQUIRED",
+      "observed_errors": [
+        "ORCH_STOP_REQUIRED"
+      ],
+      "revision_before": 12,
+      "revision_after": 12,
+      "canonical_unchanged": true
+    },
+    {
+      "label": "request-pause",
+      "receipt": {
+        "path": "coordination/control-request-pause.json",
+        "sha256": "0d41254537c0413862e07ad8845a4c9ca86d025b8a97a7e11c043a8e8057dfad"
+      },
+      "exit_code": 0,
+      "expected_error": null,
+      "observed_errors": [],
+      "revision_before": 11,
+      "revision_after": 12,
+      "canonical_unchanged": false
+    },
+    {
+      "label": "reserve-marker-worker",
+      "receipt": {
+        "path": "coordination/control-reserve-marker-worker.json",
+        "sha256": "21a584521f4c646462f02ecb78c9176fb3d0cdb93431b6d5d7aadde496ca54af"
+      },
+      "exit_code": 0,
+      "expected_error": null,
+      "observed_errors": [],
+      "revision_before": 6,
+      "revision_after": 7,
+      "canonical_unchanged": false
+    },
+    {
+      "label": "stop-after-observation",
+      "receipt": {
+        "path": "coordination/control-stop-after-observation.json",
+        "sha256": "2c2f7643144c99ea00c336b90a74481dd5d2363ef5e3d81f2ba38a64735930c9"
+      },
+      "exit_code": 0,
+      "expected_error": null,
+      "observed_errors": [],
+      "revision_before": 13,
+      "revision_after": 14,
+      "canonical_unchanged": false
+    },
+    {
+      "label": "stop-before-observation-rejected",
+      "receipt": {
+        "path": "coordination/control-stop-before-observation-rejected.json",
+        "sha256": "e29339f1f015e59426783c8403ec106ae9836d1f6665d7e7da976f385575001d"
+      },
+      "exit_code": 2,
+      "expected_error": "ORCH_STOP_UNCONFIRMED",
+      "observed_errors": [
+        "ORCH_STOP_UNCONFIRMED"
+      ],
+      "revision_before": 12,
+      "revision_after": 12,
+      "canonical_unchanged": true
+    },
+    {
+      "label": "synthetic-settings-change-rejected",
+      "receipt": {
+        "path": "coordination/control-synthetic-settings-change-rejected.json",
+        "sha256": "5e088b342043cba7e002c232d04fdad134683dd47ecb31732ec280c898b2f44c"
+      },
+      "exit_code": 2,
+      "expected_error": "ORCH_SETTINGS_REPLACEMENT",
+      "observed_errors": [
+        "ORCH_SETTINGS_REPLACEMENT"
+      ],
+      "revision_before": 15,
+      "revision_after": 15,
+      "canonical_unchanged": true
+    },
+    {
+      "label": "worker-controlled-uncertain",
+      "receipt": {
+        "path": "coordination/control-worker-controlled-uncertain.json",
+        "sha256": "57522f8fa1a682bef7131fd3e2f14c06f8edbf9ee8efcb6da9c7ae7910427fac"
+      },
+      "exit_code": 0,
+      "expected_error": null,
+      "observed_errors": [],
+      "revision_before": 7,
+      "revision_after": 8,
+      "canonical_unchanged": false
+    },
+    {
+      "label": "worker-interruption-observed",
+      "receipt": {
+        "path": "coordination/control-worker-interruption-observed.json",
+        "sha256": "fe4b9aa1f2b8d09239c77f9a17f2a12423030e4efe85a30707ea8eefad8219de"
+      },
+      "exit_code": 0,
+      "expected_error": null,
+      "observed_errors": [],
+      "revision_before": 12,
+      "revision_after": 13,
+      "canonical_unchanged": false
+    },
+    {
+      "label": "worker-original-receipt-import",
+      "receipt": {
+        "path": "coordination/control-worker-original-receipt-import.json",
+        "sha256": "0932f7d3237cbd4cdf55fc49c8c3d63e34c9dd6e0a3b6c21c073d1e3c11e3d34"
+      },
+      "exit_code": 0,
+      "expected_error": null,
+      "observed_errors": [],
+      "revision_before": 8,
+      "revision_after": 9,
+      "canonical_unchanged": false
+    },
+    {
+      "label": "worker-role-reads",
+      "receipt": {
+        "path": "coordination/control-worker-role-reads.json",
+        "sha256": "a7b3b7cad1c1400318e5ff55c0f5919d442f94492f9ce4af4dd377370f30e52d"
+      },
+      "exit_code": 0,
+      "expected_error": null,
+      "observed_errors": [],
+      "revision_before": 10,
+      "revision_after": 11,
+      "canonical_unchanged": false
+    },
+    {
+      "label": "worker-running-observed",
+      "receipt": {
+        "path": "coordination/control-worker-running-observed.json",
+        "sha256": "05ebf125c605bdbc953ccdcc91a66b36b47960ce3e207a0d6a068abddf7fa3a5"
+      },
+      "exit_code": 0,
+      "expected_error": null,
+      "observed_errors": [],
+      "revision_before": 9,
+      "revision_after": 10,
+      "canonical_unchanged": false
+    }
+  ],
+  "native_receipts": [
+    {
+      "path": "coordination/manager-running-roster.json",
+      "sha256": "bcf03b2a32e57c3d9ff53bb14b168d8e6fe614c98f8ad08aed89dd59a5c15404"
+    },
+    {
+      "path": "coordination/worker-actual-spawn-delayed.json",
+      "sha256": "77b75570ec5e42fbc09a77c8a1323d871b6632b94fd17a074c5576c171a594d8"
+    },
+    {
+      "path": "coordination/worker-delayed-receipt-reconciliation.json",
+      "sha256": "d3142516d79b2e4e430507afee132d4f92a7cfc8d24355d33077136d1a0e3357"
+    },
+    {
+      "path": "coordination/native-worker-interruption.json",
+      "sha256": "786d36da10d96793edfa562590eac59c75dc9e51f1dd4c964b6483f599475a37"
+    }
+  ],
+  "started_workers": [
+    {
+      "assignment_id": "recovery_worker",
+      "native_id": "/root/recovery_manager/marker_worker",
+      "launch_count": 1,
+      "last_actual_native_status": "interrupted",
+      "canonical_state": "stopped",
+      "changes": [
+        {
+          "path": "markers/recovery_worker/readiness.json",
+          "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+        }
+      ]
+    }
+  ],
+  "delivery_completed": false,
+  "unfinished_main_criteria": [
+    "The intentionally unfinished worker deliverable is completed and directly verified."
+  ],
+  "delivery_artifact_absent": true,
+  "protected_file_inventory_equal": true,
+  "protected_file_count": 86,
+  "canonical_before_final_response": {
+    "revision": 15,
+    "status": "paused",
+    "stage": "stopped",
+    "writer": "/root/recovery_manager"
+  },
+  "limitations": [
+    "Literal model/effort telemetry unavailable; exact full-history inheritance guarantee was used with omitted overrides.",
+    "Actual mid-run model switching was not exercised.",
+    "Manager native completion must be observed by the host after this turn ends; it is not claimed from this running turn."
+  ],
+  "next_gate": "Return to host, which observes manager completion plus the interrupted worker and performs original-bootstrap authorized manager replacement."
+}

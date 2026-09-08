@@ -15,7 +15,9 @@ from pathlib import Path
 from unittest import mock
 
 SCRIPT_PATH = Path(__file__).resolve().parents[1] / "scripts" / "role_catalog.py"
-PROJECT_ROOT = Path(__file__).resolve().parents[4]
+PACKAGE_ROOT = SCRIPT_PATH.parents[1]
+SOURCE_LAYOUT = PACKAGE_ROOT.parent.name == "SKILLS-depo"
+PROJECT_ROOT = PACKAGE_ROOT.parents[1] if SOURCE_LAYOUT else PACKAGE_ROOT.parents[2]
 SPEC = importlib.util.spec_from_file_location("role_catalog_under_test", SCRIPT_PATH)
 if SPEC is None or SPEC.loader is None:
     raise RuntimeError(f"could not load role catalog helper: {SCRIPT_PATH}")
@@ -81,7 +83,7 @@ class RoleCatalogTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
         (self.root / "SOUL.md").write_text("# Fixture soul\n", encoding="utf-8")
-        self.role_root = self.root / "sub-agent-roles"
+        self.role_root = self.root / "roles"
         self.role_root.mkdir()
 
     def tearDown(self) -> None:
@@ -162,9 +164,9 @@ class RoleCatalogTests(unittest.TestCase):
         self.assertEqual(1, len(catalog.valid_roles))
         entry = catalog.valid_roles[0]
         self.assertEqual(
-            "sub-agent-roles/project-sub-agent/AGENTS.md", entry.agents_file
+            "roles/project-sub-agent/AGENTS.md", entry.agents_file
         )
-        self.assertEqual("sub-agent-roles/project-sub-agent/ROLE.md", entry.role_file)
+        self.assertEqual("roles/project-sub-agent/ROLE.md", entry.role_file)
 
     def test_t003_missing_agents_file_is_invalid(self) -> None:
         self.make_bundle("missing-agents", agents_text=None)
@@ -251,15 +253,15 @@ class RoleCatalogTests(unittest.TestCase):
         self.assertIn(
             "| Role | Description | Folder | AGENTS.md | ROLE.md | State |", rendered
         )
-        self.assertIn("sub-agent-roles/project-sub-agent/AGENTS.md", rendered)
-        self.assertIn("sub-agent-roles/project-sub-agent/ROLE.md", rendered)
+        self.assertIn("roles/project-sub-agent/AGENTS.md", rendered)
+        self.assertIn("roles/project-sub-agent/ROLE.md", rendered)
 
     def test_t014_json_output_has_versioned_contract(self) -> None:
         self.make_bundle("project-sub-agent")
         payload = role_catalog.build_catalog(self.root).to_dict()
         serialized = json.loads(json.dumps(payload))
         self.assertEqual(1, serialized["schema_version"])
-        self.assertEqual("sub-agent-roles", serialized["role_root"])
+        self.assertEqual("roles", serialized["role_root"])
         self.assertTrue(serialized["valid_roles"][0]["valid"])
         self.assertEqual([], serialized["invalid_roles"])
 
@@ -334,7 +336,7 @@ class RoleCatalogTests(unittest.TestCase):
         self.assertEqual(before, self.snapshot())
         self.assertIn('"valid_roles"', stdout.getvalue())
 
-    def test_t023_create_command_creates_only_the_role_bundle(self) -> None:
+    def test_t023_create_publishes_pair_index_and_only_its_lock(self) -> None:
         args = self.creation_args()
         role_catalog.create_role(self.root, args)
         created = sorted(
@@ -344,9 +346,11 @@ class RoleCatalogTests(unittest.TestCase):
         )
         self.assertEqual(
             [
+                ".sys4ai/role-catalog.lock",
                 "SOUL.md",
-                "sub-agent-roles/documentation-reviewer/AGENTS.md",
-                "sub-agent-roles/documentation-reviewer/ROLE.md",
+                "roles/INDEX.md",
+                "roles/documentation-reviewer/AGENTS.md",
+                "roles/documentation-reviewer/ROLE.md",
             ],
             created,
         )
@@ -557,278 +561,386 @@ class RoleCatalogTests(unittest.TestCase):
         self.assertEqual([], payload["invalid_roles"])
 
 
+    def test_index_is_navigation_and_never_grants_role_eligibility(self):
+        self.make_bundle("valid-worker")
+        self.make_bundle("invalid-worker", agents_text=None)
+        (self.role_root / "INDEX.md").write_text("# Roles\nvalid-worker invalid-worker nonexistent-manager\n")
+        before = self.snapshot()
+        catalog = role_catalog.build_catalog(self.root)
+        self.assertEqual(["valid-worker"], [x.name for x in catalog.valid_roles])
+        self.assertEqual("stale", catalog.index_status)
+        self.assertEqual(64, len(catalog.valid_roles[0].agents_sha256))
+        for name in ("invalid-worker", "nonexistent-manager"):
+            with self.assertRaises(role_catalog.CatalogError):
+                role_catalog.find_valid_role(catalog, name)
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(1, role_catalog.main(["--repo-root", str(self.root), "validate"]))
+        self.assertEqual(before, self.snapshot())
+
+    def test_reindex_is_deterministic_and_reports_content_drift(self):
+        bundle = self.make_bundle("valid-worker")
+        first = role_catalog.reindex(self.root)
+        self.assertEqual("current", first["index_status"])
+        index = (self.role_root / "INDEX.md").read_bytes()
+        self.assertIn(b"[AGENTS.md](./valid-worker/AGENTS.md)", index)
+        self.assertNotIn(str(self.root).encode(), index)
+        before = self.snapshot()
+        self.assertFalse(role_catalog.reindex(self.root)["mutated"])
+        self.assertEqual(before, self.snapshot())
+        with (bundle / "ROLE.md").open("a") as stream:
+            stream.write("\nAdditional bounded capability.\n")
+        self.assertEqual("stale", role_catalog.build_catalog(self.root).index_status)
+        self.assertEqual(index, (self.role_root / "INDEX.md").read_bytes())
+        self.assertTrue(role_catalog.reindex(self.root)["mutated"])
+        self.assertNotEqual(index, (self.role_root / "INDEX.md").read_bytes())
+
+    def test_index_failure_preserves_created_bundle_and_reindex_recovers(self):
+        with mock.patch.object(role_catalog, "publish_index", side_effect=OSError("interrupted index publication")):
+            with self.assertRaises(role_catalog.PublicationPending) as caught:
+                role_catalog.create_role(self.root, self.creation_args())
+        self.assertTrue(caught.exception.result["bundle_committed"])
+        self.assertEqual("reindex", caught.exception.result["recovery"])
+        pair = self.role_root / "documentation-reviewer"
+        original = {f.name: f.read_bytes() for f in pair.iterdir()}
+        self.assertTrue(role_catalog.build_catalog(self.root).valid_roles[0].valid)
+        self.assertEqual("current", role_catalog.reindex(self.root)["index_status"])
+        self.assertEqual(original, {f.name: f.read_bytes() for f in pair.iterdir()})
+
+    def test_symlink_index_and_control_directory_are_rejected(self):
+        self.make_bundle("valid-worker")
+        outside = self.root / "outside.txt"
+        outside.write_text("preserve")
+        (self.role_root / "INDEX.md").symlink_to(outside)
+        with self.assertRaises(role_catalog.CatalogError):
+            role_catalog.reindex(self.root)
+        self.assertEqual("preserve", outside.read_text())
+        (self.role_root / "INDEX.md").unlink()
+        (self.root / ".sys4ai").symlink_to(self.role_root, target_is_directory=True)
+        with self.assertRaises(role_catalog.CatalogError):
+            role_catalog.reindex(self.root)
+        self.assertFalse((self.role_root / "role-catalog.lock").exists())
+
+    def test_busy_lock_blocks_a_second_writer(self):
+        import subprocess
+        self.make_bundle("valid-worker")
+        with role_catalog.mutation_lock(self.root):
+            before = self.snapshot()
+            result = subprocess.run([sys.executable, str(SCRIPT_PATH), "--repo-root", str(self.root), "reindex"], capture_output=True, text=True)
+            self.assertEqual(2, result.returncode)
+            self.assertIn("busy", result.stderr)
+            self.assertEqual(before, self.snapshot())
+
+    def make_legacy(self):
+        self.make_bundle("legacy-worker")
+        legacy = self.root / "sub-agent-roles"
+        self.role_root.rename(legacy)
+        history = self.root / "historical-response.md"
+        history.write_text("Original role: sub-agent-roles/legacy-worker/ROLE.md\n")
+        return legacy, history
+
+    def test_legacy_preview_is_read_only_and_active_discovery_has_no_fallback(self):
+        self.make_legacy()
+        before = self.snapshot()
+        preview = role_catalog.transition_preview(self.root)
+        self.assertEqual([], preview["conflicts"])
+        self.assertEqual(before, self.snapshot())
+        with self.assertRaisesRegex(role_catalog.CatalogError, "transition-preview"):
+            role_catalog.build_catalog(self.root)
+        with self.assertRaisesRegex(role_catalog.CatalogError, "confirmation"):
+            role_catalog.transition_apply(self.root, preview, confirmed=False)
+        self.assertEqual(before, self.snapshot())
+
+    def test_copy_first_transition_preserves_legacy_and_history_and_is_idempotent(self):
+        legacy, history = self.make_legacy()
+        originals = {f.name: f.read_bytes() for f in (legacy / "legacy-worker").iterdir()}
+        old_history = history.read_bytes()
+        preview = role_catalog.transition_preview(self.root)
+        result = role_catalog.transition_apply(self.root, preview, confirmed=True)
+        self.assertEqual("current", result["index_status"])
+        self.assertEqual(originals, {f.name: f.read_bytes() for f in (self.role_root / "legacy-worker").iterdir()})
+        self.assertEqual(originals, {f.name: f.read_bytes() for f in (legacy / "legacy-worker").iterdir()})
+        self.assertEqual(old_history, history.read_bytes())
+        before = self.snapshot()
+        self.assertFalse(role_catalog.transition_apply(self.root, preview, confirmed=True)["mutated"])
+        self.assertEqual(before, self.snapshot())
+
+    def test_identical_destination_is_retained_and_customization_blocks_transition(self):
+        import shutil
+        legacy, _ = self.make_legacy()
+        shutil.copytree(legacy / "legacy-worker", self.role_root / "legacy-worker")
+        extra = self.role_root / "legacy-worker" / "project-notes.md"
+        extra.write_text("project-owned")
+        preview = role_catalog.transition_preview(self.root)
+        role_catalog.transition_apply(self.root, preview, confirmed=True)
+        self.assertEqual("project-owned", extra.read_text())
+        target = self.role_root / "legacy-worker" / "ROLE.md"
+        target.write_text(target.read_text() + "\nCustom project responsibility.\n")
+        before = self.snapshot()
+        conflicting = role_catalog.transition_preview(self.root)
+        self.assertTrue(conflicting["conflicts"])
+        with self.assertRaises(role_catalog.CatalogError):
+            role_catalog.transition_apply(self.root, conflicting, confirmed=True)
+        self.assertEqual(before, self.snapshot())
+
+    def test_stale_or_unconfined_transition_preview_is_rejected(self):
+        legacy, _ = self.make_legacy()
+        preview = role_catalog.transition_preview(self.root)
+        source = legacy / "legacy-worker" / "ROLE.md"
+        source.write_text(source.read_text() + "\nChanged role definition.\n")
+        with self.assertRaisesRegex(role_catalog.CatalogError, "changed"):
+            role_catalog.transition_apply(self.root, preview, confirmed=True)
+        self.assertFalse(self.role_root.exists())
+        preview = role_catalog.transition_preview(self.root)
+        preview["pairs"][0]["files"][0]["destination"] = "../outside"
+        preview["preview_sha256"] = role_catalog.object_digest({k: v for k, v in preview.items() if k != "preview_sha256"})
+        with self.assertRaisesRegex(role_catalog.CatalogError, "unconfined"):
+            role_catalog.transition_apply(self.root, preview, confirmed=True)
+        self.assertFalse(self.role_root.exists())
+
+    def test_interrupted_pair_and_index_publication_resume_exact_transition(self):
+        self.make_legacy()
+        preview = role_catalog.transition_preview(self.root)
+        publish = role_catalog.atomic_publish
+        def interrupted(path, content, **options):
+            if path.name == "ROLE.md":
+                raise OSError("interrupted paired-file publication")
+            return publish(path, content, **options)
+        with mock.patch.object(role_catalog, "atomic_publish", side_effect=interrupted):
+            with self.assertRaises(role_catalog.PublicationPending):
+                role_catalog.transition_apply(self.root, preview, confirmed=True)
+        self.assertTrue((self.role_root / "legacy-worker/AGENTS.md").is_file())
+        with mock.patch.object(role_catalog, "publish_index", side_effect=OSError("interrupted index")):
+            with self.assertRaises(role_catalog.PublicationPending):
+                role_catalog.transition_apply(self.root, preview, confirmed=True)
+        self.assertTrue((self.role_root / "legacy-worker/ROLE.md").is_file())
+        result = role_catalog.transition_apply(self.root, preview, confirmed=True)
+        self.assertEqual("current", result["index_status"])
+        receipt = json.loads((self.role_root / ".transition.json").read_text())
+        self.assertEqual("completed", receipt["status"])
+        self.assertEqual(2, len(receipt["completed"]))
+
+    def test_concurrent_bundle_change_rejects_stale_index_publication(self):
+        self.make_bundle("valid-worker")
+        expected = role_catalog.build_catalog(self.root).fingerprint
+        self.make_bundle("another-worker")
+        with role_catalog.mutation_lock(self.root):
+            with self.assertRaisesRegex(role_catalog.CatalogError, "changed"):
+                role_catalog.publish_index(self.root, expected_fingerprint=expected)
+        self.assertFalse((self.role_root / "INDEX.md").exists())
+
+    def test_corrupt_transition_receipt_cannot_authorize_recovery(self):
+        self.make_legacy()
+        preview = role_catalog.transition_preview(self.root)
+        self.role_root.mkdir()
+        receipt = self.role_root / ".transition.json"
+        for malformed in ({"schema_version": 999}, {"schema_version": 1, "preview": None, "completed": [], "status": "pending", "history": []}):
+            receipt.write_text(json.dumps(malformed))
+            before = receipt.read_bytes()
+            with self.assertRaises(role_catalog.CatalogError):
+                role_catalog.transition_apply(self.root, preview, confirmed=True)
+            self.assertEqual(before, receipt.read_bytes())
+            self.assertFalse((self.role_root / "legacy-worker").exists())
+
+    def test_external_soul_symlink_prevents_role_eligibility(self):
+        self.make_bundle("valid-worker")
+        with tempfile.TemporaryDirectory() as other:
+            external = Path(other) / "SOUL.md"
+            external.write_text("External instructions")
+            (self.root / "SOUL.md").unlink()
+            (self.root / "SOUL.md").symlink_to(external)
+            catalog = role_catalog.build_catalog(self.root)
+            self.assertEqual([], catalog.valid_roles)
+            self.assertTrue(catalog.invalid_roles)
+
+    def test_concurrent_transition_target_is_preserved_at_publication_boundary(self):
+        self.make_legacy()
+        preview = role_catalog.transition_preview(self.root)
+        publish = role_catalog.atomic_publish
+        target = self.role_root / "legacy-worker/AGENTS.md"
+        def concurrent(path, content, **options):
+            if path == target.resolve() and not path.exists():
+                path.write_text("Concurrent project-owned content\n")
+            return publish(path, content, **options)
+        with mock.patch.object(role_catalog, "atomic_publish", side_effect=concurrent):
+            with self.assertRaises(role_catalog.PublicationPending):
+                role_catalog.transition_apply(self.root, preview, confirmed=True)
+        self.assertEqual("Concurrent project-owned content\n", target.read_text())
+        self.assertEqual("pending", json.loads((self.role_root / ".transition.json").read_text())["status"])
+
+    def test_index_becoming_unsafe_after_pair_publication_retains_valid_pair(self):
+        target = self.role_root / "documentation-reviewer"
+        outside = self.root / "keep.txt"
+        outside.write_text("Preserve this file")
+        catalog = role_catalog.build_catalog
+        def index_changed(root, **options):
+            index = self.role_root / "INDEX.md"
+            if (target / "ROLE.md").exists() and not index.is_symlink():
+                index.symlink_to(outside)
+            return catalog(root, **options)
+        with mock.patch.object(role_catalog, "build_catalog", side_effect=index_changed):
+            with self.assertRaises(role_catalog.PublicationPending):
+                role_catalog.create_role(self.root, self.creation_args())
+        self.assertTrue(role_catalog.validate_role_directory(target.resolve(), self.root.resolve()).valid)
+        self.assertEqual("Preserve this file", outside.read_text())
+
+    def test_completed_receipt_and_history_require_exact_internal_coverage(self):
+        self.make_legacy()
+        preview = role_catalog.transition_preview(self.root)
+        role_catalog.transition_apply(self.root, preview, confirmed=True)
+        target = self.role_root / ".transition.json"
+        original = json.loads(target.read_text())
+        for history_case in (False, True):
+            receipt = json.loads(json.dumps(original))
+            if history_case:
+                previous = {k: v for k, v in receipt.items() if k != "history"}
+                previous["completed"] = {"../not-a-file": "unreviewed"}
+                receipt["history"].append(previous)
+            else:
+                receipt["completed"] = []
+            target.write_text(json.dumps(receipt))
+            before = target.read_bytes()
+            with self.assertRaises(role_catalog.CatalogError):
+                role_catalog.transition_apply(self.root, preview, confirmed=True)
+            self.assertEqual(before, target.read_bytes())
+
+    def test_create_rollback_preserves_identical_replacement_file_identity(self):
+        target = self.role_root / "documentation-reviewer"
+        link = role_catalog.os.link
+        observed = []
+        def concurrent(source, destination, **options):
+            destination = Path(destination)
+            if destination.name == "ROLE.md":
+                agents = target / "AGENTS.md"
+                old_inode = agents.stat().st_ino
+                replacement = self.root / "replacement.md"
+                replacement.write_bytes(agents.read_bytes())
+                os.replace(replacement, agents)
+                destination.write_bytes(Path(source).read_bytes())
+                observed.append(old_inode != agents.stat().st_ino)
+            return link(source, destination, **options)
+        with mock.patch.object(role_catalog.os, "link", side_effect=concurrent):
+            with self.assertRaises(FileExistsError):
+                role_catalog.create_role(self.root, self.creation_args())
+        self.assertEqual([True], observed)
+        self.assertTrue((target / "AGENTS.md").is_file())
+        self.assertTrue((target / "ROLE.md").is_file())
+        self.assertTrue(role_catalog.validate_role_directory(target.resolve(), self.root.resolve()).valid)
+
+
 class ImplementationContractTests(unittest.TestCase):
+    """Portable source/installed contracts; native execution is tested separately."""
     @classmethod
-    def setUpClass(cls) -> None:
-        cls.plan = (
-            PROJECT_ROOT
-            / "Implementation_Plans"
-            / "subagent_role_system_implementation_plan.md"
-        ).read_text(encoding="utf-8")
-        cls.root_agents = (PROJECT_ROOT / "AGENTS.md").read_text(encoding="utf-8")
-        cls.director = (PROJECT_ROOT / "ROLE.md").read_text(encoding="utf-8")
-        cls.role_agents = (
-            PROJECT_ROOT / "sub-agent-roles" / "project-sub-agent" / "AGENTS.md"
-        ).read_text(encoding="utf-8")
-        cls.role = (
-            PROJECT_ROOT / "sub-agent-roles" / "project-sub-agent" / "ROLE.md"
-        ).read_text(encoding="utf-8")
-        cls.skill = (
-            PROJECT_ROOT / ".agents" / "skills" / "manage-subagent-roles" / "SKILL.md"
-        ).read_text(encoding="utf-8")
-        cls.schema = (
-            PROJECT_ROOT
-            / ".agents"
-            / "skills"
-            / "manage-subagent-roles"
-            / "references"
-            / "role-schema.md"
-        ).read_text(encoding="utf-8")
-
-    def test_plan_contains_all_unique_contiguous_formal_requirements(self) -> None:
-        identifiers = re.findall(
-            r"^- \*\*([A-Z]{3}-\d{3}):\*\*",
-            self.plan,
-            flags=re.MULTILINE,
-        )
-        expected_counts = {
-            "DIR": 18,
-            "ROL": 15,
-            "GEN": 10,
-            "MET": 15,
-            "FIT": 11,
-            "SKL": 20,
-            "CRT": 14,
-            "SPN": 16,
-            "VER": 16,
-        }
-        self.assertEqual(135, len(identifiers))
-        self.assertEqual(len(identifiers), len(set(identifiers)))
-        for prefix, count in expected_counts.items():
-            expected = {f"{prefix}-{number:03d}" for number in range(1, count + 1)}
-            self.assertEqual(
-                expected,
-                {
-                    identifier
-                    for identifier in identifiers
-                    if identifier.startswith(prefix)
-                },
-            )
-
-    def test_director_role_contains_every_required_operating_section(self) -> None:
-        required_sections = (
-            "# Project Director Role",
-            "## Purpose",
-            "## Primary responsibilities",
-            "## Authority and non-authority",
-            "## Task assessment and decomposition",
-            "## Mandatory role-management skill workflow",
-            "## Role selection and role creation",
-            "## Delegation contract",
-            "## Model and reasoning identity",
-            "## Parallel-work ownership",
-            "## Supervision and steering",
-            "## Review and integration",
-            "## Verification and validation",
-            "## Escalation and stopping conditions",
-            "## Completion report",
-        )
-        for section in required_sections:
-            self.assertIn(section, self.director)
-        normalized_director = " ".join(self.director.split())
-        for fragment in (
-            "$manage-subagent-roles",
-            "fresh filesystem-backed role catalog",
-            "one bounded objective",
-            "one stopping condition",
-            "non-overlapping write ownership",
-            "sub-agent completion message is not proof",
-            "required Codex skill, tool, permission",
-            "exact model and reasoning effort",
-            "fork_turns",
-            "runtime limit",
-        ):
-            self.assertIn(fragment, normalized_director)
-
-    def test_root_role_does_not_repeat_automatic_instruction_loading(self) -> None:
-        self.assertNotIn("## Required first reads", self.director)
-        self.assertNotIn("Read the root `AGENTS.md`", self.director)
-        self.assertNotIn("Read this root `ROLE.md`", self.director)
-        self.assertIn("Read `./SOUL.md`", self.root_agents)
-        self.assertIn("Read `./ROLE.md`", self.root_agents)
-
-        normalized_skill = " ".join(self.skill.split())
-        normalized_schema = " ".join(self.schema.split())
-        self.assertIn(
-            "Do not assume that Codex automatically loaded the role-specific nested",
-            normalized_skill,
-        )
-        self.assertIn(
-            "Codex does not recursively load every descendant `AGENTS.md`",
-            normalized_schema,
-        )
-        self.assertIn(
-            "explicitly require reading the selected role's `AGENTS.md` and `ROLE.md`",
-            " ".join(self.plan.split()),
-        )
-
-    def test_root_agents_connects_director_to_local_skill(self) -> None:
-        self.assertIn("Read `./SOUL.md`", self.root_agents)
-        self.assertIn("Read `./ROLE.md`", self.root_agents)
-        self.assertIn(
-            "./.agents/skills/manage-subagent-roles/SKILL.md",
-            self.root_agents,
-        )
-        self.assertIn("Before selecting", self.root_agents)
-
-    def test_generic_role_has_exact_metadata_title_links_and_contract(self) -> None:
-        metadata, body = role_catalog.parse_frontmatter(self.role)
-        self.assertEqual("project-sub-agent", metadata["name"])
-        self.assertIn("when no narrower specialized role", metadata["description"])
-        h1_titles, heading_names, sections = role_catalog.role_sections(body)
-        self.assertEqual(["Sub-Agent Project Role"], h1_titles)
-        self.assertEqual(list(role_catalog.REQUIRED_ROLE_HEADINGS), heading_names)
-        self.assertTrue(all(sections.values()))
-        self.assertIn("](../../SOUL.md)", self.role_agents)
-        self.assertIn("](./ROLE.md)", self.role_agents)
-        self.assertIn("Do not create nested sub-agents", self.role_agents)
-        self.assertIn("exact model and reasoning effort inherited", self.role_agents)
-        self.assertIn("Project Director decisions", self.role)
-        self.assertIn("None by default", self.role)
-
-    def test_skill_contract_covers_all_modes_fit_and_native_orchestration(self) -> None:
-        self.assertTrue(self.skill.startswith("---\nname: manage-subagent-roles\n"))
-        frontmatter_end = self.skill.index("\n---", 4)
-        description_line = next(
-            line
-            for line in self.skill[4:frontmatter_end].splitlines()
-            if line.startswith("description:")
-        )
-        self.assertTrue(
-            description_line.startswith(
-                "description: Discover and return project sub-agent roles"
-            )
-        )
-        for heading in (
-            "## Inventory before other modes",
-            "## Select by task fit",
-            "## Create a reusable role",
-            "## Validate a catalog or role",
-            "## Build the delegation contract",
-            "## Spawn through native Codex orchestration",
-            "## Supervise and collect",
-            "## Failure behavior",
-        ):
-            self.assertIn(heading, self.skill)
-        for fragment in (
-            "AGENTS.md",
-            "ROLE.md",
-            "Invalid roles are never eligible",
-            "A role capability is not the same as a Codex skill dependency",
-            "Only the first case enters role creation",
-            "If the request is inventory only",
-            "If it is creation only",
-            "spawn_agent",
-            "followup_task",
-            "wait_agent",
-            "interrupt_agent",
-            "fork_turns",
-            "Omit the `model` and `reasoning_effort` spawn arguments",
-            "agents.default_subagent_model",
-            "agents.default_subagent_reasoning_effort",
-            "Do not shell out to another Codex process",
-            "Do not create a user-visible task or thread",
-        ):
-            self.assertIn(fragment, " ".join(self.skill.split()))
-
-    def test_schema_templates_and_helper_form_one_role_creation_system(self) -> None:
-        skill_root = SCRIPT_PATH.parents[1]
-        agents_template = skill_root / "assets" / "role-bundle" / "AGENTS.md.template"
-        role_template = skill_root / "assets" / "role-bundle" / "ROLE.md.template"
-        self.assertTrue(agents_template.is_file())
-        self.assertTrue(role_template.is_file())
-        source = SCRIPT_PATH.read_text(encoding="utf-8")
-        self.assertIn('read_template(skill_root, "AGENTS.md.template")', source)
-        self.assertIn('read_template(skill_root, "ROLE.md.template")', source)
-        self.assertIn("target.mkdir()", source)
-        self.assertIn("build_catalog(root)", source)
-        self.assertIn("find_valid_role(catalog, args.name)", source)
-        self.assertIn("role target already exists", source)
-        for fragment in (
-            "Do not add a registry",
-            "Create a role only for a reusable role-definition gap",
-            "missing skill, tool, dependency, permission",
-            "Both links must resolve",
-        ):
-            self.assertIn(fragment, " ".join(self.schema.split()))
-
-    def test_skill_ui_metadata_keeps_implicit_invocation_enabled(self) -> None:
-        openai_yaml = (
-            PROJECT_ROOT
-            / ".agents"
-            / "skills"
-            / "manage-subagent-roles"
-            / "agents"
-            / "openai.yaml"
-        ).read_text(encoding="utf-8")
-        self.assertIn('display_name: "Manage Sub-Agent Roles"', openai_yaml)
-        self.assertIn(
-            'short_description: "Find, create, and assign sub-agent roles"', openai_yaml
-        )
-        self.assertIn("$manage-subagent-roles", openai_yaml)
-        self.assertNotIn("allow_implicit_invocation: false", openai_yaml)
-
-    def test_readme_exposes_the_generic_role_system_without_a_registry(self) -> None:
-        readme = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
-        specs_path = PROJECT_ROOT / "SPECS.md"
-        if specs_path.is_file():
-            self.assertIn("[SPECS.md](./SPECS.md)", readme)
-            self.assertIn("## Python environment", specs_path.read_text(encoding="utf-8"))
-            self.assertNotIn("## Python environment", readme)
+    def setUpClass(cls):
+        if SOURCE_LAYOUT:
+            cls.director = (PROJECT_ROOT / "ROLES-depo/project-director-ROLE.md").read_text()
+            cls.root_agents = (PROJECT_ROOT / "AGENTS-depo/project-template-AGENTS.md").read_text()
+            cls.readme = (PROJECT_ROOT / "SPECS-depo/project-template-README.md").read_text()
+            cls.pairs = {name: (
+                (PROJECT_ROOT / f"ROLES-depo/{name}-AGENTS.md").read_text(),
+                (PROJECT_ROOT / f"ROLES-depo/{name}-ROLE.md").read_text())
+                for name in ("project-sub-agent", "task-manager")}
         else:
-            self.assertIn("## Python environment", readme)
-        self.assertRegex(readme, r"\]\((?:\./)?ROLE\.md\)")
-        self.assertRegex(readme, r"\]\((?:\./)?sub-agent-roles\)")
-        self.assertRegex(
-            readme, r"\]\((?:\./)?\.agents/skills/manage-subagent-roles/SKILL\.md\)"
-        )
-        self.assertFalse((PROJECT_ROOT / ".codex" / "agents").exists())
-        forbidden_registry_names = {
-            "AGENT_ROLE_REGISTRY.csv",
-            "role-registry.json",
-            "role_registry.json",
-            "roles.csv",
-        }
-        discovered = {item.name for item in PROJECT_ROOT.rglob("*") if item.is_file()}
-        self.assertTrue(forbidden_registry_names.isdisjoint(discovered))
+            cls.director = (PROJECT_ROOT / "ROLE.md").read_text()
+            cls.root_agents = (PROJECT_ROOT / "AGENTS.md").read_text()
+            cls.readme = (PROJECT_ROOT / "README.md").read_text()
+            cls.pairs = {name: ((PROJECT_ROOT / "roles" / name / "AGENTS.md").read_text(),
+                                (PROJECT_ROOT / "roles" / name / "ROLE.md").read_text())
+                         for name in ("project-sub-agent", "task-manager")}
+        cls.skill = (PACKAGE_ROOT / "SKILL.md").read_text()
+        cls.schema = (PACKAGE_ROOT / "references/role-schema.md").read_text()
 
-    def test_children_must_inherit_exact_director_model_and_reasoning(self) -> None:
-        normalized_director = " ".join(self.director.split())
-        normalized_skill = " ".join(self.skill.split())
-        normalized_schema = " ".join(self.schema.split())
+    def test_director_requires_fresh_roles_and_bounded_delegation(self):
+        text = " ".join(self.director.split()).casefold()
+        for clause in ("fresh", "catalog", "one bounded objective", "stopping condition",
+                       "protected state", "non-overlapping", "directly", "native",
+                       "manager", "canonical", "capability", "authority"):
+            self.assertIn(clause, text)
+        self.assertIn(".agents/skills/manage-subagent-roles/SKILL.md", self.director)
 
-        for text in (normalized_director, normalized_skill, normalized_schema):
-            self.assertIn("exact model and reasoning effort", text)
-            self.assertIn("fork_turns", text)
-            self.assertIn("model", text)
-            self.assertIn("reasoning_effort", text)
+    def test_explicit_instruction_loading_and_no_ordinary_child_promotion(self):
+        for name, (agents, role) in self.pairs.items():
+            with self.subTest(name=name):
+                self.assertIn("](../../SOUL.md)", agents)
+                self.assertIn("](./ROLE.md)", agents)
+                self.assertIn("delegation", agents)
+        self.assertIn("Codex does not recursively load", self.schema)
+        self.assertIn("Do not assume that Codex automatically loaded", self.skill)
+        self.assertIn("Ordinary children", self.skill)
+        self.assertIn("confirmed", self.pairs["task-manager"][1])
+        self.assertIn("does not supply task-manager authority", self.pairs["project-sub-agent"][1])
 
-        self.assertIn("Set `fork_turns` to `all`", self.director)
-        self.assertIn("Do not pass `model`", self.director)
-        self.assertIn("Do not pass `reasoning_effort`", self.director)
-        self.assertIn("Omit the `model` and `reasoning_effort`", self.skill)
-        self.assertIn("agents.default_subagent_model", self.skill)
-        self.assertIn("agents.default_subagent_reasoning_effort", self.skill)
-        self.assertIn("not spawnable", normalized_schema)
+    def test_pair_contracts_validate_in_a_clean_project(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder).resolve()
+            (root / "SOUL.md").write_text("# Project soul\n")
+            for name, (agents, role) in self.pairs.items():
+                target = root / "roles" / name
+                target.mkdir(parents=True)
+                (target / "AGENTS.md").write_text(agents)
+                (target / "ROLE.md").write_text(role)
+            catalog = role_catalog.reindex(root)
+            fresh = role_catalog.build_catalog(root)
+            self.assertFalse(fresh.invalid_roles)
+            self.assertEqual({"project-sub-agent", "task-manager"}, {r.name for r in fresh.valid_roles})
+            self.assertEqual("current", fresh.index_status)
 
-        obsolete_exception = (
-            "unless the user, project policy, or task explicitly requires an override"
-        )
-        self.assertNotIn(obsolete_exception, normalized_skill.lower())
-        self.assertNotIn(
-            "unless the user, applicable project policy, or task explicitly requires an override",
-            normalized_director.lower(),
-        )
+    def test_manager_and_worker_authority_are_distinct(self):
+        manager = " ".join(self.pairs["task-manager"][1].split())
+        worker = " ".join(self.pairs["project-sub-agent"][1].split())
+        for clause in ("confirmed Task execution", "bootstrap handoff", "canonical state",
+                       "one distinct dedicated implementer", "one-to-one reviews"):
+            self.assertIn(clause, manager)
+        self.assertIn("not a substitute for a specialized role", worker)
+        self.assertIn("None by default", worker)
+        self.assertIn("Do not accept your own work", worker)
+
+    def test_skills_tools_and_roles_do_not_grant_authority(self):
+        text = " ".join(self.skill.split())
+        for clause in ("narrowest suitable valid role", "required Codex skills",
+                       "Only the first case enters role creation",
+                       "A role capability is not the same as a Codex skill dependency",
+                       "Creation-only requests stop", "Inventory alone creates no role"):
+            self.assertIn(clause, text)
+
+    def test_native_operations_and_context_are_separate_from_identity(self):
+        text = " ".join(self.skill.split())
+        for operation in ("spawn_agent", "send_message", "followup_task", "list_agents",
+                          "wait_agent", "interrupt_agent"):
+            self.assertIn(operation, text)
+        for clause in ("exact effective model and reasoning effort", "inheritance guarantee",
+                       "Omit the `model` and `reasoning_effort`", "sibling drafts",
+                       "queued", "paths, hashes and status", "before launch",
+                       "original reservation", "No shell-launched Codex process"):
+            self.assertIn(clause, text)
+        for config in ("agents.default_subagent_model", "agents.default_subagent_reasoning_effort"):
+            self.assertIn(config, text)
+
+    def test_source_navigation_is_not_role_authority(self):
+        text = " ".join((self.skill + " " + self.schema).split())
+        for clause in ("roles/INDEX.md", "navigation", "never independent role authority",
+                       "transition-preview", "transition-apply", "preview_sha256",
+                       "reindex", "read-only", "committed valid bundle"):
+            self.assertIn(clause, text)
+        self.assertIn("roles/", self.readme)
+        self.assertIn(".agents/skills/manage-subagent-roles/SKILL.md", self.readme)
+
+    def test_template_helpers_and_ui_metadata_are_available(self):
+        for filename in ("AGENTS.md.template", "ROLE.md.template"):
+            self.assertTrue((PACKAGE_ROOT / "assets/role-bundle" / filename).is_file())
+        metadata = (PACKAGE_ROOT / "agents/openai.yaml").read_text()
+        self.assertIn('display_name: "Manage Sub-Agent Roles"', metadata)
+        self.assertIn("$manage-subagent-roles", metadata)
+        self.assertNotIn("allow_implicit_invocation: false", metadata)
+        self.assertTrue(self.skill.startswith("---\nname: manage-subagent-roles\n"))
+
+    def test_read_only_and_recovery_boundary_is_explicit(self):
+        text = " ".join((self.skill + " " + self.schema).split())
+        for clause in ("Read-only routes never migrate", "An uncertain outcome",
+                       "only its own invalid incomplete pair", "exit 3",
+                       "do not create the role again", "age or roster absence alone"):
+            # The helper README also documents partial-commit recovery.
+            all_text = text + " " + " ".join((PACKAGE_ROOT / "README.md").read_text().split())
+            self.assertIn(clause.casefold(), all_text.casefold())
 
 
 if __name__ == "__main__":

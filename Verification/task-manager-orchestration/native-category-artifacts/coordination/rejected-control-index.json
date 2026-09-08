@@ -1,0 +1,162 @@
+{
+  "rejections": [
+    {
+      "arguments": [
+        "orchestrate",
+        "TASK-20260908-726896CC",
+        "--expected-revision",
+        "20"
+      ],
+      "exit_code": 2,
+      "result": {
+        "schema_version": 1,
+        "command": "orchestrate",
+        "status": "error",
+        "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh",
+        "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/Tasks",
+        "mutated": false,
+        "task_id": null,
+        "revision_before": null,
+        "revision_after": null,
+        "response_id": null,
+        "response_path": null,
+        "warnings": [],
+        "errors": [
+          {
+            "code": "ORCH_INDEPENDENT_DISPATCH",
+            "message": "Dispatch every initial queued solver before importing candidate bytes."
+          }
+        ],
+        "recovery_required": false
+      }
+    },
+    {
+      "arguments": [
+        "orchestrate",
+        "TASK-20260908-726896CC",
+        "--expected-revision",
+        "20"
+      ],
+      "exit_code": 2,
+      "result": {
+        "schema_version": 1,
+        "command": "orchestrate",
+        "status": "error",
+        "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh",
+        "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/Tasks",
+        "mutated": false,
+        "task_id": null,
+        "revision_before": null,
+        "revision_after": null,
+        "response_id": null,
+        "response_path": null,
+        "warnings": [],
+        "errors": [
+          {
+            "code": "ORCH_REQUIRED_CANDIDATE",
+            "message": "Every frozen solver slot needs exactly one current candidate."
+          }
+        ],
+        "recovery_required": false
+      }
+    },
+    {
+      "arguments": [
+        "orchestrate",
+        "TASK-20260908-726896CC",
+        "--expected-revision",
+        "59"
+      ],
+      "exit_code": 9,
+      "result": {
+        "schema_version": 1,
+        "command": "orchestrate",
+        "status": "error",
+        "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh",
+        "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/Tasks",
+        "mutated": false,
+        "task_id": "TASK-20260908-726896CC",
+        "revision_before": null,
+        "revision_after": null,
+        "response_id": null,
+        "response_path": null,
+        "warnings": [],
+        "errors": [
+          {
+            "code": "TRANSACTION_INCOMPLETE",
+            "message": "Task response transaction did not complete; explicit validation and reconciliation are required.",
+            "operation_id": "TXN-facf12bbefd14904a33fd32de84723ef",
+            "diagnostic": "'coding_a'",
+            "task_id": "TASK-20260908-726896CC",
+            "canonical_core_committed": false
+          }
+        ],
+        "recovery_required": true
+      }
+    },
+    {
+      "arguments": [
+        "orchestrate",
+        "TASK-20260908-726896CC",
+        "--expected-revision",
+        "69"
+      ],
+      "exit_code": 2,
+      "result": {
+        "schema_version": 1,
+        "command": "orchestrate",
+        "status": "error",
+        "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh",
+        "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/Tasks",
+        "mutated": false,
+        "task_id": null,
+        "revision_before": null,
+        "revision_after": null,
+        "response_id": null,
+        "response_path": null,
+        "warnings": [],
+        "errors": [
+          {
+            "code": "ORCH_STALE_CANDIDATE",
+            "message": "Candidate has been superseded."
+          }
+        ],
+        "recovery_required": false
+      }
+    },
+    {
+      "arguments": [
+        "orchestrate",
+        "TASK-20260908-726896CC",
+        "--expected-revision",
+        "73"
+      ],
+      "exit_code": 2,
+      "result": {
+        "schema_version": 1,
+        "command": "orchestrate",
+        "status": "error",
+        "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh",
+        "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/Tasks",
+        "mutated": false,
+        "task_id": null,
+        "revision_before": null,
+        "revision_after": null,
+        "response_id": null,
+        "response_path": null,
+        "warnings": [],
+        "errors": [
+          {
+            "code": "ORCH_REVIEW_GATE",
+            "message": "Every current candidate requires its assigned reviewer pass."
+          }
+        ],
+        "recovery_required": false
+      }
+    }
+  ],
+  "actual_helper_defect": "coordination/rebind-defect-report.json",
+  "repair_boundary": "coordination/repair-continuation-boundary.json",
+  "future_exact_payloads": "coordination/event-requests/",
+  "interpretation": "Expected missing/stale guards left canonical bytes unchanged; one native-path helper defect was reported, independently repaired by host, and then exercised successfully without native relaunch."
+}

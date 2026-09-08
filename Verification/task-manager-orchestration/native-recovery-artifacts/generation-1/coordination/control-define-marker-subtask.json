@@ -1,0 +1,122 @@
+{
+  "label": "define-marker-subtask",
+  "observed_at": "2026-09-08T12:17:42.975640+00:00",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/.agents/skills/agent-task/scripts/task_state.py",
+    "--project-root",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "orchestrate",
+    "TASK-20260908-A8B65949",
+    "--expected-revision",
+    "5"
+  ],
+  "payload": {
+    "event": {
+      "event_id": "event_eef1aa66902b4a8f93bf780aa971e193",
+      "actor": "/root/recovery_manager",
+      "execution_id": "recovery_validation_20260908",
+      "generation": 1,
+      "kind": "subtask.define",
+      "data": {
+        "subtask_id": "marker_validation",
+        "baseline": {
+          "objective": "Write one readiness marker, then remain active awaiting manager control. Keep the deliberately unfinished deliverable incomplete for native interruption and recovery validation.",
+          "requirements": [
+            "TASK-034"
+          ],
+          "inputs": [
+            {
+              "path": "context/scenario.md",
+              "sha256": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e"
+            },
+            {
+              "path": "context/authority.json",
+              "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+            }
+          ],
+          "dependencies": [],
+          "criteria": [
+            "One readiness marker confirms exact role reads and assigned native identity.",
+            "The deliberately unfinished delivery artifact is completed and verified."
+          ],
+          "category": "generic",
+          "rationale": "A single controlled marker write and wait has one execution owner and needs no solver or review team.",
+          "reads": [
+            "SOUL.md",
+            "AGENTS.md",
+            "ROLE.md",
+            "SPECS.md",
+            "roles/project-sub-agent",
+            ".agents/skills/communication",
+            "context",
+            "coordination"
+          ],
+          "writes": [
+            "markers/recovery_worker"
+          ],
+          "protected": [
+            "SOUL.md",
+            "AGENTS.md",
+            "ROLE.md",
+            "SPECS.md",
+            "roles",
+            ".agents",
+            "control_records",
+            "project.json"
+          ],
+          "authority": "The approved TASK-034 scenario authorizes one disposable marker and actual native interruption; no production completion, canonical mutation, user settings, external action, or other-project change.",
+          "implementation_required": true,
+          "deliverable": "markers/recovery_worker/readiness.json only at this stage; markers/recovery_worker/delivery.txt must remain absent.",
+          "stop": "After writing readiness, send the manager its path and digest and remain in bounded native waits until explicit control or interruption. Do not finish voluntarily or create delivery.txt.",
+          "slots": [
+            {
+              "slot": "marker_worker",
+              "function": "worker",
+              "perspective": "Bounded marker write and native stopping observation",
+              "solver_slot": null
+            }
+          ]
+        }
+      }
+    },
+    "response": {
+      "work_completed": [
+        "Observed define-marker-subtask."
+      ],
+      "verification_evidence": [
+        "Exact current inputs and returned native/artifact evidence are retained."
+      ],
+      "user_response_summary": "Observed define-marker-subtask.",
+      "current_summary": "Observed define-marker-subtask.",
+      "next_step": "Continue the bounded approved validation.",
+      "blockers": [],
+      "open_questions": [],
+      "relevant_files": []
+    }
+  },
+  "expected_error": null,
+  "exit_code": 0,
+  "result": {
+    "schema_version": 1,
+    "command": "orchestrate",
+    "status": "recorded",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": true,
+    "task_id": "TASK-20260908-A8B65949",
+    "revision_before": 5,
+    "revision_after": 6,
+    "response_id": "RESP-0005",
+    "response_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/responses/Task-Response-0005-2026-09-08T06-17-42-06-00.md",
+    "warnings": [],
+    "errors": [],
+    "recovery_required": false
+  },
+  "stderr": "",
+  "canonical_before_sha256": "9debd661b65f95daabae6e30ee5cfaabbc6cce6b18745985150c90c5c5becea1",
+  "canonical_after_sha256": "47b117d659f44ed2af626e93c9de38639826101c2caa1cc9f4744a3f02b8d2e1",
+  "canonical_unchanged": false,
+  "revision_before": 5,
+  "revision_after": 6
+}

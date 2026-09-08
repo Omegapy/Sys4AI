@@ -1,0 +1,167 @@
+{
+  "label": "dispatch-after-pause-rejected",
+  "observed_at": "2026-09-08T12:20:32.443752+00:00",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/.agents/skills/agent-task/scripts/task_state.py",
+    "--project-root",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "orchestrate",
+    "TASK-20260908-A8B65949",
+    "--expected-revision",
+    "12"
+  ],
+  "payload": {
+    "event": {
+      "event_id": "event_119d4a6fe3f742398bb88ca19ba06d64",
+      "actor": "/root/recovery_manager",
+      "execution_id": "recovery_validation_20260908",
+      "generation": 1,
+      "kind": "assignment.reserve",
+      "data": {
+        "assignment_id": "blocked_dispatch_control",
+        "subtask_id": "marker_validation",
+        "slot": "marker_worker",
+        "role": {
+          "name": "project-sub-agent",
+          "agents_path": "roles/project-sub-agent/AGENTS.md",
+          "role_path": "roles/project-sub-agent/ROLE.md",
+          "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+          "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+          "catalog": {
+            "path": "coordination/catalog_cefaf3444b144badb4386290c33cfb7c.json",
+            "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+          }
+        },
+        "fit": {
+          "objective": "Write one readiness marker, then remain active awaiting manager control. Keep the deliberately unfinished deliverable incomplete for native interruption and recovery validation.",
+          "capabilities": [
+            "bounded JSON write",
+            "role evidence hashing",
+            "native waiting and stopping"
+          ],
+          "reads": [
+            "SOUL.md",
+            "AGENTS.md",
+            "ROLE.md",
+            "SPECS.md",
+            "roles/project-sub-agent",
+            ".agents/skills/communication",
+            "context",
+            "coordination",
+            "Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/artifacts/orchestration/baseline_3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee.json"
+          ],
+          "writes": [
+            "markers/recovery_worker"
+          ],
+          "deliverable": "markers/recovery_worker/readiness.json only at this stage; markers/recovery_worker/delivery.txt must remain absent.",
+          "tools": [
+            "Python standard library",
+            "native send_message and bounded wait"
+          ],
+          "skills": [
+            "communication"
+          ],
+          "authority": "The approved TASK-034 scenario authorizes one disposable marker and actual native interruption; no production completion, canonical mutation, user settings, external action, or other-project change. No nested delegation.",
+          "risk": "Disposable marker only; deliberately incomplete result; manager will interrupt actual native activity.",
+          "stop": "After writing readiness, send the manager its path and digest and remain in bounded native waits until explicit control or interruption. Do not finish voluntarily or create delivery.txt.",
+          "rationale": "The general project worker explicitly supports bounded implementation and evidence collection. The manager role is broader and grants unnecessary coordination authority; no specialized domain expertise is needed."
+        },
+        "runtime": {
+          "tools": [
+            "spawn_agent",
+            "send_message",
+            "followup_task",
+            "list_agents",
+            "wait_agent",
+            "interrupt_agent"
+          ],
+          "depth": 2,
+          "available_slots": 2,
+          "evidence": [
+            {
+              "path": "coordination/current-worker-runtime.json",
+              "sha256": "9cef6141f0e582c895169e17e75ca91373f29a7c9fad929834e685a327543261"
+            },
+            {
+              "path": "coordination/worker-dispatch-roster.json",
+              "sha256": "7d70256827ff285344462c78aa5eb0e425b185f9c86e7a7ff29f58cec0c5eb61"
+            }
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "context": [
+          {
+            "path": "Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/artifacts/orchestration/baseline_3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee.json",
+            "sha256": "3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee"
+          },
+          {
+            "path": "context/scenario.md",
+            "sha256": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e"
+          },
+          {
+            "path": "context/authority.json",
+            "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+          },
+          {
+            "path": "coordination/current-worker-runtime.json",
+            "sha256": "9cef6141f0e582c895169e17e75ca91373f29a7c9fad929834e685a327543261"
+          }
+        ]
+      }
+    },
+    "response": {
+      "work_completed": [
+        "Controlled dependent dispatch was rejected while execution is stopping; no second worker launch attempted."
+      ],
+      "verification_evidence": [
+        "Exact current inputs and returned native/artifact evidence are retained."
+      ],
+      "user_response_summary": "Controlled dependent dispatch was rejected while execution is stopping; no second worker launch attempted.",
+      "current_summary": "Controlled dependent dispatch was rejected while execution is stopping; no second worker launch attempted.",
+      "next_step": "Continue the bounded approved validation.",
+      "blockers": [],
+      "open_questions": [],
+      "relevant_files": []
+    }
+  },
+  "expected_error": "ORCH_DISPATCH_STOPPED",
+  "exit_code": 2,
+  "result": {
+    "schema_version": 1,
+    "command": "orchestrate",
+    "status": "error",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": false,
+    "task_id": null,
+    "revision_before": null,
+    "revision_after": null,
+    "response_id": null,
+    "response_path": null,
+    "warnings": [],
+    "errors": [
+      {
+        "code": "ORCH_DISPATCH_STOPPED",
+        "message": "Execution is not active; only controlling reconciliation is permitted."
+      }
+    ],
+    "recovery_required": false
+  },
+  "stderr": "",
+  "canonical_before_sha256": "b8d0e91c3c56cd62a383d6be2b83a60831ac35e70636b57cfafe84375b75063c",
+  "canonical_after_sha256": "b8d0e91c3c56cd62a383d6be2b83a60831ac35e70636b57cfafe84375b75063c",
+  "canonical_unchanged": true,
+  "revision_before": 12,
+  "revision_after": 12
+}

@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-08T12:31:54.171764+00:00",
+  "native_id": "/root/recovery_replacement",
+  "task_id": "TASK-20260908-A8B65949",
+  "execution_id": "recovery_validation_20260908",
+  "generation": 2,
+  "assignment_id": "recovery_replacement",
+  "required_reads_completed": true,
+  "required_read_sha256s": {
+    "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+    "AGENTS.md": "a66a47e92a227ced22ba7da905d770b3a930e133876b043afca27c7010043b8c",
+    "ROLE.md": "478e75f0cfc693f61a0cbfc48d07efbc5f050b57db5f493c5f3aca5d3a9538a4",
+    "SPECS.md": "02c36c12cea1d5d2535fa1ab2bb930a489aa03b7d6f530b19d93411ec70907c8",
+    "README.md": "b39a4932c8d181844696cfff89a12ffa4766c3f760e46cb07467e3b6e414bc62",
+    "roles/task-manager/AGENTS.md": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+    "roles/task-manager/ROLE.md": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0",
+    ".agents/skills/communication/SKILL.md": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+    ".agents/skills/task/SKILL.md": "214c545c72ee982a42e77ed129918a5996d96f4ca71a63e6aba22b57aeba5200",
+    ".agents/skills/agent-task/SKILL.md": "d2c36bf2f2b5880030171b3bb94b7bc0751fda594392328250e0c04dfdb6079b",
+    ".agents/skills/manage-subagent-roles/SKILL.md": "841388a1c7aec7005a91da25d1bdf05b586d01af23426df58c024a353b92a83e",
+    ".agents/skills/agent-task/references/orchestration-contract.md": "d4ee43bf26b2b8e21cee15223ed4287d529ea89b924786bd9f3b86867b8a2ef9",
+    ".agents/skills/agent-task/references/task-system-contract.md": "c33a5b1b4db3ff4cc9ee72801aa7f9ad65d51c1acb0baea83c112d66a8d8b21e",
+    "context/scenario.md": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e",
+    "context/authority.json": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c",
+    "context/native-runtime.json": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4",
+    "coordination/replacement-bootstrap.json": "973de40aef71081ba809995dfe3bb5d2993f23d3648c208f6606adce4e51a0a8",
+    "coordination/host-replacement-evidence.json": "4583912f4d19c04c4a6872946296064a2d5bd3b08565395345c06c51568c4a7a",
+    "coordination/first-manager-handoff.json": "94705e5d5648f1871cd40c307aa6e123fd5dbfac2b1c3b48e3116d283b083e73",
+    "coordination/validation_api.py": "e707ccbd8dc99cd32d25b5d169c6f81965800cd4b124454a0dc7a7fcb7c07bd8",
+    "coordination/control_api.py": "ae0aefd81ebce8a0ef5f4ce6eb71d77a9730f7c0685ffb48728f298be987efb1"
+  },
+  "role_reads": {
+    "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+    "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0",
+    "evidence": "Replacement manager directly read both complete role files, owning SOUL and governance, installed Task and role skills, both Task contracts, exact replacement assignment, scenario, authority/runtime and first-manager handoff before readiness."
+  },
+  "current_canonical": {
+    "path": "Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/task.json",
+    "sha256": "d81da88ef8348e229108de6cba4e98695f186b4d1d55e1001af113f57688e7dd",
+    "revision": 19,
+    "status": "paused",
+    "stage": "receipt_recorded",
+    "writer": "/root",
+    "definition_of_done": [
+      "The intentionally unfinished worker deliverable is completed and directly verified."
+    ],
+    "old_assignment_states": {
+      "recovery_manager": "revoked",
+      "recovery_worker": "revoked"
+    }
+  },
+  "actual_native_observation": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root/recovery_replacement",
+          "agent_status": "running"
+        }
+      ]
+    }
+  },
+  "current_role_catalog_matches_selected": true,
+  "current_assignment_references_match": true,
+  "task_validation": {
+    "schema_version": 1,
+    "command": "validate",
+    "status": "valid",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": false,
+    "task_id": "TASK-20260908-A8B65949",
+    "revision_before": 19,
+    "revision_after": 19,
+    "response_id": null,
+    "response_path": null,
+    "warnings": [],
+    "errors": [],
+    "recovery_required": false,
+    "integrity": "valid",
+    "validated_task_count": 1
+  },
+  "retained_worker_changes": [
+    {
+      "path": "markers/recovery_worker/readiness.json",
+      "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+    }
+  ],
+  "unfinished_delivery_absent": true,
+  "historical_canonical_boundary": "The first-manager handoff records revision 16. Later replacement and receipt events legitimately change current canonical bytes; historical hashes remain evidence of their original boundary.",
+  "capability_conflicts": [],
+  "capability_limits": [
+    "Literal model and reasoning telemetry is unavailable; the effective full-history inheritance guarantee is used with no overrides.",
+    "The disposable fixture has no local virtual environment. Authorized standard-library checks use the existing depot Python; no dependencies were installed.",
+    "Task ownership remains with /root until exact manager activation."
+  ],
+  "canonical_task_mutations_performed": false,
+  "children_launched": false,
+  "ready_for_exact_activation": true
+}

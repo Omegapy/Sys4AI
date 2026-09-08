@@ -1,0 +1,107 @@
+[
+  {
+    "suite": "source-task",
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/task/tests",
+    "started_at": "2026-09-08T06:40:16.979020+00:00",
+    "duration_seconds": 25.34,
+    "exit_code": 1,
+    "log": "Verification/task-manager-orchestration/baseline-tests/source-task.log",
+    "summary": [
+      "",
+      "----------------------------------------------------------------------",
+      "Ran 16 tests in 25.287s",
+      "",
+      "FAILED (failures=2)"
+    ]
+  },
+  {
+    "suite": "source-agent-task",
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/agent-task/tests",
+    "started_at": "2026-09-08T06:40:16.980574+00:00",
+    "duration_seconds": 12.454,
+    "exit_code": 1,
+    "log": "Verification/task-manager-orchestration/baseline-tests/source-agent-task.log",
+    "summary": [
+      "",
+      "----------------------------------------------------------------------",
+      "Ran 52 tests in 12.346s",
+      "",
+      "FAILED (failures=2, errors=9)"
+    ]
+  },
+  {
+    "suite": "source-roles",
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/manage-subagent-roles/tests",
+    "started_at": "2026-09-08T06:40:16.981871+00:00",
+    "duration_seconds": 0.173,
+    "exit_code": 1,
+    "log": "Verification/task-manager-orchestration/baseline-tests/source-roles.log",
+    "summary": [
+      "",
+      "----------------------------------------------------------------------",
+      "Ran 40 tests in 0.055s",
+      "",
+      "FAILED (errors=1)"
+    ]
+  },
+  {
+    "suite": "source-initializer",
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/init-new-project/tests",
+    "started_at": "2026-09-08T06:40:16.982968+00:00",
+    "duration_seconds": 21.746,
+    "exit_code": 0,
+    "log": "Verification/task-manager-orchestration/baseline-tests/source-initializer.log",
+    "summary": [
+      "...............................",
+      "----------------------------------------------------------------------",
+      "Ran 31 tests in 21.665s",
+      "",
+      "OK"
+    ]
+  },
+  {
+    "suite": "root-agent-task",
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s .agents/skills/agent-task/tests",
+    "started_at": "2026-09-08T06:40:17.155275+00:00",
+    "duration_seconds": 14.923,
+    "exit_code": 0,
+    "log": "Verification/task-manager-orchestration/baseline-tests/root-agent-task.log",
+    "summary": [
+      "...................................................................",
+      "----------------------------------------------------------------------",
+      "Ran 67 tests in 14.845s",
+      "",
+      "OK"
+    ]
+  },
+  {
+    "suite": "root-integration",
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s tests",
+    "started_at": "2026-09-08T06:40:29.434919+00:00",
+    "duration_seconds": 2.26,
+    "exit_code": 0,
+    "log": "Verification/task-manager-orchestration/baseline-tests/root-integration.log",
+    "summary": [
+      "...",
+      "----------------------------------------------------------------------",
+      "Ran 66 tests in 2.140s",
+      "",
+      "OK"
+    ]
+  },
+  {
+    "suite": "template-contract",
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s Projects/Sys4AI-Template-Project/tests",
+    "started_at": "2026-09-08T06:40:31.694563+00:00",
+    "duration_seconds": 0.279,
+    "exit_code": 0,
+    "log": "Verification/task-manager-orchestration/baseline-tests/template-contract.log",
+    "summary": [
+      "........",
+      "----------------------------------------------------------------------",
+      "Ran 8 tests in 0.234s",
+      "",
+      "OK"
+    ]
+  }
+]

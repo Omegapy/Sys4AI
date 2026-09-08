@@ -40,18 +40,25 @@ def fixture(root: Path) -> Path:
         "SOULS-depo/SOUL.md": "SOUL.md",
         "AGENTS-depo/project-template-AGENTS.md": "AGENTS.md",
         "ROLES-depo/project-director-ROLE.md": "ROLE.md",
-        "ROLES-depo/project-sub-agent-AGENTS.md": "sub-agent-roles/project-sub-agent/AGENTS.md",
-        "ROLES-depo/project-sub-agent-ROLE.md": "sub-agent-roles/project-sub-agent/ROLE.md",
+        "ROLES-depo/project-sub-agent-AGENTS.md": "roles/project-sub-agent/AGENTS.md",
+        "ROLES-depo/project-sub-agent-ROLE.md": "roles/project-sub-agent/ROLE.md",
         "SPECS-depo/project-template-SPECS.md": "SPECS.md",
         "SPECS-depo/project-template.gitignore": ".gitignore",
     }
+    for role in ("project-sub-agent", "task-manager"):
+        for name in ("AGENTS", "ROLE"):
+            overrides[f"ROLES-depo/{role}-{name}.md"] = f"roles/{role}/{name}.md"
     for origin, target in overrides.items():
-        put(root, origin, "# Starter " + target + "\n")
+        actual = HELPER.parents[1] / origin
+        text = actual.read_text() if target.startswith("roles/") else "# Starter " + target + "\n"
+        put(root, origin, text)
+    put(root, "SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py",
+        (HELPER.parents[1] / "SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py").read_text())
     mirrors = {
         "SKILLS-depo/init-new-project/assets/baseline-assets.json": ".template/baseline-assets.json",
         "SKILLS-depo/init-new-project/assets/project-readme.md": ".template/project-readme.md",
     }
-    put(root, next(iter(mirrors)), '{"schema_version": 2}\n')
+    put(root, next(iter(mirrors)), '{"schema_version": 2, "roles": "roles"}\n')
     put(root, "SKILLS-depo/init-new-project/assets/project-readme.md", "# __PROJECT_NAME__\n")
     put(root, engine.MANIFEST, json.dumps({
         "schema_version": 1, "template": engine.TEMPLATE,
@@ -76,6 +83,111 @@ class TemplateUpdateTests(unittest.TestCase):
 
     def apply(self) -> dict:
         return engine.update(self.root, "apply")
+
+    def test_role_index_is_generated_bound_and_customization_protected(self):
+        self.apply()
+        state = engine.load_state(self.root)
+        entry = state["files"][engine.ROLE_INDEX]
+        self.assertEqual("role-index-v1", entry["generated"]["kind"])
+        self.assertEqual(engine.role_index_inputs(state["files"]), entry["generated"]["inputs"])
+        original = (self.template / engine.ROLE_INDEX).read_bytes()
+        self.assertEqual(original, engine.snapshot(self.root)["generated"][engine.ROLE_INDEX])
+        role = self.root / "ROLES-depo/task-manager-ROLE.md"
+        role.write_bytes(role.read_bytes() + b"\nAdditional bounded fixture duty.\n")
+        self.assertIn(engine.ROLE_INDEX, engine.update(self.root, "check")["updates"])
+        self.apply()
+        self.assertNotEqual(original, (self.template / engine.ROLE_INDEX).read_bytes())
+        (self.template / engine.ROLE_INDEX).write_text("Project-owned navigation\n")
+        with self.assertRaises(engine.UpdateError):
+            self.apply()
+        self.assertEqual("Project-owned navigation\n", (self.template / engine.ROLE_INDEX).read_text())
+
+    def test_invalid_role_and_static_index_mapping_fail_without_template_writes(self):
+        role = self.root / "ROLES-depo/task-manager-ROLE.md"
+        good = role.read_bytes()
+        role.write_text("invalid role")
+        with self.assertRaisesRegex(engine.UpdateError, "role pairs"):
+            self.apply()
+        self.assertEqual({}, file_inventory(self.template))
+        role.write_bytes(good)
+        manifest = json.loads((self.root / engine.MANIFEST).read_bytes())
+        for destination in ("roles/INDEX.md", "roles/index.md", "roles/INDEX.md/child.md"):
+            manifest["mirrors"]["ROLES-depo/task-manager-ROLE.md"] = destination
+            put(self.root, engine.MANIFEST, json.dumps(manifest))
+            with self.assertRaisesRegex(engine.UpdateError, "generated|collision"):
+                self.apply()
+            self.assertEqual({}, file_inventory(self.template))
+
+    def test_generated_index_cannot_omit_an_unmanaged_destination_role(self):
+        self.apply()
+        owned = self.template / "roles/local-worker"
+        shutil.copytree(self.template / "roles/project-sub-agent", owned)
+        role = owned / "ROLE.md"
+        role.write_text(role.read_text().replace("name: project-sub-agent", "name: local-worker"))
+        before = file_inventory(self.template)
+        with self.assertRaises(engine.UpdateError) as caught:
+            self.apply()
+        self.assertTrue(any("unmanaged role directory" in error for error in caught.exception.report["conflicts"]))
+        self.assertEqual(before, file_inventory(self.template))
+
+    def test_pending_generated_bytes_are_validated_against_frozen_inputs(self):
+        import base64
+        self.apply()
+        before = engine.load_state(self.root)
+        role = self.root / "ROLES-depo/task-manager-ROLE.md"
+        role.write_bytes(role.read_bytes() + b"\nChanged bounded fixture duty.\n")
+        snap = engine.snapshot(self.root)
+        pending = engine.make_pending(before, snap)
+        corrupted = json.loads(json.dumps(pending))
+        fake = b"Forged index\n"
+        corrupted["payloads"][engine.ROLE_INDEX] = base64.b64encode(fake).decode()
+        corrupted["after"]["files"][engine.ROLE_INDEX]["sha256"] = engine.digest(fake)
+        original = file_inventory(self.template)
+        with self.assertRaisesRegex(engine.UpdateError, "frozen role pairs"):
+            engine.recover(self.root, corrupted)
+        self.assertEqual(original, file_inventory(self.template))
+        engine.atomic_write(self.root / engine.PENDING, engine.encoded(pending))
+        # Saved payloads, not a later depot edition, govern recovery.
+        role.write_bytes(role.read_bytes() + b"\nA later unrelated source edit.\n")
+        engine.recover(self.root, pending)
+        self.assertEqual(snap["generated"][engine.ROLE_INDEX], (self.template / engine.ROLE_INDEX).read_bytes())
+        self.assertFalse((self.root / engine.PENDING).exists())
+
+    def test_legacy_state_transition_retains_exact_pairs_before_interruption(self):
+        import base64
+        self.apply()
+        before = engine.load_state(self.root)
+        for name in list(before["files"]):
+            if name.startswith("roles/task-manager/") or name == engine.ROLE_INDEX:
+                before["files"].pop(name)
+                (self.template / name).unlink()
+            elif name.startswith("roles/project-sub-agent/"):
+                legacy = name.replace("roles/", "sub-agent-roles/", 1)
+                before["files"][legacy] = before["files"].pop(name)
+                (self.template / legacy).parent.mkdir(parents=True, exist_ok=True)
+                (self.template / name).rename(self.template / legacy)
+        (self.template / "roles/project-sub-agent").rmdir()
+        (self.template / "roles/task-manager").rmdir()
+        (self.template / "roles").rmdir()
+        engine.atomic_write(self.root / engine.STATE, engine.encoded(before))
+        old = {name: (self.template / name).read_bytes() for name in before["files"] if name.startswith("sub-agent-roles/")}
+        preview = engine.update(self.root, "check")
+        self.assertEqual(set(old), {entry["legacy"] for entry in preview["role_retirements"]})
+        write = engine.atomic_write
+        def interrupted(path, raw, mode=0o644):
+            if path == self.template / "roles/project-sub-agent/ROLE.md":
+                raise OSError("injected role transition interruption")
+            return write(path, raw, mode)
+        with patch.object(engine, "atomic_write", side_effect=interrupted), self.assertRaises(OSError):
+            self.apply()
+        archives = list((self.root / engine.CONTROL / "role-layout-history").glob("*.json"))
+        self.assertEqual(1, len(archives))
+        retained = json.loads(archives[0].read_bytes())
+        self.assertEqual(old, {name: base64.b64decode(raw) for name, raw in retained["payloads"].items()})
+        result = self.apply()
+        self.assertTrue(result["recovered"])
+        self.assertFalse((self.template / "sub-agent-roles").exists())
+        self.assertEqual("current", engine.update(self.root, "check")["status"])
 
     def test_check_is_read_only_and_noop_apply_preserves_mtimes(self) -> None:
         before = file_inventory(self.root)

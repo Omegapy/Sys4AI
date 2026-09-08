@@ -1,0 +1,209 @@
+{
+  "probe_id": "PLAN-20260908-6E6F545E-TASK-002",
+  "created_at": "2026-09-08T06:40:55.568364+00:00",
+  "root_native_id": "/root",
+  "manager_native_id": "/root/native_probe_manager",
+  "fixture": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04",
+  "source_hashes": [
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/SOUL.md",
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLE.md",
+      "sha256": "8438a5b28c382f750ec65598cc097fe6bfda915affef36ab7074905cb2ec463d"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/SPECS.md",
+      "sha256": "e04a8fe939047b7f0e2beefdb130efa60be69eb3b37201404dc1a648317c0369"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/sub-agent-roles/project-sub-agent/AGENTS.md",
+      "sha256": "f4211b99a8453204053ade52563a6f234d0b43a3fedf88b6bdc362475ab7e876"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/sub-agent-roles/project-sub-agent/ROLE.md",
+      "sha256": "36ba709cac3009a3c1777b6ba0954f1ed1ac988327700b8dd65e28fb30de1c21"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/manage-subagent-roles/SKILL.md",
+      "sha256": "204cefada5ada1be88180ddd53d0f3bef5fd2dd4512c1081179879a9c4cbed54"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/task-manager-orchestration/native-problem-packet.json",
+      "sha256": "322898ae061ab12cfb8a7db1a0a3fec7985791e528546e707188f8382dc673f8"
+    }
+  ],
+  "common_problem_sha256": "387769d0c8f92a9b9cad2c5154f1c5604a6d77ba5531471cb0e023903b183f44",
+  "common_problem_serialization": "UTF-8 JSON with sort_keys=True, separators=(comma,colon)",
+  "runtime_guarantee": {
+    "source": "effective developer multi_agent_role instruction",
+    "exact_excerpt": "Full-history forks (`fork_turns` omitted or `\"all\"`) inherit the parent model and reasoning effort and do not accept overrides.",
+    "application": "All native spawn arguments use fork_turns all and omit model and reasoning_effort. Exact model names are not self-attested.",
+    "configuration_receipt": "Root delegation states effective user allowlist has no agents defaults/custom agents and project config absent; manager did not reread configuration."
+  },
+  "available_native_operations": [
+    "spawn_agent",
+    "list_agents",
+    "send_message",
+    "followup_task",
+    "wait_agent",
+    "interrupt_agent"
+  ],
+  "not_available": [
+    "close_agent",
+    "release_agent"
+  ],
+  "declared_concurrency_including_root": 4,
+  "events": [
+    {
+      "id": "E01",
+      "operation": "list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E02",
+      "operation": "spawn_agent",
+      "arguments": {
+        "task_name": "solver_a",
+        "fork_turns": "all",
+        "model": "omitted",
+        "reasoning_effort": "omitted"
+      },
+      "result": {
+        "task_name": "/root/native_probe_manager/solver_a"
+      },
+      "candidate_contents_in_context": false
+    },
+    {
+      "id": "E03",
+      "operation": "spawn_agent",
+      "arguments": {
+        "task_name": "solver_b",
+        "fork_turns": "all",
+        "model": "omitted",
+        "reasoning_effort": "omitted"
+      },
+      "result": {
+        "task_name": "/root/native_probe_manager/solver_b"
+      },
+      "candidate_contents_in_context": false
+    },
+    {
+      "id": "E04",
+      "operation": "list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_a",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_b",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E05",
+      "operation": "send_message",
+      "arguments": {
+        "target": "/root/native_probe_manager/solver_a",
+        "nonce": "manager-to-worker-A-20260908-001"
+      },
+      "result": "Tool accepted; worker final acknowledged exact nonce."
+    },
+    {
+      "id": "E06",
+      "operation": "wait_agent",
+      "arguments": {
+        "timeout_ms": 60000
+      },
+      "result": {
+        "message": "Wait completed.",
+        "timed_out": false
+      },
+      "notification": {
+        "sender": "/root/native_probe_manager/solver_a",
+        "status": "passed",
+        "candidate_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-a-candidate.json",
+        "candidate_sha256": "b0df6618aba05d0afa07400838464f5d350d63c89d3dbd69dbaa8c06e6f1e77e",
+        "receipt_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-a-receipt.json",
+        "receipt_sha256": "a43d20fce654d7cea989980b417cffab99d3ab93efe49651c0bc1fc8c90e3b2b",
+        "nonce_acknowledged": "manager-to-worker-A-20260908-001"
+      }
+    },
+    {
+      "id": "E07",
+      "operation": "list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_a",
+            "agent_status": "completed",
+            "completion_receipt": "E06"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_b",
+            "agent_status": "running"
+          }
+        ]
+      },
+      "interpretation": "A is natively completed. Attempt queued C to test whether its slot is reusable."
+    },
+    {
+      "id": "E08",
+      "operation": "worker_final",
+      "sender": "/root/native_probe_manager/solver_b",
+      "status": "passed",
+      "candidate_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-b-candidate.json",
+      "candidate_sha256": "d0cbac677ade5b81aadd034cac941f4fade0144b3a39f03c0808dc6186b2a9bb",
+      "receipt_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-b-receipt.json",
+      "receipt_sha256": "692a018f67c24d21be48d30a1761d93a9f42c4b2e2967b3771c3cb2c3c89f439"
+    },
+    {
+      "id": "E09",
+      "operation": "spawn_agent",
+      "arguments": {
+        "task_name": "solver_c",
+        "fork_turns": "all",
+        "model": "omitted",
+        "reasoning_effort": "omitted"
+      },
+      "result": {
+        "task_name": "/root/native_probe_manager/solver_c"
+      },
+      "candidate_contents_in_context": false,
+      "previous_candidate_read_count": 0,
+      "interpretation": "A completed native slot became reusable by a new distinct child."
+    }
+  ]
+}

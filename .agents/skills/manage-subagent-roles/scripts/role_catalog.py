@@ -5,10 +5,13 @@ from __future__ import annotations
 
 import argparse
 import ast
+import contextlib
+import hashlib
 import json
 import os
 import re
 import shutil
+import stat
 import sys
 import tempfile
 from collections.abc import Iterable, Sequence
@@ -16,7 +19,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 SCHEMA_VERSION = 1
-ROLE_ROOT_NAME = "sub-agent-roles"
+ROLE_ROOT_NAME = "roles"
+LEGACY_ROLE_ROOT_NAME = "sub-agent-roles"
+MAX_MANIFEST_BYTES = 1_000_000
 ROLE_NAME_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 MAX_ROLE_NAME_LENGTH = 63
 MAX_FRONTMATTER_LINES = 64
@@ -64,6 +69,14 @@ class CatalogError(RuntimeError):
     """Raised when the role catalog cannot be used safely."""
 
 
+class PublicationPending(CatalogError):
+    """A valid bundle/transition committed; only the named recovery remains."""
+
+    def __init__(self, result: dict[str, object]):
+        self.result = result
+        super().__init__(str(result.get("error", "role publication remains pending")))
+
+
 @dataclass
 class RoleEntry:
     """One discovered role directory and its validation state."""
@@ -74,6 +87,8 @@ class RoleEntry:
     agents_file: str
     role_file: str
     diagnostics: list[str] = field(default_factory=list)
+    agents_sha256: str | None = None
+    role_sha256: str | None = None
 
     @property
     def valid(self) -> bool:
@@ -92,6 +107,8 @@ class RoleEntry:
             "role_file": self.role_file,
             "valid": self.valid,
             "diagnostics": list(self.diagnostics),
+            "agents_sha256": self.agents_sha256,
+            "role_sha256": self.role_sha256,
         }
 
 
@@ -102,6 +119,8 @@ class RoleCatalog:
     role_root: str
     valid_roles: list[RoleEntry]
     invalid_roles: list[RoleEntry]
+    index_status: str = "missing"
+    fingerprint: str = ""
 
     def to_dict(self) -> dict[str, object]:
         return {
@@ -109,6 +128,8 @@ class RoleCatalog:
             "role_root": self.role_root,
             "valid_roles": [entry.to_dict() for entry in self.valid_roles],
             "invalid_roles": [entry.to_dict() for entry in self.invalid_roles],
+            "index_status": self.index_status,
+            "fingerprint": self.fingerprint,
         }
 
 
@@ -125,19 +146,29 @@ def is_within(candidate: Path, parent: Path) -> bool:
 def repository_root(raw_root: str | os.PathLike[str]) -> Path:
     """Resolve and validate the supplied project root."""
 
-    root = Path(raw_root).expanduser().resolve()
+    candidate = Path(raw_root).expanduser()
+    if candidate.is_symlink():
+        raise CatalogError("project root must not be a symbolic link")
+    # Normalize host aliases such as macOS /var before confining project paths.
+    root = checked_path(candidate.resolve())
     if not root.is_dir():
         raise CatalogError(f"project root is not a directory: {root}")
     return root
 
 
-def role_root_for(root: Path) -> Path:
+def role_root_for(root: Path, role_root_name: str = ROLE_ROOT_NAME) -> Path:
     """Return a safe, existing role root below the project root."""
 
     root = root.resolve()
-    role_root = root / ROLE_ROOT_NAME
+    if role_root_name not in {ROLE_ROOT_NAME, LEGACY_ROLE_ROOT_NAME}:
+        raise CatalogError("unsupported role root")
+    role_root = root / role_root_name
+    if role_root.is_symlink() and not is_within(role_root.resolve(), root):
+        raise CatalogError(f"role root escapes the project root: {role_root}")
+    role_root = checked_path(role_root)
     if not role_root.exists():
-        raise CatalogError(f"role root does not exist: {role_root}")
+        legacy = " Use transition-preview for the legacy layout." if (root / LEGACY_ROLE_ROOT_NAME).exists() else ""
+        raise CatalogError(f"role root does not exist: {role_root}.{legacy}")
     if not role_root.is_dir():
         raise CatalogError(f"role root is not a directory: {role_root}")
 
@@ -147,6 +178,34 @@ def role_root_for(root: Path) -> Path:
     if role_root.is_symlink():
         raise CatalogError(f"role root must not be a symbolic link: {role_root}")
     return role_root
+
+
+def checked_path(path: Path) -> Path:
+    """Reject aliases before resolving; never follow a role or control symlink."""
+    absolute = Path(os.path.abspath(path))
+    for component in reversed((absolute, *absolute.parents)):
+        if component.is_symlink():
+            raise CatalogError(f"path must not be a symbolic link: {component}")
+    if absolute.exists() and absolute.is_file() and absolute.stat().st_nlink != 1:
+        raise CatalogError(f"file must not be hard-linked: {absolute}")
+    return absolute
+
+
+def digest_bytes(content: bytes) -> str:
+    return hashlib.sha256(content).hexdigest()
+
+
+def file_digest(path: Path) -> str | None:
+    checked_path(path)
+    if not path.exists():
+        return None
+    if not path.is_file():
+        raise CatalogError(f"expected a regular file: {path}")
+    return digest_bytes(path.read_bytes())
+
+
+def object_digest(value: object) -> str:
+    return digest_bytes(json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode())
 
 
 def relative_path(path: Path, root: Path) -> str:
@@ -321,12 +380,19 @@ def validate_agents_file(
 
     targets = markdown_link_targets(agents_text)
     expected_links = {
-        "../../SOUL.md": (root / "SOUL.md").resolve(),
-        "./ROLE.md": role_file.resolve(),
+        "../../SOUL.md": root / "SOUL.md",
+        "./ROLE.md": role_file,
     }
     for target, expected in expected_links.items():
         if target not in targets:
             diagnostics.append(f"AGENTS.md is missing required link: {target}")
+            continue
+        try:
+            checked_path(expected)
+            if not is_within(expected.resolve(), root.resolve()):
+                raise CatalogError("required instruction source escapes the project")
+        except CatalogError as exc:
+            diagnostics.append(str(exc))
             continue
         resolved_target = (role_dir / target).resolve()
         if resolved_target != expected:
@@ -358,6 +424,22 @@ def validate_role_directory(role_dir: Path, root: Path) -> RoleEntry:
 
     if role_dir.is_symlink():
         entry.add_diagnostic("role directory must not be a symbolic link")
+        return entry
+
+    if agents_file.is_symlink():
+        entry.add_diagnostic("role bundle requires one regular AGENTS.md")
+    if role_file.is_symlink():
+        entry.add_diagnostic("role bundle requires one regular ROLE.md")
+    if entry.diagnostics and (agents_file.is_symlink() or role_file.is_symlink()):
+        return entry
+
+    try:
+        checked_path(role_dir)
+        checked_path(agents_file)
+        checked_path(role_file)
+    except CatalogError as exc:
+        entry.add_diagnostic(str(exc))
+        return entry
 
     if not agents_file.is_file() or agents_file.is_symlink():
         entry.add_diagnostic("role bundle requires one regular AGENTS.md")
@@ -366,7 +448,9 @@ def validate_role_directory(role_dir: Path, root: Path) -> RoleEntry:
 
     if role_file.is_file() and not role_file.is_symlink():
         try:
-            role_text = role_file.read_text(encoding="utf-8")
+            role_bytes = role_file.read_bytes()
+            role_text = role_bytes.decode("utf-8")
+            entry.role_sha256 = digest_bytes(role_bytes)
             metadata, body = parse_frontmatter(role_text)
             entry.name = metadata["name"]
             entry.description = metadata["description"]
@@ -383,7 +467,9 @@ def validate_role_directory(role_dir: Path, root: Path) -> RoleEntry:
 
     if agents_file.is_file() and not agents_file.is_symlink():
         try:
-            agents_text = agents_file.read_text(encoding="utf-8")
+            agents_bytes = agents_file.read_bytes()
+            agents_text = agents_bytes.decode("utf-8")
+            entry.agents_sha256 = digest_bytes(agents_bytes)
             for diagnostic in validate_agents_file(
                 agents_text, role_dir, role_file, root
             ):
@@ -394,13 +480,13 @@ def validate_role_directory(role_dir: Path, root: Path) -> RoleEntry:
     return entry
 
 
-def build_catalog(root: Path) -> RoleCatalog:
+def build_catalog(root: Path, *, role_root_name: str = ROLE_ROOT_NAME, inspect_index: bool = True) -> RoleCatalog:
     """Scan the live filesystem and return valid and invalid roles."""
 
     root = root.resolve()
-    role_root = role_root_for(root)
+    role_root = role_root_for(root, role_root_name)
     candidates = sorted(
-        (item for item in role_root.iterdir() if item.is_dir() or item.is_symlink()),
+        (item for item in role_root.iterdir() if item.name not in {"INDEX.md", ".transition.json"} and (item.is_dir() or item.is_symlink())),
         key=lambda item: item.name,
     )
     entries = [validate_role_directory(item, root) for item in candidates]
@@ -425,11 +511,110 @@ def build_catalog(root: Path) -> RoleCatalog:
         (entry for entry in entries if not entry.valid),
         key=lambda entry: (entry.name or entry.folder, entry.folder),
     )
-    return RoleCatalog(
+    catalog = RoleCatalog(
         role_root=relative_path(role_root, root),
         valid_roles=valid_roles,
         invalid_roles=invalid_roles,
     )
+    catalog.fingerprint = object_digest({"valid": [e.to_dict() for e in valid_roles], "invalid": [e.to_dict() for e in invalid_roles]})
+    if role_root_name == ROLE_ROOT_NAME and inspect_index:
+        index = checked_path(role_root / "INDEX.md")
+        if index.exists():
+            if not index.is_file():
+                raise CatalogError("role index must be a regular file")
+            catalog.index_status = "current" if index.read_bytes() == render_index(catalog).encode() else "stale"
+    elif role_root_name != ROLE_ROOT_NAME:
+        catalog.index_status = "legacy"
+    return catalog
+
+
+def render_index(catalog: RoleCatalog) -> str:
+    """Render context-relative navigation without a clock or absolute root."""
+    lines = ["<!-- Generated by role_catalog.py. Paired role files are authoritative. -->", "", "# Roles", "",
+             f"Catalog SHA-256: `{catalog.fingerprint}`", "",
+             "| Role | Selection | AGENTS.md | ROLE.md | AGENTS SHA-256 | ROLE SHA-256 |",
+             "| --- | --- | --- | --- | --- | --- |"]
+    for entry in catalog.valid_roles:
+        name = Path(entry.folder).name
+        lines.append(f"| {entry.name} | {markdown_escape(entry.description)} | [AGENTS.md](./{name}/AGENTS.md) | [ROLE.md](./{name}/ROLE.md) | `{entry.agents_sha256}` | `{entry.role_sha256}` |")
+    lines.extend(["", "## Invalid bundles", ""])
+    if not catalog.invalid_roles:
+        lines.append("None.")
+    for entry in catalog.invalid_roles:
+        lines.append(f"- `{markdown_escape(entry.folder)}`: {markdown_escape('; '.join(entry.diagnostics))}")
+    return "\n".join(lines) + "\n"
+
+
+@contextlib.contextmanager
+def mutation_lock(root: Path):
+    """A retained advisory-lock file avoids unlink/reacquire races."""
+    root = repository_root(root)
+    try:
+        import fcntl
+    except ImportError as exc:
+        raise CatalogError("role mutations require POSIX advisory locking on this host") from exc
+    control = checked_path(root / ".sys4ai")
+    control.mkdir(exist_ok=True)
+    lock = checked_path(control / "role-catalog.lock")
+    descriptor = os.open(lock, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
+    try:
+        info = os.fstat(descriptor)
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1:
+            raise CatalogError("unsafe role-catalog lock")
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise CatalogError("role catalog is busy; preserve the active writer") from exc
+        yield
+    finally:
+        os.close(descriptor)
+
+
+def atomic_publish(path: Path, content: bytes, *, replace: bool = True) -> None:
+    checked_path(path)
+    if path.exists() and not path.is_file():
+        raise CatalogError(f"publication target is not a regular file: {path}")
+    descriptor, temporary = tempfile.mkstemp(prefix=".role-publish-", dir=path.parent)
+    try:
+        with os.fdopen(descriptor, "wb") as stream:
+            stream.write(content)
+            stream.flush()
+            os.fsync(stream.fileno())
+        checked_path(path)
+        if replace:
+            os.replace(temporary, path)
+        else:
+            # A preview of an absent role file never authorizes replacing a
+            # concurrently appearing file, even if another editor ignores locks.
+            os.link(temporary, path, follow_symlinks=False)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
+
+
+def publish_index(root: Path, *, expected_fingerprint: str | None = None) -> dict[str, object]:
+    """Publish while the caller holds the catalog mutation lock."""
+    catalog = build_catalog(root)
+    if expected_fingerprint is not None and catalog.fingerprint != expected_fingerprint:
+        raise CatalogError("role bundles changed since the reviewed catalog")
+    content = render_index(catalog).encode()
+    target = checked_path(root / ROLE_ROOT_NAME / "INDEX.md")
+    if target.exists() and target.read_bytes() == content:
+        return {"status": "current", "mutated": False, "index_sha256": digest_bytes(content), **catalog.to_dict()}
+    if build_catalog(root).fingerprint != catalog.fingerprint:
+        raise CatalogError("role bundles changed during index generation")
+    atomic_publish(target, content)
+    current = build_catalog(root)
+    if current.index_status != "current":
+        raise CatalogError("role bundles changed during index publication; reindex after the writer stops")
+    return {"status": "updated", "mutated": True, "index_sha256": digest_bytes(content), **current.to_dict()}
+
+
+def reindex(root: Path) -> dict[str, object]:
+    root = repository_root(root)
+    build_catalog(root)
+    with mutation_lock(root):
+        return publish_index(root)
 
 
 def markdown_escape(value: object) -> str:
@@ -643,13 +828,23 @@ def render_role_bundle(args: argparse.Namespace) -> tuple[str, str]:
     return agents_text, role_text
 
 
-def remove_created_target(target: Path, expected_contents: dict[str, str]) -> None:
+def remove_created_target(target: Path, expected_contents: dict[str, str], expected_identity: tuple[int, int] | None = None, file_identities: dict[str, tuple[int, int]] | None = None) -> None:
     """Rollback only files created by this operation, preserving surprises."""
 
+    try:
+        checked_path(target)
+        info = target.stat()
+        if expected_identity is not None and (info.st_dev, info.st_ino) != expected_identity:
+            return
+    except (CatalogError, OSError):
+        return
     for filename, expected_text in expected_contents.items():
         candidate = target / filename
         if candidate.is_file() and not candidate.is_symlink():
             try:
+                info = candidate.stat()
+                if file_identities is not None and (info.st_dev, info.st_ino) != file_identities.get(filename):
+                    continue
                 if candidate.read_text(encoding="utf-8") == expected_text:
                     candidate.unlink()
             except (OSError, UnicodeError):
@@ -660,7 +855,7 @@ def remove_created_target(target: Path, expected_contents: dict[str, str]) -> No
         pass
 
 
-def create_role(root: Path, args: argparse.Namespace) -> tuple[RoleEntry, RoleCatalog]:
+def _create_role(root: Path, args: argparse.Namespace) -> tuple[RoleEntry, RoleCatalog]:
     """Create both canonical files safely, validate, and relist."""
 
     root = root.resolve()
@@ -679,6 +874,9 @@ def create_role(root: Path, args: argparse.Namespace) -> tuple[RoleEntry, RoleCa
     }
     temporary = Path(tempfile.mkdtemp(prefix=".creating-", dir=role_root))
     target_created = False
+    target_identity = None
+    published_contents = {}
+    published_identities = {}
     try:
         for filename, content in expected_contents.items():
             (temporary / filename).write_text(content, encoding="utf-8")
@@ -688,20 +886,229 @@ def create_role(root: Path, args: argparse.Namespace) -> tuple[RoleEntry, RoleCa
         except FileExistsError as exc:
             raise CatalogError(f"role target already exists: {target}") from exc
         target_created = True
+        info = target.stat()
+        target_identity = (info.st_dev, info.st_ino)
 
         for filename in expected_contents:
-            os.replace(temporary / filename, target / filename)
+            checked_path(target)
+            info = (temporary / filename).stat()
+            os.link(temporary / filename, target / filename, follow_symlinks=False)
+            published_contents[filename] = expected_contents[filename]
+            published_identities[filename] = (info.st_dev, info.st_ino)
+            (temporary / filename).unlink()
 
         temporary.rmdir()
-        catalog = build_catalog(root)
+        catalog = build_catalog(root, inspect_index=False)
         entry = find_valid_role(catalog, args.name)
         return entry, catalog
     except Exception:
         if target_created:
-            remove_created_target(target, expected_contents)
+            remove_created_target(target, published_contents, target_identity, published_identities)
         raise
     finally:
         shutil.rmtree(temporary, ignore_errors=True)
+
+
+def create_role(root: Path, args: argparse.Namespace) -> tuple[RoleEntry, RoleCatalog]:
+    root = repository_root(root)
+    role_root_for(root)
+    render_role_bundle(args)
+    with mutation_lock(root):
+        # Reject an already unsafe index before publishing any new pair. Later
+        # navigation failures belong to the post-commit recovery boundary below.
+        build_catalog(root)
+        entry, catalog = _create_role(root, args)
+        try:
+            publish_index(root, expected_fingerprint=catalog.fingerprint)
+        except (CatalogError, OSError, UnicodeError) as exc:
+            raise PublicationPending({"status": "partial", "bundle_committed": True,
+                "created_role": entry.to_dict(), "index_status": "pending",
+                "recovery": "reindex", "error": str(exc)}) from exc
+        return entry, build_catalog(root)
+
+
+def transition_preview(root: Path) -> dict[str, object]:
+    """Inspect exact legacy pairs; no role-root creation or index repair."""
+    root = repository_root(root)
+    legacy = build_catalog(root, role_root_name=LEGACY_ROLE_ROOT_NAME)
+    target_root = checked_path(root / ROLE_ROOT_NAME)
+    if target_root.exists() and not target_root.is_dir():
+        raise CatalogError("active role root is not a directory")
+    pairs = []
+    conflicts = [f"invalid legacy bundle {e.folder}: {'; '.join(e.diagnostics)}" for e in legacy.invalid_roles]
+    for entry in legacy.valid_roles:
+        destination = checked_path(target_root / entry.name)
+        if destination.exists() and not destination.is_dir():
+            conflicts.append(f"role destination is not a directory: {entry.name}")
+        files = []
+        for name, expected in (("AGENTS.md", entry.agents_sha256), ("ROLE.md", entry.role_sha256)):
+            target = checked_path(destination / name)
+            actual = file_digest(target)
+            if actual is not None and actual != expected:
+                conflicts.append(f"customized destination: {entry.name}/{name}")
+            files.append({"source": f"{LEGACY_ROLE_ROOT_NAME}/{entry.name}/{name}",
+                          "destination": f"{ROLE_ROOT_NAME}/{entry.name}/{name}",
+                          "source_sha256": expected, "destination_sha256": actual})
+        pairs.append({"name": entry.name, "files": files})
+    preview = {"schema_version": 1, "project_root": str(root),
+               "legacy_fingerprint": legacy.fingerprint, "pairs": pairs,
+               "conflicts": conflicts, "receipt": f"{ROLE_ROOT_NAME}/.transition.json"}
+    preview["preview_sha256"] = object_digest(preview)
+    return preview
+
+
+def load_manifest(path: Path) -> dict[str, object]:
+    checked_path(path)
+    if not path.is_file() or path.stat().st_size > MAX_MANIFEST_BYTES:
+        raise CatalogError("manifest must be a bounded regular file")
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise CatalogError("duplicate JSON key in role manifest")
+            result[key] = value
+        return result
+    try:
+        value = json.loads(path.read_text(), object_pairs_hook=unique)
+    except (ValueError, RecursionError) as exc:
+        raise CatalogError("invalid role manifest JSON") from exc
+    if not isinstance(value, dict):
+        raise CatalogError("role manifest must be an object")
+    return value
+
+
+def validate_preview(preview: dict[str, object], root: Path) -> None:
+    fields = {"schema_version", "project_root", "legacy_fingerprint", "pairs", "conflicts", "receipt", "preview_sha256"}
+    if not isinstance(preview, dict) or set(preview) != fields or type(preview["schema_version"]) is not int or preview["schema_version"] != 1:
+        raise CatalogError("unsupported role transition preview")
+    unsigned = {k: v for k, v in preview.items() if k != "preview_sha256"}
+    if preview["preview_sha256"] != object_digest(unsigned) or preview["project_root"] != str(root):
+        raise CatalogError("role transition preview digest or project mismatch")
+    if preview["receipt"] != f"{ROLE_ROOT_NAME}/.transition.json" or preview["conflicts"] != []:
+        raise CatalogError("role transition preview contains conflicts or an unsafe receipt")
+    if not isinstance(preview["pairs"], list) or not preview["pairs"]:
+        raise CatalogError("role transition needs at least one valid legacy pair")
+    names = set()
+    for pair in preview["pairs"]:
+        if not isinstance(pair, dict) or set(pair) != {"name", "files"} or not isinstance(pair["name"], str):
+            raise CatalogError("invalid transition pair")
+        validate_role_name(pair["name"])
+        if pair["name"] in names:
+            raise CatalogError("duplicate transition pair")
+        names.add(pair["name"])
+        if not isinstance(pair["files"], list) or len(pair["files"]) != 2:
+            raise CatalogError("transition must retain both role files")
+        for filename, item in zip(("AGENTS.md", "ROLE.md"), pair["files"]):
+            if not isinstance(item, dict) or set(item) != {"source", "destination", "source_sha256", "destination_sha256"}:
+                raise CatalogError("invalid transition file fields")
+            if item["source"] != f"{LEGACY_ROLE_ROOT_NAME}/{pair['name']}/{filename}" or item["destination"] != f"{ROLE_ROOT_NAME}/{pair['name']}/{filename}":
+                raise CatalogError("unconfined transition path")
+            for key in ("source_sha256", "destination_sha256"):
+                value = item[key]
+                if key == "destination_sha256" and value is None:
+                    continue
+                if not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value):
+                    raise CatalogError("invalid transition digest")
+
+
+def validate_transition_receipt(value: object, root: Path, *, historical: bool = False) -> dict[str, str]:
+    fields = {"schema_version", "preview", "completed", "status"}
+    if not historical:
+        fields.add("history")
+    if not isinstance(value, dict) or set(value) != fields or type(value["schema_version"]) is not int or value["schema_version"] != 1:
+        raise CatalogError("unsupported transition receipt; preserve it for reviewed recovery")
+    validate_preview(value["preview"], root)
+    if not isinstance(value["status"], str) or value["status"] not in {"pending", "completed"} or (historical and value["status"] != "completed"):
+        raise CatalogError("invalid transition receipt status")
+    destinations = {item["destination"]: item["source_sha256"] for pair in value["preview"]["pairs"] for item in pair["files"]}
+    completed = value["completed"]
+    if not isinstance(completed, list) or any(not isinstance(item, str) or item not in destinations for item in completed) or len(set(completed)) != len(completed):
+        raise CatalogError("invalid completed transition references")
+    if value["status"] == "completed" and set(completed) != set(destinations):
+        raise CatalogError("completed transition receipt has incomplete destination coverage")
+    if not historical:
+        if not isinstance(value["history"], list):
+            raise CatalogError("invalid retained transition history")
+        for previous in value["history"]:
+            # Historical provenance is checked internally; its old destinations
+            # need not retain those bytes after a later authorized adoption.
+            validate_transition_receipt(previous, root, historical=True)
+    return destinations
+
+
+def transition_apply(root: Path, preview: dict[str, object], *, confirmed: bool) -> dict[str, object]:
+    root = repository_root(root)
+    if not confirmed:
+        raise CatalogError("role transition requires explicit confirmation of the reviewed preview")
+    validate_preview(preview, root)
+    with mutation_lock(root):
+        fresh = transition_preview(root)
+        receipt_path = checked_path(root / ROLE_ROOT_NAME / ".transition.json")
+        prior = load_manifest(receipt_path) if receipt_path.exists() else None
+        if prior is not None:
+            destinations = validate_transition_receipt(prior, root)
+            if any(file_digest(root / item) != destinations[item] for item in prior["completed"]):
+                raise CatalogError("a committed transition destination changed; preserve it for review")
+        resuming = prior is not None and prior["preview"] == preview
+        if prior is not None and prior["status"] == "pending" and not resuming:
+            raise CatalogError("another reviewed role transition needs recovery first")
+        if fresh["legacy_fingerprint"] != preview["legacy_fingerprint"] or fresh["conflicts"]:
+            raise CatalogError("legacy roles changed or a destination is customized")
+        if not resuming and fresh != preview:
+            raise CatalogError("stale role transition preview")
+        for pair in preview["pairs"]:
+            for item in pair["files"]:
+                actual = file_digest(root / item["destination"])
+                allowed = {item["destination_sha256"]}
+                if resuming:
+                    allowed.add(item["source_sha256"])
+                if actual not in allowed:
+                    raise CatalogError("transition destination changed outside the reviewed publication")
+        if resuming and prior["status"] == "completed":
+            for pair in preview["pairs"]:
+                for item in pair["files"]:
+                    if file_digest(root / item["destination"]) != item["source_sha256"]:
+                        raise CatalogError("completed transition bytes changed; do not replay it")
+            catalog = build_catalog(root)
+            if catalog.index_status != "current":
+                raise PublicationPending({"status": "partial", "transition_committed": True,
+                    "index_status": catalog.index_status, "recovery": "reindex",
+                    "error": "completed transition has index drift; regenerate navigation explicitly"})
+            return {"status": "current", "mutated": False, "receipt": str(receipt_path.relative_to(root)), **catalog.to_dict()}
+        role_root = checked_path(root / ROLE_ROOT_NAME)
+        role_root.mkdir(exist_ok=True)
+        history = [] if prior is None else prior["history"] + ([{k: v for k, v in prior.items() if k != "history"}] if not resuming else [])
+        receipt = prior if resuming else {"schema_version": 1, "preview": preview, "completed": [], "status": "pending", "history": history}
+        atomic_publish(receipt_path, (json.dumps(receipt, indent=2) + "\n").encode())
+        try:
+            for pair in preview["pairs"]:
+                target_dir = checked_path(role_root / pair["name"])
+                target_dir.mkdir(exist_ok=True)
+                for item in pair["files"]:
+                    source = checked_path(root / item["source"])
+                    content = source.read_bytes()
+                    if digest_bytes(content) != item["source_sha256"]:
+                        raise CatalogError("legacy role changed during publication")
+                    target = checked_path(root / item["destination"])
+                    current = file_digest(target)
+                    if current != item["source_sha256"]:
+                        if current != item["destination_sha256"]:
+                            raise CatalogError("role destination changed during publication")
+                        atomic_publish(target, content, replace=False)
+                    if item["destination"] not in receipt["completed"]:
+                        receipt["completed"].append(item["destination"])
+                        atomic_publish(receipt_path, (json.dumps(receipt, indent=2) + "\n").encode())
+                entry = validate_role_directory(target_dir, root)
+                if not entry.valid:
+                    raise CatalogError(f"published role is invalid: {entry.diagnostics}")
+            publish_index(root)
+            receipt["status"] = "completed"
+            atomic_publish(receipt_path, (json.dumps(receipt, indent=2) + "\n").encode())
+            return {"status": "updated", "mutated": True, "receipt": str(receipt_path.relative_to(root)), **build_catalog(root).to_dict()}
+        except (CatalogError, OSError, UnicodeError) as exc:
+            raise PublicationPending({"status": "partial", "transition_committed": True,
+                "receipt": str(receipt_path.relative_to(root)), "completed_files": receipt["completed"],
+                "recovery": "transition-apply with the same reviewed preview and --confirmed", "error": str(exc)}) from exc
 
 
 def add_format_argument(parser: argparse.ArgumentParser) -> None:
@@ -722,7 +1129,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--repo-root",
         default=".",
-        help="project root containing sub-agent-roles (default: current directory)",
+        help="project root containing roles (default: current directory)",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -739,6 +1146,14 @@ def build_parser() -> argparse.ArgumentParser:
     show_parser = subparsers.add_parser("show", help="show one valid role")
     show_parser.add_argument("name", help="role metadata name")
     add_format_argument(show_parser)
+
+    for command, help_text in (("reindex", "regenerate role navigation from current pairs"),
+                               ("transition-preview", "inspect a preserved legacy-role transition")):
+        add_format_argument(subparsers.add_parser(command, help=help_text))
+    transition_parser = subparsers.add_parser("transition-apply", help="apply or recover an exact reviewed legacy preview")
+    transition_parser.add_argument("--preview-file", type=Path, required=True)
+    transition_parser.add_argument("--confirmed", action="store_true")
+    add_format_argument(transition_parser)
 
     create_parser = subparsers.add_parser(
         "create", help="create, validate, and relist one reusable role"
@@ -766,11 +1181,22 @@ def run(args: argparse.Namespace) -> int:
 
     root = repository_root(args.repo_root)
 
+    if args.command in {"reindex", "transition-preview", "transition-apply"}:
+        if args.command == "reindex":
+            result = reindex(root)
+        elif args.command == "transition-preview":
+            result = transition_preview(root)
+        else:
+            result = transition_apply(root, load_manifest(args.preview_file), confirmed=args.confirmed)
+        print(json.dumps(result, indent=2, sort_keys=True))
+        return 1 if result.get("conflicts") or result.get("invalid_roles") else 0
+
     if args.command == "create":
         entry, catalog = create_role(root, args)
         if args.format == "json":
             payload = catalog.to_dict()
             payload["created_role"] = entry.to_dict()
+            payload["bundle_committed"] = True
             print(json.dumps(payload, indent=2, sort_keys=True))
         else:
             print(f"Created and validated role: {entry.name}\n")
@@ -784,7 +1210,7 @@ def run(args: argparse.Namespace) -> int:
 
     if args.command == "validate":
         print_catalog(catalog, args.format)
-        return 1 if catalog.invalid_roles else 0
+        return 1 if catalog.invalid_roles or catalog.index_status != "current" else 0
 
     if args.command == "show":
         entry = find_valid_role(catalog, args.name)
@@ -804,6 +1230,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         return run(args)
+    except PublicationPending as exc:
+        print(json.dumps(exc.result, indent=2, sort_keys=True))
+        return 3
     except (CatalogError, OSError, UnicodeError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2

@@ -1,0 +1,30 @@
+diff --git a/ROLE.md b/ROLE.md
+index 2bade30..d0537b8 100644
+--- a/ROLE.md
++++ b/ROLE.md
+@@ -44,8 +44,10 @@ The Project Director owns workspace registration and reusable-asset decisions
+ and must:
+ 
+ 1. Treat `depot/projects.json` as factual workspace inventory only.
+-2. Treat depot source collections as reusable inputs, not automatic authority
+-   over active project files.
++2. Maintain reusable assets in the depot source collections and use the
++   explicit template update mappings to keep `Projects/Sys4AI-Template-Project/`
++   current. Ordinary product projects and active root installations remain
++   independent of those automatic updates.
+ 3. Treat root and child project files as project-local artifacts.
+ 4. Require an exact source, destination, file set, and overwrite boundary
+    before adopting or refreshing a reusable asset.
+@@ -58,6 +60,12 @@ because it is beneath the workspace. Registration is explicit. A project may
+ own a separate Git repository, remote, and GitHub Pages site, but local depot
+ authority does not authorize creating or publishing any of them.
+ 
++The template is the source of starter assets for both project creation and
++clean existing-project preparation. Follow `depot/template-update.md` to check
++automatic source updates, resolve mapping conflicts, and maintain the local
++watcher. Author reusable changes in the appropriate `*-depo` collection;
++do not edit its mapped template copy directly.
++
+ ## Authority and non-authority
+ 
+ The Project Director owns task framing, decomposition, role selection,

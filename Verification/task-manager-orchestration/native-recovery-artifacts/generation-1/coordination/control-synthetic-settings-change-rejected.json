@@ -1,0 +1,80 @@
+{
+  "label": "synthetic-settings-change-rejected",
+  "observed_at": "2026-09-08T12:21:43.198042+00:00",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/.agents/skills/agent-task/scripts/task_state.py",
+    "--project-root",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "orchestrate",
+    "TASK-20260908-A8B65949",
+    "--expected-revision",
+    "15"
+  ],
+  "payload": {
+    "event": {
+      "event_id": "event_ce5213c82a524beeac7887cd96ea1d14",
+      "actor": "/root/recovery_manager",
+      "execution_id": "recovery_validation_20260908",
+      "generation": 1,
+      "kind": "execution.resume",
+      "data": {
+        "settings": {
+          "mode": "observed_equal",
+          "model": "synthetic-different-model-for-negative-control",
+          "effort": "synthetic-different-effort-for-negative-control",
+          "evidence": [
+            {
+              "path": "coordination/synthetic-settings-change.json",
+              "sha256": "67f5e9702bb60b4f222bc749600742e2dfcf887cae75381017081c87ea1dafbf"
+            }
+          ]
+        },
+        "reason": "Explicitly synthetic requested-setting negative control after worker reconciliation; no native model, effort, spawn override or configuration is changed."
+      }
+    },
+    "response": {
+      "work_completed": [
+        "Observed synthetic-settings-change-rejected."
+      ],
+      "verification_evidence": [
+        "Exact current inputs and returned native/artifact evidence are retained."
+      ],
+      "user_response_summary": "Observed synthetic-settings-change-rejected.",
+      "current_summary": "Observed synthetic-settings-change-rejected.",
+      "next_step": "Continue the bounded approved validation.",
+      "blockers": [],
+      "open_questions": [],
+      "relevant_files": []
+    }
+  },
+  "expected_error": "ORCH_SETTINGS_REPLACEMENT",
+  "exit_code": 2,
+  "result": {
+    "schema_version": 1,
+    "command": "orchestrate",
+    "status": "error",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": false,
+    "task_id": null,
+    "revision_before": null,
+    "revision_after": null,
+    "response_id": null,
+    "response_path": null,
+    "warnings": [],
+    "errors": [
+      {
+        "code": "ORCH_SETTINGS_REPLACEMENT",
+        "message": "A setting change requires reconciled manager replacement and a new generation."
+      }
+    ],
+    "recovery_required": false
+  },
+  "stderr": "",
+  "canonical_before_sha256": "a918739d644b1cd615963a180aaf66a15a81c277ba9ceaf6db9fc87688ea2e30",
+  "canonical_after_sha256": "a918739d644b1cd615963a180aaf66a15a81c277ba9ceaf6db9fc87688ea2e30",
+  "canonical_unchanged": true,
+  "revision_before": 15,
+  "revision_after": 15
+}

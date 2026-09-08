@@ -56,3 +56,20 @@ when the real project's repository is configured. It excludes virtual
 environments, generated caches, local secrets and Task runtime files. Preserve those protections when specializing the project.
 Review inherited path-specific rules, including `/Projects/*`, against the real
 product's layout rather than replacing its exclusions with depot defaults.
+
+## Task and role storage
+
+The Task helper preserves schema-1 history and adds a versioned orchestration
+extension for enabled records. Task state, role definitions, native execution
+and managed document lifecycles stay separate. Current role definitions use
+paired files under `roles/` with a destination-generated `roles/INDEX.md`.
+The role mutation helper uses Python standard-library POSIX advisory locking;
+unsupported hosts must report the missing capability rather than bypass it.
+No database, queue service, memory/ontology backend or new production package
+is required by orchestration.
+
+Use the installed Task and role contracts for current commands, exact writer
+and version checks, index repair, selected legacy transition and recovery.
+Initializer starter data excludes native handles, live execution and role
+transition runtime receipts. Existing customized projects require their own
+reviewed adoption; registration and read-only inspection do not migrate them.

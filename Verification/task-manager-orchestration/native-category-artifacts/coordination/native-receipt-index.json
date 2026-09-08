@@ -1,0 +1,1069 @@
+{
+  "canonical_task": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/task.json",
+    "sha256": "d20a26caf7965f6f975c8c4e210d1d14b4c1dbf5cb76dd4992c4952e6d15ebde"
+  },
+  "execution_id": "ticket_validation_20260908",
+  "generation": 1,
+  "manager_native_status_boundary": "Manager is running while producing this handoff; host must observe its final completion. Every child has its own completed observation after its last work.",
+  "count_children": 11,
+  "assignments": [
+    {
+      "assignment_id": "analysis_a",
+      "function": "solver",
+      "subtask_id": "analysis",
+      "slot": "solver_a",
+      "native_id": "/root/task_manager_validation/analysis_a",
+      "role": {
+        "agents_path": "roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "catalog": {
+          "path": "context/catalog_4423fd78f0674038a7b989afca771d5b.json",
+          "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+        },
+        "name": "project-sub-agent",
+        "role_path": "roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "role_reads": {
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "evidence": "Read both selected project-sub-agent files in full; ordinary solver authority and exact bounded stopping condition retained.",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "native_launch_receipt": {
+        "result": {
+          "task_name": "/root/task_manager_validation/analysis_a"
+        },
+        "tool": "collaboration.spawn_agent"
+      },
+      "last_observation": {
+        "changes": [
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/analysis_a/candidate-v1.md",
+            "sha256": "73ab17594aa57ec3466b331562c2f7f791a7e4b54a47c0e771cae72d507cee4f"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/analysis_a/receipt-v1.json",
+            "sha256": "da54afceb329b26f143c299c4fd4de0ecfef7353bca0e623582f6b955fd3c026"
+          }
+        ],
+        "receipt": {
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root/task_manager_validation/analysis_a",
+                "agent_status": "completed"
+              }
+            ]
+          },
+          "tool": "collaboration.list_agents"
+        }
+      },
+      "canonical_assignment_state": "completed",
+      "baseline": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069",
+      "round": 1,
+      "current_context": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069.json",
+          "sha256": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069"
+        },
+        {
+          "path": "data/tickets.json",
+          "sha256": "3923fe6ee5e9c9cb40da4e53030be11844b3c9dc8bf22a620539576a163eea3d"
+        }
+      ],
+      "input_receipt": null
+    },
+    {
+      "assignment_id": "analysis_b",
+      "function": "solver",
+      "subtask_id": "analysis",
+      "slot": "solver_b",
+      "native_id": "/root/task_manager_validation/analysis_b",
+      "role": {
+        "agents_path": "roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "catalog": {
+          "path": "context/catalog_20bef40eecea48deb613d997f3b7370b.json",
+          "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+        },
+        "name": "project-sub-agent",
+        "role_path": "roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "role_reads": {
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "evidence": "Read both selected role files in full before analysis; hashes matched packet; ordinary solver authority retained.",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "native_launch_receipt": {
+        "result": {
+          "task_name": "/root/task_manager_validation/analysis_b"
+        },
+        "tool": "collaboration.spawn_agent"
+      },
+      "last_observation": {
+        "changes": [
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/analysis_b/candidate-v1.md",
+            "sha256": "c761201d2e8a0dc516c40ae1711b587e1831cab4d81d6403c53db0cad51f2b46"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/analysis_b/receipt-v1.json",
+            "sha256": "e215fbc1173f8617307410ea46d8c3737caf0668d6c61e966ce16926391f243f"
+          }
+        ],
+        "receipt": {
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root/task_manager_validation/analysis_b",
+                "agent_status": "completed"
+              }
+            ]
+          },
+          "tool": "collaboration.list_agents"
+        }
+      },
+      "canonical_assignment_state": "completed",
+      "baseline": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069",
+      "round": 1,
+      "current_context": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069.json",
+          "sha256": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069"
+        },
+        {
+          "path": "data/tickets.json",
+          "sha256": "3923fe6ee5e9c9cb40da4e53030be11844b3c9dc8bf22a620539576a163eea3d"
+        }
+      ],
+      "input_receipt": null
+    },
+    {
+      "assignment_id": "analysis_c",
+      "function": "solver",
+      "subtask_id": "analysis",
+      "slot": "solver_c",
+      "native_id": "/root/task_manager_validation/analysis_c",
+      "role": {
+        "agents_path": "roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "catalog": {
+          "path": "context/catalog_726321c0be024016ae608a41af2a83e1.json",
+          "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+        },
+        "name": "project-sub-agent",
+        "role_path": "roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "role_reads": {
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "evidence": "Read both complete selected role files and project SOUL, AGENTS, ROLE and SPECS before producing the candidate; role digests match the packet.",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "native_launch_receipt": {
+        "result": {
+          "task_name": "/root/task_manager_validation/analysis_c"
+        },
+        "tool": "collaboration.spawn_agent"
+      },
+      "last_observation": {
+        "changes": [
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/analysis_c/candidate-v1.md",
+            "sha256": "9c1003a67784cf391db1cfd3ded94f30009b0195e0cc459b0257068687e99cae"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/analysis_c/receipt-v1.json",
+            "sha256": "7a5e8b0f6670bf88d915435a18eb229d35a11b818816e197614426b18dd68f00"
+          }
+        ],
+        "receipt": {
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root/task_manager_validation/analysis_c",
+                "agent_status": "completed"
+              }
+            ]
+          },
+          "tool": "collaboration.list_agents"
+        }
+      },
+      "canonical_assignment_state": "completed",
+      "baseline": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069",
+      "round": 1,
+      "current_context": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069.json",
+          "sha256": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069"
+        },
+        {
+          "path": "data/tickets.json",
+          "sha256": "3923fe6ee5e9c9cb40da4e53030be11844b3c9dc8bf22a620539576a163eea3d"
+        }
+      ],
+      "input_receipt": null
+    },
+    {
+      "assignment_id": "analysis_senior",
+      "function": "senior",
+      "subtask_id": "analysis",
+      "slot": "senior",
+      "native_id": "/root/task_manager_validation/analysis_senior",
+      "role": {
+        "agents_path": "roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "catalog": {
+          "path": "context/catalog_1977c87831fe43c693f363e529e27f00.json",
+          "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+        },
+        "name": "project-sub-agent",
+        "role_path": "roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "role_reads": {
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "evidence": "Read both complete selected role files and the complete SOUL, ROLE, AGENTS, SPECS, communication skill, child contract and exact assignment packet before producing the synthesis. Observed selected role hashes match the packet.",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "native_launch_receipt": {
+        "result": {
+          "task_name": "/root/task_manager_validation/analysis_senior"
+        },
+        "tool": "collaboration.spawn_agent"
+      },
+      "last_observation": {
+        "changes": [
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/analysis_senior/proposal-v1.md",
+            "sha256": "38a563ef628c0d052234931c71a459865f4a9b27886f242b3251423233cccb6f"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/analysis_senior/synthesis-v1.json",
+            "sha256": "d6942ebbddef7e3ae2b9fc6660e2c5b965baf627597d5b2a8886c19a3abe7951"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/analysis_senior/receipt-v1.json",
+            "sha256": "961e42a299e6d3a809034c02e12027701a44d06795da9070db4b4d9e7e5959eb"
+          }
+        ],
+        "receipt": {
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root/task_manager_validation/analysis_senior",
+                "agent_status": "completed"
+              }
+            ]
+          },
+          "tool": "collaboration.list_agents"
+        }
+      },
+      "canonical_assignment_state": "completed",
+      "baseline": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069",
+      "round": 1,
+      "current_context": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069.json",
+          "sha256": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/analysis_a_v1.md",
+          "sha256": "73ab17594aa57ec3466b331562c2f7f791a7e4b54a47c0e771cae72d507cee4f"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/analysis_b_v1.md",
+          "sha256": "c761201d2e8a0dc516c40ae1711b587e1831cab4d81d6403c53db0cad51f2b46"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/analysis_c_v1.md",
+          "sha256": "9c1003a67784cf391db1cfd3ded94f30009b0195e0cc459b0257068687e99cae"
+        }
+      ],
+      "input_receipt": null
+    },
+    {
+      "assignment_id": "coding_a",
+      "function": "solver",
+      "subtask_id": "coding",
+      "slot": "solver_a",
+      "native_id": "/root/task_manager_validation/coding_a",
+      "role": {
+        "agents_path": "roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "catalog": {
+          "path": "coordination/catalog_0fdf7ebb2f004bf39c3a70b2f095a97b.json",
+          "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+        },
+        "name": "project-sub-agent",
+        "role_path": "roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "role_reads": {
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "evidence": "Read both selected role files again in full and verified hashes under the current rebind; previously read root guidance remains unchanged.",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "native_launch_receipt": {
+        "result": {
+          "task_name": "/root/task_manager_validation/coding_a"
+        },
+        "tool": "collaboration.spawn_agent"
+      },
+      "last_observation": {
+        "changes": [
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_a/candidate-v3.md",
+            "sha256": "13655a83e362d3cb02bc81f407ffe7d0ce03a1a0c7734dd47f467b811665e4d3"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_a/receipt-v3.json",
+            "sha256": "dafd511cea67315898855d60221f26ed73cd4c09073495733416c20eab37e94e"
+          }
+        ],
+        "receipt": {
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root/task_manager_validation/coding_a",
+                "agent_status": "completed"
+              }
+            ]
+          },
+          "tool": "collaboration.list_agents"
+        }
+      },
+      "canonical_assignment_state": "completed",
+      "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "round": 3,
+      "current_context": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee.json",
+          "sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_conflict_v1.md",
+          "sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7"
+        },
+        {
+          "path": "coordination/strict-policy-steering.json",
+          "sha256": "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+          "sha256": "71136dfcfe79fc38bd7319cac2e1a2dfceb13fa2ad4931bda5276be9b0c2d565"
+        }
+      ],
+      "input_receipt": {
+        "artifact_sha256s": [
+          "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+          "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7",
+          "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65",
+          "71136dfcfe79fc38bd7319cac2e1a2dfceb13fa2ad4931bda5276be9b0c2d565"
+        ],
+        "evidence": "Actual native send_message delivered this exact packet and its listed current artifact digests without waking the completed instance; native tool returned success.",
+        "native_id": "/root/task_manager_validation/coding_a",
+        "tool": "collaboration.send_message"
+      }
+    },
+    {
+      "assignment_id": "coding_b",
+      "function": "solver",
+      "subtask_id": "coding",
+      "slot": "solver_b",
+      "native_id": "/root/task_manager_validation/coding_b",
+      "role": {
+        "agents_path": "roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "catalog": {
+          "path": "coordination/catalog_78b31a09043c4a57ab1c8cb27041d6d8.json",
+          "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+        },
+        "name": "project-sub-agent",
+        "role_path": "roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "role_reads": {
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "evidence": "Reread both selected role files in full for this same-solver revision; exact current hashes match the rebind packet.",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "native_launch_receipt": {
+        "result": {
+          "task_name": "/root/task_manager_validation/coding_b"
+        },
+        "tool": "collaboration.spawn_agent"
+      },
+      "last_observation": {
+        "changes": [
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_b/candidate-v2.md",
+            "sha256": "5c7f2146a68b57d15e0d2a7a7cc69e6c878a52bbf517e9f0e09db495a6accc89"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_b/receipt-v2.json",
+            "sha256": "6c2434092a172cd835b828a7bf84f6e58800a57bd32aa30a06bd8c46f41a6b9f"
+          }
+        ],
+        "receipt": {
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root/task_manager_validation/coding_b",
+                "agent_status": "completed"
+              }
+            ]
+          },
+          "tool": "collaboration.list_agents"
+        }
+      },
+      "canonical_assignment_state": "completed",
+      "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "round": 3,
+      "current_context": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee.json",
+          "sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_conflict_v1.md",
+          "sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7"
+        },
+        {
+          "path": "coordination/strict-policy-steering.json",
+          "sha256": "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_b_v1.md",
+          "sha256": "c20f8d2d2dd29d9cda4c727baef1cc1f14feedfcbd41735c7c6e4858ad6b0e03"
+        }
+      ],
+      "input_receipt": {
+        "artifact_sha256s": [
+          "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+          "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7",
+          "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65",
+          "c20f8d2d2dd29d9cda4c727baef1cc1f14feedfcbd41735c7c6e4858ad6b0e03"
+        ],
+        "evidence": "Actual native send_message delivered this exact packet and its listed current artifact digests without waking the completed instance; native tool returned success.",
+        "native_id": "/root/task_manager_validation/coding_b",
+        "tool": "collaboration.send_message"
+      }
+    },
+    {
+      "assignment_id": "coding_implementer",
+      "function": "implementer",
+      "subtask_id": "coding",
+      "slot": "implementer",
+      "native_id": "/root/task_manager_validation/coding_implementer",
+      "role": {
+        "agents_path": "roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "catalog": {
+          "path": "coordination/catalog_bb8a7b2e988e43418aad0e23f145407f.json",
+          "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+        },
+        "name": "project-sub-agent",
+        "role_path": "roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "role_reads": {
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "evidence": "Directly read both assigned project-sub-agent files before implementation; hashes match the exact packet and fresh-catalog reference. This child remains the dedicated implementer with no canonical writer authority.",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "native_launch_receipt": {
+        "result": {
+          "task_name": "/root/task_manager_validation/coding_implementer"
+        },
+        "tool": "collaboration.spawn_agent"
+      },
+      "last_observation": {
+        "changes": [
+          {
+            "path": "ticket_ordering.py",
+            "sha256": "7d633c192d9a474a3d2f021d80cf1109c245708de6bd1b5789211076c7872292"
+          },
+          {
+            "path": "tests/__init__.py",
+            "sha256": "42a7d02e27cec35ec1706a69f7d274af89df09af64de1e773d68b136c486458a"
+          },
+          {
+            "path": "tests/test_ticket_ordering.py",
+            "sha256": "2c2dfcf1e68bb5b840bfc96a54f9f68c9bd934c1a20d04421752585912954caa"
+          },
+          {
+            "path": "implementation-evidence/check_behavior.py",
+            "sha256": "666f2eaab038aa55c2ddbd544dfe3ac52ced9162c39e31bd20f0ea7135241195"
+          },
+          {
+            "path": "implementation-evidence/command-results.json",
+            "sha256": "264914c2d4a563cc07390e06c97c1201f147e7d81113f9e14013c33aa82f97ca"
+          },
+          {
+            "path": "implementation-evidence/direct-checks.json",
+            "sha256": "4c7a75eb43bc4989704eab459a4f96cc905313e7d626f6fe57a1d670f2bb7663"
+          },
+          {
+            "path": "implementation-evidence/preflight.json",
+            "sha256": "baa1fe1c3b2c29b4191c904d0e8e333687e62ff2785794287594f3cb25f0f5f2"
+          },
+          {
+            "path": "implementation-evidence/unittest.log",
+            "sha256": "bf1d8186df2d63ab6beb6c5dbd7841764bfe6ec831b9b94b3acbe5cbc71d83a5"
+          },
+          {
+            "path": "implementation-evidence/receipt.json",
+            "sha256": "cdf82338fd30821f2ec8a8311f9317ec16d2dc69cb2790a19a970bfaa517c135"
+          }
+        ],
+        "receipt": {
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root/task_manager_validation/coding_implementer",
+                "agent_status": "completed"
+              }
+            ]
+          },
+          "tool": "collaboration.list_agents"
+        }
+      },
+      "canonical_assignment_state": "completed",
+      "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "round": 3,
+      "current_context": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee.json",
+          "sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_proposal_v2.md",
+          "sha256": "3a694d70363b42f5ee5c6326f12cf82f587d5402f7a3313c48009272b842cab4"
+        }
+      ],
+      "input_receipt": null
+    },
+    {
+      "assignment_id": "coding_reviewer_a",
+      "function": "reviewer",
+      "subtask_id": "coding",
+      "slot": "reviewer_a",
+      "native_id": "/root/task_manager_validation/coding_reviewer_a",
+      "role": {
+        "agents_path": "roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "catalog": {
+          "path": "coordination/catalog_cf86df656f7b4f9691e0751b29d32a17.json",
+          "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+        },
+        "name": "project-sub-agent",
+        "role_path": "roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "role_reads": {
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "evidence": "Both selected role files reread in full for this continuation and matched the exact rebind. Owning root instructions, child contract and communication skill were read during this assignment; SOUL hash remains unchanged.",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "native_launch_receipt": {
+        "result": {
+          "task_name": "/root/task_manager_validation/coding_reviewer_a"
+        },
+        "tool": "collaboration.spawn_agent"
+      },
+      "last_observation": {
+        "changes": [
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_a/findings-v3.json",
+            "sha256": "5a286092a641aad5d98d7bb2c24029de10450bcf9d37609b1dbfc7eb4c411076"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_a/receipt-v3.json",
+            "sha256": "f042f9a30445564c89b034c5b4593860f390ec93c78270bae3a7515cf1e972dd"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_a/checks-v3.json",
+            "sha256": "95b73776e21986792a7ec9256fe645e814a9236b4fae81bf45f284170cb6c578"
+          }
+        ],
+        "receipt": {
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root/task_manager_validation/coding_reviewer_a",
+                "agent_status": "completed"
+              }
+            ]
+          },
+          "tool": "collaboration.list_agents"
+        }
+      },
+      "canonical_assignment_state": "completed",
+      "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "round": 3,
+      "current_context": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee.json",
+          "sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+          "sha256": "13655a83e362d3cb02bc81f407ffe7d0ce03a1a0c7734dd47f467b811665e4d3"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_conflict_v1.md",
+          "sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7"
+        },
+        {
+          "path": "coordination/strict-policy-steering.json",
+          "sha256": "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+        }
+      ],
+      "input_receipt": {
+        "artifact_sha256s": [
+          "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+          "13655a83e362d3cb02bc81f407ffe7d0ce03a1a0c7734dd47f467b811665e4d3",
+          "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7",
+          "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+        ],
+        "evidence": "Actual native send_message delivered this exact packet and its listed current artifact digests without waking the completed instance; native tool returned success.",
+        "native_id": "/root/task_manager_validation/coding_reviewer_a",
+        "tool": "collaboration.send_message"
+      }
+    },
+    {
+      "assignment_id": "coding_reviewer_b",
+      "function": "reviewer",
+      "subtask_id": "coding",
+      "slot": "reviewer_b",
+      "native_id": "/root/task_manager_validation/coding_reviewer_b",
+      "role": {
+        "agents_path": "roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "catalog": {
+          "path": "coordination/catalog_41e7970dba93497f81ef9eeb3382e71b.json",
+          "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+        },
+        "name": "project-sub-agent",
+        "role_path": "roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "role_reads": {
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "evidence": "Both complete selected role files were read in this same native reviewer. Their current byte digests match the unchanged loaded files and the strict rebind packet.",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "native_launch_receipt": {
+        "result": {
+          "task_name": "/root/task_manager_validation/coding_reviewer_b"
+        },
+        "tool": "collaboration.spawn_agent"
+      },
+      "last_observation": {
+        "changes": [
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_b/findings-v2.json",
+            "sha256": "838ac622eef6b1b730e796bdc49d82a78aca054e3c5d1314232c0bd1dfb20656"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_b/receipt-v2.json",
+            "sha256": "f7c0ef7b33ce7b68e9b7aa8b158481d4a5d974c925c6efee57451ca905a2e391"
+          }
+        ],
+        "receipt": {
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root/task_manager_validation/coding_reviewer_b",
+                "agent_status": "completed"
+              }
+            ]
+          },
+          "tool": "collaboration.list_agents"
+        }
+      },
+      "canonical_assignment_state": "completed",
+      "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "round": 3,
+      "current_context": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee.json",
+          "sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_b_v2.md",
+          "sha256": "5c7f2146a68b57d15e0d2a7a7cc69e6c878a52bbf517e9f0e09db495a6accc89"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_conflict_v1.md",
+          "sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7"
+        },
+        {
+          "path": "coordination/strict-policy-steering.json",
+          "sha256": "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+        }
+      ],
+      "input_receipt": {
+        "artifact_sha256s": [
+          "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+          "5c7f2146a68b57d15e0d2a7a7cc69e6c878a52bbf517e9f0e09db495a6accc89",
+          "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7",
+          "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+        ],
+        "evidence": "Actual native send_message delivered this exact packet and its listed current artifact digests without waking the completed instance; native tool returned success.",
+        "native_id": "/root/task_manager_validation/coding_reviewer_b",
+        "tool": "collaboration.send_message"
+      }
+    },
+    {
+      "assignment_id": "coding_senior",
+      "function": "senior",
+      "subtask_id": "coding",
+      "slot": "senior",
+      "native_id": "/root/task_manager_validation/coding_senior",
+      "role": {
+        "agents_path": "roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "catalog": {
+          "path": "coordination/catalog_c7f289dba168431b8bf50401b0a24cfb.json",
+          "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+        },
+        "name": "project-sub-agent",
+        "role_path": "roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "role_reads": {
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "evidence": "Both assigned role files reread in full in this current round and matched their assigned hashes; same bounded native senior, without writer, implementation or manager authority.",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "native_launch_receipt": {
+        "result": {
+          "task_name": "/root/task_manager_validation/coding_senior"
+        },
+        "tool": "collaboration.spawn_agent"
+      },
+      "last_observation": {
+        "changes": [
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_senior/proposal-v2.md",
+            "sha256": "3a694d70363b42f5ee5c6326f12cf82f587d5402f7a3313c48009272b842cab4"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_senior/synthesis-v2.json",
+            "sha256": "27868b0a68e13555b6a71e993b9e5873aadd683b3cee6208c70e33c8e5fcd0f8"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_senior/receipt-v2.json",
+            "sha256": "79c8a2252290a7a49c520b52cf2aae829369d2145e4444a02eb2f6428dde94ab"
+          }
+        ],
+        "receipt": {
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root/task_manager_validation/coding_senior",
+                "agent_status": "completed"
+              }
+            ]
+          },
+          "tool": "collaboration.list_agents"
+        }
+      },
+      "canonical_assignment_state": "completed",
+      "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "round": 3,
+      "current_context": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee.json",
+          "sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v3.md",
+          "sha256": "13655a83e362d3cb02bc81f407ffe7d0ce03a1a0c7734dd47f467b811665e4d3"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_b_v2.md",
+          "sha256": "5c7f2146a68b57d15e0d2a7a7cc69e6c878a52bbf517e9f0e09db495a6accc89"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/review_a_findings_v3.json",
+          "sha256": "5a286092a641aad5d98d7bb2c24029de10450bcf9d37609b1dbfc7eb4c411076"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/review_b_findings_v2.json",
+          "sha256": "838ac622eef6b1b730e796bdc49d82a78aca054e3c5d1314232c0bd1dfb20656"
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_conflict_v1.md",
+          "sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7"
+        },
+        {
+          "path": "coordination/strict-policy-steering.json",
+          "sha256": "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+        }
+      ],
+      "input_receipt": {
+        "artifact_sha256s": [
+          "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+          "13655a83e362d3cb02bc81f407ffe7d0ce03a1a0c7734dd47f467b811665e4d3",
+          "5c7f2146a68b57d15e0d2a7a7cc69e6c878a52bbf517e9f0e09db495a6accc89",
+          "5a286092a641aad5d98d7bb2c24029de10450bcf9d37609b1dbfc7eb4c411076",
+          "838ac622eef6b1b730e796bdc49d82a78aca054e3c5d1314232c0bd1dfb20656",
+          "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7",
+          "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+        ],
+        "evidence": "Actual native send_message delivered this exact packet and its listed current artifact digests without waking the completed instance; native tool returned success.",
+        "native_id": "/root/task_manager_validation/coding_senior",
+        "tool": "collaboration.send_message"
+      }
+    },
+    {
+      "assignment_id": "fixture_worker",
+      "function": "worker",
+      "subtask_id": "fixture",
+      "slot": "worker",
+      "native_id": "/root/task_manager_validation/fixture_worker",
+      "role": {
+        "agents_path": "roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "catalog": {
+          "path": "context/catalog_95540fbc68ef412f9d52f93c90a02e3f.json",
+          "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+        },
+        "name": "project-sub-agent",
+        "role_path": "roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "role_reads": {
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "evidence": "Both roles/project-sub-agent/AGENTS.md and roles/project-sub-agent/ROLE.md were read in full through exec_command before artifact creation; Python recomputed their hashes and matched the supplied assignment packet.",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "native_launch_receipt": {
+        "result": {
+          "task_name": "/root/task_manager_validation/fixture_worker"
+        },
+        "tool": "collaboration.spawn_agent"
+      },
+      "last_observation": {
+        "changes": [
+          {
+            "path": "data/tickets.json",
+            "sha256": "3923fe6ee5e9c9cb40da4e53030be11844b3c9dc8bf22a620539576a163eea3d"
+          },
+          {
+            "path": "data/worker-receipt.json",
+            "sha256": "7437c2e9c22660b397f084fdad6aaac7a21ee3cc63d2c542796170b8c65e301c"
+          }
+        ],
+        "receipt": {
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root/task_manager_validation/fixture_worker",
+                "agent_status": "completed"
+              }
+            ]
+          },
+          "tool": "collaboration.list_agents"
+        }
+      },
+      "canonical_assignment_state": "completed",
+      "baseline": "6a2a48bc8faa3156fb4dff7cc5886b87a40165669759e35cbcd39b905b994aa8",
+      "round": 1,
+      "current_context": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_6a2a48bc8faa3156fb4dff7cc5886b87a40165669759e35cbcd39b905b994aa8.json",
+          "sha256": "6a2a48bc8faa3156fb4dff7cc5886b87a40165669759e35cbcd39b905b994aa8"
+        }
+      ],
+      "input_receipt": null
+    },
+    {
+      "assignment_id": "manager_validation",
+      "function": "manager",
+      "subtask_id": null,
+      "slot": "manager",
+      "native_id": "/root/task_manager_validation",
+      "role": {
+        "agents_path": "roles/task-manager/AGENTS.md",
+        "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+        "catalog": {
+          "path": "context/catalog_20162f2ed03942f5bb21e0b7a1a318a6.json",
+          "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+        },
+        "name": "task-manager",
+        "role_path": "roles/task-manager/ROLE.md",
+        "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0"
+      },
+      "role_reads": {
+        "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+        "evidence": "Manager directly read both complete role files, root SOUL, governance and installed Task contracts before readiness.",
+        "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "native_launch_receipt": {
+        "result": {
+          "task_name": "/root/task_manager_validation"
+        },
+        "tool": "collaboration.spawn_agent"
+      },
+      "last_observation": null,
+      "canonical_assignment_state": "active",
+      "baseline": "89d3c915511b33fa7a6278840c7d8c64c752a5f2b4b877c61c0fc2d8fdae1d5b",
+      "round": 0,
+      "current_context": [
+        {
+          "path": "context/scenario.md",
+          "sha256": "a9a04801f283389a870ccaa0b28926150d29be331b887c9bae9d505457bf5ede"
+        },
+        {
+          "path": "context/authority.json",
+          "sha256": "76f183366635df10c8d4bfccdfa95b883d1602e50bf12922d8508a71ffe49ced"
+        },
+        {
+          "path": "context/native-runtime.json",
+          "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+        }
+      ],
+      "input_receipt": null
+    }
+  ],
+  "raw_queued_status_evidence": "coordination/repair-raw-native-roster.json",
+  "queued_normalization": "coordination/repair-native-normalization.json"
+}

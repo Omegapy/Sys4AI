@@ -1,0 +1,153 @@
+{
+  "patch": {
+    "decisions": [
+      {
+        "authority_basis": "The current user explicitly activated to-implementation-plan for the named TRD.",
+        "decided_at": "2026-09-08T06:10:30.679857+00:00",
+        "decision_id": "DEC-001",
+        "source_ids": [
+          "SRC-001",
+          "SRC-002"
+        ],
+        "statement": "Create one new managed draft in the Sys4AI root from the supplied TRD, retaining all 37 requirement IDs. Keep Task, TRD, native goal, plan, and Git state separate.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-002",
+        "source_ids": [
+          "SRC-002"
+        ],
+        "statement": "P01: Extend task.json through schema version 2 for new orchestration-enabled records, with one versioned orchestration object. Preserve strict schema-1 read/validate support; never upgrade historical records during list, status, show, continue, or validation. Use an explicit reviewed upgrade only for a selected legacy Task that needs new execution state.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-003",
+        "source_ids": [
+          "SRC-002"
+        ],
+        "statement": "P01/P07: Keep task_state.py as the public storage CLI. Add a proposed orchestrate SELECTOR --expected-revision N --payload-file FILE route and a small orchestration_state.py sibling module for typed event validation. Proposed event families are manager reservation/receipt/activation, subtask definition, assignment, candidate, review, conflict, synthesis, acceptance, implementation result, stop request, and reconciliation. These are planned APIs and are not available today.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-004",
+        "source_ids": [
+          "SRC-002"
+        ],
+        "statement": "P01/P07: The canonical orchestration object records execution identity, handoff stage, designated manager, current writer assignment, versioned subtasks, role references, assignments, native receipts, candidate/review/conflict/synthesis references, acceptance, active write scopes, and concise event history. Referenced immutable artifacts live within the existing Task directory under artifacts/orchestration; they are evidence, not a second ledger. Revisions, event IDs, execution generations, and content digests reject duplicate or stale accepted transitions.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-005",
+        "source_ids": [
+          "SRC-002"
+        ],
+        "statement": "P07: Reserve a manager assignment under existing Task locks before native launch, record the actual receipt, then activate the manager and end bootstrap write authority. An uncertain launch is a reconciliation state, never permission to spawn again blindly. Protocol actor and generation checks protect cooperative ownership and stale writes; they do not authenticate an operating-system process or create exactly-once atomicity across tools and files.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-006",
+        "source_ids": [
+          "SRC-002"
+        ],
+        "statement": "P02: Generate roles/INDEX.md deterministically from validated AGENTS.md and ROLE.md pairs using project-relative links and content digests. Extend the role helper with an explicit reindex route, read-only drift reporting, and bundle-committed/index-pending recovery. Bundle validity remains authoritative. No role index is rewritten by list, show, or validate.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-007",
+        "source_ids": [
+          "SRC-002"
+        ],
+        "statement": "D03/P02/P05: Add a dedicated reusable task-manager pair because the current only role explicitly excludes Director authority. Keep the existing general role for bounded work when its function-specific fit is demonstrated. Create solver, reviewer, senior, or implementer definitions only for proven reusable gaps; do not install the example roster automatically. Persist reusable additions in ROLES-depo and map starter bundles explicitly into the Template.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-008",
+        "source_ids": [
+          "SRC-002",
+          "SRC-003",
+          "SRC-005"
+        ],
+        "statement": "D03/D06: Separate model identity from supplied context. Prefer an isolated initial problem packet for solver candidates only where the current runtime verifies exact model and effort inheritance. Full-history forks are eligible only when they contain no sibling candidate content. Queued solver dispatch must preserve this guarantee. Replace the unconditional local fork-all rule only in the reviewed adoption; never rewrite user configuration or silently choose another model.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-009",
+        "source_ids": [
+          "SRC-002"
+        ],
+        "statement": "P03/P04: Use evidence-based progress checkpoints and observed capacity. Do not make the suggested three attempts a mandatory retry limit. Queue required logical agents without reducing solver/reviewer count or criteria; serialize overlapping implementation ownership. Slot reuse and session replacement require actual native status evidence.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-010",
+        "source_ids": [
+          "SRC-002"
+        ],
+        "statement": "P05: Use a read-only legacy-role transition preview with exact source/destination hashes and collision diagnostics, followed by an explicitly authorized copy-first publication and mapping receipt. Keep legacy bundles recoverable and excluded from ordinary active discovery. Do not rewrite historical path references or delete old content merely to complete adoption.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-011",
+        "source_ids": [
+          "SRC-002"
+        ],
+        "statement": "P06: Extend the existing updater to render and hash-manage the destination-specific role index after validated bundle publication; do not mirror a static source index across contexts. Update the initializer policy, scanners, package-preservation checks, and receipt compatibility together. Native handles and live Task/execution state never enter starter assets.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-012",
+        "source_ids": [
+          "SRC-002"
+        ],
+        "statement": "D01/D03/P06: Deliver reusable source changes first, update the designated Template through a reviewed updater preview, then apply an exact root adoption manifest. Preserve depot-specific responsibilities, root automatic intake and 30-day age closure, unrelated ROLE.md edits, To-TRD work, historical records, and intentional source/template intake differences. Do not copy an entire reusable skill package over the root helper when it would remove root-specific behavior.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-013",
+        "source_ids": [
+          "SRC-002"
+        ],
+        "statement": "Plan work ownership: The executing Project Director owns scope, design acceptance, exact manifests, ledger mutations, integration, and final verification. Each executable plan task receives exactly one accountable implementer before it starts. No blanket parallel group is assigned because helper, guidance, and mapping edits overlap. This plan does not activate the future task-manager topology for its own creation.",
+        "status": "approved"
+      },
+      {
+        "authority_basis": "Current user approved this named canonical revision with: i approve the paln. The separate /goal implement request authorizes the planned local implementation and bounded native feasibility check. Scope and safety boundaries remain as specified.",
+        "decided_at": "2026-09-08T06:42:47.408130+00:00",
+        "decision_id": "DEC-014",
+        "source_ids": [
+          "SRC-002"
+        ],
+        "statement": "Readiness prerequisite: Resolve TASK-002 through a separately authorized bounded native feasibility investigation while this draft is unready, then append the observed evidence to project inspection through a managed plan revision. The remaining plan requires approval of that exact current revision and separate execution authority. A failed feasibility gate stops the dependent delivery without replacing any required topology.",
+        "status": "approved"
+      }
+    ]
+  },
+  "summary": "Record user approval of the 13 implementation decisions in revision 1; native feasibility remains unresolved.",
+  "authority_basis": "Current user: i approve the paln, following /goal implement of this exact plan.",
+  "confirmed": true,
+  "material_change": false
+}

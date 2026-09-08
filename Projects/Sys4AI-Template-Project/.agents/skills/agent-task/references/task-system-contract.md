@@ -1,9 +1,16 @@
 # Task system contract
 
-This reference defines the project-local Task ledger used by the root Project
-Director. `task.json` is canonical. `TASK.md` and `Tasks/INDEX.md` are generated
+This reference defines the project-local Task ledger used by the authorized
+Project Director. `task.json` is canonical. `TASK.md` and `Tasks/INDEX.md` are generated
 views. Task Responses are append-only continuation records and never replace
 live-project verification.
+
+The approved schema-2 implementation is specified in
+[Canonical Task orchestration](orchestration-contract.md). It preserves the
+schema-1 contract below for historical records and adds bounded manager/writer,
+assignment and current-artifact gates through the same helper. Read-only routes
+never upgrade historical records. Source and Template intake remain distinct
+from the active depot root's automatic intake and inactivity extensions.
 
 ## Contents
 
@@ -41,9 +48,13 @@ file, response directory, response file, lock target, or temporary payload. It
 also rejects absolute task selectors, traversal segments, control characters,
 hidden task targets, and any resolved path outside `Tasks/`.
 
-Only the root Project Director can approve canonical state, lifecycle changes,
-completion, and final Task Responses. Child agents can inspect a specifically
-delegated read-only artifact and return evidence, but cannot mutate the ledger.
+Schema-1 work remains under the host Project Director's authority. For schema-2
+execution, the host performs bounded bootstrap and the confirmed manager alone
+approves canonical state, lifecycle changes, completion and final Task Responses
+after activation. Ordinary workers, solvers, reviewers, seniors and implementers
+may inspect delegated read-only artifacts and return evidence; they cannot
+mutate the ledger. Selected unassigned maintenance and exact frozen-transaction
+recovery follow the orchestration contract's explicit exception boundaries.
 
 ## Commands and results
 
@@ -405,3 +416,15 @@ not delete Task records automatically.
 Task activation never authorizes unrelated deletion, dependency installation,
 external communication, financial action, Git mutation, publication,
 deployment, user-visible thread management, or a change outside the project.
+
+## Schema-2 execution extension
+
+New execution workflow records explicitly pass `orchestration_enabled: true` to
+`new`. The omitted flag preserves the raw schema-1 API and historical lifecycle
+semantics. See [Canonical Task orchestration](orchestration-contract.md) for the
+exact typed event schema, actor/generation checks, artifact and review freshness,
+strict upgrade, unassigned maintenance, and transaction recovery behavior. All
+schema-2 mutations use the existing Task locks, revisions, immutable response
+identities and partial-publication transaction. Read-only routes do not migrate
+or repair records. Root automatic intake and inactivity policy remain separate
+project-local extensions, with ownership reconciliation before age closure.

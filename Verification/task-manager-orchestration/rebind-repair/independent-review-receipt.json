@@ -1,0 +1,79 @@
+{
+  "timestamp": "2026-09-08T05:12:48-06:00",
+  "role_read_hashes": {
+    "roles/project-sub-agent/AGENTS.md": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+    "roles/project-sub-agent/ROLE.md": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+  },
+  "snapshot": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-rebind-independent-3m38s036",
+  "source_hashes": {
+    "scripts/orchestration_state.py": "a8b0a6b7e9a2b492b835cac176b6b36aac3be7fd43ef85455b19a0575c0871d4",
+    "scripts/task_state.py": "19275841e4625d9300cfde1852ddcc38d211430f68849caa8f2dad3b0991ccac",
+    "tests/test_orchestration_state.py": "444b5a926c7213b0fa3fa38a119b29c8f59ca6a5898bbdf954fd2cb7b9c55f9a"
+  },
+  "old_orchestration_sha256": "46ae88d4f86ab1c6d47ac185e6a3f543ebb4b1e21aad3fd81c1ab92948a6c7dd",
+  "original_payload_sha256": "ccdaafadc51c37b579ce2a95f5eadd77a247103f81ad3a7890f59f6d9a7b8a0b",
+  "native_task_before_sha256": "adddb3b89693fb25cdf1cebd3db6d1fd1238c35dd413db1dab3c1f39ed1fd242",
+  "native_task_revision": 59,
+  "checks": [
+    {
+      "name": "old_native_payload_reproduction",
+      "observed": "KeyError: coding_a",
+      "passed": true
+    },
+    {
+      "name": "corrected_native_payload_pure_apply",
+      "observed": "Accepted; preserved same native identity, role reads, observations, candidates, reviews, synthesis, acceptance, subtasks, dependency binding, writer and generation; zero artifact writes returned",
+      "passed": true
+    },
+    {
+      "name": "foreign_writer",
+      "observed": "ORCH_WRITER",
+      "passed": true
+    },
+    {
+      "name": "stale_generation",
+      "observed": "ORCH_STALE_GENERATION",
+      "passed": true
+    },
+    {
+      "name": "different_native_identity",
+      "observed": "ORCH_INPUT_RECEIPT",
+      "passed": true
+    },
+    {
+      "name": "changed_loaded_role",
+      "observed": "ORCH_ROLE_CHANGED",
+      "passed": true
+    },
+    {
+      "name": "mismatched_packet_digests",
+      "observed": "ORCH_INPUT_RECEIPT",
+      "passed": true
+    },
+    {
+      "name": "candidate_scope_expansion",
+      "observed": "ORCH_CANDIDATE_SCOPE",
+      "passed": true
+    },
+    {
+      "name": "external_owner_with_same_logical_assignment_id",
+      "observed": "ORCH_WRITE_OVERLAP",
+      "passed": true
+    }
+  ],
+  "native_execution_performed": false,
+  "native_task_after_sha256": "adddb3b89693fb25cdf1cebd3db6d1fd1238c35dd413db1dab3c1f39ed1fd242",
+  "native_task_unchanged": true,
+  "cli_tests": {
+    "names": [
+      "test_rejected_solver_rebind_retains_provenance_while_checking_analysis_dependency",
+      "test_input_rebind_does_not_skip_another_active_write_owner",
+      "test_compatible_baseline_rebind_preserves_native_identity"
+    ],
+    "tests_run": 3,
+    "failures": 0,
+    "errors": 0,
+    "passed": true
+  },
+  "all_checks_passed": true
+}

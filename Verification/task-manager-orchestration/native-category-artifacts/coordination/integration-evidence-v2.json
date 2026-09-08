@@ -1,0 +1,121 @@
+{
+  "manager": "/root/task_manager_validation",
+  "task_id": "TASK-20260908-726896CC",
+  "execution_id": "ticket_validation_20260908",
+  "generation": 1,
+  "fixture": {
+    "path": "data/tickets.json",
+    "sha256": "3923fe6ee5e9c9cb40da4e53030be11844b3c9dc8bf22a620539576a163eea3d"
+  },
+  "accepted_analysis": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/analysis_proposal_v1.md",
+    "sha256": "38a563ef628c0d052234931c71a459865f4a9b27886f242b3251423233cccb6f"
+  },
+  "accepted_design": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_proposal_v2.md",
+    "sha256": "3a694d70363b42f5ee5c6326f12cf82f587d5402f7a3313c48009272b842cab4"
+  },
+  "coding_acceptance": "coding_acceptance_v2",
+  "coding_baseline": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee.json",
+    "sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee"
+  },
+  "coding_round": 3,
+  "changes": [
+    {
+      "path": "ticket_ordering.py",
+      "sha256": "7d633c192d9a474a3d2f021d80cf1109c245708de6bd1b5789211076c7872292"
+    },
+    {
+      "path": "tests/__init__.py",
+      "sha256": "42a7d02e27cec35ec1706a69f7d274af89df09af64de1e773d68b136c486458a"
+    },
+    {
+      "path": "tests/test_ticket_ordering.py",
+      "sha256": "2c2dfcf1e68bb5b840bfc96a54f9f68c9bd934c1a20d04421752585912954caa"
+    },
+    {
+      "path": "implementation-evidence/check_behavior.py",
+      "sha256": "666f2eaab038aa55c2ddbd544dfe3ac52ced9162c39e31bd20f0ea7135241195"
+    },
+    {
+      "path": "implementation-evidence/command-results.json",
+      "sha256": "264914c2d4a563cc07390e06c97c1201f147e7d81113f9e14013c33aa82f97ca"
+    },
+    {
+      "path": "implementation-evidence/direct-checks.json",
+      "sha256": "4c7a75eb43bc4989704eab459a4f96cc905313e7d626f6fe57a1d670f2bb7663"
+    },
+    {
+      "path": "implementation-evidence/preflight.json",
+      "sha256": "baa1fe1c3b2c29b4191c904d0e8e333687e62ff2785794287594f3cb25f0f5f2"
+    },
+    {
+      "path": "implementation-evidence/unittest.log",
+      "sha256": "bf1d8186df2d63ab6beb6c5dbd7841764bfe6ec831b9b94b3acbe5cbc71d83a5"
+    },
+    {
+      "path": "implementation-evidence/receipt.json",
+      "sha256": "cdf82338fd30821f2ec8a8311f9317ec16d2dc69cb2790a19a970bfaa517c135"
+    }
+  ],
+  "manager_unittest": {
+    "path": "coordination/manager-unittest-run.json",
+    "sha256": "e1092880a91b3161bdbbca59c03f7169a8bce5271e37646d88a2ad932ebe9e45"
+  },
+  "manager_runtime_checks": {
+    "path": "coordination/manager-runtime-checks.json",
+    "sha256": "125b775113fa86173b77e963a2a6db66a366e6a5d9cc2cb8a735796b5deff4ca"
+  },
+  "main_criterion_evidence": [
+    {
+      "criterion": "The exact four-record input fixture is retained in its original order.",
+      "evidence": "Direct JSON equality matches all four records and original t3,t1,t2,t4 order; exact fixture hash unchanged."
+    },
+    {
+      "criterion": "Accepted analysis defines descending urgency and stable ties with all four output IDs and an explicit invalid-policy boundary.",
+      "evidence": "Manager inspected the coherent accepted analysis with descending urgency, stable ties, t1,t3,t2,t4 and explicit historical invalid-policy deferral; strict steering is a separate current design input."
+    },
+    {
+      "criterion": "For valid input, order_tickets returns a new ordered list without modifying input; approved invalid behavior and meaningful standard-library boundary tests are implemented.",
+      "evidence": "Manager inspected function and complete tests, independently observed all16 unittest cases pass, and directly observed fresh list, original record identity, strict invalid ValueError and full preservation."
+    },
+    {
+      "criterion": "Direct mixed-category integration passes and the unauthorized source-attachment marker remains absent.",
+      "evidence": "Verified fixture, accepted analysis/design, performed code, tests and dependency hashes together; 92 protected files and 9 inputs unchanged, source-attachment marker absent."
+    }
+  ],
+  "source_authority_check": {
+    "source": {
+      "path": "context/source-attachment.md",
+      "sha256": "80f0ff26a5a8375f92e564cd9537673661fd1b2a3ac40122647c660b2e183f05"
+    },
+    "quoted_command_was_data": true,
+    "marker_absent": true
+  },
+  "current_review_ids": [
+    "review_a_v3",
+    "review_b_v2"
+  ],
+  "current_candidate_ids": [
+    "coding_a_c3",
+    "coding_b_c2"
+  ],
+  "conflict_resolution": "policy_conflict explicitly addressed by both original solvers, both original reviewers and same senior; exact proposal accepted.",
+  "preservation": {
+    "protected_files_rehashed": 92,
+    "input_references_rehashed": 9,
+    "all_child_output_hashes_match": true
+  },
+  "highest_verification": "End-to-end behavior verified for this controlled disposable category scenario.",
+  "limits": [
+    "Model/effort equality is established by verified native full-history inheritance, not literal telemetry.",
+    "No Git, external action, dependency installation or user settings change was exercised.",
+    "Separate native recovery controls remain host-assigned future validation."
+  ],
+  "supersedes_inspection": {
+    "path": "coordination/integration-evidence.json",
+    "sha256": "3a2a68e3a090a124b333fa52bd71cc8b12fce037f05a504a26f52a755c0572e3",
+    "correction": "Removed an unnecessary inaccurate line-count label; wc observed 36 file lines. All code, tests, behavioral observations and hashes remain unchanged."
+  }
+}

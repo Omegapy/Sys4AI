@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ast
 import hashlib
 import importlib.util
 import json
@@ -17,7 +18,24 @@ import unittest
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = SKILL_ROOT / "scripts" / "task_state.py"
-PROJECT_ROOT = Path(__file__).resolve().parents[4]
+SOURCE_LAYOUT = SKILL_ROOT.parent.name == "SKILLS-depo"
+PROJECT_ROOT = SKILL_ROOT.parent.parent if SOURCE_LAYOUT else Path(__file__).resolve().parents[4]
+WORKFLOW_ROOT = Path(os.environ["SYS4AI_WORKFLOW_ROOT"]).resolve() if os.environ.get("SYS4AI_WORKFLOW_ROOT") else None
+
+
+def document_path(relative):
+    """Read this package's source or installed context; explicit overlays may omit unchanged files."""
+    if SOURCE_LAYOUT:
+        if relative.startswith(".agents/skills/"):
+            mapped = "SKILLS-depo/" + relative.removeprefix(".agents/skills/")
+        else:
+            mapped = {"AGENTS.md":"AGENTS-depo/project-template-AGENTS.md", "ROLE.md":"ROLES-depo/project-director-ROLE.md"}.get(relative, relative)
+    else:
+        mapped = relative
+    if WORKFLOW_ROOT is not None and (WORKFLOW_ROOT / mapped).exists():
+        return WORKFLOW_ROOT / mapped
+    return PROJECT_ROOT / mapped
+
 
 SPEC = importlib.util.spec_from_file_location("task_state", SCRIPT)
 assert SPEC and SPEC.loader
@@ -451,8 +469,8 @@ class TaskStateTests(unittest.TestCase):
         self.assertEqual(completed.returncode, 2)
         self.assertEqual(result["errors"][0]["code"], "SECRET_PATTERN")
         self.assertEqual(before, self.tree_hash())
-        skill = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("Never store\nhidden reasoning", skill)
+        skill = document_path(".agents/skills/agent-task/SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("Keep hidden reasoning, credentials, transcripts", re.sub(r"\s+", " ", skill))
 
         recorded, recorded_result = self.mutate(state)
         self.assertEqual(recorded.returncode, 0, recorded_result)
@@ -635,8 +653,9 @@ class TaskStateTests(unittest.TestCase):
         self.assertEqual(before, self.tree_hash())
 
     def test_t026_task_skill_covers_zero_one_and_multiple_selection_dialogs(self) -> None:
-        skill = (PROJECT_ROOT / ".agents/skills/task/SKILL.md").read_text(encoding="utf-8")
-        for phrase in ("With no nonterminal tasks", "With one nonterminal task", "With multiple nonterminal tasks"):
+        skill = document_path(".agents/skills/task/SKILL.md").read_text(encoding="utf-8")
+        for phrase in ("with none, obtain the objective", "with one, show its ID", "with multiple, show the choices"):
+            skill = re.sub(r"\s+", " ", skill)
             self.assertIn(phrase, skill)
         self.assertEqual(self.run_cli("status")[1]["counts"]["nonterminal"], 0)
         self.create_task("One")
@@ -653,31 +672,35 @@ class TaskStateTests(unittest.TestCase):
         self.assertEqual(before, self.tree_hash())
 
     def test_t028_ordinary_prompt_policy_does_not_authorize_task_mutation(self) -> None:
-        skill = (PROJECT_ROOT / ".agents/skills/task/SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("answer\nordinary prompts normally", skill)
-        self.assertIn("do not mutate Task state", skill)
-        self.assertIn('words such as "task," "work," "next," or "continue."', skill)
+        skill = document_path(".agents/skills/task/SKILL.md").read_text(encoding="utf-8")
+        normalized = re.sub(r"\s+", " ", skill)
+        self.assertIn("Do not use for ordinary untracked questions or unrelated project work", normalized)
+        self.assertIn("Opening or approving a document does not start Task execution", normalized)
+        self.assertIn("They never create or age Tasks", normalized)
 
     def test_t029_skill_metadata_has_exact_names_and_explicit_only_policy(self) -> None:
-        task_yaml = (PROJECT_ROOT / ".agents/skills/task/agents/openai.yaml").read_text(encoding="utf-8")
-        agent_yaml = (PROJECT_ROOT / ".agents/skills/agent-task/agents/openai.yaml").read_text(encoding="utf-8")
+        task_yaml = document_path(".agents/skills/task/agents/openai.yaml").read_text(encoding="utf-8")
+        agent_yaml = document_path(".agents/skills/agent-task/agents/openai.yaml").read_text(encoding="utf-8")
         self.assertIn('display_name: "Task"', task_yaml)
         self.assertIn('display_name: "Agent Task"', agent_yaml)
         self.assertEqual(task_yaml.count("allow_implicit_invocation: false"), 1)
         self.assertEqual(agent_yaml.count("allow_implicit_invocation: false"), 1)
 
     def test_t030_task_routes_to_exact_agent_task_contract_before_state_action(self) -> None:
-        task_skill = (PROJECT_ROOT / ".agents/skills/task/SKILL.md").read_text(encoding="utf-8")
+        task_skill = document_path(".agents/skills/task/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("[Agent Task skill](../agent-task/SKILL.md)", task_skill)
-        self.assertIn("Before every Task state operation", task_skill)
-        agent_skill = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("before state operations and use its helper", re.sub(r"\s+", " ", task_skill))
+        agent_skill = document_path(".agents/skills/agent-task/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("references/task-system-contract.md", agent_skill)
 
     def test_t031_child_role_is_forbidden_from_ledger_mutation(self) -> None:
-        agent_skill = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("A child agent must stop without changing `Tasks/`", agent_skill)
-        task_skill = (PROJECT_ROOT / ".agents/skills/task/SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("they cannot create task\nfolders, mutate canonical Task state, or write final Task Responses", task_skill)
+        agent_skill = document_path(".agents/skills/agent-task/SKILL.md").read_text(encoding="utf-8")
+        normalized = re.sub(r"\s+", " ", agent_skill)
+        self.assertIn("Ordinary workers, solvers, reviewers, seniors and implementers return evidence", normalized)
+        self.assertIn("they do not mutate canonical state, final Task Responses or role indexes", normalized)
+        self.assertIn("Only the confirmed manager records the final Task Response", normalized)
+        task_skill = document_path(".agents/skills/task/SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("Reading root guidance alone does not promote any ordinary child to manager or writer", re.sub(r"\s+", " ", task_skill))
 
     def test_t032_second_writer_gets_lock_exit_and_first_files_are_unchanged(self) -> None:
         locks = self.root / "Tasks" / ".locks" / "catalog.lock"
@@ -806,7 +829,7 @@ class TaskStateTests(unittest.TestCase):
         self.assertEqual(second_result["status"], "already_reconciled")
 
     def test_t039_first_turn_policy_covers_zero_one_and_multiple_task_notices(self) -> None:
-        agents = (PROJECT_ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        agents = document_path("AGENTS.md").read_text(encoding="utf-8")
         self.assertIn("first assistant turn", agents)
         self.assertIn("non-blocking resume", agents)
         self.assertIn("Do not interrupt unrelated work", agents)
@@ -847,31 +870,32 @@ class TaskStateTests(unittest.TestCase):
 
     def test_t043_native_goal_and_task_state_are_explicitly_separate(self) -> None:
         contract = (SKILL_ROOT / "references/task-system-contract.md").read_text(encoding="utf-8")
-        task_skill = (PROJECT_ROOT / ".agents/skills/task/SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("Codex\ntask, thread, or goal", task_skill)
-        root_agents = re.sub(r"\s+", " ", (PROJECT_ROOT / "AGENTS.md").read_text(encoding="utf-8"))
+        task_skill = document_path(".agents/skills/task/SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("Codex conversations, native goals", re.sub(r"\s+", " ", task_skill))
+        root_agents = re.sub(r"\s+", " ", document_path("AGENTS.md").read_text(encoding="utf-8"))
         self.assertIn("native goal state", root_agents)
         self.assertIn("Report any mismatch", root_agents)
         self.assertIn("task.json", contract)
 
     def test_t044_delegated_work_returns_evidence_and_only_director_records(self) -> None:
-        role = re.sub(r"\s+", " ", (PROJECT_ROOT / "ROLE.md").read_text(encoding="utf-8"))
-        self.assertIn("Child agents return evidence", role)
-        self.assertIn("final Task Responses", role)
-        agents = re.sub(r"\s+", " ", (PROJECT_ROOT / "AGENTS.md").read_text(encoding="utf-8"))
-        self.assertIn("Child agents return evidence and do not mutate the Task ledger", agents)
+        role = re.sub(r"\s+", " ", document_path("ROLE.md").read_text(encoding="utf-8"))
+        self.assertIn("Ordinary children own only their delegated work and evidence", role)
+        self.assertIn("truthful final Task Response", role)
+        agents = re.sub(r"\s+", " ", document_path("AGENTS.md").read_text(encoding="utf-8"))
+        self.assertIn("return evidence without ledger or role-index writes", agents)
 
     def test_t045_task_activation_does_not_broaden_external_authority(self) -> None:
-        task_skill = (PROJECT_ROOT / ".agents/skills/task/SKILL.md").read_text(encoding="utf-8")
-        for phrase in ("destructive actions", "dependency installs", "external messages", "commits", "pushes", "publication", "deployment"):
+        task_skill = document_path(".agents/skills/task/SKILL.md").read_text(encoding="utf-8")
+        for phrase in ("destruction", "dependency installation", "external messages", "Git publication", "deployment"):
+            task_skill = re.sub(r"\s+", " ", task_skill)
             self.assertIn(phrase, task_skill)
 
     def test_t046_both_skills_pass_bundled_validator(self) -> None:
         validator = Path("/Users/alex.omegapy/.codex/skills/.system/skill-creator/scripts/quick_validate.py")
         uv = Path("/Users/alex.omegapy/.local/bin/uv")
-        for skill in (PROJECT_ROOT / ".agents/skills/task", PROJECT_ROOT / ".agents/skills/agent-task"):
+        for skill in (document_path(".agents/skills/task"), document_path(".agents/skills/agent-task")):
             completed = subprocess.run(
-                [str(uv), "run", "--with", "PyYAML", "--", "python", str(validator), str(skill)],
+                [str(uv), "run", "--offline", "--with", "PyYAML", "--", "python", str(validator), str(skill)],
                 text=True,
                 capture_output=True,
                 check=False,
@@ -880,7 +904,16 @@ class TaskStateTests(unittest.TestCase):
             self.assertIn("Skill is valid!", completed.stdout)
 
     def test_t047_helper_compiles_and_uses_only_standard_library_imports(self) -> None:
-        py_compile.compile(str(SCRIPT), doraise=True)
+        py_compile.compile(str(SCRIPT), cfile=str(self.root / "task_state.pyc"), doraise=True)
+        module = SCRIPT.with_name("orchestration_state.py")
+        py_compile.compile(str(module), cfile=str(self.root / "orchestration_state.pyc"), doraise=True)
+        for script in (SCRIPT, module):
+            tree = ast.parse(script.read_text())
+            for node in ast.walk(tree):
+                if isinstance(node, (ast.Import, ast.ImportFrom)):
+                    imports = [alias.name for alias in node.names] if isinstance(node, ast.Import) else [node.module]
+                    for name in imports:
+                        self.assertIn(name.split(".")[0], sys.stdlib_module_names)
         source = SCRIPT.read_text(encoding="utf-8")
         for prohibited in ("yaml", "requests", "filelock", "sqlalchemy"):
             self.assertNotRegex(source, rf"^(?:from|import) {prohibited}\b")
@@ -912,9 +945,9 @@ class TaskStateTests(unittest.TestCase):
 
     def test_t048_all_task_system_artifacts_are_project_local(self) -> None:
         for path in (
-            PROJECT_ROOT / ".agents/skills/task",
-            PROJECT_ROOT / ".agents/skills/agent-task",
-            PROJECT_ROOT / "Tasks",
+            document_path(".agents/skills/task"),
+            document_path(".agents/skills/agent-task"),
+            document_path("Tasks"),
         ):
             self.assertTrue(path.resolve().is_relative_to(PROJECT_ROOT.resolve()))
         source = SCRIPT.read_text(encoding="utf-8")
@@ -946,6 +979,8 @@ class TaskStateTests(unittest.TestCase):
             ".agents/skills/agent-task/agents/openai.yaml",
             ".agents/skills/agent-task/references/task-system-contract.md",
             ".agents/skills/agent-task/scripts/task_state.py",
+            ".agents/skills/agent-task/scripts/orchestration_state.py",
+            ".agents/skills/agent-task/references/orchestration-contract.md",
             ".agents/skills/agent-task/assets/TASK.md.template",
             ".agents/skills/agent-task/assets/Task-Response.md.template",
             ".agents/skills/agent-task/assets/INDEX.md.template",
@@ -953,8 +988,8 @@ class TaskStateTests(unittest.TestCase):
             "Tasks/INDEX.md",
         }
         for relative in expected:
-            self.assertTrue((PROJECT_ROOT / relative).is_file(), relative)
-        for runtime in (PROJECT_ROOT / "Tasks/.locks", PROJECT_ROOT / "Tasks/.tmp"):
+            self.assertTrue((self.root / relative if relative.startswith("Tasks/") else document_path(relative)).is_file(), relative)
+        for runtime in (self.root / "Tasks/.locks", self.root / "Tasks/.tmp"):
             self.assertFalse(runtime.exists(), runtime)
 
     def test_t051_update_changes_mutable_fields_and_preserves_identity(self) -> None:

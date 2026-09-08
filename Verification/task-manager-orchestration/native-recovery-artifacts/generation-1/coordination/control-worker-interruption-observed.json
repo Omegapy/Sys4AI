@@ -1,0 +1,85 @@
+{
+  "label": "worker-interruption-observed",
+  "observed_at": "2026-09-08T12:21:10.361878+00:00",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/.agents/skills/agent-task/scripts/task_state.py",
+    "--project-root",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "orchestrate",
+    "TASK-20260908-A8B65949",
+    "--expected-revision",
+    "12"
+  ],
+  "payload": {
+    "event": {
+      "event_id": "event_5b8b306482cf4205a823fe79c5e0110e",
+      "actor": "/root/recovery_manager",
+      "execution_id": "recovery_validation_20260908",
+      "generation": 1,
+      "kind": "assignment.observe",
+      "data": {
+        "assignment_id": "recovery_worker",
+        "receipt": {
+          "tool": "collaboration.list_agents",
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root/recovery_manager",
+                "agent_status": "running"
+              },
+              {
+                "agent_name": "/root/recovery_manager/marker_worker",
+                "agent_status": "interrupted"
+              }
+            ]
+          }
+        },
+        "changes": [
+          {
+            "path": "markers/recovery_worker/readiness.json",
+            "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+          }
+        ]
+      }
+    },
+    "response": {
+      "work_completed": [
+        "Observed worker-interruption-observed."
+      ],
+      "verification_evidence": [
+        "Exact current inputs and returned native/artifact evidence are retained."
+      ],
+      "user_response_summary": "Observed worker-interruption-observed.",
+      "current_summary": "Observed worker-interruption-observed.",
+      "next_step": "Continue the bounded approved validation.",
+      "blockers": [],
+      "open_questions": [],
+      "relevant_files": []
+    }
+  },
+  "expected_error": null,
+  "exit_code": 0,
+  "result": {
+    "schema_version": 1,
+    "command": "orchestrate",
+    "status": "recorded",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": true,
+    "task_id": "TASK-20260908-A8B65949",
+    "revision_before": 12,
+    "revision_after": 13,
+    "response_id": "RESP-0012",
+    "response_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/responses/Task-Response-0012-2026-09-08T06-21-10-06-00.md",
+    "warnings": [],
+    "errors": [],
+    "recovery_required": false
+  },
+  "stderr": "",
+  "canonical_before_sha256": "b8d0e91c3c56cd62a383d6be2b83a60831ac35e70636b57cfafe84375b75063c",
+  "canonical_after_sha256": "e0266d94786795d13b0d135b1ddad1335c847203e4ce6022e4c97e02570846e0",
+  "canonical_unchanged": false,
+  "revision_before": 12,
+  "revision_after": 13
+}

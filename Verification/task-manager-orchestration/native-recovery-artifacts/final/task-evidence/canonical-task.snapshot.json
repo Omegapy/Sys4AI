@@ -1,0 +1,1449 @@
+{
+  "schema_version": 2,
+  "task_id": "TASK-20260908-A8B65949",
+  "name": "Native stopping and recovery validation",
+  "original_name": "Native stopping and recovery validation",
+  "slug": "native-stopping-and-recovery-validation",
+  "folder_name": "Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949",
+  "description": "Controlled disposable worker pause, uncertain-receipt reconciliation, manager replacement and cancellation; no completed delivery is expected.",
+  "definition_of_done": [
+    "The intentionally unfinished worker deliverable is completed and directly verified."
+  ],
+  "created_at": "2026-09-08T06:09:46-06:00",
+  "updated_at": "2026-09-08T06:40:34-06:00",
+  "status": "cancelled",
+  "parent_task_id": null,
+  "revision": 23,
+  "response_count": 22,
+  "last_response": {
+    "response_id": "RESP-0022",
+    "sequence": 22,
+    "created_at": "2026-09-08T06:40:34-06:00",
+    "path": "responses/Task-Response-0022-2026-09-08T06-40-34-06-00.md",
+    "supersedes_response_id": null
+  },
+  "current_summary": "Controlled recovery validation reached its expected cancellation. The real replacement manager reconnected, rejected stale-generation work, retained prior history and the readiness marker, and cancelled this disposable Task with its delivery criterion still unfinished. No delivery completion or actual model switch is claimed.",
+  "next_step": "Host: inspect this final cancelled record and observe the replacement manager completed after its return.",
+  "blockers": [],
+  "open_questions": [],
+  "thread_refs": [],
+  "orchestration": {
+    "acceptances": {},
+    "artifacts": {
+      "baseline_3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee": {
+        "assignment_id": "recovery_manager",
+        "generation": 1,
+        "path": "artifacts/orchestration/baseline_3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee.json",
+        "sha256": "3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee",
+        "size": 1766
+      }
+    },
+    "assignments": {
+      "recovery_manager": {
+        "acceptance_id": null,
+        "assignment_id": "recovery_manager",
+        "baseline": "aeef06d117d220d81fb548422fd57fbcabb15ae69366aa21bca28d9b19527758",
+        "context": [
+          {
+            "path": "context/scenario.md",
+            "sha256": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e"
+          },
+          {
+            "path": "context/authority.json",
+            "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+          },
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+          }
+        ],
+        "fit": {
+          "authority": "The user explicitly requested and approved implementation of the named plan, including TASK-034 bounded native interruption, reconnect, replacement and setting-change failure tests. Canonical writes only after activation; ordinary writes only coordination. Delegate one bounded marker/wait worker. Do not replace yourself or cancel before host transfer.",
+          "capabilities": [
+            "native coordination",
+            "current evidence inspection",
+            "Task writer and stopping controls"
+          ],
+          "deliverable": "Exact delayed-receipt, pause/interruption and stopped-state evidence, with unfinished criteria preserved for host-controlled replacement.",
+          "objective": "Direct the first generation of the one host-created bounded native stopping/recovery fixture.",
+          "rationale": "The persisted task-manager role fits bounded native supervision and canonical ownership; ordinary workers do not supply that authority.",
+          "reads": [
+            "context",
+            "coordination",
+            ".agents/skills",
+            "roles",
+            "SOUL.md",
+            "ROLE.md",
+            "AGENTS.md",
+            "SPECS.md"
+          ],
+          "risk": "Disposable fixture only; no actual model/configuration change or external action.",
+          "skills": [
+            "task",
+            "agent-task",
+            "manage-subagent-roles"
+          ],
+          "stop": "After real pause, interruption/reconciliation and labelled setting-change rejection, return the exact stopped-state evidence and finish your turn for host replacement.",
+          "tools": [
+            "native collaboration",
+            "Python standard library",
+            "installed Task and role helpers"
+          ],
+          "writes": [
+            "coordination"
+          ]
+        },
+        "function": "manager",
+        "generation": 1,
+        "input_receipt": null,
+        "native_id": "/root/recovery_manager",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/recovery_manager"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "observations": [
+          {
+            "changes": [
+              {
+                "path": "coordination/first-manager-handoff.json",
+                "sha256": "94705e5d5648f1871cd40c307aa6e123fd5dbfac2b1c3b48e3116d283b083e73"
+              }
+            ],
+            "receipt": {
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root",
+                    "agent_status": "running"
+                  },
+                  {
+                    "agent_name": "/root/recovery_manager",
+                    "agent_status": "completed"
+                  },
+                  {
+                    "agent_name": "/root/recovery_manager/marker_worker",
+                    "agent_status": "interrupted"
+                  }
+                ]
+              },
+              "tool": "collaboration.list_agents"
+            }
+          }
+        ],
+        "perspective": "Project Director",
+        "role": {
+          "agents_path": "roles/task-manager/AGENTS.md",
+          "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+          "catalog": {
+            "path": "coordination/catalog_fa75b54aa01245e29dbb7394f88f6c23.json",
+            "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+          },
+          "name": "task-manager",
+          "role_path": "roles/task-manager/ROLE.md",
+          "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0"
+        },
+        "role_reads": {
+          "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+          "evidence": "Manager directly read both complete role files, owning project SOUL, governance, installed Task and role skills, both Task contracts, exact reservation, scenario, authority and native runtime evidence before readiness.",
+          "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0"
+        },
+        "round": 0,
+        "runtime": {
+          "available_slots": 3,
+          "depth": 2,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+            },
+            {
+              "path": "context/host-roster.json",
+              "sha256": "61bb75fac7ec7e43f38395a245b404ea2aa568f734a4686ed5ab5654edfe59ad"
+            }
+          ],
+          "tools": [
+            "spawn_agent",
+            "send_message",
+            "followup_task",
+            "list_agents",
+            "wait_agent",
+            "interrupt_agent"
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "slot": "manager",
+        "state": "revoked",
+        "subtask_id": null
+      },
+      "recovery_replacement": {
+        "acceptance_id": null,
+        "assignment_id": "recovery_replacement",
+        "baseline": "aeef06d117d220d81fb548422fd57fbcabb15ae69366aa21bca28d9b19527758",
+        "context": [
+          {
+            "path": "context/scenario.md",
+            "sha256": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e"
+          },
+          {
+            "path": "context/authority.json",
+            "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+          },
+          {
+            "path": "coordination/host-replacement-evidence.json",
+            "sha256": "4583912f4d19c04c4a6872946296064a2d5bd3b08565395345c06c51568c4a7a"
+          }
+        ],
+        "fit": {
+          "authority": "Approved plan TASK-034 replacement/cancellation test; canonical writer only after host activation. Ordinary writes only coordination. No children, implementation, user settings or external actions.",
+          "capabilities": [
+            "native coordination",
+            "current evidence inspection",
+            "Task writer and stopping controls"
+          ],
+          "deliverable": "Exact stale-generation rejection, cancelled Task with unfinished criterion, preserved marker and final native-accounting evidence.",
+          "objective": "Inspect the reconciled recovery fixture, reject stale generation work and complete its truthful cancellation.",
+          "rationale": "The persisted manager role fits exact generation ownership and Task lifecycle verification; no broader worker or product scope is needed.",
+          "reads": [
+            "context",
+            "coordination",
+            ".agents/skills",
+            "roles",
+            "SOUL.md",
+            "ROLE.md",
+            "AGENTS.md",
+            "SPECS.md"
+          ],
+          "risk": "Disposable fixture only; no actual model/configuration change or external action.",
+          "skills": [
+            "task",
+            "agent-task",
+            "manage-subagent-roles"
+          ],
+          "stop": "After direct verification, record cancelled execution and cancelled Task with unfinished criteria, then return evidence and end the turn.",
+          "tools": [
+            "native collaboration",
+            "Python standard library",
+            "installed Task and role helpers"
+          ],
+          "writes": [
+            "coordination"
+          ]
+        },
+        "function": "manager",
+        "generation": 2,
+        "input_receipt": null,
+        "native_id": "/root/recovery_replacement",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/recovery_replacement"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "observations": [],
+        "perspective": "Project Director",
+        "role": {
+          "agents_path": "roles/task-manager/AGENTS.md",
+          "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+          "catalog": {
+            "path": "coordination/catalog_a2c3069d30e34855bee9c0b2b6479300.json",
+            "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+          },
+          "name": "task-manager",
+          "role_path": "roles/task-manager/ROLE.md",
+          "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0"
+        },
+        "role_reads": {
+          "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+          "evidence": "Replacement manager directly read both complete role files, owning SOUL and governance, installed Task and role skills, both Task contracts, exact replacement assignment, scenario, authority/runtime and first-manager handoff before readiness.",
+          "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0"
+        },
+        "round": 0,
+        "runtime": {
+          "available_slots": 3,
+          "depth": 2,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+            },
+            {
+              "path": "coordination/host-replacement-evidence.json",
+              "sha256": "4583912f4d19c04c4a6872946296064a2d5bd3b08565395345c06c51568c4a7a"
+            }
+          ],
+          "tools": [
+            "spawn_agent",
+            "send_message",
+            "followup_task",
+            "list_agents",
+            "wait_agent",
+            "interrupt_agent"
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "slot": "manager",
+        "state": "active",
+        "subtask_id": null
+      },
+      "recovery_worker": {
+        "acceptance_id": null,
+        "assignment_id": "recovery_worker",
+        "baseline": "3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee",
+        "context": [
+          {
+            "path": "Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/artifacts/orchestration/baseline_3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee.json",
+            "sha256": "3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee"
+          },
+          {
+            "path": "context/scenario.md",
+            "sha256": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e"
+          },
+          {
+            "path": "context/authority.json",
+            "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+          },
+          {
+            "path": "coordination/current-worker-runtime.json",
+            "sha256": "9cef6141f0e582c895169e17e75ca91373f29a7c9fad929834e685a327543261"
+          }
+        ],
+        "fit": {
+          "authority": "The approved TASK-034 scenario authorizes one disposable marker and actual native interruption; no production completion, canonical mutation, user settings, external action, or other-project change. No nested delegation.",
+          "capabilities": [
+            "bounded JSON write",
+            "role evidence hashing",
+            "native waiting and stopping"
+          ],
+          "deliverable": "markers/recovery_worker/readiness.json only at this stage; markers/recovery_worker/delivery.txt must remain absent.",
+          "objective": "Write one readiness marker, then remain active awaiting manager control. Keep the deliberately unfinished deliverable incomplete for native interruption and recovery validation.",
+          "rationale": "The general project worker explicitly supports bounded implementation and evidence collection. The manager role is broader and grants unnecessary coordination authority; no specialized domain expertise is needed.",
+          "reads": [
+            "SOUL.md",
+            "AGENTS.md",
+            "ROLE.md",
+            "SPECS.md",
+            "roles/project-sub-agent",
+            ".agents/skills/communication",
+            "context",
+            "coordination",
+            "Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/artifacts/orchestration/baseline_3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee.json"
+          ],
+          "risk": "Disposable marker only; deliberately incomplete result; manager will interrupt actual native activity.",
+          "skills": [
+            "communication"
+          ],
+          "stop": "After writing readiness, send the manager its path and digest and remain in bounded native waits until explicit control or interruption. Do not finish voluntarily or create delivery.txt.",
+          "tools": [
+            "Python standard library",
+            "native send_message and bounded wait"
+          ],
+          "writes": [
+            "markers/recovery_worker"
+          ]
+        },
+        "function": "worker",
+        "generation": 1,
+        "input_receipt": null,
+        "native_id": "/root/recovery_manager/marker_worker",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/recovery_manager/marker_worker"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "observations": [
+          {
+            "changes": [],
+            "receipt": {
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/recovery_manager",
+                    "agent_status": "running"
+                  },
+                  {
+                    "agent_name": "/root/recovery_manager/marker_worker",
+                    "agent_status": "running"
+                  }
+                ]
+              },
+              "tool": "collaboration.list_agents"
+            }
+          },
+          {
+            "changes": [
+              {
+                "path": "markers/recovery_worker/readiness.json",
+                "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+              }
+            ],
+            "receipt": {
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/recovery_manager",
+                    "agent_status": "running"
+                  },
+                  {
+                    "agent_name": "/root/recovery_manager/marker_worker",
+                    "agent_status": "interrupted"
+                  }
+                ]
+              },
+              "tool": "collaboration.list_agents"
+            }
+          },
+          {
+            "changes": [
+              {
+                "path": "markers/recovery_worker/readiness.json",
+                "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+              }
+            ],
+            "receipt": {
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root",
+                    "agent_status": "running"
+                  },
+                  {
+                    "agent_name": "/root/recovery_manager",
+                    "agent_status": "completed"
+                  },
+                  {
+                    "agent_name": "/root/recovery_manager/marker_worker",
+                    "agent_status": "interrupted"
+                  }
+                ]
+              },
+              "tool": "collaboration.list_agents"
+            }
+          }
+        ],
+        "perspective": "Bounded marker write and native stopping observation",
+        "role": {
+          "agents_path": "roles/project-sub-agent/AGENTS.md",
+          "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+          "catalog": {
+            "path": "coordination/catalog_548d0e01bf7a4478a6bcbfbf2f670c85.json",
+            "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+          },
+          "name": "project-sub-agent",
+          "role_path": "roles/project-sub-agent/ROLE.md",
+          "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+        },
+        "role_reads": {
+          "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+          "evidence": "Worker directly read both complete role files, owning SOUL, AGENTS, ROLE, SPECS, communication skill, assignment and all four assigned context inputs before writing this marker.",
+          "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+        },
+        "round": 1,
+        "runtime": {
+          "available_slots": 2,
+          "depth": 2,
+          "evidence": [
+            {
+              "path": "coordination/current-worker-runtime.json",
+              "sha256": "9cef6141f0e582c895169e17e75ca91373f29a7c9fad929834e685a327543261"
+            },
+            {
+              "path": "coordination/worker-dispatch-roster.json",
+              "sha256": "7d70256827ff285344462c78aa5eb0e425b185f9c86e7a7ff29f58cec0c5eb61"
+            }
+          ],
+          "tools": [
+            "spawn_agent",
+            "send_message",
+            "followup_task",
+            "list_agents",
+            "wait_agent",
+            "interrupt_agent"
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "slot": "marker_worker",
+        "state": "revoked",
+        "subtask_id": "marker_validation"
+      }
+    },
+    "authority": "The user explicitly requested and approved implementation of the named plan, including TASK-034 bounded native interruption, reconnect, replacement and setting-change failure tests.",
+    "blockers": [],
+    "bootstrap": "/root",
+    "candidates": {},
+    "conflicts": {},
+    "context": [
+      {
+        "path": "context/scenario.md",
+        "sha256": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e"
+      },
+      {
+        "path": "context/authority.json",
+        "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+      },
+      {
+        "path": "coordination/host-replacement-evidence.json",
+        "sha256": "4583912f4d19c04c4a6872946296064a2d5bd3b08565395345c06c51568c4a7a"
+      }
+    ],
+    "events": [
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "recovery_manager",
+          "authority": "The user explicitly requested and approved implementation of the named plan, including TASK-034 bounded native interruption, reconnect, replacement and setting-change failure tests.",
+          "bootstrap_receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root",
+                  "agent_status": "running"
+                },
+                {
+                  "agent_name": "/root/task_manager_validation",
+                  "agent_status": "completed"
+                },
+                {
+                  "agent_name": "/root/task_manager_validation/coding_implementer",
+                  "agent_status": "completed"
+                },
+                {
+                  "agent_name": "/root/task_manager_validation/coding_senior",
+                  "agent_status": "completed"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          },
+          "context": [
+            {
+              "path": "context/scenario.md",
+              "sha256": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e"
+            },
+            {
+              "path": "context/authority.json",
+              "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+            },
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+            }
+          ],
+          "fit": {
+            "authority": "The user explicitly requested and approved implementation of the named plan, including TASK-034 bounded native interruption, reconnect, replacement and setting-change failure tests. Canonical writes only after activation; ordinary writes only coordination. Delegate one bounded marker/wait worker. Do not replace yourself or cancel before host transfer.",
+            "capabilities": [
+              "native coordination",
+              "current evidence inspection",
+              "Task writer and stopping controls"
+            ],
+            "deliverable": "Exact delayed-receipt, pause/interruption and stopped-state evidence, with unfinished criteria preserved for host-controlled replacement.",
+            "objective": "Direct the first generation of the one host-created bounded native stopping/recovery fixture.",
+            "rationale": "The persisted task-manager role fits bounded native supervision and canonical ownership; ordinary workers do not supply that authority.",
+            "reads": [
+              "context",
+              "coordination",
+              ".agents/skills",
+              "roles",
+              "SOUL.md",
+              "ROLE.md",
+              "AGENTS.md",
+              "SPECS.md"
+            ],
+            "risk": "Disposable fixture only; no actual model/configuration change or external action.",
+            "skills": [
+              "task",
+              "agent-task",
+              "manage-subagent-roles"
+            ],
+            "stop": "After real pause, interruption/reconciliation and labelled setting-change rejection, return the exact stopped-state evidence and finish your turn for host replacement.",
+            "tools": [
+              "native collaboration",
+              "Python standard library",
+              "installed Task and role helpers"
+            ],
+            "writes": [
+              "coordination"
+            ]
+          },
+          "role": {
+            "agents_path": "roles/task-manager/AGENTS.md",
+            "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+            "catalog": {
+              "path": "coordination/catalog_fa75b54aa01245e29dbb7394f88f6c23.json",
+              "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+            },
+            "name": "task-manager",
+            "role_path": "roles/task-manager/ROLE.md",
+            "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0"
+          },
+          "runtime": {
+            "available_slots": 3,
+            "depth": 2,
+            "evidence": [
+              {
+                "path": "context/native-runtime.json",
+                "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+              },
+              {
+                "path": "context/host-roster.json",
+                "sha256": "61bb75fac7ec7e43f38395a245b404ea2aa568f734a4686ed5ab5654edfe59ad"
+              }
+            ],
+            "tools": [
+              "spawn_agent",
+              "send_message",
+              "followup_task",
+              "list_agents",
+              "wait_agent",
+              "interrupt_agent"
+            ]
+          },
+          "settings": {
+            "effort": null,
+            "evidence": [
+              {
+                "path": "context/native-runtime.json",
+                "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+              }
+            ],
+            "mode": "verified_inheritance",
+            "model": null
+          },
+          "source_refs": [
+            {
+              "path": "context/authority.json",
+              "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+            }
+          ]
+        },
+        "event_id": "event_2b78effe38e9486e8fd05dc47acb5d9e",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "manager.reserve",
+        "revision": 2,
+        "sha256": "69e085296b1502a3d2895ecea1da1a75af002be3f9814901cca2b32330e6e3b8"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "recovery_manager",
+          "receipt": {
+            "result": {
+              "task_name": "/root/recovery_manager"
+            },
+            "tool": "collaboration.spawn_agent"
+          }
+        },
+        "event_id": "event_a1ec9d10394342f7a6dc6d9c12cf2fcb",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "manager.receipt",
+        "revision": 3,
+        "sha256": "799af206704a26ee64eb2edc90d7f654f67a91ba29ddb42f51f8d368f2d94f73"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "recovery_manager",
+          "role_reads": {
+            "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+            "evidence": "Manager directly read both complete role files, owning project SOUL, governance, installed Task and role skills, both Task contracts, exact reservation, scenario, authority and native runtime evidence before readiness.",
+            "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0"
+          }
+        },
+        "event_id": "event_8aebc9e68eab46c8a7bd741dbcd2a236",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "manager.activate",
+        "revision": 4,
+        "sha256": "67f5318bfb5d9f776ec5e90192fa1aa7c16fc4d1654faf05d91ba8be32829ce0"
+      },
+      {
+        "actor": "/root/recovery_manager",
+        "data": {
+          "assignment_id": "recovery_manager",
+          "receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root",
+                  "agent_status": "running"
+                },
+                {
+                  "agent_name": "/root/recovery_manager",
+                  "agent_status": "running"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          }
+        },
+        "event_id": "event_31f28a9a6ebe46ae8313c5ce6203b22c",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "manager.reconnect",
+        "revision": 5,
+        "sha256": "299063efc27d1af1bfac11480315787d8ec4d1f1206ea4429f089d0a73682bf7"
+      },
+      {
+        "actor": "/root/recovery_manager",
+        "data": {
+          "baseline": {
+            "authority": "The approved TASK-034 scenario authorizes one disposable marker and actual native interruption; no production completion, canonical mutation, user settings, external action, or other-project change.",
+            "category": "generic",
+            "criteria": [
+              "One readiness marker confirms exact role reads and assigned native identity.",
+              "The deliberately unfinished delivery artifact is completed and verified."
+            ],
+            "deliverable": "markers/recovery_worker/readiness.json only at this stage; markers/recovery_worker/delivery.txt must remain absent.",
+            "dependencies": [],
+            "implementation_required": true,
+            "inputs": [
+              {
+                "path": "context/scenario.md",
+                "sha256": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e"
+              },
+              {
+                "path": "context/authority.json",
+                "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+              }
+            ],
+            "objective": "Write one readiness marker, then remain active awaiting manager control. Keep the deliberately unfinished deliverable incomplete for native interruption and recovery validation.",
+            "protected": [
+              "SOUL.md",
+              "AGENTS.md",
+              "ROLE.md",
+              "SPECS.md",
+              "roles",
+              ".agents",
+              "control_records",
+              "project.json"
+            ],
+            "rationale": "A single controlled marker write and wait has one execution owner and needs no solver or review team.",
+            "reads": [
+              "SOUL.md",
+              "AGENTS.md",
+              "ROLE.md",
+              "SPECS.md",
+              "roles/project-sub-agent",
+              ".agents/skills/communication",
+              "context",
+              "coordination"
+            ],
+            "requirements": [
+              "TASK-034"
+            ],
+            "slots": [
+              {
+                "function": "worker",
+                "perspective": "Bounded marker write and native stopping observation",
+                "slot": "marker_worker",
+                "solver_slot": null
+              }
+            ],
+            "stop": "After writing readiness, send the manager its path and digest and remain in bounded native waits until explicit control or interruption. Do not finish voluntarily or create delivery.txt.",
+            "writes": [
+              "markers/recovery_worker"
+            ]
+          },
+          "subtask_id": "marker_validation"
+        },
+        "event_id": "event_eef1aa66902b4a8f93bf780aa971e193",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "subtask.define",
+        "revision": 6,
+        "sha256": "a9d252976ce627332ff9d60fd79e5265d13c2bacecf0140920acdb53dd40401e"
+      },
+      {
+        "actor": "/root/recovery_manager",
+        "data": {
+          "assignment_id": "recovery_worker",
+          "context": [
+            {
+              "path": "Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/artifacts/orchestration/baseline_3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee.json",
+              "sha256": "3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee"
+            },
+            {
+              "path": "context/scenario.md",
+              "sha256": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e"
+            },
+            {
+              "path": "context/authority.json",
+              "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+            },
+            {
+              "path": "coordination/current-worker-runtime.json",
+              "sha256": "9cef6141f0e582c895169e17e75ca91373f29a7c9fad929834e685a327543261"
+            }
+          ],
+          "fit": {
+            "authority": "The approved TASK-034 scenario authorizes one disposable marker and actual native interruption; no production completion, canonical mutation, user settings, external action, or other-project change. No nested delegation.",
+            "capabilities": [
+              "bounded JSON write",
+              "role evidence hashing",
+              "native waiting and stopping"
+            ],
+            "deliverable": "markers/recovery_worker/readiness.json only at this stage; markers/recovery_worker/delivery.txt must remain absent.",
+            "objective": "Write one readiness marker, then remain active awaiting manager control. Keep the deliberately unfinished deliverable incomplete for native interruption and recovery validation.",
+            "rationale": "The general project worker explicitly supports bounded implementation and evidence collection. The manager role is broader and grants unnecessary coordination authority; no specialized domain expertise is needed.",
+            "reads": [
+              "SOUL.md",
+              "AGENTS.md",
+              "ROLE.md",
+              "SPECS.md",
+              "roles/project-sub-agent",
+              ".agents/skills/communication",
+              "context",
+              "coordination",
+              "Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/artifacts/orchestration/baseline_3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee.json"
+            ],
+            "risk": "Disposable marker only; deliberately incomplete result; manager will interrupt actual native activity.",
+            "skills": [
+              "communication"
+            ],
+            "stop": "After writing readiness, send the manager its path and digest and remain in bounded native waits until explicit control or interruption. Do not finish voluntarily or create delivery.txt.",
+            "tools": [
+              "Python standard library",
+              "native send_message and bounded wait"
+            ],
+            "writes": [
+              "markers/recovery_worker"
+            ]
+          },
+          "role": {
+            "agents_path": "roles/project-sub-agent/AGENTS.md",
+            "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+            "catalog": {
+              "path": "coordination/catalog_548d0e01bf7a4478a6bcbfbf2f670c85.json",
+              "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+            },
+            "name": "project-sub-agent",
+            "role_path": "roles/project-sub-agent/ROLE.md",
+            "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+          },
+          "runtime": {
+            "available_slots": 2,
+            "depth": 2,
+            "evidence": [
+              {
+                "path": "coordination/current-worker-runtime.json",
+                "sha256": "9cef6141f0e582c895169e17e75ca91373f29a7c9fad929834e685a327543261"
+              },
+              {
+                "path": "coordination/worker-dispatch-roster.json",
+                "sha256": "7d70256827ff285344462c78aa5eb0e425b185f9c86e7a7ff29f58cec0c5eb61"
+              }
+            ],
+            "tools": [
+              "spawn_agent",
+              "send_message",
+              "followup_task",
+              "list_agents",
+              "wait_agent",
+              "interrupt_agent"
+            ]
+          },
+          "settings": {
+            "effort": null,
+            "evidence": [
+              {
+                "path": "context/native-runtime.json",
+                "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+              }
+            ],
+            "mode": "verified_inheritance",
+            "model": null
+          },
+          "slot": "marker_worker",
+          "subtask_id": "marker_validation"
+        },
+        "event_id": "event_837f9b87520b47f2aec94380cf8b875f",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "assignment.reserve",
+        "revision": 7,
+        "sha256": "5e31ab156582bd4801db927d1d2e3bf73a23317b88f061c7a3edb2134729aa81"
+      },
+      {
+        "actor": "/root/recovery_manager",
+        "data": {
+          "assignment_id": "recovery_worker",
+          "reason": "Controlled test: actual spawn receipt retained in coordination/worker-actual-spawn-delayed.json, deliberately delayed before canonical import. Reconcile this original assignment and actual native ID without another launch."
+        },
+        "event_id": "event_4cba63f722a04e05be510ba694ebca06",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "assignment.uncertain",
+        "revision": 8,
+        "sha256": "32fe0144a9c6696316bd68c9d0dfa1ca9b0e44cb4692da9bc4a2206279a04773"
+      },
+      {
+        "actor": "/root/recovery_manager",
+        "data": {
+          "assignment_id": "recovery_worker",
+          "receipt": {
+            "result": {
+              "task_name": "/root/recovery_manager/marker_worker"
+            },
+            "tool": "collaboration.spawn_agent"
+          }
+        },
+        "event_id": "event_181e8f5d0afc40bb8e56afc4f16934d7",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "assignment.receipt",
+        "revision": 9,
+        "sha256": "4fa88cee1e5a78af439d8efa9b6af59b209031438a4162e54abcdf1ca6feac54"
+      },
+      {
+        "actor": "/root/recovery_manager",
+        "data": {
+          "assignment_id": "recovery_worker",
+          "changes": [],
+          "receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root/recovery_manager",
+                  "agent_status": "running"
+                },
+                {
+                  "agent_name": "/root/recovery_manager/marker_worker",
+                  "agent_status": "running"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          }
+        },
+        "event_id": "event_05c66917fcd54f06bbc93412ff425a63",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "assignment.observe",
+        "revision": 10,
+        "sha256": "2b1d1fa23f1519c7fc203e43e98963fd98d7958b91db56616e9c2f60e8735025"
+      },
+      {
+        "actor": "/root/recovery_manager",
+        "data": {
+          "assignment_id": "recovery_worker",
+          "role_reads": {
+            "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+            "evidence": "Worker directly read both complete role files, owning SOUL, AGENTS, ROLE, SPECS, communication skill, assignment and all four assigned context inputs before writing this marker.",
+            "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+          }
+        },
+        "event_id": "event_b8e35f78a07c4c2d8ae3dce5631f39d2",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "assignment.reads",
+        "revision": 11,
+        "sha256": "79c8c3ec175965ed7e68752e59d5f11713d484fadb7041783a5a446bb9456261"
+      },
+      {
+        "actor": "/root/recovery_manager",
+        "data": {
+          "action": "pause",
+          "reason": "Approved controlled native pause/interruption test; stop dependent dispatch before reconciling the still-running marker worker."
+        },
+        "event_id": "event_f2b54255d3e84e44aabe643d0a66550f",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "stop.request",
+        "revision": 12,
+        "sha256": "3aa39450d2af13c6505968dfbe3df7a8ad59191e4cd9b78dccd972caa9d60b4c"
+      },
+      {
+        "actor": "/root/recovery_manager",
+        "data": {
+          "assignment_id": "recovery_worker",
+          "changes": [
+            {
+              "path": "markers/recovery_worker/readiness.json",
+              "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+            }
+          ],
+          "receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root/recovery_manager",
+                  "agent_status": "running"
+                },
+                {
+                  "agent_name": "/root/recovery_manager/marker_worker",
+                  "agent_status": "interrupted"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          }
+        },
+        "event_id": "event_5b8b306482cf4205a823fe79c5e0110e",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "assignment.observe",
+        "revision": 13,
+        "sha256": "0a3cce0ab4b17c15f2329da85e44588ed02c986dab2ef16139bda04a5a93c3a3"
+      },
+      {
+        "actor": "/root/recovery_manager",
+        "data": {
+          "reason": "Actual interruption returned previous running, current native roster reports interrupted, the exact readiness marker is unchanged, and the deliberately unfinished delivery file is absent. The sole worker is reconciled."
+        },
+        "event_id": "event_638c846ad20b438aa1dd15c551d01cf3",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "stop.finish",
+        "revision": 14,
+        "sha256": "e36c5a2cc909e926bcb3e9953ad44d2503c9e231a893537aab496677c36c836e"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "observations": [
+            {
+              "assignment_id": "recovery_manager",
+              "changes": [
+                {
+                  "path": "coordination/first-manager-handoff.json",
+                  "sha256": "94705e5d5648f1871cd40c307aa6e123fd5dbfac2b1c3b48e3116d283b083e73"
+                }
+              ],
+              "receipt": {
+                "result": {
+                  "agents": [
+                    {
+                      "agent_name": "/root",
+                      "agent_status": "running"
+                    },
+                    {
+                      "agent_name": "/root/recovery_manager",
+                      "agent_status": "completed"
+                    },
+                    {
+                      "agent_name": "/root/recovery_manager/marker_worker",
+                      "agent_status": "interrupted"
+                    }
+                  ]
+                },
+                "tool": "collaboration.list_agents"
+              }
+            },
+            {
+              "assignment_id": "recovery_worker",
+              "changes": [
+                {
+                  "path": "markers/recovery_worker/readiness.json",
+                  "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+                }
+              ],
+              "receipt": {
+                "result": {
+                  "agents": [
+                    {
+                      "agent_name": "/root",
+                      "agent_status": "running"
+                    },
+                    {
+                      "agent_name": "/root/recovery_manager",
+                      "agent_status": "completed"
+                    },
+                    {
+                      "agent_name": "/root/recovery_manager/marker_worker",
+                      "agent_status": "interrupted"
+                    }
+                  ]
+                },
+                "tool": "collaboration.list_agents"
+              }
+            }
+          ],
+          "reason": "Approved recovery test: both exact canonical owners have actual completed/interrupted observations; transfer to a distinct manager to finish cancellation verification.",
+          "user_authorized": true
+        },
+        "event_id": "event_13e435578d574161916007f3d9b89f91",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 1,
+        "kind": "manager.replace",
+        "revision": 17,
+        "sha256": "d350da4bf4b868900f092db52531c6e48e6a589198c44d627a9b27de8d6cbcce"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "recovery_replacement",
+          "authority": "The user explicitly requested and approved implementation of the named plan, including TASK-034 bounded native interruption, reconnect, replacement and setting-change failure tests.",
+          "bootstrap_receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root",
+                  "agent_status": "running"
+                },
+                {
+                  "agent_name": "/root/recovery_manager",
+                  "agent_status": "completed"
+                },
+                {
+                  "agent_name": "/root/recovery_manager/marker_worker",
+                  "agent_status": "interrupted"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          },
+          "context": [
+            {
+              "path": "context/scenario.md",
+              "sha256": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e"
+            },
+            {
+              "path": "context/authority.json",
+              "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+            },
+            {
+              "path": "coordination/host-replacement-evidence.json",
+              "sha256": "4583912f4d19c04c4a6872946296064a2d5bd3b08565395345c06c51568c4a7a"
+            }
+          ],
+          "fit": {
+            "authority": "Approved plan TASK-034 replacement/cancellation test; canonical writer only after host activation. Ordinary writes only coordination. No children, implementation, user settings or external actions.",
+            "capabilities": [
+              "native coordination",
+              "current evidence inspection",
+              "Task writer and stopping controls"
+            ],
+            "deliverable": "Exact stale-generation rejection, cancelled Task with unfinished criterion, preserved marker and final native-accounting evidence.",
+            "objective": "Inspect the reconciled recovery fixture, reject stale generation work and complete its truthful cancellation.",
+            "rationale": "The persisted manager role fits exact generation ownership and Task lifecycle verification; no broader worker or product scope is needed.",
+            "reads": [
+              "context",
+              "coordination",
+              ".agents/skills",
+              "roles",
+              "SOUL.md",
+              "ROLE.md",
+              "AGENTS.md",
+              "SPECS.md"
+            ],
+            "risk": "Disposable fixture only; no actual model/configuration change or external action.",
+            "skills": [
+              "task",
+              "agent-task",
+              "manage-subagent-roles"
+            ],
+            "stop": "After direct verification, record cancelled execution and cancelled Task with unfinished criteria, then return evidence and end the turn.",
+            "tools": [
+              "native collaboration",
+              "Python standard library",
+              "installed Task and role helpers"
+            ],
+            "writes": [
+              "coordination"
+            ]
+          },
+          "role": {
+            "agents_path": "roles/task-manager/AGENTS.md",
+            "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+            "catalog": {
+              "path": "coordination/catalog_a2c3069d30e34855bee9c0b2b6479300.json",
+              "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+            },
+            "name": "task-manager",
+            "role_path": "roles/task-manager/ROLE.md",
+            "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0"
+          },
+          "runtime": {
+            "available_slots": 3,
+            "depth": 2,
+            "evidence": [
+              {
+                "path": "context/native-runtime.json",
+                "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+              },
+              {
+                "path": "coordination/host-replacement-evidence.json",
+                "sha256": "4583912f4d19c04c4a6872946296064a2d5bd3b08565395345c06c51568c4a7a"
+              }
+            ],
+            "tools": [
+              "spawn_agent",
+              "send_message",
+              "followup_task",
+              "list_agents",
+              "wait_agent",
+              "interrupt_agent"
+            ]
+          },
+          "settings": {
+            "effort": null,
+            "evidence": [
+              {
+                "path": "context/native-runtime.json",
+                "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+              }
+            ],
+            "mode": "verified_inheritance",
+            "model": null
+          },
+          "source_refs": [
+            {
+              "path": "context/authority.json",
+              "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+            }
+          ]
+        },
+        "event_id": "event_6e2a512823b74f9fb425f307be103021",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 2,
+        "kind": "manager.reserve",
+        "revision": 18,
+        "sha256": "2d7287e0a94f6235ffd0cf0b35e2c52e2834cbc4cf8c9d7520427c54b4b878e9"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "recovery_replacement",
+          "receipt": {
+            "result": {
+              "task_name": "/root/recovery_replacement"
+            },
+            "tool": "collaboration.spawn_agent"
+          }
+        },
+        "event_id": "event_44eb3b5c58344b52b289b8bd7e146b8b",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 2,
+        "kind": "manager.receipt",
+        "revision": 19,
+        "sha256": "282da874e7384674d1c9b446a87600b0d27c917ec8236b4dd18c30f9ef410b6c"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "recovery_replacement",
+          "role_reads": {
+            "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+            "evidence": "Replacement manager directly read both complete role files, owning SOUL and governance, installed Task and role skills, both Task contracts, exact replacement assignment, scenario, authority/runtime and first-manager handoff before readiness.",
+            "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0"
+          }
+        },
+        "event_id": "event_5bbe6563ec354d6785133585d592ef4f",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 2,
+        "kind": "manager.activate",
+        "revision": 20,
+        "sha256": "2136f9f8e2f43efddac5dcece05607c9527f391405298800cedd9952f51a76cf"
+      },
+      {
+        "actor": "/root/recovery_replacement",
+        "data": {
+          "assignment_id": "recovery_replacement",
+          "receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root/recovery_replacement",
+                  "agent_status": "running"
+                },
+                {
+                  "agent_name": "/root/recovery_manager",
+                  "agent_status": "completed"
+                },
+                {
+                  "agent_name": "/root/recovery_manager/marker_worker",
+                  "agent_status": "interrupted"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          }
+        },
+        "event_id": "event_2fb8fe1bec6d43739ca85d2ae39f73db",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 2,
+        "kind": "manager.reconnect",
+        "revision": 21,
+        "sha256": "d15b0bfa3f5b231c6d1a4e56382c55a52c89531c5bd36cb8b048b83a815307de"
+      },
+      {
+        "actor": "/root/recovery_replacement",
+        "data": {
+          "criteria": [],
+          "inspection": [
+            {
+              "path": "coordination/replacement-inspection.json",
+              "sha256": "8599a11b4bdc477d1cd63ec319e3889db0da5151ac06a9f10d18089f9df09682"
+            },
+            {
+              "path": "coordination/control-replacement-old-generation-rejected.json",
+              "sha256": "1fc1c7b882e1b33dbf51e458cc5bdca9e4db722942742537b244ed17faaf89bb"
+            },
+            {
+              "path": "markers/recovery_worker/readiness.json",
+              "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+            }
+          ],
+          "outcome": "cancelled"
+        },
+        "event_id": "event_477636e98a354e2799294f44435198a4",
+        "execution_id": "recovery_validation_20260908",
+        "generation": 2,
+        "kind": "execution.finish",
+        "revision": 22,
+        "sha256": "3d2c656d1d405a4b434e86662572206510801e3abb488499e75eac03bb07baa7"
+      }
+    ],
+    "execution_id": "recovery_validation_20260908",
+    "generation": 2,
+    "history": [],
+    "manager_id": "recovery_replacement",
+    "results": {},
+    "reviews": {},
+    "settings": {
+      "effort": null,
+      "evidence": [
+        {
+          "path": "context/native-runtime.json",
+          "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+        }
+      ],
+      "mode": "verified_inheritance",
+      "model": null
+    },
+    "source_refs": [
+      {
+        "path": "context/authority.json",
+        "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+      }
+    ],
+    "stage": "stopped",
+    "subtasks": {
+      "marker_validation": {
+        "active_conflicts": [],
+        "baseline": {
+          "authority": "The approved TASK-034 scenario authorizes one disposable marker and actual native interruption; no production completion, canonical mutation, user settings, external action, or other-project change.",
+          "category": "generic",
+          "criteria": [
+            "One readiness marker confirms exact role reads and assigned native identity.",
+            "The deliberately unfinished delivery artifact is completed and verified."
+          ],
+          "deliverable": "markers/recovery_worker/readiness.json only at this stage; markers/recovery_worker/delivery.txt must remain absent.",
+          "dependencies": [],
+          "implementation_required": true,
+          "inputs": [
+            {
+              "path": "context/scenario.md",
+              "sha256": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e"
+            },
+            {
+              "path": "context/authority.json",
+              "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+            }
+          ],
+          "objective": "Write one readiness marker, then remain active awaiting manager control. Keep the deliberately unfinished deliverable incomplete for native interruption and recovery validation.",
+          "protected": [
+            "SOUL.md",
+            "AGENTS.md",
+            "ROLE.md",
+            "SPECS.md",
+            "roles",
+            ".agents",
+            "control_records",
+            "project.json"
+          ],
+          "rationale": "A single controlled marker write and wait has one execution owner and needs no solver or review team.",
+          "reads": [
+            "SOUL.md",
+            "AGENTS.md",
+            "ROLE.md",
+            "SPECS.md",
+            "roles/project-sub-agent",
+            ".agents/skills/communication",
+            "context",
+            "coordination"
+          ],
+          "requirements": [
+            "TASK-034"
+          ],
+          "slots": [
+            {
+              "function": "worker",
+              "perspective": "Bounded marker write and native stopping observation",
+              "slot": "marker_worker",
+              "solver_slot": null
+            }
+          ],
+          "stop": "After writing readiness, send the manager its path and digest and remain in bounded native waits until explicit control or interruption. Do not finish voluntarily or create delivery.txt.",
+          "writes": [
+            "markers/recovery_worker"
+          ]
+        },
+        "dependency_versions": {},
+        "digest": "3fabe874c23edc7559c9c409b41b87da0576bd57f026e45cca27fbb3429c1bee",
+        "round": 1,
+        "task_digest": "aeef06d117d220d81fb548422fd57fbcabb15ae69366aa21bca28d9b19527758",
+        "verified": [],
+        "versions": []
+      }
+    },
+    "syntheses": {},
+    "task_digest": "aeef06d117d220d81fb548422fd57fbcabb15ae69366aa21bca28d9b19527758",
+    "verifications": [
+      {
+        "criteria": [],
+        "inspection": [
+          {
+            "path": "coordination/replacement-inspection.json",
+            "sha256": "8599a11b4bdc477d1cd63ec319e3889db0da5151ac06a9f10d18089f9df09682"
+          },
+          {
+            "path": "coordination/control-replacement-old-generation-rejected.json",
+            "sha256": "1fc1c7b882e1b33dbf51e458cc5bdca9e4db722942742537b244ed17faaf89bb"
+          },
+          {
+            "path": "markers/recovery_worker/readiness.json",
+            "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+          }
+        ],
+        "outcome": "cancelled"
+      }
+    ],
+    "version": 1,
+    "writer": "/root/recovery_replacement"
+  }
+}

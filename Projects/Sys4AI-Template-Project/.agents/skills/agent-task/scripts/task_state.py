@@ -9,6 +9,8 @@ under <project-root>/Tasks.
 from __future__ import annotations
 
 import argparse
+import base64
+import importlib.util
 import contextlib
 import datetime as dt
 import hashlib
@@ -22,6 +24,10 @@ import unicodedata
 import uuid
 from typing import Any, Iterator
 
+
+_orch_spec = importlib.util.spec_from_file_location("sys4ai_orchestration_state", Path(__file__).with_name("orchestration_state.py"))
+orch = importlib.util.module_from_spec(_orch_spec)
+_orch_spec.loader.exec_module(orch)
 
 SCHEMA_VERSION = 1
 RESULT_SCHEMA_VERSION = 1
@@ -146,6 +152,17 @@ class TaskError(Exception):
         finding: dict[str, Any] = {"code": self.code, "message": self.message}
         finding.update(self.details)
         return finding
+
+
+def orchestration_call(fn, *args, **kwargs):
+    try:
+        return fn(*args, **kwargs)
+    except orch.OrchestrationError as exc:
+        raise TaskError(EXIT_INVALID, exc.code, str(exc)) from exc
+
+
+def state_fields(state):
+    return STATE_FIELDS + (("orchestration",) if state.get("schema_version") == 2 else ())
 
 
 def finding(code: str, message: str, **details: Any) -> dict[str, Any]:
@@ -462,7 +479,12 @@ def json_text(value: Any) -> str:
 
 
 def canonical_state(state: dict[str, Any]) -> dict[str, Any]:
-    ordered: dict[str, Any] = {key: state[key] for key in STATE_FIELDS}
+    fields = state_fields(state)
+    if set(state) != set(fields):
+        raise TaskError(EXIT_INTEGRITY, "STATE_FIELDS", "Canonicalization cannot discard unknown or missing state fields.")
+    ordered: dict[str, Any] = {key: state[key] for key in fields}
+    if state.get("schema_version") == 2:
+        ordered["orchestration"] = json.loads(json.dumps(state["orchestration"], sort_keys=True))
     last_response = ordered["last_response"]
     if isinstance(last_response, dict):
         ordered["last_response"] = {key: last_response[key] for key in LAST_RESPONSE_FIELDS}
@@ -583,7 +605,7 @@ def render_task_markdown(state: dict[str, Any]) -> str:
     latest = "None"
     if isinstance(last, dict):
         latest = f"[{last['response_id']}]({last['path']})"
-    return render_template(
+    rendered = render_template(
         "TASK.md.template",
         {
             "revision": str(state["revision"]),
@@ -602,6 +624,9 @@ def render_task_markdown(state: dict[str, Any]) -> str:
             "latest_response": latest,
         },
     )
+    if state.get("schema_version") == 2:
+        rendered += orch.summary(state["orchestration"])
+    return rendered
 
 
 def render_relevant_files(files: list[dict[str, str]]) -> str:
@@ -638,7 +663,7 @@ def render_response_markdown(
         next_step = "Task completed. No next step required."
     else:
         next_step = markdown_block(state_after["next_step"]) if state_after["next_step"] is not None else "None"
-    return render_template(
+    rendered = render_template(
         "Task-Response.md.template",
         {
             "timestamp": timestamp,
@@ -658,6 +683,15 @@ def render_response_markdown(
             "relevant_files": render_relevant_files(payload["relevant_files"]),
         },
     )
+
+    if state_after.get("schema_version") == 2:
+        o = state_after["orchestration"]
+        actor = payload.get("actor")
+        if actor is None:
+            rendered += "\n## Orchestration receipt\n\nNo native identity was assigned by this schema upgrade.\n"
+        else:
+            rendered += f"\n## Orchestration receipt\n\nActor: {markdown_inline(actor)}; execution: {markdown_inline(payload.get('execution_id'))}; generation: {payload.get('generation')}; writer after: {markdown_inline(o['writer'])}.\n"
+    return rendered
 
 
 def task_sort_key(state: dict[str, Any]) -> tuple[int, float, str]:
@@ -795,14 +829,20 @@ def validate_markdown_links(text: str, base: Path, path: Path) -> list[dict[str,
 
 def validate_state_shape(state: dict[str, Any], folder: Path, raw_text: str) -> list[dict[str, Any]]:
     errors: list[dict[str, Any]] = []
-    missing = sorted(set(STATE_FIELDS) - set(state))
-    unknown = sorted(set(state) - set(STATE_FIELDS))
+    missing = sorted(set(state_fields(state)) - set(state))
+    unknown = sorted(set(state) - set(state_fields(state)))
     if missing or unknown:
         errors.append(finding("STATE_FIELDS", "task.json has missing or unsupported fields.", path=str(folder / "task.json"), missing=missing, unknown=unknown))
         return errors
 
-    if state["schema_version"] != SCHEMA_VERSION or isinstance(state["schema_version"], bool):
+    if type(state["schema_version"]) is not int or state["schema_version"] not in (1, 2):
         errors.append(finding("SCHEMA_VERSION", "Unsupported task schema version.", task_id=state.get("task_id")))
+
+    if state.get("schema_version") == 2:
+        try:
+            orch.validate(state["orchestration"])
+        except (orch.OrchestrationError, KeyError, TypeError, ValueError) as exc:
+            errors.append(finding(getattr(exc, "code", "ORCH_STATE"), str(exc), task_id=state.get("task_id")))
 
     for key, limit in (("name", MAX_NAME), ("original_name", MAX_NAME), ("description", MAX_DESCRIPTION), ("current_summary", MAX_TEXT)):
         value = state[key]
@@ -1473,9 +1513,11 @@ def validate_new_payload(payload: dict[str, Any]) -> dict[str, Any]:
     require_object_keys(
         payload,
         required={"name", "description", "definition_of_done"},
-        optional={"parent_task_id", "current_summary", "next_step", "blockers", "open_questions", "thread_refs"},
+        optional={"parent_task_id", "current_summary", "next_step", "blockers", "open_questions", "thread_refs", "orchestration_enabled"},
         label="new payload",
     )
+    if "orchestration_enabled" in payload and type(payload["orchestration_enabled"]) is not bool:
+        raise TaskError(EXIT_INVALID, "ORCH_ENABLE", "orchestration_enabled must be boolean.")
     name = require_text(payload["name"], "name", max_length=MAX_NAME)
     description = require_text(payload["description"], "description", max_length=MAX_DESCRIPTION)
     assert isinstance(name, str) and isinstance(description, str)
@@ -1489,6 +1531,7 @@ def validate_new_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "blockers": require_string_list(payload.get("blockers", []), "blockers"),
         "open_questions": require_string_list(payload.get("open_questions", []), "open_questions"),
         "thread_refs": [],
+        "orchestration_enabled": payload.get("orchestration_enabled", False),
     }
     if result["parent_task_id"] is not None:
         result["parent_task_id"] = require_text(result["parent_task_id"], "parent_task_id", max_length=MAX_NAME)
@@ -1616,7 +1659,7 @@ def command_new(project_root: Path, tasks_root: Path, payload: dict[str, Any]) -
         task_id, folder_name, slug = allocate_identity(catalog["states"], validated["name"], timestamp)
         state = canonical_state(
             {
-                "schema_version": SCHEMA_VERSION,
+                "schema_version": 2 if validated["orchestration_enabled"] else 1,
                 "task_id": task_id,
                 "name": validated["name"],
                 "original_name": validated["name"],
@@ -1636,6 +1679,7 @@ def command_new(project_root: Path, tasks_root: Path, payload: dict[str, Any]) -
                 "blockers": validated["blockers"],
                 "open_questions": validated["open_questions"],
                 "thread_refs": validated["thread_refs"],
+                **({"orchestration": orch.empty()} if validated["orchestration_enabled"] else {}),
             }
         )
         _, tmp_root = ensure_runtime_directories(tasks_root)
@@ -1722,8 +1766,15 @@ def validate_response_payload(payload: dict[str, Any], command: str, state: dict
         "updates",
         "completion_evidence",
         "user_authorized",
+        "actor", "execution_id", "generation", "legacy_sha256", "reconciliation",
     }
     require_object_keys(payload, required=required, optional=optional, label=f"{command} payload")
+    if state["schema_version"] == 1 and any(key in payload for key in ("actor", "execution_id", "generation", "reconciliation")):
+        raise TaskError(EXIT_INVALID, "ORCH_LEGACY_PAYLOAD", "Orchestration actor fields require schema 2.")
+    if "legacy_sha256" in payload and command != "upgrade-orchestration":
+        raise TaskError(EXIT_INVALID, "ORCH_UPGRADE_PAYLOAD", "legacy_sha256 is valid only for explicit upgrade.")
+    if "reconciliation" in payload and command != "reopen":
+        raise TaskError(EXIT_INVALID, "ORCH_RECOVERY_PAYLOAD", "Reopening reconciliation is valid only for explicit reopen.")
     result: dict[str, Any] = {
         "work_completed": require_string_list(payload["work_completed"], "work_completed", nonempty=True),
         "verification_evidence": require_string_list(payload["verification_evidence"], "verification_evidence", nonempty=True),
@@ -1740,6 +1791,7 @@ def validate_response_payload(payload: dict[str, Any], command: str, state: dict
         "updates": None,
         "completion_evidence": None,
         "user_authorized": payload.get("user_authorized", False),
+        **{key: payload[key] for key in ("actor", "execution_id", "generation", "legacy_sha256", "reconciliation") if key in payload},
     }
     if "status_reason" in payload:
         result["status_reason"] = require_text(payload["status_reason"], "status_reason")
@@ -1880,6 +1932,15 @@ def response_transaction(
     initial_catalog = scan_catalog(tasks_root)
     require_valid_catalog(initial_catalog)
     initial_state, _ = resolve_task(selector, initial_catalog)
+    event = None
+    if command == "orchestrate":
+        require_object_keys(raw_payload, required={"event", "response"}, optional=set(), label="orchestrate payload")
+        event = raw_payload["event"]
+        if not isinstance(raw_payload["response"], dict):
+            raise TaskError(EXIT_INVALID, "ORCH_RESPONSE", "response must be an object.")
+        raw_payload = raw_payload["response"]
+        if initial_state["schema_version"] != 2:
+            raise TaskError(EXIT_INVALID, "ORCH_UPGRADE_REQUIRED", "Enable orchestration on a new record or explicitly upgrade this selected legacy Task.")
     payload = validate_response_payload(raw_payload, command, initial_state, project_root)
     operation_id = new_operation_id()
     result = base_result(command, project_root, tasks_root)
@@ -1902,10 +1963,43 @@ def response_transaction(
                         details={"expected_revision": expected_revision, "actual_revision": state["revision"], "task_id": state["task_id"]},
                     )
                 payload = validate_response_payload(raw_payload, command, state, project_root)
-                target = choose_status(command, payload, state)
-                validate_transition_authority(command, payload, state, target)
+                artifact_writes = []
+                reopened_orchestration = None
+                if command == "upgrade-orchestration":
+                    if state["schema_version"] != 1 or payload.get("user_authorized") is not True or not payload.get("status_reason"):
+                        raise TaskError(EXIT_INVALID, "ORCH_UPGRADE_AUTHORITY", "Upgrade requires an explicitly authorized schema-1 selection and reason.")
+                    original_bytes = (folder / "task.json").read_bytes()
+                    if payload.get("legacy_sha256") != hashlib.sha256(original_bytes).hexdigest():
+                        raise TaskError(EXIT_REVISION, "ORCH_UPGRADE_DIGEST", "Previewed legacy bytes changed.")
+                    if payload.get("status_after") not in (None, state["status"]):
+                        raise TaskError(EXIT_INVALID, "ORCH_UPGRADE_STATUS", "Upgrade cannot alter lifecycle meaning.")
+                    target = state["status"]
+                else:
+                    target = choose_status(command, payload, state)
+                    validate_transition_authority(command, payload, state, target)
+                    if command != "orchestrate":
+                        reopened_orchestration = orchestration_call(orch.lifecycle, state, payload, command, target, project_root, folder)
                 timestamp = now_local()
                 updated = apply_state_updates(state, payload, target, timestamp)
+                if reopened_orchestration is not None:
+                    updated["orchestration"] = reopened_orchestration
+                if command == "upgrade-orchestration":
+                    updated.update(schema_version=2, orchestration=orch.empty())
+                    artifact_writes = [{"path": "artifacts/orchestration/legacy-v1-" + payload["legacy_sha256"] + ".json", "content": original_bytes}]
+                elif event is not None:
+                    updated["orchestration"], artifact_writes = orchestration_call(orch.apply, state, event, project_root, folder, list(catalog["states"].values()))
+                    # Typed events may not smuggle a lifecycle transition through response.status_after.
+                    if target != state["status"]:
+                        raise TaskError(EXIT_INVALID, "ORCH_EVENT_LIFECYCLE", "Record the typed event first; use the separately gated lifecycle command.")
+                for artifact_write in artifact_writes:
+                    try:
+                        artifact_text = artifact_write["content"].decode("utf-8")
+                    except UnicodeDecodeError:
+                        artifact_text = None
+                    if artifact_text is not None:
+                        reject_secrets(artifact_text)
+                if event is not None:
+                    payload.update(actor=event["actor"], execution_id=event["execution_id"], generation=event["generation"])
                 sequence = updated["response_count"]
                 response_id = canonical_response_id(sequence)
                 filename = canonical_response_filename(sequence, timestamp)
@@ -1923,6 +2017,8 @@ def response_transaction(
                 response_path = folder / relpath
                 if response_path.exists() or response_path.is_symlink():
                     raise TaskError(EXIT_INTEGRITY, "RESPONSE_COLLISION", "Next Task Response path already exists.", details={"path": str(response_path)})
+                if len(json_text(updated).encode()) > MAX_JSON_BYTES:
+                    raise TaskError(EXIT_INVALID, "ORCH_STATE_LIMIT", "Canonical state exceeds its bounded size; preserve history and report a resource blocker.")
                 planned_errors = validate_state_shape(updated, folder, json_text(updated))
                 if planned_errors:
                     raise TaskError(EXIT_INTEGRITY, "PLANNED_STATE_INVALID", "Planned task state failed validation.", details={"findings": planned_errors})
@@ -1947,9 +2043,15 @@ def response_transaction(
                     "planned_state": updated,
                     "created_at": timestamp,
                 }
+                if state["schema_version"] == 2 or command == "upgrade-orchestration":
+                    intent.update(schema_version=2, pre_state_sha256=hashlib.sha256((folder / "task.json").read_bytes()).hexdigest(), post_state_sha256=hashlib.sha256(json_text(updated).encode()).hexdigest(), actor=event["actor"] if event else payload.get("actor"), execution_id=event["execution_id"] if event else payload.get("execution_id"), generation=event["generation"] if event else payload.get("generation"), event_id=event["event_id"] if event else None, event_sha256=orch.hash_json(event) if event else None, artifacts=[{"path": w["path"], "sha256": hashlib.sha256(w["content"]).hexdigest(), "content_base64": base64.b64encode(w["content"]).decode()} for w in artifact_writes])
                 intent_path = tmp_root / f"{operation_id}.json"
+                if len(json_text(intent).encode()) > MAX_JSON_BYTES:
+                    raise TaskError(EXIT_INVALID, "ORCH_INTENT_LIMIT", "Transaction evidence exceeds bounded intent size.")
                 atomic_write_json(intent_path, intent)
                 inject_fault("before_response_publish")
+                publish_orchestration_artifacts(folder, intent, allow_existing=False)
+                inject_fault("after_artifact_publish")
                 os.replace(staged_response, response_path)
                 staged_response = None
                 inject_fault("after_response_publish")
@@ -2026,6 +2128,40 @@ def response_transaction(
         ) from exc
 
 
+def publish_orchestration_artifacts(folder, intent, *, allow_existing):
+    for artifact in intent.get("artifacts", []):
+        require_object_keys(artifact, required={"path", "sha256", "content_base64"}, optional=set(), label="artifact publication")
+        target = orchestration_call(orch.confined, folder, artifact["path"])
+        if not artifact["path"].startswith("artifacts/orchestration/"):
+            raise TaskError(EXIT_INTEGRITY, "ORCH_ARTIFACT_PATH", "Invalid artifact publication target.")
+        try:
+            content = base64.b64decode(artifact["content_base64"], validate=True)
+        except (ValueError, TypeError) as exc:
+            raise TaskError(EXIT_INTEGRITY, "ORCH_ARTIFACT_CONTENT", "Malformed staged artifact bytes.") from exc
+        if hashlib.sha256(content).hexdigest() != artifact["sha256"]:
+            raise TaskError(EXIT_INTEGRITY, "ORCH_ARTIFACT_HASH", "Staged artifact digest differs.")
+        if target.exists():
+            if not allow_existing or not target.is_file() or hashlib.sha256(target.read_bytes()).hexdigest() != artifact["sha256"]:
+                raise TaskError(EXIT_INTEGRITY, "ORCH_ARTIFACT_COLLISION", "Artifact version was changed or already exists.")
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
+        fd, name = tempfile.mkstemp(prefix=".artifact-", dir=target.parent)
+        try:
+            with os.fdopen(fd, "wb") as handle:
+                handle.write(content); handle.flush(); os.fsync(handle.fileno())
+            os.replace(name, target)
+        finally:
+            Path(name).unlink(missing_ok=True)
+
+
+def upgrade_preview(project_root, tasks_root, selector):
+    catalog = scan_catalog(tasks_root); require_valid_catalog(catalog)
+    state, folder = resolve_task(selector, catalog)
+    result = base_result("upgrade-preview", project_root, tasks_root)
+    result.update(status="preview", task_id=state["task_id"], revision_before=state["revision"], revision_after=state["revision"], schema_before=state["schema_version"], schema_after=2, sha256=hashlib.sha256((folder / "task.json").read_bytes()).hexdigest(), native_identity_created=False)
+    return result
+
+
 def command_validate(project_root: Path, tasks_root: Path, selector: str | None) -> dict[str, Any]:
     result = base_result("validate", project_root, tasks_root)
     catalog = scan_catalog(tasks_root)
@@ -2053,7 +2189,7 @@ def command_validate(project_root: Path, tasks_root: Path, selector: str | None)
     return result
 
 
-def command_rebuild(project_root: Path, tasks_root: Path, selector: str | None) -> dict[str, Any]:
+def command_rebuild(project_root: Path, tasks_root: Path, selector: str | None, actor_payload=None) -> dict[str, Any]:
     catalog = scan_catalog(tasks_root)
     require_valid_catalog(catalog)
     selected_id: str | None = None
@@ -2068,6 +2204,9 @@ def command_rebuild(project_root: Path, tasks_root: Path, selector: str | None) 
         targets = list(current["states"].values())
         if selected_id:
             targets = [current["states"][selected_id]]
+        for state in targets:
+            if state["schema_version"] == 2:
+                orchestration_call(orch.auth, state, actor_payload or {}, allow_unassigned=True)
         for state in targets:
             folder = current["folders"][state["task_id"]]
             atomic_write_text(folder / "TASK.md", render_task_markdown(state))
@@ -2084,6 +2223,11 @@ def command_rebuild(project_root: Path, tasks_root: Path, selector: str | None) 
 
 
 def validate_reconcile_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    cooperative = {key: payload[key] for key in ("actor", "execution_id", "generation", "bootstrap_receipt") if key in payload}
+    if cooperative:
+        stripped = {key: value for key, value in payload.items() if key not in cooperative}
+        return {**validate_reconcile_payload(stripped), **cooperative}
+
     repair_type = payload.get("repair_type")
     if repair_type == "transaction":
         require_object_keys(payload, required={"repair_type", "operation_id"}, optional=set(), label="transaction reconcile payload")
@@ -2227,6 +2371,7 @@ def reconcile_redaction_intent(
     operation_id: str,
     intent_path: Path,
     intent: dict[str, Any],
+    actor_payload=None,
 ) -> dict[str, Any]:
     result = base_result("reconcile", project_root, tasks_root)
     task_id = intent.get("task_id")
@@ -2256,6 +2401,19 @@ def reconcile_redaction_intent(
                 raise TaskError(EXIT_INTEGRITY, "RECONCILE_TASK_MISSING", "Redaction task is missing.", recovery_required=True)
             state = catalog["states"][task_id]
             folder = catalog["folders"][task_id]
+            planned_errors = validate_state_shape(planned, folder, json_text(planned))
+            if planned_errors:
+                raise TaskError(EXIT_INTEGRITY, "TRANSACTION_PLANNED_STATE", "Redaction planned state is invalid.", details={"findings": planned_errors})
+            if intent.get("schema_version") == 2:
+                expected_keys = {"schema_version", "kind", "operation_id", "command", "task_id", "expected_revision", "old_response_id", "old_response_path", "original_sha256", "redacted_sha256", "redacted_content", "correction_response_id", "correction_response_path", "correction_response_sha256", "correction_response_content", "staged_response_path", "planned_state", "created_at", "pre_state_sha256", "post_state_sha256", "actor", "execution_id", "generation"}
+                require_object_keys(intent, required=expected_keys, optional=set(), label="schema-2 redaction intent")
+                live_sha = hashlib.sha256((folder / "task.json").read_bytes()).hexdigest()
+                if live_sha not in (intent["pre_state_sha256"], intent["post_state_sha256"]) or hashlib.sha256(json_text(planned).encode()).hexdigest() != intent["post_state_sha256"]:
+                    raise TaskError(EXIT_INTEGRITY, "ORCH_RECOVERY_STATE_HASH", "Redaction state bytes differ from the exact reviewed transaction.")
+                if any((actor_payload or {}).get(k) != intent[k] for k in ("actor", "execution_id", "generation")):
+                    orchestration_call(orch.auth, state, actor_payload or {})
+            elif intent.get("schema_version") != 1:
+                raise TaskError(EXIT_INTEGRITY, "TRANSACTION_INTENT_SCHEMA", "Unsupported redaction intent version.")
             old_path = validate_intent_response_path(folder, intent.get("old_response_path"), "old_response_path")
             correction_path = validate_intent_response_path(
                 folder,
@@ -2335,6 +2493,7 @@ def reconcile_transaction(
     selector: str | None,
     expected_revision: int | None,
     operation_id: str,
+    actor_payload=None,
 ) -> dict[str, Any]:
     result = base_result("reconcile", project_root, tasks_root)
     _, tmp_root = ensure_runtime_directories(tasks_root)
@@ -2358,6 +2517,7 @@ def reconcile_transaction(
             operation_id,
             intent_path,
             intent,
+            actor_payload=actor_payload,
         )
     if intent.get("kind") != "response_transaction":
         raise TaskError(EXIT_INTEGRITY, "TRANSACTION_INTENT_SCHEMA", "Transaction intent kind is invalid.", recovery_required=True)
@@ -2384,6 +2544,23 @@ def reconcile_transaction(
             planned = intent.get("planned_state")
             if not isinstance(planned, dict):
                 raise TaskError(EXIT_INTEGRITY, "TRANSACTION_PLANNED_STATE", "Transaction intent has no exact planned state.", recovery_required=True)
+            planned_errors = validate_state_shape(planned, folder, json_text(planned))
+            if planned_errors:
+                raise TaskError(EXIT_INTEGRITY, "TRANSACTION_PLANNED_STATE", "Exact planned state is invalid.", details={"findings": planned_errors}, recovery_required=True)
+            if intent.get("schema_version") == 2:
+                expected_keys = {"schema_version", "kind", "operation_id", "command", "task_id", "expected_revision", "response_id", "response_path", "response_sha256", "response_content", "staged_response_path", "planned_state", "created_at", "pre_state_sha256", "post_state_sha256", "actor", "execution_id", "generation", "event_id", "event_sha256", "artifacts"}
+                require_object_keys(intent, required=expected_keys, optional=set(), label="schema-2 transaction intent")
+                if hashlib.sha256(json_text(planned).encode()).hexdigest() != intent["post_state_sha256"]:
+                    raise TaskError(EXIT_INTEGRITY, "ORCH_POST_STATE_HASH", "Planned state digest differs from intent.")
+                live_sha = hashlib.sha256((folder / "task.json").read_bytes()).hexdigest()
+                if live_sha not in (intent["pre_state_sha256"], intent["post_state_sha256"]):
+                    raise TaskError(EXIT_INTEGRITY, "ORCH_RECOVERY_STATE_HASH", "Same revision does not authorize recovery over different bytes.")
+                if intent["command"] != "upgrade-orchestration":
+                    auth_input = actor_payload or {}
+                    if any(auth_input.get(k) != intent[k] for k in ("actor", "execution_id", "generation")):
+                        orchestration_call(orch.auth, state, auth_input)
+            elif intent.get("schema_version") != 1:
+                raise TaskError(EXIT_INTEGRITY, "TRANSACTION_INTENT_SCHEMA", "Unsupported transaction intent version.")
             try:
                 planned = canonical_state(planned)
             except (KeyError, TypeError) as exc:
@@ -2403,7 +2580,8 @@ def reconcile_transaction(
 
             expected = intent["expected_revision"]
             planned_revision = planned["revision"]
-            if state["revision"] == expected and not response_path.exists():
+            artifacts_published = any((folder / a["path"]).exists() for a in intent.get("artifacts", []))
+            if state["revision"] == expected and not response_path.exists() and not artifacts_published:
                 cleanup_staged_response(tasks_root, intent.get("staged_response_path"))
                 receipt = write_reconcile_receipt(tasks_root, operation_id, task_id, "aborted_transaction_cleaned")
                 intent_path.unlink(missing_ok=True)
@@ -2419,6 +2597,11 @@ def reconcile_transaction(
                 )
                 return result
 
+            if intent.get("schema_version") == 2 and intent.get("artifacts"):
+                publish_orchestration_artifacts(folder, intent, allow_existing=True)
+                if state["revision"] == expected and not response_path.exists():
+                    staged = write_staged_text(response_path, response_content)
+                    os.replace(staged, response_path)
             if state["revision"] == expected and response_path.is_file() and not response_path.is_symlink():
                 if hashlib.sha256(response_path.read_bytes()).hexdigest() != intent["response_sha256"]:
                     raise TaskError(EXIT_INTEGRITY, "ORPHAN_RESPONSE_HASH", "Published orphan response differs from transaction evidence.", recovery_required=True)
@@ -2497,6 +2680,10 @@ def reconcile_lock(project_root: Path, tasks_root: Path, payload: dict[str, Any]
             details={"actual_owner": actual_owner},
             recovery_required=True,
         )
+    if lock_name != "catalog":
+        catalog = scan_catalog(tasks_root, ignore_catalog_lock=True, check_transactions=False, check_projections=False)
+        if lock_name in catalog["states"]:
+            orchestration_call(orch.auth, catalog["states"][lock_name], payload, allow_unassigned=True)
     entries = list(lock_dir.iterdir())
     if len(entries) != 1 or entries[0].name != "owner.json" or entries[0].is_symlink() or not entries[0].is_file():
         raise TaskError(EXIT_LOCK, "LOCK_CONTENT_AMBIGUOUS", "Lock directory contains unexpected data and was not removed.", recovery_required=True)
@@ -2550,6 +2737,7 @@ def reconcile_response_redaction(
                         "Expected revision does not match canonical state.",
                         details={"expected_revision": expected_revision, "actual_revision": state["revision"], "task_id": task_id},
                     )
+                orchestration_call(orch.auth, state, payload, allow_unassigned=True)
                 old_path = task_response_path_from_id(state, folder, payload["response_id"])
                 unrelated_errors = [
                     item
@@ -2654,6 +2842,8 @@ def reconcile_response_redaction(
                     "planned_state": updated,
                     "created_at": timestamp,
                 }
+                if state["schema_version"] == 2:
+                    intent.update(schema_version=2, pre_state_sha256=hashlib.sha256((folder / "task.json").read_bytes()).hexdigest(), post_state_sha256=hashlib.sha256(json_text(updated).encode()).hexdigest(), actor=payload.get("actor"), execution_id=payload.get("execution_id"), generation=payload.get("generation"))
                 intent_path = tmp_root / f"{operation_id}.json"
                 atomic_write_json(intent_path, intent)
                 inject_fault("before_redaction_correction_publish")
@@ -2748,7 +2938,7 @@ def command_reconcile(
             expected_revision,
             payload,
         )
-    return reconcile_transaction(project_root, tasks_root, selector, expected_revision, payload["operation_id"])
+    return reconcile_transaction(project_root, tasks_root, selector, expected_revision, payload["operation_id"], actor_payload=payload)
 
 
 def format_markdown(result: dict[str, Any]) -> str:
@@ -2809,7 +2999,7 @@ def build_parser() -> argparse.ArgumentParser:
     allow_documented_format_position(list_parser)
     list_parser.add_argument("--status", action="append", choices=STATUSES, dest="statuses")
 
-    for command in ("show", "continue"):
+    for command in ("show", "continue", "upgrade-preview"):
         sub = subparsers.add_parser(command, help=f"Read-only {command} operation")
         allow_documented_format_position(sub)
         sub.add_argument("selector")
@@ -2818,7 +3008,7 @@ def build_parser() -> argparse.ArgumentParser:
     allow_documented_format_position(new)
     new.add_argument("--payload-file", default="-", help="One-use JSON payload path, or - for stdin")
 
-    for command in ("update", "record-response", "pause", "complete", "cancel", "reopen"):
+    for command in ("update", "record-response", "pause", "complete", "cancel", "reopen", "orchestrate", "upgrade-orchestration"):
         sub = subparsers.add_parser(command, help=f"Run a {command} response transaction")
         allow_documented_format_position(sub)
         sub.add_argument("selector")
@@ -2832,6 +3022,10 @@ def build_parser() -> argparse.ArgumentParser:
     rebuild = subparsers.add_parser("rebuild-projections", help="Regenerate TASK.md and INDEX.md")
     allow_documented_format_position(rebuild)
     rebuild.add_argument("selector", nargs="?")
+    rebuild.add_argument("--actor")
+    rebuild.add_argument("--execution-id")
+    rebuild.add_argument("--generation", type=int)
+    rebuild.add_argument("--bootstrap-receipt", help="Project-relative native roster JSON for maintenance before an execution exists")
 
     reconcile = subparsers.add_parser("reconcile", help="Apply an explicit bounded recovery payload")
     allow_documented_format_position(reconcile)
@@ -2857,11 +3051,17 @@ def run(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
         return command_show(project_root, tasks_root, args.selector), EXIT_OK
     if command == "continue":
         return command_show(project_root, tasks_root, args.selector, continuation=True), EXIT_OK
+    if command == "upgrade-preview":
+        return upgrade_preview(project_root, tasks_root, args.selector), EXIT_OK
     if command == "validate":
         result = command_validate(project_root, tasks_root, args.selector)
         return result, EXIT_INTEGRITY if result["errors"] else EXIT_OK
     if command == "rebuild-projections":
-        return command_rebuild(project_root, tasks_root, args.selector), EXIT_OK
+        actor_payload = {"actor": args.actor, "execution_id": args.execution_id, "generation": args.generation}
+        if args.bootstrap_receipt:
+            receipt_path = orchestration_call(orch.confined, project_root, args.bootstrap_receipt, must_exist=True)
+            actor_payload["bootstrap_receipt"] = read_json_file(receipt_path, "bootstrap receipt")[0]
+        return command_rebuild(project_root, tasks_root, args.selector, actor_payload), EXIT_OK
 
     payload: dict[str, Any] | None = None
     payload_path: Path | None = None

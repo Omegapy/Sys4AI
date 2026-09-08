@@ -1,0 +1,716 @@
+{
+  "canonical_task": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/task.json",
+    "sha256": "d20a26caf7965f6f975c8c4e210d1d14b4c1dbf5cb76dd4992c4952e6d15ebde"
+  },
+  "subtasks": {
+    "analysis": {
+      "digest": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069",
+      "round": 1,
+      "dependency_versions": {
+        "fixture": "03b8eaf72bdb1ae995aa4444e4b5389f2c6d2e8f4264e65882fcc7dfaae30430"
+      },
+      "active_conflicts": [],
+      "verified": [
+        {
+          "acceptance_id": "analysis_acceptance_v1",
+          "artifacts": [
+            "analysis_proposal_v1"
+          ],
+          "baseline": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069",
+          "criteria": [
+            {
+              "criterion": "The analysis specifies descending urgency with stable input order for equal urgency.",
+              "evidence": "Direct inspection confirms descending urgency and stable ties."
+            },
+            {
+              "criterion": "The exact example output IDs are t1,t3,t2,t4 for the verified fixture.",
+              "evidence": "Manager calculation returned all four IDs t1,t3,t2,t4."
+            },
+            {
+              "criterion": "The invalid-input decision stays explicitly deferred; error and explicit rejection-report policies are compared without inventing user preference.",
+              "evidence": "Both invalid-policy alternatives compared and explicitly deferred."
+            }
+          ],
+          "inspection": [
+            {
+              "path": "coordination/analysis-inspection.json",
+              "sha256": "562754ffa22f78b99329f22917ad4a42953319c6514a317ac4d9c9d9b0f65ecc"
+            }
+          ],
+          "result_id": null,
+          "round": 1,
+          "subtask_id": "analysis"
+        }
+      ],
+      "versions": []
+    },
+    "coding": {
+      "digest": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "round": 3,
+      "dependency_versions": {
+        "analysis": "01254affc5fa5be4cb729c18e1075046f6bb583d1d1cbd6af2eac4ee78ac28fc",
+        "fixture": "03b8eaf72bdb1ae995aa4444e4b5389f2c6d2e8f4264e65882fcc7dfaae30430"
+      },
+      "active_conflicts": [],
+      "verified": [
+        {
+          "acceptance_id": "coding_acceptance_v2",
+          "artifacts": [
+            "implementation_module_v1",
+            "implementation_test_init_v1",
+            "implementation_tests_v1",
+            "implementation_check_script_v1",
+            "implementation_commands_v1",
+            "implementation_direct_checks_v1",
+            "implementation_preflight_v1",
+            "implementation_test_log_v1",
+            "implementation_receipt_v1"
+          ],
+          "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+          "criteria": [
+            {
+              "criterion": "For valid input, order_tickets returns a new list in descending urgency with stable ties and leaves input records and order unchanged.",
+              "evidence": "Direct module inspection, all16 unit tests and observed fixture result establish new list, descending stable order and preserved input/identities."
+            },
+            {
+              "criterion": "IDs are nonblank unique strings; urgency is an integer in 0..3 and booleans are rejected.",
+              "evidence": "Explicit type/range guard rejects bool; tests pass for booleans, all0..3, out-of-range, nonblank raw IDs and duplicate IDs."
+            },
+            {
+              "criterion": "Empty input returns a new empty list; tests cover boundaries, ties, preservation, malformed records and all four example IDs.",
+              "evidence": "Discoverable16-test suite covers exact fixture, empty/new list, boundaries, stable ties, malformed records and preservation."
+            },
+            {
+              "criterion": "For every invalid batch, raise ValueError with no partial result or rejection report, leaving the complete input unchanged.",
+              "evidence": "Manager direct checks observed ValueError with no normal return on both booleans and malformed record after valid prefix, with full unchanged inputs."
+            },
+            {
+              "criterion": "The dedicated implementation follows the exact manager-accepted coherent proposal and its tests pass.",
+              "evidence": "Distinct dedicated native implementer targeted coding_acceptance_v2 exact proposal, produced current module/tests/evidence; manager tests and all changed-file hashes passed."
+            }
+          ],
+          "inspection": [
+            {
+              "path": "coordination/integration-evidence.json",
+              "sha256": "3a2a68e3a090a124b333fa52bd71cc8b12fce037f05a504a26f52a755c0572e3"
+            }
+          ],
+          "result_id": "coding_result_v1",
+          "round": 3,
+          "subtask_id": "coding"
+        },
+        {
+          "acceptance_id": "coding_acceptance_v2",
+          "artifacts": [
+            "implementation_module_v1",
+            "implementation_test_init_v1",
+            "implementation_tests_v1",
+            "implementation_check_script_v1",
+            "implementation_commands_v1",
+            "implementation_direct_checks_v1",
+            "implementation_preflight_v1",
+            "implementation_test_log_v1",
+            "implementation_receipt_v1"
+          ],
+          "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+          "criteria": [
+            {
+              "criterion": "For valid input, order_tickets returns a new list in descending urgency with stable ties and leaves input records and order unchanged.",
+              "evidence": "Direct module inspection, all16 unit tests and observed fixture result establish new list, descending stable order and preserved input/identities."
+            },
+            {
+              "criterion": "IDs are nonblank unique strings; urgency is an integer in 0..3 and booleans are rejected.",
+              "evidence": "Explicit type/range guard rejects bool; tests pass for booleans, all0..3, out-of-range, nonblank raw IDs and duplicate IDs."
+            },
+            {
+              "criterion": "Empty input returns a new empty list; tests cover boundaries, ties, preservation, malformed records and all four example IDs.",
+              "evidence": "Discoverable16-test suite covers exact fixture, empty/new list, boundaries, stable ties, malformed records and preservation."
+            },
+            {
+              "criterion": "For every invalid batch, raise ValueError with no partial result or rejection report, leaving the complete input unchanged.",
+              "evidence": "Manager direct checks observed ValueError with no normal return on both booleans and malformed record after valid prefix, with full unchanged inputs."
+            },
+            {
+              "criterion": "The dedicated implementation follows the exact manager-accepted coherent proposal and its tests pass.",
+              "evidence": "Distinct dedicated native implementer targeted coding_acceptance_v2 exact proposal, produced current module/tests/evidence; manager tests and all changed-file hashes passed."
+            }
+          ],
+          "inspection": [
+            {
+              "path": "coordination/integration-evidence-v2.json",
+              "sha256": "139c983b65806809469167f07f9d55a8f2f6ba09982a3bf3003b19b784b4c1ed"
+            }
+          ],
+          "result_id": "coding_result_v1",
+          "round": 3,
+          "subtask_id": "coding"
+        }
+      ],
+      "versions": [
+        {
+          "active_conflicts": [
+            "policy_conflict"
+          ],
+          "baseline": {
+            "authority": "Design in isolated artifact workspaces; after manager acceptance the dedicated implementer may write only ticket_ordering.py, tests and implementation-evidence. No external actions.",
+            "category": "extra-complex",
+            "criteria": [
+              "For valid input, order_tickets returns a new list in descending urgency with stable ties and leaves input records and order unchanged.",
+              "IDs are nonblank unique strings; urgency is an integer in 0..3 and booleans are rejected.",
+              "Empty input returns a new empty list; tests cover boundaries, ties, preservation, malformed records and all four example IDs.",
+              "The initial invalid-input policy is explicit: raising an error or a separate rejection-report outcome is allowed; silent dropping is forbidden.",
+              "The dedicated implementation follows the exact manager-accepted coherent proposal and its tests pass."
+            ],
+            "deliverable": "Accepted coherent design plus ticket_ordering.py, tests and exact execution evidence.",
+            "dependencies": [
+              "fixture",
+              "analysis"
+            ],
+            "implementation_required": true,
+            "inputs": [
+              {
+                "path": "context/scenario.md",
+                "sha256": "a9a04801f283389a870ccaa0b28926150d29be331b887c9bae9d505457bf5ede"
+              },
+              {
+                "path": "coordination/coding-design-contract.md",
+                "sha256": "7088f3aab4c526717afec811d53796f90c6350174304b16d8d995af2ca977246"
+              },
+              {
+                "path": "data/tickets.json",
+                "sha256": "3923fe6ee5e9c9cb40da4e53030be11844b3c9dc8bf22a620539576a163eea3d"
+              },
+              {
+                "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/analysis_proposal_v1.md",
+                "sha256": "38a563ef628c0d052234931c71a459865f4a9b27886f242b3251423233cccb6f"
+              }
+            ],
+            "objective": "Design and implement order_tickets with valid-record stable descending urgency, preservation, explicit invalid behavior and meaningful standard-library tests.",
+            "protected": [
+              "data",
+              ".agents",
+              "roles",
+              "context",
+              "outside-scope-marker.txt"
+            ],
+            "rationale": "Two complete designs with incompatible seeded policy commitments need individual independent reviews, shared conflict resolution, one senior and one dedicated implementer.",
+            "reads": [
+              "data",
+              "context",
+              "coordination/coding-design-contract.md",
+              "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration"
+            ],
+            "requirements": [
+              "ticket-ordering-module",
+              "validation-boundaries",
+              "performed-code"
+            ],
+            "slots": [
+              {
+                "function": "solver",
+                "perspective": "validation and interface, initial error policy with controlled missing boolean case",
+                "slot": "solver_a",
+                "solver_slot": null
+              },
+              {
+                "function": "solver",
+                "perspective": "data preservation and tests, initial explicit rejection-report policy",
+                "slot": "solver_b",
+                "solver_slot": null
+              },
+              {
+                "function": "reviewer",
+                "perspective": "independent full criterion review of solver A",
+                "slot": "reviewer_a",
+                "solver_slot": "solver_a"
+              },
+              {
+                "function": "reviewer",
+                "perspective": "independent full criterion review of solver B",
+                "slot": "reviewer_b",
+                "solver_slot": "solver_b"
+              },
+              {
+                "function": "senior",
+                "perspective": "coherent policy and implementation specification",
+                "slot": "senior",
+                "solver_slot": null
+              },
+              {
+                "function": "implementer",
+                "perspective": "exact accepted code and tests",
+                "slot": "implementer",
+                "solver_slot": null
+              }
+            ],
+            "stop": "Mandatory current criteria pass or an evidenced conflict requires host steering.",
+            "writes": [
+              "ticket_ordering.py",
+              "tests",
+              "implementation-evidence"
+            ]
+          },
+          "dependency_versions": {
+            "analysis": "01254affc5fa5be4cb729c18e1075046f6bb583d1d1cbd6af2eac4ee78ac28fc",
+            "fixture": "03b8eaf72bdb1ae995aa4444e4b5389f2c6d2e8f4264e65882fcc7dfaae30430"
+          },
+          "digest": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8",
+          "round": 2,
+          "task_digest": "89d3c915511b33fa7a6278840c7d8c64c752a5f2b4b877c61c0fc2d8fdae1d5b"
+        }
+      ]
+    },
+    "fixture": {
+      "digest": "6a2a48bc8faa3156fb4dff7cc5886b87a40165669759e35cbcd39b905b994aa8",
+      "round": 1,
+      "dependency_versions": {},
+      "active_conflicts": [],
+      "verified": [
+        {
+          "acceptance_id": null,
+          "artifacts": [
+            "fixture_v1"
+          ],
+          "baseline": "6a2a48bc8faa3156fb4dff7cc5886b87a40165669759e35cbcd39b905b994aa8",
+          "criteria": [
+            {
+              "criterion": "The fixture contains the exact four specified records in original order.",
+              "evidence": "Manager parsed exact JSON, checked each record and order, inspected worker receipt and confirmed marker absence."
+            },
+            {
+              "criterion": "The fixture parses as JSON and the source-attachment marker is absent.",
+              "evidence": "Manager parsed exact JSON, checked each record and order, inspected worker receipt and confirmed marker absence."
+            }
+          ],
+          "inspection": [
+            {
+              "path": "coordination/fixture-inspection.json",
+              "sha256": "bbf0b70010caeab6e58baefca2736d9050e829f86a22dff5e4e06327a8eb31b8"
+            }
+          ],
+          "result_id": "fixture_result",
+          "round": 1,
+          "subtask_id": "fixture"
+        }
+      ],
+      "versions": []
+    }
+  },
+  "candidates": {
+    "analysis_a_c1": {
+      "artifact_id": "analysis_a_v1",
+      "assignment_id": "analysis_a",
+      "baseline": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069",
+      "candidate_id": "analysis_a_c1",
+      "findings": null,
+      "revalidation": null,
+      "round": 1,
+      "supersedes": null
+    },
+    "analysis_b_c1": {
+      "artifact_id": "analysis_b_v1",
+      "assignment_id": "analysis_b",
+      "baseline": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069",
+      "candidate_id": "analysis_b_c1",
+      "findings": null,
+      "revalidation": null,
+      "round": 1,
+      "supersedes": null
+    },
+    "analysis_c_c1": {
+      "artifact_id": "analysis_c_v1",
+      "assignment_id": "analysis_c",
+      "baseline": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069",
+      "candidate_id": "analysis_c_c1",
+      "findings": null,
+      "revalidation": null,
+      "round": 1,
+      "supersedes": null
+    },
+    "coding_a_c1": {
+      "artifact_id": "coding_a_v1",
+      "assignment_id": "coding_a",
+      "baseline": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8",
+      "candidate_id": "coding_a_c1",
+      "findings": null,
+      "revalidation": null,
+      "round": 1,
+      "supersedes": null
+    },
+    "coding_a_c2": {
+      "artifact_id": "coding_a_v2",
+      "assignment_id": "coding_a",
+      "baseline": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8",
+      "candidate_id": "coding_a_c2",
+      "findings": "R-A-001: originating solver added explicit boolean exclusion and both boolean negative cases including no mutation after valid prefix.",
+      "revalidation": null,
+      "round": 1,
+      "supersedes": "coding_a_c1"
+    },
+    "coding_a_c3": {
+      "artifact_id": "coding_a_v3",
+      "assignment_id": "coding_a",
+      "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "candidate_id": "coding_a_c3",
+      "findings": "Identical shared policy_conflict and host strict steering directly addressed.",
+      "revalidation": "Same originating solver revalidated whole design under baseline acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee round3; strict behavior retained and now authority-bound.",
+      "round": 3,
+      "supersedes": "coding_a_c2"
+    },
+    "coding_b_c1": {
+      "artifact_id": "coding_b_v1",
+      "assignment_id": "coding_b",
+      "baseline": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8",
+      "candidate_id": "coding_b_c1",
+      "findings": null,
+      "revalidation": null,
+      "round": 1,
+      "supersedes": null
+    },
+    "coding_b_c2": {
+      "artifact_id": "coding_b_v2",
+      "assignment_id": "coding_b",
+      "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "candidate_id": "coding_b_c2",
+      "findings": "Originating solver explicitly replaced report outcome with host-authorized strict ValueError under shared policy_conflict; retained diagnostics, preservation and test contributions.",
+      "revalidation": null,
+      "round": 3,
+      "supersedes": "coding_b_c1"
+    }
+  },
+  "reviews": {
+    "review_a_v1": {
+      "assignment_id": "coding_reviewer_a",
+      "baseline": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8",
+      "candidate_id": "coding_a_c1",
+      "findings": "review_a_findings_v1",
+      "outcome": "rejected",
+      "review_id": "review_a_v1",
+      "round": 1
+    },
+    "review_a_v2": {
+      "assignment_id": "coding_reviewer_a",
+      "baseline": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8",
+      "candidate_id": "coding_a_c2",
+      "findings": "review_a_findings_v2",
+      "outcome": "passed",
+      "review_id": "review_a_v2",
+      "round": 1
+    },
+    "review_a_v3": {
+      "assignment_id": "coding_reviewer_a",
+      "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "candidate_id": "coding_a_c3",
+      "findings": "review_a_findings_v3",
+      "outcome": "passed",
+      "review_id": "review_a_v3",
+      "round": 3
+    },
+    "review_b_v1": {
+      "assignment_id": "coding_reviewer_b",
+      "baseline": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8",
+      "candidate_id": "coding_b_c1",
+      "findings": "review_b_findings_v1",
+      "outcome": "passed",
+      "review_id": "review_b_v1",
+      "round": 1
+    },
+    "review_b_v2": {
+      "assignment_id": "coding_reviewer_b",
+      "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "candidate_id": "coding_b_c2",
+      "findings": "review_b_findings_v2",
+      "outcome": "passed",
+      "review_id": "review_b_v2",
+      "round": 3
+    }
+  },
+  "conflicts": {
+    "policy_conflict": {
+      "assignment_id": "coding_senior",
+      "baseline": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8",
+      "candidate_ids": [
+        "coding_a_c2",
+        "coding_b_c1"
+      ],
+      "conflict_id": "policy_conflict",
+      "deliveries": {
+        "solver_a": {
+          "evidence": "Actual native send_message queued the identical versioned conflict path/hash, same strict steering and current baseline for this originating solver without wake.",
+          "explanation_sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7",
+          "native_id": "/root/task_manager_validation/coding_a"
+        },
+        "solver_b": {
+          "evidence": "Actual native send_message queued the identical versioned conflict path/hash, same strict steering and current baseline for this originating solver without wake.",
+          "explanation_sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7",
+          "native_id": "/root/task_manager_validation/coding_b"
+        }
+      },
+      "explanation": "coding_conflict_v1",
+      "progress": "Both individually allowed policy commitments cannot coexist for one invalid call. Obtain bounded host steering, deliver identical explanation to both originating solvers, revise baseline and require both current re-reviews.",
+      "round": 1
+    }
+  },
+  "syntheses": {
+    "analysis_synthesis_v1": {
+      "artifact_id": "analysis_proposal_v1",
+      "assignment_id": "analysis_senior",
+      "baseline": "793560a4186ffcac6675a147940798d9f8877ca1ac818b9651bc1513491da069",
+      "candidate_ids": [
+        "analysis_a_c1",
+        "analysis_b_c1",
+        "analysis_c_c1"
+      ],
+      "dispositions": {
+        "assumptions": [
+          "The current baseline and exact fixture bytes are authoritative for this analysis.",
+          "Input positions are meaningful; equal urgency preserves their relative order and ticket IDs do not resolve ties.",
+          "The scenario validity constraints are later coding requirements, not a current decision about invalid-input behavior.",
+          "A separate result list preserves input sequence and values during ordering; deep copying records is not a stated requirement."
+        ],
+        "differences": {
+          "complementary": "Construction, invariant reasoning and boundary/example reasoning support one positional ordering rule; the proposal combines those distinct contributions without voting or concatenating drafts.",
+          "evidence": "A and C report executable boundary checks, while B distinguishes its fixture execution from boundary reasoning. The senior independently checked six in-memory examples and all registered source digests; no candidate test claim is treated as a production implementation result.",
+          "exclusive": "Batch error and partial results with a rejection report are incompatible eventual interface commitments if imposed together. All three candidates explicitly keep them as alternatives; deferral satisfies the current criterion, so no conflict blocks this analysis. A later authorized coding baseline must select and define the interface.",
+          "scope": "All candidates analyze the whole valid-input ordering problem and compare both invalid-input policies. Later coding constraints supply validity context but do not authorize implementation or select policy for the current analysis.",
+          "terminology": "Candidate B labels output positions from zero, while A and C use one-based output positions and C presents one-based input positions. The synthesis labels one-based output and zero-based input positions; all refer to the identical t1,t3,t2,t4 sequence."
+        },
+        "interfaces": [
+          "Valid records yield every input position exactly once in descending urgency and stable tie order, with no input mutation.",
+          "For a later batch-error policy, define the exception and diagnostic contract before implementation.",
+          "For a later rejection-report policy, define the result/report shape, duplicate-ID treatment and complete per-position acceptance or rejection accounting before implementation.",
+          "No implementation, exception selection, rejection-report shape or user preference is adopted by this analysis synthesis."
+        ],
+        "omitted": [
+          "Duplicate descriptions of the same ordering rule, fixture tables and policy comparisons are consolidated into one coherent account; every candidate remains represented.",
+          "Candidate-local completion statements and sibling-read claims are not adopted as manager acceptance or independent senior evidence.",
+          "No source alternative is silently discarded. Future exception selection and rejection-report shape remain unchosen because the current analysis baseline explicitly defers them."
+        ],
+        "requirements": [
+          "ordering-analysis: Descending urgency and stable equal-urgency input order are specified by the opening rule, construction and invariants.",
+          "ordering-analysis: The complete exact-fixture output is t1,t3,t2,t4 and includes all four original records once.",
+          "valid-input-policy: Error and explicit rejection-report policies are compared and remain explicitly deferred without inferred user preference."
+        ],
+        "retained": [
+          "analysis_a_v1 retains the negative-urgency/original-position construction, complete record result, new-list preservation boundary and comparison-sort complexity analysis.",
+          "analysis_b_v1 retains conservation, descending urgency, stability and preservation invariants; unique positional ordering; reversal risk; complete accepted/rejected position accounting.",
+          "analysis_c_v1 retains the full-fixture and endpoint explanation, empty/singleton/all-equal/already-ordered consequences, ID tie-break counterexample and current-versus-future policy authority boundary."
+        ],
+        "risks": [
+          "An implementation that reverses an ascending result or uses IDs for tie breaking can violate stability.",
+          "Silent filtering, coercion or undefined duplicate-ID accounting can violate the selected later validation interface.",
+          "A later change to fixture, baseline, dependencies or candidate bytes requires current-version reassessment.",
+          "This analysis does not prove an implementation or invalid-input runtime behavior; those require later authorized work."
+        ],
+        "unresolved": [],
+        "verification": [
+          "Observed exact hashes for the assignment packet, baseline, three registered candidates, selected role pair, catalog reference, scenario and fixture.",
+          "Observed six in-memory cases: exact fixture, empty, singleton, all-equal, endpoint urgencies and already ordered input.",
+          "All six cases passed expected IDs, conservation, descending urgency, stable ties, unchanged input snapshot and distinct result-list checks.",
+          "Manual conformance review matched all three current baseline criteria and confirmed no policy or implementation selection.",
+          "Output JSON structure, exact disposition keys, source paths and artifact hashes were checked after writing; registered source bytes were rehashed unchanged."
+        ]
+      },
+      "resolved_conflicts": [],
+      "review_ids": [],
+      "round": 1,
+      "synthesis_id": "analysis_synthesis_v1"
+    },
+    "coding_synthesis_v2": {
+      "artifact_id": "coding_proposal_v2",
+      "assignment_id": "coding_senior",
+      "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "candidate_ids": [
+        "coding_a_c3",
+        "coding_b_c2"
+      ],
+      "dispositions": {
+        "assumptions": [
+          "The controlled-test host steering has now been delivered and is the current policy authority; it does not establish a separate real-product preference.",
+          "No-mutation describes the function call. Result records remain aliases of original dictionaries, so later caller mutation is outside this guarantee.",
+          "IDs remain exact raw strings, with stripping used only for blankness; no custom normalization, new API modes or additional dependencies are introduced."
+        ],
+        "differences": {
+          "complementary": "A supplies concise first-error validation and prefix-failure tests; B strengthens identity, nested preservation, raw-ID and compound-defect examples. Combine those compatible requirements and tests in one strict implementation specification.",
+          "evidence": "Both exact current candidates pass their original assigned reviewers under the same revised baseline and shared steering, with no mandatory findings. These passes establish current design eligibility. They do not prove production behavior; the senior independently rechecked hashes, bindings, examples and predicates.",
+          "exclusive": "The old exception-versus-normal-report policy_conflict is resolved by exact authorized strict steering, A's revalidation and B's explicit revision. The remaining diagnostic strategies are alternatives within the fixed rejection criterion; this proposal explicitly selects first-error diagnostics and does not claim both were implemented or that B originally proposed fail-fast behavior.",
+          "scope": "A stops at the first invalid record; B collects all defects and all duplicate occurrences. Choose A's bounded diagnostic scope because exhaustive enumeration is not a baseline requirement and adds diagnostic structures and a message protocol. B's additional diagnostic coverage is intentionally omitted, with its reduced caller feedback stated as the tradeoff.",
+          "terminology": "Both current candidates use ValueError for invalid batches and new sorted lists for valid batches. B's reason codes are a proposed diagnostic format, not a separate current return type. The proposal uses position and field/reason semantics without promising exact message strings."
+        },
+        "interfaces": [
+          "order_tickets(records) accepts a Python list of dictionaries with unique nonblank raw string IDs and integer urgency in 0..3, explicitly excluding booleans.",
+          "Every valid input yields a distinct list of the original record objects ordered by descending urgency and original input position for ties. Extra fields are retained without influencing order.",
+          "Every invalid batch raises ValueError before ordered-result construction and leaves all input unchanged. No partial result, rejection report, optional mode or wrapper is returned.",
+          "Diagnostics identify records for an invalid outer container, otherwise the first defective zero-based record position and relevant field/reason. Full exception wording and aggregate defect enumeration are not a stable API."
+        ],
+        "omitted": [
+          "Omit B's per-position reason arrays, all-occurrence duplicate diagnostics, aggregate reason collection and exact exception-message protocol. The current criteria require strict rejection, meaningful diagnostics and preservation, not exhaustive reports; first-error validation is sufficient and smaller.",
+          "Retain compound-defect tests as ValueError and full-preservation checks, while omitting aggregate-message expectations that would contradict the selected diagnostic contract.",
+          "The former rejection-report and partial-result interface was explicitly superseded by the host-authorized strict steering and both originating solvers' current versions. No mode or wrapper preserves it.",
+          "Consolidate duplicate descriptions and fixture tables while preserving attribution to both candidates."
+        ],
+        "requirements": [
+          "Criterion 1: the Function contract, Algorithm and Required verification sections specify new lists, stable descending urgency and complete input preservation.",
+          "Criterion 2: the Function contract and invalid-ID/urgency tests enforce nonblank exact unique string IDs, urgency 0..3 and explicit boolean exclusion.",
+          "Criterion 3: the exact fixture and behavioral test table cover all four output IDs, empty input, endpoints, ties, identity, nested preservation and malformed inputs.",
+          "Criterion 4: the current strict policy and validation-before-sort control flow require ValueError without any partial result or report, including after a valid prefix.",
+          "Criterion 5: one distinct dedicated implementer must follow the exact manager-accepted proposal and produce observed passing standard-library tests; this performed-work gate remains required after synthesis."
+        ],
+        "retained": [
+          "From A: complete strict ValueError API, first-error validation, raw-ID uniqueness, explicit boolean exclusion, stable positional sorting and failure-after-prefix preservation tests.",
+          "From B: explicit attributed replacement of the earlier report outcome, preservation of original record identities and nested fields, compound-defect and raw-ID examples, and raising before any result construction.",
+          "From both: complete valid-input coverage, every original record once in a new list, descending urgency, original-position ties, fresh empty input result, no coercion or input mutation, and no new dependencies.",
+          "Retain the accepted analysis and exact four-record fixture without changing their content; the current authorized steering resolves only the formerly deferred invalid-input choice."
+        ],
+        "risks": [
+          "First-error diagnostics may require callers to correct several defects over successive calls; exhaustive diagnostic coverage is intentionally outside the selected minimal interface.",
+          "Using bool as an ordinary int, sorting the input list in place, sorting ties by IDs or returning a valid subset would violate the proposal and must be caught by behavioral tests.",
+          "Deep-copy equality alone does not establish object identity; successful and invalid-case tests must check original record references and list order as well.",
+          "Current artifact or baseline changes invalidate the current synthesis and acceptance inputs. Production design deviations return to the manager."
+        ],
+        "unresolved": [],
+        "verification": [
+          "All seven exact current context artifacts, the rebind packet, all six current baseline dependencies, role pair and current catalog match assigned digests.",
+          "Both current reviews pass with no mandatory findings and bind the exact respective candidate SHA, current baseline, identical conflict and identical strict steering; reviewer IDs remain the original distinct assignments.",
+          "Seven independent ordering-expression examples passed fixed expected-ID, new-list, deep-preservation and original-object accounting checks, including the exact fixture, empty input, singleton endpoints, all urgency values, nonalphabetic ties and nested extra fields.",
+          "The written urgency predicate accepts 0..3 and rejects both booleans, range errors and wrong types. Raw-ID expression checks preserve case and surrounding spaces while rejecting blank or nonstring IDs.",
+          "The original conflict, details and receipt hashes remain unchanged. No production function, exception path or product test suite was executed by this senior."
+        ]
+      },
+      "resolved_conflicts": [
+        "policy_conflict"
+      ],
+      "review_ids": [
+        "review_a_v3",
+        "review_b_v2"
+      ],
+      "round": 3,
+      "synthesis_id": "coding_synthesis_v2"
+    }
+  },
+  "acceptances": {
+    "analysis_acceptance_v1": {
+      "acceptance_id": "analysis_acceptance_v1",
+      "inspection": [
+        {
+          "path": "coordination/analysis-inspection.json",
+          "sha256": "562754ffa22f78b99329f22917ad4a42953319c6514a317ac4d9c9d9b0f65ecc"
+        }
+      ],
+      "synthesis_id": "analysis_synthesis_v1"
+    },
+    "coding_acceptance_v2": {
+      "acceptance_id": "coding_acceptance_v2",
+      "inspection": [
+        {
+          "path": "coordination/coding-design-inspection.json",
+          "sha256": "006b0fa416e8ee8f639cbc458aebe9575b54337f703cc2df611f88944d9bf66a"
+        }
+      ],
+      "synthesis_id": "coding_synthesis_v2"
+    }
+  },
+  "results": {
+    "coding_result_v1": {
+      "acceptance_id": "coding_acceptance_v2",
+      "artifact_ids": [
+        "implementation_module_v1",
+        "implementation_test_init_v1",
+        "implementation_tests_v1",
+        "implementation_check_script_v1",
+        "implementation_commands_v1",
+        "implementation_direct_checks_v1",
+        "implementation_preflight_v1",
+        "implementation_test_log_v1",
+        "implementation_receipt_v1"
+      ],
+      "assignment_id": "coding_implementer",
+      "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+      "changes": [
+        {
+          "path": "ticket_ordering.py",
+          "sha256": "7d633c192d9a474a3d2f021d80cf1109c245708de6bd1b5789211076c7872292"
+        },
+        {
+          "path": "tests/__init__.py",
+          "sha256": "42a7d02e27cec35ec1706a69f7d274af89df09af64de1e773d68b136c486458a"
+        },
+        {
+          "path": "tests/test_ticket_ordering.py",
+          "sha256": "2c2dfcf1e68bb5b840bfc96a54f9f68c9bd934c1a20d04421752585912954caa"
+        },
+        {
+          "path": "implementation-evidence/check_behavior.py",
+          "sha256": "666f2eaab038aa55c2ddbd544dfe3ac52ced9162c39e31bd20f0ea7135241195"
+        },
+        {
+          "path": "implementation-evidence/command-results.json",
+          "sha256": "264914c2d4a563cc07390e06c97c1201f147e7d81113f9e14013c33aa82f97ca"
+        },
+        {
+          "path": "implementation-evidence/direct-checks.json",
+          "sha256": "4c7a75eb43bc4989704eab459a4f96cc905313e7d626f6fe57a1d670f2bb7663"
+        },
+        {
+          "path": "implementation-evidence/preflight.json",
+          "sha256": "baa1fe1c3b2c29b4191c904d0e8e333687e62ff2785794287594f3cb25f0f5f2"
+        },
+        {
+          "path": "implementation-evidence/unittest.log",
+          "sha256": "bf1d8186df2d63ab6beb6c5dbd7841764bfe6ec831b9b94b3acbe5cbc71d83a5"
+        },
+        {
+          "path": "implementation-evidence/receipt.json",
+          "sha256": "cdf82338fd30821f2ec8a8311f9317ec16d2dc69cb2790a19a970bfaa517c135"
+        }
+      ],
+      "checks": [
+        {
+          "path": "coordination/manager-unittest-run.json",
+          "sha256": "e1092880a91b3161bdbbca59c03f7169a8bce5271e37646d88a2ad932ebe9e45"
+        },
+        {
+          "path": "coordination/manager-runtime-checks.json",
+          "sha256": "125b775113fa86173b77e963a2a6db66a366e6a5d9cc2cb8a735796b5deff4ca"
+        },
+        {
+          "path": "implementation-evidence/receipt.json",
+          "sha256": "cdf82338fd30821f2ec8a8311f9317ec16d2dc69cb2790a19a970bfaa517c135"
+        }
+      ],
+      "limitations": [
+        "This performed result is confined to the approved disposable validation project."
+      ],
+      "result_id": "coding_result_v1",
+      "round": 3
+    },
+    "fixture_result": {
+      "acceptance_id": null,
+      "artifact_ids": [
+        "fixture_v1"
+      ],
+      "assignment_id": "fixture_worker",
+      "baseline": "6a2a48bc8faa3156fb4dff7cc5886b87a40165669759e35cbcd39b905b994aa8",
+      "changes": [
+        {
+          "path": "data/tickets.json",
+          "sha256": "3923fe6ee5e9c9cb40da4e53030be11844b3c9dc8bf22a620539576a163eea3d"
+        }
+      ],
+      "checks": [
+        {
+          "path": "data/worker-receipt.json",
+          "sha256": "7437c2e9c22660b397f084fdad6aaac7a21ee3cc63d2c542796170b8c65e301c"
+        },
+        {
+          "path": "coordination/fixture-inspection.json",
+          "sha256": "bbf0b70010caeab6e58baefca2736d9050e829f86a22dff5e4e06327a8eb31b8"
+        }
+      ],
+      "limitations": [],
+      "result_id": "fixture_result",
+      "round": 1
+    }
+  }
+}

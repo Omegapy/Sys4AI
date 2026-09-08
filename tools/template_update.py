@@ -21,7 +21,9 @@ import os
 from pathlib import Path, PurePosixPath
 import re
 import stat
+import sys
 import tempfile
+import types
 import unicodedata
 from typing import Any, Iterator
 
@@ -35,13 +37,19 @@ BASELINE_SKILLS = (
     "agent-task", "communication", "manage-subagent-roles", "task",
     "to-implementation-plan", "to-trd",
 )
-BASELINE_FILES = {
+LEGACY_BASELINE_FILES = {
     "SOUL.md", "AGENTS.md", "ROLE.md", "SPECS.md", ".gitignore",
     "sub-agent-roles/project-sub-agent/AGENTS.md",
     "sub-agent-roles/project-sub-agent/ROLE.md", ".template/baseline-assets.json",
     ".template/project-readme.md",
     *(f".agents/skills/{name}/SKILL.md" for name in BASELINE_SKILLS),
 }
+ROLE_INDEX = "roles/INDEX.md"
+ROLE_HELPER = ".agents/skills/manage-subagent-roles/scripts/role_catalog.py"
+BASELINE_FILES = (LEGACY_BASELINE_FILES - {
+    "sub-agent-roles/project-sub-agent/AGENTS.md", "sub-agent-roles/project-sub-agent/ROLE.md",
+}) | {ROLE_INDEX, ROLE_HELPER, *(f"roles/{name}/{filename}" for name in
+      ("project-sub-agent", "task-manager") for filename in ("AGENTS.md", "ROLE.md"))}
 EXCLUDED = {
     ".git", ".gitmodules", ".gitignore_global", ".venv", "venv", "env",
     ".sys4ai", "__pycache__", ".ds_store", ".pytest_cache", ".ruff_cache",
@@ -49,7 +57,7 @@ EXCLUDED = {
     ".data_storage", "dist", "build", "node_modules", ".env", ".envrc",
     ".secrets", "secrets", "credentials", ".credentials", "credentials.json",
     ".credentials.json", ".aws", ".ssh", ".netrc", ".pypirc", ".npmrc",
-    "id_rsa", "id_ed25519",
+    "id_rsa", "id_ed25519", ".transition.json",
 }
 EXCLUDED_SUFFIXES = (
     ".pyc", ".pyo", ".log", ".zip", ".whl", ".egg", ".pem", ".key",
@@ -196,6 +204,51 @@ def validate_skill(name: str, raw: bytes) -> None:
         raise UpdateError(f"skill name must match its folder and have a description: {name}")
 
 
+def role_index_inputs(files: dict[str, Any]) -> dict[str, dict[str, str]]:
+    if not isinstance(files, dict) or any(not isinstance(name, str) for name in files):
+        raise UpdateError("invalid generated role index file inventory")
+    targets = {"SOUL.md", ROLE_HELPER} | {name for name in files if name.startswith("roles/") and name != ROLE_INDEX}
+    if not targets <= files.keys():
+        raise UpdateError("role index lacks its validator or instruction source")
+    if any(not isinstance(files[target], dict) or not {"source", "sha256"} <= files[target].keys()
+           or not all(isinstance(files[target][key], str) for key in ("source", "sha256")) for target in targets):
+        raise UpdateError("invalid generated role index input binding")
+    return {target: {key: files[target][key] for key in ("source", "sha256")} for target in sorted(targets)}
+
+
+def render_role_index(inputs: dict[str, bytes]) -> bytes:
+    """Validate and render from frozen bytes; never write into the Template."""
+    if not {"SOUL.md", ROLE_HELPER} <= inputs.keys():
+        raise UpdateError("role index lacks its frozen inputs")
+    module_name = "_template_role_catalog_" + digest(inputs[ROLE_HELPER])
+    helper = types.ModuleType(module_name)
+    helper.__file__ = ROLE_HELPER
+    sys.modules[module_name] = helper
+    try:
+        exec(compile(inputs[ROLE_HELPER], ROLE_HELPER, "exec"), helper.__dict__)
+        if helper.ROLE_ROOT_NAME != "roles":
+            raise UpdateError("role validator does not support the active roles layout")
+        with tempfile.TemporaryDirectory(prefix="sys4ai-role-index-") as temporary:
+            root = Path(temporary).resolve()
+            (root / "roles").mkdir()
+            for target, raw in inputs.items():
+                if target == ROLE_HELPER:
+                    continue
+                path = root / destination(target)
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(raw)
+            catalog = helper.build_catalog(root)
+            if catalog.invalid_roles or not {"project-sub-agent", "task-manager"} <= {entry.name for entry in catalog.valid_roles}:
+                raise UpdateError("template role pairs are invalid or required roles are missing")
+            return helper.render_index(catalog).encode()
+    except (AttributeError, RuntimeError, OSError, UnicodeError) as error:
+        if isinstance(error, UpdateError):
+            raise
+        raise UpdateError(f"role index validation failed: {error}") from error
+    finally:
+        sys.modules.pop(module_name, None)
+
+
 def snapshot(root: Path) -> dict[str, Any]:
     """Read one validated source snapshot without touching the template."""
     safe(root)
@@ -289,19 +342,31 @@ def snapshot(root: Path) -> dict[str, Any]:
     for key in identities:
         if any(parent.as_posix() in identities for parent in PurePosixPath(key).parents):
             raise UpdateError(f"template file/directory mapping collision: {identities[key]}")
-    missing = sorted(BASELINE_FILES - files.keys())
+    reserved_index = unicodedata.normalize("NFD", ROLE_INDEX).casefold()
+    if reserved_index in identities:
+        raise UpdateError("roles/INDEX.md is generated; a static source mapping cannot own it")
+    if any(reserved_index in {parent.as_posix() for parent in PurePosixPath(name).parents}
+           or name in {parent.as_posix() for parent in PurePosixPath(reserved_index).parents} for name in identities):
+        raise UpdateError("generated role index has a file/directory mapping collision")
+    missing = sorted((BASELINE_FILES - {ROLE_INDEX}) - files.keys())
     if missing:
         raise UpdateError("required template governance source is missing: " + ", ".join(missing))
-    for target in BASELINE_FILES:
+    for target in BASELINE_FILES - {ROLE_INDEX}:
         if not blobs[files[target]["source"]].strip():
             raise UpdateError(f"required template governance source is empty: {target}")
     policy = json_document(blobs[files[".template/baseline-assets.json"]["source"]])
     if (not isinstance(policy, dict) or type(policy.get("schema_version")) is not int
             or policy["schema_version"] != 2):
         raise UpdateError("template initialization policy must use schema 2")
+    if policy.get("roles") != "roles":
+        raise UpdateError("template initialization policy must use the active roles layout")
+    inputs = role_index_inputs(files)
+    index = render_role_index({target: blobs[entry["source"]] for target, entry in inputs.items()})
+    files[ROLE_INDEX] = {"source": files[ROLE_HELPER]["source"], "sha256": digest(index), "mode": 0o644,
+                         "generated": {"kind": "role-index-v1", "inputs": inputs}}
     state = {"schema_version": 1, "template": TEMPLATE, "collections": collections, "files": files}
     return {
-        "state": state, "blobs": blobs,
+        "state": state, "blobs": blobs, "generated": {ROLE_INDEX: index},
         "fingerprint": digest(manifest_raw + encoded(state)),
     }
 
@@ -332,6 +397,12 @@ def validate_state(state: Any) -> dict[str, Any]:
             raise UpdateError("invalid recorded destination ownership")
         if source(entry.get("source")).split("/")[0] not in collections:
             raise UpdateError("recorded source collection is missing")
+        if "generated" in entry and (target != ROLE_INDEX or entry["generated"] != {
+            "kind": "role-index-v1", "inputs": role_index_inputs(state["files"])
+        } or entry["source"] != state["files"][ROLE_HELPER]["source"]):
+            raise UpdateError("invalid generated role index ownership")
+    if ROLE_INDEX in state["files"] and "generated" not in state["files"][ROLE_INDEX]:
+        raise UpdateError("recorded role index must have generated ownership")
     return state
 
 
@@ -388,6 +459,7 @@ def plan(
         lost.remove(retire_collection)
     if lost:
         report["conflicts"].append("recorded source collection is missing: " + ", ".join(lost))
+    report["conflicts"].extend(role_scope_conflicts(template, before, after))
     for target in sorted(before["files"].keys() | after["files"].keys()):
         previous = before["files"].get(target)
         desired = after["files"].get(target)
@@ -415,7 +487,49 @@ def plan(
         report["status"] = "conflict"
     elif before != after:
         report["status"] = "outdated"
+    retired = role_retirements(before, after)
+    if retired:
+        report["role_retirements"] = retired
     return report
+
+
+def role_retirements(before: dict[str, Any], after: dict[str, Any]) -> list[dict[str, str]]:
+    result = []
+    for target, entry in sorted(before["files"].items()):
+        if not target.startswith("sub-agent-roles/") or target in after["files"]:
+            continue
+        active = "roles/" + target.removeprefix("sub-agent-roles/")
+        if active not in after["files"] or after["files"][active]["source"] != entry["source"]:
+            raise UpdateError("legacy role retirement lacks an exact source-to-active mapping")
+        result.append({"legacy": target, "active": active, "source": entry["source"], "sha256": entry["sha256"]})
+    return result
+
+
+def role_scope_conflicts(template: Path, before: dict[str, Any], after: dict[str, Any]) -> list[str]:
+    """A managed index cannot silently omit project-owned role directories."""
+    conflicts = []
+    for prefix in ("roles", "sub-agent-roles"):
+        folder = safe(template / prefix)
+        if not folder.exists():
+            continue
+        if not folder.is_dir():
+            conflicts.append(f"role collection is not a directory: {prefix}")
+            continue
+        desired = {Path(name).parts[1] for name in after["files"] if name.startswith(prefix + "/") and len(Path(name).parts) > 2}
+        previous = {Path(name).parts[1] for name in before["files"] if name.startswith(prefix + "/") and len(Path(name).parts) > 2}
+        for child in folder.iterdir():
+            safe(child)
+            if not child.is_dir() or child.name in desired:
+                continue
+            if prefix == "sub-agent-roles":
+                if role_retirements(before, after) and child.name not in previous and any((child / name).exists() for name in ("AGENTS.md", "ROLE.md")):
+                    conflicts.append(f"unmanaged legacy role needs reviewed transition: {prefix}/{child.name}")
+                continue
+            files = [item for item in child.rglob("*") if safe(item).is_file()]
+            retiring = child.name in previous and all(item.relative_to(template).as_posix() in before["files"] and item.relative_to(template).as_posix() not in after["files"] for item in files)
+            if not retiring:
+                conflicts.append(f"unmanaged role directory needs explicit adoption: {prefix}/{child.name}")
+    return conflicts
 
 
 def atomic_write(path: Path, data: bytes, mode: int = 0o644) -> None:
@@ -467,17 +581,28 @@ def locked(root: Path, *, readonly: bool = False) -> Iterator[None]:
 
 def make_pending(
     before: dict[str, Any], snap: dict[str, Any],
-    *, retirement: dict[str, str] | None = None,
+    *, retirement: dict[str, str] | None = None, root: Path | None = None,
 ) -> dict[str, Any]:
     after = snap["state"]
     payloads = {
-        target: base64.b64encode(snap["blobs"][entry["source"]]).decode("ascii")
+        target: base64.b64encode(snap["generated"][target] if "generated" in entry else snap["blobs"][entry["source"]]).decode("ascii")
         for target, entry in after["files"].items()
         if before["files"].get(target) != entry
     }
     pending = {"schema_version": 1, "before": before, "after": after, "payloads": payloads}
     if retirement is not None:
         pending["retirement"] = retirement
+    retired = role_retirements(before, after)
+    if retired:
+        if root is None:
+            raise UpdateError("role retirement needs current legacy bytes for recovery")
+        retained = {}
+        for entry in retired:
+            raw = read_file(root / TEMPLATE / entry["legacy"])
+            if digest(raw) != entry["sha256"]:
+                raise UpdateError("legacy role changed before recovery capture")
+            retained[entry["legacy"]] = base64.b64encode(raw).decode("ascii")
+        pending["role_retirement"] = {"schema_version": 1, "mapping": retired, "payloads": retained}
     return pending
 
 
@@ -487,7 +612,8 @@ def recover(root: Path, pending: dict[str, Any]) -> None:
         raise UpdateError("invalid pending template update")
     before = validate_state(pending.get("before"))
     after = validate_state(pending.get("after"))
-    if not BASELINE_FILES.issubset(after["files"]):
+    required = BASELINE_FILES if any(name.startswith("roles/") for name in after["files"]) else LEGACY_BASELINE_FILES
+    if not required.issubset(after["files"]):
         raise UpdateError("pending update would remove required template governance")
     state_raw = read_file(root / STATE, optional=True)
     current_state = load_state(root)
@@ -527,6 +653,37 @@ def recover(root: Path, pending: dict[str, Any]) -> None:
     template = safe(root / TEMPLATE)
     if not template.is_dir():
         raise UpdateError("template directory is missing during recovery")
+    scope_conflicts = role_scope_conflicts(template, before, after)
+    if scope_conflicts:
+        raise UpdateError("role ownership conflict", report={"status": "conflict", "conflicts": scope_conflicts})
+    if ROLE_INDEX in after["files"]:
+        inputs = {}
+        for target, binding in role_index_inputs(after["files"]).items():
+            raw = decoded[target] if target in decoded else read_file(template / target)
+            if digest(raw) != binding["sha256"]:
+                raise UpdateError("generated role index input changed during recovery")
+            inputs[target] = raw
+        if digest(render_role_index(inputs)) != after["files"][ROLE_INDEX]["sha256"]:
+            raise UpdateError("generated role index does not match its frozen role pairs")
+    retired = role_retirements(before, after)
+    retained = pending.get("role_retirement")
+    archive_raw = None
+    if retired:
+        if (not isinstance(retained, dict) or set(retained) != {"schema_version", "mapping", "payloads"}
+                or type(retained["schema_version"]) is not int or retained["schema_version"] != 1
+                or retained["mapping"] != retired or not isinstance(retained["payloads"], dict)
+                or set(retained["payloads"]) != {entry["legacy"] for entry in retired}):
+            raise UpdateError("legacy role retirement recovery inventory is invalid")
+        for entry in retired:
+            try:
+                raw = base64.b64decode(retained["payloads"][entry["legacy"]], validate=True)
+            except (ValueError, TypeError, binascii.Error) as error:
+                raise UpdateError("legacy role recovery payload is invalid") from error
+            if digest(raw) != entry["sha256"]:
+                raise UpdateError("legacy role recovery payload checksum mismatch")
+        archive_raw = encoded(retained)
+    elif retained is not None:
+        raise UpdateError("unexpected legacy role retirement record")
     targets = sorted(before["files"].keys() | after["files"].keys())
     conflicts = []
     observed: dict[str, str | None] = {}
@@ -538,6 +695,13 @@ def recover(root: Path, pending: dict[str, Any]) -> None:
             conflicts.append(f"destination changed during interrupted update: {target}")
     if conflicts:
         raise UpdateError("recovery conflict", report={"status": "conflict", "conflicts": conflicts})
+    if archive_raw is not None:
+        archive = root / CONTROL / "role-layout-history" / (digest(archive_raw) + ".json")
+        existing = read_file(archive, optional=True)
+        if existing is not None and existing != archive_raw:
+            raise UpdateError("legacy role recovery archive was customized")
+        if existing is None:
+            atomic_write(archive, archive_raw, 0o600)
     for target in targets:
         desired = after["files"].get(target)
         new = None if desired is None else desired["sha256"]
@@ -562,6 +726,8 @@ def recover(root: Path, pending: dict[str, Any]) -> None:
         expected_hash = after["files"].get(target, {}).get("sha256")
         if file_hash(template / target) != expected_hash:
             raise UpdateError(f"post-write verification failed: {target}")
+    if role_scope_conflicts(template, after, after):
+        raise UpdateError("role directory changed during update; preserve it for reviewed recovery")
     if read_file(root / STATE, optional=True) != state_raw:
         raise UpdateError("template state changed during update")
     if current_state != after:
@@ -615,7 +781,7 @@ def update(
             retirement = None if retire_collection is None else {
                 "collection": retire_collection, "state_sha256": expected_state_sha256,
             }
-            pending = make_pending(before, second, retirement=retirement)
+            pending = make_pending(before, second, retirement=retirement, root=root)
             atomic_write(root / PENDING, encoded(pending), 0o600)
             recover(root, pending)
             report["status"] = "applied"

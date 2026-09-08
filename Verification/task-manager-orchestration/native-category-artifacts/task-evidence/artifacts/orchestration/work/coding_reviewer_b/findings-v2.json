@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "assignment_id": "coding_reviewer_b",
+  "native_id": "/root/task_manager_validation/coding_reviewer_b",
+  "task_id": "TASK-20260908-726896CC",
+  "execution_id": "ticket_validation_20260908",
+  "generation": 1,
+  "outcome": "passed",
+  "candidate_id": "coding_b_v2",
+  "candidate": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_b_v2.md",
+    "sha256": "5c7f2146a68b57d15e0d2a7a7cc69e6c878a52bbf517e9f0e09db495a6accc89"
+  },
+  "candidate_sha256": "5c7f2146a68b57d15e0d2a7a7cc69e6c878a52bbf517e9f0e09db495a6accc89",
+  "baseline": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee.json",
+    "sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee"
+  },
+  "shared_conflict": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_conflict_v1.md",
+    "sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7"
+  },
+  "steering": {
+    "path": "coordination/strict-policy-steering.json",
+    "sha256": "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+  },
+  "criterion_evidence": [
+    {
+      "criterion": "For valid input, order_tickets returns a new list in descending urgency with stable ties and leaves input records and order unchanged.",
+      "status": "passed",
+      "evidence": [
+        "Complete function contract preserves original record objects exactly once in a new list, including nested extra fields.",
+        "Algorithm step 4 sorts newly allocated positional pairs by negative urgency and original position; input records and input order receive no writes.",
+        "The independent exact-fixture calculation passed and retains t3 before t2."
+      ]
+    },
+    {
+      "criterion": "IDs are nonblank unique strings; urgency is an integer in 0..3 and booleans are rejected.",
+      "status": "passed",
+      "evidence": [
+        "IDs remain nonblank unique raw strings; whitespace checking does not normalize them. Every duplicate occurrence receives a defect, including records with another invalid field.",
+        "Integer urgency explicitly excludes both booleans before the inclusive range check. Focused boolean, endpoint, range and wrong-type checks passed.",
+        "Missing or malformed fields, invalid ID types and no-coercion behavior remain explicit."
+      ]
+    },
+    {
+      "criterion": "Empty input returns a new empty list; tests cover boundaries, ties, preservation, malformed records and all four example IDs.",
+      "status": "passed_for_design_gate",
+      "evidence": [
+        "Empty input is specified to return a distinct empty list, confirmed for the ordering construction.",
+        "The dedicated implementation test plan covers all four example IDs, urgency values and boundaries, stable all-equal and mixed ties, malformed records, duplicate and compound defects, raw-ID semantics, extra fields and record identities.",
+        "The test plan requires unchanged deep snapshots and identities after an invalid value follows a valid prefix. Actual production tests remain a later gate."
+      ]
+    },
+    {
+      "criterion": "For every invalid batch, raise ValueError with no partial result or rejection report, leaving the complete input unchanged.",
+      "status": "passed",
+      "evidence": [
+        "Every invalid batch explicitly raises ValueError and returns no partial result or rejection report. A non-list input has its exact ValueError outcome.",
+        "Algorithm step 3 raises from accumulated diagnostics before step 4 constructs any result. Validation only reads input and allocates separate diagnostic structures.",
+        "The compound duplicate/boolean example raises the defined diagnostic exception and returns neither record. The prior report policy has been explicitly superseded under exact steering."
+      ]
+    },
+    {
+      "criterion": "The dedicated implementation follows the exact manager-accepted coherent proposal and its tests pass.",
+      "status": "later_implementation_gate",
+      "evidence": [
+        "The candidate is a complete design revision and assigns production code and actual tests to the distinct dedicated implementer after exact manager acceptance.",
+        "No implementation completion is inferred from this review or from the solver-reported model checks."
+      ]
+    },
+    {
+      "criterion": "Same-reviewer current-version review and explicit disposition of former policy",
+      "status": "passed",
+      "evidence": [
+        "The assignment native_id is the same /root/task_manager_validation/coding_reviewer_b instance.",
+        "The candidate identifies the same originating solver, exact current baseline, prior candidate digest, shared conflict digest and host steering digest.",
+        "The prior report proposal is identified as valid under its former baseline and intentionally replaced by the authorized strict policy; useful diagnostic and preservation contributions remain attributed."
+      ]
+    }
+  ],
+  "mandatory_findings": [],
+  "optional_observations": [],
+  "observed_checks": [
+    {
+      "name": "current_packet_context_dependencies_and_roles",
+      "method": "byte digest comparison",
+      "outcome": "passed",
+      "evidence": "Current rebind packet, baseline, exact B v2 candidate, shared conflict, steering, all six baseline inputs, SOUL and both loaded role files match the assigned hashes."
+    },
+    {
+      "name": "fixture_and_empty_ordering_construction",
+      "method": "independent standard-library expression checks",
+      "outcome": "passed",
+      "evidence": "The specified positional-key construction gives t1,t3,t2,t4 with urgencies 3,2,2,0, retains each original object once, uses a new list and leaves the deep snapshot unchanged. Empty construction yields a distinct empty list."
+    },
+    {
+      "name": "strict_round_boolean_and_range_predicate",
+      "method": "focused standard-library expression checks",
+      "outcome": "passed",
+      "evidence": "The v2 stated predicate accepts endpoints 0 and 3 and rejects True, False, -1, 4, 2.0, string 2 and None."
+    },
+    {
+      "name": "strict_no_partial_return_and_preservation",
+      "method": "manual control-flow review of complete function contract and algorithm steps 1 through 4",
+      "outcome": "passed",
+      "evidence": "The non-list branch raises ValueError. List validation collects defects without input writes; any defect raises before result construction. Only the all-valid branch sorts new positional pairs and returns a fresh list. No partial-result branch, report outcome, mode or wrapper remains."
+    },
+    {
+      "name": "policy_attribution_and_complete_current_coverage",
+      "method": "version-specific static comparison",
+      "outcome": "passed",
+      "evidence": "Policy revision cites prior B v1, exact shared conflict and exact host steering. It explicitly replaces the previously permitted report with strict ValueError and retains diagnostic accounting, compound defects, ordering, identity and preservation. All current criteria are assessed below."
+    },
+    {
+      "name": "prior_review_preservation",
+      "method": "byte digest comparison",
+      "outcome": "passed",
+      "evidence": "findings-v1.json and receipt-v1.json retain their original hashes."
+    }
+  ],
+  "verification_level": "Targeted specification checks passed with static current-design and control-flow review.",
+  "limitations": [
+    "No production function or test suite was implemented or executed.",
+    "The solver-reported 24 model checks were not independently rerun and are not treated as performed implementation.",
+    "Only the assigned B v2 candidate and supplied shared conflict were reviewed; no sibling candidate file was inspected."
+  ]
+}

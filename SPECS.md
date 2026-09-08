@@ -68,3 +68,11 @@ environments, Git initialization, and publication are separate project work.
 Keep technical requirements here. `README.md` provides navigation and usage;
 `AGENTS.md` requires reading this file and owns agent instructions. Link to the
 existing skill and operational contracts instead of repeating their contents.
+
+## Task orchestration and role storage
+
+Task and role helpers use Python standard-library filesystem transactions,
+SHA256 evidence and the existing Task ledger. Role mutation uses POSIX advisory
+locking; no database, external orchestration framework or retired memory service
+is required. Native tools supply real agent control and inheritance evidence.
+The root intake policy remains separate from generic Template behavior.

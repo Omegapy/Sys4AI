@@ -1,0 +1,73 @@
+{
+  "canonical_before_sha256": "0f1ca267009588118f30a8a727c3c50f4322930ecd5938c98d7bfbbf594a64c6",
+  "revision_before": 127,
+  "payload": {
+    "event": {
+      "event_id": "event_4f5749ea3bf049ce96ab4fd2e51110af",
+      "actor": "/root/task_manager_validation",
+      "execution_id": "ticket_validation_20260908",
+      "generation": 1,
+      "kind": "subtask.verify",
+      "data": {
+        "subtask_id": "coding",
+        "baseline": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+        "round": 3,
+        "result_id": "coding_result_v1",
+        "acceptance_id": "coding_acceptance_v2",
+        "artifacts": [
+          "implementation_module_v1",
+          "implementation_test_init_v1",
+          "implementation_tests_v1",
+          "implementation_check_script_v1",
+          "implementation_commands_v1",
+          "implementation_direct_checks_v1",
+          "implementation_preflight_v1",
+          "implementation_test_log_v1",
+          "implementation_receipt_v1"
+        ],
+        "criteria": [
+          {
+            "criterion": "For valid input, order_tickets returns a new list in descending urgency with stable ties and leaves input records and order unchanged.",
+            "evidence": "Direct module inspection, all16 unit tests and observed fixture result establish new list, descending stable order and preserved input/identities."
+          },
+          {
+            "criterion": "IDs are nonblank unique strings; urgency is an integer in 0..3 and booleans are rejected.",
+            "evidence": "Explicit type/range guard rejects bool; tests pass for booleans, all0..3, out-of-range, nonblank raw IDs and duplicate IDs."
+          },
+          {
+            "criterion": "Empty input returns a new empty list; tests cover boundaries, ties, preservation, malformed records and all four example IDs.",
+            "evidence": "Discoverable16-test suite covers exact fixture, empty/new list, boundaries, stable ties, malformed records and preservation."
+          },
+          {
+            "criterion": "For every invalid batch, raise ValueError with no partial result or rejection report, leaving the complete input unchanged.",
+            "evidence": "Manager direct checks observed ValueError with no normal return on both booleans and malformed record after valid prefix, with full unchanged inputs."
+          },
+          {
+            "criterion": "The dedicated implementation follows the exact manager-accepted coherent proposal and its tests pass.",
+            "evidence": "Distinct dedicated native implementer targeted coding_acceptance_v2 exact proposal, produced current module/tests/evidence; manager tests and all changed-file hashes passed."
+          }
+        ],
+        "inspection": [
+          {
+            "path": "coordination/integration-evidence.json",
+            "sha256": "3a2a68e3a090a124b333fa52bd71cc8b12fce037f05a504a26f52a755c0572e3"
+          }
+        ]
+      }
+    },
+    "response": {
+      "work_completed": [
+        "Observed subtask.verify."
+      ],
+      "verification_evidence": [
+        "Exact current inputs and returned native/artifact evidence are retained."
+      ],
+      "user_response_summary": "Observed subtask.verify.",
+      "current_summary": "Observed subtask.verify.",
+      "next_step": "Continue the bounded approved validation.",
+      "blockers": [],
+      "open_questions": [],
+      "relevant_files": []
+    }
+  }
+}

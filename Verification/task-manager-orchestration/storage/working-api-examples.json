@@ -1,0 +1,758 @@
+{
+  "evidence_level": "Executed deterministic CLI fixture with synthetic native receipts; not native runtime evidence. Exact successful payload trace, not a launch transcript.",
+  "fixture_project": "/private/tmp/sys4ai-orchestration-build/api-example-project",
+  "calls": [
+    {
+      "command": "new",
+      "arguments": [],
+      "payload": {
+        "name": "Orchestration fixture",
+        "description": "Deliver the bounded fixture.",
+        "definition_of_done": [
+          "Delivered and inspected."
+        ],
+        "orchestration_enabled": true
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "orchestrate",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "1"
+      ],
+      "payload": {
+        "event": {
+          "event_id": "event1",
+          "actor": "/root",
+          "execution_id": "execution1",
+          "generation": 1,
+          "kind": "manager.reserve",
+          "data": {
+            "assignment_id": "manager1",
+            "role": {
+              "name": "fixture-role",
+              "agents_path": "roles/fixture-role/AGENTS.md",
+              "role_path": "roles/fixture-role/ROLE.md",
+              "agents_sha256": "a193e2423bee274d3d2ce0a63e8e7f70ce539c7c3f1594b6006cfd76d725343b",
+              "role_sha256": "d38aab47f624fc8b7283e5c7978bea057639cf7d6a4fa12ba90c2c1a60c2864b",
+              "catalog": {
+                "path": "catalog.json",
+                "sha256": "5430cebd4aca5f679bb410deb3c27e272d1e1e2c1ec82231069a69acfd0777d4"
+              }
+            },
+            "fit": {
+              "objective": "Bounded fixture",
+              "capabilities": [
+                "focused verification"
+              ],
+              "reads": [
+                "evidence.txt"
+              ],
+              "writes": [],
+              "deliverable": "Evidence artifact",
+              "tools": [
+                "native collaboration"
+              ],
+              "skills": [],
+              "authority": "Only fixture writes",
+              "risk": "Disposable fixture",
+              "stop": "Return the artifact",
+              "rationale": "This test role fits focused checks."
+            },
+            "runtime": {
+              "tools": [
+                "spawn_agent",
+                "list_agents",
+                "send_message",
+                "followup_task",
+                "interrupt_agent"
+              ],
+              "depth": 2,
+              "available_slots": 2,
+              "evidence": [
+                {
+                  "path": "evidence.txt",
+                  "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+                }
+              ]
+            },
+            "settings": {
+              "mode": "verified_inheritance",
+              "model": null,
+              "effort": null,
+              "evidence": [
+                {
+                  "path": "evidence.txt",
+                  "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+                }
+              ]
+            },
+            "context": [
+              {
+                "path": "evidence.txt",
+                "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+              }
+            ],
+            "source_refs": [
+              {
+                "path": "evidence.txt",
+                "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+              }
+            ],
+            "authority": "Explicit fixture work",
+            "bootstrap_receipt": {
+              "tool": "collaboration.list_agents",
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root",
+                    "agent_status": "running"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "response": {
+          "work_completed": [
+            "Completed one bounded and observed work unit."
+          ],
+          "verification_evidence": [
+            "Inspected the resulting local artifact."
+          ],
+          "user_response_summary": "Reported the observed result and current Task state.",
+          "current_summary": "The current bounded work unit is complete.",
+          "next_step": "Continue with the next approved work unit.",
+          "blockers": [],
+          "open_questions": [],
+          "relevant_files": []
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "orchestrate",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "2"
+      ],
+      "payload": {
+        "event": {
+          "event_id": "event2",
+          "actor": "/root",
+          "execution_id": "execution1",
+          "generation": 1,
+          "kind": "manager.receipt",
+          "data": {
+            "assignment_id": "manager1",
+            "receipt": {
+              "tool": "collaboration.spawn_agent",
+              "result": {
+                "task_name": "/root/manager1"
+              }
+            }
+          }
+        },
+        "response": {
+          "work_completed": [
+            "Completed one bounded and observed work unit."
+          ],
+          "verification_evidence": [
+            "Inspected the resulting local artifact."
+          ],
+          "user_response_summary": "Reported the observed result and current Task state.",
+          "current_summary": "The current bounded work unit is complete.",
+          "next_step": "Continue with the next approved work unit.",
+          "blockers": [],
+          "open_questions": [],
+          "relevant_files": []
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "orchestrate",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "3"
+      ],
+      "payload": {
+        "event": {
+          "event_id": "event3",
+          "actor": "/root",
+          "execution_id": "execution1",
+          "generation": 1,
+          "kind": "manager.activate",
+          "data": {
+            "assignment_id": "manager1",
+            "role_reads": {
+              "agents_sha256": "a193e2423bee274d3d2ce0a63e8e7f70ce539c7c3f1594b6006cfd76d725343b",
+              "role_sha256": "d38aab47f624fc8b7283e5c7978bea057639cf7d6a4fa12ba90c2c1a60c2864b",
+              "evidence": "Fixture reports explicit pair read."
+            }
+          }
+        },
+        "response": {
+          "work_completed": [
+            "Completed one bounded and observed work unit."
+          ],
+          "verification_evidence": [
+            "Inspected the resulting local artifact."
+          ],
+          "user_response_summary": "Reported the observed result and current Task state.",
+          "current_summary": "The current bounded work unit is complete.",
+          "next_step": "Continue with the next approved work unit.",
+          "blockers": [],
+          "open_questions": [],
+          "relevant_files": []
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "orchestrate",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "4"
+      ],
+      "payload": {
+        "event": {
+          "event_id": "event4",
+          "actor": "/root/manager1",
+          "execution_id": "execution1",
+          "generation": 1,
+          "kind": "subtask.define",
+          "data": {
+            "subtask_id": "subtask1",
+            "baseline": {
+              "objective": "Deliver bounded result",
+              "requirements": [
+                "REQ-fixture"
+              ],
+              "inputs": [
+                {
+                  "path": "evidence.txt",
+                  "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+                }
+              ],
+              "dependencies": [],
+              "criteria": [
+                "Subtask done."
+              ],
+              "category": "generic",
+              "rationale": "Fixture exercises the chosen workflow.",
+              "reads": [
+                "evidence.txt"
+              ],
+              "writes": [
+                "output"
+              ],
+              "protected": [
+                "evidence.txt"
+              ],
+              "authority": "Fixture only",
+              "implementation_required": true,
+              "deliverable": "Result and evidence",
+              "stop": "Return result",
+              "slots": [
+                {
+                  "slot": "worker",
+                  "function": "worker",
+                  "perspective": "execute",
+                  "solver_slot": null
+                }
+              ]
+            }
+          }
+        },
+        "response": {
+          "work_completed": [
+            "Completed one bounded and observed work unit."
+          ],
+          "verification_evidence": [
+            "Inspected the resulting local artifact."
+          ],
+          "user_response_summary": "Reported the observed result and current Task state.",
+          "current_summary": "The current bounded work unit is complete.",
+          "next_step": "Continue with the next approved work unit.",
+          "blockers": [],
+          "open_questions": [],
+          "relevant_files": []
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "orchestrate",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "5"
+      ],
+      "payload": {
+        "event": {
+          "event_id": "event5",
+          "actor": "/root/manager1",
+          "execution_id": "execution1",
+          "generation": 1,
+          "kind": "assignment.reserve",
+          "data": {
+            "assignment_id": "worker1",
+            "subtask_id": "subtask1",
+            "slot": "worker",
+            "role": {
+              "name": "fixture-role",
+              "agents_path": "roles/fixture-role/AGENTS.md",
+              "role_path": "roles/fixture-role/ROLE.md",
+              "agents_sha256": "a193e2423bee274d3d2ce0a63e8e7f70ce539c7c3f1594b6006cfd76d725343b",
+              "role_sha256": "d38aab47f624fc8b7283e5c7978bea057639cf7d6a4fa12ba90c2c1a60c2864b",
+              "catalog": {
+                "path": "catalog.json",
+                "sha256": "5430cebd4aca5f679bb410deb3c27e272d1e1e2c1ec82231069a69acfd0777d4"
+              }
+            },
+            "fit": {
+              "objective": "Bounded fixture",
+              "capabilities": [
+                "focused verification"
+              ],
+              "reads": [
+                "evidence.txt"
+              ],
+              "writes": [
+                "output"
+              ],
+              "deliverable": "Evidence artifact",
+              "tools": [
+                "native collaboration"
+              ],
+              "skills": [],
+              "authority": "Only fixture writes",
+              "risk": "Disposable fixture",
+              "stop": "Return the artifact",
+              "rationale": "This test role fits focused checks."
+            },
+            "runtime": {
+              "tools": [
+                "spawn_agent",
+                "list_agents",
+                "send_message",
+                "followup_task",
+                "interrupt_agent"
+              ],
+              "depth": 2,
+              "available_slots": 2,
+              "evidence": [
+                {
+                  "path": "evidence.txt",
+                  "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+                }
+              ]
+            },
+            "settings": {
+              "mode": "verified_inheritance",
+              "model": null,
+              "effort": null,
+              "evidence": [
+                {
+                  "path": "evidence.txt",
+                  "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+                }
+              ]
+            },
+            "context": [
+              {
+                "path": "evidence.txt",
+                "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+              },
+              {
+                "path": "Tasks/Task-orchestration-fixture-2026-09-08--F5F0A9A2/artifacts/orchestration/baseline_75d427018dcba2f443d0b3fdc8700489082a54072cc2ec37f62c0ed81455f6b2.json",
+                "sha256": "75d427018dcba2f443d0b3fdc8700489082a54072cc2ec37f62c0ed81455f6b2"
+              }
+            ]
+          }
+        },
+        "response": {
+          "work_completed": [
+            "Completed one bounded and observed work unit."
+          ],
+          "verification_evidence": [
+            "Inspected the resulting local artifact."
+          ],
+          "user_response_summary": "Reported the observed result and current Task state.",
+          "current_summary": "The current bounded work unit is complete.",
+          "next_step": "Continue with the next approved work unit.",
+          "blockers": [],
+          "open_questions": [],
+          "relevant_files": []
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "orchestrate",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "6"
+      ],
+      "payload": {
+        "event": {
+          "event_id": "event6",
+          "actor": "/root/manager1",
+          "execution_id": "execution1",
+          "generation": 1,
+          "kind": "assignment.receipt",
+          "data": {
+            "assignment_id": "worker1",
+            "receipt": {
+              "tool": "collaboration.spawn_agent",
+              "result": {
+                "task_name": "/root/manager1/worker1"
+              }
+            }
+          }
+        },
+        "response": {
+          "work_completed": [
+            "Completed one bounded and observed work unit."
+          ],
+          "verification_evidence": [
+            "Inspected the resulting local artifact."
+          ],
+          "user_response_summary": "Reported the observed result and current Task state.",
+          "current_summary": "The current bounded work unit is complete.",
+          "next_step": "Continue with the next approved work unit.",
+          "blockers": [],
+          "open_questions": [],
+          "relevant_files": []
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "orchestrate",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "7"
+      ],
+      "payload": {
+        "event": {
+          "event_id": "event7",
+          "actor": "/root/manager1",
+          "execution_id": "execution1",
+          "generation": 1,
+          "kind": "assignment.reads",
+          "data": {
+            "assignment_id": "worker1",
+            "role_reads": {
+              "agents_sha256": "a193e2423bee274d3d2ce0a63e8e7f70ce539c7c3f1594b6006cfd76d725343b",
+              "role_sha256": "d38aab47f624fc8b7283e5c7978bea057639cf7d6a4fa12ba90c2c1a60c2864b",
+              "evidence": "Fixture reports explicit pair read."
+            }
+          }
+        },
+        "response": {
+          "work_completed": [
+            "Completed one bounded and observed work unit."
+          ],
+          "verification_evidence": [
+            "Inspected the resulting local artifact."
+          ],
+          "user_response_summary": "Reported the observed result and current Task state.",
+          "current_summary": "The current bounded work unit is complete.",
+          "next_step": "Continue with the next approved work unit.",
+          "blockers": [],
+          "open_questions": [],
+          "relevant_files": []
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "orchestrate",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "8"
+      ],
+      "payload": {
+        "event": {
+          "event_id": "event8",
+          "actor": "/root/manager1",
+          "execution_id": "execution1",
+          "generation": 1,
+          "kind": "artifact.register",
+          "data": {
+            "artifact_id": "deliverable",
+            "assignment_id": "worker1",
+            "source_path": "output/deliverable.txt"
+          }
+        },
+        "response": {
+          "work_completed": [
+            "Completed one bounded and observed work unit."
+          ],
+          "verification_evidence": [
+            "Inspected the resulting local artifact."
+          ],
+          "user_response_summary": "Reported the observed result and current Task state.",
+          "current_summary": "The current bounded work unit is complete.",
+          "next_step": "Continue with the next approved work unit.",
+          "blockers": [],
+          "open_questions": [],
+          "relevant_files": []
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "orchestrate",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "9"
+      ],
+      "payload": {
+        "event": {
+          "event_id": "event9",
+          "actor": "/root/manager1",
+          "execution_id": "execution1",
+          "generation": 1,
+          "kind": "result.record",
+          "data": {
+            "result_id": "result1",
+            "assignment_id": "worker1",
+            "baseline": "75d427018dcba2f443d0b3fdc8700489082a54072cc2ec37f62c0ed81455f6b2",
+            "round": 1,
+            "acceptance_id": null,
+            "artifact_ids": [
+              "deliverable"
+            ],
+            "changes": [
+              {
+                "path": "evidence.txt",
+                "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+              }
+            ],
+            "checks": [
+              {
+                "path": "evidence.txt",
+                "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+              }
+            ],
+            "limitations": []
+          }
+        },
+        "response": {
+          "work_completed": [
+            "Completed one bounded and observed work unit."
+          ],
+          "verification_evidence": [
+            "Inspected the resulting local artifact."
+          ],
+          "user_response_summary": "Reported the observed result and current Task state.",
+          "current_summary": "The current bounded work unit is complete.",
+          "next_step": "Continue with the next approved work unit.",
+          "blockers": [],
+          "open_questions": [],
+          "relevant_files": []
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "orchestrate",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "10"
+      ],
+      "payload": {
+        "event": {
+          "event_id": "event10",
+          "actor": "/root/manager1",
+          "execution_id": "execution1",
+          "generation": 1,
+          "kind": "assignment.observe",
+          "data": {
+            "assignment_id": "worker1",
+            "receipt": {
+              "tool": "collaboration.list_agents",
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/manager1/worker1",
+                    "agent_status": "completed"
+                  }
+                ]
+              }
+            },
+            "changes": [
+              {
+                "path": "evidence.txt",
+                "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+              }
+            ]
+          }
+        },
+        "response": {
+          "work_completed": [
+            "Completed one bounded and observed work unit."
+          ],
+          "verification_evidence": [
+            "Inspected the resulting local artifact."
+          ],
+          "user_response_summary": "Reported the observed result and current Task state.",
+          "current_summary": "The current bounded work unit is complete.",
+          "next_step": "Continue with the next approved work unit.",
+          "blockers": [],
+          "open_questions": [],
+          "relevant_files": []
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "orchestrate",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "11"
+      ],
+      "payload": {
+        "event": {
+          "event_id": "event11",
+          "actor": "/root/manager1",
+          "execution_id": "execution1",
+          "generation": 1,
+          "kind": "subtask.verify",
+          "data": {
+            "subtask_id": "subtask1",
+            "baseline": "75d427018dcba2f443d0b3fdc8700489082a54072cc2ec37f62c0ed81455f6b2",
+            "round": 1,
+            "result_id": "result1",
+            "acceptance_id": null,
+            "artifacts": [
+              "deliverable"
+            ],
+            "criteria": [
+              {
+                "criterion": "Subtask done.",
+                "evidence": "Direct fixture inspection."
+              }
+            ],
+            "inspection": [
+              {
+                "path": "evidence.txt",
+                "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+              }
+            ]
+          }
+        },
+        "response": {
+          "work_completed": [
+            "Completed one bounded and observed work unit."
+          ],
+          "verification_evidence": [
+            "Inspected the resulting local artifact."
+          ],
+          "user_response_summary": "Reported the observed result and current Task state.",
+          "current_summary": "The current bounded work unit is complete.",
+          "next_step": "Continue with the next approved work unit.",
+          "blockers": [],
+          "open_questions": [],
+          "relevant_files": []
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "orchestrate",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "12"
+      ],
+      "payload": {
+        "event": {
+          "event_id": "event12",
+          "actor": "/root/manager1",
+          "execution_id": "execution1",
+          "generation": 1,
+          "kind": "execution.finish",
+          "data": {
+            "outcome": "delivered",
+            "criteria": [
+              {
+                "criterion": "Delivered and inspected.",
+                "evidence": "Integration fixture passed."
+              }
+            ],
+            "inspection": [
+              {
+                "path": "evidence.txt",
+                "sha256": "b438cf11d20f69790cb0ad9406803cfa760ff1a00e0eb470cfe82505f6a5c6ae"
+              }
+            ]
+          }
+        },
+        "response": {
+          "work_completed": [
+            "Completed one bounded and observed work unit."
+          ],
+          "verification_evidence": [
+            "Inspected the resulting local artifact."
+          ],
+          "user_response_summary": "Reported the observed result and current Task state.",
+          "current_summary": "The current bounded work unit is complete.",
+          "next_step": "Continue with the next approved work unit.",
+          "blockers": [],
+          "open_questions": [],
+          "relevant_files": []
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "command": "complete",
+      "arguments": [
+        "TASK-20260908-F5F0A9A2",
+        "--expected-revision",
+        "13"
+      ],
+      "payload": {
+        "work_completed": [
+          "Completed one bounded and observed work unit."
+        ],
+        "verification_evidence": [
+          "Inspected the resulting local artifact."
+        ],
+        "user_response_summary": "Reported the observed result and current Task state.",
+        "current_summary": "The current bounded work unit is complete.",
+        "next_step": null,
+        "blockers": [],
+        "open_questions": [],
+        "relevant_files": [],
+        "status_after": "completed",
+        "completion_evidence": [
+          {
+            "criterion": "Delivered and inspected.",
+            "evidence": "Direct evidence for: Delivered and inspected."
+          }
+        ],
+        "actor": "/root/manager1",
+        "execution_id": "execution1",
+        "generation": 1
+      },
+      "exit_code": 0
+    }
+  ],
+  "final_status": "completed"
+}

@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "kind": "design_correction_expression_and_document_checks",
+  "candidate_sha256": "71136dfcfe79fc38bd7319cac2e1a2dfceb13fa2ad4931bda5276be9b0c2d565",
+  "interpreter": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+  "python_version": "3.12.13",
+  "reproducer": "for urgency in (False, True): print(repr(urgency), isinstance(urgency, int) and not isinstance(urgency, bool) and 0 <= urgency <= 3)",
+  "predicate_results": [
+    {
+      "input_repr": "False",
+      "input_type": "bool",
+      "candidate_predicate_accepts": false,
+      "required_acceptance": false,
+      "conforms": true
+    },
+    {
+      "input_repr": "True",
+      "input_type": "bool",
+      "candidate_predicate_accepts": false,
+      "required_acceptance": false,
+      "conforms": true
+    },
+    {
+      "input_repr": "0",
+      "input_type": "int",
+      "candidate_predicate_accepts": true,
+      "required_acceptance": true,
+      "conforms": true
+    },
+    {
+      "input_repr": "1",
+      "input_type": "int",
+      "candidate_predicate_accepts": true,
+      "required_acceptance": true,
+      "conforms": true
+    },
+    {
+      "input_repr": "2",
+      "input_type": "int",
+      "candidate_predicate_accepts": true,
+      "required_acceptance": true,
+      "conforms": true
+    },
+    {
+      "input_repr": "3",
+      "input_type": "int",
+      "candidate_predicate_accepts": true,
+      "required_acceptance": true,
+      "conforms": true
+    },
+    {
+      "input_repr": "-1",
+      "input_type": "int",
+      "candidate_predicate_accepts": false,
+      "required_acceptance": false,
+      "conforms": true
+    },
+    {
+      "input_repr": "4",
+      "input_type": "int",
+      "candidate_predicate_accepts": false,
+      "required_acceptance": false,
+      "conforms": true
+    },
+    {
+      "input_repr": "1.0",
+      "input_type": "float",
+      "candidate_predicate_accepts": false,
+      "required_acceptance": false,
+      "conforms": true
+    },
+    {
+      "input_repr": "'2'",
+      "input_type": "str",
+      "candidate_predicate_accepts": false,
+      "required_acceptance": false,
+      "conforms": true
+    },
+    {
+      "input_repr": "None",
+      "input_type": "NoneType",
+      "candidate_predicate_accepts": false,
+      "required_acceptance": false,
+      "conforms": true
+    }
+  ],
+  "targeted_document_comparison": {
+    "unchanged_algorithm_steps": [
+      1,
+      2,
+      3,
+      5,
+      6
+    ],
+    "changed_step": 4,
+    "all_prior_test_rows_retained": true,
+    "added_test_rows": [
+      "| Boolean urgency | Test `True` and `False` separately as urgency values; each raises `ValueError`, returns no successful result, and leaves the input unchanged. |",
+      "| Boolean after a valid prefix | For each of `True` and `False`, place an invalid record after at least one valid record. Assert `ValueError`, no successful partial result, and complete equality to the input snapshot after the exception, including original order and dictionary values. |"
+    ]
+  },
+  "prior_fixture_evidence": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_a/checks-v1.json",
+    "sha256": "c99bcaf04f8d2e5df7d925c9036afb03a0a90c68a0544b507b289c66733222bb",
+    "applicability": "The exact input fixture digest and ordering steps 5 and 6 are unchanged."
+  },
+  "limitation": "Expression checks and proposed-test inspection only. No order_tickets implementation, ValueError path or product test suite was executed."
+}

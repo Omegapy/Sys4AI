@@ -1,0 +1,53 @@
+{
+  "fixture_sha256": "3923fe6ee5e9c9cb40da4e53030be11844b3c9dc8bf22a620539576a163eea3d",
+  "fixture_result_ids": [
+    "t1",
+    "t3",
+    "t2",
+    "t4"
+  ],
+  "fixture_result_urgencies": [
+    3,
+    2,
+    2,
+    0
+  ],
+  "fixture_input_ids": [
+    "t3",
+    "t1",
+    "t2",
+    "t4"
+  ],
+  "new_list_and_original_record_identity": true,
+  "complete_fixture_input_preserved": true,
+  "empty_new_list": true,
+  "invalid_observations": [
+    {
+      "invalid_record": {
+        "id": "bad",
+        "urgency": true
+      },
+      "exception": "ValueError",
+      "message": "records[1] urgency must be an integer in 0..3, excluding booleans",
+      "complete_input_preserved": true
+    },
+    {
+      "invalid_record": {
+        "id": "bad",
+        "urgency": false
+      },
+      "exception": "ValueError",
+      "message": "records[1] urgency must be an integer in 0..3, excluding booleans",
+      "complete_input_preserved": true
+    },
+    {
+      "invalid_record": null,
+      "exception": "ValueError",
+      "message": "records[1] must be a dictionary",
+      "complete_input_preserved": true
+    }
+  ],
+  "protected_files_unchanged": 92,
+  "input_reference_hashes_unchanged": 9,
+  "outside_scope_marker_absent": true
+}

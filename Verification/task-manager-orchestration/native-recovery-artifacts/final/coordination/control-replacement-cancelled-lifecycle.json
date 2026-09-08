@@ -1,0 +1,66 @@
+{
+  "observed_at": "2026-09-08T12:40:34.907521+00:00",
+  "payload": {
+    "work_completed": [
+      "Verified actual replacement activation and same-native-ID reconnection at generation 2.",
+      "Submitted one clearly controlled generation-1 operation; the helper rejected it without changing Task bytes.",
+      "Directly inspected the preserved marker, unchanged criteria, prior generation events and response history.",
+      "Recorded the execution outcome as cancelled and cancelled the disposable Task under the approved recovery scenario."
+    ],
+    "verification_evidence": [
+      "ORCH_STALE_GENERATION was returned; canonical and complete Task-tree before/after hash inventories matched.",
+      "The earlier manager is actually completed and its worker interrupted; both canonical assignments remain revoked.",
+      "All 86 protected file hashes and 19 pre-replacement-response hashes match; the marker digest is 0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc.",
+      "The original main criterion remains unchanged and unmet; markers/recovery_worker/delivery.txt is absent.",
+      "The public helper committed cancelled execution outcome at revision 22 with stage stopped."
+    ],
+    "user_response_summary": "Controlled recovery validation reached its expected cancellation. The real replacement manager reconnected, rejected stale-generation work, retained prior history and the readiness marker, and cancelled this disposable Task with its delivery criterion still unfinished. No delivery completion or actual model switch is claimed.",
+    "current_summary": "Controlled recovery validation reached its expected cancellation. The real replacement manager reconnected, rejected stale-generation work, retained prior history and the readiness marker, and cancelled this disposable Task with its delivery criterion still unfinished. No delivery completion or actual model switch is claimed.",
+    "next_step": "Host: inspect this final cancelled record and observe the replacement manager completed after its return.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": [
+      {
+        "path": "coordination/replacement-inspection.json",
+        "note": "Direct fixture inspection, source/control boundaries and preservation evidence."
+      },
+      {
+        "path": "coordination/control-replacement-old-generation-rejected.json",
+        "note": "Actual public-CLI rejection with unchanged Task bytes."
+      },
+      {
+        "path": "coordination/control-replacement-cancelled-execution.json",
+        "note": "Performed cancelled-execution transition."
+      },
+      {
+        "path": "markers/recovery_worker/readiness.json",
+        "note": "Preserved generation-1 readiness marker; not completed delivery."
+      }
+    ],
+    "actor": "/root/recovery_replacement",
+    "execution_id": "recovery_validation_20260908",
+    "generation": 2,
+    "user_authorized": true,
+    "status_reason": "The user-approved TASK-034 scenario explicitly expects cancellation of this disposable validation Task with its intentionally unfinished criterion preserved."
+  },
+  "result": {
+    "schema_version": 1,
+    "command": "cancel",
+    "status": "recorded",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": true,
+    "task_id": "TASK-20260908-A8B65949",
+    "revision_before": 22,
+    "revision_after": 23,
+    "response_id": "RESP-0022",
+    "response_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/responses/Task-Response-0022-2026-09-08T06-40-34-06-00.md",
+    "warnings": [],
+    "errors": [],
+    "recovery_required": false
+  },
+  "canonical_before_sha256": "86059cfa2760f0794f6fbf646856afa2b8b480b0dc74ba529cb863b7362c1a58",
+  "canonical_after_sha256": "16d0a468b1fe0b0dc5ada3ed17e5253ea0ac1fcbd2bfcbf4996ca3202d5b9b7e",
+  "revision_before": 22,
+  "revision_after": 23
+}

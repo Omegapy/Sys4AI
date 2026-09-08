@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "kind": "design_expression_reproduction",
+  "candidate_sha256": "fe1bcba81130f106afb2692807b4363eafe9b9437f4b0c7cb1bc06367b306af5",
+  "interpreter": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+  "python_version": "3.12.13",
+  "reproducer": "for urgency in (False, True): print(repr(urgency), isinstance(urgency, int) and 0 <= urgency <= 3)",
+  "predicate_results": [
+    {
+      "input_repr": "False",
+      "input_type": "bool",
+      "candidate_predicate_accepts": true,
+      "required_acceptance": false,
+      "conforms": false
+    },
+    {
+      "input_repr": "True",
+      "input_type": "bool",
+      "candidate_predicate_accepts": true,
+      "required_acceptance": false,
+      "conforms": false
+    },
+    {
+      "input_repr": "0",
+      "input_type": "int",
+      "candidate_predicate_accepts": true,
+      "required_acceptance": true,
+      "conforms": true
+    },
+    {
+      "input_repr": "3",
+      "input_type": "int",
+      "candidate_predicate_accepts": true,
+      "required_acceptance": true,
+      "conforms": true
+    },
+    {
+      "input_repr": "-1",
+      "input_type": "int",
+      "candidate_predicate_accepts": false,
+      "required_acceptance": false,
+      "conforms": true
+    },
+    {
+      "input_repr": "4",
+      "input_type": "int",
+      "candidate_predicate_accepts": false,
+      "required_acceptance": false,
+      "conforms": true
+    },
+    {
+      "input_repr": "1.0",
+      "input_type": "float",
+      "candidate_predicate_accepts": false,
+      "required_acceptance": false,
+      "conforms": true
+    },
+    {
+      "input_repr": "'2'",
+      "input_type": "str",
+      "candidate_predicate_accepts": false,
+      "required_acceptance": false,
+      "conforms": true
+    },
+    {
+      "input_repr": "None",
+      "input_type": "NoneType",
+      "candidate_predicate_accepts": false,
+      "required_acceptance": false,
+      "conforms": true
+    }
+  ],
+  "fixture_calculation": {
+    "observed_ids": [
+      "t1",
+      "t3",
+      "t2",
+      "t4"
+    ],
+    "expected_ids": [
+      "t1",
+      "t3",
+      "t2",
+      "t4"
+    ],
+    "new_result_list": true,
+    "input_unchanged": true,
+    "original_record_objects_retained": true
+  },
+  "candidate_section_lines": [
+    {
+      "line": 7,
+      "text": "## Initial controlled defect"
+    },
+    {
+      "line": 11,
+      "text": "## API and validation contract"
+    },
+    {
+      "line": 21,
+      "text": "## Algorithm and invariants"
+    },
+    {
+      "line": 26,
+      "text": "4. Require `isinstance(record[\"urgency\"], int)` and inclusive range 0 through 3. Raise `ValueError` for any failed check."
+    },
+    {
+      "line": 34,
+      "text": "## Exact fixture and proposed tests"
+    },
+    {
+      "line": 53,
+      "text": "| Invalid urgency | Values `-1`, `4`, `1.0`, `\"2\"` and `None` each raise `ValueError`. |"
+    },
+    {
+      "line": 58,
+      "text": "## Scope, coverage and current evidence"
+    }
+  ],
+  "limitation": "These checks evaluate the written validation predicate and ordering construction; no product function was created, executed or accepted."
+}

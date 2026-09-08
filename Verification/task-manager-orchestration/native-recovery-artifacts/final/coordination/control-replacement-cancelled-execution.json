@@ -1,0 +1,71 @@
+{
+  "observed_at": "2026-09-08T12:40:02.863546+00:00",
+  "payload": {
+    "event": {
+      "event_id": "event_477636e98a354e2799294f44435198a4",
+      "actor": "/root/recovery_replacement",
+      "execution_id": "recovery_validation_20260908",
+      "generation": 2,
+      "kind": "execution.finish",
+      "data": {
+        "outcome": "cancelled",
+        "criteria": [],
+        "inspection": [
+          {
+            "path": "coordination/replacement-inspection.json",
+            "sha256": "8599a11b4bdc477d1cd63ec319e3889db0da5151ac06a9f10d18089f9df09682"
+          },
+          {
+            "path": "coordination/control-replacement-old-generation-rejected.json",
+            "sha256": "1fc1c7b882e1b33dbf51e458cc5bdca9e4db722942742537b244ed17faaf89bb"
+          },
+          {
+            "path": "markers/recovery_worker/readiness.json",
+            "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+          }
+        ]
+      }
+    },
+    "response": {
+      "work_completed": [
+        "The replacement manager reconnected, verified stale-generation rejection, preserved the readiness marker and unfinished criteria, and recorded the controlled execution outcome as cancelled. No delivery was completed."
+      ],
+      "verification_evidence": [
+        "Actual native observations show the first manager completed and its worker interrupted; both old canonical assignments are revoked.",
+        "The controlled generation-1 operation returned ORCH_STALE_GENERATION with every Task byte unchanged.",
+        "Direct hash checks preserve 86 protected files, 19 earlier responses, generation-1 events and the original marker; delivery.txt remains absent."
+      ],
+      "user_response_summary": "The replacement manager reconnected, verified stale-generation rejection, preserved the readiness marker and unfinished criteria, and recorded the controlled execution outcome as cancelled. No delivery was completed.",
+      "current_summary": "The replacement manager reconnected, verified stale-generation rejection, preserved the readiness marker and unfinished criteria, and recorded the controlled execution outcome as cancelled. No delivery was completed.",
+      "next_step": "Cancel the disposable Task through the real lifecycle route with the unfinished criterion preserved.",
+      "blockers": [],
+      "open_questions": [],
+      "relevant_files": [
+        {
+          "path": "coordination/replacement-inspection.json",
+          "note": "Direct cancellation inspection and exact supporting receipts."
+        }
+      ]
+    }
+  },
+  "result": {
+    "schema_version": 1,
+    "command": "orchestrate",
+    "status": "recorded",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": true,
+    "task_id": "TASK-20260908-A8B65949",
+    "revision_before": 21,
+    "revision_after": 22,
+    "response_id": "RESP-0021",
+    "response_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/responses/Task-Response-0021-2026-09-08T06-40-02-06-00.md",
+    "warnings": [],
+    "errors": [],
+    "recovery_required": false
+  },
+  "canonical_before_sha256": "28c9c407592ee25428926cb4f993b3ccd9f1a494979df7b69a19790edce9973f",
+  "canonical_after_sha256": "86059cfa2760f0794f6fbf646856afa2b8b480b0dc74ba529cb863b7362c1a58",
+  "revision_before": 21,
+  "revision_after": 22
+}

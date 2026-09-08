@@ -1,0 +1,61 @@
+{
+  "label": "pause-before-observation-rejected",
+  "observed_at": "2026-09-08T12:20:32.575684+00:00",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/.agents/skills/agent-task/scripts/task_state.py",
+    "--project-root",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "pause",
+    "TASK-20260908-A8B65949",
+    "--expected-revision",
+    "12"
+  ],
+  "payload": {
+    "work_completed": [
+      "Observed pause-before-observation-rejected."
+    ],
+    "verification_evidence": [
+      "Exact current inputs and returned native/artifact evidence are retained."
+    ],
+    "user_response_summary": "Observed pause-before-observation-rejected.",
+    "current_summary": "Observed pause-before-observation-rejected.",
+    "next_step": "Continue the bounded approved validation.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": [],
+    "actor": "/root/recovery_manager",
+    "execution_id": "recovery_validation_20260908",
+    "generation": 1,
+    "status_reason": "Negative control before native owner reconciliation."
+  },
+  "expected_error": "ORCH_STOP_REQUIRED",
+  "exit_code": 2,
+  "result": {
+    "schema_version": 1,
+    "command": "pause",
+    "status": "error",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": false,
+    "task_id": null,
+    "revision_before": null,
+    "revision_after": null,
+    "response_id": null,
+    "response_path": null,
+    "warnings": [],
+    "errors": [
+      {
+        "code": "ORCH_STOP_REQUIRED",
+        "message": "Reconcile every worker before a stopped lifecycle claim."
+      }
+    ],
+    "recovery_required": false
+  },
+  "stderr": "",
+  "canonical_before_sha256": "b8d0e91c3c56cd62a383d6be2b83a60831ac35e70636b57cfafe84375b75063c",
+  "canonical_after_sha256": "b8d0e91c3c56cd62a383d6be2b83a60831ac35e70636b57cfafe84375b75063c",
+  "canonical_unchanged": true,
+  "revision_before": 12,
+  "revision_after": 12
+}

@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-08T12:23:34.584393+00:00",
+  "task_id": "TASK-20260908-A8B65949",
+  "execution_id": "recovery_validation_20260908",
+  "generation": 1,
+  "assignment_id": "recovery_manager",
+  "native_id": "/root/recovery_manager",
+  "canonical": {
+    "path": "Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/task.json",
+    "sha256": "23056846941de5b1be553e00aea38d5c9d301f2e885cdd01ef6c16113ca904d2"
+  },
+  "revision": 16,
+  "status": "paused",
+  "stage": "stopped",
+  "writer": "/root/recovery_manager",
+  "last_response": {
+    "path": "Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/responses/Task-Response-0015-2026-09-08T06-22-41-06-00.md",
+    "sha256": "0d8b2a61caafd680363a834d0472dc08202182bf8f610aff9225f43274dc6883"
+  },
+  "response_count": 15,
+  "validation": {
+    "schema_version": 1,
+    "command": "validate",
+    "status": "valid",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": false,
+    "task_id": "TASK-20260908-A8B65949",
+    "revision_before": 16,
+    "revision_after": 16,
+    "response_id": null,
+    "response_path": null,
+    "warnings": [],
+    "errors": [],
+    "recovery_required": false,
+    "integrity": "valid",
+    "validated_task_count": 1
+  },
+  "status_receipt": {
+    "schema_version": 1,
+    "command": "status",
+    "status": "ok",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": false,
+    "task_id": null,
+    "revision_before": null,
+    "revision_after": null,
+    "response_id": null,
+    "response_path": null,
+    "warnings": [],
+    "errors": [],
+    "recovery_required": false,
+    "counts": {
+      "open": 0,
+      "paused": 1,
+      "awaiting_user": 0,
+      "blocked": 0,
+      "completed": 0,
+      "cancelled": 0,
+      "nonterminal": 1,
+      "terminal": 0,
+      "total": 1
+    },
+    "integrity": "valid",
+    "projection_drift": [],
+    "nonterminal_candidates": [
+      {
+        "task_id": "TASK-20260908-A8B65949",
+        "name": "Native stopping and recovery validation",
+        "status": "paused",
+        "description": "Controlled disposable worker pause, uncertain-receipt reconciliation, manager replacement and cancellation; no completed delivery is expected.",
+        "created_at": "2026-09-08T06:09:46-06:00",
+        "updated_at": "2026-09-08T06:22:41-06:00",
+        "parent_task_id": null,
+        "revision": 16,
+        "response_count": 15,
+        "latest_response": {
+          "response_id": "RESP-0015",
+          "sequence": 15,
+          "created_at": "2026-09-08T06:22:41-06:00",
+          "path": "responses/Task-Response-0015-2026-09-08T06-22-41-06-00.md",
+          "supersedes_response_id": null
+        },
+        "next_step": "Host: observe this manager completed and the worker interrupted, reconcile both actual native owners, then perform the authorized generation replacement."
+      }
+    ]
+  },
+  "last_actual_native_roster": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root/recovery_manager",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/recovery_manager/marker_worker",
+          "agent_status": "interrupted"
+        }
+      ]
+    }
+  },
+  "worker_changes": [
+    {
+      "path": "markers/recovery_worker/readiness.json",
+      "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+    }
+  ],
+  "first_manager_validation": {
+    "path": "coordination/first-manager-validation.json",
+    "sha256": "c2541d443966f28bb9666deb5dfc5adb84002aa84788780a61dc4801977786a1"
+  },
+  "final_response_control": {
+    "path": "coordination/control-first-manager-final-response.json",
+    "sha256": "87551dc420b581a6f22eb4e120475c0227fac0827b154db25a69f3577babce2c"
+  },
+  "unfinished_criterion_preserved": true,
+  "delivery_completed": false,
+  "required_next_step": "Host must observe this manager actually completed after the final response, retain the worker interrupted observation and known marker change, then use explicit manager.replace under original-bootstrap authority.",
+  "writer_boundary": "No further Task mutations or child dispatch will be performed by this manager after returning this handoff.",
+  "known_coordination_artifacts": [
+    {
+      "path": "coordination/bootstrap.json",
+      "sha256": "d84576d3dbc35222547c92613169e3b2ae8f400a1e50ed1849e6ac395b1303f7"
+    },
+    {
+      "path": "coordination/catalog_548d0e01bf7a4478a6bcbfbf2f670c85.json",
+      "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+    },
+    {
+      "path": "coordination/catalog_cefaf3444b144badb4386290c33cfb7c.json",
+      "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+    },
+    {
+      "path": "coordination/catalog_fa75b54aa01245e29dbb7394f88f6c23.json",
+      "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+    },
+    {
+      "path": "coordination/control-actual-paused-lifecycle.json",
+      "sha256": "beb13a50a89cc77c08e13ca0d77751dfe273de207fa671e8335ac5a615302ccf"
+    },
+    {
+      "path": "coordination/control-define-marker-subtask.json",
+      "sha256": "ded2e39be89aef78a03d62c08e26aa1b36b94c916d2783dff749e3071f7d4dad"
+    },
+    {
+      "path": "coordination/control-dispatch-after-pause-rejected.json",
+      "sha256": "f0c249797a23c0fcdd6a35faa9a5b543ecb0d0e581665afabe1b30f03fc8a10c"
+    },
+    {
+      "path": "coordination/control-duplicate-manager-rejected.json",
+      "sha256": "59cc9cfe809069ab2b2632f5c5bdac6af58c71170f5b1a0081ebf1c4c4a58cb0"
+    },
+    {
+      "path": "coordination/control-first-manager-final-response.json",
+      "sha256": "87551dc420b581a6f22eb4e120475c0227fac0827b154db25a69f3577babce2c"
+    },
+    {
+      "path": "coordination/control-manager-reconnect.json",
+      "sha256": "ed660813d577bbca01b659a4644d11c7ec4f7d3508513d9972adcc54b13dca5b"
+    },
+    {
+      "path": "coordination/control-pause-before-observation-rejected.json",
+      "sha256": "13ee70f7fdb1bc9ed895ab6b148102decea65388527dd9fbec864d409986b973"
+    },
+    {
+      "path": "coordination/control-request-pause.json",
+      "sha256": "0d41254537c0413862e07ad8845a4c9ca86d025b8a97a7e11c043a8e8057dfad"
+    },
+    {
+      "path": "coordination/control-reserve-marker-worker.json",
+      "sha256": "21a584521f4c646462f02ecb78c9176fb3d0cdb93431b6d5d7aadde496ca54af"
+    },
+    {
+      "path": "coordination/control-stop-after-observation.json",
+      "sha256": "2c2f7643144c99ea00c336b90a74481dd5d2363ef5e3d81f2ba38a64735930c9"
+    },
+    {
+      "path": "coordination/control-stop-before-observation-rejected.json",
+      "sha256": "e29339f1f015e59426783c8403ec106ae9836d1f6665d7e7da976f385575001d"
+    },
+    {
+      "path": "coordination/control-synthetic-settings-change-rejected.json",
+      "sha256": "5e088b342043cba7e002c232d04fdad134683dd47ecb31732ec280c898b2f44c"
+    },
+    {
+      "path": "coordination/control-worker-controlled-uncertain.json",
+      "sha256": "57522f8fa1a682bef7131fd3e2f14c06f8edbf9ee8efcb6da9c7ae7910427fac"
+    },
+    {
+      "path": "coordination/control-worker-interruption-observed.json",
+      "sha256": "fe4b9aa1f2b8d09239c77f9a17f2a12423030e4efe85a30707ea8eefad8219de"
+    },
+    {
+      "path": "coordination/control-worker-original-receipt-import.json",
+      "sha256": "0932f7d3237cbd4cdf55fc49c8c3d63e34c9dd6e0a3b6c21c073d1e3c11e3d34"
+    },
+    {
+      "path": "coordination/control-worker-role-reads.json",
+      "sha256": "a7b3b7cad1c1400318e5ff55c0f5919d442f94492f9ce4af4dd377370f30e52d"
+    },
+    {
+      "path": "coordination/control-worker-running-observed.json",
+      "sha256": "05ebf125c605bdbc953ccdcc91a66b36b47960ce3e207a0d6a068abddf7fa3a5"
+    },
+    {
+      "path": "coordination/control_api.py",
+      "sha256": "ae0aefd81ebce8a0ef5f4ce6eb71d77a9730f7c0685ffb48728f298be987efb1"
+    },
+    {
+      "path": "coordination/current-worker-runtime.json",
+      "sha256": "9cef6141f0e582c895169e17e75ca91373f29a7c9fad929834e685a327543261"
+    },
+    {
+      "path": "coordination/first-manager-validation.json",
+      "sha256": "c2541d443966f28bb9666deb5dfc5adb84002aa84788780a61dc4801977786a1"
+    },
+    {
+      "path": "coordination/helper-receipts.jsonl",
+      "sha256": "d9cea057c9ca61c567e27dd18312b0bfb30e8d6fc11241111082dfe57b9b9440"
+    },
+    {
+      "path": "coordination/manager-readiness.json",
+      "sha256": "d0b1beae2802daed19c6bc6a3b2df1822a5d24f2215408a7b5b5e2b2bcc0339c"
+    },
+    {
+      "path": "coordination/manager-running-roster.json",
+      "sha256": "bcf03b2a32e57c3d9ff53bb14b168d8e6fe614c98f8ad08aed89dd59a5c15404"
+    },
+    {
+      "path": "coordination/marker-before-interruption.json",
+      "sha256": "e6d7a1c70b7ee7ec47d126a23adef10f0349d7f5381c6f3519b619384b360148"
+    },
+    {
+      "path": "coordination/native-worker-interruption.json",
+      "sha256": "786d36da10d96793edfa562590eac59c75dc9e51f1dd4c964b6483f599475a37"
+    },
+    {
+      "path": "coordination/protected-before-worker.json",
+      "sha256": "ac09d3c94d99309f4f305a4a2a8fd8d61558faf0185bfc9688b78bc74a1182b5"
+    },
+    {
+      "path": "coordination/synthetic-settings-change.json",
+      "sha256": "67f5e9702bb60b4f222bc749600742e2dfcf887cae75381017081c87ea1dafbf"
+    },
+    {
+      "path": "coordination/validation_api.py",
+      "sha256": "e707ccbd8dc99cd32d25b5d169c6f81965800cd4b124454a0dc7a7fcb7c07bd8"
+    },
+    {
+      "path": "coordination/worker-actual-spawn-delayed.json",
+      "sha256": "77b75570ec5e42fbc09a77c8a1323d871b6632b94fd17a074c5576c171a594d8"
+    },
+    {
+      "path": "coordination/worker-assignment.json",
+      "sha256": "499b53b4341000b80060a50dcc0e940f406975a6107b2f657e79c0e9fd2d851e"
+    },
+    {
+      "path": "coordination/worker-delayed-receipt-reconciliation.json",
+      "sha256": "d3142516d79b2e4e430507afee132d4f92a7cfc8d24355d33077136d1a0e3357"
+    },
+    {
+      "path": "coordination/worker-dispatch-roster.json",
+      "sha256": "7d70256827ff285344462c78aa5eb0e425b185f9c86e7a7ff29f58cec0c5eb61"
+    }
+  ]
+}

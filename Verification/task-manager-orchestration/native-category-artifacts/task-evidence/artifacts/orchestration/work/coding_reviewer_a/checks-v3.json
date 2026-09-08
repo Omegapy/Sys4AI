@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "strict_round_design_revalidation",
+  "candidate_sha256": "13655a83e362d3cb02bc81f407ffe7d0ce03a1a0c7734dd47f467b811665e4d3",
+  "baseline_sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee",
+  "interpreter": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+  "python_version": "3.12.13",
+  "same_reviewer_native_id": "/root/task_manager_validation/coding_reviewer_a",
+  "document_checks": {
+    "all_six_algorithm_steps_unchanged_from_v2": true,
+    "all_proposed_test_rows_unchanged_from_v2": true,
+    "boolean_exclusion_retained_in_algorithm_and_API": true,
+    "strict_ValueError_no_partial_result_no_report_contract_explicit": true,
+    "current_baseline_conflict_and_steering_digests_cited": true,
+    "all_current_input_digests_verified": true
+  },
+  "boolean_predicate_checks": [
+    {
+      "input_repr": "False",
+      "written_predicate_accepts": false,
+      "expected_acceptance": false
+    },
+    {
+      "input_repr": "True",
+      "written_predicate_accepts": false,
+      "expected_acceptance": false
+    }
+  ],
+  "shared_conflict_expression_check": {
+    "input": [
+      {
+        "id": "ok",
+        "urgency": 3
+      },
+      {
+        "id": "bad",
+        "urgency": true
+      }
+    ],
+    "urgency_validation_results": [
+      true,
+      false
+    ],
+    "candidate_required_outcome": "ValueError with no normal result, no rejection report and unchanged complete input.",
+    "evidence_limit": "Validation expressions were evaluated. The proposed API and exception path were not implemented or executed."
+  },
+  "retained_prior_checks": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_a/checks-v2.json",
+    "sha256": "5d2bd0402edd21cd963a49d4be2d2573f274fdcc5094c498defa310af3674d65",
+    "applicability": "All six algorithm steps and proposed test rows are byte-identical to the previously reviewed design, and fixture/analysis dependencies retain exact hashes."
+  },
+  "authority_evidence": "The current native manager continuation assigns this exact strict baseline and host steering for the approved controlled test; the older prospective policy text is not the authority for this round."
+}

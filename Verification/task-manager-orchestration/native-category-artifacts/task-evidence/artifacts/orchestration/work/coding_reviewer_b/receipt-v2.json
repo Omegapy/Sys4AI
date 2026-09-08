@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "native_id": "/root/task_manager_validation/coding_reviewer_b",
+  "assignment_id": "coding_reviewer_b",
+  "task_id": "TASK-20260908-726896CC",
+  "execution_id": "ticket_validation_20260908",
+  "generation": 1,
+  "outcome": "passed",
+  "status": "completed",
+  "role_reads": {
+    "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+    "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+    "evidence": "Both complete selected role files were read in this same native reviewer. Their current byte digests match the unchanged loaded files and the strict rebind packet."
+  },
+  "soul_sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+  "packet": {
+    "path": "coordination/rebind_coding_reviewer_b_strict.json",
+    "sha256": "b2fbc6663975b568e5ff56ab83a796975ba8afd55ece34b1178e8dbaeaeea1a5"
+  },
+  "baseline": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee.json",
+    "sha256": "acd7e5a4ae3da65dc15fe35a5e63e29865d64fdfd516a2ebf51d48bc61b7adee"
+  },
+  "candidate": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_b_v2.md",
+    "sha256": "5c7f2146a68b57d15e0d2a7a7cc69e6c878a52bbf517e9f0e09db495a6accc89"
+  },
+  "shared_conflict": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_conflict_v1.md",
+    "sha256": "175219b33b2a880a3114a594e753792ac789292defd1fc9318dbc769816a68a7"
+  },
+  "steering": {
+    "path": "coordination/strict-policy-steering.json",
+    "sha256": "6658c9280414b04f2ab89c2e001c6b7fc516ca6f56636cf2a2946e8ca2cddc65"
+  },
+  "artifacts": [
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_b/findings-v2.json",
+      "sha256": "838ac622eef6b1b730e796bdc49d82a78aca054e3c5d1314232c0bd1dfb20656"
+    }
+  ],
+  "checks": [
+    {
+      "name": "current_packet_context_dependencies_and_roles",
+      "method": "byte digest comparison",
+      "outcome": "passed",
+      "evidence": "Current rebind packet, baseline, exact B v2 candidate, shared conflict, steering, all six baseline inputs, SOUL and both loaded role files match the assigned hashes."
+    },
+    {
+      "name": "fixture_and_empty_ordering_construction",
+      "method": "independent standard-library expression checks",
+      "outcome": "passed",
+      "evidence": "The specified positional-key construction gives t1,t3,t2,t4 with urgencies 3,2,2,0, retains each original object once, uses a new list and leaves the deep snapshot unchanged. Empty construction yields a distinct empty list."
+    },
+    {
+      "name": "strict_round_boolean_and_range_predicate",
+      "method": "focused standard-library expression checks",
+      "outcome": "passed",
+      "evidence": "The v2 stated predicate accepts endpoints 0 and 3 and rejects True, False, -1, 4, 2.0, string 2 and None."
+    },
+    {
+      "name": "strict_no_partial_return_and_preservation",
+      "method": "manual control-flow review of complete function contract and algorithm steps 1 through 4",
+      "outcome": "passed",
+      "evidence": "The non-list branch raises ValueError. List validation collects defects without input writes; any defect raises before result construction. Only the all-valid branch sorts new positional pairs and returns a fresh list. No partial-result branch, report outcome, mode or wrapper remains."
+    },
+    {
+      "name": "policy_attribution_and_complete_current_coverage",
+      "method": "version-specific static comparison",
+      "outcome": "passed",
+      "evidence": "Policy revision cites prior B v1, exact shared conflict and exact host steering. It explicitly replaces the previously permitted report with strict ValueError and retains diagnostic accounting, compound defects, ordering, identity and preservation. All current criteria are assessed below."
+    },
+    {
+      "name": "prior_review_preservation",
+      "method": "byte digest comparison",
+      "outcome": "passed",
+      "evidence": "findings-v1.json and receipt-v1.json retain their original hashes."
+    }
+  ],
+  "prior_artifacts_preserved": [
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_b/findings-v1.json",
+      "sha256": "622e86d819edf03239fdbe033fb2299ba525f1f4fa3d8749a263e34502a54056"
+    },
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_b/receipt-v1.json",
+      "sha256": "e4fe4418a4a04256acead12ed764969be97b360885543f60b4c43c8d6ab7ad10"
+    }
+  ],
+  "verification_level": "Targeted specification checks passed with static current-design and control-flow review.",
+  "limitations": [
+    "No production function or test suite was implemented or executed.",
+    "The solver-reported 24 model checks were not independently rerun and are not treated as performed implementation.",
+    "Only the assigned B v2 candidate and supplied shared conflict were reviewed; no sibling candidate file was inspected."
+  ],
+  "settings_evidence": "Same native reviewer continues under inherited parent model and reasoning effort without overrides; literal telemetry was not observed.",
+  "scope_evidence": "Only findings-v2.json and receipt-v2.json were written in the existing exclusive workspace. Prior findings, candidates, canonical state, roles and production code were preserved. No nested agents were launched.",
+  "stopping_condition": "Current strict candidate independently re-reviewed and exact artifact receipts produced."
+}

@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "reviewer_assignment_id": "coding_reviewer_a",
+  "native_id": "/root/task_manager_validation/coding_reviewer_a",
+  "outcome": "rejected",
+  "candidate_id": "coding_a_v1",
+  "candidate_path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v1.md",
+  "candidate_sha256": "fe1bcba81130f106afb2692807b4363eafe9b9437f4b0c7cb1bc06367b306af5",
+  "baseline": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8.json",
+    "sha256": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8"
+  },
+  "review_scope": "Independent full current design review. Later dedicated implementation is a separate gate and is not treated as a missing design artifact defect.",
+  "criterion_evidence": [
+    {
+      "criterion": "For valid input, order_tickets returns a new list in descending urgency with stable ties and leaves input records and order unchanged.",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v1.md",
+          "section": "## API and validation contract",
+          "line": 11
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v1.md",
+          "section": "## Algorithm and invariants",
+          "line": 21
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v1.md",
+          "section": "## Exact fixture and proposed tests",
+          "line": 34
+        }
+      ],
+      "observation": "The API promises a new list of every original record; sorting positional pairs by negative urgency and original position preserves ties without input writes. A separate expression calculation produced t1,t3,t2,t4, retained record identities and left the fixture unchanged."
+    },
+    {
+      "criterion": "IDs are nonblank unique strings; urgency is an integer in 0..3 and booleans are rejected.",
+      "status": "rejected",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v1.md",
+          "section": "## API and validation contract",
+          "line": 11
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v1.md",
+          "section": "## Algorithm and invariants",
+          "line": 21
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_a/checks-v1.json",
+          "sha256": "c99bcaf04f8d2e5df7d925c9036afb03a0a90c68a0544b507b289c66733222bb"
+        }
+      ],
+      "observation": "Nonblank exact unique string IDs and ordinary integer boundaries are specified. The actual proposed urgency predicate accepts both True and False, violating mandatory boolean rejection. This remains a defect despite its controlled-injection label.",
+      "mandatory_finding_ids": [
+        "R-A-001"
+      ]
+    },
+    {
+      "criterion": "Empty input returns a new empty list; tests cover boundaries, ties, preservation, malformed records and all four example IDs.",
+      "status": "passed_for_stated_cases",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v1.md",
+          "section": "## Exact fixture and proposed tests",
+          "line": 34
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v1.md",
+          "section": "## Algorithm and invariants",
+          "line": 21
+        }
+      ],
+      "observation": "The design specifies a distinct new empty list and meaningful tests for endpoints, all urgency values, ties, preservation, wrong shapes, missing fields, invalid IDs, ordinary invalid urgency and all four exact fixture IDs. Boolean negative tests are absent and must be added with R-A-001 to verify the separate mandatory validation rule. These tests are proposed, not a performed product suite."
+    },
+    {
+      "criterion": "The initial invalid-input policy is explicit: raising an error or a separate rejection-report outcome is allowed; silent dropping is forbidden.",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v1.md",
+          "section": "## API and validation contract",
+          "line": 11
+        }
+      ],
+      "observation": "ValueError rejects the entire invalid batch without a successful or partial sorted result. Complete validation precedes sorting; input remains unchanged on failures. This is one permitted initial policy proposal, and this review does not select the user policy."
+    },
+    {
+      "criterion": "The dedicated implementation follows the exact manager-accepted coherent proposal and its tests pass.",
+      "status": "later_required_gate",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v1.md",
+          "section": "## Scope, coverage and current evidence",
+          "line": 58
+        }
+      ],
+      "observation": "A distinct dedicated implementer must later follow the exact manager-accepted coherent design and run its tests. The candidate correctly makes no implementation or product-suite completion claim. This future execution requirement is retained without counting it as a current design defect."
+    }
+  ],
+  "mandatory_findings": [
+    {
+      "id": "R-A-001",
+      "severity": "mandatory",
+      "title": "Reject boolean urgency in the proposed validation and its tests",
+      "candidate_lines": [
+        11,
+        21
+      ],
+      "evidence": "The written check isinstance(urgency, int) and 0 <= urgency <= 3 evaluates to True for both False and True in the assigned interpreter. The candidate explicitly omits boolean cases from its proposed tests.",
+      "minimal_reproducer": "for urgency in (False, True): print(repr(urgency), isinstance(urgency, int) and 0 <= urgency <= 3)",
+      "observed": "False True; True True",
+      "expected": "Both boolean inputs produce the candidate's explicit invalid-input outcome, with no successful sorted-list return.",
+      "required_correction": "The originating solver must add explicit boolean exclusion to its algorithm and propose negative tests for both False and True, including a later invalid record after a valid prefix with unchanged caller input. Re-review the exact corrected candidate digest with this same reviewer. Do not relax the governing boolean exclusion or implement production code in this design correction."
+    }
+  ],
+  "optional_observations": [],
+  "checked_inputs": [
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8.json",
+      "sha256": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8"
+    },
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v1.md",
+      "sha256": "fe1bcba81130f106afb2692807b4363eafe9b9437f4b0c7cb1bc06367b306af5"
+    },
+    {
+      "path": "context/scenario.md",
+      "sha256": "a9a04801f283389a870ccaa0b28926150d29be331b887c9bae9d505457bf5ede"
+    },
+    {
+      "path": "coordination/coding-design-contract.md",
+      "sha256": "7088f3aab4c526717afec811d53796f90c6350174304b16d8d995af2ca977246"
+    },
+    {
+      "path": "data/tickets.json",
+      "sha256": "3923fe6ee5e9c9cb40da4e53030be11844b3c9dc8bf22a620539576a163eea3d"
+    },
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/analysis_proposal_v1.md",
+      "sha256": "38a563ef628c0d052234931c71a459865f4a9b27886f242b3251423233cccb6f"
+    },
+    {
+      "path": "context/catalog_542a89f5ff99499d8213ab386128ba37.json",
+      "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+    }
+  ],
+  "highest_verification_level": "Targeted written-predicate reproduction and fixture-expression checks observed; complete design inspected.",
+  "limitations": [
+    "No product implementation or test suite exists within this reviewer assignment.",
+    "Only the assigned solver A candidate was reviewed; no sibling candidate draft was inspected.",
+    "Manager acceptance and final Task completion remain separate."
+  ]
+}

@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "<stdin>", line 6, in <module>
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/.agents/skills/agent-task/scripts/orchestration_state.py", line 644, in apply
+    reserve(o, {'assignment_id':aid, 'subtask_id':previous['subtask_id'], 'slot':previous['slot'], 'role':data['role'], 'fit':data['fit'], 'runtime':data['runtime'], 'settings':previous['settings'], 'context':data['context']}, task, root, folder, external_owners=external_owners)
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/.agents/skills/agent-task/scripts/orchestration_state.py", line 522, in reserve
+    s = current_subtask(o, sid, task, root, folder); slot_name = data['slot']
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/.agents/skills/agent-task/scripts/orchestration_state.py", line 398, in current_subtask
+    verified_current(o, dep, task, root, folder)
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/.agents/skills/agent-task/scripts/orchestration_state.py", line 872, in verified_current
+    acceptance_current(o, verification['acceptance_id'], task, root, folder)
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/.agents/skills/agent-task/scripts/orchestration_state.py", line 853, in acceptance_current
+    syn = synthesis_current(o, accepted['synthesis_id'], task, root, folder)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/.agents/skills/agent-task/scripts/orchestration_state.py", line 453, in synthesis_current
+    need(v['baseline'] == s['digest'] and v['round'] == s['round'] and set(v['candidate_ids']) == set(candidate_set(o, a['subtask_id'], task, root, folder)), 'ORCH_STALE_SYNTHESIS', 'Synthesis input set or baseline is stale.')
+                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/.agents/skills/agent-task/scripts/orchestration_state.py", line 429, in candidate_set
+    values = [c for c in o['candidates'].values() if o['assignments'][c['assignment_id']]['subtask_id'] == sid and o['assignments'][c['assignment_id']]['slot'] == slot and c['baseline'] == s['digest'] and c['round'] == s['round'] and not any(n['supersedes'] == c['candidate_id'] for n in o['candidates'].values())]
+                                                     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'coding_a'

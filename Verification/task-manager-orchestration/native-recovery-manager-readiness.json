@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-08T12:13:04.874047+00:00",
+  "native_id": "/root/recovery_manager",
+  "task_id": "TASK-20260908-A8B65949",
+  "execution_id": "recovery_validation_20260908",
+  "generation": 1,
+  "assignment_id": "recovery_manager",
+  "required_reads_completed": true,
+  "required_read_sha256s": {
+    "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+    "AGENTS.md": "a66a47e92a227ced22ba7da905d770b3a930e133876b043afca27c7010043b8c",
+    "ROLE.md": "478e75f0cfc693f61a0cbfc48d07efbc5f050b57db5f493c5f3aca5d3a9538a4",
+    "SPECS.md": "02c36c12cea1d5d2535fa1ab2bb930a489aa03b7d6f530b19d93411ec70907c8",
+    "roles/task-manager/AGENTS.md": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+    "roles/task-manager/ROLE.md": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0",
+    ".agents/skills/task/SKILL.md": "214c545c72ee982a42e77ed129918a5996d96f4ca71a63e6aba22b57aeba5200",
+    ".agents/skills/agent-task/SKILL.md": "d2c36bf2f2b5880030171b3bb94b7bc0751fda594392328250e0c04dfdb6079b",
+    ".agents/skills/manage-subagent-roles/SKILL.md": "841388a1c7aec7005a91da25d1bdf05b586d01af23426df58c024a353b92a83e",
+    ".agents/skills/communication/SKILL.md": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+    ".agents/skills/agent-task/references/task-system-contract.md": "c33a5b1b4db3ff4cc9ee72801aa7f9ad65d51c1acb0baea83c112d66a8d8b21e",
+    ".agents/skills/agent-task/references/orchestration-contract.md": "d4ee43bf26b2b8e21cee15223ed4287d529ea89b924786bd9f3b86867b8a2ef9",
+    "context/scenario.md": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e",
+    "context/authority.json": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c",
+    "context/native-runtime.json": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4",
+    "coordination/bootstrap.json": "d84576d3dbc35222547c92613169e3b2ae8f400a1e50ed1849e6ac395b1303f7"
+  },
+  "role_reads": {
+    "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+    "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0",
+    "evidence": "Manager directly read both complete role files, owning project SOUL, governance, installed Task and role skills, both Task contracts, exact reservation, scenario, authority and native runtime evidence before readiness."
+  },
+  "soul_sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+  "canonical_observation": {
+    "revision": 3,
+    "writer": "/root",
+    "stage": "receipt_recorded",
+    "status": "open",
+    "sha256": "05fd459c36aaf991974c609ef7f7c9152e928c4f5a8eee23ded0877a088ebdfd",
+    "native_receipt_matches_this_instance": true,
+    "read_only_status": {
+      "exit_code": 0,
+      "integrity": "valid",
+      "projection_drift": [],
+      "mutated": false,
+      "total": 1,
+      "nonterminal": 1
+    },
+    "read_only_validate": {
+      "exit_code": 0,
+      "integrity": "valid",
+      "revision_before": 3,
+      "revision_after": 3,
+      "mutated": false
+    }
+  },
+  "capability_conflicts": [],
+  "capability_limits": [
+    "Literal model and reasoning-effort telemetry is unavailable; the effective runtime explicitly guarantees exact inheritance for full-history forks with no overrides.",
+    "The disposable project has no local virtual environment. The delegation explicitly permits the depot Python for standard-library helpers without copying or installing an environment.",
+    "Readiness grants no Task mutation or nested delegation. These operations await exact host activation and the bounded follow-up."
+  ],
+  "canonical_task_mutations_performed": false,
+  "children_launched": false,
+  "ready_for_exact_activation": true
+}

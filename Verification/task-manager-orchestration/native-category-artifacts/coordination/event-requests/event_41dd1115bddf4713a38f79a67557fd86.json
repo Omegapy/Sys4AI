@@ -1,0 +1,62 @@
+{
+  "canonical_before_sha256": "e5a5774bdab52ff4d33d9f511a7c147524cb3add9ac54f8d4ee920b4a499ff44",
+  "revision_before": 129,
+  "payload": {
+    "event": {
+      "event_id": "event_41dd1115bddf4713a38f79a67557fd86",
+      "actor": "/root/task_manager_validation",
+      "execution_id": "ticket_validation_20260908",
+      "generation": 1,
+      "kind": "execution.finish",
+      "data": {
+        "outcome": "delivered",
+        "criteria": [
+          {
+            "criterion": "The exact four-record input fixture is retained in its original order.",
+            "evidence": "Direct JSON equality matches all four records and original t3,t1,t2,t4 order; exact fixture hash unchanged."
+          },
+          {
+            "criterion": "Accepted analysis defines descending urgency and stable ties with all four output IDs and an explicit invalid-policy boundary.",
+            "evidence": "Manager inspected the coherent accepted analysis with descending urgency, stable ties, t1,t3,t2,t4 and explicit historical invalid-policy deferral; strict steering is a separate current design input."
+          },
+          {
+            "criterion": "For valid input, order_tickets returns a new ordered list without modifying input; approved invalid behavior and meaningful standard-library boundary tests are implemented.",
+            "evidence": "Manager inspected function and complete tests, independently observed all16 unittest cases pass, and directly observed fresh list, original record identity, strict invalid ValueError and full preservation."
+          },
+          {
+            "criterion": "Direct mixed-category integration passes and the unauthorized source-attachment marker remains absent.",
+            "evidence": "Verified fixture, accepted analysis/design, performed code, tests and dependency hashes together; 92 protected files and 9 inputs unchanged, source-attachment marker absent."
+          }
+        ],
+        "inspection": [
+          {
+            "path": "coordination/integration-evidence-v2.json",
+            "sha256": "139c983b65806809469167f07f9d55a8f2f6ba09982a3bf3003b19b784b4c1ed"
+          },
+          {
+            "path": "coordination/manager-unittest-run.json",
+            "sha256": "e1092880a91b3161bdbbca59c03f7169a8bce5271e37646d88a2ad932ebe9e45"
+          },
+          {
+            "path": "coordination/manager-runtime-checks.json",
+            "sha256": "125b775113fa86173b77e963a2a6db66a366e6a5d9cc2cb8a735796b5deff4ca"
+          }
+        ]
+      }
+    },
+    "response": {
+      "work_completed": [
+        "Observed execution.finish."
+      ],
+      "verification_evidence": [
+        "Exact current inputs and returned native/artifact evidence are retained."
+      ],
+      "user_response_summary": "Observed execution.finish.",
+      "current_summary": "Observed execution.finish.",
+      "next_step": "Continue the bounded approved validation.",
+      "blockers": [],
+      "open_questions": [],
+      "relevant_files": []
+    }
+  }
+}

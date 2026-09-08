@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "outcome": "conflict",
+  "conflict_id": "coding-invalid-interface-v1",
+  "assignment_id": "coding_senior",
+  "native_id": "/root/task_manager_validation/coding_senior",
+  "task_id": "TASK-20260908-726896CC",
+  "execution_id": "ticket_validation_20260908",
+  "generation": 1,
+  "baseline": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8.json",
+    "sha256": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8"
+  },
+  "sources": [
+    {
+      "assignment_id": "coding_a",
+      "candidate_id": "coding_a_c2",
+      "artifact_version": "coding_a_v2",
+      "candidate": {
+        "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+        "sha256": "71136dfcfe79fc38bd7319cac2e1a2dfceb13fa2ad4931bda5276be9b0c2d565"
+      },
+      "review_id": "review_a_v2",
+      "review_artifact_version": "review_a_findings_v2",
+      "review": {
+        "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/review_a_findings_v2.json",
+        "sha256": "ce79426e4c6c22ea88f087735227c97ca99b428fa674a76b6d65b227bae7a981"
+      },
+      "individual_review_outcome": "passed",
+      "commitment": "For any invalid input, raise ValueError; return no successful result, partial list or rejection-report object."
+    },
+    {
+      "assignment_id": "coding_b",
+      "candidate_id": "coding_b_c1",
+      "artifact_version": "coding_b_v1",
+      "candidate": {
+        "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_b_v1.md",
+        "sha256": "c20f8d2d2dd29d9cda4c727baef1cc1f14feedfcbd41735c7c6e4858ad6b0e03"
+      },
+      "review_id": "review_b_v1",
+      "review_artifact_version": "review_b_findings_v1",
+      "review": {
+        "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/review_b_findings_v1.json",
+        "sha256": "622e86d819edf03239fdbe033fb2299ba525f1f4fa3d8749a263e34502a54056"
+      },
+      "individual_review_outcome": "passed",
+      "commitment": "For any invalid input, return a separate tagged rejection-report dictionary, with a stably ordered accepted subset and complete explicit rejection accounting."
+    }
+  ],
+  "shared_conflict": "Both current candidates pass their individual design gates under the initial baseline, but A commits to raising ValueError without a returned partial result and B commits to returning a tagged report with a partial accepted subset for the same invalid input. These mutually exclusive core interface commitments require one bounded host decision before a coherent implementation proposal.",
+  "witness": {
+    "records": [
+      {
+        "id": "ok",
+        "urgency": 3
+      },
+      {
+        "id": "bad",
+        "urgency": true
+      }
+    ],
+    "candidate_a_specified_outcome": {
+      "raises": "ValueError",
+      "normal_return": false
+    },
+    "candidate_b_specified_outcome": {
+      "kind": "rejection_report",
+      "accepted": [
+        {
+          "id": "ok",
+          "urgency": 3
+        }
+      ],
+      "rejected": [
+        {
+          "position": 1,
+          "reasons": [
+            "urgency_not_integer"
+          ]
+        }
+      ],
+      "input_errors": []
+    },
+    "evidence_type": "source-derived expected outcomes; no implementation execution"
+  },
+  "bounded_host_decision": "Should order_tickets reject every invalid batch with ValueError and no returned partial result, or return an explicit rejection report with the ordered valid subset and complete rejection reasons?",
+  "next_gate": "The manager obtains and records the exact authorized policy steering, delivers this same versioned explanation and revised baseline to both originating solvers, and obtains revised or explicitly revalidated candidates plus current passes from both assigned reviewers before further senior synthesis.",
+  "dispositions": {
+    "retained": [
+      "Both candidates retain order_tickets(records), Python list input with dictionary records, new successful result lists, descending urgency and original-position stability.",
+      "Both retain raw nonblank unique string IDs, integer urgency 0..3 excluding booleans, no coercion or ID tie breaking, and extra fields that do not affect order.",
+      "Both retain original record references without input or nested-field mutation during the call, a fresh empty result, and the exact fixture order t1,t3,t2,t4.",
+      "Candidate A contributes whole-batch validation, concise indexed exception diagnostics and preservation checks after a valid prefix; candidate B contributes explicit accounting invariants, compound-defect and duplicate-group examples, and detailed preservation tests. These contributions remain visible for revision; policy-dependent parts are conditional on the host decision."
+    ],
+    "omitted": [
+      "No substantive opposing commitment is discarded. Repeated common ordering explanations and fixture tables are consolidated.",
+      "No coherent implementation proposal is offered while the invalid-input interface remains unresolved."
+    ],
+    "differences": {
+      "complementary": "The common ordering, validation and preservation rules agree. A emphasizes first-error batch validation and failure-after-prefix tests; B emphasizes complete diagnostic accounting and compound defects. Retain applicable tests and invariants after the interface decision.",
+      "terminology": "A uses a successful ordered result and an exception; B distinguishes a successful list from a rejection_report. The word accepted in B denotes a partial subset inside an invalid outcome. It must not be renamed as whole-batch success.",
+      "scope": "Both solve the complete current design and defer production changes to a dedicated implementer. B includes all-defect reports, duplicate-group accounting and partial output; A includes first-error diagnostics and no partial return. Those public behaviors cannot be added or removed as cosmetic synthesis edits.",
+      "evidence": "Both exact candidates have passing assigned reviews with no mandatory findings under the same current baseline. Review A records the boolean correction. Solver/reviewer expression checks are bounded evidence; neither pass proves an implemented function, and no evidence dispute resolves the interface choice.",
+      "exclusive": "The same invalid invocation cannot both raise ValueError without a returned report and normally return B's rejection_report dictionary. A mode parameter, wrapper API or mixed error policy would change both commitments and has no current authority. A bounded host decision is required."
+    },
+    "assumptions": [
+      "The initial baseline still permits either invalid-input proposal individually; described future strict-policy steering has not been handed off as the current decision.",
+      "IDs use exact string equality; surrounding whitespace and case are retained. New-list preservation is shallow and does not promise isolation from later caller mutation."
+    ],
+    "interfaces": [
+      "Agreed valid-input interface: order_tickets(records) returns a new sorted list of the original record objects, with no input mutation.",
+      "Unresolved invalid-input interface: A raises ValueError for the whole batch; B returns exactly kind, accepted, rejected and input_errors fields in a rejection_report dictionary."
+    ],
+    "requirements": [
+      "Both current designs cover valid descending stable order, unchanged input, IDs and urgency constraints including booleans, empty input, meaningful test cases and all four fixture IDs.",
+      "The initial invalid-input criterion allows each explicit interface, but a single accepted implementation must have one coherent contract.",
+      "The dedicated implementation and passing production tests remain a later required gate."
+    ],
+    "risks": [
+      "Treating B's accepted subset as full success could silently lose invalid records at the caller.",
+      "Selecting an exception/report contract without the bounded host decision would invent policy authority and erase an individually valid commitment.",
+      "Old candidate or review versions cannot establish eligibility after revised conflict context or baseline steering."
+    ],
+    "verification": [
+      "Rehashed the exact packet, common baseline, five context references, all four baseline inputs, role pair and catalog; all assigned digests matched.",
+      "Checked both review outcomes, empty mandatory findings, candidate SHA bindings, identical baseline references and distinct reviewer native IDs.",
+      "Independently calculated the exact fixture ordering, new-list identity, original record identity retention and unchanged snapshot; checked boolean exclusion and integer endpoints as expressions.",
+      "Compared the two specified outcomes for the same invalid witness. This is specification analysis; no product function or exception/report implementation was executed."
+    ],
+    "unresolved": [
+      "Should order_tickets reject every invalid batch with ValueError and no returned partial result, or return an explicit rejection report with the ordered valid subset and complete rejection reasons?"
+    ]
+  },
+  "highest_verification_level": "Static source, digest and review-binding checks passed; targeted independent ordering and validation-expression checks passed. No product implementation was executed."
+}

@@ -1,0 +1,86 @@
+{
+  "assignment_id": "coding_reviewer_a",
+  "native_id": "/root/task_manager_validation/coding_reviewer_a",
+  "role": {
+    "name": "project-sub-agent",
+    "agents_path": "roles/project-sub-agent/AGENTS.md",
+    "role_path": "roles/project-sub-agent/ROLE.md",
+    "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+    "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+    "catalog": {
+      "path": "coordination/catalog_20fa12ca8ccc48dcb47b99a8c2355752.json",
+      "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+    }
+  },
+  "fit": {
+    "authority": "Only the exact disposable project assignment. No canonical ledger or role-index writes, nested delegation, external actions or other-project changes.",
+    "capabilities": [
+      "bounded project analysis",
+      "documentation",
+      "focused testing and verification"
+    ],
+    "deliverable": "Review the exact corrected solver A candidate-v2 for R-A-001 and all design criteria, retaining the initial allowed error policy.",
+    "objective": "Review the exact corrected solver A candidate-v2 for R-A-001 and all design criteria, retaining the initial allowed error policy.",
+    "rationale": "Same existing native reviewer receives exact revised inputs; the unchanged loaded generic pair supports this bounded function.",
+    "reads": [
+      "SOUL.md",
+      "AGENTS.md",
+      "ROLE.md",
+      "SPECS.md",
+      "roles/project-sub-agent/AGENTS.md",
+      "roles/project-sub-agent/ROLE.md",
+      "context",
+      "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration"
+    ],
+    "risk": "Controlled local fixture; writes are exclusive and bounded. No product or external state.",
+    "skills": [],
+    "stop": "Return exact role-read and artifact receipts when mandatory assigned criteria are met, or report a concrete blocker.",
+    "tools": [
+      "native assignment messages",
+      "Python standard library",
+      "filesystem inspection"
+    ],
+    "writes": [
+      "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_a"
+    ]
+  },
+  "runtime": {
+    "tools": [
+      "spawn_agent",
+      "send_message",
+      "followup_task",
+      "list_agents",
+      "wait_agent",
+      "interrupt_agent"
+    ],
+    "depth": 2,
+    "available_slots": 1,
+    "evidence": [
+      {
+        "path": "context/native-runtime.json",
+        "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+      },
+      {
+        "path": "coordination/roster_cb0e0904c55640298690c5d213d90b46.json",
+        "sha256": "d2af1c70ec04d5bf916929d1188b2530218b5cc3db534f6e8b40ab4b3d6ee835"
+      }
+    ]
+  },
+  "context": [
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8.json",
+      "sha256": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8"
+    },
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+      "sha256": "71136dfcfe79fc38bd7319cac2e1a2dfceb13fa2ad4931bda5276be9b0c2d565"
+    },
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/review_a_findings_v1.json",
+      "sha256": "a3a5df3e0b266344d89355382599fbaf4d91155134394189d38f4c769f1275f4"
+    }
+  ],
+  "reason": "Review the exact corrected solver A candidate-v2 for R-A-001 and all design criteria, retaining the initial allowed error policy.",
+  "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh",
+  "artifact_workspace": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_a"
+}

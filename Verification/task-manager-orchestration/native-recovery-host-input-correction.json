@@ -1,0 +1,37 @@
+{
+  "observed_at": "2026-09-08T12:27:56.323801+00:00",
+  "classification": "Host client mapping mistake, safely rejected before mutation; not a helper defect or planned native failure injection.",
+  "mistake": "Used native task basename marker_worker as a logical assignment ID.",
+  "actual_assignment_id": "recovery_worker",
+  "canonical_sha256_unchanged": "23056846941de5b1be553e00aea38d5c9d301f2e885cdd01ef6c16113ca904d2",
+  "rejection": {
+    "arguments": [
+      "orchestrate",
+      "TASK-20260908-A8B65949",
+      "--expected-revision",
+      "16"
+    ],
+    "exit_code": 2,
+    "result": {
+      "schema_version": 1,
+      "command": "orchestrate",
+      "status": "error",
+      "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+      "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+      "mutated": false,
+      "task_id": null,
+      "revision_before": null,
+      "revision_after": null,
+      "response_id": null,
+      "response_path": null,
+      "warnings": [],
+      "errors": [
+        {
+          "code": "ORCH_RECOVERY_OWNER",
+          "message": "Invalid recovery observation mapping."
+        }
+      ],
+      "recovery_required": false
+    }
+  }
+}

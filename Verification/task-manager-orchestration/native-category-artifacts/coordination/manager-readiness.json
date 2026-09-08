@@ -1,0 +1,61 @@
+{
+  "native_id": "/root/task_manager_validation",
+  "task_id": "TASK-20260908-726896CC",
+  "execution_id": "ticket_validation_20260908",
+  "generation": 1,
+  "assignment_id": "manager_validation",
+  "phase": "readiness_only",
+  "required_reads_completed": true,
+  "read_sha256": {
+    "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+    "AGENTS.md": "a66a47e92a227ced22ba7da905d770b3a930e133876b043afca27c7010043b8c",
+    "ROLE.md": "478e75f0cfc693f61a0cbfc48d07efbc5f050b57db5f493c5f3aca5d3a9538a4",
+    "SPECS.md": "02c36c12cea1d5d2535fa1ab2bb930a489aa03b7d6f530b19d93411ec70907c8",
+    "roles/task-manager/AGENTS.md": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+    "roles/task-manager/ROLE.md": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0",
+    ".agents/skills/task/SKILL.md": "214c545c72ee982a42e77ed129918a5996d96f4ca71a63e6aba22b57aeba5200",
+    ".agents/skills/agent-task/SKILL.md": "d2c36bf2f2b5880030171b3bb94b7bc0751fda594392328250e0c04dfdb6079b",
+    ".agents/skills/manage-subagent-roles/SKILL.md": "841388a1c7aec7005a91da25d1bdf05b586d01af23426df58c024a353b92a83e",
+    ".agents/skills/agent-task/references/orchestration-contract.md": "d4ee43bf26b2b8e21cee15223ed4287d529ea89b924786bd9f3b86867b8a2ef9",
+    ".agents/skills/agent-task/references/task-system-contract.md": "c33a5b1b4db3ff4cc9ee72801aa7f9ad65d51c1acb0baea83c112d66a8d8b21e",
+    ".agents/skills/communication/SKILL.md": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+    "coordination/bootstrap.json": "6e66dabbdb82ce235810ec15a4df9484813f6818711b6dbee589855e55b7dfa0",
+    "context/authority.json": "76f183366635df10c8d4bfccdfa95b883d1602e50bf12922d8508a71ffe49ced",
+    "context/native-runtime.json": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8",
+    "context/scenario.md": "a9a04801f283389a870ccaa0b28926150d29be331b887c9bae9d505457bf5ede",
+    "coordination/validation_api.py": "e4b3721b02a35da94855d63573576a10d2c625e74e7affa9d4bb52bab532937d"
+  },
+  "role_reads": {
+    "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+    "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0",
+    "evidence": "Manager directly read both complete role files, root SOUL, governance and installed Task contracts before readiness."
+  },
+  "soul_sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+  "native_observation": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root/task_manager_validation",
+          "agent_status": "running"
+        }
+      ]
+    }
+  },
+  "canonical_observation": {
+    "revision": 3,
+    "stage": "receipt_recorded",
+    "writer": "/root",
+    "native_id": "/root/task_manager_validation",
+    "status_check": "ok; mutated false",
+    "validation": "valid; mutated false"
+  },
+  "capability_conflicts": [],
+  "capability_limits": [
+    "Literal model and reasoning telemetry is unavailable; the effective full-history inheritance guarantee establishes equality without a literal identity claim.",
+    "The disposable fixture has no local virtual environment; its supplied validation wrapper explicitly uses the existing depot Python 3.12 interpreter for standard-library helpers. No environment is copied or installed."
+  ],
+  "canonical_task_mutations_performed": false,
+  "children_launched": false,
+  "ready_for_exact_activation": true
+}

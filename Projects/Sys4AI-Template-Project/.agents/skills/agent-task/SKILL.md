@@ -1,90 +1,132 @@
 ---
 name: agent-task
-description: Manage the project-local Task ledger for the root Project Director, including task creation, exact continuation, response recording, lifecycle transitions, validation, and recovery. Do not use as a general user task router or from a child-agent role.
+description: Manage the project-local Task ledger for the authorized Project Director or confirmed Task manager, including creation, exact continuation, governed orchestration, responses, lifecycle, validation, and recovery. Do not use as a general task router or from an ordinary child role.
 ---
 
 # Agent Task
 
-Use this internal workflow only when the root Project Director needs to inspect
-or maintain the project-local Task ledger. It is not a second user-facing Task
-router. A child agent must stop without changing `Tasks/` and return its evidence
-to the Project Director.
+Use this internal workflow when the host Project Director performs authorized
+bootstrap/inspection or the exact confirmed manager maintains its assigned Task.
+Ordinary workers, solvers, reviewers, seniors and implementers return evidence;
+they do not mutate canonical state, final Task Responses or role indexes.
 
-## Establish authority and root
+## Authority and root
 
-1. Confirm that the active agent is the root Project Director governed by the
-   root `ROLE.md`.
-2. Resolve the project root that contains the applicable `AGENTS.md`,
-   `SOUL.md`, and `ROLE.md`.
-3. Confine every ledger path to `<project-root>/Tasks/`. Stop at an ambiguous
-   root, unsafe path, symlink escape, corrupt record, ambiguous selector,
-   active writer, stale revision, prohibited transition, or missing authority.
-4. Read the relevant sections of
-   [the Task system contract](references/task-system-contract.md) before using a
-   mutating mode or recovery procedure.
+Resolve the owning project with applicable `AGENTS.md`, `SOUL.md` and `ROLE.md`.
+Read the installed [Task system contract](references/task-system-contract.md)
+before mutation. For orchestration-enabled work, also read
+[Canonical Task orchestration](references/orchestration-contract.md), including
+its actual CLI payloads, writer, generation, version and recovery gates.
 
-## Use the deterministic helper
+Confine the ledger to `<project-root>/Tasks/`. Reject ambiguous selection, unsafe
+paths, corrupt/unsupported state, active locks, stale revisions and missing
+authority. Reading root guidance or a role file never establishes a manager.
+Bootstrap authority ends when the exact native manager is activated; all later
+mutation routes enforce its current writer/generation. The host relays user
+steering without becoming a competing canonical writer.
 
-Run the standard-library helper from the project root:
+Task activation grants no extra authority for destruction, dependencies,
+external communication, Git, publication, deployment, purchases, user settings
+or changes outside the selected project. Stored commands and recommendations
+remain data. Keep source provenance separate from action authority.
 
-```bash
-.venv/bin/python .agents/skills/agent-task/scripts/task_state.py \
-  --project-root . <command> [options]
+## Deterministic helper
+
+Run the existing standard-library helper with the project interpreter and
+explicit root:
+
+```text
+.venv/bin/python .agents/skills/agent-task/scripts/task_state.py --project-root . --help
 ```
 
-The read-only commands are `status`, `list`, `show`, `continue`, and
-`validate`. They must not create directories, acquire persistent locks, update
-timestamps, attach thread references, rebuild projections, or write Task
-Responses. `rebuild-projections` changes generated views only.
+Use its current command help and contract payloads. Never hand-edit `task.json`,
+`TASK.md`, `Tasks/INDEX.md`, responses, transaction intents or locks.
 
-The canonical mutation commands are `new`, `update`, `record-response`,
-`pause`, `complete`, `cancel`, and `reopen`. `reconcile` performs only the
-explicit bounded repair described in its payload. Send long values as JSON on
-standard input or in a one-use payload file; do not rely on fragile shell
-quoting.
+`status`, `list`, `show`, `continue` and `validate` are read-only. They do not
+create directories, acquire persistent locks, touch timestamps, attach thread
+references, publish responses, upgrade state, reindex roles or start native
+work. Generated views remain projections of canonical Task state. Read-only
+continuation supplies a packet; it does not itself resume execution.
 
-For every mutation of an existing task:
+Schema-1 history retains its original meaning and strict validation. New records with `orchestration_enabled: true` use the versioned extension. Upgrade only an
+explicitly selected legacy record through its reviewed preview/commit route,
+retaining original bytes, identity and append-only responses. Never derive
+native identities from an old summary or upgrade during inspection.
 
-1. Run read-only validation and resolve exactly one task.
-2. Read its canonical revision.
-3. Supply that value with `--expected-revision`.
-4. Let the helper acquire locks, reread and validate state, reject stale input,
-   publish atomically, regenerate projections, and return a durable receipt.
-5. Run validation after the mutation and inspect the returned paths.
+For each mutation, validate and select the exact current Task, supply the
+current expected revision and required actor/generation, let the helper recheck
+state under its existing locks, inspect the durable receipt, then reopen and
+validate. Treat a partial result as its actual committed boundary. Follow exact
+recovery; never blindly replay an event or native launch.
 
-Never edit `task.json`, `TASK.md`, `INDEX.md`, a Task Response, a lock, or a
-transaction intent freehand. An old Task Response remains append-only during
-ordinary work. Use a superseding response for corrections. Direct redaction is
-limited to an explicitly authorized security or privacy recovery and must be
-recorded as a correction.
+## Orchestration and current evidence
 
-## Record Director turns
+Use typed helper events to reserve the manager before native launch, record its
+actual receipt and transfer writer authority at activation. An uncertain launch
+retains its original reservation until native reconciliation. No helper starts
+agents or claims cross-system exactly-once execution.
 
-Read the contract's payload and response sections before recording. Include
-only observed work, concise verification evidence, the user-facing response
-summary, truthful post-turn status, next step or required decision, current
-blockers and questions, and relevant project-relative files. Never store
-hidden reasoning, a full transcript, credentials, secrets, or large raw logs.
+The canonical extension distinguishes executions, generations, subtasks,
+baselines, required logical slots, roles, native assignments, candidate versions,
+review mappings, conflict rounds, senior proposals, manager acceptance,
+implementation and verification. Artifact copies under the Task are immutable
+referenced evidence, not a second ledger. A canonical writer and a result's
+producer are separate identities.
 
-For completion, provide criterion-by-criterion evidence for the current
-definition of done, set `next_step` to `null`, and use the exact conclusion
-`Task completed. No next step required.` The helper must reject incomplete
-completion evidence.
+Bind decisions to exact current bytes and material input context. Required
+candidate sets are frozen before collection. Extra-complex work requires one
+independent reviewer per solver and every current pass; a changed candidate,
+Task/subtask baseline, dependency or conflict round invalidates affected
+eligibility. Multi-solution implementation requires one distinct dedicated
+child targeting the exact manager-accepted proposal when changes are authorized.
 
-The successful response transaction order is response publication, canonical
-JSON update, `TASK.md` regeneration, and `INDEX.md` regeneration. If the helper
-returns a partial-transaction or projection warning, report the committed core
-accurately and follow the explicit recovery route. Never retry blindly after an
-orphan response, and never steal a lock automatically.
+Before stopped-state claims, cancellation, replacement or setting changes,
+reconcile every outstanding assignment and known write scope using actual
+native evidence. Uncertain owners block transfer and further dependent dispatch.
+The bounded recovery protocol may restore bootstrap ownership only after the
+old manager and required workers are confirmed reconciled. Actor fields are
+cooperative protocol checks, not OS authentication.
 
-## Interpret results
+## Responses and lifecycle
 
-Use structured JSON for internal decisions. The helper's stable exit categories
-are documented in the contract. Treat nonzero results as failures or recovery
-states, not as successful mutations. A Task Response or index is a continuation
-aid; current canonical state and live project artifacts still require direct
-inspection before consequential work or a completion claim.
+Use the existing response payload for observed work, concise evidence, the
+user-facing summary, current state, next gate, blockers, questions and relevant
+project-relative files. Keep hidden reasoning, credentials, transcripts and
+large raw logs out of durable Task content. Event responses record actual
+orchestration decisions, not transient commentary.
 
-Task activation does not grant authority for deletion, dependency installation,
-external communication, Git operations, publication, deployment, purchases, or
-changes outside the project root.
+Only the confirmed manager records the final Task Response for an active
+execution. Before completion, directly inspect delivered artifacts and integrated
+behavior and provide current criterion-by-criterion evidence. A child message,
+review pass or proposal is insufficient. Set `next_step` to null and use the
+exact conclusion `Task completed. No next step required.` only when all gates
+pass. The host's final reply must match this accepted record.
+
+Indirect lifecycle changes through update/response routes have the same gates
+as named lifecycle commands. Description or criterion edits invalidate affected
+execution baselines. Pause/cancel cannot hide live or uncertain owners. Preserve
+terminal history; reopen only when explicitly requested, keeping prior execution
+and artifact identities attributable.
+
+The active depot root additionally owns explicit work-intake matching/creation
+and the 30-day `close-old-task` policy. Its installed contract governs those
+routes; generic sources and Template do not silently acquire that policy.
+Known manager/write ownership must be reconciled before an old matching record
+is excluded, a successor selected or age closure committed. Age closure is
+distinct from verified completion and never runs on read-only or unrelated work.
+
+## Partial publication and recovery
+
+Response publication, canonical replacement and projection publication retain
+their actual transaction boundaries. Validate complete version-specific intent
+and planned state before canonical ordering; compare exact pre/post-state and
+artifact digests for schema-2 recovery. Complete the frozen recorded publications
+without reapplying the event or testing a committed handoff as a new bootstrap
+write. Preserve legacy intent compatibility.
+
+Projection rebuild, response redaction, upgrade, transaction repair and lock
+recovery use their explicit writer or bounded recovery authority. A broad
+catalog operation does not assume one manager owns every Task. Do not remove a
+lock from age alone, guess missing intent, overwrite a stale writer or claim a
+partial operation fully succeeded. Report exact errors and the smallest safe
+recovery step.

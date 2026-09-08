@@ -1,0 +1,72 @@
+[
+  {
+    "suite": "updater",
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_template_update.py",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 5.289,
+    "log": "Verification/task-manager-orchestration/pipeline-checks/updater.log",
+    "sha256": "dc972a0fe495646fe271e54caaafca33d6a33b47ecc88e2e0b76294813d61a35",
+    "summary": [
+      "----------------------------------------------------------------------",
+      "Ran 38 tests in 5.218s",
+      "",
+      "OK"
+    ]
+  },
+  {
+    "suite": "watcher",
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_template_watch.py",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 0.093,
+    "log": "Verification/task-manager-orchestration/pipeline-checks/watcher.log",
+    "sha256": "e56e0f895f6178aad1d16fe09af6648f0a3d50bb4dd790b64f9b2b65aac63205",
+    "summary": [
+      "----------------------------------------------------------------------",
+      "Ran 11 tests in 0.027s",
+      "",
+      "OK"
+    ]
+  },
+  {
+    "suite": "initializer",
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "SKILLS-depo/init-new-project/tests",
+      "-q"
+    ],
+    "exit_code": 1,
+    "seconds": 1.529,
+    "log": "Verification/task-manager-orchestration/pipeline-checks/initializer.log",
+    "sha256": "2080ec2db499a87325bd19ae0562cfbeee662ba2be485701d0fc16d12a04348b",
+    "summary": [
+      "----------------------------------------------------------------------",
+      "Ran 36 tests in 1.455s",
+      "",
+      "FAILED (errors=36)"
+    ]
+  }
+]

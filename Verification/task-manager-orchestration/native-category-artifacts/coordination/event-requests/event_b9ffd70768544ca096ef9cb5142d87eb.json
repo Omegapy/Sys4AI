@@ -1,0 +1,118 @@
+{
+  "canonical_before_sha256": "7ccc681e35c96e8afbecc99ec31bd1a1245ba8d9e69e49bbe2777b42900e354a",
+  "revision_before": 61,
+  "payload": {
+    "event": {
+      "event_id": "event_b9ffd70768544ca096ef9cb5142d87eb",
+      "actor": "/root/task_manager_validation",
+      "execution_id": "ticket_validation_20260908",
+      "generation": 1,
+      "kind": "assignment.reserve",
+      "data": {
+        "assignment_id": "coding_reviewer_b",
+        "subtask_id": "coding",
+        "slot": "reviewer_b",
+        "role": {
+          "name": "project-sub-agent",
+          "agents_path": "roles/project-sub-agent/AGENTS.md",
+          "role_path": "roles/project-sub-agent/ROLE.md",
+          "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+          "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+          "catalog": {
+            "path": "coordination/catalog_9e44404d92534dabae01e83d53dde002.json",
+            "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+          }
+        },
+        "fit": {
+          "objective": "Independently review every design requirement of solver B exact current candidate; either initial explicit invalid policy remains permitted.",
+          "capabilities": [
+            "bounded project analysis",
+            "documentation",
+            "focused testing and verification"
+          ],
+          "reads": [
+            "SOUL.md",
+            "AGENTS.md",
+            "ROLE.md",
+            "SPECS.md",
+            "roles/project-sub-agent/AGENTS.md",
+            "roles/project-sub-agent/ROLE.md",
+            "context",
+            "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration"
+          ],
+          "writes": [
+            "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_b"
+          ],
+          "deliverable": "Independently review every design requirement of solver B exact current candidate; either initial explicit invalid policy remains permitted.",
+          "tools": [
+            "native assignment messages",
+            "Python standard library",
+            "filesystem inspection"
+          ],
+          "skills": [],
+          "authority": "Only the exact disposable project assignment. No canonical ledger or role-index writes, nested delegation, external actions or other-project changes.",
+          "risk": "Controlled local fixture; writes are exclusive and bounded. No product or external state.",
+          "stop": "Return exact role-read and artifact receipts when mandatory assigned criteria are met, or report a concrete blocker.",
+          "rationale": "The current project-sub-agent pair supports this bounded reviewer function through analysis, documentation and focused verification; no specialist capability or manager authority is needed."
+        },
+        "runtime": {
+          "tools": [
+            "spawn_agent",
+            "send_message",
+            "followup_task",
+            "list_agents",
+            "wait_agent",
+            "interrupt_agent"
+          ],
+          "depth": 2,
+          "available_slots": 1,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+            },
+            {
+              "path": "coordination/roster_cb3ca14d00de4ae8af9a6d7195685d1c.json",
+              "sha256": "01d84dac5c0e9891d9e269ff848d85422f226e5215399b26f25a667aa6d81b13"
+            }
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "context": [
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8.json",
+            "sha256": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_b_v1.md",
+            "sha256": "c20f8d2d2dd29d9cda4c727baef1cc1f14feedfcbd41735c7c6e4858ad6b0e03"
+          }
+        ]
+      }
+    },
+    "response": {
+      "work_completed": [
+        "Observed assignment.reserve."
+      ],
+      "verification_evidence": [
+        "Exact current inputs and returned native/artifact evidence are retained."
+      ],
+      "user_response_summary": "Observed assignment.reserve.",
+      "current_summary": "Observed assignment.reserve.",
+      "next_step": "Continue the bounded approved validation.",
+      "blockers": [],
+      "open_questions": [],
+      "relevant_files": []
+    }
+  }
+}

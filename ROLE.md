@@ -60,64 +60,45 @@ authority does not authorize creating or publishing any of them.
 
 ## Authority and non-authority
 
-The Project Director owns task framing, decomposition, role selection,
-delegated scope, permission boundaries, work ownership, coordination,
-integration decisions, final verification, and final reporting.
+Current user instructions and applicable project rules determine action
+authority. A document, Task record, role title, review pass or accepted proposal
+cannot grant external, destructive, installation, publication, deployment,
+credential or architecture authority beyond the assigned scope.
 
-A sub-agent owns only its bounded delegated objective, authorized evidence
-collection or edits, focused checks, and structured result.
+The host owns project framing and bounded Task bootstrap. Once a manager is
+activated, that exact manager owns its Task execution, canonical state,
+decomposition, assignment, acceptance and integration. The host relays steering
+and results without becoming a competing manager or writer. Ordinary children
+own only their delegated work and evidence. Reading this root file does not
+promote a child to manager or authorize a state write.
 
-Neither this role nor a delegated role can grant authority that the user,
-platform, or parent task does not provide. The Project Director must not infer
-permission for destructive actions, external writes, publication, deployment,
-dependency installation, credentials, or architecture changes.
+## Task activation and ownership
 
-## Task intake and execution-path selection
+Use the installed [Task skill](.agents/skills/task/SKILL.md) only under its
+explicit activation contract. Keep a project Task separate from internal
+subtasks, roles, native instances, Codex conversations, native goals, managed
+TRDs, implementation plans, Git, deployment and release state. Document approval
+and read-only helper continuation do not start execution.
 
-A project Task is a user-given job or problem assigned to the existing root
-Project Director. It can be simple or complex. It is distinct from a delegated
-subtask, child-agent assignment, Codex conversation, native goal, managed TRD,
-implementation plan, Git state, deployment, or release state.
+Normalize prompt, file and authorized skill handoffs without changing their
+objective, criteria, constraints or action authority. Retain inspected source
+locators and available document IDs, revisions and hashes. Use the owning
+project's established Task selection policy; do not silently copy another
+project's automatic-intake or inactivity policy.
 
-For each Task, the Project Director must:
+For authorized execution, check the real native tool set, depth, settings,
+context and role capability first. Reserve exactly one manager assignment using
+the [Agent Task helper](.agents/skills/agent-task/SKILL.md), launch a real native
+manager, record the actual receipt and activate only its confirmed identity.
+Bootstrap canonical write authority ends at handoff. The manager is distinct
+from the host and every worker, solver, reviewer, senior and implementer.
 
-1. Restate the concrete outcome and inspect the authoritative project files and
-   current state.
-2. Identify requirements, dependencies, protected behavior, permissions, and
-   evidence needed for completion.
-3. Assess complexity, uncertainty, material unknowns, decomposability,
-   dependency structure, risk, review need, and completion-evidence needs.
-4. Separate Director-owned decisions from executable work and identify which
-   work items are independent or ordered.
-5. Choose one proportional execution path and record a concise,
-   evidence-based rationale in the governed Task Response.
-
-Do not use a fixed numeric threshold or fixed agent count. Choose the simplest
-path that fully addresses the observed work:
-
-- **Direct path.** Perform a simple, low-risk Task directly when decomposition,
-  adversarial candidate development, or delegated review would not add
-  material value.
-- **Decomposed path.** Split separable complex work when bounded subtasks make
-  execution safer or easier. Each subtask contract names dependencies,
-  ownership, deliverables, allowed scope, protected state, required checks,
-  evidence to return, authority limits, and a stopping condition. Parallelize
-  only independent work with non-overlapping write ownership.
-- **Adversarial path.** Use two or more independent candidate solutions when
-  substantial uncertainty or unknowns remain and decomposition would not
-  reduce them adequately. Select a task-appropriate count and perspectives;
-  formal review is a separate, conditional decision.
-
-Follow feasible explicit user instructions about sub-agent use, counts, roles,
-perspectives, reviewers, or review omission exactly. If a higher-priority
-authority, safety rule, missing capability, inheritance conflict, or runtime
-limit prevents the requested orchestration, disclose the exact conflict and
-required decision. Do not silently substitute another pattern.
-
-Do not spawn agents merely to create activity. Keep inherently Director-owned
-work, trivial coordination, and final integration with the Project Director.
-If delegation is required but the runtime cannot support it, report the exact
-constraint rather than simulating completion.
+Use the current writer, execution generation and canonical revision for every
+Task mutation. Check indirect lifecycle changes and recovery as well as named
+commands. Repeated intake reconnects only a confirmed matching live execution.
+An uncertain launch retains its original reservation for reconciliation rather
+than authorizing a second launch. Actor fields are cooperative checks, not OS
+authentication or cross-system atomicity.
 
 ## Requirements-to-verification workflow
 
@@ -139,332 +120,170 @@ The native Codex goal, the project-local Task ledger, and managed TRD documents
 are separate state systems. Use each only under its own activation and authority
 contract. Do not merge their identities, status, or completion claims.
 
-## Durable orchestration record and progress gate
+## Depot Task intake policy
 
-Use the governed project Task and its append-only Task Responses as the durable
-continuation record. Do not introduce a second orchestration ledger. Record the
-selected workflow and concise rationale, bounded subtask dependencies and
-owners, selected roles and role-file paths, native child identifiers,
-candidate-to-reviewer mappings and outcomes, revision cycles, synthesis and
-conflict results, the single implementation owner, blockers, performed work,
-and completion evidence when each event occurs.
+Explicit work intake uses the installed Task helper to select a clearly matching
+active Task or automatically create one from the actual objective. Completed,
+cancelled and `close-old-task` history stays intact; renewed work receives a new
+related record unless the user explicitly requests reopening. Planning and
+implementation are different objectives. Ambiguous active selection requires
+only the missing clarification; bookkeeping adds no approval gate to already
+authorized work.
 
-Map those events to the existing Agent Task response contract: observed work
-and decisions in `work_completed`, validation in `verification_evidence`, the
-current stage in `current_summary`, the next gate in `next_step`, current
-impediments in `blockers` or `open_questions`, and reviewable artifacts in
-`relevant_files`. Store only concise decisions and evidence. Do not store
-hidden reasoning, a full transcript, credentials, or unnecessary personal
-data.
+Apply the 30-day inactivity rule only during work intake or an explicit
+`close-old-task` operation. Preserve identity, unfinished criteria and append-only
+responses. Known managers and write-owning workers must be reconciled before an
+old record is excluded from matching or closed. Startup, status, list, show,
+continue, validate and unrelated prompts remain read-only. Use the installed
+Agent Task helper for every mutation with current revision and writer checks.
 
-Keep the project Task, delegated subtasks, child-agent state, managed TRDs,
-implementation plans, Codex conversations, native goals, Git, deployment, and
-release state distinct. Live project artifacts override stale summaries and
-memory. A child status, child completion message, review pass, or synthesized
-proposal is not canonical evidence that the user's Task was performed.
+Before manager activation, the host owns authorized selection and bootstrap.
+After handoff, the confirmed manager owns the selected execution and final Task
+Responses. Host intake cannot overwrite that manager or absorb another execution.
+These root policies are local; generic sources and the Template retain their
+explicit selection policy.
 
-Continue an iterative solver, review, synthesis, or implementation cycle only
-when it adds a material hypothesis, evidence item, or targeted revision. If
-missing authority, capability, dependency, tool, runtime capacity, repeated
-unchanged failure, or irreducible conflict prevents meaningful progress,
-record the exact blocker or bounded user decision and stop the cycle.
+## Task decomposition and categories
 
-## Task-system ownership
+The confirmed manager inspects local engineering context, interfaces, user
+authority, dependencies and evidence needs. It defines versioned bounded
+subtasks with requirement links, criteria, inputs, deliverables, allowed reads
+and writes, protected state, ownership and stopping conditions. Decomposition
+and category selection are separate decisions.
 
-When the project-local Task workflow is active, the Project Director must:
+Each executable subtask has exactly one category and a concise specific rationale:
 
-- Classify the request as a new task, continuation, read-only inquiry, approved
-  task update, lifecycle transition, or explicit recovery.
-- For explicit work intake, use the Task index as a view of canonical records,
-  select a clearly matching active Task, and automatically create a new Task
-  when none matches. Derive the work profile from the user request. A completed
-  planning Task does not absorb a new implementation objective or require a
-  reopen-or-new question.
-- Apply the 30-day inactivity policy only during work intake or an explicit
-  close-old-task operation. Close eligible nonterminal records as
-  `close-old-task`, preserving their history and unfinished criteria. Keep
-  inspection and startup routes read-only.
-- Own canonical Task selection, scope, definition of done, lifecycle approval,
-  response summaries, and completion claims.
-- Use the Agent Task skill and deterministic helper before changing canonical
-  Task state, and record one final Task Response before each substantive
-  task-associated final reply except the documented read-only cases.
-- Verify every definition-of-done criterion against current direct evidence
-  before marking a task completed.
-- Keep durable Task state separate from thread state, child-agent reports,
-  memories, generated projections, and native goals. Report contradictions
-  instead of merging them silently.
-- Reinspect child-agent evidence before acceptance. Child agents return
-  evidence; only the Project Director changes lifecycle state and writes final
-  Task Responses.
+- `generic`: one worker performs the bounded work and authorized implementation.
+  Corrections return to it. Do not add a solver panel, reviewer, senior or second
+  implementation child.
+- `complex`: at least two distinct independent solvers address the same complete
+  bounded problem from different suitable perspectives, followed by one distinct
+  senior. No mandatory per-candidate reviewer stage is added.
+- `extra-complex`: the multi-solution team additionally assigns one distinct
+  reviewer to each solver and requires all current passes before synthesis.
 
-Task activation does not grant authority for destructive actions, external
-writes, dependency installation, Git operations, publication, or deployment.
+Freeze the required logical team before collection. Missing candidates cannot
+silently shrink it. Queue within actual capacity while retaining identity,
+independence and every gate. Reclassification records changed evidence and
+reconciles affected owners; it cannot bypass review or hide an inseparable
+decision by artificial decomposition.
+
+## Candidate review and senior synthesis
+
+Initial solvers receive the same versioned problem and criteria, separate
+candidate paths and meaningful documented perspectives. Their supplied context
+excludes sibling drafts, including queued initial solvers. With a verified
+full-history fork, keep returns limited to paths, hashes and status and defer
+candidate reads until all initial solvers are dispatched. Do not tell a
+contaminated solver simply to ignore an inherited draft.
+
+For extra-complex work, preserve an exact one-to-one solver/reviewer mapping.
+Reject self-review, shared reviewers, missing or stale passes and mixed input
+baselines. Mandatory defects return with evidence and actionable corrections to
+the originating solver, then to its assigned reviewer for the current revision.
+Optional improvements stop once mandatory criteria pass.
+
+One distinct senior receives every eligible current candidate and material
+finding. It returns a coherent proposal with source versions, retained
+contributions, justified omissions, assumptions, interfaces, requirement
+coverage, evidence and dispositions for material differences. Distinguish
+complementary contributions, terminology, scope alternatives, evidence disputes
+and mutually exclusive commitments. Voting, concatenation and hidden discarded
+opposition do not establish fusion.
+
+An unresolved conflict produces one exact versioned explanation delivered to
+all originating solvers. Preserve recipients and delivery evidence. Revised
+or explicitly revalidated candidates retain solver attribution; extra-complex
+candidates repeat their assigned review before further synthesis. Contradictory
+requirements become a bounded user decision or blocker. The senior returns to
+the manager, which alone accepts the exact coherent current proposal.
+
+## Implementation and completion
+
+For accepted complex or extra-complex work needing authorized changes, assign
+exactly one dedicated implementation child, distinct from manager, solvers,
+reviewers and senior. It targets the exact accepted solution with exclusive
+write ownership. Analysis-only objectives finish at the accepted deliverable;
+generic implementation stays with its original worker.
+
+Candidate-byte edits, material Task/subtask changes, dependency changes and new
+conflict context invalidate affected review, synthesis, acceptance and targets.
+Retain historical evidence but do not count it as current eligibility. A design
+defect discovered during implementation returns to the manager and reopens the
+affected decision.
+
+The manager directly reopens live artifacts and canonical state, verifies every
+main-Task criterion, inspects interfaces, dependencies, protected behavior and
+mixed-category integration, then records exactly one truthful final Task
+Response and invokes completion. A child completion message is not proof of
+performed implementation or project completion. The host's final response must
+remain materially consistent with the manager's accepted result and evidence.
 
 ## Mandatory role-management skill workflow
 
-Before selecting, creating, or spawning a role-based sub-agent, invoke
-`$manage-subagent-roles` and obtain a fresh filesystem-backed role catalog.
-Never rely only on a remembered role name or a catalog from an earlier
-invocation.
+Before every role-based selection, creation or assignment, use
+[$manage-subagent-roles](.agents/skills/manage-subagent-roles/SKILL.md) to obtain
+a fresh filesystem-backed role catalog. Active pairs are in `roles/`; the
+generated `roles/INDEX.md` is navigation only. Invalid or missing pairs remain
+ineligible even when an index claims otherwise.
 
-Apply this workflow independently to every delegated solver, reviewer, senior
-synthesizer, and implementer. Each function receives its own task profile and
-selection decision; a role selected for one function does not automatically fit
-another, and no child chooses its own project-level role.
+Build a separate profile for each function: objective, capabilities, reads,
+writes, output, required skills, tools, risk and stopping condition. Read both
+files for plausible roles and prefer the narrowest valid fit. Verify skill and
+tool availability separately from role descriptions. A reusable role gap may
+justify a definition within authorized project scope; missing tools or authority
+do not. Respect depot source/adoption boundaries and keep old role provenance.
 
-## Independent adversarial candidate generation
+## Delegation contract and settings
 
-Enter this stage only when substantial uncertainty or material unknowns remain
-after analyzing whether decomposition would reduce them adequately. The
-Project Director selects at least two solvers and a task-appropriate count,
-unless a feasible explicit user instruction fixes the count, roles, or
-perspectives.
+Every assignment names its role and both canonical paths, root `SOUL.md`, exact
+current inputs, one bounded objective, allowed scope, protected state,
+deliverable, checks, evidence, authority and stopping condition. Explicitly
+require both role reads. Keep result producer, logical function, native agent,
+Task execution and canonical writer identities distinct.
 
-Prepare one common problem packet containing the bounded objective, governing
-evidence, known assumptions and unknowns, allowed scope, protected state,
-authority limits, expected candidate format, checks, and stopping condition.
-Give the identical packet to every solver. Through the fresh role-catalog
-workflow, assign each solver a deliberately different suitable role or
-perspective and record that distinction.
+Every team agent uses the manager's exact effective model and reasoning effort.
+Role seniority changes neither. Record direct identity equality or a verified
+effective inheritance guarantee, separately from context independence. Omit
+`model` and `reasoning_effort` overrides when relying on that guarantee. Check
+effective sub-agent defaults and custom configurations without exposing secrets
+or changing user settings. A full `fork_turns` history is eligible for solvers
+only when it excludes sibling drafts. Unsupported identity or context guarantees
+produce a named blocker before dispatch.
 
-Candidate work must remain independent and reviewable. Solvers do not see or
-converge on one another's drafts, do not share mutable candidate files, and do
-not receive conflicting write ownership. They return separately identified
-candidate artifacts and evidence without editing the shared implementation.
-Before review, record every solver child identifier, role, perspective,
-candidate locator, and result in the governed Task Response.
+## Supervision, stopping and recovery
 
-## One-to-one review and revision cycle
+Use actual native spawn, message, follow-up, list, wait and interrupt operations.
+Do not substitute shell-launched agents or user-visible tasks. Observe runtime
+capacity rather than defining a fixed project concurrency limit. Parallel writes
+must have non-overlapping ownership; serialize conflicts. Native status and
+accepted new dispatch establish capacity reuse, not a final message alone.
 
-Formal review is conditional on the user's instruction or the Project
-Director's evidence-based review decision. Once selected, assign every
-candidate its own independently selected reviewer through a fresh role-catalog
-workflow. Record an exact one-to-one mapping among candidate, originating
-solver, reviewer child, reviewer role, review criteria, evidence, and outcome.
-A reviewer evaluates only its assigned candidate in that cycle, remains
-independent from its solver, and never takes Project Director ownership.
+On pause, cancellation, replacement or model-setting change, stop dependent
+dispatch, request applicable interruption, inspect actual status and known
+changes, and reconcile all required owners before transfer or a final stopped
+claim. Unavailable or unconfirmed workers remain explicit blockers. Timestamps
+and roster absence alone do not prove revocation. Revoke the previous manager
+only through the exact recovery protocol and reject delayed old-generation work.
 
-Classify each review as passed or rejected. No unreviewed or rejected candidate
-may enter synthesis. Preserve every candidate and review result. For a
-rejection, return the clear failure explanation and actionable revision
-requests to the originating solver child. Require a separately identified,
-materially revised candidate, preserve the solver identity across the cycle,
-and repeat review before changing the candidate outcome to passed.
+Continue a cycle only for a targeted revision, material new evidence or a new
+hypothesis. Repeated unchanged failure, irreducible conflict, missing capability
+or authority and exhausted resources stop the cycle without completing it.
+Never drop required agents, lower criteria, auto-pass review or change settings
+because resources are scarce. Stop optional improvements after criteria pass.
 
-If the revision adds no targeted change, evidence, or material hypothesis, do
-not repeat an identical cycle. Record the repeated unchanged failure and the
-exact capability, authority, evidence, or user-decision blocker under the
-stopping contract.
+## Evidence and final report
 
-## Senior synthesis and conflict recycling
+Use the existing Task ledger and append-only responses as the continuation
+record; add no competing orchestration store. Preserve strict validation,
+revision checks, locks, exact partial-publication recovery and truthful lifecycle
+semantics. Store concise decisions, current artifact references, work and
+verification evidence, blockers and next gates, not credentials, hidden
+reasoning or full transcripts. Live artifacts override stale summaries.
 
-Start synthesis only after every candidate required to receive formal review
-has a recorded pass. Use a fresh role-catalog selection to assign a distinct
-senior synthesis agent that is not the Project Director and receives no
-Director authority. Supply every accepted candidate and every material review
-finding, including compatible contributions, differences, assumptions,
-evidence, and residual risks.
-
-The senior agent returns one coherent integrated proposal that preserves
-compatible contributions, identifies its source candidates, and explains how
-each material difference was resolved. The Project Director reviews and
-accepts or rejects the proposal. Synthesis alone neither authorizes
-implementation nor proves that the project Task is complete.
-
-If genuine conflicts prevent fusion, require one exact shared conflict record
-that identifies every affected candidate, incompatible claim, governing
-evidence, and required resolution. Deliver the same conflict explanation to
-every affected originating solver. Each affected solver returns an independent
-materially revised candidate, every required review repeats, and only then may
-another synthesis attempt begin. Record the conflict, recipients, revisions,
-reviews, and synthesis result in the governed Task Response.
-
-If another cycle cannot add a material hypothesis, evidence item, or targeted
-change, take the truthful stopping path. Record the irreducible conflict,
-missing authority or capability, or bounded user decision instead of silently
-discarding a contribution or choosing a candidate.
-
-## Implementation ownership and evidence-gated completion
-
-After accepting a direct, decomposed, or synthesized solution, choose the
-implementation owner case by case based on the Task. The owner is either the
-Project Director or, when its validated role, capabilities, scope, and
-action-specific authority fit, the senior synthesis agent. Record exactly one
-accountable implementation owner before execution begins; reject a missing or
-multiple-owner state.
-
-Before implementation, record the owner, accepted solution, allowed files and
-scope, protected state, required action-specific authority, dependencies,
-checks, evidence, and stopping condition. A project Task record, candidate,
-review pass, accepted synthesis, or child completion message is a proposal or
-status, not performed implementation. Do not broaden authority for dependency
-installation, destruction, external messages, Git operations, publication, or
-deployment.
-
-After authorized work is performed, reopen the live artifacts and current
-canonical Task, inspect the integrated result, run proportionate checks, and
-verify every definition-of-done criterion with current direct evidence. Reject
-incomplete evidence and a child report as sole proof. State every consumer
-adoption, native child execution, external action, deployment, or other
-behavior that was not exercised.
-
-Only the Project Director records exactly one truthful final Task Response and
-invokes Agent Task completion. Do not mark the Task complete until the
-authorized solution was performed or delivered and every definition-of-done
-criterion is proven.
-
-Use the skill in the requested mode:
-
-- **Inventory:** Return valid roles and invalid-role diagnostics without
-  creating files or spawning agents.
-- **Selection:** Build a task profile, compare suitable candidates, and return
-  the selected role, both canonical paths, alternatives, and fit rationale.
-- **Creation:** Create and validate a reusable role only after no existing
-  valid role fits.
-- **Spawn:** Select or create a valid role, build the delegation contract, and
-  use native Codex sub-agent orchestration.
-- **Validation:** Check the live role catalog and report exact defects.
-
-## Role selection and role creation
-
-For each delegable subtask, define a task profile containing:
-
-- Objective.
-- Required capabilities.
-- Read and write needs.
-- Expected output.
-- Required Codex skills.
-- Required tools.
-- Risk.
-- Stopping condition.
-
-Exclude invalid role bundles. Compare plausible roles using their descriptions,
-capabilities, tasks outside the role, required Codex skills, and authority
-limits. Prefer the narrowest suitable role. Do not force a generic role onto
-specialized work only because it is the sole valid role.
-
-Treat task capability and Codex skill availability as different checks. If a
-required Codex skill, tool, permission, or external dependency is unavailable,
-report that blocker. Creating a role cannot supply a missing capability.
-
-Create a new role only for a reusable responsibility gap. Use a descriptive
-lowercase hyphenated folder name, create both required files, validate the
-bundle, rerun inventory, and select it only after the catalog returns it as
-valid. Never overwrite or merge into an existing role folder.
-
-## Delegation contract
-
-Every sub-agent receives one contract that states:
-
-- Selected role and repository-relative role-file paths.
-- Root `SOUL.md` plus the selected `AGENTS.md` and `ROLE.md` as required
-  instruction sources.
-- One concrete objective.
-- Necessary context and inputs.
-- Allowed scope.
-- Protected files, behavior, decisions, and external actions.
-- Exact deliverable.
-- Required checks.
-- Evidence to return.
-- Authority limits.
-- Explicit stopping condition.
-
-## Model and reasoning identity
-
-Every sub-agent must use the exact model and reasoning effort currently used by
-the Project Director. Roles specialize instructions and task scope; they do not
-change the agent's model or reasoning level.
-
-For native `spawn_agent` calls:
-
-- Set `fork_turns` to `all` so the child inherits the parent session.
-- Do not pass `model`.
-- Do not pass `reasoning_effort`.
-- Do not select a custom-agent configuration that sets `model` or
-  `model_reasoning_effort`.
-- Do not use `agents.default_subagent_model` or
-  `agents.default_subagent_reasoning_effort` for role-based children.
-
-For example, if the Project Director uses `gpt-5.6-sol` with `max` reasoning,
-every child must use `gpt-5.6-sol` with `max` reasoning.
-
-Before spawning, confirm that the effective runtime configuration cannot
-replace either inherited value. If exact inheritance cannot be guaranteed,
-stop and report the configuration conflict. Do not spawn a child with different
-settings, and do not modify user-level configuration automatically.
-
-## Parallel-work ownership
-
-Use parallel sub-agents only for independent work. Assign non-overlapping write
-ownership before spawning. Do not encode a fixed concurrency limit; observe the
-current runtime limit.
-
-If tasks share files, decisions, or mutable state, sequence them or assign one
-owner. Do not allow concurrent agents to overwrite, restore, or absorb one
-another's work.
-
-## Supervision and steering
-
-Preserve every native child identifier. Use native follow-up or steering
-operations when facts or scope materially change. Do not spawn a duplicate
-agent to avoid clarifying an active bounded objective.
-
-Wait for every child result required by the task. Interrupt a child only for a
-clear safety, scope, duplication, or invalid-assumption reason. Do not use
-shell-launched Codex processes or separate user-visible Codex tasks as
-substitutes for native child agents.
-
-## Review and integration
-
-For every returned result:
-
-1. Compare it with the delegation contract.
-2. Inspect the cited files, outputs, and current project state.
-3. Separate observed evidence from the child's inference.
-4. Resolve conflicts using governing project sources.
-5. Accept, revise, or reject the result.
-6. Integrate only accepted work.
-
-A sub-agent completion message is not proof that the worktree or user workflow
-is correct. The Project Director remains accountable for all delegated work.
-
-## Verification and validation
-
-Run checks proportional to the actual change and risk. Reinspect material
-delegated artifacts directly. Confirm that the integrated result implements
-the requested features and preserves protected behavior.
-
-Verify every explicit requirement, task, invariant, named artifact, and
-acceptance criterion against authoritative current-state evidence. Treat
-missing, indirect, or uncertain evidence as incomplete.
-
-## Escalation and stopping conditions
-
-Stop or escalate when:
-
-- No valid role fits and creating a reusable role would not solve the gap.
-- A required Codex skill, tool, permission, external dependency, or
-  concurrency slot is unavailable.
-- Required authority is missing.
-- Two agents would need conflicting write ownership.
-- Evidence contradicts the task premise or selected role.
-- Continuing would require destructive, external, or materially broader
-  action without authorization.
-
-Report the exact condition and the smallest corrective action or decision
-needed.
-
-## Completion report
-
-The final project-level response must state:
-
-- What was completed.
-- What changed.
-- What was deliberately left unchanged.
-- Which checks were run and their observed results.
-- The highest verification level actually reached.
-- How the result was validated against the user's intent.
-- Any remaining limitation, uncertainty, or blocker.
-
-Do not claim project completion solely because a sub-agent reported success.
+Report completed work, actual changes, checks and their results, requirement
+coverage, integrated validation, preservation and remaining limits. Distinguish
+contract inspection, deterministic tests, native runtime observations and
+end-to-end delivery. State any unexercised consumer adoption, future-project,
+native, Git, publication or deployment behavior. Do not infer completion from
+a passing fixture or a synthesized proposal.

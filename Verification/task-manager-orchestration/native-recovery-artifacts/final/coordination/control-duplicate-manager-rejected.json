@@ -1,0 +1,193 @@
+{
+  "label": "duplicate-manager-rejected",
+  "observed_at": "2026-09-08T12:16:36.523429+00:00",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/.agents/skills/agent-task/scripts/task_state.py",
+    "--project-root",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "orchestrate",
+    "TASK-20260908-A8B65949",
+    "--expected-revision",
+    "5"
+  ],
+  "payload": {
+    "event": {
+      "event_id": "event_d6452176d4d54468acf6f18b35acb07c",
+      "actor": "/root/recovery_manager",
+      "execution_id": "recovery_validation_20260908",
+      "generation": 1,
+      "kind": "manager.reserve",
+      "data": {
+        "assignment_id": "duplicate_manager_control",
+        "authority": "The user explicitly requested and approved implementation of the named plan, including TASK-034 bounded native interruption, reconnect, replacement and setting-change failure tests.",
+        "bootstrap_receipt": {
+          "result": {
+            "agents": [
+              {
+                "agent_name": "/root",
+                "agent_status": "running"
+              },
+              {
+                "agent_name": "/root/task_manager_validation",
+                "agent_status": "completed"
+              },
+              {
+                "agent_name": "/root/task_manager_validation/coding_implementer",
+                "agent_status": "completed"
+              },
+              {
+                "agent_name": "/root/task_manager_validation/coding_senior",
+                "agent_status": "completed"
+              }
+            ]
+          },
+          "tool": "collaboration.list_agents"
+        },
+        "context": [
+          {
+            "path": "context/scenario.md",
+            "sha256": "ae75e5c7ae0e4bc96fd4c9f6c4a3b6080237ac925d6ab13e7196b0d611a86f9e"
+          },
+          {
+            "path": "context/authority.json",
+            "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+          },
+          {
+            "path": "context/native-runtime.json",
+            "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+          }
+        ],
+        "fit": {
+          "authority": "The user explicitly requested and approved implementation of the named plan, including TASK-034 bounded native interruption, reconnect, replacement and setting-change failure tests. Canonical writes only after activation; ordinary writes only coordination. Delegate one bounded marker/wait worker. Do not replace yourself or cancel before host transfer.",
+          "capabilities": [
+            "native coordination",
+            "current evidence inspection",
+            "Task writer and stopping controls"
+          ],
+          "deliverable": "Exact delayed-receipt, pause/interruption and stopped-state evidence, with unfinished criteria preserved for host-controlled replacement.",
+          "objective": "Direct the first generation of the one host-created bounded native stopping/recovery fixture.",
+          "rationale": "The persisted task-manager role fits bounded native supervision and canonical ownership; ordinary workers do not supply that authority.",
+          "reads": [
+            "context",
+            "coordination",
+            ".agents/skills",
+            "roles",
+            "SOUL.md",
+            "ROLE.md",
+            "AGENTS.md",
+            "SPECS.md"
+          ],
+          "risk": "Disposable fixture only; no actual model/configuration change or external action.",
+          "skills": [
+            "task",
+            "agent-task",
+            "manage-subagent-roles"
+          ],
+          "stop": "After real pause, interruption/reconciliation and labelled setting-change rejection, return the exact stopped-state evidence and finish your turn for host replacement.",
+          "tools": [
+            "native collaboration",
+            "Python standard library",
+            "installed Task and role helpers"
+          ],
+          "writes": [
+            "coordination"
+          ]
+        },
+        "role": {
+          "agents_path": "roles/task-manager/AGENTS.md",
+          "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+          "catalog": {
+            "path": "coordination/catalog_fa75b54aa01245e29dbb7394f88f6c23.json",
+            "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+          },
+          "name": "task-manager",
+          "role_path": "roles/task-manager/ROLE.md",
+          "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0"
+        },
+        "runtime": {
+          "available_slots": 3,
+          "depth": 2,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+            },
+            {
+              "path": "context/host-roster.json",
+              "sha256": "61bb75fac7ec7e43f38395a245b404ea2aa568f734a4686ed5ab5654edfe59ad"
+            }
+          ],
+          "tools": [
+            "spawn_agent",
+            "send_message",
+            "followup_task",
+            "list_agents",
+            "wait_agent",
+            "interrupt_agent"
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "216632064a6728c3f13b2db4ae33ecea4798e38bc8c947fbb7f7400339a2e3e4"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "source_refs": [
+          {
+            "path": "context/authority.json",
+            "sha256": "4945f73eeb39672bf6d2d1f7b197a4dd8dcb5ba04d7e88bb7d45db23f0c3d29c"
+          }
+        ]
+      }
+    },
+    "response": {
+      "work_completed": [
+        "Controlled duplicate manager reservation was rejected; no native duplicate launch was attempted."
+      ],
+      "verification_evidence": [
+        "Exact current inputs and returned native/artifact evidence are retained."
+      ],
+      "user_response_summary": "Controlled duplicate manager reservation was rejected; no native duplicate launch was attempted.",
+      "current_summary": "Controlled duplicate manager reservation was rejected; no native duplicate launch was attempted.",
+      "next_step": "Continue the bounded approved validation.",
+      "blockers": [],
+      "open_questions": [],
+      "relevant_files": []
+    }
+  },
+  "expected_error": "ORCH_DUPLICATE_MANAGER",
+  "exit_code": 2,
+  "result": {
+    "schema_version": 1,
+    "command": "orchestrate",
+    "status": "error",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": false,
+    "task_id": null,
+    "revision_before": null,
+    "revision_after": null,
+    "response_id": null,
+    "response_path": null,
+    "warnings": [],
+    "errors": [
+      {
+        "code": "ORCH_DUPLICATE_MANAGER",
+        "message": "An execution already has its designated manager."
+      }
+    ],
+    "recovery_required": false
+  },
+  "stderr": "",
+  "canonical_before_sha256": "9debd661b65f95daabae6e30ee5cfaabbc6cce6b18745985150c90c5c5becea1",
+  "canonical_after_sha256": "9debd661b65f95daabae6e30ee5cfaabbc6cce6b18745985150c90c5c5becea1",
+  "canonical_unchanged": true,
+  "revision_before": 5,
+  "revision_after": 5
+}

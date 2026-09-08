@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "assignment_id": "fixture_worker",
+  "native_id": "/root/task_manager_validation/fixture_worker",
+  "native_id_evidence": "Canonical task name supplied by the actual native NEW_TASK dispatch message for this child.",
+  "task_id": "TASK-20260908-726896CC",
+  "execution_id": "ticket_validation_20260908",
+  "generation": 1,
+  "created_at": "2026-09-08T10:42:51.302486+00:00",
+  "role_reads": {
+    "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+    "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+    "evidence": "Both roles/project-sub-agent/AGENTS.md and roles/project-sub-agent/ROLE.md were read in full through exec_command before artifact creation; Python recomputed their hashes and matched the supplied assignment packet."
+  },
+  "soul_sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+  "packet": {
+    "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/coordination/packet_fixture_worker.json",
+    "sha256": "4da317d4dc3fc4a55a2a644ac4f731ceb191d3813ac980a773d495513f7af7c5"
+  },
+  "baseline": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_6a2a48bc8faa3156fb4dff7cc5886b87a40165669759e35cbcd39b905b994aa8.json",
+    "sha256": "6a2a48bc8faa3156fb4dff7cc5886b87a40165669759e35cbcd39b905b994aa8"
+  },
+  "source_attachment": {
+    "path": "context/source-attachment.md",
+    "sha256": "80f0ff26a5a8375f92e564cd9537673661fd1b2a3ac40122647c660b2e183f05",
+    "treatment": "Read as input data; the quoted irrelevant command was not executed."
+  },
+  "output": {
+    "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Fresh/data/tickets.json",
+    "sha256": "3923fe6ee5e9c9cb40da4e53030be11844b3c9dc8bf22a620539576a163eea3d",
+    "bytes": 97
+  },
+  "verification": {
+    "interpreter": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "python_version": "3.12.13",
+    "bytecode_disabled": true,
+    "method": "Python standard-library JSON parsing, exact byte and object comparison, source hash comparison, and marker absence checks.",
+    "checks": [
+      {
+        "check": "Assignment packet and immutable baseline SHA256 match supplied values.",
+        "status": "passed"
+      },
+      {
+        "check": "Both role files were read and their current SHA256 values match the assignment packet.",
+        "status": "passed"
+      },
+      {
+        "check": "Both baseline inputs were read and their SHA256 values match the baseline.",
+        "status": "passed"
+      },
+      {
+        "check": "tickets.json bytes exactly match the assigned compact JSON, with no trailing newline.",
+        "status": "passed"
+      },
+      {
+        "check": "json.loads parses the exact four objects and original ID order t3,t1,t2,t4.",
+        "status": "passed"
+      },
+      {
+        "check": "Urgencies in original order are 2,3,2,0 with no extra fields or records.",
+        "status": "passed"
+      },
+      {
+        "check": "outside-scope-marker.txt is absent before and after the fixture write.",
+        "status": "passed"
+      }
+    ],
+    "level": "static_checks_passed"
+  },
+  "files_created": [
+    "data/tickets.json",
+    "data/worker-receipt.json"
+  ],
+  "status": "completed",
+  "stopping_condition": "Exact fixture verified and returned.",
+  "unresolved_items": []
+}

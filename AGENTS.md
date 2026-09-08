@@ -67,20 +67,30 @@ incomplete item with its evidence.
 
 ## Project Director workflow
 
-The root agent is the Project Director defined in `./ROLE.md`. Before selecting,
-creating, or spawning a role-based sub-agent, the Project Director must use the
-[manage-subagent-roles skill](./.agents/skills/manage-subagent-roles/SKILL.md)
-to obtain and assess a fresh filesystem-backed role catalog.
+The host is the Sys4AI Depot Project Director defined in `./ROLE.md`. Explicit
+Task execution hands control to a real native manager only after its reservation,
+actual launch receipt and confirmed activation. That manager acts as Project
+Director for the assigned execution and becomes its sole canonical writer. The
+host relays user steering and results. Ordinary children receive one bounded
+objective and stopping condition; reading root guidance does not promote them.
 
-Every role-based sub-agent must inherit the Project Director's exact model and
-reasoning effort. Do not use a spawn argument, sub-agent default, or
-custom-agent configuration that replaces either value.
+Before every role-based selection, creation or assignment, the responsible
+Director must use the [manage-subagent-roles skill](./.agents/skills/manage-subagent-roles/SKILL.md)
+to obtain and assess a fresh filesystem-backed catalog. Active roles are paired
+files under `roles/`; `roles/INDEX.md` is navigation only. Preserve legacy role
+provenance and use explicit preview/apply for transition.
 
-The Project Director owns scope, project registration, reusable-asset adoption
-decisions, delegation, integration, final verification, and the user-facing
-completion report. Child agents receive one bounded objective and one stopping
-condition. They do not make ungranted external, destructive, publication, or
-architecture decisions.
+Every role-based child inherits the exact effective model and reasoning effort
+of the Director. Omit overrides under a verified inheritance guarantee and
+separately verify solver context independence. Queue within observed capacity
+without reducing required teams. Children receive no ungranted external,
+destructive, publication, installation or architecture authority.
+
+The host retains workspace registration and reusable-asset adoption decisions.
+Within its assigned Task, the confirmed manager owns decomposition, category and
+role selection, delegation, acceptance, integration, final verification and the
+canonical Task Response. Follow the installed Task skill's generic, complex and
+extra-complex team, version, stopping and recovery gates.
 
 ## Task-system workflow
 
@@ -105,9 +115,11 @@ architecture decisions.
   [Agent Task skill](./.agents/skills/agent-task/SKILL.md). Use the Agent Task
   helper for every mutation; status, list, startup awareness, and unrelated
   prompts remain read-only.
-- The Project Director owns Task state, definition-of-done verification, and
-  final Task Responses. Child agents return evidence and do not mutate the Task
-  ledger.
+- The host owns bounded bootstrap until manager activation. The confirmed
+  manager then owns Task state, definition-of-done verification and final Task
+  Responses. Ordinary children return evidence without ledger or role-index writes.
+- Reconcile known managers and write-owning workers before any age-based matching
+  exclusion, closure, pause, cancellation, replacement or settings change.
 - Keep Task state separate from conversation threads, Codex memory, managed
   TRDs, and native goal state. Report any mismatch and do not silently merge or
   overwrite these sources.

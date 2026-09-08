@@ -1,0 +1,142 @@
+{
+  "status": "passed",
+  "observed_at": "2026-09-08T12:46:41.505665+00:00",
+  "highest_verification": "runtime_observed",
+  "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+  "task_id": "TASK-20260908-A8B65949",
+  "revision": 23,
+  "generation": 2,
+  "task_status": "cancelled",
+  "execution_stage": "stopped",
+  "execution_outcome": "cancelled",
+  "canonical_sha256": "16d0a468b1fe0b0dc5ada3ed17e5253ea0ac1fcbd2bfcbf4996ca3202d5b9b7e",
+  "delivery_completed": false,
+  "unfinished_criterion_preserved": true,
+  "no_delivery_artifact": true,
+  "root_task_validation": {
+    "schema_version": 1,
+    "command": "validate",
+    "status": "valid",
+    "project_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "tasks_root": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/Tasks",
+    "mutated": false,
+    "task_id": "TASK-20260908-A8B65949",
+    "revision_before": 23,
+    "revision_after": 23,
+    "response_id": null,
+    "response_path": null,
+    "warnings": [],
+    "errors": [],
+    "recovery_required": false,
+    "integrity": "valid",
+    "validated_task_count": 1
+  },
+  "root_command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery/.agents/skills/agent-task/scripts/task_state.py",
+    "--project-root",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-delivered-starter-k3b688jg/Sys4AI/Projects/Orchestration-Recovery",
+    "validate",
+    "TASK-20260908-A8B65949"
+  ],
+  "native_final_observation": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/recovery_manager",
+          "agent_status": "completed"
+        },
+        {
+          "agent_name": "/root/recovery_manager/marker_worker",
+          "agent_status": "interrupted"
+        },
+        {
+          "agent_name": "/root/recovery_replacement",
+          "agent_status": "completed"
+        }
+      ]
+    }
+  },
+  "native_observation_normalization": "The actual root full-tree list_agents supplied completed status objects with final replies for both managers. This receipt retains the completion discriminant and exact IDs without duplicating those messages. Interrupted is the actual worker status. The root is running to finish the implementation plan.",
+  "started_native_instances_accounted": 3,
+  "negative_controls": [
+    {
+      "label": "dispatch-after-pause-rejected",
+      "code": "ORCH_DISPATCH_STOPPED",
+      "canonical_unchanged": true
+    },
+    {
+      "label": "duplicate-manager-rejected",
+      "code": "ORCH_DUPLICATE_MANAGER",
+      "canonical_unchanged": true
+    },
+    {
+      "label": "pause-before-observation-rejected",
+      "code": "ORCH_STOP_REQUIRED",
+      "canonical_unchanged": true
+    },
+    {
+      "label": "stop-before-observation-rejected",
+      "code": "ORCH_STOP_UNCONFIRMED",
+      "canonical_unchanged": true
+    },
+    {
+      "label": "synthetic-settings-change-rejected",
+      "code": "ORCH_SETTINGS_REPLACEMENT",
+      "canonical_unchanged": true
+    },
+    {
+      "label": "replacement-old-generation-rejected",
+      "code": "ORCH_STALE_GENERATION",
+      "canonical_unchanged": true
+    }
+  ],
+  "first_generation_history_preserved": true,
+  "prior_response_hashes_verified": 19,
+  "protected_hashes_verified": 86,
+  "artifact_index_files_rehashed": 162,
+  "handoff_and_index_references_verified": 174,
+  "archived_evidence_files": 164,
+  "canonical_assignments": {
+    "recovery_manager": {
+      "native_id": "/root/recovery_manager",
+      "function": "manager",
+      "state": "revoked",
+      "generation": 1
+    },
+    "recovery_replacement": {
+      "native_id": "/root/recovery_replacement",
+      "function": "manager",
+      "state": "active",
+      "generation": 2
+    },
+    "recovery_worker": {
+      "native_id": "/root/recovery_manager/marker_worker",
+      "function": "worker",
+      "state": "revoked",
+      "generation": 1
+    }
+  },
+  "actual_live_cases": [
+    "Original and replacement same-ID manager reconnection",
+    "One worker launched, observed running and actually interrupted",
+    "All prior owners observed before generation transfer",
+    "Distinct replacement launched, role-read verified and activated",
+    "Real pause and cancelled lifecycle with unfinished delivery preserved"
+  ],
+  "controlled_cases": [
+    "Delayed import of one actual spawn receipt reconciled to its original reservation and native ID without relaunch",
+    "Synthetic different-settings payload rejected; no real model or user configuration change",
+    "Synthetic generation-1 operation rejected through the actual helper with unchanged complete Task bytes"
+  ],
+  "not_exercised": [
+    "Actual mid-run model switching",
+    "Literal model/effort telemetry"
+  ],
+  "host_input_correction": "The first host replacement payload used the wrong logical assignment ID and was rejected without mutation. The canonical mapping supplied the correction; see native-recovery-host-input-correction.json."
+}

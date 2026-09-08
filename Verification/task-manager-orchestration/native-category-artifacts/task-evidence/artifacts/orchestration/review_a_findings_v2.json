@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "reviewer_assignment_id": "coding_reviewer_a",
+  "native_id": "/root/task_manager_validation/coding_reviewer_a",
+  "outcome": "passed",
+  "candidate_id": "coding_a_v2",
+  "candidate_path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+  "candidate_sha256": "71136dfcfe79fc38bd7319cac2e1a2dfceb13fa2ad4931bda5276be9b0c2d565",
+  "baseline": {
+    "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8.json",
+    "sha256": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8"
+  },
+  "input_rebind": {
+    "path": "coordination/rebind_coding_reviewer_a_correction.json",
+    "sha256": "4da014720c14d5d46dd5ae5e3a85f2dfbfadbae9973c88c7a8deca8186a5462b"
+  },
+  "review_scope": "Same independent reviewer checks corrected solver A current full design under the unchanged initial baseline. Initial error policy remains an allowed proposal; later implementation remains a separate required gate.",
+  "criterion_evidence": [
+    {
+      "criterion": "For valid input, order_tickets returns a new list in descending urgency with stable ties and leaves input records and order unchanged.",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+          "section": "## API and validation contract",
+          "line": 11
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+          "section": "## Algorithm and invariants",
+          "line": 21
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+          "section": "## Exact fixture and proposed tests",
+          "line": 34
+        }
+      ],
+      "observation": "New result list, conservation of original record identities, descending urgency, original-position tie order and no caller mutation remain explicit. Ordering steps and fixture digest are unchanged from the directly checked initial design."
+    },
+    {
+      "criterion": "IDs are nonblank unique strings; urgency is an integer in 0..3 and booleans are rejected.",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+          "section": "## API and validation contract",
+          "line": 11
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+          "section": "## Algorithm and invariants",
+          "line": 21
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_reviewer_a/checks-v2.json",
+          "sha256": "5d2bd0402edd21cd963a49d4be2d2573f274fdcc5094c498defa310af3674d65"
+        }
+      ],
+      "observation": "Nonblank unique exact string IDs and inclusive integer range 0..3 remain explicit. Both API predicate and algorithm step 4 now exclude bool. Independent execution of the corrected predicate rejected False and True and met all nine other type/boundary controls."
+    },
+    {
+      "criterion": "Empty input returns a new empty list; tests cover boundaries, ties, preservation, malformed records and all four example IDs.",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+          "section": "## Exact fixture and proposed tests",
+          "line": 34
+        },
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+          "section": "## Algorithm and invariants",
+          "line": 21
+        }
+      ],
+      "observation": "Distinct empty list, all four exact fixture IDs, urgency endpoints and all values, ties, preservation, malformed records and failure after a valid prefix retain the original meaningful test specification. Two added rows explicitly test False and True separately and after a valid prefix, with ValueError and unchanged caller input."
+    },
+    {
+      "criterion": "The initial invalid-input policy is explicit: raising an error or a separate rejection-report outcome is allowed; silent dropping is forbidden.",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+          "section": "## API and validation contract",
+          "line": 11
+        }
+      ],
+      "observation": "ValueError remains the explicit whole-batch invalid outcome. Full validation occurs before a successful sorted-list result, and no silent drop or partial success is permitted. This remains an initial allowed proposal without implying a user preference."
+    },
+    {
+      "criterion": "The dedicated implementation follows the exact manager-accepted coherent proposal and its tests pass.",
+      "status": "later_required_gate",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+          "section": "## Scope, coverage and current evidence",
+          "line": 60
+        }
+      ],
+      "observation": "A distinct dedicated implementer must later implement the exact manager-accepted coherent proposal and run meaningful tests. The design preserves that requirement and makes no performed-code or suite-pass claim."
+    }
+  ],
+  "mandatory_findings": [],
+  "resolved_findings": [
+    {
+      "id": "R-A-001",
+      "prior_findings_sha256": "a3a5df3e0b266344d89355382599fbaf4d91155134394189d38f4c769f1275f4",
+      "status": "resolved_in_current_design",
+      "evidence": "Explicit boolean exclusion occurs in API and algorithm; both values fail the independently executed predicate; both required negative-test forms are specified.",
+      "scope": "Resolution applies to these exact candidate bytes and this baseline; implementation behavior is still a later gate."
+    }
+  ],
+  "optional_observations": [],
+  "checked_inputs": [
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8.json",
+      "sha256": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8"
+    },
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+      "sha256": "71136dfcfe79fc38bd7319cac2e1a2dfceb13fa2ad4931bda5276be9b0c2d565"
+    },
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/review_a_findings_v1.json",
+      "sha256": "a3a5df3e0b266344d89355382599fbaf4d91155134394189d38f4c769f1275f4"
+    },
+    {
+      "path": "context/scenario.md",
+      "sha256": "a9a04801f283389a870ccaa0b28926150d29be331b887c9bae9d505457bf5ede"
+    },
+    {
+      "path": "coordination/coding-design-contract.md",
+      "sha256": "7088f3aab4c526717afec811d53796f90c6350174304b16d8d995af2ca977246"
+    },
+    {
+      "path": "data/tickets.json",
+      "sha256": "3923fe6ee5e9c9cb40da4e53030be11844b3c9dc8bf22a620539576a163eea3d"
+    },
+    {
+      "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/analysis_proposal_v1.md",
+      "sha256": "38a563ef628c0d052234931c71a459865f4a9b27886f242b3251423233cccb6f"
+    },
+    {
+      "path": "coordination/catalog_20fa12ca8ccc48dcb47b99a8c2355752.json",
+      "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+    }
+  ],
+  "highest_verification_level": "Targeted corrected-predicate tests and design-difference checks passed; all current design criteria inspected.",
+  "limitations": [
+    "No product implementation, exception path or product test suite was executed.",
+    "Only the assigned solver A candidate was reviewed; no sibling candidate draft was inspected.",
+    "This design review pass does not accept a manager proposal or complete the Task."
+  ]
+}

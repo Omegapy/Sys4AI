@@ -20,7 +20,7 @@ Requirements and implementation plans remain separate from Task state.
 
 The [Project Director](./ROLE.md) uses the
 [role management skill](./.agents/skills/manage-subagent-roles/SKILL.md) to inspect
-the [local role bundles](./sub-agent-roles) before bounded delegation. The project
+the [local role bundles](./roles) and [role index](./roles/INDEX.md) before bounded delegation. The project
 owns those role files and keeps task acceptance with its Director.
 
 ## Project setup

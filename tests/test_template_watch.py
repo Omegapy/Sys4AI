@@ -35,6 +35,26 @@ class WatcherTests(unittest.TestCase):
         target.unlink()
         self.assertNotEqual(before, watcher.fingerprint(self.root))
 
+    def test_role_source_and_generated_template_index_changes_are_observed(self):
+        source = self.root / "ROLES-depo/task-manager-ROLE.md"
+        source.parent.mkdir()
+        source.write_bytes((Path(__file__).resolve().parents[1] / "ROLES-depo/task-manager-ROLE.md").read_bytes())
+        before = watcher.fingerprint(self.root)
+        source.write_bytes(source.read_bytes() + b"\nBounded fixture edit.\n")
+        self.assertNotEqual(before, watcher.fingerprint(self.root))
+        index = self.root / "Projects/Sys4AI-Template-Project/roles/INDEX.md"
+        index.parent.mkdir()
+        index.write_text("Generated fixture navigation\n")
+        before = watcher.fingerprint(self.root)
+        index.write_text("Changed generated fixture navigation\n")
+        self.assertNotEqual(before, watcher.fingerprint(self.root))
+        # Another product remains outside the watcher's designated boundary.
+        other = self.root / "Projects/Other/roles"
+        other.mkdir(parents=True)
+        before = watcher.fingerprint(self.root)
+        (other / "INDEX.md").write_text("Unselected project\n")
+        self.assertEqual(before, watcher.fingerprint(self.root))
+
     def test_transients_ignored_and_symlinks_not_followed(self):
         folder = self.root / 'SKILLS-depo/demo'
         (folder / '__pycache__').mkdir()

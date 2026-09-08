@@ -5,215 +5,157 @@ description: Discover and return project sub-agent roles with their AGENTS.md an
 
 # Manage Sub-Agent Roles
 
-Use the live `sub-agent-roles/` filesystem as the role catalog. Never rely on a
-remembered role list and never create a persistent registry.
+Use the owning project's live `roles/` pairs as its authoritative catalog.
+`roles/INDEX.md` is persisted navigation, never independent role authority.
+The Project Director or the exact confirmed Task manager owns selection and
+assignment. Ordinary children do not select their own project-level role or
+write a role index.
 
-## Establish the project root
+## Establish the project root and mode
 
-Use the nearest ancestor that contains `SOUL.md`, `ROLE.md`, `AGENTS.md`, and
-`sub-agent-roles/`. Stop with the exact missing path if that root is not
-unambiguous.
+Resolve the owning project containing `SOUL.md`, `ROLE.md`, `AGENTS.md` and
+`roles/`. Read applicable local instructions. Run its installed helper with the
+project Python environment; do not install a parser or dependency.
 
-Run the helper with the project's Python environment. From the template root:
-
-```bash
+```text
 .venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . list --format json
 ```
 
-On another platform, use that checkout's active project-environment Python.
-Do not install a parser or another dependency for this workflow.
-
-## Choose the requested mode
-
-- **Inventory:** Return the current valid roles and invalid-role diagnostics.
-- **Selection:** Inventory first, then choose the narrowest suitable valid
-  role for a bounded task.
-- **Creation:** Inventory and assess fit first; create a reusable role only
-  when no existing valid role fits and the gap is a role gap.
-- **Validation:** Validate structure, metadata, links, names, and role
-  contracts.
-- **Spawn:** Select or create a valid role, build a delegation contract, and
-  use native Codex sub-agent tools.
-- **Supervision and collection:** Steer, wait for, interrupt when necessary,
-  collect, and review native child-agent results.
-
-If the request is inventory only, return the catalog and stop without creating
-or spawning anything. If it is creation only, validate and return the role and
-stop without spawning.
+Inventory and validation are read-only. Selection adds a function-specific fit
+decision. Creation is only for a demonstrated reusable role gap. Reindex or
+legacy transition is an explicit mutation. Spawn and supervision use actual
+native tools under the assignment's authority. Inventory alone creates no role,
+index, manager, worker, Task or user-visible conversation.
 
 ## Inventory before other modes
 
-Always run a fresh catalog inventory before selection, creation, or spawning.
-Use JSON for internal decisions and a Markdown table for a human-facing list.
+Run fresh inventory before every selection, creation or assignment, including
+manager bootstrap and each worker, solver, reviewer, senior and implementer.
+Return each role's name, description, pair paths, content digests and validity;
+return invalid bundles and index drift separately. Invalid roles are never
+eligible. A stale or forged index cannot make a missing pair valid.
 
-The result must return, for each valid role:
-
-- Name.
-- Description.
-- Role folder.
-- `AGENTS.md` path.
-- `ROLE.md` path.
-- Validity state.
-
-Return invalid intended role folders separately with every diagnostic. Invalid
-roles are never eligible for selection or spawning.
+Use JSON for decisions and a concise Markdown table for a requested human
+inventory. Legacy `sub-agent-roles/` is excluded from ordinary active discovery;
+an absent active layout requires an explicit transition, never a fallback.
 
 ## Select by task fit
 
-Build a task profile with:
+Define objective, required capabilities, read/write needs, expected output,
+required Codex skills, tools, risk and stopping condition for this function.
+Read both full files for plausible candidates. Compare capabilities, exclusions
+and authority; verify actual skill/tool availability. A role capability is not
+the same as a Codex skill dependency. Prefer the narrowest suitable valid role.
+Return its pair paths and digests, alternatives, rationale and residual limits.
 
-- Objective.
-- Required capabilities.
-- Read and write needs.
-- Expected output.
-- Required Codex skills.
-- Tool needs.
-- Risk.
-- Stopping condition.
-
-Read the full `ROLE.md` and `AGENTS.md` only for plausible candidates. Compare
-the profile with each candidate's purpose, suitable tasks, capabilities, tasks
-outside the role, required Codex skills, and authority limits.
-
-Exclude roles that lack a capability, required skill, tool, or authority. A
-role capability is not the same as a Codex skill dependency. Check required
-skills against the skills actually available to the current child-agent
-environment; do not infer availability from a role declaration.
-
-Prefer the narrowest suitable role. Return the selected role, both canonical
-paths, alternatives considered, fit rationale, and residual limitations. Do
-not force the general role onto specialized work merely because it is the
-only valid role.
-
-If no role fits, distinguish:
-
-1. A reusable role-definition gap.
-2. A missing Codex skill.
-3. A missing tool or dependency.
-4. Missing permission.
-5. Work that should remain with the Project Director.
-
-Only the first case enters role creation.
+Distinguish a reusable responsibility gap from a missing skill, tool, dependency,
+permission, native capability or work reserved for the Director. Only the first
+case enters role creation. A manager requires explicit Task ownership and
+nested-delegation capability; a general worker's title cannot supply it.
 
 ## Create a reusable role
 
-Before creation, read
-[the role schema](references/role-schema.md). Define the enduring
-responsibility, descriptive slug, title, selection boundary, capabilities,
-exclusions, required inputs, expected outputs, working method, validation
-duties, required skills, authority limits, and escalation conditions.
+Read [the role schema](references/role-schema.md). Define its enduring purpose,
+descriptive name, selection boundary, capabilities, exclusions, required inputs,
+outputs, method, skills, validation duties, authority and stopping conditions.
+Respect the owning project's source/adoption boundary: reusable depot content
+belongs in source collections; ordinary project roles remain project-local.
 
-Use the helper's `create` command. It renders the canonical templates,
-rejects unsafe or existing targets, installs both role files as one logical
-operation, validates the result, reruns inventory, and returns the new role.
-Run `create --help` for the accepted fields.
+Use `create --help` and the existing helper to render a complete new pair and
+publish its index. Never overwrite an existing target. Verify the returned pair,
+index and fresh catalog before assignment. A committed valid bundle with a
+pending index returns explicit recovery; run `reindex`, not creation again.
+Creation-only requests stop after validation and do not spawn.
 
-Do not leave placeholders. Do not create a role for a transient ticket or task
-identifier. Do not overwrite an existing path. Do not create a registry entry.
-Do not install a missing skill, tool, plugin, or dependency.
+## Validate and repair navigation
 
-## Validate a catalog or role
-
-Use:
-
-```bash
-.venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . validate --format markdown
+```text
+.venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . validate --format json
 .venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . show ROLE_NAME --format json
+.venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . reindex --format json
 ```
 
-Validation fails closed for an absent role root, an incomplete pair, malformed
-metadata, a name mismatch, a duplicate name, a broken required link, an
-incomplete role contract, an unsafe path, or an invalid creation target.
+List/show/validate leave bytes unchanged and report missing/stale index content.
+`reindex` regenerates deterministic relative links, hashes and invalid diagnostics
+from the live pairs under the helper's mutation lock. Index failure cannot
+promote an invalid bundle. Do not steal a lock, force an overwrite or treat a
+lock file's age as proof of an active or abandoned writer.
+
+For a legacy transition, read the schema, run `transition-preview --format json`,
+review the exact old/new paths, digests and collisions, then use only the
+authorized preview with `transition-apply --preview-file FILE --confirmed`.
+Retain legacy pairs and historical references. If publication is interrupted,
+inspect `roles/.transition.json` and resume the exact reported recovery. A changed
+source or customized destination blocks replay. Read-only routes never migrate.
 
 ## Build the delegation contract
 
-Before spawning, specify:
-
-1. Selected role name and repository-relative `AGENTS.md` and `ROLE.md` paths.
-2. Root `SOUL.md` as the shared behavioral source.
-3. One concrete objective.
-4. Necessary context and inputs.
-5. Allowed scope.
-6. Protected files, behavior, decisions, and external actions.
-7. Exact deliverable.
-8. Required checks.
-9. Evidence to return.
-10. Authority limits.
-11. Explicit stopping condition.
-12. Exact Project Director model inheritance with no override.
-13. Exact Project Director reasoning-effort inheritance with no override.
-
-The spawn prompt must instruct the child to read, before task work:
-
-1. Root `SOUL.md`.
-2. The selected role's `AGENTS.md`.
-3. The selected role's `ROLE.md`.
-4. The complete delegation contract.
+Name the selected role and both canonical pair paths, root `SOUL.md`, one
+objective, inspected inputs and current baseline, allowed reads/writes,
+protected state, exact deliverable, checks, evidence, authority and stopping
+condition. Include native identity/settings and context evidence separately.
+Require the child to read SOUL, both role files and the complete contract before
+work, then return their exact digests with its result.
 
 Do not assume that Codex automatically loaded the role-specific nested
-`AGENTS.md`. Codex discovers a nested `AGENTS.md` automatically only when that
-file is on the path from the project root to the session's current working
-directory. A child spawned from the project root must receive the selected
-role-file paths and explicit read instructions in its delegation prompt.
+`AGENTS.md`. A role file outside the session's ancestor path must be explicitly
+loaded. Root guidance does not promote ordinary children to manager or writer.
 
 ## Spawn through native Codex orchestration
 
-Use the native sub-agent operations available in the current Codex runtime,
-such as `spawn_agent`, `list_agents`, `send_message` or `followup_task`,
-`wait_agent`, and `interrupt_agent`.
+Use available native `spawn_agent`, `send_message`, `followup_task`,
+`list_agents`, `wait_agent` and `interrupt_agent` operations. Check actual
+capability, delegation depth, instruction compatibility and current capacity
+before corresponding dispatch. No shell-launched Codex process or separate
+user-visible task or thread substitutes for a native child.
 
-- Give each child one bounded objective.
-- Preserve the returned child identifier.
-- Set `fork_turns` to `all`.
-- Omit the `model` and `reasoning_effort` spawn arguments. The child must
-  inherit the exact model and reasoning effort used by the Project Director.
-- Do not select a custom-agent file that sets `model` or
-  `model_reasoning_effort`.
-- Do not use `agents.default_subagent_model` or
-  `agents.default_subagent_reasoning_effort` for role-based children.
-- Before spawning, check whether effective user or project configuration can
-  override either inherited value. If the runtime cannot guarantee exact
-  inheritance, stop and report the conflict without changing user
-  configuration.
-- Respect the runtime's current concurrency limit.
-- Run parallel children only for independent work with non-overlapping write
-  ownership.
-- Do not shell out to another Codex process.
-- Do not create a user-visible task or thread as a substitute for a child
-  agent.
-- Do not authorize nested delegation unless the Project Director explicitly
-  requires it.
+Every team member uses the manager's exact effective model and reasoning effort.
+Record direct equality evidence or a verified runtime inheritance guarantee.
+Omit the `model` and `reasoning_effort` spawn arguments when using verified
+inheritance. Check effective `agents.default_subagent_model`,
+`agents.default_subagent_reasoning_effort` and custom-agent settings without
+exposing credentials or rewriting user configuration. Unverified settings or
+a known mismatch blocks dispatch; seniority changes no setting.
+
+Separate identity from context. `fork_turns: all` has a verified full-history
+inheritance guarantee in the observed runtime, but solver forks qualify only
+when the supplied history excludes sibling drafts. For queued initial solvers,
+return only paths, hashes and status and defer candidate reads until all initial
+solvers launch. Another context mode needs its own verified model/effort and
+isolation guarantees. A prompt to ignore an inherited draft is insufficient.
+
+Reserve the assignment through the Task helper before launch when orchestration
+is active. Preserve the actual returned native ID and record the receipt before
+activation/results. An uncertain launch keeps its original reservation for
+reconciliation. Do not duplicate it. Queue within observed capacity, preserving
+logical team counts, reviewer mappings and non-overlapping write ownership.
+Do not authorize nested delegation unless the Director grants it for the bounded
+assignment; the confirmed Task manager has only the nested authority handed off.
 
 ## Supervise and collect
 
-Steer an existing child when material context or scope changes. Do not spawn a
-duplicate agent to avoid clarification. Interrupt only for a clear safety,
-scope, duplication, or invalid-assumption reason.
+Use the original native IDs for steering and follow-up. Wait for required
+results; do not spawn a duplicate to avoid clarifying an active assignment.
+Require outputs, paths, exact versions, checks, limitations and stopped-state
+evidence. A completion message alone does not prove correct artifacts or capacity
+release. Inspect material bytes and actual native status before acceptance.
 
-Wait for every result required for integration. Require each child to return:
+On controlling user changes, stop dependent dispatch, request applicable native
+interruption, inspect known edits and reconcile every owner before replacement
+or a final stopped-state claim. Preserve uncertain owners explicitly. A manager
+transfer or model-setting change must use the current Task generation and
+recovery protocol. Do not infer stopping from age or roster absence alone.
 
-- Outcome.
-- Evidence and paths.
-- Files changed.
-- Checks run and observed results.
-- Failures or uncertainty.
-- Unresolved items.
-- Whether the stopping condition was reached.
-
-The Project Director must inspect material artifacts and current project state,
-resolve conflicts, and run proportionate checks before accepting a result.
-A child completion message is not proof of project completion.
+For a completed/stopped instance receiving materially revised inputs, queue the
+packet with `send_message` without waking it, record the helper's
+`assignment.inputs` handoff and current scope/capacity checks, then wake it with
+`followup_task`. Reconcile running owners first. An observed running status is
+not a replacement for a required reservation or resume transition.
 
 ## Failure behavior
 
-Fail closed and report the smallest corrective action when:
-
-- No valid suitable role exists.
-- A required skill, tool, permission, dependency, or concurrency slot is
-  unavailable.
-- Role files are incomplete or contradictory.
-- Creation would overwrite or escape the role root.
-- Native sub-agent orchestration is unavailable.
-- The child's model or reasoning effort would differ from the Project
-  Director's current settings.
-- The requested action exceeds current authority.
+Report the exact missing role, capability, permission, native tool, inheritance
+guarantee, independence condition or stale/conflicting state. Continue a cycle
+only for a targeted revision, new evidence or hypothesis. Preserve artifacts,
+mandatory criteria and required agent counts. Do not create roles to hide a
+missing tool, silently change topology, or claim unobserved native behavior.

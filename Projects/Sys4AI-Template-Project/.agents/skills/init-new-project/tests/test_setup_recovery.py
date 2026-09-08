@@ -16,6 +16,148 @@ class RecoveryCases(unittest.TestCase):
     run_setup = fixture.InitializerTests.run_setup
     fail_verification = fixture.InitializerTests.fail_verification
 
+    def transitioned_project(self):
+        template = self.root / self.helper.TEMPLATE
+        self.target.mkdir()
+        shutil.copyfile(template / "SOUL.md", self.target / "SOUL.md")
+        shutil.copytree(template / ".agents/skills/manage-subagent-roles",
+                        self.target / ".agents/skills/manage-subagent-roles")
+        shutil.copytree(template / "roles/project-sub-agent",
+                        self.target / "sub-agent-roles/project-sub-agent")
+        raw = (template / self.helper.ROLE_HELPER).read_bytes()
+        with self.helper.role_validator(raw) as validator:
+            preview = validator.transition_preview(self.target)
+            result = validator.transition_apply(self.target, preview, confirmed=True)
+        self.assertEqual("current", result["index_status"])
+        return raw
+
+    def test_actual_completed_copy_first_transition_allows_preparation_and_rerun(self):
+        self.transitioned_project()
+        legacy = fixture.manifest(self.target / "sub-agent-roles")
+        receipt = self.target / "roles/.transition.json"
+        provenance = receipt.read_bytes()
+        first = self.run_setup(mode="prepare-existing")
+        self.assertEqual(self.helper.SETUP_CONTRACT, first["setup_contract"])
+        self.assertEqual(legacy, fixture.manifest(self.target / "sub-agent-roles"))
+        self.assertEqual(provenance, receipt.read_bytes())
+        self.assertEqual((self.target / self.helper.ROLE_INDEX).read_bytes(), self.helper.planned_role_index(self.target, {}, {}))
+        repeated = self.run_setup(mode="prepare-existing")
+        self.assertEqual(first["identity"], repeated["identity"])
+        self.assertEqual(provenance, receipt.read_bytes())
+        self.assertEqual(legacy, fixture.manifest(self.target / "sub-agent-roles"))
+
+    def test_transition_evidence_is_required_and_rechecked_before_preparation_writes(self):
+        self.transitioned_project()
+        receipt = self.target / "roles/.transition.json"
+        original = receipt.read_bytes()
+        active = self.target / "roles/project-sub-agent/ROLE.md"
+        active_bytes = active.read_bytes()
+        legacy = self.target / "sub-agent-roles/project-sub-agent/ROLE.md"
+        legacy_bytes = legacy.read_bytes()
+        for case in ("missing", "pending", "corrupt", "collision", "changed-legacy"):
+            altered = json.loads(original)
+            if case == "missing":
+                receipt.unlink()
+            elif case == "pending":
+                altered["status"] = "pending"
+                receipt.write_text(json.dumps(altered))
+            elif case == "corrupt":
+                altered["completed"] = []
+                receipt.write_text(json.dumps(altered))
+            elif case == "collision":
+                active.write_bytes(active_bytes + b"\nConcurrent active role customization.\n")
+            else:
+                legacy.write_bytes(legacy_bytes + b"\nChanged retained legacy role.\n")
+            before = fixture.manifest(self.root)
+            with self.subTest(case=case), self.assertRaises(self.helper.InitializationError):
+                self.helper.run_initialization(**{**self.arguments, "mode": "prepare-existing"})
+            self.assertEqual(before, fixture.manifest(self.root))
+            receipt.write_bytes(original)
+            active.write_bytes(active_bytes)
+            legacy.write_bytes(legacy_bytes)
+
+    def test_legacy_role_layout_and_old_helper_require_review_before_new_adoption(self):
+        self.target.mkdir()
+        legacy = self.target / "sub-agent-roles/custom-worker/ROLE.md"
+        legacy.parent.mkdir(parents=True)
+        legacy.write_text("Preserved legacy role\n")
+        before = fixture.manifest(self.root)
+        with self.assertRaisesRegex(self.helper.InitializationError, "explicit reviewed transition"):
+            self.helper.run_initialization(**{**self.arguments, "mode": "prepare-existing"})
+        self.assertEqual(before, fixture.manifest(self.root))
+        shutil.rmtree(self.target / "sub-agent-roles")
+        old_helper = self.target / self.helper.ROLE_HELPER
+        old_helper.parent.mkdir(parents=True)
+        old_helper.write_text('ROLE_ROOT_NAME = "sub-agent-roles"\n')
+        before = fixture.manifest(self.root)
+        with self.assertRaisesRegex(self.helper.InitializationError, "explicit active-layout transition"):
+            self.helper.run_initialization(**{**self.arguments, "mode": "prepare-existing"})
+        self.assertEqual(before, fixture.manifest(self.root))
+
+    def test_current_custom_role_collection_gets_its_own_index_without_package_fill(self):
+        self.target.mkdir()
+        template = self.root / self.helper.TEMPLATE
+        source = template / "roles/project-sub-agent"
+        owned = self.target / "roles/project-sub-agent"
+        shutil.copytree(source, owned)
+        role = owned / "ROLE.md"
+        role.write_bytes(role.read_bytes() + b"\nProject-owned role responsibility.\n")
+        original = fixture.manifest(owned)
+        report = self.run_setup(mode="prepare-existing")
+        self.assertEqual(original, fixture.manifest(owned))
+        self.assertFalse((self.target / "roles/task-manager").exists())
+        index = (self.target / self.helper.ROLE_INDEX).read_bytes()
+        self.assertNotEqual((template / self.helper.ROLE_INDEX).read_bytes(), index)
+        self.assertEqual(self.helper.planned_role_index(self.target, {}, {}), index)
+        self.assertEqual("governance-starter-v2", report["setup_contract"])
+        self.run_setup(mode="prepare-existing")
+        # An existing index is never overwritten to conceal a customization.
+        (self.target / self.helper.ROLE_INDEX).write_text("Owned index\n")
+        before = (self.target / self.helper.ROLE_INDEX).read_bytes()
+        with self.assertRaises(self.helper.InitializationError):
+            self.helper.run_initialization(**{**self.arguments, "mode": "prepare-existing"})
+        self.assertEqual(before, (self.target / self.helper.ROLE_INDEX).read_bytes())
+
+    def test_legacy_receipt_contract_resumes_and_reruns_without_layout_upgrade(self):
+        template = self.root / self.helper.TEMPLATE
+        backup = Path(self.temporary.name) / "current-template"
+        shutil.copytree(template, backup)
+        (template / "roles").rename(template / "sub-agent-roles")
+        shutil.rmtree(template / "sub-agent-roles/task-manager")
+        (template / "sub-agent-roles/INDEX.md").unlink()
+        policy_path = template / self.helper.TEMPLATE_POLICY
+        policy = json.loads(policy_path.read_text()); policy["roles"] = "sub-agent-roles"
+        policy_path.write_text(json.dumps(policy))
+        role_helper = template / self.helper.ROLE_HELPER
+        role_helper.write_text(role_helper.read_text().replace('ROLE_ROOT_NAME = "roles"', 'ROLE_ROOT_NAME = "sub-agent-roles"'))
+        identity = {"schema_version": 1, "project_id": "orchard", "project_name": "Orchard",
+                    "purpose": self.arguments["purpose"], "relative_path": "Projects/Orchard"}
+        proposed, sources, _ = self.helper.source_snapshot(self.root, fixture.SOURCE_SKILL, identity, contract=self.helper.LEGACY_CONTRACT)
+        for source in sources:
+            source["adoption"] = "adopted"
+        record = {"schema_version": 1, "setup_contract": self.helper.LEGACY_CONTRACT,
+                  "status": "partial", "mode": "create", "operation_id": "project-setup-" + "1" * 32,
+                  "identity": identity, "project_root": str(self.target), "sources": sources,
+                  "owned_files": {name: self.helper.sha(raw) for name, raw in proposed.items()},
+                  "preserved_files": {}, "recovery_before": {name: None for name in proposed},
+                  "completed_stages": [], "active_stage": "assets", "checks": [],
+                  "created_at": "2026-09-08T00:00:00+00:00", "git_setup": "separate"}
+        target = self.target / self.helper.RECORD
+        target.parent.mkdir(parents=True)
+        target.write_bytes(self.helper.encoded(record))
+        first = self.run_setup()
+        self.assertEqual(self.helper.LEGACY_CONTRACT, first["setup_contract"])
+        pair_before = fixture.manifest(self.target / "sub-agent-roles")
+        shutil.rmtree(template); backup.rename(template)
+        repeated = self.run_setup()
+        self.assertEqual(first["sources"], repeated["sources"])
+        self.assertEqual(pair_before, fixture.manifest(self.target / "sub-agent-roles"))
+        self.assertFalse((self.target / "roles").exists())
+        mixed = deepcopy(repeated)
+        mixed["setup_contract"] = self.helper.SETUP_CONTRACT
+        with self.assertRaisesRegex(self.helper.InitializationError, "mixes incompatible role layouts"):
+            self.helper.validate_record(mixed, self.target, identity)
+
     def test_source_drift_rejected_before_destination_publication(self):
         template = self.root / self.helper.TEMPLATE
         changes = {
@@ -28,8 +170,8 @@ class RecoveryCases(unittest.TestCase):
         for name, change in changes.items():
             backup = Path(self.temporary.name) / "template-backup"
             shutil.copytree(template, backup)
-            def changed_snapshot(*args):
-                snapshot = original_snapshot(*args)
+            def changed_snapshot(*args, **kwargs):
+                snapshot = original_snapshot(*args, **kwargs)
                 change()
                 return snapshot
             with (self.subTest(change=name), patch.object(self.helper, "source_snapshot", side_effect=changed_snapshot),
@@ -45,7 +187,7 @@ class RecoveryCases(unittest.TestCase):
         identity = {"schema_version": 1, "project_id": "orchard", "project_name": "Orchard",
                     "purpose": "Orchard observations.", "relative_path": "Projects/Orchard"}
         _, records, _ = self.helper.source_snapshot(self.root, fixture.SOURCE_SKILL, identity)
-        for relative in ("sub-agent-roles/project-sub-agent/new.md", "reference-assets/new.md",
+        for relative in ("roles/project-sub-agent/new.md", "reference-assets/new.md",
                          ".agents/skills/communication/new.md"):
             changed = template / relative
             changed.parent.mkdir(parents=True, exist_ok=True)
@@ -162,7 +304,7 @@ class RecoveryCases(unittest.TestCase):
             "README.md": b"Custom README",
             "SPECS.md": b"Custom specs",
             ".agents/skills/communication/SKILL.md": b"Custom skill",
-            "sub-agent-roles/project-sub-agent/ROLE.md": b"Custom role",
+            "roles/project-sub-agent/ROLE.md": b"Custom role",
             "Tasks/task-owned/task.json": b'{"preserve":true}',
             "config/memory.toml": b"preserve original configuration bytes",
             "control_records/project-initialization.json": b"legacy receipt remains untouched",
@@ -178,7 +320,7 @@ class RecoveryCases(unittest.TestCase):
         for name, checksum in before.items():
             self.assertEqual(checksum, after[name], name)
         self.assertFalse((self.target / ".agents/skills/communication/README.md").exists())
-        self.assertFalse((self.target / "sub-agent-roles/project-sub-agent/AGENTS.md").exists())
+        self.assertFalse((self.target / "roles/project-sub-agent/AGENTS.md").exists())
         self.assertFalse((self.target / "Tasks/INDEX.md").exists())
         self.assertEqual("Saved name", report["identity"]["project_name"])
         self.assertNotIn("dataset_id", report["identity"])
@@ -198,7 +340,7 @@ class RecoveryCases(unittest.TestCase):
         report = self.run_setup()
         schema = json.loads((fixture.SOURCE_SKILL / "assets/initialization-receipt.schema.json").read_text())
         self.assertTrue(set(schema["required"]) <= report.keys())
-        self.assertEqual(schema["properties"]["setup_contract"]["const"], report["setup_contract"])
+        self.assertIn(report["setup_contract"], schema["properties"]["setup_contract"]["enum"])
         self.helper.validate_record(report, self.target, report["identity"])
         for change in ({"schema_version": 2}, {"completed_stages": ["assets"]},
                        {"active_stage": "assets"}, {"owned_files": {"../outside": "0" * 64}},
@@ -275,7 +417,7 @@ class RecoveryCases(unittest.TestCase):
 
     def test_minimum_saved_inventory_keeps_governance_and_renderer_sources(self):
         original = self.run_setup()
-        for name in (".agents/skills/task/SKILL.md", "sub-agent-roles/project-sub-agent/ROLE.md",
+        for name in (".agents/skills/task/SKILL.md", "roles/project-sub-agent/ROLE.md",
                      self.helper.README_RENDERER, self.helper.TEMPLATE_POLICY):
             altered = deepcopy(original)
             source = self.helper.TEMPLATE + "/" + name

@@ -32,6 +32,13 @@ SOURCE_DEPOT = load_helper(SOURCE_SKILL).installed_locations()[0]
 
 
 def fixture_depot(base: Path) -> Path:
+    """Compose a disposable proposed Template before any live adoption.
+
+    The production helper still reads only this fixture's registered Template.
+    Tests must not require publishing a new live Template to validate its pending
+    initializer. Mapped source bytes form the fixture; unmanaged historical
+    starter files retain the existing Template bytes.
+    """
     root = base / "Sys4AI"
     root.mkdir(parents=True)
     (root / "depot").mkdir()
@@ -40,19 +47,33 @@ def fixture_depot(base: Path) -> Path:
     template.mkdir()
     ignore = shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc")
     for name in BASELINE:
-        source = SOURCE_SKILL if name == "init-new-project" else SOURCE_DEPOT / "Projects/Sys4AI-Template-Project/.agents/skills" / name
+        source = SOURCE_SKILL if name == "init-new-project" else SOURCE_DEPOT / "SKILLS-depo" / name
         shutil.copytree(source, root / "SKILLS-depo" / name, ignore=ignore)
         shutil.copytree(source, template / ".agents/skills" / name, ignore=ignore)
     (root / "SOULS-depo").mkdir()
-    shutil.copyfile(SOURCE_DEPOT / "Projects/Sys4AI-Template-Project/SOUL.md", root / "SOULS-depo/SOUL.md")
+    shutil.copyfile(SOURCE_DEPOT / "SOULS-depo/SOUL.md", root / "SOULS-depo/SOUL.md")
     shutil.copyfile(root / "SOULS-depo/SOUL.md", template / "SOUL.md")
     policy = json.loads((SOURCE_SKILL / "assets/baseline-assets.json").read_text())
+    mapping = json.loads((SOURCE_DEPOT / "depot/template-update.json").read_text())["overrides"]
+    mapped = {destination: source for source, destination in mapping.items()}
     for relative in policy["starter_files"]:
         target = template / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(SOURCE_DEPOT / "Projects/Sys4AI-Template-Project" / relative, target)
-    shutil.copytree(SOURCE_DEPOT / "Projects/Sys4AI-Template-Project/sub-agent-roles/project-sub-agent",
-                    template / "sub-agent-roles/project-sub-agent", ignore=ignore)
+        source = SOURCE_DEPOT / mapped[relative] if relative in mapped else SOURCE_DEPOT / "Projects/Sys4AI-Template-Project" / relative
+        shutil.copyfile(source, target)
+    for relative, source in mapped.items():
+        if relative.startswith("roles/"):
+            target = template / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(SOURCE_DEPOT / source, target)
+    role_script = template / ".agents/skills/manage-subagent-roles/scripts/role_catalog.py"
+    role_spec = importlib.util.spec_from_file_location("fixture_role_catalog", role_script)
+    role_helper = importlib.util.module_from_spec(role_spec)
+    sys.modules[role_spec.name] = role_helper
+    role_spec.loader.exec_module(role_helper)
+    catalog = role_helper.build_catalog(template.resolve(), inspect_index=False)
+    assert not catalog.invalid_roles, catalog.invalid_roles
+    (template / "roles/INDEX.md").write_text(role_helper.render_index(catalog))
     (template / ".template").mkdir()
     for name in ("baseline-assets.json", "project-readme.md"):
         shutil.copyfile(SOURCE_SKILL / "assets" / name, template / ".template" / name)
@@ -156,7 +177,10 @@ class InitializerTests(unittest.TestCase):
             "models/weights",
             "unknown.txt",
             ".DS_Store",
-            "sub-agent-roles/project-sub-agent/__pycache__/compiled.pyc",
+            "roles/project-sub-agent/__pycache__/compiled.pyc",
+            "roles/.transition.json",
+            "roles/task-manager/.transition.json",
+            ".sys4ai/role-catalog.lock",
             "Implementation_Plans/old-plan.md",
             "Tasks/old-task/task.json",
         )
@@ -218,7 +242,7 @@ class InitializerTests(unittest.TestCase):
     def test_legacy_private_provider_directories_are_never_copied(self):
         template = self.root / self.helper.TEMPLATE
         excluded_files = []
-        for collection in (".agents/skills/communication", "sub-agent-roles/project-sub-agent", "reference-assets"):
+        for collection in (".agents/skills/communication", "roles/project-sub-agent", "reference-assets"):
             for private_directory in (".cognee", ".cognee_system"):
                 relative = Path(collection) / private_directory / "db.sqlite"
                 target = template / relative
@@ -270,21 +294,26 @@ class InitializerTests(unittest.TestCase):
         package.mkdir()
         (package / "SKILL.md").write_text("---\nname: new-skill\ndescription: Template addition.\n---\nUse this skill.\n")
         (package / "resource.md").write_text("complete added package")
-        role = template / "sub-agent-roles/new-role"
-        shutil.copytree(template / "sub-agent-roles/project-sub-agent", role)
+        role = template / "roles/new-role"
+        shutil.copytree(template / "roles/project-sub-agent", role)
         (role / "reference.md").write_text("complete role reference")
+        role_file = role / "ROLE.md"
+        role_file.write_text(role_file.read_text().replace("name: project-sub-agent", "name: new-role"))
+        inputs = {"SOUL.md": (template / "SOUL.md").read_bytes(), self.helper.ROLE_HELPER: (template / self.helper.ROLE_HELPER).read_bytes()}
+        inputs.update({"roles/" + name: raw for name, raw in self.helper.tree_files(template / "roles").items() if name != "INDEX.md"})
+        (template / "roles/INDEX.md").write_bytes(self.helper.role_index_bytes(inputs, required=True))
         reference = template / "reference-assets/SOULS-depo/alternative.md"
         reference.parent.mkdir(parents=True)
         reference.write_text("template reference asset")
         self.run_setup()
         self.assertEqual("complete added package", (self.target / ".agents/skills/new-skill/resource.md").read_text())
         self.assertTrue((self.target / ".agents/skills/init-new-project/SKILL.md").is_file())
-        self.assertEqual("complete role reference", (self.target / "sub-agent-roles/new-role/reference.md").read_text())
+        self.assertEqual("complete role reference", (self.target / "roles/new-role/reference.md").read_text())
         self.assertEqual("template reference asset", (self.target / "reference-assets/SOULS-depo/alternative.md").read_text())
 
     def test_missing_required_template_dependencies_refuse_without_mutation(self):
         template = self.root / self.helper.TEMPLATE
-        for relative in (".agents/skills/task", "sub-agent-roles/project-sub-agent", "AGENTS.md"):
+        for relative in (".agents/skills/task", "roles/project-sub-agent", "AGENTS.md", self.helper.ROLE_HELPER):
             with self.subTest(relative=relative):
                 selected = template / relative
                 backup = Path(self.temporary.name) / "required-backup"

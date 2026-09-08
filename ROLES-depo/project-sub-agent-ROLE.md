@@ -12,6 +12,11 @@ Director. This role is a reusable general worker for a template project and is
 not a substitute for a specialized role when domain-specific capability is
 required.
 
+With a recorded function-specific fit, this definition can support a generic
+worker, solver, reviewer, senior synthesizer or dedicated implementer. Each
+required function still has its distinct native instance and bounded contract.
+It does not supply task-manager authority or unstated domain expertise.
+
 ## Suitable tasks
 
 - Focused project inspection and evidence collection.

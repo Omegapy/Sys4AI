@@ -1,7 +1,7 @@
 # Task system contract
 
-This reference defines the project-local Task ledger used by the root Project
-Director. `task.json` is canonical. `TASK.md` and `Tasks/INDEX.md` are generated
+This reference defines the project-local Task ledger used by the authorized
+Project Director. `task.json` is canonical. `TASK.md` and `Tasks/INDEX.md` are generated
 views. Task Responses are append-only continuation records and never replace
 live-project verification.
 
@@ -41,9 +41,13 @@ file, response directory, response file, lock target, or temporary payload. It
 also rejects absolute task selectors, traversal segments, control characters,
 hidden task targets, and any resolved path outside `Tasks/`.
 
-Only the root Project Director can approve canonical state, lifecycle changes,
-completion, and final Task Responses. Child agents can inspect a specifically
-delegated read-only artifact and return evidence, but cannot mutate the ledger.
+Schema-1 work remains under the host Project Director's authority. For schema-2
+execution, the host performs bounded bootstrap and the confirmed manager alone
+approves canonical state, lifecycle changes, completion and final Task Responses
+after activation. Ordinary workers, solvers, reviewers, seniors and implementers
+may inspect delegated read-only artifacts and return evidence; they cannot
+mutate the ledger. Selected unassigned maintenance and exact frozen-transaction
+recovery follow the orchestration contract's explicit exception boundaries.
 
 ## Commands and results
 
@@ -478,3 +482,38 @@ not delete Task records automatically.
 Task activation never authorizes unrelated deletion, dependency installation,
 external communication, financial action, Git mutation, publication,
 deployment, user-visible thread management, or a change outside the project.
+
+## Schema-2 execution extension
+
+New execution workflow records explicitly pass `orchestration_enabled: true` to
+`new`. The omitted flag preserves the raw schema-1 API and historical lifecycle
+semantics. See [Canonical Task orchestration](orchestration-contract.md) for the
+exact typed event schema, actor/generation checks, artifact and review freshness,
+strict upgrade, unassigned maintenance, and transaction recovery behavior. All
+schema-2 mutations use the existing Task locks, revisions, immutable response
+identities and partial-publication transaction. Read-only routes do not migrate
+or repair records. Root automatic intake and inactivity policy remain separate
+project-local extensions, with ownership reconciliation before age closure.
+
+## Root schema-2 intake and inactivity proof
+
+The root `intake` work-profile payload may include `orchestration_enabled: true`
+for a new execution record and `intake_actor` for current host evidence. That
+object has exactly `native_id` and `receipt`; receipt uses the documented native
+`collaboration.list_agents` shape and must actually show that host running.
+It is required before intake can close any old schema-2 record. Preserve actual
+native IDs and receipts; examples and role names are not identity evidence.
+
+The helper checks known owners before excluding an old match or creating its
+successor. Unreconciled ownership blocks the entire intake before closure/new
+work. A current live match is returned without changing its writer; reconnect
+through the manager event using current native observations.
+
+For explicit schema-2 `close-old-task`, the normal closure-response payload also
+includes `actor`, `execution_id`, `generation`, and `policy_receipt`. The latter
+is that actor's current running native roster receipt. An owned execution
+requires its original bootstrap and reconciled owners. An unassigned record
+uses null execution ID and generation 0 without inventing a writer or execution.
+The 30-day, revision, lock and append-only non-completion gates still apply.
+These fields and policy belong to the installed depot extension; generic source
+and Template helpers have no `intake` or inactivity-closure route.

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-08T12:39:31.221639+00:00",
+  "task_id": "TASK-20260908-A8B65949",
+  "execution_id": "recovery_validation_20260908",
+  "generation": 2,
+  "native_id": "/root/recovery_replacement",
+  "revision": 21,
+  "entry_snapshot": {
+    "path": "coordination/replacement-entry-snapshot.json",
+    "sha256": "b68eb1e3d7648b4cc16905c2f2729eb86ae13aa517966832eaea5b50b0337d2a"
+  },
+  "current_native_roster": {
+    "path": "coordination/replacement-current-native-roster.json",
+    "sha256": "aad5b0a1ff15b80d3a52a161d398c7e79387456f53ba79f7629da01180fd4ef5"
+  },
+  "reconnect": {
+    "path": "coordination/control-replacement-manager-reconnect.json",
+    "sha256": "b87f9d759af05cc51fb9e21a8b9184bb534df34f871b3e488fd5022ef23e5850"
+  },
+  "stale_generation_control": {
+    "path": "coordination/control-replacement-old-generation-rejected.json",
+    "sha256": "1fc1c7b882e1b33dbf51e458cc5bdca9e4db722942742537b244ed17faaf89bb"
+  },
+  "controlled_fault_boundary": "The replacement manager deliberately submitted a generation-1 payload through the actual public helper. It was rejected without changing any Task bytes. No real delayed worker emission is claimed. The first manager separately delayed importing a real launch receipt; that was also controlled.",
+  "old_native_owners": {
+    "/root/recovery_manager": "completed",
+    "/root/recovery_manager/marker_worker": "interrupted"
+  },
+  "old_canonical_assignments": {
+    "recovery_manager": "revoked",
+    "recovery_worker": "revoked"
+  },
+  "marker": {
+    "path": "markers/recovery_worker/readiness.json",
+    "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+  },
+  "unfinished_delivery_absent": true,
+  "unchanged_main_criteria": [
+    "The intentionally unfinished worker deliverable is completed and directly verified."
+  ],
+  "subtask_baselines_unchanged": true,
+  "old_generation_events_unchanged": true,
+  "prior_response_count": 19,
+  "prior_responses_unchanged": true,
+  "protected_file_count": 86,
+  "protected_hashes_unchanged": true,
+  "first_manager_controls_and_native_receipt_hashes_unchanged": true,
+  "delivery_completed": false,
+  "implementation_results": 0,
+  "verified_subtasks": 0,
+  "intended_next_operation": "Record execution outcome cancelled, then the real cancelled Task lifecycle.",
+  "limitations": [
+    "Actual mid-run model switching was not exercised.",
+    "Literal model/effort telemetry is unavailable; full-history exact inheritance was used.",
+    "The replacement manager is currently running; the host must observe its completed native state after final return."
+  ]
+}

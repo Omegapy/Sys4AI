@@ -1,0 +1,159 @@
+[
+  {
+    "check": "repository",
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 5.665,
+    "log": "Verification/task-manager-orchestration/root-checks/repository.log",
+    "sha256": "8f4a23255b215b91a90b9fd533d45f053e75ed794fe84467718bda29451dce40",
+    "summary": [
+      "----------------------------------------------------------------------",
+      "Ran 73 tests in 5.581s",
+      "",
+      "OK"
+    ]
+  },
+  {
+    "check": "agent-task",
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      ".agents/skills/agent-task/tests",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 73.853,
+    "log": "Verification/task-manager-orchestration/root-checks/agent-task.log",
+    "sha256": "e26f65786720d4171c43714c2a08b9048fabc9535ce47b029bd1a76e1e03d7f7",
+    "summary": [
+      "----------------------------------------------------------------------",
+      "Ran 106 tests in 73.744s",
+      "",
+      "OK"
+    ]
+  },
+  {
+    "check": "roles",
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      ".agents/skills/manage-subagent-roles/tests",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 0.379,
+    "log": "Verification/task-manager-orchestration/root-checks/roles.log",
+    "sha256": "91fd00172e1c15e9245f455edda062b876b39e2a5f686f23599abffffce0dee4",
+    "summary": [
+      "----------------------------------------------------------------------",
+      "Ran 66 tests in 0.298s",
+      "",
+      "OK"
+    ]
+  },
+  {
+    "check": "task",
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      ".agents/skills/task/tests",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 0.05,
+    "log": "Verification/task-manager-orchestration/root-checks/task.log",
+    "sha256": "52cf5f3f31ce7a886d7b9e06fda43beb74e668d1708a6be972068aaf3c46327e",
+    "summary": [
+      "----------------------------------------------------------------------",
+      "Ran 14 tests in 0.008s",
+      "",
+      "OK"
+    ]
+  },
+  {
+    "check": "initializer",
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      ".agents/skills/init-new-project/tests",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 30.016,
+    "log": "Verification/task-manager-orchestration/root-checks/initializer.log",
+    "sha256": "88d8819f20922f7bb38d8cade5faab279226ea26e6553151e2fbba165539246d",
+    "summary": [
+      "----------------------------------------------------------------------",
+      "Ran 36 tests in 29.930s",
+      "",
+      "OK"
+    ]
+  },
+  {
+    "check": "role-validator",
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      ".agents/skills/manage-subagent-roles/scripts/role_catalog.py",
+      "--repo-root",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "validate",
+      "--format",
+      "json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.049,
+    "log": "Verification/task-manager-orchestration/root-checks/role-validator.log",
+    "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769",
+    "summary": "valid"
+  },
+  {
+    "check": "task-status",
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      ".agents/skills/agent-task/scripts/task_state.py",
+      "--project-root",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "status"
+    ],
+    "exit_code": 0,
+    "seconds": 0.119,
+    "log": "Verification/task-manager-orchestration/root-checks/task-status.log",
+    "sha256": "c1442c34204dc8f2ae8a825efe0ac083ce9de45b7ba946a03b2f68caa4bdd009",
+    "summary": "ok"
+  },
+  {
+    "check": "task-validator",
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      ".agents/skills/agent-task/scripts/task_state.py",
+      "--project-root",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "validate"
+    ],
+    "exit_code": 0,
+    "seconds": 0.118,
+    "log": "Verification/task-manager-orchestration/root-checks/task-validator.log",
+    "sha256": "c2af0d7515ab7b2bde5efb253e94cb10e29851732f4235ecc97fd2a2441e469d",
+    "summary": "valid"
+  }
+]

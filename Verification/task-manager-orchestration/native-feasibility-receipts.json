@@ -1,0 +1,883 @@
+{
+  "probe_id": "PLAN-20260908-6E6F545E-TASK-002",
+  "created_at": "2026-09-08T06:40:55.568364+00:00",
+  "root_native_id": "/root",
+  "manager_native_id": "/root/native_probe_manager",
+  "fixture": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04",
+  "source_hashes": [
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/SOUL.md",
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLE.md",
+      "sha256": "8438a5b28c382f750ec65598cc097fe6bfda915affef36ab7074905cb2ec463d"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/SPECS.md",
+      "sha256": "e04a8fe939047b7f0e2beefdb130efa60be69eb3b37201404dc1a648317c0369"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/sub-agent-roles/project-sub-agent/AGENTS.md",
+      "sha256": "f4211b99a8453204053ade52563a6f234d0b43a3fedf88b6bdc362475ab7e876"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/sub-agent-roles/project-sub-agent/ROLE.md",
+      "sha256": "36ba709cac3009a3c1777b6ba0954f1ed1ac988327700b8dd65e28fb30de1c21"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/manage-subagent-roles/SKILL.md",
+      "sha256": "204cefada5ada1be88180ddd53d0f3bef5fd2dd4512c1081179879a9c4cbed54"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/task-manager-orchestration/native-problem-packet.json",
+      "sha256": "322898ae061ab12cfb8a7db1a0a3fec7985791e528546e707188f8382dc673f8"
+    }
+  ],
+  "common_problem_sha256": "387769d0c8f92a9b9cad2c5154f1c5604a6d77ba5531471cb0e023903b183f44",
+  "common_problem_serialization": "UTF-8 JSON with sort_keys=True, separators=(comma,colon)",
+  "runtime_guarantee": {
+    "source": "effective developer multi_agent_role instruction",
+    "exact_excerpt": "Full-history forks (`fork_turns` omitted or `\"all\"`) inherit the parent model and reasoning effort and do not accept overrides.",
+    "application": "All native spawn arguments use fork_turns all and omit model and reasoning_effort. Exact model names are not self-attested.",
+    "configuration_receipt": "Root delegation states effective user allowlist has no agents defaults/custom agents and project config absent; manager did not reread configuration."
+  },
+  "available_native_operations": [
+    "spawn_agent",
+    "list_agents",
+    "send_message",
+    "followup_task",
+    "wait_agent",
+    "interrupt_agent"
+  ],
+  "not_available": [
+    "close_agent",
+    "release_agent"
+  ],
+  "declared_concurrency_including_root": 4,
+  "events": [
+    {
+      "id": "E01",
+      "operation": "list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E02",
+      "operation": "spawn_agent",
+      "arguments": {
+        "task_name": "solver_a",
+        "fork_turns": "all",
+        "model": "omitted",
+        "reasoning_effort": "omitted"
+      },
+      "result": {
+        "task_name": "/root/native_probe_manager/solver_a"
+      },
+      "candidate_contents_in_context": false
+    },
+    {
+      "id": "E03",
+      "operation": "spawn_agent",
+      "arguments": {
+        "task_name": "solver_b",
+        "fork_turns": "all",
+        "model": "omitted",
+        "reasoning_effort": "omitted"
+      },
+      "result": {
+        "task_name": "/root/native_probe_manager/solver_b"
+      },
+      "candidate_contents_in_context": false
+    },
+    {
+      "id": "E04",
+      "operation": "list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_a",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_b",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E05",
+      "operation": "send_message",
+      "arguments": {
+        "target": "/root/native_probe_manager/solver_a",
+        "nonce": "manager-to-worker-A-20260908-001"
+      },
+      "result": "Tool accepted; worker final acknowledged exact nonce."
+    },
+    {
+      "id": "E06",
+      "operation": "wait_agent",
+      "arguments": {
+        "timeout_ms": 60000
+      },
+      "result": {
+        "message": "Wait completed.",
+        "timed_out": false
+      },
+      "notification": {
+        "sender": "/root/native_probe_manager/solver_a",
+        "status": "passed",
+        "candidate_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-a-candidate.json",
+        "candidate_sha256": "b0df6618aba05d0afa07400838464f5d350d63c89d3dbd69dbaa8c06e6f1e77e",
+        "receipt_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-a-receipt.json",
+        "receipt_sha256": "a43d20fce654d7cea989980b417cffab99d3ab93efe49651c0bc1fc8c90e3b2b",
+        "nonce_acknowledged": "manager-to-worker-A-20260908-001"
+      }
+    },
+    {
+      "id": "E07",
+      "operation": "list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_a",
+            "agent_status": "completed",
+            "completion_receipt": "E06"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_b",
+            "agent_status": "running"
+          }
+        ]
+      },
+      "interpretation": "A is natively completed. Attempt queued C to test whether its slot is reusable."
+    },
+    {
+      "id": "E08",
+      "operation": "worker_final",
+      "sender": "/root/native_probe_manager/solver_b",
+      "status": "passed",
+      "candidate_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-b-candidate.json",
+      "candidate_sha256": "d0cbac677ade5b81aadd034cac941f4fade0144b3a39f03c0808dc6186b2a9bb",
+      "receipt_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-b-receipt.json",
+      "receipt_sha256": "692a018f67c24d21be48d30a1761d93a9f42c4b2e2967b3771c3cb2c3c89f439"
+    },
+    {
+      "id": "E09",
+      "operation": "spawn_agent",
+      "arguments": {
+        "task_name": "solver_c",
+        "fork_turns": "all",
+        "model": "omitted",
+        "reasoning_effort": "omitted"
+      },
+      "result": {
+        "task_name": "/root/native_probe_manager/solver_c"
+      },
+      "candidate_contents_in_context": false,
+      "previous_candidate_read_count": 0,
+      "interpretation": "Completed-worker capacity became reusable by a new distinct child; exact allocator slot identity is not exposed. A had native completed status and B returned its final before C dispatch."
+    },
+    {
+      "id": "E10",
+      "operation": "followup_task",
+      "arguments": {
+        "target": "/root/native_probe_manager/solver_a",
+        "objective": "Read-only stop/reconnect probe after arithmetic completion",
+        "nonce": "stop-reconnect-A-001"
+      },
+      "result": "Empty tool response, no error; E12 proves execution."
+    },
+    {
+      "id": "E11",
+      "operation": "list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_a",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_c",
+            "agent_status": "running"
+          }
+        ]
+      },
+      "note": "B is absent from this later live roster; its final completion receipt is E08."
+    },
+    {
+      "id": "E12",
+      "operation": "worker_message",
+      "sender": "/root/native_probe_manager/solver_a",
+      "message": "READY_FOR_BOUNDED_INTERRUPT; native identity: /root/native_probe_manager/solver_a; packet SHA256: 322898ae061ab12cfb8a7db1a0a3fec7985791e528546e707188f8382dc673f8; nonce: stop-reconnect-A-001."
+    },
+    {
+      "id": "E13",
+      "operation": "interrupt_agent",
+      "arguments": {
+        "target": "/root/native_probe_manager/solver_a"
+      },
+      "result": {
+        "previous_status": "running"
+      },
+      "reason": "The explicitly contracted readiness boundary ended permitted substantive work; interruption tested that bounded stopping contract."
+    },
+    {
+      "id": "E14",
+      "operation": "list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_a",
+            "agent_status": "interrupted"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_c",
+            "agent_status": "completed",
+            "completion_receipt": "E15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E15",
+      "operation": "worker_final",
+      "sender": "/root/native_probe_manager/solver_c",
+      "status": "passed",
+      "candidate_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-c-candidate.json",
+      "candidate_sha256": "a44e76fc896281dab3f41aaedacaf90ae729cfe297f6a4bb730a150ad40abb85",
+      "receipt_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-c-receipt.json",
+      "receipt_sha256": "2637b81482e60457b3cf454f8d83a71a21de6cd8f9aafc20c92624af0f0c83bb"
+    },
+    {
+      "id": "E16",
+      "operation": "followup_task",
+      "arguments": {
+        "target": "/root/native_probe_manager/solver_a",
+        "objective": "Read-only immediate reconnection receipt after observed interruption",
+        "nonce": "stop-reconnect-A-001"
+      },
+      "result": "Empty tool response, no error; E17 proves execution."
+    },
+    {
+      "id": "E17",
+      "operation": "worker_final",
+      "sender": "/root/native_probe_manager/solver_a",
+      "status": "RECONNECTED",
+      "native_id": "/root/native_probe_manager/solver_a",
+      "packet_sha256": "322898ae061ab12cfb8a7db1a0a3fec7985791e528546e707188f8382dc673f8",
+      "nonce": "stop-reconnect-A-001"
+    },
+    {
+      "id": "E18",
+      "operation": "list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_a",
+            "agent_status": "completed",
+            "completion_receipt": "E17"
+          },
+          {
+            "agent_name": "/root/native_probe_manager/solver_c",
+            "agent_status": "completed",
+            "completion_receipt": "E15"
+          }
+        ]
+      },
+      "note": "No probe worker is running or interrupted. B is reconciled by E08 and its absence from E11/E14/E18; no deletion claim is made."
+    }
+  ],
+  "dispatch_context_evidence": {
+    "common_problem": {
+      "objective": "Compute the sum of the integer sequence [2, 5, 8] and independently describe one way to verify it.",
+      "numbers": [
+        2,
+        5,
+        8
+      ],
+      "criteria": [
+        "Exact integer result",
+        "One independently written verification method",
+        "Candidate-private random marker remains in candidate file only"
+      ]
+    },
+    "common_problem_sha256": "387769d0c8f92a9b9cad2c5154f1c5604a6d77ba5531471cb0e023903b183f44",
+    "exact_common_excerpt_from_each_spawn_message": "Identical common_problem supplied to all solvers: {\"objective\":\"Compute the sum of the integer sequence [2, 5, 8] and independently describe one way to verify it.\",\"numbers\":[2,5,8],\"criteria\":[\"Exact integer result\",\"One independently written verification method\",\"Candidate-private random marker remains in candidate file only\"]}.",
+    "exact_scope_excerpt_from_each_spawn_message": "Read only governing files and your own assigned artifacts. Do not read sibling artifacts, parent output files, or another solver's answer. Shared filesystem exists; this is instruction-based context independence, not sandbox isolation.",
+    "exact_queued_c_excerpt": "The manager has not read or printed any earlier candidate; your inherited context can include only sibling paths, hashes, status and non-candidate messaging nonce.",
+    "observed_before_c_dispatch": "Manager context included A and B final paths, hashes, status and A nonce acknowledgement; no candidate result, verification text or private marker. Candidate files were first opened after E09.",
+    "worker_receipt_corroboration": "All three receipts report sibling_candidate_contents_present_in_received_context false and the identical common problem hash.",
+    "isolation_level": "Instruction-based separation and observed context discipline on a shared filesystem; no sandbox isolation or OS access enforcement is claimed."
+  },
+  "role_catalog_receipts": [
+    {
+      "path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/catalog-before-reconnect-a.json",
+      "sha256": "644261abb766938c3fb2295cae27a05c9bdc1d1544484d889458319b29934cba",
+      "receipt": {
+        "assignment": "read_only_stop_reconnect_on_solver_a",
+        "at": "2026-09-08T06:45:48.456127+00:00",
+        "command": ".venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . list --format json",
+        "exit_code": 0,
+        "catalog": {
+          "invalid_roles": [],
+          "role_root": "sub-agent-roles",
+          "schema_version": 1,
+          "valid_roles": [
+            {
+              "agents_file": "sub-agent-roles/project-sub-agent/AGENTS.md",
+              "description": "General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.",
+              "diagnostics": [],
+              "folder": "sub-agent-roles/project-sub-agent",
+              "name": "project-sub-agent",
+              "role_file": "sub-agent-roles/project-sub-agent/ROLE.md",
+              "valid": true
+            }
+          ]
+        },
+        "root_selected_role": "project-sub-agent",
+        "fit": "Root selected a bounded read-only stopping/reconnection probe; same paired project-sub-agent role provides focused native verification without production decisions.",
+        "alternatives": [],
+        "role_hashes": {
+          "sub-agent-roles/project-sub-agent/AGENTS.md": "f4211b99a8453204053ade52563a6f234d0b43a3fedf88b6bdc362475ab7e876",
+          "sub-agent-roles/project-sub-agent/ROLE.md": "36ba709cac3009a3c1777b6ba0954f1ed1ac988327700b8dd65e28fb30de1c21"
+        }
+      }
+    },
+    {
+      "path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/catalog-before-resume-a.json",
+      "sha256": "59baeea86dff21c558b55e20e8fd2a2a32b2b0ec77bb725e8225d6c6750e440e",
+      "receipt": {
+        "assignment": "resume_interrupted_solver_a",
+        "at": "2026-09-08T06:47:13.654603+00:00",
+        "exit_code": 0,
+        "catalog": {
+          "invalid_roles": [],
+          "role_root": "sub-agent-roles",
+          "schema_version": 1,
+          "valid_roles": [
+            {
+              "agents_file": "sub-agent-roles/project-sub-agent/AGENTS.md",
+              "description": "General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.",
+              "diagnostics": [],
+              "folder": "sub-agent-roles/project-sub-agent",
+              "name": "project-sub-agent",
+              "role_file": "sub-agent-roles/project-sub-agent/ROLE.md",
+              "valid": true
+            }
+          ]
+        },
+        "root_selected_role": "project-sub-agent",
+        "fit": "Read-only same-identity interruption recovery receipt, selected by root.",
+        "role_hashes": {
+          "sub-agent-roles/project-sub-agent/AGENTS.md": "f4211b99a8453204053ade52563a6f234d0b43a3fedf88b6bdc362475ab7e876",
+          "sub-agent-roles/project-sub-agent/ROLE.md": "36ba709cac3009a3c1777b6ba0954f1ed1ac988327700b8dd65e28fb30de1c21"
+        }
+      }
+    },
+    {
+      "path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/catalog-before-solver-a.json",
+      "sha256": "b4bebb5ee74621217a2ea74e912173aba6dfd41272c5da189df59bb0ca86e31c",
+      "receipt": {
+        "assignment": "solver_a",
+        "at": "2026-09-08T06:41:26.734260+00:00",
+        "command": ".venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . list --format json",
+        "exit_code": 0,
+        "catalog": {
+          "invalid_roles": [],
+          "role_root": "sub-agent-roles",
+          "schema_version": 1,
+          "valid_roles": [
+            {
+              "agents_file": "sub-agent-roles/project-sub-agent/AGENTS.md",
+              "description": "General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.",
+              "diagnostics": [],
+              "folder": "sub-agent-roles/project-sub-agent",
+              "name": "project-sub-agent",
+              "role_file": "sub-agent-roles/project-sub-agent/ROLE.md",
+              "valid": true
+            }
+          ]
+        },
+        "root_selected_role": "project-sub-agent",
+        "fit": "Focused arithmetic verification and disposable evidence writing; root selected this role for direct-sum perspective.",
+        "alternatives": [],
+        "role_hashes": {
+          "sub-agent-roles/project-sub-agent/AGENTS.md": "f4211b99a8453204053ade52563a6f234d0b43a3fedf88b6bdc362475ab7e876",
+          "sub-agent-roles/project-sub-agent/ROLE.md": "36ba709cac3009a3c1777b6ba0954f1ed1ac988327700b8dd65e28fb30de1c21"
+        }
+      }
+    },
+    {
+      "path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/catalog-before-solver-b.json",
+      "sha256": "4869b848c9f80acf8a096749264b402cdf0bad9dc473370b490b6610f235a401",
+      "receipt": {
+        "assignment": "solver_b",
+        "at": "2026-09-08T06:42:11.149515+00:00",
+        "command": ".venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . list --format json",
+        "exit_code": 0,
+        "catalog": {
+          "invalid_roles": [],
+          "role_root": "sub-agent-roles",
+          "schema_version": 1,
+          "valid_roles": [
+            {
+              "agents_file": "sub-agent-roles/project-sub-agent/AGENTS.md",
+              "description": "General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.",
+              "diagnostics": [],
+              "folder": "sub-agent-roles/project-sub-agent",
+              "name": "project-sub-agent",
+              "role_file": "sub-agent-roles/project-sub-agent/ROLE.md",
+              "valid": true
+            }
+          ]
+        },
+        "root_selected_role": "project-sub-agent",
+        "fit": "Focused arithmetic verification and disposable evidence writing; root selected this role for incremental-check perspective.",
+        "alternatives": [],
+        "role_hashes": {
+          "sub-agent-roles/project-sub-agent/AGENTS.md": "f4211b99a8453204053ade52563a6f234d0b43a3fedf88b6bdc362475ab7e876",
+          "sub-agent-roles/project-sub-agent/ROLE.md": "36ba709cac3009a3c1777b6ba0954f1ed1ac988327700b8dd65e28fb30de1c21"
+        }
+      }
+    },
+    {
+      "path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/catalog-before-solver-c.json",
+      "sha256": "8b45c1e9257b1a9225418fbd606b5058ca2e8050a040680b95dc7e7bb1cbca1f",
+      "receipt": {
+        "assignment": "solver_c",
+        "at": "2026-09-08T06:44:29.093842+00:00",
+        "command": ".venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . list --format json",
+        "exit_code": 0,
+        "catalog": {
+          "invalid_roles": [],
+          "role_root": "sub-agent-roles",
+          "schema_version": 1,
+          "valid_roles": [
+            {
+              "agents_file": "sub-agent-roles/project-sub-agent/AGENTS.md",
+              "description": "General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.",
+              "diagnostics": [],
+              "folder": "sub-agent-roles/project-sub-agent",
+              "name": "project-sub-agent",
+              "role_file": "sub-agent-roles/project-sub-agent/ROLE.md",
+              "valid": true
+            }
+          ]
+        },
+        "root_selected_role": "project-sub-agent",
+        "fit": "Focused arithmetic verification and disposable evidence writing; root selected this role for inverse-check perspective.",
+        "alternatives": [],
+        "role_hashes": {
+          "sub-agent-roles/project-sub-agent/AGENTS.md": "f4211b99a8453204053ade52563a6f234d0b43a3fedf88b6bdc362475ab7e876",
+          "sub-agent-roles/project-sub-agent/ROLE.md": "36ba709cac3009a3c1777b6ba0954f1ed1ac988327700b8dd65e28fb30de1c21"
+        }
+      }
+    }
+  ],
+  "workers": [
+    {
+      "logical_instance": "solver_a",
+      "native_id": "/root/native_probe_manager/solver_a",
+      "perspective": "DIRECT SUM",
+      "candidate_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-a-candidate.json",
+      "candidate_sha256": "b0df6618aba05d0afa07400838464f5d350d63c89d3dbd69dbaa8c06e6f1e77e",
+      "receipt_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-a-receipt.json",
+      "receipt_sha256": "a43d20fce654d7cea989980b417cffab99d3ab93efe49651c0bc1fc8c90e3b2b",
+      "receipt": {
+        "candidate_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-a-candidate.json",
+        "candidate_sha256": "b0df6618aba05d0afa07400838464f5d350d63c89d3dbd69dbaa8c06e6f1e77e",
+        "checks": {
+          "candidate_round_trip": true,
+          "common_problem_hash_matches": true,
+          "exact_integer_result": true,
+          "independent_inverse_operation_verified": true,
+          "marker_present_in_candidate_only": true,
+          "verification_text_present": true,
+          "writes_limited_to_assigned_artifacts": true
+        },
+        "common_problem_sha256": "387769d0c8f92a9b9cad2c5154f1c5604a6d77ba5531471cb0e023903b183f44",
+        "input_packet_sha256": "322898ae061ab12cfb8a7db1a0a3fec7985791e528546e707188f8382dc673f8",
+        "logical_solver": "A",
+        "model_effort_inheritance_source": {
+          "delegation_contract": "Parent states this child uses fork_turns all with no model or reasoning_effort overrides.",
+          "reported_model_name": null,
+          "reported_reasoning_effort_name": null,
+          "runtime_guarantee": "collaboration.spawn_agent tool contract: Full-history forks (fork_turns omitted or \"all\") inherit the parent model and reasoning effort and do not accept overrides."
+        },
+        "native_task_name": "/root/native_probe_manager/solver_a",
+        "probe_id": "PLAN-20260908-6E6F545E-TASK-002",
+        "role_file_sha256": {
+          "sub-agent-roles/project-sub-agent/AGENTS.md": "f4211b99a8453204053ade52563a6f234d0b43a3fedf88b6bdc362475ab7e876",
+          "sub-agent-roles/project-sub-agent/ROLE.md": "36ba709cac3009a3c1777b6ba0954f1ed1ac988327700b8dd65e28fb30de1c21"
+        },
+        "sibling_candidate_contents_present_in_received_context": false,
+        "status": "passed"
+      },
+      "manager_validation": {
+        "candidate_hash_matches_worker_receipt": true,
+        "exact_integer_result_matches_common_input": true,
+        "verification_method_present": true,
+        "common_problem_hash_matches": true,
+        "role_hashes_match_fresh_catalog": true
+      },
+      "final_state": "completed",
+      "final_state_evidence": "E17/E18"
+    },
+    {
+      "logical_instance": "solver_b",
+      "native_id": "/root/native_probe_manager/solver_b",
+      "perspective": "INCREMENTAL CHECK",
+      "candidate_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-b-candidate.json",
+      "candidate_sha256": "d0cbac677ade5b81aadd034cac941f4fade0144b3a39f03c0808dc6186b2a9bb",
+      "receipt_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-b-receipt.json",
+      "receipt_sha256": "692a018f67c24d21be48d30a1761d93a9f42c4b2e2967b3771c3cb2c3c89f439",
+      "receipt": {
+        "candidate_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-b-candidate.json",
+        "candidate_sha256": "d0cbac677ade5b81aadd034cac941f4fade0144b3a39f03c0808dc6186b2a9bb",
+        "checks": {
+          "assigned_candidate_identity_verified": true,
+          "candidate_json_reopened": true,
+          "common_problem_hash_matches_contract": true,
+          "exact_integer_result_verified": true,
+          "private_marker_format_verified": true,
+          "sibling_artifacts_not_read": true,
+          "verification_method_present": true
+        },
+        "common_problem_sha256": "387769d0c8f92a9b9cad2c5154f1c5604a6d77ba5531471cb0e023903b183f44",
+        "input_file_sha256": "322898ae061ab12cfb8a7db1a0a3fec7985791e528546e707188f8382dc673f8",
+        "logical_solver": "B",
+        "model_effort_inheritance_source": "Platform collaboration.spawn_agent contract: Full-history forks (fork_turns omitted or \"all\") inherit the parent model and reasoning effort and do not accept overrides. The supplied delegation specifies fork_turns=\"all\" and no overrides. Exact model and reasoning-effort values are not exposed to this solver.",
+        "native_task_name": "/root/native_probe_manager/solver_b",
+        "perspective": "INCREMENTAL CHECK",
+        "probe_id": "PLAN-20260908-6E6F545E-TASK-002",
+        "role_file_sha256": {
+          "sub-agent-roles/project-sub-agent/AGENTS.md": "f4211b99a8453204053ade52563a6f234d0b43a3fedf88b6bdc362475ab7e876",
+          "sub-agent-roles/project-sub-agent/ROLE.md": "36ba709cac3009a3c1777b6ba0954f1ed1ac988327700b8dd65e28fb30de1c21"
+        },
+        "sibling_candidate_contents_present_in_received_context": false,
+        "status": "passed"
+      },
+      "manager_validation": {
+        "candidate_hash_matches_worker_receipt": true,
+        "exact_integer_result_matches_common_input": true,
+        "verification_method_present": true,
+        "common_problem_hash_matches": true,
+        "role_hashes_match_fresh_catalog": true
+      },
+      "final_state": "completed",
+      "final_state_evidence": "E08; absent from E11/E14/E18"
+    },
+    {
+      "logical_instance": "solver_c",
+      "native_id": "/root/native_probe_manager/solver_c",
+      "perspective": "INVERSE CHECK",
+      "candidate_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-c-candidate.json",
+      "candidate_sha256": "a44e76fc896281dab3f41aaedacaf90ae729cfe297f6a4bb730a150ad40abb85",
+      "receipt_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-c-receipt.json",
+      "receipt_sha256": "2637b81482e60457b3cf454f8d83a71a21de6cd8f9aafc20c92624af0f0c83bb",
+      "receipt": {
+        "candidate_path": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-c-candidate.json",
+        "candidate_sha256": "a44e76fc896281dab3f41aaedacaf90ae729cfe297f6a4bb730a150ad40abb85",
+        "checks": {
+          "candidate_contents_not_printed": "passed",
+          "common_problem_hash": "passed",
+          "exact_integer_type": "passed",
+          "inverse_arithmetic_verification": "passed",
+          "private_marker_absent_from_receipt": "passed",
+          "private_marker_generated_inside_writing_process": "passed",
+          "required_candidate_fields": "passed",
+          "sibling_candidate_files_not_read": "passed",
+          "write_scope_limited_to_assigned_files": "passed"
+        },
+        "common_problem_sha256": "387769d0c8f92a9b9cad2c5154f1c5604a6d77ba5531471cb0e023903b183f44",
+        "input_packet_sha256": "322898ae061ab12cfb8a7db1a0a3fec7985791e528546e707188f8382dc673f8",
+        "logical_solver": "C",
+        "model_effort_inheritance_source": "Effective collaboration.spawn_agent tool contract: full-history forks with fork_turns omitted or all inherit the parent model and reasoning effort and do not accept overrides. The complete delegation contract states fork_turns all with no overrides for this child. No literal model or reasoning-effort value is claimed.",
+        "native_canonical_task_name": "/root/native_probe_manager/solver_c",
+        "probe_id": "PLAN-20260908-6E6F545E-TASK-002",
+        "role_file_sha256": {
+          "/Volumes/P-SSD/AngryOwl/Sys4AI/sub-agent-roles/project-sub-agent/AGENTS.md": "f4211b99a8453204053ade52563a6f234d0b43a3fedf88b6bdc362475ab7e876",
+          "/Volumes/P-SSD/AngryOwl/Sys4AI/sub-agent-roles/project-sub-agent/ROLE.md": "36ba709cac3009a3c1777b6ba0954f1ed1ac988327700b8dd65e28fb30de1c21"
+        },
+        "sibling_candidate_contents_present_in_received_context": false,
+        "status": "passed"
+      },
+      "manager_validation": {
+        "candidate_hash_matches_worker_receipt": true,
+        "exact_integer_result_matches_common_input": true,
+        "verification_method_present": true,
+        "common_problem_hash_matches": true,
+        "role_hashes_match_fresh_catalog": true
+      },
+      "final_state": "completed",
+      "final_state_evidence": "E15/E18"
+    }
+  ],
+  "manager_validation": {
+    "validated_at": "2026-09-08T06:50:59.157783+00:00",
+    "all_solvers_dispatched_before_first_manager_candidate_read": true,
+    "all_three_results_correct": true,
+    "independently_written_verification_texts_distinct": true,
+    "three_private_markers_distinct": true,
+    "private_markers_absent_from_sibling_candidates_and_all_worker_receipts": true,
+    "candidate_markers_not_printed": true,
+    "all_inspected_source_hashes_unchanged": {
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SOUL.md": true,
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLE.md": true,
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SPECS.md": true,
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/sub-agent-roles/project-sub-agent/AGENTS.md": true,
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/sub-agent-roles/project-sub-agent/ROLE.md": true,
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/manage-subagent-roles/SKILL.md": true,
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/task-manager-orchestration/native-problem-packet.json": true
+    }
+  },
+  "capabilities": [
+    {
+      "capability": "host_to_manager_launch",
+      "status": "passed",
+      "evidence": [
+        "Root delegation NEW_TASK to /root/native_probe_manager",
+        "E01 native root and distinct manager IDs"
+      ]
+    },
+    {
+      "capability": "host_manager_messaging",
+      "status": "passed",
+      "evidence": [
+        "Manager send_message /root and root replies in the native message stream"
+      ]
+    },
+    {
+      "capability": "manager_to_worker_launch",
+      "status": "passed",
+      "evidence": [
+        "E02",
+        "E03",
+        "E09"
+      ]
+    },
+    {
+      "capability": "manager_worker_bidirectional_messaging",
+      "status": "passed",
+      "evidence": [
+        "E05",
+        "E06 exact nonce acknowledgement",
+        "E12 readiness message"
+      ]
+    },
+    {
+      "capability": "explicit_role_loading",
+      "status": "passed",
+      "evidence": [
+        "Fresh per-assignment catalogs",
+        "All worker role_file_sha256 values match live paired files"
+      ]
+    },
+    {
+      "capability": "exact_model_and_reasoning_inheritance",
+      "status": "passed",
+      "evidence": [
+        "Effective developer full-history inheritance guarantee",
+        "All spawn calls fork_turns all with model and reasoning_effort omitted",
+        "Root configuration inspection receipt",
+        "Worker runtime-guarantee receipts"
+      ],
+      "limitation": "Literal effective model/effort telemetry was not exposed. This result relies on the runtime contract and root configuration evidence, not self-reported identity."
+    },
+    {
+      "capability": "native_nested_depth_two",
+      "status": "passed",
+      "evidence": [
+        "E04 root -> distinct manager -> distinct workers"
+      ],
+      "limitation": "No deeper level or maximum native depth was tested."
+    },
+    {
+      "capability": "queued_candidate_context_independence",
+      "status": "passed",
+      "evidence": [
+        "queue.json logical C before initial dispatch",
+        "E06/E08 path/hash-only returns",
+        "E09 queued C dispatch before any manager candidate read",
+        "Worker C context receipt",
+        "Distinct private markers and verification text"
+      ],
+      "limitation": "Shared filesystem access is not sandboxed; worker read restrictions and native parent-context evidence are the verified protocol."
+    },
+    {
+      "capability": "completion_capacity_release_and_reuse",
+      "status": "passed",
+      "evidence": [
+        "E04 four simultaneously running agents",
+        "E07 native A completed",
+        "E08 B final completion",
+        "E09 new distinct C accepted after completions",
+        "E11 completed A reactivated while C running"
+      ],
+      "limitation": "The runtime exposes no allocator slot identity or explicit close/release API. New-launch and follow-up success establish actual reusable capacity without identifying which completed slot was used."
+    },
+    {
+      "capability": "interruption",
+      "status": "passed",
+      "evidence": [
+        "E12 readiness boundary",
+        "E13 previous_status running",
+        "E14 native interrupted state"
+      ]
+    },
+    {
+      "capability": "same_identity_followup_reconnection",
+      "status": "passed",
+      "evidence": [
+        "E16 followup to /root/native_probe_manager/solver_a",
+        "E17 RECONNECTED same native ID and nonce",
+        "E18 native completed state"
+      ]
+    },
+    {
+      "capability": "final_worker_reconciliation",
+      "status": "passed",
+      "evidence": [
+        "E08 completed B and later roster absence",
+        "E15/E18 completed C",
+        "E17/E18 completed A"
+      ]
+    },
+    {
+      "capability": "explicit_manual_agent_close_or_release",
+      "status": "not_exercised",
+      "evidence": [
+        "No callable operation in direct collaboration tool set or searched nested tool metadata"
+      ],
+      "limitation": "Completion reuse passed; no close/release operation exists in the available tool schema."
+    },
+    {
+      "capability": "deeper_native_depth_and_maximum_depth",
+      "status": "not_exercised",
+      "evidence": [
+        "Only root-manager-worker topology authorized"
+      ]
+    },
+    {
+      "capability": "literal_effective_model_effort_telemetry",
+      "status": "not_exercised",
+      "evidence": [
+        "No such telemetry exposed in native tools"
+      ]
+    },
+    {
+      "capability": "production_task_manager_workflow",
+      "status": "not_exercised",
+      "evidence": [
+        "Disposable feasibility fixture only"
+      ],
+      "limitation": "No production Task-manager role, reviewer/synthesis workflow, Task mutation, source adoption, Template update, Git action, or external action was implemented by this probe."
+    }
+  ],
+  "outcome": "passed_for_bounded_native_feasibility",
+  "blockers": [],
+  "completed_at": "2026-09-08T06:50:59.158719+00:00",
+  "highest_verification_level": "Runtime or manual behavior observed",
+  "native_status_reconciliation": {
+    "manager": "Running only to write this report; stopping condition reached on return to root. Root must observe manager final status.",
+    "workers": {
+      "/root/native_probe_manager/solver_a": {
+        "status": "completed",
+        "evidence": "E17/E18"
+      },
+      "/root/native_probe_manager/solver_b": {
+        "status": "completed",
+        "evidence": "E08; absent from E11/E14/E18"
+      },
+      "/root/native_probe_manager/solver_c": {
+        "status": "completed",
+        "evidence": "E15/E18"
+      }
+    },
+    "running_or_interrupted_probe_workers": []
+  },
+  "tool_metadata_discovery": {
+    "search": "ALL_TOOLS names/descriptions matching sub.?agent, close_agent, release_agent, spawn_agent, interrupt_agent",
+    "result": [],
+    "direct_collaboration_operations": [
+      "spawn_agent",
+      "list_agents",
+      "send_message",
+      "followup_task",
+      "wait_agent",
+      "interrupt_agent"
+    ]
+  },
+  "files_written_by_manager": [
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/catalog-before-reconnect-a.json",
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/catalog-before-resume-a.json",
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/catalog-before-solver-a.json",
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/catalog-before-solver-b.json",
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/catalog-before-solver-c.json",
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/manager-validation.json",
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/manager-working-receipts.json",
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/queue.json",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/task-manager-orchestration/native-feasibility.md",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/task-manager-orchestration/native-feasibility-receipts.json"
+  ],
+  "files_written_by_workers": [
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-a-candidate.json",
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-a-receipt.json",
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-b-candidate.json",
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-b-receipt.json",
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-c-candidate.json",
+    "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-task-manager-native-xzavoc04/solver-c-receipt.json"
+  ]
+}

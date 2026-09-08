@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-08T12:42:33.422357+00:00",
+  "task_id": "TASK-20260908-A8B65949",
+  "execution_id": "recovery_validation_20260908",
+  "generation": 2,
+  "assignment_id": "recovery_replacement",
+  "native_id": "/root/recovery_replacement",
+  "canonical": {
+    "path": "Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/task.json",
+    "sha256": "16d0a468b1fe0b0dc5ada3ed17e5253ea0ac1fcbd2bfcbf4996ca3202d5b9b7e"
+  },
+  "revision": 23,
+  "status": "cancelled",
+  "stage": "stopped",
+  "execution_outcome": "cancelled",
+  "writer": "/root/recovery_replacement",
+  "response_count": 22,
+  "latest_response": {
+    "path": "Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/responses/Task-Response-0022-2026-09-08T06-40-34-06-00.md",
+    "sha256": "12c0201d04b545ef2cf2fb4a8408061aa754324735377794723c6a5bae6c6eaa"
+  },
+  "task_projection": {
+    "path": "Tasks/Task-native-stopping-and-recovery-validation-2026-09-08--A8B65949/TASK.md",
+    "sha256": "4530323003cb30fac721201f58092eb887368b421502aa599d83c25be5b2876c"
+  },
+  "catalog_projection": {
+    "path": "Tasks/INDEX.md",
+    "sha256": "dad9d416b392db955e8b8f53811e87753cab9c50c87f3366afdfb26292525870"
+  },
+  "final_validation": {
+    "path": "coordination/replacement-final-validation.json",
+    "sha256": "b9729d355b13218da2c1f429e9799c47217ce702f77553c7512da53387eb8b95"
+  },
+  "artifact_index": {
+    "path": "coordination/replacement-final-artifact-index.json",
+    "sha256": "f38be394b4b582454e864d29413bfb495bb276ce0540fe39fbc440fe1384fe50"
+  },
+  "artifact_index_file_count": 162,
+  "manager_readiness": {
+    "path": "coordination/replacement-readiness.json",
+    "sha256": "8e1811712ed667c85dc9814a9f7d5d87d8588207c4780fb0b5be66d63d70f05c"
+  },
+  "same_id_reconnect": {
+    "path": "coordination/control-replacement-manager-reconnect.json",
+    "sha256": "b87f9d759af05cc51fb9e21a8b9184bb534df34f871b3e488fd5022ef23e5850"
+  },
+  "stale_generation_rejection": {
+    "path": "coordination/control-replacement-old-generation-rejected.json",
+    "sha256": "1fc1c7b882e1b33dbf51e458cc5bdca9e4db722942742537b244ed17faaf89bb"
+  },
+  "cancelled_execution": {
+    "path": "coordination/control-replacement-cancelled-execution.json",
+    "sha256": "51bb683e20b1df68946fd388b1a44a6be7fdd88d9ae3f071fc2f62e4a7aa8db5"
+  },
+  "cancelled_lifecycle": {
+    "path": "coordination/control-replacement-cancelled-lifecycle.json",
+    "sha256": "dd0d741e0a6ae30bf581bc23736312c3ad6c93f8ef673d222cd8b9a2c958b925"
+  },
+  "retained_marker": {
+    "path": "markers/recovery_worker/readiness.json",
+    "sha256": "0abe50015b4afdd41bb4ff260c83e65afcbc7ac2178f6ee090ad9ce9b8eccacc"
+  },
+  "protected_file_count": 86,
+  "protected_hashes_unchanged": true,
+  "historical_responses": {
+    "entry_revision": 20,
+    "entry_response_count": 19,
+    "all_retained_unchanged": true,
+    "final_response_count": 22
+  },
+  "generation_1_events_and_old_assignments_retained": true,
+  "unfinished_main_criterion": "The intentionally unfinished worker deliverable is completed and directly verified.",
+  "delivery_artifact_absent": true,
+  "delivery_completed": false,
+  "children_launched_by_replacement": false,
+  "native_observation": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root/recovery_manager",
+          "agent_status": "completed"
+        },
+        {
+          "agent_name": "/root/recovery_manager/marker_worker",
+          "agent_status": "interrupted"
+        },
+        {
+          "agent_name": "/root/recovery_replacement",
+          "agent_status": "running"
+        }
+      ]
+    }
+  },
+  "verification_level": "Runtime behavior observed for actual activation/reconnection and public helper cancelled execution/lifecycle; the host must observe final manager completion for its last accounting step.",
+  "controlled_cases": [
+    "A generation-1 payload was deliberately submitted by the replacement manager and rejected with ORCH_STALE_GENERATION; the complete Task tree remained byte-identical.",
+    "The first manager deliberately delayed importing one real worker spawn receipt; no organic launch/network failure is claimed.",
+    "The earlier requested-settings mismatch was a deterministic payload; no real model/effort setting or user configuration changed."
+  ],
+  "limitations": [
+    "Literal model/effort telemetry is unavailable; full-history exact inheritance was used without overrides.",
+    "Actual mid-run model switching was not exercised."
+  ],
+  "required_host_step": "Reopen final canonical record, projections, marker and hash index; observe /root/recovery_replacement completed after this final return. The earlier manager remains completed and its marker worker interrupted.",
+  "writer_boundary": "This replacement manager will perform no further Task, coordination or project writes and launch no children after returning this handoff."
+}

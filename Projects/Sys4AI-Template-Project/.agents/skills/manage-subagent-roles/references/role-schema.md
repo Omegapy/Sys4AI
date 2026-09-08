@@ -7,17 +7,31 @@ files.
 
 ## Canonical layout
 
-Each immediate child of `sub-agent-roles/` is one reusable role:
+Each immediate role directory under `roles/` is one reusable definition:
 
 ```text
-sub-agent-roles/
+roles/
+|-- INDEX.md
 `-- descriptive-role-name/
     |-- AGENTS.md
     `-- ROLE.md
 ```
 
-The two files are the canonical role bundle. Do not add a registry, database,
-CSV, generated index, or native custom-agent TOML file for the initial system.
+The two files are the canonical role bundle. `INDEX.md` is a deterministic
+navigation view of validated pairs, with project-relative links, content
+digests and invalid-role diagnostics. It is never role authority. Do not add a
+competing registry, database, CSV or native custom-agent TOML configuration.
+Legacy `sub-agent-roles/` remains recoverable provenance and is inspected only
+for explicit transition or diagnostics, never as an automatic active fallback.
+
+The `reindex`, `transition-preview` and confirmed `transition-apply`
+routes extend the existing helper. Reindex reports unchanged/current output or
+the exact publication failure. Creation reports a committed valid bundle
+separately from an index still needing publication. Recovery completes that
+publication without recreating or deleting the bundle. Transition previews bind
+the exact old/new pair hashes; differing destinations or stale previews block
+copy-first apply. Preserve legacy content and historical references. No
+read-only route reindexes, creates, migrates or repairs.
 
 ## Directory and role name
 
@@ -147,10 +161,25 @@ Example command shape:
 ```
 
 The helper renders `assets/role-bundle/AGENTS.md.template` and
-`assets/role-bundle/ROLE.md.template`, creates both files in a temporary
-directory under the role root, reserves the final directory with a
-fail-if-present operation, moves both completed files into it, validates the
-live catalog, and removes only its own incomplete output if creation fails.
+`assets/role-bundle/ROLE.md.template`, validates both files, reserves a new role
+directory with a fail-if-present operation, and publishes its index. It removes
+only its own invalid incomplete pair on creation failure. A valid committed
+pair survives an index failure; exit 3 reports `bundle_committed: true` and
+`recovery: reindex`. Never repeat creation of that existing role.
+
+Mutations use the standard-library POSIX advisory lock at
+`.sys4ai/role-catalog.lock`. Its retained regular file avoids unlink/reacquire
+races; only the held OS lock indicates an active writer. Read-only routes do
+not create it or publish any files. Unsafe symlink or hard-link targets fail.
+
+`transition-preview --format json` returns exact pairs, source/destination
+digests, conflicts and `preview_sha256`. Save the reviewed JSON outside the
+role tree. `transition-apply --preview-file FILE --confirmed --format json`
+rereads those preconditions, keeps all legacy files, records publication in
+`roles/.transition.json`, then validates and indexes the active pairs. A partial
+receipt resumes only with the same reviewed preview; current source or
+destination changes block recovery. Successful repeated apply is a no-op.
+Index, lock and transition receipts are not role definitions or starter data.
 
 ## Catalog states
 
@@ -188,14 +217,19 @@ or native runtime capability is a blocker, not a reason to invent a role.
 
 ## Model and reasoning identity
 
-Every role-based child is a model-and-reasoning copy of the Project Director.
-The selected role changes the child's instructions and bounded objective only.
+Every role-based child uses the Project Director's exact model and reasoning
+effort. The selected role changes the child's instructions and bounded objective
+only. Record directly observed equality or an effective runtime inheritance
+guarantee; a role title or requested setting is not observed equality.
 
-For a runtime with `spawn_agent`, set `fork_turns` to `all` and omit the
-`model` and `reasoning_effort` arguments. Do not use a custom-agent file or an
-effective `agents.default_subagent_model` or
-`agents.default_subagent_reasoning_effort` setting that replaces the parent's
-values.
+For a runtime that guarantees inheritance with `fork_turns: all`, omit the
+`model` and `reasoning_effort` arguments. Check effective custom-agent files,
+`agents.default_subagent_model` and `agents.default_subagent_reasoning_effort`
+without exposing secrets. Do not use a configuration that replaces the parent's
+values. Model/effort inheritance and context independence are separate checks.
+Initial solver history must exclude sibling candidate content, including queued
+dispatch. Keep returns to paths, hashes and status until every initial solver
+has launched; another context mode requires its own verified guarantees.
 
 Check the effective project and user configuration before spawning. If the
 runtime cannot guarantee that both values match the Project Director exactly,
@@ -217,3 +251,13 @@ when the Project Director:
 6. Uses native Codex sub-agent orchestration without model or reasoning
    overrides.
 7. Reviews and verifies the returned result.
+
+For a tracked execution, the host reserves and launches a real manager, records
+its native receipt, and activates its exact assignment through the Task helper.
+That manager alone owns canonical writes after handoff. An ordinary child is not
+promoted by reading root guidance. Role definitions, logical function slots,
+native instances, result producers and the canonical writer remain distinct.
+Re-read the catalog and assess the function-specific fit before each assignment.
+Reservation precedes launch; an uncertain outcome is reconciled against the
+original reservation before any replacement. Follow the Task contract's current
+generation, artifact, stopping and recovery gates.

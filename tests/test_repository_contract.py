@@ -39,6 +39,11 @@ class RepositoryContractTests(unittest.TestCase):
             "Tasks/INDEX.md",
             "sub-agent-roles/project-sub-agent/AGENTS.md",
             "sub-agent-roles/project-sub-agent/ROLE.md",
+            "roles/project-sub-agent/AGENTS.md",
+            "roles/project-sub-agent/ROLE.md",
+            "roles/task-manager/AGENTS.md",
+            "roles/task-manager/ROLE.md",
+            "roles/INDEX.md",
             "depot/README.md",
             "depot/projects.json",
             "tests/test_repository_contract.py",
@@ -169,6 +174,11 @@ class RepositoryContractTests(unittest.TestCase):
             "Tasks/INDEX.md",
             "sub-agent-roles/project-sub-agent/AGENTS.md",
             "sub-agent-roles/project-sub-agent/ROLE.md",
+            "roles/project-sub-agent/AGENTS.md",
+            "roles/project-sub-agent/ROLE.md",
+            "roles/task-manager/AGENTS.md",
+            "roles/task-manager/ROLE.md",
+            "roles/INDEX.md",
             "Projects/Sys4AI-Template-Project/SOUL.md",
             "Projects/Sys4AI-Template-Project/ROLE.md",
             "Projects/Sys4AI-Template-Project/Tasks/INDEX.md",
@@ -195,7 +205,7 @@ class RepositoryContractTests(unittest.TestCase):
             "Sys4AI depot and multi-project",
             "depot/projects.json",
             "project-local",
-            "Child agents return evidence and do not mutate the Task ledger",
+            "Ordinary children return evidence without ledger or role-index writes",
             "native goal state",
         ):
             self.assertIn(phrase, normalized_agents)
@@ -205,15 +215,15 @@ class RepositoryContractTests(unittest.TestCase):
             "## Primary responsibilities",
             "## Workspace and depot governance",
             "## Requirements-to-verification workflow",
-            "## Task-system ownership",
+            "## Depot Task intake policy",
             "## Mandatory role-management skill workflow",
-            "## Model and reasoning identity",
-            "## Verification and validation",
-            "## Completion report",
+            "## Delegation contract and settings",
+            "## Implementation and completion",
+            "## Evidence and final report",
         ):
             self.assertIn(heading, role)
         self.assertIn("fresh filesystem-backed role catalog", normalized_role)
-        self.assertIn("exact model and reasoning effort", normalized_role)
+        self.assertIn("exact effective model and reasoning effort", normalized_role)
         self.assertIn("final Task Responses", normalized_role)
 
     def test_template_is_project_local_and_product_neutral(self) -> None:
@@ -224,7 +234,7 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertIn("project-local", readme)
         self.assertIn("project-local", agents)
         self.assertIn("This template supplies", agents)
-        self.assertIn("generic Project Director", (TEMPLATE / "ROLE.md").read_text())
+        self.assertIn("project-neutral", (TEMPLATE / "ROLE.md").read_text())
         for forbidden in ("depot/manifest.json", "depot_sync.py", "sys4ai-project-sync"):
             self.assertNotIn(forbidden, readme)
             self.assertNotIn(forbidden, agents)
@@ -277,7 +287,12 @@ class RepositoryContractTests(unittest.TestCase):
                 if item.is_file() and "__pycache__" not in item.parts and item.name != ".DS_Store"
             }
         self.assertEqual(manifest(source), manifest(active))
-        self.assertEqual(record["files_sha256"], manifest(source))
+        current = json.loads((ROOT / "Verification/task-manager-orchestration/root-adoption-manifest.json").read_text())
+        self.assertEqual(current["initializer_files_sha256"], manifest(source))
+        self.assertEqual("PLAN-20260908-6E6F545E", current["plan_id"])
+        # The original adoption receipt is retained with its original meaning;
+        # it is not rewritten to claim the later package bytes.
+        self.assertNotEqual(record["files_sha256"], current["initializer_files_sha256"])
         self.assertEqual("adopted", record["status"])
         self.assertIn("no other active skills or projects", record["overwrite_boundary"])
 

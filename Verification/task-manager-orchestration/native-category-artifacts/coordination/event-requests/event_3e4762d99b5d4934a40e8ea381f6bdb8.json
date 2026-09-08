@@ -1,0 +1,126 @@
+{
+  "canonical_before_sha256": "ccc0ebb0ba3808a33c7056c8da365d1a3b4adc601de0f023e6e3cf97385eec65",
+  "revision_before": 73,
+  "payload": {
+    "event": {
+      "event_id": "event_3e4762d99b5d4934a40e8ea381f6bdb8",
+      "actor": "/root/task_manager_validation",
+      "execution_id": "ticket_validation_20260908",
+      "generation": 1,
+      "kind": "assignment.reserve",
+      "data": {
+        "assignment_id": "coding_senior_missing_review",
+        "subtask_id": "coding",
+        "slot": "senior",
+        "role": {
+          "name": "project-sub-agent",
+          "agents_path": "roles/project-sub-agent/AGENTS.md",
+          "role_path": "roles/project-sub-agent/ROLE.md",
+          "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+          "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+          "catalog": {
+            "path": "coordination/catalog_8a4e146fc08c47d58add2df929561344.json",
+            "sha256": "dca9bbd968599b86b92fb0a5b5c2233b63477801b82aaf2a9a77a6960c4d9769"
+          }
+        },
+        "fit": {
+          "authority": "Only the exact disposable project assignment. No canonical ledger or role-index writes, nested delegation, external actions or other-project changes.",
+          "capabilities": [
+            "bounded project analysis",
+            "documentation",
+            "focused testing and verification"
+          ],
+          "deliverable": "Current coherent coding proposal",
+          "objective": "Synthesize current coding candidates only after complete current passes.",
+          "rationale": "Fresh general role fits bounded senior synthesis; this controlled attempt must reject while corrected A lacks its current review.",
+          "reads": [
+            "SOUL.md",
+            "AGENTS.md",
+            "ROLE.md",
+            "SPECS.md",
+            "roles/project-sub-agent/AGENTS.md",
+            "roles/project-sub-agent/ROLE.md",
+            "context",
+            "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration"
+          ],
+          "risk": "Controlled local fixture; writes are exclusive and bounded. No product or external state.",
+          "skills": [],
+          "stop": "Return exact role-read and artifact receipts when mandatory assigned criteria are met, or report a concrete blocker.",
+          "tools": [
+            "native assignment messages",
+            "Python standard library",
+            "filesystem inspection"
+          ],
+          "writes": [
+            "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/work/coding_senior_missing_review"
+          ]
+        },
+        "runtime": {
+          "tools": [
+            "spawn_agent",
+            "send_message",
+            "followup_task",
+            "list_agents",
+            "wait_agent",
+            "interrupt_agent"
+          ],
+          "depth": 2,
+          "available_slots": 1,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+            },
+            {
+              "path": "coordination/roster_91fb4d03d14c47c9b1e3655c63941939.json",
+              "sha256": "8a300ff5ca9c50e74d1cdf9805034d267a3c06fd5716c8855932a7f657ca7065"
+            }
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "context/native-runtime.json",
+              "sha256": "8eb19e9d1a50adb598723f3805d0df4f020240d195b294e4a98d9f060d7d0db8"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "context": [
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/baseline_85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8.json",
+            "sha256": "85a4b04b6d818bcd4284d9cdfc677123a0f0627238b728d4f668d18f44f098e8"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_a_v2.md",
+            "sha256": "71136dfcfe79fc38bd7319cac2e1a2dfceb13fa2ad4931bda5276be9b0c2d565"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/coding_b_v1.md",
+            "sha256": "c20f8d2d2dd29d9cda4c727baef1cc1f14feedfcbd41735c7c6e4858ad6b0e03"
+          },
+          {
+            "path": "Tasks/Task-native-ticket-orchestration-validation-2026-09-08--726896CC/artifacts/orchestration/review_b_findings_v1.json",
+            "sha256": "622e86d819edf03239fdbe033fb2299ba525f1f4fa3d8749a263e34502a54056"
+          }
+        ]
+      }
+    },
+    "response": {
+      "work_completed": [
+        "Observed assignment.reserve."
+      ],
+      "verification_evidence": [
+        "Exact current inputs and returned native/artifact evidence are retained."
+      ],
+      "user_response_summary": "Observed assignment.reserve.",
+      "current_summary": "Observed assignment.reserve.",
+      "next_step": "Continue the bounded approved validation.",
+      "blockers": [],
+      "open_questions": [],
+      "relevant_files": []
+    }
+  }
+}

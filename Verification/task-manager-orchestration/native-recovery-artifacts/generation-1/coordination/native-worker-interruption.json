@@ -1,0 +1,43 @@
+{
+  "observed_at": "2026-09-08T12:21:10.280725+00:00",
+  "before_receipt": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root/recovery_manager",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/recovery_manager/marker_worker",
+          "agent_status": "running"
+        }
+      ]
+    }
+  },
+  "interrupt": {
+    "tool": "collaboration.interrupt_agent",
+    "arguments": {
+      "target": "/root/recovery_manager/marker_worker"
+    },
+    "result": {
+      "previous_status": "running"
+    }
+  },
+  "after_receipt": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root/recovery_manager",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/recovery_manager/marker_worker",
+          "agent_status": "interrupted"
+        }
+      ]
+    }
+  },
+  "normalization": "The current manager subtree was requested; all returned IDs and status discriminants are retained exactly."
+}
