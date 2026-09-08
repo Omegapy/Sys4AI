@@ -20,6 +20,6 @@ a child to manager. Keep Task, TRD, plan, conversation and native goal state
 separate. Status and other read-only routes do not start execution.
 
 Use `.agents/skills/manage-subagent-roles/SKILL.md` before every assignment.
-Active roles use paired `roles/<name>/AGENTS.md` and `ROLE.md`; their generated
+Active roles use paired `Roles/<name>/AGENTS.md` and `ROLE.md`; their generated
 index is navigation only. Preserve exact manager model and reasoning settings,
 independent solver contexts and non-overlapping authorized write ownership.

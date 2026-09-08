@@ -45,6 +45,15 @@ maintain factual project registration. Setup records source hashes and checked
 stages in the project-owned `control_records/project-setup.json` receipt.
 Equivalent reruns preserve identity and avoid duplicate registration.
 
+The licensing starters are `LICENSE`, `LICENSE-CODE`, and `LICENSE-DOCS`.
+They define the Apache 2.0 code / CC BY 4.0 document split and default
+attribution. Setup contract `governance-starter-v4` adopts the complete trio
+when no existing root license markers are present. It preserves existing
+licensing as a whole, records original and observed marker hashes separately,
+and skips missing companions. Earlier setup editions retain their own source
+requirements; a rerun does not adopt a later licensing edition. Follow the
+initializer skill for recognized markers and explicit adoption boundaries.
+
 Setup does not define a product runtime or configure a repository. Product
 implementation, dependency installation, Git setup, and publication are
 separate project work. Existing independent project state remains project-owned.
@@ -62,7 +71,7 @@ product's layout rather than replacing its exclusions with depot defaults.
 The Task helper preserves schema-1 history and adds a versioned orchestration
 extension for enabled records. Task state, role definitions, native execution
 and managed document lifecycles stay separate. Current role definitions use
-paired files under `roles/` with a destination-generated `roles/INDEX.md`.
+paired files under `Roles/` with a destination-generated `Roles/INDEX.md`.
 The role mutation helper uses Python standard-library POSIX advisory locking;
 unsupported hosts must report the missing capability rather than bypass it.
 No database, queue service, memory/ontology backend or new production package

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import base64
 import json
 import os
 from pathlib import Path
@@ -40,17 +41,17 @@ def fixture(root: Path) -> Path:
         "SOULS-depo/SOUL.md": "SOUL.md",
         "AGENTS-depo/project-template-AGENTS.md": "AGENTS.md",
         "ROLES-depo/project-director-ROLE.md": "ROLE.md",
-        "ROLES-depo/project-sub-agent-AGENTS.md": "roles/project-sub-agent/AGENTS.md",
-        "ROLES-depo/project-sub-agent-ROLE.md": "roles/project-sub-agent/ROLE.md",
+        "ROLES-depo/project-sub-agent-AGENTS.md": "Roles/project-sub-agent/AGENTS.md",
+        "ROLES-depo/project-sub-agent-ROLE.md": "Roles/project-sub-agent/ROLE.md",
         "SPECS-depo/project-template-SPECS.md": "SPECS.md",
         "SPECS-depo/project-template.gitignore": ".gitignore",
     }
     for role in ("project-sub-agent", "task-manager"):
         for name in ("AGENTS", "ROLE"):
-            overrides[f"ROLES-depo/{role}-{name}.md"] = f"roles/{role}/{name}.md"
+            overrides[f"ROLES-depo/{role}-{name}.md"] = f"Roles/{role}/{name}.md"
     for origin, target in overrides.items():
         actual = HELPER.parents[1] / origin
-        text = actual.read_text() if target.startswith("roles/") else "# Starter " + target + "\n"
+        text = actual.read_text() if target.startswith("Roles/") else "# Starter " + target + "\n"
         put(root, origin, text)
     put(root, "SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py",
         (HELPER.parents[1] / "SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py").read_text())
@@ -58,7 +59,7 @@ def fixture(root: Path) -> Path:
         "SKILLS-depo/init-new-project/assets/baseline-assets.json": ".template/baseline-assets.json",
         "SKILLS-depo/init-new-project/assets/project-readme.md": ".template/project-readme.md",
     }
-    put(root, next(iter(mirrors)), '{"schema_version": 2, "roles": "roles"}\n')
+    put(root, next(iter(mirrors)), '{"schema_version": 2, "roles": "Roles"}\n')
     put(root, "SKILLS-depo/init-new-project/assets/project-readme.md", "# __PROJECT_NAME__\n")
     put(root, engine.MANIFEST, json.dumps({
         "schema_version": 1, "template": engine.TEMPLATE,
@@ -74,6 +75,23 @@ def file_inventory(folder: Path) -> dict[str, bytes]:
     }
 
 
+def lowercase_owned_template(root: Path, template: Path) -> bytes:
+    """Recreate the prior ownership edition without altering its source bindings."""
+    engine.update(root, "apply")
+    state = engine.load_state(root)
+    state["files"] = {name.replace("Roles/", "roles/", 1): entry for name, entry in state["files"].items()}
+    index = state["files"][engine.PREVIOUS_ROLE_INDEX]
+    index["generated"]["inputs"] = engine.role_index_inputs(state["files"], "roles")
+    folder = template / "Roles"
+    folder.rename(template / "fixture-case-hop")
+    (template / "fixture-case-hop").rename(template / "roles")
+    # Preserve a raw-state representation distinct from the writer's encoding.
+    raw = json.dumps(state, indent=4).encode() + b"\n"
+    (root / engine.STATE).write_bytes(raw)
+    engine.validate_state(state)
+    return raw
+
+
 class TemplateUpdateTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
@@ -83,6 +101,220 @@ class TemplateUpdateTests(unittest.TestCase):
 
     def apply(self) -> dict:
         return engine.update(self.root, "apply")
+
+    def test_case_transition_renames_exact_directory_and_archives_original_state(self):
+        raw_state = lowercase_owned_template(self.root, self.template)
+        put(self.template, "roles/project-sub-agent/local-notes.txt", "Preserve project notes\n")
+        (self.template / "roles/project-sub-agent/empty").mkdir()
+        inode = (self.template / "roles").stat().st_ino
+        old_tree = file_inventory(self.template / "roles")
+        before = file_inventory(self.root)
+        preview = engine.update(self.root, "check")
+        self.assertEqual(before, file_inventory(self.root))
+        self.assertEqual(["roles"], engine.role_case_entries(self.template))
+        self.assertEqual("Roles", preview["role_case_transition"]["to"])
+        self.assertFalse(any(name.startswith(("Roles/", "roles/")) for name in preview["deletions"] + preview["additions"]))
+        self.assertEqual("applied", self.apply()["status"])
+        self.assertEqual(["Roles"], engine.role_case_entries(self.template))
+        self.assertEqual(inode, (self.template / "Roles").stat().st_ino)
+        self.assertEqual(old_tree, file_inventory(self.template / "Roles"))
+        self.assertTrue((self.template / "Roles/project-sub-agent/empty").is_dir())
+        self.assertEqual("Preserve project notes\n", (self.template / "Roles/project-sub-agent/local-notes.txt").read_text())
+        archives = list((self.root / engine.CONTROL / "role-layout-history").glob("*.json"))
+        self.assertEqual(1, len(archives))
+        retained = json.loads(archives[0].read_bytes())
+        self.assertEqual(raw_state, base64.b64decode(retained["before_state"]))
+        self.assertEqual(old_tree, {name: base64.b64decode(raw) for name, raw in retained["payloads"].items()})
+        self.assertFalse(any(name.startswith("roles/") for name in engine.load_state(self.root)["files"]))
+        self.assertFalse((self.template / ".sys4ai").exists())
+        mtimes = {item: item.stat().st_mtime_ns for item in [self.root / engine.STATE, *self.template.rglob("*")]}
+        self.assertEqual("current", engine.update(self.root, "check")["status"])
+        self.assertEqual("current", self.apply()["status"])
+        self.assertEqual(mtimes, {item: item.stat().st_mtime_ns for item in mtimes})
+
+    def test_case_transition_rejects_distinct_dual_trees_even_when_identical(self):
+        lowercase_owned_template(self.root, self.template)
+        try:
+            (self.template / "Roles").mkdir()
+        except FileExistsError:
+            self.skipTest("distinct case-equivalent directories require a case-sensitive filesystem")
+        shutil.copytree(self.template / "roles", self.template / "Roles", dirs_exist_ok=True)
+        for changed in (False, True):
+            if changed:
+                (self.template / "Roles/task-manager/ROLE.md").write_text("Distinct customized tree\n")
+            original = file_inventory(self.root)
+            with self.assertRaisesRegex(engine.UpdateError, "exactly.*lowercase"):
+                self.apply()
+            self.assertEqual(original, file_inventory(self.root))
+            self.assertFalse((self.root / engine.PENDING).exists())
+
+    def test_case_transition_rejects_wrong_case_aliases_and_missing_ownership(self):
+        lowercase_owned_template(self.root, self.template)
+        (self.template / "roles").rename(self.template / "fixture-case-hop")
+        (self.template / "fixture-case-hop").rename(self.template / "ROLES")
+        original = file_inventory(self.root)
+        with self.assertRaisesRegex(engine.UpdateError, "exactly.*lowercase"):
+            self.apply()
+        self.assertEqual(original, file_inventory(self.root))
+        (self.template / "ROLES").rename(self.template / "fixture-case-hop")
+        (self.template / "fixture-case-hop").rename(self.template / "roles")
+        (self.root / engine.STATE).unlink()
+        original = file_inventory(self.template)
+        with self.assertRaises(engine.UpdateError):
+            self.apply()
+        self.assertEqual(original, file_inventory(self.template))
+
+    def test_case_transition_requires_complete_mapping_and_fresh_reviewed_tree(self):
+        lowercase_owned_template(self.root, self.template)
+        before = engine.load_state(self.root)
+        snap = engine.snapshot(self.root)
+        missing = json.loads(json.dumps(snap["state"]))
+        missing["files"].pop("Roles/task-manager/ROLE.md")
+        with self.assertRaisesRegex(engine.UpdateError, "every old role destination"):
+            engine.role_case_mapping(before, missing)
+        preview = engine.case_preview(self.root, before, snap["state"])
+        put(self.template, "roles/project-sub-agent/new-notes.txt", "Changed after review\n")
+        original = file_inventory(self.root)
+        with self.assertRaisesRegex(engine.UpdateError, "changed after preflight"):
+            engine.make_pending(before, snap, root=self.root, reviewed_case=preview)
+        self.assertEqual(original, file_inventory(self.root))
+
+    def test_case_transition_rejects_linked_managed_bytes_before_publication(self):
+        lowercase_owned_template(self.root, self.template)
+        source = self.template / "roles/task-manager/ROLE.md"
+        os.link(source, self.root / "aliased-role.md")
+        original = file_inventory(self.root)
+        with self.assertRaisesRegex(engine.UpdateError, "non-aliased"):
+            self.apply()
+        self.assertEqual(original, file_inventory(self.root))
+
+    def test_case_transition_never_replaces_an_appearing_empty_destination(self):
+        lowercase_owned_template(self.root, self.template)
+        original = file_inventory(self.template)
+        rename = engine.rename_role_directory
+        appeared = {}
+        def competing_directory(source, destination):
+            if source.name == "roles":
+                destination.mkdir()
+                appeared["path"] = destination
+                appeared["inode"] = destination.stat().st_ino
+            return rename(source, destination)
+        with patch.object(engine, "rename_role_directory", side_effect=competing_directory):
+            with self.assertRaises(OSError):
+                self.apply()
+        self.assertEqual(original, file_inventory(self.template))
+        self.assertEqual(appeared["inode"], appeared["path"].stat().st_ino)
+        self.assertEqual([], list(appeared["path"].iterdir()))
+        self.assertEqual(["roles"], engine.role_case_entries(self.template))
+        # Removing only the empty directory created by this fixture allows recovery.
+        appeared["path"].rmdir()
+        self.assertTrue(self.apply()["recovered"])
+
+    def interrupt_case_transition(self, boundary):
+        rename, write, unlink = engine.rename_role_directory, engine.atomic_write, Path.unlink
+        hops = 0
+        def interrupted_rename(source, destination):
+            nonlocal hops
+            if Path(source).parent == self.template and Path(source).name in {"roles", *[p.name for p in self.template.glob(".template-roles-case-*")]}:
+                hops += 1
+                if boundary == "before-rename" and hops == 1:
+                    raise OSError("injected case transition interruption")
+                result = rename(source, destination)
+                if boundary == f"after-hop-{hops}":
+                    raise OSError("injected case transition interruption")
+                return result
+            return rename(source, destination)
+        def interrupted_write(path, data, mode=0o644):
+            if boundary == "content" and path == self.template / "Roles/task-manager/ROLE.md":
+                raise OSError("injected case transition interruption")
+            result = write(path, data, mode)
+            if boundary == "state" and path == self.root / engine.STATE:
+                raise OSError("injected case transition interruption")
+            return result
+        def interrupted_unlink(path, *args, **kwargs):
+            if boundary == "cleanup" and path == self.root / engine.PENDING:
+                raise OSError("injected case transition interruption")
+            return unlink(path, *args, **kwargs)
+        with patch.object(engine, "rename_role_directory", side_effect=interrupted_rename), patch.object(engine, "atomic_write", side_effect=interrupted_write), patch.object(Path, "unlink", interrupted_unlink):
+            with self.assertRaisesRegex(OSError, "injected case transition"):
+                self.apply()
+        self.assertTrue((self.root / engine.PENDING).exists())
+
+    def test_case_transition_recovers_each_rename_and_publication_boundary(self):
+        for boundary in ("before-rename", "after-hop-1", "after-hop-2", "content", "state", "cleanup"):
+            with self.subTest(boundary=boundary), tempfile.TemporaryDirectory() as temporary:
+                saved_root, saved_template = self.root, self.template
+                self.root = Path(temporary).resolve()
+                self.template = fixture(self.root)
+                try:
+                    raw_state = lowercase_owned_template(self.root, self.template)
+                    role = self.root / "ROLES-depo/task-manager-ROLE.md"
+                    role.write_bytes(role.read_bytes() + b"\nA reviewed source update accompanies the rename.\n")
+                    self.interrupt_case_transition(boundary)
+                    original = file_inventory(self.root)
+                    with self.assertRaisesRegex(engine.UpdateError, "interrupted"):
+                        engine.update(self.root, "check")
+                    self.assertEqual(original, file_inventory(self.root))
+                    archives = list((self.root / engine.CONTROL / "role-layout-history").glob("*.json"))
+                    self.assertEqual(raw_state, base64.b64decode(json.loads(archives[0].read_bytes())["before_state"]))
+                    self.assertTrue(self.apply()["recovered"])
+                    self.assertEqual(["Roles"], engine.role_case_entries(self.template))
+                    self.assertFalse(list(self.template.glob(".template-roles-case-*")))
+                    self.assertEqual(role.read_bytes(), (self.template / "Roles/task-manager/ROLE.md").read_bytes())
+                    self.assertFalse((self.root / engine.PENDING).exists())
+                    self.assertEqual("current", self.apply()["status"])
+                finally:
+                    self.root, self.template = saved_root, saved_template
+
+    def test_case_recovery_refuses_new_destination_changed_bytes_and_forged_receipt(self):
+        lowercase_owned_template(self.root, self.template)
+        self.interrupt_case_transition("after-hop-1")
+        pending_path = self.root / engine.PENDING
+        pending_raw = pending_path.read_bytes()
+        pending = json.loads(pending_raw)
+        temporary = self.template / pending["role_case_transition"]["preview"]["temporary"]
+        (self.template / "Roles").mkdir()
+        original = file_inventory(self.root)
+        with self.assertRaisesRegex(engine.UpdateError, "ambiguous directories"):
+            self.apply()
+        self.assertEqual(original, file_inventory(self.root))
+        (self.template / "Roles").rmdir()
+        role = temporary / "task-manager/ROLE.md"
+        saved = role.read_bytes()
+        role.write_bytes(saved + b"\nUnreviewed concurrent change.\n")
+        original = file_inventory(self.root)
+        with self.assertRaisesRegex(engine.UpdateError, "tree changed before rename"):
+            self.apply()
+        self.assertEqual(original, file_inventory(self.root))
+        role.write_bytes(saved)
+        for mutation in ("missing", "payload", "identity"):
+            corrupt = json.loads(pending_raw)
+            if mutation == "missing":
+                corrupt.pop("role_case_transition")
+            elif mutation == "payload":
+                corrupt["role_case_transition"]["payloads"]["task-manager/ROLE.md"] = base64.b64encode(b"Wrong archive").decode()
+            else:
+                corrupt["role_case_transition"]["preview"]["directory_identity"]["inode"] += 1
+            pending_path.write_bytes(engine.encoded(corrupt))
+            original = file_inventory(self.template)
+            with self.assertRaises(engine.UpdateError):
+                self.apply()
+            self.assertEqual(original, file_inventory(self.template))
+        pending_path.write_bytes(pending_raw)
+        self.assertTrue(self.apply()["recovered"])
+
+    def test_case_recovery_rejects_replaced_directory_even_with_identical_bytes(self):
+        lowercase_owned_template(self.root, self.template)
+        self.interrupt_case_transition("after-hop-1")
+        pending = json.loads((self.root / engine.PENDING).read_bytes())
+        temporary = self.template / pending["role_case_transition"]["preview"]["temporary"]
+        saved = self.root / "retained-original-role-tree"
+        temporary.rename(saved)
+        shutil.copytree(saved, temporary)
+        original = file_inventory(self.root)
+        with self.assertRaisesRegex(engine.UpdateError, "directory identity changed"):
+            self.apply()
+        self.assertEqual(original, file_inventory(self.root))
 
     def test_role_index_is_generated_bound_and_customization_protected(self):
         self.apply()
@@ -111,7 +343,7 @@ class TemplateUpdateTests(unittest.TestCase):
         self.assertEqual({}, file_inventory(self.template))
         role.write_bytes(good)
         manifest = json.loads((self.root / engine.MANIFEST).read_bytes())
-        for destination in ("roles/INDEX.md", "roles/index.md", "roles/INDEX.md/child.md"):
+        for destination in ("Roles/INDEX.md", "Roles/index.md", "Roles/INDEX.md/child.md"):
             manifest["mirrors"]["ROLES-depo/task-manager-ROLE.md"] = destination
             put(self.root, engine.MANIFEST, json.dumps(manifest))
             with self.assertRaisesRegex(engine.UpdateError, "generated|collision"):
@@ -120,8 +352,8 @@ class TemplateUpdateTests(unittest.TestCase):
 
     def test_generated_index_cannot_omit_an_unmanaged_destination_role(self):
         self.apply()
-        owned = self.template / "roles/local-worker"
-        shutil.copytree(self.template / "roles/project-sub-agent", owned)
+        owned = self.template / "Roles/local-worker"
+        shutil.copytree(self.template / "Roles/project-sub-agent", owned)
         role = owned / "ROLE.md"
         role.write_text(role.read_text().replace("name: project-sub-agent", "name: local-worker"))
         before = file_inventory(self.template)
@@ -158,24 +390,24 @@ class TemplateUpdateTests(unittest.TestCase):
         self.apply()
         before = engine.load_state(self.root)
         for name in list(before["files"]):
-            if name.startswith("roles/task-manager/") or name == engine.ROLE_INDEX:
+            if name.startswith("Roles/task-manager/") or name == engine.ROLE_INDEX:
                 before["files"].pop(name)
                 (self.template / name).unlink()
-            elif name.startswith("roles/project-sub-agent/"):
-                legacy = name.replace("roles/", "sub-agent-roles/", 1)
+            elif name.startswith("Roles/project-sub-agent/"):
+                legacy = name.replace("Roles/", "sub-agent-roles/", 1)
                 before["files"][legacy] = before["files"].pop(name)
                 (self.template / legacy).parent.mkdir(parents=True, exist_ok=True)
                 (self.template / name).rename(self.template / legacy)
-        (self.template / "roles/project-sub-agent").rmdir()
-        (self.template / "roles/task-manager").rmdir()
-        (self.template / "roles").rmdir()
+        (self.template / "Roles/project-sub-agent").rmdir()
+        (self.template / "Roles/task-manager").rmdir()
+        (self.template / "Roles").rmdir()
         engine.atomic_write(self.root / engine.STATE, engine.encoded(before))
         old = {name: (self.template / name).read_bytes() for name in before["files"] if name.startswith("sub-agent-roles/")}
         preview = engine.update(self.root, "check")
         self.assertEqual(set(old), {entry["legacy"] for entry in preview["role_retirements"]})
         write = engine.atomic_write
         def interrupted(path, raw, mode=0o644):
-            if path == self.template / "roles/project-sub-agent/ROLE.md":
+            if path == self.template / "Roles/project-sub-agent/ROLE.md":
                 raise OSError("injected role transition interruption")
             return write(path, raw, mode)
         with patch.object(engine, "atomic_write", side_effect=interrupted), self.assertRaises(OSError):
@@ -231,6 +463,33 @@ class TemplateUpdateTests(unittest.TestCase):
         )
         (self.root / "EXAMPLES-depo/notes.md").unlink()
         self.assertIn("reference-assets/EXAMPLES-depo/notes.md", self.apply()["deletions"])
+
+    def test_license_collection_maps_to_template_root_and_preserves_projects(self) -> None:
+        policy = json.loads((self.root / engine.MANIFEST).read_text())
+        names = ("LICENSE", "LICENSE-CODE", "LICENSE-DOCS")
+        for name in names:
+            put(self.root, "LICENSES-depo/" + name, "License fixture " + name + "\n")
+            policy["overrides"]["LICENSES-depo/" + name] = name
+        put(self.root, engine.MANIFEST, json.dumps(policy))
+        product = put(self.root, "Projects/Existing/LICENSE", "Existing project terms\n")
+        root_license = put(self.root, "LICENSE", "Active root terms\n")
+        self.apply()
+        state = engine.load_state(self.root)
+        self.assertIn("LICENSES-depo", state["collections"])
+        for name in names:
+            self.assertEqual((self.root / "LICENSES-depo" / name).read_bytes(),
+                             (self.template / name).read_bytes())
+            self.assertEqual("LICENSES-depo/" + name, state["files"][name]["source"])
+            self.assertFalse((self.template / "reference-assets/LICENSES-depo" / name).exists())
+        put(self.root, "LICENSES-depo/LICENSE-CODE", "Revised code fixture\n")
+        self.assertIn("LICENSE-CODE", self.apply()["updates"])
+        self.assertEqual("Existing project terms\n", product.read_text())
+        self.assertEqual("Active root terms\n", root_license.read_text())
+        (self.root / "LICENSES-depo/LICENSE-DOCS").unlink()
+        before = file_inventory(self.template)
+        with self.assertRaises(engine.UpdateError):
+            engine.update(self.root, "apply")
+        self.assertEqual(before, file_inventory(self.template))
 
     def test_explicit_mappings_require_valid_safe_sources(self) -> None:
         manifest = json.loads((self.root / engine.MANIFEST).read_bytes())

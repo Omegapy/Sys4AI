@@ -26,7 +26,7 @@ workspace.
 
 ## Reusable collections and project ownership
 
-`SKILLS-depo/`, `SOULS-depo/`, `AGENTS-depo/`, `ROLES-depo/`, and
+`SKILLS-depo/`, `SOULS-depo/`, `AGENTS-depo/`, `ROLES-depo/`, `LICENSES-depo/`, and
 [`SPECS-depo/`](./SPECS-depo/SPECS.md) contain reusable source material.
 They do not automatically govern active root files or ordinary product
 projects. Reusable additions, modifications and deletions belong in these
@@ -77,7 +77,7 @@ objective and stopping condition; reading root guidance does not promote them.
 Before every role-based selection, creation or assignment, the responsible
 Director must use the [manage-subagent-roles skill](./.agents/skills/manage-subagent-roles/SKILL.md)
 to obtain and assess a fresh filesystem-backed catalog. Active roles are paired
-files under `roles/`; `roles/INDEX.md` is navigation only. Preserve legacy role
+files under `Roles/`; `Roles/INDEX.md` is navigation only. Preserve legacy role
 provenance and use explicit preview/apply for transition.
 
 Every role-based child inherits the exact effective model and reasoning effort

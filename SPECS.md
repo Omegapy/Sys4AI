@@ -50,6 +50,11 @@ Update state and recovery data belong in `.sys4ai/template-update/`.
 Host logs belong in `~/Library/Logs/Sys4AI/`. The watcher is a local
 user launch agent; a clone requires its own explicit watcher installation.
 
+`LICENSES-depo/` supplies `LICENSE`, `LICENSE-CODE` (Apache 2.0), and
+`LICENSE-DOCS` (CC BY 4.0) through explicit Template root mappings. The active
+root adopts the same trio. [The licensing guide](./LICENSES-depo/README.md)
+records provenance, attribution, scope, and project ownership boundaries.
+
 ## Project initialization
 
 Both `init-new-project create` and `prepare-existing` copy reviewed governance
@@ -62,6 +67,9 @@ The setup receipt at `control_records/project-setup.json` records source hashes,
 asset adoption, registration, and verification. A partial operation must resume
 through the helper's checked same-request flow. Product dependencies, virtual
 environments, Git initialization, and publication are separate project work.
+Setup contract `governance-starter-v4` includes the complete license trio and
+records preserved project licensing separately. Earlier receipt editions keep
+their original source requirements and do not acquire licenses on a rerun.
 
 ## Documentation ownership
 

@@ -7,10 +7,10 @@ files.
 
 ## Canonical layout
 
-Each immediate role directory under `roles/` is one reusable definition:
+Each immediate role directory under `Roles/` is one reusable definition:
 
 ```text
-roles/
+Roles/
 |-- INDEX.md
 `-- descriptive-role-name/
     |-- AGENTS.md
@@ -32,6 +32,52 @@ publication without recreating or deleting the bundle. Transition previews bind
 the exact old/new pair hashes; differing destinations or stale previews block
 copy-first apply. Preserve legacy content and historical references. No
 read-only route reindexes, creates, migrates or repairs.
+
+The role root's actual directory entry must be exactly `Roles`. All other
+case-equivalent names and dual trees are rejected, including on case-insensitive
+filesystems. `roles/` is the previous edition, not an active fallback.
+
+## Case-only rename and provenance
+
+`case-rename-preview --format json` inspects the previous lowercase tree without
+writing. Its version 1 preview binds the exact project root, `source: roles`,
+`destination: Roles`, deterministic temporary name, source device/inode,
+complete relative directory/file inventory and `preview_sha256`. Every file
+has its SHA-256, including custom content, `INDEX.md` and `.transition.json`.
+Symlinks, hard links, unexpected entry types and competing case aliases block.
+A pending legacy copy-first transition must finish using its original helper
+before the directory can be renamed.
+
+Save the preview outside the role tree. An authorized
+`case-rename-apply --preview-file FILE --confirmed --format json` writes a
+version 1 receipt at `.sys4ai/roles-case-rename.json`, then moves the same directory
+through two exclusive no-overwrite renames. Its `preview` retains the reviewed
+input and `status` is `pending` or `completed`. The macOS implementation uses
+`renamex_np(RENAME_EXCL)`; Linux uses `renameat2(RENAME_NOREPLACE)` when supplied
+by the host C library. Unsupported exclusive rename capability fails explicitly.
+No nonexclusive fallback overwrites a competing empty directory.
+
+An interruption before or after either hop returns exit 3 with the same-preview
+recovery command. Pending recovery requires the exact original inventory and
+directory identity at exactly one source, temporary or destination path. It
+never deletes a competing tree or restores stale bytes. A completed replay
+verifies the same exact `Roles` directory identity and leaves later authorized
+file edits intact. Run `reindex` separately after the rename; the physical
+operation preserves the old index bytes and does not claim current navigation.
+
+`validate_case_rename_receipt(value, root)` requires completed, exact current
+physical spelling and retained directory identity. It returns `status`,
+`directory_identity`, `source_files` (old project-relative paths to original
+hashes) and `destination_paths` (old paths to current `Roles/` paths). This is
+historical provenance; current consumers must inspect current file hashes.
+`validate_transition_receipt` accepts internally valid prior lowercase
+destinations without rewriting them. `transition_destination_paths(value,
+root)` resolves those destinations only through the completed rename proof and
+requires every historical file to have belonged to its inventory. Active
+`transition-preview` and `transition-apply` accept only current `Roles/` targets.
+Case receipts and prior transition evidence are controls, not starter assets or
+role definitions. Template migration also requires its own checked mapping and
+managed-ownership transaction through the depot updater.
 
 ## Directory and role name
 
@@ -176,7 +222,7 @@ not create it or publish any files. Unsafe symlink or hard-link targets fail.
 digests, conflicts and `preview_sha256`. Save the reviewed JSON outside the
 role tree. `transition-apply --preview-file FILE --confirmed --format json`
 rereads those preconditions, keeps all legacy files, records publication in
-`roles/.transition.json`, then validates and indexes the active pairs. A partial
+`Roles/.transition.json`, then validates and indexes the active pairs. A partial
 receipt resumes only with the same reviewed preview; current source or
 destination changes block recovery. Successful repeated apply is a no-op.
 Index, lock and transition receipts are not role definitions or starter data.

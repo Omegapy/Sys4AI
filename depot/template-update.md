@@ -19,10 +19,11 @@ factual inventory and does not control the update mapping.
 | `SOULS-depo/SOUL.md` | `SOUL.md` |
 | `AGENTS-depo/project-template-AGENTS.md` | `AGENTS.md` |
 | `ROLES-depo/project-director-ROLE.md` | `ROLE.md` |
-| Generic and task-manager pairs in `ROLES-depo/` | `roles/project-sub-agent/` and `roles/task-manager/` |
-| Validated destination role pairs and role helper snapshot | Generated `roles/INDEX.md` |
+| Generic and task-manager pairs in `ROLES-depo/` | `Roles/project-sub-agent/` and `Roles/task-manager/` |
+| Validated destination role pairs and role helper snapshot | Generated `Roles/INDEX.md` |
 | `SPECS-depo/project-template-SPECS.md` | `SPECS.md` |
 | `SPECS-depo/project-template.gitignore` | `.gitignore` |
+| `LICENSES-depo/LICENSE`, `LICENSE-CODE`, and `LICENSE-DOCS` | The same three active files at the Template root |
 | `SPECS-depo/project-template-README.md` and `template-tests/` | Template overview and its local contract test |
 | Initializer policy and README renderer | `.template/`, also retained in its skill package |
 | Other regular files in the remaining `*-depo` collections | `reference-assets/<collection>/`, preserving their relative paths |
@@ -41,17 +42,53 @@ Transient files, environments, repository history, credentials, model files,
 and generated data are excluded. Product dependencies are prepared separately.
 Every explicit override or mirror must refer to a current source file.
 
+The license trio is part of the initializer's current required starter set.
+Both setup routes obtain it only from the Template. Existing project licensing
+is preserved as a whole; missing companions are explicitly skipped instead of
+combining systems. Earlier setup receipts retain their original edition.
+
 ## Check or update now
 
 The updater validates the role pairs with frozen role-helper bytes in a
-disposable tree and generates `roles/INDEX.md` for their destination paths.
+disposable tree and generates `Roles/INDEX.md` for their destination paths.
 No static override or mirror can own that index. Its state entry binds the
 helper, SOUL, and role-file digests. Pending updates include the exact generated
 bytes, and recovery regenerates and checks them against the saved inputs.
 No role-catalog runtime lock or transition receipt is placed in the Template.
 
+An explicit mapping change from the previous `roles/` layout to `Roles/` uses
+a directory transition before file publication. Stop this checkout's watcher
+while making the coordinated mapping, helper, policy and source-guidance change.
+Run `check` and review its `role_case_transition` record, including every mapped
+path, the original state digest, directory identity and complete tree inventory.
+Ordinary `apply` executes that reviewed source/mapping edition. The transition
+requires every previously managed role file to keep its matching source at the
+new path. Customized managed bytes, missing files, unexpected case spellings,
+distinct case-equivalent directories and filesystem aliases block it.
+
+The same directory moves through a recorded intermediate name to `Roles`, so
+case-insensitive filesystems cannot turn old-path deletion into new-file deletion.
+Each hop uses the host's exclusive rename operation. A concurrently appearing
+empty directory is preserved and blocks the hop; unsupported hosts fail closed.
+The pending record retains the exact original state bytes and all role-tree file
+bytes. Apply archives that record under `role-layout-history/` before the first
+rename. Unmanaged files and empty directories inside the accepted role collection
+stay intact; unadopted role pairs still require explicit review. Earlier history
+records are retained without editing their path strings or checksums.
+
+After an interrupted rename or publication, ordinary `apply` validates the
+pending record, original directory identity and each old or new file checksum,
+then resumes the same operation. It rejects a replacement directory, a new
+conflicting destination, changed preserved bytes or stale ownership state.
+`check` remains read-only and reports the pending recovery. Do not rename the
+intermediate directory, edit state or remove the pending record by hand. After
+successful apply, exact directory entries and state keys use `Roles/`; repeat
+`check` and `apply` are current. Restore the watcher only after the coordinated
+sources, Template and these checks pass. Ordinary read-only checks never rename
+an old or incorrectly spelled directory.
+
 The reviewed role-layout mapping may retire old `sub-agent-roles/` destinations
-only when the same source has an exact `roles/` destination. The preview lists
+only when the same source has an exact `Roles/` destination. The preview lists
 each old path, new path, source, and retained hash. Before deleting any old pair,
 apply retains those bytes and mappings in a content-addressed record under
 `.sys4ai/template-update/role-layout-history/`. The pending transaction binds

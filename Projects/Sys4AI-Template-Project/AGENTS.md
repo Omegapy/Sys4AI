@@ -62,7 +62,7 @@ custom-agent configuration that replaces either value.
 - Each executable subtask is generic, complex or extra-complex. Follow the
   installed Task skill for required distinct agents, current-version review,
   senior return, conditional implementation and native stopping/recovery.
-- Active role pairs are in `roles/`; `roles/INDEX.md` is generated navigation.
+- Active role pairs are in `Roles/`; `Roles/INDEX.md` is generated navigation.
   Fresh paired-file validity and function-specific fit govern each assignment.
   Reading root guidance does not promote an ordinary child to manager.
 - Keep Task state separate from conversation threads, Codex memory, managed

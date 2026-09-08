@@ -29,7 +29,7 @@ class OrchestrationTests(unittest.TestCase):
         (self.root / 'Tasks').mkdir(); (self.root / 'Tasks/INDEX.md').write_text(task_state.render_index_markdown([], '2026-09-08T00:00:00+00:00'))
         source = SKILL_ROOT.parent / 'manage-subagent-roles'
         shutil.copytree(source, self.root / '.agents/skills/manage-subagent-roles', ignore=shutil.ignore_patterns('__pycache__'))
-        role_dir = self.root / 'roles/fixture-role'; role_dir.mkdir(parents=True)
+        role_dir = self.root / 'Roles/fixture-role'; role_dir.mkdir(parents=True)
         (role_dir / 'AGENTS.md').write_bytes((source / 'assets/role-bundle/AGENTS.md.template').read_bytes())
         headings = ['Purpose','Suitable tasks','Capabilities','Tasks outside the role','Required Codex skills','Expected inputs','Expected outputs','Working method','Validation responsibilities','Authority limits','Escalation and stopping conditions','Result-reporting contract']
         (role_dir / 'ROLE.md').write_text('---\nname: fixture-role\ndescription: Bounded deterministic test role only.\n---\n\n# Fixture role\n\n' + '\n\n'.join('## '+h+'\n\nUse only the explicit bounded test contract; do not take project authority.' for h in headings)+'\n')
@@ -39,7 +39,7 @@ class OrchestrationTests(unittest.TestCase):
         (self.root / 'catalog.json').write_text(cp.stdout)
         (self.root / 'evidence.txt').write_text('Synthetic deterministic fixture evidence; no actual native execution is claimed.\n')
         self.ev = self.ref('evidence.txt'); self.context = [self.ev]
-        self.role = {'name':'fixture-role','agents_path':'roles/fixture-role/AGENTS.md','role_path':'roles/fixture-role/ROLE.md','agents_sha256':self.ref('roles/fixture-role/AGENTS.md')['sha256'],'role_sha256':self.ref('roles/fixture-role/ROLE.md')['sha256'],'catalog':self.ref('catalog.json')}
+        self.role = {'name':'fixture-role','agents_path':'Roles/fixture-role/AGENTS.md','role_path':'Roles/fixture-role/ROLE.md','agents_sha256':self.ref('Roles/fixture-role/AGENTS.md')['sha256'],'role_sha256':self.ref('Roles/fixture-role/ROLE.md')['sha256'],'catalog':self.ref('catalog.json')}
         self.settings = {'mode':'verified_inheritance','model':None,'effort':None,'evidence':self.context}
         self.runtime = {'tools':['spawn_agent','list_agents','send_message','followup_task','interrupt_agent'],'depth':2,'available_slots':2,'evidence':self.context}
         cp, result = self.run_cli('new',payload={'name':'Orchestration fixture','description':'Deliver the bounded fixture.','definition_of_done':['Delivered and inspected.'],'orchestration_enabled':True})
@@ -144,6 +144,40 @@ class OrchestrationTests(unittest.TestCase):
         self.event('assignment.receipt',{'assignment_id':'worker1','receipt':self.launch('fixture-role')},fail='ORCH_NATIVE_ID')
         self.event('assignment.uncertain',{'assignment_id':'worker1','reason':'Native response lost.'})
         self.event('assignment.reserve',self.assignment_data('worker2','worker'),fail='ORCH_SLOT_OWNER')
+    def test_capitalized_roles_are_required_for_current_assignments(self):
+        self.define()
+        data = self.assignment_data('worker1', 'worker')
+        old_role = copy.deepcopy(self.role)
+        old_role['agents_path'] = old_role['agents_path'].replace('Roles/', 'roles/')
+        old_role['role_path'] = old_role['role_path'].replace('Roles/', 'roles/')
+        original = copy.deepcopy(old_role)
+        task_state.orch.role(old_role)  # Earlier stored metadata stays readable.
+        self.assertEqual(old_role, original)
+        data['role'] = old_role
+        before = (self.folder / 'task.json').read_bytes()
+        self.event('assignment.reserve', data, fail='ORCH_ROLE_PAIR')
+        self.assertEqual((self.folder / 'task.json').read_bytes(), before)
+        self.assign('worker1', 'worker')
+        self.assertEqual(self.state['orchestration']['assignments']['worker1']['role']['agents_path'], 'Roles/fixture-role/AGENTS.md')
+
+    def test_role_root_case_is_observed_not_inferred_from_file_lookup(self):
+        self.define()
+        (self.root / 'Roles').rename(self.root / 'rename-hop')
+        (self.root / 'rename-hop').rename(self.root / 'roles')
+        before = (self.folder / 'task.json').read_bytes()
+        self.event('assignment.reserve', self.assignment_data('worker1', 'worker'), fail='ORCH_ROLE_ROOT')
+        self.assertEqual((self.folder / 'task.json').read_bytes(), before)
+
+    def test_role_control_write_scopes_reject_case_and_path_aliases(self):
+        for raw in ('Roles', 'Roles/', 'roles', 'ROLES', 'Roles/INDEX.md',
+                    'roles/index.md', './Roles/./INDEX.md', 'ROLES//INDEX.md'):
+            with self.subTest(raw=raw):
+                baseline = self.base()
+                baseline['writes'] = [raw]
+                before = (self.folder / 'task.json').read_bytes()
+                self.event('subtask.define', {'subtask_id':'bad_scope', 'baseline':baseline}, fail='ORCH_WRITE_SCOPE')
+                self.assertEqual((self.folder / 'task.json').read_bytes(), before)
+
     def test_counts_dependencies_and_scope(self):
         b=self.base('complex');b['slots']=[b['slots'][0]];self.event('subtask.define',{'subtask_id':'bad','baseline':b},fail='ORCH_TEAM')
         b=self.base(dependencies=['missing']);self.event('subtask.define',{'subtask_id':'bad','baseline':b},fail='ORCH_DEPENDENCY')

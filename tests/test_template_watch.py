@@ -42,18 +42,30 @@ class WatcherTests(unittest.TestCase):
         before = watcher.fingerprint(self.root)
         source.write_bytes(source.read_bytes() + b"\nBounded fixture edit.\n")
         self.assertNotEqual(before, watcher.fingerprint(self.root))
-        index = self.root / "Projects/Sys4AI-Template-Project/roles/INDEX.md"
+        index = self.root / "Projects/Sys4AI-Template-Project/Roles/INDEX.md"
         index.parent.mkdir()
         index.write_text("Generated fixture navigation\n")
         before = watcher.fingerprint(self.root)
         index.write_text("Changed generated fixture navigation\n")
         self.assertNotEqual(before, watcher.fingerprint(self.root))
         # Another product remains outside the watcher's designated boundary.
-        other = self.root / "Projects/Other/roles"
+        other = self.root / "Projects/Other/Roles"
         other.mkdir(parents=True)
         before = watcher.fingerprint(self.root)
         (other / "INDEX.md").write_text("Unselected project\n")
         self.assertEqual(before, watcher.fingerprint(self.root))
+
+    def test_actual_role_directory_case_change_changes_fingerprint(self):
+        template = self.root / "Projects/Sys4AI-Template-Project"
+        folder = template / "roles"  # The previous directory spelling is migration input.
+        folder.mkdir()
+        (folder / "INDEX.md").write_text("Identical bytes across a case-only rename\n")
+        before = watcher.fingerprint(self.root)
+        folder.rename(template / "case-hop")
+        (template / "case-hop").rename(template / "Roles")
+        self.assertNotEqual(before, watcher.fingerprint(self.root))
+        self.assertIn("Roles", [item.name for item in template.iterdir()])
+        self.assertNotIn("roles", [item.name for item in template.iterdir()])
 
     def test_transients_ignored_and_symlinks_not_followed(self):
         folder = self.root / 'SKILLS-depo/demo'

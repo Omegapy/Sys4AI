@@ -22,7 +22,7 @@ class RecoveryCases(unittest.TestCase):
         shutil.copyfile(template / "SOUL.md", self.target / "SOUL.md")
         shutil.copytree(template / ".agents/skills/manage-subagent-roles",
                         self.target / ".agents/skills/manage-subagent-roles")
-        shutil.copytree(template / "roles/project-sub-agent",
+        shutil.copytree(template / "Roles/project-sub-agent",
                         self.target / "sub-agent-roles/project-sub-agent")
         raw = (template / self.helper.ROLE_HELPER).read_bytes()
         with self.helper.role_validator(raw) as validator:
@@ -34,7 +34,7 @@ class RecoveryCases(unittest.TestCase):
     def test_actual_completed_copy_first_transition_allows_preparation_and_rerun(self):
         self.transitioned_project()
         legacy = fixture.manifest(self.target / "sub-agent-roles")
-        receipt = self.target / "roles/.transition.json"
+        receipt = self.target / "Roles/.transition.json"
         provenance = receipt.read_bytes()
         first = self.run_setup(mode="prepare-existing")
         self.assertEqual(self.helper.SETUP_CONTRACT, first["setup_contract"])
@@ -48,9 +48,9 @@ class RecoveryCases(unittest.TestCase):
 
     def test_transition_evidence_is_required_and_rechecked_before_preparation_writes(self):
         self.transitioned_project()
-        receipt = self.target / "roles/.transition.json"
+        receipt = self.target / "Roles/.transition.json"
         original = receipt.read_bytes()
-        active = self.target / "roles/project-sub-agent/ROLE.md"
+        active = self.target / "Roles/project-sub-agent/ROLE.md"
         active_bytes = active.read_bytes()
         legacy = self.target / "sub-agent-roles/project-sub-agent/ROLE.md"
         legacy_bytes = legacy.read_bytes()
@@ -97,19 +97,19 @@ class RecoveryCases(unittest.TestCase):
     def test_current_custom_role_collection_gets_its_own_index_without_package_fill(self):
         self.target.mkdir()
         template = self.root / self.helper.TEMPLATE
-        source = template / "roles/project-sub-agent"
-        owned = self.target / "roles/project-sub-agent"
+        source = template / "Roles/project-sub-agent"
+        owned = self.target / "Roles/project-sub-agent"
         shutil.copytree(source, owned)
         role = owned / "ROLE.md"
         role.write_bytes(role.read_bytes() + b"\nProject-owned role responsibility.\n")
         original = fixture.manifest(owned)
         report = self.run_setup(mode="prepare-existing")
         self.assertEqual(original, fixture.manifest(owned))
-        self.assertFalse((self.target / "roles/task-manager").exists())
+        self.assertFalse((self.target / "Roles/task-manager").exists())
         index = (self.target / self.helper.ROLE_INDEX).read_bytes()
         self.assertNotEqual((template / self.helper.ROLE_INDEX).read_bytes(), index)
         self.assertEqual(self.helper.planned_role_index(self.target, {}, {}), index)
-        self.assertEqual("governance-starter-v2", report["setup_contract"])
+        self.assertEqual("governance-starter-v4", report["setup_contract"])
         self.run_setup(mode="prepare-existing")
         # An existing index is never overwritten to conceal a customization.
         (self.target / self.helper.ROLE_INDEX).write_text("Owned index\n")
@@ -122,14 +122,15 @@ class RecoveryCases(unittest.TestCase):
         template = self.root / self.helper.TEMPLATE
         backup = Path(self.temporary.name) / "current-template"
         shutil.copytree(template, backup)
-        (template / "roles").rename(template / "sub-agent-roles")
+        (template / "Roles").rename(template / "sub-agent-roles")
         shutil.rmtree(template / "sub-agent-roles/task-manager")
         (template / "sub-agent-roles/INDEX.md").unlink()
         policy_path = template / self.helper.TEMPLATE_POLICY
         policy = json.loads(policy_path.read_text()); policy["roles"] = "sub-agent-roles"
+        policy["starter_files"] = sorted(self.helper.required_starters(self.helper.LEGACY_CONTRACT))
         policy_path.write_text(json.dumps(policy))
         role_helper = template / self.helper.ROLE_HELPER
-        role_helper.write_text(role_helper.read_text().replace('ROLE_ROOT_NAME = "roles"', 'ROLE_ROOT_NAME = "sub-agent-roles"'))
+        role_helper.write_text(role_helper.read_text().replace('ROLE_ROOT_NAME = "Roles"', 'ROLE_ROOT_NAME = "sub-agent-roles"'))
         identity = {"schema_version": 1, "project_id": "orchard", "project_name": "Orchard",
                     "purpose": self.arguments["purpose"], "relative_path": "Projects/Orchard"}
         proposed, sources, _ = self.helper.source_snapshot(self.root, fixture.SOURCE_SKILL, identity, contract=self.helper.LEGACY_CONTRACT)
@@ -152,7 +153,7 @@ class RecoveryCases(unittest.TestCase):
         repeated = self.run_setup()
         self.assertEqual(first["sources"], repeated["sources"])
         self.assertEqual(pair_before, fixture.manifest(self.target / "sub-agent-roles"))
-        self.assertFalse((self.target / "roles").exists())
+        self.assertFalse((self.target / "Roles").exists())
         mixed = deepcopy(repeated)
         mixed["setup_contract"] = self.helper.SETUP_CONTRACT
         with self.assertRaisesRegex(self.helper.InitializationError, "mixes incompatible role layouts"):
@@ -187,7 +188,7 @@ class RecoveryCases(unittest.TestCase):
         identity = {"schema_version": 1, "project_id": "orchard", "project_name": "Orchard",
                     "purpose": "Orchard observations.", "relative_path": "Projects/Orchard"}
         _, records, _ = self.helper.source_snapshot(self.root, fixture.SOURCE_SKILL, identity)
-        for relative in ("roles/project-sub-agent/new.md", "reference-assets/new.md",
+        for relative in ("Roles/project-sub-agent/new.md", "reference-assets/new.md",
                          ".agents/skills/communication/new.md"):
             changed = template / relative
             changed.parent.mkdir(parents=True, exist_ok=True)
@@ -304,7 +305,7 @@ class RecoveryCases(unittest.TestCase):
             "README.md": b"Custom README",
             "SPECS.md": b"Custom specs",
             ".agents/skills/communication/SKILL.md": b"Custom skill",
-            "roles/project-sub-agent/ROLE.md": b"Custom role",
+            "Roles/project-sub-agent/ROLE.md": b"Custom role",
             "Tasks/task-owned/task.json": b'{"preserve":true}',
             "config/memory.toml": b"preserve original configuration bytes",
             "control_records/project-initialization.json": b"legacy receipt remains untouched",
@@ -320,7 +321,7 @@ class RecoveryCases(unittest.TestCase):
         for name, checksum in before.items():
             self.assertEqual(checksum, after[name], name)
         self.assertFalse((self.target / ".agents/skills/communication/README.md").exists())
-        self.assertFalse((self.target / "roles/project-sub-agent/AGENTS.md").exists())
+        self.assertFalse((self.target / "Roles/project-sub-agent/AGENTS.md").exists())
         self.assertFalse((self.target / "Tasks/INDEX.md").exists())
         self.assertEqual("Saved name", report["identity"]["project_name"])
         self.assertNotIn("dataset_id", report["identity"])
@@ -417,7 +418,7 @@ class RecoveryCases(unittest.TestCase):
 
     def test_minimum_saved_inventory_keeps_governance_and_renderer_sources(self):
         original = self.run_setup()
-        for name in (".agents/skills/task/SKILL.md", "roles/project-sub-agent/ROLE.md",
+        for name in (".agents/skills/task/SKILL.md", "Roles/project-sub-agent/ROLE.md",
                      self.helper.README_RENDERER, self.helper.TEMPLATE_POLICY):
             altered = deepcopy(original)
             source = self.helper.TEMPLATE + "/" + name

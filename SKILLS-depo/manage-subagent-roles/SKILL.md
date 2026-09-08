@@ -5,8 +5,10 @@ description: Discover and return project sub-agent roles with their AGENTS.md an
 
 # Manage Sub-Agent Roles
 
-Use the owning project's live `roles/` pairs as its authoritative catalog.
-`roles/INDEX.md` is persisted navigation, never independent role authority.
+Use the owning project's live `Roles/` pairs as its authoritative catalog.
+`Roles/INDEX.md` is persisted navigation, never independent role authority.
+The actual directory entry must be exactly `Roles`; a lowercase filesystem
+alias or a second case-equivalent tree is not an active catalog.
 The Project Director or the exact confirmed Task manager owns selection and
 assignment. Ordinary children do not select their own project-level role or
 write a role index.
@@ -14,7 +16,7 @@ write a role index.
 ## Establish the project root and mode
 
 Resolve the owning project containing `SOUL.md`, `ROLE.md`, `AGENTS.md` and
-`roles/`. Read applicable local instructions. Run its installed helper with the
+`Roles/`. Read applicable local instructions. Run its installed helper with the
 project Python environment; do not install a parser or dependency.
 
 ```text
@@ -85,8 +87,20 @@ For a legacy transition, read the schema, run `transition-preview --format json`
 review the exact old/new paths, digests and collisions, then use only the
 authorized preview with `transition-apply --preview-file FILE --confirmed`.
 Retain legacy pairs and historical references. If publication is interrupted,
-inspect `roles/.transition.json` and resume the exact reported recovery. A changed
+inspect `Roles/.transition.json` and resume the exact reported recovery. A changed
 source or customized destination blocks replay. Read-only routes never migrate.
+
+For an authorized rename of the previous lowercase `roles/` layout, run
+`case-rename-preview --format json` and save the reviewed preview outside the
+role tree. Use `case-rename-apply --preview-file FILE --confirmed` for that exact
+project. The helper moves the unchanged tree through an exclusive temporary
+name and records `.sys4ai/roles-case-rename.json`. Replay the same preview after
+an interruption; changed bytes, identity, aliases or competing trees block
+recovery. After completion, run `reindex` to publish current `Roles/` navigation.
+The original `.transition.json` stays byte-identical. Its lowercase paths are
+historical provenance; only a validated completed rename receipt resolves them
+to current paths. This operation does not adopt other project assets or update
+the Template mapping and ownership state; the depot update pipeline owns those.
 
 ## Build the delegation contract
 

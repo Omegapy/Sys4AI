@@ -81,9 +81,9 @@ def valid_role_text(
 class RoleCatalogTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
-        self.root = Path(self.temporary.name)
+        self.root = Path(self.temporary.name).resolve()
         (self.root / "SOUL.md").write_text("# Fixture soul\n", encoding="utf-8")
-        self.role_root = self.root / "roles"
+        self.role_root = self.root / "Roles"
         self.role_root.mkdir()
 
     def tearDown(self) -> None:
@@ -164,9 +164,9 @@ class RoleCatalogTests(unittest.TestCase):
         self.assertEqual(1, len(catalog.valid_roles))
         entry = catalog.valid_roles[0]
         self.assertEqual(
-            "roles/project-sub-agent/AGENTS.md", entry.agents_file
+            "Roles/project-sub-agent/AGENTS.md", entry.agents_file
         )
-        self.assertEqual("roles/project-sub-agent/ROLE.md", entry.role_file)
+        self.assertEqual("Roles/project-sub-agent/ROLE.md", entry.role_file)
 
     def test_t003_missing_agents_file_is_invalid(self) -> None:
         self.make_bundle("missing-agents", agents_text=None)
@@ -253,15 +253,15 @@ class RoleCatalogTests(unittest.TestCase):
         self.assertIn(
             "| Role | Description | Folder | AGENTS.md | ROLE.md | State |", rendered
         )
-        self.assertIn("roles/project-sub-agent/AGENTS.md", rendered)
-        self.assertIn("roles/project-sub-agent/ROLE.md", rendered)
+        self.assertIn("Roles/project-sub-agent/AGENTS.md", rendered)
+        self.assertIn("Roles/project-sub-agent/ROLE.md", rendered)
 
     def test_t014_json_output_has_versioned_contract(self) -> None:
         self.make_bundle("project-sub-agent")
         payload = role_catalog.build_catalog(self.root).to_dict()
         serialized = json.loads(json.dumps(payload))
         self.assertEqual(1, serialized["schema_version"])
-        self.assertEqual("roles", serialized["role_root"])
+        self.assertEqual("Roles", serialized["role_root"])
         self.assertTrue(serialized["valid_roles"][0]["valid"])
         self.assertEqual([], serialized["invalid_roles"])
 
@@ -347,10 +347,10 @@ class RoleCatalogTests(unittest.TestCase):
         self.assertEqual(
             [
                 ".sys4ai/role-catalog.lock",
+                "Roles/INDEX.md",
+                "Roles/documentation-reviewer/AGENTS.md",
+                "Roles/documentation-reviewer/ROLE.md",
                 "SOUL.md",
-                "roles/INDEX.md",
-                "roles/documentation-reviewer/AGENTS.md",
-                "roles/documentation-reviewer/ROLE.md",
             ],
             created,
         )
@@ -826,6 +826,231 @@ class RoleCatalogTests(unittest.TestCase):
         self.assertTrue((target / "ROLE.md").is_file())
         self.assertTrue(role_catalog.validate_role_directory(target.resolve(), self.root.resolve()).valid)
 
+    def make_lowercase(self):
+        # A distinct intermediate name changes the directory entry on both
+        # case-sensitive and case-insensitive filesystems.
+        intermediate = self.root / "fixture-case-hop"
+        self.role_root.rename(intermediate)
+        lower = self.root / "roles"
+        intermediate.rename(lower)
+        self.assertIn("roles", {p.name for p in self.root.iterdir()})
+        self.assertNotIn("Roles", {p.name for p in self.root.iterdir()})
+        return lower
+
+    def make_previous_transition(self):
+        self.make_legacy()
+        preview = role_catalog.transition_preview(self.root)
+        role_catalog.transition_apply(self.root, preview, confirmed=True)
+        target = self.role_root / ".transition.json"
+        receipt = json.loads(target.read_text())
+        receipt["preview"]["receipt"] = "roles/.transition.json"
+        for pair in receipt["preview"]["pairs"]:
+            for item in pair["files"]:
+                item["destination"] = item["destination"].replace("Roles/", "roles/", 1)
+        receipt["preview"]["preview_sha256"] = role_catalog.object_digest({k: v for k, v in receipt["preview"].items() if k != "preview_sha256"})
+        receipt["completed"] = [p.replace("Roles/", "roles/", 1) for p in receipt["completed"]]
+        target.write_text(json.dumps(receipt, indent=2) + "\n")
+        return self.make_lowercase(), receipt
+
+    def test_lowercase_root_never_satisfies_active_cli_or_creates_parallel_layout(self):
+        self.make_bundle("valid-worker")
+        self.make_lowercase()
+        (self.root / "sub-agent-roles").mkdir()
+        before = self.snapshot()
+        for command in (["list"], ["validate"], ["show", "valid-worker"], ["reindex"]):
+            with contextlib.redirect_stderr(io.StringIO()):
+                self.assertEqual(2, role_catalog.main(["--repo-root", str(self.root), *command, "--format", "json"]))
+            self.assertEqual(before, self.snapshot())
+        with self.assertRaisesRegex(role_catalog.CatalogError, "exact spelling"):
+            role_catalog.create_role(self.root, self.creation_args())
+        with self.assertRaisesRegex(role_catalog.CatalogError, "exact spelling"):
+            role_catalog.transition_preview(self.root)
+        self.assertEqual(before, self.snapshot())
+
+    def test_case_rename_keeps_original_transition_and_custom_files_then_reindexes(self):
+        lower, historical = self.make_previous_transition()
+        (lower / "legacy-worker" / "project-notes.md").write_text("Preserve custom responsibilities.\n")
+        (lower / "empty-custom-directory").mkdir()
+        original = role_catalog.role_tree_inventory(lower)
+        historical_bytes = (lower / ".transition.json").read_bytes()
+        before = self.snapshot()
+        preview = role_catalog.case_rename_preview(self.root)
+        self.assertEqual(before, self.snapshot())
+        with self.assertRaisesRegex(role_catalog.CatalogError, "confirmation"):
+            role_catalog.case_rename_apply(self.root, preview, confirmed=False)
+        self.assertEqual(before, self.snapshot())
+        result = role_catalog.case_rename_apply(self.root, preview, confirmed=True)
+        self.assertEqual("updated", result["status"])
+        self.assertEqual(original, role_catalog.role_tree_inventory(self.role_root))
+        self.assertEqual(historical_bytes, (self.role_root / ".transition.json").read_bytes())
+        self.assertEqual({"Roles"}, {p.name for p in self.root.iterdir() if p.name.casefold() == "roles"})
+        mapping = role_catalog.transition_destination_paths(historical, self.root)
+        self.assertEqual({"roles/legacy-worker/AGENTS.md": "Roles/legacy-worker/AGENTS.md",
+                          "roles/legacy-worker/ROLE.md": "Roles/legacy-worker/ROLE.md"}, mapping)
+        role_catalog.reindex(self.root)
+        self.assertEqual("current", role_catalog.build_catalog(self.root).index_status)
+        # Completed proof survives authorized later edits, but never relabels
+        # the historical hashes as current file content.
+        note = self.role_root / "legacy-worker" / "project-notes.md"
+        note.write_text("A later authorized customization.\n")
+        current = self.snapshot()
+        self.assertFalse(role_catalog.case_rename_apply(self.root, preview, confirmed=True)["mutated"])
+        self.assertEqual(current, self.snapshot())
+        self.assertEqual(preview, role_catalog.case_rename_preview(self.root))
+        with self.assertRaisesRegex(role_catalog.CatalogError, "unsafe receipt"):
+            role_catalog.transition_apply(self.root, historical["preview"], confirmed=True)
+
+    def test_case_rename_rejects_stale_changed_tree_and_wrong_root(self):
+        self.make_bundle("valid-worker")
+        lower = self.make_lowercase()
+        preview = role_catalog.case_rename_preview(self.root)
+        (lower / "extra.md").write_text("Appeared after review")
+        with self.assertRaisesRegex(role_catalog.CatalogError, "stale"):
+            role_catalog.case_rename_apply(self.root, preview, confirmed=True)
+        self.assertIn("roles", {p.name for p in self.root.iterdir()})
+        with tempfile.TemporaryDirectory() as folder:
+            with self.assertRaisesRegex(role_catalog.CatalogError, "project mismatch"):
+                role_catalog.case_rename_apply(Path(folder), preview, confirmed=True)
+        with mock.patch.object(role_catalog, "MAX_MANIFEST_BYTES", 1):
+            with self.assertRaisesRegex(role_catalog.CatalogError, "bounded receipt size"):
+                role_catalog.case_rename_preview(self.root)
+
+    def test_case_rename_recovers_uncertain_initial_receipt_publication(self):
+        self.make_bundle("valid-worker")
+        self.make_lowercase()
+        preview = role_catalog.case_rename_preview(self.root)
+        publish = role_catalog.atomic_publish
+        def interrupted(path, content, **options):
+            publish(path, content, **options)
+            raise OSError("receipt committed before observed acknowledgement")
+        with mock.patch.object(role_catalog, "atomic_publish", side_effect=interrupted):
+            with self.assertRaises(role_catalog.PublicationPending):
+                role_catalog.case_rename_apply(self.root, preview, confirmed=True)
+        self.assertIn("roles", {p.name for p in self.root.iterdir()})
+        receipt = role_catalog.load_manifest(self.root / role_catalog.CASE_RENAME_RECEIPT)
+        self.assertEqual("pending", receipt["status"])
+        self.assertEqual("updated", role_catalog.case_rename_apply(self.root, preview, confirmed=True)["status"])
+
+    def test_case_rename_recovers_before_and_after_each_physical_hop(self):
+        rename = role_catalog.rename_directory_no_replace
+        for fail_after in (0, 1, 2):
+            with self.subTest(fail_after=fail_after), tempfile.TemporaryDirectory() as folder:
+                root = Path(folder).resolve()
+                (root / "roles").mkdir()
+                (root / "roles" / "custom.md").write_text("Preserved across interruption")
+                preview = role_catalog.case_rename_preview(root)
+                calls = []
+                def interrupted(source, target):
+                    if fail_after == 0:
+                        raise OSError("before first hop")
+                    rename(source, target)
+                    calls.append(target.name)
+                    if len(calls) == fail_after:
+                        raise OSError("after physical hop, before next control write")
+                with mock.patch.object(role_catalog, "rename_directory_no_replace", side_effect=interrupted):
+                    with self.assertRaises(role_catalog.PublicationPending):
+                        role_catalog.case_rename_apply(root, preview, confirmed=True)
+                self.assertEqual("pending", role_catalog.load_manifest(root / role_catalog.CASE_RENAME_RECEIPT)["status"])
+                before = {p.relative_to(root).as_posix(): p.read_bytes() for p in root.rglob("*") if p.is_file()}
+                self.assertEqual(preview, role_catalog.case_rename_preview(root))
+                self.assertEqual(before, {p.relative_to(root).as_posix(): p.read_bytes() for p in root.rglob("*") if p.is_file()})
+                result = role_catalog.case_rename_apply(root, preview, confirmed=True)
+                self.assertEqual("updated", result["status"])
+                self.assertEqual("Preserved across interruption", (root / "Roles/custom.md").read_text())
+                self.assertFalse((root / preview["temporary"]).exists())
+
+    def test_case_rename_changed_interrupted_tree_and_replaced_inode_block_recovery(self):
+        self.make_bundle("valid-worker")
+        self.make_lowercase()
+        preview = role_catalog.case_rename_preview(self.root)
+        rename = role_catalog.rename_directory_no_replace
+        def interrupt(source, target):
+            rename(source, target)
+            raise OSError("interrupted")
+        with mock.patch.object(role_catalog, "rename_directory_no_replace", side_effect=interrupt):
+            with self.assertRaises(role_catalog.PublicationPending):
+                role_catalog.case_rename_apply(self.root, preview, confirmed=True)
+        temporary = self.root / preview["temporary"]
+        note = temporary / "new.md"
+        note.write_text("Concurrent change must survive")
+        with self.assertRaises(role_catalog.PublicationPending):
+            role_catalog.case_rename_apply(self.root, preview, confirmed=True)
+        self.assertEqual("Concurrent change must survive", note.read_text())
+        temporary.rename(self.root / "retained-original")
+        temporary.mkdir()
+        with self.assertRaisesRegex(role_catalog.PublicationPending, "identity changed"):
+            role_catalog.case_rename_apply(self.root, preview, confirmed=True)
+
+    def test_case_rename_refuses_aliases_and_exclusive_rename_preserves_competitor(self):
+        self.make_bundle("valid-worker")
+        lower = self.make_lowercase()
+        target = lower / "valid-worker" / "alias.md"
+        target.symlink_to(lower / "valid-worker" / "ROLE.md")
+        with self.assertRaisesRegex(role_catalog.CatalogError, "symbolic link"):
+            role_catalog.case_rename_preview(self.root)
+        target.unlink()
+        os.link(lower / "valid-worker" / "ROLE.md", target)
+        with self.assertRaisesRegex(role_catalog.CatalogError, "hard-linked"):
+            role_catalog.case_rename_preview(self.root)
+        target.unlink()
+        preview = role_catalog.case_rename_preview(self.root)
+        rename = role_catalog.rename_directory_no_replace
+        def concurrent(source, destination):
+            if destination.name == "Roles":
+                destination.mkdir()
+            return rename(source, destination)
+        with mock.patch.object(role_catalog, "rename_directory_no_replace", side_effect=concurrent):
+            with self.assertRaises(role_catalog.PublicationPending):
+                role_catalog.case_rename_apply(self.root, preview, confirmed=True)
+        self.assertTrue((self.root / preview["temporary"] / "valid-worker/ROLE.md").is_file())
+        self.assertTrue((self.root / "Roles").is_dir())
+        with self.assertRaisesRegex(role_catalog.PublicationPending, "conflicting"):
+            role_catalog.case_rename_apply(self.root, preview, confirmed=True)
+
+    def test_case_sensitive_dual_directories_are_rejected(self):
+        if (self.root / "roles").exists():
+            self.skipTest("requires a case-sensitive filesystem; separately exercised on APFS case-sensitive volume")
+        lower = self.root / "roles"
+        lower.mkdir()
+        (lower / "keep.md").write_text("Separate lowercase tree")
+        before = self.snapshot()
+        with self.assertRaisesRegex(role_catalog.CatalogError, "exact spelling"):
+            role_catalog.build_catalog(self.root)
+        with self.assertRaisesRegex(role_catalog.CatalogError, "exact spelling"):
+            role_catalog.case_rename_preview(self.root)
+        self.assertEqual(before, self.snapshot())
+
+    def test_historical_transition_needs_completed_case_proof_for_current_paths(self):
+        lower, historical = self.make_previous_transition()
+        historical_bytes = (lower / ".transition.json").read_bytes()
+        self.assertEqual(set(historical["completed"]), set(role_catalog.validate_transition_receipt(historical, self.root.resolve())))
+        with self.assertRaises(role_catalog.CatalogError):
+            role_catalog.transition_destination_paths(historical, self.root)
+        preview = role_catalog.case_rename_preview(self.root)
+        role_catalog.case_rename_apply(self.root, preview, confirmed=True)
+        receipt = role_catalog.load_manifest(self.root / role_catalog.CASE_RENAME_RECEIPT)
+        proof = role_catalog.validate_case_rename_receipt(receipt, self.root)
+        self.assertIn("roles/INDEX.md", proof["source_files"])
+        self.assertEqual("Roles/INDEX.md", proof["destination_paths"]["roles/INDEX.md"])
+        for status in ("pending", [], "forged"):
+            changed = dict(receipt, status=status)
+            with self.assertRaises(role_catalog.CatalogError):
+                role_catalog.validate_case_rename_receipt(changed, self.root)
+        self.assertEqual(historical_bytes, (self.role_root / ".transition.json").read_bytes())
+
+    def test_case_rename_cli_publishes_reviewed_physical_change_only(self):
+        self.make_bundle("valid-worker")
+        self.make_lowercase()
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            self.assertEqual(0, role_catalog.main(["--repo-root", str(self.root), "case-rename-preview", "--format", "json"]))
+        preview = self.root / "reviewed-case-rename.json"
+        preview.write_text(output.getvalue())
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(0, role_catalog.main(["--repo-root", str(self.root), "case-rename-apply", "--preview-file", str(preview), "--confirmed", "--format", "json"]))
+        self.assertEqual("Roles/valid-worker/ROLE.md", role_catalog.build_catalog(self.root).valid_roles[0].role_file)
+        self.assertFalse((self.role_root / "INDEX.md").exists())
+
 
 class ImplementationContractTests(unittest.TestCase):
     """Portable source/installed contracts; native execution is tested separately."""
@@ -843,8 +1068,8 @@ class ImplementationContractTests(unittest.TestCase):
             cls.director = (PROJECT_ROOT / "ROLE.md").read_text()
             cls.root_agents = (PROJECT_ROOT / "AGENTS.md").read_text()
             cls.readme = (PROJECT_ROOT / "README.md").read_text()
-            cls.pairs = {name: ((PROJECT_ROOT / "roles" / name / "AGENTS.md").read_text(),
-                                (PROJECT_ROOT / "roles" / name / "ROLE.md").read_text())
+            cls.pairs = {name: ((PROJECT_ROOT / "Roles" / name / "AGENTS.md").read_text(),
+                                (PROJECT_ROOT / "Roles" / name / "ROLE.md").read_text())
                          for name in ("project-sub-agent", "task-manager")}
         cls.skill = (PACKAGE_ROOT / "SKILL.md").read_text()
         cls.schema = (PACKAGE_ROOT / "references/role-schema.md").read_text()
@@ -874,7 +1099,7 @@ class ImplementationContractTests(unittest.TestCase):
             root = Path(folder).resolve()
             (root / "SOUL.md").write_text("# Project soul\n")
             for name, (agents, role) in self.pairs.items():
-                target = root / "roles" / name
+                target = root / "Roles" / name
                 target.mkdir(parents=True)
                 (target / "AGENTS.md").write_text(agents)
                 (target / "ROLE.md").write_text(role)
@@ -917,11 +1142,11 @@ class ImplementationContractTests(unittest.TestCase):
 
     def test_source_navigation_is_not_role_authority(self):
         text = " ".join((self.skill + " " + self.schema).split())
-        for clause in ("roles/INDEX.md", "navigation", "never independent role authority",
+        for clause in ("Roles/INDEX.md", "navigation", "never independent role authority",
                        "transition-preview", "transition-apply", "preview_sha256",
                        "reindex", "read-only", "committed valid bundle"):
             self.assertIn(clause, text)
-        self.assertIn("roles/", self.readme)
+        self.assertIn("Roles/", self.readme)
         self.assertIn(".agents/skills/manage-subagent-roles/SKILL.md", self.readme)
 
     def test_template_helpers_and_ui_metadata_are_available(self):

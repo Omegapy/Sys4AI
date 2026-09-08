@@ -150,8 +150,8 @@ remain materially consistent with the manager's accepted result and evidence.
 
 Before every role-based selection, creation or assignment, use
 [$manage-subagent-roles](.agents/skills/manage-subagent-roles/SKILL.md) to obtain
-a fresh filesystem-backed role catalog. Active pairs are in `roles/`; the
-generated `roles/INDEX.md` is navigation only. Invalid or missing pairs remain
+a fresh filesystem-backed role catalog. Active pairs are in `Roles/`; the
+generated `Roles/INDEX.md` is navigation only. Invalid or missing pairs remain
 ineligible even when an index claims otherwise.
 
 Build a separate profile for each function: objective, capabilities, reads,

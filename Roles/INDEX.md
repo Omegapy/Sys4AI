@@ -2,7 +2,7 @@
 
 # Roles
 
-Catalog SHA-256: `ba709f463b90986b746525a49ed8dbf4bc5bb73cf65841eb92785e31e96aa45a`
+Catalog SHA-256: `ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de`
 
 | Role | Selection | AGENTS.md | ROLE.md | AGENTS SHA-256 | ROLE SHA-256 |
 | --- | --- | --- | --- | --- | --- |

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Publish validated depot files into the one Sys4AI project template.
 
-The receipt owns individual destination bytes, never a whole directory. A
+The receipt owns individual destination bytes. The explicit role-case migration
+also binds the original directory identity and preserves its complete tree. A
 pending record permits forward recovery after interrupted per-file atomic
 writes; this is not a transactionally swapped template tree. Initializers
 coordinate their template reads with a shared lock on the same lock file.
@@ -44,11 +45,12 @@ LEGACY_BASELINE_FILES = {
     ".template/project-readme.md",
     *(f".agents/skills/{name}/SKILL.md" for name in BASELINE_SKILLS),
 }
-ROLE_INDEX = "roles/INDEX.md"
+ROLE_INDEX = "Roles/INDEX.md"
+PREVIOUS_ROLE_INDEX = "roles/INDEX.md"
 ROLE_HELPER = ".agents/skills/manage-subagent-roles/scripts/role_catalog.py"
 BASELINE_FILES = (LEGACY_BASELINE_FILES - {
     "sub-agent-roles/project-sub-agent/AGENTS.md", "sub-agent-roles/project-sub-agent/ROLE.md",
-}) | {ROLE_INDEX, ROLE_HELPER, *(f"roles/{name}/{filename}" for name in
+}) | {ROLE_INDEX, ROLE_HELPER, *(f"Roles/{name}/{filename}" for name in
       ("project-sub-agent", "task-manager") for filename in ("AGENTS.md", "ROLE.md"))}
 EXCLUDED = {
     ".git", ".gitmodules", ".gitignore_global", ".venv", "venv", "env",
@@ -204,10 +206,10 @@ def validate_skill(name: str, raw: bytes) -> None:
         raise UpdateError(f"skill name must match its folder and have a description: {name}")
 
 
-def role_index_inputs(files: dict[str, Any]) -> dict[str, dict[str, str]]:
+def role_index_inputs(files: dict[str, Any], role_root: str = "Roles") -> dict[str, dict[str, str]]:
     if not isinstance(files, dict) or any(not isinstance(name, str) for name in files):
         raise UpdateError("invalid generated role index file inventory")
-    targets = {"SOUL.md", ROLE_HELPER} | {name for name in files if name.startswith("roles/") and name != ROLE_INDEX}
+    targets = {"SOUL.md", ROLE_HELPER} | {name for name in files if name.startswith(role_root + "/") and name != role_root + "/INDEX.md"}
     if not targets <= files.keys():
         raise UpdateError("role index lacks its validator or instruction source")
     if any(not isinstance(files[target], dict) or not {"source", "sha256"} <= files[target].keys()
@@ -216,7 +218,7 @@ def role_index_inputs(files: dict[str, Any]) -> dict[str, dict[str, str]]:
     return {target: {key: files[target][key] for key in ("source", "sha256")} for target in sorted(targets)}
 
 
-def render_role_index(inputs: dict[str, bytes]) -> bytes:
+def render_role_index(inputs: dict[str, bytes], role_root: str = "Roles") -> bytes:
     """Validate and render from frozen bytes; never write into the Template."""
     if not {"SOUL.md", ROLE_HELPER} <= inputs.keys():
         raise UpdateError("role index lacks its frozen inputs")
@@ -226,11 +228,11 @@ def render_role_index(inputs: dict[str, bytes]) -> bytes:
     sys.modules[module_name] = helper
     try:
         exec(compile(inputs[ROLE_HELPER], ROLE_HELPER, "exec"), helper.__dict__)
-        if helper.ROLE_ROOT_NAME != "roles":
+        if helper.ROLE_ROOT_NAME != role_root:
             raise UpdateError("role validator does not support the active roles layout")
         with tempfile.TemporaryDirectory(prefix="sys4ai-role-index-") as temporary:
             root = Path(temporary).resolve()
-            (root / "roles").mkdir()
+            (root / role_root).mkdir()
             for target, raw in inputs.items():
                 if target == ROLE_HELPER:
                     continue
@@ -344,7 +346,7 @@ def snapshot(root: Path) -> dict[str, Any]:
             raise UpdateError(f"template file/directory mapping collision: {identities[key]}")
     reserved_index = unicodedata.normalize("NFD", ROLE_INDEX).casefold()
     if reserved_index in identities:
-        raise UpdateError("roles/INDEX.md is generated; a static source mapping cannot own it")
+        raise UpdateError("Roles/INDEX.md is generated; a static source mapping cannot own it")
     if any(reserved_index in {parent.as_posix() for parent in PurePosixPath(name).parents}
            or name in {parent.as_posix() for parent in PurePosixPath(reserved_index).parents} for name in identities):
         raise UpdateError("generated role index has a file/directory mapping collision")
@@ -358,7 +360,7 @@ def snapshot(root: Path) -> dict[str, Any]:
     if (not isinstance(policy, dict) or type(policy.get("schema_version")) is not int
             or policy["schema_version"] != 2):
         raise UpdateError("template initialization policy must use schema 2")
-    if policy.get("roles") != "roles":
+    if policy.get("roles") != "Roles":
         raise UpdateError("template initialization policy must use the active roles layout")
     inputs = role_index_inputs(files)
     index = render_role_index({target: blobs[entry["source"]] for target, entry in inputs.items()})
@@ -385,8 +387,13 @@ def validate_state(state: Any) -> dict[str, Any]:
         for name in collections
     ) or len(set(collections)) != len(collections):
         raise UpdateError("invalid recorded depot collections")
+    identities: set[str] = set()
     for target, entry in state["files"].items():
         destination(target)
+        identity = unicodedata.normalize("NFD", target).casefold()
+        if identity in identities:
+            raise UpdateError("case-equivalent recorded destinations are ambiguous")
+        identities.add(identity)
         if (
             not isinstance(entry, dict)
             or not isinstance(entry.get("sha256"), str)
@@ -397,12 +404,16 @@ def validate_state(state: Any) -> dict[str, Any]:
             raise UpdateError("invalid recorded destination ownership")
         if source(entry.get("source")).split("/")[0] not in collections:
             raise UpdateError("recorded source collection is missing")
-        if "generated" in entry and (target != ROLE_INDEX or entry["generated"] != {
-            "kind": "role-index-v1", "inputs": role_index_inputs(state["files"])
+        if "generated" in entry and (target not in {ROLE_INDEX, PREVIOUS_ROLE_INDEX} or entry["generated"] != {
+            "kind": "role-index-v1", "inputs": role_index_inputs(state["files"], target.split("/")[0])
         } or entry["source"] != state["files"][ROLE_HELPER]["source"]):
             raise UpdateError("invalid generated role index ownership")
-    if ROLE_INDEX in state["files"] and "generated" not in state["files"][ROLE_INDEX]:
-        raise UpdateError("recorded role index must have generated ownership")
+    role_roots = {target.split("/")[0] for target in state["files"] if target.split("/")[0].casefold() == "roles"}
+    if len(role_roots) > 1 or role_roots - {"Roles", "roles"}:
+        raise UpdateError("recorded role directory casing is ambiguous")
+    for index in (ROLE_INDEX, PREVIOUS_ROLE_INDEX):
+        if index in state["files"] and "generated" not in state["files"][index]:
+            raise UpdateError("recorded role index must have generated ownership")
     return state
 
 
@@ -440,6 +451,204 @@ def retirement_targets(
     return targets
 
 
+def role_layout(state: dict[str, Any]) -> str:
+    return "roles" if any(name.startswith("roles/") for name in state["files"]) else "Roles"
+
+
+def role_case_mapping(before: dict[str, Any], after: dict[str, Any]) -> dict[str, str]:
+    """Translate only the reviewed complete managed lowercase role collection."""
+    if role_layout(before) != "roles" or role_layout(after) != "Roles":
+        return {}
+    mapping = {name: "Roles/" + name.removeprefix("roles/")
+               for name in before["files"] if name.startswith("roles/")}
+    for old, new in mapping.items():
+        if new not in after["files"] or before["files"][old]["source"] != after["files"][new]["source"]:
+            raise UpdateError("case transition requires every old role destination and its exact source")
+    return mapping
+
+
+def role_case_entries(template: Path) -> list[str]:
+    return sorted(item.name for item in template.iterdir()
+                  if unicodedata.normalize("NFD", item.name).casefold() == "roles")
+
+
+def role_tree(folder: Path) -> dict[str, Any]:
+    """Capture all bytes and directory entries, including unmanaged preserved files."""
+    safe(folder)
+    if not folder.is_dir():
+        raise UpdateError("role case transition requires a directory")
+    files, directories, identities = {}, [], set()
+    for item in sorted(folder.rglob("*")):
+        safe(item)
+        name = item.relative_to(folder).as_posix()
+        identity = unicodedata.normalize("NFD", name).casefold()
+        if identity in identities:
+            raise UpdateError("case-equivalent role tree entries are ambiguous")
+        identities.add(identity)
+        if item.is_dir():
+            directories.append(name)
+        else:
+            files[name] = {"sha256": digest(read_file(item)), "mode": stat.S_IMODE(item.stat().st_mode)}
+    return {"files": files, "directories": directories}
+
+
+def case_preview(root: Path, before: dict[str, Any], after: dict[str, Any]) -> dict[str, Any] | None:
+    mapping = role_case_mapping(before, after)
+    if not mapping:
+        return None
+    template = root / TEMPLATE
+    if role_case_entries(template) != ["roles"]:
+        raise UpdateError("case transition requires exactly the recorded lowercase roles directory")
+    folder = safe(template / "roles")
+    tree = role_tree(folder)
+    for old in mapping:
+        if tree["files"].get(old.removeprefix("roles/"), {}).get("sha256") != before["files"][old]["sha256"]:
+            raise UpdateError("managed role changed before case transition")
+    info = folder.stat()
+    temporary = ".template-roles-case-" + digest(encoded([before, after]))[:24]
+    if safe(template / temporary).exists():
+        raise UpdateError("role case transition temporary directory already exists")
+    return {"schema_version": 1, "from": "roles", "to": "Roles", "temporary": temporary,
+            "directory_identity": {"device": info.st_dev, "inode": info.st_ino},
+            "before_state_sha256": file_hash(root / STATE), "mapping": mapping, "tree": tree}
+
+
+def case_record(root: Path, preview: dict[str, Any]) -> dict[str, Any]:
+    folder = root / TEMPLATE / "roles"
+    raw_state = read_file(root / STATE)
+    if digest(raw_state) != preview["before_state_sha256"] or role_tree(folder) != preview["tree"]:
+        raise UpdateError("role case transition input changed before recovery capture")
+    payloads = {}
+    for name, entry in preview["tree"]["files"].items():
+        raw = read_file(folder / name)
+        if digest(raw) != entry["sha256"]:
+            raise UpdateError("role case transition bytes changed during recovery capture")
+        payloads[name] = base64.b64encode(raw).decode("ascii")
+    info = folder.stat()
+    if (role_case_entries(root / TEMPLATE) != ["roles"] or role_tree(folder) != preview["tree"]
+            or {"device": info.st_dev, "inode": info.st_ino} != preview["directory_identity"]
+            or file_hash(root / STATE) != preview["before_state_sha256"]):
+        raise UpdateError("role case transition input changed during recovery capture")
+    return {"preview": preview, "before_state": base64.b64encode(raw_state).decode("ascii"), "payloads": payloads}
+
+
+def validate_case_record(root: Path, record: Any, before: dict[str, Any], after: dict[str, Any]) -> str | None:
+    """Validate saved history and return the one actual directory spelling/location."""
+    mapping = role_case_mapping(before, after)
+    if not mapping:
+        if record is not None:
+            raise UpdateError("unexpected role case transition record")
+        return None
+    if not isinstance(record, dict) or set(record) != {"preview", "before_state", "payloads"}:
+        raise UpdateError("role case transition recovery record is missing or invalid")
+    preview = record["preview"]
+    if (not isinstance(preview, dict) or set(preview) != {"schema_version", "from", "to", "temporary", "directory_identity", "before_state_sha256", "mapping", "tree"}
+            or type(preview["schema_version"]) is not int or preview["schema_version"] != 1
+            or preview["from"] != "roles" or preview["to"] != "Roles" or preview["mapping"] != mapping
+            or preview["temporary"] != ".template-roles-case-" + digest(encoded([before, after]))[:24]):
+        raise UpdateError("role case transition recovery preview is invalid")
+    try:
+        raw_state = base64.b64decode(record["before_state"], validate=True)
+    except (ValueError, TypeError, binascii.Error) as error:
+        raise UpdateError("role case transition state payload is invalid") from error
+    if digest(raw_state) != preview["before_state_sha256"] or json_document(raw_state) != before:
+        raise UpdateError("role case transition original state changed")
+    tree = preview["tree"]
+    if (not isinstance(tree, dict) or set(tree) != {"files", "directories"}
+            or not isinstance(tree["files"], dict) or not isinstance(tree["directories"], list)
+            or not isinstance(record["payloads"], dict) or set(record["payloads"]) != set(tree["files"])):
+        raise UpdateError("role case transition tree inventory is invalid")
+    for name in tree["directories"]:
+        relative(name)
+    for name, entry in tree["files"].items():
+        relative(name)
+        try:
+            raw = base64.b64decode(record["payloads"][name], validate=True)
+        except (ValueError, TypeError, binascii.Error) as error:
+            raise UpdateError("role case transition file payload is invalid") from error
+        if (not isinstance(entry, dict) or set(entry) != {"sha256", "mode"}
+                or digest(raw) != entry["sha256"] or type(entry["mode"]) is not int):
+            raise UpdateError("role case transition file checksum is invalid")
+    for old in mapping:
+        if tree["files"].get(old.removeprefix("roles/"), {}).get("sha256") != before["files"][old]["sha256"]:
+            raise UpdateError("role case transition archive differs from original ownership")
+    template = root / TEMPLATE
+    names = role_case_entries(template)
+    temporary = safe(template / preview["temporary"])
+    if temporary.exists():
+        names.append(temporary.name)
+    if len(names) != 1 or names[0] not in {"roles", "Roles", temporary.name}:
+        raise UpdateError("role case transition has missing or ambiguous directories")
+    location = names[0]
+    folder = safe(template / location)
+    info = folder.stat()
+    if {"device": info.st_dev, "inode": info.st_ino} != preview["directory_identity"]:
+        raise UpdateError("role case transition directory identity changed")
+    actual = role_tree(folder)
+    if location != "Roles":
+        if actual != tree:
+            raise UpdateError("role case transition tree changed before rename")
+    else:
+        allowed_files = dict(tree["files"])
+        allowed_dirs = set(tree["directories"])
+        for target, entry in after["files"].items():
+            if target.startswith("Roles/"):
+                name = target.removeprefix("Roles/")
+                allowed_files.setdefault(name, entry)
+                allowed_dirs.update(parent.as_posix() for parent in PurePosixPath(name).parents if parent.as_posix() != ".")
+        if not tree["files"].keys() <= actual["files"].keys() <= allowed_files.keys() or not set(tree["directories"]) <= set(actual["directories"]) <= allowed_dirs:
+            raise UpdateError("role case transition tree inventory changed during publication")
+        for name, entry in actual["files"].items():
+            old_hash = tree["files"].get(name, {}).get("sha256")
+            new_hash = after["files"].get("Roles/" + name, {}).get("sha256")
+            if entry["sha256"] not in {old_hash, new_hash}:
+                raise UpdateError("role case transition bytes changed during publication")
+            if "Roles/" + name not in after["files"] and entry != tree["files"][name]:
+                raise UpdateError("preserved role file changed during publication")
+    if load_state(root) == before and file_hash(root / STATE) != preview["before_state_sha256"]:
+        raise UpdateError("role case transition state digest changed")
+    return location
+
+
+def rename_role_directory(source: Path, destination: Path) -> None:
+    """Refuse even an empty destination created after the caller's preflight."""
+    import ctypes
+    library = ctypes.CDLL(None, use_errno=True)
+    if sys.platform == "darwin" and hasattr(library, "renamex_np"):
+        rename = library.renamex_np
+        rename.argtypes = (ctypes.c_char_p, ctypes.c_char_p, ctypes.c_uint)
+        args = (os.fsencode(source), os.fsencode(destination), 0x00000004)  # RENAME_EXCL
+    elif sys.platform.startswith("linux") and hasattr(library, "renameat2"):
+        rename = library.renameat2
+        rename.argtypes = (ctypes.c_int, ctypes.c_char_p, ctypes.c_int, ctypes.c_char_p, ctypes.c_uint)
+        args = (-100, os.fsencode(source), -100, os.fsencode(destination), 1)  # AT_FDCWD, RENAME_NOREPLACE
+    else:
+        raise UpdateError("this host has no supported exclusive directory rename")
+    rename.restype = ctypes.c_int
+    if rename(*args) != 0:
+        error = ctypes.get_errno()
+        raise OSError(error, os.strerror(error), str(destination))
+
+
+def finish_case_rename(root: Path, record: dict[str, Any], before: dict[str, Any], after: dict[str, Any]) -> None:
+    """Move the same owned directory through a non-aliasing intermediate name."""
+    template = root / TEMPLATE
+    for old, new in (("roles", record["preview"]["temporary"]), (record["preview"]["temporary"], "Roles")):
+        location = validate_case_record(root, record, before, after)
+        if location != old:
+            continue
+        if safe(template / new).exists():
+            raise UpdateError("role case transition rename destination appeared")
+        rename_role_directory(template / old, template / new)
+        descriptor = os.open(template, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        try:
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+    if validate_case_record(root, record, before, after) != "Roles":
+        raise UpdateError("role case transition did not reach the exact Roles spelling")
+
+
 def plan(
     root: Path, before: dict[str, Any], after: dict[str, Any],
     *, retire_collection: str | None = None,
@@ -459,12 +668,18 @@ def plan(
         lost.remove(retire_collection)
     if lost:
         report["conflicts"].append("recorded source collection is missing: " + ", ".join(lost))
-    report["conflicts"].extend(role_scope_conflicts(template, before, after))
-    for target in sorted(before["files"].keys() | after["files"].keys()):
-        previous = before["files"].get(target)
+    transition = case_preview(root, before, after)
+    mapping = role_case_mapping(before, after)
+    previous_files = {mapping.get(name, name): entry for name, entry in before["files"].items()}
+    if transition is not None:
+        report["role_case_transition"] = transition
+    report["conflicts"].extend(role_scope_conflicts(template, before, after, case_root="roles" if mapping else None))
+    for target in sorted(previous_files.keys() | after["files"].keys()):
+        previous = previous_files.get(target)
         desired = after["files"].get(target)
         try:
-            current = file_hash(template / target)
+            physical = "roles/" + target.removeprefix("Roles/") if mapping and target.startswith("Roles/") else target
+            current = file_hash(template / physical)
         except (UpdateError, OSError) as error:
             report["conflicts"].append(f"{target}: {error}")
             continue
@@ -498,25 +713,33 @@ def role_retirements(before: dict[str, Any], after: dict[str, Any]) -> list[dict
     for target, entry in sorted(before["files"].items()):
         if not target.startswith("sub-agent-roles/") or target in after["files"]:
             continue
-        active = "roles/" + target.removeprefix("sub-agent-roles/")
+        active = role_layout(after) + "/" + target.removeprefix("sub-agent-roles/")
         if active not in after["files"] or after["files"][active]["source"] != entry["source"]:
             raise UpdateError("legacy role retirement lacks an exact source-to-active mapping")
         result.append({"legacy": target, "active": active, "source": entry["source"], "sha256": entry["sha256"]})
     return result
 
 
-def role_scope_conflicts(template: Path, before: dict[str, Any], after: dict[str, Any]) -> list[str]:
+def role_scope_conflicts(template: Path, before: dict[str, Any], after: dict[str, Any], *, case_root: str | None = None) -> list[str]:
     """A managed index cannot silently omit project-owned role directories."""
     conflicts = []
-    for prefix in ("roles", "sub-agent-roles"):
-        folder = safe(template / prefix)
+    active_root = role_layout(after)
+    entries = role_case_entries(template)
+    if case_root is None and entries not in ([], [active_root]):
+        conflicts.append("role directory spelling differs from the active mapping or has case aliases")
+        return conflicts
+    mapping = role_case_mapping(before, after)
+    before_files = {mapping.get(name, name): entry for name, entry in before["files"].items()}
+    for prefix in (active_root, "sub-agent-roles"):
+        physical = case_root if prefix == active_root and case_root is not None else prefix
+        folder = safe(template / physical)
         if not folder.exists():
             continue
         if not folder.is_dir():
             conflicts.append(f"role collection is not a directory: {prefix}")
             continue
         desired = {Path(name).parts[1] for name in after["files"] if name.startswith(prefix + "/") and len(Path(name).parts) > 2}
-        previous = {Path(name).parts[1] for name in before["files"] if name.startswith(prefix + "/") and len(Path(name).parts) > 2}
+        previous = {Path(name).parts[1] for name in before_files if name.startswith(prefix + "/") and len(Path(name).parts) > 2}
         for child in folder.iterdir():
             safe(child)
             if not child.is_dir() or child.name in desired:
@@ -526,7 +749,8 @@ def role_scope_conflicts(template: Path, before: dict[str, Any], after: dict[str
                     conflicts.append(f"unmanaged legacy role needs reviewed transition: {prefix}/{child.name}")
                 continue
             files = [item for item in child.rglob("*") if safe(item).is_file()]
-            retiring = child.name in previous and all(item.relative_to(template).as_posix() in before["files"] and item.relative_to(template).as_posix() not in after["files"] for item in files)
+            names = [prefix + "/" + item.relative_to(folder).as_posix() for item in files]
+            retiring = child.name in previous and all(name in before_files and name not in after["files"] for name in names)
             if not retiring:
                 conflicts.append(f"unmanaged role directory needs explicit adoption: {prefix}/{child.name}")
     return conflicts
@@ -582,6 +806,7 @@ def locked(root: Path, *, readonly: bool = False) -> Iterator[None]:
 def make_pending(
     before: dict[str, Any], snap: dict[str, Any],
     *, retirement: dict[str, str] | None = None, root: Path | None = None,
+    reviewed_case: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     after = snap["state"]
     payloads = {
@@ -590,6 +815,13 @@ def make_pending(
         if before["files"].get(target) != entry
     }
     pending = {"schema_version": 1, "before": before, "after": after, "payloads": payloads}
+    if role_case_mapping(before, after):
+        if root is None:
+            raise UpdateError("role case transition needs current bytes for recovery")
+        preview = case_preview(root, before, after)
+        if reviewed_case is not None and preview != reviewed_case:
+            raise UpdateError("role case transition changed after preflight")
+        pending["role_case_transition"] = case_record(root, preview)
     if retirement is not None:
         pending["retirement"] = retirement
     retired = role_retirements(before, after)
@@ -612,7 +844,10 @@ def recover(root: Path, pending: dict[str, Any]) -> None:
         raise UpdateError("invalid pending template update")
     before = validate_state(pending.get("before"))
     after = validate_state(pending.get("after"))
-    required = BASELINE_FILES if any(name.startswith("roles/") for name in after["files"]) else LEGACY_BASELINE_FILES
+    active_root = role_layout(after)
+    active_index = active_root + "/INDEX.md"
+    required = ({name.replace("Roles/", active_root + "/", 1) for name in BASELINE_FILES}
+                if active_index in after["files"] else LEGACY_BASELINE_FILES)
     if not required.issubset(after["files"]):
         raise UpdateError("pending update would remove required template governance")
     state_raw = read_file(root / STATE, optional=True)
@@ -653,17 +888,21 @@ def recover(root: Path, pending: dict[str, Any]) -> None:
     template = safe(root / TEMPLATE)
     if not template.is_dir():
         raise UpdateError("template directory is missing during recovery")
-    scope_conflicts = role_scope_conflicts(template, before, after)
+    case = pending.get("role_case_transition")
+    case_location = validate_case_record(root, case, before, after)
+    mapping = role_case_mapping(before, after)
+    previous_files = {mapping.get(name, name): entry for name, entry in before["files"].items()}
+    scope_conflicts = role_scope_conflicts(template, before, after, case_root=case_location)
     if scope_conflicts:
         raise UpdateError("role ownership conflict", report={"status": "conflict", "conflicts": scope_conflicts})
-    if ROLE_INDEX in after["files"]:
+    if active_index in after["files"]:
         inputs = {}
-        for target, binding in role_index_inputs(after["files"]).items():
+        for target, binding in role_index_inputs(after["files"], active_root).items():
             raw = decoded[target] if target in decoded else read_file(template / target)
             if digest(raw) != binding["sha256"]:
                 raise UpdateError("generated role index input changed during recovery")
             inputs[target] = raw
-        if digest(render_role_index(inputs)) != after["files"][ROLE_INDEX]["sha256"]:
+        if digest(render_role_index(inputs, active_root)) != after["files"][active_index]["sha256"]:
             raise UpdateError("generated role index does not match its frozen role pairs")
     retired = role_retirements(before, after)
     retained = pending.get("role_retirement")
@@ -684,24 +923,28 @@ def recover(root: Path, pending: dict[str, Any]) -> None:
         archive_raw = encoded(retained)
     elif retained is not None:
         raise UpdateError("unexpected legacy role retirement record")
-    targets = sorted(before["files"].keys() | after["files"].keys())
+    targets = sorted(previous_files.keys() | after["files"].keys())
     conflicts = []
     observed: dict[str, str | None] = {}
     for target in targets:
-        old = before["files"].get(target, {}).get("sha256")
+        old = previous_files.get(target, {}).get("sha256")
         new = after["files"].get(target, {}).get("sha256")
-        observed[target] = file_hash(template / target)
+        physical = case_location + "/" + target.removeprefix("Roles/") if case_location and target.startswith("Roles/") else target
+        observed[target] = file_hash(template / physical)
         if observed[target] not in {old, new}:
             conflicts.append(f"destination changed during interrupted update: {target}")
     if conflicts:
         raise UpdateError("recovery conflict", report={"status": "conflict", "conflicts": conflicts})
-    if archive_raw is not None:
-        archive = root / CONTROL / "role-layout-history" / (digest(archive_raw) + ".json")
+    archives = ([] if archive_raw is None else [archive_raw]) + ([] if case is None else [encoded(case)])
+    for raw in archives:
+        archive = root / CONTROL / "role-layout-history" / (digest(raw) + ".json")
         existing = read_file(archive, optional=True)
-        if existing is not None and existing != archive_raw:
+        if existing is not None and existing != raw:
             raise UpdateError("legacy role recovery archive was customized")
         if existing is None:
-            atomic_write(archive, archive_raw, 0o600)
+            atomic_write(archive, raw, 0o600)
+    if case is not None:
+        finish_case_rename(root, case, before, after)
     for target in targets:
         desired = after["files"].get(target)
         new = None if desired is None else desired["sha256"]
@@ -726,6 +969,8 @@ def recover(root: Path, pending: dict[str, Any]) -> None:
         expected_hash = after["files"].get(target, {}).get("sha256")
         if file_hash(template / target) != expected_hash:
             raise UpdateError(f"post-write verification failed: {target}")
+    if case is not None:
+        validate_case_record(root, case, before, after)
     if role_scope_conflicts(template, after, after):
         raise UpdateError("role directory changed during update; preserve it for reviewed recovery")
     if read_file(root / STATE, optional=True) != state_raw:
@@ -781,7 +1026,8 @@ def update(
             retirement = None if retire_collection is None else {
                 "collection": retire_collection, "state_sha256": expected_state_sha256,
             }
-            pending = make_pending(before, second, retirement=retirement, root=root)
+            pending = make_pending(before, second, retirement=retirement, root=root,
+                                   reviewed_case=report.get("role_case_transition"))
             atomic_write(root / PENDING, encoded(pending), 0o600)
             recover(root, pending)
             report["status"] = "applied"

@@ -42,10 +42,20 @@ STARTER_FILES = {
 }
 IDENTITY = "project.json"
 RECORD = "control_records/project-setup.json"
-SETUP_CONTRACT = "governance-starter-v2"
+SETUP_CONTRACT = "governance-starter-v4"
+PRE_LICENSE_CONTRACT = "governance-starter-v3"
+LOWERCASE_CONTRACT = "governance-starter-v2"
 LEGACY_CONTRACT = "governance-starter-v1"
-ROLE_INDEX = "roles/INDEX.md"
+ROLE_ROOTS = {SETUP_CONTRACT: "Roles", PRE_LICENSE_CONTRACT: "Roles", LOWERCASE_CONTRACT: "roles",
+              LEGACY_CONTRACT: "sub-agent-roles"}
+LICENSE_FILES = {"LICENSE", "LICENSE-CODE", "LICENSE-DOCS"}
+LICENSE_MARKER = re.compile(
+    r"(?:licen[cs]e(?:s|[._-].+)?|copying(?:[._-].+)?|copyright(?:[._-].+)?|unlicense(?:[._-].+)?)",
+    re.IGNORECASE,
+)
+ROLE_INDEX = "Roles/INDEX.md"
 ROLE_HELPER = ".agents/skills/manage-subagent-roles/scripts/role_catalog.py"
+CASE_RECEIPT = ".sys4ai/roles-case-rename.json"
 STAGES = ["assets", "registration", "verification"]
 SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 ID_PATTERN = re.compile(r"[a-z][a-z0-9]*(?:-[a-z0-9]+)*\Z")
@@ -409,8 +419,20 @@ def validate_package(name: str, files: dict[str, bytes]) -> None:
             unique_json(raw)
 
 
+def exact_role_root(root: Path, name: str, *, allow_absent: bool = False) -> None:
+    """Check directory entries, never case-insensitive path lookup."""
+    matches = sorted(entry.name for entry in root.iterdir() if entry.name.casefold() == name.casefold()) if root.is_dir() else []
+    if matches != [name]:
+        if not matches and allow_absent:
+            return
+        raise InitializationError("role directory spelling differs from its setup edition; an explicit case-rename transition is required")
+    target = safe(root / name)
+    if not target.is_dir():
+        raise InitializationError("role collection is not a regular directory")
+
+
 @contextmanager
-def role_validator(raw: bytes) -> Iterator[Any]:
+def role_validator(raw: bytes, *, role_root: str = "Roles") -> Iterator[Any]:
     """Use the reviewed Template helper bytes, including its receipt validator."""
     module_name = "_initializer_role_catalog_" + sha(raw)
     helper = types.ModuleType(module_name)
@@ -418,7 +440,7 @@ def role_validator(raw: bytes) -> Iterator[Any]:
     sys.modules[module_name] = helper
     try:
         exec(compile(raw, ROLE_HELPER, "exec"), helper.__dict__)
-        if helper.ROLE_ROOT_NAME != "roles":
+        if helper.ROLE_ROOT_NAME != role_root:
             raise InitializationError("role helper requires an explicit active-layout transition")
         yield helper
     except (RuntimeError, AttributeError, OSError, UnicodeError, SyntaxError, ValueError) as error:
@@ -429,16 +451,19 @@ def role_validator(raw: bytes) -> Iterator[Any]:
         sys.modules.pop(module_name, None)
 
 
-def role_index_bytes(files: dict[str, bytes], *, required: bool = False) -> bytes:
+def role_index_bytes(files: dict[str, bytes], *, required: bool = False,
+                     contract: str = SETUP_CONTRACT) -> bytes:
     """Render with one frozen role helper and disposable role files only."""
     if not {ROLE_HELPER, "SOUL.md"} <= files.keys():
         raise InitializationError("role index lacks its required helper or instruction source")
-    with role_validator(files[ROLE_HELPER]) as helper:
+    role_root = ROLE_ROOTS[contract]
+    role_index = role_root + "/INDEX.md"
+    with role_validator(files[ROLE_HELPER], role_root=role_root) as helper:
         with tempfile.TemporaryDirectory(prefix="sys4ai-initializer-roles-") as temporary:
             root = Path(temporary).resolve()
-            (root / "roles").mkdir()
+            (root / role_root).mkdir()
             for relative, raw in files.items():
-                if relative == "SOUL.md" or relative.startswith("roles/") and relative != ROLE_INDEX:
+                if relative == "SOUL.md" or relative.startswith(role_root + "/") and relative != role_index:
                     target = destination_file(root, relative)
                     target.parent.mkdir(parents=True, exist_ok=True)
                     target.write_bytes(raw)
@@ -454,7 +479,10 @@ def template_sources(
     template = safe(depot / TEMPLATE)
     policy = file_bytes(template / TEMPLATE_POLICY)
     specification = unique_json(policy)
-    role_root = "sub-agent-roles" if contract == LEGACY_CONTRACT else "roles"
+    if contract not in ROLE_ROOTS:
+        raise InitializationError("unsupported starter edition")
+    role_root = ROLE_ROOTS[contract]
+    exact_role_root(template, role_root)
     if (
         not isinstance(specification, dict)
         or specification.get("schema_version") != 2
@@ -476,7 +504,7 @@ def template_sources(
         or not isinstance(optional_files, list)
         or any(not isinstance(item, str) for item in starter_files + optional_files)
         or len(set(starter_files + optional_files)) != len(starter_files + optional_files)
-        or set(starter_files) != STARTER_FILES
+        or set(starter_files) != required_starters(contract)
         or optional_files != []
     ):
         raise InitializationError("template starter file allowlist is invalid")
@@ -509,16 +537,22 @@ def template_sources(
             for relative, raw in package.items():
                 include(f"{collection}/{name}/{relative}", raw, version=version)
     if contract != LEGACY_CONTRACT:
-        index = file_bytes(template / ROLE_INDEX)
-        if index != role_index_bytes(copied, required=True):
+        role_index = role_root + "/INDEX.md"
+        index = file_bytes(template / role_index)
+        if index != role_index_bytes(copied, required=True, contract=contract):
             raise InitializationError("template role index is stale; run the reviewed Template update")
-        include(ROLE_INDEX, index)
+        include(role_index, index)
     reference = safe(template / "reference-assets")
     if reference.exists():
         for relative, raw in tree_files(reference).items():
             include("reference-assets/" + relative, raw)
     renderer = file_bytes(template / README_RENDERER)
     return copied, origins, versions, renderer, policy
+
+
+def required_starters(contract: str) -> set[str]:
+    # Older receipts retain the file inventory of their original edition.
+    return STARTER_FILES | (LICENSE_FILES if contract == SETUP_CONTRACT else set())
 
 
 def source_snapshot(
@@ -805,11 +839,44 @@ def selected_identity(
     return identity, saved
 
 
+def license_inventory(destination: Path) -> dict[str, str]:
+    """Record root license markers and their trees without changing project terms."""
+    result = {}
+    if destination.exists():
+        for marker in sorted(destination.iterdir()):
+            if not LICENSE_MARKER.fullmatch(marker.name):
+                continue
+            safe(marker)
+            for item in [marker, *sorted(marker.rglob("*"))] if marker.is_dir() else [marker]:
+                safe(item)
+                result[item.relative_to(destination).as_posix()] = (
+                    "directory" if item.is_dir() else sha(file_bytes(item)))
+    return result
+
+
+def check_license_adoption(destination: Path, record: dict[str, Any]) -> None:
+    """Recheck the reviewed licensing set, allowing only already-published starters."""
+    if record["setup_contract"] != SETUP_CONTRACT:
+        return
+    expected = dict(record["preserved_licenses"])
+    for name in LICENSE_FILES & record["owned_files"].keys():
+        target = destination_file(destination, name)
+        if target.exists():
+            expected[name] = record["owned_files"][name]
+    if license_inventory(destination) != expected:
+        raise InitializationError("project licensing changed during asset adoption")
+
+
 def asset_plan(destination: Path, *, mode: str, proposed: dict[str, bytes],
-               original: dict[str, bytes], saved_identity: dict[str, Any] | None
+               original: dict[str, bytes], saved_identity: dict[str, Any] | None,
+               preserved_licenses: dict[str, str]
                ) -> tuple[dict[str, bytes], dict[str, str | None], dict[str, str]]:
     selected, before, preserved = {}, {}, {}
     for name, raw in proposed.items():
+        if name in LICENSE_FILES and preserved_licenses and safe(destination / name).is_dir():
+            # A project may use LICENSE/ as a directory. Preserve it without
+            # trying to publish a regular starter file at the same path.
+            continue
         target = destination_file(destination, name)
         present = file_bytes(target) if target.exists() else None
         if mode == "create":
@@ -822,8 +889,8 @@ def asset_plan(destination: Path, *, mode: str, proposed: dict[str, bytes],
         parts = Path(name).parts
         package_exists = ((name.startswith(".agents/skills/") and len(parts) > 3
                            and (destination / Path(*parts[:3])).is_dir())
-                          or (name.startswith("roles/") and name != ROLE_INDEX
-                              and (destination / "roles").is_dir()))
+                          or (name.startswith("Roles/") and name != ROLE_INDEX
+                              and (destination / "Roles").is_dir()))
         existing_tasks = (name.startswith("Tasks/") and (destination / "Tasks").is_dir()
                           and any((destination / "Tasks").iterdir()))
         if present is not None:
@@ -831,7 +898,7 @@ def asset_plan(destination: Path, *, mode: str, proposed: dict[str, bytes],
                 selected[name], before[name] = raw, sha(present)
             else:
                 preserved[name] = sha(present)
-        elif not (package_exists or existing_tasks):
+        elif not (package_exists or existing_tasks or name in LICENSE_FILES and preserved_licenses):
             selected[name], before[name] = raw, None
     if ROLE_INDEX in proposed:
         index = planned_role_index(destination, proposed, selected)
@@ -843,16 +910,21 @@ def asset_plan(destination: Path, *, mode: str, proposed: dict[str, bytes],
     return selected, before, preserved
 
 
-def planned_role_index(destination: Path, proposed: dict[str, bytes], owned: dict[str, Any]) -> bytes:
+def planned_role_index(destination: Path, proposed: dict[str, bytes], owned: dict[str, Any],
+                       *, contract: str = SETUP_CONTRACT) -> bytes:
     effective = {name: proposed[name] if name in owned else file_bytes(destination / name) for name in ("SOUL.md", ROLE_HELPER)}
-    role_root = safe(destination / "roles")
+    role_name = ROLE_ROOTS[contract]
+    role_index = role_name + "/INDEX.md"
+    exact_role_root(destination, role_name, allow_absent=True)
+    role_root = safe(destination / role_name)
     if role_root.exists():
-        effective.update({"roles/" + name: raw for name, raw in tree_files(role_root).items() if name != "INDEX.md"})
-    effective.update({name: proposed[name] for name in owned if name.startswith("roles/") and name != ROLE_INDEX})
-    return role_index_bytes(effective)
+        effective.update({role_name + "/" + name: raw for name, raw in tree_files(role_root).items() if name != "INDEX.md"})
+    effective.update({name: proposed[name] for name in owned if name.startswith(role_name + "/") and name != role_index})
+    return role_index_bytes(effective, contract=contract)
 
 
 def check_existing_role_layout(destination: Path, validator_raw: bytes) -> None:
+    exact_role_root(destination, "Roles", allow_absent=True)
     legacy = safe(destination / "sub-agent-roles")
     package = safe(destination / ".agents/skills/manage-subagent-roles")
     if legacy.exists() and not package.exists():
@@ -868,13 +940,13 @@ def check_existing_role_layout(destination: Path, validator_raw: bytes) -> None:
         roots = [node.value.value for node in tree.body if isinstance(node, ast.Assign)
                  and any(isinstance(target, ast.Name) and target.id == "ROLE_ROOT_NAME" for target in node.targets)
                  and isinstance(node.value, ast.Constant)]
-        if roots != ["roles"]:
+        if roots != ["Roles"]:
             raise InitializationError("existing role helper requires an explicit active-layout transition")
     if not legacy.exists():
         return
     # A copy-first transition retains the legacy directory. Its presence is not
     # completion evidence; validate the exact receipt and live bytes read-only.
-    receipt_path = safe(destination / "roles/.transition.json")
+    receipt_path = safe(destination / "Roles/.transition.json")
     if not receipt_path.is_file():
         raise InitializationError("retained legacy roles lack an explicit completed transition receipt")
     functions = {node.name for node in tree.body if isinstance(node, ast.FunctionDef)}
@@ -883,6 +955,7 @@ def check_existing_role_layout(destination: Path, validator_raw: bytes) -> None:
     with role_validator(validator_raw) as validator:
         receipt = validator.load_manifest(receipt_path)
         destinations = validator.validate_transition_receipt(receipt, destination)
+        current_paths = validator.transition_destination_paths(receipt, destination)
         if receipt["status"] != "completed":
             raise InitializationError("explicit role transition is incomplete; recover it before preparation")
         preview = receipt["preview"]
@@ -893,17 +966,48 @@ def check_existing_role_layout(destination: Path, validator_raw: bytes) -> None:
             for entry in pair["files"]:
                 if sha(file_bytes(destination_file(destination, entry["source"]))) != entry["source_sha256"]:
                     raise InitializationError("retained legacy role bytes changed after their reviewed transition")
-        if any(sha(file_bytes(destination_file(destination, name))) != checksum for name, checksum in destinations.items()):
+        if any(sha(file_bytes(destination_file(destination, current_paths[name]))) != checksum for name, checksum in destinations.items()):
             raise InitializationError("active role bytes differ from the completed transition receipt")
         catalog = validator.build_catalog(destination)
         if catalog.invalid_roles or catalog.index_status != "current":
             raise InitializationError("completed transition lacks current valid active roles and index")
 
 
+def record_role_paths(record: dict[str, Any], destination: Path
+                      ) -> tuple[str, dict[str, str], dict[str, str] | None]:
+    """Resolve an earlier edition only through its explicit completed rename."""
+    role_root = ROLE_ROOTS[record["setup_contract"]]
+    names = sorted(entry.name for entry in destination.iterdir()
+                   if entry.name.casefold() == "roles") if destination.is_dir() else []
+    if record["setup_contract"] == LOWERCASE_CONTRACT and names == ["Roles"]:
+        if "assets" not in record["completed_stages"]:
+            raise InitializationError("finish interrupted lowercase asset adoption before its explicit case rename")
+        receipt_path = destination_file(destination, CASE_RECEIPT)
+        if not receipt_path.is_file():
+            raise InitializationError("lowercase setup receipt requires an explicit completed case-rename receipt")
+        raw = file_bytes(receipt_path)
+        with role_validator(file_bytes(destination / ROLE_HELPER)) as validator:
+            proof = validator.validate_case_rename_receipt(unique_json(raw), destination)
+        paths = proof["destination_paths"]
+        for key in ("owned_files", "preserved_files"):
+            files = record.get(key)
+            if isinstance(files, dict) and any(isinstance(name, str) and name.startswith("roles/")
+                                               and name not in paths for name in files):
+                raise InitializationError("case-rename proof omits a recorded lowercase role file")
+        evidence = {"path": CASE_RECEIPT, "sha256": sha(raw), "source": "roles", "destination": "Roles"}
+        if "role_case_transition" in record and record["role_case_transition"] != evidence:
+            raise InitializationError("setup case-rename evidence changed since verification")
+        return "Roles", paths, evidence
+    if "role_case_transition" in record:
+        raise InitializationError("setup case-rename evidence has no matching current role layout")
+    exact_role_root(destination, role_root, allow_absent="assets" not in record["completed_stages"])
+    return role_root, {}, None
+
+
 def validate_record(record: Any, destination: Path, identity: dict[str, Any]) -> None:
     if (not isinstance(record, dict) or record.get("schema_version") != 1
             or not isinstance(record.get("setup_contract"), str)
-            or record.get("setup_contract") not in {SETUP_CONTRACT, LEGACY_CONTRACT}):
+            or record.get("setup_contract") not in ROLE_ROOTS):
         raise InitializationError("existing setup receipt has an unsupported contract")
     if record.get("project_root") != str(destination) or record.get("identity") != identity:
         raise InitializationError("existing setup receipt belongs to another project or request")
@@ -928,17 +1032,23 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
                 or not SHA256.fullmatch(entry["source_sha256"])
                 or not isinstance(entry.get("source_version"), str)
                 or not re.fullmatch(r"sha256:[0-9a-f]{64}", entry["source_version"])
-                or entry.get("adoption") not in {"adopted", "preserved-project-owned", "skipped-existing-package"}):
+                or entry.get("adoption") not in {"adopted", "preserved-project-owned", "skipped-existing-package", "skipped-existing-license"}):
             raise InitializationError("existing setup receipt has invalid source provenance")
         relative_source = entry["source"].removeprefix(TEMPLATE + "/")
         expected_destination = {README_RENDERER: "README.md", TEMPLATE_POLICY: IDENTITY}.get(
             relative_source, relative_source)
         if entry.get("destination") != expected_destination:
             raise InitializationError("existing setup receipt changes a source destination")
-        destination_file(destination, expected_destination)
+        if (record["setup_contract"] == SETUP_CONTRACT
+                and expected_destination in LICENSE_FILES
+                and entry["adoption"] == "skipped-existing-license"):
+            safe(destination / expected_destination)
+        else:
+            destination_file(destination, expected_destination)
         checksum = entry.get("destination_sha256")
-        if (entry["adoption"] == "skipped-existing-package" and checksum is not None
-                or entry["adoption"] != "skipped-existing-package"
+        skipped = entry["adoption"] in {"skipped-existing-package", "skipped-existing-license"}
+        if (skipped and checksum is not None
+                or not skipped
                 and (not isinstance(checksum, str) or not SHA256.fullmatch(checksum))):
             raise InitializationError("existing setup receipt has an invalid adoption digest")
         adoption = (entry["adoption"], checksum)
@@ -948,12 +1058,14 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
         source_adoptions[expected_destination] = adoption
         seen_sources.add(entry["source"])
     legacy = record["setup_contract"] == LEGACY_CONTRACT
+    role_root = ROLE_ROOTS[record["setup_contract"]]
     role_sources = ({"sub-agent-roles/project-sub-agent/AGENTS.md", "sub-agent-roles/project-sub-agent/ROLE.md"} if legacy else
-        {ROLE_INDEX, ROLE_HELPER, *(f"roles/{role}/{filename}" for role in ("project-sub-agent", "task-manager") for filename in ("AGENTS.md", "ROLE.md"))})
-    if any(entry["destination"].startswith("roles/" if legacy else "sub-agent-roles/") for entry in record["sources"]):
+        {role_root + "/INDEX.md", ROLE_HELPER, *(f"{role_root}/{role}/{filename}" for role in ("project-sub-agent", "task-manager") for filename in ("AGENTS.md", "ROLE.md"))})
+    incompatible = set(ROLE_ROOTS.values()) - {role_root}
+    if any(entry["destination"].startswith(tuple(name + "/" for name in incompatible)) for entry in record["sources"]):
         raise InitializationError("existing setup receipt mixes incompatible role layouts")
     required_sources = {TEMPLATE + "/" + name for name in
-        STARTER_FILES | {"SOUL.md", TEMPLATE_POLICY, README_RENDERER}
+        required_starters(record["setup_contract"]) | {"SOUL.md", TEMPLATE_POLICY, README_RENDERER}
         | {f".agents/skills/{name}/SKILL.md" for name in REQUIRED_SKILLS}
         | role_sources}
     if not required_sources <= seen_sources:
@@ -971,12 +1083,54 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
     if (record["owned_files"].keys() & record["preserved_files"].keys()
             or IDENTITY not in record["owned_files"].keys() | record["preserved_files"].keys()):
         raise InitializationError("existing setup receipt has conflicting file ownership")
+    if record["setup_contract"] == SETUP_CONTRACT:
+        markers = record.get("preserved_licenses")
+        if not isinstance(markers, dict):
+            raise InitializationError("existing setup receipt lacks its licensing decision")
+        for name, checksum in markers.items():
+            if (not isinstance(name, str) or not name or Path(name).as_posix() != name
+                    or Path(name).is_absolute() or ".." in Path(name).parts
+                    or not LICENSE_MARKER.fullmatch(Path(name).parts[0])
+                    or not isinstance(checksum, str)
+                    or checksum != "directory" and not SHA256.fullmatch(checksum)):
+                raise InitializationError("existing setup receipt has invalid preserved licensing")
+            target = safe(destination / name)
+            if checksum == "directory":
+                if not target.is_dir():
+                    raise InitializationError("preserved license directory is missing")
+            elif not target.is_file():
+                raise InitializationError("preserved license file is missing")
+            else:
+                # Validate type/alias safety before any receipt or history write;
+                # current content may differ from the original preserved hash.
+                file_bytes(target)
+            if len(Path(name).parts) > 1 and markers.get(Path(name).parent.as_posix()) != "directory":
+                raise InitializationError("preserved license tree lacks its parent evidence")
+        for name in LICENSE_FILES:
+            adoption, checksum = source_adoptions[name]
+            if not markers:
+                if adoption != "adopted":
+                    raise InitializationError("license starter skip lacks preserved licensing")
+            elif adoption == "preserved-project-owned":
+                target = destination_file(destination, name)
+                if not any(value == checksum and value != "directory"
+                           and target.samefile(destination / marker)
+                           for marker, value in markers.items()):
+                    raise InitializationError("preserved license lacks matching marker evidence")
+            elif adoption != "skipped-existing-license":
+                raise InitializationError("existing setup receipt mixes project licensing with starters")
+    elif "preserved_licenses" in record or any(value[0] == "skipped-existing-license" for value in source_adoptions.values()):
+        raise InitializationError("older setup receipt contains a later licensing decision")
+    current_role_root, _, _ = record_role_paths(record, destination)
     expected_owned, expected_preserved = {}, {}
     for name, (adoption, checksum) in source_adoptions.items():
         if adoption == "adopted":
             expected_owned[name] = checksum
         elif adoption == "preserved-project-owned":
             expected_preserved[name] = checksum
+        elif adoption == "skipped-existing-license":
+            if name not in LICENSE_FILES or not record.get("preserved_licenses"):
+                raise InitializationError("unsupported skipped license starter")
         else:
             # Only resources omitted to preserve an existing whole package or
             # nonempty Task tree can lack an adopted/preserved file digest.
@@ -985,8 +1139,8 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
                 preserved_root = destination / Path(*parts[:3])
             elif legacy and name.startswith("sub-agent-roles/") and len(parts) > 2:
                 preserved_root = destination / Path(*parts[:2])
-            elif not legacy and name.startswith("roles/") and len(parts) > 2:
-                preserved_root = destination / "roles"
+            elif not legacy and name.startswith(role_root + "/") and len(parts) > 2:
+                preserved_root = destination / current_role_root
             elif name == "Tasks/INDEX.md":
                 preserved_root = destination / "Tasks"
             else:
@@ -1022,20 +1176,27 @@ def archive_record(destination: Path, raw: bytes) -> dict[str, str]:
 def verify_project(destination: Path, record: dict[str, Any]) -> dict[str, str]:
     """Observe current adopted files without resetting normal project edits."""
     validate_record(record, destination, record["identity"])
+    role_root, current_paths, case_evidence = record_role_paths(record, destination)
     current = {}
     for name in sorted(record["owned_files"].keys() | record["preserved_files"].keys()):
-        target = destination_file(destination, name)
+        current_name = current_paths.get(name, name)
+        target = destination_file(destination, current_name)
         if not target.is_file():
             raise InitializationError(f"project setup file is missing: {name}")
-        current[name] = sha(file_bytes(target))
+        current[current_name] = sha(file_bytes(target))
     identity = record["identity"]
     observed, saved = selected_identity(destination, **{key: identity[key] for key in
         ("project_id", "project_name", "purpose")}, relative=identity["relative_path"])
     if saved is None or observed != identity:
         raise InitializationError("project identity changed during setup")
-    if record["setup_contract"] == SETUP_CONTRACT:
-        if file_bytes(destination / ROLE_INDEX) != planned_role_index(destination, {}, {}):
+    if record["setup_contract"] != LEGACY_CONTRACT:
+        current_contract = SETUP_CONTRACT if role_root == "Roles" else LOWERCASE_CONTRACT
+        if file_bytes(destination / role_root / "INDEX.md") != planned_role_index(destination, {}, {}, contract=current_contract):
             raise InitializationError("project role index is stale; preserve role edits and explicitly reindex")
+    if case_evidence is not None:
+        record["role_case_transition"] = case_evidence
+    if record["setup_contract"] == SETUP_CONTRACT:
+        record["current_licenses"] = license_inventory(destination)
     return current
 
 
@@ -1071,13 +1232,16 @@ def run_initialization(
             if record is None:
                 if mode == "prepare-existing":
                     check_existing_role_layout(destination, proposed_all[ROLE_HELPER])
+                preserved_licenses = license_inventory(destination)
                 proposed, before, preserved = asset_plan(destination, mode=mode,
-                    proposed=proposed_all, original=original, saved_identity=saved_identity)
+                    proposed=proposed_all, original=original, saved_identity=saved_identity,
+                    preserved_licenses=preserved_licenses)
                 record = {"schema_version": 1, "setup_contract": SETUP_CONTRACT,
                           "status": "partial", "mode": mode, "operation_id": "project-setup-" + uuid4().hex,
                           "identity": identity, "project_root": str(destination), "sources": sources,
                           "owned_files": {name: sha(raw) for name, raw in proposed.items()},
-                          "preserved_files": preserved, "recovery_before": before,
+                          "preserved_files": preserved, "preserved_licenses": preserved_licenses,
+                          "recovery_before": before,
                           "completed_stages": [], "active_stage": "assets", "checks": [],
                           "created_at": datetime.now(timezone.utc).isoformat(), "git_setup": "separate"}
                 for entry in sources:
@@ -1085,7 +1249,8 @@ def run_initialization(
                     if name in preserved:
                         entry.update(adoption="preserved-project-owned", destination_sha256=preserved[name])
                     elif name not in proposed:
-                        entry.update(adoption="skipped-existing-package", destination_sha256=None)
+                        entry.update(adoption="skipped-existing-license" if name in LICENSE_FILES
+                                     else "skipped-existing-package", destination_sha256=None)
                     else:
                         entry["adoption"] = "adopted"
                         entry["destination_sha256"] = sha(proposed[name])
@@ -1094,8 +1259,9 @@ def run_initialization(
                 actual_sources = {(entry["source"], entry["source_sha256"]) for entry in sources}
                 if expected_sources != actual_sources:
                     raise InitializationError("partial asset adoption source changed; preserve existing owned state")
-                if contract == SETUP_CONTRACT:
-                    proposed_all[ROLE_INDEX] = planned_role_index(destination, proposed_all, record["owned_files"])
+                if contract != LEGACY_CONTRACT:
+                    role_index = ROLE_ROOTS[contract] + "/INDEX.md"
+                    proposed_all[role_index] = planned_role_index(destination, proposed_all, record["owned_files"], contract=contract)
                 for name, checksum in record["owned_files"].items():
                     if name not in proposed_all or sha(proposed_all[name]) != checksum:
                         raise InitializationError("partial asset adoption differs from the saved plan")
@@ -1104,12 +1270,15 @@ def run_initialization(
             check_sources(depot, record["sources"], contract=contract)
             if file_bytes(depot / "depot/projects.json") != registry_before:
                 raise InitializationError("registry changed during preflight")
+            check_license_adoption(destination, record)
         lock = depot / "depot" / (".initialize-" + sha(relative.encode())[:16] + ".lock")
         with exclusive(lock):
             if mode == "create" and previous_raw is None and destination.exists() and any(destination.iterdir()):
                 raise InitializationError("new project destination changed after preflight")
             if (file_bytes(record_path) if record_path.exists() else None) != previous_raw:
                 raise InitializationError("setup receipt changed since preflight")
+            if "assets" not in record["completed_stages"]:
+                check_license_adoption(destination, record)
             if not destination.exists():
                 destination.mkdir()
             if previous_raw is not None:
@@ -1120,7 +1289,7 @@ def run_initialization(
             was_completed = record["status"] == "completed"
             record.update(status="partial", checks=[])
             record["completed_stages"] = [stage for stage in record["completed_stages"] if stage == "assets"]
-            for key in ("verified_at", "current_files", "recovery", "rerun"):
+            for key in ("verified_at", "current_files", "current_licenses", "recovery", "rerun"):
                 record.pop(key, None)
 
             def checkpoint(stage: str | None = None) -> None:
@@ -1151,6 +1320,7 @@ def run_initialization(
                                 raise InitializationError("owned asset changed during interrupted adoption")
                             atomic_write(target, after, present)
                     check_sources(depot, record["sources"], contract=contract)
+                    check_license_adoption(destination, record)
                     checkpoint("assets")
                 template_guard.close()
                 begin("registration")

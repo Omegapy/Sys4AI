@@ -7,6 +7,9 @@ records; and independent Sys4AI project working trees.
 
 For project specifications, see [SPECS.md](./SPECS.md).
 
+For code and document licensing, see [LICENSE](./LICENSE),
+[LICENSE-CODE](./LICENSE-CODE), and [LICENSE-DOCS](./LICENSE-DOCS).
+
 ## Current state
 
 Reusable assets are maintained in the `*-depo` collections. The
@@ -36,6 +39,7 @@ Sys4AI/
   AGENTS-depo/                  reusable agent-guidance source material
   ROLES-depo/                   reusable role source material
   SPECS-depo/                   reusable project specifications and .gitignore
+  LICENSES-depo/                reusable code and document licensing
   Projects/                     independent project working trees
   depot/
     projects.json               factual workspace project registry
@@ -73,6 +77,7 @@ The template follows its automatic update mapping.
 - `SOULS-depo/` stores reusable reasoning and quality guidance.
 - `AGENTS-depo/` stores reusable project instruction sources.
 - `ROLES-depo/` stores reusable Director and sub-agent role sources.
+- [LICENSES-depo](./LICENSES-depo/README.md) stores the three-file licensing template.
 - For reusable project specifications, see [SPECS-depo/SPECS.md](./SPECS-depo/SPECS.md).
 
 These collections own reusable changes and feed the template. Root-specific
@@ -114,6 +119,9 @@ The helper copies the registered Template's selected starter files, complete
 skill and role packages, reference assets, and `SOUL.md`. It specializes project
 identity and records factual registration. All seven governance and setup
 skills are required; additional complete packages are discovered automatically.
+It also adopts the Template's three license files when the project has no
+existing license markers. Existing licensing is preserved as a whole, including
+partial or alternatively named sets. Setup reruns retain their original edition.
 
 Use `prepare-existing` for a manual copy or a customized existing project.
 It adopts missing assets and preserves project-owned content and identity.
@@ -130,7 +138,7 @@ caches, and repository metadata. Existing products receive no automatic refresh.
 
 The root [AGENTS.md](./AGENTS.md), [SOUL.md](./SOUL.md), and
 [ROLE.md](./ROLE.md) define the Sys4AI Depot Project Director. Active role definitions live as paired files under [roles](./roles);
-[roles/INDEX.md](./roles/INDEX.md) provides generated navigation. Legacy
+[Roles/INDEX.md](./Roles/INDEX.md) provides generated navigation. Legacy
 `sub-agent-roles/` retains transition provenance and historical references.
 
 Before role-based delegation, the Project Director uses the root

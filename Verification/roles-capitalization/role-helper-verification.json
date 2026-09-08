@@ -1,0 +1,80 @@
+{
+  "observed_at": "2026-09-08T15:02:36.139564+00:00",
+  "status": "component source verified",
+  "requirements": [
+    "RC-02",
+    "RC-03"
+  ],
+  "agent": "/root/roles_case_helper",
+  "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.3.2)]",
+  "platform": "darwin",
+  "instruction_reads": {
+    "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+    "roles/project-sub-agent/AGENTS.md": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+    "roles/project-sub-agent/ROLE.md": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe"
+  },
+  "source_files": {
+    "SKILLS-depo/manage-subagent-roles/SKILL.md": "6366b1b38cc5ccb1558678a1bebc7f7f2b3b0b408b4616b194cbe08a3d5871d4",
+    "SKILLS-depo/manage-subagent-roles/README.md": "62de203e2f7412a016776b890bb4f65b93cd176f140d6525a4a7012a702a27f1",
+    "SKILLS-depo/manage-subagent-roles/references/role-schema.md": "d2c0416585c89621ed25835ce97d2842798e0a54971803f8a9695d677b575186",
+    "SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py": "3d46f11bc66c781d53edb266f0412127967770b8ef39f3fdc445364849f77945",
+    "SKILLS-depo/manage-subagent-roles/tests/test_role_catalog.py": "084ddbb22869af8268e600e874e25b95d38451ea3223f6514b53a4a31956f02b"
+  },
+  "checks": [
+    {
+      "filesystem": "case-insensitive",
+      "argv": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "SKILLS-depo/manage-subagent-roles/tests",
+        "-v"
+      ],
+      "TMPDIR": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/",
+      "returncode": 0,
+      "tests": 76,
+      "seconds": 0.355,
+      "skipped": 1,
+      "log": "Verification/roles-capitalization/role-helper-tests-case-insensitive.log",
+      "log_sha256": "02fd187747aea8bd179c4332a6978483ba7078441976ab4734c0cc73274021a0"
+    },
+    {
+      "filesystem": "case-sensitive",
+      "argv": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "SKILLS-depo/manage-subagent-roles/tests",
+        "-v"
+      ],
+      "TMPDIR": "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-roles-case-filesystem-0k44_o5e/mount/helper",
+      "returncode": 0,
+      "tests": 76,
+      "seconds": 0.407,
+      "skipped": 0,
+      "log": "Verification/roles-capitalization/role-helper-tests-case-sensitive.log",
+      "log_sha256": "93b605d916d162a81c372b2839ef347eec2cde6bb40fa53a511092b4cafbe07e"
+    }
+  ],
+  "observations": [
+    "Actual Roles directory spelling is mandatory on both filesystem types; lowercase discovery/create/reindex and legacy-transition target lookup fail without layout mutation.",
+    "Actual native exclusive renames exercised on both APFS filesystem types.",
+    "All tree files and empty directories survive a rename, including byte-identical old .transition.json and index bytes.",
+    "Initial receipt acknowledgement failure and before/after-hop interruptions resume the same preview and directory identity.",
+    "Stale hashes, replaced inode, symlink/hardlink aliases, actual empty-directory race and dual case-sensitive trees reject without overwriting protected bytes.",
+    "Completed proof permits later authorized file edits, and current path resolution remains separate from historical receipt hashes."
+  ],
+  "integration": [
+    "Initializer teammate independently reported both filesystem fixture integrations passing with this API shape.",
+    "Parent owns final adoption, active root/Template physical rename, role index regeneration and project-wide acceptance."
+  ],
+  "limits": [
+    "Linux renameat2 branch is not runtime-tested on this macOS host. Unsupported exclusive rename capability fails explicitly.",
+    "Component tests use disposable filesystem fixtures and CLI entry points; no live root/Template role mutation or native role spawning occurred in this child.",
+    "No Task, TRD, managed-plan, registry, Git or external-system writes by this child."
+  ]
+}

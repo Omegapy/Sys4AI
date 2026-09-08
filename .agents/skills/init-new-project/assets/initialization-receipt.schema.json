@@ -26,7 +26,9 @@
     "setup_contract": {
       "enum": [
         "governance-starter-v1",
-        "governance-starter-v2"
+        "governance-starter-v2",
+        "governance-starter-v3",
+        "governance-starter-v4"
       ]
     },
     "status": {
@@ -124,7 +126,8 @@
             "enum": [
               "adopted",
               "preserved-project-owned",
-              "skipped-existing-package"
+              "skipped-existing-package",
+              "skipped-existing-license"
             ]
           }
         }
@@ -142,10 +145,30 @@
         "$ref": "#/$defs/sha"
       }
     },
+    "preserved_licenses": {
+      "description": "Original project-owned license markers and tree hashes for v4. An empty map records adoption of the Template license trio.",
+      "$ref": "#/$defs/licenseInventory"
+    },
+    "current_licenses": {
+      "description": "License marker paths and hashes observed during the latest v4 verification; original preservation evidence remains unchanged.",
+      "$ref": "#/$defs/licenseInventory"
+    },
     "current_files": {
       "type": "object",
+      "description": "Hashes observed at exact current paths. A v2 receipt after a proven case rename uses Roles paths here while its original source and adoption maps retain roles paths.",
       "additionalProperties": {
         "$ref": "#/$defs/sha"
+      }
+    },
+    "role_case_transition": {
+      "type": "object",
+      "required": ["path", "sha256", "source", "destination"],
+      "additionalProperties": false,
+      "properties": {
+        "path": {"const": ".sys4ai/roles-case-rename.json"},
+        "sha256": {"$ref": "#/$defs/sha"},
+        "source": {"const": "roles"},
+        "destination": {"const": "Roles"}
       }
     },
     "recovery_before": {
@@ -233,6 +256,16 @@
   },
   "allOf": [
     {
+      "if": {"properties": {"setup_contract": {"const": "governance-starter-v4"}}},
+      "then": {
+        "required": ["preserved_licenses"],
+        "allOf": [{
+          "if": {"properties": {"status": {"const": "completed"}}},
+          "then": {"required": ["current_licenses"]}
+        }]
+      }
+    },
+    {
       "if": {
         "properties": {
           "status": {
@@ -278,6 +311,12 @@
     }
   ],
   "$defs": {
+    "licenseInventory": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [{"$ref": "#/$defs/sha"}, {"const": "directory"}]
+      }
+    },
     "sha": {
       "type": "string",
       "pattern": "^[0-9a-f]{64}$"

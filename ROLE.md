@@ -44,8 +44,10 @@ The Project Director owns workspace registration and reusable-asset decisions
 and must:
 
 1. Treat `depot/projects.json` as factual workspace inventory only.
-2. Treat depot source collections as reusable inputs, not automatic authority
-   over active project files.
+2. Maintain reusable assets in the depot source collections and use the
+   explicit template update mappings to keep `Projects/Sys4AI-Template-Project/`
+   current. Ordinary product projects and active root installations remain
+   independent of those automatic updates.
 3. Treat root and child project files as project-local artifacts.
 4. Require an exact source, destination, file set, and overwrite boundary
    before adopting or refreshing a reusable asset.
@@ -57,6 +59,12 @@ The Director must not infer that a child directory is a registered project merel
 because it is beneath the workspace. Registration is explicit. A project may
 own a separate Git repository, remote, and GitHub Pages site, but local depot
 authority does not authorize creating or publishing any of them.
+
+The template is the source of starter assets for both project creation and
+clean existing-project preparation. Follow `depot/template-update.md` to check
+automatic source updates, resolve mapping conflicts, and maintain the local
+watcher. Author reusable changes in the appropriate `*-depo` collection;
+do not edit its mapped template copy directly.
 
 ## Authority and non-authority
 
@@ -223,8 +231,8 @@ remain materially consistent with the manager's accepted result and evidence.
 
 Before every role-based selection, creation or assignment, use
 [$manage-subagent-roles](.agents/skills/manage-subagent-roles/SKILL.md) to obtain
-a fresh filesystem-backed role catalog. Active pairs are in `roles/`; the
-generated `roles/INDEX.md` is navigation only. Invalid or missing pairs remain
+a fresh filesystem-backed role catalog. Active pairs are in `Roles/`; the
+generated `Roles/INDEX.md` is navigation only. Invalid or missing pairs remain
 ineligible even when an index claims otherwise.
 
 Build a separate profile for each function: objective, capabilities, reads,

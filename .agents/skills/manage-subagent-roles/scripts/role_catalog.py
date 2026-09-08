@@ -19,7 +19,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 SCHEMA_VERSION = 1
-ROLE_ROOT_NAME = "roles"
+ROLE_ROOT_NAME = "Roles"
+PREVIOUS_ROLE_ROOT_NAME = "roles"
+CASE_RENAME_RECEIPT = ".sys4ai/roles-case-rename.json"
 LEGACY_ROLE_ROOT_NAME = "sub-agent-roles"
 MAX_MANIFEST_BYTES = 1_000_000
 ROLE_NAME_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -165,6 +167,7 @@ def role_root_for(root: Path, role_root_name: str = ROLE_ROOT_NAME) -> Path:
     role_root = root / role_root_name
     if role_root.is_symlink() and not is_within(role_root.resolve(), root):
         raise CatalogError(f"role root escapes the project root: {role_root}")
+    exact_directory_entry(root, role_root_name)
     role_root = checked_path(role_root)
     if not role_root.exists():
         legacy = " Use transition-preview for the legacy layout." if (root / LEGACY_ROLE_ROOT_NAME).exists() else ""
@@ -178,6 +181,21 @@ def role_root_for(root: Path, role_root_name: str = ROLE_ROOT_NAME) -> Path:
     if role_root.is_symlink():
         raise CatalogError(f"role root must not be a symbolic link: {role_root}")
     return role_root
+
+
+def exact_directory_entry(parent: Path, name: str, *, allow_missing: bool = False) -> Path:
+    """Inspect spelling, including aliases hidden by case-insensitive lookup."""
+    matches = sorted(item.name for item in parent.iterdir() if item.name.casefold() == name.casefold())
+    if matches and matches != [name]:
+        raise CatalogError(f"role directory must have exact spelling {name}; found {matches}. "
+                           "Use case-rename-preview for the previous lowercase layout.")
+    target = checked_path(parent / name)
+    if not matches and not allow_missing:
+        legacy = " Use transition-preview for the legacy layout." if (parent / LEGACY_ROLE_ROOT_NAME).exists() else ""
+        raise CatalogError(f"role root does not exist: {target}.{legacy}")
+    if matches and not target.is_dir():
+        raise CatalogError(f"role root is not a directory: {target}")
+    return target
 
 
 def checked_path(path: Path) -> Path:
@@ -931,7 +949,7 @@ def transition_preview(root: Path) -> dict[str, object]:
     """Inspect exact legacy pairs; no role-root creation or index repair."""
     root = repository_root(root)
     legacy = build_catalog(root, role_root_name=LEGACY_ROLE_ROOT_NAME)
-    target_root = checked_path(root / ROLE_ROOT_NAME)
+    target_root = exact_directory_entry(root, ROLE_ROOT_NAME, allow_missing=True)
     if target_root.exists() and not target_root.is_dir():
         raise CatalogError("active role root is not a directory")
     pairs = []
@@ -977,14 +995,212 @@ def load_manifest(path: Path) -> dict[str, object]:
     return value
 
 
-def validate_preview(preview: dict[str, object], root: Path) -> None:
+def directory_identity(path: Path) -> dict[str, int]:
+    checked_path(path)
+    info = path.stat()
+    if not stat.S_ISDIR(info.st_mode):
+        raise CatalogError(f"expected a directory: {path}")
+    return {"device": info.st_dev, "inode": info.st_ino}
+
+
+def role_tree_inventory(path: Path) -> dict[str, dict[str, str]]:
+    """Bind every retained file, including custom content and old receipts."""
+    directory_identity(path)
+    inventory = {}
+    for item in sorted(path.rglob("*")):
+        checked_path(item)
+        relative = item.relative_to(path).as_posix()
+        if item.is_dir():
+            inventory[relative] = {"kind": "directory"}
+        elif item.is_file():
+            inventory[relative] = {"kind": "file", "sha256": file_digest(item)}
+        else:
+            raise CatalogError(f"unsupported entry in role tree: {relative}")
+    return inventory
+
+
+def validate_case_rename_preview(preview: object, root: Path) -> None:
+    fields = {"schema_version", "project_root", "source", "destination", "temporary",
+              "source_identity", "inventory", "preview_sha256"}
+    if not isinstance(preview, dict) or set(preview) != fields or type(preview["schema_version"]) is not int or preview["schema_version"] != 1:
+        raise CatalogError("unsupported role case-rename preview")
+    unsigned = {k: v for k, v in preview.items() if k != "preview_sha256"}
+    if preview["preview_sha256"] != object_digest(unsigned) or preview["project_root"] != str(root):
+        raise CatalogError("role case-rename preview digest or project mismatch")
+    if preview["source"] != PREVIOUS_ROLE_ROOT_NAME or preview["destination"] != ROLE_ROOT_NAME:
+        raise CatalogError("case rename must be exactly roles to Roles")
+    base = {k: v for k, v in unsigned.items() if k != "temporary"}
+    if preview["temporary"] != ".roles-case-rename-" + object_digest(base)[:24]:
+        raise CatalogError("unsafe role case-rename temporary path")
+    identity = preview["source_identity"]
+    if not isinstance(identity, dict) or set(identity) != {"device", "inode"} or any(type(v) is not int or v < 0 for v in identity.values()):
+        raise CatalogError("invalid role directory identity")
+    inventory = preview["inventory"]
+    if not isinstance(inventory, dict):
+        raise CatalogError("invalid role case-rename inventory")
+    for name, item in inventory.items():
+        if not isinstance(name, str) or not name or "\\" in name or "\x00" in name or Path(name).is_absolute() or any(part in {"", ".", ".."} for part in name.split("/")):
+            raise CatalogError("unconfined role case-rename inventory path")
+        if not isinstance(item, dict) or not isinstance(item.get("kind"), str) or item["kind"] not in {"directory", "file"}:
+            raise CatalogError("invalid role case-rename inventory entry")
+        if item["kind"] == "directory":
+            if set(item) != {"kind"}:
+                raise CatalogError("invalid role case-rename directory entry")
+        elif set(item) != {"kind", "sha256"} or not isinstance(item["sha256"], str) or not re.fullmatch(r"[0-9a-f]{64}", item["sha256"]):
+            raise CatalogError("invalid role case-rename file digest")
+        for parent in Path(name).parents:
+            if parent != Path(".") and inventory.get(parent.as_posix()) != {"kind": "directory"}:
+                raise CatalogError("incomplete role case-rename directory coverage")
+    receipt_bytes = (json.dumps({"schema_version": 1, "preview": preview, "status": "completed"}, indent=2) + "\n").encode()
+    if len(receipt_bytes) > MAX_MANIFEST_BYTES:
+        raise CatalogError("role case-rename inventory exceeds the bounded receipt size")
+
+
+def _validate_case_receipt(value: object, root: Path) -> dict[str, object]:
+    if not isinstance(value, dict) or set(value) != {"schema_version", "preview", "status"} or type(value["schema_version"]) is not int or value["schema_version"] != 1 or not isinstance(value["status"], str) or value["status"] not in {"pending", "completed"}:
+        raise CatalogError("unsupported role case-rename receipt")
+    validate_case_rename_preview(value["preview"], root)
+    return value
+
+
+def _case_rename_location(root: Path, preview: dict[str, object]) -> Path:
+    """A recoverable rename owns one exact directory, never two aliases."""
+    names = {preview["source"], preview["destination"], preview["temporary"]}
+    candidates = sorted((item for item in root.iterdir()
+                         if item.name.casefold() in {name.casefold() for name in names}), key=lambda item: item.name)
+    if len(candidates) != 1 or candidates[0].name not in names:
+        raise CatalogError("role case-rename has missing, ambiguous or conflicting directories")
+    current = candidates[0]
+    if directory_identity(current) != preview["source_identity"]:
+        raise CatalogError("role case-rename directory identity changed")
+    return current
+
+
+def validate_case_rename_receipt(value: object, root: Path) -> dict[str, object]:
+    """Return historical path proof, without claiming old file hashes are current."""
+    root = repository_root(root)
+    receipt = _validate_case_receipt(value, root)
+    preview = receipt["preview"]
+    if receipt["status"] != "completed" or _case_rename_location(root, preview).name != ROLE_ROOT_NAME:
+        raise CatalogError("role case-rename is not completed at the exact active Roles directory")
+    source_files = {f"{PREVIOUS_ROLE_ROOT_NAME}/{name}": item["sha256"]
+                    for name, item in preview["inventory"].items() if item["kind"] == "file"}
+    return {"status": "completed", "source_files": source_files,
+            "destination_paths": {name: f"{ROLE_ROOT_NAME}/{name.split('/', 1)[1]}" for name in source_files},
+            "directory_identity": dict(preview["source_identity"])}
+
+
+def case_rename_preview(root: Path) -> dict[str, object]:
+    """Read-only exact lowercase-to-uppercase tree inspection or recovery view."""
+    root = repository_root(root)
+    receipt_path = checked_path(root / CASE_RENAME_RECEIPT)
+    if receipt_path.exists():
+        receipt = _validate_case_receipt(load_manifest(receipt_path), root)
+        preview = receipt["preview"]
+        if receipt["status"] == "completed":
+            validate_case_rename_receipt(receipt, root)
+        elif role_tree_inventory(_case_rename_location(root, preview)) != preview["inventory"]:
+            raise CatalogError("pending role case-rename tree changed; preserve it for review")
+        return preview
+    source = exact_directory_entry(root, PREVIOUS_ROLE_ROOT_NAME)
+    identity = directory_identity(source)
+    inventory = role_tree_inventory(source)
+    old_transition = source / ".transition.json"
+    if old_transition.exists():
+        receipt = load_manifest(old_transition)
+        validate_transition_receipt(receipt, root)
+        if receipt["status"] != "completed":
+            raise CatalogError("finish the pending legacy transition with its original helper before renaming roles")
+    if directory_identity(source) != identity:
+        raise CatalogError("role directory changed during case-rename inspection")
+    preview = {"schema_version": 1, "project_root": str(root), "source": PREVIOUS_ROLE_ROOT_NAME,
+               "destination": ROLE_ROOT_NAME, "source_identity": identity, "inventory": inventory}
+    preview["temporary"] = ".roles-case-rename-" + object_digest(preview)[:24]
+    preview["preview_sha256"] = object_digest(preview)
+    validate_case_rename_preview(preview, root)
+    if any(item.name.casefold() == preview["temporary"].casefold() for item in root.iterdir()):
+        raise CatalogError("role case-rename temporary path already exists")
+    return preview
+
+
+def rename_directory_no_replace(source: Path, destination: Path) -> None:
+    """Use the host's exclusive rename, refusing an appearing empty directory."""
+    import ctypes
+    library = ctypes.CDLL(None, use_errno=True)
+    if sys.platform == "darwin" and hasattr(library, "renamex_np"):
+        rename = library.renamex_np
+        rename.argtypes = (ctypes.c_char_p, ctypes.c_char_p, ctypes.c_uint)
+        args = (os.fsencode(source), os.fsencode(destination), 0x00000004)  # RENAME_EXCL
+    elif sys.platform.startswith("linux") and hasattr(library, "renameat2"):
+        rename = library.renameat2
+        rename.argtypes = (ctypes.c_int, ctypes.c_char_p, ctypes.c_int, ctypes.c_char_p, ctypes.c_uint)
+        args = (-100, os.fsencode(source), -100, os.fsencode(destination), 1)  # AT_FDCWD, RENAME_NOREPLACE
+    else:
+        raise CatalogError("this host has no supported exclusive directory rename")
+    rename.restype = ctypes.c_int
+    if rename(*args) != 0:
+        error = ctypes.get_errno()
+        raise OSError(error, os.strerror(error), str(destination))
+    descriptor = os.open(source.parent, os.O_RDONLY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def case_rename_apply(root: Path, preview: dict[str, object], *, confirmed: bool) -> dict[str, object]:
+    """Rename the bound tree in two no-overwrite hops, retaining exact recovery."""
+    root = repository_root(root)
+    if not confirmed:
+        raise CatalogError("role case rename requires explicit confirmation of the reviewed preview")
+    validate_case_rename_preview(preview, root)
+    with mutation_lock(root):
+        receipt_path = checked_path(root / CASE_RENAME_RECEIPT)
+        new_receipt = not receipt_path.exists()
+        if not new_receipt:
+            receipt = _validate_case_receipt(load_manifest(receipt_path), root)
+            if receipt["preview"] != preview:
+                raise CatalogError("another role case-rename preview owns recovery")
+            if receipt["status"] == "completed":
+                proof = validate_case_rename_receipt(receipt, root)
+                return {**proof, "status": "current", "mutated": False, "receipt": CASE_RENAME_RECEIPT}
+        else:
+            if case_rename_preview(root) != preview:
+                raise CatalogError("stale role case-rename preview")
+            receipt = {"schema_version": 1, "preview": preview, "status": "pending"}
+        try:
+            if new_receipt:
+                atomic_publish(receipt_path, (json.dumps(receipt, indent=2) + "\n").encode(), replace=False)
+            for expected, destination in ((PREVIOUS_ROLE_ROOT_NAME, preview["temporary"]),
+                                          (preview["temporary"], ROLE_ROOT_NAME)):
+                current = _case_rename_location(root, preview)
+                if role_tree_inventory(current) != preview["inventory"]:
+                    raise CatalogError("pending role case-rename tree changed; preserve it for review")
+                if current.name == expected:
+                    rename_directory_no_replace(current, root / destination)
+            current = _case_rename_location(root, preview)
+            if current.name != ROLE_ROOT_NAME or role_tree_inventory(current) != preview["inventory"]:
+                raise CatalogError("role case-rename postcondition changed")
+            receipt["status"] = "completed"
+            atomic_publish(receipt_path, (json.dumps(receipt, indent=2) + "\n").encode())
+            proof = validate_case_rename_receipt(receipt, root)
+            return {**proof, "status": "updated", "mutated": True, "receipt": CASE_RENAME_RECEIPT}
+        except (CatalogError, OSError, UnicodeError) as exc:
+            raise PublicationPending({"status": "partial", "receipt": CASE_RENAME_RECEIPT,
+                "recovery": "case-rename-apply with the same reviewed preview and --confirmed",
+                "error": str(exc)}) from exc
+
+
+def validate_preview(preview: dict[str, object], root: Path, *, destination_root: str = ROLE_ROOT_NAME) -> None:
     fields = {"schema_version", "project_root", "legacy_fingerprint", "pairs", "conflicts", "receipt", "preview_sha256"}
     if not isinstance(preview, dict) or set(preview) != fields or type(preview["schema_version"]) is not int or preview["schema_version"] != 1:
         raise CatalogError("unsupported role transition preview")
     unsigned = {k: v for k, v in preview.items() if k != "preview_sha256"}
     if preview["preview_sha256"] != object_digest(unsigned) or preview["project_root"] != str(root):
         raise CatalogError("role transition preview digest or project mismatch")
-    if preview["receipt"] != f"{ROLE_ROOT_NAME}/.transition.json" or preview["conflicts"] != []:
+    if destination_root not in {ROLE_ROOT_NAME, PREVIOUS_ROLE_ROOT_NAME}:
+        raise CatalogError("unsupported transition destination root")
+    if preview["receipt"] != f"{destination_root}/.transition.json" or preview["conflicts"] != []:
         raise CatalogError("role transition preview contains conflicts or an unsafe receipt")
     if not isinstance(preview["pairs"], list) or not preview["pairs"]:
         raise CatalogError("role transition needs at least one valid legacy pair")
@@ -1001,7 +1217,7 @@ def validate_preview(preview: dict[str, object], root: Path) -> None:
         for filename, item in zip(("AGENTS.md", "ROLE.md"), pair["files"]):
             if not isinstance(item, dict) or set(item) != {"source", "destination", "source_sha256", "destination_sha256"}:
                 raise CatalogError("invalid transition file fields")
-            if item["source"] != f"{LEGACY_ROLE_ROOT_NAME}/{pair['name']}/{filename}" or item["destination"] != f"{ROLE_ROOT_NAME}/{pair['name']}/{filename}":
+            if item["source"] != f"{LEGACY_ROLE_ROOT_NAME}/{pair['name']}/{filename}" or item["destination"] != f"{destination_root}/{pair['name']}/{filename}":
                 raise CatalogError("unconfined transition path")
             for key in ("source_sha256", "destination_sha256"):
                 value = item[key]
@@ -1017,7 +1233,11 @@ def validate_transition_receipt(value: object, root: Path, *, historical: bool =
         fields.add("history")
     if not isinstance(value, dict) or set(value) != fields or type(value["schema_version"]) is not int or value["schema_version"] != 1:
         raise CatalogError("unsupported transition receipt; preserve it for reviewed recovery")
-    validate_preview(value["preview"], root)
+    # Lowercase previews remain attributable historical provenance. Only the
+    # separate case-rename proof can resolve them to current active paths.
+    preview = value["preview"]
+    destination_root = PREVIOUS_ROLE_ROOT_NAME if isinstance(preview, dict) and preview.get("receipt") == f"{PREVIOUS_ROLE_ROOT_NAME}/.transition.json" else ROLE_ROOT_NAME
+    validate_preview(preview, root, destination_root=destination_root)
     if not isinstance(value["status"], str) or value["status"] not in {"pending", "completed"} or (historical and value["status"] != "completed"):
         raise CatalogError("invalid transition receipt status")
     destinations = {item["destination"]: item["source_sha256"] for pair in value["preview"]["pairs"] for item in pair["files"]}
@@ -1036,6 +1256,19 @@ def validate_transition_receipt(value: object, root: Path, *, historical: bool =
     return destinations
 
 
+def transition_destination_paths(value: object, root: Path) -> dict[str, str]:
+    """Resolve historical paths only with the explicit completed rename proof."""
+    root = repository_root(root)
+    destinations = validate_transition_receipt(value, root)
+    if all(item.startswith(f"{ROLE_ROOT_NAME}/") for item in destinations):
+        exact_directory_entry(root, ROLE_ROOT_NAME)
+        return {item: item for item in destinations}
+    proof = validate_case_rename_receipt(load_manifest(root / CASE_RENAME_RECEIPT), root)
+    if not set(destinations).issubset(proof["destination_paths"]):
+        raise CatalogError("historical transition destinations were not in the renamed tree")
+    return {item: proof["destination_paths"][item] for item in destinations}
+
+
 def transition_apply(root: Path, preview: dict[str, object], *, confirmed: bool) -> dict[str, object]:
     root = repository_root(root)
     if not confirmed:
@@ -1047,7 +1280,10 @@ def transition_apply(root: Path, preview: dict[str, object], *, confirmed: bool)
         prior = load_manifest(receipt_path) if receipt_path.exists() else None
         if prior is not None:
             destinations = validate_transition_receipt(prior, root)
-            if any(file_digest(root / item) != destinations[item] for item in prior["completed"]):
+            # Active previews never use lowercase paths. A prior completed
+            # receipt may retain them after an explicit case-only rename.
+            paths = transition_destination_paths(prior, root)
+            if any(file_digest(root / paths[item]) != destinations[item] for item in prior["completed"]):
                 raise CatalogError("a committed transition destination changed; preserve it for review")
         resuming = prior is not None and prior["preview"] == preview
         if prior is not None and prior["status"] == "pending" and not resuming:
@@ -1148,12 +1384,14 @@ def build_parser() -> argparse.ArgumentParser:
     add_format_argument(show_parser)
 
     for command, help_text in (("reindex", "regenerate role navigation from current pairs"),
-                               ("transition-preview", "inspect a preserved legacy-role transition")):
+                               ("transition-preview", "inspect a preserved legacy-role transition"),
+                               ("case-rename-preview", "inspect the exact roles to Roles rename")):
         add_format_argument(subparsers.add_parser(command, help=help_text))
-    transition_parser = subparsers.add_parser("transition-apply", help="apply or recover an exact reviewed legacy preview")
-    transition_parser.add_argument("--preview-file", type=Path, required=True)
-    transition_parser.add_argument("--confirmed", action="store_true")
-    add_format_argument(transition_parser)
+    for command in ("transition-apply", "case-rename-apply"):
+        transition_parser = subparsers.add_parser(command, help="apply or recover an exact reviewed preview")
+        transition_parser.add_argument("--preview-file", type=Path, required=True)
+        transition_parser.add_argument("--confirmed", action="store_true")
+        add_format_argument(transition_parser)
 
     create_parser = subparsers.add_parser(
         "create", help="create, validate, and relist one reusable role"
@@ -1181,11 +1419,15 @@ def run(args: argparse.Namespace) -> int:
 
     root = repository_root(args.repo_root)
 
-    if args.command in {"reindex", "transition-preview", "transition-apply"}:
+    if args.command in {"reindex", "transition-preview", "transition-apply", "case-rename-preview", "case-rename-apply"}:
         if args.command == "reindex":
             result = reindex(root)
         elif args.command == "transition-preview":
             result = transition_preview(root)
+        elif args.command == "case-rename-preview":
+            result = case_rename_preview(root)
+        elif args.command == "case-rename-apply":
+            result = case_rename_apply(root, load_manifest(args.preview_file), confirmed=args.confirmed)
         else:
             result = transition_apply(root, load_manifest(args.preview_file), confirmed=args.confirmed)
         print(json.dumps(result, indent=2, sort_keys=True))

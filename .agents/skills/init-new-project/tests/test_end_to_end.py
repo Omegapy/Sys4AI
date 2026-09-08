@@ -14,7 +14,7 @@ import test_initializer as fixture
 
 class CommandLineTests(unittest.TestCase):
     def test_create_prepare_nested_identity_preservation_and_reruns(self):
-        with tempfile.TemporaryDirectory(prefix="sys4ai-governance-e2e-", dir="/private/tmp") as temporary:
+        with tempfile.TemporaryDirectory(prefix="sys4ai-governance-e2e-", dir=os.environ.get("TMPDIR", "/private/tmp")) as temporary:
             root = fixture.fixture_depot(Path(temporary))
             (root / "Projects/Group").mkdir()
             script = root / "SKILLS-depo/init-new-project/scripts/init_new_project.py"
@@ -47,8 +47,10 @@ runpy.run_path(script,run_name='__main__')
             self.assertEqual("completed", report["status"])
             self.assertEqual("Projects/Group/Fresh", report["identity"]["relative_path"])
             self.assertEqual(list(fixture.BASELINE), sorted(p.name for p in (fresh / ".agents/skills").iterdir()))
-            self.assertEqual(["project-sub-agent", "task-manager"], sorted(p.name for p in (fresh / "roles").iterdir() if p.is_dir()))
-            self.assertTrue((fresh / "roles/INDEX.md").is_file())
+            self.assertEqual(["project-sub-agent", "task-manager"], sorted(p.name for p in (fresh / "Roles").iterdir() if p.is_dir()))
+            self.assertTrue((fresh / "Roles/INDEX.md").is_file())
+            self.assertEqual(["Roles"], sorted(p.name for p in fresh.iterdir() if p.name.casefold() == "roles"))
+            self.assertEqual("governance-starter-v4", report["setup_contract"])
             for name in (".venv", ".sys4ai", "Ontology", "config", "models", "INIT_MEMORY.md"):
                 self.assertFalse((fresh / name).exists(), name)
             self.assertEqual(["assets", "registration", "verification"], report["completed_stages"])

@@ -6,6 +6,14 @@ Project ID: `{project_id}`. Workspace path: `{relative_path}`.
 
 For project specifications, see [SPECS.md](./SPECS.md).
 
+## Licensing
+
+Review this project's root license notices before reusing its material. Setup
+adopts the Template's `LICENSE`, `LICENSE-CODE` (Apache 2.0), and `LICENSE-DOCS`
+(CC BY 4.0) when no existing license markers are present. An existing licensing
+system is preserved as a whole. The setup receipt records which files were
+adopted, preserved, or skipped; it does not replace the project's license terms.
+
 ## Project guidance
 
 Read [SOUL.md](./SOUL.md), [AGENTS.md](./AGENTS.md), and [ROLE.md](./ROLE.md)
@@ -20,7 +28,7 @@ Requirements and implementation plans remain separate from Task state.
 
 The [Project Director](./ROLE.md) uses the
 [role management skill](./.agents/skills/manage-subagent-roles/SKILL.md) to inspect
-the [local role bundles](./roles) and [role index](./roles/INDEX.md) before bounded delegation. The project
+the [local role bundles](./Roles) and [role index](./Roles/INDEX.md) before bounded delegation. The project
 owns those role files and keeps task acceptance with its Director.
 
 ## Project setup

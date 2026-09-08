@@ -28,6 +28,9 @@ STARTERS = {
     ".gitignore",
     "README.md",
     "SPECS.md",
+    "LICENSE",
+    "LICENSE-CODE",
+    "LICENSE-DOCS",
     "Implementation_Plans/subagent_role_system_implementation_plan.md",
     "Implementation_Plans/task_system_implementation_plan.md",
     "Tasks/INDEX.md",
@@ -145,7 +148,7 @@ class TemplateContractTests(unittest.TestCase):
         self.assertEqual([], self.allowlist["optional_starter_files"])
         self.assertEqual(2, self.allowlist["schema_version"])
         self.assertEqual(".agents/skills", self.allowlist["skills"])
-        self.assertEqual("roles", self.allowlist["roles"])
+        self.assertEqual("Roles", self.allowlist["roles"])
         self.assertEqual("SOUL.md", self.allowlist["soul"])
         for relative in self.allowlist["starter_files"]:
             target = TEMPLATE / relative
@@ -193,10 +196,10 @@ class TemplateContractTests(unittest.TestCase):
         self.assertEqual([], self.allowlist["optional_starter_files"])
         for retired in ("Ontology", "INIT_MEMORY.md"):
             self.assertFalse((TEMPLATE / retired).exists(), retired)
-        roles = {p.name for p in (TEMPLATE / "roles").iterdir() if p.is_dir()}
+        roles = {p.name for p in (TEMPLATE / "Roles").iterdir() if p.is_dir()}
         self.assertEqual({"project-sub-agent", "task-manager"}, roles)
-        self.assertEqual((TEMPLATE / "roles/INDEX.md").read_bytes(), self.helper.planned_role_index(TEMPLATE, {}, {}))
-        self.assertFalse((TEMPLATE / "roles/.transition.json").exists())
+        self.assertEqual((TEMPLATE / "Roles/INDEX.md").read_bytes(), self.helper.planned_role_index(TEMPLATE, {}, {}))
+        self.assertFalse((TEMPLATE / "Roles/.transition.json").exists())
 
 
     def test_ignore_rules_protect_local_artifacts_and_secrets(self):

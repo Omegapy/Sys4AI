@@ -1,0 +1,458 @@
+{
+  "schema_version": 1,
+  "requirement_id": "RC-08",
+  "status": "passed",
+  "highest_verification_level": "runtime_observed",
+  "observed_at": "2026-09-08T15:12:51.544163+00:00",
+  "native_agent_id": "/root/roles_case_native_read",
+  "native_identity_evidence": {
+    "tool": "collaboration.list_agents",
+    "arguments": {
+      "path_prefix": "/root/roles_case_native_read"
+    },
+    "actual_response": {
+      "agents": [
+        {
+          "agent_name": "/root/roles_case_native_read",
+          "agent_status": "running"
+        }
+      ]
+    },
+    "scope": "Observed this native child's identity and running state during the read check. The parent must observe terminal status after the final return."
+  },
+  "assignment": {
+    "role_name": "project-sub-agent",
+    "agents_path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Roles/project-sub-agent/AGENTS.md",
+    "role_path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Roles/project-sub-agent/ROLE.md",
+    "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+    "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+    "role_fit": "The parent selected the general project worker for bounded read-only CLI and path verification; the assignment grants only one evidence-file write.",
+    "selected_catalog_fingerprint": "ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de",
+    "stopping_condition": "Record actual required reads, six installed CLI receipts, physical directory spellings and limitations, then return the evidence path and SHA256."
+  },
+  "read_evidence": {
+    "root_full_content_read_command_chunks": [
+      "f79ee7",
+      "a2d2a8",
+      "8a719b"
+    ],
+    "template_instruction_read_command_chunks": [
+      "8d7515",
+      "db6462"
+    ],
+    "identical_template_content_byte_comparison_command_chunk": "98c18d",
+    "note": "The root SOUL, AGENTS, ROLE, SPECS, communication skill, manage-subagent-roles skill and both assigned files were explicitly read. Template AGENTS, ROLE and SPECS were read; Template SOUL, skills and assigned pair were read as bytes and confirmed identical to already-read root content. Both assigned pairs were opened through exact capitalized Roles paths."
+  },
+  "projects": [
+    {
+      "label": "root",
+      "root": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "case_equivalent_directory_entries": [
+        {
+          "name": "Roles",
+          "is_dir": true,
+          "is_symlink": false
+        }
+      ],
+      "assigned_role_entries": [
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "required_read_hashes": [
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/SOUL.md",
+          "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+          "bytes": 28149,
+          "read_via_capitalized_roles_path": false,
+          "same_as_root": true
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/AGENTS.md",
+          "sha256": "2525a276555db88c122ea0547d307c0f72b5b701e389b442a3b4934c249b5664",
+          "bytes": 7525,
+          "read_via_capitalized_roles_path": false,
+          "same_as_root": true
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLE.md",
+          "sha256": "18b4cfbd80a46f26883dad6ebec2443276f53838e339b408b7e7d6e214d6a3a1",
+          "bytes": 16747,
+          "read_via_capitalized_roles_path": false,
+          "same_as_root": true
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/SPECS.md",
+          "sha256": "250bac542a62694e3822ec671a59036a142344e8452c4741cacba2475805c1e1",
+          "bytes": 3938,
+          "read_via_capitalized_roles_path": false,
+          "same_as_root": true
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/communication/SKILL.md",
+          "sha256": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+          "bytes": 17043,
+          "read_via_capitalized_roles_path": false,
+          "same_as_root": true
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/manage-subagent-roles/SKILL.md",
+          "sha256": "6366b1b38cc5ccb1558678a1bebc7f7f2b3b0b408b4616b194cbe08a3d5871d4",
+          "bytes": 10202,
+          "read_via_capitalized_roles_path": false,
+          "same_as_root": true
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Roles/project-sub-agent/AGENTS.md",
+          "sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+          "bytes": 1306,
+          "read_via_capitalized_roles_path": true,
+          "same_as_root": true
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Roles/project-sub-agent/ROLE.md",
+          "sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+          "bytes": 4195,
+          "read_via_capitalized_roles_path": true,
+          "same_as_root": true
+        }
+      ],
+      "installed_helper": {
+        "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/manage-subagent-roles/scripts/role_catalog.py",
+        "sha256": "3d46f11bc66c781d53edb266f0412127967770b8ef39f3fdc445364849f77945"
+      },
+      "python": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "current_catalog_fingerprint": "ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de"
+    },
+    {
+      "label": "template",
+      "root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project",
+      "case_equivalent_directory_entries": [
+        {
+          "name": "Roles",
+          "is_dir": true,
+          "is_symlink": false
+        }
+      ],
+      "assigned_role_entries": [
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "required_read_hashes": [
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project/SOUL.md",
+          "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+          "bytes": 28149,
+          "read_via_capitalized_roles_path": false,
+          "same_as_root": true
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project/AGENTS.md",
+          "sha256": "0bc4cd3d76449902f7b109c2125bb5767eb80284896d30a4de420eb06e93cc4f",
+          "bytes": 3917,
+          "read_via_capitalized_roles_path": false,
+          "same_as_root": false
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project/ROLE.md",
+          "sha256": "2fe9051d2f2fe34ae3a2608673280fd98da3fabdd722e75357eaa6042b244ca2",
+          "bytes": 12461,
+          "read_via_capitalized_roles_path": false,
+          "same_as_root": false
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project/SPECS.md",
+          "sha256": "653bac6734ecb8a3840efa13449ec6c092540800235a7462bae83830132b95c4",
+          "bytes": 4292,
+          "read_via_capitalized_roles_path": false,
+          "same_as_root": false
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project/.agents/skills/communication/SKILL.md",
+          "sha256": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+          "bytes": 17043,
+          "read_via_capitalized_roles_path": false,
+          "same_as_root": true
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project/.agents/skills/manage-subagent-roles/SKILL.md",
+          "sha256": "6366b1b38cc5ccb1558678a1bebc7f7f2b3b0b408b4616b194cbe08a3d5871d4",
+          "bytes": 10202,
+          "read_via_capitalized_roles_path": false,
+          "same_as_root": true
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project/Roles/project-sub-agent/AGENTS.md",
+          "sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+          "bytes": 1306,
+          "read_via_capitalized_roles_path": true,
+          "same_as_root": true
+        },
+        {
+          "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project/Roles/project-sub-agent/ROLE.md",
+          "sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+          "bytes": 4195,
+          "read_via_capitalized_roles_path": true,
+          "same_as_root": true
+        }
+      ],
+      "installed_helper": {
+        "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project/.agents/skills/manage-subagent-roles/scripts/role_catalog.py",
+        "sha256": "3d46f11bc66c781d53edb266f0412127967770b8ef39f3fdc445364849f77945"
+      },
+      "python": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project/.venv/bin/python",
+      "current_catalog_fingerprint": "ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de"
+    }
+  ],
+  "command_receipts": [
+    {
+      "label": "root",
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "operation": "list",
+      "cmd": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . list --format json",
+      "chunk_id": "1bc85d",
+      "wall_time_seconds": 0.000003459,
+      "exit_code": 0,
+      "original_token_count": 349,
+      "output": "{\n  \"fingerprint\": \"ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de\",\n  \"index_status\": \"current\",\n  \"invalid_roles\": [],\n  \"role_root\": \"Roles\",\n  \"schema_version\": 1,\n  \"valid_roles\": [\n    {\n      \"agents_file\": \"Roles/project-sub-agent/AGENTS.md\",\n      \"agents_sha256\": \"9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a\",\n      \"description\": \"General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.\",\n      \"diagnostics\": [],\n      \"folder\": \"Roles/project-sub-agent\",\n      \"name\": \"project-sub-agent\",\n      \"role_file\": \"Roles/project-sub-agent/ROLE.md\",\n      \"role_sha256\": \"fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe\",\n      \"valid\": true\n    },\n    {\n      \"agents_file\": \"Roles/task-manager/AGENTS.md\",\n      \"agents_sha256\": \"937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028\",\n      \"description\": \"Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution.\",\n      \"diagnostics\": [],\n      \"folder\": \"Roles/task-manager\",\n      \"name\": \"task-manager\",\n      \"role_file\": \"Roles/task-manager/ROLE.md\",\n      \"role_sha256\": \"da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0\",\n      \"valid\": true\n    }\n  ]\n}\n",
+      "result": {
+        "fingerprint": "ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de",
+        "index_status": "current",
+        "invalid_roles": [],
+        "role_root": "Roles",
+        "schema_version": 1,
+        "valid_roles": [
+          {
+            "agents_file": "Roles/project-sub-agent/AGENTS.md",
+            "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+            "description": "General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.",
+            "diagnostics": [],
+            "folder": "Roles/project-sub-agent",
+            "name": "project-sub-agent",
+            "role_file": "Roles/project-sub-agent/ROLE.md",
+            "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+            "valid": true
+          },
+          {
+            "agents_file": "Roles/task-manager/AGENTS.md",
+            "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+            "description": "Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution.",
+            "diagnostics": [],
+            "folder": "Roles/task-manager",
+            "name": "task-manager",
+            "role_file": "Roles/task-manager/ROLE.md",
+            "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0",
+            "valid": true
+          }
+        ]
+      }
+    },
+    {
+      "label": "root",
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "operation": "show project-sub-agent",
+      "cmd": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . show project-sub-agent --format json",
+      "chunk_id": "73e48a",
+      "wall_time_seconds": 9.17e-7,
+      "exit_code": 0,
+      "original_token_count": 140,
+      "output": "{\n  \"agents_file\": \"Roles/project-sub-agent/AGENTS.md\",\n  \"agents_sha256\": \"9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a\",\n  \"description\": \"General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.\",\n  \"diagnostics\": [],\n  \"folder\": \"Roles/project-sub-agent\",\n  \"name\": \"project-sub-agent\",\n  \"role_file\": \"Roles/project-sub-agent/ROLE.md\",\n  \"role_sha256\": \"fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe\",\n  \"valid\": true\n}\n",
+      "result": {
+        "agents_file": "Roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "description": "General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.",
+        "diagnostics": [],
+        "folder": "Roles/project-sub-agent",
+        "name": "project-sub-agent",
+        "role_file": "Roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+        "valid": true
+      }
+    },
+    {
+      "label": "root",
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "operation": "validate",
+      "cmd": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . validate --format json",
+      "chunk_id": "23e1dc",
+      "wall_time_seconds": 0.000001125,
+      "exit_code": 0,
+      "original_token_count": 349,
+      "output": "{\n  \"fingerprint\": \"ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de\",\n  \"index_status\": \"current\",\n  \"invalid_roles\": [],\n  \"role_root\": \"Roles\",\n  \"schema_version\": 1,\n  \"valid_roles\": [\n    {\n      \"agents_file\": \"Roles/project-sub-agent/AGENTS.md\",\n      \"agents_sha256\": \"9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a\",\n      \"description\": \"General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.\",\n      \"diagnostics\": [],\n      \"folder\": \"Roles/project-sub-agent\",\n      \"name\": \"project-sub-agent\",\n      \"role_file\": \"Roles/project-sub-agent/ROLE.md\",\n      \"role_sha256\": \"fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe\",\n      \"valid\": true\n    },\n    {\n      \"agents_file\": \"Roles/task-manager/AGENTS.md\",\n      \"agents_sha256\": \"937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028\",\n      \"description\": \"Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution.\",\n      \"diagnostics\": [],\n      \"folder\": \"Roles/task-manager\",\n      \"name\": \"task-manager\",\n      \"role_file\": \"Roles/task-manager/ROLE.md\",\n      \"role_sha256\": \"da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0\",\n      \"valid\": true\n    }\n  ]\n}\n",
+      "result": {
+        "fingerprint": "ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de",
+        "index_status": "current",
+        "invalid_roles": [],
+        "role_root": "Roles",
+        "schema_version": 1,
+        "valid_roles": [
+          {
+            "agents_file": "Roles/project-sub-agent/AGENTS.md",
+            "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+            "description": "General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.",
+            "diagnostics": [],
+            "folder": "Roles/project-sub-agent",
+            "name": "project-sub-agent",
+            "role_file": "Roles/project-sub-agent/ROLE.md",
+            "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+            "valid": true
+          },
+          {
+            "agents_file": "Roles/task-manager/AGENTS.md",
+            "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+            "description": "Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution.",
+            "diagnostics": [],
+            "folder": "Roles/task-manager",
+            "name": "task-manager",
+            "role_file": "Roles/task-manager/ROLE.md",
+            "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0",
+            "valid": true
+          }
+        ]
+      }
+    },
+    {
+      "label": "template",
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project",
+      "operation": "list",
+      "cmd": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . list --format json",
+      "chunk_id": "e61cd3",
+      "wall_time_seconds": 9.58e-7,
+      "exit_code": 0,
+      "original_token_count": 349,
+      "output": "{\n  \"fingerprint\": \"ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de\",\n  \"index_status\": \"current\",\n  \"invalid_roles\": [],\n  \"role_root\": \"Roles\",\n  \"schema_version\": 1,\n  \"valid_roles\": [\n    {\n      \"agents_file\": \"Roles/project-sub-agent/AGENTS.md\",\n      \"agents_sha256\": \"9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a\",\n      \"description\": \"General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.\",\n      \"diagnostics\": [],\n      \"folder\": \"Roles/project-sub-agent\",\n      \"name\": \"project-sub-agent\",\n      \"role_file\": \"Roles/project-sub-agent/ROLE.md\",\n      \"role_sha256\": \"fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe\",\n      \"valid\": true\n    },\n    {\n      \"agents_file\": \"Roles/task-manager/AGENTS.md\",\n      \"agents_sha256\": \"937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028\",\n      \"description\": \"Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution.\",\n      \"diagnostics\": [],\n      \"folder\": \"Roles/task-manager\",\n      \"name\": \"task-manager\",\n      \"role_file\": \"Roles/task-manager/ROLE.md\",\n      \"role_sha256\": \"da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0\",\n      \"valid\": true\n    }\n  ]\n}\n",
+      "result": {
+        "fingerprint": "ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de",
+        "index_status": "current",
+        "invalid_roles": [],
+        "role_root": "Roles",
+        "schema_version": 1,
+        "valid_roles": [
+          {
+            "agents_file": "Roles/project-sub-agent/AGENTS.md",
+            "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+            "description": "General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.",
+            "diagnostics": [],
+            "folder": "Roles/project-sub-agent",
+            "name": "project-sub-agent",
+            "role_file": "Roles/project-sub-agent/ROLE.md",
+            "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+            "valid": true
+          },
+          {
+            "agents_file": "Roles/task-manager/AGENTS.md",
+            "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+            "description": "Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution.",
+            "diagnostics": [],
+            "folder": "Roles/task-manager",
+            "name": "task-manager",
+            "role_file": "Roles/task-manager/ROLE.md",
+            "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0",
+            "valid": true
+          }
+        ]
+      }
+    },
+    {
+      "label": "template",
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project",
+      "operation": "show project-sub-agent",
+      "cmd": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . show project-sub-agent --format json",
+      "chunk_id": "d65149",
+      "wall_time_seconds": 5.42e-7,
+      "exit_code": 0,
+      "original_token_count": 140,
+      "output": "{\n  \"agents_file\": \"Roles/project-sub-agent/AGENTS.md\",\n  \"agents_sha256\": \"9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a\",\n  \"description\": \"General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.\",\n  \"diagnostics\": [],\n  \"folder\": \"Roles/project-sub-agent\",\n  \"name\": \"project-sub-agent\",\n  \"role_file\": \"Roles/project-sub-agent/ROLE.md\",\n  \"role_sha256\": \"fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe\",\n  \"valid\": true\n}\n",
+      "result": {
+        "agents_file": "Roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+        "description": "General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.",
+        "diagnostics": [],
+        "folder": "Roles/project-sub-agent",
+        "name": "project-sub-agent",
+        "role_file": "Roles/project-sub-agent/ROLE.md",
+        "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+        "valid": true
+      }
+    },
+    {
+      "label": "template",
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Sys4AI-Template-Project",
+      "operation": "validate",
+      "cmd": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python .agents/skills/manage-subagent-roles/scripts/role_catalog.py --repo-root . validate --format json",
+      "chunk_id": "af198f",
+      "wall_time_seconds": 0.000001375,
+      "exit_code": 0,
+      "original_token_count": 349,
+      "output": "{\n  \"fingerprint\": \"ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de\",\n  \"index_status\": \"current\",\n  \"invalid_roles\": [],\n  \"role_root\": \"Roles\",\n  \"schema_version\": 1,\n  \"valid_roles\": [\n    {\n      \"agents_file\": \"Roles/project-sub-agent/AGENTS.md\",\n      \"agents_sha256\": \"9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a\",\n      \"description\": \"General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.\",\n      \"diagnostics\": [],\n      \"folder\": \"Roles/project-sub-agent\",\n      \"name\": \"project-sub-agent\",\n      \"role_file\": \"Roles/project-sub-agent/ROLE.md\",\n      \"role_sha256\": \"fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe\",\n      \"valid\": true\n    },\n    {\n      \"agents_file\": \"Roles/task-manager/AGENTS.md\",\n      \"agents_sha256\": \"937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028\",\n      \"description\": \"Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution.\",\n      \"diagnostics\": [],\n      \"folder\": \"Roles/task-manager\",\n      \"name\": \"task-manager\",\n      \"role_file\": \"Roles/task-manager/ROLE.md\",\n      \"role_sha256\": \"da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0\",\n      \"valid\": true\n    }\n  ]\n}\n",
+      "result": {
+        "fingerprint": "ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de",
+        "index_status": "current",
+        "invalid_roles": [],
+        "role_root": "Roles",
+        "schema_version": 1,
+        "valid_roles": [
+          {
+            "agents_file": "Roles/project-sub-agent/AGENTS.md",
+            "agents_sha256": "9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a",
+            "description": "General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required.",
+            "diagnostics": [],
+            "folder": "Roles/project-sub-agent",
+            "name": "project-sub-agent",
+            "role_file": "Roles/project-sub-agent/ROLE.md",
+            "role_sha256": "fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe",
+            "valid": true
+          },
+          {
+            "agents_file": "Roles/task-manager/AGENTS.md",
+            "agents_sha256": "937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028",
+            "description": "Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution.",
+            "diagnostics": [],
+            "folder": "Roles/task-manager",
+            "name": "task-manager",
+            "role_file": "Roles/task-manager/ROLE.md",
+            "role_sha256": "da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0",
+            "valid": true
+          }
+        ]
+      }
+    }
+  ],
+  "findings": [
+    "Root and Template each contain exactly one case-equivalent active role-directory entry, spelled Roles, and it is a real directory rather than a symlink.",
+    "Each installed role helper completed list, show project-sub-agent and validate with exit code 0.",
+    "Both catalogs report role_root Roles, index_status current, two valid paired roles and no invalid roles.",
+    "Both show commands return exact capitalized assigned pair paths and hashes matching the parent assignment.",
+    "The native child explicitly loaded the capitalized role files and followed the bounded project-sub-agent contract."
+  ],
+  "inheritance_evidence": {
+    "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/roles-capitalization/runtime-inheritance.json",
+    "sha256": "299f3ff1f570c2e3faa0c9fdb71d1ac5cd452ff0183e0d459f639e7bb0d8ec10",
+    "content": {
+      "configuration_allowlist": [
+        {
+          "path": "/Users/alex.omegapy/.codex/config.toml",
+          "exists": true,
+          "agent_default_model": null,
+          "agent_default_reasoning_effort": null,
+          "custom_agent_names": []
+        },
+        {
+          "path": ".codex/config.toml",
+          "exists": false
+        }
+      ],
+      "guarantee": "Current native runtime: full-history fork inherits exact parent model and reasoning effort; no override supplied for any worker. Literal model/effort telemetry not available."
+    }
+  },
+  "files_written": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/roles-capitalization/native-role-read.json"
+  ],
+  "prohibited_actions_performed": [],
+  "limitations": [
+    "This is a native role-loading and installed CLI smoke check; it does not execute a Task-manager bootstrap or orchestration lifecycle.",
+    "This does not establish automatic role discovery by a new Codex session.",
+    "Literal effective model and reasoning-effort telemetry is unavailable. Exact inheritance rests on the full-history runtime guarantee and the inspected parent configuration allowlist; this child supplied no setting override or rewrite.",
+    "Historical provenance, case-rename mutation recovery, updater behavior, initializer behavior, unselected projects and Git publication were outside this bounded check.",
+    "All six role-helper invocations were documented read-only routes. No role creation, reindex, Task mutation, source/runtime/registry edit, installation or child spawn was performed."
+  ]
+}

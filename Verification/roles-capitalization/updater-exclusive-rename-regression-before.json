@@ -1,0 +1,42 @@
+{
+  "purpose": "Reproduce the exists-then-rename race before exclusive native rename repair",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_template_update.py",
+    "-k",
+    "never_replaces_an_appearing_empty_destination",
+    "-v"
+  ],
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "test_case_transition_never_replaces_an_appearing_empty_destination (test_template_update.TemplateUpdateTests.test_case_transition_never_replaces_an_appearing_empty_destination) ... FAIL\n\n======================================================================\nFAIL: test_case_transition_never_replaces_an_appearing_empty_destination (test_template_update.TemplateUpdateTests.test_case_transition_never_replaces_an_appearing_empty_destination)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/tests/test_template_update.py\", line 203, in test_case_transition_never_replaces_an_appearing_empty_destination\n    with self.assertRaises(OSError):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: OSError not raised\n\n----------------------------------------------------------------------\nRan 1 test in 0.159s\n\nFAILED (failures=1)\n",
+  "source_sha256": {
+    "tools/template_update.py": "60129884825a2fb9aefe9eaec5033b396e124d8862aa0686fb81049ac127a35c",
+    "tests/test_template_update.py": "ab2fa18d074757029eb2922ad611ab7a794628c560a6ca4ab9d41e9747b8cf1e"
+  },
+  "prior_passing_runs": [
+    {
+      "filesystem": "default case-insensitive",
+      "tests": 46,
+      "skipped": 1,
+      "result": "passed"
+    },
+    {
+      "filesystem": "case-sensitive APFS",
+      "tests": 46,
+      "skipped": 0,
+      "result": "passed"
+    },
+    {
+      "suite": "watcher",
+      "tests": 12,
+      "result": "passed"
+    }
+  ]
+}

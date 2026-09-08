@@ -39,11 +39,11 @@ class RepositoryContractTests(unittest.TestCase):
             "Tasks/INDEX.md",
             "sub-agent-roles/project-sub-agent/AGENTS.md",
             "sub-agent-roles/project-sub-agent/ROLE.md",
-            "roles/project-sub-agent/AGENTS.md",
-            "roles/project-sub-agent/ROLE.md",
-            "roles/task-manager/AGENTS.md",
-            "roles/task-manager/ROLE.md",
-            "roles/INDEX.md",
+            "Roles/project-sub-agent/AGENTS.md",
+            "Roles/project-sub-agent/ROLE.md",
+            "Roles/task-manager/AGENTS.md",
+            "Roles/task-manager/ROLE.md",
+            "Roles/INDEX.md",
             "depot/README.md",
             "depot/projects.json",
             "tests/test_repository_contract.py",
@@ -174,11 +174,11 @@ class RepositoryContractTests(unittest.TestCase):
             "Tasks/INDEX.md",
             "sub-agent-roles/project-sub-agent/AGENTS.md",
             "sub-agent-roles/project-sub-agent/ROLE.md",
-            "roles/project-sub-agent/AGENTS.md",
-            "roles/project-sub-agent/ROLE.md",
-            "roles/task-manager/AGENTS.md",
-            "roles/task-manager/ROLE.md",
-            "roles/INDEX.md",
+            "Roles/project-sub-agent/AGENTS.md",
+            "Roles/project-sub-agent/ROLE.md",
+            "Roles/task-manager/AGENTS.md",
+            "Roles/task-manager/ROLE.md",
+            "Roles/INDEX.md",
             "Projects/Sys4AI-Template-Project/SOUL.md",
             "Projects/Sys4AI-Template-Project/ROLE.md",
             "Projects/Sys4AI-Template-Project/Tasks/INDEX.md",
@@ -287,14 +287,35 @@ class RepositoryContractTests(unittest.TestCase):
                 if item.is_file() and "__pycache__" not in item.parts and item.name != ".DS_Store"
             }
         self.assertEqual(manifest(source), manifest(active))
-        current = json.loads((ROOT / "Verification/task-manager-orchestration/root-adoption-manifest.json").read_text())
-        self.assertEqual(current["initializer_files_sha256"], manifest(source))
-        self.assertEqual("PLAN-20260908-6E6F545E", current["plan_id"])
+        previous = json.loads((ROOT / "Verification/task-manager-orchestration/root-adoption-manifest.json").read_text())
+        current = json.loads((ROOT / "Verification/roles-capitalization/root-adoption.json").read_text())
+        licensing = json.loads((ROOT / "Verification/licenses-depot/root-adoption.json").read_text())
+        self.assertEqual(licensing["initializer_files_sha256"], manifest(source))
+        self.assertEqual("applied", licensing["status"])
+        self.assertEqual(current["initializer_files_sha256"], licensing["previous_initializer_files_sha256"])
+        self.assertNotEqual(current["initializer_files_sha256"], licensing["initializer_files_sha256"])
+        self.assertEqual("applied", current["status"])
+        self.assertNotEqual(previous["initializer_files_sha256"], current["initializer_files_sha256"])
+        self.assertEqual("PLAN-20260908-6E6F545E", previous["plan_id"])
         # The original adoption receipt is retained with its original meaning;
         # it is not rewritten to claim the later package bytes.
         self.assertNotEqual(record["files_sha256"], current["initializer_files_sha256"])
         self.assertEqual("adopted", record["status"])
         self.assertIn("no other active skills or projects", record["overwrite_boundary"])
+
+    def test_license_sources_root_and_template_have_complete_matching_terms(self) -> None:
+        bodies = {
+            "LICENSE-CODE": (11358, "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"),
+            "LICENSE-DOCS": (18657, "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"),
+        }
+        for name in ("LICENSE", "LICENSE-CODE", "LICENSE-DOCS"):
+            source = (ROOT / "LICENSES-depo" / name).read_bytes()
+            self.assertEqual(source, (ROOT / name).read_bytes())
+            self.assertEqual(source, (TEMPLATE / name).read_bytes())
+            self.assertIn(b"Alexander Samuel Ricciardi", source)
+            if name in bodies:
+                size, checksum = bodies[name]
+                self.assertEqual(checksum, hashlib.sha256(source[-size:]).hexdigest())
 
     def test_template_seed_and_setup_routes_preserve_project_boundaries(self) -> None:
         spec = json.loads((ROOT / "SKILLS-depo/init-new-project/assets/baseline-assets.json").read_text())

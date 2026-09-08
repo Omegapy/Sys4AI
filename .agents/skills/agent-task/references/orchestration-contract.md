@@ -34,9 +34,18 @@ Each assignment contains its function, subtask, exact role pair and digests,
 fresh catalog/fit evidence, required capabilities, baseline, perspective,
 permitted writes, stopping condition, runtime capability evidence, identity
 guarantee, and eventual native receipt. Role names and native IDs are distinct.
-Actual native IDs originate in tool receipts. Role pairs in `roles/` determine
+Actual native IDs originate in tool receipts. Role pairs in `Roles/` determine
 eligibility; their generated index is navigation. Historical role hashes retain
 the originally inspected provenance even if the current role later changes.
+
+The active directory is spelled exactly `Roles/`, including on case-insensitive
+hosts. New reservations require that directory, its current catalog and the
+matching capitalized pair paths. Structural validation retains earlier `roles/`
+paths as immutable historical provenance; it neither renames stored references
+nor treats them as a fresh selection. A role-path change is not a context-only
+rebind: reconcile the prior owners and use the existing replacement protocol
+for a newly loaded pair. Worker scopes cannot include the role root or its
+index through trailing slashes, normalized path segments or case aliases.
 
 ## Writer and publication protocol
 

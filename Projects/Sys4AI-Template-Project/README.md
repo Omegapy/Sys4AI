@@ -8,6 +8,11 @@ Pages site.
 
 For project specifications, see [SPECS.md](./SPECS.md).
 
+The template's [LICENSE](./LICENSE) routes code to [Apache 2.0](./LICENSE-CODE)
+and documents to [CC BY 4.0](./LICENSE-DOCS). Both initialization routes include
+the complete trio for projects without existing licensing. Existing project
+license systems remain project-owned and are preserved as a whole.
+
 This template is maintained from the parent's reusable `*-depo` sources through
 the [automatic update pipeline](../../depot/template-update.md). Edit reusable
 content in its mapped source collection. The template is the sole source of
@@ -41,8 +46,9 @@ The template currently includes these project-local categories:
 
 - `SOUL.md`
 - `AGENTS.md` and `ROLE.md` template variants
+- `LICENSE`, `LICENSE-CODE`, and `LICENSE-DOCS`
 - the bounded `project-sub-agent` and confirmed `task-manager` role bundles
-- a deterministic `roles/INDEX.md` generated from those authoritative pairs
+- a deterministic `Roles/INDEX.md` generated from those authoritative pairs
 - complete shared skill packages under `.agents/skills/`
 - the role-system and Task-system implementation contracts
 
@@ -55,7 +61,7 @@ publication settings are also project-owned.
 
 The root [AGENTS.md](./AGENTS.md), [SOUL.md](./SOUL.md), and
 [ROLE.md](./ROLE.md) define shared guidance and the generic Project Director.
-Reusable roles live in [roles](./roles), with generated [navigation](./roles/INDEX.md)
+Reusable roles live in [roles](./roles), with generated [navigation](./Roles/INDEX.md)
 and one
 `AGENTS.md` and one `ROLE.md` per role.
 

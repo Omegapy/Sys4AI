@@ -49,7 +49,7 @@ without restating or summarizing those requirements.
 The Task helper preserves schema-1 history and adds a versioned orchestration
 extension for enabled records. Task state, role definitions, native execution
 and managed document lifecycles stay separate. Current role definitions use
-paired files under `roles/` with a destination-generated `roles/INDEX.md`.
+paired files under `Roles/` with a destination-generated `Roles/INDEX.md`.
 The role mutation helper uses Python standard-library POSIX advisory locking;
 unsupported hosts must report the missing capability rather than bypass it.
 No database, queue service, memory/ontology backend or new production package
