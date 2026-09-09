@@ -74,3 +74,12 @@ Task response file fields. The helper never manufactures Task acceptance.
 If memory is a required deliverable, a failed publication leaves that criterion
 unmet. Optional later capture failure is reported separately; memory-only recovery
 does not reopen a terminal Task, relaunch agents or repeat committed Task events.
+
+## Automatic completion checkpoint
+
+When automatic capture is on, the manager evaluates useful evidence-backed
+findings after verification, before its terminal Task response while it still
+owns the execution. Include bounded memory/evidence writes in its original
+reservation. Follow [automatic capture](automatic-capture.md); do not await a
+user reminder or publish unreviewed child proposals. A failure is reported with
+the actual publication status, and optional capture does not undo Task acceptance.

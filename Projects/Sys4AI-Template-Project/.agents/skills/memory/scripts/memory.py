@@ -16,6 +16,15 @@ def main(argv=None):
     parser.add_argument("--project-root", required=True)
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("health")
+    commands.add_parser("capture-status")
+    setting = commands.add_parser("set-capture")
+    setting.add_argument("setting", choices=("on", "off"))
+    setting.add_argument("--expected-config-sha256", required=True)
+    capture = commands.add_parser("capture")
+    capture.add_argument("payload")
+    capture.add_argument("--trigger", required=True)
+    capture.add_argument("--grant-file", required=True)
+    capture.add_argument("--actor", required=True)
     validate = commands.add_parser("validate"); validate.add_argument("path", nargs="?")
     read = commands.add_parser("read"); read.add_argument("path")
     search = commands.add_parser("search"); search.add_argument("query")
@@ -45,6 +54,16 @@ def main(argv=None):
         root = project_root(args.project_root)
         if args.command == "health":
             result = health(root)
+        elif args.command == "capture-status":
+            from memory_capture import capture_status
+            result = capture_status(root)
+        elif args.command == "set-capture":
+            from memory_capture import set_capture
+            result = set_capture(root, args.setting == "on", args.expected_config_sha256)
+        elif args.command == "capture":
+            from memory_capture import capture
+            payload = decode_json_yaml(safe_read_bytes(root, args.payload, max_bytes=16_000_000))
+            result = capture(root, payload, args.grant_file, args.actor, trigger=args.trigger)
         elif args.command == "read":
             result = load_record(root, args.path)
         elif args.command == "validate":

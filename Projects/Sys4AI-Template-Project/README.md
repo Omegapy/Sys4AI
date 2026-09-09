@@ -155,9 +155,10 @@ local policies; this Template keeps its explicit selection policy.
 The [memory skill](./.agents/skills/memory/SKILL.md), [record contracts](./reference-assets/MEMORY-depo/README.md),
 [empty memory directory](./MEMORY/README.md) and [configuration](./memory.yaml)
 provide portable project memory. The Template contains no learned records and
-its identity remains neutral. Initializer edition `governance-starter-v5`
-specializes a new project's memory identity and preserves existing memory and
-older setup receipts. Direct Markdown and lexical lookup need no backend.
+its identity remains neutral. Initializer edition `governance-starter-v6`
+specializes a new project's memory identity, enables automatic capture and binds
+its local Director. Setup reports that capture is on and asks whether to turn
+it off. Existing choices, learned memory and older setup receipts are preserved. Direct Markdown and lexical lookup need no backend.
 The optional local backend and model are provisioned through separate explicit
 work; setup does not install or activate them. Frozen Task inputs and scoped
 publication follow the memory skill's existing integration contracts.

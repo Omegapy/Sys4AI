@@ -53,3 +53,7 @@ instructions, Task state, roles and source evidence retain authority over recall
 conclusions. Lookup does not initialize a backend or create a Task. The setup
 receipt records preserved existing memory separately; later runtime provisioning
 and canonical publication require their own current project scope.
+
+Automatic memory capture defaults on for a new installation. The agent records
+useful evidence-backed findings at substantive work completion. Ask to turn it
+off; current configuration in `memory.yaml` determines the actual preference.

@@ -109,7 +109,7 @@ class RecoveryCases(unittest.TestCase):
         index = (self.target / self.helper.ROLE_INDEX).read_bytes()
         self.assertNotEqual((template / self.helper.ROLE_INDEX).read_bytes(), index)
         self.assertEqual(self.helper.planned_role_index(self.target, {}, {}), index)
-        self.assertEqual("governance-starter-v5", report["setup_contract"])
+        self.assertEqual("governance-starter-v6", report["setup_contract"])
         self.run_setup(mode="prepare-existing")
         # An existing index is never overwritten to conceal a customization.
         (self.target / self.helper.ROLE_INDEX).write_text("Owned index\n")

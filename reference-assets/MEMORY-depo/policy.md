@@ -113,3 +113,13 @@ not operating-system authentication against arbitrary local processes. Users
 or editors that bypass the helper must coordinate writes; the helper compares
 expected bytes immediately before and after atomic replacement and reports
 observed conflicts without overwriting them on retry.
+
+## Automatic capture preference
+
+New installations default `integration.automatic_capture` to `true`. The owning
+agent evaluates useful durable findings at substantive work completion and
+publishes reviewed evidence through the memory helper. Read-only requests do not
+capture. Users can turn the preference off; initialization reruns preserve that
+choice. The installed memory skill's `references/automatic-capture.md` owns the
+checkpoint procedure, opt-out command and post-initialization notice. No timer,
+transcript recorder, or background service is installed by this preference.

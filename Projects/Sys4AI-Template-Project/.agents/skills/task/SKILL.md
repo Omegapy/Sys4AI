@@ -213,3 +213,8 @@ Children return proposals; publication requires the current separate memory
 scope. Memory lookup and optional capture never activate this Task workflow or
 change its installed selection policy, and unavailable memory does not block
 ordinary Task inspection.
+
+When automatic capture is on, include a bounded memory/evidence write scope in
+the manager reservation. The manager performs the memory skill's automatic
+checkpoint after verification and before its terminal response, using its current
+publication grant. This changes neither the category team nor Task event schema.

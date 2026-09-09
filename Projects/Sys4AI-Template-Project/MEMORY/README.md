@@ -12,3 +12,8 @@ and canonical Task/role state retain authority over remembered conclusions.
 `memory.yaml` at the project root owns identity, source selection and runtime
 paths. Direct reads and lexical lookup work without a backend. Examples in
 the reference collection remain non-active examples and are never copied here.
+
+Automatic capture is on by default after initialization. The owning agent
+captures useful evidence-backed findings at substantive work completion. Ask to
+turn automatic capture off to preserve recall while disabling these checkpoints.
+No learned records, transcripts, or another project's memory are seeded here.

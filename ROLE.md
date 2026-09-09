@@ -308,3 +308,11 @@ explicit current memory grant without requesting approval for each note.
 Children return proposals. Memory supplies no authority, Task activation,
 separate scheduler or new category team. Apply the installed memory integration
 contract and retain real publication receipts, current versions and limitations.
+
+Automatic memory capture defaults on after new memory installation. At
+substantive work completion, evaluate durable findings through the installed
+memory skill's automatic-capture workflow before the final handoff. An explicit
+Task manager receives bounded `MEMORY/` and `control_records/memory/` write scopes
+in its initial reservation when it owns this checkpoint. Preserve user opt-out,
+current authority checks, and accepted evidence; do not require per-note user
+approval already covered by that scope.

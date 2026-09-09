@@ -14,7 +14,7 @@ class MemoryEditionTests(unittest.TestCase):
     setUp = fixture.InitializerTests.setUp
     run_setup = fixture.InitializerTests.run_setup
 
-    def test_new_projects_have_distinct_empty_disabled_memory(self):
+    def test_new_projects_have_distinct_empty_memory_and_capture_on(self):
         root_note = self.root / "MEMORY/root-only.md"
         root_note.parent.mkdir()
         root_note.write_text("ROOT_LEARNED_MEMORY_MUST_NOT_BE_ADOPTED")
@@ -23,14 +23,19 @@ class MemoryEditionTests(unittest.TestCase):
         for name in ("orchard", "meadow", "a"):
             target = self.root / "Projects" / name.title()
             report = self.run_setup(destination=target, project_id=name, project_name=name.title())
-            self.assertEqual("governance-starter-v5", report["setup_contract"])
+            self.assertEqual("governance-starter-v6", report["setup_contract"])
             config = json.loads((target / "memory.yaml").read_text())
             self.assertEqual({"id": name, "name": name.title(), "root": "."}, config["project"])
             self.assertEqual("reference-assets/MEMORY-depo", config["contract_root"])
             self.assertEqual("MEMORY", config["canonical_root"])
             self.assertEqual({"name": "basic-memory", "enabled": False, "semantic_enabled": False}, config["backend"])
-            self.assertEqual({"director": None}, config["publication"])
-            self.assertEqual({**source_config, "project": config["project"]}, config)
+            self.assertEqual("/root", config["publication"]["director"]["actor_id"])
+            self.assertTrue(config["integration"]["automatic_capture"])
+            self.assertEqual("on", report["memory_capture"]["status"])
+            self.assertIn("turn it off", report["memory_capture"]["opt_out_question"])
+            for ref in config["publication"]["director"]["authority"]:
+                self.assertEqual(ref["sha256"], self.helper.sha((target / ref["path"]).read_bytes()))
+            self.assertEqual({**source_config, "project": config["project"], "publication": config["publication"]}, config)
             self.assertEqual({"README.md"}, set(self.helper.tree_files(target / "MEMORY")))
             self.assertFalse((target / ".sys4ai").exists())
             self.assertFalse((target / ".venv").exists())
@@ -93,7 +98,7 @@ class MemoryEditionTests(unittest.TestCase):
         template = self.root / self.helper.TEMPLATE
         changes = ["policy", "populated", "runtime-path", "enabled", "publisher",
                    "memory.yaml", "MEMORY/README.md", ".agents/skills/memory/SKILL.md",
-                   *sorted(self.helper.MEMORY_CONTRACT_FILES), *sorted(self.helper.MEMORY_HELPER_FILES)]
+                   *sorted(self.helper.MEMORY_CONTRACT_FILES), *sorted(self.helper.MEMORY_HELPER_FILES), *sorted(self.helper.CAPTURE_HELPER_FILES)]
         for change in changes:
             with self.subTest(change=change):
                 backup = Path(self.temporary.name) / "memory-template-backup"

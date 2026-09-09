@@ -108,3 +108,10 @@ edition `governance-starter-v5` supplies empty project memory; v1-v4 receipts,
 root intake/closure policy and existing product content retain their semantics.
 Semantic use is controlled by current configuration and the exact local pilot
 certification. Inspect `memory.py --project-root . health` for current readiness.
+
+Automatic memory capture defaults on in initializer edition `governance-starter-v6`.
+The completion workflow and explicit on/off command are defined in the memory
+skill's [automatic-capture reference](./.agents/skills/memory/references/automatic-capture.md).
+New installations receive destination-local Director authority. Setup reports
+the actual setting and offers off after completion; existing choices and earlier
+receipt editions are preserved.

@@ -149,3 +149,10 @@ lookup is read-only and creates or activates no Task. Follow its
 for identical frozen solver packets, scoped publication and material changes.
 Keep learned records in this project's `MEMORY/`; starter setup copies only
 empty capability and never another project's records or runtime.
+
+When project memory is configured with `integration.automatic_capture: true`,
+perform the memory skill's [automatic completion checkpoint](./.agents/skills/memory/references/automatic-capture.md)
+before the final handoff of substantive work. Capture useful new evidence-backed
+findings within current scope without a user reminder. Skip trivial or read-only
+requests and duplicate findings. Respect an explicit opt-out and preserve the
+existing publication, privacy, Task ownership and frozen-input checks.

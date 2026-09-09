@@ -29,7 +29,8 @@
         "governance-starter-v2",
         "governance-starter-v3",
         "governance-starter-v4",
-        "governance-starter-v5"
+        "governance-starter-v5",
+        "governance-starter-v6"
       ]
     },
     "status": {
@@ -172,13 +173,26 @@
     },
     "role_case_transition": {
       "type": "object",
-      "required": ["path", "sha256", "source", "destination"],
+      "required": [
+        "path",
+        "sha256",
+        "source",
+        "destination"
+      ],
       "additionalProperties": false,
       "properties": {
-        "path": {"const": ".sys4ai/roles-case-rename.json"},
-        "sha256": {"$ref": "#/$defs/sha"},
-        "source": {"const": "roles"},
-        "destination": {"const": "Roles"}
+        "path": {
+          "const": ".sys4ai/roles-case-rename.json"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "source": {
+          "const": "roles"
+        },
+        "destination": {
+          "const": "Roles"
+        }
       }
     },
     "recovery_before": {
@@ -262,27 +276,112 @@
           "$ref": "#/$defs/sha"
         }
       }
+    },
+    "memory_capture": {
+      "type": "object",
+      "description": "Latest capture setting and post-setup opt-out notice; existing choices are preserved.",
+      "required": [
+        "automatic_capture",
+        "status",
+        "message",
+        "opt_out_question"
+      ],
+      "properties": {
+        "automatic_capture": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "on",
+            "off",
+            "unavailable",
+            "not-installed"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "opt_out_question": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "config_sha256": {
+          "type": "string"
+        }
+      }
     }
   },
   "allOf": [
     {
-      "if": {"properties": {"setup_contract": {"const": "governance-starter-v5"}}},
+      "if": {
+        "properties": {
+          "setup_contract": {
+            "enum": [
+              "governance-starter-v5",
+              "governance-starter-v6"
+            ]
+          }
+        }
+      },
       "then": {
-        "required": ["preserved_memory"],
-        "allOf": [{
-          "if": {"properties": {"status": {"const": "completed"}}},
-          "then": {"required": ["current_memory"]}
-        }]
+        "required": [
+          "preserved_memory"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "completed"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "current_memory"
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "if": {"properties": {"setup_contract": {"enum": ["governance-starter-v4", "governance-starter-v5"]}}},
+      "if": {
+        "properties": {
+          "setup_contract": {
+            "enum": [
+              "governance-starter-v4",
+              "governance-starter-v5",
+              "governance-starter-v6"
+            ]
+          }
+        }
+      },
       "then": {
-        "required": ["preserved_licenses"],
-        "allOf": [{
-          "if": {"properties": {"status": {"const": "completed"}}},
-          "then": {"required": ["current_licenses"]}
-        }]
+        "required": [
+          "preserved_licenses"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "completed"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "current_licenses"
+              ]
+            }
+          }
+        ]
       }
     },
     {
@@ -334,13 +433,27 @@
     "memoryInventory": {
       "type": "object",
       "additionalProperties": {
-        "anyOf": [{"$ref": "#/$defs/sha"}, {"const": "directory"}]
+        "anyOf": [
+          {
+            "$ref": "#/$defs/sha"
+          },
+          {
+            "const": "directory"
+          }
+        ]
       }
     },
     "licenseInventory": {
       "type": "object",
       "additionalProperties": {
-        "anyOf": [{"$ref": "#/$defs/sha"}, {"const": "directory"}]
+        "anyOf": [
+          {
+            "$ref": "#/$defs/sha"
+          },
+          {
+            "const": "directory"
+          }
+        ]
       }
     },
     "sha": {

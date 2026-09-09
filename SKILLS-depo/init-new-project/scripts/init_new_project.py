@@ -42,14 +42,16 @@ STARTER_FILES = {
 }
 IDENTITY = "project.json"
 RECORD = "control_records/project-setup.json"
-SETUP_CONTRACT = "governance-starter-v5"
+SETUP_CONTRACT = "governance-starter-v6"
+MEMORY_CONTRACT = "governance-starter-v5"
+MEMORY_CONTRACTS = {MEMORY_CONTRACT, SETUP_CONTRACT}
 LICENSE_CONTRACT = "governance-starter-v4"
 PRE_LICENSE_CONTRACT = "governance-starter-v3"
 LOWERCASE_CONTRACT = "governance-starter-v2"
 LEGACY_CONTRACT = "governance-starter-v1"
-ROLE_ROOTS = {SETUP_CONTRACT: "Roles", LICENSE_CONTRACT: "Roles", PRE_LICENSE_CONTRACT: "Roles", LOWERCASE_CONTRACT: "roles",
+ROLE_ROOTS = {SETUP_CONTRACT: "Roles", MEMORY_CONTRACT: "Roles", LICENSE_CONTRACT: "Roles", PRE_LICENSE_CONTRACT: "Roles", LOWERCASE_CONTRACT: "roles",
               LEGACY_CONTRACT: "sub-agent-roles"}
-LICENSE_CONTRACTS = {LICENSE_CONTRACT, SETUP_CONTRACT}
+LICENSE_CONTRACTS = {LICENSE_CONTRACT, *MEMORY_CONTRACTS}
 LICENSE_FILES = {"LICENSE", "LICENSE-CODE", "LICENSE-DOCS"}
 MEMORY_FILES = {"memory.yaml", "MEMORY/README.md"}
 MEMORY_CONTRACT_ROOT = "reference-assets/MEMORY-depo"
@@ -61,6 +63,8 @@ MEMORY_CONTRACT_FILES = {MEMORY_CONTRACT_ROOT + "/" + name for name in (
 )}
 MEMORY_TREES = ("MEMORY", MEMORY_CONTRACT_ROOT, ".agents/skills/memory")
 MEMORY_HELPER_FILES = {".agents/skills/memory/scripts/" + name for name in ("memory_core.py", "memory_paths.py")}
+CAPTURE_HELPER_FILES = {".agents/skills/memory/scripts/memory_capture.py",
+                        ".agents/skills/memory/references/automatic-capture.md"}
 SPECIALIZED_FILES = {"README.md", IDENTITY, "memory.yaml", "Roles/INDEX.md"}
 LICENSE_MARKER = re.compile(
     r"(?:licen[cs]e(?:s|[._-].+)?|copying(?:[._-].+)?|copyright(?:[._-].+)?|unlicense(?:[._-].+)?)",
@@ -559,11 +563,13 @@ def template_sources(
     if reference.exists():
         for relative, raw in tree_files(reference).items():
             include("reference-assets/" + relative, raw)
-    if contract == SETUP_CONTRACT:
+    if contract in MEMORY_CONTRACTS:
         if not (MEMORY_CONTRACT_FILES | MEMORY_HELPER_FILES) <= copied.keys():
             raise InitializationError("template lacks required memory contract assets")
         if set(tree_files(template / "MEMORY")) != {"README.md"}:
             raise InitializationError("template memory is not empty")
+    if contract == SETUP_CONTRACT and not CAPTURE_HELPER_FILES <= copied.keys():
+        raise InitializationError("template lacks automatic memory capture support")
     renderer = file_bytes(template / README_RENDERER)
     return copied, origins, versions, renderer, policy
 
@@ -571,11 +577,11 @@ def template_sources(
 def required_starters(contract: str) -> set[str]:
     # Older receipts retain the file inventory of their original edition.
     return (STARTER_FILES | (LICENSE_FILES if contract in LICENSE_CONTRACTS else set())
-            | (MEMORY_FILES if contract == SETUP_CONTRACT else set()))
+            | (MEMORY_FILES if contract in MEMORY_CONTRACTS else set()))
 
 
 def required_skills(contract: str) -> set[str]:
-    return REQUIRED_SKILLS | ({"memory"} if contract == SETUP_CONTRACT else set())
+    return REQUIRED_SKILLS | ({"memory"} if contract in MEMORY_CONTRACTS else set())
 
 
 def validate_memory_config(config: Any, files: dict[str, bytes], *, allow_template: bool) -> None:
@@ -605,7 +611,9 @@ def validate_memory_config(config: Any, files: dict[str, bytes], *, allow_templa
                 sys.modules[name] = module
 
 
-def specialize_memory(raw: bytes, identity: dict[str, Any], files: dict[str, bytes]) -> bytes:
+def specialize_memory(raw: bytes, identity: dict[str, Any], files: dict[str, bytes],
+                      *, automatic: bool = False, destination: Path | None = None,
+                      owned_governance: frozenset[str] = frozenset()) -> bytes:
     """Specialize only an empty, portable Template configuration."""
     config = unique_json(raw)
     validate_memory_config(config, files, allow_template=True)
@@ -618,12 +626,26 @@ def specialize_memory(raw: bytes, identity: dict[str, Any], files: dict[str, byt
             or config.get("corpus", {}).get("source_groups") != []):
         raise InitializationError("template memory configuration is not an empty portable starter")
     config["project"] = {"id": identity["project_id"], "name": identity["project_name"], "root": "."}
+    if automatic:
+        config["integration"]["automatic_capture"] = True
+        # Bind the new installation to this project's final governance, including
+        # preserved existing instructions, never to the depot's authority.
+        authority = []
+        for name in ("SOUL.md", "AGENTS.md", "ROLE.md"):
+            target = destination_file(destination, name) if destination is not None else None
+            raw_authority = (file_bytes(target) if name not in owned_governance
+                             and target is not None and target.exists() else files[name])
+            authority.append({"path": name, "sha256": sha(raw_authority)})
+        config["publication"]["director"] = {"actor_id": "/root", "authority": authority,
+            "scope": ["MEMORY", "control_records/memory", ".sys4ai/memory"]}
     validate_memory_config(config, files, allow_template=False)
     return encoded(config)
 
 
 def source_snapshot(
     depot: Path, skill: Path, identity: dict[str, Any], *, contract: str = SETUP_CONTRACT,
+    destination: Path | None = None,
+    owned_governance: frozenset[str] = frozenset(),
 ) -> tuple[dict[str, bytes], list[dict[str, str]], dict[str, bytes]]:
     # The installed skill provides code only. Every starter input, including the
     # allowlist and README renderer, is read from the registered template.
@@ -637,8 +659,9 @@ def source_snapshot(
         raise InitializationError("template Task index is not empty")
     proposed["README.md"] = renderer.decode().format(**identity).encode()
     proposed[IDENTITY] = encoded(identity)
-    if contract == SETUP_CONTRACT:
-        proposed["memory.yaml"] = specialize_memory(original["memory.yaml"], identity, original)
+    if contract in MEMORY_CONTRACTS:
+        proposed["memory.yaml"] = specialize_memory(original["memory.yaml"], identity, original,
+            automatic=contract == SETUP_CONTRACT, destination=destination, owned_governance=owned_governance)
     records = [
         {
             "source": source.relative_to(depot).as_posix(),
@@ -957,12 +980,14 @@ def memory_inventory(destination: Path) -> dict[str, str]:
 
 
 def check_memory_adoption(destination: Path, record: dict[str, Any]) -> None:
-    if record["setup_contract"] != SETUP_CONTRACT:
+    if record["setup_contract"] not in MEMORY_CONTRACTS:
         return
     expected = dict(record["preserved_memory"])
     for name, checksum in record["owned_files"].items():
         if memory_path(name) and destination_file(destination, name).exists():
-            expected[name] = checksum
+            prior = record.get("recovery_before", {}).get(name)
+            actual = sha(file_bytes(destination_file(destination, name)))
+            expected[name] = prior if prior is not None and actual == prior else checksum
             parent = Path(name).parent
             while memory_path(parent.as_posix()):
                 expected[parent.as_posix()] = "directory"
@@ -1000,7 +1025,7 @@ def asset_plan(destination: Path, *, mode: str, proposed: dict[str, bytes],
         existing_tasks = (name.startswith("Tasks/") and (destination / "Tasks").is_dir()
                           and any((destination / "Tasks").iterdir()))
         if present is not None:
-            if saved_identity is None and name == "README.md" and present == original.get(name):
+            if saved_identity is None and name in {"README.md", "memory.yaml"} and present == original.get(name):
                 selected[name], before[name] = raw, sha(present)
             else:
                 preserved[name] = sha(present)
@@ -1145,7 +1170,7 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
             relative_source, relative_source)
         if entry.get("destination") != expected_destination:
             raise InitializationError("existing setup receipt changes a source destination")
-        if entry["adoption"] == "specialized" and (record["setup_contract"] != SETUP_CONTRACT
+        if entry["adoption"] == "specialized" and (record["setup_contract"] not in MEMORY_CONTRACTS
                                                    or expected_destination not in SPECIALIZED_FILES):
             raise InitializationError("existing setup receipt has an unsupported specialization")
         if (record["setup_contract"] in LICENSE_CONTRACTS
@@ -1176,7 +1201,8 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
     required_sources = {TEMPLATE + "/" + name for name in
         required_starters(record["setup_contract"]) | {"SOUL.md", TEMPLATE_POLICY, README_RENDERER}
         | {f".agents/skills/{name}/SKILL.md" for name in required_skills(record["setup_contract"])}
-        | (MEMORY_CONTRACT_FILES | MEMORY_HELPER_FILES if record["setup_contract"] == SETUP_CONTRACT else set())
+        | (MEMORY_CONTRACT_FILES | MEMORY_HELPER_FILES if record["setup_contract"] in MEMORY_CONTRACTS else set())
+        | (CAPTURE_HELPER_FILES if record["setup_contract"] == SETUP_CONTRACT else set())
         | role_sources}
     if not required_sources <= seen_sources:
         raise InitializationError("existing setup receipt omits required starter source provenance")
@@ -1231,7 +1257,7 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
                 raise InitializationError("existing setup receipt mixes project licensing with starters")
     elif "preserved_licenses" in record or any(value[0] == "skipped-existing-license" for value in source_adoptions.values()):
         raise InitializationError("older setup receipt contains a later licensing decision")
-    if record["setup_contract"] == SETUP_CONTRACT:
+    if record["setup_contract"] in MEMORY_CONTRACTS:
         inventory = record.get("preserved_memory")
         if not isinstance(inventory, dict):
             raise InitializationError("existing setup receipt lacks its memory preservation decision")
@@ -1258,7 +1284,11 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
             existing = (name == "memory.yaml" and name in inventory or any(
                 name.startswith(root + "/") and inventory.get(root) == "directory" for root in MEMORY_TREES))
             expected_adoption = "preserved-project-owned" if name in inventory else "skipped-existing-package"
-            if (existing and adoption != expected_adoption
+            pristine_config = (name == "memory.yaml" and adoption == "specialized"
+                               and record["setup_contract"] == SETUP_CONTRACT
+                               and inventory.get(name) == next(entry["source_sha256"] for entry in record["sources"]
+                                                               if entry["destination"] == name))
+            if (existing and adoption != expected_adoption and not pristine_config
                     or not existing and adoption == "skipped-existing-package"):
                 raise InitializationError("memory source adoption mixes an existing collection with new starters")
             if adoption == "preserved-project-owned" and inventory.get(name) != checksum:
@@ -1289,7 +1319,7 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
                 preserved_root = destination / current_role_root
             elif name == "Tasks/INDEX.md":
                 preserved_root = destination / "Tasks"
-            elif record["setup_contract"] == SETUP_CONTRACT and any(
+            elif record["setup_contract"] in MEMORY_CONTRACTS and any(
                     name.startswith(root + "/") and record["preserved_memory"].get(root) == "directory"
                     for root in MEMORY_TREES):
                 preserved_root = destination / next(root for root in MEMORY_TREES if name.startswith(root + "/"))
@@ -1323,6 +1353,33 @@ def archive_record(destination: Path, raw: bytes) -> dict[str, str]:
     return {"path": relative, "sha256": checksum}
 
 
+def memory_capture_notice(destination: Path) -> dict[str, Any]:
+    """Describe the installed state; never enable a preserved configuration here."""
+    result = {"automatic_capture": None, "status": "unavailable", "opt_out_question": None}
+    if not (destination / "memory.yaml").exists():
+        return {**result, "status": "not-installed", "message": "Project memory is not installed by this setup edition."}
+    try:
+        raw = file_bytes(destination_file(destination, "memory.yaml"))
+        config = unique_json(raw)
+        files = {name: file_bytes(destination_file(destination, name)) for name in MEMORY_HELPER_FILES}
+        validate_memory_config(config, files, allow_template=False)
+        enabled = config["integration"]["automatic_capture"]
+        result.update(automatic_capture=enabled, config_sha256=sha(raw))
+        if enabled:
+            if not destination_file(destination, ".agents/skills/memory/scripts/memory_capture.py").is_file():
+                raise InitializationError("the preserved memory package lacks automatic capture support")
+            director = config["publication"]["director"]
+            if not director or any(sha(file_bytes(destination_file(destination, ref["path"]))) != ref["sha256"]
+                                   for ref in director["authority"]):
+                raise InitializationError("project memory publication authority needs current local binding")
+        result.update(status="on" if enabled else "off",
+                      message="Memory automatic capture is " + ("on." if enabled else "off; your existing preference was preserved."),
+                      opt_out_question="Would you like to turn it off?" if enabled else None)
+    except (InitializationError, OSError, ValueError, KeyError, TypeError):
+        result["message"] = "Existing project memory was preserved; automatic capture readiness could not be verified. Inspect its configuration and installed memory package."
+    return result
+
+
 def verify_project(destination: Path, record: dict[str, Any]) -> dict[str, str]:
     """Observe current adopted files without resetting normal project edits."""
     validate_record(record, destination, record["identity"])
@@ -1347,7 +1404,7 @@ def verify_project(destination: Path, record: dict[str, Any]) -> dict[str, str]:
         record["role_case_transition"] = case_evidence
     if record["setup_contract"] in LICENSE_CONTRACTS:
         record["current_licenses"] = license_inventory(destination)
-    if record["setup_contract"] == SETUP_CONTRACT:
+    if record["setup_contract"] in MEMORY_CONTRACTS:
         record["current_memory"] = memory_inventory(destination)
     return current
 
@@ -1380,7 +1437,8 @@ def run_initialization(
     with ExitStack() as template_guard:
         proposed = {}
         if record is None or "assets" not in record["completed_stages"]:
-            proposed_all, sources, original = source_snapshot(depot, skill, identity, contract=contract)
+            proposed_all, sources, original = source_snapshot(depot, skill, identity, contract=contract,
+                destination=destination, owned_governance=frozenset(record["owned_files"]) if record else frozenset())
             if record is None:
                 if mode == "prepare-existing":
                     check_existing_role_layout(destination, proposed_all[ROLE_HELPER])
@@ -1446,7 +1504,7 @@ def run_initialization(
             was_completed = record["status"] == "completed"
             record.update(status="partial", checks=[])
             record["completed_stages"] = [stage for stage in record["completed_stages"] if stage == "assets"]
-            for key in ("verified_at", "current_files", "current_licenses", "current_memory", "recovery", "rerun"):
+            for key in ("verified_at", "current_files", "current_licenses", "current_memory", "memory_capture", "recovery", "rerun"):
                 record.pop(key, None)
 
             def checkpoint(stage: str | None = None) -> None:
@@ -1494,6 +1552,7 @@ def run_initialization(
                 record["checks"] = [{"check": name, "outcome": "passed"}
                                     for name in ("project-identity", "project-files", "registration")]
                 checkpoint("verification")
+                record["memory_capture"] = memory_capture_notice(destination)
                 record.update(status="completed", active_stage=None,
                               verified_at=datetime.now(timezone.utc).isoformat())
                 record.pop("recovery_before", None)

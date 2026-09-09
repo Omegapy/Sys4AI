@@ -2,7 +2,7 @@
 name: init-new-project
 description: Create or prepare a selected Sys4AI project using Template governance assets, preserved project content and factual registration.
 metadata:
-  version: 7.0.0
+  version: 8.0.0
 ---
 
 # Initialize a Sys4AI project
@@ -33,8 +33,10 @@ are required for new projects. The initializer reads the Template and does not r
 The memory starters are `memory.yaml`, `MEMORY/README.md`, the complete memory
 skill, and `reference-assets/MEMORY-depo/` contract assets. The Template config
 has no project ID or name, publisher authorization, learned records or enabled
-backend. Setup specializes only `project.id` and `project.name`, retains project
-root `.`, and uses the local `reference-assets/MEMORY-depo` contract path.
+backend. New installation enables automatic capture and binds the local Director
+to the destination's current SOUL/AGENTS/ROLE hashes and bounded memory paths.
+Setup specializes `project.id` and `project.name`, retains project root `.`,
+and uses the local `reference-assets/MEMORY-depo` contract path.
 The memory helper validates the constrained JSON-compatible YAML configuration
 without contacting or provisioning a backend. Nonempty Template memory and
 missing required memory starter, skill or contract sources reject setup.
@@ -69,11 +71,11 @@ is preserved. Existing `project.json` bytes and additional fields are preserved;
 its project ID and relative destination must agree with the request, and its
 existing display name and purpose take precedence.
 
-Existing `memory.yaml` bytes remain untouched, including a config in an older
+Existing customized `memory.yaml` bytes remain untouched, including a config in an older
 format. Existing `MEMORY/`, `reference-assets/MEMORY-depo/`, and memory skill
 collections remain intact as whole packages; setup does not add their missing
-resources. This also preserves an existing unspecialized config in a manual
-Template copy. The receipt reports preservation instead of claiming that such
+resources. A pristine `memory.yaml` in a manual Template copy is specialized during first
+preparation, enabling capture and binding its own project authority. The receipt reports preservation instead of claiming that such
 project-owned configuration is operational. Changing it is separate scoped
 project work. Original complete memory inventories are retained for recovery;
 completed reruns observe current edits without replacing those original hashes.
@@ -104,14 +106,17 @@ not ignored. The starter policy has no optional root guide or runtime bundle.
 ## Completion and receipts
 
 The durable receipt is `control_records/project-setup.json`, schema version 1,
-with setup contract `governance-starter-v5`. Edition v5 adds memory starters and
+with setup contract `governance-starter-v6`. Edition v6 defaults automatic
+capture on and binds the destination's own Director for reviewed memory writes.
+The `memory_capture` result reports the actual current setting and readiness.
+Edition v5 added memory starters and
 records `specialized` identity/configuration assets separately from `adopted`
 copies and `preserved-project-owned` files. `preserved_memory` records the
 original complete config and collections; `current_memory` records the latest
 observation. Missing resources inside an existing memory collection use
 `skipped-existing-package`, retaining every Template source entry.
 
-Editions v4 and v5 require the license trio
+Editions v4, v5 and v6 require the license trio
 and records the original `preserved_licenses` inventory (empty when adopting
 the trio) separately from `current_licenses` observed during verification.
 Entries for absent companions use `skipped-existing-license`; every Template
@@ -119,6 +124,8 @@ license source remains in the receipt. Original markers must remain present;
 ordinary content edits are observed without rewriting original hashes. During
 interrupted asset adoption, licensing must still match the reviewed inventory.
 
+Earlier `governance-starter-v5` receipts retain their original capture setting
+and publisher binding; reruns do not silently upgrade them.
 Earlier `governance-starter-v4` receipts retain the seven-skill licensing edition
 without acquiring memory. Earlier `governance-starter-v3` receipts retain their original license-free
 starter requirement and `Roles/` layout. Earlier `governance-starter-v1`
@@ -137,9 +144,19 @@ resource is identified explicitly; copied Template bytes are not claimed for it.
 The receipt must account for every source destination in both directions:
 adopted files match `owned_files`, preserved files match `preserved_files`, and
 both maps match the source adoption hashes. Only explicitly skipped resources
-inside an existing package, nonempty Task tree, or a v4/v5 preserved licensing
+inside an existing package, nonempty Task tree, or a v4/v5/v6 preserved licensing
 system may be absent from both maps.
 Standalone starters and the required source inventory cannot be omitted.
+
+After the helper returns `status: completed`, read `memory_capture` and tell the
+user its actual setting. When `status: on`, say: "Memory automatic capture is on.
+Would you like to turn it off?" Setup is already complete; do not wait for an
+answer to enable it. Keep it on unless the user opts out. If they ask for off,
+use the installed memory `set-capture off` command with the current config hash.
+A preserved off preference remains off on reruns. If status is unavailable,
+explain the preserved configuration/package limitation and complete any separately
+authorized upgrade; never report capture ready just because a flag is true.
+For the completion trigger, follow the memory skill's automatic-capture reference.
 
 Reinspect the result and affected files before reporting completion. State the
 actual checks performed and any unresolved conflict. The receipt establishes

@@ -119,7 +119,7 @@ def default_config(project_id=None, name=None):
             "retrieval": {"mode": "lexical", "max_results": 20},
             "corpus": {"include": ["README.md", "docs/**/*.md", "research/**/*.md", "research/**/*.tex", "research/**/*.pdf", "research/**/*.html"],
                        "exclude": list(DEFAULT_EXCLUSIONS), "source_groups": []},
-            "state": dict(STATE_PATHS), "integration": {"task_packets": True, "automatic_capture": False},
+            "state": dict(STATE_PATHS), "integration": {"task_packets": True, "automatic_capture": True},
             "publication": {"director": None}}
 
 
@@ -165,8 +165,8 @@ def validate_config(value, allow_template=False):
         require(corpus_allowed(group["evidence"]["path"], value), "invalid_groups", "Relationship evidence must be an allowed source.")
     require(value["state"] == STATE_PATHS, "invalid_state_paths", "Version 1 state classes have fixed confined paths.")
     exact(value["integration"], ("task_packets", "automatic_capture"))
-    require(type(value["integration"]["task_packets"]) is bool and value["integration"]["automatic_capture"] is False,
-            "invalid_integration", "Automatic capture is unsupported.")
+    require(type(value["integration"]["task_packets"]) is bool and type(value["integration"]["automatic_capture"]) is bool,
+            "invalid_integration", "Memory integration settings must be booleans.")
     exact(value["publication"], ("director",))
     director = value["publication"]["director"]
     if director is not None:

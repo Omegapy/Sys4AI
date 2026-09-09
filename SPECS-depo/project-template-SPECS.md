@@ -102,7 +102,8 @@ and exact result revalidation. A failed compatibility gate retains lexical use.
 The memory [state-path contract](./.agents/skills/memory/references/state-paths.md)
 distinguishes rebuildable projection, normalization, index and model products
 from durable backend configuration and pending maintenance journals. Never
-classify the whole `.sys4ai` directory as disposable. Setup edition v5 selects
-the complete empty capability, specializes only the owning identity/paths and
-records copied, specialized or preserved assets; v1-v4 receipts keep their
-original requirements and equivalent-rerun behavior.
+classify the whole `.sys4ai` directory as disposable. Setup edition v6 selects
+the empty capability, defaults automatic capture on and binds the destination
+Director to its local governance. It records copied, specialized or preserved
+assets and reports the setting with an opt-out after completion. Existing
+choices and v1-v5 receipt editions retain their original adoption evidence.

@@ -39,3 +39,10 @@ reviewed `--packet-sha256`; it never guesses a frozen baseline's digest.
 Use the [publication examples](publication-examples.md) to construct reviewed
 operations. Maintenance and Task packets use the same checked actor/scope
 boundary while retaining their distinct file formats and Task lifecycle.
+
+Automatic completion workflows use `capture PAYLOAD --trigger TRIGGER` with the
+same grant and actor as `publish`/`supersede`. It checks the current setting,
+skips without writes when off, and retains publication and recovery safeguards.
+`capture-status` is read-only. `set-capture on|off --expected-config-sha256 HASH`
+is the explicit user preference operation; it changes only that configuration
+boolean. See [automatic capture](automatic-capture.md) for checkpoints and notices.

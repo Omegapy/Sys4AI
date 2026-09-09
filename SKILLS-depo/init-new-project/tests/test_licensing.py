@@ -24,7 +24,7 @@ class LicensingTests(unittest.TestCase):
                     (target / "project-data.txt").write_text("retain existing data")
                 report = self.run_setup(mode=mode, destination=target,
                     project_id=mode, project_name=mode)
-                self.assertEqual("governance-starter-v5", report["setup_contract"])
+                self.assertEqual("governance-starter-v6", report["setup_contract"])
                 self.assertEqual({}, report["preserved_licenses"])
                 for name in self.helper.LICENSE_FILES:
                     raw = (template / name).read_bytes()

@@ -299,6 +299,12 @@ class RepositoryContractTests(unittest.TestCase):
                 relative = entry["destination"][len(prefix):]
                 self.assertEqual(expected_current.get(relative), entry["before_sha256"])
                 expected_current[relative] = entry["after_sha256"]
+        automatic_capture = json.loads((ROOT / "Verification/automatic-memory-capture/root-adoption.json").read_text())
+        for entry in automatic_capture["entries"]:
+            if entry["destination"].startswith(prefix):
+                relative = entry["destination"][len(prefix):]
+                self.assertEqual(expected_current.get(relative), entry["before_sha256"])
+                expected_current[relative] = entry["after_sha256"]
         self.assertEqual(expected_current, manifest(source))
         self.assertEqual("applied", licensing["status"])
         self.assertEqual(current["initializer_files_sha256"], licensing["previous_initializer_files_sha256"])
@@ -360,6 +366,8 @@ class RepositoryContractTests(unittest.TestCase):
         template_config = json.loads((TEMPLATE / "memory.yaml").read_text())
         self.assertEqual("sys4ai-depot", config["project"]["id"])
         self.assertIsNone(template_config["project"]["id"])
+        self.assertIsInstance(config["integration"]["automatic_capture"], bool)
+        self.assertTrue(template_config["integration"]["automatic_capture"])
         self.assertEqual("MEMORY", config["canonical_root"])
         self.assertEqual("reference-assets/MEMORY-depo", config["contract_root"])
         self.assertEqual(["README.md"], sorted(p.relative_to(TEMPLATE / "MEMORY").as_posix()

@@ -138,3 +138,8 @@ proposals against their actual evidence and publish only within a current memory
 grant. Link observed receipts through existing Task artifacts or responses.
 Required memory deliverables remain unmet on failure; optional later capture
 failure is separate and recovery cannot replay Task execution.
+
+With automatic capture enabled, perform the installed memory completion
+checkpoint after verification and before the terminal Task response, while the
+current assignment still owns its granted memory scope. Capture only useful new
+findings; preserve the user's opt-out and report optional failures separately.
