@@ -1,0 +1,402 @@
+{
+  "accepted_analysis": {
+    "acceptance_id": "accepted-analysis-v2",
+    "candidate_ids": [
+      "solver1-v2",
+      "solver2-v2"
+    ],
+    "current_baseline": {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/baseline_cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf.json",
+      "sha256": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf"
+    },
+    "current_packet": {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+      "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+    },
+    "current_round": 2,
+    "initial_packet": {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-initial.json",
+      "sha256": "39d64cf8c6fe3a624bc9951142454ba822e0e3e5a2f5271b44a4901874230fa6"
+    },
+    "synthesis": {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/senior-synthesis.json",
+      "sha256": "c6e0679e13da4b12f42c968b9b58642f774f0a1818d8c222baa5817974466bb0"
+    }
+  },
+  "criterion_results": [
+    {
+      "criterion": "Actual native manager ownership and initially reserved bounded memory scope are verified.",
+      "evidence": [
+        {
+          "path": "Verification/manager/initial-packet-check.json",
+          "sha256": "53efd204414deb2abb0c80a570a5242cb9037db4f4db369ab327292369579110"
+        },
+        {
+          "path": "Verification/manager/native-team-reconciliation.json",
+          "sha256": "3ec904d16d3aac8a92b175917150e01a8f6032246f49b21d86d6b13711b9acfa"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "criterion": "Independent solvers share one frozen packet; new notes and sibling proposals stay excluded and material changes use current native input gates.",
+      "evidence": [
+        {
+          "path": "Verification/manager/initial-dispatch-independence.json",
+          "sha256": "cceaba6403ed48495806e70cb94474f2151e759ba089756373bb60d1d2bc4a89"
+        },
+        {
+          "path": "Verification/manager/new-note-and-sibling-exclusion.json",
+          "sha256": "8df44dc990cd82fd1e726ccfc9faf647f9e50a70f2207be2b04b66139c67c414"
+        },
+        {
+          "path": "Verification/manager/material-native-handoff.json",
+          "sha256": "e134feaa34ac15ed1b731eea2bc6a638f89f2d4a0e5a877854b5dd14c032405e"
+        },
+        {
+          "path": "Verification/manager/current-input-version-gates.json",
+          "sha256": "5ded026ba819beae5fdc4e651e4b380ffaa22b25cfac5e0b36c83b6ce1be199f"
+        },
+        {
+          "path": "Verification/manager/candidate-set-verification.json",
+          "sha256": "96c22ad6ff5feff6a9cd3d32e51b0c1e0dcd3e41ec6645d67f8f9f8a27fb0486"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "criterion": "Required reviewed owner publication and canonical retrieval succeed; optional failure remains separate without terminal replay.",
+      "evidence": [
+        {
+          "path": "Verification/manager/owner-publication.json",
+          "sha256": "a96e8ab020f4835b4b4a3fde05dd297b24575dedfc568ccd1456473d0dc5da2d"
+        },
+        {
+          "path": "Verification/manager/completion-retrieval.json",
+          "sha256": "d0835594dda6a88d12cfec82ad9d8d08f4441acbaa9e6009cca124a685cad61c"
+        },
+        {
+          "path": "Verification/manager/optional-retry-failure.json",
+          "sha256": "2a1269b30ff45f50f1c6cfffbd08758a07ca4466e23595b5f548218c175c0328"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "criterion": "Manager review follows relevant verification and precedes the one terminal Task response with all required team members reconciled.",
+      "evidence": [
+        {
+          "path": "Verification/manager/completion-verification.json",
+          "sha256": "0b51ccdfa2a16c4fc2aafe65f74efde2062edbfc01328f5e28bd2715f1e9e5cb"
+        },
+        {
+          "path": "Verification/manager/completion-learning-review.json",
+          "sha256": "6d71ef417dd46f53beee2aa5adb7c817e183d983ee6e85a56b6fdda82aa91b9b"
+        },
+        {
+          "path": "Verification/manager/completion-publication.json",
+          "sha256": "01c6158332f9bd1ca3510b63e54e23991d5df73efc24d4ba2d46e091e109c2ce"
+        },
+        {
+          "path": "Verification/manager/native-team-reconciliation.json",
+          "sha256": "3ec904d16d3aac8a92b175917150e01a8f6032246f49b21d86d6b13711b9acfa"
+        },
+        {
+          "path": "Verification/manager/final-task-validation.json",
+          "sha256": "c650f83d0d21fa51f93c86a5e6c73187ccbc79583b4b6ebe0262fcac21e55843"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "Verification/manager/initial-dispatch-independence.json",
+      "sha256": "cceaba6403ed48495806e70cb94474f2151e759ba089756373bb60d1d2bc4a89"
+    },
+    {
+      "path": "Verification/manager/solver1-completion-review.json",
+      "sha256": "94d54623463eb5b6c7ef538621bac848b9c77cefc0b4404d7ee2b234a9b126e1"
+    },
+    {
+      "path": "Verification/manager/new-note-and-sibling-exclusion.json",
+      "sha256": "8df44dc990cd82fd1e726ccfc9faf647f9e50a70f2207be2b04b66139c67c414"
+    },
+    {
+      "path": "Verification/manager/material-change-assessment.json",
+      "sha256": "5d5e1c262746ebe46213939f82601a34b1162db11e0c2706ad5b5727f8409ff5"
+    },
+    {
+      "path": "Verification/manager/material-native-handoff.json",
+      "sha256": "e134feaa34ac15ed1b731eea2bc6a638f89f2d4a0e5a877854b5dd14c032405e"
+    },
+    {
+      "path": "Verification/manager/current-input-version-gates.json",
+      "sha256": "5ded026ba819beae5fdc4e651e4b380ffaa22b25cfac5e0b36c83b6ce1be199f"
+    },
+    {
+      "path": "Verification/manager/owner-publication.json",
+      "sha256": "a96e8ab020f4835b4b4a3fde05dd297b24575dedfc568ccd1456473d0dc5da2d"
+    },
+    {
+      "path": "Verification/manager/optional-retry-failure.json",
+      "sha256": "2a1269b30ff45f50f1c6cfffbd08758a07ca4466e23595b5f548218c175c0328"
+    },
+    {
+      "path": "Verification/manager/partial-round2-recovery-boundary.json",
+      "sha256": "ede00f4b55fe24a3fca8522b5343059feb0d58f27519ead45d04e63498a93661"
+    },
+    {
+      "path": "Verification/manager/active-lease-continuation.json",
+      "sha256": "c325e3eb15a04915f59b1a670f6db26506060bc3b2b95fb461ea2aec80e5270b"
+    },
+    {
+      "path": "Verification/manager/native-team-reconciliation.json",
+      "sha256": "3ec904d16d3aac8a92b175917150e01a8f6032246f49b21d86d6b13711b9acfa"
+    },
+    {
+      "path": "Verification/manager/senior-inspection.json",
+      "sha256": "c2bcb4b5b3b963f139fd507b41013d28df9d55ef616e694d1df00369f2128f03"
+    },
+    {
+      "path": "Verification/manager/completion-verification.json",
+      "sha256": "0b51ccdfa2a16c4fc2aafe65f74efde2062edbfc01328f5e28bd2715f1e9e5cb"
+    },
+    {
+      "path": "Verification/manager/completion-learning-review.json",
+      "sha256": "6d71ef417dd46f53beee2aa5adb7c817e183d983ee6e85a56b6fdda82aa91b9b"
+    },
+    {
+      "path": "Verification/manager/completion-publication.json",
+      "sha256": "01c6158332f9bd1ca3510b63e54e23991d5df73efc24d4ba2d46e091e109c2ce"
+    },
+    {
+      "path": "Verification/manager/completion-retrieval.json",
+      "sha256": "d0835594dda6a88d12cfec82ad9d8d08f4441acbaa9e6009cca124a685cad61c"
+    },
+    {
+      "path": "Verification/manager/final-task-validation.json",
+      "sha256": "c650f83d0d21fa51f93c86a5e6c73187ccbc79583b4b6ebe0262fcac21e55843"
+    },
+    {
+      "path": "Verification/manager/final-preservation-and-retrieval.json",
+      "sha256": "4897fab24d784c6088a2a26702a7e2fde86027b5aa9d93c6a02dc7d2aaa36ac0"
+    }
+  ],
+  "execution_id": "wdyl-native-manager-001",
+  "generation": 1,
+  "highest_verification_level": "Native isolated Task workflow observed end-to-end, including actual independent team, material input gates, scoped canonical publication/retrieval and one validated terminal response.",
+  "learning": {
+    "automatic_capture": "on_preserved",
+    "final_manager_checkpoint": "After direct verification and before terminal response, task-completed capture produced E5F6A7B8 for the distinct observed partial-work/native continuation finding.",
+    "initial_manager_checkpoint": "After verified native initial dispatch, work-completed capture produced D4E5F6A7 while solver2 was active; it and sibling proposal remained excluded from old packet.",
+    "optional_backend": "disabled_no_semantic_claim",
+    "publications": [
+      {
+        "canonical_retrieval": "passed_no_diagnostics",
+        "claim_level": "verified_outcome",
+        "record": {
+          "path": "MEMORY/MEM-20260909-D4E5F6A7.md",
+          "sha256": "05614b80d61905b489f39511493cb8d3b5361fb444cbb7070a34169784aa9f75"
+        },
+        "state": "active"
+      },
+      {
+        "canonical_retrieval": "passed_no_diagnostics",
+        "claim_level": "verified_outcome",
+        "record": {
+          "path": "MEMORY/MEM-20260909-E5F6A7B8.md",
+          "sha256": "2fffc026788135717f46c03fa880e0c49bf3c0792c946a95d44aad5182ede769"
+        },
+        "state": "active"
+      }
+    ],
+    "substantive_no_new_behavioral_lesson": "Both solvers and senior reviewed current evidence once per bounded completion, matched accepted A1B2C3D4/C3D4E5F6 and proposed no duplicate note. Manager inspection concurs."
+  },
+  "limitations": [
+    "The installed Task helper still rejects actual errored status objects and ordinary resume covers completed/stopped states. This task used one separately authorized active-lease continuation, not general failed-state recovery.",
+    "Cooperative native context and filesystem scopes are not OS isolation.",
+    "The intentionally defective router is unchanged. The separate later TASK-022 work unit owns retrieval, current-source reassessment and any authorized fixture fix.",
+    "No production project adoption, root learned-memory capture, backend provision, external action, Git publication, or long-term benefit is claimed."
+  ],
+  "native_team": [
+    {
+      "assignment_id": "senior",
+      "function": "senior",
+      "native_id": "/root/native_learning_manager/senior",
+      "role": {
+        "agents_path": "Roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+        "catalog": {
+          "path": "coordination/senior-role-catalog.json",
+          "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397"
+        },
+        "name": "project-sub-agent",
+        "role_path": "Roles/project-sub-agent/ROLE.md",
+        "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "evidence/manager-bootstrap/settings.json",
+            "sha256": "cf5da99fccad8bd60cb3c4808bd136a683a7cd7fd38347ed11a738d04f73d046"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "state": "completed"
+    },
+    {
+      "assignment_id": "solver1",
+      "function": "solver",
+      "native_id": "/root/native_learning_manager/solver1",
+      "role": {
+        "agents_path": "Roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+        "catalog": {
+          "path": "coordination/solver1-rebind-role-catalog.json",
+          "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397"
+        },
+        "name": "project-sub-agent",
+        "role_path": "Roles/project-sub-agent/ROLE.md",
+        "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "evidence/manager-bootstrap/settings.json",
+            "sha256": "cf5da99fccad8bd60cb3c4808bd136a683a7cd7fd38347ed11a738d04f73d046"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "state": "completed"
+    },
+    {
+      "assignment_id": "solver2",
+      "function": "solver",
+      "native_id": "/root/native_learning_manager/solver2",
+      "role": {
+        "agents_path": "Roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+        "catalog": {
+          "path": "coordination/solver2-rebind-role-catalog.json",
+          "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397"
+        },
+        "name": "project-sub-agent",
+        "role_path": "Roles/project-sub-agent/ROLE.md",
+        "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "evidence/manager-bootstrap/settings.json",
+            "sha256": "cf5da99fccad8bd60cb3c4808bd136a683a7cd7fd38347ed11a738d04f73d046"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "state": "completed"
+    },
+    {
+      "assignment_id": "wdyl-manager",
+      "function": "manager",
+      "native_id": "/root/native_learning_manager",
+      "role": {
+        "agents_path": "Roles/task-manager/AGENTS.md",
+        "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+        "catalog": {
+          "path": "evidence/manager-bootstrap/role-catalog.json",
+          "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397"
+        },
+        "name": "task-manager",
+        "role_path": "Roles/task-manager/ROLE.md",
+        "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "evidence/manager-bootstrap/settings.json",
+            "sha256": "cf5da99fccad8bd60cb3c4808bd136a683a7cd7fd38347ed11a738d04f73d046"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "state": "active"
+    }
+  ],
+  "observed_at": "2026-09-09T06:48:18.085308+00:00",
+  "observed_failures": [
+    {
+      "detail": "Material packet build rejected while a solver was unreconciled: packet_dispatch_started.",
+      "kind": "expected_negative_control"
+    },
+    {
+      "detail": "Same completed publication payload with its obsolete Task grant rejected task_changed; note, journal and Task hashes unchanged.",
+      "kind": "optional_retry"
+    },
+    {
+      "detail": "Native solver1 model-capacity error occurred after partial checks. Actual errored object rejected ORCH_FIELDS by installed Task helper. Parent explicitly authorized one continuation of the unchanged active lease; final current candidate completed with prior evidence preserved. No general errored-state recovery or assignment.resume was claimed.",
+      "kind": "runtime_and_compatibility"
+    },
+    {
+      "detail": "One post-publication inspection used the wrong lexical-result key; receipt was already complete. Reopened actual state and corrected inspection without capture or Task event replay. Senior retained its corrected invalid-path and syntax invocations in checks.json.",
+      "kind": "verification_harness_correction"
+    }
+  ],
+  "orchestration_stage": "finished",
+  "preservation": {
+    "evidence": {
+      "path": "Verification/manager/final-preservation-and-retrieval.json",
+      "sha256": "4897fab24d784c6088a2a26702a7e2fde86027b5aa9d93c6a02dc7d2aaa36ac0"
+    },
+    "existing_memory_records_and_governance_unchanged": true,
+    "fixture_implementation_performed": false,
+    "original_protected_files": 46,
+    "status": "passed"
+  },
+  "project_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/what-did-you-learn/fixtures/native-depot/Projects/Learning-Lab",
+  "report": {
+    "path": "Verification/manager/result.md",
+    "sha256": "5134999d3e14fc12471ecc34effcc8bcb66056826fe0e85f76c271b8fc7af9fc"
+  },
+  "revision": 49,
+  "schema_version": 1,
+  "sequence": {
+    "accepted_senior_revision": 44,
+    "assignment_resume_events": 0,
+    "both_initial_launches_recorded_revision": 11,
+    "both_same_id_input_bindings_committed_revision": 26,
+    "execution_finished_revision": 48,
+    "explicit_active_lease_continuation_response_revision": 33,
+    "final_checkpoint_registered_revision": 47,
+    "first_candidate_import_revision": 14,
+    "manager_activated_revision": 4,
+    "material_subtask_revision": 24,
+    "subtask_verified_revision": 46,
+    "terminal_completed_revision": 49,
+    "terminal_events_replayed": false,
+    "truthful_post_continuation_running_revision": 34
+  },
+  "status": "completed",
+  "task": {
+    "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/task.json",
+    "sha256": "bbae2454ed8e9ffc3400071179d135c8e7069038eecbee8fc30e1d8937896f40"
+  },
+  "task_id": "TASK-20260908-4051880A",
+  "terminal_response": {
+    "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/responses/Task-Response-0048-2026-09-09T00-46-41-06-00.md",
+    "sha256": "f00bbe28e3019ce607fdbd4a388f089e4fd3526688e2276250df872847fa46df"
+  },
+  "terminal_response_count": 1,
+  "terminal_response_id": "RESP-0048",
+  "writer": "/root/native_learning_manager"
+}

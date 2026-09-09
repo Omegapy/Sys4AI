@@ -2,7 +2,7 @@
 name: init-new-project
 description: Create or prepare a selected Sys4AI project using Template governance assets, preserved project content and factual registration.
 metadata:
-  version: 8.0.0
+  version: 9.0.0
 ---
 
 # Initialize a Sys4AI project
@@ -25,9 +25,9 @@ are rejected. There is no caller-controlled depot or Template override.
 
 Every starter input comes from the registered `Sys4AI-Template-Project`: its
 schema-2 `.template/baseline-assets.json`, README renderer, soul, complete skill
-and role packages, and selected reference assets. The eight required skills are
+and role packages, and selected reference assets. The nine required skills are
 `agent-task`, `communication`, `init-new-project`, `manage-subagent-roles`, `task`,
-`memory`, `to-implementation-plan` and `to-trd`. The `project-sub-agent` and `task-manager` pairs and a validated `Roles/INDEX.md`
+`memory`, `to-implementation-plan`, `to-trd` and `what-did-you-learn`. The `project-sub-agent` and `task-manager` pairs and a validated `Roles/INDEX.md`
 are required for new projects. The initializer reads the Template and does not refresh it.
 
 The memory starters are `memory.yaml`, `MEMORY/README.md`, the complete memory
@@ -103,10 +103,43 @@ Version 3 deliberately removes the former `--principal-id`, `--dataset-id` and
 `--artifact-receipt` arguments and their Python API parameters. They are rejected,
 not ignored. The starter policy has no optional root guide or runtime bundle.
 
+## Learning setup and selected adoption
+
+New setup and first preparation require the complete local learning skill and
+`reference-assets/LEARNING-depo/` contract inventory. Existing packages are
+preserved whole and assessed with exact missing/incompatible-resource diagnostics.
+For a first memory binding only, a missing stable completion link may be appended
+to `AGENTS.md` before its destination-local authority hash is computed. Preserve
+already-bound governance and configuration; report unavailable shared capability
+when its route is incompatible.
+
+An earlier completed setup receives learning only through an explicitly selected
+`prepare-existing --adopt-module what-did-you-learn` request with the same exact
+identity/destination arguments. Optional `--refresh-dependency memory` selects
+whole memory skill and contract packages only when their full current inventory
+matches completed receipt-owned evidence. Preserve custom/incomplete dependencies,
+configuration, capture off and memory history. Missing empty capability may be
+installed with new local provenance; do not rewrite the original setup contract.
+
+Use `assess-learning --destination ABSOLUTE_PROJECT_PATH` for read-only current
+capability. It separates manual/shared interfaces, actual capture choice,
+publication binding/scope and optional backend status. Publication always needs
+a current exact operation grant and owner checks. Backend status is never a
+successful runtime check. Unknown resolver/configuration inspector bytes are
+preserved without execution instead of being trusted for a read-only claim.
+
+Module operations are nested in the existing receipt's `module_adoptions` with
+frozen source/target hashes and archived earlier receipts. Finish a partial base
+setup first. Resume a partial module with its exact module/dependency selection;
+changed inputs or conflicting edits prevent replay. Ordinary reruns acquire no
+new edition; equivalent completed module requests preserve later project edits
+and verify current capability without an implicit package refresh.
+
 ## Completion and receipts
 
 The durable receipt is `control_records/project-setup.json`, schema version 1,
-with setup contract `governance-starter-v6`. Edition v6 defaults automatic
+with setup contract `governance-starter-v7`. Edition v7 adds the learning module;
+memory remains supported for v5-v7 and capture for v6-v7. Edition v6 defaults automatic
 capture on and binds the destination's own Director for reviewed memory writes.
 The `memory_capture` result reports the actual current setting and readiness.
 Edition v5 added memory starters and
@@ -116,7 +149,7 @@ original complete config and collections; `current_memory` records the latest
 observation. Missing resources inside an existing memory collection use
 `skipped-existing-package`, retaining every Template source entry.
 
-Editions v4, v5 and v6 require the license trio
+Editions v4, v5, v6 and v7 require the license trio
 and records the original `preserved_licenses` inventory (empty when adopting
 the trio) separately from `current_licenses` observed during verification.
 Entries for absent companions use `skipped-existing-license`; every Template
@@ -144,7 +177,7 @@ resource is identified explicitly; copied Template bytes are not claimed for it.
 The receipt must account for every source destination in both directions:
 adopted files match `owned_files`, preserved files match `preserved_files`, and
 both maps match the source adoption hashes. Only explicitly skipped resources
-inside an existing package, nonempty Task tree, or a v4/v5/v6 preserved licensing
+inside an existing package, nonempty Task tree, or a v4/v5/v6/v7 preserved licensing
 system may be absent from both maps.
 Standalone starters and the required source inventory cannot be omitted.
 

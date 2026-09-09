@@ -7,13 +7,13 @@ starters only from the registered Template, specializes project identity,
 maintains factual registration and verifies local files.
 
 Both routes preserve existing project documents, packages, Tasks, configuration,
-data and repository metadata. New projects receive eight complete skill packages
+data and repository metadata. New projects receive nine complete skill packages
 and the generic and task-manager roles with a generated index. The helper does not create an environment, install software
 or contact a service. It uses Git only for read-only observations when a child
 repository already exists.
 
 The [receipt schema](assets/initialization-receipt.schema.json) defines schema-1
-`governance-starter-v6` receipts at `control_records/project-setup.json`. Source
+`governance-starter-v7` receipts at `control_records/project-setup.json`. Source
 provenance, original adoption hashes and current observed hashes have separate
 fields. Partial asset adoption resumes only against the same source inventory
 and unchanged target bytes. Completed reruns preserve project edits and observe
@@ -21,6 +21,66 @@ current files and registration. Receipts from earlier setup tools are untouched.
 Receipt validation binds every source adoption decision to the exact owned or
 preserved file inventory. An omitted entry, changed adoption digest, contradictory
 source decision or unsupported skipped starter rejects a rerun before mutation.
+
+Version 9 adds the `what-did-you-learn` module through contract v7. Memory
+features remain explicit for v5-v7 and automatic capture for v6-v7. New projects
+and first preparation receive the complete thin skill and five declared assets
+under `reference-assets/LEARNING-depo/`. The source manifest, local references,
+supported memory interfaces and shared completion route must pass preflight.
+Existing custom module and memory packages remain whole. An incomplete preserved
+capability is reported with its exact resource diagnostics.
+
+Inspect current capability without changing files or contacting a backend:
+
+```bash
+python3 .agents/skills/init-new-project/scripts/init_new_project.py \
+  assess-learning --destination /absolute/depot/Projects/Selected
+```
+
+The result separates `manual_review`, `shared_automatic_checkpoint`, the actual
+capture preference, current Director binding and `authorized_publication`.
+`requires-current-operation-grant` means the memory helper must still check the
+exact operation, actor, configured path scope and current Task owner. It is not
+an authorization to save. Backend status is `disabled` or
+`configured-not-verified`; setup never initializes or contacts one. The three
+pure resolver/configuration inspectors are pinned to this initializer's reviewed
+version. Unknown customized inspector bytes remain untouched and are rejected
+before execution; other compatible project resources may remain customized.
+
+For an exact project whose completed receipt predates learning, select adoption:
+
+```bash
+python3 .agents/skills/init-new-project/scripts/init_new_project.py \
+  prepare-existing --destination /absolute/depot/Projects/Selected \
+  --project-id selected --project-name Selected --purpose "Project purpose" \
+  --adopt-module what-did-you-learn
+```
+
+Add `--refresh-dependency memory` only when explicitly selecting a complete
+memory skill and contract-package refresh. The helper refreshes an existing
+package only when its entire file and directory inventory matches completed
+receipt-owned provenance. It removes only retired owned resources. A customized
+or incomplete dependency stays whole and receives a precise scoped-adoption
+requirement; matching filenames never establish ownership. Existing `memory.yaml`,
+capture off, notes, grants, history and backend data remain project-owned.
+A pre-memory project can receive the selected empty memory capability and its
+own initial authority. If needed, the minimal stable completion link is appended
+to its governing instructions before that first local hash binding. An existing
+binding is preserved, including any incompatible completion route.
+
+Selected operations live in `module_adoptions` inside the existing receipt.
+They retain the original base contract, source/owned/preserved inventories and
+content-addressed receipt history. Each records module/version identity, exact
+Template sources, package decisions, frozen before/after hashes, target scope,
+checks and current capability. Partial operation status remains inside that
+entry; a failed CLI result also distinguishes `base_setup_status`.
+Recover unfinished base setup before adoption. Recover an interrupted module
+with the exact same module and dependency arguments, frozen Template inputs and
+expected before/after target bytes. Source drift, conflicting edits or active
+project/Template locks refuse unsafe continuation. Completed repeated module
+requests verify current files and capability, preserve subsequent project edits,
+perform no implicit refresh and add no registration. Ordinary setup reruns keep
+the original edition and do not discover a new module.
 
 Version 8 enables automatic memory capture by default through contract v6, for
 new projects and the first memory installation into an existing project. It
@@ -97,7 +157,7 @@ PYTHONDONTWRITEBYTECODE=1 GIT_OPTIONAL_LOCKS=0 \
 
 The standard-library suite uses disposable depot fixtures. It exercises memory
 identity/path specialization, empty starters, complete memory preservation,
-missing memory sources, on/off capture, post-setup notices, v1-v6 receipt recovery, licensing
+missing memory sources, on/off capture, post-setup notices, v1-v7 receipt recovery, selected module recovery, licensing
 adoption, whole-system preservation, earlier receipt editions, create,
 manual-copy preparation, existing customization, identity and registry conflicts,
 source drift, symlink/hardlink rejection, atomic writes, interrupted recovery,

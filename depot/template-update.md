@@ -28,14 +28,17 @@ factual inventory and does not control the update mapping.
 | Initializer policy and README renderer | `.template/`, also retained in its skill package |
 | `MEMORY-depo/starter/MEMORY/README.md` and `starter/memory.yaml` | Empty active `MEMORY/README.md` and neutral `memory.yaml` |
 | Remaining `MEMORY-depo/` contracts, schemas, profiles and inactive examples | `reference-assets/MEMORY-depo/` |
+| `LEARNING-depo/` policy, review contract, manifest and lesson-body assets | `reference-assets/LEARNING-depo/`, using the ordinary collection mapping |
+| `SKILLS-depo/what-did-you-learn/` | `.agents/skills/what-did-you-learn/`, using ordinary skill discovery |
 | Other regular files in the remaining `*-depo` collections | `reference-assets/<collection>/`, preserving their relative paths |
 
 `overrides` place a file at its active template path instead of the default
 reference location. `mirrors` add a second destination. Add an explicit mapping
 when new guidance should become an active root file or role bundle. New skills
 are discovered automatically without adding a mapping. Retain a complete skill
-package with valid metadata before publishing it. The six governance skills
-remain required dependencies; extra skills can be added and removed.
+package with valid metadata before publishing it. The updater retains six
+governance dependencies. Initializer editions additionally require their declared
+capabilities, so coordinate removals with the starter contract and its checks.
 
 The Template's schema-2 policy selects static starter files and bounded trees.
 Skill and role trees are discovered dynamically. `.template/` controls are read
@@ -50,6 +53,14 @@ is preserved as a whole; missing companions are explicitly skipped instead of
 combining systems. Earlier setup receipts retain their original edition.
 
 ## Check or update now
+
+Initializer edition v7 requires the learning skill and the module's complete
+declared resource inventory. Its preflight verifies memory interfaces and the
+shared completion route; the Template contract tests also check neutral memory
+and matching local resources. Keep learned notes, project grants and runtime
+evidence outside reusable collections. Existing projects acquire this capability
+only through selected adoption. Ordinary setup reruns retain their original
+edition. No extra mapping override is needed for the learning module.
 
 The updater validates the role pairs with frozen role-helper bytes in a
 disposable tree and generates `Roles/INDEX.md` for their destination paths.

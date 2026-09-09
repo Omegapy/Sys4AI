@@ -1,0 +1,242 @@
+{
+  "status": "passed",
+  "layer": "helper and contract checks; no native identity inferred",
+  "current_affected_distinct_tests": 48,
+  "results": [
+    {
+      "path": "Verification/what-did-you-learn/learning-final-checks.json",
+      "sha256": "2a8e493429529e7e0e77e2622440d3bbb6e7984aafdbb0805c8b44bf4c95e062",
+      "result": [
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -m unittest discover -s SKILLS-depo/what-did-you-learn/tests -p 'test_*.py' -v",
+          "exit_code": 0,
+          "tests": 11
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -m unittest discover -s SKILLS-depo/memory/tests -p test_learning_integration.py -v",
+          "exit_code": 0,
+          "tests": 10
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -m unittest discover -s SKILLS-depo/memory/tests -p test_automatic_capture.py -v",
+          "exit_code": 0,
+          "tests": 5
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -m unittest discover -s SKILLS-depo/memory/tests -p test_publication.py -v",
+          "exit_code": 0,
+          "tests": 10
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -m unittest discover -s SKILLS-depo/memory/tests -p test_recovery.py -v",
+          "exit_code": 0,
+          "tests": 5
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -m unittest discover -s SKILLS-depo/memory/tests -p test_task_integration.py -v",
+          "exit_code": 0,
+          "tests": 6
+        }
+      ]
+    },
+    {
+      "path": "Verification/what-did-you-learn/learning-companion-discovery-checks.json",
+      "sha256": "e1303ac96ff9b162b8bc50106073983554711198250743f5d24483a7db63ae25",
+      "result": [
+        {
+          "case": "paired_reusable_source",
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/tests -p test_learning_integration.py -v",
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "tests": 11,
+          "skipped": 0,
+          "expected_diagnostic": null,
+          "passed": true
+        },
+        {
+          "case": "memory_only_installed",
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp9dl1jdg4/installed/.agents/skills/memory/tests -p test_learning_integration.py -v",
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "tests": 11,
+          "skipped": 10,
+          "expected_diagnostic": null,
+          "passed": true
+        },
+        {
+          "case": "module_only_partial",
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp9dl1jdg4/installed/.agents/skills/memory/tests -p test_learning_integration.py -v",
+          "exit_code": 1,
+          "expected_exit_code": 1,
+          "tests": 1,
+          "skipped": 0,
+          "expected_diagnostic": "Partial learning companion installation",
+          "passed": true
+        },
+        {
+          "case": "skill_only_partial",
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp9dl1jdg4/installed/.agents/skills/memory/tests -p test_learning_integration.py -v",
+          "exit_code": 1,
+          "expected_exit_code": 1,
+          "tests": 1,
+          "skipped": 0,
+          "expected_diagnostic": "Partial learning companion installation",
+          "passed": true
+        },
+        {
+          "case": "broken_module_link",
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp9dl1jdg4/installed/.agents/skills/memory/tests -p test_learning_integration.py -v",
+          "exit_code": 1,
+          "expected_exit_code": 1,
+          "tests": 1,
+          "skipped": 0,
+          "expected_diagnostic": "Partial learning companion installation",
+          "passed": true
+        },
+        {
+          "case": "paired_installed",
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp9dl1jdg4/installed/.agents/skills/memory/tests -p test_learning_integration.py -v",
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "tests": 11,
+          "skipped": 0,
+          "expected_diagnostic": null,
+          "passed": true
+        },
+        {
+          "case": "incompatible_module_version",
+          "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp9dl1jdg4/installed/.agents/skills/memory/tests -p test_learning_integration.py -v",
+          "exit_code": 1,
+          "expected_exit_code": 1,
+          "tests": 1,
+          "skipped": 0,
+          "expected_diagnostic": "Incompatible learning companion installation",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "Verification/what-did-you-learn/installed-memory.json",
+      "sha256": "98033c47b55e12e939293e112bc17218b9dbf417461a8e43ada26650f8977522",
+      "result": {
+        "group": "memory",
+        "status": "passed",
+        "runs": [
+          {
+            "command": [
+              "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+              "-B",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              ".agents/skills/what-did-you-learn/tests",
+              "-p",
+              "test_*.py",
+              "-v"
+            ],
+            "exit_code": 0,
+            "observed_at": "2026-09-09T05:38:18.866586+00:00",
+            "tests_run": 11,
+            "skipped": 0
+          },
+          {
+            "command": [
+              "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+              "-B",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              ".agents/skills/memory/tests",
+              "-p",
+              "test_learning_integration.py",
+              "-v"
+            ],
+            "exit_code": 0,
+            "observed_at": "2026-09-09T05:38:19.848951+00:00",
+            "tests_run": 11,
+            "skipped": 0
+          },
+          {
+            "command": [
+              "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+              "-B",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              ".agents/skills/memory/tests",
+              "-p",
+              "test_automatic_capture.py",
+              "-v"
+            ],
+            "exit_code": 0,
+            "observed_at": "2026-09-09T05:38:20.200427+00:00",
+            "tests_run": 5,
+            "skipped": 0
+          },
+          {
+            "command": [
+              "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+              "-B",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              ".agents/skills/memory/tests",
+              "-p",
+              "test_publication.py",
+              "-v"
+            ],
+            "exit_code": 0,
+            "observed_at": "2026-09-09T05:38:21.239052+00:00",
+            "tests_run": 10,
+            "skipped": 0
+          },
+          {
+            "command": [
+              "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+              "-B",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              ".agents/skills/memory/tests",
+              "-p",
+              "test_recovery.py",
+              "-v"
+            ],
+            "exit_code": 0,
+            "observed_at": "2026-09-09T05:38:22.521441+00:00",
+            "tests_run": 5,
+            "skipped": 0
+          },
+          {
+            "command": [
+              "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+              "-B",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              ".agents/skills/memory/tests",
+              "-p",
+              "test_task_integration.py",
+              "-v"
+            ],
+            "exit_code": 0,
+            "observed_at": "2026-09-09T05:38:27.313390+00:00",
+            "tests_run": 6,
+            "skipped": 0
+          }
+        ],
+        "log": "Verification/what-did-you-learn/installed-memory.log"
+      }
+    }
+  ],
+  "initial_failures_retained": [
+    "learning-initial-test-failures.log",
+    "initializer-check-history.md"
+  ]
+}

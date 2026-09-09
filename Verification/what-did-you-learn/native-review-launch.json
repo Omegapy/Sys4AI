@@ -1,0 +1,52 @@
+{
+  "observed_at": "2026-09-09T05:42:27.065237+00:00",
+  "launch": {
+    "tool": "collaboration.spawn_agent",
+    "result": {
+      "task_name": "/root/native_review"
+    }
+  },
+  "roster": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/initializer_learning",
+          "agent_status": "completed"
+        },
+        {
+          "agent_name": "/root/learning_workflow",
+          "agent_status": "completed"
+        },
+        {
+          "agent_name": "/root/native_review",
+          "agent_status": "running"
+        }
+      ]
+    }
+  },
+  "settings": {
+    "mode": "verified_inheritance",
+    "fork_turns": "all",
+    "overrides": null,
+    "evidence": "Native spawn_agent full-history tool guarantee; current root configured defaults previously checked."
+  },
+  "role_catalog": "native-review-role-catalog.json",
+  "fit": {
+    "objective": "Read-only learning review of controlled local evidence",
+    "reads": [
+      "local governance",
+      "context",
+      "fixture",
+      "evidence",
+      "installed learning and memory contracts"
+    ],
+    "writes": [],
+    "rationale": "Valid generic role supports focused analysis without manager or publication scope",
+    "stop": "Return concise evidence; preserve all bytes and mtimes"
+  }
+}

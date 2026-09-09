@@ -107,3 +107,27 @@ the empty capability, defaults automatic capture on and binds the destination
 Director to its local governance. It records copied, specialized or preserved
 assets and reports the setting with an opt-out after completion. Existing
 choices and v1-v5 receipt editions retain their original adoption evidence.
+
+## Learning capability
+
+Initializer edition v7 adds the complete `what-did-you-learn` skill and
+`reference-assets/LEARNING-depo/` resources. Memory remains supported for v5-v7
+and automatic capture for v6-v7. The module supplies learning review and
+improvement disposition through the existing memory completion reference;
+record schema, publication, retrieval and recovery remain owned by memory.
+Canonical learned records remain project-local in `MEMORY/`.
+
+Selected prior-edition adoption uses `prepare-existing --adopt-module
+what-did-you-learn`. Optional `--refresh-dependency memory` requires a complete
+unchanged receipt-owned dependency package. The existing setup receipt gains
+validated `module_adoptions`, preserving its original base fields and
+content-hashed history. Existing configuration, capture off, bound governance,
+customizations and notes remain intact. First memory binding may add its missing
+stable completion link before local authority hashes are computed.
+
+The standard-library read-only assessment separates interface capability,
+capture preference, current binding, required operation grants and optional
+backend status. Unknown customized inspectors are preserved without execution.
+No setup or lookup installs a backend, starts a service, records transcripts,
+adds runtime hooks or provisions a model. Inspect the installed learning and
+initializer contracts for supported commands and exact recovery boundaries.

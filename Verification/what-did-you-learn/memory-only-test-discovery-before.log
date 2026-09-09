@@ -1,0 +1,20 @@
+E
+======================================================================
+ERROR: test_learning_integration (unittest.loader._FailedTest.test_learning_integration)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_learning_integration
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 396, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 339, in _get_module_from_name
+    __import__(name)
+  File "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpq7vsiymm/memory-only/.agents/skills/memory/tests/test_learning_integration.py", line 30, in <module>
+    from learning_contract import resolve
+ModuleNotFoundError: No module named 'learning_contract'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

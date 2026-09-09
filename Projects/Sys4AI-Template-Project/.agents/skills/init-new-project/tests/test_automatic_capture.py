@@ -26,11 +26,12 @@ class AutomaticCaptureEditionTests(unittest.TestCase):
         report = self.run_setup(mode="prepare-existing")
         self.assertEqual("on", report["memory_capture"]["status"])
         self.assertIsNotNone(report["memory_capture"]["opt_out_question"])
-        self.assertEqual(raw, (self.target / "AGENTS.md").read_bytes())
+        final_governance = raw + self.helper.completion_link()
+        self.assertEqual(final_governance, (self.target / "AGENTS.md").read_bytes())
         config = json.loads((self.target / "memory.yaml").read_text())
         self.assertTrue(config["integration"]["automatic_capture"])
         authority = {ref["path"]: ref["sha256"] for ref in config["publication"]["director"]["authority"]}
-        self.assertEqual(self.helper.sha(raw), authority["AGENTS.md"])
+        self.assertEqual(self.helper.sha(final_governance), authority["AGENTS.md"])
         self.assertEqual(["MEMORY", "control_records/memory", ".sys4ai/memory"], config["publication"]["director"]["scope"])
 
     def test_opt_out_survives_completed_setup_rerun_and_preserves_notes(self):
@@ -103,6 +104,7 @@ class AutomaticCaptureEditionTests(unittest.TestCase):
 
     def test_v5_receipt_recovers_and_keeps_original_off_configuration(self):
         template = self.root / self.helper.TEMPLATE
+        fixture.remove_learning_edition(template)
         config_path = template / "memory.yaml"; current = config_path.read_bytes()
         config = json.loads(current); config["integration"]["automatic_capture"] = False
         config_path.write_bytes(self.helper.encoded(config))

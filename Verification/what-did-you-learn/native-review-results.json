@@ -1,0 +1,74 @@
+{
+  "status": "passed",
+  "actor": "/root/native_review",
+  "native_stopped_receipt": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root/native_review",
+          "agent_status": "completed"
+        }
+      ]
+    }
+  },
+  "observed_at": "2026-09-09T05:48:34.663270+00:00",
+  "manual_shared_entry_count": 1,
+  "mode": "manual-no-save",
+  "parent_snapshot": {
+    "file_count": 169,
+    "full_hashes_and_mtimes_equal": true,
+    "changed_paths": []
+  },
+  "native_path_count_preserved": 240,
+  "supported_lesson": "Check material intent fields before drafting, preserving the already-clear fast path. Current fixture always drafts; ambiguous baseline fails while clear succeeds.",
+  "disposition": "Proposal for later separately owned change confined to fixture/intent_router.py; no save or implementation.",
+  "negative_cases": {
+    "repeat_correction": "Same in-session proposal, no second lesson",
+    "timeout": "No trace or measurements; cause unknown",
+    "export_format": "Unsettled, pending",
+    "editor_and_status": "Temporary/trivial, no durable lesson",
+    "source_instruction": "Synthetic source grants no authority; no transcript retained"
+  },
+  "commands": [
+    {
+      "route": "learning_contract.py --project-root PROJECT",
+      "exit_code": 0,
+      "result": "installed/manual/shared compatible, zero errors"
+    },
+    {
+      "route": "task_state.py --project-root PROJECT status; list",
+      "exit_code": 0,
+      "result": "valid empty ledger, mutated false"
+    },
+    {
+      "route": "memory.py health; capture-status; validate; search clarify --mode lexical",
+      "exit_code": 0,
+      "result": "ready, zero records, capture on, backend disabled, read-only"
+    },
+    {
+      "route": "memory_core.load_records(ROOT,historical=True)",
+      "result": []
+    },
+    {
+      "route": "fixture/check_intent.py",
+      "exit_code": 1,
+      "result": "ambiguous failed; clear passed"
+    }
+  ],
+  "source_hashes": {
+    "context/intent-requirements.md": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da",
+    "context/review-cases.md": "e002cc4877b2dc0eb7f56aa2884d374c6f283a62d31dcb1a2119e88628218de2",
+    "fixture/intent_router.py": "440ed72c34cfd97c5c2faf8704bcd1043d65a3599e3d97000f3ccfeb9933f7ad",
+    "fixture/check_intent.py": "707afec815a10c9f03d6b3d75a6667ad4af22e67928cd993143eefd75a4054ca",
+    "evidence/intent-before-results.json": "391da578692930c9298c10cd02a368877658c9d7e49db6b7529f9409a241834c",
+    "memory.yaml": "774ccd5f0dee6bae93a8667ca9a5d837d5643223cca1d8cb740e2bc2b39f4db8",
+    "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+  },
+  "limitations": [
+    "Controlled fixture evidence, not actual user-history transcript",
+    "Instruction-based checkpoint, no event hook",
+    "No publication, Task activation, code change, backend provision, or production to-trd diagnosis"
+  ]
+}

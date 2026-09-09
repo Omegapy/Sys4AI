@@ -1,0 +1,745 @@
+{
+  "artifact_kind": "senior_synthesis",
+  "baseline": {
+    "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/baseline_cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf.json",
+    "sha256": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf"
+  },
+  "candidate_inputs": [
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-candidate-v2.json",
+      "sha256": "407474624c4a4518ec8508ce224a74c3cab82f60352905cd7dab0d15445caede"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-candidate-v2.json",
+      "sha256": "db26177464c0ec728a9ed8ec4be054cb1cf4b406f534aeae27aaf92f4c628768"
+    }
+  ],
+  "check_inputs": [
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+      "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-checks-v2.json",
+      "sha256": "33ddb7be0acf71f0ada7e77f4c2e00259d4de4e2f3845116b8dbb0677ce7c946"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json",
+      "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6"
+    }
+  ],
+  "coherent_proposal": {
+    "artifact": "fixture/intent_router.py",
+    "cases": [
+      {
+        "condition": "purpose absent; acceptance_criteria non-empty",
+        "expected": {
+          "action": "clarify",
+          "missing": [
+            "purpose"
+          ]
+        },
+        "input": {
+          "acceptance_criteria": [
+            "A readable draft exists"
+          ]
+        }
+      },
+      {
+        "condition": "purpose non-empty; acceptance_criteria absent",
+        "expected": {
+          "action": "clarify",
+          "missing": [
+            "acceptance_criteria"
+          ]
+        },
+        "input": {
+          "purpose": "Create a bounded draft"
+        }
+      },
+      {
+        "condition": "both material fields absent",
+        "expected": {
+          "action": "clarify",
+          "missing": [
+            "purpose",
+            "acceptance_criteria"
+          ]
+        },
+        "input": {}
+      },
+      {
+        "condition": "purpose empty; acceptance_criteria absent (existing ambiguous fixture)",
+        "expected": {
+          "action": "clarify",
+          "missing": [
+            "purpose",
+            "acceptance_criteria"
+          ]
+        },
+        "input": {
+          "purpose": ""
+        }
+      },
+      {
+        "condition": "purpose non-empty; acceptance_criteria present but empty",
+        "expected": {
+          "action": "clarify",
+          "missing": [
+            "acceptance_criteria"
+          ]
+        },
+        "input": {
+          "acceptance_criteria": [],
+          "purpose": "Create a bounded draft"
+        }
+      },
+      {
+        "condition": "both material fields non-empty (existing clear fixture)",
+        "expected": {
+          "action": "draft",
+          "missing": []
+        },
+        "input": {
+          "acceptance_criteria": [
+            "A readable draft exists"
+          ],
+          "purpose": "Create a bounded draft"
+        }
+      }
+    ],
+    "conclusion": "Decide whether material intent is complete before drafting in this fixture. Inspect purpose and acceptance_criteria independently; collect absent or empty material fields in that stable order. Clarify exactly those fields when any are missing, otherwise draft with no missing fields. A present empty acceptance_criteria list is incomplete under the current accepted lifecycle decision.",
+    "disposition": "targeted_improvement_proposal",
+    "historical_rule": "Current lifecycle-v2 and active C3D4E5F6 establish non-empty criteria. Its supersedes link names B2C3D4E5 as the earlier presence-only decision. Preserve history; do not apply the old rule now. Exact predecessor bytes and recovery journals were outside the bound packet and were not opened.",
+    "implementation_status": "proposed_only",
+    "later_benefit_status": "unobserved_by_this_work_unit",
+    "local_diagnosis": "The two-line router returns draft unconditionally and never reads intent. Its source explains both solvers recorded missing-field and empty-criteria failures. The clear result is already correct and must remain so.",
+    "owner": "The separately authorized later native TASK-022 work unit under the responsible Director; the current manager accepts analysis only.",
+    "preservation_boundary": [
+      "route(intent) and action/missing output shape",
+      "Already-clear drafting",
+      "fixture/check_intent.py",
+      "Current and historical requirements/evidence",
+      "Governance, roles and memory configuration",
+      "Canonical memory and all production skills"
+    ],
+    "project_id": "wdyl-lab",
+    "project_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/what-did-you-learn/fixtures/native-depot/Projects/Learning-Lab"
+  },
+  "created_at": "2026-09-09T06:41:55.520038+00:00",
+  "criterion_coverage": [
+    {
+      "coverage": "Inspect both material values in purpose, acceptance_criteria order. Clarify absent or empty values and name exactly those fields; retain draft with an empty missing list for clear input. The current fixtures and both five-case receipts support the bounded diagnosis.",
+      "criterion": "The proposal covers missing purpose, missing acceptance criteria, and already-clear drafting using current intent requirements.",
+      "evidence": [
+        {
+          "path": "context/intent-requirements.md",
+          "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da"
+        },
+        {
+          "path": "fixture/intent_router.py",
+          "sha256": "440ed72c34cfd97c5c2faf8704bcd1043d65a3599e3d97000f3ccfeb9933f7ad"
+        },
+        {
+          "path": "fixture/check_intent.py",
+          "sha256": "707afec815a10c9f03d6b3d75a6667ad4af22e67928cd993143eefd75a4054ca"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+          "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json",
+          "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6"
+        }
+      ],
+      "status": "covered"
+    },
+    {
+      "coverage": "Current design, observed defective code, this proposed change and unobserved later corrected behavior are separate. Only the separate later authorized TASK-022 work unit may implement the router change after accepted-lesson retrieval and current-source checks.",
+      "criterion": "The proposal separates accepted design, observed defective behavior, proposed improvement and later validated reuse with exact evidence and bounded authority.",
+      "evidence": [
+        {
+          "path": "context/intent-requirements.md",
+          "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da"
+        },
+        {
+          "path": "context/lifecycle-v2.md",
+          "sha256": "cf941771d1a9921d2c8ef1501b93a9f8993b54dd1c18556b806d8bac2e3eed7b"
+        },
+        {
+          "path": "context/manager-requirements.md",
+          "sha256": "de919bdcefbf1944011d3ad25cf1a76f0661b96098375c8cd0b94ac92b40a876"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+          "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+          "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json",
+          "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6"
+        }
+      ],
+      "status": "covered"
+    },
+    {
+      "coverage": "Both current candidates and exact check receipts bind to the same round2 packet/baseline. The senior independently validated all three assignments and equal solver contexts. The packet contains only two eligible accepted notes and excludes the current-execution note; solver contexts contain no sibling outputs. The solvers report frozen-only retrieval and no sibling reads. These cooperative checks do not independently prove every earlier native dispatch or isolation event; final native protocol verification remains the manager responsibility.",
+      "criterion": "Each solver uses the identical current frozen memory packet and excludes sibling outputs and unbound new notes.",
+      "evidence": [
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-candidate-v2.json",
+          "sha256": "407474624c4a4518ec8508ce224a74c3cab82f60352905cd7dab0d15445caede"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-candidate-v2.json",
+          "sha256": "db26177464c0ec728a9ed8ec4be054cb1cf4b406f534aeae27aaf92f4c628768"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+          "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-checks-v2.json",
+          "sha256": "33ddb7be0acf71f0ada7e77f4c2e00259d4de4e2f3845116b8dbb0677ce7c946"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+          "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/baseline_cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf.json",
+          "sha256": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf"
+        }
+      ],
+      "status": "covered_with_manager_protocol_boundary"
+    },
+    {
+      "coverage": "A purpose with acceptance_criteria present as [] requires clarify and missing [acceptance_criteria]. Current lifecycle-v2 and active successor C3D4E5F6 establish this rule. Clear non-empty criteria retain draft. The superseded presence-only rule remains historical; predecessor-body retention and recovery completion are not independently verified within these frozen inputs.",
+      "criterion": "The proposal explicitly handles a present but empty acceptance-criteria field using the current accepted lifecycle evidence while preserving the already-clear path and historical decision limits.",
+      "evidence": [
+        {
+          "path": "context/lifecycle-v2.md",
+          "sha256": "cf941771d1a9921d2c8ef1501b93a9f8993b54dd1c18556b806d8bac2e3eed7b"
+        },
+        {
+          "path": "MEMORY/MEM-20260909-C3D4E5F6.md",
+          "sha256": "b4be7e425d4a16314b192a1adc7d2126abe337f7bf8d23de95f97b85906371c9"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json",
+          "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+          "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+        }
+      ],
+      "status": "covered"
+    }
+  ],
+  "current_input_validation": [
+    {
+      "assignment_id": "solver1",
+      "baseline": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf",
+      "mutated": false,
+      "packet": {
+        "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+        "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+      },
+      "round": 2,
+      "status": "bound"
+    },
+    {
+      "assignment_id": "solver2",
+      "baseline": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf",
+      "mutated": false,
+      "packet": {
+        "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+        "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+      },
+      "round": 2,
+      "status": "bound"
+    },
+    {
+      "assignment_id": "senior",
+      "baseline": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf",
+      "mutated": false,
+      "packet": {
+        "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+        "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+      },
+      "round": 2,
+      "status": "bound"
+    }
+  ],
+  "dispositions": {
+    "assumptions": [
+      "The bounded schema is the supplied dictionary with a purpose string and acceptance_criteria list. Absence and demonstrated empty values are material omissions. Arbitrary malformed types, whitespace-only values and substantive quality of non-empty prose have no additional acceptance requirement here.",
+      "The later work unit obtains its current authorized scope and rechecks accepted lessons and sources; this synthesis is not its implementation grant."
+    ],
+    "differences": {
+      "complementary": "Solver1 emphasizes the minimal decision boundary; solver2 makes the evidence and reuse sequence explicit. Combine them into a router-only proposal whose later acceptance requires missing-value correction and preserved clear drafting.",
+      "evidence": "Both current receipts report the same two-case checker result and five focused input/output comparisons. Different snapshot counts reflect different inspected sets (27 versus 32), not conflicting runtime results. Senior checked receipt consistency and current source hashes without rerunning fixture tests.",
+      "exclusive": "No mutually exclusive core commitment remains in the complete round2 candidates. The presence-only alternative is superseded by current accepted lifecycle evidence, not a competing current route.",
+      "scope": "Both restrict implementation to a distinct later work unit and fixture/intent_router.py. Preserve that common narrow scope; senior synthesis authorizes no implementation or publication.",
+      "terminology": "Use targeted improvement proposal. Non-empty means the accepted controlled values have content; presence alone is insufficient. Do not add whitespace normalization, arbitrary type validation or semantic quality scoring."
+    },
+    "interfaces": [
+      "Keep route(intent) and the action/missing object. Clarify returns exact missing names in stable order; draft returns missing: [].",
+      "Keep fixture/check_intent.py unchanged; later validation uses focused calls for the single-field and present-empty cases.",
+      "Keep memory publication, canonical/exact/lexical retrieval, code adoption and later observed behavior as separate evidence-bearing operations. The manager remains the sole current Task writer."
+    ],
+    "omitted": [
+      "Repeated prose and duplicate cases are consolidated into one decision rule and evidence sequence without discarding a substantive contribution.",
+      "A new behavioral memory note is omitted because the frozen accepted intent and lifecycle notes already represent the finding. Confirmation receipts remain supporting Task evidence.",
+      "A broad interview, schema framework, production to-trd fix, unrelated timeout diagnosis and general native errored-state recovery claim lack evidence or authority in this assignment."
+    ],
+    "requirements": [
+      {
+        "coverage": "Inspect both material values in purpose, acceptance_criteria order. Clarify absent or empty values and name exactly those fields; retain draft with an empty missing list for clear input. The current fixtures and both five-case receipts support the bounded diagnosis.",
+        "criterion": "The proposal covers missing purpose, missing acceptance criteria, and already-clear drafting using current intent requirements.",
+        "evidence": [
+          {
+            "path": "context/intent-requirements.md",
+            "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da"
+          },
+          {
+            "path": "fixture/intent_router.py",
+            "sha256": "440ed72c34cfd97c5c2faf8704bcd1043d65a3599e3d97000f3ccfeb9933f7ad"
+          },
+          {
+            "path": "fixture/check_intent.py",
+            "sha256": "707afec815a10c9f03d6b3d75a6667ad4af22e67928cd993143eefd75a4054ca"
+          },
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+            "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+          },
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json",
+            "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6"
+          }
+        ],
+        "status": "covered"
+      },
+      {
+        "coverage": "Current design, observed defective code, this proposed change and unobserved later corrected behavior are separate. Only the separate later authorized TASK-022 work unit may implement the router change after accepted-lesson retrieval and current-source checks.",
+        "criterion": "The proposal separates accepted design, observed defective behavior, proposed improvement and later validated reuse with exact evidence and bounded authority.",
+        "evidence": [
+          {
+            "path": "context/intent-requirements.md",
+            "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da"
+          },
+          {
+            "path": "context/lifecycle-v2.md",
+            "sha256": "cf941771d1a9921d2c8ef1501b93a9f8993b54dd1c18556b806d8bac2e3eed7b"
+          },
+          {
+            "path": "context/manager-requirements.md",
+            "sha256": "de919bdcefbf1944011d3ad25cf1a76f0661b96098375c8cd0b94ac92b40a876"
+          },
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+            "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+          },
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+            "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+          },
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json",
+            "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6"
+          }
+        ],
+        "status": "covered"
+      },
+      {
+        "coverage": "Both current candidates and exact check receipts bind to the same round2 packet/baseline. The senior independently validated all three assignments and equal solver contexts. The packet contains only two eligible accepted notes and excludes the current-execution note; solver contexts contain no sibling outputs. The solvers report frozen-only retrieval and no sibling reads. These cooperative checks do not independently prove every earlier native dispatch or isolation event; final native protocol verification remains the manager responsibility.",
+        "criterion": "Each solver uses the identical current frozen memory packet and excludes sibling outputs and unbound new notes.",
+        "evidence": [
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-candidate-v2.json",
+            "sha256": "407474624c4a4518ec8508ce224a74c3cab82f60352905cd7dab0d15445caede"
+          },
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-candidate-v2.json",
+            "sha256": "db26177464c0ec728a9ed8ec4be054cb1cf4b406f534aeae27aaf92f4c628768"
+          },
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+            "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+          },
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-checks-v2.json",
+            "sha256": "33ddb7be0acf71f0ada7e77f4c2e00259d4de4e2f3845116b8dbb0677ce7c946"
+          },
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+            "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+          },
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/baseline_cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf.json",
+            "sha256": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf"
+          }
+        ],
+        "status": "covered_with_manager_protocol_boundary"
+      },
+      {
+        "coverage": "A purpose with acceptance_criteria present as [] requires clarify and missing [acceptance_criteria]. Current lifecycle-v2 and active successor C3D4E5F6 establish this rule. Clear non-empty criteria retain draft. The superseded presence-only rule remains historical; predecessor-body retention and recovery completion are not independently verified within these frozen inputs.",
+        "criterion": "The proposal explicitly handles a present but empty acceptance-criteria field using the current accepted lifecycle evidence while preserving the already-clear path and historical decision limits.",
+        "evidence": [
+          {
+            "path": "context/lifecycle-v2.md",
+            "sha256": "cf941771d1a9921d2c8ef1501b93a9f8993b54dd1c18556b806d8bac2e3eed7b"
+          },
+          {
+            "path": "MEMORY/MEM-20260909-C3D4E5F6.md",
+            "sha256": "b4be7e425d4a16314b192a1adc7d2126abe337f7bf8d23de95f97b85906371c9"
+          },
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json",
+            "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6"
+          },
+          {
+            "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+            "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+          }
+        ],
+        "status": "covered"
+      }
+    ],
+    "retained": [
+      "From solver1: the smallest deterministic two-field routing rule, exact missing-field names, clear-input fast path and fixed purpose-before-acceptance_criteria order.",
+      "From solver2: separate evidence stages for accepted design, observed failure, proposed code change and later validated reuse; explicit historical predecessor and publication limits.",
+      "From both: present-empty acceptance criteria require clarification under current lifecycle evidence; the local unconditional return explains the reproduced fixture defect; broader schemas and production behavior are outside this finding."
+    ],
+    "risks": [
+      "A presence-only implementation repeats the accepted empty-criteria defect. Blanket clarification regresses the clear-input path.",
+      "Promoting historical advice to current authority, substituting new notes into frozen contexts or treating proposal acceptance as proof of a fix overstates the evidence.",
+      "The manager-reported earlier model-capacity error and active-lease continuation remain a manager-owned native protocol limitation. This synthesis and valid current candidates establish no general production recovery capability."
+    ],
+    "unresolved": [],
+    "verification": [
+      "Senior independently reopened supplied references, checked current versions, validated all three assignments, compared equal solver contexts, performed frozen lexical retrieval, and inspected local module and capture status.",
+      "Exact solver receipts record checker exit 1, ambiguous failure and clear success. All five focused cases agree: four missing/empty cases fail and already-clear passes. These are reviewed solver observations, not tests rerun by the senior.",
+      "The separate later owner must retrieve and recheck accepted lessons and sources, pin router before/after hashes, perform the restricted change, run the unchanged checker and focused cases, and retain separate retrieval/change/behavior receipts. Only later observations support bounded benefit."
+    ]
+  },
+  "evidence_qualification": [
+    {
+      "claim": "The controlled fixture requires missing-field clarification and preserves clear drafting; lifecycle-v2 explicitly adds present-empty criteria. Both eligible notes are active accepted_design records.",
+      "evidence": [
+        {
+          "path": "context/intent-requirements.md",
+          "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da"
+        },
+        {
+          "path": "context/lifecycle-v2.md",
+          "sha256": "cf941771d1a9921d2c8ef1501b93a9f8993b54dd1c18556b806d8bac2e3eed7b"
+        },
+        {
+          "path": "MEMORY/MEM-20260909-A1B2C3D4.md",
+          "sha256": "5f909433809573ce4d88a93c78ab841e794186713737cc7e502c3849f602ffb7"
+        },
+        {
+          "path": "MEMORY/MEM-20260909-C3D4E5F6.md",
+          "sha256": "b4be7e425d4a16314b192a1adc7d2126abe337f7bf8d23de95f97b85906371c9"
+        }
+      ],
+      "limit": "Design establishes required behavior, not implementation or production reliability.",
+      "stage": "accepted_design"
+    },
+    {
+      "claim": "Both supplied solver receipts reproduce the same defective baseline while clear input passes. Senior confirmed current source identity and receipt agreement.",
+      "evidence": [
+        {
+          "path": "fixture/intent_router.py",
+          "sha256": "440ed72c34cfd97c5c2faf8704bcd1043d65a3599e3d97000f3ccfeb9933f7ad"
+        },
+        {
+          "path": "fixture/check_intent.py",
+          "sha256": "707afec815a10c9f03d6b3d75a6667ad4af22e67928cd993143eefd75a4054ca"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+          "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-checks-v2.json",
+          "sha256": "33ddb7be0acf71f0ada7e77f4c2e00259d4de4e2f3845116b8dbb0677ce7c946"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json",
+          "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6"
+        }
+      ],
+      "limit": "Senior did not rerun fixture calls. This is evidence review and source inspection, not a new independent fixture runtime observation.",
+      "stage": "observed_failure"
+    },
+    {
+      "claim": "A required-value check in the single authorized router can satisfy the current cases while preserving its interface.",
+      "evidence": [
+        {
+          "path": "context/intent-requirements.md",
+          "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da"
+        },
+        {
+          "path": "context/lifecycle-v2.md",
+          "sha256": "cf941771d1a9921d2c8ef1501b93a9f8993b54dd1c18556b806d8bac2e3eed7b"
+        },
+        {
+          "path": "context/manager-requirements.md",
+          "sha256": "de919bdcefbf1944011d3ad25cf1a76f0661b96098375c8cd0b94ac92b40a876"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-candidate-v2.json",
+          "sha256": "407474624c4a4518ec8508ce224a74c3cab82f60352905cd7dab0d15445caede"
+        },
+        {
+          "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-candidate-v2.json",
+          "sha256": "db26177464c0ec728a9ed8ec4be054cb1cf4b406f534aeae27aaf92f4c628768"
+        }
+      ],
+      "limit": "This analysis performs no router change or authority expansion.",
+      "stage": "proposed_improvement"
+    },
+    {
+      "claim": "Later reuse starts with accepted-lesson retrieval and current-source checks, followed by the separate authorized change and observed expected outputs.",
+      "evidence": [
+        {
+          "path": "context/intent-requirements.md",
+          "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da"
+        },
+        {
+          "path": "context/manager-requirements.md",
+          "sha256": "de919bdcefbf1944011d3ad25cf1a76f0661b96098375c8cd0b94ac92b40a876"
+        }
+      ],
+      "limit": "No later implementation or corrected runtime is supplied here. Publication, acceptance and static capability do not establish benefit.",
+      "stage": "later_validated_reuse"
+    }
+  ],
+  "identity": {
+    "actor": "/root/native_learning_manager/senior",
+    "assignment_id": "senior",
+    "execution_id": "wdyl-native-manager-001",
+    "function": "senior",
+    "generation": 1,
+    "round": 2,
+    "subtask_id": "intent-analysis",
+    "task_id": "TASK-20260908-4051880A"
+  },
+  "manager_handoff_limits": [
+    "Manager retains final acceptance, exact native launch/rebind sequence verification, lifecycle history/recovery proof, required publication and terminal Task verification.",
+    "Equal bound contexts and solver declarations are cooperative evidence; they do not provide an OS-enforced proof of all prior reads.",
+    "Earlier model-capacity error and active-lease continuation remain manager-owned protocol limitations."
+  ],
+  "objective": "Assess the complete bounded intent-routing problem: clarify missing material purpose or acceptance criteria, preserve already-clear drafting, and state what exact evidence permits safe later reuse.",
+  "observation_strength": "Senior static source/version and consistency checks passed; current bound lexical retrieval was observed. Fixture runtime conclusions are attributed to the two reviewed solver receipts. No implemented fix or end-to-end improvement claimed.",
+  "packet": {
+    "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+    "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+  },
+  "role_reads": {
+    "agents": {
+      "path": "Roles/project-sub-agent/AGENTS.md",
+      "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+    },
+    "role": {
+      "path": "Roles/project-sub-agent/ROLE.md",
+      "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+    },
+    "soul": {
+      "path": "SOUL.md",
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+    }
+  },
+  "schema_version": 1,
+  "settings": "Inherited model and reasoning effort retained without overrides; no nested agents.",
+  "shared_completion_checkpoint": {
+    "accepted_matches": [
+      {
+        "path": "MEMORY/MEM-20260909-A1B2C3D4.md",
+        "sha256": "5f909433809573ce4d88a93c78ab841e794186713737cc7e502c3849f602ffb7"
+      },
+      {
+        "path": "MEMORY/MEM-20260909-C3D4E5F6.md",
+        "sha256": "b4be7e425d4a16314b192a1adc7d2126abe337f7bf8d23de95f97b85906371c9"
+      }
+    ],
+    "capture_status": {
+      "automatic_capture": true,
+      "config_sha256": "774ccd5f0dee6bae93a8667ca9a5d837d5643223cca1d8cb740e2bc2b39f4db8",
+      "message": "Memory automatic capture is on.",
+      "read_only": true,
+      "triggers": [
+        "work-completed",
+        "task-completed",
+        "decision-recorded",
+        "failure-observed"
+      ]
+    },
+    "disposition": "Return this synthesis for manager review. The manager alone evaluates distinct required Task publication under its current grant; do not repeat this behavioral checkpoint or manufacture a note.",
+    "entry": ".agents/skills/memory/references/automatic-capture.md",
+    "entry_count": 1,
+    "limits": "No canonical memory, configuration, Task state or fixture write. Frozen recall excludes unbound notes. Later benefit is separate and unobserved.",
+    "mode": "Substantive senior completion review with proposal-only child authority",
+    "owner": "/root/native_learning_manager",
+    "proposed_notes": [],
+    "publication_attempted": false,
+    "review": "Established owner and bound scope; inspected accepted designs and current source/solver evidence; compared the behavioral finding with both accepted notes; retained a router-only improvement and separate later validation. Additional confirmation supports existing lessons, not a new durable identity.",
+    "review_result": "no_new_durable_lesson_semantically_already_represented"
+  },
+  "source_versions": [
+    {
+      "path": ".agents/skills/communication/SKILL.md",
+      "sha256": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c"
+    },
+    {
+      "path": ".agents/skills/memory/SKILL.md",
+      "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+    },
+    {
+      "path": ".agents/skills/memory/references/automatic-capture.md",
+      "sha256": "b2c112c9052a26786e41caf0c21f6b6b1a827f67fbc004bc9ff646212a22ec27"
+    },
+    {
+      "path": ".agents/skills/memory/references/task-integration.md",
+      "sha256": "1a275a3f6fd4ae943a17ddb9a8bc949e7ac913c5742efa7f66620f5b1e2850a5"
+    },
+    {
+      "path": ".agents/skills/what-did-you-learn/SKILL.md",
+      "sha256": "0b3ed8b0f29cdc39853893ff1c916a97e43c1550b3a7091eb6b4555566214c04"
+    },
+    {
+      "path": ".agents/skills/what-did-you-learn/references/improvement-and-reuse.md",
+      "sha256": "d3d5c9ee0bd1ca68f46c407e305df6b2c28a77408a695998edfc297d21cff9e2"
+    },
+    {
+      "path": ".agents/skills/what-did-you-learn/references/module-resolution.md",
+      "sha256": "697cf0f0f8269988aae970087e5939f85ca631d2e5cc602a97fb70c14b0db5c8"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "fb709c430777c2a4ae5782f82485faf8f0aa533b446400b3bde16cfa895a16a6"
+    },
+    {
+      "path": "MEMORY/MEM-20260909-A1B2C3D4.md",
+      "sha256": "5f909433809573ce4d88a93c78ab841e794186713737cc7e502c3849f602ffb7"
+    },
+    {
+      "path": "MEMORY/MEM-20260909-C3D4E5F6.md",
+      "sha256": "b4be7e425d4a16314b192a1adc7d2126abe337f7bf8d23de95f97b85906371c9"
+    },
+    {
+      "path": "ROLE.md",
+      "sha256": "09d8ff13a82a03946d84c8320b9a2192c56bc330a9ab9f4c70c8583cb39e010b"
+    },
+    {
+      "path": "Roles/project-sub-agent/AGENTS.md",
+      "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+    },
+    {
+      "path": "Roles/project-sub-agent/ROLE.md",
+      "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+    },
+    {
+      "path": "SOUL.md",
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+    },
+    {
+      "path": "SPECS.md",
+      "sha256": "ac838b0d4e4a1d7e69654b854e449526d7f218e8bbcdae77edba4505637db8dd"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/baseline_cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf.json",
+      "sha256": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+      "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-candidate-v2.json",
+      "sha256": "407474624c4a4518ec8508ce224a74c3cab82f60352905cd7dab0d15445caede"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+      "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-candidate-v2.json",
+      "sha256": "db26177464c0ec728a9ed8ec4be054cb1cf4b406f534aeae27aaf92f4c628768"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-checks-v2.json",
+      "sha256": "33ddb7be0acf71f0ada7e77f4c2e00259d4de4e2f3845116b8dbb0677ce7c946"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json",
+      "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6"
+    },
+    {
+      "path": "context/intent-requirements.md",
+      "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da"
+    },
+    {
+      "path": "context/lifecycle-v2.md",
+      "sha256": "cf941771d1a9921d2c8ef1501b93a9f8993b54dd1c18556b806d8bac2e3eed7b"
+    },
+    {
+      "path": "context/manager-requirements.md",
+      "sha256": "de919bdcefbf1944011d3ad25cf1a76f0661b96098375c8cd0b94ac92b40a876"
+    },
+    {
+      "path": "coordination/senior-delegation.json",
+      "sha256": "9e1bb4b0ac7b1f7174969d468d9aecbbbd0957964900c8d4ae3bbb08eb4907c5"
+    },
+    {
+      "path": "coordination/senior-native-observation.json",
+      "sha256": "ac7b140f714250c51291129170036e61a99d6b03a188dbd7148bc5d4dc421837"
+    },
+    {
+      "path": "coordination/senior-role-catalog.json",
+      "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397"
+    },
+    {
+      "path": "evidence/intent-before-results.json",
+      "sha256": "391da578692930c9298c10cd02a368877658c9d7e49db6b7529f9409a241834c"
+    },
+    {
+      "path": "evidence/manager-bootstrap/settings.json",
+      "sha256": "cf5da99fccad8bd60cb3c4808bd136a683a7cd7fd38347ed11a738d04f73d046"
+    },
+    {
+      "path": "fixture/check_intent.py",
+      "sha256": "707afec815a10c9f03d6b3d75a6667ad4af22e67928cd993143eefd75a4054ca"
+    },
+    {
+      "path": "fixture/intent_router.py",
+      "sha256": "440ed72c34cfd97c5c2faf8704bcd1043d65a3599e3d97000f3ccfeb9933f7ad"
+    },
+    {
+      "path": "memory.yaml",
+      "sha256": "774ccd5f0dee6bae93a8667ca9a5d837d5643223cca1d8cb740e2bc2b39f4db8"
+    },
+    {
+      "path": "reference-assets/LEARNING-depo/contract.json",
+      "sha256": "239f18c84ad93101ae1e67185f70d0ecabe7a0ef65e6156eb5ab0d9d1539af8d"
+    },
+    {
+      "path": "reference-assets/LEARNING-depo/policy.md",
+      "sha256": "3afa6952837da99a74c4b944b8619e7bfb0a31b35259a80fd1207a207167c41e"
+    },
+    {
+      "path": "reference-assets/LEARNING-depo/review-contract.md",
+      "sha256": "e0f56c546f02583193d1c1aa0838ef20017cad4dca6c6ce5e0debd01e07d3dcb"
+    }
+  ],
+  "status": "complete_for_manager_collection",
+  "stopping_condition": "Complete current synthesis and concise checks only; return paths, hashes, status and actual conflicts."
+}

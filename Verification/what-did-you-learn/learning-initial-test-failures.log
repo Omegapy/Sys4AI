@@ -1,0 +1,53 @@
+Initial observed command:
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/memory/tests -p test_learning_integration.py -v
+
+The following is transcribed from the first tool result, before correcting the
+test's assumption about a rejected write. Unittest suppressed the full fixture
+data diff; no suppressed bytes are reconstructed here.
+
+test_actual_failure_receipt_retains_observation_and_limited_causal_claim (test_learning_integration.LearningIntegrationTests.test_actual_failure_receipt_retains_observation_and_limited_causal_claim) ... FAIL
+test_capture_off_keeps_explicit_authorized_save_and_no_index_maintenance (test_learning_integration.LearningIntegrationTests.test_capture_off_keeps_explicit_authorized_save_and_no_index_maintenance) ... ok
+test_discussion_lesson_body_publication_exact_retrieval_and_operation_retry (test_learning_integration.LearningIntegrationTests.test_discussion_lesson_body_publication_exact_retrieval_and_operation_retry) ... ok
+test_interrupted_lesson_supersession_reports_commit_boundary_and_recovers_without_task_change (test_learning_integration.LearningIntegrationTests.test_interrupted_lesson_supersession_reports_commit_boundary_and_recovers_without_task_change) ... ok
+test_missing_discussion_evidence_and_sensitive_source_cannot_publish (test_learning_integration.LearningIntegrationTests.test_missing_discussion_evidence_and_sensitive_source_cannot_publish) ... FAIL
+test_readiness_manual_review_and_no_lesson_operations_preserve_full_tree (test_learning_integration.LearningIntegrationTests.test_readiness_manual_review_and_no_lesson_operations_preserve_full_tree) ... ok
+test_source_instructions_supply_no_publication_grant (test_learning_integration.LearningIntegrationTests.test_source_instructions_supply_no_publication_grant) ... ok
+test_unknown_learning_fields_and_trigger_are_rejected_without_writes (test_learning_integration.LearningIntegrationTests.test_unknown_learning_fields_and_trigger_are_rejected_without_writes) ... ok
+test_unsettled_proposal_and_child_actor_do_not_enter_active_recall (test_learning_integration.LearningIntegrationTests.test_unsettled_proposal_and_child_actor_do_not_enter_active_recall) ... ok
+
+======================================================================
+FAIL: test_actual_failure_receipt_retains_observation_and_limited_causal_claim (test_learning_integration.LearningIntegrationTests.test_actual_failure_receipt_retains_observation_and_limited_causal_claim)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/tests/test_learning_integration.py", line 162, in test_actual_failure_receipt_retains_observation_and_limited_causal_claim
+    self.assert_no_write(before)
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/tests/test_learning_integration.py", line 83, in assert_no_write
+    self.assertEqual(before, snapshot(self.root))
+AssertionError: {'mem[315840 chars]8890)} != {'mem[315840 chars]8890), '.sys4ai/memory/maintenance/memory.lock[25 chars]347)}
+Diff is 1543366 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_missing_discussion_evidence_and_sensitive_source_cannot_publish (test_learning_integration.LearningIntegrationTests.test_missing_discussion_evidence_and_sensitive_source_cannot_publish)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/tests/test_learning_integration.py", line 203, in test_missing_discussion_evidence_and_sensitive_source_cannot_publish
+    self.assert_no_write(before)
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/tests/test_learning_integration.py", line 83, in assert_no_write
+    self.assertEqual(before, snapshot(self.root))
+AssertionError: {'mem[315840 chars]8065)} != {'mem[315840 chars]8065), '.sys4ai/memory/maintenance/memory.lock[25 chars]148)}
+Diff is 1543366 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.534s
+
+FAILED (failures=2)
+
+Correction rationale:
+The pre-existing publication helper initializes its maintenance lock before
+performing its in-lock evidence validation. A rejected attempted write is not
+the same operation as read-only review. The two review cases now invoke the
+existing read-only validate_publication_evidence operation and compare every
+fixture file's bytes and modification time. A separate new regression exercises
+the attempted write, requires evidence_unqualified, verifies no pending
+transaction or note, preserves every original file, and permits exactly the
+observed new maintenance/memory.lock. No memory implementation was changed.

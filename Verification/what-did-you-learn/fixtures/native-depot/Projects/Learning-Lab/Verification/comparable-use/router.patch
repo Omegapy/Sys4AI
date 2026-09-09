@@ -1,0 +1,8 @@
+--- fixture/intent_router.py.before
++++ fixture/intent_router.py.after
+@@ -1,2 +1,5 @@
+ def route(intent):
++    missing = [field for field in ("purpose", "acceptance_criteria") if not intent.get(field)]
++    if missing:
++        return {"action": "clarify", "missing": missing}
+     return {"action": "draft", "missing": []}

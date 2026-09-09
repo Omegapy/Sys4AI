@@ -1,0 +1,77 @@
+{
+  "candidate_imports_round2_before_both_rebinds": 0,
+  "canonical_sequence": [
+    {
+      "actor": "/root/native_learning_manager",
+      "assignment_id": "solver1",
+      "event_id": "wdyl-1788933882511486000",
+      "kind": "assignment.observe",
+      "revision": 15
+    },
+    {
+      "actor": "/root/native_learning_manager",
+      "assignment_id": "solver2",
+      "event_id": "wdyl-1788934244813008000",
+      "kind": "assignment.observe",
+      "revision": 22
+    },
+    {
+      "actor": "/root/native_learning_manager",
+      "assignment_id": null,
+      "event_id": "wdyl-1788934245287323000",
+      "kind": "subtask.revise",
+      "revision": 24
+    },
+    {
+      "actor": "/root/native_learning_manager",
+      "assignment_id": "solver1",
+      "event_id": "wdyl-1788934301174383000",
+      "kind": "assignment.inputs",
+      "revision": 25
+    },
+    {
+      "actor": "/root/native_learning_manager",
+      "assignment_id": "solver2",
+      "event_id": "wdyl-1788934301370888000",
+      "kind": "assignment.inputs",
+      "revision": 26
+    }
+  ],
+  "current_baseline": {
+    "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/baseline_cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf.json",
+    "sha256": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf"
+  },
+  "current_packet": {
+    "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+    "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+  },
+  "native_actions": [
+    {
+      "accepted": true,
+      "native_id": "/root/native_learning_manager/solver1",
+      "purpose": "Queue exact material context while idle; no wake",
+      "tool": "collaboration.send_message"
+    },
+    {
+      "accepted": true,
+      "native_id": "/root/native_learning_manager/solver2",
+      "purpose": "Queue exact material context while idle; no wake",
+      "tool": "collaboration.send_message"
+    },
+    {
+      "accepted": true,
+      "native_id": "/root/native_learning_manager/solver1",
+      "purpose": "Wake only after both assignment.inputs commits at revisions25/26",
+      "tool": "collaboration.followup_task"
+    },
+    {
+      "accepted": true,
+      "native_id": "/root/native_learning_manager/solver2",
+      "purpose": "Wake only after both assignment.inputs commits at revisions25/26",
+      "tool": "collaboration.followup_task"
+    }
+  ],
+  "observed_at": "2026-09-09T06:12:17.972674+00:00",
+  "same_native_ids_retained": true,
+  "status": "same_native_rebind_dispatched"
+}

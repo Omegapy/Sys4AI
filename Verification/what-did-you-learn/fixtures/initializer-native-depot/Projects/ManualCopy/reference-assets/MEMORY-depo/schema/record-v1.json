@@ -1,0 +1,376 @@
+{
+  "$comment": "Schema describes structural fields. memory_core.validate_record also enforces chronology, identity ownership, lifecycle, placeholders and sensitive-content rules. Publication validates live evidence, current actor authority and exact reviewed bytes. JSON objects are the complete supported YAML representation; no automatic migration.",
+  "$id": "urn:sys4ai:memory:record:1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "publication": {
+            "type": "object"
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "state": {
+            "const": "draft"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "publication": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "handoff"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "claim": {
+            "properties": {
+              "level": {
+                "const": "historical_context"
+              }
+            }
+          },
+          "limitations": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "applicability": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 200,
+      "minItems": 1,
+      "type": "array"
+    },
+    "claim": {
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "enum": [
+            "accepted_design",
+            "cancelled_work",
+            "historical_context",
+            "observed_failure",
+            "performed_work",
+            "verified_outcome"
+          ]
+        },
+        "summary": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "level",
+        "summary"
+      ],
+      "type": "object"
+    },
+    "confidence": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "created": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "id": {
+      "pattern": "^MEM-[0-9]{8}-[A-F0-9]{8}$",
+      "type": "string"
+    },
+    "lifecycle": {
+      "additionalProperties": false,
+      "properties": {
+        "reason": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "superseded_by": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "supersedes": {
+          "items": {
+            "pattern": "^MEM-[0-9]{8}-[A-F0-9]{8}$",
+            "type": "string"
+          },
+          "maxItems": 200,
+          "type": "array"
+        }
+      },
+      "required": [
+        "supersedes",
+        "superseded_by",
+        "reason"
+      ],
+      "type": "object"
+    },
+    "limitations": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 200,
+      "type": "array"
+    },
+    "modified": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "origin": {
+      "additionalProperties": false,
+      "properties": {
+        "execution_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "generation": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "role": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "agents_path": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "agents_sha256": {
+                  "pattern": "^[a-f0-9]{64}$",
+                  "type": "string"
+                },
+                "name": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "role_path": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "role_sha256": {
+                  "pattern": "^[a-f0-9]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "agents_path",
+                "role_path",
+                "agents_sha256",
+                "role_sha256"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "task_id": {
+          "anyOf": [
+            {
+              "pattern": "^TASK-[0-9]{8}-[A-F0-9]{8}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "task_path": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "task_id",
+        "task_path",
+        "execution_id",
+        "generation",
+        "role"
+      ],
+      "type": "object"
+    },
+    "project_id": {
+      "maxLength": 100,
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "type": "string"
+    },
+    "publication": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "actor_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "actor_kind": {
+              "enum": [
+                "director",
+                "manager"
+              ]
+            },
+            "approved_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "operation_id": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "actor_id",
+            "actor_kind",
+            "operation_id",
+            "approved_at"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "sources": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "enum": [
+              "source",
+              "design",
+              "verification"
+            ]
+          },
+          "locator": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "path": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "locator",
+          "kind"
+        ],
+        "type": "object"
+      },
+      "maxItems": 200,
+      "minItems": 1,
+      "type": "array"
+    },
+    "state": {
+      "enum": [
+        "active",
+        "draft",
+        "retracted",
+        "superseded"
+      ]
+    },
+    "title": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "decision",
+        "experiment",
+        "finding",
+        "handoff",
+        "lesson"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "project_id",
+    "type",
+    "title",
+    "state",
+    "created",
+    "modified",
+    "claim",
+    "applicability",
+    "limitations",
+    "confidence",
+    "sources",
+    "origin",
+    "lifecycle",
+    "publication"
+  ],
+  "title": "Sys4AI memory record frontmatter v1",
+  "type": "object"
+}

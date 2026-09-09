@@ -1,0 +1,71 @@
+{
+  "based_on": "context/intent-requirements.md and comparable-use-contract.md",
+  "cases": [
+    {
+      "expected": {
+        "action": "clarify",
+        "missing": [
+          "purpose"
+        ]
+      },
+      "intent": {
+        "acceptance_criteria": [
+          "Observable result"
+        ]
+      },
+      "name": "purpose_absent"
+    },
+    {
+      "expected": {
+        "action": "clarify",
+        "missing": [
+          "purpose"
+        ]
+      },
+      "intent": {
+        "acceptance_criteria": [
+          "Observable result"
+        ],
+        "purpose": ""
+      },
+      "name": "purpose_empty"
+    },
+    {
+      "expected": {
+        "action": "clarify",
+        "missing": [
+          "acceptance_criteria"
+        ]
+      },
+      "intent": {
+        "purpose": "Produce a bounded result"
+      },
+      "name": "criteria_absent"
+    },
+    {
+      "expected": {
+        "action": "clarify",
+        "missing": [
+          "acceptance_criteria"
+        ]
+      },
+      "intent": {
+        "acceptance_criteria": [],
+        "purpose": "Produce a bounded result"
+      },
+      "name": "criteria_empty"
+    },
+    {
+      "expected": {
+        "action": "clarify",
+        "missing": [
+          "purpose",
+          "acceptance_criteria"
+        ]
+      },
+      "intent": {},
+      "name": "both_absent"
+    }
+  ],
+  "specified_before_edit": true
+}

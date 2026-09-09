@@ -35,10 +35,20 @@ Keep Task/execution/role origins null when they do not apply.
 
 Automatic capture defaults on for new installations. Before the final handoff
 of substantive work, follow [automatic capture](references/automatic-capture.md)
-without waiting for a user reminder. Check the current setting and capture only
-useful new, evidence-backed knowledge. This checkpoint uses the same reviewed
-publication safeguards as explicit capture. An explicit opt-out disables the
-checkpoint; it does not disable read-only recall or user-requested publication.
+without waiting for a user reminder. This is the one shared entry for learning
+review and memory completion. When a compatible `what-did-you-learn` module is
+present, it supplies the learning judgment; memory retains persistence and its
+existing memory-only behavior when that module is absent. Settled material
+corrections, accepted decisions, significant failures and verified reusable
+successes use the same bounded procedure, with only fitting supported triggers.
+
+Check the current setting and capture only useful new, evidence-backed knowledge.
+A bare "What did you learn?" request enters that procedure in review-only mode;
+the question supplies no save or project-change authority. A valid review may
+save nothing. Off disables automatic persistence under both skill names while
+retaining explicit review, read-only recall and authorized user-requested
+publication. Do not run independent capture paths or claim guaranteed event
+detection, hooks or background execution.
 
 Workers, solvers, reviewers, seniors and implementers return draft proposals
 through their assigned result artifacts. A proposal is excluded from shared

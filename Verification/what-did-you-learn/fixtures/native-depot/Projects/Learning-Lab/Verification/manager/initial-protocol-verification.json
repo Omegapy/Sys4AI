@@ -1,0 +1,37 @@
+{
+  "artifacts": [
+    {
+      "path": "Verification/manager/initial-dispatch-independence.json",
+      "sha256": "cceaba6403ed48495806e70cb94474f2151e759ba089756373bb60d1d2bc4a89"
+    },
+    {
+      "path": "Verification/manager/solver1-initial-binding.json",
+      "sha256": "5b0cfe0887708c8ab3c8f4fd5f5da9a215e634abf8af14429cf38c57300b6775"
+    },
+    {
+      "path": "Verification/manager/solver2-initial-binding.json",
+      "sha256": "36ce279d86908564560baa11e7955022a9d6e392e38e9bcac8b9ecb825c6390e"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-initial.json",
+      "sha256": "39d64cf8c6fe3a624bc9951142454ba822e0e3e5a2f5271b44a4901874230fa6"
+    }
+  ],
+  "claim_level": "verified_outcome",
+  "command": "Manager directly reopened both canonical assignment contexts after actual native launches, validated each with memory_packet.validate_assignment, and checked initial-dispatch-independence.json plus current exact packet sources.",
+  "details": {
+    "both_packet_bindings": "bound",
+    "initial_candidate_count_at_second_launch": 0,
+    "native_solvers": [
+      "/root/native_learning_manager/solver1",
+      "/root/native_learning_manager/solver2"
+    ],
+    "packet_sha256": "39d64cf8c6fe3a624bc9951142454ba822e0e3e5a2f5271b44a4901874230fa6"
+  },
+  "limitations": [
+    "This receipt verifies native initial dispatch and static frozen packet binding; later material rebind and completed solution acceptance are separate checks."
+  ],
+  "observed_at": "2026-09-09T06:06:56.292182+00:00",
+  "outcome": "passed",
+  "schema_version": 1
+}

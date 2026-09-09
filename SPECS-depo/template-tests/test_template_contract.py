@@ -22,6 +22,7 @@ BASELINE = {
     "to-implementation-plan",
     "to-trd",
     "memory",
+    "what-did-you-learn",
 }
 STARTERS = {
     "AGENTS.md",
@@ -37,6 +38,11 @@ STARTERS = {
     "Tasks/INDEX.md",
     "memory.yaml",
     "MEMORY/README.md",
+    "reference-assets/LEARNING-depo/contract.json",
+    "reference-assets/LEARNING-depo/README.md",
+    "reference-assets/LEARNING-depo/policy.md",
+    "reference-assets/LEARNING-depo/review-contract.md",
+    "reference-assets/LEARNING-depo/assets/lesson-body-template.md",
 }
 EXCLUDED_CHECKOUT_PATHS = {".venv", ".ruff_cache", ".DS_Store"}
 
@@ -159,6 +165,29 @@ class TemplateContractTests(unittest.TestCase):
             self.assertTrue(package)
         self.assertTrue((TEMPLATE / "SOUL.md").is_file())
         # Creation reads this complete template package set, including additions.
+
+    def test_learning_module_is_complete_local_and_neutral(self):
+        module = TEMPLATE / "reference-assets/LEARNING-depo"
+        manifest = json.loads((module / "contract.json").read_text())
+        self.assertEqual("what-did-you-learn", manifest["module_id"])
+        self.assertEqual("1.0.0", manifest["module_version"])
+        self.assertEqual(set(manifest["required_resources"]),
+                         {p.relative_to(module).as_posix() for p in module.rglob("*") if p.is_file()})
+        self.assertEqual({"schema_version", "module_id", "module_version", "required_resources", "skill", "memory"},
+                         set(manifest))
+        for relative in manifest["skill"]["required_resources"]:
+            self.assertTrue((TEMPLATE / ".agents/skills/what-did-you-learn" / relative).is_file(), relative)
+        with self.helper.learning_resolver((TEMPLATE / self.helper.LEARNING_RESOLVER).read_bytes()) as resolver:
+            result = resolver.resolve(TEMPLATE)
+        self.assertEqual([], result["errors"])
+        self.assertTrue(result["capabilities"]["manual_review"])
+        self.assertTrue(result["capabilities"]["shared_automatic_checkpoint"])
+        self.assertEqual("not_assessed", result["capabilities"]["authorized_publication"])
+        self.assertEqual("not_assessed", result["capabilities"]["optional_backend"])
+        config = json.loads((TEMPLATE / "memory.yaml").read_text())
+        self.assertIsNone(config["publication"]["director"])
+        self.assertIsNone(config["project"]["id"])
+        self.assertFalse((TEMPLATE / "control_records/project-setup.json").exists())
 
     def test_starter_policy_uses_template_relative_sources(self):
         self.assertEqual("Projects/Sys4AI-Template-Project", self.allowlist["template"])

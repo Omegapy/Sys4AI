@@ -40,6 +40,7 @@ Sys4AI/
   ROLES-depo/                   reusable role source material
   SPECS-depo/                   reusable project specifications and .gitignore
   LICENSES-depo/                reusable code and document licensing
+  LEARNING-depo/                reusable learning policy, review and lesson assets
   Projects/                     independent project working trees
   depot/
     projects.json               factual workspace project registry
@@ -78,6 +79,7 @@ The template follows its automatic update mapping.
 - `AGENTS-depo/` stores reusable project instruction sources.
 - `ROLES-depo/` stores reusable Director and sub-agent role sources.
 - [LICENSES-depo](./LICENSES-depo/README.md) stores the three-file licensing template.
+- [LEARNING-depo](./LEARNING-depo/README.md) owns learning review and improvement policy; the existing memory capability owns persistence.
 - For reusable project specifications, see [SPECS-depo/SPECS.md](./SPECS-depo/SPECS.md).
 
 These collections own reusable changes and feed the template. Root-specific
@@ -117,8 +119,9 @@ support projects beneath this depot's `Projects/` container.
 
 The helper copies the registered Template's selected starter files, complete
 skill and role packages, reference assets, and `SOUL.md`. It specializes project
-identity and records factual registration. All seven governance and setup
-skills are required; additional complete packages are discovered automatically.
+identity and records factual registration. Edition v7 requires the seven
+governance/setup skills plus memory and what-did-you-learn; additional complete
+packages are discovered automatically.
 It also adopts the Template's three license files when the project has no
 existing license markers. Existing licensing is preserved as a whole, including
 partial or alternatively named sets. Setup reruns retain their original edition.
@@ -214,3 +217,38 @@ search 'query'` for lookup, or replace the search arguments with `health` for
 current readiness. Reads perform no maintenance or provisioning. Canonical
 publication needs the exact current Director/manager grant. New projects receive
 only the empty Template capability; existing products require their own adoption.
+
+## What did you learn?
+
+Ask "What did you learn?" to use the installed
+[learning skill](./.agents/skills/what-did-you-learn/SKILL.md). It reviews relevant
+evidence, states applicability and limits, and identifies contextual recall,
+a targeted improvement or further investigation. The question alone authorizes
+no save or project change; a useful review may find no durable lesson.
+
+Learning and memory use one [shared completion checkpoint](./.agents/skills/memory/references/automatic-capture.md).
+Material settled work is reviewed after verification and before handoff. Actual
+persistence follows the existing capture preference and current owner/grant.
+Capture off prevents automatic persistence while leaving explicit review and
+authorized saves available. This workflow uses instructions and explicit
+checkpoints; it does not provide runtime hooks or background scheduling.
+
+New projects and first preparation receive the module by default in initializer
+edition v7. A previously initialized project retains its original edition until
+the exact destination is selected for module adoption:
+
+```text
+.venv/bin/python .agents/skills/init-new-project/scripts/init_new_project.py prepare-existing \
+  --destination /absolute/depot/Projects/Selected --project-id selected \
+  --project-name Selected --purpose "The existing project purpose" \
+  --adopt-module what-did-you-learn
+```
+
+Use the project's existing identity values. When a compatible older dependency
+needs refresh, explicitly add `--refresh-dependency memory`; only complete,
+unchanged receipt-owned packages qualify. Custom packages, capture preferences
+and learned history are preserved. Read-only `assess-learning --destination PATH`
+reports local capability separately from current publication authority and
+backend readiness. [Initialization and recovery](./.agents/skills/init-new-project/README.md)
+describe the nested `module_adoptions` receipt, exact retry requirements and
+preserved incompatibilities. Ordinary reruns perform no implicit upgrade.

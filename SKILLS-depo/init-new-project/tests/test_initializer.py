@@ -18,7 +18,7 @@ from unittest.mock import patch
 
 SOURCE_SKILL = Path(__file__).resolve().parents[1]
 BASELINE = ("agent-task", "communication", "init-new-project", "manage-subagent-roles",
-            "memory", "task", "to-implementation-plan", "to-trd")
+            "memory", "task", "to-implementation-plan", "to-trd", "what-did-you-learn")
 
 
 def load_helper(skill: Path):
@@ -58,6 +58,9 @@ def fixture_depot(base: Path) -> Path:
     mapped = {destination: source for source, destination in mapping.items()}
     mapped.update({"memory.yaml": "MEMORY-depo/starter/memory.yaml",
                    "MEMORY/README.md": "MEMORY-depo/starter/MEMORY/README.md"})
+    mapped.update({"reference-assets/LEARNING-depo/" + path.relative_to(SOURCE_DEPOT / "LEARNING-depo").as_posix():
+                   path.relative_to(SOURCE_DEPOT).as_posix()
+                   for path in (SOURCE_DEPOT / "LEARNING-depo").rglob("*") if path.is_file()})
     for relative in policy["starter_files"]:
         target = template / relative
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -67,6 +70,7 @@ def fixture_depot(base: Path) -> Path:
     # MEMORY/README.md and memory.yaml copies belong to this Template edition.
     shutil.copytree(SOURCE_DEPOT / "MEMORY-depo", template / "reference-assets/MEMORY-depo",
                     ignore=shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc", "starter"))
+    shutil.copytree(SOURCE_DEPOT / "LEARNING-depo", template / "reference-assets/LEARNING-depo", ignore=ignore, dirs_exist_ok=True)
     for relative, source in mapped.items():
         if relative.startswith(policy["roles"] + "/"):
             target = template / relative
@@ -90,8 +94,20 @@ def fixture_depot(base: Path) -> Path:
     return root
 
 
+def remove_learning_edition(template: Path) -> None:
+    """Remove learning assets when reconstructing an actual earlier Template."""
+    for name in (".agents/skills/what-did-you-learn", "reference-assets/LEARNING-depo"):
+        if (template / name).exists():
+            shutil.rmtree(template / name)
+    policy = template / ".template/baseline-assets.json"
+    data = json.loads(policy.read_text())
+    data["starter_files"] = [name for name in data["starter_files"] if not name.startswith("reference-assets/LEARNING-depo/")]
+    policy.write_text(json.dumps(data, indent=2) + "\n")
+
+
 def remove_memory_edition(template: Path) -> None:
     """Reconstruct a pre-memory Template for a historical receipt fixture."""
+    remove_learning_edition(template)
     for name in (".agents/skills/memory", "reference-assets/MEMORY-depo", "MEMORY"):
         shutil.rmtree(template / name)
     (template / "memory.yaml").unlink()

@@ -1,0 +1,114 @@
+{
+  "assignment_id": "solver1",
+  "context": [
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+      "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+    },
+    {
+      "path": "context/intent-requirements.md",
+      "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da"
+    },
+    {
+      "path": "context/manager-requirements.md",
+      "sha256": "de919bdcefbf1944011d3ad25cf1a76f0661b96098375c8cd0b94ac92b40a876"
+    },
+    {
+      "path": "context/lifecycle-v2.md",
+      "sha256": "cf941771d1a9921d2c8ef1501b93a9f8993b54dd1c18556b806d8bac2e3eed7b"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/baseline_cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf.json",
+      "sha256": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf"
+    }
+  ],
+  "fit": {
+    "authority": "Analysis and assigned artifact only; no shared memory, Task state, fixture, configuration or external writes.",
+    "capabilities": [
+      "bounded analysis",
+      "evidence verification",
+      "frozen source discipline"
+    ],
+    "deliverable": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/work/solver1/candidate.json",
+    "objective": "Assess the complete bounded intent-routing problem: clarify missing material purpose or acceptance criteria, preserve already-clear drafting, and state what exact evidence permits safe later reuse.",
+    "rationale": "The fresh general role explicitly supports this bounded solver1 function; task-manager authority is unnecessary.",
+    "reads": [
+      "SOUL.md",
+      "ROLE.md",
+      "AGENTS.md",
+      "SPECS.md",
+      "Roles/project-sub-agent",
+      ".agents/skills/memory",
+      ".agents/skills/what-did-you-learn",
+      ".agents/skills/communication",
+      "reference-assets/LEARNING-depo",
+      "reference-assets/MEMORY-depo",
+      "memory.yaml",
+      "context/intent-requirements.md",
+      "context/manager-requirements.md",
+      "fixture",
+      "evidence/intent-before-results.json",
+      "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/task.json",
+      "packets/revised.json",
+      "context/lifecycle-v2.md"
+    ],
+    "risk": "Cooperative frozen context and exact evidence versions must remain valid.",
+    "skills": [
+      "memory",
+      "what-did-you-learn"
+    ],
+    "stop": "Return the complete current artifact with path/hash/status only; preserve all other files.",
+    "tools": [
+      "exec_command",
+      "read-only installed memory helpers"
+    ],
+    "writes": [
+      "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/work/solver1"
+    ]
+  },
+  "role": {
+    "agents_path": "Roles/project-sub-agent/AGENTS.md",
+    "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "catalog": {
+      "path": "coordination/solver1-rebind-role-catalog.json",
+      "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397"
+    },
+    "name": "project-sub-agent",
+    "role_path": "Roles/project-sub-agent/ROLE.md",
+    "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+  },
+  "runtime": {
+    "available_slots": 2,
+    "depth": 2,
+    "evidence": [
+      {
+        "path": "coordination/rebind-native-observation.json",
+        "sha256": "ac7b140f714250c51291129170036e61a99d6b03a188dbd7148bc5d4dc421837"
+      },
+      {
+        "path": "evidence/manager-bootstrap/settings.json",
+        "sha256": "cf5da99fccad8bd60cb3c4808bd136a683a7cd7fd38347ed11a738d04f73d046"
+      }
+    ],
+    "tools": [
+      "spawn_agent",
+      "list_agents",
+      "send_message",
+      "followup_task",
+      "interrupt_agent"
+    ]
+  },
+  "settings": {
+    "effort": null,
+    "evidence": [
+      {
+        "path": "evidence/manager-bootstrap/settings.json",
+        "sha256": "cf5da99fccad8bd60cb3c4808bd136a683a7cd7fd38347ed11a738d04f73d046"
+      }
+    ],
+    "mode": "verified_inheritance",
+    "model": null
+  },
+  "slot": "solver1",
+  "subtask_id": "intent-analysis"
+}

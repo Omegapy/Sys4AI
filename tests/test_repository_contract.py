@@ -147,9 +147,11 @@ class RepositoryContractTests(unittest.TestCase):
             "agent-task",
             "communication",
             "manage-subagent-roles",
+            "memory",
             "task",
             "to-implementation-plan",
             "to-trd",
+            "what-did-you-learn",
         }
         source_skills = {
             path.parent.name for path in (ROOT / "SKILLS-depo").glob("*/SKILL.md")
@@ -305,6 +307,14 @@ class RepositoryContractTests(unittest.TestCase):
                 relative = entry["destination"][len(prefix):]
                 self.assertEqual(expected_current.get(relative), entry["before_sha256"])
                 expected_current[relative] = entry["after_sha256"]
+        learning = json.loads((ROOT / "Verification/what-did-you-learn/active-root-adoption.json").read_text())
+        self.assertEqual("PLAN-20260909-2AB7D4CC", learning["plan_id"])
+        self.assertEqual("applied", learning["status"])
+        for entry in learning["entries"]:
+            if entry["destination"].startswith(prefix):
+                relative = entry["destination"][len(prefix):]
+                self.assertEqual(expected_current.get(relative), entry["before_sha256"])
+                expected_current[relative] = entry["after_sha256"]
         self.assertEqual(expected_current, manifest(source))
         self.assertEqual("applied", licensing["status"])
         self.assertEqual(current["initializer_files_sha256"], licensing["previous_initializer_files_sha256"])
@@ -387,6 +397,23 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertIn("explicitly invokes `$to-trd`", agents)
         self.assertIn("native Codex goal", role)
         self.assertTrue((ROOT / "Tasks/INDEX.md").is_file())
+
+    def test_learning_sources_template_and_selected_root_adoption_match(self) -> None:
+        def inventory(folder):
+            return {p.relative_to(folder).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+                    for p in folder.rglob("*") if p.is_file()
+                    and "__pycache__" not in p.parts and p.name != ".DS_Store"}
+        for source, destination in (("LEARNING-depo", "reference-assets/LEARNING-depo"),
+                                    ("SKILLS-depo/what-did-you-learn", ".agents/skills/what-did-you-learn"),
+                                    ("SKILLS-depo/memory", ".agents/skills/memory")):
+            expected = inventory(ROOT / source)
+            self.assertTrue(expected)
+            self.assertEqual(expected, inventory(TEMPLATE / destination))
+            self.assertEqual(expected, inventory(ROOT / destination))
+        baseline = json.loads((ROOT / "Verification/what-did-you-learn/baseline.json").read_text())
+        for relative in ("SOUL.md", "AGENTS.md", "ROLE.md", "memory.yaml", "depot/projects.json"):
+            self.assertEqual(baseline["protected"][relative]["sha256"],
+                             hashlib.sha256((ROOT / relative).read_bytes()).hexdigest())
 
 
 if __name__ == "__main__":

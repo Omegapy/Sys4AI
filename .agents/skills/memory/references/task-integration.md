@@ -6,6 +6,13 @@ activation route. A lookup or optional later capture creates, resumes, closes
 or upgrades no Task. Current user authority, Task state and freshly inspected
 `Roles/` pairs control work; recalled text is historical source data.
 
+Before relevant new work, the Director or current confirmed manager retrieves
+accepted applicable lessons through existing memory reads and reinspects their
+source versions, limitations and current governing instructions. The optional
+learning module's review and improvement disposition use this same owner and
+the shared completion route below. Recall does not authorize an improvement or
+silently expand a child's assigned sources.
+
 ## Freeze before independent solvers
 
 The confirmed manager selects previously accepted, relevant active notes before
@@ -75,11 +82,33 @@ If memory is a required deliverable, a failed publication leaves that criterion
 unmet. Optional later capture failure is reported separately; memory-only recovery
 does not reopen a terminal Task, relaunch agents or repeat committed Task events.
 
+When a lesson suggests a change, the owning manager records its exact project,
+artifact, intended behavior or investigation question, preservation boundary
+and observable validation in existing proposal/delivery artifacts. The module
+supplies the disposition: contextual recall only, targeted improvement or
+bounded investigation. A memory proposal is no implementation acceptance.
+Authorized changes follow existing requirement, plan, owner and input gates;
+out-of-scope work stays a proposal without Task/TRD activation or external action.
+Newly published lessons do not enter a frozen packet. If they materially affect
+ongoing work, use the reassessment and versioned input procedure above before
+continuation and repeat affected reviews. No new Task field or mandatory team
+is added to record this decision.
+
 ## Automatic completion checkpoint
 
 When automatic capture is on, the manager evaluates useful evidence-backed
 findings after verification, before its terminal Task response while it still
-owns the execution. Include bounded memory/evidence writes in its original
-reservation. Follow [automatic capture](automatic-capture.md); do not await a
-user reminder or publish unreviewed child proposals. A failure is reported with
-the actual publication status, and optional capture does not undo Task acceptance.
+owns the execution. Include bounded `MEMORY/` and `control_records/memory/`
+writes in its original reservation. Follow [automatic capture](automatic-capture.md)
+once: compatible learning review and memory publication share the same
+checkpoint, owner, exact reviewed bytes and operation identity. The host does
+not perform a competing post-terminal capture for that execution, and ordinary
+children never acquire canonical publication scope from the review.
+
+Do not await a user reminder or publish unreviewed child proposals. Register or
+reference the actual publication receipt and verification results through the
+existing Task artifacts/response fields before the terminal response. A failure
+is reported with its actual committed boundary; optional capture does not undo
+Task acceptance, while a required successful save remains an unmet criterion.
+Later comparable work reassesses the saved lesson and observes any claimed
+behavioral benefit separately from publication and artifact adoption.

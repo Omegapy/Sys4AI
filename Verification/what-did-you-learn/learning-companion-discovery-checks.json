@@ -1,0 +1,72 @@
+[
+  {
+    "case": "paired_reusable_source",
+    "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/tests -p test_learning_integration.py -v",
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "tests": 11,
+    "skipped": 0,
+    "expected_diagnostic": null,
+    "passed": true
+  },
+  {
+    "case": "memory_only_installed",
+    "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp9dl1jdg4/installed/.agents/skills/memory/tests -p test_learning_integration.py -v",
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "tests": 11,
+    "skipped": 10,
+    "expected_diagnostic": null,
+    "passed": true
+  },
+  {
+    "case": "module_only_partial",
+    "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp9dl1jdg4/installed/.agents/skills/memory/tests -p test_learning_integration.py -v",
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "tests": 1,
+    "skipped": 0,
+    "expected_diagnostic": "Partial learning companion installation",
+    "passed": true
+  },
+  {
+    "case": "skill_only_partial",
+    "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp9dl1jdg4/installed/.agents/skills/memory/tests -p test_learning_integration.py -v",
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "tests": 1,
+    "skipped": 0,
+    "expected_diagnostic": "Partial learning companion installation",
+    "passed": true
+  },
+  {
+    "case": "broken_module_link",
+    "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp9dl1jdg4/installed/.agents/skills/memory/tests -p test_learning_integration.py -v",
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "tests": 1,
+    "skipped": 0,
+    "expected_diagnostic": "Partial learning companion installation",
+    "passed": true
+  },
+  {
+    "case": "paired_installed",
+    "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp9dl1jdg4/installed/.agents/skills/memory/tests -p test_learning_integration.py -v",
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "tests": 11,
+    "skipped": 0,
+    "expected_diagnostic": null,
+    "passed": true
+  },
+  {
+    "case": "incompatible_module_version",
+    "command": "PYTHONDONTWRITEBYTECODE=1 /Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B -m unittest discover -s /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp9dl1jdg4/installed/.agents/skills/memory/tests -p test_learning_integration.py -v",
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "tests": 1,
+    "skipped": 0,
+    "expected_diagnostic": "Incompatible learning companion installation",
+    "passed": true
+  }
+]

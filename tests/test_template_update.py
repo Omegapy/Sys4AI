@@ -153,6 +153,52 @@ class TemplateUpdateTests(unittest.TestCase):
         self.assertEqual(engine.update(self.root, "check")["status"], "current")
         self.assertEqual((self.template / "reference-assets/MEMORY-depo/policy.md").read_text(), "# Revised memory policy\n")
 
+    def learning_fixture(self):
+        source = HELPER.parents[1]
+        for relative in ("LEARNING-depo", "SKILLS-depo/what-did-you-learn"):
+            shutil.copytree(source / relative, self.root / relative)
+
+    def test_learning_default_mapping_tracks_declared_add_modify_remove(self):
+        self.learning_fixture()
+        self.apply()
+        for origin, target in (("LEARNING-depo", "reference-assets/LEARNING-depo"),
+                               ("SKILLS-depo/what-did-you-learn", ".agents/skills/what-did-you-learn")):
+            self.assertEqual(file_inventory(self.root / origin), file_inventory(self.template / target))
+        manifest_path = self.root / "LEARNING-depo/contract.json"
+        manifest = json.loads(manifest_path.read_text())
+        manifest["required_resources"].append("usage.md")
+        manifest_path.write_text(json.dumps(manifest))
+        put(self.root, "LEARNING-depo/usage.md", "# Reusable usage\n")
+        self.apply()
+        self.assertEqual("# Reusable usage\n", (self.template / "reference-assets/LEARNING-depo/usage.md").read_text())
+        put(self.root, "LEARNING-depo/usage.md", "# Revised reusable usage\n")
+        self.apply()
+        self.assertEqual("# Revised reusable usage\n", (self.template / "reference-assets/LEARNING-depo/usage.md").read_text())
+        manifest["required_resources"].remove("usage.md")
+        manifest_path.write_text(json.dumps(manifest))
+        (self.root / "LEARNING-depo/usage.md").unlink()
+        self.apply()
+        self.assertFalse((self.template / "reference-assets/LEARNING-depo/usage.md").exists())
+        self.assertEqual("current", engine.update(self.root, "check")["status"])
+
+    def test_learning_conflict_and_broken_package_preserve_the_template(self):
+        self.learning_fixture()
+        self.apply()
+        resolver = self.root / "SKILLS-depo/what-did-you-learn/scripts/learning_contract.py"
+        original = resolver.read_bytes()
+        resolver.write_text("def incomplete(\n")
+        before = file_inventory(self.template)
+        with self.assertRaises(engine.UpdateError):
+            self.apply()
+        self.assertEqual(before, file_inventory(self.template))
+        resolver.write_bytes(original)
+        put(self.template, "reference-assets/LEARNING-depo/policy.md", "# Project customization\n")
+        put(self.root, "LEARNING-depo/policy.md", "# Updated reusable policy\n")
+        before = file_inventory(self.template)
+        with self.assertRaisesRegex(engine.UpdateError, "conflicts"):
+            self.apply()
+        self.assertEqual(before, file_inventory(self.template))
+
     def test_case_transition_renames_exact_directory_and_archives_original_state(self):
         raw_state = lowercase_owned_template(self.root, self.template)
         put(self.template, "roles/project-sub-agent/local-notes.txt", "Preserve project notes\n")

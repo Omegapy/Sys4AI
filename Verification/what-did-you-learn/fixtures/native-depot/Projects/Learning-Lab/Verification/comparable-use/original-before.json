@@ -1,0 +1,53 @@
+{
+  "command": [
+    "/opt/homebrew/opt/python@3.12/bin/python3.12",
+    "-B",
+    "fixture/check_intent.py"
+  ],
+  "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/what-did-you-learn/fixtures/native-depot/Projects/Learning-Lab",
+  "exit_code": 1,
+  "observed_at": "2026-09-09T06:53:40.329696+00:00",
+  "parsed_stdout": {
+    "passed": false,
+    "results": [
+      {
+        "actual": {
+          "action": "draft",
+          "missing": []
+        },
+        "expected": {
+          "action": "clarify",
+          "missing": [
+            "purpose",
+            "acceptance_criteria"
+          ]
+        },
+        "intent": {
+          "purpose": ""
+        },
+        "name": "ambiguous",
+        "passed": false
+      },
+      {
+        "actual": {
+          "action": "draft",
+          "missing": []
+        },
+        "expected": {
+          "action": "draft",
+          "missing": []
+        },
+        "intent": {
+          "acceptance_criteria": [
+            "A readable draft exists"
+          ],
+          "purpose": "Create a bounded draft"
+        },
+        "name": "clear",
+        "passed": true
+      }
+    ]
+  },
+  "stderr": "",
+  "stdout": "{\n  \"results\": [\n    {\n      \"name\": \"ambiguous\",\n      \"intent\": {\n        \"purpose\": \"\"\n      },\n      \"expected\": {\n        \"action\": \"clarify\",\n        \"missing\": [\n          \"purpose\",\n          \"acceptance_criteria\"\n        ]\n      },\n      \"actual\": {\n        \"action\": \"draft\",\n        \"missing\": []\n      },\n      \"passed\": false\n    },\n    {\n      \"name\": \"clear\",\n      \"intent\": {\n        \"purpose\": \"Create a bounded draft\",\n        \"acceptance_criteria\": [\n          \"A readable draft exists\"\n        ]\n      },\n      \"expected\": {\n        \"action\": \"draft\",\n        \"missing\": []\n      },\n      \"actual\": {\n        \"action\": \"draft\",\n        \"missing\": []\n      },\n      \"passed\": true\n    }\n  ],\n  \"passed\": false\n}\n"
+}

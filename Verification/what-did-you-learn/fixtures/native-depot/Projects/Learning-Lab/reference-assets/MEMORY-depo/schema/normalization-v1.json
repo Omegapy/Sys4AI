@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sys4AI source normalization version 1",
+  "type": "object",
+  "required": ["schema_version", "normalization_version", "document"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "normalization_version": {"const": "normalization-1"},
+    "document": {
+      "type": "object",
+      "required": ["kind", "path", "sha256", "source_identity", "format", "extractor", "segments", "limitations"],
+      "properties": {
+        "kind": {"const": "source"},
+        "path": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_identity": {"type": "string"},
+        "format": {"enum": ["md", "tex", "pdf", "html"]},
+        "extractor": {"type": "string"},
+        "segments": {"type": "array", "items": {"type": "object", "required": ["text", "locator", "heading"]}},
+        "limitations": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

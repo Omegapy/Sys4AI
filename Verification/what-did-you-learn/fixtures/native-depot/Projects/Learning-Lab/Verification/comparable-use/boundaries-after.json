@@ -1,0 +1,119 @@
+{
+  "command": [
+    "/opt/homebrew/opt/python@3.12/bin/python3.12",
+    "-B",
+    "-c",
+    "from pathlib import Path\nimport json,runpy\nroute=runpy.run_path(\"fixture/intent_router.py\")[\"route\"]\ncases=json.loads(Path(\"Verification/comparable-use/boundary-cases.json\").read_text())[\"cases\"]\nresults=[]\nfor case in cases:\n    actual=route(case[\"intent\"])\n    results.append({**case,\"actual\":actual,\"passed\":actual==case[\"expected\"]})\nprint(json.dumps({\"results\":results,\"passed\":all(case[\"passed\"] for case in results)},indent=2))\nraise SystemExit(0 if all(case[\"passed\"] for case in results) else 1)\n"
+  ],
+  "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/what-did-you-learn/fixtures/native-depot/Projects/Learning-Lab",
+  "exit_code": 0,
+  "observed_at": "2026-09-09T06:55:50.832424+00:00",
+  "parsed_stdout": {
+    "passed": true,
+    "results": [
+      {
+        "actual": {
+          "action": "clarify",
+          "missing": [
+            "purpose"
+          ]
+        },
+        "expected": {
+          "action": "clarify",
+          "missing": [
+            "purpose"
+          ]
+        },
+        "intent": {
+          "acceptance_criteria": [
+            "Observable result"
+          ]
+        },
+        "name": "purpose_absent",
+        "passed": true
+      },
+      {
+        "actual": {
+          "action": "clarify",
+          "missing": [
+            "purpose"
+          ]
+        },
+        "expected": {
+          "action": "clarify",
+          "missing": [
+            "purpose"
+          ]
+        },
+        "intent": {
+          "acceptance_criteria": [
+            "Observable result"
+          ],
+          "purpose": ""
+        },
+        "name": "purpose_empty",
+        "passed": true
+      },
+      {
+        "actual": {
+          "action": "clarify",
+          "missing": [
+            "acceptance_criteria"
+          ]
+        },
+        "expected": {
+          "action": "clarify",
+          "missing": [
+            "acceptance_criteria"
+          ]
+        },
+        "intent": {
+          "purpose": "Produce a bounded result"
+        },
+        "name": "criteria_absent",
+        "passed": true
+      },
+      {
+        "actual": {
+          "action": "clarify",
+          "missing": [
+            "acceptance_criteria"
+          ]
+        },
+        "expected": {
+          "action": "clarify",
+          "missing": [
+            "acceptance_criteria"
+          ]
+        },
+        "intent": {
+          "acceptance_criteria": [],
+          "purpose": "Produce a bounded result"
+        },
+        "name": "criteria_empty",
+        "passed": true
+      },
+      {
+        "actual": {
+          "action": "clarify",
+          "missing": [
+            "purpose",
+            "acceptance_criteria"
+          ]
+        },
+        "expected": {
+          "action": "clarify",
+          "missing": [
+            "purpose",
+            "acceptance_criteria"
+          ]
+        },
+        "intent": {},
+        "name": "both_absent",
+        "passed": true
+      }
+    ]
+  },
+  "stderr": "",
+  "stdout": "{\n  \"results\": [\n    {\n      \"expected\": {\n        \"action\": \"clarify\",\n        \"missing\": [\n          \"purpose\"\n        ]\n      },\n      \"intent\": {\n        \"acceptance_criteria\": [\n          \"Observable result\"\n        ]\n      },\n      \"name\": \"purpose_absent\",\n      \"actual\": {\n        \"action\": \"clarify\",\n        \"missing\": [\n          \"purpose\"\n        ]\n      },\n      \"passed\": true\n    },\n    {\n      \"expected\": {\n        \"action\": \"clarify\",\n        \"missing\": [\n          \"purpose\"\n        ]\n      },\n      \"intent\": {\n        \"acceptance_criteria\": [\n          \"Observable result\"\n        ],\n        \"purpose\": \"\"\n      },\n      \"name\": \"purpose_empty\",\n      \"actual\": {\n        \"action\": \"clarify\",\n        \"missing\": [\n          \"purpose\"\n        ]\n      },\n      \"passed\": true\n    },\n    {\n      \"expected\": {\n        \"action\": \"clarify\",\n        \"missing\": [\n          \"acceptance_criteria\"\n        ]\n      },\n      \"intent\": {\n        \"purpose\": \"Produce a bounded result\"\n      },\n      \"name\": \"criteria_absent\",\n      \"actual\": {\n        \"action\": \"clarify\",\n        \"missing\": [\n          \"acceptance_criteria\"\n        ]\n      },\n      \"passed\": true\n    },\n    {\n      \"expected\": {\n        \"action\": \"clarify\",\n        \"missing\": [\n          \"acceptance_criteria\"\n        ]\n      },\n      \"intent\": {\n        \"acceptance_criteria\": [],\n        \"purpose\": \"Produce a bounded result\"\n      },\n      \"name\": \"criteria_empty\",\n      \"actual\": {\n        \"action\": \"clarify\",\n        \"missing\": [\n          \"acceptance_criteria\"\n        ]\n      },\n      \"passed\": true\n    },\n    {\n      \"expected\": {\n        \"action\": \"clarify\",\n        \"missing\": [\n          \"purpose\",\n          \"acceptance_criteria\"\n        ]\n      },\n      \"intent\": {},\n      \"name\": \"both_absent\",\n      \"actual\": {\n        \"action\": \"clarify\",\n        \"missing\": [\n          \"purpose\",\n          \"acceptance_criteria\"\n        ]\n      },\n      \"passed\": true\n    }\n  ],\n  \"passed\": true\n}\n"
+}

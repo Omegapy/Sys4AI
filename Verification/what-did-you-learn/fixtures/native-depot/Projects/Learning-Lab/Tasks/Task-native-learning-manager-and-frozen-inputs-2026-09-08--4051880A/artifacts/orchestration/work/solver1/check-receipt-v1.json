@@ -1,0 +1,578 @@
+{
+  "actor": "/root/native_learning_manager/solver1",
+  "assignment_id": "solver1",
+  "commands": [
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+        "-B",
+        "fixture/check_intent.py"
+      ],
+      "exit_code": 1,
+      "observed_at": "2026-09-09T06:01:37.518007+00:00",
+      "stderr": "",
+      "stdout": {
+        "passed": false,
+        "results": [
+          {
+            "actual": {
+              "action": "draft",
+              "missing": []
+            },
+            "expected": {
+              "action": "clarify",
+              "missing": [
+                "purpose",
+                "acceptance_criteria"
+              ]
+            },
+            "intent": {
+              "purpose": ""
+            },
+            "name": "ambiguous",
+            "passed": false
+          },
+          {
+            "actual": {
+              "action": "draft",
+              "missing": []
+            },
+            "expected": {
+              "action": "draft",
+              "missing": []
+            },
+            "intent": {
+              "acceptance_criteria": [
+                "A readable draft exists"
+              ],
+              "purpose": "Create a bounded draft"
+            },
+            "name": "clear",
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+        "-B",
+        ".agents/skills/what-did-you-learn/scripts/learning_contract.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/what-did-you-learn/fixtures/native-depot/Projects/Learning-Lab"
+      ],
+      "exit_code": 0,
+      "observed_at": "2026-09-09T06:01:37.567703+00:00",
+      "stderr": "",
+      "stdout": {
+        "capabilities": {
+          "authorized_publication": "not_assessed",
+          "manual_review": true,
+          "optional_backend": "not_assessed",
+          "shared_automatic_checkpoint": true
+        },
+        "errors": [],
+        "governance": {
+          "completion_routing": true,
+          "diagnostics": [],
+          "route_paths": [
+            "AGENTS.md"
+          ]
+        },
+        "incompatible_resources": [],
+        "layout": "installed",
+        "memory": {
+          "capture_triggers": [
+            "work-completed",
+            "task-completed",
+            "decision-recorded",
+            "failure-observed"
+          ],
+          "checkpoint_compatible": true,
+          "helper_commands": [
+            "backend-recover",
+            "capture",
+            "capture-status",
+            "health",
+            "propose",
+            "publish",
+            "read",
+            "recover",
+            "redact",
+            "reindex",
+            "reindex-payload",
+            "retract",
+            "search",
+            "set-capture",
+            "supersede",
+            "validate"
+          ],
+          "incompatible_resources": [],
+          "interface_compatible": true,
+          "missing_resources": [],
+          "required_resources": [
+            ".agents/skills/memory/SKILL.md",
+            ".agents/skills/memory/README.md",
+            ".agents/skills/memory/agents/openai.yaml",
+            ".agents/skills/memory/scripts/memory.py",
+            ".agents/skills/memory/scripts/memory_capture.py",
+            ".agents/skills/memory/scripts/memory_core.py",
+            ".agents/skills/memory/scripts/memory_evidence.py",
+            ".agents/skills/memory/scripts/memory_maintenance.py",
+            ".agents/skills/memory/scripts/memory_normalization.py",
+            ".agents/skills/memory/scripts/memory_normalize_html.py",
+            ".agents/skills/memory/scripts/memory_normalize_pdf.py",
+            ".agents/skills/memory/scripts/memory_normalize_tex.py",
+            ".agents/skills/memory/scripts/memory_packet.py",
+            ".agents/skills/memory/scripts/memory_paths.py",
+            ".agents/skills/memory/scripts/memory_publish.py",
+            ".agents/skills/memory/scripts/memory_recovery.py",
+            ".agents/skills/memory/scripts/memory_search.py",
+            ".agents/skills/memory/scripts/basic_memory_adapter.py",
+            ".agents/skills/memory/scripts/basic_memory_projection.py",
+            ".agents/skills/memory/references/automatic-capture.md",
+            ".agents/skills/memory/references/task-integration.md",
+            ".agents/skills/memory/references/evidence-and-lifecycle.md",
+            ".agents/skills/memory/references/publication-examples.md",
+            ".agents/skills/memory/references/operations.md",
+            ".agents/skills/memory/references/state-paths.md",
+            ".agents/skills/memory/references/basic-memory-pilot.md",
+            ".agents/skills/memory/requirements-extraction.txt",
+            ".agents/skills/memory/requirements-backend-pilot.txt",
+            "reference-assets/MEMORY-depo/README.md",
+            "reference-assets/MEMORY-depo/policy.md",
+            "reference-assets/MEMORY-depo/publication-and-recovery.md",
+            "reference-assets/MEMORY-depo/schema/record-v1.json",
+            "reference-assets/MEMORY-depo/schema/config-v1.json"
+          ],
+          "root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/what-did-you-learn/fixtures/native-depot/Projects/Learning-Lab/.agents/skills/memory"
+        },
+        "missing_resources": [],
+        "module": {
+          "compatible": true,
+          "contract_sha256": "239f18c84ad93101ae1e67185f70d0ecabe7a0ef65e6156eb5ab0d9d1539af8d",
+          "id": "what-did-you-learn",
+          "root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/what-did-you-learn/fixtures/native-depot/Projects/Learning-Lab/reference-assets/LEARNING-depo",
+          "version": "1.0.0"
+        },
+        "read_only": true,
+        "required_resources": [
+          "reference-assets/LEARNING-depo/contract.json",
+          "reference-assets/LEARNING-depo/README.md",
+          "reference-assets/LEARNING-depo/policy.md",
+          "reference-assets/LEARNING-depo/review-contract.md",
+          "reference-assets/LEARNING-depo/assets/lesson-body-template.md",
+          ".agents/skills/what-did-you-learn/SKILL.md",
+          ".agents/skills/what-did-you-learn/README.md",
+          ".agents/skills/what-did-you-learn/agents/openai.yaml",
+          ".agents/skills/what-did-you-learn/references/module-resolution.md",
+          ".agents/skills/what-did-you-learn/references/improvement-and-reuse.md",
+          ".agents/skills/what-did-you-learn/scripts/learning_contract.py"
+        ]
+      }
+    },
+    {
+      "argv": [
+        "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+        "-B",
+        ".agents/skills/memory/scripts/memory.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/what-did-you-learn/fixtures/native-depot/Projects/Learning-Lab",
+        "capture-status"
+      ],
+      "exit_code": 0,
+      "observed_at": "2026-09-09T06:01:37.601912+00:00",
+      "stderr": "",
+      "stdout": {
+        "automatic_capture": true,
+        "config_sha256": "774ccd5f0dee6bae93a8667ca9a5d837d5643223cca1d8cb740e2bc2b39f4db8",
+        "message": "Memory automatic capture is on.",
+        "read_only": true,
+        "triggers": [
+          "work-completed",
+          "task-completed",
+          "decision-recorded",
+          "failure-observed"
+        ]
+      }
+    }
+  ],
+  "execution_id": "wdyl-native-manager-001",
+  "focused_checks": {
+    "execution": "Imported the inspected fixture/intent_router.py through importlib.util and invoked route once for each recorded input in this Python -B process.",
+    "results": [
+      {
+        "actual": {
+          "action": "draft",
+          "missing": []
+        },
+        "expected_from_current_requirements": {
+          "action": "clarify",
+          "missing": [
+            "purpose"
+          ]
+        },
+        "input": {
+          "acceptance_criteria": [
+            "A readable draft exists"
+          ]
+        },
+        "meets_requirement": false,
+        "name": "missing_purpose"
+      },
+      {
+        "actual": {
+          "action": "draft",
+          "missing": []
+        },
+        "expected_from_current_requirements": {
+          "action": "clarify",
+          "missing": [
+            "acceptance_criteria"
+          ]
+        },
+        "input": {
+          "purpose": "Create a bounded draft"
+        },
+        "meets_requirement": false,
+        "name": "missing_acceptance_criteria"
+      },
+      {
+        "actual": {
+          "action": "draft",
+          "missing": []
+        },
+        "expected_from_current_requirements": {
+          "action": "clarify",
+          "missing": [
+            "purpose",
+            "acceptance_criteria"
+          ]
+        },
+        "input": {},
+        "meets_requirement": false,
+        "name": "both_missing"
+      },
+      {
+        "actual": {
+          "action": "draft",
+          "missing": []
+        },
+        "expected_from_current_requirements": {
+          "action": "draft",
+          "missing": []
+        },
+        "input": {
+          "acceptance_criteria": [
+            "A readable draft exists"
+          ],
+          "purpose": "Create a bounded draft"
+        },
+        "meets_requirement": true,
+        "name": "already_clear"
+      }
+    ]
+  },
+  "frozen_retrieval": {
+    "limitations": [
+      "Only the exact frozen memory inputs are searched; changed inputs require manager reconciliation."
+    ],
+    "mode": "frozen-lexical",
+    "mutated": false,
+    "packet": {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-initial.json",
+      "sha256": "39d64cf8c6fe3a624bc9951142454ba822e0e3e5a2f5271b44a4901874230fa6"
+    },
+    "project_id": "wdyl-lab",
+    "results": [
+      {
+        "authority": "Source data; inspect current governing sources before acting.",
+        "claim": {
+          "level": "accepted_design",
+          "summary": "The authorized fixture design requires clarification for missing material intent while preserving the already-clear draft path."
+        },
+        "confidence": "high",
+        "diagnostics": [],
+        "excerpt": "Clarify missing material intent and preserve the clear fast path\n## Observation\n\nThe controlled design settles that missing purpose or acceptance criteria need clarification. The real baseline check fails the ambiguous case and passes the clear case.\n\n## Evidence\n\ncontext/intent-requirements.md defines the accepted boundary. evidence/intent-before-results.json records the actual failing check and the preserved clear fast path. The native manual review is retained separately by the Director.\n\n## Lesson and applicability\n\nBefore drafting in this fixture, check material intent fields. Clarify the missing fields; preserve the already-clear draft path. Reassess current sources when this lesson is\u2026",
+        "heading": "Clarify missing material intent and preserve the clear fast path",
+        "kind": "memory",
+        "limitations": [
+          "Controlled accepted fixture design, not production behavior or a long-term reliability measurement."
+        ],
+        "locator": "MEMORY/MEM-20260909-A1B2C3D4.md",
+        "path": "MEMORY/MEM-20260909-A1B2C3D4.md",
+        "record_id": "MEM-20260909-A1B2C3D4",
+        "representations": [
+          {
+            "locator": "MEMORY/MEM-20260909-A1B2C3D4.md",
+            "path": "MEMORY/MEM-20260909-A1B2C3D4.md",
+            "sha256": "5f909433809573ce4d88a93c78ab841e794186713737cc7e502c3849f602ffb7"
+          }
+        ],
+        "score": 40,
+        "sha256": "5f909433809573ce4d88a93c78ab841e794186713737cc7e502c3849f602ffb7",
+        "source_identity": "MEM-20260909-A1B2C3D4",
+        "sources": [
+          {
+            "kind": "design",
+            "locator": "document",
+            "path": "context/intent-requirements.md",
+            "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da"
+          }
+        ],
+        "state": "active"
+      }
+    ],
+    "status": "ok"
+  },
+  "generation": 1,
+  "mutation_scope": "Only this solver check receipt; no implementation, canonical Task, memory, configuration or runtime mutation.",
+  "observed_at": "2026-09-09T06:01:37.668069+00:00",
+  "packet_document_identities": [
+    {
+      "path": "MEMORY/MEM-20260909-A1B2C3D4.md",
+      "sha256": "5f909433809573ce4d88a93c78ab841e794186713737cc7e502c3849f602ffb7",
+      "source_identity": "MEM-20260909-A1B2C3D4"
+    }
+  ],
+  "protected_after": {
+    ".agents/skills/memory/SKILL.md": {
+      "mtime_ns": 1788932419583934807,
+      "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+      "size": 4404
+    },
+    ".agents/skills/memory/references/automatic-capture.md": {
+      "mtime_ns": 1788932419586290436,
+      "sha256": "b2c112c9052a26786e41caf0c21f6b6b1a827f67fbc004bc9ff646212a22ec27",
+      "size": 9944
+    },
+    ".agents/skills/memory/references/task-integration.md": {
+      "mtime_ns": 1788932419589704011,
+      "sha256": "1a275a3f6fd4ae943a17ddb9a8bc949e7ac913c5742efa7f66620f5b1e2850a5",
+      "size": 7335
+    },
+    ".agents/skills/what-did-you-learn/SKILL.md": {
+      "mtime_ns": 1788932419634855698,
+      "sha256": "0b3ed8b0f29cdc39853893ff1c916a97e43c1550b3a7091eb6b4555566214c04",
+      "size": 2881
+    },
+    "AGENTS.md": {
+      "mtime_ns": 1788932419547515423,
+      "sha256": "fb709c430777c2a4ae5782f82485faf8f0aa533b446400b3bde16cfa895a16a6",
+      "size": 5045
+    },
+    "MEMORY/MEM-20260909-A1B2C3D4.md": {
+      "mtime_ns": 1788932948454153101,
+      "sha256": "5f909433809573ce4d88a93c78ab841e794186713737cc7e502c3849f602ffb7",
+      "size": 2824
+    },
+    "ROLE.md": {
+      "mtime_ns": 1788932419548264134,
+      "sha256": "09d8ff13a82a03946d84c8320b9a2192c56bc330a9ab9f4c70c8583cb39e010b",
+      "size": 13786
+    },
+    "Roles/project-sub-agent/AGENTS.md": {
+      "mtime_ns": 1788932419638921781,
+      "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+      "size": 1861
+    },
+    "Roles/project-sub-agent/ROLE.md": {
+      "mtime_ns": 1788932419639488544,
+      "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+      "size": 4740
+    },
+    "SOUL.md": {
+      "mtime_ns": 1788932419558200001,
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+      "size": 28149
+    },
+    "SPECS.md": {
+      "mtime_ns": 1788932419550092207,
+      "sha256": "ac838b0d4e4a1d7e69654b854e449526d7f218e8bbcdae77edba4505637db8dd",
+      "size": 7943
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/baseline_0a0145781841b7b2bce58f303f5897cf71d699fa5001a57d0ad9dd788834db29.json": {
+      "mtime_ns": 1788933471575714776,
+      "sha256": "0a0145781841b7b2bce58f303f5897cf71d699fa5001a57d0ad9dd788834db29",
+      "size": 2750
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-initial.json": {
+      "mtime_ns": 1788933471499989900,
+      "sha256": "39d64cf8c6fe3a624bc9951142454ba822e0e3e5a2f5271b44a4901874230fa6",
+      "size": 4971
+    },
+    "context/intent-requirements.md": {
+      "mtime_ns": 1788932420252436419,
+      "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da",
+      "size": 885
+    },
+    "context/manager-requirements.md": {
+      "mtime_ns": 1788933155094190815,
+      "sha256": "de919bdcefbf1944011d3ad25cf1a76f0661b96098375c8cd0b94ac92b40a876",
+      "size": 3426
+    },
+    "evidence/intent-before-results.json": {
+      "mtime_ns": 1788932420272354539,
+      "sha256": "391da578692930c9298c10cd02a368877658c9d7e49db6b7529f9409a241834c",
+      "size": 1360
+    },
+    "fixture/check_intent.py": {
+      "mtime_ns": 1788932420252596119,
+      "sha256": "707afec815a10c9f03d6b3d75a6667ad4af22e67928cd993143eefd75a4054ca",
+      "size": 660
+    },
+    "fixture/intent_router.py": {
+      "mtime_ns": 1788932420252527497,
+      "sha256": "440ed72c34cfd97c5c2faf8704bcd1043d65a3599e3d97000f3ccfeb9933f7ad",
+      "size": 65
+    },
+    "memory.yaml": {
+      "mtime_ns": 1788932948594435514,
+      "sha256": "774ccd5f0dee6bae93a8667ca9a5d837d5643223cca1d8cb740e2bc2b39f4db8",
+      "size": 2074
+    },
+    "reference-assets/LEARNING-depo/policy.md": {
+      "mtime_ns": 1788932419556233976,
+      "sha256": "3afa6952837da99a74c4b944b8619e7bfb0a31b35259a80fd1207a207167c41e",
+      "size": 7208
+    },
+    "reference-assets/LEARNING-depo/review-contract.md": {
+      "mtime_ns": 1788932419556816280,
+      "sha256": "e0f56c546f02583193d1c1aa0838ef20017cad4dca6c6ce5e0debd01e07d3dcb",
+      "size": 6030
+    }
+  },
+  "protected_before": {
+    ".agents/skills/memory/SKILL.md": {
+      "mtime_ns": 1788932419583934807,
+      "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+      "size": 4404
+    },
+    ".agents/skills/memory/references/automatic-capture.md": {
+      "mtime_ns": 1788932419586290436,
+      "sha256": "b2c112c9052a26786e41caf0c21f6b6b1a827f67fbc004bc9ff646212a22ec27",
+      "size": 9944
+    },
+    ".agents/skills/memory/references/task-integration.md": {
+      "mtime_ns": 1788932419589704011,
+      "sha256": "1a275a3f6fd4ae943a17ddb9a8bc949e7ac913c5742efa7f66620f5b1e2850a5",
+      "size": 7335
+    },
+    ".agents/skills/what-did-you-learn/SKILL.md": {
+      "mtime_ns": 1788932419634855698,
+      "sha256": "0b3ed8b0f29cdc39853893ff1c916a97e43c1550b3a7091eb6b4555566214c04",
+      "size": 2881
+    },
+    "AGENTS.md": {
+      "mtime_ns": 1788932419547515423,
+      "sha256": "fb709c430777c2a4ae5782f82485faf8f0aa533b446400b3bde16cfa895a16a6",
+      "size": 5045
+    },
+    "MEMORY/MEM-20260909-A1B2C3D4.md": {
+      "mtime_ns": 1788932948454153101,
+      "sha256": "5f909433809573ce4d88a93c78ab841e794186713737cc7e502c3849f602ffb7",
+      "size": 2824
+    },
+    "ROLE.md": {
+      "mtime_ns": 1788932419548264134,
+      "sha256": "09d8ff13a82a03946d84c8320b9a2192c56bc330a9ab9f4c70c8583cb39e010b",
+      "size": 13786
+    },
+    "Roles/project-sub-agent/AGENTS.md": {
+      "mtime_ns": 1788932419638921781,
+      "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+      "size": 1861
+    },
+    "Roles/project-sub-agent/ROLE.md": {
+      "mtime_ns": 1788932419639488544,
+      "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+      "size": 4740
+    },
+    "SOUL.md": {
+      "mtime_ns": 1788932419558200001,
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+      "size": 28149
+    },
+    "SPECS.md": {
+      "mtime_ns": 1788932419550092207,
+      "sha256": "ac838b0d4e4a1d7e69654b854e449526d7f218e8bbcdae77edba4505637db8dd",
+      "size": 7943
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/baseline_0a0145781841b7b2bce58f303f5897cf71d699fa5001a57d0ad9dd788834db29.json": {
+      "mtime_ns": 1788933471575714776,
+      "sha256": "0a0145781841b7b2bce58f303f5897cf71d699fa5001a57d0ad9dd788834db29",
+      "size": 2750
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-initial.json": {
+      "mtime_ns": 1788933471499989900,
+      "sha256": "39d64cf8c6fe3a624bc9951142454ba822e0e3e5a2f5271b44a4901874230fa6",
+      "size": 4971
+    },
+    "context/intent-requirements.md": {
+      "mtime_ns": 1788932420252436419,
+      "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da",
+      "size": 885
+    },
+    "context/manager-requirements.md": {
+      "mtime_ns": 1788933155094190815,
+      "sha256": "de919bdcefbf1944011d3ad25cf1a76f0661b96098375c8cd0b94ac92b40a876",
+      "size": 3426
+    },
+    "evidence/intent-before-results.json": {
+      "mtime_ns": 1788932420272354539,
+      "sha256": "391da578692930c9298c10cd02a368877658c9d7e49db6b7529f9409a241834c",
+      "size": 1360
+    },
+    "fixture/check_intent.py": {
+      "mtime_ns": 1788932420252596119,
+      "sha256": "707afec815a10c9f03d6b3d75a6667ad4af22e67928cd993143eefd75a4054ca",
+      "size": 660
+    },
+    "fixture/intent_router.py": {
+      "mtime_ns": 1788932420252527497,
+      "sha256": "440ed72c34cfd97c5c2faf8704bcd1043d65a3599e3d97000f3ccfeb9933f7ad",
+      "size": 65
+    },
+    "memory.yaml": {
+      "mtime_ns": 1788932948594435514,
+      "sha256": "774ccd5f0dee6bae93a8667ca9a5d837d5643223cca1d8cb740e2bc2b39f4db8",
+      "size": 2074
+    },
+    "reference-assets/LEARNING-depo/policy.md": {
+      "mtime_ns": 1788932419556233976,
+      "sha256": "3afa6952837da99a74c4b944b8619e7bfb0a31b35259a80fd1207a207167c41e",
+      "size": 7208
+    },
+    "reference-assets/LEARNING-depo/review-contract.md": {
+      "mtime_ns": 1788932419556816280,
+      "sha256": "e0f56c546f02583193d1c1aa0838ef20017cad4dca6c6ce5e0debd01e07d3dcb",
+      "size": 6030
+    }
+  },
+  "protected_unchanged": true,
+  "read_scope": "Exact frozen packet, referenced versions, local governance, installed assigned skills and permitted fixture evidence only. No corpus or sibling lookup.",
+  "schema_version": 1,
+  "status": "analysis_checks_complete_expected_fixture_failures_observed",
+  "validation_after": {
+    "assignment_id": "solver1",
+    "baseline": "0a0145781841b7b2bce58f303f5897cf71d699fa5001a57d0ad9dd788834db29",
+    "mutated": false,
+    "packet": {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-initial.json",
+      "sha256": "39d64cf8c6fe3a624bc9951142454ba822e0e3e5a2f5271b44a4901874230fa6"
+    },
+    "round": 1,
+    "status": "bound"
+  },
+  "validation_before": {
+    "assignment_id": "solver1",
+    "baseline": "0a0145781841b7b2bce58f303f5897cf71d699fa5001a57d0ad9dd788834db29",
+    "mutated": false,
+    "packet": {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-initial.json",
+      "sha256": "39d64cf8c6fe3a624bc9951142454ba822e0e3e5a2f5271b44a4901874230fa6"
+    },
+    "round": 1,
+    "status": "bound"
+  }
+}

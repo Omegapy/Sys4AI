@@ -109,7 +109,7 @@ class RecoveryCases(unittest.TestCase):
         index = (self.target / self.helper.ROLE_INDEX).read_bytes()
         self.assertNotEqual((template / self.helper.ROLE_INDEX).read_bytes(), index)
         self.assertEqual(self.helper.planned_role_index(self.target, {}, {}), index)
-        self.assertEqual("governance-starter-v6", report["setup_contract"])
+        self.assertEqual("governance-starter-v7", report["setup_contract"])
         self.run_setup(mode="prepare-existing")
         # An existing index is never overwritten to conceal a customization.
         (self.target / self.helper.ROLE_INDEX).write_text("Owned index\n")
@@ -233,9 +233,13 @@ class RecoveryCases(unittest.TestCase):
         agents = self.target / "AGENTS.md"
         adopted = agents.read_bytes()
         agents.write_text("concurrent project edit")
+        receipt_before = (self.target / self.helper.RECORD).read_bytes()
         with self.assertRaises(self.helper.InitializationError) as conflict:
             self.helper.run_initialization(**self.arguments)
-        self.assertIn("owned asset changed", conflict.exception.report["recovery"]["reason"])
+        # v7 validates the first local binding against its frozen proposal before
+        # entering recovery writes; the original pending receipt stays intact.
+        self.assertIn("saved plan", str(conflict.exception))
+        self.assertEqual(receipt_before, (self.target / self.helper.RECORD).read_bytes())
         self.assertEqual("concurrent project edit", agents.read_text())
         agents.write_bytes(adopted)
         report = self.run_setup()

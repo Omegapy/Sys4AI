@@ -1,0 +1,51 @@
+{
+  "observed_at": "2026-09-09T04:20:43.737515+00:00",
+  "native_observation": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/initializer_learning",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/learning_workflow",
+          "agent_status": "running"
+        }
+      ]
+    }
+  },
+  "launches": [
+    {
+      "tool": "collaboration.spawn_agent",
+      "result": {
+        "task_name": "/root/learning_workflow"
+      }
+    },
+    {
+      "tool": "collaboration.spawn_agent",
+      "result": {
+        "task_name": "/root/initializer_learning"
+      }
+    }
+  ],
+  "settings": {
+    "mode": "verified_inheritance",
+    "model": null,
+    "effort": null,
+    "evidence": "Current tool contract guarantees full-history forks inherit parent model and reasoning effort and disallow overrides. Both dispatches used fork_turns all and omitted overrides. Safe local settings inspection found gpt-6-astra/max and no custom subagent model/effort defaults."
+  },
+  "roles": {
+    "catalog_fingerprint": "ba245e8ebbde2fd020f851d21343d5348b3763692a37468cab019642775b3545",
+    "name": "project-sub-agent",
+    "agents_path": "Roles/project-sub-agent/AGENTS.md",
+    "role_path": "Roles/project-sub-agent/ROLE.md",
+    "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+  },
+  "task_ownership": "No root Task activated; workers have bounded file scopes and no canonical writer or shared memory authority. Initializer holds source edits until accepted predecessor phase."
+}

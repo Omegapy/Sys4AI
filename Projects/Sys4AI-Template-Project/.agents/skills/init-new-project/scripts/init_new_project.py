@@ -42,14 +42,17 @@ STARTER_FILES = {
 }
 IDENTITY = "project.json"
 RECORD = "control_records/project-setup.json"
-SETUP_CONTRACT = "governance-starter-v6"
+SETUP_CONTRACT = "governance-starter-v7"
+CAPTURE_CONTRACT = "governance-starter-v6"
 MEMORY_CONTRACT = "governance-starter-v5"
-MEMORY_CONTRACTS = {MEMORY_CONTRACT, SETUP_CONTRACT}
+MEMORY_CONTRACTS = {MEMORY_CONTRACT, CAPTURE_CONTRACT, SETUP_CONTRACT}
+CAPTURE_CONTRACTS = {CAPTURE_CONTRACT, SETUP_CONTRACT}
+LEARNING_CONTRACTS = {SETUP_CONTRACT}
 LICENSE_CONTRACT = "governance-starter-v4"
 PRE_LICENSE_CONTRACT = "governance-starter-v3"
 LOWERCASE_CONTRACT = "governance-starter-v2"
 LEGACY_CONTRACT = "governance-starter-v1"
-ROLE_ROOTS = {SETUP_CONTRACT: "Roles", MEMORY_CONTRACT: "Roles", LICENSE_CONTRACT: "Roles", PRE_LICENSE_CONTRACT: "Roles", LOWERCASE_CONTRACT: "roles",
+ROLE_ROOTS = {SETUP_CONTRACT: "Roles", CAPTURE_CONTRACT: "Roles", MEMORY_CONTRACT: "Roles", LICENSE_CONTRACT: "Roles", PRE_LICENSE_CONTRACT: "Roles", LOWERCASE_CONTRACT: "roles",
               LEGACY_CONTRACT: "sub-agent-roles"}
 LICENSE_CONTRACTS = {LICENSE_CONTRACT, *MEMORY_CONTRACTS}
 LICENSE_FILES = {"LICENSE", "LICENSE-CODE", "LICENSE-DOCS"}
@@ -65,7 +68,22 @@ MEMORY_TREES = ("MEMORY", MEMORY_CONTRACT_ROOT, ".agents/skills/memory")
 MEMORY_HELPER_FILES = {".agents/skills/memory/scripts/" + name for name in ("memory_core.py", "memory_paths.py")}
 CAPTURE_HELPER_FILES = {".agents/skills/memory/scripts/memory_capture.py",
                         ".agents/skills/memory/references/automatic-capture.md"}
-SPECIALIZED_FILES = {"README.md", IDENTITY, "memory.yaml", "Roles/INDEX.md"}
+LEARNING_MODULE = "what-did-you-learn"
+LEARNING_ROOT = "reference-assets/LEARNING-depo"
+LEARNING_SKILL = ".agents/skills/what-did-you-learn"
+LEARNING_RESOLVER = LEARNING_SKILL + "/scripts/learning_contract.py"
+LEARNING_FILES = {LEARNING_ROOT + "/" + name for name in (
+    "contract.json", "README.md", "policy.md", "review-contract.md", "assets/lesson-body-template.md")}
+LEARNING_TREES = (LEARNING_ROOT, LEARNING_SKILL)
+COMPLETION_REFERENCE = ".agents/skills/memory/references/automatic-capture.md"
+# Supported pure inspectors are pinned with this initializer edition. Unknown
+# project customizations are preserved and never executed for assessment.
+LEARNING_INSPECTOR_SHA256 = "2d28d84bc560012ca7fa105155ed1081205de1c82bccabdda864790005ec8d8d"
+MEMORY_INSPECTOR_SHA256 = {
+    ".agents/skills/memory/scripts/memory_core.py": "a41175553ec3e4d81b7cede8cc26b81676eddb4a7a697db6c1a47aab5929d874",
+    ".agents/skills/memory/scripts/memory_paths.py": "5e7c01db65adf4296d97b166945a80a18875055a46811eeb30c701ab7040f7de",
+}
+SPECIALIZED_FILES = {"README.md", IDENTITY, "memory.yaml", "Roles/INDEX.md", "AGENTS.md"}
 LICENSE_MARKER = re.compile(
     r"(?:licen[cs]e(?:s|[._-].+)?|copying(?:[._-].+)?|copyright(?:[._-].+)?|unlicense(?:[._-].+)?)",
     re.IGNORECASE,
@@ -568,8 +586,10 @@ def template_sources(
             raise InitializationError("template lacks required memory contract assets")
         if set(tree_files(template / "MEMORY")) != {"README.md"}:
             raise InitializationError("template memory is not empty")
-    if contract == SETUP_CONTRACT and not CAPTURE_HELPER_FILES <= copied.keys():
+    if contract in CAPTURE_CONTRACTS and not CAPTURE_HELPER_FILES <= copied.keys():
         raise InitializationError("template lacks automatic memory capture support")
+    if contract in LEARNING_CONTRACTS:
+        validate_learning_sources(template, copied)
     renderer = file_bytes(template / README_RENDERER)
     return copied, origins, versions, renderer, policy
 
@@ -577,11 +597,65 @@ def template_sources(
 def required_starters(contract: str) -> set[str]:
     # Older receipts retain the file inventory of their original edition.
     return (STARTER_FILES | (LICENSE_FILES if contract in LICENSE_CONTRACTS else set())
-            | (MEMORY_FILES if contract in MEMORY_CONTRACTS else set()))
+            | (MEMORY_FILES if contract in MEMORY_CONTRACTS else set())
+            | (LEARNING_FILES if contract in LEARNING_CONTRACTS else set()))
 
 
 def required_skills(contract: str) -> set[str]:
-    return REQUIRED_SKILLS | ({"memory"} if contract in MEMORY_CONTRACTS else set())
+    return (REQUIRED_SKILLS | ({"memory"} if contract in MEMORY_CONTRACTS else set())
+            | ({LEARNING_MODULE} if contract in LEARNING_CONTRACTS else set()))
+
+
+@contextmanager
+def learning_resolver(raw: bytes) -> Iterator[Any]:
+    """Load the reviewed pure resolver without importing a project runtime."""
+    if sha(raw) != LEARNING_INSPECTOR_SHA256:
+        raise InitializationError("unknown learning inspector preserved without execution: " + LEARNING_RESOLVER)
+    name = "_initializer_learning_" + sha(raw)
+    module = types.ModuleType(name)
+    module.__file__ = LEARNING_RESOLVER
+    previous = sys.modules.get(name)
+    bytecode = sys.dont_write_bytecode
+    sys.modules[name] = module
+    try:
+        exec(compile(raw, LEARNING_RESOLVER, "exec"), module.__dict__)
+        yield module
+    except (AttributeError, ImportError, UnicodeError, SyntaxError, ValueError, RuntimeError) as error:
+        if isinstance(error, InitializationError):
+            raise
+        raise InitializationError("learning resolver is unavailable or incompatible") from error
+    finally:
+        sys.dont_write_bytecode = bytecode
+        if previous is None:
+            sys.modules.pop(name, None)
+        else:
+            sys.modules[name] = previous
+
+
+def validate_learning_sources(template: Path, files: dict[str, bytes]) -> None:
+    if not (LEARNING_FILES | {LEARNING_RESOLVER}) <= files.keys():
+        raise InitializationError("template lacks required learning module resources")
+    manifest = unique_json(files[LEARNING_ROOT + "/contract.json"])
+    check_memory_inspectors(files)
+    with learning_resolver(files[LEARNING_RESOLVER]) as helper:
+        try:
+            helper._validate_manifest(manifest, LEARNING_ROOT + "/contract.json")
+        except helper.ContractError as error:
+            raise InitializationError("template learning compatibility inventory is invalid") from error
+        declared = {LEARNING_ROOT + "/" + name for name in manifest["required_resources"]}
+        actual = {name for name in files if name.startswith(LEARNING_ROOT + "/")}
+        if actual != declared:
+            raise InitializationError("template learning resource inventory differs from its contract")
+        resolution = helper.resolve(template)
+        if not resolution["capabilities"]["shared_automatic_checkpoint"]:
+            paths = sorted({item["path"] for item in resolution["errors"]})
+            raise InitializationError("template learning interfaces or completion routing are incompatible: " + ", ".join(paths))
+
+
+def check_memory_inspectors(files: dict[str, bytes]) -> None:
+    for name, expected in MEMORY_INSPECTOR_SHA256.items():
+        if name not in files or sha(files[name]) != expected:
+            raise InitializationError("unknown memory inspector preserved without execution: " + name)
 
 
 def validate_memory_config(config: Any, files: dict[str, bytes], *, allow_template: bool) -> None:
@@ -660,8 +734,26 @@ def source_snapshot(
     proposed["README.md"] = renderer.decode().format(**identity).encode()
     proposed[IDENTITY] = encoded(identity)
     if contract in MEMORY_CONTRACTS:
-        proposed["memory.yaml"] = specialize_memory(original["memory.yaml"], identity, original,
-            automatic=contract == SETUP_CONTRACT, destination=destination, owned_governance=owned_governance)
+        memory_files = original
+        binding_owned = owned_governance
+        if contract in LEARNING_CONTRACTS and destination is not None:
+            config_path = destination_file(destination, "memory.yaml")
+            first_binding = (not config_path.exists() or "memory.yaml" in owned_governance
+                             or not (destination / IDENTITY).exists()
+                             and file_bytes(config_path) == original["memory.yaml"])
+            if first_binding:
+                memory_files = dict(original)
+                for name in ("SOUL.md", "AGENTS.md", "ROLE.md"):
+                    target = destination_file(destination, name)
+                    if target.exists():
+                        memory_files[name] = file_bytes(target)
+                if not any(COMPLETION_REFERENCE.encode() in memory_files[name]
+                           for name in ("SOUL.md", "AGENTS.md", "ROLE.md")):
+                    memory_files["AGENTS.md"] += completion_link()
+                proposed["AGENTS.md"] = memory_files["AGENTS.md"]
+                binding_owned = owned_governance | {"SOUL.md", "AGENTS.md", "ROLE.md"}
+        proposed["memory.yaml"] = specialize_memory(original["memory.yaml"], identity, memory_files,
+            automatic=contract in CAPTURE_CONTRACTS, destination=destination, owned_governance=binding_owned)
     records = [
         {
             "source": source.relative_to(depot).as_posix(),
@@ -705,6 +797,12 @@ def check_sources(depot: Path, records: list[dict[str, str]], *, contract: str =
         raise InitializationError("reviewed template source file set changed during adoption")
     if actual != expected:
         raise InitializationError("reviewed template source changed during adoption")
+
+
+def completion_link() -> bytes:
+    return ("\n\n## Learning and memory completion\n\n"
+            "At substantive work completion, follow the project-local "
+            f"[shared completion checkpoint]({COMPLETION_REFERENCE}) when memory automatic capture is enabled.\n").encode()
 
 
 def destination_file(root: Path, relative: str) -> Path:
@@ -1021,11 +1119,13 @@ def asset_plan(destination: Path, *, mode: str, proposed: dict[str, bytes],
                           or (name.startswith("Roles/") and name != ROLE_INDEX
                               and (destination / "Roles").is_dir())
                           or any(name.startswith(root + "/") and (destination / root).is_dir()
-                                 for root in MEMORY_TREES))
+                                 for root in (*MEMORY_TREES, *LEARNING_TREES)))
         existing_tasks = (name.startswith("Tasks/") and (destination / "Tasks").is_dir()
                           and any((destination / "Tasks").iterdir()))
         if present is not None:
-            if saved_identity is None and name in {"README.md", "memory.yaml"} and present == original.get(name):
+            if (name == "AGENTS.md" and raw != original.get(name) and raw != present and raw == present + completion_link()):
+                selected[name], before[name] = raw, sha(present)
+            elif saved_identity is None and name in {"README.md", "memory.yaml"} and present == original.get(name):
                 selected[name], before[name] = raw, sha(present)
             else:
                 preserved[name] = sha(present)
@@ -1171,7 +1271,8 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
         if entry.get("destination") != expected_destination:
             raise InitializationError("existing setup receipt changes a source destination")
         if entry["adoption"] == "specialized" and (record["setup_contract"] not in MEMORY_CONTRACTS
-                                                   or expected_destination not in SPECIALIZED_FILES):
+                                                   or expected_destination not in SPECIALIZED_FILES
+                                                   or expected_destination == "AGENTS.md" and record["setup_contract"] not in LEARNING_CONTRACTS):
             raise InitializationError("existing setup receipt has an unsupported specialization")
         if (record["setup_contract"] in LICENSE_CONTRACTS
                 and expected_destination in LICENSE_FILES
@@ -1202,7 +1303,8 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
         required_starters(record["setup_contract"]) | {"SOUL.md", TEMPLATE_POLICY, README_RENDERER}
         | {f".agents/skills/{name}/SKILL.md" for name in required_skills(record["setup_contract"])}
         | (MEMORY_CONTRACT_FILES | MEMORY_HELPER_FILES if record["setup_contract"] in MEMORY_CONTRACTS else set())
-        | (CAPTURE_HELPER_FILES if record["setup_contract"] == SETUP_CONTRACT else set())
+        | (CAPTURE_HELPER_FILES if record["setup_contract"] in CAPTURE_CONTRACTS else set())
+        | (LEARNING_FILES | {LEARNING_RESOLVER} if record["setup_contract"] in LEARNING_CONTRACTS else set())
         | role_sources}
     if not required_sources <= seen_sources:
         raise InitializationError("existing setup receipt omits required starter source provenance")
@@ -1285,7 +1387,7 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
                 name.startswith(root + "/") and inventory.get(root) == "directory" for root in MEMORY_TREES))
             expected_adoption = "preserved-project-owned" if name in inventory else "skipped-existing-package"
             pristine_config = (name == "memory.yaml" and adoption == "specialized"
-                               and record["setup_contract"] == SETUP_CONTRACT
+                               and record["setup_contract"] in CAPTURE_CONTRACTS
                                and inventory.get(name) == next(entry["source_sha256"] for entry in record["sources"]
                                                                if entry["destination"] == name))
             if (existing and adoption != expected_adoption and not pristine_config
@@ -1323,6 +1425,8 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
                     name.startswith(root + "/") and record["preserved_memory"].get(root) == "directory"
                     for root in MEMORY_TREES):
                 preserved_root = destination / next(root for root in MEMORY_TREES if name.startswith(root + "/"))
+            elif record["setup_contract"] in LEARNING_CONTRACTS and any(name.startswith(root + "/") for root in LEARNING_TREES):
+                preserved_root = destination / next(root for root in LEARNING_TREES if name.startswith(root + "/"))
             else:
                 raise InitializationError("existing setup receipt skips a required standalone starter")
             safe(preserved_root)
@@ -1331,6 +1435,23 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
                 raise InitializationError("existing setup receipt lacks its preserved package or Task tree")
     if record["owned_files"] != expected_owned or record["preserved_files"] != expected_preserved:
         raise InitializationError("existing setup receipt file inventories differ from source adoption decisions")
+    if record["setup_contract"] in LEARNING_CONTRACTS:
+        inventory = record.get("preserved_learning")
+        if not isinstance(inventory, dict):
+            raise InitializationError("learning setup receipt lacks complete package preservation evidence")
+        for name, digest in inventory.items():
+            if (not isinstance(name, str) or not any(name == root or name.startswith(root + "/") for root in LEARNING_TREES)
+                    or not isinstance(digest, str) or digest != "directory" and not SHA256.fullmatch(digest)
+                    or Path(name).as_posix() != name or ".." in Path(name).parts
+                    or name not in LEARNING_TREES and inventory.get(Path(name).parent.as_posix()) != "directory"):
+                raise InitializationError("invalid learning preservation inventory")
+            safe(destination / name)
+        for name, (adoption, digest) in source_adoptions.items():
+            root = next((root for root in LEARNING_TREES if name.startswith(root + "/")), None)
+            if root and inventory.get(root) == "directory":
+                expected = "preserved-project-owned" if name in inventory else "skipped-existing-package"
+                if adoption != expected or digest != inventory.get(name):
+                    raise InitializationError("learning source adoption mixes an existing whole package")
     if "assets" not in stages:
         before = record.get("recovery_before")
         if (not isinstance(before, dict) or before.keys() != record["owned_files"].keys()
@@ -1339,6 +1460,7 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
             raise InitializationError("partial setup receipt lacks its asset recovery inventory")
     if record["status"] == "completed" and (stages != STAGES or record["active_stage"] is not None):
         raise InitializationError("completed setup receipt lacks required stages")
+    validate_module_adoptions(record, destination)
 
 
 def archive_record(destination: Path, raw: bytes) -> dict[str, str]:
@@ -1362,6 +1484,7 @@ def memory_capture_notice(destination: Path) -> dict[str, Any]:
         raw = file_bytes(destination_file(destination, "memory.yaml"))
         config = unique_json(raw)
         files = {name: file_bytes(destination_file(destination, name)) for name in MEMORY_HELPER_FILES}
+        check_memory_inspectors(files)
         validate_memory_config(config, files, allow_template=False)
         enabled = config["integration"]["automatic_capture"]
         result.update(automatic_capture=enabled, config_sha256=sha(raw))
@@ -1380,15 +1503,72 @@ def memory_capture_notice(destination: Path) -> dict[str, Any]:
     return result
 
 
-def verify_project(destination: Path, record: dict[str, Any]) -> dict[str, str]:
+def assess_learning(destination: Path) -> dict[str, Any]:
+    """Report local capability separately from grants and backend readiness."""
+    result = {"module_id": LEARNING_MODULE, "read_only": True,
+              "manual_review": "unavailable", "shared_automatic_checkpoint": "unavailable",
+              "authorized_publication": "unavailable", "optional_backend": "not-assessed",
+              "automatic_capture": None, "director_binding": "not-assessed",
+              "operation_grant_checked": False, "diagnostics": []}
+    try:
+        raw = file_bytes(destination_file(destination, LEARNING_RESOLVER))
+        with learning_resolver(raw) as helper:
+            resolution = helper.resolve(destination)
+        result["resolution"] = resolution
+        result["diagnostics"].extend(resolution["errors"])
+        if resolution["capabilities"]["manual_review"]:
+            result["manual_review"] = "available"
+        config_raw = file_bytes(destination_file(destination, "memory.yaml"))
+        config = unique_json(config_raw)
+        files = {name: file_bytes(destination_file(destination, name)) for name in MEMORY_HELPER_FILES}
+        check_memory_inspectors(files)
+        validate_memory_config(config, files, allow_template=False)
+        identity = unique_json(file_bytes(destination_file(destination, IDENTITY)))
+        if config["project"] != {"id": identity["project_id"], "name": identity["project_name"], "root": "."}:
+            raise InitializationError("memory.yaml identity does not match this destination")
+        result["config_sha256"] = sha(config_raw)
+        result["automatic_capture"] = config["integration"]["automatic_capture"]
+        if not result["automatic_capture"]:
+            result["shared_automatic_checkpoint"] = "off"
+        elif resolution["capabilities"]["shared_automatic_checkpoint"]:
+            result["shared_automatic_checkpoint"] = "available"
+        result["optional_backend"] = "configured-not-verified" if config["backend"]["enabled"] else "disabled"
+        director = config["publication"]["director"]
+        result["director_binding"] = "absent"
+        if director:
+            result["publication_scope"] = list(director["scope"])
+            result["director_binding"] = "unverified"
+            for ref in director["authority"]:
+                if sha(file_bytes(destination_file(destination, ref["path"]))) != ref["sha256"]:
+                    result["director_binding"] = "stale"
+                    result["diagnostics"].append({"path": ref["path"], "code": "stale_authority",
+                                                   "message": "Preserved publication authority no longer matches this governing file."})
+            if result["director_binding"] == "unverified":
+                result["director_binding"] = "current"
+            if result["director_binding"] == "current" and resolution["memory"]["interface_compatible"]:
+                result["authorized_publication"] = "requires-current-operation-grant"
+        result["publication_requirement"] = "The memory helper must verify the exact operation grant, actor and current Task ownership before each write."
+    except (InitializationError, OSError, ValueError, KeyError, TypeError) as error:
+        result["manual_review"] = "unavailable"
+        result["shared_automatic_checkpoint"] = "unavailable"
+        result["diagnostics"].append({"path": "memory.yaml or installed learning/memory package",
+                                       "code": "capability_unavailable",
+                                       "message": str(error) if isinstance(error, InitializationError) else "Required local configuration or resource could not be verified."})
+    return result
+
+
+def verify_project(destination: Path, record: dict[str, Any], *, allow_module_gaps: bool = False) -> dict[str, str]:
     """Observe current adopted files without resetting normal project edits."""
     validate_record(record, destination, record["identity"])
     role_root, current_paths, case_evidence = record_role_paths(record, destination)
     current = {}
-    for name in sorted(record["owned_files"].keys() | record["preserved_files"].keys()):
+    current_owned = module_owned_files(record)
+    for name in sorted(current_owned.keys() | record["preserved_files"].keys()):
         current_name = current_paths.get(name, name)
         target = destination_file(destination, current_name)
         if not target.is_file():
+            if allow_module_gaps and any(current_name.startswith(root + "/") for root in MODULE_PACKAGES):
+                continue
             raise InitializationError(f"project setup file is missing: {name}")
         current[current_name] = sha(file_bytes(target))
     identity = record["identity"]
@@ -1406,14 +1586,443 @@ def verify_project(destination: Path, record: dict[str, Any]) -> dict[str, str]:
         record["current_licenses"] = license_inventory(destination)
     if record["setup_contract"] in MEMORY_CONTRACTS:
         record["current_memory"] = memory_inventory(destination)
+    if record["setup_contract"] in LEARNING_CONTRACTS:
+        record["current_learning"] = {name: digest for root in LEARNING_TREES for name, digest in package_inventory(destination, root).items()}
     return current
 
 
+MODULE_PACKAGES = (*LEARNING_TREES, ".agents/skills/memory", MEMORY_CONTRACT_ROOT, "MEMORY")
+REFRESH_PACKAGES = {".agents/skills/memory", MEMORY_CONTRACT_ROOT}
+MODULE_STAGES = ["assets", "verification"]
+BASE_IMMUTABLE = ("schema_version", "setup_contract", "operation_id", "identity", "project_root",
+                  "sources", "owned_files", "preserved_files", "preserved_memory", "preserved_licenses", "preserved_learning", "created_at")
+MODULE_FROZEN = ("module_id", "module_version", "project_root", "identity", "base_receipt",
+                 "refresh_dependencies", "new_memory", "sources", "packages", "files", "preserved_files")
+
+
+def package_inventory(destination: Path, root: str) -> dict[str, str]:
+    target = safe(destination / root)
+    if not target.exists():
+        return {}
+    if not target.is_dir():
+        raise InitializationError("module package is not a directory: " + root)
+    result = {}
+    for path in (target, *sorted(target.rglob("*"))):
+        safe(path)
+        result[path.relative_to(destination).as_posix()] = "directory" if path.is_dir() else sha(file_bytes(path))
+    return result
+
+
+def inventory_from_files(root: str, files: dict[str, Any]) -> dict[str, str]:
+    result = {root: "directory"}
+    for name, value in files.items():
+        if not name.startswith(root + "/"):
+            continue
+        result[name] = sha(value) if isinstance(value, bytes) else value
+        parent = Path(name).parent
+        while parent.as_posix() != root:
+            result[parent.as_posix()] = "directory"
+            parent = parent.parent
+    return result
+
+
+def check_learning_adoption(destination: Path, record: dict[str, Any]) -> None:
+    if record["setup_contract"] not in LEARNING_CONTRACTS:
+        return
+    expected = dict(record["preserved_learning"])
+    for root in LEARNING_TREES:
+        planned = inventory_from_files(root, {name: digest for name, digest in record["owned_files"].items() if name.startswith(root + "/")})
+        expected.update({name: digest for name, digest in planned.items() if digest == "directory" and safe(destination / name).is_dir()})
+        published = {name: digest for name, digest in record["owned_files"].items()
+                     if name.startswith(root + "/") and destination_file(destination, name).exists()}
+        if published:
+            expected.update(inventory_from_files(root, published))
+    current = {name: digest for root in LEARNING_TREES for name, digest in package_inventory(destination, root).items()}
+    if current != expected:
+        raise InitializationError("project learning packages changed during asset adoption")
+
+
+def module_owned_files(record: dict[str, Any]) -> dict[str, str]:
+    owned = dict(record["owned_files"])
+    for operation in record.get("module_adoptions", []):
+        if operation["status"] == "completed":
+            for name, change in operation["files"].items():
+                if change["after"] is None:
+                    owned.pop(name, None)
+                else:
+                    owned[name] = change["after"]
+    return owned
+
+
+def module_source_files(depot: Path, *, new_memory: bool) -> dict[str, bytes]:
+    original, _, _, _, _ = template_sources(depot)
+    selected = {name: raw for name, raw in original.items()
+                if name == "memory.yaml" or any(name.startswith(root + "/") for root in MODULE_PACKAGES)}
+    if new_memory:
+        selected["AGENTS.md"] = original["AGENTS.md"]
+    return selected
+
+
+def module_proposed_files(destination: Path, identity: dict[str, Any], original: dict[str, bytes],
+                          *, new_memory: bool) -> dict[str, bytes]:
+    proposed = dict(original)
+    if new_memory:
+        governance = {name: file_bytes(destination_file(destination, name)) for name in ("SOUL.md", "AGENTS.md", "ROLE.md")}
+        if not any(COMPLETION_REFERENCE.encode() in raw for raw in governance.values()):
+            governance["AGENTS.md"] += completion_link()
+        proposed["AGENTS.md"] = governance["AGENTS.md"]
+        proposed["memory.yaml"] = specialize_memory(original["memory.yaml"], identity, {**original, **governance},
+            automatic=True, destination=destination, owned_governance=frozenset(governance))
+    return proposed
+
+
+def plan_module_adoption(depot: Path, destination: Path, record: dict[str, Any], previous_raw: bytes,
+                         refresh_dependencies: list[str]) -> tuple[dict[str, Any], dict[str, bytes]]:
+    new_memory = not destination_file(destination, "memory.yaml").exists()
+    original = module_source_files(depot, new_memory=new_memory)
+    proposed = module_proposed_files(destination, record["identity"], original, new_memory=new_memory)
+    owned = module_owned_files(record)
+    packages, changes, preserved = {}, {}, {}
+    for root in MODULE_PACKAGES:
+        before = package_inventory(destination, root)
+        source = {name: raw for name, raw in proposed.items() if name.startswith(root + "/")}
+        after = inventory_from_files(root, source)
+        type_changes = sorted(name for name in before.keys() & after.keys()
+                              if (before[name] == "directory") != (after[name] == "directory"))
+        if type_changes:
+            raise InitializationError("module package file/directory transition requires separate scoped adoption: " + ", ".join(type_changes))
+        decision, diagnostic = "adopted", None
+        if before:
+            decision = "preserved-package"
+            if root in REFRESH_PACKAGES and "memory" in refresh_dependencies and before != after:
+                owned_package = {name: digest for name, digest in owned.items() if name.startswith(root + "/")}
+                expected_owned = inventory_from_files(root, owned_package) if owned_package else {}
+                if owned_package and before == expected_owned:
+                    decision = "refreshed-owned-package"
+                else:
+                    decision = "preserved-incompatible-refresh"
+                    different = sorted(name for name in before.keys() | expected_owned.keys() if before.get(name) != expected_owned.get(name))
+                    diagnostic = {"code": "scoped_dependency_adoption_required", "path": root,
+                        "different_resources": different,
+                        "message": "Preserved whole package: explicit refresh requires its complete unchanged receipt-owned inventory; review a separate scoped custom-package adoption."}
+            if decision.startswith("preserved"):
+                after = dict(before)
+        packages[root] = {"decision": decision, "before": before, "after": after, "diagnostic": diagnostic}
+        if not decision.startswith("preserved"):
+            for name in sorted(before.keys() | after.keys()):
+                if before.get(name) == "directory" or after.get(name) == "directory":
+                    continue
+                changes[name] = {"before": before.get(name), "after": after.get(name)}
+    for name in (IDENTITY, "SOUL.md", "AGENTS.md", "ROLE.md", "memory.yaml"):
+        target = destination_file(destination, name)
+        present = file_bytes(target) if target.exists() else None
+        if new_memory and name in {"AGENTS.md", "memory.yaml"} and present != proposed[name]:
+            changes[name] = {"before": sha(present) if present is not None else None, "after": sha(proposed[name])}
+        elif present is not None:
+            preserved[name] = sha(present)
+    sources = []
+    for name, raw in sorted(original.items()):
+        if name in changes:
+            after = changes[name]["after"]
+            adoption = "specialized" if name in {"AGENTS.md", "memory.yaml"} else "adopted"
+        else:
+            root = next((root for root in MODULE_PACKAGES if name.startswith(root + "/")), None)
+            after = packages[root]["after"].get(name) if root else preserved.get(name)
+            adoption = "preserved-project-owned" if after else "skipped-existing-package"
+        sources.append({"source": TEMPLATE + "/" + name, "destination": name, "source_sha256": sha(raw),
+                        "source_version": "sha256:" + sha(raw), "destination_sha256": after, "adoption": adoption})
+    digest = sha(previous_raw)
+    operation = {"schema_version": 1, "module_id": LEARNING_MODULE,
+        "module_version": unique_json(original[LEARNING_ROOT + "/contract.json"])["module_version"],
+        "operation_id": "module-adoption-" + uuid4().hex, "project_root": str(destination), "identity": deepcopy(record["identity"]),
+        "base_receipt": {"path": "control_records/project-setup-history/" + digest + ".json", "sha256": digest},
+        "refresh_dependencies": refresh_dependencies, "new_memory": new_memory,
+        "sources": sources, "packages": packages, "files": changes, "preserved_files": preserved,
+        "status": "partial", "completed_stages": [], "active_stage": "assets", "checks": [],
+        "created_at": datetime.now(timezone.utc).isoformat()}
+    operation["manifest_sha256"] = sha(encoded({key: operation[key] for key in MODULE_FROZEN}))
+    return operation, proposed
+
+
+def validate_module_adoptions(record: dict[str, Any], destination: Path) -> None:
+    operations = record.get("module_adoptions", [])
+    if not isinstance(operations, list) or len(operations) > 100:
+        raise InitializationError("invalid module adoption collection")
+    seen = set()
+    for index, operation in enumerate(operations):
+        required = {"schema_version", "operation_id", "manifest_sha256", "status", "completed_stages", "active_stage", "checks", "created_at", *MODULE_FROZEN}
+        optional = {"capabilities", "current_files", "verified_at", "recovery", "rerun"}
+        if (not isinstance(operation, dict) or not required <= operation.keys() or not operation.keys() <= required | optional
+                or type(operation["schema_version"]) is not int or operation["schema_version"] != 1
+                or any(not isinstance(operation[name], str) for name in ("module_id", "module_version", "project_root", "operation_id", "manifest_sha256", "status", "created_at"))
+                or operation["active_stage"] is not None and not isinstance(operation["active_stage"], str)
+                or not isinstance(operation["checks"], list)
+                or operation["module_id"] != LEARNING_MODULE
+                or operation["module_version"] != "1.0.0"
+                or operation["project_root"] != str(destination) or operation["identity"] != record["identity"]
+                or not isinstance(operation["operation_id"], str)
+                or not re.fullmatch(r"module-adoption-[0-9a-f]{32}", operation["operation_id"])
+                or operation["operation_id"] in seen or operation["refresh_dependencies"] not in ([], ["memory"])
+                or type(operation["new_memory"]) is not bool
+                or operation["manifest_sha256"] != sha(encoded({key: operation[key] for key in MODULE_FROZEN}))):
+            raise InitializationError("invalid module adoption identity or frozen manifest")
+        seen.add(operation["operation_id"])
+        stages = operation["completed_stages"]
+        if (operation["status"] not in {"partial", "completed"} or not isinstance(stages, list)
+                or stages != MODULE_STAGES[:len(stages)] or operation["active_stage"] not in {*MODULE_STAGES, None}
+                or operation["status"] == "completed" and (stages != MODULE_STAGES or operation["active_stage"] is not None)
+                or operation["status"] == "partial" and index != len(operations) - 1):
+            raise InitializationError("invalid module adoption lifecycle")
+        archive = operation["base_receipt"]
+        if (not isinstance(archive, dict) or set(archive) != {"path", "sha256"}
+                or not isinstance(archive["sha256"], str) or not SHA256.fullmatch(archive["sha256"])
+                or archive["path"] != "control_records/project-setup-history/" + archive["sha256"] + ".json"):
+            raise InitializationError("invalid module base receipt provenance")
+        raw = file_bytes(destination_file(destination, archive["path"]))
+        old = unique_json(raw)
+        if not isinstance(old, dict) or sha(raw) != archive["sha256"] or any(old.get(key) != record.get(key) for key in BASE_IMMUTABLE):
+            raise InitializationError("module adoption changed its original base setup evidence")
+        old_operations = old.get("module_adoptions", [])
+        if (not isinstance(old_operations, list) or len(old_operations) != index
+                or any(not isinstance(prior, dict) or prior.get("operation_id") != operations[position]["operation_id"]
+                       or prior.get("manifest_sha256") != operations[position]["manifest_sha256"]
+                       or prior.get("status") != "completed" for position, prior in enumerate(old_operations))):
+            raise InitializationError("module adoption lacks its exact earlier operation provenance")
+        previous_owned = module_owned_files(old)
+        if not isinstance(operation["packages"], dict) or set(operation["packages"]) != set(MODULE_PACKAGES):
+            raise InitializationError("invalid module package scope")
+        for root, package in operation["packages"].items():
+            if (not isinstance(package, dict) or set(package) != {"decision", "before", "after", "diagnostic"}
+                    or not isinstance(package["decision"], str)
+                    or package["diagnostic"] is not None and not isinstance(package["diagnostic"], dict)
+                    or package["decision"] not in {"adopted", "preserved-package", "refreshed-owned-package", "preserved-incompatible-refresh"}
+                    or package["decision"] == "refreshed-owned-package" and (root not in REFRESH_PACKAGES or operation["refresh_dependencies"] != ["memory"])):
+                raise InitializationError("invalid module package adoption decision")
+            for phase in ("before", "after"):
+                inventory = package[phase]
+                if not isinstance(inventory, dict):
+                    raise InitializationError("invalid module package inventory")
+                for name, digest in inventory.items():
+                    if (not isinstance(name, str) or name != root and not name.startswith(root + "/")
+                            or not isinstance(digest, str) or digest != "directory" and not SHA256.fullmatch(digest)
+                            or Path(name).as_posix() != name or ".." in Path(name).parts):
+                        raise InitializationError("invalid module package path or digest")
+                    if name != root and inventory.get(Path(name).parent.as_posix()) != "directory":
+                        raise InitializationError("module package inventory lacks parent evidence")
+                    safe(destination / name)
+                if inventory and inventory.get(root) != "directory":
+                    raise InitializationError("module package lacks its directory evidence")
+            if package["decision"].startswith("preserved") and package["before"] != package["after"]:
+                raise InitializationError("module preservation changed a whole package")
+            if package["decision"] == "adopted" and package["before"]:
+                raise InitializationError("module adoption cannot relabel an existing package as missing")
+            if package["decision"] == "refreshed-owned-package":
+                owned_package = {name: digest for name, digest in previous_owned.items() if name.startswith(root + "/")}
+                expected_owned = inventory_from_files(root, owned_package) if owned_package else {}
+                if not owned_package or package["before"] != expected_owned:
+                    raise InitializationError("module refresh lacks complete prior receipt ownership")
+        if not isinstance(operation["files"], dict) or not isinstance(operation["preserved_files"], dict):
+            raise InitializationError("invalid module target inventory")
+        for name, change in operation["files"].items():
+            if not isinstance(name, str):
+                raise InitializationError("invalid module target path")
+            allowed = any(name.startswith(root + "/") for root in MODULE_PACKAGES)
+            if not allowed and not (operation["new_memory"] and name in {"AGENTS.md", "memory.yaml"}):
+                raise InitializationError("module adoption target is outside its selected scope")
+            destination_file(destination, name)
+            if (not isinstance(change, dict) or set(change) != {"before", "after"}
+                    or any(value is not None and (not isinstance(value, str) or not SHA256.fullmatch(value)) for value in change.values())
+                    or change["before"] is None and change["after"] is None):
+                raise InitializationError("invalid module before/after evidence")
+        for name, digest in operation["preserved_files"].items():
+            if name not in {IDENTITY, "SOUL.md", "AGENTS.md", "ROLE.md", "memory.yaml"} or not isinstance(digest, str) or not SHA256.fullmatch(digest) or name in operation["files"]:
+                raise InitializationError("invalid module preserved governing file")
+            destination_file(destination, name)
+        if not {IDENTITY, "SOUL.md", "ROLE.md"} <= operation["preserved_files"].keys():
+            raise InitializationError("module adoption lacks frozen project identity and governance")
+        if operation["new_memory"] and (operation["files"].get("memory.yaml", {}).get("before", "absent") is not None
+                                        or operation["files"].get("memory.yaml", {}).get("after") is None):
+            raise InitializationError("new memory binding lacks a missing-before configuration")
+        sources = operation["sources"]
+        if not isinstance(sources, list) or not sources:
+            raise InitializationError("module adoption lacks source evidence")
+        source_names = set()
+        for source in sources:
+            name = source.get("destination") if isinstance(source, dict) else None
+            if (not isinstance(name, str) or name in source_names or source.get("source") != TEMPLATE + "/" + name
+                    or not (name == "memory.yaml" or operation["new_memory"] and name == "AGENTS.md"
+                            or any(name.startswith(root + "/") for root in MODULE_PACKAGES))
+                    or not isinstance(source.get("source_sha256"), str) or not SHA256.fullmatch(source["source_sha256"])
+                    or source.get("source_version") != "sha256:" + source["source_sha256"]):
+                raise InitializationError("invalid nested module source provenance")
+            source_names.add(name)
+            destination_file(destination, name)
+            root = next((root for root in MODULE_PACKAGES if name.startswith(root + "/")), None)
+            after = (operation["files"][name]["after"] if name in operation["files"] else
+                     operation["packages"][root]["after"].get(name) if root else operation["preserved_files"].get(name))
+            adoption = ("specialized" if name in {"memory.yaml", "AGENTS.md"} else "adopted") if name in operation["files"] else "preserved-project-owned" if after else "skipped-existing-package"
+            if source.get("destination_sha256") != after or source.get("adoption") != adoption:
+                raise InitializationError("module source and target decisions disagree")
+            if adoption == "adopted" and source["source_sha256"] != after:
+                raise InitializationError("module adopted bytes differ from their frozen source")
+        if not (LEARNING_FILES | {LEARNING_RESOLVER, "memory.yaml"}) <= source_names:
+            raise InitializationError("module adoption omits required source evidence")
+        for root, package in operation["packages"].items():
+            selected = {name for name in package["before"].keys() | package["after"].keys()
+                        if package["before"].get(name) != "directory" and package["after"].get(name) != "directory"}
+            actual = {name for name in operation["files"] if name.startswith(root + "/")}
+            if package["decision"].startswith("preserved"):
+                if actual:
+                    raise InitializationError("module adoption writes a preserved package")
+            elif actual != selected or any(operation["files"][name] != {"before": package["before"].get(name), "after": package["after"].get(name)} for name in actual):
+                raise InitializationError("module package and target inventories disagree")
+            if not {name for name, digest in package["after"].items() if digest != "directory" and not package["decision"].startswith("preserved")} <= source_names:
+                raise InitializationError("module adopted package omits source provenance")
+
+
+def check_module_state(destination: Path, operation: dict[str, Any], *, complete: bool = False) -> None:
+    for name, digest in operation["preserved_files"].items():
+        if sha(file_bytes(destination_file(destination, name))) != digest:
+            raise InitializationError("preserved module input changed: " + name)
+    for name, change in operation["files"].items():
+        target = destination_file(destination, name)
+        current = sha(file_bytes(target)) if target.exists() else None
+        if current not in ({change["after"]} if complete else {change["before"], change["after"]}):
+            raise InitializationError("module adoption target changed: " + name)
+    for root, package in operation["packages"].items():
+        current = package_inventory(destination, root)
+        if complete or package["decision"].startswith("preserved"):
+            if current != package["after"]:
+                raise InitializationError("module package changed during adoption: " + root)
+        else:
+            possible = package["before"].keys() | package["after"].keys()
+            if not current.keys() <= possible or any(value not in {package["before"].get(name), package["after"].get(name)} for name, value in current.items()):
+                raise InitializationError("module package gained conflicting content: " + root)
+
+
+def check_module_sources(depot: Path, operation: dict[str, Any]) -> dict[str, bytes]:
+    original = module_source_files(depot, new_memory=operation["new_memory"])
+    expected = {entry["destination"]: entry["source_sha256"] for entry in operation["sources"]}
+    if {name: sha(raw) for name, raw in original.items()} != expected:
+        raise InitializationError("frozen module Template sources changed; restore the reviewed edition before recovery")
+    return original
+
+
+def verify_module_current(destination: Path, operation: dict[str, Any]) -> None:
+    operation["current_files"] = {name: digest for root in MODULE_PACKAGES for name, digest in package_inventory(destination, root).items()}
+    operation["capabilities"] = assess_learning(destination)
+    operation["checks"] = [{"check": name, "outcome": "passed"} for name in ("module-manifest", "current-project-identity", "local-capability-assessment")]
+    operation["verified_at"] = datetime.now(timezone.utc).isoformat()
+
+
+def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], previous_raw: bytes,
+                         refresh_dependencies: list[str]) -> dict[str, Any]:
+    if record["status"] != "completed" or record["completed_stages"] != STAGES:
+        raise InitializationError("finish the incomplete base setup before selected module adoption")
+    pending = [op for op in record.get("module_adoptions", []) if op["status"] != "completed"]
+    if pending and pending[0]["refresh_dependencies"] != refresh_dependencies:
+        raise InitializationError("resume the exact pending module request and dependency selection")
+    matches = [op for op in record.get("module_adoptions", []) if op["refresh_dependencies"] == refresh_dependencies]
+    operation = pending[0] if pending else matches[-1] if matches else None
+    record_path = destination_file(destination, RECORD)
+    lock = depot / "depot" / (".initialize-" + sha(record["identity"]["relative_path"].encode())[:16] + ".lock")
+    with exclusive(lock), ExitStack() as guard:
+        if file_bytes(record_path) != previous_raw:
+            raise InitializationError("setup receipt changed before module adoption")
+        if operation is None or operation["status"] != "completed":
+            guard.enter_context(template_read_lock(depot))
+            if operation is None:
+                verify_project(destination, deepcopy(record), allow_module_gaps=True)
+                original, _, _, _, _ = template_sources(depot)
+                check_existing_role_layout(destination, original[ROLE_HELPER])
+                operation, proposed = plan_module_adoption(depot, destination, record, previous_raw, refresh_dependencies)
+                record.setdefault("module_adoptions", []).append(operation)
+            else:
+                proposed = module_proposed_files(destination, record["identity"], check_module_sources(depot, operation), new_memory=operation["new_memory"])
+            check_module_sources(depot, operation)
+            check_module_state(destination, operation)
+            for name, change in operation["files"].items():
+                if change["after"] is not None and (name not in proposed or sha(proposed[name]) != change["after"]):
+                    raise InitializationError("module recovery no longer produces its frozen after bytes")
+        archived = archive_record(destination, previous_raw)
+        if archived not in record.setdefault("history", []):
+            record["history"].append(archived)
+        validate_module_adoptions(record, destination)
+        current_raw = previous_raw
+
+        def checkpoint() -> None:
+            nonlocal current_raw
+            raw = encoded(record)
+            atomic_write(record_path, raw, current_raw, mode=0o600)
+            current_raw = raw
+
+        try:
+            if operation["status"] == "completed":
+                verify_project(destination, deepcopy(record), allow_module_gaps=True)
+                verify_module_current(destination, operation)
+                operation["rerun"] = "verified-current-module-without-refresh"
+                checkpoint()
+                return record
+            checkpoint()
+            operation["active_stage"] = "assets"
+            if "assets" not in operation["completed_stages"]:
+                for name, change in operation["files"].items():
+                    target = destination_file(destination, name)
+                    current = file_bytes(target) if target.exists() else None
+                    current_digest = sha(current) if current is not None else None
+                    if current_digest == change["after"]:
+                        continue
+                    if current_digest != change["before"]:
+                        raise InitializationError("module adoption target changed before publication: " + name)
+                    if change["after"] is None:
+                        target.unlink()
+                    else:
+                        atomic_write(target, proposed[name], current)
+                for package in operation["packages"].values():
+                    for name in sorted(package["before"].keys() - package["after"].keys(), key=lambda value: len(Path(value).parts), reverse=True):
+                        target = safe(destination / name)
+                        if package["before"][name] == "directory" and target.exists():
+                            target.rmdir()
+                check_module_state(destination, operation, complete=True)
+                check_module_sources(depot, operation)
+                operation["completed_stages"].append("assets")
+                checkpoint()
+            operation["active_stage"] = "verification"
+            checkpoint()
+            check_module_state(destination, operation, complete=True)
+            check_module_sources(depot, operation)
+            verify_module_current(destination, operation)
+            if "verification" not in operation["completed_stages"]:
+                operation["completed_stages"].append("verification")
+            checkpoint()
+            operation.update(status="completed", active_stage=None)
+            operation.pop("recovery", None)
+            checkpoint()
+            return record
+        except (InitializationError, OSError, ValueError, KeyError) as error:
+            operation["status"] = "partial"
+            operation["active_stage"] = operation["active_stage"] or "verification"
+            operation["recovery"] = {"stage": operation["active_stage"], "completed_stages": list(operation["completed_stages"]),
+                "owned_record": RECORD, "reason": str(error) if isinstance(error, InitializationError) else "A local module adoption stage failed.",
+                "next_action": "Preserve working files and repeat the exact selected module and dependency request after resolving the cause."}
+            try:
+                checkpoint()
+            except (InitializationError, OSError):
+                operation["recovery"]["record_update"] = "failed; retain the saved setup receipt"
+            raise InitializationError("selected module adoption is incomplete; working state was retained",
+                                      report={**record, "status": "partial", "base_setup_status": record["status"]}) from error
+
+
 def run_initialization(
-    *, mode: str, destination: Path, project_id: str, project_name: str, purpose: str
+    *, mode: str, destination: Path, project_id: str, project_name: str, purpose: str,
+    adopt_module: str | None = None, refresh_dependency: list[str] | None = None,
 ) -> dict[str, Any]:
     if mode not in {"create", "prepare-existing"}:
         raise InitializationError("unknown initialization route")
+    refresh = sorted(set(refresh_dependency or []))
+    if (adopt_module not in {None, LEARNING_MODULE} or refresh not in ([], ["memory"])
+            or adopt_module is not None and mode != "prepare-existing" or refresh and adopt_module is None):
+        raise InitializationError("dependency refresh requires selected prepare-existing learning-module adoption")
     depot, skill = installed_locations()
     validate_identity(project_id, project_name, purpose)
     registry, registry_before = read_registry(depot)
@@ -1432,6 +2041,13 @@ def run_initialization(
     if record is not None:
         validate_record(record, destination, identity)
         record = deepcopy(record)
+    if adopt_module is not None:
+        if record is None:
+            raise InitializationError("module adoption requires a valid completed base setup receipt")
+        return run_module_adoption(depot, destination, record, previous_raw, refresh)
+    if record is not None:
+        if any(operation["status"] != "completed" for operation in record.get("module_adoptions", [])):
+            raise InitializationError("resume the exact pending selected module adoption before ordinary setup")
         record["mode"] = mode
     contract = record["setup_contract"] if record is not None else SETUP_CONTRACT
     with ExitStack() as template_guard:
@@ -1453,6 +2069,7 @@ def run_initialization(
                           "owned_files": {name: sha(raw) for name, raw in proposed.items()},
                           "preserved_files": preserved, "preserved_licenses": preserved_licenses,
                           "preserved_memory": preserved_memory,
+                          "preserved_learning": {name: digest for root in LEARNING_TREES for name, digest in package_inventory(destination, root).items()},
                           "recovery_before": before,
                           "completed_stages": [], "active_stage": "assets", "checks": [],
                           "created_at": datetime.now(timezone.utc).isoformat(), "git_setup": "separate"}
@@ -1485,6 +2102,7 @@ def run_initialization(
                 raise InitializationError("registry changed during preflight")
             check_license_adoption(destination, record)
             check_memory_adoption(destination, record)
+            check_learning_adoption(destination, record)
         lock = depot / "depot" / (".initialize-" + sha(relative.encode())[:16] + ".lock")
         with exclusive(lock):
             if mode == "create" and previous_raw is None and destination.exists() and any(destination.iterdir()):
@@ -1494,6 +2112,7 @@ def run_initialization(
             if "assets" not in record["completed_stages"]:
                 check_license_adoption(destination, record)
                 check_memory_adoption(destination, record)
+                check_learning_adoption(destination, record)
             if not destination.exists():
                 destination.mkdir()
             if previous_raw is not None:
@@ -1504,7 +2123,7 @@ def run_initialization(
             was_completed = record["status"] == "completed"
             record.update(status="partial", checks=[])
             record["completed_stages"] = [stage for stage in record["completed_stages"] if stage == "assets"]
-            for key in ("verified_at", "current_files", "current_licenses", "current_memory", "memory_capture", "recovery", "rerun"):
+            for key in ("verified_at", "current_files", "current_licenses", "current_memory", "current_learning", "memory_capture", "recovery", "rerun"):
                 record.pop(key, None)
 
             def checkpoint(stage: str | None = None) -> None:
@@ -1537,6 +2156,7 @@ def run_initialization(
                     check_sources(depot, record["sources"], contract=contract)
                     check_license_adoption(destination, record)
                     check_memory_adoption(destination, record)
+                    check_learning_adoption(destination, record)
                     checkpoint("assets")
                 template_guard.close()
                 begin("registration")
@@ -1553,6 +2173,8 @@ def run_initialization(
                                     for name in ("project-identity", "project-files", "registration")]
                 checkpoint("verification")
                 record["memory_capture"] = memory_capture_notice(destination)
+                if contract in LEARNING_CONTRACTS or record.get("module_adoptions"):
+                    record["learning"] = assess_learning(destination)
                 record.update(status="completed", active_stage=None,
                               verified_at=datetime.now(timezone.utc).isoformat())
                 record.pop("recovery_before", None)
@@ -1582,9 +2204,14 @@ def main(argv: list[str] | None = None) -> int:
         route.add_argument("--project-id", required=True)
         route.add_argument("--project-name", required=True)
         route.add_argument("--purpose", required=True)
+        if mode == "prepare-existing":
+            route.add_argument("--adopt-module", choices=[LEARNING_MODULE])
+            route.add_argument("--refresh-dependency", action="append", choices=["memory"])
+    assessment = commands.add_parser("assess-learning", help="Inspect local learning capability without writing or contacting a backend")
+    assessment.add_argument("--destination", type=Path, required=True)
     arguments = vars(parser.parse_args(argv))
     try:
-        result = run_initialization(**arguments)
+        result = assess_learning(arguments["destination"]) if arguments["mode"] == "assess-learning" else run_initialization(**arguments)
         print(encoded(result).decode(), end="")
         return 0
     except (InitializationError, OSError, subprocess.TimeoutExpired) as error:

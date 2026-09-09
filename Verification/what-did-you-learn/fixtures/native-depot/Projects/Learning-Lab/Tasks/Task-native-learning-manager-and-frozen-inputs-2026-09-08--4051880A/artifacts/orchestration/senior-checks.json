@@ -1,0 +1,588 @@
+{
+  "actor": "/root/native_learning_manager/senior",
+  "artifact": {
+    "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/work/senior/synthesis.json",
+    "sha256": "c6e0679e13da4b12f42c968b9b58642f774f0a1818d8c222baa5817974466bb0"
+  },
+  "assignment_bindings": [
+    {
+      "assignment_id": "solver1",
+      "baseline": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf",
+      "mutated": false,
+      "packet": {
+        "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+        "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+      },
+      "round": 2,
+      "status": "bound"
+    },
+    {
+      "assignment_id": "solver2",
+      "baseline": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf",
+      "mutated": false,
+      "packet": {
+        "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+        "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+      },
+      "round": 2,
+      "status": "bound"
+    },
+    {
+      "assignment_id": "senior",
+      "baseline": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf",
+      "mutated": false,
+      "packet": {
+        "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+        "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+      },
+      "round": 2,
+      "status": "bound"
+    }
+  ],
+  "canonical_revision": 40,
+  "canonical_task_before_after": {
+    "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/task.json",
+    "sha256": "792226c2b917d6cb19e90392701f1956168f862f53cc95b1c64d2edad4f6d5b0"
+  },
+  "capture_status": {
+    "automatic_capture": true,
+    "config_sha256": "774ccd5f0dee6bae93a8667ca9a5d837d5643223cca1d8cb740e2bc2b39f4db8",
+    "message": "Memory automatic capture is on.",
+    "read_only": true,
+    "triggers": [
+      "work-completed",
+      "task-completed",
+      "decision-recorded",
+      "failure-observed"
+    ]
+  },
+  "command": "PYTHONDONTWRITEBYTECODE=1 /opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/bin/python3.12 -B - (stdin senior source, binding, evidence consistency and output checks)",
+  "current_snapshot_count": 36,
+  "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/what-did-you-learn/fixtures/native-depot/Projects/Learning-Lab",
+  "delegation": {
+    "path": "coordination/senior-delegation.json",
+    "sha256": "9e1bb4b0ac7b1f7174969d468d9aecbbbd0957964900c8d4ae3bbb08eb4907c5"
+  },
+  "earlier_invocation_corrections": [
+    "First validate_assignment call supplied the Task directory and was rejected: invalid_task, Supply the exact canonical Task path. Correcting to task.json returned bound; no write or helper change occurred.",
+    "First output-building stdin command had an unclosed dictionary and failed Python parsing before execution. Corrected syntax in this command; no files were created by the rejected command."
+  ],
+  "equal_solver_contexts": true,
+  "execution_id": "wdyl-native-manager-001",
+  "frozen_search": {
+    "mode": "frozen-lexical",
+    "mutated": false,
+    "operation": "memory_packet.search_packet(root, exact revised packet, acceptance criteria, limit=20)",
+    "packet_excluded": [
+      {
+        "id": "MEM-20260909-D4E5F6A7",
+        "reason": "current_execution_or_nonactive"
+      }
+    ],
+    "results": [
+      {
+        "diagnostics": [],
+        "path": "MEMORY/MEM-20260909-A1B2C3D4.md",
+        "record_id": "MEM-20260909-A1B2C3D4",
+        "sha256": "5f909433809573ce4d88a93c78ab841e794186713737cc7e502c3849f602ffb7",
+        "state": "active"
+      },
+      {
+        "diagnostics": [],
+        "path": "MEMORY/MEM-20260909-C3D4E5F6.md",
+        "record_id": "MEM-20260909-C3D4E5F6",
+        "sha256": "b4be7e425d4a16314b192a1adc7d2126abe337f7bf8d23de95f97b85906371c9",
+        "state": "active"
+      }
+    ],
+    "status": "ok"
+  },
+  "generation": 1,
+  "kind": "senior-check-receipt",
+  "limits": [
+    "Senior helper retrieval and static checks only; fixture runtime results are attributed to supplied solver receipts.",
+    "No source, shared memory, Task, configuration, role, production, external or Git writes.",
+    "No broad recall, predecessor-body inspection, new lifecycle recovery or general native error-recovery test."
+  ],
+  "module": {
+    "capabilities": {
+      "authorized_publication": "not_assessed",
+      "manual_review": true,
+      "optional_backend": "not_assessed",
+      "shared_automatic_checkpoint": true
+    },
+    "errors": [],
+    "module": {
+      "compatible": true,
+      "contract_sha256": "239f18c84ad93101ae1e67185f70d0ecabe7a0ef65e6156eb5ab0d9d1539af8d",
+      "id": "what-did-you-learn",
+      "root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/what-did-you-learn/fixtures/native-depot/Projects/Learning-Lab/reference-assets/LEARNING-depo",
+      "version": "1.0.0"
+    }
+  },
+  "observed_at": "2026-09-09T06:41:55.524676+00:00",
+  "output_checks": {
+    "actual_core_commitment_conflicts": 0,
+    "all_four_exact_criteria_present": true,
+    "json_reopened_equal": true,
+    "required_disposition_shape_valid": true,
+    "within_250000_byte_limit": true
+  },
+  "protected_after": {
+    ".agents/skills/communication/SKILL.md": {
+      "mtime_ns": 1788932419567790176,
+      "sha256": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+      "size": 17043
+    },
+    ".agents/skills/memory/SKILL.md": {
+      "mtime_ns": 1788932419583934807,
+      "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+      "size": 4404
+    },
+    ".agents/skills/memory/references/automatic-capture.md": {
+      "mtime_ns": 1788932419586290436,
+      "sha256": "b2c112c9052a26786e41caf0c21f6b6b1a827f67fbc004bc9ff646212a22ec27",
+      "size": 9944
+    },
+    ".agents/skills/memory/references/task-integration.md": {
+      "mtime_ns": 1788932419589704011,
+      "sha256": "1a275a3f6fd4ae943a17ddb9a8bc949e7ac913c5742efa7f66620f5b1e2850a5",
+      "size": 7335
+    },
+    ".agents/skills/what-did-you-learn/SKILL.md": {
+      "mtime_ns": 1788932419634855698,
+      "sha256": "0b3ed8b0f29cdc39853893ff1c916a97e43c1550b3a7091eb6b4555566214c04",
+      "size": 2881
+    },
+    ".agents/skills/what-did-you-learn/references/improvement-and-reuse.md": {
+      "mtime_ns": 1788932419636269876,
+      "sha256": "d3d5c9ee0bd1ca68f46c407e305df6b2c28a77408a695998edfc297d21cff9e2",
+      "size": 4717
+    },
+    ".agents/skills/what-did-you-learn/references/module-resolution.md": {
+      "mtime_ns": 1788932419636958007,
+      "sha256": "697cf0f0f8269988aae970087e5939f85ca631d2e5cc602a97fb70c14b0db5c8",
+      "size": 4481
+    },
+    "AGENTS.md": {
+      "mtime_ns": 1788932419547515423,
+      "sha256": "fb709c430777c2a4ae5782f82485faf8f0aa533b446400b3bde16cfa895a16a6",
+      "size": 5045
+    },
+    "MEMORY/MEM-20260909-A1B2C3D4.md": {
+      "mtime_ns": 1788932948454153101,
+      "sha256": "5f909433809573ce4d88a93c78ab841e794186713737cc7e502c3849f602ffb7",
+      "size": 2824
+    },
+    "MEMORY/MEM-20260909-C3D4E5F6.md": {
+      "mtime_ns": 1788932964314883437,
+      "sha256": "b4be7e425d4a16314b192a1adc7d2126abe337f7bf8d23de95f97b85906371c9",
+      "size": 2509
+    },
+    "ROLE.md": {
+      "mtime_ns": 1788932419548264134,
+      "sha256": "09d8ff13a82a03946d84c8320b9a2192c56bc330a9ab9f4c70c8583cb39e010b",
+      "size": 13786
+    },
+    "Roles/project-sub-agent/AGENTS.md": {
+      "mtime_ns": 1788932419638921781,
+      "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+      "size": 1861
+    },
+    "Roles/project-sub-agent/ROLE.md": {
+      "mtime_ns": 1788932419639488544,
+      "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+      "size": 4740
+    },
+    "SOUL.md": {
+      "mtime_ns": 1788932419558200001,
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+      "size": 28149
+    },
+    "SPECS.md": {
+      "mtime_ns": 1788932419550092207,
+      "sha256": "ac838b0d4e4a1d7e69654b854e449526d7f218e8bbcdae77edba4505637db8dd",
+      "size": 7943
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/baseline_cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf.json": {
+      "mtime_ns": 1788934245367497111,
+      "sha256": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf",
+      "size": 3085
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json": {
+      "mtime_ns": 1788934245269052216,
+      "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968",
+      "size": 9063
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-candidate-v2.json": {
+      "mtime_ns": 1788935500175692478,
+      "sha256": "407474624c4a4518ec8508ce224a74c3cab82f60352905cd7dab0d15445caede",
+      "size": 24194
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json": {
+      "mtime_ns": 1788934906449391876,
+      "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3",
+      "size": 28593
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-candidate-v2.json": {
+      "mtime_ns": 1788934659222257488,
+      "sha256": "db26177464c0ec728a9ed8ec4be054cb1cf4b406f534aeae27aaf92f4c628768",
+      "size": 29440
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-checks-v2.json": {
+      "mtime_ns": 1788934659324697502,
+      "sha256": "33ddb7be0acf71f0ada7e77f4c2e00259d4de4e2f3845116b8dbb0677ce7c946",
+      "size": 24722
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json": {
+      "mtime_ns": 1788934659427038517,
+      "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6",
+      "size": 4111
+    },
+    "context/intent-requirements.md": {
+      "mtime_ns": 1788932420252436419,
+      "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da",
+      "size": 885
+    },
+    "context/lifecycle-v2.md": {
+      "mtime_ns": 1788932955979012324,
+      "sha256": "cf941771d1a9921d2c8ef1501b93a9f8993b54dd1c18556b806d8bac2e3eed7b",
+      "size": 280
+    },
+    "context/manager-requirements.md": {
+      "mtime_ns": 1788933155094190815,
+      "sha256": "de919bdcefbf1944011d3ad25cf1a76f0661b96098375c8cd0b94ac92b40a876",
+      "size": 3426
+    },
+    "coordination/senior-delegation.json": {
+      "mtime_ns": 1788935500761139346,
+      "sha256": "9e1bb4b0ac7b1f7174969d468d9aecbbbd0957964900c8d4ae3bbb08eb4907c5",
+      "size": 6117
+    },
+    "coordination/senior-native-observation.json": {
+      "mtime_ns": 1788935500580980889,
+      "sha256": "ac7b140f714250c51291129170036e61a99d6b03a188dbd7148bc5d4dc421837",
+      "size": 420
+    },
+    "coordination/senior-role-catalog.json": {
+      "mtime_ns": 1788935500621690577,
+      "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397",
+      "size": 1394
+    },
+    "evidence/intent-before-results.json": {
+      "mtime_ns": 1788932420272354539,
+      "sha256": "391da578692930c9298c10cd02a368877658c9d7e49db6b7529f9409a241834c",
+      "size": 1360
+    },
+    "evidence/manager-bootstrap/settings.json": {
+      "mtime_ns": 1788933155137038390,
+      "sha256": "cf5da99fccad8bd60cb3c4808bd136a683a7cd7fd38347ed11a738d04f73d046",
+      "size": 719
+    },
+    "fixture/check_intent.py": {
+      "mtime_ns": 1788932420252596119,
+      "sha256": "707afec815a10c9f03d6b3d75a6667ad4af22e67928cd993143eefd75a4054ca",
+      "size": 660
+    },
+    "fixture/intent_router.py": {
+      "mtime_ns": 1788932420252527497,
+      "sha256": "440ed72c34cfd97c5c2faf8704bcd1043d65a3599e3d97000f3ccfeb9933f7ad",
+      "size": 65
+    },
+    "memory.yaml": {
+      "mtime_ns": 1788932948594435514,
+      "sha256": "774ccd5f0dee6bae93a8667ca9a5d837d5643223cca1d8cb740e2bc2b39f4db8",
+      "size": 2074
+    },
+    "reference-assets/LEARNING-depo/contract.json": {
+      "mtime_ns": 1788932419555141282,
+      "sha256": "239f18c84ad93101ae1e67185f70d0ecabe7a0ef65e6156eb5ab0d9d1539af8d",
+      "size": 2234
+    },
+    "reference-assets/LEARNING-depo/policy.md": {
+      "mtime_ns": 1788932419556233976,
+      "sha256": "3afa6952837da99a74c4b944b8619e7bfb0a31b35259a80fd1207a207167c41e",
+      "size": 7208
+    },
+    "reference-assets/LEARNING-depo/review-contract.md": {
+      "mtime_ns": 1788932419556816280,
+      "sha256": "e0f56c546f02583193d1c1aa0838ef20017cad4dca6c6ce5e0debd01e07d3dcb",
+      "size": 6030
+    }
+  },
+  "protected_before": {
+    ".agents/skills/communication/SKILL.md": {
+      "mtime_ns": 1788932419567790176,
+      "sha256": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+      "size": 17043
+    },
+    ".agents/skills/memory/SKILL.md": {
+      "mtime_ns": 1788932419583934807,
+      "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+      "size": 4404
+    },
+    ".agents/skills/memory/references/automatic-capture.md": {
+      "mtime_ns": 1788932419586290436,
+      "sha256": "b2c112c9052a26786e41caf0c21f6b6b1a827f67fbc004bc9ff646212a22ec27",
+      "size": 9944
+    },
+    ".agents/skills/memory/references/task-integration.md": {
+      "mtime_ns": 1788932419589704011,
+      "sha256": "1a275a3f6fd4ae943a17ddb9a8bc949e7ac913c5742efa7f66620f5b1e2850a5",
+      "size": 7335
+    },
+    ".agents/skills/what-did-you-learn/SKILL.md": {
+      "mtime_ns": 1788932419634855698,
+      "sha256": "0b3ed8b0f29cdc39853893ff1c916a97e43c1550b3a7091eb6b4555566214c04",
+      "size": 2881
+    },
+    ".agents/skills/what-did-you-learn/references/improvement-and-reuse.md": {
+      "mtime_ns": 1788932419636269876,
+      "sha256": "d3d5c9ee0bd1ca68f46c407e305df6b2c28a77408a695998edfc297d21cff9e2",
+      "size": 4717
+    },
+    ".agents/skills/what-did-you-learn/references/module-resolution.md": {
+      "mtime_ns": 1788932419636958007,
+      "sha256": "697cf0f0f8269988aae970087e5939f85ca631d2e5cc602a97fb70c14b0db5c8",
+      "size": 4481
+    },
+    "AGENTS.md": {
+      "mtime_ns": 1788932419547515423,
+      "sha256": "fb709c430777c2a4ae5782f82485faf8f0aa533b446400b3bde16cfa895a16a6",
+      "size": 5045
+    },
+    "MEMORY/MEM-20260909-A1B2C3D4.md": {
+      "mtime_ns": 1788932948454153101,
+      "sha256": "5f909433809573ce4d88a93c78ab841e794186713737cc7e502c3849f602ffb7",
+      "size": 2824
+    },
+    "MEMORY/MEM-20260909-C3D4E5F6.md": {
+      "mtime_ns": 1788932964314883437,
+      "sha256": "b4be7e425d4a16314b192a1adc7d2126abe337f7bf8d23de95f97b85906371c9",
+      "size": 2509
+    },
+    "ROLE.md": {
+      "mtime_ns": 1788932419548264134,
+      "sha256": "09d8ff13a82a03946d84c8320b9a2192c56bc330a9ab9f4c70c8583cb39e010b",
+      "size": 13786
+    },
+    "Roles/project-sub-agent/AGENTS.md": {
+      "mtime_ns": 1788932419638921781,
+      "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+      "size": 1861
+    },
+    "Roles/project-sub-agent/ROLE.md": {
+      "mtime_ns": 1788932419639488544,
+      "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+      "size": 4740
+    },
+    "SOUL.md": {
+      "mtime_ns": 1788932419558200001,
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+      "size": 28149
+    },
+    "SPECS.md": {
+      "mtime_ns": 1788932419550092207,
+      "sha256": "ac838b0d4e4a1d7e69654b854e449526d7f218e8bbcdae77edba4505637db8dd",
+      "size": 7943
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/baseline_cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf.json": {
+      "mtime_ns": 1788934245367497111,
+      "sha256": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf",
+      "size": 3085
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json": {
+      "mtime_ns": 1788934245269052216,
+      "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968",
+      "size": 9063
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-candidate-v2.json": {
+      "mtime_ns": 1788935500175692478,
+      "sha256": "407474624c4a4518ec8508ce224a74c3cab82f60352905cd7dab0d15445caede",
+      "size": 24194
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json": {
+      "mtime_ns": 1788934906449391876,
+      "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3",
+      "size": 28593
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-candidate-v2.json": {
+      "mtime_ns": 1788934659222257488,
+      "sha256": "db26177464c0ec728a9ed8ec4be054cb1cf4b406f534aeae27aaf92f4c628768",
+      "size": 29440
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-checks-v2.json": {
+      "mtime_ns": 1788934659324697502,
+      "sha256": "33ddb7be0acf71f0ada7e77f4c2e00259d4de4e2f3845116b8dbb0677ce7c946",
+      "size": 24722
+    },
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json": {
+      "mtime_ns": 1788934659427038517,
+      "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6",
+      "size": 4111
+    },
+    "context/intent-requirements.md": {
+      "mtime_ns": 1788932420252436419,
+      "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da",
+      "size": 885
+    },
+    "context/lifecycle-v2.md": {
+      "mtime_ns": 1788932955979012324,
+      "sha256": "cf941771d1a9921d2c8ef1501b93a9f8993b54dd1c18556b806d8bac2e3eed7b",
+      "size": 280
+    },
+    "context/manager-requirements.md": {
+      "mtime_ns": 1788933155094190815,
+      "sha256": "de919bdcefbf1944011d3ad25cf1a76f0661b96098375c8cd0b94ac92b40a876",
+      "size": 3426
+    },
+    "coordination/senior-delegation.json": {
+      "mtime_ns": 1788935500761139346,
+      "sha256": "9e1bb4b0ac7b1f7174969d468d9aecbbbd0957964900c8d4ae3bbb08eb4907c5",
+      "size": 6117
+    },
+    "coordination/senior-native-observation.json": {
+      "mtime_ns": 1788935500580980889,
+      "sha256": "ac7b140f714250c51291129170036e61a99d6b03a188dbd7148bc5d4dc421837",
+      "size": 420
+    },
+    "coordination/senior-role-catalog.json": {
+      "mtime_ns": 1788935500621690577,
+      "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397",
+      "size": 1394
+    },
+    "evidence/intent-before-results.json": {
+      "mtime_ns": 1788932420272354539,
+      "sha256": "391da578692930c9298c10cd02a368877658c9d7e49db6b7529f9409a241834c",
+      "size": 1360
+    },
+    "evidence/manager-bootstrap/settings.json": {
+      "mtime_ns": 1788933155137038390,
+      "sha256": "cf5da99fccad8bd60cb3c4808bd136a683a7cd7fd38347ed11a738d04f73d046",
+      "size": 719
+    },
+    "fixture/check_intent.py": {
+      "mtime_ns": 1788932420252596119,
+      "sha256": "707afec815a10c9f03d6b3d75a6667ad4af22e67928cd993143eefd75a4054ca",
+      "size": 660
+    },
+    "fixture/intent_router.py": {
+      "mtime_ns": 1788932420252527497,
+      "sha256": "440ed72c34cfd97c5c2faf8704bcd1043d65a3599e3d97000f3ccfeb9933f7ad",
+      "size": 65
+    },
+    "memory.yaml": {
+      "mtime_ns": 1788932948594435514,
+      "sha256": "774ccd5f0dee6bae93a8667ca9a5d837d5643223cca1d8cb740e2bc2b39f4db8",
+      "size": 2074
+    },
+    "reference-assets/LEARNING-depo/contract.json": {
+      "mtime_ns": 1788932419555141282,
+      "sha256": "239f18c84ad93101ae1e67185f70d0ecabe7a0ef65e6156eb5ab0d9d1539af8d",
+      "size": 2234
+    },
+    "reference-assets/LEARNING-depo/policy.md": {
+      "mtime_ns": 1788932419556233976,
+      "sha256": "3afa6952837da99a74c4b944b8619e7bfb0a31b35259a80fd1207a207167c41e",
+      "size": 7208
+    },
+    "reference-assets/LEARNING-depo/review-contract.md": {
+      "mtime_ns": 1788932419556816280,
+      "sha256": "e0f56c546f02583193d1c1aa0838ef20017cad4dca6c6ce5e0debd01e07d3dcb",
+      "size": 6030
+    }
+  },
+  "reviewed_solver_evidence": {
+    "clear_case_passed": true,
+    "expected_baseline_failures": 4,
+    "fixture_exit_codes": [
+      1,
+      1
+    ],
+    "fixture_results_equal": true,
+    "focused_case_count": 5,
+    "focused_results_equal": true,
+    "internally_equal_snapshot_counts": [
+      27,
+      32
+    ],
+    "refs": [
+      {
+        "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+        "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+      },
+      {
+        "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-checks-v2.json",
+        "sha256": "33ddb7be0acf71f0ada7e77f4c2e00259d4de4e2f3845116b8dbb0677ce7c946"
+      },
+      {
+        "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json",
+        "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6"
+      }
+    ]
+  },
+  "round": 2,
+  "schema_version": 1,
+  "senior_fixture_tests_executed": false,
+  "sources_preserved": true,
+  "status": "passed",
+  "supplied_refs_checked": [
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/packet-revised.json",
+      "sha256": "9ead27fd3f5369d2b56b53971fd3e526eebc7f5a4c6a56a7620bb5203883b968"
+    },
+    {
+      "path": "context/intent-requirements.md",
+      "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da"
+    },
+    {
+      "path": "context/manager-requirements.md",
+      "sha256": "de919bdcefbf1944011d3ad25cf1a76f0661b96098375c8cd0b94ac92b40a876"
+    },
+    {
+      "path": "context/lifecycle-v2.md",
+      "sha256": "cf941771d1a9921d2c8ef1501b93a9f8993b54dd1c18556b806d8bac2e3eed7b"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/baseline_cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf.json",
+      "sha256": "cd93a39ebca260cf37b9fd756e231f0a4c7cef4ccf90f35f35124f82f62395bf"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-candidate-v2.json",
+      "sha256": "407474624c4a4518ec8508ce224a74c3cab82f60352905cd7dab0d15445caede"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-candidate-v2.json",
+      "sha256": "db26177464c0ec728a9ed8ec4be054cb1cf4b406f534aeae27aaf92f4c628768"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver1-partial-checks-v2.json",
+      "sha256": "4a026dcf0d9e0b8d5ce8e569cebe547b4ad6e89c5e267170a88b86c0527e06d3"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-checks-v2.json",
+      "sha256": "33ddb7be0acf71f0ada7e77f4c2e00259d4de4e2f3845116b8dbb0677ce7c946"
+    },
+    {
+      "path": "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/solver2-observation-v2.json",
+      "sha256": "6d16c09b1d3065dbba04f739c59a4238fd882e7971f58533cdb5851ecdc01bd6"
+    },
+    {
+      "path": "coordination/senior-role-catalog.json",
+      "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397"
+    },
+    {
+      "path": "coordination/senior-native-observation.json",
+      "sha256": "ac7b140f714250c51291129170036e61a99d6b03a188dbd7148bc5d4dc421837"
+    },
+    {
+      "path": "evidence/manager-bootstrap/settings.json",
+      "sha256": "cf5da99fccad8bd60cb3c4808bd136a683a7cd7fd38347ed11a738d04f73d046"
+    }
+  ],
+  "task_id": "TASK-20260908-4051880A",
+  "writes": [
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/work/senior/synthesis.json",
+    "Tasks/Task-native-learning-manager-and-frozen-inputs-2026-09-08--4051880A/artifacts/orchestration/work/senior/checks.json"
+  ]
+}

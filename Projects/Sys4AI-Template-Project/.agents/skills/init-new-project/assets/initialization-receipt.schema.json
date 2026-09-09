@@ -30,7 +30,8 @@
         "governance-starter-v3",
         "governance-starter-v4",
         "governance-starter-v5",
-        "governance-starter-v6"
+        "governance-starter-v6",
+        "governance-starter-v7"
       ]
     },
     "status": {
@@ -314,6 +315,45 @@
           "type": "string"
         }
       }
+    },
+    "module_adoptions": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/$defs/moduleAdoption"
+      }
+    },
+    "learning": {
+      "type": "object",
+      "description": "Current read-only module capability assessment. Publication still requires an exact current operation grant; backend readiness is not exercised."
+    },
+    "preserved_learning": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/sha"
+          },
+          {
+            "const": "directory"
+          }
+        ]
+      },
+      "description": "Original complete v7 learning skill and contract-package inventory."
+    },
+    "current_learning": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/sha"
+          },
+          {
+            "const": "directory"
+          }
+        ]
+      },
+      "description": "Current complete v7 learning package inventory; original preservation is retained."
     }
   },
   "allOf": [
@@ -323,7 +363,8 @@
           "setup_contract": {
             "enum": [
               "governance-starter-v5",
-              "governance-starter-v6"
+              "governance-starter-v6",
+              "governance-starter-v7"
             ]
           }
         }
@@ -357,7 +398,8 @@
             "enum": [
               "governance-starter-v4",
               "governance-starter-v5",
-              "governance-starter-v6"
+              "governance-starter-v6",
+              "governance-starter-v7"
             ]
           }
         }
@@ -427,6 +469,20 @@
           }
         }
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "setup_contract": {
+            "const": "governance-starter-v7"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "preserved_learning"
+        ]
+      }
     }
   ],
   "$defs": {
@@ -459,6 +515,314 @@
     "sha": {
       "type": "string",
       "pattern": "^[0-9a-f]{64}$"
+    },
+    "moduleAdoption": {
+      "type": "object",
+      "description": "Selected module operation extending the original base receipt; frozen manifests and checked recovery remain within this ledger.",
+      "required": [
+        "schema_version",
+        "module_id",
+        "module_version",
+        "operation_id",
+        "project_root",
+        "identity",
+        "base_receipt",
+        "refresh_dependencies",
+        "new_memory",
+        "sources",
+        "packages",
+        "files",
+        "preserved_files",
+        "manifest_sha256",
+        "status",
+        "completed_stages",
+        "active_stage",
+        "checks",
+        "created_at"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "module_id": {
+          "const": "what-did-you-learn"
+        },
+        "module_version": {
+          "const": "1.0.0"
+        },
+        "operation_id": {
+          "type": "string",
+          "pattern": "^module-adoption-[0-9a-f]{32}$"
+        },
+        "project_root": {
+          "type": "string"
+        },
+        "identity": {
+          "type": "object",
+          "required": [
+            "schema_version",
+            "project_id",
+            "project_name",
+            "purpose",
+            "relative_path"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "schema_version": {
+              "const": 1
+            },
+            "project_id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            },
+            "project_name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "purpose": {
+              "type": "string",
+              "minLength": 1
+            },
+            "relative_path": {
+              "type": "string",
+              "pattern": "^Projects/"
+            }
+          }
+        },
+        "base_receipt": {
+          "type": "object",
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string",
+              "pattern": "^control_records/project-setup-history/[0-9a-f]{64}\\.json$"
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha"
+            }
+          }
+        },
+        "refresh_dependencies": {
+          "enum": [
+            [],
+            [
+              "memory"
+            ]
+          ]
+        },
+        "new_memory": {
+          "type": "boolean"
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "source",
+              "destination",
+              "source_sha256",
+              "destination_sha256",
+              "source_version",
+              "adoption"
+            ],
+            "properties": {
+              "source": {
+                "type": "string",
+                "pattern": "^Projects/Sys4AI-Template-Project/"
+              },
+              "destination": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_sha256": {
+                "$ref": "#/$defs/sha"
+              },
+              "destination_sha256": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/sha"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "source_version": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              },
+              "adoption": {
+                "enum": [
+                  "adopted",
+                  "specialized",
+                  "preserved-project-owned",
+                  "skipped-existing-package",
+                  "skipped-existing-license"
+                ]
+              }
+            }
+          }
+        },
+        "packages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "decision",
+              "before",
+              "after",
+              "diagnostic"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "decision": {
+                "enum": [
+                  "adopted",
+                  "preserved-package",
+                  "refreshed-owned-package",
+                  "preserved-incompatible-refresh"
+                ]
+              },
+              "before": {
+                "type": "object",
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/sha"
+                    },
+                    {
+                      "const": "directory"
+                    }
+                  ]
+                }
+              },
+              "after": {
+                "type": "object",
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/sha"
+                    },
+                    {
+                      "const": "directory"
+                    }
+                  ]
+                }
+              },
+              "diagnostic": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "files": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "before",
+              "after"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "before": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/sha"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "after": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/sha"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "preserved_files": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/sha"
+          }
+        },
+        "manifest_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "status": {
+          "enum": [
+            "partial",
+            "completed"
+          ]
+        },
+        "completed_stages": {
+          "enum": [
+            [],
+            [
+              "assets"
+            ],
+            [
+              "assets",
+              "verification"
+            ]
+          ]
+        },
+        "active_stage": {
+          "enum": [
+            "assets",
+            "verification",
+            null
+          ]
+        },
+        "checks": {
+          "type": "array"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "capabilities": {
+          "type": "object"
+        },
+        "current_files": {
+          "type": "object",
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/sha"
+              },
+              {
+                "const": "directory"
+              }
+            ]
+          }
+        },
+        "verified_at": {
+          "type": "string"
+        },
+        "recovery": {
+          "type": "object"
+        },
+        "rerun": {
+          "type": "string"
+        }
+      }
     }
   }
 }

@@ -1,0 +1,8 @@
+{
+  "content": "def route(intent):\n    missing = [field for field in (\"purpose\", \"acceptance_criteria\") if not intent.get(field)]\n    if missing:\n        return {\"action\": \"clarify\", \"missing\": missing}\n    return {\"action\": \"draft\", \"missing\": []}\n",
+  "diff": "--- fixture/intent_router.py.before\n+++ fixture/intent_router.py.after\n@@ -1,2 +1,5 @@\n def route(intent):\n+    missing = [field for field in (\"purpose\", \"acceptance_criteria\") if not intent.get(field)]\n+    if missing:\n+        return {\"action\": \"clarify\", \"missing\": missing}\n     return {\"action\": \"draft\", \"missing\": []}\n",
+  "observed_at": "2026-09-09T06:55:50.900317+00:00",
+  "path": "fixture/intent_router.py",
+  "sha256": "78ed36d6f944a0c7757fc6d6880407b0c9bf40d007e8f9b00e63bde8359bb9ca",
+  "syntax_valid": true
+}

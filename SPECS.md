@@ -115,3 +115,30 @@ skill's [automatic-capture reference](./.agents/skills/memory/references/automat
 New installations receive destination-local Director authority. Setup reports
 the actual setting and offers off after completion; existing choices and earlier
 receipt editions are preserved.
+
+## Learning module and initialization v7
+
+`LEARNING-depo/` owns the version 1.0.0 policy, review contract, compatibility
+manifest and lesson-body assets. The thin `what-did-you-learn` skill uses the
+existing memory completion reference, storage schema, four capture triggers,
+publication and recovery operations. Adopted contracts live at
+`reference-assets/LEARNING-depo/`. No learned records or runtime state belong
+in the reusable module or Template.
+
+Initializer 9.0.0 uses `governance-starter-v7` for new and first-prepared projects.
+Memory editions remain v5-v7 and automatic capture v6-v7. Explicit
+`prepare-existing --adopt-module what-did-you-learn` extends the existing setup
+receipt's `module_adoptions`; it retains the original base edition and archived
+provenance. `--refresh-dependency memory` selects complete unchanged receipt-owned
+dependencies only. Current project content, memory choices, records and existing
+bound governance remain preserved. A first memory binding may add its missing
+stable completion link before hashing destination-local authority.
+
+The read-only learning resolver and initializer assessment use Python 3.12's
+standard library. The initializer binds its three pure inspectors to reviewed
+hashes and rejects unknown customized inspector code before execution. Static
+interfaces, actual capture choice, current binding, operation-specific grants
+and backend status are separate checks. Initialization provisions no runtime,
+service, model or dependency. Follow the installed
+[initializer contract](./.agents/skills/init-new-project/SKILL.md) and
+[learning entry](./.agents/skills/what-did-you-learn/SKILL.md) for usage.

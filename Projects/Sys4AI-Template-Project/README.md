@@ -155,10 +155,30 @@ local policies; this Template keeps its explicit selection policy.
 The [memory skill](./.agents/skills/memory/SKILL.md), [record contracts](./reference-assets/MEMORY-depo/README.md),
 [empty memory directory](./MEMORY/README.md) and [configuration](./memory.yaml)
 provide portable project memory. The Template contains no learned records and
-its identity remains neutral. Initializer edition `governance-starter-v6`
+its identity remains neutral. Initializer edition `governance-starter-v7`
 specializes a new project's memory identity, enables automatic capture and binds
 its local Director. Setup reports that capture is on and asks whether to turn
 it off. Existing choices, learned memory and older setup receipts are preserved. Direct Markdown and lexical lookup need no backend.
 The optional local backend and model are provisioned through separate explicit
 work; setup does not install or activate them. Frozen Task inputs and scoped
 publication follow the memory skill's existing integration contracts.
+
+## Learning starter
+
+The [What Did You Learn skill](./.agents/skills/what-did-you-learn/SKILL.md) uses
+the [module contracts](./reference-assets/LEARNING-depo/README.md) and the memory
+skill's [shared completion checkpoint](./.agents/skills/memory/references/automatic-capture.md).
+Ask "What did you learn?" for an evidence-based review, including a valid
+no-durable-lesson result. The question alone permits no save or project change.
+Automatic persistence follows the existing preference and current owner/grant;
+capture off preserves explicit review and authorized save behavior.
+
+Edition v7 supplies this capability by default for new and first-prepared
+projects. Existing prior-edition projects use the selected depot initializer's
+`prepare-existing --adopt-module what-did-you-learn` route. Explicit
+`--refresh-dependency memory` may refresh complete unchanged receipt-owned
+dependencies; custom packages, project content and learned history remain
+preserved. Ordinary reruns retain their original setup edition. The existing
+setup receipt records module adoption and checked recovery. See the
+[initializer guide](./.agents/skills/init-new-project/README.md) for exact usage.
+This starter contains no learned records, active grant or runtime hooks.

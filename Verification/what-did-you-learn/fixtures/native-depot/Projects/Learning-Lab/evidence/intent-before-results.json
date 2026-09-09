@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "claim_level": "observed_failure",
+  "outcome": "failed",
+  "command": "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/bin/python3.12 -B fixture/check_intent.py",
+  "observed_at": "2026-09-09T05:40:20.272051+00:00",
+  "artifacts": [
+    {
+      "path": "context/intent-requirements.md",
+      "sha256": "d2e26ced37c1f6e56d37daafce39b66d06b32ca05f6ce2d57b0531179da3b3da"
+    }
+  ],
+  "details": {
+    "results": [
+      {
+        "name": "ambiguous",
+        "intent": {
+          "purpose": ""
+        },
+        "expected": {
+          "action": "clarify",
+          "missing": [
+            "purpose",
+            "acceptance_criteria"
+          ]
+        },
+        "actual": {
+          "action": "draft",
+          "missing": []
+        },
+        "passed": false
+      },
+      {
+        "name": "clear",
+        "intent": {
+          "purpose": "Create a bounded draft",
+          "acceptance_criteria": [
+            "A readable draft exists"
+          ]
+        },
+        "expected": {
+          "action": "draft",
+          "missing": []
+        },
+        "actual": {
+          "action": "draft",
+          "missing": []
+        },
+        "passed": true
+      }
+    ],
+    "passed": false
+  },
+  "limitations": [
+    "Controlled fixture defect; no production to-trd diagnosis."
+  ]
+}
