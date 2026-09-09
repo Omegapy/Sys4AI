@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "evidence_level": "actual-root-capture-and-fresh-native-recall",
+  "observed_at": "2026-09-08T22:07:24.165170+00:00",
+  "native_launch": {
+    "tool": "collaboration.spawn_agent",
+    "arguments": {
+      "task_name": "memory_fresh_recall",
+      "fork_turns": "none",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "max"
+    },
+    "result": {
+      "task_name": "/root/memory_fresh_recall"
+    }
+  },
+  "native_stop": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root/memory_fresh_recall",
+          "agent_status": "completed"
+        }
+      ]
+    }
+  },
+  "fresh_context": "The native none fork received no surrounding conversation, no record ID/title/content and no result/source hash in its task prompt. Exact parent model and effort were observed in current turn metadata and supplied unchanged.",
+  "checks": {
+    "actual_prior_canonical_publication": true,
+    "fresh_context_found_canonical_note": true,
+    "default_hybrid": true,
+    "explicit_lexical": true,
+    "current_cited_source_digests_verified": true,
+    "readonly_bytes_and_mtimes_preserved": true,
+    "no_Task_events_replayed": true
+  },
+  "canonical_record": {
+    "path": "MEMORY/MEM-20260908-6A59F482.md",
+    "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292"
+  },
+  "evidence": [
+    {
+      "path": "Verification/project-memory/root-capture-result.json",
+      "sha256": "fe68f4c5e0586a84260a9a28d6999d1c1973d0788a100341be28398e83b83550"
+    },
+    {
+      "path": "Verification/project-memory/root-backend-enablement-results.json",
+      "sha256": "0f3404be1859ebdb3c7a45c45d76d3db63055381a923959a8c94f6dec9cdcf8b"
+    },
+    {
+      "path": "Verification/project-memory/fresh-context-dispatch.json",
+      "sha256": "672d77f265315d45fcbf134dbf4df15559bf109ac963ba43232445bb5c0e7984"
+    },
+    {
+      "path": "Verification/project-memory/fresh-context-role-catalog.json",
+      "sha256": "9358679d8b9f571b5e1bbdc6dcf779384744d1ddd03edbee2788998dc1ae2be6"
+    },
+    {
+      "path": "Verification/project-memory/fresh-context/fresh-context-report.md",
+      "sha256": "f0f539037e6b9cdb4cb004037a1592300faa2b7378baef2e5d95d3a2b3d35038"
+    },
+    {
+      "path": "Verification/project-memory/fresh-context/fresh-context-evidence.json",
+      "sha256": "bdb4ae10c5097b51e7c875ebd1df2351cc0b1591927705b2ad4a9e0ec3db6163"
+    }
+  ],
+  "preservation_entries": 287,
+  "limitations": [
+    "The canonical finding describes the earlier bounded lexical-only check; fresh recall did not broaden its claim.",
+    "Fresh-context observation covers this native runtime, root and pinned local backend profile.",
+    "Native Task category verification is reported separately.",
+    "A later state-path documentation correction does not change the measured finding, cited search implementation or backend behavior."
+  ]
+}

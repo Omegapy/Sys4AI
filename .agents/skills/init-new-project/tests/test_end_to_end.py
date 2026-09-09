@@ -50,7 +50,7 @@ runpy.run_path(script,run_name='__main__')
             self.assertEqual(["project-sub-agent", "task-manager"], sorted(p.name for p in (fresh / "Roles").iterdir() if p.is_dir()))
             self.assertTrue((fresh / "Roles/INDEX.md").is_file())
             self.assertEqual(["Roles"], sorted(p.name for p in fresh.iterdir() if p.name.casefold() == "roles"))
-            self.assertEqual("governance-starter-v4", report["setup_contract"])
+            self.assertEqual("governance-starter-v5", report["setup_contract"])
             for name in (".venv", ".sys4ai", "Ontology", "config", "models", "INIT_MEMORY.md"):
                 self.assertFalse((fresh / name).exists(), name)
             self.assertEqual(["assets", "registration", "verification"], report["completed_stages"])

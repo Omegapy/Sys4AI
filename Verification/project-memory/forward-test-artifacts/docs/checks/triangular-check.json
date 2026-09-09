@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "claim_level": "verified_outcome",
+  "outcome": "passed",
+  "command": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python docs/checks/check_triangular.py",
+  "observed_at": "2026-09-08T21:00:01.172950+00:00",
+  "artifacts": [
+    {
+      "path": "research/triangular.tex",
+      "sha256": "7fb8897dc9a1507109a2fe6a1dfa520874124b5cbe8b6c4ab68685e0fb11c5d4"
+    },
+    {
+      "path": "docs/checks/check_triangular.py",
+      "sha256": "909264da3626b6e0bba233600f6b8f2d36088bdab75379f54984faa06c0cebc8"
+    }
+  ],
+  "details": {
+    "outcome": "passed",
+    "cases": [
+      {
+        "n": 1,
+        "direct_sum": 1,
+        "closed_form": 1
+      },
+      {
+        "n": 10,
+        "direct_sum": 55,
+        "closed_form": 55
+      },
+      {
+        "n": 100,
+        "direct_sum": 5050,
+        "closed_form": 5050
+      }
+    ]
+  },
+  "limitations": [
+    "Three finite arithmetic cases; this is not a proof for all positive integers."
+  ]
+}

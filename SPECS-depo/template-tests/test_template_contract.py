@@ -21,6 +21,7 @@ BASELINE = {
     "task",
     "to-implementation-plan",
     "to-trd",
+    "memory",
 }
 STARTERS = {
     "AGENTS.md",
@@ -34,6 +35,8 @@ STARTERS = {
     "Implementation_Plans/subagent_role_system_implementation_plan.md",
     "Implementation_Plans/task_system_implementation_plan.md",
     "Tasks/INDEX.md",
+    "memory.yaml",
+    "MEMORY/README.md",
 }
 EXCLUDED_CHECKOUT_PATHS = {".venv", ".ruff_cache", ".DS_Store"}
 
@@ -130,6 +133,21 @@ class TemplateContractTests(unittest.TestCase):
                     str(Path(current) / name),
                 )
                 self.assertNotIn(name, {".git", "memory.toml", "initialization.json"})
+
+    def test_memory_starter_is_empty_and_complete(self):
+        config = json.loads((TEMPLATE / "memory.yaml").read_text())
+        self.assertEqual({"id": None, "name": None, "root": "."}, config["project"])
+        self.assertEqual("MEMORY", config["canonical_root"])
+        self.assertEqual("reference-assets/MEMORY-depo", config["contract_root"])
+        self.assertFalse(config["backend"]["enabled"])
+        self.assertFalse(config["backend"]["semantic_enabled"])
+        self.assertEqual(["README.md"], sorted(p.relative_to(TEMPLATE / "MEMORY").as_posix()
+                         for p in (TEMPLATE / "MEMORY").rglob("*") if p.is_file()))
+        for rel in ("README.md", "policy.md", "publication-and-recovery.md",
+                    "schema/record-v1.json", "schema/config-v1.json", "schema/normalization-v1.json",
+                    "schema/backend-projection-v1.json", "profiles/basic-memory-v0.23.0.json"):
+            self.assertTrue((TEMPLATE / "reference-assets/MEMORY-depo" / rel).is_file(), rel)
+        self.assertIsNone(config["publication"]["director"])
 
     def test_all_embedded_packages_are_complete_and_parseable(self):
         skills = TEMPLATE / ".agents/skills"

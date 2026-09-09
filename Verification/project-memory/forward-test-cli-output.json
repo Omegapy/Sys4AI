@@ -1,0 +1,148 @@
+[
+  {
+    "phase": "supplied successful arithmetic receipt",
+    "argv": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "docs/checks/check_triangular.py"
+    ],
+    "cwd": "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+    "exit_code": 0,
+    "stdout": "{\"outcome\": \"passed\", \"cases\": [{\"n\": 1, \"direct_sum\": 1, \"closed_form\": 1}, {\"n\": 10, \"direct_sum\": 55, \"closed_form\": 55}, {\"n\": 100, \"direct_sum\": 5050, \"closed_form\": 5050}]}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "disabled backend initial inspection",
+    "argv": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      ".agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+      "health"
+    ],
+    "cwd": "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+    "exit_code": 0,
+    "stdout": "{\n  \"backend\": \"disabled\",\n  \"diagnostics\": [],\n  \"project_id\": \"triangular-checks\",\n  \"read_only\": true,\n  \"records\": 0,\n  \"status\": \"ready\"\n}\n",
+    "stderr": "",
+    "files_and_mtimes_preserved": true,
+    "changed_paths": []
+  },
+  {
+    "phase": "disabled backend initial inspection",
+    "argv": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      ".agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+      "search",
+      "eq:triangular-total"
+    ],
+    "cwd": "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+    "exit_code": 0,
+    "stdout": "{\n  \"historical\": false,\n  \"limitations\": [\n    \"Semantic backend disabled; results use deterministic lexical retrieval.\",\n    \"research/triangular.tex: Literal source extraction; macros and included files are not expanded or compiled.\"\n  ],\n  \"mode\": \"lexical\",\n  \"mutated\": false,\n  \"project_id\": \"triangular-checks\",\n  \"results\": [\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"bibliography_keys\": [],\n      \"diagnostics\": [],\n      \"environments\": [\n        \"equation\"\n      ],\n      \"excerpt\": \"\u2026eger $n$, the candidate total is\\n\\\\begin{equation}\\nS_n = \\\\sum_{k=1}^{n} k = \\\\frac{n(n+1)}{2}.\\n\\\\label{eq:triangular-total}\\n\\\\end{equation}\\nThe supplied arithmetic check evaluates $n=1$, $n=10$, and $n=100$.\\nThese finite evaluations are examples, not a proof for every integer.\\n\\\\end{document}\\n\",\n      \"heading\": \"Triangular totals\",\n      \"kind\": \"source\",\n      \"labels\": [\n        \"eq:triangular-total\"\n      ],\n      \"limitations\": [\n        \"Literal source extraction; macros and included files are not expanded or compiled.\"\n      ],\n      \"line\": 4,\n      \"locator\": \"research/triangular.tex:4\",\n      \"path\": \"research/triangular.tex\",\n      \"references\": [],\n      \"representations\": [\n        {\n          \"locator\": \"research/triangular.tex:4\",\n          \"path\": \"research/triangular.tex\",\n          \"sha256\": \"7fb8897dc9a1507109a2fe6a1dfa520874124b5cbe8b6c4ab68685e0fb11c5d4\"\n        }\n      ],\n      \"score\": 111,\n      \"sha256\": \"7fb8897dc9a1507109a2fe6a1dfa520874124b5cbe8b6c4ab68685e0fb11c5d4\",\n      \"source_identity\": \"research/triangular.tex\"\n    }\n  ],\n  \"status\": \"ok\"\n}\n",
+    "stderr": "",
+    "files_and_mtimes_preserved": true,
+    "changed_paths": []
+  },
+  {
+    "phase": "lesson proposal from supplied successful check receipt",
+    "argv": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      ".agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+      "propose",
+      "proposals/triangular-lesson-input.json"
+    ],
+    "cwd": "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+    "exit_code": 2,
+    "stdout": "{\n  \"error\": {\n    \"code\": \"invalid_record\",\n    \"details\": {},\n    \"message\": \"Record must have bounded JSON-compatible YAML frontmatter.\"\n  },\n  \"ok\": false\n}\n",
+    "stderr": "",
+    "files_and_mtimes_preserved": true,
+    "changed_paths": []
+  },
+  {
+    "phase": "proposal retry using documented record frontmatter",
+    "argv": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      ".agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+      "propose",
+      "proposals/triangular-lesson.md"
+    ],
+    "cwd": "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+    "exit_code": 0,
+    "stdout": "{\n  \"content\": \"---\\n{\\n  \\\"applicability\\\": [\\n    \\\"Exact integer arithmetic for the three sampled positive integer inputs.\\\"\\n  ],\\n  \\\"claim\\\": {\\n    \\\"level\\\": \\\"verified_outcome\\\",\\n    \\\"summary\\\": \\\"Direct integer sums and n(n+1)/2 agreed for n=1, 10, and 100 in the observed arithmetic check.\\\"\\n  },\\n  \\\"confidence\\\": \\\"high\\\",\\n  \\\"created\\\": \\\"2026-09-08T21:01:18.451006+00:00\\\",\\n  \\\"id\\\": \\\"MEM-20260908-14436ED6\\\",\\n  \\\"lifecycle\\\": {\\n    \\\"reason\\\": null,\\n    \\\"superseded_by\\\": null,\\n    \\\"supersedes\\\": []\\n  },\\n  \\\"limitations\\\": [\\n    \\\"Three finite cases are not a proof of the formula for every positive integer.\\\"\\n  ],\\n  \\\"modified\\\": \\\"2026-09-08T21:01:18.451006+00:00\\\",\\n  \\\"origin\\\": {\\n    \\\"execution_id\\\": null,\\n    \\\"generation\\\": null,\\n    \\\"role\\\": null,\\n    \\\"task_id\\\": null,\\n    \\\"task_path\\\": null\\n  },\\n  \\\"project_id\\\": \\\"triangular-checks\\\",\\n  \\\"publication\\\": null,\\n  \\\"schema_version\\\": 1,\\n  \\\"sources\\\": [\\n    {\\n      \\\"kind\\\": \\\"source\\\",\\n      \\\"locator\\\": \\\"label:eq:triangular-total\\\",\\n      \\\"path\\\": \\\"research/triangular.tex\\\",\\n      \\\"sha256\\\": \\\"7fb8897dc9a1507109a2fe6a1dfa520874124b5cbe8b6c4ab68685e0fb11c5d4\\\"\\n    },\\n    {\\n      \\\"kind\\\": \\\"verification\\\",\\n      \\\"locator\\\": \\\"json:/outcome\\\",\\n      \\\"path\\\": \\\"docs/checks/triangular-check.json\\\",\\n      \\\"sha256\\\": \\\"3385d6f3bd63e6d076229f6ad8aedf1317806e4d6ad8ac7597f1e84f0461a026\\\"\\n    }\\n  ],\\n  \\\"state\\\": \\\"draft\\\",\\n  \\\"title\\\": \\\"Finite triangular checks support the sampled cases\\\",\\n  \\\"type\\\": \\\"lesson\\\"\\n}\\n---\\n# Lesson from the triangular sum check\\n\\nThe check compared direct integer sums with n*(n+1)//2 at n=1, 10, and 100 and passed. Retain these as regression examples. Their agreement does not prove the formula for untested values.\\n\",\n  \"operation\": \"propose\",\n  \"sha256\": \"8d5a85efc546063f77d4d5c75e8fa619bbaff02aad514607ef79fe3764fa9721\",\n  \"state\": \"draft\",\n  \"written\": false\n}\n",
+    "stderr": "",
+    "files_and_mtimes_preserved": true,
+    "changed_paths": []
+  },
+  {
+    "phase": "confirm draft excluded from shared recall",
+    "argv": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      ".agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+      "search",
+      "MEM-20260908-14436ED6"
+    ],
+    "cwd": "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+    "exit_code": 0,
+    "stdout": "{\n  \"historical\": false,\n  \"limitations\": [\n    \"Semantic backend disabled; results use deterministic lexical retrieval.\",\n    \"research/triangular.tex: Literal source extraction; macros and included files are not expanded or compiled.\"\n  ],\n  \"mode\": \"lexical\",\n  \"mutated\": false,\n  \"project_id\": \"triangular-checks\",\n  \"results\": [],\n  \"status\": \"no_match\"\n}\n",
+    "stderr": "",
+    "files_and_mtimes_preserved": true,
+    "changed_paths": []
+  },
+  {
+    "phase": "enabled backend without runtime or compatibility certificate",
+    "argv": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      ".agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+      "health"
+    ],
+    "cwd": "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+    "exit_code": 0,
+    "stdout": "{\n  \"backend\": {\n    \"available\": false,\n    \"limitations\": [\n      \"file_absent\"\n    ],\n    \"mode\": \"lexical\"\n  },\n  \"diagnostics\": [],\n  \"project_id\": \"triangular-checks\",\n  \"read_only\": true,\n  \"records\": 0,\n  \"status\": \"ready\"\n}\n",
+    "stderr": "",
+    "files_and_mtimes_preserved": true,
+    "changed_paths": []
+  },
+  {
+    "phase": "enabled backend without runtime or compatibility certificate",
+    "argv": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      ".agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+      "search",
+      "eq:triangular-total",
+      "--mode",
+      "auto"
+    ],
+    "cwd": "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+    "exit_code": 0,
+    "stdout": "{\n  \"historical\": false,\n  \"limitations\": [\n    \"Semantic backend unavailable or uncertified; using lexical retrieval without maintenance.\",\n    \"file_absent\",\n    \"research/triangular.tex: Literal source extraction; macros and included files are not expanded or compiled.\"\n  ],\n  \"mode\": \"lexical\",\n  \"mutated\": false,\n  \"project_id\": \"triangular-checks\",\n  \"results\": [\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"bibliography_keys\": [],\n      \"diagnostics\": [],\n      \"environments\": [\n        \"equation\"\n      ],\n      \"excerpt\": \"\u2026eger $n$, the candidate total is\\n\\\\begin{equation}\\nS_n = \\\\sum_{k=1}^{n} k = \\\\frac{n(n+1)}{2}.\\n\\\\label{eq:triangular-total}\\n\\\\end{equation}\\nThe supplied arithmetic check evaluates $n=1$, $n=10$, and $n=100$.\\nThese finite evaluations are examples, not a proof for every integer.\\n\\\\end{document}\\n\",\n      \"heading\": \"Triangular totals\",\n      \"kind\": \"source\",\n      \"labels\": [\n        \"eq:triangular-total\"\n      ],\n      \"limitations\": [\n        \"Literal source extraction; macros and included files are not expanded or compiled.\"\n      ],\n      \"line\": 4,\n      \"locator\": \"research/triangular.tex:4\",\n      \"path\": \"research/triangular.tex\",\n      \"references\": [],\n      \"representations\": [\n        {\n          \"locator\": \"research/triangular.tex:4\",\n          \"path\": \"research/triangular.tex\",\n          \"sha256\": \"7fb8897dc9a1507109a2fe6a1dfa520874124b5cbe8b6c4ab68685e0fb11c5d4\"\n        }\n      ],\n      \"score\": 111,\n      \"sha256\": \"7fb8897dc9a1507109a2fe6a1dfa520874124b5cbe8b6c4ab68685e0fb11c5d4\",\n      \"source_identity\": \"research/triangular.tex\"\n    }\n  ],\n  \"status\": \"ok\"\n}\n",
+    "stderr": "",
+    "files_and_mtimes_preserved": true,
+    "changed_paths": []
+  },
+  {
+    "phase": "enabled backend without runtime or compatibility certificate",
+    "argv": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      ".agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+      "validate"
+    ],
+    "cwd": "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+    "exit_code": 0,
+    "stdout": "{\n  \"diagnostics\": [],\n  \"read_only\": true,\n  \"records\": 0,\n  \"valid\": true\n}\n",
+    "stderr": "",
+    "files_and_mtimes_preserved": true,
+    "changed_paths": []
+  }
+]

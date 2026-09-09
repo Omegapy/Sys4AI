@@ -369,3 +369,16 @@ Explicit upgrade requires the normal response fields plus `user_authorized`,
 `status_reason`, and the preview's `legacy_sha256`. The original schema-1 bytes
 are retained under `artifacts/orchestration/legacy-v1-<sha256>.json`. No read,
 intake inspection, or catalog rebuild upgrades historical records automatically.
+
+## Optional memory artifacts
+
+The installed memory capability uses the evidence contracts above without
+extending this schema. A confirmed manager registers a bounded immutable memory
+packet, includes its exact reference in baseline inputs and every initial solver
+context, and preserves it for queued dispatch. The memory-side assignment check
+validates those bindings. Current-execution drafts and proposals are excluded.
+Changed material memory follows existing reconciliation, baseline revision,
+conflict and assignment-input gates. A publication receipt is normal evidence;
+memory recovery cannot manufacture acceptance or replay committed Task events.
+See the [memory integration contract](../../memory/references/task-integration.md)
+for packet selection, limits and retrieval behavior.

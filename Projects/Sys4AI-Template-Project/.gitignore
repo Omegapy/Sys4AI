@@ -400,3 +400,14 @@ pip-delete-this-directory.txt
 *.sqlite
 *.sqlite3
 *.db
+
+# Project memory: only classified local runtime products are excluded.
+# MEMORY/ and memory.yaml are canonical project sources and remain trackable.
+/.venv-memory-pilot/
+/.sys4ai/memory/projection/
+/.sys4ai/memory/normalized/
+/.sys4ai/memory/index/
+/.sys4ai/memory/model-cache/
+# These local paths are durable configuration/recovery, never disposable caches.
+/.sys4ai/memory/backend-config/
+/.sys4ai/memory/maintenance/

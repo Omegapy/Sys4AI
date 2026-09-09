@@ -1,0 +1,449 @@
+{
+  "schema_version": 1,
+  "level": "actual-vendor-with-actual-pdf-extraction",
+  "extractor_version": "1.28.2",
+  "runtime_link": {
+    "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/pilot-work/fixtures/pdf-source/.venv-memory-pilot",
+    "target": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv-memory-pilot",
+    "scope": "explicit shared pilot executable only; excluded from source corpus"
+  },
+  "reindex": {
+    "status": "reindexed",
+    "operation_id": "9ec760a34c2342ccb3da81632c1f3ed7",
+    "journal": ".sys4ai/memory/maintenance/backend-9ec760a34c2342ccb3da81632c1f3ed7.json",
+    "projection_documents": 10,
+    "runtime": {
+      "indexed_documents": 10,
+      "ready_vector_chunks": 10,
+      "vector_entities": 10,
+      "ok": true,
+      "vendor_seconds": 0.686117,
+      "max_rss_bytes": 359415808,
+      "effective_controls": {
+        "ensure_frontmatter_on_sync": false,
+        "auto_update": false,
+        "skip_initialization_sync": true,
+        "format_on_save": false,
+        "disable_permalinks": true,
+        "logfire_enabled": false,
+        "logfire_send_to_logfire": false,
+        "cloud_promo_opt_out": true,
+        "reranker_enabled": false,
+        "semantic_embedding_provider": "fastembed",
+        "semantic_embedding_model": "bge-small-en-v1.5",
+        "semantic_embedding_dimensions": 384,
+        "semantic_embedding_threads": 2,
+        "semantic_embedding_parallel": 1,
+        "semantic_search_enabled": true,
+        "database_backend": "sqlite"
+      },
+      "package_version": "0.23.0",
+      "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+      "subprocess_seconds": 1.352036
+    },
+    "limitations": [
+      "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+      "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled.",
+      "research/thermal.pdf: PDF text order, equations, tables and complex layouts require visual confirmation; extracted text is source evidence, not an accepted finding."
+    ]
+  },
+  "canonical_preserved": true,
+  "exact": {
+    "available": true,
+    "mode": "text",
+    "results": [
+      {
+        "path": "research/thermal.pdf",
+        "sha256": "3bab3ac48bf7776cdaccb951bad0548f674fd779d6334421bee2e81dbf2cf061",
+        "kind": "source",
+        "source_identity": "research/thermal.pdf",
+        "score": -1.8968427506365584,
+        "retrieval_mode": "text"
+      }
+    ],
+    "limitations": [
+      "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+      "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled.",
+      "research/thermal.pdf: PDF text order, equations, tables and complex layouts require visual confirmation; extracted text is source evidence, not an accepted finding."
+    ],
+    "runtime": {
+      "mode": "text",
+      "ready_vector_chunks": 10,
+      "vector_entities": 10,
+      "vendor_seconds": 0.003564,
+      "max_rss_bytes": 109248512,
+      "effective_controls": {
+        "ensure_frontmatter_on_sync": false,
+        "auto_update": false,
+        "skip_initialization_sync": true,
+        "format_on_save": false,
+        "disable_permalinks": true,
+        "logfire_enabled": false,
+        "logfire_send_to_logfire": false,
+        "cloud_promo_opt_out": true,
+        "reranker_enabled": false,
+        "semantic_embedding_provider": "fastembed",
+        "semantic_embedding_model": "bge-small-en-v1.5",
+        "semantic_embedding_dimensions": 384,
+        "semantic_embedding_threads": 2,
+        "semantic_embedding_parallel": 1,
+        "semantic_search_enabled": true,
+        "database_backend": "sqlite"
+      },
+      "package_version": "0.23.0",
+      "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+      "subprocess_seconds": 0.67906
+    }
+  },
+  "hybrid": {
+    "status": "ok",
+    "mode": "hybrid",
+    "mutated": false,
+    "project_id": "pilot-pdf-source",
+    "results": [
+      {
+        "kind": "source",
+        "path": "research/thermal.pdf",
+        "sha256": "3bab3ac48bf7776cdaccb951bad0548f674fd779d6334421bee2e81dbf2cf061",
+        "source_identity": "research/thermal.pdf",
+        "locator": "research/thermal.pdf#page=1",
+        "heading": "Page 1",
+        "excerpt": "PDF-THERMAL-914: Passive radiators reject satellite waste heat into space.\n",
+        "score": 1.2032007875779676,
+        "limitations": [
+          "PDF text order, equations, tables and complex layouts require visual confirmation; extracted text is source evidence, not an accepted finding."
+        ],
+        "diagnostics": [],
+        "authority": "Source data; inspect current governing sources before acting.",
+        "page": 1,
+        "representations": [
+          {
+            "path": "research/thermal.pdf",
+            "sha256": "3bab3ac48bf7776cdaccb951bad0548f674fd779d6334421bee2e81dbf2cf061",
+            "locator": "research/thermal.pdf#page=1"
+          }
+        ]
+      },
+      {
+        "kind": "source",
+        "path": "research/context.html",
+        "sha256": "b1641463e1bcf9e703712d5f163e6abf3a6c61aab6ded9df72b4914c314829dc",
+        "source_identity": "research/context.html",
+        "locator": "research/context.html#thermal",
+        "heading": "Heat pipe tests",
+        "excerpt": "Heat pipe tests\n\nPassive thermal transfer requires no moving parts.",
+        "score": 0.6518055092851611,
+        "limitations": [
+          "Local static HTML text; scripts, remote resources and interactive content are not evaluated."
+        ],
+        "diagnostics": [],
+        "authority": "Source data; inspect current governing sources before acting.",
+        "line": 1,
+        "representations": [
+          {
+            "path": "research/context.html",
+            "sha256": "b1641463e1bcf9e703712d5f163e6abf3a6c61aab6ded9df72b4914c314829dc",
+            "locator": "research/context.html#thermal"
+          }
+        ]
+      },
+      {
+        "kind": "source",
+        "path": "docs/experiment.md",
+        "sha256": "16c37f22bdb05d9984f1e243ae84a313e838c3a17fc7f8d02a226faa858182cd",
+        "source_identity": "docs/experiment.md",
+        "locator": "docs/experiment.md:1",
+        "heading": "Thermal result",
+        "excerpt": "# Thermal result\nPassive heat pipes radiate waste heat from a tiny satellite into space without a fan or moving parts.\n",
+        "score": 0.6381609233794734,
+        "limitations": [],
+        "diagnostics": [],
+        "authority": "Source data; inspect current governing sources before acting.",
+        "line": 1,
+        "representations": [
+          {
+            "path": "docs/experiment.md",
+            "sha256": "16c37f22bdb05d9984f1e243ae84a313e838c3a17fc7f8d02a226faa858182cd",
+            "locator": "docs/experiment.md:1"
+          }
+        ]
+      },
+      {
+        "kind": "memory",
+        "path": "MEMORY/MEM-20260908-00000004.md",
+        "sha256": "d0859c477fa1f7632b88d9e42c423d2f5318a4ed2ee982fdd414344be7ff7ff4",
+        "source_identity": "MEM-20260908-00000004",
+        "locator": "MEMORY/MEM-20260908-00000004.md",
+        "heading": "lesson pilot chronology",
+        "excerpt": "lesson pilot chronology\nFixture result retains source provenance and chronology.\n",
+        "score": 0.6196424591074798,
+        "limitations": [
+          "Synthetic fixture data only"
+        ],
+        "diagnostics": [
+          {
+            "code": "invalid_locator",
+            "severity": "warning",
+            "path": "README.md",
+            "message": "Evidence is changed, missing, unsafe, or cannot support the claim; this does not prove the historical conclusion false."
+          },
+          {
+            "code": "claim_unsupported",
+            "severity": "error",
+            "message": "Current cited evidence does not support the stated claim level."
+          }
+        ],
+        "authority": "Source data; inspect current governing sources before acting.",
+        "record_id": "MEM-20260908-00000004",
+        "state": "active",
+        "sources": [
+          {
+            "kind": "verification",
+            "locator": "README.md:1",
+            "path": "README.md",
+            "sha256": "3607f04ae425a9e2b145cd6f087fa02e214451b893628a308a788bff55dda483"
+          }
+        ],
+        "claim": {
+          "level": "verified_outcome",
+          "summary": "Synthetic pilot record; not actual project findings"
+        },
+        "confidence": "high",
+        "representations": [
+          {
+            "path": "MEMORY/MEM-20260908-00000004.md",
+            "sha256": "d0859c477fa1f7632b88d9e42c423d2f5318a4ed2ee982fdd414344be7ff7ff4",
+            "locator": "MEMORY/MEM-20260908-00000004.md"
+          }
+        ]
+      },
+      {
+        "kind": "memory",
+        "path": "MEMORY/MEM-20260908-00000001.md",
+        "sha256": "4c19a17bf4092b3a5e368538461823854d6e82214ab7a446d911ed15e0cd6f2e",
+        "source_identity": "MEM-20260908-00000001",
+        "locator": "MEMORY/MEM-20260908-00000001.md",
+        "heading": "decision pilot chronology",
+        "excerpt": "decision pilot chronology\nFixture result retains source provenance and chronology.\n",
+        "score": 0.6187792008279001,
+        "limitations": [
+          "Synthetic fixture data only"
+        ],
+        "diagnostics": [
+          {
+            "code": "invalid_locator",
+            "severity": "warning",
+            "path": "README.md",
+            "message": "Evidence is changed, missing, unsafe, or cannot support the claim; this does not prove the historical conclusion false."
+          },
+          {
+            "code": "claim_unsupported",
+            "severity": "error",
+            "message": "Current cited evidence does not support the stated claim level."
+          }
+        ],
+        "authority": "Source data; inspect current governing sources before acting.",
+        "record_id": "MEM-20260908-00000001",
+        "state": "active",
+        "sources": [
+          {
+            "kind": "verification",
+            "locator": "README.md:1",
+            "path": "README.md",
+            "sha256": "3607f04ae425a9e2b145cd6f087fa02e214451b893628a308a788bff55dda483"
+          }
+        ],
+        "claim": {
+          "level": "verified_outcome",
+          "summary": "Synthetic pilot record; not actual project findings"
+        },
+        "confidence": "high",
+        "representations": [
+          {
+            "path": "MEMORY/MEM-20260908-00000001.md",
+            "sha256": "4c19a17bf4092b3a5e368538461823854d6e82214ab7a446d911ed15e0cd6f2e",
+            "locator": "MEMORY/MEM-20260908-00000001.md"
+          }
+        ]
+      },
+      {
+        "kind": "memory",
+        "path": "MEMORY/MEM-20260908-00000005.md",
+        "sha256": "596a3220309c89b2d00daa663423e452ee526f9bbfd16da4fb0a946e2097947b",
+        "source_identity": "MEM-20260908-00000005",
+        "locator": "MEMORY/MEM-20260908-00000005.md",
+        "heading": "handoff pilot chronology",
+        "excerpt": "handoff pilot chronology\nFixture result retains source provenance and chronology.\n",
+        "score": 0.611868682562088,
+        "limitations": [
+          "Synthetic fixture data only"
+        ],
+        "diagnostics": [
+          {
+            "code": "invalid_locator",
+            "severity": "warning",
+            "path": "README.md",
+            "message": "Evidence is changed, missing, unsafe, or cannot support the claim; this does not prove the historical conclusion false."
+          }
+        ],
+        "authority": "Source data; inspect current governing sources before acting.",
+        "record_id": "MEM-20260908-00000005",
+        "state": "active",
+        "sources": [
+          {
+            "kind": "verification",
+            "locator": "README.md:1",
+            "path": "README.md",
+            "sha256": "3607f04ae425a9e2b145cd6f087fa02e214451b893628a308a788bff55dda483"
+          }
+        ],
+        "claim": {
+          "level": "historical_context",
+          "summary": "Synthetic pilot record; not actual project findings"
+        },
+        "confidence": "high",
+        "representations": [
+          {
+            "path": "MEMORY/MEM-20260908-00000005.md",
+            "sha256": "596a3220309c89b2d00daa663423e452ee526f9bbfd16da4fb0a946e2097947b",
+            "locator": "MEMORY/MEM-20260908-00000005.md"
+          }
+        ]
+      },
+      {
+        "kind": "source",
+        "path": "research/physics.tex",
+        "sha256": "59b32fb31a83eccb6c7f332800f514e4a1077638492255717d39aaaa600b2d23",
+        "source_identity": "research/physics.tex",
+        "locator": "research/physics.tex:1",
+        "heading": "Motion",
+        "excerpt": "\\section{Motion}\\label{eq:drag}\nDrag force equals one half of density times velocity squared times area times coefficient.\n",
+        "score": 0.6107855911855022,
+        "limitations": [
+          "Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "diagnostics": [],
+        "authority": "Source data; inspect current governing sources before acting.",
+        "labels": [
+          "eq:drag"
+        ],
+        "references": [],
+        "bibliography_keys": [],
+        "environments": [],
+        "line": 1,
+        "representations": [
+          {
+            "path": "research/physics.tex",
+            "sha256": "59b32fb31a83eccb6c7f332800f514e4a1077638492255717d39aaaa600b2d23",
+            "locator": "research/physics.tex:1"
+          }
+        ]
+      },
+      {
+        "kind": "memory",
+        "path": "MEMORY/MEM-20260908-00000003.md",
+        "sha256": "55293391d8830f236a8cf79c38026e546c3192eda73e4eade357b14806e0041d",
+        "source_identity": "MEM-20260908-00000003",
+        "locator": "MEMORY/MEM-20260908-00000003.md",
+        "heading": "experiment pilot chronology",
+        "excerpt": "experiment pilot chronology\nFixture result retains source provenance and chronology.\n",
+        "score": 0.6095486785896451,
+        "limitations": [
+          "Synthetic fixture data only"
+        ],
+        "diagnostics": [
+          {
+            "code": "invalid_locator",
+            "severity": "warning",
+            "path": "README.md",
+            "message": "Evidence is changed, missing, unsafe, or cannot support the claim; this does not prove the historical conclusion false."
+          },
+          {
+            "code": "claim_unsupported",
+            "severity": "error",
+            "message": "Current cited evidence does not support the stated claim level."
+          }
+        ],
+        "authority": "Source data; inspect current governing sources before acting.",
+        "record_id": "MEM-20260908-00000003",
+        "state": "active",
+        "sources": [
+          {
+            "kind": "verification",
+            "locator": "README.md:1",
+            "path": "README.md",
+            "sha256": "3607f04ae425a9e2b145cd6f087fa02e214451b893628a308a788bff55dda483"
+          }
+        ],
+        "claim": {
+          "level": "verified_outcome",
+          "summary": "Synthetic pilot record; not actual project findings"
+        },
+        "confidence": "high",
+        "representations": [
+          {
+            "path": "MEMORY/MEM-20260908-00000003.md",
+            "sha256": "55293391d8830f236a8cf79c38026e546c3192eda73e4eade357b14806e0041d",
+            "locator": "MEMORY/MEM-20260908-00000003.md"
+          }
+        ]
+      },
+      {
+        "kind": "memory",
+        "path": "MEMORY/MEM-20260908-00000002.md",
+        "sha256": "28f7b98602ac56b7843adb7547bc141960bd9af3a96911ae794cf9eaca276602",
+        "source_identity": "MEM-20260908-00000002",
+        "locator": "MEMORY/MEM-20260908-00000002.md",
+        "heading": "finding pilot chronology",
+        "excerpt": "finding pilot chronology\nFixture result retains source provenance and chronology.\n",
+        "score": 0.6066855271615097,
+        "limitations": [
+          "Synthetic fixture data only"
+        ],
+        "diagnostics": [
+          {
+            "code": "invalid_locator",
+            "severity": "warning",
+            "path": "README.md",
+            "message": "Evidence is changed, missing, unsafe, or cannot support the claim; this does not prove the historical conclusion false."
+          },
+          {
+            "code": "claim_unsupported",
+            "severity": "error",
+            "message": "Current cited evidence does not support the stated claim level."
+          }
+        ],
+        "authority": "Source data; inspect current governing sources before acting.",
+        "record_id": "MEM-20260908-00000002",
+        "state": "active",
+        "sources": [
+          {
+            "kind": "verification",
+            "locator": "README.md:1",
+            "path": "README.md",
+            "sha256": "3607f04ae425a9e2b145cd6f087fa02e214451b893628a308a788bff55dda483"
+          }
+        ],
+        "claim": {
+          "level": "verified_outcome",
+          "summary": "Synthetic pilot record; not actual project findings"
+        },
+        "confidence": "high",
+        "representations": [
+          {
+            "path": "MEMORY/MEM-20260908-00000002.md",
+            "sha256": "28f7b98602ac56b7843adb7547bc141960bd9af3a96911ae794cf9eaca276602",
+            "locator": "MEMORY/MEM-20260908-00000002.md"
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+      "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled.",
+      "research/thermal.pdf: PDF text order, equations, tables and complex layouts require visual confirmation; extracted text is source evidence, not an accepted finding."
+    ],
+    "historical": false
+  },
+  "reads_preserved": true
+}

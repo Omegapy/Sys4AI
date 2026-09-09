@@ -1,0 +1,102 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-B",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project/.agents/skills/memory/scripts/memory.py",
+    "--project-root",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project",
+    "search",
+    "Labelled equation recalled",
+    "--mode",
+    "lexical"
+  ],
+  "result": {
+    "historical": false,
+    "limitations": [
+      "research/fixture.tex: Literal source extraction; macros and included files are not expanded or compiled."
+    ],
+    "mode": "lexical",
+    "mutated": false,
+    "project_id": "native-memory-fixture",
+    "results": [
+      {
+        "authority": "Source data; inspect current governing sources before acting.",
+        "claim": {
+          "level": "verified_outcome",
+          "summary": "The actual lexical memory CLI recalled the literal E=mc^2 source and eq:native-energy label with the current source digest; all 53 inspected filesystem entries preserved bytes and modification times."
+        },
+        "confidence": "high",
+        "diagnostics": [],
+        "excerpt": "Labelled equation recalled without changing inspected fixture files\nThe lexical search for `eq:native-energy` returned `research/fixture.tex` with the source label and literal `E=mc^2` text. Direct inspection agreed with the returned current raw-byte digest.\n\nThe before and after observation found no byte or modification-time changes in the 53 inspected source, memory, role, configuration, baseline and canonical Task entries. The worker returned the observation in its assigned result; the confirmed manager reviewed the exact source and receipt before this publication.\n",
+        "heading": "Labelled equation recalled without changing inspected fixture files",
+        "kind": "memory",
+        "limitations": [
+          "This is one literal lexical fixture lookup; TeX macros and included files were not expanded or compiled.",
+          "The preservation observation covers the 53 source, memory, role, config, baseline and canonical Task entries listed in search-observation.json.",
+          "Backend retrieval, publication and Task completion were outside this worker observation."
+        ],
+        "locator": "MEMORY/MEM-20260908-31E9F7F5.md",
+        "path": "MEMORY/MEM-20260908-31E9F7F5.md",
+        "record_id": "MEM-20260908-31E9F7F5",
+        "representations": [
+          {
+            "locator": "MEMORY/MEM-20260908-31E9F7F5.md",
+            "path": "MEMORY/MEM-20260908-31E9F7F5.md",
+            "sha256": "bff640a3ebf5c28e5eb240e9e0f3c62ce22492d67d680003db51e2adc7ad9f93"
+          }
+        ],
+        "score": 133,
+        "sha256": "bff640a3ebf5c28e5eb240e9e0f3c62ce22492d67d680003db51e2adc7ad9f93",
+        "source_identity": "MEM-20260908-31E9F7F5",
+        "sources": [
+          {
+            "kind": "source",
+            "locator": "label:eq:native-energy",
+            "path": "research/fixture.tex",
+            "sha256": "416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73"
+          },
+          {
+            "kind": "verification",
+            "locator": "json:/details",
+            "path": "output/generic/verification-receipt.json",
+            "sha256": "62322c824035f922202a8bd0024355e2dc2c517e803d8f944252bd2754adaf67"
+          }
+        ],
+        "state": "active"
+      },
+      {
+        "authority": "Source data; inspect current governing sources before acting.",
+        "bibliography_keys": [],
+        "diagnostics": [],
+        "environments": [
+          "equation"
+        ],
+        "excerpt": "\\section{Conserved quantity}\n\\begin{equation}\\label{eq:native-energy} E=mc^2 \\end{equation}\n",
+        "heading": "Conserved quantity",
+        "kind": "source",
+        "labels": [
+          "eq:native-energy"
+        ],
+        "limitations": [
+          "Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "line": 1,
+        "locator": "research/fixture.tex:1",
+        "path": "research/fixture.tex",
+        "references": [],
+        "representations": [
+          {
+            "locator": "research/fixture.tex:1",
+            "path": "research/fixture.tex",
+            "sha256": "416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73"
+          }
+        ],
+        "score": 12,
+        "sha256": "416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73",
+        "source_identity": "research/fixture.tex"
+      }
+    ],
+    "status": "ok"
+  },
+  "returncode": 0
+}

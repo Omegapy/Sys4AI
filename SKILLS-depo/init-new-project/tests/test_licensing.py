@@ -24,7 +24,7 @@ class LicensingTests(unittest.TestCase):
                     (target / "project-data.txt").write_text("retain existing data")
                 report = self.run_setup(mode=mode, destination=target,
                     project_id=mode, project_name=mode)
-                self.assertEqual("governance-starter-v4", report["setup_contract"])
+                self.assertEqual("governance-starter-v5", report["setup_contract"])
                 self.assertEqual({}, report["preserved_licenses"])
                 for name in self.helper.LICENSE_FILES:
                     raw = (template / name).read_bytes()
@@ -176,6 +176,7 @@ class LicensingTests(unittest.TestCase):
 
     def test_pre_license_v3_partial_and_completed_receipts_keep_their_edition(self):
         template = self.root / self.helper.TEMPLATE
+        fixture.remove_memory_edition(template)
         policy_path = template / self.helper.TEMPLATE_POLICY
         current_policy = policy_path.read_bytes()
         policy = json.loads(current_policy)
@@ -210,3 +211,5 @@ class LicensingTests(unittest.TestCase):
         self.assertEqual(first["sources"], repeated["sources"])
         self.assertNotIn("preserved_licenses", repeated)
         self.assertFalse(any((self.target / name).exists() for name in self.helper.LICENSE_FILES))
+        self.assertFalse(any((self.target / name).exists() for name in self.helper.MEMORY_FILES))
+        self.assertFalse((self.target / ".agents/skills/memory").exists())

@@ -295,3 +295,16 @@ contract inspection, deterministic tests, native runtime observations and
 end-to-end delivery. State any unexercised consumer adoption, future-project,
 native, Git, publication or deployment behavior. Do not infer completion from
 a passing fixture or a synthesized proposal.
+
+## Project memory responsibility
+
+Use the adopted memory skill for relevant project lessons and source evidence;
+reinspect current governing sources before applying recalled conclusions. In an
+explicit Task execution, its confirmed manager freezes the same accepted memory
+packet for every initial solver through existing evidence and input mechanisms.
+The host preserves the manager's sole-writer and assigned memory scope. The
+Director or confirmed manager may activate an evidence-backed note within an
+explicit current memory grant without requesting approval for each note.
+Children return proposals. Memory supplies no authority, Task activation,
+separate scheduler or new category team. Apply the installed memory integration
+contract and retain real publication receipts, current versions and limitations.

@@ -109,7 +109,7 @@ class RecoveryCases(unittest.TestCase):
         index = (self.target / self.helper.ROLE_INDEX).read_bytes()
         self.assertNotEqual((template / self.helper.ROLE_INDEX).read_bytes(), index)
         self.assertEqual(self.helper.planned_role_index(self.target, {}, {}), index)
-        self.assertEqual("governance-starter-v4", report["setup_contract"])
+        self.assertEqual("governance-starter-v5", report["setup_contract"])
         self.run_setup(mode="prepare-existing")
         # An existing index is never overwritten to conceal a customization.
         (self.target / self.helper.ROLE_INDEX).write_text("Owned index\n")
@@ -122,6 +122,7 @@ class RecoveryCases(unittest.TestCase):
         template = self.root / self.helper.TEMPLATE
         backup = Path(self.temporary.name) / "current-template"
         shutil.copytree(template, backup)
+        fixture.remove_memory_edition(template)
         (template / "Roles").rename(template / "sub-agent-roles")
         shutil.rmtree(template / "sub-agent-roles/task-manager")
         (template / "sub-agent-roles/INDEX.md").unlink()
@@ -154,6 +155,8 @@ class RecoveryCases(unittest.TestCase):
         self.assertEqual(first["sources"], repeated["sources"])
         self.assertEqual(pair_before, fixture.manifest(self.target / "sub-agent-roles"))
         self.assertFalse((self.target / "Roles").exists())
+        self.assertFalse(any((self.target / name).exists() for name in self.helper.MEMORY_FILES))
+        self.assertFalse((self.target / ".agents/skills/memory").exists())
         mixed = deepcopy(repeated)
         mixed["setup_contract"] = self.helper.SETUP_CONTRACT
         with self.assertRaisesRegex(self.helper.InitializationError, "mixes incompatible role layouts"):

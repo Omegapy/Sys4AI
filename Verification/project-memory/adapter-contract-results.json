@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "evidence_level": "deterministic-contract-tests",
+  "tests": [
+    {
+      "test": "test_changed_profile_or_backend_outage_degrades_without_repair",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_changed_source_and_new_lifecycle_are_rejected",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_disabled_and_missing_state_reads_preserve_bytes_and_mtimes",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_draft_is_not_ingested",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_fake_transport_cannot_return_foreign_or_invented_content",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_foreign_project_and_disallowed_alias_never_project",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_interrupted_build_leaves_recoverable_receipt_and_canonical_bytes",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_maintenance_rejects_missing_authority_before_creating_state",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_matching_shape_cache_still_requires_completed_ownership_receipt",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_packet_filter_is_applied_after_backend_ranking",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_pending_maintenance_is_reported_without_mutation",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_projection_rejects_backend_modified_metadata_and_unknown_file",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_projection_retains_all_five_metadata_types_and_chronology",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_query_worker_python_guard_denies_write_and_network",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_source_formats_keep_original_identity_and_locator",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_sqlite_connection_is_bound_and_literal_uri_names_are_preserved",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_unknown_empty_directory_blocks_replacement",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_wrong_query_mode_and_writer_operation_rejected",
+      "module": "test_basic_memory_adapter",
+      "outcome": "ok"
+    }
+  ],
+  "test_count": 18,
+  "evidence": [
+    {
+      "path": "Verification/project-memory/final-source-memory-results.json",
+      "sha256": "bc31e2e2d83269e9361dfda9c15d945ee96d895591ad86125656c26ad8f79f41"
+    },
+    {
+      "path": "Verification/project-memory/final-source-memory-tests.txt",
+      "sha256": "776cb1188ba6f50bf56597a9724f7ad277ad1b4e424ee2265794180c6e208fda"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "SKILLS-depo/memory/tests/test_basic_memory_adapter.py",
+      "sha256": "4c63c9d4b8026ed0cc8de042747b452f2daa97f5b261d9d3b82ab0b89e83f867"
+    }
+  ],
+  "limitations": [
+    "Deterministic fixtures do not establish real native context or vendor behavior; those have separate reports."
+  ]
+}

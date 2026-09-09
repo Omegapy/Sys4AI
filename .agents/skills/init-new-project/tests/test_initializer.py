@@ -18,7 +18,7 @@ from unittest.mock import patch
 
 SOURCE_SKILL = Path(__file__).resolve().parents[1]
 BASELINE = ("agent-task", "communication", "init-new-project", "manage-subagent-roles",
-            "task", "to-implementation-plan", "to-trd")
+            "memory", "task", "to-implementation-plan", "to-trd")
 
 
 def load_helper(skill: Path):
@@ -56,11 +56,17 @@ def fixture_depot(base: Path) -> Path:
     policy = json.loads((SOURCE_SKILL / "assets/baseline-assets.json").read_text())
     mapping = json.loads((SOURCE_DEPOT / "depot/template-update.json").read_text())["overrides"]
     mapped = {destination: source for source, destination in mapping.items()}
+    mapped.update({"memory.yaml": "MEMORY-depo/starter/memory.yaml",
+                   "MEMORY/README.md": "MEMORY-depo/starter/MEMORY/README.md"})
     for relative in policy["starter_files"]:
         target = template / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         source = SOURCE_DEPOT / mapped[relative] if relative in mapped else SOURCE_DEPOT / "Projects/Sys4AI-Template-Project" / relative
         shutil.copyfile(source, target)
+    # Starter mappings override their reference destinations; only their active
+    # MEMORY/README.md and memory.yaml copies belong to this Template edition.
+    shutil.copytree(SOURCE_DEPOT / "MEMORY-depo", template / "reference-assets/MEMORY-depo",
+                    ignore=shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc", "starter"))
     for relative, source in mapped.items():
         if relative.startswith(policy["roles"] + "/"):
             target = template / relative
@@ -82,6 +88,13 @@ def fixture_depot(base: Path) -> Path:
                             if entry["id"] in {"sys4ai-depot", "sys4ai-template-project"}]
     (root / "depot/projects.json").write_text(json.dumps(registry, indent=2) + "\n")
     return root
+
+
+def remove_memory_edition(template: Path) -> None:
+    """Reconstruct a pre-memory Template for a historical receipt fixture."""
+    for name in (".agents/skills/memory", "reference-assets/MEMORY-depo", "MEMORY"):
+        shutil.rmtree(template / name)
+    (template / "memory.yaml").unlink()
 
 
 def manifest(root: Path) -> dict[str, str]:

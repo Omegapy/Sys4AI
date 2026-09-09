@@ -1,0 +1,1 @@
+Protected fixture role.

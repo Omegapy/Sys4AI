@@ -290,7 +290,16 @@ class RepositoryContractTests(unittest.TestCase):
         previous = json.loads((ROOT / "Verification/task-manager-orchestration/root-adoption-manifest.json").read_text())
         current = json.loads((ROOT / "Verification/roles-capitalization/root-adoption.json").read_text())
         licensing = json.loads((ROOT / "Verification/licenses-depot/root-adoption.json").read_text())
-        self.assertEqual(licensing["initializer_files_sha256"], manifest(source))
+        memory_adoption = json.loads((ROOT / "Verification/project-memory/root-adoption-manifest.json").read_text())
+        self.assertEqual("PLAN-20260908-5F47ADB2", memory_adoption["plan_id"])
+        expected_current = dict(licensing["initializer_files_sha256"])
+        prefix = ".agents/skills/init-new-project/"
+        for entry in memory_adoption["entries"]:
+            if entry["destination"].startswith(prefix):
+                relative = entry["destination"][len(prefix):]
+                self.assertEqual(expected_current.get(relative), entry["before_sha256"])
+                expected_current[relative] = entry["after_sha256"]
+        self.assertEqual(expected_current, manifest(source))
         self.assertEqual("applied", licensing["status"])
         self.assertEqual(current["initializer_files_sha256"], licensing["previous_initializer_files_sha256"])
         self.assertNotEqual(current["initializer_files_sha256"], licensing["initializer_files_sha256"])
@@ -339,12 +348,29 @@ class RepositoryContractTests(unittest.TestCase):
     def test_retired_service_files_and_entry_points_are_absent(self) -> None:
         for relative in ("ONTOLOGY-depo", "Projects/Sys4AI-Memory-Service",
                          "config/memory.toml", "config/context.toml", "control_records/memory",
-                         "schemas/memory", ".sys4ai/memory", ".sys4ai/ontology-artifacts",
+                         "schemas/memory", ".sys4ai/ontology-artifacts",
                          ".sys4ai/operational-verification"):
             self.assertFalse((ROOT / relative).exists(), relative)
         for command in ("sys4ai-memory", "sys4ai-ontology", "sys4ai-context"):
             self.assertFalse((ROOT / ".venv/bin" / command).exists(), command)
         self.assertNotIn("sys4ai-memory-service", {x["id"] for x in self.projects["projects"]})
+
+    def test_project_memory_adoption_has_local_identity_and_classified_state(self):
+        config = json.loads((ROOT / "memory.yaml").read_text())
+        template_config = json.loads((TEMPLATE / "memory.yaml").read_text())
+        self.assertEqual("sys4ai-depot", config["project"]["id"])
+        self.assertIsNone(template_config["project"]["id"])
+        self.assertEqual("MEMORY", config["canonical_root"])
+        self.assertEqual("reference-assets/MEMORY-depo", config["contract_root"])
+        self.assertEqual(["README.md"], sorted(p.relative_to(TEMPLATE / "MEMORY").as_posix()
+                         for p in (TEMPLATE / "MEMORY").rglob("*") if p.is_file()))
+        self.assertTrue((ROOT / ".agents/skills/memory/scripts/memory.py").is_file())
+        self.assertEqual((ROOT / "SKILLS-depo/memory/scripts/memory.py").read_bytes(),
+                         (ROOT / ".agents/skills/memory/scripts/memory.py").read_bytes())
+        state = ROOT / ".sys4ai/memory"
+        if state.exists():
+            self.assertTrue({p.name for p in state.iterdir()} <=
+                            {"projection", "normalized", "index", "model-cache", "backend-config", "maintenance"})
 
     def test_state_systems_remain_separate(self) -> None:
         agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")

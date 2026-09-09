@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "level": "actual-vendor-with-synthetic-fixtures",
+  "cases": [
+    {
+      "case": "wrong-project-config",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "backend_config_changed"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "cross-project-alias",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "unsafe_symlink"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "unclassified-projection-query",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "unclassified_projection"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "unclassified-projection-reindex",
+      "error": {
+        "code": "unclassified_state",
+        "message": "Projection contains unknown or modified content.",
+        "details": {}
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "stale-canonical-projection",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "projection_stale"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "stale-direct-fallback",
+      "result": {
+        "status": "ok",
+        "mode": "lexical",
+        "mutated": false,
+        "project_id": "pilot-alpha",
+        "results": [
+          {
+            "kind": "source",
+            "path": "README.md",
+            "sha256": "172518d8cf51107abd02db837894e3fbfe596be437f34dffa5903c97cb9e827a",
+            "source_identity": "README.md",
+            "locator": "README.md:1",
+            "heading": "Local retrieval",
+            "excerpt": "# Local retrieval\nERR-ALPHA-731 requires a second independent measurement.\n\nAFTER-INDEX-CHANGE\n",
+            "score": 111,
+            "limitations": [
+              "Stored normalization is stale; this result was extracted from the current source without updating the cache."
+            ],
+            "diagnostics": [],
+            "authority": "Source data; inspect current governing sources before acting.",
+            "line": 1,
+            "representations": [
+              {
+                "path": "README.md",
+                "sha256": "172518d8cf51107abd02db837894e3fbfe596be437f34dffa5903c97cb9e827a",
+                "locator": "README.md:1"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "README.md: Stored normalization is stale; this result was extracted from the current source without updating the cache.",
+          "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+          "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "historical": false
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "backend-unavailable-fallback",
+      "result": {
+        "status": "ok",
+        "mode": "lexical",
+        "mutated": false,
+        "project_id": "pilot-alpha",
+        "results": [
+          {
+            "kind": "source",
+            "path": "README.md",
+            "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac",
+            "source_identity": "README.md",
+            "locator": "README.md:1",
+            "heading": "Local retrieval",
+            "excerpt": "# Local retrieval\nERR-ALPHA-731 requires a second independent measurement.\n",
+            "score": 111,
+            "limitations": [],
+            "diagnostics": [],
+            "authority": "Source data; inspect current governing sources before acting.",
+            "line": 1,
+            "representations": [
+              {
+                "path": "README.md",
+                "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac",
+                "locator": "README.md:1"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+          "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "historical": false
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "missing-model-no-download",
+      "result": {
+        "status": "ok",
+        "mode": "lexical",
+        "mutated": false,
+        "project_id": "pilot-alpha",
+        "results": [
+          {
+            "kind": "source",
+            "path": "README.md",
+            "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac",
+            "source_identity": "README.md",
+            "locator": "README.md:1",
+            "heading": "Local retrieval",
+            "excerpt": "# Local retrieval\nERR-ALPHA-731 requires a second independent measurement.\n",
+            "score": 111,
+            "limitations": [],
+            "diagnostics": [],
+            "authority": "Source data; inspect current governing sources before acting.",
+            "line": 1,
+            "representations": [
+              {
+                "path": "README.md",
+                "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac",
+                "locator": "README.md:1"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+          "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "historical": false
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "worker-write-tool-rejection",
+      "error": {
+        "code": "backend_operation",
+        "message": "Pinned backend operation failed.",
+        "details": {
+          "error_detail": "Only fixed bounded search is permitted.",
+          "returncode": 1
+        }
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "worker-canonical-target-rejection",
+      "error": {
+        "code": "maintenance_scope",
+        "message": "Pinned backend operation failed.",
+        "details": {
+          "error_detail": "Worker may write only its approved backend staging directory.",
+          "returncode": 1
+        }
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "frozen-backend-retrieval",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "invalid_packet"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "frozen-baseline-thermal",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "invalid_packet"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "changed-frozen-evidence",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "projection_stale"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "restored-hybrid",
+      "result": {
+        "available": true,
+        "mode": "hybrid",
+        "results": [
+          {
+            "path": "docs/experiment.md",
+            "sha256": "16c37f22bdb05d9984f1e243ae84a313e838c3a17fc7f8d02a226faa858182cd",
+            "kind": "source",
+            "source_identity": "docs/experiment.md",
+            "score": 1.2303657292005021,
+            "retrieval_mode": "hybrid"
+          },
+          {
+            "path": "research/context.html",
+            "sha256": "b1641463e1bcf9e703712d5f163e6abf3a6c61aab6ded9df72b4914c314829dc",
+            "kind": "source",
+            "source_identity": "research/context.html",
+            "score": 0.8438287918487786,
+            "retrieval_mode": "hybrid"
+          },
+          {
+            "path": "MEMORY/MEM-20260908-00000003.md",
+            "sha256": "016578ee2ef6bce4c930effe5f2209621cfb5fe19ddeb3d1b6f6b29e5a73391b",
+            "kind": "memory",
+            "source_identity": "MEM-20260908-00000003",
+            "score": 0.5570434932429986,
+            "retrieval_mode": "hybrid"
+          }
+        ],
+        "limitations": [
+          "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+          "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "runtime": {
+          "mode": "hybrid",
+          "ready_vector_chunks": 9,
+          "vector_entities": 9,
+          "vendor_seconds": 0.210287,
+          "max_rss_bytes": 336904192,
+          "effective_controls": {
+            "ensure_frontmatter_on_sync": false,
+            "auto_update": false,
+            "skip_initialization_sync": true,
+            "format_on_save": false,
+            "disable_permalinks": true,
+            "logfire_enabled": false,
+            "logfire_send_to_logfire": false,
+            "cloud_promo_opt_out": true,
+            "reranker_enabled": false,
+            "semantic_embedding_provider": "fastembed",
+            "semantic_embedding_model": "bge-small-en-v1.5",
+            "semantic_embedding_dimensions": 384,
+            "semantic_embedding_threads": 2,
+            "semantic_embedding_parallel": 1,
+            "semantic_search_enabled": true,
+            "database_backend": "sqlite"
+          },
+          "package_version": "0.23.0",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "subprocess_seconds": 0.865753
+        }
+      },
+      "inspection_preserved": true
+    }
+  ],
+  "native_orchestration": "not exercised by this runner",
+  "expanded_reindex": {
+    "status": "reindexed",
+    "operation_id": "5a98c00f10594ceaa1d675f3211c46a8",
+    "journal": ".sys4ai/memory/maintenance/backend-5a98c00f10594ceaa1d675f3211c46a8.json",
+    "projection_documents": 11,
+    "runtime": {
+      "indexed_documents": 11,
+      "ready_vector_chunks": 11,
+      "vector_entities": 11,
+      "ok": true,
+      "vendor_seconds": 0.743195,
+      "max_rss_bytes": 348258304,
+      "effective_controls": {
+        "ensure_frontmatter_on_sync": false,
+        "auto_update": false,
+        "skip_initialization_sync": true,
+        "format_on_save": false,
+        "disable_permalinks": true,
+        "logfire_enabled": false,
+        "logfire_send_to_logfire": false,
+        "cloud_promo_opt_out": true,
+        "reranker_enabled": false,
+        "semantic_embedding_provider": "fastembed",
+        "semantic_embedding_model": "bge-small-en-v1.5",
+        "semantic_embedding_dimensions": 384,
+        "semantic_embedding_threads": 2,
+        "semantic_embedding_parallel": 1,
+        "semantic_search_enabled": true,
+        "database_backend": "sqlite"
+      },
+      "package_version": "0.23.0",
+      "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+      "subprocess_seconds": 1.372951
+    },
+    "limitations": [
+      "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+      "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+    ]
+  },
+  "expanded_reindex_canonical_preserved": true,
+  "restored_reindex": {
+    "status": "reindexed",
+    "operation_id": "b444766da5c5437ebdf0ef3459f54c7f",
+    "journal": ".sys4ai/memory/maintenance/backend-b444766da5c5437ebdf0ef3459f54c7f.json",
+    "projection_documents": 9,
+    "runtime": {
+      "indexed_documents": 9,
+      "ready_vector_chunks": 9,
+      "vector_entities": 9,
+      "ok": true,
+      "vendor_seconds": 0.671711,
+      "max_rss_bytes": 364904448,
+      "effective_controls": {
+        "ensure_frontmatter_on_sync": false,
+        "auto_update": false,
+        "skip_initialization_sync": true,
+        "format_on_save": false,
+        "disable_permalinks": true,
+        "logfire_enabled": false,
+        "logfire_send_to_logfire": false,
+        "cloud_promo_opt_out": true,
+        "reranker_enabled": false,
+        "semantic_embedding_provider": "fastembed",
+        "semantic_embedding_model": "bge-small-en-v1.5",
+        "semantic_embedding_dimensions": 384,
+        "semantic_embedding_threads": 2,
+        "semantic_embedding_parallel": 1,
+        "semantic_search_enabled": true,
+        "database_backend": "sqlite"
+      },
+      "package_version": "0.23.0",
+      "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+      "subprocess_seconds": 1.300314
+    },
+    "limitations": [
+      "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+      "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+    ]
+  }
+}

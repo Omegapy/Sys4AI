@@ -1,0 +1,295 @@
+{
+  "$comment": "Null project id/name are accepted only together in an unspecialized Template using allow_template=True. Operations require specialized identity. Helper also checks segment glob rules, immutable path classes, source grouping, safe publication scopes and current authority. No backend is imported or provisioned by schema validation.",
+  "$id": "urn:sys4ai:memory:config:1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "backend": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "name": {
+          "const": "basic-memory"
+        },
+        "semantic_enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "enabled",
+        "semantic_enabled"
+      ],
+      "type": "object"
+    },
+    "canonical_root": {
+      "const": "MEMORY"
+    },
+    "contract_root": {
+      "const": "reference-assets/MEMORY-depo"
+    },
+    "corpus": {
+      "additionalProperties": false,
+      "properties": {
+        "exclude": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 200,
+          "type": "array"
+        },
+        "include": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "type": "array"
+        },
+        "source_groups": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "evidence": {
+                "additionalProperties": false,
+                "properties": {
+                  "path": {
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              "id": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "paths": {
+                "items": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "maxItems": 200,
+                "minItems": 2,
+                "type": "array"
+              }
+            },
+            "required": [
+              "id",
+              "paths",
+              "evidence"
+            ],
+            "type": "object"
+          },
+          "maxItems": 200,
+          "type": "array"
+        }
+      },
+      "required": [
+        "include",
+        "exclude",
+        "source_groups"
+      ],
+      "type": "object"
+    },
+    "integration": {
+      "additionalProperties": false,
+      "properties": {
+        "automatic_capture": {
+          "const": false
+        },
+        "task_packets": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "task_packets",
+        "automatic_capture"
+      ],
+      "type": "object"
+    },
+    "project": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "name": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "root": {
+          "const": "."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "root"
+      ],
+      "type": "object"
+    },
+    "publication": {
+      "additionalProperties": false,
+      "properties": {
+        "director": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "actor_id": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "authority": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "path": {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "sha256": {
+                        "pattern": "^[a-f0-9]{64}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "path",
+                      "sha256"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 200,
+                  "minItems": 3,
+                  "type": "array"
+                },
+                "scope": {
+                  "items": {
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 200,
+                  "minItems": 1,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "actor_id",
+                "scope",
+                "authority"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "director"
+      ],
+      "type": "object"
+    },
+    "retrieval": {
+      "additionalProperties": false,
+      "properties": {
+        "max_results": {
+          "maximum": 200,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "mode": {
+          "enum": [
+            "lexical",
+            "auto",
+            "hybrid"
+          ]
+        }
+      },
+      "required": [
+        "mode",
+        "max_results"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "state": {
+      "additionalProperties": false,
+      "properties": {
+        "backend_config": {
+          "const": ".sys4ai/memory/backend-config"
+        },
+        "index": {
+          "const": ".sys4ai/memory/index"
+        },
+        "maintenance": {
+          "const": ".sys4ai/memory/maintenance"
+        },
+        "model_cache": {
+          "const": ".sys4ai/memory/model-cache"
+        },
+        "normalized": {
+          "const": ".sys4ai/memory/normalized"
+        },
+        "projection": {
+          "const": ".sys4ai/memory/projection"
+        }
+      },
+      "required": [
+        "projection",
+        "normalized",
+        "index",
+        "model_cache",
+        "backend_config",
+        "maintenance"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "project",
+    "canonical_root",
+    "contract_root",
+    "backend",
+    "retrieval",
+    "corpus",
+    "state",
+    "integration",
+    "publication"
+  ],
+  "title": "Sys4AI project memory configuration v1",
+  "type": "object"
+}

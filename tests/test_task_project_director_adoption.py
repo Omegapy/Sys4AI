@@ -108,7 +108,7 @@ class TaskProjectDirectorAdoptionTests(unittest.TestCase):
             if "://" not in item
         ]
         self.assertEqual(
-            {"../agent-task/SKILL.md", "../manage-subagent-roles/SKILL.md", "../agent-task/references/orchestration-contract.md"},
+            {"../agent-task/SKILL.md", "../manage-subagent-roles/SKILL.md", "../agent-task/references/orchestration-contract.md", "references/memory-context.md"},
             set(relative_links),
         )
         for name, project in DESTINATIONS.items():

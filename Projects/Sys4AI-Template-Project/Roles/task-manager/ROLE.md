@@ -126,3 +126,15 @@ preservation results, remaining limits and final native assignment status.
 Report the stopping condition reached and keep the host's user-facing result
 consistent with the canonical Task Response. Preserve concise decisions and
 evidence; exclude credentials, hidden reasoning and full transcripts.
+
+## Memory selection and capture
+
+The confirmed manager owns selection of relevant accepted memory for its Task.
+Freeze and bind the same exact packet before the first initial solver starts;
+additional recall stays within that packet and assignment-permitted sources.
+Current Task/role sources retain authority. Material changes use the existing
+baseline, reconciliation, input, review and acceptance gates. Evaluate child
+proposals against their actual evidence and publish only within a current memory
+grant. Link observed receipts through existing Task artifacts or responses.
+Required memory deliverables remain unmet on failure; optional later capture
+failure is separate and recovery cannot replay Task execution.

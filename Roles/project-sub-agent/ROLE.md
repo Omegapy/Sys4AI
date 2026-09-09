@@ -118,3 +118,13 @@ Return:
 6. Unresolved items.
 7. Confirmation that the stopping condition was reached, or the exact reason
    work stopped early.
+
+## Memory result boundary
+
+When memory is part of the assignment, retain its exact packet references and
+evidence limitations. Report any source-version change; do not widen frozen
+recall or infer current authority from remembered roles and decisions. Useful
+findings may be returned as proposed notes within the allowed output artifact.
+The owning Director or confirmed manager reviews and publishes within its
+granted memory scope. This role acquires no canonical memory, Task or role-index
+write authority from a proposal or a backend tool.

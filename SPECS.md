@@ -84,3 +84,27 @@ SHA256 evidence and the existing Task ledger. Role mutation uses POSIX advisory
 locking; no database, external orchestration framework or retired memory service
 is required. Native tools supply real agent control and inheritance evidence.
 The root intake policy remains separate from generic Template behavior.
+
+## Project memory
+
+The root owns portable Markdown records in `MEMORY/` and its `memory.yaml`
+configuration under identity `sys4ai-depot`. Adopted contracts live at
+`reference-assets/MEMORY-depo/`; reusable sources remain in `MEMORY-depo/` and
+`SKILLS-depo/memory/`. General retrieval permits README, docs and research; it
+excludes child projects, Tasks, roles, reusable assets and private/runtime paths.
+
+The memory core and Task/role integration retain Python 3.12 standard-library
+independence. Configuration/frontmatter use a documented JSON subset of YAML.
+`requirements-memory.txt` declares the existing optional PyMuPDF extraction
+dependency. The pinned Basic Memory pilot uses `.venv-memory-pilot` and the
+memory skill's separate backend requirements/profile; the root `.venv` is
+preserved. Setup and ordinary reads provision no packages, models or services.
+
+The [state-path contract](./.agents/skills/memory/references/state-paths.md)
+separates derived products from durable backend configuration and maintenance
+recovery. The [integration contract](./.agents/skills/memory/references/task-integration.md)
+uses existing Task artifacts and inputs without a schema change. Initializer
+edition `governance-starter-v5` supplies empty project memory; v1-v4 receipts,
+root intake/closure policy and existing product content retain their semantics.
+Semantic use is controlled by current configuration and the exact local pilot
+certification. Inspect `memory.py --project-root . health` for current readiness.

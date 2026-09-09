@@ -31,3 +31,14 @@
 - Stop dependent dispatch before cancellation, replacement or a model-setting
   change; reconcile actual worker status and known changes before transferring
   ownership. A stale timestamp or child claim is not stopping evidence.
+
+## Project memory inputs
+
+If project memory is adopted, read its integration contract for the current
+assignment. Select previously accepted evidence and freeze one bounded packet
+before initial solver dispatch. Register its exact bytes and supply the same
+version through baseline inputs and every initial assignment context, including
+queued solvers. Exclude sibling drafts, reviews, synthesis and proposed notes
+from direct, indexed and inherited context. Reconcile material evidence changes
+before rebinding. Publish only with a current granted memory scope; a child
+proposal, memory note or backend never grants Task ownership or publication rights.

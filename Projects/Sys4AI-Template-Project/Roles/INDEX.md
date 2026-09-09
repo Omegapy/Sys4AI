@@ -2,12 +2,12 @@
 
 # Roles
 
-Catalog SHA-256: `ea83116c032c592f40b67247de2b9058d63d4a742663d012061252f36e87d8de`
+Catalog SHA-256: `bb56c45c02cc17221858b895630353fc25ed6898f699e9fdbc21db4794e66eec`
 
 | Role | Selection | AGENTS.md | ROLE.md | AGENTS SHA-256 | ROLE SHA-256 |
 | --- | --- | --- | --- | --- | --- |
-| project-sub-agent | General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required. | [AGENTS.md](./project-sub-agent/AGENTS.md) | [ROLE.md](./project-sub-agent/ROLE.md) | `9acb819779aa05d154804d5022a960c5569a452ccaf6446e6497ee0180a24b2a` | `fd78736aca9999c20431d910e3e032d89b29128e24e7e2af7c9e2bf6dbaf21fe` |
-| task-manager | Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution. | [AGENTS.md](./task-manager/AGENTS.md) | [ROLE.md](./task-manager/ROLE.md) | `937cdba04000f4156c2506b5845749b365d21fc95c91b2ae07e9f6ff96338028` | `da4bc5780b37e40cfb25c6e561509a6e6123c178277de159c0be4930aa3d02a0` |
+| project-sub-agent | General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required. | [AGENTS.md](./project-sub-agent/AGENTS.md) | [ROLE.md](./project-sub-agent/ROLE.md) | `7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2` | `4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2` |
+| task-manager | Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution. | [AGENTS.md](./task-manager/AGENTS.md) | [ROLE.md](./task-manager/ROLE.md) | `b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49` | `089f287a320a7be6e98d049eeceded6211bc647a4cda5a6842db6a028c3de428` |
 
 ## Invalid bundles
 

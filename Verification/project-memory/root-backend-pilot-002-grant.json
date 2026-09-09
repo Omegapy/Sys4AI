@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "grant_id": "root-backend-pilot-002",
+  "project_id": "sys4ai-depot",
+  "actor_id": "/root",
+  "actor_kind": "director",
+  "operation": "reindex",
+  "payload_sha256": "a2e3f283477a874039f8e04bfa1aa3d4c2f32020851fcc9476ec3488f08f7a87",
+  "config_sha256": "bbad0ba888072ba6ffa0a7193811873c404b892d1e7c99d52e7fc3e194e9cef0",
+  "scope": [
+    ".sys4ai/memory/projection",
+    ".sys4ai/memory/index",
+    ".sys4ai/memory/normalized",
+    ".sys4ai/memory/backend-config",
+    ".sys4ai/memory/maintenance"
+  ],
+  "native_receipt": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/memory_backend",
+          "agent_status": "completed"
+        },
+        {
+          "agent_name": "/root/memory_core",
+          "agent_status": "completed"
+        },
+        {
+          "agent_name": "/root/memory_native_manager",
+          "agent_status": "running"
+        }
+      ]
+    }
+  },
+  "observed_at": "2026-09-08T21:53:37.474462+00:00",
+  "expires_at": "2026-09-08T21:58:37.474462+00:00",
+  "task": null,
+  "reviewed_records": [],
+  "privacy_redaction": false
+}

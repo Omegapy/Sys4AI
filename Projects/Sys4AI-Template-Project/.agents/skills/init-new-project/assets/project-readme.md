@@ -43,3 +43,13 @@ add them only when its actual work requires them.
 
 The depot registration records factual inventory. Git setup, remotes, publication
 and deployment have their own separately authorized workflows.
+
+## Project memory
+
+The [memory skill](./.agents/skills/memory/SKILL.md) uses this project's
+[memory directory](./MEMORY/README.md) and [configuration](./memory.yaml).
+New projects start with no learned records and the backend disabled. Current
+instructions, Task state, roles and source evidence retain authority over recalled
+conclusions. Lookup does not initialize a backend or create a Task. The setup
+receipt records preserved existing memory separately; later runtime provisioning
+and canonical publication require their own current project scope.

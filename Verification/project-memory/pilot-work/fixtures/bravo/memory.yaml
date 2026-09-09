@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "project": {
+    "id": "pilot-bravo",
+    "name": "Isolated pilot bravo",
+    "root": "."
+  },
+  "canonical_root": "MEMORY",
+  "contract_root": "reference-assets/MEMORY-depo",
+  "backend": {
+    "name": "basic-memory",
+    "enabled": true,
+    "semantic_enabled": true
+  },
+  "retrieval": {
+    "mode": "lexical",
+    "max_results": 20
+  },
+  "corpus": {
+    "include": [
+      "README.md",
+      "docs/**/*.md",
+      "research/**/*.md",
+      "research/**/*.tex",
+      "research/**/*.pdf",
+      "research/**/*.html"
+    ],
+    "exclude": [
+      "Projects/**",
+      "Tasks/**",
+      "Roles/**",
+      "roles/**",
+      "sub-agent-roles/**",
+      "**/*-depo/**",
+      "reference-assets/**",
+      ".git/**",
+      ".venv*/**",
+      "venv/**",
+      ".sys4ai/**",
+      ".agents/**",
+      ".codex/**",
+      "node_modules/**",
+      "build/**",
+      "dist/**",
+      "target/**",
+      "**/__pycache__/**",
+      "**/.env*",
+      "**/secrets/**",
+      "**/credentials/**",
+      "**/*.pem",
+      "**/*.key"
+    ],
+    "source_groups": []
+  },
+  "state": {
+    "projection": ".sys4ai/memory/projection",
+    "normalized": ".sys4ai/memory/normalized",
+    "index": ".sys4ai/memory/index",
+    "model_cache": ".sys4ai/memory/model-cache",
+    "backend_config": ".sys4ai/memory/backend-config",
+    "maintenance": ".sys4ai/memory/maintenance"
+  },
+  "integration": {
+    "task_packets": true,
+    "automatic_capture": false
+  },
+  "publication": {
+    "director": {
+      "actor_id": "/root/memory_backend",
+      "scope": [
+        ".sys4ai/memory/projection",
+        ".sys4ai/memory/normalized",
+        ".sys4ai/memory/index",
+        ".sys4ai/memory/model-cache",
+        ".sys4ai/memory/backend-config",
+        ".sys4ai/memory/maintenance"
+      ],
+      "authority": [
+        {
+          "path": "SOUL.md",
+          "sha256": "89c1dc7d3462124eb2c756c43c6bb8924c0643867ebd7c14cc673b5603a5dea4"
+        },
+        {
+          "path": "AGENTS.md",
+          "sha256": "89c1dc7d3462124eb2c756c43c6bb8924c0643867ebd7c14cc673b5603a5dea4"
+        },
+        {
+          "path": "ROLE.md",
+          "sha256": "89c1dc7d3462124eb2c756c43c6bb8924c0643867ebd7c14cc673b5603a5dea4"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "condition": "Native launch returns agent thread limit reached despite a roster containing fewer running agents than the declared four-slot capacity; no release/close control is exposed.",
+  "goal_status": "blocked",
+  "blocked_goal_turns": [
+    {
+      "root_turn_id": "01a082b2-21ff-7c10-889c-cea1fb6e3f8e",
+      "observed_at": "2026-09-08T22:25:19.124626+00:00",
+      "ordinal": 1,
+      "evidence": "Verification/project-memory/native-project/Verification/manager/native-capacity-blocker.json"
+    },
+    {
+      "root_turn_id": "01a08322-9808-7cc3-b2be-d94e92218e73",
+      "ordinal": 2,
+      "observed_at": "2026-09-08T22:30:53.556284+00:00",
+      "previous_turn_classification": "progress: implementation, backend, generic, solver and preservation evidence completed before the runtime blocker",
+      "this_turn_classification": "verified live-manager wait and repeated same blocker after a real turn-state change",
+      "evidence": "Verification/project-memory/native-project/Verification/manager/resume-turn-2-capacity-attempt.json",
+      "evidence_sha256": "8e18e4800bfd624e971e143a12a16fc7dbbc985e8f8d104c5864c9f7c637243a"
+    },
+    {
+      "root_turn_id": "01a08325-feee-7262-9e49-4fd30cb3fcd3",
+      "ordinal": 3,
+      "observed_at": "2026-09-08T22:34:46.222419+00:00",
+      "previous_turn_classification": "verified live-manager wait; same native capacity condition persisted after a real turn-state change",
+      "this_turn_classification": "verified live-manager wait; same blocker revalidated with no available release control or remaining independent implementation work",
+      "evidence": "Verification/project-memory/native-project/Verification/manager/resume-turn-3-capacity-attempt.json",
+      "evidence_sha256": "9ab7d2e29bced9a26c0c11e71e91cd542a0df6781c6a655c3fbd9962c0aae8ee"
+    }
+  ],
+  "native_manager": "/root/memory_native_manager",
+  "canonical_task": "Verification/project-memory/native-project/Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/task.json",
+  "next_action": "After a real root/manager turn-state or runtime change, resume the exact existing manager. It must refresh native status and retry only the original reserved complex-senior launch; generic events, memory capture/recovery and solver work must not be repeated.",
+  "block_threshold": "Mark the native goal blocked only after the same condition recurs in at least three consecutive root goal turns and no meaningful progress is available.",
+  "blocked_threshold_satisfied": true,
+  "resume_policy": "If the user resumes a goal marked blocked, begin a fresh three-turn audit and preserve this audit as history.",
+  "goal_transition_evidence": "Verification/project-memory/goal-blocked-receipt.json",
+  "resolution": {
+    "kind": "user-directed-verification-method-change",
+    "authority": {
+      "path": "Verification/project-memory/host-testing-scope.json",
+      "sha256": "0245d0c1379c1f00506a6879e4897a3a1286f4134a42a2850de536483ba8d314"
+    },
+    "native_capacity_problem_resolved": false,
+    "further_sub_agent_work_authorized": false,
+    "replacement_verification": {
+      "path": "Verification/project-memory/host-testing-results.json",
+      "sha256": "4a3cf991c07730de0eb628a32abb44eddb5dbd86ff6769d578aeeb5008e0295f"
+    }
+  }
+}

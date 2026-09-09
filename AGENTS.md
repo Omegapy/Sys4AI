@@ -138,3 +138,14 @@ relevant reusable sources, project registry, requirements, plan, tests, and
 final status. State the highest verification level reached and identify any
 future-project, Git, GitHub Pages, host-discovery, or end-to-end behavior that
 was not exercised.
+
+## Project memory
+
+The [memory skill](./.agents/skills/memory/SKILL.md) provides project-owned
+Markdown recall and evidence retrieval when configured. Current instructions,
+canonical Tasks, exact role pairs and direct sources retain authority. Memory
+lookup is read-only and creates or activates no Task. Follow its
+[Task integration contract](./.agents/skills/memory/references/task-integration.md)
+for identical frozen solver packets, scoped publication and material changes.
+Keep learned records in this project's `MEMORY/`; starter setup copies only
+empty capability and never another project's records or runtime.

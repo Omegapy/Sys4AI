@@ -74,3 +74,14 @@ custom-agent configuration that replaces either value.
 The installed `to-trd` skill remains explicit-only. It captures requirements
 when the user invokes it; it does not authorize implementation or create Task
 state.
+
+## Project memory
+
+The [memory skill](./.agents/skills/memory/SKILL.md) provides project-owned
+Markdown recall and evidence retrieval when configured. Current instructions,
+canonical Tasks, exact role pairs and direct sources retain authority. Memory
+lookup is read-only and creates or activates no Task. Follow its
+[Task integration contract](./.agents/skills/memory/references/task-integration.md)
+for identical frozen solver packets, scoped publication and material changes.
+Keep learned records in this project's `MEMORY/`; starter setup copies only
+empty capability and never another project's records or runtime.

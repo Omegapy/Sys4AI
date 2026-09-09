@@ -6,4 +6,5 @@
 | --- | --- | --- | ---: | --- | --- | ---: | ---: | --- |
 | `PLAN-20260902-2C15FED4` | Task-triggered Project Director orchestration | `completed` | 84 | 2026-09-02T22:57:07.807689Z | `Plan_task-triggered-project-director-orchestration_2026-09-02_2C15FED4` | 5 | 16 | `pass` |
 | `PLAN-20260904-D17393C2` | Implement document-centric To-TRD lifecycle | `completed` | 138 | 2026-09-04T22:02:47.276667Z | `Plan_implement-document-centric-to-trd-lifecycle_2026-09-04_D17393C2` | 8 | 35 | `pass` |
+| `PLAN-20260908-5F47ADB2` | Implement Sys4AI project memory first release | `draft` | 1 | 2026-09-08T18:17:50.801393Z | `Plan_sys4ai-project-memory-first-release_2026-09-08_5F47ADB2` | 9 | 50 | `unresolved` |
 | `PLAN-20260908-6E6F545E` | Implement Sys4AI task-manager orchestration | `completed` | 375 | 2026-09-08T12:57:31.691465Z | `Plan_implement-sys4ai-task-manager-orchestration_2026-09-08_6E6F545E` | 8 | 36 | `pass` |

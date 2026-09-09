@@ -173,3 +173,14 @@ guarantee, independence condition or stale/conflicting state. Continue a cycle
 only for a targeted revision, new evidence or hypothesis. Preserve artifacts,
 mandatory criteria and required agent counts. Do not create roles to hide a
 missing tool, silently change topology, or claim unobserved native behavior.
+
+## Recalled role context
+
+Memory may supply historical context for a fit decision, but this skill's fresh
+filesystem catalog and exact current `Roles/` pair reads establish eligibility.
+Never select a role or infer a live manager from remembered names or hashes.
+For Task memory inputs, follow the installed
+[memory contract](../memory/references/task-integration.md), preserving independent
+solver context, actual native receipts, the complete category team and inherited
+settings. An ordinary child returns proposed findings in its assigned artifact;
+role selection grants no shared memory publication scope.

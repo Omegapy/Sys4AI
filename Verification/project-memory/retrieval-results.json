@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "evidence_level": "deterministic-contract-tests",
+  "tests": [
+    {
+      "test": "test_html_retains_heading_and_discards_presentation",
+      "module": "test_normalization",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_stale_cache_is_observed_without_repair",
+      "module": "test_normalization",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_tex_preserves_math_environments_labels_and_citations",
+      "module": "test_normalization",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_alias_escape_and_nested_project_are_rejected",
+      "module": "test_retrieval",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_configured_lexical_mode_does_not_attempt_backend_queries",
+      "module": "test_retrieval",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_empty_unconfigured_and_backend_no_results",
+      "module": "test_retrieval",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_exact_identifiers_paths_and_source_kind_preserve_state",
+      "module": "test_retrieval",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_lifecycle_and_stale_source_are_explicit",
+      "module": "test_retrieval",
+      "outcome": "ok"
+    },
+    {
+      "test": "test_secrets_excluded_and_embedded_instructions_are_data",
+      "module": "test_retrieval",
+      "outcome": "ok"
+    }
+  ],
+  "test_count": 9,
+  "evidence": [
+    {
+      "path": "Verification/project-memory/host-source-memory-results.json",
+      "sha256": "c50d5e20ce648a024010a27ad08717e0cce12924eb6cd2435c5f7d12241d7463"
+    },
+    {
+      "path": "Verification/project-memory/host-source-memory-tests.txt",
+      "sha256": "fc168ae3054f860a20b868e62ce5d33f350c5cc65962e8df4e8b2a28fa5bbcdc"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "SKILLS-depo/memory/tests/test_retrieval.py",
+      "sha256": "c3ab08186c21c4901c87883d1916677661af814eec941d2d8fcbeaa5b2ce1614"
+    },
+    {
+      "path": "SKILLS-depo/memory/tests/test_normalization.py",
+      "sha256": "b3bdedfc301ee6c9555dda3c95861fb186d6540cb44fde03dd5b0879135303b3"
+    },
+    {
+      "path": "SKILLS-depo/memory/tests/fixtures/research/theorem.tex",
+      "sha256": "dbfbb26fbd257b0804e9f6ebcda9082ebb4479fd937de0fbdd63860d8cd192d6"
+    },
+    {
+      "path": "SKILLS-depo/memory/tests/fixtures/research/paper.html",
+      "sha256": "0ae00a0ad97fcacc061ad98b3b5bc9f9663a01d76061d6d7f5434215e6e57eac"
+    }
+  ],
+  "limitations": [
+    "Deterministic fixtures do not establish real native context or vendor behavior; those have separate reports."
+  ]
+}

@@ -423,3 +423,19 @@ id_ed25519*
 *.sqlite
 *.sqlite3
 *.db
+
+# Project memory: only classified local runtime products are excluded.
+# MEMORY/ and memory.yaml are canonical project sources and remain trackable.
+/.venv-memory-pilot/
+/.sys4ai/memory/projection/
+/.sys4ai/memory/normalized/
+/.sys4ai/memory/index/
+/.sys4ai/memory/model-cache/
+# These local paths are durable configuration/recovery, never disposable caches.
+/.sys4ai/memory/backend-config/
+/.sys4ai/memory/maintenance/
+
+# Reproducible downloads used only by the project-memory verification pilot.
+/Verification/project-memory/pilot-work/vendor-source/
+/Verification/project-memory/pilot-work/wheelhouse/
+/Verification/project-memory/pilot-work/fixtures/**/.sys4ai/memory/model-cache/

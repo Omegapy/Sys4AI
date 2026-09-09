@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "profile_id": "basic-memory-v0.23.0",
+  "frozen_before_runtime": true,
+  "queries": [
+    {"id": "exact-error", "query": "ERR-ALPHA-731", "modes": ["text", "hybrid"], "expected": "README.md"},
+    {"id": "concept-thermal", "query": "How can a tiny satellite get rid of waste heat without moving parts?", "modes": ["vector", "hybrid"], "expected": "docs/experiment.md"},
+    {"id": "exact-equation", "query": "eq:drag", "modes": ["text", "hybrid"], "expected": "research/physics.tex"},
+    {"id": "project-sentinel", "query": "BRAVO-ONLY-SENTINEL", "modes": ["text", "hybrid"], "expected_absent": true},
+    {"id": "sibling-sentinel", "query": "SIBLING-DRAFT-SENTINEL", "modes": ["text", "hybrid"], "expected_absent": true}
+  ],
+  "mandatory_scenarios": ["project-isolation", "alias-rejection", "canonical-and-metadata-preservation", "exact-retrieval", "conceptual-retrieval", "writer-rejection", "stale-projection", "frozen-packet", "declared-rebuild", "unknown-state-rejection", "interrupted-rebuild-recovery", "disabled-outage-fallback", "no-query-download", "read-bytes-and-mtime-preservation", "root-pilot-after-isolated-safety"]
+}

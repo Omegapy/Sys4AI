@@ -1,0 +1,40 @@
+{
+  "actual_failure": {
+    "code": "publication_interrupted",
+    "details": {
+      "cause": "OSError",
+      "journal_path": ".sys4ai/memory/maintenance/transactions/MEMOP-native-optional-001.json",
+      "operation_id": "MEMOP-native-optional-001",
+      "records": [
+        {
+          "path": "MEMORY/MEM-20260908-55667788.md",
+          "sha256": null,
+          "state": "pending"
+        }
+      ]
+    }
+  },
+  "injection": "Production helper fault callback after_journal; genuine memory journal and explicit recovery, no process termination claim.",
+  "limitations": [
+    "Recovery occurred during active execution and preserved all committed Task events; terminal replay is separately checkable."
+  ],
+  "recovery": {
+    "journal_path": ".sys4ai/memory/maintenance/transactions/MEMOP-native-optional-001.json",
+    "operation": "publish",
+    "operation_id": "MEMOP-native-optional-001",
+    "reason": "Optional historical handoff to exercise memory-only recovery without Task replay.",
+    "records": [
+      {
+        "path": "MEMORY/MEM-20260908-55667788.md",
+        "sha256": "8931eedfe66002da32a55ca01d9e28d29618884a4ef486072756be0f276b3dc4",
+        "state": "committed"
+      }
+    ],
+    "state": "complete",
+    "task_events_replayed": false
+  },
+  "status": "passed",
+  "task_files_inspected": 26,
+  "task_history_unchanged_bytes_mtimes": true,
+  "task_revision_before_after": 18
+}

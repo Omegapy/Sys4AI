@@ -201,3 +201,15 @@ revocation. Preserve original reservations, history and partial-commit receipts.
 Report the exact checks and distinguish contract inspection, deterministic
 fixtures, native observations and end-to-end delivery. State unexercised consumer,
 native, external or future-project behavior without claiming it passed.
+
+## Optional project memory
+
+When an adopted memory capability supplies relevant accepted evidence, follow
+[memory context](references/memory-context.md). The confirmed manager freezes
+one bounded packet before initial solver dispatch and binds its exact registered
+reference through existing baseline inputs and assignment context. Preserve
+each category's team, fresh role selection, settings and native ownership gates.
+Children return proposals; publication requires the current separate memory
+scope. Memory lookup and optional capture never activate this Task workflow or
+change its installed selection policy, and unavailable memory does not block
+ordinary Task inspection.

@@ -102,6 +102,57 @@ class TemplateUpdateTests(unittest.TestCase):
     def apply(self) -> dict:
         return engine.update(self.root, "apply")
 
+    def memory_fixture(self):
+        add_skill(self.root, "memory")
+        put(self.root, "MEMORY-depo/starter/MEMORY/README.md", "# Empty memory\n")
+        put(self.root, "MEMORY-depo/starter/memory.yaml", '{"project": null, "enabled": false}\n')
+        put(self.root, "MEMORY-depo/policy.md", "# Memory policy\n")
+        mapping = json.loads((self.root / engine.MANIFEST).read_text())
+        mapping["overrides"].update({"MEMORY-depo/starter/MEMORY/README.md": "MEMORY/README.md",
+                                     "MEMORY-depo/starter/memory.yaml": "memory.yaml"})
+        (self.root / engine.MANIFEST).write_text(json.dumps(mapping))
+
+    def test_memory_starters_complete_skill_and_contract_ownership(self):
+        self.memory_fixture()
+        self.assertEqual(self.apply()["status"], "applied")
+        self.assertEqual((self.template / "MEMORY/README.md").read_text(), "# Empty memory\n")
+        self.assertTrue((self.template / ".agents/skills/memory/scripts/example.py").is_file())
+        self.assertTrue((self.template / "reference-assets/MEMORY-depo/policy.md").is_file())
+        self.assertFalse((self.template / "reference-assets/MEMORY-depo/starter").exists())
+        put(self.root, "MEMORY-depo/example.md", "Inactive example\n")
+        self.apply()
+        self.assertTrue((self.template / "reference-assets/MEMORY-depo/example.md").exists())
+        (self.root / "MEMORY-depo/example.md").unlink()
+        self.apply()
+        self.assertFalse((self.template / "reference-assets/MEMORY-depo/example.md").exists())
+        put(self.template, "MEMORY/README.md", "Customized memory ownership\n")
+        put(self.root, "MEMORY-depo/starter/MEMORY/README.md", "Revised empty starter\n")
+        before = file_inventory(self.template)
+        with self.assertRaisesRegex(engine.UpdateError, "conflicts"):
+            self.apply()
+        self.assertEqual(before, file_inventory(self.template))
+
+    def test_interrupted_memory_publication_resumes_exact_pending_inputs(self):
+        self.memory_fixture()
+        self.apply()
+        put(self.root, "MEMORY-depo/policy.md", "# Revised memory policy\n")
+        put(self.root, "MEMORY-depo/starter/MEMORY/README.md", "# Revised empty memory\n")
+        original = engine.atomic_write
+        interrupted_once = []
+        def interrupted(path, data, mode=0o644):
+            original(path, data, mode)
+            if path == self.template / "MEMORY/README.md" and not interrupted_once:
+                interrupted_once.append(True)
+                raise OSError("memory fixture interruption")
+        with patch.object(engine, "atomic_write", side_effect=interrupted):
+            with self.assertRaisesRegex(OSError, "memory fixture interruption"):
+                self.apply()
+        self.assertTrue((self.root / engine.PENDING).is_file())
+        result = self.apply()
+        self.assertTrue(result["recovered"])
+        self.assertEqual(engine.update(self.root, "check")["status"], "current")
+        self.assertEqual((self.template / "reference-assets/MEMORY-depo/policy.md").read_text(), "# Revised memory policy\n")
+
     def test_case_transition_renames_exact_directory_and_archives_original_state(self):
         raw_state = lowercase_owned_template(self.root, self.template)
         put(self.template, "roles/project-sub-agent/local-notes.txt", "Preserve project notes\n")

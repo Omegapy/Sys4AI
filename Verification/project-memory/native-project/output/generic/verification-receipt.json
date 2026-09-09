@@ -1,0 +1,42 @@
+{
+  "artifacts": [
+    {
+      "path": "research/fixture.tex",
+      "sha256": "416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73"
+    },
+    {
+      "path": ".agents/skills/memory/scripts/memory.py",
+      "sha256": "ccc92c22637c04f1e8d74326bc9239d477490e425301206bf2966aa1747472f9"
+    },
+    {
+      "path": "output/generic/search-observation.json",
+      "sha256": "31e9f7f52a2338524a0c3ec4bd87b8e46140dde9fc3c47d1bab9a60917da82cc"
+    },
+    {
+      "path": "output/generic/role-reads.json",
+      "sha256": "c65c7f22746cbcba3550fb502e74d4121fd1dd28ff8b522f44400730e8331a5d"
+    }
+  ],
+  "claim_level": "verified_outcome",
+  "command": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python -B /Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project/.agents/skills/memory/scripts/memory.py --project-root /Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project search eq:native-energy --mode lexical",
+  "details": {
+    "cli_exit_zero": true,
+    "cli_reports_no_mutation": true,
+    "cli_stderr_empty": true,
+    "input_versions_match": true,
+    "label_in_direct_source": true,
+    "lexical_mode": true,
+    "literal_equation_in_direct_source": true,
+    "matching_result_provenance": true,
+    "project_bound": true,
+    "read_only_bytes_and_mtimes": true
+  },
+  "limitations": [
+    "This is one literal lexical fixture lookup; TeX macros and included files were not expanded or compiled.",
+    "The preservation observation covers the 53 source, memory, role, config, baseline and canonical Task entries listed in search-observation.json.",
+    "Backend retrieval, publication and Task completion were outside this worker observation."
+  ],
+  "observed_at": "2026-09-08T21:59:22.644016Z",
+  "outcome": "passed",
+  "schema_version": 1
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "observed_at": "2026-09-09T00:16:26.774288+00:00",
+  "authority": {
+    "path": "Verification/project-memory/host-testing-scope.json",
+    "sha256": "0245d0c1379c1f00506a6879e4897a3a1286f4134a42a2850de536483ba8d314"
+  },
+  "evidence_level": "host-run real Task and memory helpers with explicitly synthetic native fixture receipts",
+  "sub_agents_used": false,
+  "new_native_launches": 0,
+  "test_suites": [
+    {
+      "path": "Verification/project-memory/host-source-memory-results.json",
+      "sha256": "c50d5e20ce648a024010a27ad08717e0cce12924eb6cd2435c5f7d12241d7463"
+    },
+    {
+      "path": "Verification/project-memory/host-installed-memory-results.json",
+      "sha256": "3985381635bcc865222fd79284759d4171fca9a832e41ed768a8cfa1078c53e2"
+    },
+    {
+      "path": "Verification/project-memory/host-template-memory-results.json",
+      "sha256": "8503c605ccd51b7d22df4916d09dddbd2dd626d9b43dc2404acd91ec5bd164a4"
+    },
+    {
+      "path": "Verification/project-memory/host-installed-task-results.json",
+      "sha256": "2f32595d136447311c88c6ad992033c148e7f07d00cf751dda5055731307e149"
+    }
+  ],
+  "integration_test_source": {
+    "path": "SKILLS-depo/memory/tests/test_release_workflows.py",
+    "sha256": "705bfed0382a4e705f61283169509a16793e0ecd5d56034ef70761369d3dc570"
+  },
+  "integration_log": {
+    "path": "Verification/project-memory/host-source-memory-tests.txt",
+    "sha256": "fc168ae3054f860a20b868e62ce5d33f350c5cc65962e8df4e8b2a28fa5bbcdc"
+  },
+  "checks": [
+    {
+      "id": "current-candidate-review-gate",
+      "result": "passed",
+      "observed_contract": "Changed candidate invalidates its old pass and blocks senior assignment until a current mapped review passes."
+    },
+    {
+      "id": "material-memory-supersession",
+      "result": "passed",
+      "observed_contract": "Actual memory publication supersedes the prior accepted fixture design, preserves Task files and invalidates old frozen recall."
+    },
+    {
+      "id": "owner-reconciliation-gate",
+      "result": "passed",
+      "observed_contract": "Rebuilding a memory packet with unreconciled fixture owners is rejected."
+    },
+    {
+      "id": "baseline-and-review-rebinding",
+      "result": "passed",
+      "observed_contract": "A material baseline revision invalidates old acceptance; both current mapped reviews are required before senior input binding."
+    },
+    {
+      "id": "accepted-implementation-target",
+      "result": "passed",
+      "observed_contract": "The same distinct fixture implementer is rebound to the new acceptance and produces a verified new output; identity and scope are preserved."
+    },
+    {
+      "id": "terminal-memory-only-recovery",
+      "result": "passed",
+      "observed_contract": "Optional publication failure and idempotent recovery after terminal Task completion preserve every Task file byte and modification time."
+    }
+  ],
+  "limits": [
+    "No live senior/reviewer/implementer or live message/interruption/rebinding is claimed for these direct tests.",
+    "Earlier actual native observations remain preserved in their original reports and blocked fixture history.",
+    "Production team requirements and publisher/Task ownership guards are unchanged."
+  ],
+  "research_fixtures": [
+    {
+      "path": "SKILLS-depo/memory/tests/fixtures/research/theorem.tex",
+      "sha256": "dbfbb26fbd257b0804e9f6ebcda9082ebb4479fd937de0fbdd63860d8cd192d6"
+    },
+    {
+      "path": "SKILLS-depo/memory/tests/fixtures/research/paper.html",
+      "sha256": "0ae00a0ad97fcacc061ad98b3b5bc9f9663a01d76061d6d7f5434215e6e57eac"
+    }
+  ]
+}

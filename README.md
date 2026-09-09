@@ -199,3 +199,18 @@ documents actual helper payloads, version and recovery gates. Root automatic
 work intake and 30-day inactivity closure remain local policies. Historical
 Tasks retain their original schema and meaning until an explicitly selected
 upgrade. Native goals, plans, TRDs and Task state remain separate.
+
+## Project memory
+
+The [memory skill](./.agents/skills/memory/SKILL.md) provides project-owned
+[canonical records](./MEMORY/README.md), exact source retrieval and a guarded
+local Basic Memory adapter. [Configuration](./memory.yaml) and the
+[release assessment](./Verification/project-memory/RELEASE-ASSESSMENT.md) record
+the current scope and verification. Recalled conclusions remain evidence;
+current instructions, Tasks, role pairs and original sources retain authority.
+
+Use `.venv/bin/python .agents/skills/memory/scripts/memory.py --project-root .
+search 'query'` for lookup, or replace the search arguments with `health` for
+current readiness. Reads perform no maintenance or provisioning. Canonical
+publication needs the exact current Director/manager grant. New projects receive
+only the empty Template capability; existing products require their own adoption.

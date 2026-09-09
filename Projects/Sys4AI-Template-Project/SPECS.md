@@ -47,7 +47,7 @@ Equivalent reruns preserve identity and avoid duplicate registration.
 
 The licensing starters are `LICENSE`, `LICENSE-CODE`, and `LICENSE-DOCS`.
 They define the Apache 2.0 code / CC BY 4.0 document split and default
-attribution. Setup contract `governance-starter-v4` adopts the complete trio
+attribution. Setup contracts `governance-starter-v4` and `governance-starter-v5` adopt the complete trio
 when no existing root license markers are present. It preserves existing
 licensing as a whole, records original and observed marker hashes separately,
 and skips missing companions. Earlier setup editions retain their own source
@@ -82,3 +82,27 @@ and version checks, index repair, selected legacy transition and recovery.
 Initializer starter data excludes native handles, live execution and role
 transition runtime receipts. Existing customized projects require their own
 reviewed adoption; registration and read-only inspection do not migrate them.
+
+## Project memory runtime
+
+The memory core, Task integration and lexical source lookup use Python 3.12's
+standard library. `memory.yaml` and record frontmatter accept a documented JSON
+object subset of YAML; no general YAML parser is imported by governance helpers.
+Canonical notes live only in `MEMORY/`, with adopted contracts under
+`reference-assets/MEMORY-depo/`. Configuration and canonical records remain
+trackable; the Template starts empty with neutral identity and backend disabled.
+
+Optional PDF extraction is declared in the memory skill's
+`requirements-extraction.txt`. The pinned Basic Memory local pilot has a separate
+`requirements-backend-pilot.txt`, immutable model profile and runtime. Neither is
+installed by initialization or lookup. The backend's ordinary CLI/MCP writers
+are not canonical publication tools; the guarded adapter uses derived products
+and exact result revalidation. A failed compatibility gate retains lexical use.
+
+The memory [state-path contract](./.agents/skills/memory/references/state-paths.md)
+distinguishes rebuildable projection, normalization, index and model products
+from durable backend configuration and pending maintenance journals. Never
+classify the whole `.sys4ai` directory as disposable. Setup edition v5 selects
+the complete empty capability, specializes only the owning identity/paths and
+records copied, specialized or preserved assets; v1-v4 receipts keep their
+original requirements and equivalent-rerun behavior.

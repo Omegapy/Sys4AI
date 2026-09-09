@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-08T21:58:09.586931+00:00",
+  "function": "bounded fresh-context memory retrieval verification",
+  "role": "project-sub-agent",
+  "role_catalog_sha256": "9358679d8b9f571b5e1bbdc6dcf779384744d1ddd03edbee2788998dc1ae2be6",
+  "fit": {
+    "objective": "Retrieve previously recorded root read-only lookup evidence in a context with no parent conversation history.",
+    "reads": [
+      "SOUL.md",
+      "AGENTS.md",
+      "ROLE.md",
+      "SPECS.md",
+      "Roles/project-sub-agent",
+      "memory.yaml",
+      "MEMORY",
+      ".agents/skills/memory",
+      "evidence paths cited by returned records",
+      ".sys4ai/memory"
+    ],
+    "writes": [
+      "Verification/project-memory/fresh-context"
+    ],
+    "deliverable": "Read-only actual CLI commands and source-backed recall with hashes and bounded result.",
+    "skills": [
+      "memory"
+    ],
+    "authority": "PLAN TASK-048 in user-authorized implementation; no Task or canonical memory mutation.",
+    "risk": "Shared filesystem controls are cooperative.",
+    "stop": "Return observed evidence with limitations, then stop.",
+    "rationale": "Fresh valid general worker supports bounded source and runtime verification; manager role is unnecessary."
+  },
+  "settings": {
+    "mode": "observed_equal",
+    "model": "gpt-6-astra",
+    "effort": "max",
+    "parent_evidence": "Current local session turn_context in rollout-2026-09-08T14-24-42-01a082b1-befd-7192-b9a6-de197889b2ff.jsonl directly records model gpt-6-astra and effort max. Codex config agrees and has no agents defaults or custom agents.",
+    "dispatch": "Set exact same model and reasoning_effort explicitly for fork_turns none; no lower or alternative setting. This fresh context mode needs direct equality rather than the full-history inheritance guarantee."
+  },
+  "context_isolation": "Native spawn_agent fork_turns none supplies no surrounding conversation. Prompt contains no memory record ID, title, contents, result or source evidence hash.",
+  "capacity": {
+    "total_active_slots": 4,
+    "observed_running": [
+      "/root",
+      "/root/memory_native_manager",
+      "/root/memory_native_manager/generic_worker"
+    ],
+    "available": 1
+  },
+  "role_sha256s": {
+    "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+    "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "assessed_at": "2026-09-08T21:43:32.611922+00:00",
+  "status": "compatible-in-the-tested-isolated-profile",
+  "profile_sha256": "c3d33e44260654427bfa32fdc6c346e78cb78e4fb64e0d45830fed0a148bcf17",
+  "adapter_sha256": "1f0a625bd6a3462bb6074caa9c0d291df315ccb0e42c7554f971a2c8ac9d3482",
+  "checks": {
+    "pinned-runtime": true,
+    "project-isolation-and-retrieval": true,
+    "fault-inspection-preservation": true,
+    "frozen-sibling-exclusion": true,
+    "frozen-allowed-recall": true,
+    "changed-frozen-input": true,
+    "lifecycle-rejection": true,
+    "disabled-model-and-database-outage": true,
+    "actual-pdf": true,
+    "literal-url-path": true,
+    "actual-interruption-recovery": true,
+    "five-type-metadata": true
+  },
+  "evidence": [
+    {
+      "path": "Verification/project-memory/runtime-manifest.json",
+      "sha256": "e08cbba50dabcf4af9c35ca06f5f7348a2b6af05c39574ba61801d1c56bc5762"
+    },
+    {
+      "path": "Verification/project-memory/backend-fixture-results.json",
+      "sha256": "362f9fd7fef3dccc18eb88cb8e82008cb771f45fff16b83594a07df571ac9636"
+    },
+    {
+      "path": "Verification/project-memory/backend-fault-results.json",
+      "sha256": "18104e3350d311e52c5acee3bead685b172294f96f0f4031b8570d0568f50712"
+    },
+    {
+      "path": "Verification/project-memory/backend-metadata-results.json",
+      "sha256": "981142387559073c62c4470b14a1d69cb80b5ad8d41fb07655d748f7d70cbdb7"
+    },
+    {
+      "path": "Verification/project-memory/backend-pdf-results.json",
+      "sha256": "164d6b4d5bd643e2ed0cf840591cb58b306aa5685317595d2ca5ccde8c9e3836"
+    },
+    {
+      "path": "Verification/project-memory/backend-interruption-results.json",
+      "sha256": "207a0744ec5485760e6683b3de6e231002d86a8cb5842810fd907fcfa3cf2bea"
+    },
+    {
+      "path": "Verification/project-memory/backend-url-results.json",
+      "sha256": "926a344beed91e01c84351da5b7b011f3e00e8efb8b9bf352044c94583bc43e1"
+    },
+    {
+      "path": "Verification/project-memory/backend-resources.json",
+      "sha256": "a804875b9cb8ae068bf031cff041f8c04d65efa698d4af18c86927fbec19762b"
+    },
+    {
+      "path": "Verification/project-memory/backend-preservation.json",
+      "sha256": "d0dea20458e94cb05e8eca8815494dc9d788dfc3956e7fba075ba3d1e4fb9e47"
+    }
+  ],
+  "backend_enablement": "No active-root enablement decision by this worker. Director root pilot, final config-bound certification and native integration are separate gates.",
+  "task_coverage": {
+    "TASK-004": "scoped specification complete",
+    "TASK-025": "implemented and tested",
+    "TASK-026": "implemented and tested",
+    "TASK-027": "implemented and tested",
+    "TASK-028": "18 deterministic tests passed",
+    "TASK-039": "isolated runtime/model provisioned; root profile belongs to host",
+    "TASK-040": "isolated scenarios passed",
+    "TASK-042": "isolated operating evidence complete; root measurements belong to host"
+  },
+  "limitations": [
+    "Hybrid ranking can return weakly related local memories for an absent identifier; exact text retrieval remains the appropriate no-match check. Ranking is never evidence of truth.",
+    "Frozen packet filtering used synthetic Task attribution and actual backend data. Native context inheritance and manager activation were not tested by this worker.",
+    "Small PDF and short Markdown/TeX/HTML fixtures do not prove large-corpus or scanned-PDF behavior.",
+    "Python auditing and SQLite access controls are not an OS sandbox."
+  ],
+  "unexercised": [
+    "active-root pilot by this worker",
+    "root semantic enablement",
+    "native Task integration or fresh context",
+    "other platform/package profiles",
+    "host MCP registration",
+    "cloud/external service",
+    "existing-product adoption",
+    "Git/publication"
+  ]
+}

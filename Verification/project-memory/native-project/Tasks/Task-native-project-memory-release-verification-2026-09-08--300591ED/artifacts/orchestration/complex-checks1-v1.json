@@ -1,0 +1,701 @@
+{
+  "assignment_id": "complex-solver1",
+  "assignment_validation": {
+    "assignment_id": "complex-solver1",
+    "baseline": "86e380d0fed738c4301282fe1e269c58a35420007207607a1d05a0217cdabc04",
+    "mutated": false,
+    "packet": {
+      "path": "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json",
+      "sha256": "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+    },
+    "round": 1,
+    "status": "bound"
+  },
+  "baseline": {
+    "path": "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/baseline_86e380d0fed738c4301282fe1e269c58a35420007207607a1d05a0217cdabc04.json",
+    "sha256": "86e380d0fed738c4301282fe1e269c58a35420007207607a1d05a0217cdabc04"
+  },
+  "candidate": {
+    "path": "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/work/complex-solver1/candidate-v1.json",
+    "sha256": "86caa826236a7ed9f7f70d7325a3eecb5525b330e7eba90b93322158c6667d8f"
+  },
+  "contract": {
+    "path": "coordination/complex-solver1-contract.json",
+    "sha256": "0801e36fd9a00ae305313d328b25049078251addba235caac864054eb45d5a8f"
+  },
+  "inspection_preserved": true,
+  "inspection_scope_after": {
+    ".agents/skills/memory/scripts/basic_memory_adapter.py": {
+      "mtime_ns": 1788902822865404616,
+      "sha256": "1f0a625bd6a3462bb6074caa9c0d291df315ccb0e42c7554f971a2c8ac9d3482"
+    },
+    ".agents/skills/memory/scripts/basic_memory_projection.py": {
+      "mtime_ns": 1788902190888104104,
+      "sha256": "6d513c5f6695b7db3a169987d8729471884a81195a305d2c93045f4c6830293f"
+    },
+    ".agents/skills/memory/scripts/memory.py": {
+      "mtime_ns": 1788902190888295815,
+      "sha256": "ccc92c22637c04f1e8d74326bc9239d477490e425301206bf2966aa1747472f9"
+    },
+    ".agents/skills/memory/scripts/memory_core.py": {
+      "mtime_ns": 1788902190888538734,
+      "sha256": "e6c61df107a359cb21b081ee5841f14d76ce1c85cde93caaeb3c2f6a84d408e2"
+    },
+    ".agents/skills/memory/scripts/memory_evidence.py": {
+      "mtime_ns": 1788902190888731153,
+      "sha256": "074f0d1a4eaf332d34dc10a8339a51247a9c034948352ac3c4d7608551c65ad5"
+    },
+    ".agents/skills/memory/scripts/memory_maintenance.py": {
+      "mtime_ns": 1788902190888950031,
+      "sha256": "035e2b42918080d20485c9172814e4f775d914e65bc92d1caeae137525366b23"
+    },
+    ".agents/skills/memory/scripts/memory_normalization.py": {
+      "mtime_ns": 1788902190889146575,
+      "sha256": "36bfb9800dc04fce004075295e00a5e830979c2b34fd66d1d5b6a1760bb48cda"
+    },
+    ".agents/skills/memory/scripts/memory_normalize_html.py": {
+      "mtime_ns": 1788902190889388119,
+      "sha256": "34f82652d31b797f5b07ace50f0043e16766a8710c7ab3774e0cf3ef38b391af"
+    },
+    ".agents/skills/memory/scripts/memory_normalize_pdf.py": {
+      "mtime_ns": 1788902190889889209,
+      "sha256": "cac3e93c9cb3318ec6466a01e6f719491ac6368156f9be5a2b55c63c009b5a8d"
+    },
+    ".agents/skills/memory/scripts/memory_normalize_tex.py": {
+      "mtime_ns": 1788902190890203921,
+      "sha256": "c1fb0c6ed6f10c43586a6419f80a328119f1d0eccc2fcf265ae2a70f28bc8241"
+    },
+    ".agents/skills/memory/scripts/memory_packet.py": {
+      "mtime_ns": 1788903482648821428,
+      "sha256": "d0a7c7f0ada939263e55a557cf482438f6a41d129942e196c11c70b0ac8a1a2a"
+    },
+    ".agents/skills/memory/scripts/memory_paths.py": {
+      "mtime_ns": 1788902190890588384,
+      "sha256": "5e7c01db65adf4296d97b166945a80a18875055a46811eeb30c701ab7040f7de"
+    },
+    ".agents/skills/memory/scripts/memory_publish.py": {
+      "mtime_ns": 1788902190890806428,
+      "sha256": "93fb9f9dff14894f64304266061a5dd6b569ea21cb29600bf68ca54ca99d9adc"
+    },
+    ".agents/skills/memory/scripts/memory_recovery.py": {
+      "mtime_ns": 1788902190890986722,
+      "sha256": "d5ae2894e64f38ed4bf34fbb3c3bb9f5dc205f7405c3781eec81440e83694bff"
+    },
+    ".agents/skills/memory/scripts/memory_search.py": {
+      "mtime_ns": 1788902190891233933,
+      "sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b"
+    },
+    "AGENTS.md": {
+      "mtime_ns": 1788902048597402624,
+      "sha256": "d3222156881afedc49fa594075094bd0d89d2939642c4328e96278e125c03588"
+    },
+    "MEMORY/MEM-20260908-10203040.md": {
+      "mtime_ns": 1788904217463175141,
+      "sha256": "4e1b2ec9b1f0a4f06f111fd0d857e96c8b33625d396aa5bef1d3a695c3569e6d"
+    },
+    "README.md": {
+      "mtime_ns": 1788902393609916553,
+      "sha256": "8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08"
+    },
+    "ROLE.md": {
+      "mtime_ns": 1788902048598441137,
+      "sha256": "97fc2d4462992a1e2b526f0c2b7f2d2f1cbc93c98eb9fe500dc30a4da595d903"
+    },
+    "Roles/project-sub-agent/AGENTS.md": {
+      "mtime_ns": 1788902190904547967,
+      "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+    },
+    "Roles/project-sub-agent/ROLE.md": {
+      "mtime_ns": 1788902190904785512,
+      "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+    },
+    "SOUL.md": {
+      "mtime_ns": 1787879892364416361,
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+    },
+    "SPECS.md": {
+      "mtime_ns": 1788902048600917499,
+      "sha256": "fcea7b90410e210d79c2e20bfe33feecea96e317da8e4e6e86b7adac99f75d1c"
+    },
+    "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/baseline_86e380d0fed738c4301282fe1e269c58a35420007207607a1d05a0217cdabc04.json": {
+      "mtime_ns": 1788904960038106104,
+      "sha256": "86e380d0fed738c4301282fe1e269c58a35420007207607a1d05a0217cdabc04"
+    },
+    "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json": {
+      "mtime_ns": 1788904959941855914,
+      "sha256": "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+    },
+    "context/native-requirements.json": {
+      "mtime_ns": 1788902393610879106,
+      "sha256": "a0d7a7e640c445a6d3ec55259e90dc31cd8017618f4c962a0d02593eeecd290d"
+    },
+    "coordination/complex-solver1-contract.json": {
+      "mtime_ns": 1788905006736738848,
+      "sha256": "0801e36fd9a00ae305313d328b25049078251addba235caac864054eb45d5a8f"
+    },
+    "memory.yaml": {
+      "mtime_ns": 1788902393609845427,
+      "sha256": "282ef155cb702c7302b1bd28265276eeba5dd51e8094c2952b2ba09c570cc504"
+    },
+    "research/fixture.tex": {
+      "mtime_ns": 1788902393610013387,
+      "sha256": "416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73"
+    }
+  },
+  "inspection_scope_before": {
+    ".agents/skills/memory/scripts/basic_memory_adapter.py": {
+      "mtime_ns": 1788902822865404616,
+      "sha256": "1f0a625bd6a3462bb6074caa9c0d291df315ccb0e42c7554f971a2c8ac9d3482"
+    },
+    ".agents/skills/memory/scripts/basic_memory_projection.py": {
+      "mtime_ns": 1788902190888104104,
+      "sha256": "6d513c5f6695b7db3a169987d8729471884a81195a305d2c93045f4c6830293f"
+    },
+    ".agents/skills/memory/scripts/memory.py": {
+      "mtime_ns": 1788902190888295815,
+      "sha256": "ccc92c22637c04f1e8d74326bc9239d477490e425301206bf2966aa1747472f9"
+    },
+    ".agents/skills/memory/scripts/memory_core.py": {
+      "mtime_ns": 1788902190888538734,
+      "sha256": "e6c61df107a359cb21b081ee5841f14d76ce1c85cde93caaeb3c2f6a84d408e2"
+    },
+    ".agents/skills/memory/scripts/memory_evidence.py": {
+      "mtime_ns": 1788902190888731153,
+      "sha256": "074f0d1a4eaf332d34dc10a8339a51247a9c034948352ac3c4d7608551c65ad5"
+    },
+    ".agents/skills/memory/scripts/memory_maintenance.py": {
+      "mtime_ns": 1788902190888950031,
+      "sha256": "035e2b42918080d20485c9172814e4f775d914e65bc92d1caeae137525366b23"
+    },
+    ".agents/skills/memory/scripts/memory_normalization.py": {
+      "mtime_ns": 1788902190889146575,
+      "sha256": "36bfb9800dc04fce004075295e00a5e830979c2b34fd66d1d5b6a1760bb48cda"
+    },
+    ".agents/skills/memory/scripts/memory_normalize_html.py": {
+      "mtime_ns": 1788902190889388119,
+      "sha256": "34f82652d31b797f5b07ace50f0043e16766a8710c7ab3774e0cf3ef38b391af"
+    },
+    ".agents/skills/memory/scripts/memory_normalize_pdf.py": {
+      "mtime_ns": 1788902190889889209,
+      "sha256": "cac3e93c9cb3318ec6466a01e6f719491ac6368156f9be5a2b55c63c009b5a8d"
+    },
+    ".agents/skills/memory/scripts/memory_normalize_tex.py": {
+      "mtime_ns": 1788902190890203921,
+      "sha256": "c1fb0c6ed6f10c43586a6419f80a328119f1d0eccc2fcf265ae2a70f28bc8241"
+    },
+    ".agents/skills/memory/scripts/memory_packet.py": {
+      "mtime_ns": 1788903482648821428,
+      "sha256": "d0a7c7f0ada939263e55a557cf482438f6a41d129942e196c11c70b0ac8a1a2a"
+    },
+    ".agents/skills/memory/scripts/memory_paths.py": {
+      "mtime_ns": 1788902190890588384,
+      "sha256": "5e7c01db65adf4296d97b166945a80a18875055a46811eeb30c701ab7040f7de"
+    },
+    ".agents/skills/memory/scripts/memory_publish.py": {
+      "mtime_ns": 1788902190890806428,
+      "sha256": "93fb9f9dff14894f64304266061a5dd6b569ea21cb29600bf68ca54ca99d9adc"
+    },
+    ".agents/skills/memory/scripts/memory_recovery.py": {
+      "mtime_ns": 1788902190890986722,
+      "sha256": "d5ae2894e64f38ed4bf34fbb3c3bb9f5dc205f7405c3781eec81440e83694bff"
+    },
+    ".agents/skills/memory/scripts/memory_search.py": {
+      "mtime_ns": 1788902190891233933,
+      "sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b"
+    },
+    "AGENTS.md": {
+      "mtime_ns": 1788902048597402624,
+      "sha256": "d3222156881afedc49fa594075094bd0d89d2939642c4328e96278e125c03588"
+    },
+    "MEMORY/MEM-20260908-10203040.md": {
+      "mtime_ns": 1788904217463175141,
+      "sha256": "4e1b2ec9b1f0a4f06f111fd0d857e96c8b33625d396aa5bef1d3a695c3569e6d"
+    },
+    "README.md": {
+      "mtime_ns": 1788902393609916553,
+      "sha256": "8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08"
+    },
+    "ROLE.md": {
+      "mtime_ns": 1788902048598441137,
+      "sha256": "97fc2d4462992a1e2b526f0c2b7f2d2f1cbc93c98eb9fe500dc30a4da595d903"
+    },
+    "Roles/project-sub-agent/AGENTS.md": {
+      "mtime_ns": 1788902190904547967,
+      "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+    },
+    "Roles/project-sub-agent/ROLE.md": {
+      "mtime_ns": 1788902190904785512,
+      "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+    },
+    "SOUL.md": {
+      "mtime_ns": 1787879892364416361,
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+    },
+    "SPECS.md": {
+      "mtime_ns": 1788902048600917499,
+      "sha256": "fcea7b90410e210d79c2e20bfe33feecea96e317da8e4e6e86b7adac99f75d1c"
+    },
+    "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/baseline_86e380d0fed738c4301282fe1e269c58a35420007207607a1d05a0217cdabc04.json": {
+      "mtime_ns": 1788904960038106104,
+      "sha256": "86e380d0fed738c4301282fe1e269c58a35420007207607a1d05a0217cdabc04"
+    },
+    "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json": {
+      "mtime_ns": 1788904959941855914,
+      "sha256": "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+    },
+    "context/native-requirements.json": {
+      "mtime_ns": 1788902393610879106,
+      "sha256": "a0d7a7e640c445a6d3ec55259e90dc31cd8017618f4c962a0d02593eeecd290d"
+    },
+    "coordination/complex-solver1-contract.json": {
+      "mtime_ns": 1788905006736738848,
+      "sha256": "0801e36fd9a00ae305313d328b25049078251addba235caac864054eb45d5a8f"
+    },
+    "memory.yaml": {
+      "mtime_ns": 1788902393609845427,
+      "sha256": "282ef155cb702c7302b1bd28265276eeba5dd51e8094c2952b2ba09c570cc504"
+    },
+    "research/fixture.tex": {
+      "mtime_ns": 1788902393610013387,
+      "sha256": "416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73"
+    }
+  },
+  "native_id": "/root/memory_native_manager/complex_solver1",
+  "observed_at": "2026-09-08T22:08:52.804165+00:00",
+  "packet": {
+    "path": "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json",
+    "sha256": "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+  },
+  "post_candidate_probe_note": "The private sentinel was present in this assignment output before both probes; neither probe returned it. No sibling content was read.",
+  "post_candidate_sentinel_probes": [
+    {
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-B",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project/.agents/skills/memory/scripts/memory.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project",
+        "search",
+        "SIBLING_SENTINEL",
+        "--mode",
+        "hybrid",
+        "--packet-file",
+        "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json",
+        "--packet-sha256",
+        "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+      ],
+      "result": {
+        "limitations": [
+          "Only the exact frozen memory inputs are searched; changed inputs require manager reconciliation."
+        ],
+        "mode": "frozen-lexical",
+        "mutated": false,
+        "packet": {
+          "path": "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json",
+          "sha256": "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+        },
+        "project_id": "native-memory-fixture",
+        "results": [],
+        "status": "no_match"
+      },
+      "returncode": 0,
+      "scope": "packet",
+      "stderr": "",
+      "stdout": "{\n  \"limitations\": [\n    \"Only the exact frozen memory inputs are searched; changed inputs require manager reconciliation.\"\n  ],\n  \"mode\": \"frozen-lexical\",\n  \"mutated\": false,\n  \"packet\": {\n    \"path\": \"Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json\",\n    \"sha256\": \"7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6\"\n  },\n  \"project_id\": \"native-memory-fixture\",\n  \"results\": [],\n  \"status\": \"no_match\"\n}\n"
+    },
+    {
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-B",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project/.agents/skills/memory/scripts/memory.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project",
+        "search",
+        "SIBLING_SENTINEL",
+        "--mode",
+        "hybrid"
+      ],
+      "result": {
+        "historical": false,
+        "limitations": [
+          "Semantic backend disabled; results use deterministic lexical retrieval.",
+          "research/fixture.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "mode": "lexical",
+        "mutated": false,
+        "project_id": "native-memory-fixture",
+        "results": [],
+        "status": "no_match"
+      },
+      "returncode": 0,
+      "scope": "direct-corpus-negative-only",
+      "stderr": "",
+      "stdout": "{\n  \"historical\": false,\n  \"limitations\": [\n    \"Semantic backend disabled; results use deterministic lexical retrieval.\",\n    \"research/fixture.tex: Literal source extraction; macros and included files are not expanded or compiled.\"\n  ],\n  \"mode\": \"lexical\",\n  \"mutated\": false,\n  \"project_id\": \"native-memory-fixture\",\n  \"results\": [],\n  \"status\": \"no_match\"\n}\n"
+    }
+  ],
+  "role_reads": {
+    "agents_path": "Roles/project-sub-agent/AGENTS.md",
+    "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "role_path": "Roles/project-sub-agent/ROLE.md",
+    "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+    "soul_path": "SOUL.md",
+    "soul_sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+  },
+  "runs": [
+    {
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-B",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project/.agents/skills/memory/scripts/memory.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project",
+        "search",
+        "E=mc^2",
+        "--mode",
+        "hybrid",
+        "--packet-file",
+        "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json",
+        "--packet-sha256",
+        "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+      ],
+      "name": "packet-equation",
+      "result": {
+        "limitations": [
+          "Only the exact frozen memory inputs are searched; changed inputs require manager reconciliation."
+        ],
+        "mode": "frozen-lexical",
+        "mutated": false,
+        "packet": {
+          "path": "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json",
+          "sha256": "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+        },
+        "project_id": "native-memory-fixture",
+        "results": [
+          {
+            "authority": "Source data; inspect current governing sources before acting.",
+            "bibliography_keys": [],
+            "diagnostics": [],
+            "environments": [
+              "equation"
+            ],
+            "excerpt": "\\section{Conserved quantity}\n\\begin{equation}\\label{eq:native-energy} E=mc^2 \\end{equation}\n",
+            "heading": "Conserved quantity",
+            "kind": "source",
+            "labels": [
+              "eq:native-energy"
+            ],
+            "limitations": [
+              "Literal source extraction; macros and included files are not expanded or compiled."
+            ],
+            "line": 1,
+            "locator": "research/fixture.tex:1",
+            "path": "research/fixture.tex",
+            "references": [],
+            "representations": [
+              {
+                "locator": "research/fixture.tex:1",
+                "path": "research/fixture.tex",
+                "sha256": "416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73"
+              }
+            ],
+            "score": 149,
+            "sha256": "416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73",
+            "source_identity": "research/fixture.tex"
+          },
+          {
+            "authority": "Source data; inspect current governing sources before acting.",
+            "claim": {
+              "level": "accepted_design",
+              "summary": "The approved disposable fixture design groups only explicitly related representations under one evidence identity."
+            },
+            "confidence": "high",
+            "diagnostics": [],
+            "excerpt": "Fixture representations share an explicit evidence identity\nUse one evidence identity only when the source relationship is explicit. Preserve each representation and its original locator. Unrelated documents must retain separate identities.\n",
+            "heading": "Fixture representations share an explicit evidence identity",
+            "kind": "memory",
+            "limitations": [
+              "This is a prior design input, not a performed experiment or proof of scientific validity."
+            ],
+            "locator": "MEMORY/MEM-20260908-10203040.md",
+            "path": "MEMORY/MEM-20260908-10203040.md",
+            "record_id": "MEM-20260908-10203040",
+            "representations": [
+              {
+                "locator": "MEMORY/MEM-20260908-10203040.md",
+                "path": "MEMORY/MEM-20260908-10203040.md",
+                "sha256": "4e1b2ec9b1f0a4f06f111fd0d857e96c8b33625d396aa5bef1d3a695c3569e6d"
+              }
+            ],
+            "score": 43,
+            "sha256": "4e1b2ec9b1f0a4f06f111fd0d857e96c8b33625d396aa5bef1d3a695c3569e6d",
+            "source_identity": "MEM-20260908-10203040",
+            "sources": [
+              {
+                "kind": "design",
+                "locator": "document",
+                "path": "README.md",
+                "sha256": "8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08"
+              }
+            ],
+            "state": "active"
+          },
+          {
+            "authority": "Source data; inspect current governing sources before acting.",
+            "diagnostics": [],
+            "excerpt": "# Native memory fixture\n\nThis isolated project validates the user-authorized memory release. Its approved fixture design uses one underlying evidence identity for explicitly related representations. It contains no copied learned root records.\n",
+            "heading": "Native memory fixture",
+            "kind": "source",
+            "limitations": [],
+            "line": 1,
+            "locator": "README.md:1",
+            "path": "README.md",
+            "representations": [
+              {
+                "locator": "README.md:1",
+                "path": "README.md",
+                "sha256": "8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08"
+              }
+            ],
+            "score": 30,
+            "sha256": "8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08",
+            "source_identity": "README.md"
+          }
+        ],
+        "status": "ok"
+      },
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\n  \"limitations\": [\n    \"Only the exact frozen memory inputs are searched; changed inputs require manager reconciliation.\"\n  ],\n  \"mode\": \"frozen-lexical\",\n  \"mutated\": false,\n  \"packet\": {\n    \"path\": \"Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json\",\n    \"sha256\": \"7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6\"\n  },\n  \"project_id\": \"native-memory-fixture\",\n  \"results\": [\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"bibliography_keys\": [],\n      \"diagnostics\": [],\n      \"environments\": [\n        \"equation\"\n      ],\n      \"excerpt\": \"\\\\section{Conserved quantity}\\n\\\\begin{equation}\\\\label{eq:native-energy} E=mc^2 \\\\end{equation}\\n\",\n      \"heading\": \"Conserved quantity\",\n      \"kind\": \"source\",\n      \"labels\": [\n        \"eq:native-energy\"\n      ],\n      \"limitations\": [\n        \"Literal source extraction; macros and included files are not expanded or compiled.\"\n      ],\n      \"line\": 1,\n      \"locator\": \"research/fixture.tex:1\",\n      \"path\": \"research/fixture.tex\",\n      \"references\": [],\n      \"representations\": [\n        {\n          \"locator\": \"research/fixture.tex:1\",\n          \"path\": \"research/fixture.tex\",\n          \"sha256\": \"416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73\"\n        }\n      ],\n      \"score\": 149,\n      \"sha256\": \"416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73\",\n      \"source_identity\": \"research/fixture.tex\"\n    },\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"claim\": {\n        \"level\": \"accepted_design\",\n        \"summary\": \"The approved disposable fixture design groups only explicitly related representations under one evidence identity.\"\n      },\n      \"confidence\": \"high\",\n      \"diagnostics\": [],\n      \"excerpt\": \"Fixture representations share an explicit evidence identity\\nUse one evidence identity only when the source relationship is explicit. Preserve each representation and its original locator. Unrelated documents must retain separate identities.\\n\",\n      \"heading\": \"Fixture representations share an explicit evidence identity\",\n      \"kind\": \"memory\",\n      \"limitations\": [\n        \"This is a prior design input, not a performed experiment or proof of scientific validity.\"\n      ],\n      \"locator\": \"MEMORY/MEM-20260908-10203040.md\",\n      \"path\": \"MEMORY/MEM-20260908-10203040.md\",\n      \"record_id\": \"MEM-20260908-10203040\",\n      \"representations\": [\n        {\n          \"locator\": \"MEMORY/MEM-20260908-10203040.md\",\n          \"path\": \"MEMORY/MEM-20260908-10203040.md\",\n          \"sha256\": \"4e1b2ec9b1f0a4f06f111fd0d857e96c8b33625d396aa5bef1d3a695c3569e6d\"\n        }\n      ],\n      \"score\": 43,\n      \"sha256\": \"4e1b2ec9b1f0a4f06f111fd0d857e96c8b33625d396aa5bef1d3a695c3569e6d\",\n      \"source_identity\": \"MEM-20260908-10203040\",\n      \"sources\": [\n        {\n          \"kind\": \"design\",\n          \"locator\": \"document\",\n          \"path\": \"README.md\",\n          \"sha256\": \"8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08\"\n        }\n      ],\n      \"state\": \"active\"\n    },\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"diagnostics\": [],\n      \"excerpt\": \"# Native memory fixture\\n\\nThis isolated project validates the user-authorized memory release. Its approved fixture design uses one underlying evidence identity for explicitly related representations. It contains no copied learned root records.\\n\",\n      \"heading\": \"Native memory fixture\",\n      \"kind\": \"source\",\n      \"limitations\": [],\n      \"line\": 1,\n      \"locator\": \"README.md:1\",\n      \"path\": \"README.md\",\n      \"representations\": [\n        {\n          \"locator\": \"README.md:1\",\n          \"path\": \"README.md\",\n          \"sha256\": \"8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08\"\n        }\n      ],\n      \"score\": 30,\n      \"sha256\": \"8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08\",\n      \"source_identity\": \"README.md\"\n    }\n  ],\n  \"status\": \"ok\"\n}\n"
+    },
+    {
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-B",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project/.agents/skills/memory/scripts/memory.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project",
+        "search",
+        "eq:native-energy",
+        "--mode",
+        "lexical",
+        "--packet-file",
+        "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json",
+        "--packet-sha256",
+        "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+      ],
+      "name": "packet-label",
+      "result": {
+        "limitations": [
+          "Only the exact frozen memory inputs are searched; changed inputs require manager reconciliation."
+        ],
+        "mode": "frozen-lexical",
+        "mutated": false,
+        "packet": {
+          "path": "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json",
+          "sha256": "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+        },
+        "project_id": "native-memory-fixture",
+        "results": [
+          {
+            "authority": "Source data; inspect current governing sources before acting.",
+            "bibliography_keys": [],
+            "diagnostics": [],
+            "environments": [
+              "equation"
+            ],
+            "excerpt": "\\section{Conserved quantity}\n\\begin{equation}\\label{eq:native-energy} E=mc^2 \\end{equation}\n",
+            "heading": "Conserved quantity",
+            "kind": "source",
+            "labels": [
+              "eq:native-energy"
+            ],
+            "limitations": [
+              "Literal source extraction; macros and included files are not expanded or compiled."
+            ],
+            "line": 1,
+            "locator": "research/fixture.tex:1",
+            "path": "research/fixture.tex",
+            "references": [],
+            "representations": [
+              {
+                "locator": "research/fixture.tex:1",
+                "path": "research/fixture.tex",
+                "sha256": "416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73"
+              }
+            ],
+            "score": 111,
+            "sha256": "416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73",
+            "source_identity": "research/fixture.tex"
+          }
+        ],
+        "status": "ok"
+      },
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\n  \"limitations\": [\n    \"Only the exact frozen memory inputs are searched; changed inputs require manager reconciliation.\"\n  ],\n  \"mode\": \"frozen-lexical\",\n  \"mutated\": false,\n  \"packet\": {\n    \"path\": \"Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json\",\n    \"sha256\": \"7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6\"\n  },\n  \"project_id\": \"native-memory-fixture\",\n  \"results\": [\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"bibliography_keys\": [],\n      \"diagnostics\": [],\n      \"environments\": [\n        \"equation\"\n      ],\n      \"excerpt\": \"\\\\section{Conserved quantity}\\n\\\\begin{equation}\\\\label{eq:native-energy} E=mc^2 \\\\end{equation}\\n\",\n      \"heading\": \"Conserved quantity\",\n      \"kind\": \"source\",\n      \"labels\": [\n        \"eq:native-energy\"\n      ],\n      \"limitations\": [\n        \"Literal source extraction; macros and included files are not expanded or compiled.\"\n      ],\n      \"line\": 1,\n      \"locator\": \"research/fixture.tex:1\",\n      \"path\": \"research/fixture.tex\",\n      \"references\": [],\n      \"representations\": [\n        {\n          \"locator\": \"research/fixture.tex:1\",\n          \"path\": \"research/fixture.tex\",\n          \"sha256\": \"416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73\"\n        }\n      ],\n      \"score\": 111,\n      \"sha256\": \"416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73\",\n      \"source_identity\": \"research/fixture.tex\"\n    }\n  ],\n  \"status\": \"ok\"\n}\n"
+    },
+    {
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-B",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project/.agents/skills/memory/scripts/memory.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project",
+        "search",
+        "explicit evidence identity",
+        "--mode",
+        "lexical",
+        "--packet-file",
+        "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json",
+        "--packet-sha256",
+        "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+      ],
+      "name": "packet-prior-design",
+      "result": {
+        "limitations": [
+          "Only the exact frozen memory inputs are searched; changed inputs require manager reconciliation."
+        ],
+        "mode": "frozen-lexical",
+        "mutated": false,
+        "packet": {
+          "path": "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json",
+          "sha256": "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+        },
+        "project_id": "native-memory-fixture",
+        "results": [
+          {
+            "authority": "Source data; inspect current governing sources before acting.",
+            "claim": {
+              "level": "accepted_design",
+              "summary": "The approved disposable fixture design groups only explicitly related representations under one evidence identity."
+            },
+            "confidence": "high",
+            "diagnostics": [],
+            "excerpt": "Fixture representations share an explicit evidence identity\nUse one evidence identity only when the source relationship is explicit. Preserve each representation and its original locator. Unrelated documents must retain separate identities.\n",
+            "heading": "Fixture representations share an explicit evidence identity",
+            "kind": "memory",
+            "limitations": [
+              "This is a prior design input, not a performed experiment or proof of scientific validity."
+            ],
+            "locator": "MEMORY/MEM-20260908-10203040.md",
+            "path": "MEMORY/MEM-20260908-10203040.md",
+            "record_id": "MEM-20260908-10203040",
+            "representations": [
+              {
+                "locator": "MEMORY/MEM-20260908-10203040.md",
+                "path": "MEMORY/MEM-20260908-10203040.md",
+                "sha256": "4e1b2ec9b1f0a4f06f111fd0d857e96c8b33625d396aa5bef1d3a695c3569e6d"
+              }
+            ],
+            "score": 136,
+            "sha256": "4e1b2ec9b1f0a4f06f111fd0d857e96c8b33625d396aa5bef1d3a695c3569e6d",
+            "source_identity": "MEM-20260908-10203040",
+            "sources": [
+              {
+                "kind": "design",
+                "locator": "document",
+                "path": "README.md",
+                "sha256": "8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08"
+              }
+            ],
+            "state": "active"
+          },
+          {
+            "authority": "Source data; inspect current governing sources before acting.",
+            "diagnostics": [],
+            "excerpt": "\u2026oject validates the user-authorized memory release. Its approved fixture design uses one underlying evidence identity for explicitly related representations. It contains no copied learned root records.\n",
+            "heading": "Native memory fixture",
+            "kind": "source",
+            "limitations": [],
+            "line": 1,
+            "locator": "README.md:1",
+            "path": "README.md",
+            "representations": [
+              {
+                "locator": "README.md:1",
+                "path": "README.md",
+                "sha256": "8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08"
+              }
+            ],
+            "score": 33,
+            "sha256": "8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08",
+            "source_identity": "README.md"
+          }
+        ],
+        "status": "ok"
+      },
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\n  \"limitations\": [\n    \"Only the exact frozen memory inputs are searched; changed inputs require manager reconciliation.\"\n  ],\n  \"mode\": \"frozen-lexical\",\n  \"mutated\": false,\n  \"packet\": {\n    \"path\": \"Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json\",\n    \"sha256\": \"7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6\"\n  },\n  \"project_id\": \"native-memory-fixture\",\n  \"results\": [\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"claim\": {\n        \"level\": \"accepted_design\",\n        \"summary\": \"The approved disposable fixture design groups only explicitly related representations under one evidence identity.\"\n      },\n      \"confidence\": \"high\",\n      \"diagnostics\": [],\n      \"excerpt\": \"Fixture representations share an explicit evidence identity\\nUse one evidence identity only when the source relationship is explicit. Preserve each representation and its original locator. Unrelated documents must retain separate identities.\\n\",\n      \"heading\": \"Fixture representations share an explicit evidence identity\",\n      \"kind\": \"memory\",\n      \"limitations\": [\n        \"This is a prior design input, not a performed experiment or proof of scientific validity.\"\n      ],\n      \"locator\": \"MEMORY/MEM-20260908-10203040.md\",\n      \"path\": \"MEMORY/MEM-20260908-10203040.md\",\n      \"record_id\": \"MEM-20260908-10203040\",\n      \"representations\": [\n        {\n          \"locator\": \"MEMORY/MEM-20260908-10203040.md\",\n          \"path\": \"MEMORY/MEM-20260908-10203040.md\",\n          \"sha256\": \"4e1b2ec9b1f0a4f06f111fd0d857e96c8b33625d396aa5bef1d3a695c3569e6d\"\n        }\n      ],\n      \"score\": 136,\n      \"sha256\": \"4e1b2ec9b1f0a4f06f111fd0d857e96c8b33625d396aa5bef1d3a695c3569e6d\",\n      \"source_identity\": \"MEM-20260908-10203040\",\n      \"sources\": [\n        {\n          \"kind\": \"design\",\n          \"locator\": \"document\",\n          \"path\": \"README.md\",\n          \"sha256\": \"8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08\"\n        }\n      ],\n      \"state\": \"active\"\n    },\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"diagnostics\": [],\n      \"excerpt\": \"\u2026oject validates the user-authorized memory release. Its approved fixture design uses one underlying evidence identity for explicitly related representations. It contains no copied learned root records.\\n\",\n      \"heading\": \"Native memory fixture\",\n      \"kind\": \"source\",\n      \"limitations\": [],\n      \"line\": 1,\n      \"locator\": \"README.md:1\",\n      \"path\": \"README.md\",\n      \"representations\": [\n        {\n          \"locator\": \"README.md:1\",\n          \"path\": \"README.md\",\n          \"sha256\": \"8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08\"\n        }\n      ],\n      \"score\": 33,\n      \"sha256\": \"8b28fff3aedcf6e10fb9307ceb1cbad4071446e335762bd91267dd98b834be08\",\n      \"source_identity\": \"README.md\"\n    }\n  ],\n  \"status\": \"ok\"\n}\n"
+    },
+    {
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-B",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project/.agents/skills/memory/scripts/memory.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project",
+        "search",
+        "SIBLING_SENTINEL",
+        "--mode",
+        "hybrid",
+        "--packet-file",
+        "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json",
+        "--packet-sha256",
+        "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+      ],
+      "name": "packet-sibling-exclusion",
+      "result": {
+        "limitations": [
+          "Only the exact frozen memory inputs are searched; changed inputs require manager reconciliation."
+        ],
+        "mode": "frozen-lexical",
+        "mutated": false,
+        "packet": {
+          "path": "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json",
+          "sha256": "7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6"
+        },
+        "project_id": "native-memory-fixture",
+        "results": [],
+        "status": "no_match"
+      },
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\n  \"limitations\": [\n    \"Only the exact frozen memory inputs are searched; changed inputs require manager reconciliation.\"\n  ],\n  \"mode\": \"frozen-lexical\",\n  \"mutated\": false,\n  \"packet\": {\n    \"path\": \"Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/packet-complex-1.json\",\n    \"sha256\": \"7477a70fbbb5574331d979ba10a026fd204948a11da951d8f73c7ea0c88a69f6\"\n  },\n  \"project_id\": \"native-memory-fixture\",\n  \"results\": [],\n  \"status\": \"no_match\"\n}\n"
+    },
+    {
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-B",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project/.agents/skills/memory/scripts/memory.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project",
+        "search",
+        "SIBLING_SENTINEL",
+        "--mode",
+        "hybrid"
+      ],
+      "name": "corpus-sibling-exclusion",
+      "result": {
+        "historical": false,
+        "limitations": [
+          "Semantic backend disabled; results use deterministic lexical retrieval.",
+          "research/fixture.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "mode": "lexical",
+        "mutated": false,
+        "project_id": "native-memory-fixture",
+        "results": [],
+        "status": "no_match"
+      },
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\n  \"historical\": false,\n  \"limitations\": [\n    \"Semantic backend disabled; results use deterministic lexical retrieval.\",\n    \"research/fixture.tex: Literal source extraction; macros and included files are not expanded or compiled.\"\n  ],\n  \"mode\": \"lexical\",\n  \"mutated\": false,\n  \"project_id\": \"native-memory-fixture\",\n  \"results\": [],\n  \"status\": \"no_match\"\n}\n"
+    }
+  ],
+  "schema_version": 1,
+  "scope_statement": "Only assigned sources and exact frozen packet inputs were opened; direct corpus search was limited to the authorized negative sentinel probe. No sibling artifact was opened. Canonical Task bytes are not claimed unchanged because its manager may advance the ledger concurrently.",
+  "settings": "Full-history fork with no model or effort overrides; manager supplies the native inheritance verification.",
+  "shared_writes_performed": false,
+  "status": "passed_bounded_checks"
+}

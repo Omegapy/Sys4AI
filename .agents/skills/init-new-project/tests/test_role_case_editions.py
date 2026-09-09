@@ -26,6 +26,7 @@ class RoleCaseEditionTests(unittest.TestCase):
         template = self.root / self.helper.TEMPLATE
         self.template_backup = Path(self.temporary.name) / "capitalized-template"
         shutil.copytree(template, self.template_backup)
+        fixture.remove_memory_edition(template)
         rename_spelling(template, "Roles", "roles")
         policy_path = template / self.helper.TEMPLATE_POLICY
         policy = json.loads(policy_path.read_text())
@@ -130,6 +131,8 @@ class RoleCaseEditionTests(unittest.TestCase):
             self.assertEqual(original[key], repeated[key])
         self.assertEqual(before, fixture.manifest(self.target / "roles"))
         self.assertEqual(["roles"], [p.name for p in self.target.iterdir() if p.name.casefold() == "roles"])
+        self.assertFalse(any((self.target / name).exists() for name in self.helper.MEMORY_FILES))
+        self.assertFalse((self.target / ".agents/skills/memory").exists())
 
     def test_v2_partial_assets_cannot_switch_template_edition(self):
         self.seed_v2()

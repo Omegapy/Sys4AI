@@ -152,3 +152,14 @@ Schema-2 intake that may age-close records supplies `intake_actor` with the actu
 the normal response plus current actor/execution/generation and `policy_receipt`.
 Read the root schema-2 intake section of the Task contract for exact fields and
 unassigned-versus-owned recovery; no identity may be derived from a role name.
+
+## Memory evidence references
+
+The optional [memory integration contract](../memory/references/task-integration.md)
+uses the current inspected-source, artifact, baseline-input and response-file
+references. It adds no Task schema field or promotion event. A manager freezes
+accepted memory before independent solver dispatch, retains the exact packet
+for queued solvers, and reconciles material changes through existing version and
+input gates. Record actual publication receipts only. Optional memory recovery
+does not replay a Task event or reopen completed work. Read-only Task commands
+do not initialize or invoke a backend that writes state.

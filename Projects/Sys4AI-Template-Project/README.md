@@ -61,7 +61,7 @@ publication settings are also project-owned.
 
 The root [AGENTS.md](./AGENTS.md), [SOUL.md](./SOUL.md), and
 [ROLE.md](./ROLE.md) define shared guidance and the generic Project Director.
-Reusable roles live in [roles](./roles), with generated [navigation](./Roles/INDEX.md)
+Reusable roles live in [Roles](./Roles), with generated [navigation](./Roles/INDEX.md)
 and one
 `AGENTS.md` and one `ROLE.md` per role.
 
@@ -149,3 +149,15 @@ transition and index repair use the [role skill](./.agents/skills/manage-subagen
 New starter projects contain no active Task execution, native IDs or copied live
 history. The depot root's automatic intake and inactivity closure are separate
 local policies; this Template keeps its explicit selection policy.
+
+## Project memory starter
+
+The [memory skill](./.agents/skills/memory/SKILL.md), [record contracts](./reference-assets/MEMORY-depo/README.md),
+[empty memory directory](./MEMORY/README.md) and [configuration](./memory.yaml)
+provide portable project memory. The Template contains no learned records and
+its identity remains neutral. Initializer edition `governance-starter-v5`
+specializes a new project's memory identity and preserves existing memory and
+older setup receipts. Direct Markdown and lexical lookup need no backend.
+The optional local backend and model are provisioned through separate explicit
+work; setup does not install or activate them. Frozen Task inputs and scoped
+publication follow the memory skill's existing integration contracts.

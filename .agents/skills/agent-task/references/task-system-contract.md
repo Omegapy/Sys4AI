@@ -517,3 +517,12 @@ uses null execution ID and generation 0 without inventing a writer or execution.
 The 30-day, revision, lock and append-only non-completion gates still apply.
 These fields and policy belong to the installed depot extension; generic source
 and Template helpers have no `intake` or inactivity-closure route.
+
+## Memory evidence compatibility
+
+Project memory remains optional and independently configured. Its packet and
+publication receipts use the existing relevant-file and inspected-evidence
+references. No `memory_state`, promotion field or memory-specific Task event is
+supported. Read-only routes perform no memory maintenance. A missing required
+memory artifact leaves its actual criterion unmet; optional post-completion
+capture can be retried only within memory, preserving terminal Task history.

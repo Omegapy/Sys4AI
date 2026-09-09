@@ -1,0 +1,1297 @@
+{
+  "schema_version": 1,
+  "plan_id": "PLAN-20260908-5F47ADB2",
+  "note": "Planned task-to-evidence mapping. A listed path is not itself a pass; final assessment inspects current evidence and reports unfinished gates.",
+  "tasks": [
+    {
+      "task_id": "TASK-001",
+      "title": "Refresh the authorized execution baseline",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-004",
+        "REQ-037",
+        "REQ-039",
+        "REQ-048",
+        "REQ-056",
+        "REQ-059"
+      ],
+      "acceptance_criteria": [
+        "The exact plan revision, TRD digest, root identity, execution authority and source/destination boundary are recorded.",
+        "The baseline records unrelated edits, existing Task/TRD/plan history, product files and watcher state; absent services are not installed."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/execution-baseline.json",
+        "Verification/project-memory/preservation-baseline.json",
+        "Verification/project-memory/authority-and-adoption.md"
+      ]
+    },
+    {
+      "task_id": "TASK-002",
+      "title": "Specify the canonical record and path contracts",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-004",
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-008",
+        "REQ-010",
+        "REQ-011",
+        "REQ-012",
+        "REQ-013",
+        "REQ-019",
+        "REQ-026",
+        "REQ-040",
+        "REQ-049"
+      ],
+      "acceptance_criteria": [
+        "Contracts describe all required record/config fields, invalid states and explicit null origin values without invented Task IDs.",
+        "Canonical MEMORY/, adopted reference-assets/MEMORY-depo contracts, reusable source ownership and generated/recovery path classes are unambiguous."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/core-results.json",
+        "Verification/project-memory/final-source-memory-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-003",
+      "title": "Specify scoped publication and recovery",
+      "requirement_ids": [
+        "REQ-006",
+        "REQ-007",
+        "REQ-009",
+        "REQ-018",
+        "REQ-020",
+        "REQ-021",
+        "REQ-022",
+        "REQ-023",
+        "REQ-024",
+        "REQ-025",
+        "REQ-026",
+        "REQ-058"
+      ],
+      "acceptance_criteria": [
+        "Director and confirmed manager grants are checked against actual current scope; a child can produce only a proposal.",
+        "Journal recovery defines every interrupted commit boundary, preserves originals/reasons and cannot repair memory by replaying Task state."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/core-results.json",
+        "Verification/project-memory/final-source-memory-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-004",
+      "title": "Freeze the local backend pilot specification",
+      "requirement_ids": [
+        "REQ-016",
+        "REQ-022",
+        "REQ-049",
+        "REQ-050",
+        "REQ-051",
+        "REQ-054",
+        "REQ-055"
+      ],
+      "acceptance_criteria": [
+        "The profile names exact package pins, model identity and immutable model/package artifacts, local config/project binding and disabled automatic updates/frontmatter rewriting.",
+        "The specification names the adapter entry points to test, license source, local resource measurements and a provisioning authority boundary; no cloud route or global installation is planned."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/pilot-specification.md",
+        "Verification/project-memory/runtime-manifest.json",
+        "Verification/project-memory/backend-isolated-assessment.json"
+      ]
+    },
+    {
+      "task_id": "TASK-005",
+      "title": "Define the requirement-driven acceptance fixtures",
+      "requirement_ids": [
+        "REQ-012",
+        "REQ-015",
+        "REQ-016",
+        "REQ-019",
+        "REQ-023",
+        "REQ-024",
+        "REQ-027",
+        "REQ-028",
+        "REQ-029",
+        "REQ-030",
+        "REQ-032",
+        "REQ-038",
+        "REQ-044",
+        "REQ-045",
+        "REQ-052",
+        "REQ-056",
+        "REQ-057",
+        "REQ-059"
+      ],
+      "acceptance_criteria": [
+        "All 59 requirements have planned evidence and explicit negative cases; native and real backend observations are separate from deterministic tests.",
+        "Expected relevance uses known fixture evidence, preserves all mandatory checks and adds no unsupported numerical performance target."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/acceptance-matrix.md",
+        "Verification/project-memory/pilot-query-manifest.json"
+      ]
+    },
+    {
+      "task_id": "TASK-006",
+      "title": "Implement record and configuration validation",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-004",
+        "REQ-005",
+        "REQ-007",
+        "REQ-010",
+        "REQ-011",
+        "REQ-018",
+        "REQ-040",
+        "REQ-049"
+      ],
+      "acceptance_criteria": [
+        "All five record types and non-Task origins validate; malformed identifiers, unsupported YAML/schema/type/state and unresolved required values fail without writes.",
+        "Skill metadata, dispatch and documented defaults form a complete installable package; example records are clearly non-active."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/core-results.json",
+        "Verification/project-memory/final-source-memory-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-007",
+      "title": "Implement project and corpus confinement",
+      "requirement_ids": [
+        "REQ-011",
+        "REQ-012",
+        "REQ-013",
+        "REQ-019"
+      ],
+      "acceptance_criteria": [
+        "Two projects, nested Projects paths, hardlink/alias cases and credential paths cannot cross accepted read/write boundaries.",
+        "Default README/docs/research patterns and all excluded directories apply equally during ingestion and query result filtering."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/core-results.json",
+        "Verification/project-memory/final-source-memory-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-008",
+      "title": "Implement evidence and applicability checks",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-005",
+        "REQ-006",
+        "REQ-008",
+        "REQ-009",
+        "REQ-010",
+        "REQ-019",
+        "REQ-036"
+      ],
+      "acceptance_criteria": [
+        "Unsupported implementation claims, false origin IDs and unexplained source mismatches cannot become unqualified active records.",
+        "Accepted designs, observed failures, cancelled work and historical handoffs retain distinct claim types and limitations."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/core-results.json",
+        "Verification/project-memory/final-source-memory-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-009",
+      "title": "Implement strict inspection operations",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-003",
+        "REQ-007",
+        "REQ-008",
+        "REQ-014",
+        "REQ-017",
+        "REQ-018",
+        "REQ-039",
+        "REQ-049",
+        "REQ-054"
+      ],
+      "acceptance_criteria": [
+        "Inspections preserve governed bytes and mtimes even with absent config, missing database and stale indexes.",
+        "No import/startup path initializes a backend, changes a Task/role or downloads packages/models; unsupported capabilities are disclosed."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/core-results.json",
+        "Verification/project-memory/final-source-memory-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-010",
+      "title": "Implement proposals and atomic publication",
+      "requirement_ids": [
+        "REQ-005",
+        "REQ-006",
+        "REQ-009",
+        "REQ-018",
+        "REQ-020",
+        "REQ-021",
+        "REQ-022",
+        "REQ-023"
+      ],
+      "acceptance_criteria": [
+        "Only an authorized current publisher activates a reviewed evidence-backed record; proposals remain outside shared active recall.",
+        "Competing/human/stale writes return explicit conflicts and preserve the existing note and unrelated records."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/core-results.json",
+        "Verification/project-memory/final-source-memory-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-011",
+      "title": "Implement lifecycle transactions and correction recovery",
+      "requirement_ids": [
+        "REQ-007",
+        "REQ-018",
+        "REQ-023",
+        "REQ-024",
+        "REQ-025",
+        "REQ-026",
+        "REQ-058"
+      ],
+      "acceptance_criteria": [
+        "Every multi-record interruption reports actual committed records and resolves without duplicate identity, missing reason or silent half-supersession.",
+        "Recovery touches only its memory operation; optional capture repair cannot reopen or replay a Task, and correction cannot silently destroy historical records."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/core-results.json",
+        "Verification/project-memory/final-source-memory-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-012",
+      "title": "Implement classified maintenance boundaries",
+      "requirement_ids": [
+        "REQ-017",
+        "REQ-018",
+        "REQ-024",
+        "REQ-026",
+        "REQ-030",
+        "REQ-054"
+      ],
+      "acceptance_criteria": [
+        "Only declared rebuildable products can be replaced/removed; unknown or sole-copy durable state blocks cleanup.",
+        "Maintenance never touches .sys4ai/template-update or role-transition recovery and never runs as an inspection side effect."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/core-results.json",
+        "Verification/project-memory/final-source-memory-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-013",
+      "title": "Verify core publication and preservation",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-008",
+        "REQ-009",
+        "REQ-010",
+        "REQ-011",
+        "REQ-012",
+        "REQ-017",
+        "REQ-018",
+        "REQ-019",
+        "REQ-020",
+        "REQ-021",
+        "REQ-023",
+        "REQ-024",
+        "REQ-025",
+        "REQ-026",
+        "REQ-049",
+        "REQ-056",
+        "REQ-058"
+      ],
+      "acceptance_criteria": [
+        "Core acceptance cases pass with precise expected results and current source hashes; every failure remains classified.",
+        "Read-only routes work in an unprovisioned environment and historical Task/role/source bytes remain unchanged."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/core-results.json",
+        "Verification/project-memory/final-source-memory-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-014",
+      "title": "Implement deterministic Markdown and exact-term retrieval",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-007",
+        "REQ-008",
+        "REQ-013",
+        "REQ-014",
+        "REQ-015",
+        "REQ-017",
+        "REQ-019"
+      ],
+      "acceptance_criteria": [
+        "Known identifiers, paths, errors and labels find the expected permitted records with deterministic tie-breaking.",
+        "Historical records require an explicit historical request, and lexical fallback creates no index or backend state."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/retrieval-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt",
+        "Verification/project-memory/forward-test-results.json"
+      ]
+    },
+    {
+      "task_id": "TASK-015",
+      "title": "Implement TeX evidence extraction",
+      "requirement_ids": [
+        "REQ-013",
+        "REQ-014",
+        "REQ-015",
+        "REQ-027",
+        "REQ-030"
+      ],
+      "acceptance_criteria": [
+        "Representative theorem/proof/equation fixtures preserve literal expressions and identifiers.",
+        "Retrieved passages resolve to the original source digest and section/label rather than a generated conclusion."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/retrieval-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt",
+        "Verification/project-memory/forward-test-results.json"
+      ]
+    },
+    {
+      "task_id": "TASK-016",
+      "title": "Implement PDF extraction with explicit limits",
+      "requirement_ids": [
+        "REQ-014",
+        "REQ-017",
+        "REQ-026",
+        "REQ-028",
+        "REQ-030",
+        "REQ-049",
+        "REQ-054"
+      ],
+      "acceptance_criteria": [
+        "Text results retain source pages and digest; scans, difficult equations/tables/layouts are flagged for supported richer or visual inspection.",
+        "PDF dependency ownership is explicit; missing extraction support neither installs packages nor breaks Task/role or direct Markdown reads."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/retrieval-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt",
+        "Verification/project-memory/forward-test-results.json"
+      ]
+    },
+    {
+      "task_id": "TASK-017",
+      "title": "Implement attributable HTML extraction",
+      "requirement_ids": [
+        "REQ-013",
+        "REQ-014",
+        "REQ-026",
+        "REQ-029",
+        "REQ-030"
+      ],
+      "acceptance_criteria": [
+        "Substantive fixture content is retrievable with source location/version and heading context.",
+        "Original bytes remain unchanged and presentation/navigation material does not dominate matches."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/retrieval-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt",
+        "Verification/project-memory/forward-test-results.json"
+      ]
+    },
+    {
+      "task_id": "TASK-018",
+      "title": "Bind normalization and related representations",
+      "requirement_ids": [
+        "REQ-008",
+        "REQ-014",
+        "REQ-015",
+        "REQ-026",
+        "REQ-027",
+        "REQ-028",
+        "REQ-029",
+        "REQ-030"
+      ],
+      "acceptance_criteria": [
+        "Changed inputs make derived products visibly stale until authorized rebuild; read-only lookup does not regenerate them.",
+        "Known TeX/PDF companions do not count as independent supporting evidence; similarly named unrelated files remain separate."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/retrieval-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt",
+        "Verification/project-memory/forward-test-results.json"
+      ]
+    },
+    {
+      "task_id": "TASK-019",
+      "title": "Verify retrieval and source fidelity",
+      "requirement_ids": [
+        "REQ-008",
+        "REQ-012",
+        "REQ-013",
+        "REQ-014",
+        "REQ-015",
+        "REQ-017",
+        "REQ-019",
+        "REQ-027",
+        "REQ-028",
+        "REQ-029",
+        "REQ-030",
+        "REQ-056"
+      ],
+      "acceptance_criteria": [
+        "Every exact query returns its expected permitted source and usable provenance, with explicit coverage/limitations for unavailable formats.",
+        "Canonical sources and read-only state remain unchanged; normalized evidence never activates a note automatically."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/retrieval-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt",
+        "Verification/project-memory/forward-test-results.json"
+      ]
+    },
+    {
+      "task_id": "TASK-020",
+      "title": "Integrate immutable Task memory packets",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-008",
+        "REQ-020",
+        "REQ-025",
+        "REQ-031",
+        "REQ-035",
+        "REQ-037"
+      ],
+      "acceptance_criteria": [
+        "Packet and referenced evidence conform to existing project-relative {path, sha256} refs, safe regular files, the 250000-byte per-file bound and the 200-entry evidence-list bound.",
+        "The same immutable packet and canonical baseline reach every initial solver, including queued solvers, without a new Task schema field/event."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/task-integration-results.json",
+        "Verification/project-memory/installed-task-results.json",
+        "Verification/project-memory/source-role-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-021",
+      "title": "Enforce frozen recall and sibling exclusions",
+      "requirement_ids": [
+        "REQ-013",
+        "REQ-019",
+        "REQ-021",
+        "REQ-031",
+        "REQ-032",
+        "REQ-033",
+        "REQ-038"
+      ],
+      "acceptance_criteria": [
+        "Publishing or editing another note cannot silently change one solver input; every permitted extra source is attributable to the assignment version.",
+        "Contaminated full-history forks are rejected or replaced through an observed supported isolation route, never by an instruction to ignore drafts."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/task-integration-results.json",
+        "Verification/project-memory/installed-task-results.json",
+        "Verification/project-memory/source-role-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-022",
+      "title": "Integrate memory changes and publication receipts",
+      "requirement_ids": [
+        "REQ-003",
+        "REQ-008",
+        "REQ-024",
+        "REQ-025",
+        "REQ-033",
+        "REQ-034",
+        "REQ-035",
+        "REQ-037",
+        "REQ-039"
+      ],
+      "acceptance_criteria": [
+        "Material memory changes invalidate affected current gates and reconcile running writers before rebinding; immaterial edits have an explicit assessment.",
+        "Actual memory receipts can be linked through permitted Task artifacts/files without invented state, replayed events, terminal reopen or automatic task selection."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/task-integration-results.json",
+        "Verification/project-memory/installed-task-results.json",
+        "Verification/project-memory/source-role-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-023",
+      "title": "Update reusable Task and role guidance",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-009",
+        "REQ-010",
+        "REQ-020",
+        "REQ-021",
+        "REQ-031",
+        "REQ-032",
+        "REQ-033",
+        "REQ-034",
+        "REQ-035",
+        "REQ-036",
+        "REQ-037",
+        "REQ-038",
+        "REQ-039",
+        "REQ-041",
+        "REQ-047"
+      ],
+      "acceptance_criteria": [
+        "Guidance preserves fresh Roles pair selection, real manager activation/sole writer, exact settings, independent identities and complete generic/complex/extra-complex teams.",
+        "Read-only startup and Task routes do not create/close/upgrade anything; generic Template policy remains separate from depot intake/age closure."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/task-integration-results.json",
+        "Verification/project-memory/installed-task-results.json",
+        "Verification/project-memory/source-role-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt"
+      ]
+    },
+    {
+      "task_id": "TASK-024",
+      "title": "Verify Task compatibility and context contracts",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-020",
+        "REQ-021",
+        "REQ-025",
+        "REQ-031",
+        "REQ-032",
+        "REQ-033",
+        "REQ-034",
+        "REQ-035",
+        "REQ-036",
+        "REQ-037",
+        "REQ-038",
+        "REQ-039",
+        "REQ-041",
+        "REQ-056"
+      ],
+      "acceptance_criteria": [
+        "Schema-1 fixture bytes survive inspections/reruns and unsupported memory_state/promotion fields remain rejected.",
+        "Deterministic packet, publisher, context and category checks pass without changing existing Task schema or importing memory into Task/role inspectors."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/task-integration-results.json",
+        "Verification/project-memory/installed-task-results.json",
+        "Verification/project-memory/source-role-results.json",
+        "Verification/project-memory/final-source-memory-tests.txt",
+        "Verification/project-memory/host-testing-scope.json",
+        "Verification/project-memory/host-testing-results.json"
+      ]
+    },
+    {
+      "task_id": "TASK-025",
+      "title": "Implement the Basic Memory projection",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-007",
+        "REQ-008",
+        "REQ-012",
+        "REQ-013",
+        "REQ-014",
+        "REQ-019",
+        "REQ-022",
+        "REQ-026",
+        "REQ-030",
+        "REQ-050",
+        "REQ-051"
+      ],
+      "acceptance_criteria": [
+        "Projection preserves custom provenance/chronology in retrievable mappings and canonical byte hashes remain unchanged.",
+        "Excluded/sibling/non-active material is filtered before backend indexing and rechecked when results are resolved."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/adapter-contract-results.json",
+        "Verification/project-memory/backend-isolated-assessment.json",
+        "Verification/project-memory/backend-evidence-index.json"
+      ]
+    },
+    {
+      "task_id": "TASK-026",
+      "title": "Implement the guarded local query adapter",
+      "requirement_ids": [
+        "REQ-003",
+        "REQ-008",
+        "REQ-012",
+        "REQ-014",
+        "REQ-015",
+        "REQ-016",
+        "REQ-017",
+        "REQ-019",
+        "REQ-022",
+        "REQ-033",
+        "REQ-050",
+        "REQ-051",
+        "REQ-054"
+      ],
+      "acceptance_criteria": [
+        "Public reads expose no arbitrary backend writer/project/config command, startup sync, package/model download or cloud route.",
+        "Result provenance and actual lexical/vector/hybrid mode are explicit, and frozen packet constraints apply after backend ranking."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/adapter-contract-results.json",
+        "Verification/project-memory/backend-isolated-assessment.json",
+        "Verification/project-memory/backend-evidence-index.json"
+      ]
+    },
+    {
+      "task_id": "TASK-027",
+      "title": "Implement explicit backend maintenance",
+      "requirement_ids": [
+        "REQ-011",
+        "REQ-017",
+        "REQ-018",
+        "REQ-022",
+        "REQ-026",
+        "REQ-030",
+        "REQ-049",
+        "REQ-050",
+        "REQ-051",
+        "REQ-054"
+      ],
+      "acceptance_criteria": [
+        "Indexing is separately invoked and never runs inside public inspection or new-project setup.",
+        "The maintenance receipt records version/config/projection and actual effects; canonical notes/Tasks/roles are unchanged and recovery data remains attributable."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/adapter-contract-results.json",
+        "Verification/project-memory/backend-isolated-assessment.json",
+        "Verification/project-memory/backend-evidence-index.json"
+      ]
+    },
+    {
+      "task_id": "TASK-028",
+      "title": "Verify adapter boundaries without provisioning",
+      "requirement_ids": [
+        "REQ-012",
+        "REQ-014",
+        "REQ-015",
+        "REQ-017",
+        "REQ-019",
+        "REQ-022",
+        "REQ-026",
+        "REQ-033",
+        "REQ-050",
+        "REQ-051",
+        "REQ-056"
+      ],
+      "acceptance_criteria": [
+        "All deterministic boundary tests pass with no backend installation or network dependency.",
+        "The report explicitly reserves actual backend isolation, resources, search and filesystem behavior for the live pilot."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/adapter-contract-results.json",
+        "Verification/project-memory/backend-isolated-assessment.json",
+        "Verification/project-memory/backend-evidence-index.json"
+      ]
+    },
+    {
+      "task_id": "TASK-029",
+      "title": "Finish reusable documentation and starter definitions",
+      "requirement_ids": [
+        "REQ-004",
+        "REQ-011",
+        "REQ-018",
+        "REQ-019",
+        "REQ-026",
+        "REQ-040",
+        "REQ-041",
+        "REQ-043",
+        "REQ-047",
+        "REQ-049",
+        "REQ-054",
+        "REQ-058"
+      ],
+      "acceptance_criteria": [
+        "The reusable package is complete and examples cannot become active shared recall; Template identity remains unspecialized and backend disabled.",
+        "Canonical memory/config are trackable while exact disposable runtime paths are documented; unrelated recovery and protected source content remain visible."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/root-adoption-current.json",
+        "Verification/project-memory/final-template-contract-results.json"
+      ]
+    },
+    {
+      "task_id": "TASK-030",
+      "title": "Define complete Template memory mappings",
+      "requirement_ids": [
+        "REQ-004",
+        "REQ-040",
+        "REQ-042",
+        "REQ-043",
+        "REQ-047"
+      ],
+      "acceptance_criteria": [
+        "MEMORY-depo/starter/MEMORY/README.md maps to Template MEMORY/README.md and starter/memory.yaml maps to Template memory.yaml.",
+        "Complete skill and contract assets have one identified destination; no learned memory, backend data or product adoption enters the mapping."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/template-manifest.json",
+        "Verification/project-memory/template-adoption.json"
+      ]
+    },
+    {
+      "task_id": "TASK-031",
+      "title": "Implement memory-aware initializer edition",
+      "requirement_ids": [
+        "REQ-011",
+        "REQ-012",
+        "REQ-043",
+        "REQ-044",
+        "REQ-045",
+        "REQ-046",
+        "REQ-049",
+        "REQ-054",
+        "REQ-058"
+      ],
+      "acceptance_criteria": [
+        "New-edition creation selects the full empty capability and a stable distinct identity with local relative contract paths and backend disabled.",
+        "Earlier editions retain original required skills, role layouts and v4 license obligations; prepare-existing/rerun preserves note/config bytes and records copied/specialized/preserved assets factually."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/initializer-results.json",
+        "Verification/project-memory/installed-initializer-results.json"
+      ]
+    },
+    {
+      "task_id": "TASK-032",
+      "title": "Verify initializer editions and preservation",
+      "requirement_ids": [
+        "REQ-012",
+        "REQ-043",
+        "REQ-044",
+        "REQ-045",
+        "REQ-046",
+        "REQ-049",
+        "REQ-054",
+        "REQ-056",
+        "REQ-058"
+      ],
+      "acceptance_criteria": [
+        "New fixtures have distinct identity and no learned/absolute backend data; existing memory/config and v1-v4 semantics remain intact.",
+        "All interrupted stage reruns account for actual copied, specialized, preserved and skipped assets without auto-provisioning or real product migration."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/initializer-results.json",
+        "Verification/project-memory/installed-initializer-results.json"
+      ]
+    },
+    {
+      "task_id": "TASK-033",
+      "title": "Verify Template update safety",
+      "requirement_ids": [
+        "REQ-004",
+        "REQ-026",
+        "REQ-040",
+        "REQ-041",
+        "REQ-042",
+        "REQ-043",
+        "REQ-046",
+        "REQ-047",
+        "REQ-056"
+      ],
+      "acceptance_criteria": [
+        "Template checks detect missing starter config/README/contracts/skill and any learned records.",
+        "Updater operations preserve non-owned bytes and report customized targets/recovery accurately; whole-collection retirement still requires its existing explicit route."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/template-test-results.json",
+        "Verification/project-memory/final-template-contract-results.json",
+        "Verification/project-memory/final-template-memory-results.json",
+        "Verification/project-memory/template-adoption.json"
+      ]
+    },
+    {
+      "task_id": "TASK-034",
+      "title": "Publish and verify the registered Template",
+      "requirement_ids": [
+        "REQ-004",
+        "REQ-040",
+        "REQ-041",
+        "REQ-042",
+        "REQ-043",
+        "REQ-046",
+        "REQ-047",
+        "REQ-056"
+      ],
+      "acceptance_criteria": [
+        "The registered Template contains the complete empty capability and current deterministic mappings without project-specific learned/runtime content.",
+        "Post-apply check reports current, no unresolved conflict/pending transaction, and prior unrelated Template files are preserved."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/template-test-results.json",
+        "Verification/project-memory/final-template-contract-results.json",
+        "Verification/project-memory/final-template-memory-results.json",
+        "Verification/project-memory/template-adoption.json"
+      ]
+    },
+    {
+      "task_id": "TASK-035",
+      "title": "Review the active-root adoption manifest",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-004",
+        "REQ-020",
+        "REQ-035",
+        "REQ-036",
+        "REQ-037",
+        "REQ-038",
+        "REQ-039",
+        "REQ-041",
+        "REQ-047",
+        "REQ-048",
+        "REQ-049"
+      ],
+      "acceptance_criteria": [
+        "Each proposed destination has current and desired hashes or a bounded content merge; no blind package overwrite absorbs root-specific behavior.",
+        "The root owns its stable sys4ai-depot memory identity and adopted reference-assets/MEMORY-depo contracts; real products and factual registry stay unchanged."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/root-adoption-review.md",
+        "Verification/project-memory/root-adoption-manifest.json",
+        "Verification/project-memory/root-adoption-receipt.json",
+        "Verification/project-memory/root-adoption-current.json"
+      ]
+    },
+    {
+      "task_id": "TASK-036",
+      "title": "Adopt the reviewed root capability",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-004",
+        "REQ-011",
+        "REQ-020",
+        "REQ-035",
+        "REQ-036",
+        "REQ-037",
+        "REQ-038",
+        "REQ-039",
+        "REQ-041",
+        "REQ-047",
+        "REQ-048",
+        "REQ-049",
+        "REQ-054"
+      ],
+      "acceptance_criteria": [
+        "The active root validates against its own adopted configuration/contracts and the intended installed integrations.",
+        "Local Task intake/age closure, histories, To-TRD edits, licenses, product bytes and registry are preserved; no runtime provisioning occurs as an adoption side effect."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/root-adoption-review.md",
+        "Verification/project-memory/root-adoption-manifest.json",
+        "Verification/project-memory/root-adoption-receipt.json",
+        "Verification/project-memory/root-adoption-current.json"
+      ]
+    },
+    {
+      "task_id": "TASK-037",
+      "title": "Verify the adopted root and retained workflows",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-011",
+        "REQ-012",
+        "REQ-015",
+        "REQ-017",
+        "REQ-035",
+        "REQ-036",
+        "REQ-037",
+        "REQ-038",
+        "REQ-039",
+        "REQ-043",
+        "REQ-044",
+        "REQ-045",
+        "REQ-046",
+        "REQ-047",
+        "REQ-048",
+        "REQ-049",
+        "REQ-056"
+      ],
+      "acceptance_criteria": [
+        "Relevant retained suites and installed memory contracts pass, with baseline failures separated from regressions.",
+        "Root lexical/direct access works without backend provisioning, and all inspected read-only operations preserve governed bytes/mtimes."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/root-validation.json",
+        "Verification/project-memory/final-root-results.json",
+        "Verification/project-memory/final-role-inspection.json",
+        "Verification/project-memory/final-task-inspection.json"
+      ]
+    },
+    {
+      "task_id": "TASK-038",
+      "title": "Validate scoped root capture before the pilot",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-008",
+        "REQ-009",
+        "REQ-014",
+        "REQ-015",
+        "REQ-020",
+        "REQ-021",
+        "REQ-023",
+        "REQ-025",
+        "REQ-048"
+      ],
+      "acceptance_criteria": [
+        "The approved note records an actual observed result and its limits, current evidence/source digests and scoped publisher, without claiming a backend/native pass.",
+        "Publication and direct/lexical recall preserve existing notes and allow inspection of supporting evidence."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/root-capture-result.json",
+        "Verification/project-memory/root-lexical-inspection.json",
+        "Verification/project-memory/root-lexical-observation.json"
+      ]
+    },
+    {
+      "task_id": "TASK-039",
+      "title": "Provision the explicitly authorized local pilot",
+      "requirement_ids": [
+        "REQ-011",
+        "REQ-012",
+        "REQ-017",
+        "REQ-022",
+        "REQ-049",
+        "REQ-050",
+        "REQ-054",
+        "REQ-055"
+      ],
+      "acceptance_criteria": [
+        "Actual package/model artifacts, interpreter, effective project/config/routing and disabled automatic behaviors match the reviewed manifest.",
+        "The pilot uses local resources only; ordinary reads/setup trigger no provisioning and no host-wide unrestricted MCP server is registered."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/runtime-manifest.json",
+        "Verification/project-memory/backend-implementation-files.json"
+      ]
+    },
+    {
+      "task_id": "TASK-040",
+      "title": "Run isolated backend compatibility scenarios",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-008",
+        "REQ-012",
+        "REQ-014",
+        "REQ-015",
+        "REQ-016",
+        "REQ-017",
+        "REQ-019",
+        "REQ-022",
+        "REQ-026",
+        "REQ-030",
+        "REQ-032",
+        "REQ-033",
+        "REQ-050",
+        "REQ-051",
+        "REQ-052"
+      ],
+      "acceptance_criteria": [
+        "Every mandatory fixture scenario is actually exercised or explicitly reported as failed/blocked/unexercised with its reason; query relevance and mode are attributable.",
+        "The report states exact canonical/source/Task/role byte and mtime preservation, project isolation, exposed writer behavior and actual rebuild/outage effects."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/backend-isolated-assessment.json",
+        "Verification/project-memory/backend-evidence-index.json",
+        "Verification/project-memory/backend-preservation.json"
+      ]
+    },
+    {
+      "task_id": "TASK-041",
+      "title": "Run the bounded active-root backend pilot",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-008",
+        "REQ-012",
+        "REQ-014",
+        "REQ-015",
+        "REQ-016",
+        "REQ-017",
+        "REQ-019",
+        "REQ-022",
+        "REQ-026",
+        "REQ-048",
+        "REQ-050",
+        "REQ-051",
+        "REQ-052"
+      ],
+      "acceptance_criteria": [
+        "The bounded root context has observed canonical preservation, project isolation, source provenance, mode disclosure, controlled rebuild and outage fallback.",
+        "If isolated safety blocks this run, the root result remains explicitly unexercised and semantic use stays disabled; no unsafe scenario is forced on live history."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/backend-root-results.json",
+        "Verification/project-memory/backend-root-preservation.json"
+      ]
+    },
+    {
+      "task_id": "TASK-042",
+      "title": "Measure the pilot operating profile",
+      "requirement_ids": [
+        "REQ-049",
+        "REQ-050",
+        "REQ-052",
+        "REQ-054",
+        "REQ-055"
+      ],
+      "acceptance_criteria": [
+        "The report identifies exact software/model versions, license source and local operating requirements without relying on historical rankings or prices.",
+        "Resource figures identify measurement method, corpus/context and actual run conditions; unavailable observations are labeled."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/backend-operational-fit.md",
+        "Verification/project-memory/backend-root-operating-fit.md",
+        "Verification/project-memory/backend-resources.json"
+      ]
+    },
+    {
+      "task_id": "TASK-043",
+      "title": "Record compatibility and conditional enablement",
+      "requirement_ids": [
+        "REQ-015",
+        "REQ-016",
+        "REQ-017",
+        "REQ-022",
+        "REQ-048",
+        "REQ-050",
+        "REQ-051",
+        "REQ-052",
+        "REQ-053",
+        "REQ-054",
+        "REQ-055"
+      ],
+      "acceptance_criteria": [
+        "The decision cites actual checks and tested versions and distinguishes completed evaluation, compatible adoption and enabled root behavior.",
+        "Any failed, blocked or incomplete mandatory pilot check leaves semantic use off, preserves lexical/direct reads and remains visible in release evidence."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/backend-compatibility-decision.json",
+        "Verification/project-memory/root-backend-enablement-results.json",
+        "Verification/project-memory/root-backend-enablement-preservation.json"
+      ]
+    },
+    {
+      "task_id": "TASK-044",
+      "title": "Exercise native generic memory use",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-009",
+        "REQ-020",
+        "REQ-021",
+        "REQ-025",
+        "REQ-035",
+        "REQ-036",
+        "REQ-037",
+        "REQ-038",
+        "REQ-039",
+        "REQ-057"
+      ],
+      "acceptance_criteria": [
+        "Actual receipts prove current role reads, manager ownership/generation, one generic worker and authorized proposal/publication behavior.",
+        "Memory adds no reviewer, senior, separate implementer, Task activation side effect or unverified stopping claim."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/native-generic-results.json"
+      ]
+    },
+    {
+      "task_id": "TASK-045",
+      "title": "Exercise native complex frozen context",
+      "requirement_ids": [
+        "REQ-020",
+        "REQ-021",
+        "REQ-031",
+        "REQ-032",
+        "REQ-033",
+        "REQ-035",
+        "REQ-036",
+        "REQ-037",
+        "REQ-038",
+        "REQ-057"
+      ],
+      "acceptance_criteria": [
+        "Every solver receives the same exact packet/baseline and confirmed model/effort; native inherited context excludes sibling content.",
+        "Complex work retains its full solver/senior topology without a mandatory per-candidate reviewer; accepted implementation uses a distinct authorized implementer when applicable."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/native-complex-results.json",
+        "Verification/project-memory/host-testing-scope.json",
+        "Verification/project-memory/host-testing-results.json"
+      ],
+      "verification_method_override": "User directed remaining tests without sub-agents; local functional verification is complete and remaining live runs are excluded."
+    },
+    {
+      "task_id": "TASK-046",
+      "title": "Exercise native extra-complex review gates",
+      "requirement_ids": [
+        "REQ-021",
+        "REQ-031",
+        "REQ-032",
+        "REQ-033",
+        "REQ-034",
+        "REQ-035",
+        "REQ-036",
+        "REQ-037",
+        "REQ-038",
+        "REQ-057"
+      ],
+      "acceptance_criteria": [
+        "The complete required logical team and one-to-one reviewer mapping are preserved through capacity queuing and revision.",
+        "Changed candidate/input versions invalidate affected reviews and downstream acceptance; no missing or stale pass is treated as current."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/native-extra-complex-results.json",
+        "Verification/project-memory/host-testing-scope.json",
+        "Verification/project-memory/host-testing-results.json"
+      ],
+      "verification_method_override": "User directed remaining tests without sub-agents; local functional verification is complete and remaining live runs are excluded."
+    },
+    {
+      "task_id": "TASK-047",
+      "title": "Exercise native material-change and recovery gates",
+      "requirement_ids": [
+        "REQ-008",
+        "REQ-024",
+        "REQ-025",
+        "REQ-031",
+        "REQ-032",
+        "REQ-033",
+        "REQ-034",
+        "REQ-035",
+        "REQ-037",
+        "REQ-039",
+        "REQ-057",
+        "REQ-058"
+      ],
+      "acceptance_criteria": [
+        "Running/uncertain owners are reconciled before material rebinding and current native receipts prove stopping; an immaterial edit has an explicit assessment.",
+        "Optional memory retry leaves committed/terminal Task events intact, while a required missing memory deliverable remains unmet."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/native-change-recovery-results.json",
+        "Verification/project-memory/host-testing-scope.json",
+        "Verification/project-memory/host-testing-results.json"
+      ],
+      "verification_method_override": "User directed remaining tests without sub-agents; local functional verification is complete and remaining live runs are excluded."
+    },
+    {
+      "task_id": "TASK-048",
+      "title": "Validate fresh-context root capture and recall",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-006",
+        "REQ-008",
+        "REQ-009",
+        "REQ-014",
+        "REQ-015",
+        "REQ-017",
+        "REQ-020",
+        "REQ-022",
+        "REQ-031",
+        "REQ-032",
+        "REQ-048",
+        "REQ-052",
+        "REQ-053",
+        "REQ-057"
+      ],
+      "acceptance_criteria": [
+        "Fresh-context retrieval identifies the actual canonical record, project, source digests and verified meaning without granting historical authority.",
+        "The evidence distinguishes direct/lexical, backend, native and end-to-end observations and states any unsupported fresh-context or backend case explicitly."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/end-to-end-results.json",
+        "Verification/project-memory/fresh-context/fresh-context-report.md",
+        "Verification/project-memory/fresh-context/fresh-context-evidence.json"
+      ]
+    },
+    {
+      "task_id": "TASK-049",
+      "title": "Verify the integrated change and preservation",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-004",
+        "REQ-026",
+        "REQ-035",
+        "REQ-039",
+        "REQ-042",
+        "REQ-043",
+        "REQ-045",
+        "REQ-046",
+        "REQ-047",
+        "REQ-048",
+        "REQ-049",
+        "REQ-056",
+        "REQ-057",
+        "REQ-058",
+        "REQ-059"
+      ],
+      "acceptance_criteria": [
+        "Every changed artifact has a requirement/design basis and current verification; all 59 requirement criteria have evidence or an explicit unmet/unexercised classification.",
+        "Exact protected paths have affirmative preservation results, updater state is current, prior watcher state is restored and no unselected product or unrelated ledger is changed."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/final-preservation.json",
+        "Verification/project-memory/final-validation.json",
+        "Verification/project-memory/root-adoption-current.json",
+        "Verification/project-memory/host-testing-scope.json",
+        "Verification/project-memory/host-testing-results.json"
+      ]
+    },
+    {
+      "task_id": "TASK-050",
+      "title": "Publish the local release assessment",
+      "requirement_ids": [
+        "REQ-048",
+        "REQ-052",
+        "REQ-053",
+        "REQ-054",
+        "REQ-055",
+        "REQ-056",
+        "REQ-057",
+        "REQ-058",
+        "REQ-059"
+      ],
+      "acceptance_criteria": [
+        "The report maps REQ-001 through REQ-059 to current evidence and explicit unmet/unexercised outcomes with no silent deferral.",
+        "Completion claims match all mandatory gates; a negative pilot remains a negative adoption result, and existing products/Git/deployment/future environments are not declared exercised."
+      ],
+      "evidence_paths": [
+        "Verification/project-memory/RELEASE-ASSESSMENT.md",
+        "Verification/project-memory/evidence-index.json",
+        "Verification/project-memory/host-testing-scope.json",
+        "Verification/project-memory/host-testing-results.json"
+      ]
+    }
+  ]
+}

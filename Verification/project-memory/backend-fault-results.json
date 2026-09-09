@@ -1,0 +1,795 @@
+{
+  "schema_version": 1,
+  "level": "actual-vendor-with-synthetic-fixtures",
+  "cases": [
+    {
+      "case": "wrong-project-config",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "backend_config_changed"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "altered-profile-rejected",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "backend_profile_changed"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "cross-project-alias",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "unsafe_symlink"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "unclassified-projection-query",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "unclassified_projection"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "unclassified-projection-reindex",
+      "error": {
+        "code": "unclassified_state",
+        "message": "Projection contains unknown or modified content.",
+        "details": {}
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "altered-projection-rejected",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "projection_changed"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "stale-canonical-projection",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "projection_stale"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "stale-direct-fallback",
+      "result": {
+        "status": "ok",
+        "mode": "lexical",
+        "mutated": false,
+        "project_id": "pilot-alpha",
+        "results": [
+          {
+            "kind": "source",
+            "path": "README.md",
+            "sha256": "172518d8cf51107abd02db837894e3fbfe596be437f34dffa5903c97cb9e827a",
+            "source_identity": "README.md",
+            "locator": "README.md:1",
+            "heading": "Local retrieval",
+            "excerpt": "# Local retrieval\nERR-ALPHA-731 requires a second independent measurement.\n\nAFTER-INDEX-CHANGE\n",
+            "score": 111,
+            "limitations": [
+              "Stored normalization is stale; this result was extracted from the current source without updating the cache."
+            ],
+            "diagnostics": [],
+            "authority": "Source data; inspect current governing sources before acting.",
+            "line": 1,
+            "representations": [
+              {
+                "path": "README.md",
+                "sha256": "172518d8cf51107abd02db837894e3fbfe596be437f34dffa5903c97cb9e827a",
+                "locator": "README.md:1"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "README.md: Stored normalization is stale; this result was extracted from the current source without updating the cache.",
+          "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+          "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "historical": false
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "retracted-note-backend-excluded",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "projection_lifecycle"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "retracted-note-lexical-excluded",
+      "result": {
+        "status": "ok",
+        "mode": "lexical",
+        "mutated": false,
+        "project_id": "pilot-alpha",
+        "results": [
+          {
+            "kind": "memory",
+            "path": "MEMORY/MEM-20260908-00000002.md",
+            "sha256": "09b5e0648ccfafe504fd3b51b00c8433c95326840b3e50b2d6af44e1544b8d35",
+            "source_identity": "MEM-20260908-00000002",
+            "locator": "MEMORY/MEM-20260908-00000002.md",
+            "heading": "finding pilot chronology",
+            "excerpt": "finding pilot chronology\nFixture result retains source provenance and chronology.\n",
+            "score": 23,
+            "limitations": [
+              "Synthetic fixture data only"
+            ],
+            "diagnostics": [
+              {
+                "code": "invalid_locator",
+                "severity": "warning",
+                "path": "README.md",
+                "message": "Evidence is changed, missing, unsafe, or cannot support the claim; this does not prove the historical conclusion false."
+              },
+              {
+                "code": "claim_unsupported",
+                "severity": "error",
+                "message": "Current cited evidence does not support the stated claim level."
+              }
+            ],
+            "authority": "Source data; inspect current governing sources before acting.",
+            "record_id": "MEM-20260908-00000002",
+            "state": "active",
+            "sources": [
+              {
+                "kind": "verification",
+                "locator": "README.md:1",
+                "path": "README.md",
+                "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac"
+              }
+            ],
+            "claim": {
+              "level": "verified_outcome",
+              "summary": "Synthetic pilot record; not actual project findings"
+            },
+            "confidence": "high",
+            "representations": [
+              {
+                "path": "MEMORY/MEM-20260908-00000002.md",
+                "sha256": "09b5e0648ccfafe504fd3b51b00c8433c95326840b3e50b2d6af44e1544b8d35",
+                "locator": "MEMORY/MEM-20260908-00000002.md"
+              }
+            ]
+          },
+          {
+            "kind": "memory",
+            "path": "MEMORY/MEM-20260908-00000003.md",
+            "sha256": "016578ee2ef6bce4c930effe5f2209621cfb5fe19ddeb3d1b6f6b29e5a73391b",
+            "source_identity": "MEM-20260908-00000003",
+            "locator": "MEMORY/MEM-20260908-00000003.md",
+            "heading": "experiment pilot chronology",
+            "excerpt": "experiment pilot chronology\nFixture result retains source provenance and chronology.\n",
+            "score": 23,
+            "limitations": [
+              "Synthetic fixture data only"
+            ],
+            "diagnostics": [
+              {
+                "code": "invalid_locator",
+                "severity": "warning",
+                "path": "README.md",
+                "message": "Evidence is changed, missing, unsafe, or cannot support the claim; this does not prove the historical conclusion false."
+              },
+              {
+                "code": "claim_unsupported",
+                "severity": "error",
+                "message": "Current cited evidence does not support the stated claim level."
+              }
+            ],
+            "authority": "Source data; inspect current governing sources before acting.",
+            "record_id": "MEM-20260908-00000003",
+            "state": "active",
+            "sources": [
+              {
+                "kind": "verification",
+                "locator": "README.md:1",
+                "path": "README.md",
+                "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac"
+              }
+            ],
+            "claim": {
+              "level": "verified_outcome",
+              "summary": "Synthetic pilot record; not actual project findings"
+            },
+            "confidence": "high",
+            "representations": [
+              {
+                "path": "MEMORY/MEM-20260908-00000003.md",
+                "sha256": "016578ee2ef6bce4c930effe5f2209621cfb5fe19ddeb3d1b6f6b29e5a73391b",
+                "locator": "MEMORY/MEM-20260908-00000003.md"
+              }
+            ]
+          },
+          {
+            "kind": "memory",
+            "path": "MEMORY/MEM-20260908-00000004.md",
+            "sha256": "a04172ad956dd170a64ecb00293684936cd0b80a879f4c28778d9e3f03cf1c88",
+            "source_identity": "MEM-20260908-00000004",
+            "locator": "MEMORY/MEM-20260908-00000004.md",
+            "heading": "lesson pilot chronology",
+            "excerpt": "lesson pilot chronology\nFixture result retains source provenance and chronology.\n",
+            "score": 23,
+            "limitations": [
+              "Synthetic fixture data only"
+            ],
+            "diagnostics": [
+              {
+                "code": "invalid_locator",
+                "severity": "warning",
+                "path": "README.md",
+                "message": "Evidence is changed, missing, unsafe, or cannot support the claim; this does not prove the historical conclusion false."
+              },
+              {
+                "code": "claim_unsupported",
+                "severity": "error",
+                "message": "Current cited evidence does not support the stated claim level."
+              }
+            ],
+            "authority": "Source data; inspect current governing sources before acting.",
+            "record_id": "MEM-20260908-00000004",
+            "state": "active",
+            "sources": [
+              {
+                "kind": "verification",
+                "locator": "README.md:1",
+                "path": "README.md",
+                "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac"
+              }
+            ],
+            "claim": {
+              "level": "verified_outcome",
+              "summary": "Synthetic pilot record; not actual project findings"
+            },
+            "confidence": "high",
+            "representations": [
+              {
+                "path": "MEMORY/MEM-20260908-00000004.md",
+                "sha256": "a04172ad956dd170a64ecb00293684936cd0b80a879f4c28778d9e3f03cf1c88",
+                "locator": "MEMORY/MEM-20260908-00000004.md"
+              }
+            ]
+          },
+          {
+            "kind": "memory",
+            "path": "MEMORY/MEM-20260908-00000005.md",
+            "sha256": "bc62aa1d3d476e04812fc8d39ab1b4c97a65c64bb284846f65a8a64a879059c2",
+            "source_identity": "MEM-20260908-00000005",
+            "locator": "MEMORY/MEM-20260908-00000005.md",
+            "heading": "handoff pilot chronology",
+            "excerpt": "handoff pilot chronology\nFixture result retains source provenance and chronology.\n",
+            "score": 23,
+            "limitations": [
+              "Synthetic fixture data only"
+            ],
+            "diagnostics": [
+              {
+                "code": "invalid_locator",
+                "severity": "warning",
+                "path": "README.md",
+                "message": "Evidence is changed, missing, unsafe, or cannot support the claim; this does not prove the historical conclusion false."
+              }
+            ],
+            "authority": "Source data; inspect current governing sources before acting.",
+            "record_id": "MEM-20260908-00000005",
+            "state": "active",
+            "sources": [
+              {
+                "kind": "verification",
+                "locator": "README.md:1",
+                "path": "README.md",
+                "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac"
+              }
+            ],
+            "claim": {
+              "level": "historical_context",
+              "summary": "Synthetic pilot record; not actual project findings"
+            },
+            "confidence": "high",
+            "representations": [
+              {
+                "path": "MEMORY/MEM-20260908-00000005.md",
+                "sha256": "bc62aa1d3d476e04812fc8d39ab1b4c97a65c64bb284846f65a8a64a879059c2",
+                "locator": "MEMORY/MEM-20260908-00000005.md"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+          "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "historical": false
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "backend-unavailable-fallback",
+      "result": {
+        "status": "ok",
+        "mode": "lexical",
+        "mutated": false,
+        "project_id": "pilot-alpha",
+        "results": [
+          {
+            "kind": "source",
+            "path": "README.md",
+            "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac",
+            "source_identity": "README.md",
+            "locator": "README.md:1",
+            "heading": "Local retrieval",
+            "excerpt": "# Local retrieval\nERR-ALPHA-731 requires a second independent measurement.\n",
+            "score": 111,
+            "limitations": [],
+            "diagnostics": [],
+            "authority": "Source data; inspect current governing sources before acting.",
+            "line": 1,
+            "representations": [
+              {
+                "path": "README.md",
+                "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac",
+                "locator": "README.md:1"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "A required backend profile, certificate, projection, or index file is absent; explicit setup or reindex is required.",
+          "Semantic backend unavailable or uncertified; using lexical retrieval without maintenance.",
+          "file_absent",
+          "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+          "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "historical": false
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "missing-model-no-download",
+      "result": {
+        "status": "ok",
+        "mode": "lexical",
+        "mutated": false,
+        "project_id": "pilot-alpha",
+        "results": [
+          {
+            "kind": "source",
+            "path": "README.md",
+            "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac",
+            "source_identity": "README.md",
+            "locator": "README.md:1",
+            "heading": "Local retrieval",
+            "excerpt": "# Local retrieval\nERR-ALPHA-731 requires a second independent measurement.\n",
+            "score": 111,
+            "limitations": [],
+            "diagnostics": [],
+            "authority": "Source data; inspect current governing sources before acting.",
+            "line": 1,
+            "representations": [
+              {
+                "path": "README.md",
+                "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac",
+                "locator": "README.md:1"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "A pinned local model artifact is absent; reads do not download or repair it.",
+          "Semantic backend unavailable or uncertified; using lexical retrieval without maintenance.",
+          "backend_model_absent",
+          "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+          "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "historical": false
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "disabled-backend-fallback",
+      "result": {
+        "status": "ok",
+        "mode": "lexical",
+        "mutated": false,
+        "project_id": "pilot-alpha",
+        "results": [
+          {
+            "kind": "source",
+            "path": "README.md",
+            "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac",
+            "source_identity": "README.md",
+            "locator": "README.md:1",
+            "heading": "Local retrieval",
+            "excerpt": "# Local retrieval\nERR-ALPHA-731 requires a second independent measurement.\n",
+            "score": 111,
+            "limitations": [],
+            "diagnostics": [],
+            "authority": "Source data; inspect current governing sources before acting.",
+            "line": 1,
+            "representations": [
+              {
+                "path": "README.md",
+                "sha256": "1f1149383ae8245618889c53e686918248641137cb53aae7329d7b0275cc4aac",
+                "locator": "README.md:1"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "Semantic backend disabled; results use deterministic lexical retrieval.",
+          "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+          "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "historical": false
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "worker-write-tool-rejection",
+      "error": {
+        "code": "backend_operation",
+        "message": "Pinned backend operation failed.",
+        "details": {
+          "error_detail": "Only fixed bounded search is permitted.",
+          "returncode": 1
+        }
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "worker-canonical-target-rejection",
+      "error": {
+        "code": "maintenance_scope",
+        "message": "Pinned backend operation failed.",
+        "details": {
+          "error_detail": "Worker may write only its approved backend staging directory.",
+          "returncode": 1
+        }
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "frozen-backend-retrieval",
+      "result": {
+        "available": true,
+        "mode": "hybrid",
+        "results": [],
+        "limitations": [
+          "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+          "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "runtime": {
+          "mode": "hybrid",
+          "ready_vector_chunks": 11,
+          "vector_entities": 11,
+          "vendor_seconds": 0.200866,
+          "max_rss_bytes": 350666752,
+          "effective_controls": {
+            "ensure_frontmatter_on_sync": false,
+            "auto_update": false,
+            "skip_initialization_sync": true,
+            "format_on_save": false,
+            "disable_permalinks": true,
+            "logfire_enabled": false,
+            "logfire_send_to_logfire": false,
+            "cloud_promo_opt_out": true,
+            "reranker_enabled": false,
+            "semantic_embedding_provider": "fastembed",
+            "semantic_embedding_model": "bge-small-en-v1.5",
+            "semantic_embedding_dimensions": 384,
+            "semantic_embedding_threads": 2,
+            "semantic_embedding_parallel": 1,
+            "semantic_search_enabled": true,
+            "database_backend": "sqlite"
+          },
+          "package_version": "0.23.0",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "subprocess_seconds": 0.887199
+        }
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "frozen-baseline-thermal",
+      "result": {
+        "available": true,
+        "mode": "hybrid",
+        "results": [
+          {
+            "path": "docs/experiment.md",
+            "sha256": "16c37f22bdb05d9984f1e243ae84a313e838c3a17fc7f8d02a226faa858182cd",
+            "kind": "source",
+            "source_identity": "docs/experiment.md",
+            "score": 1.2303657292005021,
+            "retrieval_mode": "hybrid"
+          }
+        ],
+        "limitations": [
+          "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+          "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "runtime": {
+          "mode": "hybrid",
+          "ready_vector_chunks": 11,
+          "vector_entities": 11,
+          "vendor_seconds": 0.211459,
+          "max_rss_bytes": 353763328,
+          "effective_controls": {
+            "ensure_frontmatter_on_sync": false,
+            "auto_update": false,
+            "skip_initialization_sync": true,
+            "format_on_save": false,
+            "disable_permalinks": true,
+            "logfire_enabled": false,
+            "logfire_send_to_logfire": false,
+            "cloud_promo_opt_out": true,
+            "reranker_enabled": false,
+            "semantic_embedding_provider": "fastembed",
+            "semantic_embedding_model": "bge-small-en-v1.5",
+            "semantic_embedding_dimensions": 384,
+            "semantic_embedding_threads": 2,
+            "semantic_embedding_parallel": 1,
+            "semantic_search_enabled": true,
+            "database_backend": "sqlite"
+          },
+          "package_version": "0.23.0",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "subprocess_seconds": 0.892745
+        }
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "changed-frozen-evidence",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "projection_stale"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "changed-frozen-after-reindex",
+      "result": {
+        "available": false,
+        "mode": "lexical",
+        "results": [],
+        "limitations": [
+          "stale_packet"
+        ]
+      },
+      "inspection_preserved": true
+    },
+    {
+      "case": "restored-hybrid",
+      "result": {
+        "available": true,
+        "mode": "hybrid",
+        "results": [
+          {
+            "path": "docs/experiment.md",
+            "sha256": "16c37f22bdb05d9984f1e243ae84a313e838c3a17fc7f8d02a226faa858182cd",
+            "kind": "source",
+            "source_identity": "docs/experiment.md",
+            "score": 1.2303657292005021,
+            "retrieval_mode": "hybrid"
+          },
+          {
+            "path": "research/context.html",
+            "sha256": "b1641463e1bcf9e703712d5f163e6abf3a6c61aab6ded9df72b4914c314829dc",
+            "kind": "source",
+            "source_identity": "research/context.html",
+            "score": 0.8438287918487786,
+            "retrieval_mode": "hybrid"
+          },
+          {
+            "path": "MEMORY/MEM-20260908-00000003.md",
+            "sha256": "016578ee2ef6bce4c930effe5f2209621cfb5fe19ddeb3d1b6f6b29e5a73391b",
+            "kind": "memory",
+            "source_identity": "MEM-20260908-00000003",
+            "score": 0.5570434932429986,
+            "retrieval_mode": "hybrid"
+          }
+        ],
+        "limitations": [
+          "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+          "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+        ],
+        "runtime": {
+          "mode": "hybrid",
+          "ready_vector_chunks": 9,
+          "vector_entities": 9,
+          "vendor_seconds": 0.210962,
+          "max_rss_bytes": 348307456,
+          "effective_controls": {
+            "ensure_frontmatter_on_sync": false,
+            "auto_update": false,
+            "skip_initialization_sync": true,
+            "format_on_save": false,
+            "disable_permalinks": true,
+            "logfire_enabled": false,
+            "logfire_send_to_logfire": false,
+            "cloud_promo_opt_out": true,
+            "reranker_enabled": false,
+            "semantic_embedding_provider": "fastembed",
+            "semantic_embedding_model": "bge-small-en-v1.5",
+            "semantic_embedding_dimensions": 384,
+            "semantic_embedding_threads": 2,
+            "semantic_embedding_parallel": 1,
+            "semantic_search_enabled": true,
+            "database_backend": "sqlite"
+          },
+          "package_version": "0.23.0",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "subprocess_seconds": 0.89475
+        }
+      },
+      "inspection_preserved": true
+    }
+  ],
+  "native_orchestration": "not exercised by this runner",
+  "expanded_reindex": {
+    "status": "reindexed",
+    "operation_id": "2b9d3576b23b48a3b2d62f5a3e35f5ce",
+    "journal": ".sys4ai/memory/maintenance/backend-2b9d3576b23b48a3b2d62f5a3e35f5ce.json",
+    "projection_documents": 11,
+    "runtime": {
+      "indexed_documents": 11,
+      "ready_vector_chunks": 11,
+      "vector_entities": 11,
+      "ok": true,
+      "vendor_seconds": 0.751429,
+      "max_rss_bytes": 356597760,
+      "effective_controls": {
+        "ensure_frontmatter_on_sync": false,
+        "auto_update": false,
+        "skip_initialization_sync": true,
+        "format_on_save": false,
+        "disable_permalinks": true,
+        "logfire_enabled": false,
+        "logfire_send_to_logfire": false,
+        "cloud_promo_opt_out": true,
+        "reranker_enabled": false,
+        "semantic_embedding_provider": "fastembed",
+        "semantic_embedding_model": "bge-small-en-v1.5",
+        "semantic_embedding_dimensions": 384,
+        "semantic_embedding_threads": 2,
+        "semantic_embedding_parallel": 1,
+        "semantic_search_enabled": true,
+        "database_backend": "sqlite"
+      },
+      "package_version": "0.23.0",
+      "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+      "subprocess_seconds": 1.391133
+    },
+    "limitations": [
+      "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+      "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+    ]
+  },
+  "expanded_reindex_canonical_preserved": true,
+  "changed_evidence_reindex": {
+    "status": "reindexed",
+    "operation_id": "b8d4f887bbb94b67aa22bf0cce650b81",
+    "journal": ".sys4ai/memory/maintenance/backend-b8d4f887bbb94b67aa22bf0cce650b81.json",
+    "projection_documents": 11,
+    "runtime": {
+      "indexed_documents": 11,
+      "ready_vector_chunks": 11,
+      "vector_entities": 11,
+      "ok": true,
+      "vendor_seconds": 0.752473,
+      "max_rss_bytes": 353959936,
+      "effective_controls": {
+        "ensure_frontmatter_on_sync": false,
+        "auto_update": false,
+        "skip_initialization_sync": true,
+        "format_on_save": false,
+        "disable_permalinks": true,
+        "logfire_enabled": false,
+        "logfire_send_to_logfire": false,
+        "cloud_promo_opt_out": true,
+        "reranker_enabled": false,
+        "semantic_embedding_provider": "fastembed",
+        "semantic_embedding_model": "bge-small-en-v1.5",
+        "semantic_embedding_dimensions": 384,
+        "semantic_embedding_threads": 2,
+        "semantic_embedding_parallel": 1,
+        "semantic_search_enabled": true,
+        "database_backend": "sqlite"
+      },
+      "package_version": "0.23.0",
+      "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+      "subprocess_seconds": 1.387832
+    },
+    "limitations": [
+      "docs/experiment.md: Stored normalization is stale; this result was extracted from the current source without updating the cache.",
+      "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+      "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+    ]
+  },
+  "restored_reindex": {
+    "status": "reindexed",
+    "operation_id": "76f18d3a5888495e8fe50316c79b391a",
+    "journal": ".sys4ai/memory/maintenance/backend-76f18d3a5888495e8fe50316c79b391a.json",
+    "projection_documents": 9,
+    "runtime": {
+      "indexed_documents": 9,
+      "ready_vector_chunks": 9,
+      "vector_entities": 9,
+      "ok": true,
+      "vendor_seconds": 0.662444,
+      "max_rss_bytes": 344293376,
+      "effective_controls": {
+        "ensure_frontmatter_on_sync": false,
+        "auto_update": false,
+        "skip_initialization_sync": true,
+        "format_on_save": false,
+        "disable_permalinks": true,
+        "logfire_enabled": false,
+        "logfire_send_to_logfire": false,
+        "cloud_promo_opt_out": true,
+        "reranker_enabled": false,
+        "semantic_embedding_provider": "fastembed",
+        "semantic_embedding_model": "bge-small-en-v1.5",
+        "semantic_embedding_dimensions": 384,
+        "semantic_embedding_threads": 2,
+        "semantic_embedding_parallel": 1,
+        "semantic_search_enabled": true,
+        "database_backend": "sqlite"
+      },
+      "package_version": "0.23.0",
+      "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+      "subprocess_seconds": 1.302532
+    },
+    "limitations": [
+      "docs/experiment.md: Stored normalization is stale; this result was extracted from the current source without updating the cache.",
+      "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+      "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+    ]
+  }
+}

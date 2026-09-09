@@ -2,7 +2,7 @@
 name: init-new-project
 description: Create or prepare a selected Sys4AI project using Template governance assets, preserved project content and factual registration.
 metadata:
-  version: 6.0.0
+  version: 7.0.0
 ---
 
 # Initialize a Sys4AI project
@@ -25,10 +25,19 @@ are rejected. There is no caller-controlled depot or Template override.
 
 Every starter input comes from the registered `Sys4AI-Template-Project`: its
 schema-2 `.template/baseline-assets.json`, README renderer, soul, complete skill
-and role packages, and selected reference assets. The seven required skills are
+and role packages, and selected reference assets. The eight required skills are
 `agent-task`, `communication`, `init-new-project`, `manage-subagent-roles`, `task`,
-`to-implementation-plan` and `to-trd`. The `project-sub-agent` and `task-manager` pairs and a validated `Roles/INDEX.md`
+`memory`, `to-implementation-plan` and `to-trd`. The `project-sub-agent` and `task-manager` pairs and a validated `Roles/INDEX.md`
 are required for new projects. The initializer reads the Template and does not refresh it.
+
+The memory starters are `memory.yaml`, `MEMORY/README.md`, the complete memory
+skill, and `reference-assets/MEMORY-depo/` contract assets. The Template config
+has no project ID or name, publisher authorization, learned records or enabled
+backend. Setup specializes only `project.id` and `project.name`, retains project
+root `.`, and uses the local `reference-assets/MEMORY-depo` contract path.
+The memory helper validates the constrained JSON-compatible YAML configuration
+without contacting or provisioning a backend. Nonempty Template memory and
+missing required memory starter, skill or contract sources reject setup.
 
 The three required licensing starters are `LICENSE`, `LICENSE-CODE`, and
 `LICENSE-DOCS`. They retain the Template's Apache 2.0 / CC BY 4.0 split and
@@ -60,6 +69,15 @@ is preserved. Existing `project.json` bytes and additional fields are preserved;
 its project ID and relative destination must agree with the request, and its
 existing display name and purpose take precedence.
 
+Existing `memory.yaml` bytes remain untouched, including a config in an older
+format. Existing `MEMORY/`, `reference-assets/MEMORY-depo/`, and memory skill
+collections remain intact as whole packages; setup does not add their missing
+resources. This also preserves an existing unspecialized config in a manual
+Template copy. The receipt reports preservation instead of claiming that such
+project-owned configuration is operational. Changing it is separate scoped
+project work. Original complete memory inventories are retained for recovery;
+completed reruns observe current edits without replacing those original hashes.
+
 ## Run setup
 
 Use the depot's Python interpreter and explicit values:
@@ -86,7 +104,14 @@ not ignored. The starter policy has no optional root guide or runtime bundle.
 ## Completion and receipts
 
 The durable receipt is `control_records/project-setup.json`, schema version 1,
-with setup contract `governance-starter-v4`. Version 4 requires the license trio
+with setup contract `governance-starter-v5`. Edition v5 adds memory starters and
+records `specialized` identity/configuration assets separately from `adopted`
+copies and `preserved-project-owned` files. `preserved_memory` records the
+original complete config and collections; `current_memory` records the latest
+observation. Missing resources inside an existing memory collection use
+`skipped-existing-package`, retaining every Template source entry.
+
+Editions v4 and v5 require the license trio
 and records the original `preserved_licenses` inventory (empty when adopting
 the trio) separately from `current_licenses` observed during verification.
 Entries for absent companions use `skipped-existing-license`; every Template
@@ -94,7 +119,8 @@ license source remains in the receipt. Original markers must remain present;
 ordinary content edits are observed without rewriting original hashes. During
 interrupted asset adoption, licensing must still match the reviewed inventory.
 
-Earlier `governance-starter-v3` receipts retain their original license-free
+Earlier `governance-starter-v4` receipts retain the seven-skill licensing edition
+without acquiring memory. Earlier `governance-starter-v3` receipts retain their original license-free
 starter requirement and `Roles/` layout. Earlier `governance-starter-v1`
 and `governance-starter-v2` contracts retain their original `sub-agent-roles/`
 and lowercase `roles/` source and adoption evidence. Reruns never convert their
@@ -111,7 +137,7 @@ resource is identified explicitly; copied Template bytes are not claimed for it.
 The receipt must account for every source destination in both directions:
 adopted files match `owned_files`, preserved files match `preserved_files`, and
 both maps match the source adoption hashes. Only explicitly skipped resources
-inside an existing package, nonempty Task tree, or a v4 preserved licensing
+inside an existing package, nonempty Task tree, or a v4/v5 preserved licensing
 system may be absent from both maps.
 Standalone starters and the required source inventory cannot be omitted.
 

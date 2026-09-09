@@ -1,0 +1,520 @@
+{
+  "schema_version": 1,
+  "decision": {
+    "path": "Verification/project-memory/backend-compatibility-decision.json",
+    "sha256": "76537a4e6d6462081643d836e95aa2f26045aa00e90498e3c262e6640d2c9e5e"
+  },
+  "checks": {
+    "public_reads_preserved_bytes_and_mtimes": true,
+    "public_exact_hybrid": true,
+    "public_conceptual_hybrid": true,
+    "public_commands_succeeded": true,
+    "outage_inspections_preserved_bytes_and_mtimes": true,
+    "outage_falls_back_with_note": true,
+    "restored_runtime_bytes_and_mtimes": true,
+    "restored_hybrid": true
+  },
+  "reindex": {
+    "status": "reindexed",
+    "operation_id": "fffffbbf4c274a009e2ef3f39b4fec5c",
+    "journal": ".sys4ai/memory/maintenance/backend-fffffbbf4c274a009e2ef3f39b4fec5c.json",
+    "projection_documents": 2,
+    "runtime": {
+      "indexed_documents": 2,
+      "ready_vector_chunks": 25,
+      "vector_entities": 2,
+      "ok": true,
+      "vendor_seconds": 1.631192,
+      "max_rss_bytes": 379535360,
+      "effective_controls": {
+        "ensure_frontmatter_on_sync": false,
+        "auto_update": false,
+        "skip_initialization_sync": true,
+        "format_on_save": false,
+        "disable_permalinks": true,
+        "logfire_enabled": false,
+        "logfire_send_to_logfire": false,
+        "cloud_promo_opt_out": true,
+        "reranker_enabled": false,
+        "semantic_embedding_provider": "fastembed",
+        "semantic_embedding_model": "bge-small-en-v1.5",
+        "semantic_embedding_dimensions": 384,
+        "semantic_embedding_threads": 2,
+        "semantic_embedding_parallel": 1,
+        "semantic_search_enabled": true,
+        "database_backend": "sqlite"
+      },
+      "package_version": "0.23.0",
+      "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+      "subprocess_seconds": 2.278741
+    },
+    "limitations": [],
+    "parent_seconds": 2.456139542046003
+  },
+  "health": {
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-B",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "health"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"backend\": {\n    \"available\": true,\n    \"documents\": 2,\n    \"limitations\": [\n      \"runtime_not_started_by_health\"\n    ],\n    \"mode\": \"prebuilt-profile\",\n    \"profile\": \"basic-memory-v0.23.0\"\n  },\n  \"diagnostics\": [],\n  \"project_id\": \"sys4ai-depot\",\n  \"read_only\": true,\n  \"records\": 1,\n  \"status\": \"ready\"\n}\n",
+    "stderr": "",
+    "result": {
+      "backend": {
+        "available": true,
+        "documents": 2,
+        "limitations": [
+          "runtime_not_started_by_health"
+        ],
+        "mode": "prebuilt-profile",
+        "profile": "basic-memory-v0.23.0"
+      },
+      "diagnostics": [],
+      "project_id": "sys4ai-depot",
+      "read_only": true,
+      "records": 1,
+      "status": "ready"
+    }
+  },
+  "exact": {
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-B",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "search",
+      "Root lexical lookup"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"historical\": false,\n  \"limitations\": [],\n  \"mode\": \"hybrid\",\n  \"mutated\": false,\n  \"project_id\": \"sys4ai-depot\",\n  \"results\": [\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"claim\": {\n        \"level\": \"verified_outcome\",\n        \"summary\": \"Root health, one lexical source lookup and validate preserved the inspected files with semantic retrieval disabled.\"\n      },\n      \"confidence\": \"high\",\n      \"diagnostics\": [],\n      \"excerpt\": \"Root lexical lookup preserves inspected state\\n# Observed result\\n\\nWith the semantic backend disabled, the root memory helper returned README.md for the exact query `project-local`. Public health, lexical search and validate preserved the bytes and modification times of all 175 files in the recorded inspection scope. The evidence includes the actual commands, returned source and before/after hashes.\\n\\nUse direct Markdown and lexical lookup when semantic retrieval is unavailable. Reinspect current configuration and source versions before applying this recorded result to later work.\\n\",\n      \"heading\": \"Root lexical lookup preserves inspected state\",\n      \"kind\": \"memory\",\n      \"limitations\": [\n        \"The root test covered health, one exact-term source query and validate with no learned records initially.\",\n        \"This finding does not claim a backend pilot pass, native Task integration, arbitrary source formats or other project adoption.\"\n      ],\n      \"locator\": \"MEMORY/MEM-20260908-6A59F482.md\",\n      \"path\": \"MEMORY/MEM-20260908-6A59F482.md\",\n      \"record_id\": \"MEM-20260908-6A59F482\",\n      \"representations\": [\n        {\n          \"locator\": \"MEMORY/MEM-20260908-6A59F482.md\",\n          \"path\": \"MEMORY/MEM-20260908-6A59F482.md\",\n          \"sha256\": \"66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292\"\n        }\n      ],\n      \"score\": 1.246349446083483,\n      \"sha256\": \"66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292\",\n      \"source_identity\": \"MEM-20260908-6A59F482\",\n      \"sources\": [\n        {\n          \"kind\": \"verification\",\n          \"locator\": \"json:/outcome\",\n          \"path\": \"Verification/project-memory/root-lexical-observation.json\",\n          \"sha256\": \"4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811\"\n        },\n        {\n          \"kind\": \"source\",\n          \"locator\": \"section:def search\",\n          \"path\": \".agents/skills/memory/scripts/memory_search.py\",\n          \"sha256\": \"294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b\"\n        }\n      ],\n      \"state\": \"active\"\n    },\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"diagnostics\": [],\n      \"excerpt\": \"\u2026 sources retain authority.\\n\\nUse `.venv/bin/python .agents/skills/memory/scripts/memory.py --project-root .\\nsearch 'query'` for lookup, or replace the search arguments with `health` for\\ncurrent readiness. Reads perform no maintenance or provisioning. Canonical\\npublication needs the exact current Director/manager grant. New projects receive\\nonly the empty Template capability; existing products require their own adoption.\\n\",\n      \"heading\": \"Project memory\",\n      \"kind\": \"source\",\n      \"limitations\": [],\n      \"line\": 203,\n      \"locator\": \"README.md:203\",\n      \"path\": \"README.md\",\n      \"representations\": [\n        {\n          \"locator\": \"README.md:203\",\n          \"path\": \"README.md\",\n          \"sha256\": \"8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1\"\n        }\n      ],\n      \"score\": 0.6674868087390404,\n      \"sha256\": \"8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1\",\n      \"source_identity\": \"README.md\"\n    }\n  ],\n  \"status\": \"ok\"\n}\n",
+    "stderr": "",
+    "result": {
+      "historical": false,
+      "limitations": [],
+      "mode": "hybrid",
+      "mutated": false,
+      "project_id": "sys4ai-depot",
+      "results": [
+        {
+          "authority": "Source data; inspect current governing sources before acting.",
+          "claim": {
+            "level": "verified_outcome",
+            "summary": "Root health, one lexical source lookup and validate preserved the inspected files with semantic retrieval disabled."
+          },
+          "confidence": "high",
+          "diagnostics": [],
+          "excerpt": "Root lexical lookup preserves inspected state\n# Observed result\n\nWith the semantic backend disabled, the root memory helper returned README.md for the exact query `project-local`. Public health, lexical search and validate preserved the bytes and modification times of all 175 files in the recorded inspection scope. The evidence includes the actual commands, returned source and before/after hashes.\n\nUse direct Markdown and lexical lookup when semantic retrieval is unavailable. Reinspect current configuration and source versions before applying this recorded result to later work.\n",
+          "heading": "Root lexical lookup preserves inspected state",
+          "kind": "memory",
+          "limitations": [
+            "The root test covered health, one exact-term source query and validate with no learned records initially.",
+            "This finding does not claim a backend pilot pass, native Task integration, arbitrary source formats or other project adoption."
+          ],
+          "locator": "MEMORY/MEM-20260908-6A59F482.md",
+          "path": "MEMORY/MEM-20260908-6A59F482.md",
+          "record_id": "MEM-20260908-6A59F482",
+          "representations": [
+            {
+              "locator": "MEMORY/MEM-20260908-6A59F482.md",
+              "path": "MEMORY/MEM-20260908-6A59F482.md",
+              "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292"
+            }
+          ],
+          "score": 1.246349446083483,
+          "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+          "source_identity": "MEM-20260908-6A59F482",
+          "sources": [
+            {
+              "kind": "verification",
+              "locator": "json:/outcome",
+              "path": "Verification/project-memory/root-lexical-observation.json",
+              "sha256": "4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811"
+            },
+            {
+              "kind": "source",
+              "locator": "section:def search",
+              "path": ".agents/skills/memory/scripts/memory_search.py",
+              "sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b"
+            }
+          ],
+          "state": "active"
+        },
+        {
+          "authority": "Source data; inspect current governing sources before acting.",
+          "diagnostics": [],
+          "excerpt": "\u2026 sources retain authority.\n\nUse `.venv/bin/python .agents/skills/memory/scripts/memory.py --project-root .\nsearch 'query'` for lookup, or replace the search arguments with `health` for\ncurrent readiness. Reads perform no maintenance or provisioning. Canonical\npublication needs the exact current Director/manager grant. New projects receive\nonly the empty Template capability; existing products require their own adoption.\n",
+          "heading": "Project memory",
+          "kind": "source",
+          "limitations": [],
+          "line": 203,
+          "locator": "README.md:203",
+          "path": "README.md",
+          "representations": [
+            {
+              "locator": "README.md:203",
+              "path": "README.md",
+              "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1"
+            }
+          ],
+          "score": 0.6674868087390404,
+          "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1",
+          "source_identity": "README.md"
+        }
+      ],
+      "status": "ok"
+    }
+  },
+  "conceptual": {
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-B",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "search",
+      "Inspect stored information without changing files or their timestamps"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"historical\": false,\n  \"limitations\": [],\n  \"mode\": \"hybrid\",\n  \"mutated\": false,\n  \"project_id\": \"sys4ai-depot\",\n  \"results\": [\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"diagnostics\": [],\n      \"excerpt\": \"\u2026roject/SKILL.md)\\nwith the destination, unique stable ID, name, and product purpose. Both routes\\nsupport projects beneath this depot's `Projects/` container.\\n\\n```bash\\n.venv/bin/python .agents/skills/init-new-project/scripts/init_new_project.py create \\\\\\n  --destination /Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Example-Project \\\\\\n  --project-id example-project --project-name 'Example Project' \\\\\\n  --purpose 'Describe the actual product and its users.'\\n```\\n\\nThe helper copies the registered Template's selected starter files, complete\\nskill and role packages, reference assets, and `SOUL.md`. It specializes project\\nidentity and records factual registration. All seven governance and setup\\nskills are req\u2026\",\n      \"heading\": \"Add a future Sys4AI project\",\n      \"kind\": \"source\",\n      \"limitations\": [],\n      \"line\": 105,\n      \"locator\": \"README.md:105\",\n      \"path\": \"README.md\",\n      \"representations\": [\n        {\n          \"locator\": \"README.md:105\",\n          \"path\": \"README.md\",\n          \"sha256\": \"8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1\"\n        }\n      ],\n      \"score\": 1.1830318033199922,\n      \"sha256\": \"8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1\",\n      \"source_identity\": \"README.md\"\n    },\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"claim\": {\n        \"level\": \"verified_outcome\",\n        \"summary\": \"Root health, one lexical source lookup and validate preserved the inspected files with semantic retrieval disabled.\"\n      },\n      \"confidence\": \"high\",\n      \"diagnostics\": [],\n      \"excerpt\": \"Root lexical lookup preserves inspected state\\n# Observed result\\n\\nWith the semantic backend disabled, the root memory helper returned README.md for the exact query `project-local`. Public health, lexical search and validate preserved the bytes and modification times of all 175 files in the recorded inspection scope. The evidence includes the actual commands, returned source and before/after hashes.\\n\\nUse direct Markdown and lexical lookup when semantic retrieval is unavailable. Reinspect current configuration and source versions before applying this recorded result to later work.\\n\",\n      \"heading\": \"Root lexical lookup preserves inspected state\",\n      \"kind\": \"memory\",\n      \"limitations\": [\n        \"The root test covered health, one exact-term source query and validate with no learned records initially.\",\n        \"This finding does not claim a backend pilot pass, native Task integration, arbitrary source formats or other project adoption.\"\n      ],\n      \"locator\": \"MEMORY/MEM-20260908-6A59F482.md\",\n      \"path\": \"MEMORY/MEM-20260908-6A59F482.md\",\n      \"record_id\": \"MEM-20260908-6A59F482\",\n      \"representations\": [\n        {\n          \"locator\": \"MEMORY/MEM-20260908-6A59F482.md\",\n          \"path\": \"MEMORY/MEM-20260908-6A59F482.md\",\n          \"sha256\": \"66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292\"\n        }\n      ],\n      \"score\": 0.8304179006940404,\n      \"sha256\": \"66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292\",\n      \"source_identity\": \"MEM-20260908-6A59F482\",\n      \"sources\": [\n        {\n          \"kind\": \"verification\",\n          \"locator\": \"json:/outcome\",\n          \"path\": \"Verification/project-memory/root-lexical-observation.json\",\n          \"sha256\": \"4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811\"\n        },\n        {\n          \"kind\": \"source\",\n          \"locator\": \"section:def search\",\n          \"path\": \".agents/skills/memory/scripts/memory_search.py\",\n          \"sha256\": \"294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b\"\n        }\n      ],\n      \"state\": \"active\"\n    }\n  ],\n  \"status\": \"ok\"\n}\n",
+    "stderr": "",
+    "result": {
+      "historical": false,
+      "limitations": [],
+      "mode": "hybrid",
+      "mutated": false,
+      "project_id": "sys4ai-depot",
+      "results": [
+        {
+          "authority": "Source data; inspect current governing sources before acting.",
+          "diagnostics": [],
+          "excerpt": "\u2026roject/SKILL.md)\nwith the destination, unique stable ID, name, and product purpose. Both routes\nsupport projects beneath this depot's `Projects/` container.\n\n```bash\n.venv/bin/python .agents/skills/init-new-project/scripts/init_new_project.py create \\\n  --destination /Volumes/P-SSD/AngryOwl/Sys4AI/Projects/Example-Project \\\n  --project-id example-project --project-name 'Example Project' \\\n  --purpose 'Describe the actual product and its users.'\n```\n\nThe helper copies the registered Template's selected starter files, complete\nskill and role packages, reference assets, and `SOUL.md`. It specializes project\nidentity and records factual registration. All seven governance and setup\nskills are req\u2026",
+          "heading": "Add a future Sys4AI project",
+          "kind": "source",
+          "limitations": [],
+          "line": 105,
+          "locator": "README.md:105",
+          "path": "README.md",
+          "representations": [
+            {
+              "locator": "README.md:105",
+              "path": "README.md",
+              "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1"
+            }
+          ],
+          "score": 1.1830318033199922,
+          "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1",
+          "source_identity": "README.md"
+        },
+        {
+          "authority": "Source data; inspect current governing sources before acting.",
+          "claim": {
+            "level": "verified_outcome",
+            "summary": "Root health, one lexical source lookup and validate preserved the inspected files with semantic retrieval disabled."
+          },
+          "confidence": "high",
+          "diagnostics": [],
+          "excerpt": "Root lexical lookup preserves inspected state\n# Observed result\n\nWith the semantic backend disabled, the root memory helper returned README.md for the exact query `project-local`. Public health, lexical search and validate preserved the bytes and modification times of all 175 files in the recorded inspection scope. The evidence includes the actual commands, returned source and before/after hashes.\n\nUse direct Markdown and lexical lookup when semantic retrieval is unavailable. Reinspect current configuration and source versions before applying this recorded result to later work.\n",
+          "heading": "Root lexical lookup preserves inspected state",
+          "kind": "memory",
+          "limitations": [
+            "The root test covered health, one exact-term source query and validate with no learned records initially.",
+            "This finding does not claim a backend pilot pass, native Task integration, arbitrary source formats or other project adoption."
+          ],
+          "locator": "MEMORY/MEM-20260908-6A59F482.md",
+          "path": "MEMORY/MEM-20260908-6A59F482.md",
+          "record_id": "MEM-20260908-6A59F482",
+          "representations": [
+            {
+              "locator": "MEMORY/MEM-20260908-6A59F482.md",
+              "path": "MEMORY/MEM-20260908-6A59F482.md",
+              "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292"
+            }
+          ],
+          "score": 0.8304179006940404,
+          "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+          "source_identity": "MEM-20260908-6A59F482",
+          "sources": [
+            {
+              "kind": "verification",
+              "locator": "json:/outcome",
+              "path": "Verification/project-memory/root-lexical-observation.json",
+              "sha256": "4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811"
+            },
+            {
+              "kind": "source",
+              "locator": "section:def search",
+              "path": ".agents/skills/memory/scripts/memory_search.py",
+              "sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b"
+            }
+          ],
+          "state": "active"
+        }
+      ],
+      "status": "ok"
+    }
+  },
+  "validate": {
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-B",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "validate"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"diagnostics\": [],\n  \"read_only\": true,\n  \"records\": 1,\n  \"valid\": true\n}\n",
+    "stderr": "",
+    "result": {
+      "diagnostics": [],
+      "read_only": true,
+      "records": 1,
+      "valid": true
+    }
+  },
+  "outage_health": {
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-B",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "health"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"backend\": {\n    \"available\": false,\n    \"limitations\": [\n      \"file_absent\",\n      \"A required backend profile, certificate, projection, or index file is absent; explicit setup or reindex is required.\"\n    ],\n    \"mode\": \"lexical\"\n  },\n  \"diagnostics\": [],\n  \"project_id\": \"sys4ai-depot\",\n  \"read_only\": true,\n  \"records\": 1,\n  \"status\": \"ready\"\n}\n",
+    "stderr": "",
+    "result": {
+      "backend": {
+        "available": false,
+        "limitations": [
+          "file_absent",
+          "A required backend profile, certificate, projection, or index file is absent; explicit setup or reindex is required."
+        ],
+        "mode": "lexical"
+      },
+      "diagnostics": [],
+      "project_id": "sys4ai-depot",
+      "read_only": true,
+      "records": 1,
+      "status": "ready"
+    }
+  },
+  "outage_search": {
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-B",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "search",
+      "Root lexical lookup"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"historical\": false,\n  \"limitations\": [\n    \"A required backend profile, certificate, projection, or index file is absent; explicit setup or reindex is required.\",\n    \"Semantic backend unavailable or uncertified; using lexical retrieval without maintenance.\",\n    \"file_absent\"\n  ],\n  \"mode\": \"lexical\",\n  \"mutated\": false,\n  \"project_id\": \"sys4ai-depot\",\n  \"results\": [\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"claim\": {\n        \"level\": \"verified_outcome\",\n        \"summary\": \"Root health, one lexical source lookup and validate preserved the inspected files with semantic retrieval disabled.\"\n      },\n      \"confidence\": \"high\",\n      \"diagnostics\": [],\n      \"excerpt\": \"Root lexical lookup preserves inspected state\\n# Observed result\\n\\nWith the semantic backend disabled, the root memory helper returned README.md for the exact query `project-local`. Public health, lexical search and validate preserved the bytes and modification times of all 175 files in the recorded inspection scope. The evidence includes the actual commands, returned source and before/after hashes.\\n\\nUse direct Markdown and lexical lookup when semantic retrieval is unavailable. Reinspect current configuration and source versions before applying this recorded result to later work.\\n\",\n      \"heading\": \"Root lexical lookup preserves inspected state\",\n      \"kind\": \"memory\",\n      \"limitations\": [\n        \"The root test covered health, one exact-term source query and validate with no learned records initially.\",\n        \"This finding does not claim a backend pilot pass, native Task integration, arbitrary source formats or other project adoption.\"\n      ],\n      \"locator\": \"MEMORY/MEM-20260908-6A59F482.md\",\n      \"path\": \"MEMORY/MEM-20260908-6A59F482.md\",\n      \"record_id\": \"MEM-20260908-6A59F482\",\n      \"representations\": [\n        {\n          \"locator\": \"MEMORY/MEM-20260908-6A59F482.md\",\n          \"path\": \"MEMORY/MEM-20260908-6A59F482.md\",\n          \"sha256\": \"66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292\"\n        }\n      ],\n      \"score\": 137,\n      \"sha256\": \"66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292\",\n      \"source_identity\": \"MEM-20260908-6A59F482\",\n      \"sources\": [\n        {\n          \"kind\": \"verification\",\n          \"locator\": \"json:/outcome\",\n          \"path\": \"Verification/project-memory/root-lexical-observation.json\",\n          \"sha256\": \"4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811\"\n        },\n        {\n          \"kind\": \"source\",\n          \"locator\": \"section:def search\",\n          \"path\": \".agents/skills/memory/scripts/memory_search.py\",\n          \"sha256\": \"294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b\"\n        }\n      ],\n      \"state\": \"active\"\n    },\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"diagnostics\": [],\n      \"excerpt\": \"\u2026 sources retain authority.\\n\\nUse `.venv/bin/python .agents/skills/memory/scripts/memory.py --project-root .\\nsearch 'query'` for lookup, or replace the search arguments with `health` for\\ncurrent readiness. Reads perform no maintenance or provisioning. Canonical\\npublication needs the exact current Director/manager grant. New projects receive\\nonly the empty Template capability; existing products require their own adoption.\\n\",\n      \"heading\": \"Project memory\",\n      \"kind\": \"source\",\n      \"limitations\": [],\n      \"line\": 203,\n      \"locator\": \"README.md:203\",\n      \"path\": \"README.md\",\n      \"representations\": [\n        {\n          \"locator\": \"README.md:203\",\n          \"path\": \"README.md\",\n          \"sha256\": \"8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1\"\n        }\n      ],\n      \"score\": 22,\n      \"sha256\": \"8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1\",\n      \"source_identity\": \"README.md\"\n    }\n  ],\n  \"status\": \"ok\"\n}\n",
+    "stderr": "",
+    "result": {
+      "historical": false,
+      "limitations": [
+        "A required backend profile, certificate, projection, or index file is absent; explicit setup or reindex is required.",
+        "Semantic backend unavailable or uncertified; using lexical retrieval without maintenance.",
+        "file_absent"
+      ],
+      "mode": "lexical",
+      "mutated": false,
+      "project_id": "sys4ai-depot",
+      "results": [
+        {
+          "authority": "Source data; inspect current governing sources before acting.",
+          "claim": {
+            "level": "verified_outcome",
+            "summary": "Root health, one lexical source lookup and validate preserved the inspected files with semantic retrieval disabled."
+          },
+          "confidence": "high",
+          "diagnostics": [],
+          "excerpt": "Root lexical lookup preserves inspected state\n# Observed result\n\nWith the semantic backend disabled, the root memory helper returned README.md for the exact query `project-local`. Public health, lexical search and validate preserved the bytes and modification times of all 175 files in the recorded inspection scope. The evidence includes the actual commands, returned source and before/after hashes.\n\nUse direct Markdown and lexical lookup when semantic retrieval is unavailable. Reinspect current configuration and source versions before applying this recorded result to later work.\n",
+          "heading": "Root lexical lookup preserves inspected state",
+          "kind": "memory",
+          "limitations": [
+            "The root test covered health, one exact-term source query and validate with no learned records initially.",
+            "This finding does not claim a backend pilot pass, native Task integration, arbitrary source formats or other project adoption."
+          ],
+          "locator": "MEMORY/MEM-20260908-6A59F482.md",
+          "path": "MEMORY/MEM-20260908-6A59F482.md",
+          "record_id": "MEM-20260908-6A59F482",
+          "representations": [
+            {
+              "locator": "MEMORY/MEM-20260908-6A59F482.md",
+              "path": "MEMORY/MEM-20260908-6A59F482.md",
+              "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292"
+            }
+          ],
+          "score": 137,
+          "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+          "source_identity": "MEM-20260908-6A59F482",
+          "sources": [
+            {
+              "kind": "verification",
+              "locator": "json:/outcome",
+              "path": "Verification/project-memory/root-lexical-observation.json",
+              "sha256": "4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811"
+            },
+            {
+              "kind": "source",
+              "locator": "section:def search",
+              "path": ".agents/skills/memory/scripts/memory_search.py",
+              "sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b"
+            }
+          ],
+          "state": "active"
+        },
+        {
+          "authority": "Source data; inspect current governing sources before acting.",
+          "diagnostics": [],
+          "excerpt": "\u2026 sources retain authority.\n\nUse `.venv/bin/python .agents/skills/memory/scripts/memory.py --project-root .\nsearch 'query'` for lookup, or replace the search arguments with `health` for\ncurrent readiness. Reads perform no maintenance or provisioning. Canonical\npublication needs the exact current Director/manager grant. New projects receive\nonly the empty Template capability; existing products require their own adoption.\n",
+          "heading": "Project memory",
+          "kind": "source",
+          "limitations": [],
+          "line": 203,
+          "locator": "README.md:203",
+          "path": "README.md",
+          "representations": [
+            {
+              "locator": "README.md:203",
+              "path": "README.md",
+              "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1"
+            }
+          ],
+          "score": 22,
+          "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1",
+          "source_identity": "README.md"
+        }
+      ],
+      "status": "ok"
+    }
+  },
+  "restored_health": {
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-B",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "health"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"backend\": {\n    \"available\": true,\n    \"documents\": 2,\n    \"limitations\": [\n      \"runtime_not_started_by_health\"\n    ],\n    \"mode\": \"prebuilt-profile\",\n    \"profile\": \"basic-memory-v0.23.0\"\n  },\n  \"diagnostics\": [],\n  \"project_id\": \"sys4ai-depot\",\n  \"read_only\": true,\n  \"records\": 1,\n  \"status\": \"ready\"\n}\n",
+    "stderr": "",
+    "result": {
+      "backend": {
+        "available": true,
+        "documents": 2,
+        "limitations": [
+          "runtime_not_started_by_health"
+        ],
+        "mode": "prebuilt-profile",
+        "profile": "basic-memory-v0.23.0"
+      },
+      "diagnostics": [],
+      "project_id": "sys4ai-depot",
+      "read_only": true,
+      "records": 1,
+      "status": "ready"
+    }
+  },
+  "restored_search": {
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-B",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory.py",
+      "--project-root",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "search",
+      "Root lexical lookup"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"historical\": false,\n  \"limitations\": [],\n  \"mode\": \"hybrid\",\n  \"mutated\": false,\n  \"project_id\": \"sys4ai-depot\",\n  \"results\": [\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"claim\": {\n        \"level\": \"verified_outcome\",\n        \"summary\": \"Root health, one lexical source lookup and validate preserved the inspected files with semantic retrieval disabled.\"\n      },\n      \"confidence\": \"high\",\n      \"diagnostics\": [],\n      \"excerpt\": \"Root lexical lookup preserves inspected state\\n# Observed result\\n\\nWith the semantic backend disabled, the root memory helper returned README.md for the exact query `project-local`. Public health, lexical search and validate preserved the bytes and modification times of all 175 files in the recorded inspection scope. The evidence includes the actual commands, returned source and before/after hashes.\\n\\nUse direct Markdown and lexical lookup when semantic retrieval is unavailable. Reinspect current configuration and source versions before applying this recorded result to later work.\\n\",\n      \"heading\": \"Root lexical lookup preserves inspected state\",\n      \"kind\": \"memory\",\n      \"limitations\": [\n        \"The root test covered health, one exact-term source query and validate with no learned records initially.\",\n        \"This finding does not claim a backend pilot pass, native Task integration, arbitrary source formats or other project adoption.\"\n      ],\n      \"locator\": \"MEMORY/MEM-20260908-6A59F482.md\",\n      \"path\": \"MEMORY/MEM-20260908-6A59F482.md\",\n      \"record_id\": \"MEM-20260908-6A59F482\",\n      \"representations\": [\n        {\n          \"locator\": \"MEMORY/MEM-20260908-6A59F482.md\",\n          \"path\": \"MEMORY/MEM-20260908-6A59F482.md\",\n          \"sha256\": \"66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292\"\n        }\n      ],\n      \"score\": 1.246349446083483,\n      \"sha256\": \"66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292\",\n      \"source_identity\": \"MEM-20260908-6A59F482\",\n      \"sources\": [\n        {\n          \"kind\": \"verification\",\n          \"locator\": \"json:/outcome\",\n          \"path\": \"Verification/project-memory/root-lexical-observation.json\",\n          \"sha256\": \"4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811\"\n        },\n        {\n          \"kind\": \"source\",\n          \"locator\": \"section:def search\",\n          \"path\": \".agents/skills/memory/scripts/memory_search.py\",\n          \"sha256\": \"294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b\"\n        }\n      ],\n      \"state\": \"active\"\n    },\n    {\n      \"authority\": \"Source data; inspect current governing sources before acting.\",\n      \"diagnostics\": [],\n      \"excerpt\": \"\u2026 sources retain authority.\\n\\nUse `.venv/bin/python .agents/skills/memory/scripts/memory.py --project-root .\\nsearch 'query'` for lookup, or replace the search arguments with `health` for\\ncurrent readiness. Reads perform no maintenance or provisioning. Canonical\\npublication needs the exact current Director/manager grant. New projects receive\\nonly the empty Template capability; existing products require their own adoption.\\n\",\n      \"heading\": \"Project memory\",\n      \"kind\": \"source\",\n      \"limitations\": [],\n      \"line\": 203,\n      \"locator\": \"README.md:203\",\n      \"path\": \"README.md\",\n      \"representations\": [\n        {\n          \"locator\": \"README.md:203\",\n          \"path\": \"README.md\",\n          \"sha256\": \"8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1\"\n        }\n      ],\n      \"score\": 0.6674868087390404,\n      \"sha256\": \"8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1\",\n      \"source_identity\": \"README.md\"\n    }\n  ],\n  \"status\": \"ok\"\n}\n",
+    "stderr": "",
+    "result": {
+      "historical": false,
+      "limitations": [],
+      "mode": "hybrid",
+      "mutated": false,
+      "project_id": "sys4ai-depot",
+      "results": [
+        {
+          "authority": "Source data; inspect current governing sources before acting.",
+          "claim": {
+            "level": "verified_outcome",
+            "summary": "Root health, one lexical source lookup and validate preserved the inspected files with semantic retrieval disabled."
+          },
+          "confidence": "high",
+          "diagnostics": [],
+          "excerpt": "Root lexical lookup preserves inspected state\n# Observed result\n\nWith the semantic backend disabled, the root memory helper returned README.md for the exact query `project-local`. Public health, lexical search and validate preserved the bytes and modification times of all 175 files in the recorded inspection scope. The evidence includes the actual commands, returned source and before/after hashes.\n\nUse direct Markdown and lexical lookup when semantic retrieval is unavailable. Reinspect current configuration and source versions before applying this recorded result to later work.\n",
+          "heading": "Root lexical lookup preserves inspected state",
+          "kind": "memory",
+          "limitations": [
+            "The root test covered health, one exact-term source query and validate with no learned records initially.",
+            "This finding does not claim a backend pilot pass, native Task integration, arbitrary source formats or other project adoption."
+          ],
+          "locator": "MEMORY/MEM-20260908-6A59F482.md",
+          "path": "MEMORY/MEM-20260908-6A59F482.md",
+          "record_id": "MEM-20260908-6A59F482",
+          "representations": [
+            {
+              "locator": "MEMORY/MEM-20260908-6A59F482.md",
+              "path": "MEMORY/MEM-20260908-6A59F482.md",
+              "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292"
+            }
+          ],
+          "score": 1.246349446083483,
+          "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+          "source_identity": "MEM-20260908-6A59F482",
+          "sources": [
+            {
+              "kind": "verification",
+              "locator": "json:/outcome",
+              "path": "Verification/project-memory/root-lexical-observation.json",
+              "sha256": "4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811"
+            },
+            {
+              "kind": "source",
+              "locator": "section:def search",
+              "path": ".agents/skills/memory/scripts/memory_search.py",
+              "sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b"
+            }
+          ],
+          "state": "active"
+        },
+        {
+          "authority": "Source data; inspect current governing sources before acting.",
+          "diagnostics": [],
+          "excerpt": "\u2026 sources retain authority.\n\nUse `.venv/bin/python .agents/skills/memory/scripts/memory.py --project-root .\nsearch 'query'` for lookup, or replace the search arguments with `health` for\ncurrent readiness. Reads perform no maintenance or provisioning. Canonical\npublication needs the exact current Director/manager grant. New projects receive\nonly the empty Template capability; existing products require their own adoption.\n",
+          "heading": "Project memory",
+          "kind": "source",
+          "limitations": [],
+          "line": 203,
+          "locator": "README.md:203",
+          "path": "README.md",
+          "representations": [
+            {
+              "locator": "README.md:203",
+              "path": "README.md",
+              "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1"
+            }
+          ],
+          "score": 0.6674868087390404,
+          "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1",
+          "source_identity": "README.md"
+        }
+      ],
+      "status": "ok"
+    }
+  },
+  "status": "passed"
+}

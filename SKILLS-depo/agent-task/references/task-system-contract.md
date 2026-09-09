@@ -428,3 +428,12 @@ schema-2 mutations use the existing Task locks, revisions, immutable response
 identities and partial-publication transaction. Read-only routes do not migrate
 or repair records. Root automatic intake and inactivity policy remain separate
 project-local extensions, with ownership reconciliation before age closure.
+
+## Memory evidence compatibility
+
+Project memory remains optional and independently configured. Its packet and
+publication receipts use the existing relevant-file and inspected-evidence
+references. No `memory_state`, promotion field or memory-specific Task event is
+supported. Read-only routes perform no memory maintenance. A missing required
+memory artifact leaves its actual criterion unmet; optional post-completion
+capture can be retried only within memory, preserving terminal Task history.

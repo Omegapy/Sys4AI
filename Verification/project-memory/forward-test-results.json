@@ -1,0 +1,188 @@
+{
+  "artifacts": {
+    "command_outputs": "Verification/project-memory/forward-test-cli-output.json",
+    "command_outputs_sha256": "11ad4fd5ff0936593c01339aa3c6db2f7e99858986c1ce1cc41a4324f1e711e6",
+    "fixture_files": {
+      "Verification/project-memory/forward-test-artifacts/docs/checks/check_triangular.py": "909264da3626b6e0bba233600f6b8f2d36088bdab75379f54984faa06c0cebc8",
+      "Verification/project-memory/forward-test-artifacts/docs/checks/triangular-check.json": "3385d6f3bd63e6d076229f6ad8aedf1317806e4d6ad8ac7597f1e84f0461a026",
+      "Verification/project-memory/forward-test-artifacts/memory.yaml": "e9adaf15c3ccdc1e7be8fde8bce915d8b5ef56d61b358e90741dcde0e5b82222",
+      "Verification/project-memory/forward-test-artifacts/proposals/returned-lesson.md": "8d5a85efc546063f77d4d5c75e8fa619bbaff02aad514607ef79fe3764fa9721",
+      "Verification/project-memory/forward-test-artifacts/proposals/triangular-lesson-input.json": "8c7dc0cba6b6ea8849b1caecabac804bd46ca0ee52245aab9b665b1accd57876",
+      "Verification/project-memory/forward-test-artifacts/proposals/triangular-lesson.md": "5af3b58da233f0c33a8fa7ffb129ef4dc9bfe186b8bbc7afbc782c9aecb9396f",
+      "Verification/project-memory/forward-test-artifacts/research/triangular.tex": "7fb8897dc9a1507109a2fe6a1dfa520874124b5cbe8b6c4ab68685e0fb11c5d4"
+    }
+  },
+  "completed_at": "2026-09-08T21:04:52.157478+00:00",
+  "current_source_package_drift_since_fixture_copy": [
+    "SKILLS-depo/memory/scripts/memory_evidence.py",
+    "SKILLS-depo/memory/scripts/memory_maintenance.py",
+    "SKILLS-depo/memory/scripts/memory_publish.py",
+    "SKILLS-depo/memory/scripts/memory_recovery.py",
+    "SKILLS-depo/memory/scripts/memory_search.py"
+  ],
+  "findings": [
+    {
+      "action": "Describe INPUT as a Markdown draft file with JSON frontmatter and add a minimal propose path/to/draft.md example in the operations reference and CLI help.",
+      "area": "Proposal CLI documentation",
+      "blocking": false,
+      "classification": "Documentation discoverability; the malformed-input refusal and corrected Markdown flow behaved correctly.",
+      "evidence_phase": "lesson proposal from supplied successful check receipt",
+      "id": "FWD-001",
+      "observed": "The documented propose INPUT and --help do not state the accepted input file format. A JSON metadata/body wrapper was rejected with invalid_record; a Markdown file with JSON-compatible YAML frontmatter succeeded.",
+      "priority": "P3"
+    },
+    {
+      "action": "Include the missing prerequisite name and safe project-relative path in the backend availability diagnostic while retaining read-only lexical fallback.",
+      "area": "Unavailable backend diagnostics",
+      "blocking": false,
+      "classification": "Actionable diagnostic detail; source retrieval and preservation passed.",
+      "evidence_phase": "enabled backend without runtime or compatibility certificate",
+      "id": "FWD-002",
+      "observed": "With enabled=true, semantic_enabled=true and no runtime/certificate, health reported backend.available=false but its only backend limitation was the bare string file_absent. Search explained lexical fallback and repeated file_absent without identifying the missing local prerequisite.",
+      "priority": "P3"
+    }
+  ],
+  "fixture_root": "/private/tmp/sys4ai-memory-forward-_0ntai1a/project",
+  "flows": {
+    "evidence_backed_lesson_proposal": {
+      "content_sha256": "8d5a85efc546063f77d4d5c75e8fa619bbaff02aad514607ef79fe3764fa9721",
+      "outcome": "passed",
+      "proposal_excluded_from_shared_recall": true,
+      "record_id": "MEM-20260908-14436ED6",
+      "source_hashes_current": true,
+      "state": "draft",
+      "successful_check_cases": [
+        1,
+        10,
+        100
+      ],
+      "written_by_cli": false
+    },
+    "exact_equation_label": {
+      "actual_label_line": 8,
+      "literal_formula_preserved": true,
+      "outcome": "passed",
+      "path": "research/triangular.tex",
+      "query": "eq:triangular-total",
+      "section_locator": "research/triangular.tex:4",
+      "source_sha256": "7fb8897dc9a1507109a2fe6a1dfa520874124b5cbe8b6c4ab68685e0fb11c5d4"
+    },
+    "unavailable_backend_source_inspection": {
+      "configured_backend_enabled": true,
+      "configured_semantic_enabled": true,
+      "limitations": [
+        "Semantic backend unavailable or uncertified; using lexical retrieval without maintenance.",
+        "file_absent",
+        "research/triangular.tex: Literal source extraction; macros and included files are not expanded or compiled."
+      ],
+      "outcome": "passed",
+      "result_mode": "lexical",
+      "same_equation_result": true,
+      "vendor_runtime_or_certificate_provided": false
+    }
+  },
+  "limits": [
+    "No active note publication, approval, Task execution, backend installation, indexing, semantic retrieval or live project adoption was exercised.",
+    "The receipt establishes three finite arithmetic checks, not a proof for all integers.",
+    "TeX retrieval was literal source inspection; macros/includes were not compiled.",
+    "The initial JSON proposal input was a tester interpretation of unspecified INPUT, not an implementation correctness failure."
+  ],
+  "preservation": {
+    "all_observed_read_operations_preserved_files_and_mtimes": true,
+    "canonical_files": [
+      "MEMORY/README.md"
+    ],
+    "live_root_or_product_writes": false,
+    "observations": [
+      {
+        "count": 62,
+        "operation": "health",
+        "preserved": true
+      },
+      {
+        "count": 62,
+        "operation": "search",
+        "preserved": true
+      },
+      {
+        "count": 64,
+        "operation": "propose without output option",
+        "preserved": true
+      },
+      {
+        "count": 65,
+        "operation": "propose",
+        "preserved": true
+      },
+      {
+        "count": 65,
+        "operation": "search",
+        "preserved": true
+      },
+      {
+        "count": 66,
+        "operation": "health with unavailable backend",
+        "preserved": true
+      },
+      {
+        "count": 66,
+        "operation": "search with unavailable backend",
+        "preserved": true
+      },
+      {
+        "count": 66,
+        "operation": "validate with unavailable backend",
+        "preserved": true
+      }
+    ],
+    "runtime_state_created": false,
+    "supplied_inputs_preserved": true
+  },
+  "scope": "Independent public-CLI forward test of the memory skill in a disposable project; no initializer fixtures or other agents reports used.",
+  "status": "passed_with_nonblocking_usability_findings",
+  "tested_contract_sha256": {
+    "reference-assets/MEMORY-depo/README.md": "1eaf6968667b6c79262373a9d1e2fd448a18e3e8ba8eef0faf8bc7ed34dac74c",
+    "reference-assets/MEMORY-depo/examples/MEM-20260908-00000001.md": "085407a4c94f15d029f4302de6cbe30bf31a31e02ffdcf70bc86dd7da293e000",
+    "reference-assets/MEMORY-depo/examples/MEM-20260908-00000002.md": "78d84e7ee1f261fdde588802b9269dd082482bad445a1e57d2938c675d04a718",
+    "reference-assets/MEMORY-depo/examples/MEM-20260908-00000003.md": "250218b0cd90f034e3e8d01b50142111026f3dc7592eab259d4d136b72137473",
+    "reference-assets/MEMORY-depo/examples/MEM-20260908-00000004.md": "65685d5c220295801674a8eed01287df2ec1f9f94f5565835d1538b6c2cd3c04",
+    "reference-assets/MEMORY-depo/examples/MEM-20260908-00000005.md": "50b05d1e4c364c4def83b1666b4a134d252e5f8743a150ceb2686b21f0f2e2ef",
+    "reference-assets/MEMORY-depo/examples/README.md": "0a386db2da7d2a16176bb3328bede578b945c2e7feee304f4f8dec4048e98147",
+    "reference-assets/MEMORY-depo/examples/evidence.md": "5b83bdc8180126c1d0a12ffeee8613bf7b786406304a72f3bc942b27bb6c0f42",
+    "reference-assets/MEMORY-depo/policy.md": "f1dc05d47e19734bb7f34879f4788f4d8330f5fb6afa50fa36aacfcded19a92d",
+    "reference-assets/MEMORY-depo/profiles/basic-memory-v0.23.0.json": "c3d33e44260654427bfa32fdc6c346e78cb78e4fb64e0d45830fed0a148bcf17",
+    "reference-assets/MEMORY-depo/publication-and-recovery.md": "ab3b4b6afb21b6b5d92d7c2abc5308537100549120e28766f3a1a6a5cbb9d09b",
+    "reference-assets/MEMORY-depo/schema/backend-projection-v1.json": "b43f4ba0ba791e75e94520b06eaf60c11993f8dc730de8e70849a76dd7e7d221",
+    "reference-assets/MEMORY-depo/schema/config-v1.json": "403b62eaa69238539fa953a4648df3412ebabae3400947629bc4b03085ebf550",
+    "reference-assets/MEMORY-depo/schema/normalization-v1.json": "12d398ccc59f060b5a032ae9b220f08d64381fc5412c35bb80ae446019104ebf",
+    "reference-assets/MEMORY-depo/schema/record-v1.json": "5170551e6536484798e60d07dfb70fbb0542d49528cd51cb93dd413a2afef59f"
+  },
+  "tested_package_sha256": {
+    ".agents/skills/memory/README.md": "fe6c756bb575f793dbbb7932999c66ec2310c437f2004cf56fc159efc25da0a9",
+    ".agents/skills/memory/SKILL.md": "73922a60d6704acd8e87e31294c824d608d7ea80f5b9221e603905603b273bff",
+    ".agents/skills/memory/agents/openai.yaml": "57c25ba475f8728ba2bc738da75e5871f8878fe14784fa324cf0800b82f96886",
+    ".agents/skills/memory/references/basic-memory-pilot.md": "77168bc73c546dfe1c928567a6eab9a8787a68b8345a35a3317f9f1886bc69bd",
+    ".agents/skills/memory/references/evidence-and-lifecycle.md": "5c6a5506415b2982eb371fcb803e63eb6a6ab5571187f958b0cb1230e0a41931",
+    ".agents/skills/memory/references/operations.md": "e0e02d53981a7b25261ed52bf6bab1e2d391bc2b82908195d985a0b54b7e25dc",
+    ".agents/skills/memory/references/publication-examples.md": "2cb2fd172ccd053949c436aff78be5144e2689f82f4831582d879de352fe2ea7",
+    ".agents/skills/memory/references/state-paths.md": "927e8a6c6b86acd1deb6262090e22e8690091592c935afec908861a9d87907a4",
+    ".agents/skills/memory/references/task-integration.md": "61981524a031bc4c5f169f559c1be2ded4d357da58e43c72a0f6652936752b14",
+    ".agents/skills/memory/requirements-backend-pilot.txt": "abffb537fe96fadc8f21a690b675a796445073cc1233ad69bad89f9c7df2004d",
+    ".agents/skills/memory/requirements-extraction.txt": "a4c25fa84972bf3c37bcf1ca0f8c27e525e383ef19040e992bd4ad6f50d74558",
+    ".agents/skills/memory/scripts/basic_memory_adapter.py": "abb23f077ffbd8ab68592c964c461a24046e0b04d5cc506e69027fd70a01acf0",
+    ".agents/skills/memory/scripts/basic_memory_projection.py": "6d513c5f6695b7db3a169987d8729471884a81195a305d2c93045f4c6830293f",
+    ".agents/skills/memory/scripts/memory.py": "1191a2d267347c7ac0a661802eb6c7d617a1f493239d5f3dd2f9b648e3c34dc5",
+    ".agents/skills/memory/scripts/memory_core.py": "e6c61df107a359cb21b081ee5841f14d76ce1c85cde93caaeb3c2f6a84d408e2",
+    ".agents/skills/memory/scripts/memory_evidence.py": "cce3e181b6f1f5e6b932d192a2c177bbea821e143326431eb81bb41b2ca90ce4",
+    ".agents/skills/memory/scripts/memory_maintenance.py": "90ed305d88e25bf4f85d4f4d22259972bc88a156cd2b6a34961247b97d34f0f8",
+    ".agents/skills/memory/scripts/memory_normalization.py": "36bfb9800dc04fce004075295e00a5e830979c2b34fd66d1d5b6a1760bb48cda",
+    ".agents/skills/memory/scripts/memory_normalize_html.py": "34f82652d31b797f5b07ace50f0043e16766a8710c7ab3774e0cf3ef38b391af",
+    ".agents/skills/memory/scripts/memory_normalize_pdf.py": "cac3e93c9cb3318ec6466a01e6f719491ac6368156f9be5a2b55c63c009b5a8d",
+    ".agents/skills/memory/scripts/memory_normalize_tex.py": "c1fb0c6ed6f10c43586a6419f80a328119f1d0eccc2fcf265ae2a70f28bc8241",
+    ".agents/skills/memory/scripts/memory_packet.py": "b1a70ee50cebdff286cbb60d8fd8c7ddc0c6ffe34208195c21d50d9d5a84833b",
+    ".agents/skills/memory/scripts/memory_paths.py": "2abdd1a4a4ddf182c5a38b5a0c801aca9cbd672b14830ede33c9f0e189274524",
+    ".agents/skills/memory/scripts/memory_publish.py": "84c35c0219882f4ea2e83f83739cbcb24caf5533e418099413b730801e33892b",
+    ".agents/skills/memory/scripts/memory_recovery.py": "e447ff3728570ee86d9976edc095d2d2360b5e4ebd6091e99b70aad42bbc386a",
+    ".agents/skills/memory/scripts/memory_search.py": "1d9c2eea907594707d6db66c6c2170e207547068178792e3aaaf37a87a585695"
+  }
+}

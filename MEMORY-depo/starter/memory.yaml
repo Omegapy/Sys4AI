@@ -1,0 +1,70 @@
+{
+  "backend": {
+    "enabled": false,
+    "name": "basic-memory",
+    "semantic_enabled": false
+  },
+  "canonical_root": "MEMORY",
+  "contract_root": "reference-assets/MEMORY-depo",
+  "corpus": {
+    "exclude": [
+      "Projects/**",
+      "Tasks/**",
+      "Roles/**",
+      "roles/**",
+      "sub-agent-roles/**",
+      "**/*-depo/**",
+      "reference-assets/**",
+      ".git/**",
+      ".venv*/**",
+      "venv/**",
+      ".sys4ai/**",
+      ".agents/**",
+      ".codex/**",
+      "node_modules/**",
+      "build/**",
+      "dist/**",
+      "target/**",
+      "**/__pycache__/**",
+      "**/.env*",
+      "**/secrets/**",
+      "**/credentials/**",
+      "**/*.pem",
+      "**/*.key"
+    ],
+    "include": [
+      "README.md",
+      "docs/**/*.md",
+      "research/**/*.md",
+      "research/**/*.tex",
+      "research/**/*.pdf",
+      "research/**/*.html"
+    ],
+    "source_groups": []
+  },
+  "integration": {
+    "automatic_capture": false,
+    "task_packets": true
+  },
+  "project": {
+    "id": null,
+    "name": null,
+    "root": "."
+  },
+  "publication": {
+    "director": null
+  },
+  "retrieval": {
+    "max_results": 20,
+    "mode": "lexical"
+  },
+  "schema_version": 1,
+  "state": {
+    "backend_config": ".sys4ai/memory/backend-config",
+    "index": ".sys4ai/memory/index",
+    "maintenance": ".sys4ai/memory/maintenance",
+    "model_cache": ".sys4ai/memory/model-cache",
+    "normalized": ".sys4ai/memory/normalized",
+    "projection": ".sys4ai/memory/projection"
+  }
+}

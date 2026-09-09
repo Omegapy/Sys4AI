@@ -28,7 +28,8 @@
         "governance-starter-v1",
         "governance-starter-v2",
         "governance-starter-v3",
-        "governance-starter-v4"
+        "governance-starter-v4",
+        "governance-starter-v5"
       ]
     },
     "status": {
@@ -125,6 +126,7 @@
           "adoption": {
             "enum": [
               "adopted",
+              "specialized",
               "preserved-project-owned",
               "skipped-existing-package",
               "skipped-existing-license"
@@ -146,12 +148,20 @@
       }
     },
     "preserved_licenses": {
-      "description": "Original project-owned license markers and tree hashes for v4. An empty map records adoption of the Template license trio.",
+      "description": "Original project-owned license markers and tree hashes for v4 and v5. An empty map records adoption of the Template license trio.",
       "$ref": "#/$defs/licenseInventory"
     },
     "current_licenses": {
-      "description": "License marker paths and hashes observed during the latest v4 verification; original preservation evidence remains unchanged.",
+      "description": "License marker paths and hashes observed during the latest v4 or v5 verification; original preservation evidence remains unchanged.",
       "$ref": "#/$defs/licenseInventory"
+    },
+    "preserved_memory": {
+      "description": "Original complete memory configuration, canonical tree, contract assets and memory skill inventory for v5. Existing collections are not filled with missing files.",
+      "$ref": "#/$defs/memoryInventory"
+    },
+    "current_memory": {
+      "description": "Complete memory inventory observed during the latest v5 verification; original preservation evidence remains unchanged.",
+      "$ref": "#/$defs/memoryInventory"
     },
     "current_files": {
       "type": "object",
@@ -256,7 +266,17 @@
   },
   "allOf": [
     {
-      "if": {"properties": {"setup_contract": {"const": "governance-starter-v4"}}},
+      "if": {"properties": {"setup_contract": {"const": "governance-starter-v5"}}},
+      "then": {
+        "required": ["preserved_memory"],
+        "allOf": [{
+          "if": {"properties": {"status": {"const": "completed"}}},
+          "then": {"required": ["current_memory"]}
+        }]
+      }
+    },
+    {
+      "if": {"properties": {"setup_contract": {"enum": ["governance-starter-v4", "governance-starter-v5"]}}},
       "then": {
         "required": ["preserved_licenses"],
         "allOf": [{
@@ -311,6 +331,12 @@
     }
   ],
   "$defs": {
+    "memoryInventory": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [{"$ref": "#/$defs/sha"}, {"const": "directory"}]
+      }
+    },
     "licenseInventory": {
       "type": "object",
       "additionalProperties": {

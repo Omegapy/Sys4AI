@@ -1,0 +1,128 @@
+{
+  "event": {
+    "actor": "/root/memory_native_manager",
+    "data": {
+      "assignment_id": "generic-worker",
+      "context": [
+        {
+          "path": "context/native-requirements.json",
+          "sha256": "a0d7a7e640c445a6d3ec55259e90dc31cd8017618f4c962a0d02593eeecd290d"
+        },
+        {
+          "path": "research/fixture.tex",
+          "sha256": "416f53b8a7b5697bb1522cd2066705af138f3ef921a6240247cab2603e4d3a73"
+        },
+        {
+          "path": "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/baseline_70846bedaad0ac0e0cabd1357a23fe72f6a5f2745fb5eadb0fc248e40deb1bb7.json",
+          "sha256": "70846bedaad0ac0e0cabd1357a23fe72f6a5f2745fb5eadb0fc248e40deb1bb7"
+        }
+      ],
+      "fit": {
+        "authority": "Disposable verification only; no external, installation, governance, canonical Task, or shared memory writes by children.",
+        "capabilities": [
+          "bounded analysis",
+          "source recall",
+          "evidence validation"
+        ],
+        "deliverable": "Versioned result and actual read-only recall evidence.",
+        "objective": "Recall the labelled source equation, report exact provenance, and propose the observed result.",
+        "rationale": "Fresh general project role explicitly supports the bounded worker function; manager role grants excessive authority.",
+        "reads": [
+          "SOUL.md",
+          "Roles/project-sub-agent",
+          ".agents/skills/memory",
+          "README.md",
+          "research",
+          "MEMORY",
+          "context",
+          "context/native-requirements.json",
+          "research/fixture.tex",
+          "Tasks/Task-native-project-memory-release-verification-2026-09-08--300591ED/artifacts/orchestration/baseline_70846bedaad0ac0e0cabd1357a23fe72f6a5f2745fb5eadb0fc248e40deb1bb7.json"
+        ],
+        "risk": "Cooperative shared filesystem; isolated assigned output and exact frozen inputs.",
+        "skills": [
+          "memory"
+        ],
+        "stop": "Return exact versioned deliverable and stop; report any unmet required gate.",
+        "tools": [
+          "exec_command",
+          "memory helper"
+        ],
+        "writes": [
+          "output/generic"
+        ]
+      },
+      "role": {
+        "agents_path": "Roles/project-sub-agent/AGENTS.md",
+        "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+        "catalog": {
+          "path": "coordination/catalog-generic-worker-5.json",
+          "sha256": "9358679d8b9f571b5e1bbdc6dcf779384744d1ddd03edbee2788998dc1ae2be6"
+        },
+        "name": "project-sub-agent",
+        "role_path": "Roles/project-sub-agent/ROLE.md",
+        "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+      },
+      "runtime": {
+        "available_slots": 2,
+        "depth": 1,
+        "evidence": [
+          {
+            "path": "Verification/manager/native-roster-initial.json",
+            "sha256": "63bc2c267fba5fb4867857b73a55f815057fc67c86736e676330c073b4f30d83"
+          },
+          {
+            "path": "Verification/native/bootstrap-runtime-settings.json",
+            "sha256": "a502eb8ab7c3575058ebb5490a6624ac1af3321ebcce044382c788b8ffc30c34"
+          }
+        ],
+        "tools": [
+          "spawn_agent",
+          "list_agents",
+          "send_message",
+          "followup_task",
+          "interrupt_agent"
+        ]
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "Verification/native/bootstrap-runtime-settings.json",
+            "sha256": "a502eb8ab7c3575058ebb5490a6624ac1af3321ebcce044382c788b8ffc30c34"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "slot": "worker",
+      "subtask_id": "generic"
+    },
+    "event_id": "native-6-assignment-reserve",
+    "execution_id": "native-memory-release-001",
+    "generation": 1,
+    "kind": "assignment.reserve"
+  },
+  "result": {
+    "command": "orchestrate",
+    "errors": [
+      {
+        "code": "ORCH_CAPABILITY",
+        "message": "Nested worker dispatch requires observed depth two support."
+      }
+    ],
+    "mutated": false,
+    "project_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project",
+    "recovery_required": false,
+    "response_id": null,
+    "response_path": null,
+    "revision_after": null,
+    "revision_before": null,
+    "schema_version": 1,
+    "status": "error",
+    "task_id": null,
+    "tasks_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-memory/native-project/Tasks",
+    "warnings": []
+  },
+  "returncode": 2
+}

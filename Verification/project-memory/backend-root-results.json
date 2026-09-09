@@ -1,0 +1,584 @@
+{
+  "schema_version": 1,
+  "evidence_level": "actual-active-root-vendor-pilot",
+  "observed_at": "2026-09-08T21:53:37.537629+00:00",
+  "config_sha256": "bbad0ba888072ba6ffa0a7193811873c404b892d1e7c99d52e7fc3e194e9cef0",
+  "profile_sha256": "c3d33e44260654427bfa32fdc6c346e78cb78e4fb64e0d45830fed0a148bcf17",
+  "adapter_sha256": "1f0a625bd6a3462bb6074caa9c0d291df315ccb0e42c7554f971a2c8ac9d3482",
+  "checks": {
+    "rebuilds_preserved_canonical": true,
+    "unsupported_operation_rejected": true,
+    "wrong_project_rejected": true,
+    "disabled_public_route_preserved": true,
+    "known_queries_passed": true,
+    "read_bytes_and_mtimes_preserved": true,
+    "canonical_preserved": true
+  },
+  "first_rebuild": {
+    "status": "reindexed",
+    "operation_id": "05b0c105b48f4db28d3c06fccbba15f1",
+    "journal": ".sys4ai/memory/maintenance/backend-05b0c105b48f4db28d3c06fccbba15f1.json",
+    "projection_documents": 2,
+    "runtime": {
+      "indexed_documents": 2,
+      "ready_vector_chunks": 25,
+      "vector_entities": 2,
+      "ok": true,
+      "vendor_seconds": 1.62034,
+      "max_rss_bytes": 394592256,
+      "effective_controls": {
+        "ensure_frontmatter_on_sync": false,
+        "auto_update": false,
+        "skip_initialization_sync": true,
+        "format_on_save": false,
+        "disable_permalinks": true,
+        "logfire_enabled": false,
+        "logfire_send_to_logfire": false,
+        "cloud_promo_opt_out": true,
+        "reranker_enabled": false,
+        "semantic_embedding_provider": "fastembed",
+        "semantic_embedding_model": "bge-small-en-v1.5",
+        "semantic_embedding_dimensions": 384,
+        "semantic_embedding_threads": 2,
+        "semantic_embedding_parallel": 1,
+        "semantic_search_enabled": true,
+        "database_backend": "sqlite"
+      },
+      "package_version": "0.23.0",
+      "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+      "subprocess_seconds": 2.255513
+    },
+    "limitations": [],
+    "parent_seconds": 2.397996250074357
+  },
+  "second_rebuild": {
+    "status": "reindexed",
+    "operation_id": "b42e8d4a64b147f28883c0c95550294f",
+    "journal": ".sys4ai/memory/maintenance/backend-b42e8d4a64b147f28883c0c95550294f.json",
+    "projection_documents": 2,
+    "runtime": {
+      "indexed_documents": 2,
+      "ready_vector_chunks": 25,
+      "vector_entities": 2,
+      "ok": true,
+      "vendor_seconds": 1.649632,
+      "max_rss_bytes": 393265152,
+      "effective_controls": {
+        "ensure_frontmatter_on_sync": false,
+        "auto_update": false,
+        "skip_initialization_sync": true,
+        "format_on_save": false,
+        "disable_permalinks": true,
+        "logfire_enabled": false,
+        "logfire_send_to_logfire": false,
+        "cloud_promo_opt_out": true,
+        "reranker_enabled": false,
+        "semantic_embedding_provider": "fastembed",
+        "semantic_embedding_model": "bge-small-en-v1.5",
+        "semantic_embedding_dimensions": 384,
+        "semantic_embedding_threads": 2,
+        "semantic_embedding_parallel": 1,
+        "semantic_search_enabled": true,
+        "database_backend": "sqlite"
+      },
+      "package_version": "0.23.0",
+      "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+      "subprocess_seconds": 2.28901
+    },
+    "limitations": [],
+    "parent_seconds": 2.4636394580593333
+  },
+  "ordinary_disabled_health": {
+    "available": false,
+    "mode": "lexical",
+    "limitations": [
+      "backend_disabled"
+    ]
+  },
+  "ordinary_disabled_search": {
+    "status": "ok",
+    "mode": "lexical",
+    "mutated": false,
+    "project_id": "sys4ai-depot",
+    "results": [
+      {
+        "kind": "memory",
+        "path": "MEMORY/MEM-20260908-6A59F482.md",
+        "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+        "source_identity": "MEM-20260908-6A59F482",
+        "locator": "MEMORY/MEM-20260908-6A59F482.md",
+        "heading": "Root lexical lookup preserves inspected state",
+        "excerpt": "Root lexical lookup preserves inspected state\n# Observed result\n\nWith the semantic backend disabled, the root memory helper returned README.md for the exact query `project-local`. Public health, lexical search and validate preserved the bytes and modification times of all 175 files in the recorded inspection scope. The evidence includes the actual commands, returned source and before/after hashes.\n\nUse direct Markdown and lexical lookup when semantic retrieval is unavailable. Reinspect current configuration and source versions before applying this recorded result to later work.\n",
+        "score": 137,
+        "limitations": [
+          "The root test covered health, one exact-term source query and validate with no learned records initially.",
+          "This finding does not claim a backend pilot pass, native Task integration, arbitrary source formats or other project adoption."
+        ],
+        "diagnostics": [],
+        "authority": "Source data; inspect current governing sources before acting.",
+        "record_id": "MEM-20260908-6A59F482",
+        "state": "active",
+        "sources": [
+          {
+            "kind": "verification",
+            "locator": "json:/outcome",
+            "path": "Verification/project-memory/root-lexical-observation.json",
+            "sha256": "4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811"
+          },
+          {
+            "kind": "source",
+            "locator": "section:def search",
+            "path": ".agents/skills/memory/scripts/memory_search.py",
+            "sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b"
+          }
+        ],
+        "claim": {
+          "level": "verified_outcome",
+          "summary": "Root health, one lexical source lookup and validate preserved the inspected files with semantic retrieval disabled."
+        },
+        "confidence": "high",
+        "representations": [
+          {
+            "path": "MEMORY/MEM-20260908-6A59F482.md",
+            "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+            "locator": "MEMORY/MEM-20260908-6A59F482.md"
+          }
+        ]
+      },
+      {
+        "kind": "source",
+        "path": "README.md",
+        "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1",
+        "source_identity": "README.md",
+        "locator": "README.md:203",
+        "heading": "Project memory",
+        "excerpt": "\u2026 sources retain authority.\n\nUse `.venv/bin/python .agents/skills/memory/scripts/memory.py --project-root .\nsearch 'query'` for lookup, or replace the search arguments with `health` for\ncurrent readiness. Reads perform no maintenance or provisioning. Canonical\npublication needs the exact current Director/manager grant. New projects receive\nonly the empty Template capability; existing products require their own adoption.\n",
+        "score": 22,
+        "limitations": [],
+        "diagnostics": [],
+        "authority": "Source data; inspect current governing sources before acting.",
+        "line": 203,
+        "representations": [
+          {
+            "path": "README.md",
+            "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1",
+            "locator": "README.md:203"
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "Semantic backend disabled; results use deterministic lexical retrieval."
+    ],
+    "historical": false
+  },
+  "queries": [
+    {
+      "id": "exact-note",
+      "query": "Root lexical lookup",
+      "requested_mode": "text",
+      "expected_path": "MEMORY/MEM-20260908-6A59F482.md",
+      "result": {
+        "available": true,
+        "mode": "text",
+        "results": [
+          {
+            "path": "MEMORY/MEM-20260908-6A59F482.md",
+            "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+            "kind": "memory",
+            "source_identity": "MEM-20260908-6A59F482",
+            "score": -4.709765785508835e-06,
+            "retrieval_mode": "text"
+          }
+        ],
+        "limitations": [],
+        "runtime": {
+          "mode": "text",
+          "ready_vector_chunks": 25,
+          "vector_entities": 2,
+          "vendor_seconds": 0.003287,
+          "max_rss_bytes": 109084672,
+          "effective_controls": {
+            "ensure_frontmatter_on_sync": false,
+            "auto_update": false,
+            "skip_initialization_sync": true,
+            "format_on_save": false,
+            "disable_permalinks": true,
+            "logfire_enabled": false,
+            "logfire_send_to_logfire": false,
+            "cloud_promo_opt_out": true,
+            "reranker_enabled": false,
+            "semantic_embedding_provider": "fastembed",
+            "semantic_embedding_model": "bge-small-en-v1.5",
+            "semantic_embedding_dimensions": 384,
+            "semantic_embedding_threads": 2,
+            "semantic_embedding_parallel": 1,
+            "semantic_search_enabled": true,
+            "database_backend": "sqlite"
+          },
+          "package_version": "0.23.0",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "subprocess_seconds": 0.627162
+        }
+      },
+      "parent_seconds": 0.6724933329969645,
+      "passed": true
+    },
+    {
+      "id": "exact-note",
+      "query": "Root lexical lookup",
+      "requested_mode": "hybrid",
+      "expected_path": "MEMORY/MEM-20260908-6A59F482.md",
+      "result": {
+        "available": true,
+        "mode": "hybrid",
+        "results": [
+          {
+            "path": "MEMORY/MEM-20260908-6A59F482.md",
+            "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+            "kind": "memory",
+            "source_identity": "MEM-20260908-6A59F482",
+            "score": 1.246349446083483,
+            "retrieval_mode": "hybrid"
+          },
+          {
+            "path": "README.md",
+            "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1",
+            "kind": "source",
+            "source_identity": "README.md",
+            "score": 0.6674868087390404,
+            "retrieval_mode": "hybrid"
+          }
+        ],
+        "limitations": [],
+        "runtime": {
+          "mode": "hybrid",
+          "ready_vector_chunks": 25,
+          "vector_entities": 2,
+          "vendor_seconds": 0.205347,
+          "max_rss_bytes": 331890688,
+          "effective_controls": {
+            "ensure_frontmatter_on_sync": false,
+            "auto_update": false,
+            "skip_initialization_sync": true,
+            "format_on_save": false,
+            "disable_permalinks": true,
+            "logfire_enabled": false,
+            "logfire_send_to_logfire": false,
+            "cloud_promo_opt_out": true,
+            "reranker_enabled": false,
+            "semantic_embedding_provider": "fastembed",
+            "semantic_embedding_model": "bge-small-en-v1.5",
+            "semantic_embedding_dimensions": 384,
+            "semantic_embedding_threads": 2,
+            "semantic_embedding_parallel": 1,
+            "semantic_search_enabled": true,
+            "database_backend": "sqlite"
+          },
+          "package_version": "0.23.0",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "subprocess_seconds": 0.860027
+        }
+      },
+      "parent_seconds": 0.9072382089216262,
+      "passed": true
+    },
+    {
+      "id": "conceptual-note",
+      "query": "Inspect stored information without changing files or their timestamps",
+      "requested_mode": "vector",
+      "expected_path": "MEMORY/MEM-20260908-6A59F482.md",
+      "result": {
+        "available": true,
+        "mode": "vector",
+        "results": [
+          {
+            "path": "MEMORY/MEM-20260908-6A59F482.md",
+            "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+            "kind": "memory",
+            "source_identity": "MEM-20260908-6A59F482",
+            "score": 0.684494499669027,
+            "retrieval_mode": "vector"
+          },
+          {
+            "path": "README.md",
+            "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1",
+            "kind": "source",
+            "source_identity": "README.md",
+            "score": 0.610106011066641,
+            "retrieval_mode": "vector"
+          }
+        ],
+        "limitations": [],
+        "runtime": {
+          "mode": "vector",
+          "ready_vector_chunks": 25,
+          "vector_entities": 2,
+          "vendor_seconds": 0.197699,
+          "max_rss_bytes": 338673664,
+          "effective_controls": {
+            "ensure_frontmatter_on_sync": false,
+            "auto_update": false,
+            "skip_initialization_sync": true,
+            "format_on_save": false,
+            "disable_permalinks": true,
+            "logfire_enabled": false,
+            "logfire_send_to_logfire": false,
+            "cloud_promo_opt_out": true,
+            "reranker_enabled": false,
+            "semantic_embedding_provider": "fastembed",
+            "semantic_embedding_model": "bge-small-en-v1.5",
+            "semantic_embedding_dimensions": 384,
+            "semantic_embedding_threads": 2,
+            "semantic_embedding_parallel": 1,
+            "semantic_search_enabled": true,
+            "database_backend": "sqlite"
+          },
+          "package_version": "0.23.0",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "subprocess_seconds": 0.856912
+        }
+      },
+      "parent_seconds": 0.9043305410305038,
+      "passed": true
+    },
+    {
+      "id": "conceptual-note",
+      "query": "Inspect stored information without changing files or their timestamps",
+      "requested_mode": "hybrid",
+      "expected_path": "MEMORY/MEM-20260908-6A59F482.md",
+      "result": {
+        "available": true,
+        "mode": "hybrid",
+        "results": [
+          {
+            "path": "README.md",
+            "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1",
+            "kind": "source",
+            "source_identity": "README.md",
+            "score": 1.1830318033199922,
+            "retrieval_mode": "hybrid"
+          },
+          {
+            "path": "MEMORY/MEM-20260908-6A59F482.md",
+            "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+            "kind": "memory",
+            "source_identity": "MEM-20260908-6A59F482",
+            "score": 0.8304179006940404,
+            "retrieval_mode": "hybrid"
+          }
+        ],
+        "limitations": [],
+        "runtime": {
+          "mode": "hybrid",
+          "ready_vector_chunks": 25,
+          "vector_entities": 2,
+          "vendor_seconds": 0.212718,
+          "max_rss_bytes": 351846400,
+          "effective_controls": {
+            "ensure_frontmatter_on_sync": false,
+            "auto_update": false,
+            "skip_initialization_sync": true,
+            "format_on_save": false,
+            "disable_permalinks": true,
+            "logfire_enabled": false,
+            "logfire_send_to_logfire": false,
+            "cloud_promo_opt_out": true,
+            "reranker_enabled": false,
+            "semantic_embedding_provider": "fastembed",
+            "semantic_embedding_model": "bge-small-en-v1.5",
+            "semantic_embedding_dimensions": 384,
+            "semantic_embedding_threads": 2,
+            "semantic_embedding_parallel": 1,
+            "semantic_search_enabled": true,
+            "database_backend": "sqlite"
+          },
+          "package_version": "0.23.0",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "subprocess_seconds": 0.871182
+        }
+      },
+      "parent_seconds": 0.9179818329866976,
+      "passed": true
+    },
+    {
+      "id": "exact-source",
+      "query": "project-local",
+      "requested_mode": "text",
+      "expected_path": "README.md",
+      "result": {
+        "available": true,
+        "mode": "text",
+        "results": [
+          {
+            "path": "MEMORY/MEM-20260908-6A59F482.md",
+            "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+            "kind": "memory",
+            "source_identity": "MEM-20260908-6A59F482",
+            "score": -1.5699219285029448e-06,
+            "retrieval_mode": "text"
+          },
+          {
+            "path": "README.md",
+            "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1",
+            "kind": "source",
+            "source_identity": "README.md",
+            "score": -1.4669951684638276e-06,
+            "retrieval_mode": "text"
+          }
+        ],
+        "limitations": [],
+        "runtime": {
+          "mode": "text",
+          "ready_vector_chunks": 25,
+          "vector_entities": 2,
+          "vendor_seconds": 0.003617,
+          "max_rss_bytes": 110706688,
+          "effective_controls": {
+            "ensure_frontmatter_on_sync": false,
+            "auto_update": false,
+            "skip_initialization_sync": true,
+            "format_on_save": false,
+            "disable_permalinks": true,
+            "logfire_enabled": false,
+            "logfire_send_to_logfire": false,
+            "cloud_promo_opt_out": true,
+            "reranker_enabled": false,
+            "semantic_embedding_provider": "fastembed",
+            "semantic_embedding_model": "bge-small-en-v1.5",
+            "semantic_embedding_dimensions": 384,
+            "semantic_embedding_threads": 2,
+            "semantic_embedding_parallel": 1,
+            "semantic_search_enabled": true,
+            "database_backend": "sqlite"
+          },
+          "package_version": "0.23.0",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "subprocess_seconds": 0.614627
+        }
+      },
+      "parent_seconds": 0.6618081249762326,
+      "passed": true
+    },
+    {
+      "id": "exact-source",
+      "query": "project-local",
+      "requested_mode": "hybrid",
+      "expected_path": "README.md",
+      "result": {
+        "available": true,
+        "mode": "hybrid",
+        "results": [
+          {
+            "path": "MEMORY/MEM-20260908-6A59F482.md",
+            "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+            "kind": "memory",
+            "source_identity": "MEM-20260908-6A59F482",
+            "score": 1.1655322998940643,
+            "retrieval_mode": "hybrid"
+          },
+          {
+            "path": "README.md",
+            "sha256": "8b5a2aa24dda664ab49fc123a71d46c2a07b429a17a9341d8197800c2d23adc1",
+            "kind": "source",
+            "source_identity": "README.md",
+            "score": 1.1400751260670257,
+            "retrieval_mode": "hybrid"
+          }
+        ],
+        "limitations": [],
+        "runtime": {
+          "mode": "hybrid",
+          "ready_vector_chunks": 25,
+          "vector_entities": 2,
+          "vendor_seconds": 0.197379,
+          "max_rss_bytes": 337231872,
+          "effective_controls": {
+            "ensure_frontmatter_on_sync": false,
+            "auto_update": false,
+            "skip_initialization_sync": true,
+            "format_on_save": false,
+            "disable_permalinks": true,
+            "logfire_enabled": false,
+            "logfire_send_to_logfire": false,
+            "cloud_promo_opt_out": true,
+            "reranker_enabled": false,
+            "semantic_embedding_provider": "fastembed",
+            "semantic_embedding_model": "bge-small-en-v1.5",
+            "semantic_embedding_dimensions": 384,
+            "semantic_embedding_threads": 2,
+            "semantic_embedding_parallel": 1,
+            "semantic_search_enabled": true,
+            "database_backend": "sqlite"
+          },
+          "package_version": "0.23.0",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "subprocess_seconds": 0.851363
+        }
+      },
+      "parent_seconds": 0.8986804169835523,
+      "passed": true
+    },
+    {
+      "id": "absent-identifier",
+      "query": "ROOT_ABSENT_9923847",
+      "requested_mode": "text",
+      "expected_path": null,
+      "result": {
+        "available": true,
+        "mode": "text",
+        "results": [],
+        "limitations": [],
+        "runtime": {
+          "mode": "text",
+          "ready_vector_chunks": 25,
+          "vector_entities": 2,
+          "vendor_seconds": 0.003599,
+          "max_rss_bytes": 109723648,
+          "effective_controls": {
+            "ensure_frontmatter_on_sync": false,
+            "auto_update": false,
+            "skip_initialization_sync": true,
+            "format_on_save": false,
+            "disable_permalinks": true,
+            "logfire_enabled": false,
+            "logfire_send_to_logfire": false,
+            "cloud_promo_opt_out": true,
+            "reranker_enabled": false,
+            "semantic_embedding_provider": "fastembed",
+            "semantic_embedding_model": "bge-small-en-v1.5",
+            "semantic_embedding_dimensions": 384,
+            "semantic_embedding_threads": 2,
+            "semantic_embedding_parallel": 1,
+            "semantic_search_enabled": true,
+            "database_backend": "sqlite"
+          },
+          "package_version": "0.23.0",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "subprocess_seconds": 0.611036
+        }
+      },
+      "parent_seconds": 0.6568071249639615,
+      "passed": true
+    }
+  ],
+  "unsupported_operation": {
+    "code": "backend_query",
+    "message": "Expected a bounded text query and supported retrieval mode."
+  },
+  "wrong_project": {
+    "available": false,
+    "mode": "lexical",
+    "results": [],
+    "limitations": [
+      "backend_config_changed"
+    ]
+  },
+  "limitations": [
+    "Only the current root corpus and one accepted root note were exercised.",
+    "Ranking is retrieval relevance, not evidence of truth.",
+    "Pilot calls permit the exact prebuilt local profile while ordinary backend flags stay disabled.",
+    "Parent timings include current-source integrity checks; subprocess timing is separately reported."
+  ],
+  "status": "passed"
+}

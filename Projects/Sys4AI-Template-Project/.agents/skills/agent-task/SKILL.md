@@ -130,3 +130,14 @@ catalog operation does not assume one manager owns every Task. Do not remove a
 lock from age alone, guess missing intent, overwrite a stale writer or claim a
 partial operation fully succeeded. Report exact errors and the smallest safe
 recovery step.
+
+## Memory evidence references
+
+The optional [memory integration contract](../memory/references/task-integration.md)
+uses the current inspected-source, artifact, baseline-input and response-file
+references. It adds no Task schema field or promotion event. A manager freezes
+accepted memory before independent solver dispatch, retains the exact packet
+for queued solvers, and reconciles material changes through existing version and
+input gates. Record actual publication receipts only. Optional memory recovery
+does not replay a Task event or reopen completed work. Read-only Task commands
+do not initialize or invoke a backend that writes state.

@@ -7,13 +7,13 @@ starters only from the registered Template, specializes project identity,
 maintains factual registration and verifies local files.
 
 Both routes preserve existing project documents, packages, Tasks, configuration,
-data and repository metadata. New projects receive seven complete skill packages
+data and repository metadata. New projects receive eight complete skill packages
 and the generic and task-manager roles with a generated index. The helper does not create an environment, install software
 or contact a service. It uses Git only for read-only observations when a child
 repository already exists.
 
 The [receipt schema](assets/initialization-receipt.schema.json) defines schema-1
-`governance-starter-v4` receipts at `control_records/project-setup.json`. Source
+`governance-starter-v5` receipts at `control_records/project-setup.json`. Source
 provenance, original adoption hashes and current observed hashes have separate
 fields. Partial asset adoption resumes only against the same source inventory
 and unchanged target bytes. Completed reruns preserve project edits and observe
@@ -22,6 +22,25 @@ Receipt validation binds every source adoption decision to the exact owned or
 preserved file inventory. An omitted entry, changed adoption digest, contradictory
 source decision or unsupported skipped starter rejects a rerun before mutation.
 
+Version 7 adds an empty memory capability through contract v5. It requires
+`memory.yaml`, `MEMORY/README.md`, the memory skill and the complete
+`reference-assets/MEMORY-depo/` package. Only the new config's project ID and
+name are specialized; project root `.` and relative contract/state paths remain
+local, and the backend remains disabled. Source validation rejects a populated
+Template memory tree or incomplete required assets. The receipt distinguishes
+`specialized` configuration/identity from copied `adopted` files and preserved
+files. Registration grants no memory publication or cross-project access.
+
+Existing configuration bytes and complete memory collections remain
+project-owned, including custom notes, unrecognized config formats and missing
+package resources. Original hashes are recorded in `preserved_memory`; current
+observations are recorded in `current_memory`. Interrupted adoption requires
+the complete reviewed inventory to remain unchanged. A completed rerun permits
+ordinary content edits while retaining original evidence. An existing config,
+including an unspecialized one from a manual Template copy, is preserved and is
+not certified as operational by setup. Backend installation, configuration
+adoption and publisher authorization remain separate project work.
+
 Version 6 adds the Template's `LICENSE`, `LICENSE-CODE`, and `LICENSE-DOCS` to
 both setup routes through contract v4. Existing root license markers and license
 directories preserve the whole project licensing system, including missing
@@ -29,7 +48,8 @@ companions. `preserved_licenses` records the original marker and tree hashes;
 `current_licenses` records the latest observation. Skipped companions retain
 their Template source entries with `skipped-existing-license`. The skill defines
 recognized names and the boundary for licensing embedded only in other prose.
-Earlier v1-v3 receipts remain valid with their original starter requirements.
+Earlier v1-v4 receipts remain valid with their original starter requirements;
+v4 retains the license trio, and none of them acquires the v5 memory edition.
 Completed reruns do not adopt the new license edition or change past evidence.
 
 Version 5 adopts exactly spelled `Roles/` and validates each destination index
@@ -65,7 +85,9 @@ PYTHONDONTWRITEBYTECODE=1 GIT_OPTIONAL_LOCKS=0 \
   -s SKILLS-depo/init-new-project/tests -v
 ```
 
-The standard-library suite uses disposable depot fixtures. It exercises licensing
+The standard-library suite uses disposable depot fixtures. It exercises memory
+identity/path specialization, empty starters, complete memory preservation,
+missing memory sources, v1-v5 receipt recovery, licensing
 adoption, whole-system preservation, earlier receipt editions, create,
 manual-copy preparation, existing customization, identity and registry conflicts,
 source drift, symlink/hardlink rejection, atomic writes, interrupted recovery,

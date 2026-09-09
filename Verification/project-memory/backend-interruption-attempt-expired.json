@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "level": "actual-vendor-process-interruption",
+  "error": {
+    "code": "grant_expired",
+    "message": "Publication requires a current native receipt and unexpired bounded grant.",
+    "details": {}
+  },
+  "process": {},
+  "canonical_preserved": true,
+  "pending": [],
+  "health_while_pending": {
+    "available": true,
+    "mode": "prebuilt-profile",
+    "profile": "basic-memory-v0.23.0",
+    "documents": 9,
+    "limitations": [
+      "runtime_not_started_by_health"
+    ]
+  },
+  "pending_read_preserved": true,
+  "restored_health": {
+    "available": true,
+    "mode": "prebuilt-profile",
+    "profile": "basic-memory-v0.23.0",
+    "documents": 9,
+    "limitations": [
+      "runtime_not_started_by_health"
+    ]
+  },
+  "restored_hybrid": {
+    "available": true,
+    "mode": "hybrid",
+    "results": [
+      {
+        "path": "docs/experiment.md",
+        "sha256": "16c37f22bdb05d9984f1e243ae84a313e838c3a17fc7f8d02a226faa858182cd",
+        "kind": "source",
+        "source_identity": "docs/experiment.md",
+        "score": 1.2303657292005021,
+        "retrieval_mode": "hybrid"
+      },
+      {
+        "path": "research/context.html",
+        "sha256": "b1641463e1bcf9e703712d5f163e6abf3a6c61aab6ded9df72b4914c314829dc",
+        "kind": "source",
+        "source_identity": "research/context.html",
+        "score": 0.8438287918487786,
+        "retrieval_mode": "hybrid"
+      },
+      {
+        "path": "MEMORY/MEM-20260908-00000003.md",
+        "sha256": "016578ee2ef6bce4c930effe5f2209621cfb5fe19ddeb3d1b6f6b29e5a73391b",
+        "kind": "memory",
+        "source_identity": "MEM-20260908-00000003",
+        "score": 0.5570434932429986,
+        "retrieval_mode": "hybrid"
+      }
+    ],
+    "limitations": [
+      "research/context.html: Local static HTML text; scripts, remote resources and interactive content are not evaluated.",
+      "research/physics.tex: Literal source extraction; macros and included files are not expanded or compiled."
+    ],
+    "runtime": {
+      "mode": "hybrid",
+      "ready_vector_chunks": 9,
+      "vector_entities": 9,
+      "vendor_seconds": 0.212441,
+      "max_rss_bytes": 354861056,
+      "effective_controls": {
+        "ensure_frontmatter_on_sync": false,
+        "auto_update": false,
+        "skip_initialization_sync": true,
+        "format_on_save": false,
+        "disable_permalinks": true,
+        "logfire_enabled": false,
+        "logfire_send_to_logfire": false,
+        "cloud_promo_opt_out": true,
+        "reranker_enabled": false,
+        "semantic_embedding_provider": "fastembed",
+        "semantic_embedding_model": "bge-small-en-v1.5",
+        "semantic_embedding_dimensions": 384,
+        "semantic_embedding_threads": 2,
+        "semantic_embedding_parallel": 1,
+        "semantic_search_enabled": true,
+        "database_backend": "sqlite"
+      },
+      "package_version": "0.23.0",
+      "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+      "subprocess_seconds": 0.907698
+    }
+  },
+  "canonical_preserved_after_recovery": true
+}

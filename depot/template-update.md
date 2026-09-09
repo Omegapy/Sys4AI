@@ -26,6 +26,8 @@ factual inventory and does not control the update mapping.
 | `LICENSES-depo/LICENSE`, `LICENSE-CODE`, and `LICENSE-DOCS` | The same three active files at the Template root |
 | `SPECS-depo/project-template-README.md` and `template-tests/` | Template overview and its local contract test |
 | Initializer policy and README renderer | `.template/`, also retained in its skill package |
+| `MEMORY-depo/starter/MEMORY/README.md` and `starter/memory.yaml` | Empty active `MEMORY/README.md` and neutral `memory.yaml` |
+| Remaining `MEMORY-depo/` contracts, schemas, profiles and inactive examples | `reference-assets/MEMORY-depo/` |
 | Other regular files in the remaining `*-depo` collections | `reference-assets/<collection>/`, preserving their relative paths |
 
 `overrides` place a file at its active template path instead of the default
