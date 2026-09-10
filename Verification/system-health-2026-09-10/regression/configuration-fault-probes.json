@@ -1,0 +1,85 @@
+{
+  "controls": [
+    {
+      "name": "ontology-config-absent-resolved",
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology.py",
+        "--project-root",
+        "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-config-health-g_7hcthu",
+        "health"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "started_at": "2026-09-10T16:49:34.150803+00:00",
+      "duration_seconds": 0.045683,
+      "exit_code": 1,
+      "fixture_bytes_and_mtimes_unchanged": true,
+      "stdout": "probe-ontology-config-absent-resolved.stdout.log",
+      "stderr": "probe-ontology-config-absent-resolved.stderr.log",
+      "result": {
+        "error": {
+          "code": "missing_file",
+          "message": "Selected file or directory is absent.",
+          "path": "ontology.yaml",
+          "record_id": null,
+          "severity": "error"
+        },
+        "mutated": false,
+        "operation": "health",
+        "status": "invalid"
+      }
+    },
+    {
+      "name": "ontology-config-invalid-resolved",
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology.py",
+        "--project-root",
+        "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-config-health-g_7hcthu",
+        "health"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "started_at": "2026-09-10T16:49:34.197144+00:00",
+      "duration_seconds": 0.043936,
+      "exit_code": 1,
+      "fixture_bytes_and_mtimes_unchanged": true,
+      "stdout": "probe-ontology-config-invalid-resolved.stdout.log",
+      "stderr": "probe-ontology-config-invalid-resolved.stderr.log",
+      "result": {
+        "error": {
+          "code": "invalid_json",
+          "message": "Expected strict UTF-8 JSON; YAML features are unsupported.",
+          "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-config-health-g_7hcthu/ontology.yaml",
+          "record_id": null,
+          "severity": "error"
+        },
+        "mutated": false,
+        "operation": "health",
+        "status": "invalid"
+      }
+    },
+    {
+      "name": "memory-config-absent-resolved",
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory.py",
+        "--project-root",
+        "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-config-health-g_7hcthu",
+        "health"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "started_at": "2026-09-10T16:49:34.241562+00:00",
+      "duration_seconds": 0.035586,
+      "exit_code": 0,
+      "fixture_bytes_and_mtimes_unchanged": true,
+      "stdout": "probe-memory-config-absent-resolved.stdout.log",
+      "stderr": "probe-memory-config-absent-resolved.stderr.log",
+      "result": {
+        "backend": "unavailable",
+        "read_only": true,
+        "records": 0,
+        "status": "absent"
+      }
+    }
+  ]
+}

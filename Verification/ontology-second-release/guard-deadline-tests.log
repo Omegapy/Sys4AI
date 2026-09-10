@@ -1,0 +1,118 @@
+test_actual_plan_cli_revision_fields_and_nested_transaction_succeed (test_action_semantics.ActionSemanticsTests.test_actual_plan_cli_revision_fields_and_nested_transaction_succeed) ... ok
+test_caller_forged_task_state_is_not_current_evidence (test_action_semantics.ActionSemanticsTests.test_caller_forged_task_state_is_not_current_evidence) ... ok
+test_concrete_capability_is_observed_from_the_provider_for_every_family (test_action_semantics.ActionSemanticsTests.test_concrete_capability_is_observed_from_the_provider_for_every_family) ... ok
+test_current_task_orchestration_generation_is_read_before_dispatch (test_action_semantics.ActionSemanticsTests.test_current_task_orchestration_generation_is_read_before_dispatch) ... ok
+test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files (test_action_semantics.ActionSemanticsTests.test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files) ... ok
+test_missing_governing_source_and_unrecognized_rules_cannot_pass (test_action_semantics.ActionSemanticsTests.test_missing_governing_source_and_unrecognized_rules_cannot_pass) ... ok
+test_real_role_and_ontology_errors_retain_safe_action_and_version_text (test_action_semantics.ActionSemanticsTests.test_real_role_and_ontology_errors_retain_safe_action_and_version_text) ... ok
+test_real_task_trd_and_plan_lifecycle_values_are_constrained (test_action_semantics.ActionSemanticsTests.test_real_task_trd_and_plan_lifecycle_values_are_constrained) ... ok
+test_v2_guarded_publication_recovers_accepted_extension_and_shape_pre_post (test_action_semantics.ActionSemanticsTests.test_v2_guarded_publication_recovers_accepted_extension_and_shape_pre_post) ... ERROR
+test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner (test_action_semantics.ActionSemanticsTests.test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner) ... 
+  test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner (test_action_semantics.ActionSemanticsTests.test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner) (case='shape') ... FAIL
+  test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner (test_action_semantics.ActionSemanticsTests.test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner) (case='unsupported') ... FAIL
+  test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner (test_action_semantics.ActionSemanticsTests.test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner) (case='inconsistent') ... FAIL
+test_actual_worker_is_cancelled_at_selected_shared_deadline (test_guard_deadline.GuardDeadlineTests.test_actual_worker_is_cancelled_at_selected_shared_deadline) ... ok
+test_all_v2_backend_phases_share_one_remaining_budget (test_guard_deadline.GuardDeadlineTests.test_all_v2_backend_phases_share_one_remaining_budget) ... ERROR
+test_late_conformant_result_never_invokes_owner (test_guard_deadline.GuardDeadlineTests.test_late_conformant_result_never_invokes_owner) ... ok
+
+======================================================================
+ERROR: test_v2_guarded_publication_recovers_accepted_extension_and_shape_pre_post (test_action_semantics.ActionSemanticsTests.test_v2_guarded_publication_recovers_accepted_extension_and_shape_pre_post)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp6cr6klal/project/.agents/skills/ontology/scripts/ontology_publication.py", line 18, in _guard
+    decision = begin_action(root, "ontology", operation, arguments, targets)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp6cr6klal/project/.agents/skills/ontology/scripts/ontology_guards.py", line 710, in begin_action
+    decision = Decision(root, family, operation, normalized, list(targets), _observed)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp6cr6klal/project/.agents/skills/ontology/scripts/ontology_guards.py", line 600, in __init__
+    facts = observed if observed is not None else _direct_facts(root, family, operation, arguments, budget)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp6cr6klal/project/.agents/skills/ontology/scripts/ontology_guards.py", line 439, in _direct_facts
+    checked = budget.evaluate(validate, root, overrides=overrides)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp6cr6klal/project/.agents/skills/ontology/scripts/ontology_guards.py", line 151, in evaluate
+    self.check(result)
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp6cr6klal/project/.agents/skills/ontology/scripts/ontology_guards.py", line 141, in check
+    fail(not self.is_set(), "guard_timeout",
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp6cr6klal/project/.agents/skills/ontology/scripts/ontology_guards.py", line 122, in fail
+    raise GuardError(code, message, details)
+ontology_guards.GuardError: The shared semantic evaluation budget expired; no action was dispatched. Resolve the expensive input or retry with a smaller selected graph. [condition=guard_timeout; action=urn:sys4ai:ontology:action:ontology:preview; source=reference-assets/ONTOLOGY-depo/actions/contracts-v1.json@ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8; backend=cancelled; findings=cancelled]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_action_semantics.py", line 251, in test_v2_guarded_publication_recovers_accepted_extension_and_shape_pre_post
+    authority = grant(root, proposal)
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/support.py", line 91, in grant
+    pre = preview(root, payload)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp6cr6klal/project/.agents/skills/ontology/scripts/ontology_publication.py", line 141, in preview
+    decision = _guard(root, "preview", {"proposal": proposal}, [c["path"] for c in proposal["changes"]])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp6cr6klal/project/.agents/skills/ontology/scripts/ontology_publication.py", line 22, in _guard
+    raise OntologyError(exc.code, str(exc)) from exc
+ontology_core.OntologyError: The shared semantic evaluation budget expired; no action was dispatched. Resolve the expensive input or retry with a smaller selected graph. [condition=guard_timeout; action=urn:sys4ai:ontology:action:ontology:preview; source=reference-assets/ONTOLOGY-depo/actions/contracts-v1.json@ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8; backend=cancelled; findings=cancelled]
+
+======================================================================
+ERROR: test_all_v2_backend_phases_share_one_remaining_budget (test_guard_deadline.GuardDeadlineTests.test_all_v2_backend_phases_share_one_remaining_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guard_deadline.py", line 44, in test_all_v2_backend_phases_share_one_remaining_budget
+    decision = guards.begin_action(root, "ontology", "publish", {"proposal": proposal}, [c["path"] for c in proposal["changes"]])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpjw3nm0md/project/.agents/skills/ontology/scripts/ontology_guards.py", line 710, in begin_action
+    decision = Decision(root, family, operation, normalized, list(targets), _observed)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpjw3nm0md/project/.agents/skills/ontology/scripts/ontology_guards.py", line 600, in __init__
+    facts = observed if observed is not None else _direct_facts(root, family, operation, arguments, budget)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpjw3nm0md/project/.agents/skills/ontology/scripts/ontology_guards.py", line 439, in _direct_facts
+    checked = budget.evaluate(validate, root, overrides=overrides)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpjw3nm0md/project/.agents/skills/ontology/scripts/ontology_guards.py", line 151, in evaluate
+    self.check(result)
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpjw3nm0md/project/.agents/skills/ontology/scripts/ontology_guards.py", line 141, in check
+    fail(not self.is_set(), "guard_timeout",
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpjw3nm0md/project/.agents/skills/ontology/scripts/ontology_guards.py", line 122, in fail
+    raise GuardError(code, message, details)
+ontology_guards.GuardError: The shared semantic evaluation budget expired; no action was dispatched. Resolve the expensive input or retry with a smaller selected graph. [condition=guard_timeout; action=urn:sys4ai:ontology:action:ontology:publish; source=reference-assets/ONTOLOGY-depo/actions/contracts-v1.json@ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8; backend=cancelled; findings=cancelled]
+
+======================================================================
+FAIL: test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner (test_action_semantics.ActionSemanticsTests.test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner) (case='shape')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_action_semantics.py", line 242, in test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner
+    self.assertEqual(observed[-1][1], expected)
+AssertionError: 'cancelled' != 'violation'
+- cancelled
++ violation
+
+
+======================================================================
+FAIL: test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner (test_action_semantics.ActionSemanticsTests.test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner) (case='unsupported')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_action_semantics.py", line 242, in test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner
+    self.assertEqual(observed[-1][1], expected)
+AssertionError: 'cancelled' != 'unsupported_semantics'
+- cancelled
++ unsupported_semantics
+
+
+======================================================================
+FAIL: test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner (test_action_semantics.ActionSemanticsTests.test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner) (case='inconsistent')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_action_semantics.py", line 242, in test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner
+    self.assertEqual(observed[-1][1], expected)
+AssertionError: 'cancelled' != 'inconsistent'
+- cancelled
++ inconsistent
+
+
+----------------------------------------------------------------------
+Ran 13 tests in 85.687s
+
+FAILED (failures=3, errors=2)

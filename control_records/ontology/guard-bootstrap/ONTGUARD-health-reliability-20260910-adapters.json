@@ -1,0 +1,137 @@
+{
+  "families": {
+    "memory": [
+      {
+        "operations": [
+          "capture",
+          "set_capture"
+        ],
+        "path": ".agents/skills/memory/scripts/memory_capture.py",
+        "sha256": "0d3340dc4657205698416b870d1315d752aa641367d9b70ffc10e479a2967c70"
+      },
+      {
+        "operations": [
+          "recover_reindex",
+          "reindex"
+        ],
+        "path": ".agents/skills/memory/scripts/memory_maintenance.py",
+        "sha256": "3c13efb17fcd217b631d9c8c09e842d2233261b0a8cfca744510c7253094734d"
+      },
+      {
+        "operations": [
+          "propose"
+        ],
+        "path": ".agents/skills/memory/scripts/memory_publish.py",
+        "sha256": "e8677752709cecea1bb7ed5ebab55dbf68cf6d714aec84ceafd17a07b14abf4c"
+      },
+      {
+        "operations": [
+          "recover",
+          "transact"
+        ],
+        "path": ".agents/skills/memory/scripts/memory_recovery.py",
+        "sha256": "4a288ac8aaa33e1055f0ef878e90726df6d808385781c9f6a7b0e76be8ae2005"
+      }
+    ],
+    "ontology": [
+      {
+        "operations": [
+          "preview",
+          "publish",
+          "recover"
+        ],
+        "path": ".agents/skills/ontology/scripts/ontology_publication.py",
+        "sha256": "e9d8a2520807a4598a11890ddc9e6d470eeaa6611d6e67f6847aed3220a4b936"
+      }
+    ],
+    "plan": [
+      {
+        "operations": [
+          "handle_create",
+          "handle_rebuild_projections",
+          "handle_reconcile",
+          "handle_record_evidence",
+          "handle_reindex",
+          "handle_set_status",
+          "handle_update",
+          "handle_update_phase",
+          "handle_update_task",
+          "mutate_existing_plan"
+        ],
+        "path": ".agents/skills/to-implementation-plan/scripts/plan_state.py",
+        "sha256": "d0ea23250a69f820c3b82afb2f70b7ed2b9cbb4fad746033ed0fb14794336c26"
+      }
+    ],
+    "role": [
+      {
+        "operations": [
+          "case_rename_apply",
+          "create_role",
+          "publish_index",
+          "reindex",
+          "transition_apply"
+        ],
+        "path": ".agents/skills/manage-subagent-roles/scripts/role_catalog.py",
+        "sha256": "b649dc368d9b4f2d8eec032aaf2ae28e08ff493bbaf07d20ef21a55a52fd0cb2"
+      }
+    ],
+    "setup": [
+      {
+        "operations": [
+          "run_initialization",
+          "run_module_adoption"
+        ],
+        "path": ".agents/skills/init-new-project/scripts/init_new_project.py",
+        "sha256": "64218788dc5e6d0a98479894ee7d6d947838e2b9afef7ff5ccb66e3ff1debd7d"
+      },
+      {
+        "operations": [
+          "configure_profile"
+        ],
+        "path": ".agents/skills/ontology/scripts/ontology_profiles.py",
+        "sha256": "770c9604f2e8ea8ce16a3953858ae1e2019049a318dda5ea481857a524aa7ea8"
+      }
+    ],
+    "task": [
+      {
+        "operations": [
+          "command_intake",
+          "command_new",
+          "command_rebuild",
+          "command_reconcile",
+          "reconcile_lock",
+          "reconcile_redaction_intent",
+          "reconcile_response_redaction",
+          "reconcile_transaction",
+          "response_transaction"
+        ],
+        "path": ".agents/skills/agent-task/scripts/task_state.py",
+        "sha256": "d6a3b66844d3e366eb6b163308eec4b16c6e5cca1c5827483f8f1a59fbbc90df"
+      }
+    ],
+    "template": [
+      {
+        "operations": [
+          "recover",
+          "update"
+        ],
+        "path": "tools/template_update.py",
+        "sha256": "3aeb745dec5c671f29dde3de4472f13f0d1bf653e821a0a747053e3a783c1eb9"
+      }
+    ],
+    "trd": [
+      {
+        "operations": [
+          "create",
+          "migrate",
+          "reindex",
+          "set_status",
+          "update"
+        ],
+        "path": ".agents/skills/to-trd/scripts/trd.py",
+        "sha256": "f159f371862161e84f5586651fcb3dca2c1cc2d49f41d5434136ff7c809409ce"
+      }
+    ]
+  },
+  "schema_version": 1
+}

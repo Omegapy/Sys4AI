@@ -1,0 +1,92 @@
+{
+  "observed_at": "2026-09-10T19:00:55.561005+00:00",
+  "status": "reviewed_with_resolved_findings",
+  "scope": [
+    "ontology_health.py",
+    "ontology.py",
+    "ontology_advanced_cli.py",
+    "ontology_memory.py",
+    "ontology_workbench.py",
+    "ontology_profiles.py",
+    "ontology_publication.py"
+  ],
+  "plan_tasks": [
+    "TASK-012",
+    "TASK-014",
+    "TASK-015",
+    "TASK-016",
+    "TASK-017",
+    "TASK-018",
+    "TASK-021",
+    "TASK-022"
+  ],
+  "source_sha256": {
+    "SKILLS-depo/ontology/scripts/ontology_health.py": "95bb8bfca96f674990c45058e3169a8eac42c80e1277e0fc334098487a292ad2",
+    "SKILLS-depo/ontology/scripts/ontology.py": "9b1c193f7cb420b0afb090ab74cf069ba49eea449994f747316a7e1ff3db3bce",
+    "SKILLS-depo/ontology/scripts/ontology_advanced_cli.py": "af57d0d25cd246feb864373ee898f7026a1bce8e97f14a58ef83e878c6eb3f94",
+    "SKILLS-depo/ontology/scripts/ontology_memory.py": "9e9e0e9b6d684ddc33106941a03c6cac47950316feaf03923c83bd96d5c37aa7",
+    "SKILLS-depo/ontology/scripts/ontology_workbench.py": "326a1f4d07e6a7208bc62a495661f3c749cf1df3f66ef89f4da5edb897fc0064",
+    "SKILLS-depo/ontology/scripts/ontology_profiles.py": "770c9604f2e8ea8ce16a3953858ae1e2019049a318dda5ea481857a524aa7ea8",
+    "SKILLS-depo/ontology/scripts/ontology_publication.py": "e9d8a2520807a4598a11890ddc9e6d470eeaa6611d6e67f6847aed3220a4b936"
+  },
+  "test_sha256": {
+    "SKILLS-depo/ontology/tests/test_health_review_regressions.py": "5cce86ed1b4faf7c6335a18e882c3c3a1ea1df40a1631979ccbb371eb26191c6"
+  },
+  "findings": [
+    {
+      "id": "HR-001",
+      "severity": "P1",
+      "finding": "Complete but inconsistent inference was counted as operational readiness.",
+      "location": "ontology_health.py:95",
+      "before": "Actual worker result inconsistent, complete=true, trusted=false but aggregate ready=true.",
+      "fix": "Require complete=true, status=ok and trusted=true.",
+      "regression": "test_required_inference_rejects_complete_inconsistent_result",
+      "status": "resolved"
+    },
+    {
+      "id": "HR-002",
+      "severity": "P1",
+      "finding": "A current-context manifest with omitted outputs could hide missing required artifacts.",
+      "location": "ontology.py:29",
+      "before": "Compile manifest outputs={} with both compiled files deleted still reported required compile current and aggregate ready=true.",
+      "fix": "Check schema, matching operation, nonempty output mapping and exact current expected output set; changed input context remains stale.",
+      "regression": "test_manifest_cannot_hide_missing_required_compile_outputs",
+      "status": "resolved"
+    },
+    {
+      "id": "HR-003",
+      "severity": "P2",
+      "finding": "The workbench probe socket inactivity timeout did not impose a total network deadline.",
+      "location": "ontology_workbench.py:43",
+      "before": "A 0.05-second selected budget returned after 0.753 seconds while a local audit server trickled bytes.",
+      "fix": "Apply a monotonic remaining network budget with a transient timer shutting down the owned socket; cancel/join timer in cleanup and classify timeout.",
+      "regression": "test_service_deadline_covers_trickled_headers_and_body",
+      "status": "resolved"
+    },
+    {
+      "id": "HR-004",
+      "severity": "P2",
+      "finding": "Malformed URL syntax raised an uncaught ValueError.",
+      "location": "ontology_workbench.py:28",
+      "before": "advanced-health --workbench-url http://[ returned traceback, empty stdout and exit 1.",
+      "fix": "Convert URL/port parse ValueError to invalid_service; CLI emits invalid JSON and exit 2.",
+      "regression": "test_malformed_endpoint_has_structured_invalid_request",
+      "status": "resolved"
+    }
+  ],
+  "checks": {
+    "focused_regressions": "4 tests passed in 3.581 seconds",
+    "actual_inference": "Pinned certified disposable runtime, including a valid baseline and inconsistent authored extension.",
+    "service_probes": "Audit-owned loopback servers trickled response headers/body; both bounded timeouts and owned cleanup passed.",
+    "no_write": "Regression tests compare fixture bytes and persistent mtimes around each health/CLI/probe path.",
+    "reference_before": [
+      "initial-probes.json",
+      "inconsistent-inference.json",
+      "invalid-origin.json"
+    ],
+    "corrected_results": "corrected-probes.json"
+  },
+  "remaining_findings": [],
+  "limitations": "Bounded independent source review and focused regressions. Complete integrated guard-owner, delivered-installation, model/index and final live root acceptance remain host responsibilities. No production mutation or nested delegation was performed.",
+  "stopping_condition": "Actionable findings reported, host fixes reinspected, all retained discriminating regressions passed; reviewed test source frozen."
+}

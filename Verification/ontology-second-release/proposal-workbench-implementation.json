@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "plan_id": "PLAN-20260909-4B15BB49",
+  "plan_revision": 2,
+  "plan_sha256": "631b0d2dd3b58ff0d2f7085ba6ee5cb75f93cdb3d8b110ca387b9966c0f14c5e",
+  "scope": "Proposal/native handoff/validation/v2 publication/local browser service and assets; reusable sources only.",
+  "implementation_tasks": [
+    "TASK-015",
+    "TASK-016",
+    "TASK-017",
+    "TASK-018",
+    "TASK-019",
+    "TASK-033",
+    "TASK-034",
+    "TASK-035",
+    "TASK-036",
+    "TASK-037",
+    "TASK-038"
+  ],
+  "implementation_status": "Scoped implementation complete; coordinating owner retains real native/browser/guard integration acceptance.",
+  "source_manifest": {
+    "SKILLS-depo/ontology/scripts/ontology_proposals.py": "1606da118489f758145d102594e806f33fe170f8d12a1f6629cd61b7b9b346d8",
+    "SKILLS-depo/ontology/scripts/ontology_generation.py": "625340e3b6ec4b360413f0acd0b30ac3c408c70d3eac1ad009a9fc8b188ca364",
+    "SKILLS-depo/ontology/scripts/ontology_proposal_validation.py": "ba12ad682a9e11ded50893633bc11969587a9e34cff0d68cddfc62819ace65b1",
+    "SKILLS-depo/ontology/scripts/ontology_publication.py": "0ed1c1f52fb107011484b315be8adb54a475ad9e1edc604f4065af310ed0f546",
+    "SKILLS-depo/ontology/scripts/ontology_authority.py": "fcd0bc8cbc3afa27e24e5b7e89fba6c9c69e2d862acfb852be5be446a8df59cf",
+    "SKILLS-depo/ontology/scripts/ontology_workbench.py": "b534f749dad0f53c7d2dff6e9c3dfdf78c23cf8b0aeefb03cb66749abcd8b37d",
+    "SKILLS-depo/ontology/workbench/index.html": "d626d3fa2fb95c940cd12e221c430e295927a5b006d7258d4b99b9fc0af7d9d3",
+    "SKILLS-depo/ontology/workbench/styles.css": "e33f0dfb0723602972c836c2746e0d4f4f5145058fc7fe1cd78cf89e3e08ed54",
+    "SKILLS-depo/ontology/workbench/app.js": "84ec3b7992922059f5e610fd4f021e5c2b546540d14251c434667a68ee850b96",
+    "SKILLS-depo/ontology/workbench/editor.js": "bff1bb18d4c33c9e696a3582b5d258370512545663ee95663cd00fb1a90f448c",
+    "SKILLS-depo/ontology/workbench/review.js": "188c24ea4766d1898fa31d74070916689db8de6774ac4b46710076b9a70e96c7",
+    "SKILLS-depo/ontology/workbench/advanced.js": "6e15158a4ca41b8812468894eaf62474140e9ba466025d04dcd4b116c1d34b75",
+    "SKILLS-depo/ontology/tests/test_proposals.py": "3bc03d9e7046471e6ce78f135b16a9cc5dc94662da4ce4e1c978e346c212679d",
+    "SKILLS-depo/ontology/tests/test_generation_contract.py": "f2e005f327c78cd0aa15356daf4389c4d9207e4d32881e48cf1d7ec335e2674b",
+    "SKILLS-depo/ontology/tests/test_workbench_security.py": "f3052afa4a0b31410281d289924e732da4537e64d6880f1c11fd24dad360d6fd",
+    "SKILLS-depo/ontology/tests/test_advanced_publication.py": "265666c6a0cdd2a13ed9785f1521b8559ae1797e95c3a8bd33e60efd2cbafab0",
+    "SKILLS-depo/ontology/tests/workbench_fixture.py": "d3bf3539802e9ddf983074b75a189dd0d1d9544aa92816953bf2118d34ff4184",
+    "SKILLS-depo/ontology/SKILL.md": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac",
+    "SKILLS-depo/ontology/references/proposal-generation.md": "2d619b1dbced73e07ee86ba508c2a940fd523949f8e1355fb847ec7156bc6975",
+    "ONTOLOGY-depo/schema/proposal-v1.json": "6c62cdb75e280fa3fd904f099b835d37cea44e5b81db60e88c62d0ce56b75f3f",
+    "ONTOLOGY-depo/proposal-workflow.md": "ad30423345d9469a7e9b6602bc8ba1e7d47c41731d1d2d20ebca0fdaa60db81a",
+    "ONTOLOGY-depo/publication-and-recovery.md": "42087e6a1105dfe83e13397c383e42578356d64b56fa82fa595348a7ea428d0f"
+  },
+  "verification": {
+    "frozen_scoped_suite": {
+      "passed": 32,
+      "failed": 0,
+      "evidence": "proposal-workbench-tests-frozen.json"
+    },
+    "current_final_authority_and_http_delta": {
+      "passed": 11,
+      "failed": 0,
+      "evidence": "proposal-workbench-final-delta-tests.json"
+    },
+    "subsequent_current_http_suite": {
+      "passed": 5,
+      "failed": 0,
+      "new_case": "test_composite_relation_draft_invalid_endpoint_and_deprecation_history",
+      "observed": "Executed actual service suite with unittest; final result Ran 5 tests in 5.807s OK."
+    },
+    "javascript_syntax": "All four ES modules passed node --check; review.js rechecked after final Add a record to this draft button.",
+    "python_and_schema_syntax": "All changed Python source/test files parse; proposal-v1 JSON parses."
+  },
+  "evidence_boundary": {
+    "native_generation": "No fixture receipt is claimed as an actual native run. Owner performs observed source-to-candidate/revision acceptance.",
+    "browser": "Actual HTTP workflow passes. Owner performs real browser keyboard/visual session and complete enabled standards/inference/guard workflow.",
+    "guard": "Existing registered preview/publish/recover adapter hooks integrated; actual current adapter bytes and guard context are checked. Owner owns final enabled bootstrap/helper-matrix acceptance.",
+    "installation": "No real root .agents/Template/canonical ontology/setup/Task/plan/TRD/memory/Git mutation performed by this worker."
+  },
+  "fixture_entry": "SKILLS-depo/ontology/tests/workbench_fixture.py --root DISPOSABLE --create --advanced --install-adapters; use actual guard setup and real normalized native observation before authoring service.",
+  "known_bounds": [
+    "Source packets: at most100 selected sources,500000 total source bytes,100 approved context records,250000 context bytes; initial generation plus2 finding-directed revisions.",
+    "Extension semantic publication permits selected extension/shape locks only; new imports/profiles/authority changes use separate setup.",
+    "RDF literals, blank nodes, namespace conflicts and unknown graph semantics remain durable staged drafts, without lossy core conversion.",
+    "Local sessions are cooperative process controls, not OS/native receipt authentication; one-use URL stays private runtime and publication observation expires after5minutes."
+  ]
+}

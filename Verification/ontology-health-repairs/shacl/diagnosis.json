@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-10T18:50:03.376248+00:00",
+  "status": "source_patch_verified",
+  "source_sha256": "0fac0205a07a05859f84a82a5743e675ed538d1a0cce5ca01c160b765958b669",
+  "input_manifest": "input-manifest.json",
+  "before": {
+    "result": "timeout",
+    "elapsed_seconds": 10.0076,
+    "peak_rss_bytes": 138838016,
+    "phase_seconds": {
+      "dataset": 0.030793,
+      "selected_graph": 0.011441,
+      "generated_shapes": 0.260882,
+      "custom_shapes": 0.001987,
+      "feature_check": 0.032731,
+      "meta_shacl": {
+        "incomplete_since_seconds": 0.342751
+      },
+      "result_extraction": {
+        "incomplete_since_seconds": null
+      },
+      "serialization": {
+        "incomplete_since_seconds": null
+      }
+    }
+  },
+  "after": {
+    "result": "conformant",
+    "complete": true,
+    "elapsed_seconds": 5.8784,
+    "peak_rss_bytes": 66142208,
+    "phase_seconds": {
+      "dataset": 0.030649,
+      "selected_graph": 0.011323,
+      "generated_shapes": 0.035602,
+      "custom_shapes": 0.00197,
+      "feature_check": 0.002902,
+      "meta_shacl": 5.46421,
+      "result_extraction": 9e-06,
+      "serialization": 3.1e-05,
+      "pyshacl_after_meta": 0.152549
+    }
+  },
+  "measured_cause": "Repeated immutable generated property shapes and RDF value lists cause dominant recursive meta-SHACL validation and diagnostic-formatting cost. Dataset preparation and shape construction are not the dominant costs.",
+  "remedy": {
+    "generated_shape_triples_before": 41424,
+    "generated_shape_triples_after": 3868,
+    "property_references": 2346,
+    "distinct_property_constraints": 43,
+    "list_references": 210,
+    "distinct_lists": 18,
+    "persistent_cache": false,
+    "all_constraints_preserved": "shape-equivalence.json"
+  },
+  "attempts": [
+    {
+      "variant": "list sharing only",
+      "result": "timeout at 10 and 60 seconds",
+      "evidence": "shared-lists-ceiling-profile.json"
+    },
+    {
+      "variant": "list and complete property sharing",
+      "result": "conformant at default 10-second deadline",
+      "evidence": "final-replay.json"
+    }
+  ],
+  "default_scope_finding": {
+    "evidence": "source-full-result.json",
+    "status": "violation",
+    "complete": true,
+    "count": 12,
+    "reason": "Two external records have field:definition, field:label and field:module in the external named graph. Original default asserted+derived validation generates targets for them without selecting their metadata. Generated and contract shapes each report the three missing fields.",
+    "records": [
+      "urn:sys4ai:ontology:project:sys4ai-depot:depot",
+      "urn:sys4ai:ontology:project:sys4ai-depot:registered-template"
+    ],
+    "host_action": "Host owns the default authoring scope correction; explicit graph selection and inferred exclusion remain preserved."
+  },
+  "validation": {
+    "focused_tests": "4 tests passed in 7.821 seconds",
+    "semantic_controls": "15 controls per version matched status, completeness and every structural constraint finding",
+    "worker_certification": "10 actual confinement/resource checks passed on a disposable clone",
+    "full_graph_timeout_seconds": 1.0068,
+    "full_graph_cancel_seconds": 0.2005
+  },
+  "limits": {
+    "defaults_and_ceilings_changed": false,
+    "query_seconds": 10,
+    "rss_bytes": 536870912,
+    "guard_seconds": 5,
+    "guarded_owner_dispatch": "Integrated host acceptance remains required; this bounded worker does not dispatch owners."
+  },
+  "authority_boundary": "Reusable source only. Active root and Template adoption, root recertification, guard restoration and final live root replay belong to host."
+}

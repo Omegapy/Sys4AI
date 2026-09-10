@@ -27,7 +27,7 @@ MODES = ("text", "vector", "hybrid")
 
 
 def _limitations(error):
-    code = getattr(error, "code", "backend_unavailable")
+    code = "backend_timeout" if isinstance(error, subprocess.TimeoutExpired) else getattr(error, "code", "backend_unavailable")
     if code == "file_absent":
         return [code, "A required backend profile, certificate, projection, or index file is absent; explicit setup or reindex is required."]
     if isinstance(error, FileNotFoundError):
@@ -44,7 +44,8 @@ def _config(root, supplied):
 
 def load_profile(root, config):
     raw = safe_read_bytes(root, config["contract_root"] + "/profiles/" + PROFILE + ".json")
-    value = json.loads(raw)
+    from memory_core import decode_json_yaml
+    value = decode_json_yaml(raw)
     require(value.get("profile_id") == PROFILE and value.get("backend_version") == VERSION,
             "backend_profile", "Unsupported Basic Memory profile.")
     require(value.get("query_contract", {}).get("operations") == list(OPERATIONS),
@@ -80,26 +81,54 @@ def _model_directory(root, config, profile):
     return directory
 
 
+def verify_index(root, config):
+    index = safe_path(root, config["state"]["index"], kind="dir")
+    require({p.name for p in index.iterdir()} == {"basic-memory.db", "manifest.json"},
+            "unclassified_index", "Unclassified or active database products prevent read-only queries.")
+    manifest_path = config["state"]["index"] + "/manifest.json"
+    from memory_core import decode_json_yaml
+    manifest = decode_json_yaml(safe_read_bytes(root, manifest_path))
+    database_path = config["state"]["index"] + "/basic-memory.db"
+    actual = _file_digest(safe_path(root, database_path))
+    require(manifest == {"classification": "rebuildable-index", "files": {"basic-memory.db": actual}},
+            "backend_index_manifest", "Index bytes or ownership manifest changed.",
+            {"path": database_path, "expected_sha256": manifest.get("files", {}).get("basic-memory.db") if isinstance(manifest.get("files"), dict) else None, "current_sha256": actual})
+    certificate = decode_json_yaml(safe_read_bytes(root, config["state"]["backend_config"] + "/certification.json"))
+    require(certificate.get("project_id") == config["project"]["id"] and certificate.get("project_root") == str(root),
+            "backend_project", "Index certificate belongs to another project.")
+    require(certificate.get("database_sha256") == actual, "backend_database_changed", "Index does not match its certification.",
+            {"path": database_path, "expected_sha256": certificate.get("database_sha256"), "current_sha256": actual})
+    projection = verify_projection(root, config)
+    require(certificate.get("projection_sha256") == digest(safe_read_bytes(root, config["state"]["projection"] + "/manifest.json")),
+            "backend_projection_changed", "Index was certified against another projection.")
+    return {"database_sha256": actual, "projection_documents": len(projection["entries"])}
+
+
 def _read_certificate(root, config, *, documents=None):
     from memory_maintenance import pending_reindexes
     require(not pending_reindexes(root, config), "maintenance_pending", "Backend rebuild recovery is pending.")
     profile, profile_sha = load_profile(root, config)
     rel = config["state"]["backend_config"] + "/certification.json"
-    certificate = json.loads(safe_read_bytes(root, rel))
+    from memory_core import decode_json_yaml
+    certificate = decode_json_yaml(safe_read_bytes(root, rel))
     require(certificate.get("schema_version") == 1 and certificate.get("project_id") == config["project"]["id"]
             and certificate.get("project_root") == str(root), "backend_project", "Backend certificate belongs to another project.")
-    require(certificate.get("profile_sha256") == profile_sha, "backend_profile_changed", "Pinned backend profile changed.")
+    require(certificate.get("profile_sha256") == profile_sha, "backend_profile_changed", "Pinned backend profile changed.",
+            {"path": config["contract_root"] + "/profiles/" + PROFILE + ".json", "expected_sha256": certificate.get("profile_sha256"), "current_sha256": profile_sha})
     require(certificate.get("adapter_sha256") == _file_digest(Path(__file__)),
-            "backend_adapter_changed", "Query implementation changed after backend certification.")
+            "backend_adapter_changed", "Query implementation changed after backend certification.",
+            {"path": ".agents/skills/memory/scripts/basic_memory_adapter.py", "expected_sha256": certificate.get("adapter_sha256"), "current_sha256": _file_digest(Path(__file__))})
     require(certificate.get("config_sha256") == digest(safe_read_bytes(root, "memory.yaml")),
-            "backend_config_changed", "Backend certificate configuration is stale.")
+            "backend_config_changed", "Backend certificate configuration is stale.",
+            {"path": "memory.yaml", "expected_sha256": certificate.get("config_sha256"), "current_sha256": digest(safe_read_bytes(root, "memory.yaml"))})
     require(certificate.get("backend_config_sha256") == digest(safe_read_bytes(root, config["state"]["backend_config"] + "/config.json")),
             "backend_config_changed", "Effective backend configuration changed.")
     projection = verify_projection(root, config, current_documents=documents)
     require(certificate.get("projection_sha256") == digest(safe_read_bytes(root, config["state"]["projection"] + "/manifest.json")),
             "backend_projection_changed", "Backend certificate projection changed.")
     db = safe_path(root, config["state"]["index"] + "/basic-memory.db")
-    require(_file_digest(db) == certificate.get("database_sha256"), "backend_database_changed", "Backend database is stale or changed.")
+    require(_file_digest(db) == certificate.get("database_sha256"), "backend_database_changed", "Backend database is stale or changed.",
+            {"path": config["state"]["index"] + "/basic-memory.db", "expected_sha256": certificate.get("database_sha256"), "current_sha256": _file_digest(db)})
     index = safe_path(root, config["state"]["index"], kind="dir")
     require({p.name for p in index.iterdir()} == {"basic-memory.db", "manifest.json"},
             "unclassified_index", "Unclassified or active database products prevent read-only queries.")
@@ -110,18 +139,32 @@ def _read_certificate(root, config, *, documents=None):
     return profile, certificate, projection
 
 
-def health(root, config=None):
-    """Inspect existing state only. Never import or start the vendor runtime."""
+def health(root, config=None, *, level="static"):
+    """Static reads launch nothing; operational selection probes the fixed worker."""
     root = project_root(root)
     try:
+        require(level in {"static", "operational"}, "health_level", "Expected static or operational health.")
         config = _config(root, config)
         if not config["backend"]["enabled"] or not config["backend"]["semantic_enabled"]:
-            return {"available": False, "mode": "lexical", "limitations": ["backend_disabled"]}
+            return {"available": False, "mode": "lexical", "limitations": ["backend_disabled"], "runtime": {"status": "not_selected"}}
         profile, certificate, projection = _read_certificate(root, config)
+        _runtime_python(root)
+        runtime = {"status": "not_exercised"}
+        if level == "operational":
+            request = {"root": str(root), "operation": "health", "query": "memory health", "mode": "hybrid", "limit": 1,
+                       "profile_sha256": certificate["profile_sha256"]}
+            observed = run_worker(root, config, request, timeout_seconds=30)
+            # Recheck final bytes after a successful representative semantic read.
+            _read_certificate(root, config)
+            runtime = {"status": "passed", "operation": "bounded_hybrid_read", "dispatch": "not_exercised",
+                       "details": {k: v for k, v in observed.items() if k not in {"results", "ok"}}}
         return {"available": True, "mode": "prebuilt-profile", "profile": profile["profile_id"],
-                "documents": len(projection["entries"]), "limitations": ["runtime_not_started_by_health"]}
-    except (MemoryError, OSError, ValueError, KeyError, TypeError) as exc:
-        return {"available": False, "mode": "lexical", "limitations": _limitations(exc)}
+                "documents": len(projection["entries"]), "runtime": runtime,
+                "inputs": certificate, "limitations": ["runtime_not_started_by_health"] if level == "static" else []}
+    except (MemoryError, OSError, ValueError, KeyError, TypeError, subprocess.TimeoutExpired) as exc:
+        error = exc.as_dict() if isinstance(exc, MemoryError) else {"code": "backend_timeout" if isinstance(exc, subprocess.TimeoutExpired) else "backend_unavailable", "message": "Required backend assessment failed.", "details": {"exception": type(exc).__name__}}
+        return {"available": False, "mode": "lexical", "limitations": _limitations(exc), "error": error,
+                "diagnostics": [error], "runtime": {"status": "failed" if level == "operational" else "not_exercised"}}
 
 
 def _runtime_python(root):
@@ -147,13 +190,13 @@ def _worker_environment(root, config):
     return env
 
 
-def run_worker(root, config, request, *, build=False):
+def run_worker(root, config, request, *, build=False, timeout_seconds=None):
     """Fixed program and JSON input only; callers cannot supply commands/tools."""
     started = time.perf_counter()
     proc = subprocess.run([_runtime_python(root), "-B", str(Path(__file__).resolve()),
                            "--build-worker" if build else "--query-worker"],
                           input=canonical_json(request), stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                          cwd=root, env=_worker_environment(root, config), timeout=180 if build else 60,
+                          cwd=root, env=_worker_environment(root, config), timeout=timeout_seconds or (180 if build else 60),
                           check=False)
     require(len(proc.stdout) <= 2_000_000, "backend_output_limit", "Backend response exceeded the result limit.")
     try:
@@ -161,7 +204,7 @@ def run_worker(root, config, request, *, build=False):
     except (ValueError, UnicodeError) as exc:
         raise MemoryError("backend_failed", "Backend did not return a valid fixed-operation result.",
                           {"returncode": proc.returncode, "stderr_tail": proc.stderr.decode(errors="replace")[-1500:]}) from exc
-    require(proc.returncode == 0 and value.get("ok") is True, value.get("error", "backend_failed"),
+    require(proc.returncode == 0 and value.get("ok") is True, "backend_cancelled" if proc.returncode < 0 else value.get("error", "backend_failed"),
             "Pinned backend operation failed.", {"error_detail": value.get("detail"), "returncode": proc.returncode})
     value["subprocess_seconds"] = round(time.perf_counter() - started, 6)
     return value
@@ -380,10 +423,13 @@ def _main():
             from memory_maintenance import verify_build_request
             write_root = verify_build_request(root, config, request)
         else:
-            require(request.get("operation") == "search" and request.get("mode") in MODES
+            require(request.get("operation") in OPERATIONS and request.get("mode") in MODES
                     and isinstance(request.get("query"), str) and 0 < len(request["query"]) <= 4096
                     and isinstance(request.get("limit"), int) and not isinstance(request["limit"], bool) and 1 <= request["limit"] <= 200,
                     "backend_operation", "Only fixed bounded search is permitted.")
+            if request["operation"] == "health":
+                require(request["query"] == "memory health" and request["mode"] == "hybrid" and request["limit"] == 1,
+                        "backend_operation", "Health permits only its fixed representative read.")
             _read_certificate(root, config)
             write_root = None
         database = root / (request["database"] if build else config["state"]["index"] + "/basic-memory.db")

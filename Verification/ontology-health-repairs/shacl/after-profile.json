@@ -1,0 +1,21 @@
+{
+  "status": "timeout",
+  "complete": false,
+  "diagnostics": [
+    {
+      "code": "timeout",
+      "message": "Worker time budget expired."
+    }
+  ],
+  "worker": {
+    "platform": "Darwin",
+    "peak_rss_bytes": 99762176,
+    "rss_limit_bytes": 536870912,
+    "rss_overshoot_bytes": 0,
+    "elapsed_seconds": 10.0059,
+    "exit_code": -9,
+    "network_allowed": false,
+    "project_files_readable": false,
+    "trace": "{\"phase\": \"dataset_start\", \"seconds\": 2e-06}\n{\"phase\": \"dataset_end\", \"seconds\": 0.030997, \"graphs\": {\"asserted\": 2268, \"derived\": 1129, \"inferred\": 0, \"external\": 16}, \"records\": 191}\n{\"phase\": \"selected_graph_start\", \"seconds\": 0.034734}\n{\"phase\": \"selected_graph_end\", \"seconds\": 0.046893, \"triples\": 3397}\n{\"phase\": \"generated_shapes_start\", \"seconds\": 0.04692}\n{\"phase\": \"generated_shapes_end\", \"seconds\": 0.114277, \"triples\": 9798}\n{\"phase\": \"custom_shapes_start\", \"seconds\": 0.114298}\n{\"phase\": \"custom_shapes_end\", \"seconds\": 0.116425, \"triples\": 9843}\n{\"phase\": \"feature_check_start\", \"seconds\": 0.116443}\n{\"phase\": \"feature_check_end\", \"seconds\": 0.125093}\n{\"phase\": \"pyshacl_start\", \"seconds\": 0.125104}\n{\"phase\": \"meta_shacl_start\", \"seconds\": 0.126075}\nTimeout (0:00:05)!\nThread 0x00000001ef06e180 (most recent call first):\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/.venv-ontology-standards/lib/python3.12/site-packages/pyshacl/constraints/core/cardinality_constraints.py\", line 283 in __init__\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/.venv-ontology-standards/lib/python3.12/site-packages/pyshacl/shape.py\", line 668 in validate\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/.venv-ontology-standards/lib/python3.12/site-packages/pyshacl/constraints/core/shape_based_constraints.py\", line 130 in _evaluate_property_shape\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/.venv-ontology-standards/lib/python3.12/site-packages/pyshacl/constraints/core/shape_based_constraints.py\", line 101 in evaluate\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/.venv-ontology-standards/lib/python3.12/site-packages/pyshacl/shape.py\", line 774 in validate\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/.venv-ontology-standards/lib/python3.12/site-packages/pyshacl/validator.py\", line 333 in run\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/.venv-ontology-standards/lib/python3.12/site-packages/pyshacl/entrypoints.py\", line 243 in validate\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/shacl/after-scripts/ontology_profile_trace.py\", line 12 in measured\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/.venv-ontology-standards/lib/python3.12/site-packages/pyshacl/entrypoints.py\", line 345 in meta_validate\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/.venv-ontology-standards/lib/python3.12/site-packages/pyshacl/entrypoints.py\", line 334 in wrapped\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/.venv-ontology-standards/lib/python3.12/site-packages/pyshacl/entrypoints.py\", line 139 in validate\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/shacl/after-scripts/ontology_shacl.py\", line 103 in validate\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/shacl/after-scripts/ontology_backend.py\", line 78 in dispatch\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/shacl/after-scripts/ontology_worker.py\", line 144 in _child\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/shacl/after-scripts/ontology_worker.py\", line 156 in <module>\n"
+  }
+}

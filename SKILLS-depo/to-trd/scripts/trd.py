@@ -245,14 +245,26 @@ def validate_body(
     return sections, requirements
 
 
+def completion_blockers(sections: dict[str, str], requirements: list[dict]) -> list[dict]:
+    """Report document-content gates; semantic review and consent remain human concerns."""
+    checks = (
+        (not requirements, 'missing_requirements', 'Task requirements',
+         'A completed TRD document requires at least one requirement.'),
+        (sections['Open questions'] != 'None.', 'open_questions', 'Open questions',
+         'Unresolved requirements questions must remain draft.'),
+        (sections['Not yet specified'] != 'None.', 'unspecified_requirements', 'Not yet specified',
+         'Unresolved requirement scope or acceptance must remain draft. '
+         'Implementation choices belong in Decisions when the requirements already constrain them.'),
+        ('- Unconfirmed: ' in sections['Assumptions'], 'unconfirmed_assumptions', 'Assumptions',
+         'Unconfirmed assumptions must remain draft.'),
+    )
+    return [dict(code=code, section=section, message=message)
+            for failed, code, section, message in checks if failed]
+
+
 def gate(status: str, sections: dict[str, str], requirements: list[dict]) -> None:
-    if status != 'trd_done':
-        return
-    require(bool(requirements), 'A completed TRD document requires at least one requirement.', 8, 'lifecycle')
-    require(sections['Open questions'] == 'None.' and sections['Not yet specified'] == 'None.',
-            'Unresolved requirements questions or uncertainty must remain draft.', 8, 'lifecycle')
-    require('- Unconfirmed: ' not in sections['Assumptions'],
-            'Unconfirmed assumptions must remain draft.', 8, 'lifecycle')
+    if status == 'trd_done' and (blockers := completion_blockers(sections, requirements)):
+        raise TrdError(8, 'lifecycle', blockers[0]['message'], completion_blockers=blockers)
 
 
 def normalized_body(body: str) -> str:
@@ -281,10 +293,24 @@ class Record:
     requirements: list[dict]
 
     def summary(self) -> dict:
+        legacy = self.meta['schema_version'] == 1
+        blockers = completion_blockers(self.sections, self.requirements) if not legacy else [
+            dict(code='legacy_schema', section='schema_version',
+                 message='Explicit schema-1 migration is required before document approval.')]
+        if legacy:
+            next_action = 'migrate'
+        elif self.meta['status'] == 'trd_done':
+            next_action = 'none'
+        elif self.meta['status'] == 'retired':
+            next_action = 'restore_to_draft'
+        else:
+            next_action = 'resolve_requirements' if blockers else 'request_approval'
         return dict(self.meta, path=f'TRDs/{self.path.name}', sha256=self.sha256,
                     requirement_count=len(self.requirements),
-                    compatibility='legacy_v1_requires_migration' if self.meta['schema_version'] == 1 else 'current',
-                    migration_required=self.meta['schema_version'] == 1)
+                    compatibility='legacy_v1_requires_migration' if legacy else 'current',
+                    migration_required=legacy,
+                    completion=dict(content_ready=None if legacy else not blockers,
+                                    blockers=blockers, next_action=next_action))
 
 
 def render_document(meta: dict, body: str) -> str:
@@ -521,6 +547,7 @@ class Store:
             owner.write_text(json.dumps({'process_id': os.getpid(), 'acquired_at': now(self.timezone), 'command': command},
                                         indent=2) + '\n', encoding='utf-8')
             self._check_file(self.folder / 'INDEX.md')
+            _ontology_checkpoint()
             yield
         finally:
             try:
@@ -547,6 +574,7 @@ class Store:
             if expected is not None:
                 require(path.exists() and digest(path.read_bytes()) == expected,
                         'Document changed before publication; reread before retrying.', 6, 'stale')
+            _ontology_checkpoint(targets=False)
             os.replace(temp_path, path)
         finally:
             if temp_path is not None and temp_path.exists():
@@ -814,6 +842,97 @@ def main(argv: list[str] | None = None) -> int:
                               mutated=False, error={'category': 'io', 'message': str(exc)}), indent=2))
         return 9
 
+
+
+# Optional action guard adapter.  Standalone/core use imports no ontology runtime.
+def _ontology_checkpoint(*, targets=True):
+    import sys as _sys
+    _module = _sys.modules.get("ontology_guards")
+    if _module is not None:
+        _module.checkpoint(targets=targets)
+
+
+def _ontology_guard_adapter(function, family, root_argument, target_paths):
+    import functools as _functools
+    import inspect as _inspect
+    @_functools.wraps(function)
+    def guarded(*args, **kwargs):
+        import importlib.util as _util
+        import sys as _sys
+        from pathlib import Path as _Path
+        arguments = dict(_inspect.signature(function).bind(*args, **kwargs).arguments)
+        if root_argument == "@depot":
+            selected_root = installed_locations()[0]
+        else:
+            selected_root = arguments[root_argument]
+            if not isinstance(selected_root, (_Path, str)):
+                selected_root = getattr(selected_root, "project_root", getattr(selected_root, "root", selected_root))
+        selected_root = _Path(selected_root).absolute()
+        config_path = selected_root / "ontology-advanced.yaml"
+        if not config_path.exists() and not config_path.is_symlink():
+            return function(*args, **kwargs)
+        if family == "template" and arguments.get("command") == "check":
+            return function(*args, **kwargs)
+        import json as _json
+        import hashlib as _hashlib
+        def unique_pairs(pairs):
+            value = {}
+            for key, item in pairs:
+                if key in value:
+                    raise ValueError("duplicate guard configuration key")
+                value[key] = item
+            return value
+        try:
+            if config_path.is_symlink():
+                raise ValueError("symbolic guard configuration")
+            config = _json.loads(config_path.read_text(), object_pairs_hook=unique_pairs)
+            selected = config.get("profiles", {}).get("guards", {"enabled": False})
+            if config.get("schema_version") != 1 or not isinstance(selected, dict) or type(selected.get("enabled")) is not bool:
+                raise ValueError("unsupported guard configuration")
+        except (OSError, ValueError, AttributeError) as exc:
+            raise _ontology_adapter_error("guard_schema", "Guard configuration is unreadable or unsupported.", {}) from exc
+        if not selected["enabled"]:
+            if set(selected) != {"enabled"}:
+                raise _ontology_adapter_error("guard_schema", "Disabled guard configuration has unsupported fields.", {})
+            return function(*args, **kwargs)
+        script = selected_root / ".agents/skills/ontology/scripts/ontology_guards.py"
+        if not script.is_file() or any(parent.is_symlink() for parent in (script, *script.parents)):
+            raise _ontology_adapter_error("guard_unavailable", "Enabled guards require their current project-local installed adapter.", {})
+        current_sha256 = _hashlib.sha256(script.read_bytes()).hexdigest()
+        module = _sys.modules.get("ontology_guards")
+        if module is not None and (_Path(module.__file__).resolve() != script.resolve()
+                or getattr(module, "ENGINE_SOURCE_SHA256", None) != current_sha256):
+            raise _ontology_adapter_error("guard_stale", "Loaded guard code differs from this selected project's current installed bytes; use a fresh owning-helper process after reviewed repair.", {})
+        if module is None:
+            spec = _util.spec_from_file_location("ontology_guards", script)
+            module = _util.module_from_spec(spec)
+            _sys.modules["ontology_guards"] = module
+            _sys.path.insert(0, str(script.parent))
+            spec.loader.exec_module(module)
+        targets = list(target_paths)
+        if family == "setup":
+            destination = _Path(arguments["destination"]).absolute()
+            try:
+                relative = destination.relative_to(selected_root).as_posix()
+            except ValueError:
+                raise _ontology_adapter_error("guard_scope", "Setup target escapes the selected depot.", {})
+            targets.extend([relative + "/control_records/project-setup.json", relative + "/AGENTS.md", relative + "/ROLE.md"])
+        try:
+            return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+        except module.GuardError as exc:
+            raise _ontology_adapter_error(exc.code, str(exc), exc.details) from exc
+    return guarded
+
+
+def _ontology_adapter_error(code, message, details):
+    return TrdError(2, code, message, **details)
+
+ONTOLOGY_GUARDED_ACTIONS = ['Store.create', 'Store.update', 'Store.set_status', 'Store.migrate', 'Store.reindex']
+Store.create = _ontology_guard_adapter(Store.create, 'trd', 'self', ['TRDs'])
+Store.update = _ontology_guard_adapter(Store.update, 'trd', 'self', ['TRDs'])
+Store.set_status = _ontology_guard_adapter(Store.set_status, 'trd', 'self', ['TRDs'])
+Store.migrate = _ontology_guard_adapter(Store.migrate, 'trd', 'self', ['TRDs'])
+Store.reindex = _ontology_guard_adapter(Store.reindex, 'trd', 'self', ['TRDs'])
 
 if __name__ == '__main__':
     raise SystemExit(main())

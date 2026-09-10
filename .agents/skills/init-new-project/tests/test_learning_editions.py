@@ -13,11 +13,11 @@ class LearningEditionTests(unittest.TestCase):
 
     def test_explicit_feature_sets_and_v7_local_capabilities(self):
         h = self.helper
-        self.assertEqual({f"governance-starter-v{v}" for v in (5, 6, 7)}, h.MEMORY_CONTRACTS)
-        self.assertEqual({f"governance-starter-v{v}" for v in (6, 7)}, h.CAPTURE_CONTRACTS)
-        self.assertEqual({"governance-starter-v7"}, h.LEARNING_CONTRACTS)
+        self.assertEqual({f"governance-starter-v{v}" for v in (5, 6, 7, 8, 9)}, h.MEMORY_CONTRACTS)
+        self.assertEqual({f"governance-starter-v{v}" for v in (6, 7, 8, 9)}, h.CAPTURE_CONTRACTS)
+        self.assertEqual({"governance-starter-v7", "governance-starter-v8", "governance-starter-v9"}, h.LEARNING_CONTRACTS)
         report = self.run_setup()
-        self.assertEqual("governance-starter-v7", report["setup_contract"])
+        self.assertEqual("governance-starter-v9", report["setup_contract"])
         capability = report["learning"]
         self.assertEqual("available", capability["manual_review"])
         self.assertEqual("available", capability["shared_automatic_checkpoint"])
@@ -72,7 +72,11 @@ class LearningEditionTests(unittest.TestCase):
         config["integration"]["automatic_capture"] = False
         config_path.write_bytes(self.helper.encoded(config))
         before = fixture.manifest(self.target)
-        report = self.run_setup()
+        with self.assertRaisesRegex(self.helper.InitializationError, "incomplete") as caught:
+            self.helper.run_initialization(**self.arguments)
+        report = caught.exception.report
+        self.assertFalse(report["static_ready"])
+        self.assertIn("ontology", report["static_health"]["required_failures"])
         self.assertEqual("off", report["learning"]["shared_automatic_checkpoint"])
         for name in ("memory.yaml", "AGENTS.md"):
             self.assertEqual(before[name], fixture.manifest(self.target)[name])

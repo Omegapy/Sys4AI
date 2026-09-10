@@ -1,0 +1,2038 @@
+{
+  "schema_version": 1,
+  "observations": [
+    {
+      "query": "compendium",
+      "result": {
+        "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+        "context": {
+          "config_sha256": "06b9e6dc1f6beb1a16dab235d5f49060eddb09224389cac70fa0b7429c2c2d6c",
+          "generator_version": "1.0.0",
+          "modules": [
+            {
+              "id": "sys4ai-core",
+              "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc",
+              "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+              "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+              "version": "1.0.0"
+            }
+          ],
+          "profile_version": "1.0.0",
+          "project_id": "example",
+          "snapshot_sha256": "864707b9391aa8881e28ab76520fcf91bd2aa6c90b0d7129299420ae3cdc5b5b"
+        },
+        "diagnostics": [],
+        "limits": {
+          "hops": 2,
+          "limit": 5,
+          "max_bytes": 32000
+        },
+        "mutated": false,
+        "operation": "semantic-search",
+        "project_id": "example",
+        "query": "compendium",
+        "results": [
+          {
+            "@id": "urn:sys4ai:ontology:core:describes",
+            "@type": [
+              "urn:sys4ai:ontology:core:RelationshipType"
+            ],
+            "acyclic": false,
+            "bindings": [],
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/42",
+            "cardinality": {
+              "max": null,
+              "min": 0
+            },
+            "definition": "Connect a source artifact with the semantic entity it describes.",
+            "domain": [
+              "urn:sys4ai:ontology:core:Source",
+              "urn:sys4ai:ontology:core:Artifact"
+            ],
+            "fact_kind": "asserted",
+            "freshness": "current",
+            "kind": "predicate",
+            "label": "describes",
+            "lifecycle": "approved",
+            "match_reason": "semantic_similarity",
+            "match_score": 0.621176,
+            "module": "sys4ai-core",
+            "module_version": "1.0.0",
+            "qualifiers": {
+              "scope": {
+                "required": false,
+                "type": "string"
+              }
+            },
+            "range": [
+              "urn:sys4ai:ontology:core:Project",
+              "urn:sys4ai:ontology:core:ProjectTemplate",
+              "urn:sys4ai:ontology:core:Artifact",
+              "urn:sys4ai:ontology:core:Source",
+              "urn:sys4ai:ontology:core:Specification",
+              "urn:sys4ai:ontology:core:Requirement",
+              "urn:sys4ai:ontology:core:Task",
+              "urn:sys4ai:ontology:core:TRD",
+              "urn:sys4ai:ontology:core:ImplementationPlan",
+              "urn:sys4ai:ontology:core:Verification",
+              "urn:sys4ai:ontology:core:Validation",
+              "urn:sys4ai:ontology:core:Evidence",
+              "urn:sys4ai:ontology:core:Agent",
+              "urn:sys4ai:ontology:core:Role",
+              "urn:sys4ai:ontology:core:Skill",
+              "urn:sys4ai:ontology:core:Capability",
+              "urn:sys4ai:ontology:core:ActionType",
+              "urn:sys4ai:ontology:core:MemoryRecord",
+              "urn:sys4ai:ontology:core:Lesson",
+              "urn:sys4ai:ontology:core:Decision",
+              "urn:sys4ai:ontology:core:OntologyConcept",
+              "urn:sys4ai:ontology:core:Authority",
+              "urn:sys4ai:ontology:core:Scope",
+              "urn:sys4ai:ontology:core:TaskManager",
+              "urn:sys4ai:ontology:core:NativeGoal",
+              "urn:sys4ai:ontology:core:CodexConversation",
+              "urn:sys4ai:ontology:core:ProjectDirector",
+              "urn:sys4ai:ontology:core:ProjectSubAgent",
+              "urn:sys4ai:ontology:core:Relationship",
+              "urn:sys4ai:ontology:core:RelationshipType",
+              "urn:sys4ai:ontology:core:SourceBinding",
+              "urn:sys4ai:ontology:core:Property",
+              "urn:sys4ai:ontology:core:MemoryRetrieval",
+              "urn:sys4ai:ontology:core:OntologyRetrieval",
+              "urn:sys4ai:ontology:core:TaskManagement",
+              "urn:sys4ai:ontology:core:TRDCreation",
+              "urn:sys4ai:ontology:core:MemoryPublication",
+              "urn:sys4ai:ontology:core:OntologyPublication",
+              "urn:sys4ai:ontology:core:TaskRequirementDocument"
+            ],
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority.",
+            "source_status": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ],
+            "source_type": "ontology",
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ]
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:derivesFrom",
+            "@type": [
+              "urn:sys4ai:ontology:core:RelationshipType"
+            ],
+            "acyclic": true,
+            "bindings": [],
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/41",
+            "cardinality": {
+              "max": null,
+              "min": 0
+            },
+            "definition": "Describe explicit derivation from selected reusable source material.",
+            "domain": [
+              "urn:sys4ai:ontology:core:ProjectTemplate",
+              "urn:sys4ai:ontology:core:Artifact",
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "fact_kind": "asserted",
+            "freshness": "current",
+            "kind": "predicate",
+            "label": "derives from",
+            "lifecycle": "approved",
+            "match_reason": "semantic_similarity",
+            "match_score": 0.614529,
+            "module": "sys4ai-core",
+            "module_version": "1.0.0",
+            "qualifiers": {
+              "scope": {
+                "required": false,
+                "type": "string"
+              }
+            },
+            "range": [
+              "urn:sys4ai:ontology:core:Artifact",
+              "urn:sys4ai:ontology:core:ProjectTemplate",
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority.",
+            "source_status": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ],
+            "source_type": "ontology",
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ]
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:MemoryPublication",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept",
+              "urn:sys4ai:ontology:core:Capability"
+            ],
+            "bindings": [],
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/10",
+            "definition": "The capability to publish accepted project memory changes only through its own current exact-payload and scoped publication authority. An ontology grant is insufficient.",
+            "fact_kind": "asserted",
+            "freshness": "current",
+            "kind": "concept",
+            "label": "MemoryPublication",
+            "lifecycle": "approved",
+            "match_reason": "semantic_similarity",
+            "match_score": 0.609396,
+            "module": "sys4ai-core",
+            "module_version": "1.0.0",
+            "relationships": [
+              {
+                "@id": "urn:sys4ai:ontology:core:relation-6",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "MemoryPublication requiresAuthority Authority",
+                "lifecycle": "approved",
+                "module": "sys4ai-core",
+                "object": "urn:sys4ai:ontology:core:Authority",
+                "predicate": "urn:sys4ai:ontology:core:requiresAuthority",
+                "qualifiers": {
+                  "scope": "conceptual"
+                },
+                "sources": [
+                  {
+                    "locator": "section:Relationship vocabulary",
+                    "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                    "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:core:MemoryPublication"
+              }
+            ],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority.",
+            "source_status": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:MemoryPublication",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ],
+            "source_type": "ontology",
+            "sources": [
+              {
+                "locator": "section:MemoryPublication",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ]
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:OntologyPublication",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept",
+              "urn:sys4ai:ontology:core:Capability"
+            ],
+            "bindings": [],
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/15",
+            "definition": "The capability to publish accepted ontology changes through its separate exact-payload, current-owner and source-version gates. A memory grant is insufficient.",
+            "fact_kind": "asserted",
+            "freshness": "current",
+            "kind": "concept",
+            "label": "OntologyPublication",
+            "lifecycle": "approved",
+            "match_reason": "semantic_similarity",
+            "match_score": 0.607718,
+            "module": "sys4ai-core",
+            "module_version": "1.0.0",
+            "relationships": [
+              {
+                "@id": "urn:sys4ai:ontology:core:relation-7",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "OntologyPublication requiresAuthority Authority",
+                "lifecycle": "approved",
+                "module": "sys4ai-core",
+                "object": "urn:sys4ai:ontology:core:Authority",
+                "predicate": "urn:sys4ai:ontology:core:requiresAuthority",
+                "qualifiers": {
+                  "scope": "conceptual"
+                },
+                "sources": [
+                  {
+                    "locator": "section:Relationship vocabulary",
+                    "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                    "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:core:OntologyPublication"
+              }
+            ],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority.",
+            "source_status": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:OntologyPublication",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ],
+            "source_type": "ontology",
+            "sources": [
+              {
+                "locator": "section:OntologyPublication",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ]
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:Artifact",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "bindings": [],
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/2",
+            "definition": "A concrete document, file, record or other reviewable work product. Its filesystem path is a binding and may change without changing semantic identity.",
+            "fact_kind": "asserted",
+            "freshness": "current",
+            "kind": "concept",
+            "label": "Artifact",
+            "lifecycle": "approved",
+            "match_reason": "semantic_similarity",
+            "match_score": 0.593326,
+            "module": "sys4ai-core",
+            "module_version": "1.0.0",
+            "relationships": [
+              {
+                "@id": "urn:sys4ai:ontology:core:relation-9",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "ProjectTemplate derivesFrom Artifact",
+                "lifecycle": "approved",
+                "module": "sys4ai-core",
+                "object": "urn:sys4ai:ontology:core:Artifact",
+                "predicate": "urn:sys4ai:ontology:core:derivesFrom",
+                "qualifiers": {
+                  "scope": "conceptual"
+                },
+                "sources": [
+                  {
+                    "locator": "section:Relationship vocabulary",
+                    "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                    "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:core:ProjectTemplate"
+              },
+              {
+                "@id": "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle-subtypeOf-Artifact",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "Every release evidence bundle is an Artifact, as explicitly stated by the selected release evidence source.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "Release evidence bundle subtype of Artifact",
+                "lifecycle": "approved",
+                "module": "project",
+                "object": "urn:sys4ai:ontology:core:Artifact",
+                "predicate": "urn:sys4ai:ontology:core:subtypeOf",
+                "sources": [
+                  {
+                    "locator": "section:Release evidence bundles",
+                    "path": "docs/release-evidence.md",
+                    "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle"
+              }
+            ],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority.",
+            "source_status": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Artifact",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ],
+            "source_type": "ontology",
+            "sources": [
+              {
+                "locator": "section:Artifact",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ]
+          }
+        ],
+        "semantic": {
+          "index_sha256": "1597002d292c9b30cbf12f0ada9772418bc939eeba51a65d6c81983fb840b376",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "offline": true,
+          "packages": {
+            "anyio": "4.15.1",
+            "certifi": "2026.7.22",
+            "charset-normalizer": "3.5.1",
+            "click": "8.5.0",
+            "fastembed": "0.8.0",
+            "filelock": "3.32.6",
+            "flatbuffers": "25.12.19",
+            "fsspec": "2026.7.0",
+            "h11": "0.16.0",
+            "hf-xet": "1.6.0",
+            "httpcore": "1.0.9",
+            "httpx": "0.28.1",
+            "huggingface_hub": "1.30.0",
+            "idna": "3.19",
+            "loguru": "0.7.3",
+            "mmh3": "5.3.0",
+            "numpy": "2.5.3",
+            "onnxruntime": "1.29.0",
+            "packaging": "26.3",
+            "pillow": "12.3.0",
+            "protobuf": "7.36.1",
+            "py_rust_stemmers": "0.1.8",
+            "pyyaml": "6.0.3",
+            "requests": "2.34.2",
+            "tokenizers": "0.23.2",
+            "tqdm": "4.70.0",
+            "typing_extensions": "4.16.0",
+            "urllib3": "2.7.0"
+          },
+          "status": "current",
+          "threshold": 0.45,
+          "used": true
+        },
+        "status": "ok",
+        "truncation": {
+          "available_results": 57,
+          "returned_results": 5,
+          "truncated": true
+        }
+      }
+    },
+    {
+      "query": "a dossier of validation receipts for a release",
+      "result": {
+        "operation": "semantic-search",
+        "query": "a dossier of validation receipts for a release",
+        "project_id": "example",
+        "status": "ok",
+        "results": [
+          {
+            "@id": "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "aliases": [
+              "verification bundle"
+            ],
+            "definition": "An artifact that collects observed validation receipts for one release and supports a release decision without granting execution or publication authority.",
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "Release evidence bundle",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "section:Release evidence bundles",
+                "path": "docs/release-evidence.md",
+                "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/1",
+            "module_version": null,
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Release evidence bundles",
+                "path": "docs/release-evidence.md",
+                "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb",
+                "status": "current",
+                "actual_sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.758289,
+            "relationships": [
+              {
+                "@id": "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle-subtypeOf-Artifact",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "Every release evidence bundle is an Artifact, as explicitly stated by the selected release evidence source.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "Release evidence bundle subtype of Artifact",
+                "lifecycle": "approved",
+                "module": "project",
+                "object": "urn:sys4ai:ontology:core:Artifact",
+                "predicate": "urn:sys4ai:ontology:core:subtypeOf",
+                "sources": [
+                  {
+                    "locator": "section:Release evidence bundles",
+                    "path": "docs/release-evidence.md",
+                    "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle"
+              }
+            ],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:Evidence",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "definition": "An identified observation, source or measured result supporting a claim at a stated version and verification level.",
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "Evidence",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "sources": [
+              {
+                "locator": "section:Evidence",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/7",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Evidence",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.734008,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:example:browser-release-bundle",
+            "@type": [
+              "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle"
+            ],
+            "aliases": [],
+            "definition": "A release evidence bundle for the combined native and browser acceptance run, collecting observed validation receipts without granting authority.",
+            "fact_kind": "asserted",
+            "kind": "instance",
+            "label": "Browser release evidence bundle",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "section:Release evidence bundles",
+                "path": "docs/release-evidence.md",
+                "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/3",
+            "module_version": null,
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Release evidence bundles",
+                "path": "docs/release-evidence.md",
+                "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb",
+                "status": "current",
+                "actual_sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.733158,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:retrieves",
+            "@type": [
+              "urn:sys4ai:ontology:core:RelationshipType"
+            ],
+            "acyclic": false,
+            "cardinality": {
+              "max": null,
+              "min": 0
+            },
+            "definition": "Describe the evidence or meaning a capability can return.",
+            "domain": [
+              "urn:sys4ai:ontology:core:Skill",
+              "urn:sys4ai:ontology:core:Capability"
+            ],
+            "fact_kind": "asserted",
+            "kind": "predicate",
+            "label": "retrieves",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "qualifiers": {
+              "scope": {
+                "required": false,
+                "type": "string"
+              }
+            },
+            "range": [
+              "urn:sys4ai:ontology:core:MemoryRecord",
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/61",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.710737,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:derivesFrom",
+            "@type": [
+              "urn:sys4ai:ontology:core:RelationshipType"
+            ],
+            "acyclic": true,
+            "cardinality": {
+              "max": null,
+              "min": 0
+            },
+            "definition": "Describe explicit derivation from selected reusable source material.",
+            "domain": [
+              "urn:sys4ai:ontology:core:ProjectTemplate",
+              "urn:sys4ai:ontology:core:Artifact",
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "fact_kind": "asserted",
+            "kind": "predicate",
+            "label": "derives from",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "qualifiers": {
+              "scope": {
+                "required": false,
+                "type": "string"
+              }
+            },
+            "range": [
+              "urn:sys4ai:ontology:core:Artifact",
+              "urn:sys4ai:ontology:core:ProjectTemplate",
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/41",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.696392,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:Source",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "definition": "Identified evidence used to support a definition or assertion. A local source reference records exact path, SHA256 and a useful locator; changed bytes must be reported.",
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "Source",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "sources": [
+              {
+                "locator": "section:Source",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/28",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Source",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.695152,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:verifiedBy",
+            "@type": [
+              "urn:sys4ai:ontology:core:RelationshipType"
+            ],
+            "acyclic": false,
+            "cardinality": {
+              "max": null,
+              "min": 0
+            },
+            "definition": "Connect a work product or requirement with conformance verification evidence.",
+            "domain": [
+              "urn:sys4ai:ontology:core:Artifact",
+              "urn:sys4ai:ontology:core:Requirement",
+              "urn:sys4ai:ontology:core:Task"
+            ],
+            "fact_kind": "asserted",
+            "kind": "predicate",
+            "label": "verified by",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "qualifiers": {
+              "scope": {
+                "required": false,
+                "type": "string"
+              }
+            },
+            "range": [
+              "urn:sys4ai:ontology:core:Verification",
+              "urn:sys4ai:ontology:core:Evidence"
+            ],
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/64",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.694707,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:validatedBy",
+            "@type": [
+              "urn:sys4ai:ontology:core:RelationshipType"
+            ],
+            "acyclic": false,
+            "cardinality": {
+              "max": null,
+              "min": 0
+            },
+            "definition": "Connect a result with checks of fitness for intended use.",
+            "domain": [
+              "urn:sys4ai:ontology:core:Artifact",
+              "urn:sys4ai:ontology:core:Task"
+            ],
+            "fact_kind": "asserted",
+            "kind": "predicate",
+            "label": "validated by",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "qualifiers": {
+              "scope": {
+                "required": false,
+                "type": "string"
+              }
+            },
+            "range": [
+              "urn:sys4ai:ontology:core:Validation"
+            ],
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/63",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.669731,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:example:concurrent-validation-receipt",
+            "@type": [
+              "urn:sys4ai:ontology:core:Artifact"
+            ],
+            "definition": "A selected fixture meaning for concurrent-validation-receipt.",
+            "fact_kind": "asserted",
+            "kind": "instance",
+            "label": "Concurrent validation receipt",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "section:Specification",
+                "path": "SPECS.md",
+                "sha256": "119b2b9db3283629f802b89a129ad5806bf9b63db49667e24e4ebde7d6dc21a4"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/0",
+            "module_version": null,
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Specification",
+                "path": "SPECS.md",
+                "sha256": "119b2b9db3283629f802b89a129ad5806bf9b63db49667e24e4ebde7d6dc21a4",
+                "status": "current",
+                "actual_sha256": "119b2b9db3283629f802b89a129ad5806bf9b63db49667e24e4ebde7d6dc21a4",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.658605,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:MemoryRetrieval",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept",
+              "urn:sys4ai:ontology:core:Capability"
+            ],
+            "aliases": [
+              "retrieve project memory",
+              "memory search",
+              "memory retrieval"
+            ],
+            "definition": "The capability to retrieve permitted project memory evidence through the installed memory read and search interfaces, retaining provenance, lifecycle and source restrictions.",
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "MemoryRetrieval",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "sources": [
+              {
+                "locator": "section:MemoryRetrieval",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/12",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:MemoryRetrieval",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.657643,
+            "relationships": [
+              {
+                "@id": "urn:sys4ai:ontology:core:relation-5",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "MemoryRetrieval retrieves MemoryRecord",
+                "lifecycle": "approved",
+                "module": "sys4ai-core",
+                "object": "urn:sys4ai:ontology:core:MemoryRecord",
+                "predicate": "urn:sys4ai:ontology:core:retrieves",
+                "qualifiers": {
+                  "scope": "conceptual"
+                },
+                "sources": [
+                  {
+                    "locator": "section:Relationship vocabulary",
+                    "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                    "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:core:MemoryRetrieval"
+              }
+            ],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:Requirement",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "definition": "An explicit expected outcome or constraint with a source and observable acceptance criterion.",
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "Requirement",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "sources": [
+              {
+                "locator": "section:Requirement",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/24",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Requirement",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.646314,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:Relationship",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "definition": "A directed, typed assertion between stable endpoint identities, carrying a registered predicate, fact classification and source provenance.",
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "Relationship",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "sources": [
+              {
+                "locator": "section:Relationship",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/22",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Relationship",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.643294,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:MemoryRecord",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "definition": "A project memory record retaining historical evidence, decisions or lessons in its own canonical store. Memory recall is evidence, not current governing authority; memory publication cannot redefine ontology semantics.",
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "MemoryRecord",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "scope_note": "Historical evidence is not a freshly verified governing rule.",
+            "sources": [
+              {
+                "locator": "section:MemoryRecord",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/11",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:MemoryRecord",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.639331,
+            "relationships": [
+              {
+                "@id": "urn:sys4ai:ontology:core:relation-2",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "Task relatedTo MemoryRecord",
+                "lifecycle": "approved",
+                "module": "sys4ai-core",
+                "object": "urn:sys4ai:ontology:core:MemoryRecord",
+                "predicate": "urn:sys4ai:ontology:core:relatedTo",
+                "qualifiers": {
+                  "scope": "conceptual"
+                },
+                "sources": [
+                  {
+                    "locator": "section:Relationship vocabulary",
+                    "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                    "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:core:Task"
+              },
+              {
+                "@id": "urn:sys4ai:ontology:core:relation-5",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "MemoryRetrieval retrieves MemoryRecord",
+                "lifecycle": "approved",
+                "module": "sys4ai-core",
+                "object": "urn:sys4ai:ontology:core:MemoryRecord",
+                "predicate": "urn:sys4ai:ontology:core:retrieves",
+                "qualifiers": {
+                  "scope": "conceptual"
+                },
+                "sources": [
+                  {
+                    "locator": "section:Relationship vocabulary",
+                    "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                    "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:core:MemoryRetrieval"
+              }
+            ],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          }
+        ],
+        "context": {
+          "project_id": "example",
+          "profile_version": "1.0.0",
+          "generator_version": "1.0.0",
+          "modules": [
+            {
+              "id": "sys4ai-core",
+              "version": "1.0.0",
+              "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+              "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+              "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc"
+            }
+          ],
+          "snapshot_sha256": "864707b9391aa8881e28ab76520fcf91bd2aa6c90b0d7129299420ae3cdc5b5b",
+          "config_sha256": "06b9e6dc1f6beb1a16dab235d5f49060eddb09224389cac70fa0b7429c2c2d6c"
+        },
+        "diagnostics": [],
+        "limits": {
+          "limit": 20,
+          "max_bytes": 32000,
+          "hops": 2
+        },
+        "truncation": {
+          "truncated": true,
+          "available_results": 57,
+          "returned_results": 13
+        },
+        "mutated": false,
+        "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+        "semantic": {
+          "status": "current",
+          "used": true,
+          "index_sha256": "1597002d292c9b30cbf12f0ada9772418bc939eeba51a65d6c81983fb840b376",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "packages": {
+            "anyio": "4.15.1",
+            "certifi": "2026.7.22",
+            "charset-normalizer": "3.5.1",
+            "click": "8.5.0",
+            "fastembed": "0.8.0",
+            "filelock": "3.32.6",
+            "flatbuffers": "25.12.19",
+            "fsspec": "2026.7.0",
+            "h11": "0.16.0",
+            "hf-xet": "1.6.0",
+            "httpcore": "1.0.9",
+            "httpx": "0.28.1",
+            "huggingface_hub": "1.30.0",
+            "idna": "3.19",
+            "loguru": "0.7.3",
+            "mmh3": "5.3.0",
+            "numpy": "2.5.3",
+            "onnxruntime": "1.29.0",
+            "packaging": "26.3",
+            "pillow": "12.3.0",
+            "protobuf": "7.36.1",
+            "py_rust_stemmers": "0.1.8",
+            "pyyaml": "6.0.3",
+            "requests": "2.34.2",
+            "tokenizers": "0.23.2",
+            "tqdm": "4.70.0",
+            "typing_extensions": "4.16.0",
+            "urllib3": "2.7.0"
+          },
+          "threshold": 0.45,
+          "offline": true
+        }
+      }
+    },
+    {
+      "query": "gathered reports showing a release was checked",
+      "result": {
+        "operation": "semantic-search",
+        "query": "gathered reports showing a release was checked",
+        "project_id": "example",
+        "status": "ok",
+        "results": [
+          {
+            "@id": "urn:sys4ai:ontology:core:Evidence",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "definition": "An identified observation, source or measured result supporting a claim at a stated version and verification level.",
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "Evidence",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "sources": [
+              {
+                "locator": "section:Evidence",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/7",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Evidence",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.689719,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "aliases": [
+              "verification bundle"
+            ],
+            "definition": "An artifact that collects observed validation receipts for one release and supports a release decision without granting execution or publication authority.",
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "Release evidence bundle",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "section:Release evidence bundles",
+                "path": "docs/release-evidence.md",
+                "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/1",
+            "module_version": null,
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Release evidence bundles",
+                "path": "docs/release-evidence.md",
+                "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb",
+                "status": "current",
+                "actual_sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.653965,
+            "relationships": [
+              {
+                "@id": "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle-subtypeOf-Artifact",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "Every release evidence bundle is an Artifact, as explicitly stated by the selected release evidence source.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "Release evidence bundle subtype of Artifact",
+                "lifecycle": "approved",
+                "module": "project",
+                "object": "urn:sys4ai:ontology:core:Artifact",
+                "predicate": "urn:sys4ai:ontology:core:subtypeOf",
+                "sources": [
+                  {
+                    "locator": "section:Release evidence bundles",
+                    "path": "docs/release-evidence.md",
+                    "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle"
+              }
+            ],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:example:browser-release-bundle",
+            "@type": [
+              "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle"
+            ],
+            "aliases": [],
+            "definition": "A release evidence bundle for the combined native and browser acceptance run, collecting observed validation receipts without granting authority.",
+            "fact_kind": "asserted",
+            "kind": "instance",
+            "label": "Browser release evidence bundle",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "section:Release evidence bundles",
+                "path": "docs/release-evidence.md",
+                "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/3",
+            "module_version": null,
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Release evidence bundles",
+                "path": "docs/release-evidence.md",
+                "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb",
+                "status": "current",
+                "actual_sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.65187,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:Source",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "definition": "Identified evidence used to support a definition or assertion. A local source reference records exact path, SHA256 and a useful locator; changed bytes must be reported.",
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "Source",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "sources": [
+              {
+                "locator": "section:Source",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/28",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Source",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.642378,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:retrieves",
+            "@type": [
+              "urn:sys4ai:ontology:core:RelationshipType"
+            ],
+            "acyclic": false,
+            "cardinality": {
+              "max": null,
+              "min": 0
+            },
+            "definition": "Describe the evidence or meaning a capability can return.",
+            "domain": [
+              "urn:sys4ai:ontology:core:Skill",
+              "urn:sys4ai:ontology:core:Capability"
+            ],
+            "fact_kind": "asserted",
+            "kind": "predicate",
+            "label": "retrieves",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "qualifiers": {
+              "scope": {
+                "required": false,
+                "type": "string"
+              }
+            },
+            "range": [
+              "urn:sys4ai:ontology:core:MemoryRecord",
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/61",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.628826,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:validatedBy",
+            "@type": [
+              "urn:sys4ai:ontology:core:RelationshipType"
+            ],
+            "acyclic": false,
+            "cardinality": {
+              "max": null,
+              "min": 0
+            },
+            "definition": "Connect a result with checks of fitness for intended use.",
+            "domain": [
+              "urn:sys4ai:ontology:core:Artifact",
+              "urn:sys4ai:ontology:core:Task"
+            ],
+            "fact_kind": "asserted",
+            "kind": "predicate",
+            "label": "validated by",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "qualifiers": {
+              "scope": {
+                "required": false,
+                "type": "string"
+              }
+            },
+            "range": [
+              "urn:sys4ai:ontology:core:Validation"
+            ],
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/63",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.624591,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:derivesFrom",
+            "@type": [
+              "urn:sys4ai:ontology:core:RelationshipType"
+            ],
+            "acyclic": true,
+            "cardinality": {
+              "max": null,
+              "min": 0
+            },
+            "definition": "Describe explicit derivation from selected reusable source material.",
+            "domain": [
+              "urn:sys4ai:ontology:core:ProjectTemplate",
+              "urn:sys4ai:ontology:core:Artifact",
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "fact_kind": "asserted",
+            "kind": "predicate",
+            "label": "derives from",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "qualifiers": {
+              "scope": {
+                "required": false,
+                "type": "string"
+              }
+            },
+            "range": [
+              "urn:sys4ai:ontology:core:Artifact",
+              "urn:sys4ai:ontology:core:ProjectTemplate",
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/41",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.605996,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:MemoryPublication",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept",
+              "urn:sys4ai:ontology:core:Capability"
+            ],
+            "definition": "The capability to publish accepted project memory changes only through its own current exact-payload and scoped publication authority. An ontology grant is insufficient.",
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "MemoryPublication",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "sources": [
+              {
+                "locator": "section:MemoryPublication",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/10",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:MemoryPublication",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.592045,
+            "relationships": [
+              {
+                "@id": "urn:sys4ai:ontology:core:relation-6",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "MemoryPublication requiresAuthority Authority",
+                "lifecycle": "approved",
+                "module": "sys4ai-core",
+                "object": "urn:sys4ai:ontology:core:Authority",
+                "predicate": "urn:sys4ai:ontology:core:requiresAuthority",
+                "qualifiers": {
+                  "scope": "conceptual"
+                },
+                "sources": [
+                  {
+                    "locator": "section:Relationship vocabulary",
+                    "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                    "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:core:MemoryPublication"
+              }
+            ],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:MemoryRecord",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "definition": "A project memory record retaining historical evidence, decisions or lessons in its own canonical store. Memory recall is evidence, not current governing authority; memory publication cannot redefine ontology semantics.",
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "MemoryRecord",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "scope_note": "Historical evidence is not a freshly verified governing rule.",
+            "sources": [
+              {
+                "locator": "section:MemoryRecord",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/11",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:MemoryRecord",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.586796,
+            "relationships": [
+              {
+                "@id": "urn:sys4ai:ontology:core:relation-2",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "Task relatedTo MemoryRecord",
+                "lifecycle": "approved",
+                "module": "sys4ai-core",
+                "object": "urn:sys4ai:ontology:core:MemoryRecord",
+                "predicate": "urn:sys4ai:ontology:core:relatedTo",
+                "qualifiers": {
+                  "scope": "conceptual"
+                },
+                "sources": [
+                  {
+                    "locator": "section:Relationship vocabulary",
+                    "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                    "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:core:Task"
+              },
+              {
+                "@id": "urn:sys4ai:ontology:core:relation-5",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "MemoryRetrieval retrieves MemoryRecord",
+                "lifecycle": "approved",
+                "module": "sys4ai-core",
+                "object": "urn:sys4ai:ontology:core:MemoryRecord",
+                "predicate": "urn:sys4ai:ontology:core:retrieves",
+                "qualifiers": {
+                  "scope": "conceptual"
+                },
+                "sources": [
+                  {
+                    "locator": "section:Relationship vocabulary",
+                    "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                    "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:core:MemoryRetrieval"
+              }
+            ],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:manages",
+            "@type": [
+              "urn:sys4ai:ontology:core:RelationshipType"
+            ],
+            "acyclic": false,
+            "cardinality": {
+              "max": null,
+              "min": 0
+            },
+            "definition": "Describe a role responsible for managed work subject to confirmed activation.",
+            "domain": [
+              "urn:sys4ai:ontology:core:Role",
+              "urn:sys4ai:ontology:core:TaskManager"
+            ],
+            "fact_kind": "asserted",
+            "kind": "predicate",
+            "label": "manages",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "qualifiers": {
+              "scope": {
+                "required": false,
+                "type": "string"
+              }
+            },
+            "range": [
+              "urn:sys4ai:ontology:core:Task"
+            ],
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/45",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.586144,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:verifiedBy",
+            "@type": [
+              "urn:sys4ai:ontology:core:RelationshipType"
+            ],
+            "acyclic": false,
+            "cardinality": {
+              "max": null,
+              "min": 0
+            },
+            "definition": "Connect a work product or requirement with conformance verification evidence.",
+            "domain": [
+              "urn:sys4ai:ontology:core:Artifact",
+              "urn:sys4ai:ontology:core:Requirement",
+              "urn:sys4ai:ontology:core:Task"
+            ],
+            "fact_kind": "asserted",
+            "kind": "predicate",
+            "label": "verified by",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "qualifiers": {
+              "scope": {
+                "required": false,
+                "type": "string"
+              }
+            },
+            "range": [
+              "urn:sys4ai:ontology:core:Verification",
+              "urn:sys4ai:ontology:core:Evidence"
+            ],
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/64",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.585125,
+            "relationships": [],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:Task",
+            "@type": [
+              "urn:sys4ai:ontology:core:OntologyConcept"
+            ],
+            "aliases": [
+              "Sys4AI Task"
+            ],
+            "definition": "A canonical Sys4AI managed work record with definition of done, execution state and confirmed owner. A Task is distinct from a TRD, implementation plan, native goal and Codex conversation. Document approval does not activate a Task or establish implementation completion.",
+            "examples": [
+              "A canonical task.json with a definition of done and confirmed manager"
+            ],
+            "fact_kind": "asserted",
+            "kind": "concept",
+            "label": "Task",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "non_examples": [
+              "A Codex conversation",
+              "An approved TRD",
+              "A native goal"
+            ],
+            "scope_note": "Distinguish requirements approval, plan readiness, Task activation, implementation, verification and validation. These states require separate evidence.",
+            "sources": [
+              {
+                "locator": "section:Task",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "source_type": "ontology",
+            "match_reason": "semantic_similarity",
+            "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/33",
+            "module_version": "1.0.0",
+            "bindings": [],
+            "source_status": [
+              {
+                "locator": "section:Task",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current",
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null
+              }
+            ],
+            "freshness": "current",
+            "match_score": 0.584379,
+            "relationships": [
+              {
+                "@id": "urn:sys4ai:ontology:core:relation-1",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "Task relatedTo TRD",
+                "lifecycle": "approved",
+                "module": "sys4ai-core",
+                "object": "urn:sys4ai:ontology:core:TRD",
+                "predicate": "urn:sys4ai:ontology:core:relatedTo",
+                "qualifiers": {
+                  "scope": "conceptual"
+                },
+                "sources": [
+                  {
+                    "locator": "section:Relationship vocabulary",
+                    "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                    "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:core:Task"
+              },
+              {
+                "@id": "urn:sys4ai:ontology:core:relation-2",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "Task relatedTo MemoryRecord",
+                "lifecycle": "approved",
+                "module": "sys4ai-core",
+                "object": "urn:sys4ai:ontology:core:MemoryRecord",
+                "predicate": "urn:sys4ai:ontology:core:relatedTo",
+                "qualifiers": {
+                  "scope": "conceptual"
+                },
+                "sources": [
+                  {
+                    "locator": "section:Relationship vocabulary",
+                    "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                    "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:core:Task"
+              },
+              {
+                "@id": "urn:sys4ai:ontology:core:relation-4",
+                "@type": [
+                  "urn:sys4ai:ontology:core:Relationship"
+                ],
+                "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+                "fact_kind": "asserted",
+                "kind": "relation",
+                "label": "TaskManager manages Task",
+                "lifecycle": "approved",
+                "module": "sys4ai-core",
+                "object": "urn:sys4ai:ontology:core:Task",
+                "predicate": "urn:sys4ai:ontology:core:manages",
+                "qualifiers": {
+                  "scope": "conceptual"
+                },
+                "sources": [
+                  {
+                    "locator": "section:Relationship vocabulary",
+                    "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                    "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+                  }
+                ],
+                "subject": "urn:sys4ai:ontology:core:TaskManager"
+              }
+            ],
+            "semantic_uncertainty": "Similarity suggests relevance; it establishes neither equivalence nor authority."
+          }
+        ],
+        "context": {
+          "project_id": "example",
+          "profile_version": "1.0.0",
+          "generator_version": "1.0.0",
+          "modules": [
+            {
+              "id": "sys4ai-core",
+              "version": "1.0.0",
+              "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+              "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+              "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc"
+            }
+          ],
+          "snapshot_sha256": "864707b9391aa8881e28ab76520fcf91bd2aa6c90b0d7129299420ae3cdc5b5b",
+          "config_sha256": "06b9e6dc1f6beb1a16dab235d5f49060eddb09224389cac70fa0b7429c2c2d6c"
+        },
+        "diagnostics": [],
+        "limits": {
+          "limit": 20,
+          "max_bytes": 32000,
+          "hops": 2
+        },
+        "truncation": {
+          "truncated": true,
+          "available_results": 55,
+          "returned_results": 12
+        },
+        "mutated": false,
+        "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+        "semantic": {
+          "status": "current",
+          "used": true,
+          "index_sha256": "1597002d292c9b30cbf12f0ada9772418bc939eeba51a65d6c81983fb840b376",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "packages": {
+            "anyio": "4.15.1",
+            "certifi": "2026.7.22",
+            "charset-normalizer": "3.5.1",
+            "click": "8.5.0",
+            "fastembed": "0.8.0",
+            "filelock": "3.32.6",
+            "flatbuffers": "25.12.19",
+            "fsspec": "2026.7.0",
+            "h11": "0.16.0",
+            "hf-xet": "1.6.0",
+            "httpcore": "1.0.9",
+            "httpx": "0.28.1",
+            "huggingface_hub": "1.30.0",
+            "idna": "3.19",
+            "loguru": "0.7.3",
+            "mmh3": "5.3.0",
+            "numpy": "2.5.3",
+            "onnxruntime": "1.29.0",
+            "packaging": "26.3",
+            "pillow": "12.3.0",
+            "protobuf": "7.36.1",
+            "py_rust_stemmers": "0.1.8",
+            "pyyaml": "6.0.3",
+            "requests": "2.34.2",
+            "tokenizers": "0.23.2",
+            "tqdm": "4.70.0",
+            "typing_extensions": "4.16.0",
+            "urllib3": "2.7.0"
+          },
+          "threshold": 0.45,
+          "offline": true
+        }
+      }
+    }
+  ],
+  "purpose": "Observed query probes; no accuracy percentage or improvement threshold is inferred from selecting a connected demonstration query."
+}

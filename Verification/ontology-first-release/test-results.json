@@ -1,0 +1,112 @@
+{
+  "all_passed": true,
+  "classification": "Deterministic local suites; actual installed/native observations have separate receipts.",
+  "combined_acceptance": {
+    "competency_questions": 28,
+    "evidence": "Verification/ontology-first-release/final-competency-check.json",
+    "valid": true
+  },
+  "environment": "Existing Python 3.12 virtual environment, PYTHONDONTWRITEBYTECODE=1; no dependency installation or new service.",
+  "git_diff_check_passed": true,
+  "observed_at": "2026-09-09T19:41:38.684808+00:00",
+  "overlap": "Source, root-installed and Template suites repeat the same tests against their separate copies; counts are not unique-test totals.",
+  "schema_version": 1,
+  "suites": [
+    {
+      "log": "Verification/ontology-first-release/source-ontology-tests.log",
+      "log_sha256": "6cee1c100c9e882088fa6ed1e0ca6fed1052ba5017ce09c32714b45d00abce2b",
+      "result": "passed",
+      "seconds": 14.734,
+      "skip_reasons": [],
+      "skipped": 0,
+      "suite": "source-ontology",
+      "tests_run": 62
+    },
+    {
+      "log": "Verification/ontology-first-release/installed-ontology-tests.log",
+      "log_sha256": "1bb6968e8b2188b653755d3191db51dc40c5466d3b799d70d9bdbc9ea0ea1c3d",
+      "result": "passed",
+      "seconds": 16.027,
+      "skip_reasons": [],
+      "skipped": 0,
+      "suite": "installed-ontology",
+      "tests_run": 62
+    },
+    {
+      "log": "Verification/ontology-first-release/template-ontology-tests.log",
+      "log_sha256": "f589a60d70149c4cd847266fcfd454b95a422a5296aa83089d2e3289cf34e8c7",
+      "result": "passed",
+      "seconds": 14.42,
+      "skip_reasons": [],
+      "skipped": 0,
+      "suite": "template-ontology",
+      "tests_run": 62
+    },
+    {
+      "log": "Verification/ontology-first-release/source-initializer-tests.log",
+      "log_sha256": "719768153c88eae4e84601d54aa3000996b16cce37697d0a4459b2e048e62f27",
+      "result": "passed",
+      "seconds": 290.396,
+      "skip_reasons": [
+        "real filesystem uses case-insensitive directory lookup"
+      ],
+      "skipped": 1,
+      "suite": "source-initializer",
+      "tests_run": 100
+    },
+    {
+      "log": "Verification/ontology-first-release/installed-initializer-tests.log",
+      "log_sha256": "6150613ea05afce9bc8657931d56b23d5194e4917f332ad37a8c1cdd891fa9e9",
+      "result": "passed",
+      "seconds": 286.32,
+      "skip_reasons": [
+        "real filesystem uses case-insensitive directory lookup"
+      ],
+      "skipped": 1,
+      "suite": "installed-initializer",
+      "tests_run": 100
+    },
+    {
+      "log": "Verification/ontology-first-release/final-root-tests.log",
+      "log_sha256": "9fd20367e916e4441806efd3d741a4d945785da23bd91f349b3c514fbb744d6a",
+      "result": "passed",
+      "seconds": 11.521,
+      "skip_reasons": [
+        "distinct case-equivalent directories require a case-sensitive filesystem"
+      ],
+      "skipped": 1,
+      "suite": "final-root",
+      "tests_run": 91
+    },
+    {
+      "log": "Verification/ontology-first-release/template-contract-tests.log",
+      "log_sha256": "e3c4c45133b180d98d0541048e3ef035757150aeee0bc11feeb71a4aa7d9944f",
+      "result": "passed",
+      "seconds": 0.416,
+      "skip_reasons": [],
+      "skipped": 0,
+      "suite": "template-contract",
+      "tests_run": 11
+    },
+    {
+      "log": "Verification/ontology-first-release/memory-regression-tests.log",
+      "log_sha256": "8de8a02eaf87e4db6c680fe5e7a625f6eaa82f280207cb44710927ed95011458",
+      "result": "passed",
+      "seconds": 18.998,
+      "skip_reasons": [],
+      "skipped": 0,
+      "suite": "memory-regression",
+      "tests_run": 77
+    },
+    {
+      "log": "Verification/ontology-first-release/task-regression-tests.log",
+      "log_sha256": "31f7dc390b69ef4cb5d46d364d49ef41ebb2153c80cef467545c4bebc073038c",
+      "result": "passed",
+      "seconds": 77.156,
+      "skip_reasons": [],
+      "skipped": 0,
+      "suite": "task-regression",
+      "tests_run": 111
+    }
+  ]
+}

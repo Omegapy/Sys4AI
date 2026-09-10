@@ -1,0 +1,17 @@
+{
+  "name": "guard-incomplete-selection",
+  "note": "Direct read-only guard profile validation of the same enabled selection.",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-c",
+    "import json,sys;sys.path.insert(0,'/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts');from ontology_guards import profile,GuardError\ntry: print(json.dumps(profile(sys.argv[1])))\nexcept GuardError as error: print(json.dumps({'code':error.code,'message':str(error)}));sys.exit(1)",
+    "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-health-controls-c74rm_91/advanced"
+  ],
+  "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+  "started_at": "2026-09-10T16:46:54.289213+00:00",
+  "duration_seconds": 0.039164,
+  "exit_code": 1,
+  "fixture_bytes_and_mtimes_unchanged": true,
+  "stdout": "probe-guard-incomplete-selection.stdout.log",
+  "stderr": "probe-guard-incomplete-selection.stderr.log"
+}

@@ -15,7 +15,11 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project-root", required=True)
     commands = parser.add_subparsers(dest="command", required=True)
-    commands.add_parser("health")
+    health_command = commands.add_parser("health")
+    health_command.add_argument("--scope", choices=("canonical", "selected"), default="selected")
+    health_command.add_argument("--level", choices=("static", "operational"), default="static")
+    health_command.add_argument("--require", action="append", default=[])
+    health_command.add_argument("--format", choices=("json", "text"), default="json")
     commands.add_parser("capture-status")
     setting = commands.add_parser("set-capture")
     setting.add_argument("setting", choices=("on", "off"))
@@ -53,7 +57,7 @@ def main(argv=None):
     try:
         root = project_root(args.project_root)
         if args.command == "health":
-            result = health(root)
+            result = health(root, scope=args.scope, level=args.level, required=args.require)
         elif args.command == "capture-status":
             from memory_capture import capture_status
             result = capture_status(root)
@@ -70,7 +74,10 @@ def main(argv=None):
             config = load_config(root)
             records = [load_record(root, args.path, config)] if args.path else load_records(root, config, historical=True)
             diagnostics = [d for record in records for d in record["diagnostics"]]
-            result = {"valid": not diagnostics, "records": len(records), "diagnostics": diagnostics, "read_only": True}
+            result = {"valid": not any(d.get("severity") != "info" for d in diagnostics),
+                      "records": len(records), "diagnostics": diagnostics,
+                      "verified_current_records": sum(record["evidence"]["verified_current"] for record in records),
+                      "read_only": True}
         elif args.command == "search":
             require(bool(args.packet_file) == bool(args.packet_sha256), "packet_reference", "Frozen packet lookup requires both exact path and reviewed SHA256.")
             from memory_search import search as find
@@ -97,8 +104,21 @@ def main(argv=None):
         else:
             from memory_maintenance import recover_reindex
             result = recover_reindex(root, args.operation_id, grant_file=args.grant_file, actor=args.actor)
+        if args.command == "health":
+            from memory_core import health_exit
+            if args.format == "text":
+                print(f"Memory health: {result['aggregate']} ({args.scope}/{args.level})")
+                for name, component in result.get("components", {}).items():
+                    print(f"  {name}: {component['status']}")
+                for diagnostic in result.get("diagnostics", []):
+                    print("  " + json.dumps(diagnostic, sort_keys=True))
+                if result.get("error"):
+                    print("  " + json.dumps(result["error"], sort_keys=True))
+            else:
+                print(json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2))
+            return health_exit(result)
         print(json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2))
-        return 1 if (isinstance(result, dict) and (result.get("valid") is False or result.get("status") == "invalid")) else 0
+        return 1 if (isinstance(result, dict) and (result.get("valid") is False or result.get("ready") is False or result.get("status") == "invalid")) else 0
     except MemoryError as exc:
         print(json.dumps({"ok": False, "error": exc.as_dict()}, sort_keys=True, indent=2))
         return 2

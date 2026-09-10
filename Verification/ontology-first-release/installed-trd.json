@@ -1,0 +1,198 @@
+{
+  "scenario": "trd",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology.py",
+    "--project-root",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI",
+    "term",
+    "TRD"
+  ],
+  "returncode": 0,
+  "result": {
+    "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+    "context": {
+      "config_sha256": "de3973b748afa7dbce5aa74e049cc02bbdc9c445345fb047f96c28317f411d44",
+      "generator_version": "1.0.0",
+      "modules": [
+        {
+          "id": "sys4ai-core",
+          "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+          "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+          "version": "1.0.0"
+        }
+      ],
+      "profile_version": "1.0.0",
+      "project_id": "sys4ai-depot",
+      "snapshot_sha256": "1d5f7f78e4f0eb4929f4dfae1ff11dc623e4690959652c9903c6f145f65b8c24"
+    },
+    "diagnostics": [],
+    "limits": {
+      "hops": 2,
+      "limit": 20,
+      "max_bytes": 32000
+    },
+    "mutated": false,
+    "operation": "term",
+    "project_id": "sys4ai-depot",
+    "query": "TRD",
+    "results": [
+      {
+        "@id": "urn:sys4ai:ontology:core:TRD",
+        "@type": [
+          "urn:sys4ai:ontology:core:OntologyConcept"
+        ],
+        "aliases": [
+          "Task Requirement Document"
+        ],
+        "bindings": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-TRD",
+            "@type": [
+              "urn:sys4ai:ontology:core:SourceBinding"
+            ],
+            "binding_type": "artifact",
+            "definition": "A TRD captures approved requirements. Creating or approving it does not create a Task or authorize implementation.",
+            "entity": "urn:sys4ai:ontology:core:TRD",
+            "fact_kind": "asserted",
+            "kind": "binding",
+            "label": "Source binding binding-concept-TRD",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "section:1. Activation and authority",
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+              }
+            ]
+          }
+        ],
+        "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/31",
+        "definition": "A Task Requirement Document capturing explicit requirements and acceptance criteria. Approval settles the requirements document; it does not activate a Task, authorize implementation or prove completion.",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "kind": "concept",
+        "label": "TRD",
+        "lifecycle": "approved",
+        "match_reason": "preferred_label",
+        "match_score": 1,
+        "module": "sys4ai-core",
+        "module_version": "1.0.0",
+        "non_examples": [
+          "Task activation",
+          "Implementation completion"
+        ],
+        "relationships": [
+          {
+            "@id": "urn:sys4ai:ontology:core:relation-1",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "Task relatedTo TRD",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "object": "urn:sys4ai:ontology:core:TRD",
+            "predicate": "urn:sys4ai:ontology:core:relatedTo",
+            "qualifiers": {
+              "scope": "conceptual"
+            },
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:core:Task"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:relation-8",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "TaskRequirementDocument replacedBy TRD",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "object": "urn:sys4ai:ontology:core:TRD",
+            "predicate": "urn:sys4ai:ontology:core:replacedBy",
+            "qualifiers": {
+              "scope": "conceptual"
+            },
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:core:TaskRequirementDocument"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-produces",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "TRD creation produces a requirements document",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "TRD creation produces a requirements document",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:core:TRD",
+            "predicate": "urn:sys4ai:ontology:core:produces",
+            "sources": [
+              {
+                "locator": "section:1. Activation and authority",
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd"
+          }
+        ],
+        "scope_note": "A requirements document is not a canonical Task or a native runtime goal.",
+        "source_status": [
+          {
+            "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+            "diagnostic": null,
+            "locator": "section:1. Activation and authority",
+            "path": ".agents/skills/to-trd/SKILL.md",
+            "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+            "status": "current"
+          },
+          {
+            "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "diagnostic": null,
+            "locator": "section:TRD",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:TRD",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+          }
+        ]
+      }
+    ],
+    "status": "ok",
+    "truncation": {
+      "available_results": 1,
+      "returned_results": 1,
+      "truncated": false
+    }
+  },
+  "stderr": ""
+}

@@ -1,0 +1,100 @@
+{
+  "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+  "context": {
+    "config_sha256": "06b9e6dc1f6beb1a16dab235d5f49060eddb09224389cac70fa0b7429c2c2d6c",
+    "generator_version": "1.0.0",
+    "modules": [
+      {
+        "id": "sys4ai-core",
+        "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+        "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+        "version": "1.0.0"
+      }
+    ],
+    "profile_version": "1.0.0",
+    "project_id": "example",
+    "snapshot_sha256": "68d8dc5c6e5b9fe18245aaccec09af5c111f81a6b4e32f030b815a54ab1f2f66"
+  },
+  "diagnostics": [],
+  "limits": {
+    "hops": 2,
+    "limit": 20,
+    "max_bytes": 32000
+  },
+  "mutated": false,
+  "operation": "term",
+  "project_id": "example",
+  "query": "verification bundle",
+  "results": [
+    {
+      "@id": "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "aliases": [
+        "verification bundle"
+      ],
+      "bindings": [],
+      "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/1",
+      "definition": "An artifact that collects observed validation receipts for one release and supports a release decision without granting execution or publication authority.",
+      "fact_kind": "asserted",
+      "freshness": "current",
+      "kind": "concept",
+      "label": "Release evidence bundle",
+      "lifecycle": "approved",
+      "match_reason": "alias",
+      "match_score": 1,
+      "module": "project",
+      "module_version": null,
+      "relationships": [
+        {
+          "@id": "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle-subtypeOf-Artifact",
+          "@type": [
+            "urn:sys4ai:ontology:core:Relationship"
+          ],
+          "definition": "Every release evidence bundle is an Artifact, as explicitly stated by the selected release evidence source.",
+          "fact_kind": "asserted",
+          "kind": "relation",
+          "label": "Release evidence bundle subtype of Artifact",
+          "lifecycle": "approved",
+          "module": "project",
+          "object": "urn:sys4ai:ontology:core:Artifact",
+          "predicate": "urn:sys4ai:ontology:core:subtypeOf",
+          "sources": [
+            {
+              "locator": "section:Release evidence bundles",
+              "path": "docs/release-evidence.md",
+              "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb"
+            }
+          ],
+          "subject": "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle"
+        }
+      ],
+      "source_status": [
+        {
+          "actual_sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb",
+          "diagnostic": null,
+          "locator": "section:Release evidence bundles",
+          "path": "docs/release-evidence.md",
+          "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb",
+          "status": "current"
+        }
+      ],
+      "source_type": "ontology",
+      "sources": [
+        {
+          "locator": "section:Release evidence bundles",
+          "path": "docs/release-evidence.md",
+          "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb"
+        }
+      ]
+    }
+  ],
+  "status": "ok",
+  "truncation": {
+    "available_results": 1,
+    "returned_results": 1,
+    "truncated": false
+  }
+}

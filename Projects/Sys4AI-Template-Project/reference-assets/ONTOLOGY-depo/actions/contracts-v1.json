@@ -1,0 +1,1222 @@
+{
+  "schema_version": 1,
+  "id": "urn:sys4ai:ontology:action:contracts-v1",
+  "shapes": {
+    "path": "reference-assets/ONTOLOGY-depo/actions/action-shapes-v1.ttl",
+    "sha256": "03a84a21c38cf5e6da560d1a4516a51941a86f3e93a5751b7cf3e2e30c06ee36"
+  },
+  "actions": [
+    {
+      "id": "urn:sys4ai:ontology:action:memory:transact",
+      "family": "memory",
+      "operation": "transact",
+      "input_type": "memory-transact-request",
+      "target_type": "memory-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:MemoryMaintenance",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/memory/scripts/memory_recovery.py",
+        "symbol": "transact"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:memory:recover",
+      "family": "memory",
+      "operation": "recover",
+      "input_type": "memory-recover-request",
+      "target_type": "memory-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:MemoryMaintenance",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/memory/scripts/memory_recovery.py",
+        "symbol": "recover"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:memory:propose",
+      "family": "memory",
+      "operation": "propose",
+      "input_type": "memory-propose-request",
+      "target_type": "memory-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:MemoryMaintenance",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/memory/scripts/memory_publish.py",
+        "symbol": "propose"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:memory:set_capture",
+      "family": "memory",
+      "operation": "set_capture",
+      "input_type": "memory-set_capture-request",
+      "target_type": "memory-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:MemoryMaintenance",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/memory/scripts/memory_capture.py",
+        "symbol": "set_capture"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:memory:capture",
+      "family": "memory",
+      "operation": "capture",
+      "input_type": "memory-capture-request",
+      "target_type": "memory-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:MemoryMaintenance",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/memory/scripts/memory_capture.py",
+        "symbol": "capture"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:memory:reindex",
+      "family": "memory",
+      "operation": "reindex",
+      "input_type": "memory-reindex-request",
+      "target_type": "memory-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:MemoryMaintenance",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/memory/scripts/memory_maintenance.py",
+        "symbol": "reindex"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:memory:recover_reindex",
+      "family": "memory",
+      "operation": "recover_reindex",
+      "input_type": "memory-recover_reindex-request",
+      "target_type": "memory-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:MemoryMaintenance",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/memory/scripts/memory_maintenance.py",
+        "symbol": "recover_reindex"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:task:command_new",
+      "family": "task",
+      "operation": "command_new",
+      "input_type": "task-command_new-request",
+      "target_type": "task-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:TaskLifecycleManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/agent-task/scripts/task_state.py",
+        "symbol": "command_new"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:task:response_transaction",
+      "family": "task",
+      "operation": "response_transaction",
+      "input_type": "task-response_transaction-request",
+      "target_type": "task-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:TaskLifecycleManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/agent-task/scripts/task_state.py",
+        "symbol": "response_transaction"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": "task"
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:task:command_rebuild",
+      "family": "task",
+      "operation": "command_rebuild",
+      "input_type": "task-command_rebuild-request",
+      "target_type": "task-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:TaskLifecycleManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/agent-task/scripts/task_state.py",
+        "symbol": "command_rebuild"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:task:command_reconcile",
+      "family": "task",
+      "operation": "command_reconcile",
+      "input_type": "task-command_reconcile-request",
+      "target_type": "task-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:TaskLifecycleManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/agent-task/scripts/task_state.py",
+        "symbol": "command_reconcile"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:task:reconcile_transaction",
+      "family": "task",
+      "operation": "reconcile_transaction",
+      "input_type": "task-reconcile_transaction-request",
+      "target_type": "task-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:TaskLifecycleManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/agent-task/scripts/task_state.py",
+        "symbol": "reconcile_transaction"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:task:reconcile_redaction_intent",
+      "family": "task",
+      "operation": "reconcile_redaction_intent",
+      "input_type": "task-reconcile_redaction_intent-request",
+      "target_type": "task-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:TaskLifecycleManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/agent-task/scripts/task_state.py",
+        "symbol": "reconcile_redaction_intent"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:task:reconcile_lock",
+      "family": "task",
+      "operation": "reconcile_lock",
+      "input_type": "task-reconcile_lock-request",
+      "target_type": "task-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:TaskLifecycleManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/agent-task/scripts/task_state.py",
+        "symbol": "reconcile_lock"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:task:reconcile_response_redaction",
+      "family": "task",
+      "operation": "reconcile_response_redaction",
+      "input_type": "task-reconcile_response_redaction-request",
+      "target_type": "task-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:TaskLifecycleManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/agent-task/scripts/task_state.py",
+        "symbol": "reconcile_response_redaction"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:trd:create",
+      "family": "trd",
+      "operation": "create",
+      "input_type": "trd-create-request",
+      "target_type": "trd-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:RequirementsManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-trd/scripts/trd.py",
+        "symbol": "Store.create"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:trd:update",
+      "family": "trd",
+      "operation": "update",
+      "input_type": "trd-update-request",
+      "target_type": "trd-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:RequirementsManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-trd/scripts/trd.py",
+        "symbol": "Store.update"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:trd:set_status",
+      "family": "trd",
+      "operation": "set_status",
+      "input_type": "trd-set_status-request",
+      "target_type": "trd-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:RequirementsManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-trd/scripts/trd.py",
+        "symbol": "Store.set_status"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": "trd"
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:trd:migrate",
+      "family": "trd",
+      "operation": "migrate",
+      "input_type": "trd-migrate-request",
+      "target_type": "trd-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:RequirementsManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-trd/scripts/trd.py",
+        "symbol": "Store.migrate"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:trd:reindex",
+      "family": "trd",
+      "operation": "reindex",
+      "input_type": "trd-reindex-request",
+      "target_type": "trd-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:RequirementsManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-trd/scripts/trd.py",
+        "symbol": "Store.reindex"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:plan:handle_create",
+      "family": "plan",
+      "operation": "handle_create",
+      "input_type": "plan-handle_create-request",
+      "target_type": "plan-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ImplementationPlanManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-implementation-plan/scripts/plan_state.py",
+        "symbol": "handle_create"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:plan:mutate_existing_plan",
+      "family": "plan",
+      "operation": "mutate_existing_plan",
+      "input_type": "plan-mutate_existing_plan-request",
+      "target_type": "plan-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ImplementationPlanManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-implementation-plan/scripts/plan_state.py",
+        "symbol": "mutate_existing_plan"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:plan:handle_rebuild_projections",
+      "family": "plan",
+      "operation": "handle_rebuild_projections",
+      "input_type": "plan-handle_rebuild_projections-request",
+      "target_type": "plan-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ImplementationPlanManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-implementation-plan/scripts/plan_state.py",
+        "symbol": "handle_rebuild_projections"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:plan:handle_reindex",
+      "family": "plan",
+      "operation": "handle_reindex",
+      "input_type": "plan-handle_reindex-request",
+      "target_type": "plan-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ImplementationPlanManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-implementation-plan/scripts/plan_state.py",
+        "symbol": "handle_reindex"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:plan:handle_reconcile",
+      "family": "plan",
+      "operation": "handle_reconcile",
+      "input_type": "plan-handle_reconcile-request",
+      "target_type": "plan-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ImplementationPlanManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-implementation-plan/scripts/plan_state.py",
+        "symbol": "handle_reconcile"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:plan:handle_update",
+      "family": "plan",
+      "operation": "handle_update",
+      "input_type": "plan-handle_update-request",
+      "target_type": "plan-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ImplementationPlanManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-implementation-plan/scripts/plan_state.py",
+        "symbol": "handle_update"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:plan:handle_update_phase",
+      "family": "plan",
+      "operation": "handle_update_phase",
+      "input_type": "plan-handle_update_phase-request",
+      "target_type": "plan-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ImplementationPlanManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-implementation-plan/scripts/plan_state.py",
+        "symbol": "handle_update_phase"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:plan:handle_update_task",
+      "family": "plan",
+      "operation": "handle_update_task",
+      "input_type": "plan-handle_update_task-request",
+      "target_type": "plan-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ImplementationPlanManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-implementation-plan/scripts/plan_state.py",
+        "symbol": "handle_update_task"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:plan:handle_record_evidence",
+      "family": "plan",
+      "operation": "handle_record_evidence",
+      "input_type": "plan-handle_record_evidence-request",
+      "target_type": "plan-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ImplementationPlanManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-implementation-plan/scripts/plan_state.py",
+        "symbol": "handle_record_evidence"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:plan:handle_set_status",
+      "family": "plan",
+      "operation": "handle_set_status",
+      "input_type": "plan-handle_set_status-request",
+      "target_type": "plan-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ImplementationPlanManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/to-implementation-plan/scripts/plan_state.py",
+        "symbol": "handle_set_status"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": "plan"
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:role:create_role",
+      "family": "role",
+      "operation": "create_role",
+      "input_type": "role-create_role-request",
+      "target_type": "role-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:RoleCatalogManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/manage-subagent-roles/scripts/role_catalog.py",
+        "symbol": "create_role"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:role:transition_apply",
+      "family": "role",
+      "operation": "transition_apply",
+      "input_type": "role-transition_apply-request",
+      "target_type": "role-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:RoleCatalogManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/manage-subagent-roles/scripts/role_catalog.py",
+        "symbol": "transition_apply"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:role:case_rename_apply",
+      "family": "role",
+      "operation": "case_rename_apply",
+      "input_type": "role-case_rename_apply-request",
+      "target_type": "role-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:RoleCatalogManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/manage-subagent-roles/scripts/role_catalog.py",
+        "symbol": "case_rename_apply"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:role:reindex",
+      "family": "role",
+      "operation": "reindex",
+      "input_type": "role-reindex-request",
+      "target_type": "role-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:RoleCatalogManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/manage-subagent-roles/scripts/role_catalog.py",
+        "symbol": "reindex"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:role:publish_index",
+      "family": "role",
+      "operation": "publish_index",
+      "input_type": "role-publish_index-request",
+      "target_type": "role-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:RoleCatalogManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/manage-subagent-roles/scripts/role_catalog.py",
+        "symbol": "publish_index"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:setup:run_initialization",
+      "family": "setup",
+      "operation": "run_initialization",
+      "input_type": "setup-run_initialization-request",
+      "target_type": "setup-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ProjectCapabilitySetup",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/init-new-project/scripts/init_new_project.py",
+        "symbol": "run_initialization"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:setup:run_module_adoption",
+      "family": "setup",
+      "operation": "run_module_adoption",
+      "input_type": "setup-run_module_adoption-request",
+      "target_type": "setup-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ProjectCapabilitySetup",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/init-new-project/scripts/init_new_project.py",
+        "symbol": "run_module_adoption"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:template:update",
+      "family": "template",
+      "operation": "update",
+      "input_type": "template-update-request",
+      "target_type": "template-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:TemplateDistribution",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": "tools/template_update.py",
+        "symbol": "update"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:template:recover",
+      "family": "template",
+      "operation": "recover",
+      "input_type": "template-recover-request",
+      "target_type": "template-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:TemplateDistribution",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": "tools/template_update.py",
+        "symbol": "recover"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:ontology:preview",
+      "family": "ontology",
+      "operation": "preview",
+      "input_type": "ontology-preview-request",
+      "target_type": "ontology-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:OntologyPublication",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/ontology/scripts/ontology_publication.py",
+        "symbol": "preview"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:ontology:publish",
+      "family": "ontology",
+      "operation": "publish",
+      "input_type": "ontology-publish-request",
+      "target_type": "ontology-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:OntologyPublication",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/ontology/scripts/ontology_publication.py",
+        "symbol": "publish"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:ontology:recover",
+      "family": "ontology",
+      "operation": "recover",
+      "input_type": "ontology-recover-request",
+      "target_type": "ontology-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:OntologyPublication",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/ontology/scripts/ontology_publication.py",
+        "symbol": "recover"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:setup:configure_profile",
+      "family": "setup",
+      "operation": "configure_profile",
+      "input_type": "setup-configure_profile-request",
+      "target_type": "setup-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:ProjectCapabilitySetup",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/ontology/scripts/ontology_profiles.py",
+        "symbol": "configure_profile"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    }
+  ],
+  "uncovered": [
+    "Direct operating-system and shell writes",
+    "Native tools or third-party applications bypassing supported owning helpers",
+    "Private low-level filesystem primitives called outside a public owning transaction"
+  ],
+  "optional_actions": [
+    {
+      "id": "urn:sys4ai:ontology:action:task:command_intake",
+      "family": "task",
+      "operation": "command_intake",
+      "input_type": "task-command_intake-request",
+      "target_type": "task-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:TaskLifecycleManagement",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/agent-task/scripts/task_state.py",
+        "symbol": "command_intake"
+      },
+      "applicability": "Only a project-local helper that implements this additional public route; generic Template policy is unchanged.",
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    }
+  ],
+  "semantic_profile": "sys4ai-actions-v1",
+  "lifecycles": {
+    "task": {
+      "identity_pattern": "^TASK-[0-9]{8}-[0-9A-F]{8}$",
+      "transitions": {
+        "open": [
+          "awaiting_user",
+          "blocked",
+          "cancelled",
+          "close-old-task",
+          "completed",
+          "paused"
+        ],
+        "paused": [
+          "awaiting_user",
+          "blocked",
+          "cancelled",
+          "close-old-task",
+          "completed",
+          "open"
+        ],
+        "awaiting_user": [
+          "blocked",
+          "cancelled",
+          "close-old-task",
+          "completed",
+          "open",
+          "paused"
+        ],
+        "blocked": [
+          "awaiting_user",
+          "cancelled",
+          "close-old-task",
+          "completed",
+          "open",
+          "paused"
+        ],
+        "completed": [
+          "open"
+        ],
+        "cancelled": [],
+        "close-old-task": []
+      }
+    },
+    "trd": {
+      "identity_pattern": "^TRD-[0-9]{8}-[0-9A-F]{8}$",
+      "transitions": {
+        "draft": [
+          "retired",
+          "trd_done"
+        ],
+        "trd_done": [
+          "draft",
+          "retired"
+        ],
+        "retired": [
+          "draft"
+        ]
+      }
+    },
+    "plan": {
+      "identity_pattern": "^PLAN-[0-9]{8}-[0-9A-F]{8}$",
+      "transitions": {
+        "draft": [
+          "cancelled",
+          "ready",
+          "retired"
+        ],
+        "ready": [
+          "cancelled",
+          "draft",
+          "in_progress",
+          "retired"
+        ],
+        "in_progress": [
+          "blocked",
+          "cancelled",
+          "completed",
+          "draft",
+          "paused"
+        ],
+        "paused": [
+          "cancelled",
+          "draft",
+          "in_progress"
+        ],
+        "blocked": [
+          "cancelled",
+          "draft",
+          "in_progress"
+        ],
+        "completed": [
+          "in_progress",
+          "retired"
+        ],
+        "retired": [
+          "draft"
+        ],
+        "cancelled": [
+          "draft"
+        ]
+      }
+    }
+  }
+}

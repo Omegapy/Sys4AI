@@ -1,0 +1,703 @@
+{
+  "scenario": "unknown",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology.py",
+    "--project-root",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI",
+    "term",
+    "no-such-frobnicator-987654321"
+  ],
+  "returncode": 0,
+  "result": {
+    "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+    "context": {
+      "config_sha256": "de3973b748afa7dbce5aa74e049cc02bbdc9c445345fb047f96c28317f411d44",
+      "generator_version": "1.0.0",
+      "modules": [
+        {
+          "id": "sys4ai-core",
+          "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+          "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+          "version": "1.0.0"
+        }
+      ],
+      "profile_version": "1.0.0",
+      "project_id": "sys4ai-depot",
+      "snapshot_sha256": "1d5f7f78e4f0eb4929f4dfae1ff11dc623e4690959652c9903c6f145f65b8c24"
+    },
+    "diagnostics": [],
+    "limits": {
+      "hops": 2,
+      "limit": 20,
+      "max_bytes": 32000
+    },
+    "mutated": false,
+    "operation": "term",
+    "project_id": "sys4ai-depot",
+    "query": "no-such-frobnicator-987654321",
+    "results": [
+      {
+        "@id": "urn:sys4ai:ontology:core:Agent",
+        "@type": [
+          "urn:sys4ai:ontology:core:OntologyConcept"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/1",
+        "definition": "A running or defined assistant acting within explicitly assigned scope and current instructions. A title or capability alone grants no write or execution authority.",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "kind": "concept",
+        "label": "Agent",
+        "lifecycle": "approved",
+        "match_reason": "lexical",
+        "match_score": 10,
+        "module": "sys4ai-core",
+        "module_version": "1.0.0",
+        "relationships": [],
+        "source_status": [
+          {
+            "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "diagnostic": null,
+            "locator": "section:Agent",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Agent",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+          }
+        ]
+      },
+      {
+        "@id": "urn:sys4ai:ontology:core:Project",
+        "@type": [
+          "urn:sys4ai:ontology:core:OntologyConcept"
+        ],
+        "bindings": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-Project",
+            "@type": [
+              "urn:sys4ai:ontology:core:SourceBinding"
+            ],
+            "binding_type": "artifact",
+            "definition": "The root is a depot manager; registration is factual inventory and grants no project write authority.",
+            "entity": "urn:sys4ai:ontology:core:Project",
+            "fact_kind": "asserted",
+            "kind": "binding",
+            "label": "Source binding binding-concept-Project",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "section:Project identity and boundaries",
+                "path": "AGENTS.md",
+                "sha256": "d16daa454d6bb19053f5d3dee26369635367d88eaed4f471c7237ed1389c4aa3"
+              }
+            ]
+          }
+        ],
+        "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/17",
+        "definition": "A selected unit of work with its own identity, purpose, governing sources and change boundary. Registration describes a project; it does not grant authority over its files.",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "kind": "concept",
+        "label": "Project",
+        "lifecycle": "approved",
+        "match_reason": "lexical",
+        "match_score": 10,
+        "module": "sys4ai-core",
+        "module_version": "1.0.0",
+        "relationships": [],
+        "scope_note": "A registry entry is factual inventory and supplies no child-project adoption or write authority.",
+        "source_status": [
+          {
+            "actual_sha256": "d16daa454d6bb19053f5d3dee26369635367d88eaed4f471c7237ed1389c4aa3",
+            "diagnostic": null,
+            "locator": "section:Project identity and boundaries",
+            "path": "AGENTS.md",
+            "sha256": "d16daa454d6bb19053f5d3dee26369635367d88eaed4f471c7237ed1389c4aa3",
+            "status": "current"
+          },
+          {
+            "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "diagnostic": null,
+            "locator": "section:Project",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Project",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+          }
+        ]
+      },
+      {
+        "@id": "urn:sys4ai:ontology:core:ProjectSubAgent",
+        "@type": [
+          "urn:sys4ai:ontology:core:OntologyConcept"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/19",
+        "definition": "An ordinary native child with one bounded assignment and a stopping condition. It returns evidence and has no ungranted canonical Task, role or ontology publication authority.",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "kind": "concept",
+        "label": "ProjectSubAgent",
+        "lifecycle": "approved",
+        "match_reason": "lexical",
+        "match_score": 10,
+        "module": "sys4ai-core",
+        "module_version": "1.0.0",
+        "relationships": [],
+        "source_status": [
+          {
+            "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "diagnostic": null,
+            "locator": "section:ProjectSubAgent",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:ProjectSubAgent",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+          }
+        ]
+      },
+      {
+        "@id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+        "@type": [
+          "urn:sys4ai:ontology:core:Capability"
+        ],
+        "aliases": [
+          "retrieve project lessons",
+          "retrieve prior project decisions"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/21",
+        "definition": "Retrieve current eligible project memory with source evidence and explicit limitations. Historical records grant no execution or publication authority.",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "kind": "instance",
+        "label": "Project memory retrieval",
+        "lifecycle": "approved",
+        "match_reason": "lexical",
+        "match_score": 10,
+        "module": "project",
+        "module_version": null,
+        "relationships": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-capability-meaning",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "Project memory retrieval uses the shared capability meaning",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "Project memory retrieval uses the shared capability meaning",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:core:MemoryRetrieval",
+            "predicate": "urn:sys4ai:ontology:core:relatedTo",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-provides",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "memory skill provides Project memory retrieval",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "memory skill provides Project memory retrieval",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+            "predicate": "urn:sys4ai:ontology:core:providesCapability",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-retrieves",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "Project memory retrieval retrieves MemoryRecord",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "Project memory retrieval retrieves MemoryRecord",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:core:MemoryRecord",
+            "predicate": "urn:sys4ai:ontology:core:retrieves",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval"
+          }
+        ],
+        "source_status": [
+          {
+            "actual_sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+            "diagnostic": null,
+            "locator": "section:Project memory",
+            "path": ".agents/skills/memory/SKILL.md",
+            "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Project memory",
+            "path": ".agents/skills/memory/SKILL.md",
+            "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+          }
+        ]
+      },
+      {
+        "@id": "urn:sys4ai:ontology:project:sys4ai-depot:depot",
+        "@type": [
+          "urn:sys4ai:ontology:core:Project"
+        ],
+        "bindings": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-project-sys4ai-depot",
+            "@type": [
+              "urn:sys4ai:ontology:core:SourceBinding"
+            ],
+            "binding_type": "registry",
+            "definition": "Registry representation of Sys4AI depot at .. This record describes factual inventory only; it imports no internal vocabulary and grants no read, write or publication authority over that project.",
+            "entity": "urn:sys4ai:ontology:project:sys4ai-depot:depot",
+            "fact_kind": "asserted",
+            "kind": "binding",
+            "label": "Source binding binding-project-sys4ai-depot",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "json:/projects",
+                "path": "depot/projects.json",
+                "sha256": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd"
+              }
+            ]
+          }
+        ],
+        "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/29",
+        "definition": "Registry representation of Sys4AI depot at .. This record describes factual inventory only; it imports no internal vocabulary and grants no read, write or publication authority over that project.",
+        "fact_kind": "external",
+        "freshness": "current",
+        "kind": "instance",
+        "label": "Registered Sys4AI depot",
+        "lifecycle": "approved",
+        "match_reason": "lexical",
+        "match_score": 10,
+        "module": "project",
+        "module_version": null,
+        "relationships": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:depot-has-director",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "The depot host has its local Director role",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "The depot host has its local Director role",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:host-director",
+            "predicate": "urn:sys4ai:ontology:core:hasRole",
+            "sources": [
+              {
+                "locator": "section:Authority and non-authority",
+                "path": "ROLE.md",
+                "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:depot"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:registry-describes-depot",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "The registry describes Sys4AI depot",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "The registry describes Sys4AI depot",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:depot",
+            "predicate": "urn:sys4ai:ontology:core:describes",
+            "sources": [
+              {
+                "locator": "json:/projects",
+                "path": "depot/projects.json",
+                "sha256": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-registry"
+          }
+        ],
+        "scope_note": "Only the registry entry is represented; no child-project files are loaded.",
+        "source_status": [
+          {
+            "actual_sha256": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd",
+            "diagnostic": null,
+            "locator": "json:/projects",
+            "path": "depot/projects.json",
+            "sha256": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "json:/projects",
+            "path": "depot/projects.json",
+            "sha256": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd"
+          }
+        ]
+      },
+      {
+        "@id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory",
+        "@type": [
+          "urn:sys4ai:ontology:core:Skill"
+        ],
+        "aliases": [
+          "memory skill installation"
+        ],
+        "bindings": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-skill-memory",
+            "@type": [
+              "urn:sys4ai:ontology:core:SourceBinding"
+            ],
+            "binding_type": "skill",
+            "definition": "Retrieve current eligible project memory with source evidence and explicit limitations. Historical records grant no execution or publication authority.",
+            "entity": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory",
+            "fact_kind": "asserted",
+            "kind": "binding",
+            "label": "Source binding binding-skill-memory",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ]
+          }
+        ],
+        "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/35",
+        "definition": "Retrieve current eligible project memory with source evidence and explicit limitations. Historical records grant no execution or publication authority.",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "kind": "instance",
+        "label": "Installed memory skill",
+        "lifecycle": "approved",
+        "match_reason": "lexical",
+        "match_score": 10,
+        "module": "project",
+        "module_version": null,
+        "relationships": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-defined-by",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "memory skill is defined by its installed SKILL.md",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "memory skill is defined by its installed SKILL.md",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-memory",
+            "predicate": "urn:sys4ai:ontology:core:definedBy",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-governed-by",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "memory operations follow current installed source instructions",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "memory operations follow current installed source instructions",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-memory",
+            "predicate": "urn:sys4ai:ontology:core:governedBy",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-provides",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "memory skill provides Project memory retrieval",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "memory skill provides Project memory retrieval",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+            "predicate": "urn:sys4ai:ontology:core:providesCapability",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-provides-shared",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "memory skill implements the shared MemoryRetrieval capability",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "memory skill implements the shared MemoryRetrieval capability",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:core:MemoryRetrieval",
+            "predicate": "urn:sys4ai:ontology:core:providesCapability",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-publish-requires-authority",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "Memory publication requires its own current grant",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "Memory publication requires its own current grant",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:memory-publication-authority",
+            "predicate": "urn:sys4ai:ontology:core:requiresAuthority",
+            "sources": [
+              {
+                "locator": "section:Preparing reviewed publication",
+                "path": ".agents/skills/memory/references/publication-examples.md",
+                "sha256": "2cb2fd172ccd053949c436aff78be5144e2689f82f4831582d879de352fe2ea7"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+          }
+        ],
+        "source_status": [
+          {
+            "actual_sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+            "diagnostic": null,
+            "locator": "section:Project memory",
+            "path": ".agents/skills/memory/SKILL.md",
+            "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Project memory",
+            "path": ".agents/skills/memory/SKILL.md",
+            "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+          }
+        ]
+      },
+      {
+        "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child",
+        "@type": [
+          "urn:sys4ai:ontology:core:Role"
+        ],
+        "aliases": [
+          "bounded project worker"
+        ],
+        "bindings": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-ordinary-child",
+            "@type": [
+              "urn:sys4ai:ontology:core:SourceBinding"
+            ],
+            "binding_type": "role",
+            "definition": "An ordinary child performs one bounded assignment and returns evidence; it has no canonical Task, role-index or shared publication ownership.",
+            "entity": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child",
+            "fact_kind": "asserted",
+            "kind": "binding",
+            "label": "Source binding binding-ordinary-child",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "section:Required first reads",
+                "path": "Roles/project-sub-agent/AGENTS.md",
+                "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+              },
+              {
+                "locator": "section:Purpose",
+                "path": "Roles/project-sub-agent/ROLE.md",
+                "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+              }
+            ]
+          }
+        ],
+        "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/56",
+        "definition": "An ordinary child performs one bounded assignment and returns evidence; it has no canonical Task, role-index or shared publication ownership.",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "kind": "instance",
+        "label": "Sys4AI ordinary project sub-agent role",
+        "lifecycle": "approved",
+        "match_reason": "lexical",
+        "match_score": 10,
+        "module": "project",
+        "module_version": null,
+        "relationships": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child-defined-by-0",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "Sys4AI ordinary project sub-agent role is defined by its selected source 1",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "Sys4AI ordinary project sub-agent role is defined by its selected source 1",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-project-sub-agent-agents",
+            "predicate": "urn:sys4ai:ontology:core:definedBy",
+            "sources": [
+              {
+                "locator": "section:Required first reads",
+                "path": "Roles/project-sub-agent/AGENTS.md",
+                "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child-defined-by-1",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "Sys4AI ordinary project sub-agent role is defined by its selected source 2",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "Sys4AI ordinary project sub-agent role is defined by its selected source 2",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-project-sub-agent-role",
+            "predicate": "urn:sys4ai:ontology:core:definedBy",
+            "sources": [
+              {
+                "locator": "section:Purpose",
+                "path": "Roles/project-sub-agent/ROLE.md",
+                "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child"
+          }
+        ],
+        "source_status": [
+          {
+            "actual_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+            "diagnostic": null,
+            "locator": "section:Purpose",
+            "path": "Roles/project-sub-agent/ROLE.md",
+            "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+            "status": "current"
+          },
+          {
+            "actual_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+            "diagnostic": null,
+            "locator": "section:Required first reads",
+            "path": "Roles/project-sub-agent/AGENTS.md",
+            "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Required first reads",
+            "path": "Roles/project-sub-agent/AGENTS.md",
+            "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+          },
+          {
+            "locator": "section:Purpose",
+            "path": "Roles/project-sub-agent/ROLE.md",
+            "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+          }
+        ]
+      }
+    ],
+    "status": "ambiguous",
+    "truncation": {
+      "available_results": 8,
+      "returned_results": 7,
+      "truncated": true
+    }
+  },
+  "stderr": ""
+}

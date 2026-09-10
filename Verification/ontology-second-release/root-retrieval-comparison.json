@@ -1,0 +1,1865 @@
+{
+  "build": {
+    "elapsed_seconds": 2.9894681659934577,
+    "mutated": true,
+    "path": ".sys4ai/ontology/semantic/index-v1.json",
+    "records": 94,
+    "runtime": {
+      "model": {
+        "dimension": 384,
+        "directory": ".sys4ai/ontology/semantic/models/52398278842ec682c6f32300af41344b1c0b0bb2",
+        "files": {
+          "config.json": {
+            "sha256": "13582bcf2effc85b7bf3d3f5532e686bc1c9ce86bb009d10f0ec33cbe92299dd",
+            "size": 706
+          },
+          "model_optimized.onnx": {
+            "sha256": "51f1bd0addd6e859e42c2c8021a5e5461385bb676a649f4b269aa445449f2431",
+            "size": 66465124
+          },
+          "special_tokens_map.json": {
+            "sha256": "5d5b662e421ea9fac075174bb0688ee0d9431699900b90662acd44b2a350503a",
+            "size": 695
+          },
+          "tokenizer.json": {
+            "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+            "size": 711396
+          },
+          "tokenizer_config.json": {
+            "sha256": "0b29c7bfc889e53b36d9dd3e686dd4300f6525110eaa98c76a5dafceb2029f53",
+            "size": 1242
+          },
+          "vocab.txt": {
+            "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+            "size": 231508
+          }
+        },
+        "model": "BAAI/bge-small-en-v1.5",
+        "profile_sha256": "1e5c4903979f2f737910bfc5cfc5631e721018aa65d89bc20a6fdc4191e45159",
+        "repository": "qdrant/bge-small-en-v1.5-onnx-q",
+        "revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+        "schema_version": 1
+      },
+      "offline": true,
+      "packages": {
+        "anyio": "4.15.1",
+        "certifi": "2026.7.22",
+        "charset-normalizer": "3.5.1",
+        "click": "8.5.0",
+        "fastembed": "0.8.0",
+        "filelock": "3.32.6",
+        "flatbuffers": "25.12.19",
+        "fsspec": "2026.7.0",
+        "h11": "0.16.0",
+        "hf-xet": "1.6.0",
+        "httpcore": "1.0.9",
+        "httpx": "0.28.1",
+        "huggingface_hub": "1.30.0",
+        "idna": "3.19",
+        "loguru": "0.7.3",
+        "mmh3": "5.3.0",
+        "numpy": "2.5.3",
+        "onnxruntime": "1.29.0",
+        "packaging": "26.3",
+        "pillow": "12.3.0",
+        "protobuf": "7.36.1",
+        "py_rust_stemmers": "0.1.8",
+        "pyyaml": "6.0.3",
+        "requests": "2.34.2",
+        "tokenizers": "0.23.2",
+        "tqdm": "4.70.0",
+        "typing_extensions": "4.16.0",
+        "urllib3": "2.7.0"
+      },
+      "python": "3.12.13",
+      "requirements_sha256": "3505c5c04bd74c7cfae99a1631d8ecf56d26f4bac9e250f66b1be96519f01d20",
+      "truncated_inputs": [],
+      "worker_sha256": "55a7e69d876f0530bc677cbe3fd1390f6e2185e8c96f935a7f42d4d8c52ccb12"
+    },
+    "sha256": "93bdda215495ba527ecae3120fbbf4641e89ea7c2a0a4417b9819905d2f11971",
+    "status": "built"
+  },
+  "context": {
+    "generator_version": "1.0.0",
+    "helpers": {
+      "ontology.py": "45e796a78d784b386efd9edcf0650844e7a1006773fb3aa100783b92fec31515",
+      "ontology_advanced.py": "af4fa591f80d09dc4e051a12e23ff7c1014e5fc5fe6e8c19ae7b475c9773fb48",
+      "ontology_advanced_cli.py": "320bbb7dce8df6b26cbcdee85e0f4c9400c5f30191323d3d18fcba83b337c3fc",
+      "ontology_advanced_packet.py": "988188226bd4d4fcaf9597e708522425e87092c12e2953d36bce4cfc277f14b0",
+      "ontology_authority.py": "fcd0bc8cbc3afa27e24e5b7e89fba6c9c69e2d862acfb852be5be446a8df59cf",
+      "ontology_backend.py": "4ba6ce8879c2248442a17a4098ae8246831947553476ef051c140dc0730ce35b",
+      "ontology_build.py": "c899b17a3717cac8e843820ce102a1cce41e493f163a63210bd4335e573b4e93",
+      "ontology_core.py": "15336a6fbb542cb8abccf6db8cd4227fc846758f60868ef9e3782580ea18be1d",
+      "ontology_derivations.py": "dc2449e18bedc961a9b43330b4e6b6b3f7600d607de7425308096d3ac4a9f07c",
+      "ontology_generation.py": "625340e3b6ec4b360413f0acd0b30ac3c408c70d3eac1ad009a9fc8b188ca364",
+      "ontology_graph.py": "4f286af79661a539a19c0b1658a7377817ff16c54d1fb650dfdff67b55245886",
+      "ontology_guard_setup.py": "b0d15271c49cc5065ddc1512ce0154d67361f18c65bc61d84ac4e51dbb2b9f6d",
+      "ontology_guards.py": "ea2b7d19294fd53bc732b728658be125307ed4deda469d60549f5857cd910765",
+      "ontology_interchange.py": "51ca7df70ee4e133a686ff867a324e58f3a8fba6f3910653c0db4730745cba0a",
+      "ontology_knowledge.py": "1a99bb5ffd34ab617acb688bc15151fdc1e5d2f30af874ea3cdda43ade54f690",
+      "ontology_lifecycle.py": "eef2aa64e3d94e9b378db3a90ad17fd3ceb060ad4ade861ee80fa502a92d0a98",
+      "ontology_limits.py": "bfc60e0d200e58e222479ecc06bc5dfd1ee9bed4a74f415bed7e8bd57ec5f7bf",
+      "ontology_memory.py": "cf18cb302ec8db26cad998fc65b30cc89f130947dc04e8a2ce97a485b1cf91e4",
+      "ontology_modules.py": "d4cba6775bf4ed42bd4392ef37134ba19dd6b7d84cd82eb5997f4c8a23e47194",
+      "ontology_packet.py": "51287087f1f96fd3d58db7fe6ebf7521e6a15eb8027a55995832b84d444c1e3d",
+      "ontology_profiles.py": "ad07e5077fa2308434bee2e19617a501247abadf0edcf0d8d18a499b235f6b79",
+      "ontology_proposal_validation.py": "ba12ad682a9e11ded50893633bc11969587a9e34cff0d68cddfc62819ace65b1",
+      "ontology_proposals.py": "1606da118489f758145d102594e806f33fe170f8d12a1f6629cd61b7b9b346d8",
+      "ontology_provenance.py": "637882f7f76224a7b339447e0c4e642b909cfb0facde45b4cb13e519ab073908",
+      "ontology_publication.py": "1c314ccf1f3d8bb6e643dd5a13dadcc8018a58e5c4fdf423ff4dbd7af4d59fab",
+      "ontology_rdf.py": "e582ade5c8de1801d37b7b7e1cd2cbc014fdc852183d2d5206bcfc12b5bc1223",
+      "ontology_reasoning.py": "166f8e435a4144dd0141636cc83a7e3b7b2a7668a496d62e60b5fd1cef0a665c",
+      "ontology_retrieval.py": "6d4b30ae9ccd593dbb86ae3d97c48e8914ebe1684f78692bf1f4dfc2ef1a0738",
+      "ontology_semantic.py": "2a4df63c4c67922b1fa30ba251cfe800519ab5fe68546efef9d4a3260136f4fd",
+      "ontology_semantic_worker.py": "55a7e69d876f0530bc677cbe3fd1390f6e2185e8c96f935a7f42d4d8c52ccb12",
+      "ontology_shacl.py": "71cc8a572962b09dfe1cd98adbc6046e236ab9b526a5f18d8b1c73d615ce6a3e",
+      "ontology_sparql.py": "13550789b9ad504ab07b6e6550f96b23854faac2b977adea0a380ede54f8678a",
+      "ontology_standards.py": "db41ce2e0e2233e4305b68ebc812cd46485c9f8c1e5ac591d1a89e55cb825464",
+      "ontology_validate.py": "33aea8e2878fa914ecdf370ba2e6be409ef5f14d12d732b34b61a5272e14bdfd",
+      "ontology_wiki.py": "67b1aead617f920329d00b8034731cf1f36490c9718f6d2c42de0919ee171092",
+      "ontology_workbench.py": "06cc77cd43f19e7c22c58c30ae637368a8cec2771e4b8a548020138d8e5fab96",
+      "ontology_worker.py": "489ef392c7b15b7ad45f7dcd151ef947d10eab0020ec601c96aabf5d98b983d4"
+    },
+    "inputs": {
+      ".agents/skills/agent-task/SKILL.md": "3f74b076a6fc2d008dc194c8a316bea16008a3e435cc11169555918ed0b879fa",
+      ".agents/skills/memory/SKILL.md": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+      ".agents/skills/memory/references/publication-examples.md": "2cb2fd172ccd053949c436aff78be5144e2689f82f4831582d879de352fe2ea7",
+      ".agents/skills/ontology/SKILL.md": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac",
+      ".agents/skills/task/SKILL.md": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121",
+      ".agents/skills/to-implementation-plan/SKILL.md": "25333eec8b638aff350f434dc3b6c12840ba86c0790aa455656d09cb885790ec",
+      ".agents/skills/to-trd/SKILL.md": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+      "AGENTS.md": "d16daa454d6bb19053f5d3dee26369635367d88eaed4f471c7237ed1389c4aa3",
+      "ONTOLOGY/bindings/artifacts.json": "43a822264ece4aaae53c355d7aa8aad65a807dac4d4f66b72c5e11528cce706a",
+      "ONTOLOGY/bindings/projects.json": "11bebff22e8315e44795113a074edfdc7badf06776374d4620ed1a71b92f1f21",
+      "ONTOLOGY/bindings/roles.json": "bfcd7f277ce2d830147f901debe5c0bc329042828e1798f434702ed6dff2d3cc",
+      "ONTOLOGY/bindings/skills.json": "59e6d5df75fae981d71c2a887ab3700d7c16e20fea7eac47fd39e45b4890dacd",
+      "ONTOLOGY/contexts/context-v1.jsonld": "7dd394c9ed0bb5398781b690988403e7ae60f6f70195fed24088dd1ef8654d92",
+      "ONTOLOGY/modules/project/competency.json": "02a2025cc0695436ac7e10db0b5fb1be9d01f6f05afc23cf4eee3b0cb911dac1",
+      "ONTOLOGY/modules/project/project.jsonld": "aed74346a4ac05b9536361be3297322ac8651fbb83e32d27b9a24146e43b17c8",
+      "ONTOLOGY/modules/sys4ai-core/1.0.0/competency.json": "db9d66b7366d51c551c2ae8e19d89751a7d8bf02617d0d65f4d768830552171d",
+      "ONTOLOGY/modules/sys4ai-core/1.0.0/context-v1.jsonld": "7dd394c9ed0bb5398781b690988403e7ae60f6f70195fed24088dd1ef8654d92",
+      "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld": "b9b3bb90f8db47110588c02c99c8b4bedab62c1b4be9f533572aa3a6362e4f43",
+      "ONTOLOGY/modules/sys4ai-core/1.0.0/manifest.json": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc",
+      "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+      "ROLE.md": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b",
+      "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+      "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+      "Roles/task-manager/AGENTS.md": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+      "Roles/task-manager/ROLE.md": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+      "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+      "SPECS.md": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+      "depot/projects.json": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd",
+      "depot/template-update.json": "e19ed6439a9d26407751e742bb5080e53f64d672842080d655deb5cd397afc88",
+      "ontology.yaml": "de3973b748afa7dbce5aa74e049cc02bbdc9c445345fb047f96c28317f411d44"
+    },
+    "modules": [
+      {
+        "id": "sys4ai-core",
+        "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+        "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+        "version": "1.0.0"
+      }
+    ],
+    "profile_version": "1.0.0",
+    "project_id": "sys4ai-depot",
+    "snapshot_sha256": "c7d5c1996f2dec04697a66d88224faa05a0f6edb11c2f385c1a999f90d9f216e",
+    "sources": [
+      {
+        "actual_sha256": "3f74b076a6fc2d008dc194c8a316bea16008a3e435cc11169555918ed0b879fa",
+        "diagnostic": null,
+        "locator": "section:Authority and root",
+        "path": ".agents/skills/agent-task/SKILL.md",
+        "sha256": "3f74b076a6fc2d008dc194c8a316bea16008a3e435cc11169555918ed0b879fa",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+        "diagnostic": null,
+        "locator": "section:Project memory",
+        "path": ".agents/skills/memory/SKILL.md",
+        "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "2cb2fd172ccd053949c436aff78be5144e2689f82f4831582d879de352fe2ea7",
+        "diagnostic": null,
+        "locator": "section:Preparing reviewed publication",
+        "path": ".agents/skills/memory/references/publication-examples.md",
+        "sha256": "2cb2fd172ccd053949c436aff78be5144e2689f82f4831582d879de352fe2ea7",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac",
+        "diagnostic": null,
+        "locator": "section:Ontology",
+        "path": ".agents/skills/ontology/SKILL.md",
+        "sha256": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121",
+        "diagnostic": null,
+        "locator": "section:Intake and mode",
+        "path": ".agents/skills/task/SKILL.md",
+        "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "25333eec8b638aff350f434dc3b6c12840ba86c0790aa455656d09cb885790ec",
+        "diagnostic": null,
+        "locator": "section:Activation boundary",
+        "path": ".agents/skills/to-implementation-plan/SKILL.md",
+        "sha256": "25333eec8b638aff350f434dc3b6c12840ba86c0790aa455656d09cb885790ec",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+        "diagnostic": null,
+        "locator": "section:1. Activation and authority",
+        "path": ".agents/skills/to-trd/SKILL.md",
+        "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "d16daa454d6bb19053f5d3dee26369635367d88eaed4f471c7237ed1389c4aa3",
+        "diagnostic": null,
+        "locator": "section:Project identity and boundaries",
+        "path": "AGENTS.md",
+        "sha256": "d16daa454d6bb19053f5d3dee26369635367d88eaed4f471c7237ed1389c4aa3",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "b9b3bb90f8db47110588c02c99c8b4bedab62c1b4be9f533572aa3a6362e4f43",
+        "diagnostic": null,
+        "locator": "json:/@graph",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld",
+        "sha256": "b9b3bb90f8db47110588c02c99c8b4bedab62c1b4be9f533572aa3a6362e4f43",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:ActionType",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Agent",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Artifact",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Authority",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Capability",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:CodexConversation",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Decision",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Evidence",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:ImplementationPlan",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Lesson",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:MemoryPublication",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:MemoryRecord",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:MemoryRetrieval",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:NativeGoal",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:OntologyConcept",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:OntologyPublication",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:OntologyRetrieval",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Project",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:ProjectDirector",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:ProjectSubAgent",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:ProjectTemplate",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Property",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Relationship",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Relationship vocabulary",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:RelationshipType",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Requirement",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Role",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Scope",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Skill",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Source",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:SourceBinding",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Specification",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:TRD",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:TRDCreation",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Task",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:TaskManagement",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:TaskManager",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:TaskRequirementDocument",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Validation",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "diagnostic": null,
+        "locator": "section:Verification",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+        "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b",
+        "diagnostic": null,
+        "locator": "section:Authority and non-authority",
+        "path": "ROLE.md",
+        "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+        "diagnostic": null,
+        "locator": "section:Required first reads",
+        "path": "Roles/project-sub-agent/AGENTS.md",
+        "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+        "diagnostic": null,
+        "locator": "section:Purpose",
+        "path": "Roles/project-sub-agent/ROLE.md",
+        "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+        "diagnostic": null,
+        "locator": "section:Required first reads",
+        "path": "Roles/task-manager/AGENTS.md",
+        "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+        "diagnostic": null,
+        "locator": "section:Purpose",
+        "path": "Roles/task-manager/ROLE.md",
+        "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+        "diagnostic": null,
+        "locator": "section:Verification discipline",
+        "path": "SOUL.md",
+        "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+        "diagnostic": null,
+        "locator": "section:Ontology first release and initialization v8",
+        "path": "SPECS.md",
+        "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+        "diagnostic": null,
+        "locator": "section:Ontology second release and initialization v9",
+        "path": "SPECS.md",
+        "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd",
+        "diagnostic": null,
+        "locator": "json:/projects",
+        "path": "depot/projects.json",
+        "sha256": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd",
+        "status": "current"
+      },
+      {
+        "actual_sha256": "e19ed6439a9d26407751e742bb5080e53f64d672842080d655deb5cd397afc88",
+        "diagnostic": null,
+        "locator": "json:/overrides",
+        "path": "depot/template-update.json",
+        "sha256": "e19ed6439a9d26407751e742bb5080e53f64d672842080d655deb5cd397afc88",
+        "status": "current"
+      }
+    ]
+  },
+  "dataset": {
+    "path": "SKILLS-depo/ontology/tests/fixtures/advanced_competency.json",
+    "sha256": "f6d18774575c5e30a3997b4b2a5a9d61fe5cac29201b7911c7e0ce139b4ddc28"
+  },
+  "index_sha256": "93bdda215495ba527ecae3120fbbf4641e89ea7c2a0a4417b9819905d2f11971",
+  "interpretation": "Observed local cases only. Negative and neutral outcomes are retained. Similarity is neither equivalence nor approval. No extracted graph was published.",
+  "model": {
+    "model": {
+      "dimension": 384,
+      "directory": ".sys4ai/ontology/semantic/models/52398278842ec682c6f32300af41344b1c0b0bb2",
+      "files": {
+        "config.json": {
+          "sha256": "13582bcf2effc85b7bf3d3f5532e686bc1c9ce86bb009d10f0ec33cbe92299dd",
+          "size": 706
+        },
+        "model_optimized.onnx": {
+          "sha256": "51f1bd0addd6e859e42c2c8021a5e5461385bb676a649f4b269aa445449f2431",
+          "size": 66465124
+        },
+        "special_tokens_map.json": {
+          "sha256": "5d5b662e421ea9fac075174bb0688ee0d9431699900b90662acd44b2a350503a",
+          "size": 695
+        },
+        "tokenizer.json": {
+          "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+          "size": 711396
+        },
+        "tokenizer_config.json": {
+          "sha256": "0b29c7bfc889e53b36d9dd3e686dd4300f6525110eaa98c76a5dafceb2029f53",
+          "size": 1242
+        },
+        "vocab.txt": {
+          "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+          "size": 231508
+        }
+      },
+      "model": "BAAI/bge-small-en-v1.5",
+      "profile_sha256": "1e5c4903979f2f737910bfc5cfc5631e721018aa65d89bc20a6fdc4191e45159",
+      "repository": "qdrant/bge-small-en-v1.5-onnx-q",
+      "revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+      "schema_version": 1
+    },
+    "offline": true,
+    "packages": {
+      "anyio": "4.15.1",
+      "certifi": "2026.7.22",
+      "charset-normalizer": "3.5.1",
+      "click": "8.5.0",
+      "fastembed": "0.8.0",
+      "filelock": "3.32.6",
+      "flatbuffers": "25.12.19",
+      "fsspec": "2026.7.0",
+      "h11": "0.16.0",
+      "hf-xet": "1.6.0",
+      "httpcore": "1.0.9",
+      "httpx": "0.28.1",
+      "huggingface_hub": "1.30.0",
+      "idna": "3.19",
+      "loguru": "0.7.3",
+      "mmh3": "5.3.0",
+      "numpy": "2.5.3",
+      "onnxruntime": "1.29.0",
+      "packaging": "26.3",
+      "pillow": "12.3.0",
+      "protobuf": "7.36.1",
+      "py_rust_stemmers": "0.1.8",
+      "pyyaml": "6.0.3",
+      "requests": "2.34.2",
+      "tokenizers": "0.23.2",
+      "tqdm": "4.70.0",
+      "typing_extensions": "4.16.0",
+      "urllib3": "2.7.0"
+    },
+    "python": "3.12.13",
+    "requirements_sha256": "3505c5c04bd74c7cfae99a1631d8ecf56d26f4bac9e250f66b1be96519f01d20",
+    "truncated_inputs": [],
+    "worker_sha256": "55a7e69d876f0530bc677cbe3fd1390f6e2185e8c96f935a7f42d4d8c52ccb12"
+  },
+  "observations": [
+    {
+      "expected": "urn:sys4ai:ontology:core:Task",
+      "first_release_lexical": {
+        "attribution": [
+          {
+            "id": "urn:sys4ai:ontology:core:Task",
+            "reason": "preferred_label",
+            "sources": [
+              {
+                "actual_sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121",
+                "diagnostic": null,
+                "locator": "section:Intake and mode",
+                "path": ".agents/skills/task/SKILL.md",
+                "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Task",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:TRD",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "diagnostic": null,
+                "locator": "section:1. Activation and authority",
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TRD",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:TaskManagement",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TaskManagement",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:TaskManager",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+                "diagnostic": null,
+                "locator": "section:Purpose",
+                "path": "Roles/task-manager/ROLE.md",
+                "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+                "diagnostic": null,
+                "locator": "section:Required first reads",
+                "path": "Roles/task-manager/AGENTS.md",
+                "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TaskManager",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:TaskRequirementDocument",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TaskRequirementDocument",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          }
+        ],
+        "child_cpu_seconds": 5.551115123125783e-17,
+        "child_maxrss_raw": 386072576,
+        "correct_at_1": true,
+        "correct_at_5": true,
+        "elapsed_seconds": 0.00983424999867566,
+        "ids": [
+          "urn:sys4ai:ontology:core:Task",
+          "urn:sys4ai:ontology:core:TRD",
+          "urn:sys4ai:ontology:core:TaskManagement",
+          "urn:sys4ai:ontology:core:TaskManager",
+          "urn:sys4ai:ontology:core:TaskRequirementDocument"
+        ],
+        "semantic": null,
+        "status": "ok"
+      },
+      "id": "exact-task",
+      "query": "Task",
+      "semantic": {
+        "attribution": [
+          {
+            "id": "urn:sys4ai:ontology:core:Task",
+            "reason": "preferred_label",
+            "sources": [
+              {
+                "actual_sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121",
+                "diagnostic": null,
+                "locator": "section:Intake and mode",
+                "path": ".agents/skills/task/SKILL.md",
+                "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Task",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:TRD",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "diagnostic": null,
+                "locator": "section:1. Activation and authority",
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TRD",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:TaskManagement",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TaskManagement",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:TaskManager",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+                "diagnostic": null,
+                "locator": "section:Purpose",
+                "path": "Roles/task-manager/ROLE.md",
+                "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+                "diagnostic": null,
+                "locator": "section:Required first reads",
+                "path": "Roles/task-manager/AGENTS.md",
+                "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TaskManager",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:TaskRequirementDocument",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TaskRequirementDocument",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          }
+        ],
+        "child_cpu_seconds": 5.551115123125783e-17,
+        "child_maxrss_raw": 386072576,
+        "correct_at_1": true,
+        "correct_at_5": true,
+        "elapsed_seconds": 0.009547749999910593,
+        "ids": [
+          "urn:sys4ai:ontology:core:Task",
+          "urn:sys4ai:ontology:core:TRD",
+          "urn:sys4ai:ontology:core:TaskManagement",
+          "urn:sys4ai:ontology:core:TaskManager",
+          "urn:sys4ai:ontology:core:TaskRequirementDocument"
+        ],
+        "semantic": {
+          "status": "exact_resolution_precedes_semantic",
+          "used": false
+        },
+        "status": "ok"
+      }
+    },
+    {
+      "expected": "urn:sys4ai:ontology:core:TRD",
+      "first_release_lexical": {
+        "attribution": [
+          {
+            "id": "urn:sys4ai:ontology:core:TRD",
+            "reason": "preferred_label",
+            "sources": [
+              {
+                "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "diagnostic": null,
+                "locator": "section:1. Activation and authority",
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TRD",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-to-trd",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "diagnostic": null,
+                "locator": "section:1. Activation and authority",
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-trd-creation",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "diagnostic": null,
+                "locator": "section:1. Activation and authority",
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "diagnostic": null,
+                "locator": "section:1. Activation and authority",
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:TRDCreation",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TRDCreation",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          }
+        ],
+        "child_cpu_seconds": 5.551115123125783e-17,
+        "child_maxrss_raw": 386072576,
+        "correct_at_1": true,
+        "correct_at_5": true,
+        "elapsed_seconds": 0.004217207999317907,
+        "ids": [
+          "urn:sys4ai:ontology:core:TRD",
+          "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-to-trd",
+          "urn:sys4ai:ontology:project:sys4ai-depot:capability-trd-creation",
+          "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd",
+          "urn:sys4ai:ontology:core:TRDCreation"
+        ],
+        "semantic": null,
+        "status": "ok"
+      },
+      "id": "exact-trd",
+      "query": "TRD",
+      "semantic": {
+        "attribution": [
+          {
+            "id": "urn:sys4ai:ontology:core:TRD",
+            "reason": "preferred_label",
+            "sources": [
+              {
+                "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "diagnostic": null,
+                "locator": "section:1. Activation and authority",
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TRD",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-to-trd",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "diagnostic": null,
+                "locator": "section:1. Activation and authority",
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-trd-creation",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "diagnostic": null,
+                "locator": "section:1. Activation and authority",
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "diagnostic": null,
+                "locator": "section:1. Activation and authority",
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:TRDCreation",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TRDCreation",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          }
+        ],
+        "child_cpu_seconds": 5.551115123125783e-17,
+        "child_maxrss_raw": 386072576,
+        "correct_at_1": true,
+        "correct_at_5": true,
+        "elapsed_seconds": 0.00450645899400115,
+        "ids": [
+          "urn:sys4ai:ontology:core:TRD",
+          "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-to-trd",
+          "urn:sys4ai:ontology:project:sys4ai-depot:capability-trd-creation",
+          "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd",
+          "urn:sys4ai:ontology:core:TRDCreation"
+        ],
+        "semantic": {
+          "status": "exact_resolution_precedes_semantic",
+          "used": false
+        },
+        "status": "ok"
+      }
+    },
+    {
+      "expected": "urn:sys4ai:ontology:core:MemoryRecord",
+      "first_release_lexical": {
+        "attribution": [],
+        "child_cpu_seconds": 5.551115123125783e-17,
+        "child_maxrss_raw": 386072576,
+        "correct_at_1": false,
+        "correct_at_5": false,
+        "elapsed_seconds": 0.001506334010628052,
+        "ids": [],
+        "semantic": null,
+        "status": "no_match"
+      },
+      "id": "historical-paraphrase",
+      "query": "recollections",
+      "semantic": {
+        "attribution": [
+          {
+            "id": "urn:sys4ai:ontology:core:MemoryRecord",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:MemoryRecord",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+                "diagnostic": null,
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+                "diagnostic": null,
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:retrieves",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:derivesFrom",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:replacedBy",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          }
+        ],
+        "child_cpu_seconds": 0.3885789999999996,
+        "child_maxrss_raw": 386072576,
+        "correct_at_1": true,
+        "correct_at_5": true,
+        "elapsed_seconds": 0.49642454100830946,
+        "ids": [
+          "urn:sys4ai:ontology:core:MemoryRecord",
+          "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+          "urn:sys4ai:ontology:core:retrieves",
+          "urn:sys4ai:ontology:core:derivesFrom",
+          "urn:sys4ai:ontology:core:replacedBy"
+        ],
+        "semantic": {
+          "index_sha256": "93bdda215495ba527ecae3120fbbf4641e89ea7c2a0a4417b9819905d2f11971",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "offline": true,
+          "packages": {
+            "anyio": "4.15.1",
+            "certifi": "2026.7.22",
+            "charset-normalizer": "3.5.1",
+            "click": "8.5.0",
+            "fastembed": "0.8.0",
+            "filelock": "3.32.6",
+            "flatbuffers": "25.12.19",
+            "fsspec": "2026.7.0",
+            "h11": "0.16.0",
+            "hf-xet": "1.6.0",
+            "httpcore": "1.0.9",
+            "httpx": "0.28.1",
+            "huggingface_hub": "1.30.0",
+            "idna": "3.19",
+            "loguru": "0.7.3",
+            "mmh3": "5.3.0",
+            "numpy": "2.5.3",
+            "onnxruntime": "1.29.0",
+            "packaging": "26.3",
+            "pillow": "12.3.0",
+            "protobuf": "7.36.1",
+            "py_rust_stemmers": "0.1.8",
+            "pyyaml": "6.0.3",
+            "requests": "2.34.2",
+            "tokenizers": "0.23.2",
+            "tqdm": "4.70.0",
+            "typing_extensions": "4.16.0",
+            "urllib3": "2.7.0"
+          },
+          "status": "current",
+          "threshold": 0.45,
+          "used": true
+        },
+        "status": "ok"
+      }
+    },
+    {
+      "expected": "urn:sys4ai:ontology:core:Capability",
+      "first_release_lexical": {
+        "attribution": [],
+        "child_cpu_seconds": -4.163336342344337e-16,
+        "child_maxrss_raw": 386072576,
+        "correct_at_1": false,
+        "correct_at_5": false,
+        "elapsed_seconds": 0.0014992919896030799,
+        "ids": [],
+        "semantic": null,
+        "status": "no_match"
+      },
+      "id": "ability-paraphrase",
+      "query": "competence",
+      "semantic": {
+        "attribution": [
+          {
+            "id": "urn:sys4ai:ontology:core:Lesson",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Lesson",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:Capability",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Capability",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:retrieves",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:validatedBy",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:OntologyConcept",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:OntologyConcept",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          }
+        ],
+        "child_cpu_seconds": 0.3811979999999999,
+        "child_maxrss_raw": 386072576,
+        "correct_at_1": false,
+        "correct_at_5": true,
+        "elapsed_seconds": 0.49574787500023376,
+        "ids": [
+          "urn:sys4ai:ontology:core:Lesson",
+          "urn:sys4ai:ontology:core:Capability",
+          "urn:sys4ai:ontology:core:retrieves",
+          "urn:sys4ai:ontology:core:validatedBy",
+          "urn:sys4ai:ontology:core:OntologyConcept"
+        ],
+        "semantic": {
+          "index_sha256": "93bdda215495ba527ecae3120fbbf4641e89ea7c2a0a4417b9819905d2f11971",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "offline": true,
+          "packages": {
+            "anyio": "4.15.1",
+            "certifi": "2026.7.22",
+            "charset-normalizer": "3.5.1",
+            "click": "8.5.0",
+            "fastembed": "0.8.0",
+            "filelock": "3.32.6",
+            "flatbuffers": "25.12.19",
+            "fsspec": "2026.7.0",
+            "h11": "0.16.0",
+            "hf-xet": "1.6.0",
+            "httpcore": "1.0.9",
+            "httpx": "0.28.1",
+            "huggingface_hub": "1.30.0",
+            "idna": "3.19",
+            "loguru": "0.7.3",
+            "mmh3": "5.3.0",
+            "numpy": "2.5.3",
+            "onnxruntime": "1.29.0",
+            "packaging": "26.3",
+            "pillow": "12.3.0",
+            "protobuf": "7.36.1",
+            "py_rust_stemmers": "0.1.8",
+            "pyyaml": "6.0.3",
+            "requests": "2.34.2",
+            "tokenizers": "0.23.2",
+            "tqdm": "4.70.0",
+            "typing_extensions": "4.16.0",
+            "urllib3": "2.7.0"
+          },
+          "status": "current",
+          "threshold": 0.45,
+          "used": true
+        },
+        "status": "ok"
+      }
+    },
+    {
+      "expected": "urn:sys4ai:ontology:core:ImplementationPlan",
+      "first_release_lexical": {
+        "attribution": [
+          {
+            "id": "urn:sys4ai:ontology:core:Skill",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Skill",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:TaskManager",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+                "diagnostic": null,
+                "locator": "section:Purpose",
+                "path": "Roles/task-manager/ROLE.md",
+                "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+                "diagnostic": null,
+                "locator": "section:Required first reads",
+                "path": "Roles/task-manager/AGENTS.md",
+                "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:TaskManager",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:Validation",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Validation",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+                "diagnostic": null,
+                "locator": "section:Verification discipline",
+                "path": "SOUL.md",
+                "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:manages",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:validatedBy",
+            "reason": "lexical",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          }
+        ],
+        "child_cpu_seconds": 2.220446049250313e-16,
+        "child_maxrss_raw": 386072576,
+        "correct_at_1": false,
+        "correct_at_5": false,
+        "elapsed_seconds": 0.018583833007141948,
+        "ids": [
+          "urn:sys4ai:ontology:core:Skill",
+          "urn:sys4ai:ontology:core:TaskManager",
+          "urn:sys4ai:ontology:core:Validation",
+          "urn:sys4ai:ontology:core:manages",
+          "urn:sys4ai:ontology:core:validatedBy"
+        ],
+        "semantic": null,
+        "status": "ok"
+      },
+      "id": "planning-paraphrase",
+      "query": "a sequenced blueprint for construction",
+      "semantic": {
+        "attribution": [
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-soul",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+                "diagnostic": null,
+                "locator": "section:Verification discipline",
+                "path": "SOUL.md",
+                "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:ImplementationPlan",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "25333eec8b638aff350f434dc3b6c12840ba86c0790aa455656d09cb885790ec",
+                "diagnostic": null,
+                "locator": "section:Activation boundary",
+                "path": ".agents/skills/to-implementation-plan/SKILL.md",
+                "sha256": "25333eec8b638aff350f434dc3b6c12840ba86c0790aa455656d09cb885790ec",
+                "status": "current"
+              },
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:ImplementationPlan",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+                "diagnostic": null,
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-inference",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+                "diagnostic": null,
+                "locator": "section:Ontology second release and initialization v9",
+                "path": "SPECS.md",
+                "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:derivesFrom",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          }
+        ],
+        "child_cpu_seconds": 0.3945180000000008,
+        "child_maxrss_raw": 386072576,
+        "correct_at_1": false,
+        "correct_at_5": true,
+        "elapsed_seconds": 0.5187174160091672,
+        "ids": [
+          "urn:sys4ai:ontology:project:sys4ai-depot:artifact-soul",
+          "urn:sys4ai:ontology:core:ImplementationPlan",
+          "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+          "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-inference",
+          "urn:sys4ai:ontology:core:derivesFrom"
+        ],
+        "semantic": {
+          "index_sha256": "93bdda215495ba527ecae3120fbbf4641e89ea7c2a0a4417b9819905d2f11971",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "offline": true,
+          "packages": {
+            "anyio": "4.15.1",
+            "certifi": "2026.7.22",
+            "charset-normalizer": "3.5.1",
+            "click": "8.5.0",
+            "fastembed": "0.8.0",
+            "filelock": "3.32.6",
+            "flatbuffers": "25.12.19",
+            "fsspec": "2026.7.0",
+            "h11": "0.16.0",
+            "hf-xet": "1.6.0",
+            "httpcore": "1.0.9",
+            "httpx": "0.28.1",
+            "huggingface_hub": "1.30.0",
+            "idna": "3.19",
+            "loguru": "0.7.3",
+            "mmh3": "5.3.0",
+            "numpy": "2.5.3",
+            "onnxruntime": "1.29.0",
+            "packaging": "26.3",
+            "pillow": "12.3.0",
+            "protobuf": "7.36.1",
+            "py_rust_stemmers": "0.1.8",
+            "pyyaml": "6.0.3",
+            "requests": "2.34.2",
+            "tokenizers": "0.23.2",
+            "tqdm": "4.70.0",
+            "typing_extensions": "4.16.0",
+            "urllib3": "2.7.0"
+          },
+          "status": "current",
+          "threshold": 0.45,
+          "used": true
+        },
+        "status": "ok"
+      }
+    },
+    {
+      "expected": null,
+      "first_release_lexical": {
+        "attribution": [],
+        "child_cpu_seconds": 1.6653345369377348e-16,
+        "child_maxrss_raw": 386072576,
+        "correct_at_1": true,
+        "correct_at_5": true,
+        "elapsed_seconds": 0.001757540987455286,
+        "ids": [],
+        "semantic": null,
+        "status": "no_match"
+      },
+      "id": "unrelated-negative",
+      "query": "photosynthetic chlorophyll",
+      "semantic": {
+        "attribution": [
+          {
+            "id": "urn:sys4ai:ontology:core:broader",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-core-module",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "b9b3bb90f8db47110588c02c99c8b4bedab62c1b4be9f533572aa3a6362e4f43",
+                "diagnostic": null,
+                "locator": "json:/@graph",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld",
+                "sha256": "b9b3bb90f8db47110588c02c99c8b4bedab62c1b4be9f533572aa3a6362e4f43",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:core:Property",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "diagnostic": null,
+                "locator": "section:Property",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-wiki-index",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+                "diagnostic": null,
+                "locator": "section:Ontology second release and initialization v9",
+                "path": "SPECS.md",
+                "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+                "status": "current"
+              }
+            ]
+          },
+          {
+            "id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-publication-authority",
+            "reason": "semantic_similarity",
+            "sources": [
+              {
+                "actual_sha256": "2cb2fd172ccd053949c436aff78be5144e2689f82f4831582d879de352fe2ea7",
+                "diagnostic": null,
+                "locator": "section:Preparing reviewed publication",
+                "path": ".agents/skills/memory/references/publication-examples.md",
+                "sha256": "2cb2fd172ccd053949c436aff78be5144e2689f82f4831582d879de352fe2ea7",
+                "status": "current"
+              }
+            ]
+          }
+        ],
+        "child_cpu_seconds": 0.4009279999999997,
+        "child_maxrss_raw": 386072576,
+        "correct_at_1": false,
+        "correct_at_5": false,
+        "elapsed_seconds": 0.5181647080025868,
+        "ids": [
+          "urn:sys4ai:ontology:core:broader",
+          "urn:sys4ai:ontology:project:sys4ai-depot:artifact-core-module",
+          "urn:sys4ai:ontology:core:Property",
+          "urn:sys4ai:ontology:project:sys4ai-depot:ontology-wiki-index",
+          "urn:sys4ai:ontology:project:sys4ai-depot:memory-publication-authority"
+        ],
+        "semantic": {
+          "index_sha256": "93bdda215495ba527ecae3120fbbf4641e89ea7c2a0a4417b9819905d2f11971",
+          "model_revision": "52398278842ec682c6f32300af41344b1c0b0bb2",
+          "offline": true,
+          "packages": {
+            "anyio": "4.15.1",
+            "certifi": "2026.7.22",
+            "charset-normalizer": "3.5.1",
+            "click": "8.5.0",
+            "fastembed": "0.8.0",
+            "filelock": "3.32.6",
+            "flatbuffers": "25.12.19",
+            "fsspec": "2026.7.0",
+            "h11": "0.16.0",
+            "hf-xet": "1.6.0",
+            "httpcore": "1.0.9",
+            "httpx": "0.28.1",
+            "huggingface_hub": "1.30.0",
+            "idna": "3.19",
+            "loguru": "0.7.3",
+            "mmh3": "5.3.0",
+            "numpy": "2.5.3",
+            "onnxruntime": "1.29.0",
+            "packaging": "26.3",
+            "pillow": "12.3.0",
+            "protobuf": "7.36.1",
+            "py_rust_stemmers": "0.1.8",
+            "pyyaml": "6.0.3",
+            "requests": "2.34.2",
+            "tokenizers": "0.23.2",
+            "tqdm": "4.70.0",
+            "typing_extensions": "4.16.0",
+            "urllib3": "2.7.0"
+          },
+          "status": "current",
+          "threshold": 0.45,
+          "used": true
+        },
+        "status": "ok"
+      }
+    }
+  ],
+  "package": "installed root",
+  "project_id": "sys4ai-depot",
+  "project_root": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+  "schema_version": 1,
+  "summary": {
+    "first_release_lexical": {
+      "correct_at_1": 3,
+      "correct_at_5": 3
+    },
+    "semantic": {
+      "correct_at_1": 3,
+      "correct_at_5": 5
+    }
+  }
+}

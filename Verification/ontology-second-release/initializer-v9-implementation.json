@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "plan_id": "PLAN-20260909-4B15BB49",
+  "plan_revision": 2,
+  "tasks": [
+    "TASK-044",
+    "TASK-045"
+  ],
+  "status": "scoped-source-implementation-complete",
+  "initializer_version": "11.0.0",
+  "new_base_edition": "governance-starter-v9",
+  "prior_base_editions_preserved": [
+    "governance-starter-v1",
+    "governance-starter-v2",
+    "governance-starter-v3",
+    "governance-starter-v4",
+    "governance-starter-v5",
+    "governance-starter-v6",
+    "governance-starter-v7",
+    "governance-starter-v8"
+  ],
+  "source_manifest": {
+    "SKILLS-depo/init-new-project/README.md": "a2087b975d605ae86745c7f2d9e054194dbe81e2b25c2c0f0986b3fcde8f03b6",
+    "SKILLS-depo/init-new-project/SKILL.md": "602b94686f6f7db36b5ccb858564236e30b53acf32646572607f9bf0c8aa4551",
+    "SKILLS-depo/init-new-project/assets/baseline-assets.json": "36fc8d8e299394c2a510d2ba079c53729b68d10f2262f74bd08fbd3b05e5012d",
+    "SKILLS-depo/init-new-project/assets/initialization-receipt.schema.json": "76f89e800b292863d648fcb964fd2a2599218316087ba5fa7978546c949e690c",
+    "SKILLS-depo/init-new-project/scripts/init_new_project.py": "43de9959d6531aaaf9638175be29a4a5da1822826084c82ee24ba518a67f33e8",
+    "SKILLS-depo/init-new-project/scripts/init_ontology_advanced.py": "57e40df11c970940f25c1842976ff2b61b93004d2bd76224c3d0d6ad9006bcff",
+    "SKILLS-depo/init-new-project/tests/test_initializer.py": "81b29fe40683f57ccc15cd7a7b40311d44b03e3d51f0b8c9c86ead8c74a93062",
+    "SKILLS-depo/init-new-project/tests/test_advanced_ontology_setup.py": "c093d61c82a524919028db5b283dfd54c33cec3b02485f146d9fbb74d155f6ab",
+    "SKILLS-depo/init-new-project/tests/test_advanced_ontology_adoption.py": "1fd28183ffecc59cb01bccd44ede28afe19862af186f48661884736544944dd1",
+    "SKILLS-depo/init-new-project/tests/test_advanced_ontology_recovery.py": "59c57c27404e4bbeb41e30a75912c1fbcc20f0bc68d50b10090fd67d51eb2dca",
+    "SKILLS-depo/init-new-project/tests/test_memory_editions.py": "d09797d9d8c5ce4557769bbb622b08b1882b31662ae9d86b3fbf843f8f4c1bbf",
+    "SKILLS-depo/init-new-project/tests/test_learning_editions.py": "be8f2eaf5f7195a6e452f18a221959927ac08e395f4f7c4c6d9fd6c153bcaa00",
+    "SKILLS-depo/init-new-project/tests/test_ontology_setup.py": "abe9f6763149d9a6b590b7ad2b085249a1a597b5c8e0b487e7a2bffb5b2382e6",
+    "SKILLS-depo/init-new-project/tests/test_setup_recovery.py": "9e5f97f0bd755b72ae62f3079d74864446dad83e3e0fca0f6f340962aa9729a7",
+    "SKILLS-depo/init-new-project/tests/test_licensing.py": "123d2d0de797e1bd8b615a300c380c2b652bc12baa968b0e2b6897afce2d9fb6",
+    "SKILLS-depo/init-new-project/tests/test_end_to_end.py": "c045835361b12db591301c9ff14aa9b5a6f91e881c780210936299748b1a13b5",
+    "ONTOLOGY-depo/starter/ontology-advanced.yaml": "f79a080944ae36135f022cedf490651234f7e98c9a6233866a37668371bbfdf8",
+    "ONTOLOGY-depo/schema/advanced-starter-v1.json": "81a75cab8613f71a30524d7e385fdf03cb10943ef05dff376045ae54e8c005e0",
+    "SKILLS-depo/ontology/tests/support.py": "0134085bbb6e80a5968619c0f2cee0751c2d25ee82de7e7873cbbef628d88a0d",
+    "SKILLS-depo/ontology/tests/test_proposals.py": "276c6bc4e601c3726df03f545f0e6d5bcb4bdc5a1fed782ce7ca8ff5518ce4a3",
+    "SKILLS-depo/ontology/scripts/ontology_publication.py": "1c314ccf1f3d8bb6e643dd5a13dadcc8018a58e5c4fdf423ff4dbd7af4d59fab"
+  },
+  "coordinator_owned_dependency": {
+    "path": "SKILLS-depo/init-new-project/assets/template_update.py",
+    "sha256": "3aeb745dec5c671f29dde3de4472f13f0d1bf653e821a0a747053e3a783c1eb9",
+    "role": "Explicit reusable updater copy supplied by parent; parent owns Template mapping/adoption."
+  },
+  "validation": {
+    "initializer_suite": {
+      "tests_run": 110,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "skip_reason": "Actual filesystem has case-insensitive directory lookup; dual differently-cased collection case cannot be represented.",
+      "evidence": "Verification/ontology-second-release/initializer-v9-tests.json"
+    },
+    "ontology_regressions": {
+      "tests_run": 26,
+      "failures": 0,
+      "errors": 0,
+      "evidence": "Verification/ontology-second-release/initializer-v9-ontology-regressions.json"
+    },
+    "final_deletion_delta": {
+      "test": "test_advanced_ontology_adoption.AdvancedAdoptionTests.test_populated_v8_only_selected_upgrade_refreshes_verified_capability",
+      "tests_run": 1,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 12.531,
+      "observed": "Ran actual current fixture after adding obsolete-owned-resource removal and guard checkpoints before unlink/rmdir; unittest OK."
+    },
+    "static": "All changed Python files parse; JSON/neutral YAML and schema artifacts parse."
+  },
+  "behavior": {
+    "new_and_first_prepare": "Destination-local advanced identity and publication binding; all5 advanced profiles disabled; no environment/package/model/certification/service/guard bootstrap provisioning.",
+    "selected_upgrade": "prepare-existing --adopt-module ontology-advanced updates complete unchanged receipt-owned capability packages; authored ONTOLOGY trees/imports, configs, proposals, memory/preferences, licensing/governance and base receipt history stay preserved.",
+    "missing_baseline": "Explicit neutral ontology prerequisite is recorded inside the same advanced module_adoptions operation.",
+    "customized_missing": "Refuses before writing when a required package is customized, incomplete, missing receipt-owned content, or incompatible/unowned.",
+    "repeated_selection": "Same source selection verifies without replacement; new complete Template source inventory gets its own frozen operation.",
+    "partial_recovery": "Same source inventory, exact pre/post targets and unchanged protected authored data required; conflicting edits stay intact.",
+    "enabled_destination_guards": "Requires an exact separately reviewed adapter repair before code refresh; never silently disables or rewrites guard binding.",
+    "guard_callbacks": "Existing guarded entrypoints and lock/atomic callbacks retained; deletion branches now recheck unchanged guard context before unlink/rmdir."
+  },
+  "scope_boundaries": {
+    "live_adoption": "Not performed by this worker; parent owns Template/root/source distribution, registry and guard bootstrap acceptance.",
+    "runtime": "No runtime installation, model, service or actual project activation performed.",
+    "canonical_workflows": "No actual Task/plan/TRD/memory/Git mutation. Tests write only disposable registered depot fixtures.",
+    "earlier_phase_delta": "Read-only ontology preview no longer claims a locked mutation check; parent guard worker requested and validated the receipt evidence correction."
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "mode": "automatic-completion-review",
+  "project_id": "sys4ai-depot",
+  "owner": "/root",
+  "observed_at": "2026-09-09T19:20:48.379889+00:00",
+  "capture_status": {
+    "automatic_capture": true,
+    "config_sha256": "3989830df89045033f5e53f7fc53be143f33b553acd7f5405a591fb14cdd475a",
+    "message": "Memory automatic capture is on.",
+    "read_only": true,
+    "triggers": [
+      "work-completed",
+      "task-completed",
+      "decision-recorded",
+      "failure-observed"
+    ]
+  },
+  "result": "reviewed_without_canonical_publication",
+  "finding": "Validate JSON field types before set/membership operations so malformed local ontology data produces bounded diagnostics instead of uncaught Python exceptions.",
+  "disposition": "targeted improvement implemented and verified in this release",
+  "evidence": [
+    {
+      "path": "Verification/ontology-first-release/adversarial-profile-probe.json",
+      "sha256": "49b3d2689b90172cc32c4975e8789823ebd5dfee97d9ed9c1393ccd5f4c51de4"
+    },
+    {
+      "path": "Verification/ontology-first-release/adversarial-profile-verification.json",
+      "sha256": "a856d0760a15be670fa65ce0ef84d07c903b40d0da08f7d8f38ba9f32a443688"
+    },
+    {
+      "path": ".agents/skills/ontology/tests/test_loading.py",
+      "sha256": "974743ec2cebebeaa3ef5c50bb4dffe7fcdace7d60b77df0fc4a70920fae3fd1"
+    }
+  ],
+  "existing_memory_matches": [],
+  "publication_reason": "The approved plan protects MEMORY/ and excludes changes to the current memory corpus. Evidence stays in the authorized release verification directory; no root memory grant or record was added.",
+  "setting_unchanged": true,
+  "later_use": "No claim of benefit in later projects or later work; current malformed-input cases were re-exercised through the installed package."
+}

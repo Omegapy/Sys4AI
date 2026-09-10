@@ -1,4 +1,4 @@
-"""Focused scenario tests; all document writes use isolated temporary roots."""
+"""Helper and package regressions in isolated roots; not live interview tests."""
 from __future__ import annotations
 import ast
 import contextlib
@@ -140,7 +140,8 @@ class TrdTests(unittest.TestCase):
     def test_skill_package_contract(self):
         required = ['SKILL.md', 'README.md', 'INDEX.md', 'AGENTS.md', 'ACTIONS.md',
                     'ATTRIBUTION.md', 'agents/openai.yaml', 'references/wayfinding.md',
-                    'references/trd-contract.md', 'assets/trd-body-template.md',
+                    'references/trd-contract.md', 'references/interaction-examples.md',
+                    'tests/interaction-scenarios.md', 'assets/trd-body-template.md',
                     'assets/example-input.json', 'licenses/wayfinder-MIT.txt']
         for name in required:
             with self.subTest(file=name):
@@ -155,6 +156,14 @@ class TrdTests(unittest.TestCase):
         metadata = (SKILL / 'agents/openai.yaml').read_text()
         self.assertRegex(metadata, r'(?m)^policy:\n  allow_implicit_invocation: false$')
         self.assertIn('$to-trd', metadata)
+        short_description = re.search(r'  short_description: "(.+)"', metadata).group(1)
+        self.assertTrue(25 <= len(short_description) <= 64)
+        # Package resources must remain discoverable after a whole-folder copy.
+        for document in SKILL.rglob('*.md'):
+            for target in re.findall(r'\]\(([^)]+)\)', document.read_text()):
+                if '://' not in target and not target.startswith('#'):
+                    self.assertTrue((document.parent / target.split('#')[0]).is_file(),
+                                    f'{document.relative_to(SKILL)}: {target}')
         for node in ast.walk(ast.parse(SCRIPT.read_text())):
             if isinstance(node, ast.Import):
                 names = [alias.name.split('.')[0] for alias in node.names]
@@ -186,6 +195,13 @@ class TrdTests(unittest.TestCase):
         self.assertNotRegex(template, r'- \[[ xX]\] Complete|- Evidence:')
         self.assertNotRegex(EXAMPLE['body'], r'- \[[ xX]\] Complete|- Evidence:|## Completion evidence')
         self.assertTrue(all('complete' not in req and 'evidence' not in req for req in reqs))
+        self.assertEqual([req['id'] for req in reqs], ['REQ-001', 'REQ-002'])
+        self.assertIn('Synthetic clarification', sections['Captured user intent'])
+        self.assertIn('active filtered contacts', sections['In scope'])
+        self.assertIn('fictional', sections['Context and sources'])
+        self.assertIn('U03', ' '.join(reqs[0]['fields']['Source']))
+        self.assertIn('active filtered view', reqs[0]['fields']['Requirement'][0])
+        self.assertIn('excluded contacts are absent', reqs[0]['fields']['Acceptance'][0])
 
     def test_explicit_v1_and_v2_fixtures(self):
         sections, requirements = trd.validate_body(self.payload['body'])
@@ -200,7 +216,7 @@ class TrdTests(unittest.TestCase):
         self.error(2, trd.validate_body, self.payload['body'], schema_version=1)
 
     def test_clarification_questions_stay_out_of_new_writes(self):
-        question = 'Should the export include every field?'
+        question = 'Should unfiltered records also be exported?'
         body_with_question = self.payload['body'].replace(
             '## Open questions\n\nNone.', f'## Open questions\n\n{question}')
         self.error(2, self.store.create, dict(self.payload, body=body_with_question))
@@ -223,32 +239,53 @@ class TrdTests(unittest.TestCase):
                    {'title': 'Legacy title change'})
         self.assertEqual(snapshot(self.root), before)
 
-        resolved_body = legacy.body.replace(
-            f'## Open questions\n\n{question}', '## Open questions\n\nNone.').replace(
-            'U02 — The user wants the file saved locally and no network upload.',
-            'U02 — The user wants the file saved locally and no network upload.\n'
-            'U03 — The user confirmed that every existing field must be included.').replace(
-            '- Requirement: Export the existing contacts list as a local CSV file.',
-            '- Requirement: Export every existing contact and field as a local CSV file.').replace(
-            '- Source: U01 — example user intent.',
-            '- Source: U01 and U03 — original intent and clarification answer.').replace(
-            '- Acceptance: The exported file contains the existing contacts without changing '
-            'their source records.',
-            '- Acceptance: The exported file contains every existing contact and field without '
-            'changing source records.').replace(
-            '## Decisions\n\nNone.',
-            '## Decisions\n\n- Export fields — The user confirmed that every existing field is included.')
+        # Prepared synthetic answer checks storage propagation, not model questioning.
+        resolved_body = legacy.body
+        for before_text, after_text in (
+            (f'## Open questions\n\n{question}', '## Open questions\n\nNone.'),
+            ('## Context and sources',
+             'U04 — Synthetic clarification: include all contacts regardless of the active '
+             'filter, superseding U03 on selection only.\n\n## Context and sources'),
+            ('exports the active filtered contacts', 'exports all existing contacts'),
+            ('Export the active filtered contacts and all their existing fields',
+             'Export all existing contacts and all their existing fields'),
+            ('### REQ-001 — Export the filtered contacts', '### REQ-001 — Export all contacts'),
+            ('- Requirement: Export only the contacts in the active filtered view as a local '
+             'CSV file, including every existing field.',
+             '- Requirement: Export every existing contact and field as a local CSV file.'),
+            ('- Source: U03 — synthetic clarification of selection and fields.',
+             '- Source: U03 — synthetic clarification of fields and empty-output behavior.\n'
+             '- Source: U04 — synthetic clarification superseding the filtered selection.'),
+            ('- Acceptance: The exported file contains exactly the contacts in the active '
+             'filtered view and all their existing fields; excluded contacts are absent '
+             'and source records remain unchanged.',
+             '- Acceptance: The exported file contains every existing contact and field, '
+             'including unfiltered contacts, without changing source records.'),
+            ('An empty filtered view produces', 'An empty contact list produces'),
+            ('## Decisions\n\nNone.',
+             '## Decisions\n\n- U04 supersedes only the filtered-selection choice in U03; '
+             'fields, locality, empty-output and overwrite behavior remain unchanged.'),
+        ):
+            self.assertEqual(resolved_body.count(before_text), 1, before_text)
+            resolved_body = resolved_body.replace(before_text, after_text, 1)
         result = self.store.update(legacy.meta['trd_id'], legacy.sha256,
                                    {'body': resolved_body})
         updated = self.record()
         self.assertTrue(result['scope_changed'])
         self.assertEqual(updated.sections['Open questions'], 'None.')
-        self.assertIn('The user confirmed', updated.sections['Decisions'])
+        self.assertIn('U04 supersedes', updated.sections['Decisions'])
+        self.assertIn('U04', updated.sections['Captured user intent'])
+        self.assertIn('Export all existing contacts', updated.sections['In scope'])
         self.assertIn(
             'every existing contact and field',
             updated.requirements[0]['fields']['Requirement'][0],
         )
-        self.assertIn('U03', updated.requirements[0]['fields']['Source'][0])
+        self.assertIn('U04', ' '.join(updated.requirements[0]['fields']['Source']))
+        self.assertIn('including unfiltered contacts',
+                      updated.requirements[0]['fields']['Acceptance'][0])
+        self.assertNotIn('excluded contacts are absent', updated.body)
+        self.assertEqual([req['id'] for req in updated.requirements], ['REQ-001', 'REQ-002'])
+        self.assertEqual(updated.requirements[1], legacy.requirements[1])
 
     def test_creation_naming_collision_and_identity(self):
         self.payload['title'] = 'Café / contacts :: ?'
@@ -293,7 +330,7 @@ class TrdTests(unittest.TestCase):
     def test_body_validation_and_dependencies(self):
         original = self.payload['body']
         bad = [
-            original.replace('- Source: U01 — example user intent.\n', ''),
+            re.sub(r'^- Source: .+\n', '', original, flags=re.M),
             original.replace('### REQ-002', '### REQ-001'),
             original.replace('- Depends on: REQ-001', '- Depends on: REQ-999'),
             original.replace('- Depends on: None.', '- Depends on: REQ-001', 1),
@@ -464,6 +501,95 @@ class TrdTests(unittest.TestCase):
                    'trd_done', 'Approve.', True)
         self.assertEqual(snapshot(self.root), before)
 
+    def test_completion_reports_all_content_blockers_without_writes(self):
+        body = re.sub(r'## Task requirements\n.*?\n## Decisions',
+                      '## Task requirements\n\nNo task requirements captured yet.\n\n## Decisions',
+                      self.payload['body'], flags=re.S)
+        body = body.replace('## Not yet specified\n\nNone.',
+                            '## Not yet specified\n\nThe required export fields are undecided.')
+        body = body.replace('## Assumptions\n\nNone.',
+                            '## Assumptions\n\n- Unconfirmed: Export includes personal notes.')
+        doc = self.cli('create', '--input', '-', payload=dict(self.payload, body=body))['document']
+        diagnostic = doc['completion']
+        self.assertFalse(diagnostic['content_ready'])
+        self.assertEqual(diagnostic['next_action'], 'resolve_requirements')
+        self.assertEqual([b['code'] for b in diagnostic['blockers']],
+                         ['missing_requirements', 'unspecified_requirements', 'unconfirmed_assumptions'])
+        before = snapshot(self.root)
+        shown = self.cli('show', doc['trd_id'])['document']
+        self.assertEqual(shown['completion'], diagnostic)
+        for command in ('list', 'validate'):
+            self.assertEqual(self.cli(command)['documents'][0]['completion'], diagnostic)
+        rejected = self.cli('set-status', doc['trd_id'], '--expect-sha256', doc['sha256'],
+                            '--status', 'trd_done', '--reason', 'Fixture approval.',
+                            '--confirmed', expected=8)
+        self.assertEqual(rejected['completion_blockers'], diagnostic['blockers'])
+        self.assertEqual(snapshot(self.root), before)
+
+    def test_planning_choices_allow_document_approval(self):
+        body = self.payload['body'].replace(
+            '## Decisions\n\nNone.',
+            '## Decisions\n\nImplementation planning selects the export library, dependency '
+            'versions, and module layout within the required local CSV and source-preservation constraints.')
+        doc = self.cli('create', '--input', '-', payload=dict(self.payload, body=body))['document']
+        self.assertEqual(doc['completion'],
+                         dict(content_ready=True, blockers=[], next_action='request_approval'))
+        before = snapshot(self.root)
+        self.cli('set-status', doc['trd_id'], '--expect-sha256', doc['sha256'],
+                 '--status', 'trd_done', '--reason', 'Fixture approval.', expected=8)
+        self.assertEqual(snapshot(self.root), before)
+        done = self.cli('set-status', doc['trd_id'], '--expect-sha256', doc['sha256'],
+                        '--status', 'trd_done', '--reason', 'User approved the displayed fixture.',
+                        '--confirmed')['document']
+        current = self.record(selector=doc['trd_id'])
+        self.assertEqual(current.meta['status'], 'trd_done')
+        self.assertEqual(current.body, body)
+        self.assertEqual(done['completion'], dict(content_ready=True, blockers=[], next_action='none'))
+        self.assertTrue(self.cli('validate')['index_current'])
+        self.assertEqual({p.name for p in self.root.iterdir()}, {'TRDs'})
+        revised = self.cli('update', doc['trd_id'], '--expect-sha256', done['sha256'],
+                           '--input', '-', payload={'title': 'Revised export requirements'})['document']
+        self.assertEqual(revised['status'], 'draft')
+        self.assertEqual(revised['completion']['next_action'], 'request_approval')
+        before = snapshot(self.root)
+        self.cli('set-status', doc['trd_id'], '--expect-sha256', done['sha256'],
+                 '--status', 'trd_done', '--reason', 'Obsolete fixture approval.', '--confirmed', expected=6)
+        self.assertEqual(snapshot(self.root), before)
+
+    def test_completion_preserves_authority_gaps(self):
+        body = self.payload['body'].replace(
+            '## Decisions\n\nNone.', '## Decisions\n\nImplementation planning defines the approval interface.')
+        body = body.replace('## Not yet specified\n\nNone.',
+                            '## Not yet specified\n\nThe authority permitted to approve disclosure is undecided.')
+        doc = self.store.create(dict(self.payload, body=body))['document']
+        self.assertEqual(doc['completion']['blockers'][0]['code'], 'unspecified_requirements')
+        before = snapshot(self.root)
+        self.error(8, self.store.set_status, doc['trd_id'], doc['sha256'],
+                   'trd_done', 'Fixture approval.', True)
+        self.assertEqual(snapshot(self.root), before)
+
+    def test_completion_diagnostics_for_retired_and_legacy_documents(self):
+        rec = self.make('retired')
+        before = snapshot(self.root)
+        summary = self.cli('show', rec.meta['trd_id'])['document']
+        self.assertEqual(summary['completion'],
+                         dict(content_ready=True, blockers=[], next_action='restore_to_draft'))
+        self.assertEqual(snapshot(self.root), before)
+        historical = self.legacy('draft', body=legacy_body().replace(
+            '## Open questions\n\nNone.', '## Open questions\n\nWhich fields are required?'))
+        before = snapshot(self.root)
+        diagnostic = self.cli('show', historical.meta['trd_id'])['document']['completion']
+        self.assertIsNone(diagnostic['content_ready'])
+        self.assertEqual(diagnostic['next_action'], 'migrate')
+        self.assertEqual(diagnostic['blockers'][0]['code'], 'legacy_schema')
+        self.assertEqual(snapshot(self.root), before)
+        self.migrate(historical)
+        migrated = self.record(selector=historical.meta['trd_id'])
+        diagnostic = migrated.summary()['completion']
+        self.assertFalse(diagnostic['content_ready'])
+        self.assertEqual(diagnostic['next_action'], 'resolve_requirements')
+        self.assertEqual(diagnostic['blockers'][0]['code'], 'open_questions')
+
     def test_material_updates_reopen_document_review(self):
         changes = [
             {'title': 'New display title'},
@@ -474,10 +600,10 @@ class TrdTests(unittest.TestCase):
             ('Provide a project-local command', 'Provide a local command'),
             ('without editing contacts.', 'without modifying contacts.'),
             ('The only source for its requirements', 'The stated source for its requirements'),
-            ('Export the current contacts list', 'Export the complete contacts list'),
+            ('Export the active filtered contacts', 'Export the currently filtered contacts'),
             ('Editing contacts, cloud synchronization', 'Editing contacts, cloud storage'),
-            ('Export the existing contacts\n-', 'Export all existing contacts\n-'),
-            ('- Requirement: Export the existing contacts', '- Requirement: Export all existing contacts'),
+            ('Export the filtered contacts\n-', 'Export the selected contacts\n-'),
+            ('- Requirement: Export only the contacts', '- Requirement: Export the selected contacts'),
             ('- Source: U01 — example user intent.', '- Source: U01 — clarified user intent.'),
             ('- Acceptance: The exported file', '- Acceptance: The revised exported file'),
             ('- Depends on: REQ-001', '- Depends on: None.'),

@@ -1,0 +1,333 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "extensions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "pattern": "^ONTOLOGY/extensions/[^.][^\\\\]*\\.json$",
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "type": "object"
+      },
+      "maxItems": 100,
+      "type": "array"
+    },
+    "limits": {
+      "additionalProperties": false,
+      "properties": {
+        "derived_triples": {
+          "maximum": 400000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "guard_seconds": {
+          "maximum": 5,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "input_bytes": {
+          "maximum": 33554432,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "input_triples": {
+          "maximum": 200000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "output_bytes": {
+          "maximum": 8388608,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "proof_nodes": {
+          "maximum": 40000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "query_depth": {
+          "maximum": 64,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "query_seconds": {
+          "maximum": 60,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "reasoning_seconds": {
+          "maximum": 120,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "result_rows": {
+          "maximum": 5000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "rss_bytes": {
+          "maximum": 1073741824,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "rule_rounds": {
+          "maximum": 512,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "workers": {
+          "maximum": 2,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "profiles": {
+      "additionalProperties": false,
+      "properties": {
+        "guards": {
+          "additionalProperties": false,
+          "properties": {
+            "adapters": {
+              "additionalProperties": false,
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "type": "object"
+            },
+            "bootstrap": {
+              "additionalProperties": false,
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "type": "object"
+            },
+            "contract": {
+              "additionalProperties": false,
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "type": "object"
+            },
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "type": "object"
+        },
+        "inference": {
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "type": "object"
+        },
+        "semantic": {
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "model_manifest": {
+              "const": ".sys4ai/ontology/semantic/model.json"
+            },
+            "python": {
+              "const": ".venv-ontology-semantic/bin/python"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "type": "object"
+        },
+        "standards": {
+          "additionalProperties": false,
+          "properties": {
+            "certification": {
+              "type": "string"
+            },
+            "enabled": {
+              "type": "boolean"
+            },
+            "python": {
+              "const": ".venv-ontology-standards/bin/python"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "type": "object"
+        },
+        "workbench": {
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "host": {
+              "const": "127.0.0.1"
+            },
+            "max_request_bytes": {
+              "maximum": 1000000,
+              "minimum": 1024,
+              "type": "integer"
+            },
+            "port": {
+              "maximum": 65535,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "session_seconds": {
+              "maximum": 3600,
+              "minimum": 60,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "publication": {
+      "additionalProperties": false,
+      "properties": {
+        "binding": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "actor_id": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "authority": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "path": {
+                        "enum": [
+                          "SOUL.md",
+                          "AGENTS.md",
+                          "ROLE.md"
+                        ]
+                      },
+                      "sha256": {
+                        "pattern": "^[0-9a-f]{64}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "path",
+                      "sha256"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 3,
+                  "minItems": 3,
+                  "type": "array"
+                },
+                "scope": {
+                  "items": {
+                    "enum": [
+                      "ontology-advanced.yaml",
+                      "ONTOLOGY/extensions"
+                    ]
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array",
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "actor_id",
+                "scope",
+                "authority"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "binding"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "profiles",
+    "extensions",
+    "limits"
+  ],
+  "title": "Sys4AI ontology advanced companion v1",
+  "type": "object"
+}

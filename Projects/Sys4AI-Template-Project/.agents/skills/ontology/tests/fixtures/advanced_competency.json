@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "purpose": "Compare exact vocabulary and held-out paraphrases without assuming improvement.",
+  "cases": [
+    {"id": "exact-task", "query": "Task", "expected": "urn:sys4ai:ontology:core:Task"},
+    {"id": "exact-trd", "query": "TRD", "expected": "urn:sys4ai:ontology:core:TRD"},
+    {"id": "historical-paraphrase", "query": "recollections", "expected": "urn:sys4ai:ontology:core:MemoryRecord"},
+    {"id": "ability-paraphrase", "query": "competence", "expected": "urn:sys4ai:ontology:core:Capability"},
+    {"id": "planning-paraphrase", "query": "a sequenced blueprint for construction", "expected": "urn:sys4ai:ontology:core:ImplementationPlan"},
+    {"id": "unrelated-negative", "query": "photosynthetic chlorophyll", "expected": null}
+  ]
+}

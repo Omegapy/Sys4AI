@@ -8,8 +8,9 @@ Ordinary reads and project setup never install those requirements or a model.
 
 `basic_memory_adapter.query(root, query, config=None, mode="hybrid", limit=20,
 packet=None)` starts only the fixed local query worker. Supported modes are
-`text`, `vector`, and `hybrid`. `health(root, config=None)` reads existing state
-without importing vendor packages. Missing, changed, disabled, unprovisioned,
+`text`, `vector`, and `hybrid`. `health(root, config=None, level="static")` reads existing state
+without importing vendor packages. Explicit `level="operational"` additionally
+runs the fixed bounded hybrid-read worker and rechecks final versions. Missing, changed, disabled, unprovisioned,
 uncertified, or pending-recovery state returns a lexical limitation. Canonical
 read and validation stay with the standard-library memory helper.
 
@@ -50,3 +51,13 @@ adapter and profile hashes. It is distinct from the full compatibility decision.
 Root semantic enablement is authorized only after all mandatory actual pilot
 checks pass. Deterministic tests and a small fixture do not establish root or
 future-host readiness. A failed pilot keeps lexical/direct retrieval available.
+
+
+Projection manifests record the exact producer implementations for identity,
+normalization, text extraction and eligibility. They verify the complete current
+permitted document set, including additions, content changes and memory lifecycle
+changes. Legacy manifests lacking producer hashes are explicitly stale and require
+a reviewed reindex; a read never adds those hashes. Index manifests bind database
+bytes, and certificates bind project/root, configuration, backend settings,
+projection, database, adapter and profile; the profile pins local model artifacts.
+Changes outside the declared corpus and producer set do not fabricate dependencies.

@@ -111,8 +111,8 @@ choices and v1-v5 receipt editions retain their original adoption evidence.
 ## Learning capability
 
 Initializer edition v7 adds the complete `what-did-you-learn` skill and
-`reference-assets/LEARNING-depo/` resources. Memory remains supported for v5-v7
-and automatic capture for v6-v7. The module supplies learning review and
+`reference-assets/LEARNING-depo/` resources. Memory remains supported for v5-v8
+and automatic capture for v6-v8. The module supplies learning review and
 improvement disposition through the existing memory completion reference;
 record schema, publication, retrieval and recovery remain owned by memory.
 Canonical learned records remain project-local in `MEMORY/`.
@@ -131,3 +131,23 @@ backend status. Unknown customized inspectors are preserved without execution.
 No setup or lookup installs a backend, starts a service, records transcripts,
 adds runtime hooks or provisions a model. Inspect the installed learning and
 initializer contracts for supported commands and exact recovery boundaries.
+
+## Ontology starter and initialization v8
+
+Initializer 10.0.0 uses `governance-starter-v8` for new and first-prepared projects.
+The [ontology contract](./reference-assets/ONTOLOGY-depo/profile.md) defines a
+strict JSON-LD subset with pinned local contexts and versioned core imports.
+Canonical project graphs and bindings live under `ONTOLOGY/`; `ontology.yaml`
+configures the local project. Python 3.12 standard-library helpers provide core
+validation, lookup and explicit generated outputs without an ontology service.
+Generated `.sys4ai/ontology/` and `ONTOLOGY/WIKI/` paths are separate from durable
+`control_records/ontology/` publication and recovery records.
+
+Setup specializes the saved project identity, namespace and local Director
+binding. The initializer statically verifies declaration/import integrity and
+current binding without executing customized project code. Semantic/source
+readiness is inspected by the installed ontology `health` command; setup grants
+no operation-specific publication authority. Existing receipts retain their
+original edition. Explicit ontology adoption and receipt-owned refresh use the
+[initializer contract](./.agents/skills/init-new-project/SKILL.md), preserving
+existing memory, learning, governance, Tasks, roles, licensing and project data.

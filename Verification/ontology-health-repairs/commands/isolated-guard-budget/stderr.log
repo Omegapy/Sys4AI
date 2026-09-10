@@ -1,0 +1,27 @@
+test_all_v2_backend_phases_share_one_remaining_budget (test_guard_deadline.GuardDeadlineTests.test_all_v2_backend_phases_share_one_remaining_budget) ... ERROR
+
+======================================================================
+ERROR: test_all_v2_backend_phases_share_one_remaining_budget (test_guard_deadline.GuardDeadlineTests.test_all_v2_backend_phases_share_one_remaining_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guard_deadline.py", line 45, in test_all_v2_backend_phases_share_one_remaining_budget
+    decision = guards.begin_action(root, "ontology", "publish", {"proposal": proposal}, [c["path"] for c in proposal["changes"]])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpw8b_f3q0/project/.agents/skills/ontology/scripts/ontology_guards.py", line 724, in begin_action
+    decision = Decision(root, family, operation, normalized, list(targets), _observed)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpw8b_f3q0/project/.agents/skills/ontology/scripts/ontology_guards.py", line 639, in __init__
+    self.backend = budget.evaluate(validate, root, triples=triples, shapes=shapes, overrides=candidate_overrides)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpw8b_f3q0/project/.agents/skills/ontology/scripts/ontology_guards.py", line 151, in evaluate
+    self.check(result)
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpw8b_f3q0/project/.agents/skills/ontology/scripts/ontology_guards.py", line 141, in check
+    fail(not self.is_set(), "guard_timeout",
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpw8b_f3q0/project/.agents/skills/ontology/scripts/ontology_guards.py", line 122, in fail
+    raise GuardError(code, message, details)
+ontology_guards.GuardError: The shared semantic evaluation budget expired; no action was dispatched. Resolve the expensive input or retry with a smaller selected graph. [condition=guard_timeout; action=urn:sys4ai:ontology:action:ontology:publish; source=reference-assets/ONTOLOGY-depo/actions/contracts-v1.json@ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8; backend=conformant]
+
+----------------------------------------------------------------------
+Ran 1 test in 6.889s
+
+FAILED (errors=1)

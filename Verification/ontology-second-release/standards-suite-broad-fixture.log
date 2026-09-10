@@ -1,0 +1,54 @@
+test_advanced_packets (unittest.loader._FailedTest.test_advanced_packets) ... ERROR
+test_guard_enabled_requires_repair (test_advanced_profiles.ProfileConfiguration.test_guard_enabled_requires_repair) ... ok
+test_partial_receipt_recovery (test_advanced_profiles.ProfileConfiguration.test_partial_receipt_recovery) ... ok
+test_selected_enable_and_replay (test_advanced_profiles.ProfileConfiguration.test_selected_enable_and_replay) ... ok
+test_wrong_or_expired_authority_preserves_config (test_advanced_profiles.ProfileConfiguration.test_wrong_or_expired_authority_preserves_config) ... ok
+test_actual_standards_and_consistency_validate_isolated_candidate (test_advanced_publication.AdvancedPublicationTests.test_actual_standards_and_consistency_validate_isolated_candidate) ... ok
+test_profile_or_authority_changes_are_outside_semantic_publication (test_advanced_publication.AdvancedPublicationTests.test_profile_or_authority_changes_are_outside_semantic_publication) ... ok
+test_rdf_import_retains_full_quads_and_only_converts_lossless_axioms (test_advanced_publication.AdvancedPublicationTests.test_rdf_import_retains_full_quads_and_only_converts_lossless_axioms) ... ok
+test_v1_grant_cannot_publish_extension_and_exact_v2_partial_recovery (test_advanced_publication.AdvancedPublicationTests.test_v1_grant_cannot_publish_extension_and_exact_v2_partial_recovery) ... ok
+test_01_actual_profile_ready (test_advanced_standards.StandardsAcceptance.test_01_actual_profile_ready) ... ok
+test_02_v1_and_disabled_missing_versions (test_advanced_standards.StandardsAcceptance.test_02_v1_and_disabled_missing_versions) ... ok
+test_03_limits_are_finite (test_advanced_standards.StandardsAcceptance.test_03_limits_are_finite) ... ok
+test_04_dataset_types_language_and_preservation (test_advanced_standards.StandardsAcceptance.test_04_dataset_types_language_and_preservation) ... ok
+test_05_query_forms_and_from (test_advanced_standards.StandardsAcceptance.test_05_query_forms_and_from) ... ok
+test_06_prohibited_queries_and_partial (test_advanced_standards.StandardsAcceptance.test_06_prohibited_queries_and_partial) ... ok
+test_07_interchange_roundtrips (test_advanced_standards.StandardsAcceptance.test_07_interchange_roundtrips) ... ok
+test_08_import_security (test_advanced_standards.StandardsAcceptance.test_08_import_security) ... ok
+test_09_real_shacl_overlap_and_failure (test_advanced_standards.StandardsAcceptance.test_09_real_shacl_overlap_and_failure) ... ok
+test_10_guard_shapes_actual (test_advanced_standards.StandardsAcceptance.test_10_guard_shapes_actual) ... ok
+test_11_generated_wiki_and_proofs (test_advanced_standards.StandardsAcceptance.test_11_generated_wiki_and_proofs) ... ok
+test_12_property_and_oracle (test_advanced_standards.StandardsAcceptance.test_12_property_and_oracle) ... ok
+test_13_conflicts_negative_unproven (test_advanced_standards.StandardsAcceptance.test_13_conflicts_negative_unproven) ... ok
+test_14_stale_unsupported_and_limits (test_advanced_standards.StandardsAcceptance.test_14_stale_unsupported_and_limits) ... ok
+test_15_unselected_symlink_and_core_redefinition (test_advanced_standards.StandardsAcceptance.test_15_unselected_symlink_and_core_redefinition) ... ok
+test_16_equivalence_identity_and_conflicts (test_advanced_standards.StandardsAcceptance.test_16_equivalence_identity_and_conflicts) ... ok
+test_17_draft_exclusion_and_preview (test_advanced_standards.StandardsAcceptance.test_17_draft_exclusion_and_preview) ... ok
+test_18_blanknode_semantic_roundtrip (test_advanced_standards.StandardsAcceptance.test_18_blanknode_semantic_roundtrip) ... ok
+test_19_query_budgets_and_selected_scope (test_advanced_standards.StandardsAcceptance.test_19_query_budgets_and_selected_scope) ... ok
+test_20_real_worker_capacity (test_advanced_standards.StandardsAcceptance.test_20_real_worker_capacity) ... ok
+test_21_inferred_provenance_interchange (test_advanced_standards.StandardsAcceptance.test_21_inferred_provenance_interchange) ... ok
+
+======================================================================
+ERROR: test_advanced_packets (unittest.loader._FailedTest.test_advanced_packets)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_advanced_packets
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 396, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 339, in _get_module_from_name
+    __import__(name)
+  File "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/ontology-frozen-standards-suite-ee0pskky/SKILLS-depo/ontology/tests/test_advanced_packets.py", line 8, in <module>
+    import test_query_packets as packet_fixtures
+  File "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/ontology-frozen-standards-suite-ee0pskky/SKILLS-depo/ontology/tests/test_query_packets.py", line 11, in <module>
+    from test_query_memory import setup_memory, note
+  File "/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/ontology-frozen-standards-suite-ee0pskky/SKILLS-depo/ontology/tests/test_query_memory.py", line 17, in <module>
+    from memory_core import default_config, render_record
+ModuleNotFoundError: No module named 'memory_core'
+
+
+----------------------------------------------------------------------
+Ran 30 tests in 137.122s
+
+FAILED (errors=1)

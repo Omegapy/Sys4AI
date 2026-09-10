@@ -1,0 +1,1273 @@
+--- baseline/ACTIONS.md
++++ candidate/ACTIONS.md
+@@ -21,6 +21,16 @@
+ | TO-TRD-012 | Return a completed document to draft | `set-status ... --status draft` from trd_done | Metadata and index |
+ | TO-TRD-013 | Migrate a legacy schema-1 document | `migrate <selector> --expect-sha256 ... --reason ... --confirmed` | Selected schema-2 document and index, or validated no-op when already current |
+ 
++Capture reaches `create` only at the authorized synthesis boundary after
++[discovery](references/wayfinding.md), or when an incomplete draft is explicitly
++requested. A material question ends the response and waits; neither asking nor
++receiving an answer automatically writes. Resume remains read-only until
++explicit save. Revision resolves and reads the exact record before its authorized
++update; list/show/validate and lifecycle-only requests do not start an interview.
++When follow-ups are prohibited, report material gaps and save only an authorized
++incomplete artifact. No operation changes its ID or gains write authority from
++these conversational rules.
++
+ Every `set-status` call requires `--expect-sha256 HASH`, `--reason TEXT`, and
+ `--confirmed`. Every existing-document update requires the current content hash.
+ Migration writes require the same hash, reason, and confirmation preconditions.
+--- baseline/AGENTS.md
++++ candidate/AGENTS.md
+@@ -31,6 +31,20 @@
+ or converted to declarative `Not yet specified` gaps before a managed content
+ update. Migration cannot invent answers or silently discard historical evidence.
+ 
++Keep version 2.2.0 guidance consistent across the entry, metadata, discovery
++reference, contract, examples and action documentation. Ordinary synthesis needs
++applicable material intent to be understood. A material question ends the
++response and waits for the actual answer; it must not trigger a draft write.
++Incorporate actual answers into all affected requirements and acceptance, handle
++partial and changed answers, and preserve the explicit incomplete-draft and
++no-follow-up branches. Resume alone remains read-only until explicit save.
++Understanding review, helper validation and exact-document approval are separate.
++
++Review unresolved intake by meaning: assigning the next agent to discover the
++current user's intended behavior does not settle it. Preserve legitimate
++future-user questions, requested research, labels and URLs. Do not add a helper
++keyword heuristic or new schema to approximate understanding.
++
+ The canonical runtime state is each TRD Markdown file; the runtime index is
+ regenerated from those files. Do not add another canonical JSON store. Do not
+ change existing TRD identity, filename, or creation time while updating the skill.
+@@ -38,15 +52,29 @@
+ selection, the current digest, reason, and confirmation; reject any checked
+ legacy requirement or non-placeholder evidence before mutation.
+ 
+-Use Python's standard library only. Run focused tests in temporary project roots:
++Use Python's standard library only. For source maintenance in Sys4AI, use the
++depot's existing interpreter and the source package being changed:
+ 
+ ```bash
+-python3 -m unittest discover -s .agents/skills/to-trd/tests -v
+-python3 -m py_compile .agents/skills/to-trd/scripts/trd.py
++PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/to-trd/tests -v
+ ```
+ 
+-From a different installation layout, adjust only the skill path. Inspect
+-actual evidence before claiming success. Do not represent static metadata checks
+-as a real Codex interaction test. Keep Matt Pocock's Wayfinder attribution and
++Use the AST and temporary compile-output check in [README.md](README.md) for
++`SKILLS-depo/to-trd/scripts/trd.py` and its tests; keep caches out of the package.
++Adjust paths only when verifying a separately authorized installation. Retain
++all existing helper regressions. Update dependent example fixtures without
++no-op replacements; prepared-body tests prove storage behavior only.
++
++Define and exercise [C01–C14](tests/interaction-scenarios.md) with actual visible
++turn boundaries, minimal synthetic evidence, candidate and loaded-file hashes,
++and a fresh selected-host session. Read the [interaction examples](references/interaction-examples.md)
++as illustrations, never as executed evidence or current-user consent. Report
++unexercised cases and semantic/static/helper/host results separately.
++
++Author reusable changes here and use the existing checked Template pipeline.
++Do not directly edit its mapped copy or propagate into the active root or
++ordinary projects. Later adoption needs exact destination scope and inspection.
++Keep the helper, schema/API, attribution and MIT notice unchanged for this
++bounded discovery repair. Keep Matt Pocock's Wayfinder attribution and
+ upstream MIT notice with the skill. Do not remove, archive, or replace user TRDs
+ as part of installing, updating, or uninstalling this folder.
+--- baseline/INDEX.md
++++ candidate/INDEX.md
+@@ -2,7 +2,8 @@
+ 
+ This index describes reusable skill files. It is **not** the project TRD registry.
+ The runtime registry is `<project-root>/TRDs/INDEX.md`, generated by the helper.
+-Package version 2.0.0 uses a document lifecycle with explicit legacy migration.
++Package version 2.2.0 adds explicit discovery readiness and question-and-wait
++guidance while retaining schema 2 and the existing document lifecycle.
+ 
+ | File | Purpose | Read when |
+ | --- | --- | --- |
+@@ -12,11 +13,13 @@
+ | [AGENTS.md](AGENTS.md) | Skill-local authoring guidance | Editing this skill |
+ | [agents/openai.yaml](agents/openai.yaml) | Codex display metadata and explicit-only policy | Host discovery/configuration |
+ | [references/wayfinding.md](references/wayfinding.md) | Lightweight intent-capture conversation | Clarifying or resuming intent |
++| [references/interaction-examples.md](references/interaction-examples.md) | Synthetic fast path, real pause, follow-up and incomplete draft | Learning the discovery boundaries |
+ | [references/trd-contract.md](references/trd-contract.md) | Schema 2, document states, legacy compatibility/migration, writes, and CLI | Writing or maintaining TRDs |
+ | [assets/trd-body-template.md](assets/trd-body-template.md) | Declarative requirement body with intentional substitution slots | Creating a document |
+ | [assets/example-input.json](assets/example-input.json) | Concrete valid input with no unfilled slots | Learning/testing the format |
+ | [scripts/trd.py](scripts/trd.py) | Standard-library file/index helper | Deterministic reads or writes |
+ | [tests/test_trd.py](tests/test_trd.py) | Isolated document lifecycle, migration, helper, and package checks | Maintenance verification |
++| [tests/interaction-scenarios.md](tests/interaction-scenarios.md) | C01–C14 synthetic conversational cases and evidence contract | Actual-host behavioral verification |
+ | [ATTRIBUTION.md](ATTRIBUTION.md) | Wayfinder credit, inspected sources, adaptation notes | Provenance review |
+ | [licenses/wayfinder-MIT.txt](licenses/wayfinder-MIT.txt) | Retained upstream license notice | Redistribution/provenance review |
+ 
+--- baseline/README.md
++++ candidate/README.md
+@@ -1,7 +1,7 @@
+ # To-TRD
+ 
+-**Capture user intent as task requirements. Keep the resulting documents easy to
+-find and their state explicit. Do not turn the conversation into a task ledger.**
++**Understand the intended outcome, resolve material ambiguity, and derive task
++requirements from the user's actual decisions.**
+ 
+ To-TRD is an explicitly invoked, project-local skill. It uses a lightweight
+ adaptation of **Wayfinder by Matt Pocock** to clarify the user's intended outcome,
+@@ -9,7 +9,7 @@
+ alias from the originating request; it does not name a different technical
+ requirements format here.
+ 
+-Version 2.1.0 uses schema 2 and tracks completion of the requirements document.
++Version 2.2.0 uses schema 2 and tracks completion of the requirements document.
+ Planning and implementation remain separate workflows.
+ 
+ ## What it creates
+@@ -106,13 +106,30 @@
+ operations are interpreted by the agent and routed to the helper; `approve`,
+ `retire`, and `resume` are not additional Python subcommands.
+ 
+-With a clear request, the skill writes directly. With ambiguity, it briefly
+-states the intended outcome, then asks one material question at a time. Each
+-answer updates the working understanding and can lead to a focused follow-up.
+-Before saving, the skill translates relevant answers into sourced intent,
+-decisions, scope, requirements, assumptions, or acceptance criteria. It keeps
+-the interview prompts in the conversation and waits to write until the intent is
+-clear, unless you ask for a draft now. It does not force a long interview.
++The skill first checks the applicable outcome, use, current state, scope,
++interfaces, constraints, authority, success conditions, and consequential edge
++cases. If no material decision remains, it writes directly within the requested
++operation. Otherwise it inspects available facts and asks one focused question
++about a user-owned decision, then ends the response and waits. A recommended
++option, silence, or an unrelated reply is not an answer.
++
++Each answer changes every affected intent statement, scope boundary, requirement,
++and acceptance criterion. Partial answers settle only their clear portion; a
++changed choice invalidates obsolete assumptions and follow-up branches. The
++agent reviews the understood intent before synthesis. That review, mechanical
++validation, and approval of the exact saved document are distinct controls.
++
++You can interrupt discovery and request an incomplete draft, including one with
++zero requirements. Material gaps remain declarative in `Not yet specified` and
++the record stays draft. If follow-ups are prohibited, the skill reports the
++limits without inventing answers and saves only an authorized artifact. New
++capture permits a write at its synthesis boundary; resume alone stays read-only
++until explicit save. Answers never trigger automatic per-turn persistence.
++
++See the [synthetic interactions](references/interaction-examples.md) for these
++branches and their effect on requirements. Assigning a future agent to determine
++what the current user intended does not resolve intake. Questions that are
++themselves requested product behavior or research remain valid content.
+ 
+ To continue later, explicitly select the TRD by exact ID, exact filename, or
+ unique complete title. The current file provides the context. There is no
+@@ -142,7 +159,7 @@
+ compatibility, or approval-authority gap elsewhere does not resolve it.
+ 
+ For a normal capture, the agent presents the saved document and asks for approval
+-once its requirements are settled. You can approve the displayed, unchanged
++once its requirements are settled and questions are permitted. You can approve the displayed, unchanged
+ revision in ordinary language; the agent reads and checks its hash. It then
+ changes the state and verifies `trd_done` in the saved file. An explicit request
+ for a draft ends with the draft, and status questions do not start an approval
+@@ -337,12 +354,28 @@
+ 
+ ## Verify or maintain the skill
+ 
+-Run the focused tests from the project root:
+-
+-```bash
+-python3 -m unittest discover -s .agents/skills/to-trd/tests -v
+-python3 -m py_compile .agents/skills/to-trd/scripts/trd.py
+-```
++When maintaining the Sys4AI reusable source, run these commands from the depot
++root using its existing interpreter:
++
++```bash
++PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/to-trd/tests -v
++PYTHONDONTWRITEBYTECODE=1 .venv/bin/python - <<'PY'
++import ast
++from pathlib import Path
++import py_compile
++import tempfile
++
++with tempfile.TemporaryDirectory() as temporary:
++    for name in ('scripts/trd.py', 'tests/test_trd.py'):
++        source = Path('SKILLS-depo/to-trd') / name
++        ast.parse(source.read_text())
++        py_compile.compile(str(source), cfile=str(Path(temporary) / (source.stem + '.pyc')), doraise=True)
++PY
++```
++
++For separately authorized installed-copy verification, use that installation's
++own test and helper paths and its approved interpreter. Testing the active-root
++copy does not verify edited source files.
+ 
+ The suite tests naming, schema, source-independent body structure, all lifecycle
+ pairs, document approval gates, exact selection, legacy migration and evidence
+@@ -351,11 +384,21 @@
+ Tests use temporary projects and do not implement the fictional contacts
+ exporter. The package metadata check is not the upstream bundled skill validator.
+ 
+-After installing in a real Codex host, use a disposable project to confirm that
+-the skill appears, an unrelated prompt does not invoke it, an explicit clear
+-request writes a TRD, an ambiguous draft preserves its unknowns, and a list/show
+-request does not change files. This is a small deployment check, not a claimed
+-result from the package's Python tests.
++Exercise [C01–C14](tests/interaction-scenarios.md) in disposable Codex projects
++using separate actual user turns and the deliberately selected candidate. Keep
++source/loaded-resource hashes, minimal visible exchanges, before/after writes,
++and artifact evidence. The critical ambiguity case needs a fresh host session.
++Report static checks, helper regressions, actual conversations, and fresh-host
++loading separately; prepared bodies and instruction-presence checks do not prove
++an interview worked. Identify blocked or unexercised cases explicitly.
++
++Sys4AI reusable edits belong in `SKILLS-depo/to-trd`. Its existing checked
++Template mapping can update the registered Template; inspect the pending set
++before applying and stop on unrelated work or conflicts. Active-root and
++ordinary product installations retain their own bytes until an exact source,
++destination, file set and preservation boundary are separately authorized.
++Disposable evaluation copies are test fixtures, not product adoption. Version
++parity does not establish host readiness, watcher state, or conversational success.
+ 
+ ## Update or uninstall
+ 
+--- baseline/SKILL.md
++++ candidate/SKILL.md
+@@ -1,15 +1,20 @@
+ ---
+ name: to-trd
+-description: Capture user intent as a project-local Task Requirement Document and maintain its draft, trd_done, or retired document state. Use only when the user explicitly invokes $to-trd or explicitly asks to use the named to-trd skill. Do not use for ordinary questions, automatic task tracking, response logging, or implementing the captured requirements.
++description: Discover user intent through relevant inspection and live clarification, then derive a project-local Task Requirement Document and maintain its document state. Use only when the user explicitly invokes $to-trd or explicitly asks to use the named to-trd skill. Do not use for ordinary questions, automatic task tracking, response logging, or implementing the captured requirements.
+ license: Upstream Wayfinder material is MIT; see ATTRIBUTION.md and licenses/wayfinder-MIT.txt.
+ metadata:
+-  version: "2.1.0"
++  version: "2.2.0"
+ ---
+ 
+ # To-TRD
+ 
+-Turn the user's intended outcome into an actionable **Task Requirement Document
+-(TRD)**. In this skill, **TRP is an alias the user may use for the same document**;
++Understand the user's intended outcome before deriving a **Task Requirement
++Document (TRD)**. Apply requirements-engineering judgment within the existing
++project role: inspect relevant facts, resolve material ambiguity with the user,
++and synthesize requirements from that understanding. Filling a template is not
++evidence that the intent is understood.
++
++In this skill, **TRP is an alias the user may use for the same document**;
+ it does not mean a separate technical requirements artifact. The result is a
+ list of task requirements with sources and acceptance criteria, not a product
+ roadmap or an implementation plan.
+@@ -60,39 +65,51 @@
+ For a new capture, a clear new-document request is enough; do not force the user
+ to inspect unrelated existing TRDs first.
+ 
+-## 3. Capture and clarify intent
++## 3. Discover intent before synthesis
+ 
+ Read [references/wayfinding.md](references/wayfinding.md) for the conversation
+ procedure. Apply these rules:
+ 
+-1. Read the request and supplied materials. Preserve the user's vocabulary,
+-   intended outcome, constraints, exclusions, and already answered questions.
+-2. Give a short playback of the destination and scope. Distinguish user intent,
+-   source facts, proposed design choices, assumptions, and any material ambiguity
+-   that still needs a conversational answer.
+-3. **Use the fast path when intent is clear.** Synthesize directly; do not impose
+-   tickets, a fixed questionnaire, or an extra approval exchange already answered.
+-4. Otherwise survey uncertainty broadly, then ask **one material question at a
+-   time** whose prerequisites are understood. Give brief context and useful
+-   options, without answering for the human. After each answer, update the working
+-   understanding and ask a focused follow-up only when the answer exposes another
+-   material ambiguity.
+-5. Research only factual gaps that affect requirements. Use available primary
+-   sources or relevant local inspection; cite what was actually found. Do not
+-   invent results or require additional plugins/skills to continue.
+-6. A cheap sketch can clarify behavior only within the user's existing authority.
+-   It is not product implementation. Human preferences and prototype choices
+-   must come from the human, not the agent's selection.
+-7. Keep clarification questions in the conversation. Translate each relevant
+-   user answer into sourced captured intent, a decision, scope, a requirement,
+-   an assumption, or acceptance criteria. Do not paste the question-and-answer
+-   exchange or an unanswered interview prompt into the TRD. When an answer
+-   changes required behavior or how success is recognized, update the affected
+-   requirement or acceptance criteria rather than recording it only as a note.
+-8. Honor “save a draft now.” Preserve unresolved areas declaratively under
+-   `Not yet specified`, even when no requirements can yet be safely stated. Do
+-   not phrase those entries as questions or instructions to a downstream agent,
+-   force an endless interview, or fabricate a complete baseline.
++1. Read the request and relevant sources. Preserve the user's vocabulary,
++   constraints, exclusions, and settled answers. Inspect available facts; ask
++   the user about unresolved desired behavior, priorities, tradeoffs, and
++   authority. A source fact does not establish a preference or grant permission.
++2. **Check readiness before ordinary synthesis.** Consider each applicable area:
++   outcome; beneficiary and use; current state and requested change; scope and
++   exclusions; inputs, outputs, and behavior; constraints and authority;
++   observable success; and consequential edge cases. An area is understood from
++   the request, inspected facts, actual answers, or explicit delegation. A gap
++   is material if different answers change outcome, scope, interface,
++   constraints, acceptance, or action authority. Bounded implementation choices
++   may remain with planning. Do not invent choices to make the check pass.
++3. **Use the fast path when no material intake decision remains.** Synthesize
++   directly without a questionnaire, readiness score, or redundant confirmation.
++   Otherwise choose one consequential, answerable question whose prerequisites
++   are settled; address outcome and scope first when they remain unclear.
++4. **Ask, then wait for the actual user answer.** Explain briefly what depends
++   on the decision, ask one focused question, and end the response. Do not
++   synthesize a dependent baseline, create/update a TRD, or answer for the user
++   in that turn. Silence, elapsed time, a preselected recommendation, a tool
++   result, or an unrelated reply is not an answer. Resume only from an actual
++   answer or an explicit change of mode, subject to higher-priority host rules.
++5. Incorporate each answer before further discovery: update all affected intent,
++   scope, constraints, decisions, requirements, and acceptance criteria with its
++   source. A partial answer settles only its clear portion. Ask a focused
++   follow-up for the remaining material distinction. A changed answer invalidates
++   dependent assumptions and obsolete question branches; do not continue them.
++6. After substantial clarification, briefly summarize the consequential outcome,
++   scope, choices, exclusions, and success conditions. Seek confirmation only
++   for a material interpretation still unresolved. Agreement with this summary
++   does not approve an unseen document; mechanical validation also does not
++   prove understanding or consent.
++7. Honor an explicit incomplete-draft request immediately. Save known intent and
++   safely supported requirements, even zero, with declarative material gaps in
++   `Not yet specified`. Keep the record draft and do not invent answers or
++   accepted assumptions. This exception is not the default after asking a question.
++8. If the user or a higher-priority host instruction prohibits follow-ups, ask
++   none. State the unresolved material limits without choosing for the user.
++   Save an incomplete artifact only if the current request authorizes it; a
++   no-questions instruction alone supplies neither answers nor write authority.
+ 
+ The `Open questions` section is retained for schema compatibility and must be
+ `None.` in every newly created or content-updated TRD. If an older TRD contains
+@@ -100,8 +117,10 @@
+ `Not yet specified` entries before updating it. An explicitly resumed TRD provides
+ the persisted context. Read only the relevant sources needed to clarify the next
+ material ambiguity. Do not require a thread ID, memory service, response history,
+-or automatic cross-thread machinery. Do not write or update the TRD between
+-questions unless the user explicitly asks to save a draft.
++or automatic cross-thread machinery. Do not persist after each question or
++answer. New capture can write at its authorized synthesis boundary; a resumed
++draft stays read-only until explicit save, and revision needs content-update
++authority for the selected record.
+ 
+ Mechanical migration preserves historical questions in draft or retired
+ documents; it does not answer them or perform a content update.
+@@ -122,11 +141,16 @@
+ assumptions and material contradictions in draft.
+ 
+ Before saving, check both directions: every material user requirement and
+-exclusion appears, and every generated requirement has a source or clearly
+-identified proposed design basis. Keep IDs stable on revision. A removed
+-requirement should be explicitly accounted for in scope/decisions rather than
++exclusion and clarification appears, and every normative requirement has a
++supporting source or explicitly authorized design basis. Label proposals as
++proposals; they cannot stand in for an unresolved user decision. Keep IDs stable
++on revision. A removed requirement should be accounted for in scope/decisions rather than
+ quietly recycled under the same ID. Also confirm that `Open questions` is `None.`
+-and that no other section contains a disguised prompt for a downstream agent.
++and that no other section assigns unresolved present-task intake to a downstream
++agent. "Determine the intended selection" or "Confirm the desired output" does
++not settle the requirement. Judge the purpose: legitimate future-user questions,
++requested research, quoted labels, and URL query strings are valid deliverable
++content, not failures merely because they contain question language.
+ 
+ ## 5. Save through the helper
+ 
+@@ -225,7 +249,8 @@
+ - For an explicit draft-only request, return the draft without an approval prompt.
+ - For a capture intended to finish the requirements, resolve material
+   requirement gaps, save and validate the reviewable document, then ask one
+-  concise approval question if the exact revision has not already been approved.
++  concise approval question if the exact revision has not already been approved
++  and the current instructions permit questions.
+   Identify the document and explain that this skill requires document approval.
+   Do not end with a bare draft handoff when this is the only remaining step.
+ - When approval of that unchanged revision is already present, perform
+--- baseline/agents/openai.yaml
++++ candidate/agents/openai.yaml
+@@ -1,6 +1,6 @@
+ interface:
+   display_name: "To-TRD"
+-  short_description: "Draft and approve requirements documents"
+-  default_prompt: "Use $to-trd to capture my intent in a project-local Task Requirement Document and mark it trd_done when I approve the exact document."
++  short_description: "Clarify intent and derive task requirements"
++  default_prompt: "Use $to-trd to inspect the relevant context, clarify material gaps with me and wait for my answers, then derive a project-local Task Requirement Document for exact-revision approval."
+ policy:
+   allow_implicit_invocation: false
+--- baseline/assets/example-input.json
++++ candidate/assets/example-input.json
+@@ -1,4 +1,4 @@
+ {
+   "title": "Contacts export",
+-  "body": "## Destination\n\nProvide a project-local command that exports the existing contacts list to CSV.\n\n## Captured user intent\n\nU01 — The user wants to export the existing contacts list without editing contacts.\nU02 — The user wants the file saved locally and no network upload.\n\n## Context and sources\n\nThis is a fictional format example, not a claim about an inspected project.\nThe only source for its requirements is the example intent above.\n\n## In scope\n\nExport the current contacts list to one user-selected local CSV file.\n\n## Out of scope\n\nEditing contacts, cloud synchronization, and automatic scheduling.\n\n## Task requirements\n\n### REQ-001 — Export the existing contacts\n- Requirement: Export the existing contacts list as a local CSV file.\n- Source: U01 — example user intent.\n- Acceptance: The exported file contains the existing contacts without changing their source records.\n- Depends on: None.\n\n### REQ-002 — Keep the export local\n- Requirement: Save the CSV at the local path selected by the user without uploading it.\n- Source: U02 — example user intent.\n- Acceptance: The file exists at the selected local path and the export operation makes no network upload.\n- Depends on: REQ-001\n\n## Decisions\n\nNone.\n\n## Open questions\n\nNone.\n\n## Not yet specified\n\nNone.\n\n## Assumptions\n\nNone.\n"
++  "body": "## Destination\n\nProvide a project-local command that exports the active filtered contacts to CSV.\n\n## Captured user intent\n\nU01 — The user wants to export the existing contacts list without editing contacts.\nU02 — The user wants the file saved locally and no network upload.\nU03 — Synthetic clarification: export only the active filtered contacts, include every existing field, reject an existing output path without overwriting it, and write only the field-name header for an empty selection.\n\n## Context and sources\n\nThis is a fictional format example, not a claim about an inspected project.\nThe only source for its requirements is the fictional intent and clarification above.\n\n## In scope\n\nExport the active filtered contacts and all their existing fields to one user-selected new local CSV file.\n\n## Out of scope\n\nEditing contacts, cloud synchronization, and automatic scheduling.\n\n## Task requirements\n\n### REQ-001 — Export the filtered contacts\n- Requirement: Export only the contacts in the active filtered view as a local CSV file, including every existing field.\n- Source: U01 — example user intent.\n- Source: U03 — synthetic clarification of selection and fields.\n- Acceptance: The exported file contains exactly the contacts in the active filtered view and all their existing fields; excluded contacts are absent and source records remain unchanged.\n- Acceptance: An empty filtered view produces a CSV header with the existing field names and no data rows.\n- Depends on: None.\n\n### REQ-002 — Keep the export local\n- Requirement: Save the CSV at the new local path selected by the user without uploading it or overwriting an existing file.\n- Source: U02 — example user intent.\n- Source: U03 — synthetic clarification of overwrite behavior.\n- Acceptance: At a new path the file exists and the export makes no network upload; at an existing path the operation reports a conflict and leaves that file unchanged.\n- Depends on: REQ-001\n\n## Decisions\n\nNone.\n\n## Open questions\n\nNone.\n\n## Not yet specified\n\nNone.\n\n## Assumptions\n\nNone.\n"
+ }
+--- baseline/assets/trd-body-template.md
++++ candidate/assets/trd-body-template.md
+@@ -4,7 +4,7 @@
+ 
+ ## Captured user intent
+ 
+-{{faithful_summary_of_the_request_with_user_source_labels}}
++{{faithful_summary_of_understood_intent_and_material_answers_with_source_labels}}
+ 
+ ## Context and sources
+ 
+@@ -21,9 +21,9 @@
+ ## Task requirements
+ 
+ ### REQ-001 — {{readable_requirement_title}}
+-- Requirement: {{one_required_outcome}}
+-- Source: {{user_statement_or_source_and_design_basis}}
+-- Acceptance: {{observable_success_condition}}
++- Requirement: {{one_bounded_supported_outcome_incorporating_relevant_clarification}}
++- Source: {{meaningful_user_statement_or_verified_constraint_or_explicitly_authorized_design_basis}}
++- Acceptance: {{observable_success_condition_reflecting_the_same_supported_choices}}
+ - Depends on: None.
+ 
+ ## Decisions
+--- baseline/references/interaction-examples.md
++++ candidate/references/interaction-examples.md
+@@ -0,0 +1,114 @@
++# Synthetic discovery examples
++
++These fictional exchanges illustrate the [discovery procedure](wayfinding.md).
++They are not recorded conversations, test results, or approval from the current
++user. Each line labelled User is a separate future turn. Example requirements
++are excerpts; a saved TRD still needs the complete body contract.
++
++## Complete request: take the fast path
++
++User: "$to-trd Save a draft for an export used by the operator of this local
++contacts app. Export only the active filtered records, including all existing
++fields, as CSV to a user-selected new local file. Reject an existing path without
++changing it. An empty selection writes the field-name header only. Source
++contacts must stay unchanged and there must be no network upload. Success means
++exactly the selected records and fields appear, excluded records are absent,
++and the source and any existing destination retain their bytes. No other work."
++
++Agent action: Inspect any relevant supplied facts, review the supported intent,
++and create and validate the requested draft. No intake question or redundant
++understanding-confirmation exchange is needed. No document-approval question is
++needed for this draft-only request. Return the saved draft's actual identity.
++
++The [complete fictional payload](../assets/example-input.json) shows the same
++selection and preservation choices. Its sources describe fictional intent;
++they cannot approve a real record or authorize an exporter implementation.
++
++## Ambiguous request: ask and end the response
++
++User: "$to-trd Create a TRD for exporting contacts from this app."
++
++Inspected fact S01: The supplied fixture has a complete contact collection and
++an active filtered view. The fixture establishes existing capabilities, not the
++desired export selection.
++
++Agent: "The app has a full contact collection and a filtered view. Should export
++include all contacts or only the active filtered view? This determines which
++records the file and acceptance check must include."
++
++Agent action: End the response and wait. No TRD or index write and no completed
++baseline in this turn. A suggested option, silence, or an unrelated reply cannot
++settle the choice.
++
++## Incorporate the answer before choosing a follow-up
++
++User: "Only the filtered contacts, with all existing fields as CSV. Keep the
++export local and leave source contacts unchanged."
++
++Working update: Label this answer U02. Set the selection, fields, format,
++locality, and preservation conditions in intent, scope, and candidate
++requirements and acceptance. Do not record U02 only in Decisions.
++
++Agent: "The export will contain only filtered contacts with all existing fields.
++If the selected output path already exists, should export reject it or replace
++it? That choice determines whether an existing file can be changed."
++
++Agent action: End the response without writing; the overwrite choice is still
++material. Do not re-ask record selection or invent a replacement policy.
++
++User: "Reject an existing path. For an empty filter, write the header only."
++
++Agent action: Incorporate U03, discard any candidate overwrite behavior, and
++briefly summarize the settled outcome, scope, exclusions, and success conditions.
++If no material issue remains, synthesize at the new-capture save boundary. For
++a resume-only operation, wait for explicit save before updating its record.
++
++One resulting requirement excerpt:
++
++```markdown
++### REQ-001 — Export the filtered contacts
++- Requirement: Export only contacts in the active filtered view as CSV, including every existing field, without changing source contacts.
++- Source: U02 — synthetic selection, fields, format, and preservation answer.
++- Source: U03 — synthetic empty-selection answer.
++- Acceptance: With records inside and outside the filter, output contains exactly the selected contacts and every existing field; source records remain unchanged.
++- Acceptance: An empty filter produces the field-name header and no data rows.
++- Depends on: None.
++```
++
++The local destination and overwrite answer also require corresponding outcome
++and acceptance text. A normal settled capture presents the saved draft for
++exact-revision approval. Agreement with the prior summary did not approve this
++unseen artifact. No downstream work follows from synthetic approval.
++
++## Interrupted discovery: save the honest draft
++
++User, instead of answering the selection question: "Save the current draft now;
++I will decide the selection later."
++
++Agent action: Save supported intent with this declarative gap:
++
++```markdown
++## Open questions
++
++None.
++
++## Not yet specified
++
++The selection of exported records remains unresolved; it changes export behavior and acceptance.
++```
++
++Preserve other material unknowns too. Do not turn the gap into a requirement
++that tells the next agent to discover what the current user intended. Keep the
++record draft and report its limits without restarting the interview. If nothing
++supports even one safe outcome, use `No task requirements captured yet.` instead
++of a fabricated requirement block.
++
++## Questions prohibited: respect both constraints
++
++User: "$to-trd Discuss a possible export redesign. Do not ask questions or save
++a document yet."
++
++Agent action: Explain the known context and material unknowns without questions
++or file writes. If the user instead explicitly asks to save an incomplete draft
++with no questions, save known intent and declarative gaps only. A follow-up
++restriction supplies neither the missing selection nor document approval.
+--- baseline/references/trd-contract.md
++++ candidate/references/trd-contract.md
+@@ -89,6 +89,28 @@
+ The helper renders `# Task Requirement Document: <title>` after the metadata.
+ Do not put an H1 or frontmatter into the payload body.
+ 
++## Discovery and save boundary
++
++The agent follows [intent discovery](wayfinding.md) before ordinary synthesis.
++Its readiness review establishes supported meaning, the helper validates the
++artifact's structure, and the user approves the exact presented revision. These
++are distinct controls; passing `validate` or `completion.content_ready` cannot
++establish understanding or consent.
++
++An unresolved current-task choice remains intake even when phrased as a
++requirement for the next agent to determine the intended behavior. This is an
++agent semantic review, not a helper keyword rule. Supported future-user
++questions, research objectives, quoted labels, and URL queries remain legitimate
++content under the field rules below.
++
++Capture permits a new draft at the authorized synthesis boundary. Resume alone
++is read-only until explicit save. A revision requires an exact record read and
++authority for its content update. Questions and answers do not cause automatic
++persistence. An explicit incomplete-draft request permits known intent with
++declarative gaps, including zero requirements; a prohibition on follow-ups does
++not itself supply either missing intent or artifact authority. Read-only and
++lifecycle-only operations retain their existing boundaries.
++
+ ## Current body contract
+ 
+ Use these H2 headings exactly once, in this order:
+@@ -168,7 +190,12 @@
+ 
+ Unfilled `{{template_slots}}` are rejected in runtime documents. The slots in
+ `assets/trd-body-template.md` are intentional and must be replaced before writing.
+-The concrete `assets/example-input.json` is valid as supplied.
++The template is an artifact-shape aid after discovery, not an intake checklist.
++For an honest zero-requirement draft, replace the entire sample requirement
++block with `No task requirements captured yet.`. The concrete
++`assets/example-input.json` is valid as supplied and labels its clarification
++as fictional. That answer changes the example's requirement and acceptance,
++not only its decision notes.
+ 
+ ## Lifecycle
+ 
+@@ -209,7 +236,8 @@
+ current digest. The user does not need to type a SHA-256. An unambiguous approval
+ of that document is sufficient; a request to fix the skill, inspect status, or
+ create a plan is not document approval. A normal capture with settled content
+-ends with a reviewable artifact and one approval question if approval is missing.
++ends with a reviewable artifact and one approval question if approval is missing
++and the current instructions permit questions.
+ Explicit draft-only requests and read-only operations do not start that exchange.
+ 
+ ### Completion diagnostics
+--- baseline/references/wayfinding.md
++++ candidate/references/wayfinding.md
+@@ -22,6 +22,7 @@
+ | Verified source fact | Record the source locator and what it actually supports. |
+ | User exclusion | Preserve in scope boundaries or a negative requirement. |
+ | Design proposal | Label it as a proposal or a design decision under delegated authority. |
++| Explicit delegation | Record what choice the user delegated and the bounds of the agent's resulting decision. |
+ | Unconfirmed assumption | Keep visible and keep the document draft. |
+ | Contradiction | State the conflicting evidence; do not silently reconcile it. |
+ | Missing source | Record the limitation; never claim to have read it. |
+@@ -47,10 +48,32 @@
+ 
+ ## Choose the least expensive useful path
+ 
+-### Clear request
+-
+-Synthesize the TRD directly. Preserve the user's terms and limits. Do not force
+-an interview, invent unresolved questions, or require a new thread. New records
++### Readiness and the clear-request fast path
++
++Before ordinary synthesis, check the applicable areas below against the request,
++inspected facts, actual answers, and explicit delegation. This is a working
++understanding check, not a questionnaire, score, or new persisted record.
++
++| Area | Enough to derive requirements |
++| --- | --- |
++| Outcome | The intended result and its purpose are clear. |
++| Beneficiary and use | The relevant user, agent, or system and intended use are identifiable. |
++| Current state and change | Inspected existing behavior is distinguished from the requested change. |
++| Scope and exclusions | Included outcomes and explicit limits are preserved. |
++| Inputs, outputs, and behavior | Consequential selection, interfaces, and workflow choices are settled. |
++| Constraints and authority | Relevant environment, compatibility, privacy, dependencies, and action limits are known. |
++| Observable success | Acceptance distinguishes the intended result from a materially wrong one. |
++| Consequential edge cases | Relevant empty input, failure, conflict, or destructive behavior is understood. |
++
++Consider applicability; do not manufacture an edge case or ask about every row.
++A gap is material when plausible alternative answers change outcome, scope,
++interface, constraints, acceptance, or action authority. An area may be known,
++resolved by the user, explicitly delegated within stated bounds, unresolved, or
++inapplicable for a concrete reason. The ability to write plausible prose is not
++readiness. An ordinary capture proceeds only without unresolved material intake.
++
++When ready, synthesize the TRD directly. Preserve the user's terms and limits.
++Do not force an interview, invent unresolved questions, or require a new thread. New records
+ start in draft; approve as `trd_done` only when the current instruction actually
+ approves the exact captured document. A request to “write a draft” stays draft.
+ For a normal capture, a settled saved draft proceeds to the document-approval
+@@ -84,22 +107,41 @@
+ 
+ Survey the major unknown areas first: destination, scope, inputs, outputs,
+ constraints, success criteria, and affected systems. Do not deepen every area.
+-Pick the next question that changes a requirement and can be answered now.
++Choose by consequence, settled prerequisites, and whether an answer makes later
++questions unnecessary. Resolve outcome and scope first when unclear, then only
++the technical details that affect requirements.
+ 
+ Use one material question at a time, usually with a sentence explaining the
+ consequence. For example:
+ 
+ > Should the export include all contacts or only the currently filtered list?
+ > This changes both the selected records and the acceptance check.
++
++End the response after the question and wait for the actual answer. Do not
++write a TRD, present a completed baseline, or synthesize dependent requirements
++in the same turn. With an asynchronous question tool, keep dependent work
++pending; elapsed time never supplies the answer. A tool result, silence,
++preselected option, or unrelated reply does not resolve the decision. Continue
++only from the user's answer or an explicit change of mode, subject to the host's
++higher-priority instructions.
+ 
+ A recommendation is allowed when useful, but it must be a recommendation, not a
+ record of the user's choice. Do not answer the question yourself, including when
+ you have created several sketches or alternatives.
+ 
+-After the user answers, first update the working understanding of the affected
+-requirement area. Ask a follow-up only when that answer exposes another material
+-ambiguity or leaves the original distinction unresolved. The number of questions
+-is not fixed: stop when the intent is clear enough to state bounded requirements,
++After the user answers, update every affected intent statement, scope boundary,
++constraint, decision, requirement, and acceptance criterion before another
++question or synthesis. Define a concise source label for what the answer actually
++supports. Recording it only in Decisions while leaving contradictory behavior
++or vague acceptance does not incorporate it.
++
++A partial answer resolves only its clear portion. "CSV" settles format, not
++which records are included. "Yes" to alternatives does not choose one. Preserve
++settled answers and ask a focused follow-up for the remaining material choice.
++A changed answer invalidates dependent assumptions and obsolete interview
++branches. For example, a switch from shared to one-project-only data eliminates
++the need for a sharing-policy question; revise isolation and acceptance instead.
++The number of questions is not fixed: stop when intent is clear enough to state bounded requirements,
+ or when the user asks to save the current draft.
+ 
+ ### Draft-now request
+@@ -107,12 +149,22 @@
+ Write the known intent immediately and preserve the unknowns. A draft can contain
+ zero requirements when there is not yet enough information to state any safely.
+ Use `No task requirements captured yet.` in that section. Explain the material
+-questions in the final response without copying them into the TRD or claiming the
++gaps in the final response without restarting the interview or claiming the
+ draft is an approved requirements document. Under `Not yet specified`, describe only the
+ unresolved subject area as a declarative gap. Do not phrase it as a question or
+ an instruction to the next agent.
+ 
+ The user does not have to complete a long interview before receiving the file.
++
++### Follow-up questions prohibited
++
++Obey a user or higher-priority host prohibition on follow-ups. State which
++material aspects remain unknown; do not invent answers, delegated authority, or
++accepted assumptions. If the request authorizes an artifact, save an honest
++incomplete draft under the existing contract. If it only requests discussion or
++inspection, report the limit without writing. The restriction alone does not
++establish readiness or authorize a document. Do not start an approval exchange
++while it prohibits questions; report that a saved draft remains unapproved.
+ 
+ ## Keep conversation and artifact roles separate
+ 
+@@ -120,7 +172,7 @@
+ | --- | --- | --- |
+ | Conversation | One current material clarification question and any answer-driven follow-up | A fixed questionnaire or a question the sources already answer |
+ | Captured user intent | A faithful, concise statement of a material answer with a source label when useful | A pasted interview transcript |
+-| Decisions | Named choices already made, their basis, and implications | Agent-invented approvals or unresolved preferences |
++| Decisions | Named choices, actual delegation or proposal status, their basis, and implications | Agent-invented approvals or unresolved preferences disguised as settled choices |
+ | Requirements and acceptance | Required behavior or observable success changed or clarified by an answer | A decision note that never reaches the affected requirement |
+ | Open questions | `None.` in every new or content-updated TRD; the heading remains for schema compatibility | New clarification prompts or instructions to a downstream agent |
+ | Not yet specified | A declarative description of unresolved in-scope uncertainty in a requested draft | A question, an implementation instruction, or deliberately excluded work |
+@@ -147,8 +199,13 @@
+ clarification. Before a managed update, resolve each answer into the appropriate
+ document content or replace a still-vague topic with a declarative `Not yet
+ specified` entry. Do not preserve the old question text in the updated document.
+-Do not create or update a TRD between interview questions unless the user asks
+-to save a draft at that point.
++Do not persist after every question or answer. New capture can write when its
++intent is ready or an incomplete draft is explicitly requested. A resumed draft
++is read-only until explicit save; clarification alone does not authorize an
++update. A content revision first resolves and reads the exact selected TRD and
++writes only the authorized changes. List, show, validate, and lifecycle-only
++operations do not enter this interview or silently repair, migrate, or revise
++content. See [the operation table](../ACTIONS.md).
+ 
+ ## Use research and sketches sparingly
+ 
+@@ -201,11 +258,39 @@
+ 
+ 1. Every material user outcome, constraint, and exclusion has a destination in
+    the document.
+-2. Every requirement has a user/source basis or a labeled design-choice basis.
+-3. Every material clarification answer appears in the appropriate document
+-   content, and `Open questions` is `None.`.
++2. Every normative requirement has a supporting user/source basis or explicitly
++   authorized design basis. Labels resolve to meaningful statements or locators,
++   not "discussed above." An unapproved proposal is not a user requirement.
++3. Every material clarification changes all affected content, including relevant
++   requirements and acceptance, and `Open questions` is `None.`.
+ 4. Any contradiction is preserved rather than silently “fixed.”
+ 5. Nothing in the requirements grants permission for implementation or publication.
++
++Check meaning as well as structure. A requirement to "determine the user's
++intended selection," acceptance that says "confirm the desired output," or a
++decision assigning the next agent to choose which workflow was intended still
++contains unresolved intake. Ask about that decision before ordinary synthesis,
++or record its declarative gap in an explicitly requested incomplete draft.
++Removing a question mark or moving the text to Decisions does not resolve it.
++
++A question can instead be part of the requested deliverable: a product asking
++its future user "Replace this file?", a study answering a named research
++question, a quoted UI label, or a URL containing a query string. Preserve these
++when their purpose and source justify them. There is no general ban on "ask,"
++"confirm," research, or question punctuation. The existing `Open questions` and
++`Not yet specified` field rules still apply; put supported deliverable content
++in its appropriate requirement, acceptance, or source field.
++
++After substantial clarification, summarize the consequential outcome, scope,
++choices, exclusions, and success conditions. Ask for confirmation only where
++interpretation still has a material gap. Do not re-confirm the explicit request
++or settled answers. Keep three controls separate: the agent reviews understood
++intent; the helper validates document structure; the user approves the exact
++presented revision. Agreement with an intent summary approves no unseen TRD.
++
++See [synthetic interaction examples](interaction-examples.md) for the fast path,
++real pause, answer-driven follow-up, and requested incomplete draft. They are
++illustrations, not user decisions or executed test evidence.
+ 
+ This review is about faithful capture, not creating a heavyweight research audit.
+ Use concise source labels and locators; do not introduce a separate evidence
+@@ -219,9 +304,9 @@
+ confirmation of the user's approval. No product implementation or verification
+ claim follows from that document state. A changed title or approval-bearing
+ content returns a completed document to draft for review.
+-Do not save every assistant response. During a continued explicit capture session,
+-save at the user's requested artifact boundary or when the requested draft is
+-ready, not after each question or commentary message.
++Do not save every assistant response. Respect the selected operation's write
++boundary: capture permits synthesis; resume alone permits reading and
++clarification until explicit save. Never write merely because an answer arrived.
+ 
+ To resume in another conversation, the user explicitly selects the TRD. Read
+ its current content and relevant live sources. Derive any next clarification from
+@@ -235,7 +320,8 @@
+ and legacy migration. It does not classify arbitrary prose on the agent's behalf.
+ 
+ For a normal capture with settled requirements, present the saved revision for
+-review and ask one approval question when approval is still missing. Keep that
++review and ask one approval question when approval is still missing and questions
++are permitted. Keep that
+ question in the conversation and explain this skill's document-approval rule.
+ Do not ask the user to reproduce a digest: bind their unambiguous approval of
+ the presented document to the hash read by the helper. If content has changed
+--- baseline/tests/interaction-scenarios.md
++++ candidate/tests/interaction-scenarios.md
+@@ -0,0 +1,310 @@
++# Conversational acceptance scenarios
++
++This is a synthetic test specification, not execution evidence. It covers
++C01–C14 from the intent-discovery recommendations. `REQ-nnn.Am` means acceptance
++criterion m, in source order, of the repair TRD's REQ-nnn. These references are
++traceability labels, not a dependency on a managed TRD at runtime.
++
++## Execution and evidence rules
++
++Use disposable project roots and a deliberately selected complete skill copy.
++Keep baseline and candidate roots separate. Record the actual host, available
++model configuration and relevant instructions, source and loaded paths/version/
++hashes, visible resource reads, minimal exchanges, helper calls, before/after
++file inventories, and final synthetic artifact. A copied package hash proves
++copy identity, not host loading. Do not record hidden reasoning, credentials,
++unrelated conversations, or raw transcript archives.
++
++Run each numbered User message in a separate actual turn. The operator supplies
++later messages only after observing the response and checking the filesystem.
++Do not give the evaluated agent later answers, expected behavior, or grading
++notes in advance. Never treat an automatically selected option as submitted.
++No write means no create/update/reindex/lifecycle call or changed TRD/index.
++Inspect before the next answer, not only at the end of the case.
++
++Use manual Codex sessions for the approved implementation evaluation. An
++available evaluator may assist fixtures but cannot replace required actual-host
++observations. Record each result as passed, failed, blocked, or unexercised;
++static walkthroughs and prepared-body helper tests are different evidence.
++After a candidate correction, refresh hashes, run relevant mechanical checks,
++reload the corrected copy, and repeat affected cases. Preserve earlier failures.
++Repeat the critical sequence in a fresh session against the final candidate.
++
++Every scenario prohibits product implementation, real TRD/Task mutations,
++global or ordinary-project installation, agents, external actions, Git changes,
++and fabricated approval. Lifecycle fixture authority applies only to the
++disposable synthetic record. Read-only cases also prohibit index repair.
++
++## Shared factual fixtures
++
++For contact cases, provide a readable `fixture.md` containing:
++
++```text
++Synthetic local contacts app for one operator. Current storage: JSON records
++with id, name, email. Records: Ada (1), Bea (2), Cy (3). Active filtered view:
++Ada and Cy. Existing export format: JSON. No chosen redesign format or record
++selection is specified by this fixture. An existing target contains KEEP ME.
++```
++
++For memory cases, provide `fixture.md` containing:
++
++```text
++Synthetic workspace with projects Cedar and Birch. Each has a maintainer who
++wants to save and read project notes. No memory feature exists. File layout is
++an implementation choice; desired sharing or isolation is not yet specified.
++```
++
++Case-specific user messages supply choices. The facts above do not approve a
++redesign. For existing-record cases, create fixture records through the shipped
++helper in that disposable root; record their actual IDs, bytes, and hashes.
++
++## C01 — Ambiguous first request
++
++Setup: New empty TRD catalog and memory fixture. In separate sessions run each
++variant as the only first message:
++
++1. User A: "$to-trd Create a TRD for a project memory feature in this fixture."
++2. User B: "$to-trd Help define how the agents here should retain project notes."
++3. User C: "$to-trd Capture requirements for remembering work across this workspace."
++
++Expected: Inspect relevant facts, then ask one consequential outcome or scope
++question and end the response. No write or presented completed baseline. Observe
++the boundary before providing any answer. Silence or an unrelated "Thanks for
++the update" must not settle the decision or cause a write.
++
++Links: REQ-001.A1–A2, REQ-002.A1–A3, REQ-004.A1–A3, REQ-018.A1–A2.
++
++## C02 — The actual answer changes requirements
++
++Setup: Continue a C01 session after its observed question.
++
++1. User: "One project only; no sharing between projects. A maintainer saves and
++   reads plain-text notes for the selected project. Never read or change another
++   project's notes. Empty results show no notes. Reusing a note name must report
++   a conflict without overwrite. No network access; internal layout is your
++   choice within those constraints. That is the full scope."
++2. If the agent has a remaining material question, answer only that actual
++   question within these bounds; record the answer as a new synthetic turn.
++
++Expected: Update scope, isolation requirement, source label and acceptance so
++Cedar reads cannot return Birch notes or change Birch files. Remove cross-project
++behavior. Save only when understood within the new-capture authority, as draft.
++No product implementation. A decision-only note with unchanged generic acceptance
++fails this case.
++
++Links: REQ-006.A1–A2, REQ-007.A1–A3, REQ-011.A1–A3, REQ-018.A1/A3–A5.
++
++## C03 — Prerequisites determine the next question
++
++Setup: New memory fixture, separate sharing and isolation runs.
++
++1. User: "$to-trd Define project notes. Whether other projects can access them
++   is undecided. If sharing is chosen, its access policy is also undecided."
++2. Sharing run User: "Other projects may read shared notes."
++3. Isolation run User, in the other session: "Keep every note in one project;
++   no sharing."
++
++Expected: Ask sharing versus isolation first and pause. After the sharing answer,
++ask the now-relevant access-policy question and pause. After isolation, eliminate
++that branch and ask only a remaining material question. No writes while a
++material question is pending; no fixed questionnaire.
++
++Links: REQ-005.A1–A2, REQ-006.A2, REQ-017.A2.
++
++## C04 — Partial answer and ambiguous agreement
++
++Setup: Contacts fixture, new capture.
++
++1. User: "$to-trd Capture an export redesign; record selection and format are
++   still undecided."
++2. After a material question User: "CSV."
++3. After selection alternatives User: "Yes."
++4. User: "Only the active filtered contacts."
++
++Expected: Preserve CSV, ask the remaining selection question, and do not interpret
++"Yes" as a choice among alternatives. Ask a focused clarification and pause.
++After message 4, update selection and acceptance and ask only unresolved material
++details. No writes after messages that leave a material decision pending.
++
++Links: REQ-004.A2–A3, REQ-005.A3, REQ-006.A2, REQ-017.A2.
++
++## C05 — Inspect a source-resolvable fact
++
++Setup: Contacts fixture readable at `fixture.md`.
++
++1. User: "$to-trd Inspect fixture.md and capture a contacts-export redesign.
++   Establish the current format from the file; I have not chosen the new format."
++2. After the relevant question User: "CSV for the redesign."
++
++Expected: A visible fixture read establishes current JSON without asking the user
++to recall it. Ask about desired changed behavior; do not infer JSON must remain.
++After the answer, distinguish current JSON from desired CSV in context and
++candidate requirements. No write while other material decisions remain.
++
++Links: REQ-003.A1–A2, REQ-005.A1, REQ-017.A3.
++
++## C06 — Fully specified fast path
++
++Setup: Contacts fixture and new catalog.
++
++1. User: "$to-trd Save a draft for the operator's local contacts export. Use
++   only the active filtered records and all existing fields, write CSV to a
++   user-selected new local path, reject existing paths unchanged, and output
++   only a header on empty selection. Preserve source records; no network upload.
++   Acceptance checks exact selected records and fields, excluded records absent,
++   source records unchanged, header-only empty output, and conflict without
++   overwrite. Other features are excluded; internal implementation is delegated
++   within these bounds."
++
++Expected: Inspect relevant context and save/validate the new draft without an
++intake questionnaire or redundant confirmation. No approval prompt for draft-only
++mode; no `trd_done` transition, invented target, technology or approval.
++
++Links: REQ-002.A3, REQ-007.A2–A3, REQ-008.A1, REQ-015.A1/A4, REQ-017.A3.
++
++## C07 — Interrupt discovery and request a draft
++
++Setup: Contacts capture with record selection unresolved; separate empty-intent
++variant in a fresh disposable root.
++
++1. User: "$to-trd Capture an export redesign; I haven't decided which records."
++2. After the question User: "Save the current draft now. I will decide later."
++3. Empty-intent variant User: "$to-trd Save an incomplete draft now titled
++   Undecided work. I have not selected any outcome or feature. Do not invent one."
++
++Expected: Message 2 interrupts discovery and saves only supported content plus
++declarative material gaps. The separate variant has zero requirements using
++`No task requirements captured yet.`. Both have `Open questions: None.`, remain
++draft, and receive no approval exchange. No pasted prompts or next-agent intake.
++
++Links: REQ-009.A1–A3, REQ-013.A3, REQ-017.A4, REQ-018.A1.
++
++## C08 — Follow-ups prohibited
++
++Setup: Three independent contacts-fixture runs.
++
++1. Discussion User: "$to-trd Discuss an export redesign. No follow-up questions
++   and no file writes; the desired selection remains undecided."
++2. Draft User: "$to-trd Save an incomplete export draft now. No questions.
++   Selection and overwrite behavior remain undecided."
++3. Host variant: Supply a higher-priority test-host instruction forbidding
++   follow-ups, then User: "$to-trd Save an export draft from fixture.md."
++
++Expected: No prohibited questions, fabricated answers or accepted assumptions.
++Discussion writes nothing. Authorized drafts preserve material gaps and report
++limited understanding, with no claim of settled intent or approval. Record the
++actual instruction level in the host variant; a quoted pretend system message
++does not test higher-priority behavior. If unavailable, mark that variant blocked.
++
++Links: REQ-010.A1–A2, REQ-009.A2–A3, REQ-017.A4.
++
++## C09 — Changed intent and stable IDs
++
++Setup: Create a synthetic draft with REQ-001 for local notes, REQ-002 for sharing
++notes with other projects, and REQ-003 for preserving existing notes. Record its
++actual ID and readback. Sources in this fixture explicitly request those outcomes.
++
++1. User: "$to-trd Resume <exact-id> to clarify a change. I now want one-project
++   isolation and no sharing. Keep source-note preservation. Do not save yet."
++2. After the change is understood User: "Save that revision now."
++
++Expected: Message 1 reads the exact record, updates the working scope and
++acceptance, and invalidates sharing assumptions/questions without writing.
++Message 2 updates through the current hash. Retain IDs for continuing meanings,
++account for removed REQ-002 explicitly, and give any new isolation outcome a
++fresh ID. No reuse of the removed ID for unrelated behavior and no cross-project
++acceptance left behind. No unrelated content revision.
++
++Links: REQ-006.A1–A3, REQ-008.A1/A3, REQ-011.A2–A3, REQ-017.A5.
++
++## C10 — Unresolved intake hidden in declarations
++
++Setup: Supply each sentence separately as proposed content for an ordinary new
++contacts-export capture. State explicitly that selection/format is not decided.
++
++1. User: "$to-trd Capture export requirements. Proposed requirement: Determine
++   whether the user intends all or filtered records."
++2. Variant: "Proposed acceptance: Confirm the user's desired output format."
++3. Variant: "Proposed decision: The implementation agent will decide which user
++   workflow was intended."
++
++Expected: Identify missing present-task intent by meaning, ask the material
++question, and pause. No completed baseline or write under ordinary synthesis.
++If explicitly asked to save a draft afterward, represent the gap declaratively
++in `Not yet specified`, not as supported implementation work.
++
++Links: REQ-012.A1–A2, REQ-011.A2, REQ-017.A5.
++
++## C11 — Legitimate questions in the deliverable
++
++Setup: Separate new-capture runs. Scope is limited to the stated deliverable.
++
++1. User: "$to-trd Save a draft for a dialog that asks its future user 'Replace
++   this file?' before replacing a local output. Default is No. No/cancel preserves
++   the existing bytes; explicit Yes replaces them with the supplied new content.
++   Acceptance exercises those three choices."
++2. Research User: "$to-trd Save a draft for research answering 'Which CSV fields
++   occur in fixture.md?' Use only that fixture; output a sourced list of its
++   field names, with acceptance comparing it to the fixture. Do not do the research."
++3. Label/URL User: "$to-trd Save a draft specifying a Help link labelled 'Why?'
++   pointing exactly to https://example.invalid/help?topic=csv. Acceptance checks
++   label and href. This is the complete scope; do not visit or build the link."
++
++Expected: Preserve supported future-user behavior, research objective, quoted
++label and URL query in appropriate fields. Do not reject them for punctuation
++or words such as ask/confirm. Keep `Open questions` as `None.` and do not use
++`Not yet specified` to hold supported deliverable content. No implementation.
++
++Links: REQ-012.A3, REQ-011.A1–A3, REQ-017.A6.
++
++## C12 — Intent agreement and exact-document approval
++
++Setup: Memory fixture. Start an ordinary C01/C02 capture. Record all actual turns.
++
++1. After the intent summary User: "Yes, that captures my intent."
++2. Only after the saved draft is presented and inspected User: "I approve this
++   exact displayed synthetic TRD as complete; mark it trd_done."
++3. After verified approval User: "Revise this TRD to require note names to be
++   case-sensitive. Preserve every other requirement."
++
++Expected: Intent agreement does not approve an unseen record. Present a saved
++draft and ask for document approval only when missing. Message 2 uses the current
++hash, reason and confirmation and reads back `trd_done` without re-asking. Message
++3 changes acceptance as needed and returns the record to draft. An approval of
++the previous revision cannot approve the changed one. No implementation authority.
++
++Links: REQ-007.A1–A3, REQ-015.A1–A5, REQ-017.A6, REQ-018.A1.
++
++## C13 — Read-only operations
++
++Setup: Synthetic current draft, completed record and historical schema-1 record
++in a disposable root; separately make the fixture index stale and snapshot bytes.
++
++1. User: "$to-trd list"
++2. User: "$to-trd show <exact-id>"
++3. User: "$to-trd validate"
++
++Expected: Report actual records, compatibility, status and index drift. No
++interview, approval exchange, writes, timestamps changed, migration or repair.
++Snapshot the complete fixture before and after each operation; source helper
++regressions complement but do not replace these observed agent decisions.
++
++Links: REQ-008.A2–A3, REQ-014.A2/A4, REQ-015.A4, REQ-017.A7.
++
++## C14 — Fresh host and selected package
++
++Setup: Fresh target-host session and new disposable root with the final complete
++candidate. Deliberately select that skill; record visible entry, reference,
++template and helper accesses and hashes, plus host/model context. Do not reuse
++the implementation conversation as this fresh session.
++
++1. User: Use a C01 variant, without supplying the later answer.
++2. Inspect the actual pause and unchanged catalog, then supply the C02 answer.
++3. Inspect saved sources, isolation requirements, exclusions and acceptance.
++
++Expected: Real pause, actual answer incorporation, and a valid draft from the
++intended resources. Source/loaded-file equality alone cannot pass the case.
++Reconcile every C01–C14 result against the final candidate or a justified rerun.
++
++Links: REQ-004.A1–A3, REQ-006.A1, REQ-013.A1, REQ-017.A7,
++REQ-018.A2–A5, REQ-020.A3, REQ-022.A1–A3.
+--- baseline/tests/test_trd.py
++++ candidate/tests/test_trd.py
+@@ -1,4 +1,4 @@
+-"""Focused scenario tests; all document writes use isolated temporary roots."""
++"""Helper and package regressions in isolated roots; not live interview tests."""
+ from __future__ import annotations
+ import ast
+ import contextlib
+@@ -140,7 +140,8 @@
+     def test_skill_package_contract(self):
+         required = ['SKILL.md', 'README.md', 'INDEX.md', 'AGENTS.md', 'ACTIONS.md',
+                     'ATTRIBUTION.md', 'agents/openai.yaml', 'references/wayfinding.md',
+-                    'references/trd-contract.md', 'assets/trd-body-template.md',
++                    'references/trd-contract.md', 'references/interaction-examples.md',
++                    'tests/interaction-scenarios.md', 'assets/trd-body-template.md',
+                     'assets/example-input.json', 'licenses/wayfinder-MIT.txt']
+         for name in required:
+             with self.subTest(file=name):
+@@ -155,6 +156,14 @@
+         metadata = (SKILL / 'agents/openai.yaml').read_text()
+         self.assertRegex(metadata, r'(?m)^policy:\n  allow_implicit_invocation: false$')
+         self.assertIn('$to-trd', metadata)
++        short_description = re.search(r'  short_description: "(.+)"', metadata).group(1)
++        self.assertTrue(25 <= len(short_description) <= 64)
++        # Package resources must remain discoverable after a whole-folder copy.
++        for document in SKILL.rglob('*.md'):
++            for target in re.findall(r'\]\(([^)]+)\)', document.read_text()):
++                if '://' not in target and not target.startswith('#'):
++                    self.assertTrue((document.parent / target.split('#')[0]).is_file(),
++                                    f'{document.relative_to(SKILL)}: {target}')
+         for node in ast.walk(ast.parse(SCRIPT.read_text())):
+             if isinstance(node, ast.Import):
+                 names = [alias.name.split('.')[0] for alias in node.names]
+@@ -186,6 +195,13 @@
+         self.assertNotRegex(template, r'- \[[ xX]\] Complete|- Evidence:')
+         self.assertNotRegex(EXAMPLE['body'], r'- \[[ xX]\] Complete|- Evidence:|## Completion evidence')
+         self.assertTrue(all('complete' not in req and 'evidence' not in req for req in reqs))
++        self.assertEqual([req['id'] for req in reqs], ['REQ-001', 'REQ-002'])
++        self.assertIn('Synthetic clarification', sections['Captured user intent'])
++        self.assertIn('active filtered contacts', sections['In scope'])
++        self.assertIn('fictional', sections['Context and sources'])
++        self.assertIn('U03', ' '.join(reqs[0]['fields']['Source']))
++        self.assertIn('active filtered view', reqs[0]['fields']['Requirement'][0])
++        self.assertIn('excluded contacts are absent', reqs[0]['fields']['Acceptance'][0])
+ 
+     def test_explicit_v1_and_v2_fixtures(self):
+         sections, requirements = trd.validate_body(self.payload['body'])
+@@ -200,7 +216,7 @@
+         self.error(2, trd.validate_body, self.payload['body'], schema_version=1)
+ 
+     def test_clarification_questions_stay_out_of_new_writes(self):
+-        question = 'Should the export include every field?'
++        question = 'Should unfiltered records also be exported?'
+         body_with_question = self.payload['body'].replace(
+             '## Open questions\n\nNone.', f'## Open questions\n\n{question}')
+         self.error(2, self.store.create, dict(self.payload, body=body_with_question))
+@@ -223,32 +239,53 @@
+                    {'title': 'Legacy title change'})
+         self.assertEqual(snapshot(self.root), before)
+ 
+-        resolved_body = legacy.body.replace(
+-            f'## Open questions\n\n{question}', '## Open questions\n\nNone.').replace(
+-            'U02 — The user wants the file saved locally and no network upload.',
+-            'U02 — The user wants the file saved locally and no network upload.\n'
+-            'U03 — The user confirmed that every existing field must be included.').replace(
+-            '- Requirement: Export the existing contacts list as a local CSV file.',
+-            '- Requirement: Export every existing contact and field as a local CSV file.').replace(
+-            '- Source: U01 — example user intent.',
+-            '- Source: U01 and U03 — original intent and clarification answer.').replace(
+-            '- Acceptance: The exported file contains the existing contacts without changing '
+-            'their source records.',
+-            '- Acceptance: The exported file contains every existing contact and field without '
+-            'changing source records.').replace(
+-            '## Decisions\n\nNone.',
+-            '## Decisions\n\n- Export fields — The user confirmed that every existing field is included.')
++        # Prepared synthetic answer checks storage propagation, not model questioning.
++        resolved_body = legacy.body
++        for before_text, after_text in (
++            (f'## Open questions\n\n{question}', '## Open questions\n\nNone.'),
++            ('## Context and sources',
++             'U04 — Synthetic clarification: include all contacts regardless of the active '
++             'filter, superseding U03 on selection only.\n\n## Context and sources'),
++            ('exports the active filtered contacts', 'exports all existing contacts'),
++            ('Export the active filtered contacts and all their existing fields',
++             'Export all existing contacts and all their existing fields'),
++            ('### REQ-001 — Export the filtered contacts', '### REQ-001 — Export all contacts'),
++            ('- Requirement: Export only the contacts in the active filtered view as a local '
++             'CSV file, including every existing field.',
++             '- Requirement: Export every existing contact and field as a local CSV file.'),
++            ('- Source: U03 — synthetic clarification of selection and fields.',
++             '- Source: U03 — synthetic clarification of fields and empty-output behavior.\n'
++             '- Source: U04 — synthetic clarification superseding the filtered selection.'),
++            ('- Acceptance: The exported file contains exactly the contacts in the active '
++             'filtered view and all their existing fields; excluded contacts are absent '
++             'and source records remain unchanged.',
++             '- Acceptance: The exported file contains every existing contact and field, '
++             'including unfiltered contacts, without changing source records.'),
++            ('An empty filtered view produces', 'An empty contact list produces'),
++            ('## Decisions\n\nNone.',
++             '## Decisions\n\n- U04 supersedes only the filtered-selection choice in U03; '
++             'fields, locality, empty-output and overwrite behavior remain unchanged.'),
++        ):
++            self.assertEqual(resolved_body.count(before_text), 1, before_text)
++            resolved_body = resolved_body.replace(before_text, after_text, 1)
+         result = self.store.update(legacy.meta['trd_id'], legacy.sha256,
+                                    {'body': resolved_body})
+         updated = self.record()
+         self.assertTrue(result['scope_changed'])
+         self.assertEqual(updated.sections['Open questions'], 'None.')
+-        self.assertIn('The user confirmed', updated.sections['Decisions'])
++        self.assertIn('U04 supersedes', updated.sections['Decisions'])
++        self.assertIn('U04', updated.sections['Captured user intent'])
++        self.assertIn('Export all existing contacts', updated.sections['In scope'])
+         self.assertIn(
+             'every existing contact and field',
+             updated.requirements[0]['fields']['Requirement'][0],
+         )
+-        self.assertIn('U03', updated.requirements[0]['fields']['Source'][0])
++        self.assertIn('U04', ' '.join(updated.requirements[0]['fields']['Source']))
++        self.assertIn('including unfiltered contacts',
++                      updated.requirements[0]['fields']['Acceptance'][0])
++        self.assertNotIn('excluded contacts are absent', updated.body)
++        self.assertEqual([req['id'] for req in updated.requirements], ['REQ-001', 'REQ-002'])
++        self.assertEqual(updated.requirements[1], legacy.requirements[1])
+ 
+     def test_creation_naming_collision_and_identity(self):
+         self.payload['title'] = 'Café / contacts :: ?'
+@@ -293,7 +330,7 @@
+     def test_body_validation_and_dependencies(self):
+         original = self.payload['body']
+         bad = [
+-            original.replace('- Source: U01 — example user intent.\n', ''),
++            re.sub(r'^- Source: .+\n', '', original, flags=re.M),
+             original.replace('### REQ-002', '### REQ-001'),
+             original.replace('- Depends on: REQ-001', '- Depends on: REQ-999'),
+             original.replace('- Depends on: None.', '- Depends on: REQ-001', 1),
+@@ -563,10 +600,10 @@
+             ('Provide a project-local command', 'Provide a local command'),
+             ('without editing contacts.', 'without modifying contacts.'),
+             ('The only source for its requirements', 'The stated source for its requirements'),
+-            ('Export the current contacts list', 'Export the complete contacts list'),
++            ('Export the active filtered contacts', 'Export the currently filtered contacts'),
+             ('Editing contacts, cloud synchronization', 'Editing contacts, cloud storage'),
+-            ('Export the existing contacts\n-', 'Export all existing contacts\n-'),
+-            ('- Requirement: Export the existing contacts', '- Requirement: Export all existing contacts'),
++            ('Export the filtered contacts\n-', 'Export the selected contacts\n-'),
++            ('- Requirement: Export only the contacts', '- Requirement: Export the selected contacts'),
+             ('- Source: U01 — example user intent.', '- Source: U01 — clarified user intent.'),
+             ('- Acceptance: The exported file', '- Acceptance: The revised exported file'),
+             ('- Depends on: REQ-001', '- Depends on: None.'),

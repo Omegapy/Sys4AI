@@ -19,6 +19,14 @@ def canonical_json(value):
     return (json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":")) + "\n").encode()
 
 
+def implementation_inputs():
+    """Only producers of projected identity, text, eligibility and metadata."""
+    directory = Path(__file__).resolve().parent
+    names = ("basic_memory_projection.py", "memory_search.py", "memory_normalization.py",
+             "memory_normalize_html.py", "memory_normalize_tex.py", "memory_normalize_pdf.py")
+    return {name: digest((directory / name).read_bytes()) for name in names}
+
+
 def _eligible(root, config, document):
     kind, rel = document.get("kind"), document.get("path")
     require(kind in {"source", "memory"}, "projection_kind", "Only source and memory documents can be projected.")
@@ -73,7 +81,8 @@ def render_projection(root, config, documents):
                         "limitations": document.get("limitations", [])})
     manifest = {"schema_version": VERSION, "project_id": config["project"]["id"],
                 "config_sha256": digest(safe_read_bytes(root, "memory.yaml")),
-                "entries": entries, "classification": "rebuildable-projection"}
+                "entries": entries, "classification": "rebuildable-projection",
+                "implementation_inputs": implementation_inputs()}
     return files, manifest
 
 
@@ -90,6 +99,12 @@ def verify_projection(root, config, manifest=None, *, current_documents=None):
             "projection_config", "Projection configuration is stale.")
     entries = stored.get("entries", [])
     require(isinstance(entries, list), "projection_manifest", "Projection entries must be a list.")
+    require(stored.get("implementation_inputs") == implementation_inputs(), "projection_implementation_changed",
+            "Projection producer versions changed or were not recorded; explicit reindex is required.",
+            {"expected": stored.get("implementation_inputs"), "current": implementation_inputs()})
+    if current_documents is None:
+        from memory_search import collect_documents
+        current_documents, _ = collect_documents(root, config)
     expected = {"manifest.json"}
     known = {(d["kind"], d["path"]): d for d in current_documents} if current_documents is not None else None
     for entry in entries:
@@ -109,12 +124,18 @@ def verify_projection(root, config, manifest=None, *, current_documents=None):
         else:
             raise MemoryError("projection_kind", "Invalid projected document kind.")
         require(digest(safe_read_bytes(root, entry["path"])) == entry.get("sha256"),
-                "projection_stale", "A projected canonical document changed.")
+                "projection_stale", "A projected canonical document changed.",
+                {"path": entry["path"], "expected_sha256": entry.get("sha256"),
+                 "current_sha256": digest(safe_read_bytes(root, entry["path"]))})
         if known is not None:
             current = known.get((entry["kind"], entry["path"]))
             require(current is not None and current["sha256"] == entry["sha256"] and
                     current["source_identity"] == entry["source_identity"],
                     "projection_scope", "Projection contains a document absent from current permitted retrieval.")
+    require({(entry["kind"], entry["path"]) for entry in entries} == set(known), "projection_corpus_changed",
+            "Current permitted corpus differs from the indexed corpus; explicit reindex is required.",
+            {"added": sorted(path for kind, path in set(known) - {(e["kind"], e["path"]) for e in entries}),
+             "removed": sorted(path for kind, path in {(e["kind"], e["path"]) for e in entries} - set(known))})
     directory = safe_path(root, rel, kind="dir")
     require({p.name for p in directory.iterdir()} == expected, "unclassified_projection",
             "Unknown files or directories block use of the projection.")

@@ -1,0 +1,101 @@
+{
+  "before": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/memory/tests -p test_health_evidence.py -k test_guard_schema_uses_actual_maintenance_owner_namespace -v",
+    "errors": 3,
+    "exit_code": 1,
+    "log": "Verification/ontology-health-repairs/memory/final-guard-namespace-before.log",
+    "log_sha256": "f2cf5e7dae7126ab3924212b4b8d8fa4a5191bf0b0cc5d2064a8d4a435789ca3",
+    "observation": "Exact original KeyError reproduced using reindex and recover_reindex actual unwrapped globals, not a synthetic namespace.",
+    "run": 1
+  },
+  "checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/memory/tests -p test_health_evidence.py -v",
+      "elapsed_seconds": 1.69,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "log": "Verification/ontology-health-repairs/memory/final-guard-namespace-focused.log",
+      "log_sha256": "c695cbfb25c95138e03cd5800c62c2002aea85f288b1ff19ba4d8e127a906437",
+      "run": 17,
+      "skipped": 0,
+      "test_ids": [
+        "test_health_evidence.HealthEvidenceTests.test_accepted_design_cannot_borrow_execution_receipt_for_changed_direct_source",
+        "test_health_evidence.HealthEvidenceTests.test_actual_certificate_version_and_index_byte_faults",
+        "test_health_evidence.HealthEvidenceTests.test_aggregate_selection_and_exit_json_text_no_writes",
+        "test_health_evidence.HealthEvidenceTests.test_backend_disabled_static_and_operational_failure_diagnostics",
+        "test_health_evidence.HealthEvidenceTests.test_committed_reindex_failed_operational_probe_retains_boundary",
+        "test_health_evidence.HealthEvidenceTests.test_direct_source_archive_is_order_independent_and_validate_reports_current_count",
+        "test_health_evidence.HealthEvidenceTests.test_direct_source_invalid_proof_or_locator_fails_cli_without_writes",
+        "test_health_evidence.HealthEvidenceTests.test_direct_source_retained_bytes_are_reread_after_verification",
+        "test_health_evidence.HealthEvidenceTests.test_guard_schema_uses_actual_maintenance_owner_namespace",
+        "test_health_evidence.HealthEvidenceTests.test_historical_successor_preserves_old_bytes_claim_and_diagnostics",
+        "test_health_evidence.HealthEvidenceTests.test_legacy_companion_is_exact_historical_proof_not_current_renewal",
+        "test_health_evidence.HealthEvidenceTests.test_legacy_receipt_remains_readable_without_claiming_durable_support",
+        "test_health_evidence.HealthEvidenceTests.test_missing_tampered_and_unsafe_retained_proof_fail_closed",
+        "test_health_evidence.HealthEvidenceTests.test_previously_built_missing_product_and_producer_changes_are_nonready",
+        "test_health_evidence.HealthEvidenceTests.test_projection_detects_added_removed_changed_sources_and_irrelevant_inputs",
+        "test_health_evidence.HealthEvidenceTests.test_publication_closes_canonical_boundary_and_reports_out_of_scope_reindex",
+        "test_health_evidence.HealthEvidenceTests.test_retained_observation_survives_later_code_but_is_not_current"
+      ]
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/memory/tests -p test_basic_memory_adapter.py -v",
+      "elapsed_seconds": 0.272,
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "log": "Verification/ontology-health-repairs/memory/final-guard-namespace-adapter.log",
+      "log_sha256": "c8d483aa1f9af39886465e6621b2a1ae679539ae55966ab8394f4621bd4bf8ac",
+      "run": 18,
+      "skipped": 0,
+      "test_ids": [
+        "test_basic_memory_adapter.AdapterContracts.test_changed_profile_or_backend_outage_degrades_without_repair",
+        "test_basic_memory_adapter.AdapterContracts.test_changed_source_and_new_lifecycle_are_rejected",
+        "test_basic_memory_adapter.AdapterContracts.test_disabled_and_missing_state_reads_preserve_bytes_and_mtimes",
+        "test_basic_memory_adapter.AdapterContracts.test_draft_is_not_ingested",
+        "test_basic_memory_adapter.AdapterContracts.test_fake_transport_cannot_return_foreign_or_invented_content",
+        "test_basic_memory_adapter.AdapterContracts.test_foreign_project_and_disallowed_alias_never_project",
+        "test_basic_memory_adapter.AdapterContracts.test_interrupted_build_leaves_recoverable_receipt_and_canonical_bytes",
+        "test_basic_memory_adapter.AdapterContracts.test_maintenance_rejects_missing_authority_before_creating_state",
+        "test_basic_memory_adapter.AdapterContracts.test_matching_shape_cache_still_requires_completed_ownership_receipt",
+        "test_basic_memory_adapter.AdapterContracts.test_packet_filter_is_applied_after_backend_ranking",
+        "test_basic_memory_adapter.AdapterContracts.test_pending_maintenance_is_reported_without_mutation",
+        "test_basic_memory_adapter.AdapterContracts.test_projection_rejects_backend_modified_metadata_and_unknown_file",
+        "test_basic_memory_adapter.AdapterContracts.test_projection_retains_all_five_metadata_types_and_chronology",
+        "test_basic_memory_adapter.AdapterContracts.test_query_worker_python_guard_denies_write_and_network",
+        "test_basic_memory_adapter.AdapterContracts.test_source_formats_keep_original_identity_and_locator",
+        "test_basic_memory_adapter.AdapterContracts.test_sqlite_connection_is_bound_and_literal_uri_names_are_preserved",
+        "test_basic_memory_adapter.AdapterContracts.test_unknown_empty_directory_blocks_replacement",
+        "test_basic_memory_adapter.AdapterContracts.test_wrong_query_mode_and_writer_operation_rejected"
+      ]
+    }
+  ],
+  "diff_check": "passed",
+  "files": [
+    {
+      "path": "SKILLS-depo/memory/scripts/memory_maintenance.py",
+      "sha256": "700dffc0bd5d208731f9103002d534f52c22d4cb677298035fc0ad89f58c9073"
+    },
+    {
+      "path": "SKILLS-depo/memory/tests/test_health_evidence.py",
+      "sha256": "a5b0a732662fbdbd806286c54a1abf76815bfaead452f1479ab98ec595bef58e"
+    }
+  ],
+  "implementation": "One module-level from memory_core import load_config in owning memory_maintenance.py; guard and runtime code unchanged.",
+  "limitations": [
+    "No root mutation, guarded live reindex, model operation or semantic-dispatch suite executed by this assignment.",
+    "Host owns exact guard amendment, source/installed full memory acceptance and final root reindex.",
+    "Prepared delivery fixtures require final package adoption/refresh; prior static receipts keep their old source provenance."
+  ],
+  "observed_at": "2026-09-10T19:54:38.453563+00:00",
+  "prior_93_test_output_retained": {
+    "log": "Verification/ontology-health-repairs/memory/final-93-tests.combined.log",
+    "receipt": "Verification/ontology-health-repairs/memory/final-93-tests.receipt.json",
+    "scope": "Historical run before this one-line import and regression; verbatim earlier observed tool output, no rerun."
+  },
+  "problem": "Enabled guard schema_check resolves load_config from the maintenance owner function globals; function-local imports were absent from that namespace.",
+  "schema_version": 1,
+  "status": "source_frozen_focused_guard_namespace_fix_passed",
+  "trusted_memory_core_sha256_unchanged": "48592604ac950e32e4c80aab24edd2e90d26d09df1b6af912dcad24bbc490a54"
+}

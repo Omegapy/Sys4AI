@@ -1,0 +1,13 @@
+--- original ontology_rdf.py
++++ repaired ontology_rdf.py
+@@ -42,6 +42,10 @@
+     # Canonicalize a reified quad graph once, retaining bnode identity across graphs.
+     from rdflib import Graph, BNode, URIRef
+     from rdflib.compare import to_canonical_graph
++    # Ground RDF terms already have stable identities; introducing quad bnodes
++    # makes canonicalization expensive without changing their encoded values.
++    if not any(isinstance(value,BNode) for quad in dataset.quads((None,None,None,None)) for value in quad):
++        return sorted([[encode(value) for value in quad] for quad in dataset.quads((None,None,None,None))],key=canonical_bytes)
+     q = Graph()
+     keys = [URIRef(ADV+k) for k in ('s','p','o','g')]
+     for index, (s,p,o,g) in enumerate(dataset.quads((None,None,None,None))):

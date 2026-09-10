@@ -1,0 +1,299 @@
+{
+  "evidence_references": [
+    {
+      "path": "Verification/ontology-second-release/final-ontology-tests-r3.log",
+      "sha256": "8bd82aa30ca2a1ade92f56594c82bcce58258b36083067be275b78e7c0aeb21a"
+    },
+    {
+      "path": "Verification/ontology-second-release/browser-acceptance.json",
+      "sha256": "5054abe0b219f0087a7975f390c907b59ceff4b2e79ca9641067480dc6d3f4ff"
+    },
+    {
+      "path": "Verification/ontology-second-release/generation-acceptance.json",
+      "sha256": "3bc7ffc980898f2bb557c40917490eab6b7d60adf69d36bc8400797c84b265bb"
+    },
+    {
+      "path": "Verification/ontology-second-release/semantic-packet-acceptance.json",
+      "sha256": "b1e7326287682324ae31bdc9b5ae79d98ef64585d0475bca9f628fca98cdfa54"
+    },
+    {
+      "path": "Verification/ontology-second-release/advanced-memory-acceptance.json",
+      "sha256": "8160842122f40791de336560e17afa7da479da63b5266b37da6a771a858f7a63"
+    },
+    {
+      "path": "Verification/ontology-second-release/root-guarded-dispatch.json",
+      "sha256": "ad2640871b8dca7104064d1abd662203c1c1996efdd220ed9ac63834134d1110"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-boundary-coverage.json",
+      "sha256": "626ea6aba6b7ea07715952bdd7bf8c87d4ca6a692f1c8d69c5254ca314221509"
+    },
+    {
+      "path": "Verification/ontology-second-release/initializer-v9-tests.json",
+      "sha256": "262d4a2635483f3baaf8f2a6855b6fcf07f5785ad03b18fce6f9447960b08cf8"
+    },
+    {
+      "path": "Verification/ontology-second-release/root-inference.json",
+      "sha256": "694aa6d9da6c90cf5a04fbeae23b02d10bf4742ef14577b6b3899788bc2f6c59"
+    },
+    {
+      "path": "Verification/ontology-second-release/root-retrieval-comparison-final.json",
+      "sha256": "a335b382b3b6b11fe19809122532d8dc9bf23ded12454d0e0c8ee598f39f232c"
+    },
+    {
+      "path": "Verification/ontology-second-release/template-final-check.json",
+      "sha256": "e3a58944434e42dd21c2bc19baf566a213fab71800d61e8192cba245bc628ef1"
+    },
+    {
+      "path": "Verification/ontology-second-release/fixtures/native-context/control_records/native-context/manager-v2/final-task-summary.json",
+      "sha256": "c26434396e69be20778493b0715a6b176d3ead7117c1f21d7babccb437e99031"
+    }
+  ],
+  "files_changed": [
+    "Verification/ontology-second-release/independent-review.json"
+  ],
+  "findings": [
+    {
+      "completion_blocking": true,
+      "consequence": "An incompatible target and impossible lifecycle facts can be labeled semantically conformant. Existing owning helpers still perform their own structural, lifecycle and authority checks, so this observation does not demonstrate an unauthorized mutation. It leaves the required typed semantic action contract and its negative acceptance unproven.",
+      "id": "REVIEW-001",
+      "locations": [
+        {
+          "end": 10,
+          "path": "ONTOLOGY-depo/actions/action-shapes-v1.ttl",
+          "start": 4
+        },
+        {
+          "end": 313,
+          "path": "SKILLS-depo/ontology/scripts/ontology_guards.py",
+          "start": 293
+        },
+        {
+          "end": 172,
+          "path": "SKILLS-depo/ontology/tests/test_guarded_dispatch.py",
+          "start": 159
+        }
+      ],
+      "observation": "The delivered SHACL shape constrains only family, operation, request/target digest and text-valued target/status fields. It does not constrain target identity/type, permitted target paths, current/next state, positive target revision, or a resolved required capability. The evaluator copies targetType and requiredCapability from the matched contract; all contracts name generic core Capability. The current family matrix injects an impossible additional shape for each semantic-invalid case, so it proves that a SHACL failure blocks dispatch but not that the delivered action model rejects a semantically invalid request.",
+      "priority": 2,
+      "reproduction": {
+        "arguments": {
+          "_semantic_state": {
+            "currentState": "completed",
+            "nextState": "not-a-task-state",
+            "targetIdentity": "urn:sys4ai:ontology:core:Artifact",
+            "targetRevision": -1
+          }
+        },
+        "family": "task",
+        "method": "Read-only installed root evaluator with the actual selected SHACL backend; no owning helper invoked",
+        "observed_result": {
+          "authority_granted": false,
+          "complete": true,
+          "guard_backend_status": "conformant",
+          "target_unchanged": true
+        },
+        "operation": "response_transaction",
+        "targets": [
+          "ONTOLOGY/modules/project/project.jsonld"
+        ]
+      },
+      "requested_change": "Make the delivered contract check actual normalized target and lifecycle facts, including applicable required-capability references, using current owning read interfaces. Retain the independent authorizers. Add actual-backend negative cases using the delivered rules and semantically invalid requests, and verify that the underlying continuation is not invoked.",
+      "requirement_ids": [
+        "REQ-022",
+        "REQ-024",
+        "REQ-042"
+      ],
+      "task_ids": [
+        "TASK-023",
+        "TASK-024",
+        "TASK-050"
+      ],
+      "title": "Delivered guard model validates the envelope without enforcing typed action semantics"
+    }
+  ],
+  "limits": [
+    "This is a bounded independent review, not project-level acceptance.",
+    "No claim of an authorization bypass: invalid-action rejection in existing owning helpers remains active.",
+    "Existing host-run browser/native/backend evidence was inspected; those workflows were not repeated by this reviewer.",
+    "No Git, product adoption, remote deployment or non-Darwin certification was performed.",
+    "Final preservation/bidirectional manifests are still assigned to the host and must use their own final evidence cutoff."
+  ],
+  "observed_checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python .agents/skills/ontology/scripts/ontology.py --project-root \"$PWD\" advanced-health",
+      "result": "Current root standards and inference ready/validated; semantic index ready with94 records; guards enabled; workbench selected but running service not claimed."
+    },
+    {
+      "method": "Read-only SHA256 comparison across seven source packages, selected root installation and Template",
+      "result": "Source file inventories: ontology87, initializer24, memory40, agent-task11, TRD17, plan14, role8. All content matches except five retained root Agent Task differences and ignored .DS_Store."
+    },
+    {
+      "method": "Inspected final-ontology-tests-r3.log and actual-model supplemental evidence",
+      "result": "Recorded source suite ran138 tests, OK with1 optional actual-model skip; semantic-packet-acceptance.json separately records actual selected model, zero live model calls during frozen query, stale-index rejection and forged-score rejection."
+    },
+    {
+      "method": "Reopened native manager completion and acceptance artifact",
+      "result": "Task completed at revision50, execution finished; referenced acceptance report SHA256 matches actual bytes. Its own scope limitations remain intact."
+    },
+    {
+      "method": "Read-only actual root evaluator negative probe",
+      "result": "Confirmed REVIEW-001; target unchanged; no underlying action or mutation attempted."
+    }
+  ],
+  "plan": {
+    "path": "Implementation_Plans/Plan_sys4ai-ontology-knowledge-system-second-release_2026-09-09_4B15BB49/plan.json",
+    "requirements_read": 44,
+    "sha256": "631b0d2dd3b58ff0d2f7085ba6ee5cb75f93cdb3d8b110ca387b9966c0f14c5e",
+    "tasks_read": 54
+  },
+  "protected_state_mutated": false,
+  "reviewed_at": "2026-09-10T14:30:23.552133+00:00",
+  "reviewed_scope": [
+    {
+      "requirements": "REQ-001 through REQ-021, REQ-039 through REQ-041",
+      "result": "No other material implementation finding identified in the inspected sources and evidence.",
+      "scope": "Standards worker confinement and actual evidence, parsed query/shape restrictions, interchange, finite derivations, proposal generation/validation/publication, independent ontology semantic retrieval"
+    },
+    {
+      "requirements": "REQ-022 through REQ-026, REQ-042",
+      "result": "One material semantic-model finding; availability, hash binding and retained owner authority are separately present.",
+      "scope": "All declared action families, evaluator, owner ordering, exact-source/target binding, actual matrix coverage"
+    },
+    {
+      "requirements": "REQ-027 through REQ-032, REQ-043",
+      "result": "No material finding identified; actual UI evidence is the host CUA report, not a new browser run by this reviewer.",
+      "scope": "Workbench trusted authority, HTTP boundaries, safe rendering, form authoring, review/publication/recovery and recorded actual browser interactions"
+    },
+    {
+      "requirements": "REQ-033 through REQ-035, REQ-044",
+      "result": "No material finding identified; actual native acceptance is bounded and explicitly distinguishes its scope from semantic-model/browser fixtures.",
+      "scope": "Advanced packet validation, frozen semantic matrix, memory identity separation, and reopened actual native manager/solver acceptance references"
+    },
+    {
+      "requirements": "REQ-036 through REQ-038, TASK-042 through TASK-054",
+      "result": "Ontology and other adopted package files match source/root/Template, except preserved root Agent Task policy differences and intentionally excluded .DS_Store. Final requirement/preservation/release manifests remain host-owned completion work and were not used to excuse or fabricate implementation acceptance.",
+      "scope": "Current source/root/Template package parity, installed advanced health, neutral distribution/initializer evidence and current operational instructions"
+    }
+  ],
+  "reviewer": "/root/final_release_review",
+  "role": {
+    "agents_path": "Roles/project-sub-agent/AGENTS.md",
+    "catalog": "Verification/ontology-second-release/final-review-role-catalog.json",
+    "function": "independent bounded reviewer",
+    "role_path": "Roles/project-sub-agent/ROLE.md"
+  },
+  "schema_version": 1,
+  "source_references": [
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_backend.py",
+      "sha256": "4ba6ce8879c2248442a17a4098ae8246831947553476ef051c140dc0730ce35b"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_worker.py",
+      "sha256": "489ef392c7b15b7ad45f7dcd151ef947d10eab0020ec601c96aabf5d98b983d4"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_sparql.py",
+      "sha256": "13550789b9ad504ab07b6e6550f96b23854faac2b977adea0a380ede54f8678a"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_shacl.py",
+      "sha256": "71cc8a572962b09dfe1cd98adbc6046e236ab9b526a5f18d8b1c73d615ce6a3e"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_interchange.py",
+      "sha256": "51ca7df70ee4e133a686ff867a324e58f3a8fba6f3910653c0db4730745cba0a"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_reasoning.py",
+      "sha256": "166f8e435a4144dd0141636cc83a7e3b7b2a7668a496d62e60b5fd1cef0a665c"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_generation.py",
+      "sha256": "625340e3b6ec4b360413f0acd0b30ac3c408c70d3eac1ad009a9fc8b188ca364"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_proposal_validation.py",
+      "sha256": "ba12ad682a9e11ded50893633bc11969587a9e34cff0d68cddfc62819ace65b1"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_publication.py",
+      "sha256": "1c314ccf1f3d8bb6e643dd5a13dadcc8018a58e5c4fdf423ff4dbd7af4d59fab"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_authority.py",
+      "sha256": "fcd0bc8cbc3afa27e24e5b7e89fba6c9c69e2d862acfb852be5be446a8df59cf"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_workbench.py",
+      "sha256": "06cc77cd43f19e7c22c58c30ae637368a8cec2771e4b8a548020138d8e5fab96"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_guards.py",
+      "sha256": "ea2b7d19294fd53bc732b728658be125307ed4deda469d60549f5857cd910765"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_advanced_packet.py",
+      "sha256": "988188226bd4d4fcaf9597e708522425e87092c12e2953d36bce4cfc277f14b0"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_semantic.py",
+      "sha256": "2a4df63c4c67922b1fa30ba251cfe800519ab5fe68546efef9d4a3260136f4fd"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_semantic_worker.py",
+      "sha256": "55a7e69d876f0530bc677cbe3fd1390f6e2185e8c96f935a7f42d4d8c52ccb12"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_knowledge.py",
+      "sha256": "feb9d2c2e5f7570db49d3d07c3961ee2f38c1ee629f3a135915ea003645c0d55"
+    },
+    {
+      "path": "SKILLS-depo/ontology/workbench/app.js",
+      "sha256": "84ec3b7992922059f5e610fd4f021e5c2b546540d14251c434667a68ee850b96"
+    },
+    {
+      "path": "SKILLS-depo/ontology/workbench/editor.js",
+      "sha256": "bff1bb18d4c33c9e696a3582b5d258370512545663ee95663cd00fb1a90f448c"
+    },
+    {
+      "path": "SKILLS-depo/ontology/workbench/review.js",
+      "sha256": "188c24ea4766d1898fa31d74070916689db8de6774ac4b46710076b9a70e96c7"
+    },
+    {
+      "path": "SKILLS-depo/ontology/workbench/advanced.js",
+      "sha256": "6e15158a4ca41b8812468894eaf62474140e9ba466025d04dcd4b116c1d34b75"
+    },
+    {
+      "path": "ONTOLOGY-depo/actions/contracts-v1.json",
+      "sha256": "dab3dcf3e4ce527e1a6d0d544ca1834104cbcc3f6045fb0550616c2f2250d964"
+    },
+    {
+      "path": "ONTOLOGY-depo/actions/action-shapes-v1.ttl",
+      "sha256": "7cf34208f5c6f905d038d322e23b982bd3768a660e1bc765d0c92a5761857133"
+    },
+    {
+      "path": "ONTOLOGY-depo/actions/coverage.md",
+      "sha256": "024b96be14ac791b355e280bf58071b5746438f3731b65a5aca8368f8444edf6"
+    },
+    {
+      "path": "ONTOLOGY-depo/advanced-profile.md",
+      "sha256": "bcb0ab8cfaf950087f053532445b7d4bd6c76b728deff9ae23cdcd45de75b058"
+    },
+    {
+      "path": "SKILLS-depo/ontology/references/commands.md",
+      "sha256": "f357f40966be950e05fe6ac5b9e2a52fd480b0c097451cf39d07d85b144e3941"
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_guarded_dispatch.py",
+      "sha256": "5ba12bea04f61293f130281ca7b8d9fd631abf9c43996b318f89b78ed34723f6"
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_guard_engine.py",
+      "sha256": "33d4bf13efc190097875b6247ef6e6449de576558473d4462c901449b30b7863"
+    }
+  ],
+  "status": "changes_required",
+  "stopping_condition": "One concrete completion finding delivered with actual read-only evidence; bounded implementation review complete."
+}

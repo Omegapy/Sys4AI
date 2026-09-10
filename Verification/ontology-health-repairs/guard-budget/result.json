@@ -1,0 +1,52 @@
+{
+  "observed_at": "2026-09-10T19:23:52.120453+00:00",
+  "status": "source_correction_verified",
+  "baseline": {
+    "status": "guard_timeout",
+    "decision_seconds": 5.018657750013517,
+    "dataset_worker_seconds": 3.2675,
+    "prepare_seconds": 0.20578141600708477,
+    "fingerprint_seconds": 0.13970575100393035
+  },
+  "measured_cause": {
+    "quad_count": 1629,
+    "actual_blank_nodes": 0,
+    "dataset_construction_seconds": 0.013516458,
+    "original_quad_rows_seconds": 2.917620917,
+    "ground_fast_path_seconds": 0.02084675,
+    "exact_dataset_quads_and_semantic_hash_equal": true,
+    "semantic_sha256": "7fe04a89bdd7869d93a29efd5d5e7f3b69c9ac248a119e66a04b1b40af9d99fb"
+  },
+  "after": {
+    "status": "conformant",
+    "decision_seconds": 2.1771,
+    "dataset_worker_seconds": 0.3786,
+    "shared_guard_budget_seconds": 5
+  },
+  "change": {
+    "description": "Serialize and sort stable URI/literal quad terms directly only when the entire dataset contains no blank node. Preserve original canonicalization for every dataset containing any blank node.",
+    "files": {
+      "SKILLS-depo/ontology/scripts/ontology_rdf.py": "426b411a6e0746c563cd4be1293c997fc2ffc5ce619fdb248f3853f2227db5e1",
+      "SKILLS-depo/ontology/tests/test_rdf_canonicalization.py": "c89bc0d83bc67a4050c15850ab411e024cd7e8a9c7108dd06df40a7661a91cfb"
+    },
+    "no_cache": true,
+    "blank_node_path_byte_identical": true,
+    "guard_shacl_supervisor_or_limit_changes": false
+  },
+  "checks": {
+    "focused_rdf_tests": "2 passed in 2.383 seconds",
+    "exact_original_repaired_rdf_comparison": "6 cases passed, quads and semantic hashes equal",
+    "original_required_deadline_case": "Passed unchanged in 3.895 seconds including fixture setup",
+    "deadline_suite": "All 4 existing tests passed unchanged in 10.996 seconds; actual v2 decision 2.1551 seconds",
+    "confinement": "All 10 source runtime recertification checks passed",
+    "previous_certificate_retained": "Verification/ontology-health-repairs/shacl/source-runtime/control_records/ontology/profile-setup/certifications/58f0000f40710c89f9d7d8da9cad70f4580d364552da7b573345d1fd370db38e.json"
+  },
+  "runtime": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/shacl/source-runtime/.venv-ontology-standards/bin/python",
+  "limitations": "Source-stage disposable fixtures only; root adoption and final live owning workflows remain host work. Host addressed the separate external-authoring graph observation; final positive deadline case passed with that updated engine.",
+  "stopping_condition": "Measured correction implemented within granted scope, exact identity controls and unchanged required deadline suite pass; worker source and new tests frozen.",
+  "integration_followup": {
+    "host_change": "Host included external authored metadata in both explicit guard dataset selections.",
+    "final_guard_sha256": "f42506f6dde32f74a24c00cc1d0e046a12004fa9d03f00a5a49131607677442a",
+    "verification": "Original positive deadline case rerun using the latest host guard engine; passed. See final-engine-positive-case.log. Host owns new actual external-metadata control and final source suite."
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "browser": "Codex in-app browser",
+  "evidence": [
+    {
+      "path": "Verification/ontology-second-release/browser-evidence/published-proposal.json",
+      "sha256": "65fd830df2578eeb7ae6e22879614ba3636ffd2535cfaaa0359781ab5e9d2fe9"
+    },
+    {
+      "path": "Verification/ontology-second-release/browser-evidence/inference.json",
+      "sha256": "a201d9e5afa12bd30f0acf35eec1358d8b4bd26995cb727923a3b39d8a2d9779"
+    },
+    {
+      "path": "Verification/ontology-second-release/browser-evidence/inferred-query.json",
+      "sha256": "17bf29edf9277f4472243b325998ee0308ec382fcce4637fa67cc98e8c7baf23"
+    },
+    {
+      "path": "Verification/ontology-second-release/browser-evidence/real-service-negative-probes.json",
+      "sha256": "5b27562953adb4cc3264b14d8a264b3a0776455673c8beca4b67bce94dde42f0"
+    },
+    {
+      "path": "Verification/ontology-second-release/browser-evidence/unsafe-label-draft.json",
+      "sha256": "4a49f88074601f1e74377db48ff9c584fbae038bb190590345fd89899767f95c"
+    },
+    {
+      "path": "Verification/ontology-second-release/browser-evidence/ui-observations.json",
+      "sha256": "ca2fb2955806ccecf3414fe44cf44eaea0c0a7258bc50ea43015028b9aa89810"
+    }
+  ],
+  "guard": {
+    "action_id": "urn:sys4ai:ontology:action:ontology:publish",
+    "authorization": "retained_in_owning_helper",
+    "lock_rechecked": true,
+    "request_sha256": "15ba9bb0d431fe4fab2cb714ad5193d3aaa5bece01f03fa4ec58a0acbd0eb32a",
+    "semantic_status": "conformant"
+  },
+  "limits": [
+    "Browser screenshots were inspected through CUA; its content-export command is unsupported. No screenshot file is claimed.",
+    "HTTP and synthetic fixture tests are labeled separately from actual native/browser evidence."
+  ],
+  "native_generation": {
+    "evidence": "Verification/ontology-second-release/generation-acceptance.json",
+    "proposal_id": "ONTPROP-16ca267865ae4434aaeda32d064bbed2"
+  },
+  "observation_tool": "mcp__cua_repl.js",
+  "observations": [
+    {
+      "case": "session-isolation",
+      "evidence": "CUA author tabs4/5 on port52431 remained usable after a browsing-only tab6 connected on port52432. The prior shared-cookie failure was fixed and independently regressed.",
+      "status": "passed"
+    },
+    {
+      "case": "keyboard-alias-search",
+      "evidence": "Filled verification bundle and pressed Enter; exactly one result, Release evidence bundle.",
+      "status": "passed"
+    },
+    {
+      "case": "concept-and-relation",
+      "evidence": "Inspector showed the generated sourced definition and ReleaseEvidenceBundle subtypeOf Artifact, plus equivalent list and graph controls.",
+      "status": "passed"
+    },
+    {
+      "case": "invalid-draft",
+      "evidence": "Browser form saved r1 with an empty definition; real validation showed missing_metadata and SHACL violation; no canonical publication occurred.",
+      "status": "passed"
+    },
+    {
+      "case": "revision-and-conflict",
+      "evidence": "Tab4 saved corrected r2. Tab5 stale save was rejected and retained its exact pending definition text.",
+      "status": "passed"
+    },
+    {
+      "case": "reject-and-reload",
+      "evidence": "Rejected r2 exposed no Publish control. Reload retained the same identity and rejected state. Explicit reopen and revalidation preceded review.",
+      "status": "passed"
+    },
+    {
+      "case": "review-publish-reopen",
+      "evidence": "Inspected exact before/after diff, accepted exact review, clicked Publish reviewed change; UI reported Published and reopened the canonical result. Receipt has current actor and conformant under-lock semantic guard.",
+      "status": "passed"
+    },
+    {
+      "case": "proof-and-query",
+      "evidence": "Expanded cax-sco proof with both sourced premises; selected inferred graph, ran actual SPARQL ASK, observed answer true and complete true.",
+      "status": "passed"
+    },
+    {
+      "case": "browsing-only",
+      "evidence": "Tab6 displayed Browsing session, Create a draft disabled, no Accept/Publish/Revise controls. Separate actual HTTP publication attempt returned403 publication_unavailable with unchanged canonical hash.",
+      "status": "passed"
+    },
+    {
+      "case": "visual-and-responsive",
+      "evidence": "Actual screenshots inspected review columns and non-graph concept view. Narrow tab6 measured clientWidth500, scrollWidth500, innerWidth520. The browser minimum prevented claiming a390-pixel run. Viewport override reset.",
+      "status": "passed"
+    },
+    {
+      "case": "source-text-execution",
+      "proposal_id": "ONTPROP-42a75637305143d1949892f255eb65b0",
+      "status": "passed",
+      "evidence": "Actual CUA tab6 displayed the literal img/onerror label in a draft semantic diff, document.title stayed Ontology workbench · Sys4AI, and the review contained zero img elements. Probe was not published."
+    },
+    {
+      "case": "native-proposal-attribution",
+      "status": "passed",
+      "evidence": "Actual CUA tab6 reopened native proposal ONTPROP-16ca267865ae4434aaeda32d064bbed2 revision2 and expanded source/generator attribution: actual native run, ONTGEN-native-release-002, exact request/result hashes, settings explicitly unobserved."
+    }
+  ],
+  "project_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-second-release/fixtures/generation-native",
+  "published_operation": "ONTOP-c0ae15407f28436d8ed7efa43b75ee9e",
+  "published_proposal": "ONTPROP-7644b491e5044aa2be747e647cb3fd6d",
+  "published_sha256": "d698139b568200c5d45fce11543504cc4181bcef6c8c7596df0a0b5d525113b6",
+  "schema_version": 1,
+  "status": "passed",
+  "unsafe_probe_proposal": "ONTPROP-42a75637305143d1949892f255eb65b0",
+  "installed_cli_readonly_session": true
+}

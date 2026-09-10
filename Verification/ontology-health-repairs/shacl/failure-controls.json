@@ -1,0 +1,250 @@
+{
+  "status": "pass",
+  "full_graph_controls": {
+    "full_graph_timeout": {
+      "status": "timeout",
+      "complete": false,
+      "diagnostics": [
+        {
+          "code": "timeout",
+          "message": "Worker time budget expired."
+        }
+      ],
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 67338240,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 0,
+        "elapsed_seconds": 1.0068,
+        "exit_code": -9,
+        "network_allowed": false,
+        "project_files_readable": false
+      }
+    },
+    "full_graph_cancel": {
+      "status": "cancelled",
+      "complete": false,
+      "diagnostics": [
+        {
+          "code": "cancelled",
+          "message": "Request was cancelled."
+        }
+      ],
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 54083584,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 0,
+        "elapsed_seconds": 0.2005,
+        "exit_code": -9,
+        "network_allowed": false,
+        "project_files_readable": false
+      }
+    }
+  },
+  "certification_checks": {
+    "file_denied": true,
+    "network_denied": true,
+    "parser_file_denied": true,
+    "parser_network_denied": true,
+    "memory_terminated": true,
+    "timeout_terminated": true,
+    "cancelled": true,
+    "malformed_ipc": true,
+    "worker_failure": true,
+    "output_bounded": true
+  },
+  "certification_observations": {
+    "file": {
+      "complete": true,
+      "denied": true,
+      "diagnostics": [],
+      "status": "ok",
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 57835520,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 0,
+        "elapsed_seconds": 0.3309,
+        "exit_code": 0,
+        "network_allowed": false,
+        "project_files_readable": false
+      }
+    },
+    "network": {
+      "complete": true,
+      "denied": true,
+      "diagnostics": [],
+      "status": "ok",
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 56426496,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 0,
+        "elapsed_seconds": 0.324,
+        "exit_code": 0,
+        "network_allowed": false,
+        "project_files_readable": false
+      }
+    },
+    "parser_file": {
+      "complete": true,
+      "denied": true,
+      "diagnostics": [],
+      "exception": "PermissionError",
+      "message": "[Errno 1] Operation not permitted: '/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/ontology-denial-81bzhcmf/sentinel.txt'",
+      "status": "ok",
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 55836672,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 0,
+        "elapsed_seconds": 0.3309,
+        "exit_code": 0,
+        "network_allowed": false,
+        "project_files_readable": false
+      }
+    },
+    "parser_network": {
+      "complete": true,
+      "denied": true,
+      "diagnostics": [],
+      "exception": "URLError",
+      "message": "<urlopen error [Errno 1] Operation not permitted>",
+      "status": "ok",
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 58294272,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 0,
+        "elapsed_seconds": 0.3322,
+        "exit_code": 0,
+        "network_allowed": false,
+        "project_files_readable": false
+      }
+    },
+    "memory": {
+      "status": "memory_limit",
+      "complete": false,
+      "diagnostics": [
+        {
+          "code": "memory_limit",
+          "message": "Worker exceeded its supervised resident-memory budget."
+        }
+      ],
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 537673728,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 802816,
+        "elapsed_seconds": 0.9023,
+        "exit_code": -9,
+        "network_allowed": false,
+        "project_files_readable": false
+      }
+    },
+    "timeout": {
+      "status": "timeout",
+      "complete": false,
+      "diagnostics": [
+        {
+          "code": "timeout",
+          "message": "Worker time budget expired."
+        }
+      ],
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 57425920,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 0,
+        "elapsed_seconds": 1.0028,
+        "exit_code": -9,
+        "network_allowed": false,
+        "project_files_readable": false
+      }
+    },
+    "cancel": {
+      "status": "cancelled",
+      "complete": false,
+      "diagnostics": [
+        {
+          "code": "cancelled",
+          "message": "Request was cancelled."
+        }
+      ],
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 51757056,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 0,
+        "elapsed_seconds": 0.2069,
+        "exit_code": -9,
+        "network_allowed": false,
+        "project_files_readable": false
+      }
+    },
+    "malformed": {
+      "status": "malformed_ipc",
+      "complete": false,
+      "diagnostics": [
+        {
+          "code": "malformed_ipc",
+          "message": "Worker returned invalid JSON."
+        }
+      ],
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 57425920,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 0,
+        "elapsed_seconds": 0.3389,
+        "exit_code": 0,
+        "network_allowed": false,
+        "project_files_readable": false
+      }
+    },
+    "failure": {
+      "status": "worker_failure",
+      "complete": false,
+      "diagnostics": [
+        {
+          "code": "worker_failure",
+          "message": "Restricted worker failed; no result is trusted."
+        }
+      ],
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 57229312,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 0,
+        "elapsed_seconds": 0.3098,
+        "exit_code": 17,
+        "network_allowed": false,
+        "project_files_readable": false
+      },
+      "stderr": ""
+    },
+    "output": {
+      "status": "output_limit",
+      "complete": false,
+      "diagnostics": [
+        {
+          "code": "output_limit",
+          "message": "Worker output exceeded its bounded IPC channel."
+        }
+      ],
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 57802752,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 0,
+        "elapsed_seconds": 0.3034,
+        "exit_code": -9,
+        "network_allowed": false,
+        "project_files_readable": false
+      }
+    }
+  },
+  "focused_regression_log": "focused-tests.log",
+  "integration_boundary": "Shared guard owner/deadline tests are executed by the host integrated source acceptance; this worker never invokes a guarded owner."
+}

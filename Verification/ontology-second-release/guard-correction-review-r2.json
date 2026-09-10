@@ -1,0 +1,324 @@
+{
+  "addressed_findings": [
+    {
+      "evidence": "Actual owning observations replace caller-supplied semantic facts. Delivered selected-action SHACL constrains target/input type, concrete installed capability, governance, current identity/revision and lifecycle edges. Eight natural-invalid family cases use unchanged delivered rules and actual SHACL; no mutation continuation is invoked. Repeating the original invalid-state probe on the repaired root now returns guard_missing_evidence with exact action and contract diagnostics.",
+      "id": "REVIEW-001",
+      "status": "addressed_on_repaired_installed_root"
+    }
+  ],
+  "correction_report": {
+    "path": "Verification/ontology-second-release/guard-semantics-correction.json",
+    "sha256": "6bf2fa13a7a964970c62607823f871cb5a229edbf6cfbad8607f34083f79f368"
+  },
+  "files_changed": [
+    "Verification/ontology-second-release/guard-correction-review.json"
+  ],
+  "inspected_source_versions": [
+    {
+      "current_matches_inspected": true,
+      "path": "ONTOLOGY-depo/actions/contracts-v1.json",
+      "sha256": "ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8"
+    },
+    {
+      "current_matches_inspected": true,
+      "path": "ONTOLOGY-depo/actions/action-shapes-v1.ttl",
+      "sha256": "03a84a21c38cf5e6da560d1a4516a51941a86f3e93a5751b7cf3e2e30c06ee36"
+    },
+    {
+      "current_matches_inspected": true,
+      "path": "SKILLS-depo/ontology/scripts/ontology_guards.py",
+      "sha256": "15251f5662731c4dfb998a086337e9f3607fa3d2fb685871daf54c50756e5125"
+    },
+    {
+      "current_matches_inspected": true,
+      "path": "SKILLS-depo/ontology/scripts/ontology_guard_setup.py",
+      "sha256": "1cd332edc0775021f58df4bb493a34d4caaf4f71a904bcf2acb21adefbafacbf"
+    },
+    {
+      "current_matches_inspected": true,
+      "path": "SKILLS-depo/ontology/tests/test_guard_engine.py",
+      "sha256": "5bc156ae72a0c42f7de2a3d38e8c67e444ea1a8c938978e099ca2688e2b39bde"
+    },
+    {
+      "current_matches_inspected": true,
+      "path": "SKILLS-depo/ontology/tests/test_guarded_dispatch.py",
+      "sha256": "a36e6e79754b6d38a587574b9623ad1b3a7b28be50599f004a444d5bc7502201"
+    },
+    {
+      "current_matches_inspected": true,
+      "path": "SKILLS-depo/ontology/tests/test_action_semantics.py",
+      "sha256": "197ed70353163a94ba19fb5a51dc80b00e91ac8f83d11a7a4515f4997edd3e7f"
+    },
+    {
+      "current_matches_inspected": true,
+      "path": "SKILLS-depo/ontology/references/action-guards.md",
+      "sha256": "b85309068ce1bfcaafdf953f1d86cda221db60ef7c4685034b0feeb7bac1cbfe"
+    }
+  ],
+  "installed_root_probe": {
+    "arguments": {
+      "_semantic_state": {
+        "currentState": "completed",
+        "nextState": "not-a-task-state",
+        "targetIdentity": "urn:sys4ai:ontology:core:Artifact",
+        "targetRevision": -1
+      }
+    },
+    "engine_sha256": "15251f5662731c4dfb998a086337e9f3607fa3d2fb685871daf54c50756e5125",
+    "family": "task",
+    "method": "Read-only begin_action, using a fresh process after ROOT_REPAIR_READY",
+    "operation": "response_transaction",
+    "result": {
+      "action_id": "urn:sys4ai:ontology:action:task:response_transaction",
+      "code": "guard_missing_evidence",
+      "contract": {
+        "path": "reference-assets/ONTOLOGY-depo/actions/contracts-v1.json",
+        "sha256": "ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8"
+      },
+      "owning_action_dispatched": false,
+      "rejected": true,
+      "target_unchanged": true
+    },
+    "targets": [
+      "ONTOLOGY/modules/project/project.jsonld"
+    ]
+  },
+  "limits": [
+    "No owning mutation, dependency setup, service action, source edit, canonical Task/ontology/memory edit, or Git operation was performed by this reviewer.",
+    "Actual root repeat probe rejects invented facts before backend invocation; actual typed SHACL failures are demonstrated by the exact R2 installed-helper matrix and focused source tests.",
+    "The reported time-budget defect is a current code/configuration finding, not a claimed measured30-second live run.",
+    "Full release suite, browser replay, final manifests and project-level completion remain host-owned.",
+    "Original independent-review.json remains preserved; this report closes only its original finding and records the new bounded issue."
+  ],
+  "observed_at": "2026-09-10T15:29:45.632514+00:00",
+  "original_review": {
+    "matches_original": true,
+    "path": "Verification/ontology-second-release/independent-review.json",
+    "sha256": "e12719b8940f43a796858af38ba32a3807bcb82fbddea2be11e861a35dda90d5"
+  },
+  "repair_receipts": [
+    {
+      "all_reopened_match": true,
+      "contract": {
+        "path": "reference-assets/ONTOLOGY-depo/actions/contracts-v1.json",
+        "sha256": "ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8"
+      },
+      "engine": {
+        "path": ".agents/skills/ontology/scripts/ontology_guards.py",
+        "sha256": "15251f5662731c4dfb998a086337e9f3607fa3d2fb685871daf54c50756e5125"
+      },
+      "files": [
+        {
+          "actual_sha256": "ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8",
+          "expected_sha256": "ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8",
+          "path": "reference-assets/ONTOLOGY-depo/actions/contracts-v1.json"
+        },
+        {
+          "actual_sha256": "03a84a21c38cf5e6da560d1a4516a51941a86f3e93a5751b7cf3e2e30c06ee36",
+          "expected_sha256": "03a84a21c38cf5e6da560d1a4516a51941a86f3e93a5751b7cf3e2e30c06ee36",
+          "path": "reference-assets/ONTOLOGY-depo/actions/action-shapes-v1.ttl"
+        },
+        {
+          "actual_sha256": "15251f5662731c4dfb998a086337e9f3607fa3d2fb685871daf54c50756e5125",
+          "expected_sha256": "15251f5662731c4dfb998a086337e9f3607fa3d2fb685871daf54c50756e5125",
+          "path": ".agents/skills/ontology/scripts/ontology_guards.py"
+        },
+        {
+          "actual_sha256": "1cd332edc0775021f58df4bb493a34d4caaf4f71a904bcf2acb21adefbafacbf",
+          "expected_sha256": "1cd332edc0775021f58df4bb493a34d4caaf4f71a904bcf2acb21adefbafacbf",
+          "path": ".agents/skills/ontology/scripts/ontology_guard_setup.py"
+        },
+        {
+          "actual_sha256": "62a6101bb73aa576262f575c558c6125b9ffa8d818a468ab81894392989a0353",
+          "expected_sha256": "62a6101bb73aa576262f575c558c6125b9ffa8d818a468ab81894392989a0353",
+          "path": "control_records/ontology/guard-bootstrap/ONTGUARD-typed-root-verification.json"
+        },
+        {
+          "actual_sha256": "4a723cda6e0aeb152985d1fd89d66aa99ddde7ddfa887451629e5ffed89ff3c5",
+          "expected_sha256": "4a723cda6e0aeb152985d1fd89d66aa99ddde7ddfa887451629e5ffed89ff3c5",
+          "path": "control_records/ontology/guard-bootstrap/ONTGUARD-typed-root-20260910-bootstrap.json"
+        },
+        {
+          "actual_sha256": "88d812d3a5b53d78f73f879b938ba301cbd53f19b3b967a0a65227587320cba8",
+          "expected_sha256": "88d812d3a5b53d78f73f879b938ba301cbd53f19b3b967a0a65227587320cba8",
+          "path": "ontology-advanced.yaml"
+        }
+      ],
+      "guard_enabled": true,
+      "receipt": "Verification/ontology-second-release/root-guard-correction-receipt.json",
+      "receipt_sha256": "d0ee0975458957fca273b4c8271c471c1ca0c9d4c3f9f4783adf18f5ad1bd50e",
+      "setup": {
+        "path": ".agents/skills/ontology/scripts/ontology_guard_setup.py",
+        "sha256": "1cd332edc0775021f58df4bb493a34d4caaf4f71a904bcf2acb21adefbafacbf"
+      },
+      "status": "complete"
+    },
+    {
+      "all_reopened_match": true,
+      "contract": {
+        "path": "reference-assets/ONTOLOGY-depo/actions/contracts-v1.json",
+        "sha256": "ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8"
+      },
+      "engine": {
+        "path": ".agents/skills/ontology/scripts/ontology_guards.py",
+        "sha256": "15251f5662731c4dfb998a086337e9f3607fa3d2fb685871daf54c50756e5125"
+      },
+      "files": [
+        {
+          "actual_sha256": "ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8",
+          "expected_sha256": "ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8",
+          "path": "reference-assets/ONTOLOGY-depo/actions/contracts-v1.json"
+        },
+        {
+          "actual_sha256": "03a84a21c38cf5e6da560d1a4516a51941a86f3e93a5751b7cf3e2e30c06ee36",
+          "expected_sha256": "03a84a21c38cf5e6da560d1a4516a51941a86f3e93a5751b7cf3e2e30c06ee36",
+          "path": "reference-assets/ONTOLOGY-depo/actions/action-shapes-v1.ttl"
+        },
+        {
+          "actual_sha256": "15251f5662731c4dfb998a086337e9f3607fa3d2fb685871daf54c50756e5125",
+          "expected_sha256": "15251f5662731c4dfb998a086337e9f3607fa3d2fb685871daf54c50756e5125",
+          "path": ".agents/skills/ontology/scripts/ontology_guards.py"
+        },
+        {
+          "actual_sha256": "1cd332edc0775021f58df4bb493a34d4caaf4f71a904bcf2acb21adefbafacbf",
+          "expected_sha256": "1cd332edc0775021f58df4bb493a34d4caaf4f71a904bcf2acb21adefbafacbf",
+          "path": ".agents/skills/ontology/scripts/ontology_guard_setup.py"
+        },
+        {
+          "actual_sha256": "62a6101bb73aa576262f575c558c6125b9ffa8d818a468ab81894392989a0353",
+          "expected_sha256": "62a6101bb73aa576262f575c558c6125b9ffa8d818a468ab81894392989a0353",
+          "path": "control_records/ontology/guard-bootstrap/ONTGUARD-typed-combined-verification.json"
+        },
+        {
+          "actual_sha256": "382990e4243886720a42dfeec37093b0453aa686f43696372573a176835c9f61",
+          "expected_sha256": "382990e4243886720a42dfeec37093b0453aa686f43696372573a176835c9f61",
+          "path": "control_records/ontology/guard-bootstrap/ONTGUARD-typed-combined-20260910-bootstrap.json"
+        },
+        {
+          "actual_sha256": "d6d73cd54a2793a4cfc4db75102d31523bf3172008f63259dae1112577d6b230",
+          "expected_sha256": "d6d73cd54a2793a4cfc4db75102d31523bf3172008f63259dae1112577d6b230",
+          "path": "ontology-advanced.yaml"
+        }
+      ],
+      "guard_enabled": true,
+      "receipt": "Verification/ontology-second-release/combined-guard-correction-receipt.json",
+      "receipt_sha256": "cf7100eb8790e03211e06034ba15986edaf7180d60b30cc7897b64f789eca17d",
+      "setup": {
+        "path": ".agents/skills/ontology/scripts/ontology_guard_setup.py",
+        "sha256": "1cd332edc0775021f58df4bb493a34d4caaf4f71a904bcf2acb21adefbafacbf"
+      },
+      "status": "complete"
+    }
+  ],
+  "review_revision": 2,
+  "reviewer": "/root/final_release_review",
+  "role": {
+    "agents": {
+      "path": "Roles/project-sub-agent/AGENTS.md",
+      "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+    },
+    "catalog": {
+      "path": "Verification/ontology-second-release/guard-recheck-role-catalog.json",
+      "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397"
+    },
+    "definition": {
+      "path": "Roles/project-sub-agent/ROLE.md",
+      "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+    },
+    "settings": "Native full-history inheritance; no model or effort override; no nested delegation"
+  },
+  "schema_version": 1,
+  "scope": {
+    "additional": "New v2 selected-candidate conformance, formal consistency and accepted extension/shape partial recovery",
+    "finding": "REVIEW-001",
+    "not_release_acceptance": true,
+    "requirements": [
+      "REQ-022",
+      "REQ-023",
+      "REQ-024",
+      "REQ-025",
+      "REQ-026",
+      "REQ-042"
+    ]
+  },
+  "source_manifest": {
+    "path": "Verification/ontology-second-release/guard-semantics-correction-files-r2.json",
+    "sha256": "f8b6d0796762662ecf551fea3ee86b9ea5ebbffb8b59f716cfc1fe31bea41a33"
+  },
+  "status": "changes_required",
+  "stopping_condition": "Bounded R2 recheck complete; source correction and actual repaired-root result recorded, remaining deadline defect returned to host.",
+  "tests_inspected": [
+    {
+      "observed": "10 actual-backend semantic tests passed, including invalid lifecycle/provider/generation, v2 selected-shape failure, unsupported/inconsistent candidates and guarded partial extension+shape recovery.",
+      "path": "Verification/ontology-second-release/guard-semantics-correction-semantics-r2.log",
+      "sha256": "63b57fd370d5d4d54684d459f99b6b2248941e29591d75909e6d07bcdf64b8cc"
+    },
+    {
+      "observed": "9 focused decision-unit tests passed, including bounded malformed backend diagnostics; mocked backend tests remain unit evidence.",
+      "path": "Verification/ontology-second-release/guard-semantics-correction-engine-r2.log",
+      "sha256": "4fbc402c7852c6df1807060b8bbc39244d919ca9444338543c5372998eef62c1"
+    },
+    {
+      "observed": "Exact R2 engine15251f... actual-backend matrix:48 cases across8 families; all natural-invalid cases returned violation/complete and no underlying continuation; positive helper results reopened.",
+      "path": "control_records/ontology/guard-bootstrap/ONTGUARD-typed-root-verification.json",
+      "sha256": "62a6101bb73aa576262f575c558c6125b9ffa8d818a468ab81894392989a0353"
+    },
+    {
+      "observed": "Retained old-rules repair tested in disposable fixture with an actual backend and explicitly synthetic native grant; actual root/combined receipts inspected separately.",
+      "path": "Verification/ontology-second-release/guard-semantics-correction-migration.json",
+      "sha256": "c6ff10690305090c14e9c8e0ac99332de394494a8c8eaa86b6fec51a01ce56e0"
+    }
+  ],
+  "unresolved_findings": [
+    {
+      "actual_root_limits": {
+        "guard_seconds": 5,
+        "query_seconds": 10,
+        "reasoning_seconds": 30
+      },
+      "completion_blocking": true,
+      "consequence": "A v2 guarded request can spend the general backend budgets before its final five-second action check. This violates the plan-selected at-most-five-second guard evaluation bound; no semantic pass or unauthorized mutation was observed from this gap.",
+      "id": "GUARD-RECHECK-002",
+      "observation": "The v2 prechecks call standards.validate and standards.infer without limits or cancellation. The selected-shape dataset call also omits limits. ontology_standards.call therefore selects current general query/reasoning limits (10 and30 seconds at the inspected root). Only final action SHACL uses a fixed5-second request. There is no shared guard deadline in the inspected Decision/begin_action path, and configured lower guard_seconds is not consumed there.",
+      "observed_code_calls": [
+        {
+          "function": "validate",
+          "limits_argument": null,
+          "line": 408,
+          "path": "SKILLS-depo/ontology/scripts/ontology_guards.py"
+        },
+        {
+          "function": "infer",
+          "limits_argument": null,
+          "line": 416,
+          "path": "SKILLS-depo/ontology/scripts/ontology_guards.py"
+        },
+        {
+          "function": "dataset",
+          "limits_argument": null,
+          "line": 593,
+          "path": "SKILLS-depo/ontology/scripts/ontology_guards.py"
+        },
+        {
+          "function": "validate",
+          "limits_argument": {
+            "query_seconds": 5,
+            "reasoning_seconds": 5
+          },
+          "line": 597,
+          "path": "SKILLS-depo/ontology/scripts/ontology_guards.py"
+        }
+      ],
+      "plan_basis": [
+        "DEC-005",
+        "TASK-004",
+        "REQ-024",
+        "REQ-042"
+      ],
+      "priority": 2,
+      "requested_change": "Enforce the current selected guard budget across the complete guard evaluation, including candidate SHACL, inference and selected-shape projection. Forward a remaining deadline/cancellation budget to every backend phase, reject expiration before dispatch, and add a bounded regression proving no continuation after the total budget expires.",
+      "title": "New candidate validation runs outside the selected guard time budget",
+      "verification_level": "Confirmed from exact installed/source call paths and current numeric configuration; no deliberately slow live operation was launched."
+    }
+  ]
+}

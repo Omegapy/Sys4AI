@@ -1,0 +1,45 @@
+test_guard_schema_uses_actual_maintenance_owner_namespace (test_health_evidence.HealthEvidenceTests.test_guard_schema_uses_actual_maintenance_owner_namespace) ... 
+  test_guard_schema_uses_actual_maintenance_owner_namespace (test_health_evidence.HealthEvidenceTests.test_guard_schema_uses_actual_maintenance_owner_namespace) (operation='reindex') ... ERROR
+  test_guard_schema_uses_actual_maintenance_owner_namespace (test_health_evidence.HealthEvidenceTests.test_guard_schema_uses_actual_maintenance_owner_namespace) (operation='recover_reindex') ... ERROR
+test_guard_schema_uses_actual_maintenance_owner_namespace (test_health_evidence.HealthEvidenceTests.test_guard_schema_uses_actual_maintenance_owner_namespace) ... ERROR
+
+======================================================================
+ERROR: test_guard_schema_uses_actual_maintenance_owner_namespace (test_health_evidence.HealthEvidenceTests.test_guard_schema_uses_actual_maintenance_owner_namespace) (operation='reindex')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/tests/test_health_evidence.py", line 521, in test_guard_schema_uses_actual_maintenance_owner_namespace
+    facts = guard.schema_check(namespace, "memory", operation, self.root, {"operation_id": identity})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_guards.py", line 846, in schema_check
+    config = namespace["load_config"](root)
+             ~~~~~~~~~^^^^^^^^^^^^^^^
+KeyError: 'load_config'
+
+======================================================================
+ERROR: test_guard_schema_uses_actual_maintenance_owner_namespace (test_health_evidence.HealthEvidenceTests.test_guard_schema_uses_actual_maintenance_owner_namespace) (operation='recover_reindex')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/tests/test_health_evidence.py", line 521, in test_guard_schema_uses_actual_maintenance_owner_namespace
+    facts = guard.schema_check(namespace, "memory", operation, self.root, {"operation_id": identity})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_guards.py", line 846, in schema_check
+    config = namespace["load_config"](root)
+             ~~~~~~~~~^^^^^^^^^^^^^^^
+KeyError: 'load_config'
+
+======================================================================
+ERROR: test_guard_schema_uses_actual_maintenance_owner_namespace (test_health_evidence.HealthEvidenceTests.test_guard_schema_uses_actual_maintenance_owner_namespace)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/tests/test_health_evidence.py", line 534, in test_guard_schema_uses_actual_maintenance_owner_namespace
+    self.assertFalse(guard.schema_check(namespace, "memory", "recover_reindex", self.root, {"operation_id": identity})["input_valid"])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_guards.py", line 846, in schema_check
+    config = namespace["load_config"](root)
+             ~~~~~~~~~^^^^^^^^^^^^^^^
+KeyError: 'load_config'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.016s
+
+FAILED (errors=3)

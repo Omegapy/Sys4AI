@@ -1,0 +1,227 @@
+{
+  "scenario": "task",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology.py",
+    "--project-root",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI",
+    "term",
+    "Task"
+  ],
+  "returncode": 0,
+  "result": {
+    "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+    "context": {
+      "config_sha256": "de3973b748afa7dbce5aa74e049cc02bbdc9c445345fb047f96c28317f411d44",
+      "generator_version": "1.0.0",
+      "modules": [
+        {
+          "id": "sys4ai-core",
+          "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+          "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+          "version": "1.0.0"
+        }
+      ],
+      "profile_version": "1.0.0",
+      "project_id": "sys4ai-depot",
+      "snapshot_sha256": "1d5f7f78e4f0eb4929f4dfae1ff11dc623e4690959652c9903c6f145f65b8c24"
+    },
+    "diagnostics": [],
+    "limits": {
+      "hops": 2,
+      "limit": 20,
+      "max_bytes": 32000
+    },
+    "mutated": false,
+    "operation": "term",
+    "project_id": "sys4ai-depot",
+    "query": "Task",
+    "results": [
+      {
+        "@id": "urn:sys4ai:ontology:core:Task",
+        "@type": [
+          "urn:sys4ai:ontology:core:OntologyConcept"
+        ],
+        "aliases": [
+          "Sys4AI Task"
+        ],
+        "bindings": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-Task",
+            "@type": [
+              "urn:sys4ai:ontology:core:SourceBinding"
+            ],
+            "binding_type": "artifact",
+            "definition": "A governed Task requires explicit activation and remains separate from a TRD, implementation plan, native goal and conversation.",
+            "entity": "urn:sys4ai:ontology:core:Task",
+            "fact_kind": "asserted",
+            "kind": "binding",
+            "label": "Source binding binding-concept-Task",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "section:Intake and mode",
+                "path": ".agents/skills/task/SKILL.md",
+                "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+              }
+            ]
+          }
+        ],
+        "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/33",
+        "definition": "A canonical Sys4AI managed work record with definition of done, execution state and confirmed owner. A Task is distinct from a TRD, implementation plan, native goal and Codex conversation. Document approval does not activate a Task or establish implementation completion.",
+        "examples": [
+          "A canonical task.json with a definition of done and confirmed manager"
+        ],
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "kind": "concept",
+        "label": "Task",
+        "lifecycle": "approved",
+        "match_reason": "preferred_label",
+        "match_score": 1,
+        "module": "sys4ai-core",
+        "module_version": "1.0.0",
+        "non_examples": [
+          "A Codex conversation",
+          "An approved TRD",
+          "A native goal"
+        ],
+        "relationships": [
+          {
+            "@id": "urn:sys4ai:ontology:core:relation-1",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "Task relatedTo TRD",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "object": "urn:sys4ai:ontology:core:TRD",
+            "predicate": "urn:sys4ai:ontology:core:relatedTo",
+            "qualifiers": {
+              "scope": "conceptual"
+            },
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:core:Task"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:relation-2",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "Task relatedTo MemoryRecord",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "object": "urn:sys4ai:ontology:core:MemoryRecord",
+            "predicate": "urn:sys4ai:ontology:core:relatedTo",
+            "qualifiers": {
+              "scope": "conceptual"
+            },
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:core:Task"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:core:relation-4",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "TaskManager manages Task",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "object": "urn:sys4ai:ontology:core:Task",
+            "predicate": "urn:sys4ai:ontology:core:manages",
+            "qualifiers": {
+              "scope": "conceptual"
+            },
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:core:TaskManager"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:manager-manages-task",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "A confirmed Task manager coordinates its assigned governed Task",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "A confirmed Task manager coordinates its assigned governed Task",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:core:Task",
+            "predicate": "urn:sys4ai:ontology:core:manages",
+            "sources": [
+              {
+                "locator": "section:Required first reads",
+                "path": "Roles/task-manager/AGENTS.md",
+                "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+          }
+        ],
+        "scope_note": "Distinguish requirements approval, plan readiness, Task activation, implementation, verification and validation. These states require separate evidence.",
+        "source_status": [
+          {
+            "actual_sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121",
+            "diagnostic": null,
+            "locator": "section:Intake and mode",
+            "path": ".agents/skills/task/SKILL.md",
+            "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121",
+            "status": "current"
+          },
+          {
+            "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "diagnostic": null,
+            "locator": "section:Task",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Task",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+          }
+        ]
+      }
+    ],
+    "status": "ok",
+    "truncation": {
+      "available_results": 1,
+      "returned_results": 1,
+      "truncated": false
+    }
+  },
+  "stderr": ""
+}

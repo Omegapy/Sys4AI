@@ -12,6 +12,7 @@ import argparse
 import ast
 import fcntl
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -42,17 +43,21 @@ STARTER_FILES = {
 }
 IDENTITY = "project.json"
 RECORD = "control_records/project-setup.json"
-SETUP_CONTRACT = "governance-starter-v7"
+SETUP_CONTRACT = "governance-starter-v9"
+ONTOLOGY_CONTRACT = "governance-starter-v8"
+LEARNING_CONTRACT = "governance-starter-v7"
 CAPTURE_CONTRACT = "governance-starter-v6"
 MEMORY_CONTRACT = "governance-starter-v5"
-MEMORY_CONTRACTS = {MEMORY_CONTRACT, CAPTURE_CONTRACT, SETUP_CONTRACT}
-CAPTURE_CONTRACTS = {CAPTURE_CONTRACT, SETUP_CONTRACT}
-LEARNING_CONTRACTS = {SETUP_CONTRACT}
+MEMORY_CONTRACTS = {MEMORY_CONTRACT, CAPTURE_CONTRACT, LEARNING_CONTRACT, ONTOLOGY_CONTRACT, SETUP_CONTRACT}
+CAPTURE_CONTRACTS = {CAPTURE_CONTRACT, LEARNING_CONTRACT, ONTOLOGY_CONTRACT, SETUP_CONTRACT}
+LEARNING_CONTRACTS = {LEARNING_CONTRACT, ONTOLOGY_CONTRACT, SETUP_CONTRACT}
+ONTOLOGY_CONTRACTS = {ONTOLOGY_CONTRACT, SETUP_CONTRACT}
+ADVANCED_CONTRACTS = {SETUP_CONTRACT}
 LICENSE_CONTRACT = "governance-starter-v4"
 PRE_LICENSE_CONTRACT = "governance-starter-v3"
 LOWERCASE_CONTRACT = "governance-starter-v2"
 LEGACY_CONTRACT = "governance-starter-v1"
-ROLE_ROOTS = {SETUP_CONTRACT: "Roles", CAPTURE_CONTRACT: "Roles", MEMORY_CONTRACT: "Roles", LICENSE_CONTRACT: "Roles", PRE_LICENSE_CONTRACT: "Roles", LOWERCASE_CONTRACT: "roles",
+ROLE_ROOTS = {SETUP_CONTRACT: "Roles", ONTOLOGY_CONTRACT: "Roles", LEARNING_CONTRACT: "Roles", CAPTURE_CONTRACT: "Roles", MEMORY_CONTRACT: "Roles", LICENSE_CONTRACT: "Roles", PRE_LICENSE_CONTRACT: "Roles", LOWERCASE_CONTRACT: "roles",
               LEGACY_CONTRACT: "sub-agent-roles"}
 LICENSE_CONTRACTS = {LICENSE_CONTRACT, *MEMORY_CONTRACTS}
 LICENSE_FILES = {"LICENSE", "LICENSE-CODE", "LICENSE-DOCS"}
@@ -75,15 +80,45 @@ LEARNING_RESOLVER = LEARNING_SKILL + "/scripts/learning_contract.py"
 LEARNING_FILES = {LEARNING_ROOT + "/" + name for name in (
     "contract.json", "README.md", "policy.md", "review-contract.md", "assets/lesson-body-template.md")}
 LEARNING_TREES = (LEARNING_ROOT, LEARNING_SKILL)
+ONTOLOGY_MODULE = "ontology"
+ONTOLOGY_CONTEXT_SHA256 = "7dd394c9ed0bb5398781b690988403e7ae60f6f70195fed24088dd1ef8654d92"
+ONTOLOGY_ROOT = "reference-assets/ONTOLOGY-depo"
+ONTOLOGY_SKILL = ".agents/skills/ontology"
+ONTOLOGY_TREES = ("ONTOLOGY", ONTOLOGY_ROOT, ONTOLOGY_SKILL)
+ONTOLOGY_FILES = {"ontology.yaml", "ONTOLOGY/contexts/context-v1.jsonld",
+    "ONTOLOGY/modules/project/project.jsonld", "ONTOLOGY/bindings/bindings.jsonld",
+    *("ONTOLOGY/modules/sys4ai-core/1.0.0/" + name for name in
+      ("manifest.json", "core.jsonld", "context-v1.jsonld", "vocabulary-source.md", "competency.json"))}
+ONTOLOGY_REFERENCE_FILES = {ONTOLOGY_ROOT + "/" + name for name in
+    ("contract.json", "profile.md", "state-paths.md", "publication-and-recovery.md",
+     "contexts/context-v1.jsonld", "schema/record-v1.json")}
+ONTOLOGY_FILES |= ONTOLOGY_REFERENCE_FILES
+ONTOLOGY_HELPERS = {ONTOLOGY_SKILL + "/scripts/" + name for name in
+    ("ontology.py", "ontology_core.py", "ontology_modules.py", "ontology_validate.py", "ontology_build.py",
+     "ontology_publication.py", "ontology_authority.py", "ontology_lifecycle.py", "ontology_retrieval.py", "ontology_graph.py",
+     "ontology_wiki.py", "ontology_knowledge.py", "ontology_memory.py", "ontology_packet.py", "check_ontology.py")}
+ONTOLOGY_SKILL_RESOURCES = ONTOLOGY_HELPERS | {ONTOLOGY_SKILL + "/" + name for name in
+    ("SKILL.md", "README.md", "references/commands.md", "references/knowledge-routing.md",
+     "references/memory-integration.md", "references/task-integration.md", "references/verification.md")}
 COMPLETION_REFERENCE = ".agents/skills/memory/references/automatic-capture.md"
 # Supported pure inspectors are pinned with this initializer edition. Unknown
 # project customizations are preserved and never executed for assessment.
 LEARNING_INSPECTOR_SHA256 = "2d28d84bc560012ca7fa105155ed1081205de1c82bccabdda864790005ec8d8d"
 MEMORY_INSPECTOR_SHA256 = {
-    ".agents/skills/memory/scripts/memory_core.py": "a41175553ec3e4d81b7cede8cc26b81676eddb4a7a697db6c1a47aab5929d874",
+    ".agents/skills/memory/scripts/memory_core.py": "48592604ac950e32e4c80aab24edd2e90d26d09df1b6af912dcad24bbc490a54",
     ".agents/skills/memory/scripts/memory_paths.py": "5e7c01db65adf4296d97b166945a80a18875055a46811eeb30c701ab7040f7de",
 }
-SPECIALIZED_FILES = {"README.md", IDENTITY, "memory.yaml", "Roles/INDEX.md", "AGENTS.md"}
+# Earlier reviewed pure config validators remain usable for read-only assessment
+# of preserved editions; new Template source must use the current pin above.
+MEMORY_COMPATIBLE_INSPECTORS = {
+    ".agents/skills/memory/scripts/memory_core.py": {"a41175553ec3e4d81b7cede8cc26b81676eddb4a7a697db6c1a47aab5929d874"},
+}
+ROLE_INSPECTOR_SHA256 = {
+    "Roles": "b649dc368d9b4f2d8eec032aaf2ae28e08ff493bbaf07d20ef21a55a52fd0cb2",
+    "roles": "65f39e7f394b851e1b9018d896417eb67449406f73e32bd981ebe4ddbce37352",
+    "sub-agent-roles": "ed0bd7f33650afbed0808d6bb83f8a8be5bd0404294efbeb26dd95fba28e7368",
+}
+SPECIALIZED_FILES = {"README.md", IDENTITY, "memory.yaml", "ontology.yaml", "ontology-advanced.yaml", "Roles/INDEX.md", "AGENTS.md"}
 LICENSE_MARKER = re.compile(
     r"(?:licen[cs]e(?:s|[._-].+)?|copying(?:[._-].+)?|copyright(?:[._-].+)?|unlicense(?:[._-].+)?)",
     re.IGNORECASE,
@@ -131,6 +166,22 @@ RESERVED = {
     "sys4ai-template-project",
     "template",
 }
+
+_advanced_spec = importlib.util.spec_from_file_location("_sys4ai_initializer_advanced", Path(__file__).with_name("init_ontology_advanced.py"))
+ADVANCED = importlib.util.module_from_spec(_advanced_spec)
+_advanced_spec.loader.exec_module(ADVANCED)
+ADVANCED_MODULE = ADVANCED.MODULE
+_static_spec = importlib.util.spec_from_file_location("_sys4ai_initializer_static", Path(__file__).with_name("init_static_health.py"))
+STATIC = importlib.util.module_from_spec(_static_spec)
+_static_spec.loader.exec_module(STATIC)
+
+
+def _advanced(name, *args, **kwargs):
+    return getattr(ADVANCED, name)(types.SimpleNamespace(**globals()), *args, **kwargs)
+
+
+def _static(name, *args, **kwargs):
+    return getattr(STATIC, name)(types.SimpleNamespace(**globals()), *args, **kwargs)
 
 
 class InitializationError(RuntimeError):
@@ -469,6 +520,8 @@ def exact_role_root(root: Path, name: str, *, allow_absent: bool = False) -> Non
 @contextmanager
 def role_validator(raw: bytes, *, role_root: str = "Roles") -> Iterator[Any]:
     """Use the reviewed Template helper bytes, including its receipt validator."""
+    if sha(raw) != ROLE_INSPECTOR_SHA256.get(role_root):
+        raise InitializationError("unknown role inspector preserved without execution; select explicit compatible role helper adoption: " + ROLE_HELPER)
     module_name = "_initializer_role_catalog_" + sha(raw)
     helper = types.ModuleType(module_name)
     helper.__file__ = ROLE_HELPER
@@ -590,6 +643,11 @@ def template_sources(
         raise InitializationError("template lacks automatic memory capture support")
     if contract in LEARNING_CONTRACTS:
         validate_learning_sources(template, copied)
+    if contract in ONTOLOGY_CONTRACTS:
+        validate_ontology_sources(template, copied)
+    if contract in ADVANCED_CONTRACTS:
+        _advanced("validate_static", copied, neutral=True)
+        _static("validate_source", copied)
     renderer = file_bytes(template / README_RENDERER)
     return copied, origins, versions, renderer, policy
 
@@ -598,12 +656,15 @@ def required_starters(contract: str) -> set[str]:
     # Older receipts retain the file inventory of their original edition.
     return (STARTER_FILES | (LICENSE_FILES if contract in LICENSE_CONTRACTS else set())
             | (MEMORY_FILES if contract in MEMORY_CONTRACTS else set())
-            | (LEARNING_FILES if contract in LEARNING_CONTRACTS else set()))
+            | (LEARNING_FILES if contract in LEARNING_CONTRACTS else set())
+            | (ONTOLOGY_FILES if contract in ONTOLOGY_CONTRACTS else set())
+            | (ADVANCED.STARTERS if contract in ADVANCED_CONTRACTS else set()))
 
 
 def required_skills(contract: str) -> set[str]:
     return (REQUIRED_SKILLS | ({"memory"} if contract in MEMORY_CONTRACTS else set())
-            | ({LEARNING_MODULE} if contract in LEARNING_CONTRACTS else set()))
+            | ({LEARNING_MODULE} if contract in LEARNING_CONTRACTS else set())
+            | ({ONTOLOGY_MODULE} if contract in ONTOLOGY_CONTRACTS else set()))
 
 
 @contextmanager
@@ -652,9 +713,10 @@ def validate_learning_sources(template: Path, files: dict[str, bytes]) -> None:
             raise InitializationError("template learning interfaces or completion routing are incompatible: " + ", ".join(paths))
 
 
-def check_memory_inspectors(files: dict[str, bytes]) -> None:
+def check_memory_inspectors(files: dict[str, bytes], *, preserved: bool = False) -> None:
     for name, expected in MEMORY_INSPECTOR_SHA256.items():
-        if name not in files or sha(files[name]) != expected:
+        allowed = {expected} | (MEMORY_COMPATIBLE_INSPECTORS.get(name, set()) if preserved else set())
+        if name not in files or sha(files[name]) not in allowed:
             raise InitializationError("unknown memory inspector preserved without execution: " + name)
 
 
@@ -754,6 +816,12 @@ def source_snapshot(
                 binding_owned = owned_governance | {"SOUL.md", "AGENTS.md", "ROLE.md"}
         proposed["memory.yaml"] = specialize_memory(original["memory.yaml"], identity, memory_files,
             automatic=contract in CAPTURE_CONTRACTS, destination=destination, owned_governance=binding_owned)
+    if contract in ONTOLOGY_CONTRACTS:
+        proposed["ontology.yaml"] = specialize_ontology(original["ontology.yaml"], identity, proposed,
+            destination=destination, owned_governance=owned_governance | ({"AGENTS.md"} if proposed["AGENTS.md"] != original["AGENTS.md"] else set()))
+    if contract in ADVANCED_CONTRACTS:
+        proposed[ADVANCED.CONFIG] = _advanced("specialize", original[ADVANCED.CONFIG], identity, proposed,
+            destination=destination, owned_governance=owned_governance | ({"AGENTS.md"} if proposed["AGENTS.md"] != original["AGENTS.md"] else set()))
     records = [
         {
             "source": source.relative_to(depot).as_posix(),
@@ -850,8 +918,10 @@ def atomic_write(
         if expected is None:
             # Hard-link publication gives create-only semantics even if another
             # writer appears after the last check. The staging alias is removed.
+            _ontology_checkpoint(targets=False)
             os.link(staging, target, follow_symlinks=False)
         else:
+            _ontology_checkpoint(targets=False)
             os.replace(staging, target)
     finally:
         staging.unlink(missing_ok=True)
@@ -871,6 +941,7 @@ def template_read_lock(depot: Path) -> Iterator[None]:
             fcntl.flock(descriptor, fcntl.LOCK_SH | fcntl.LOCK_NB)
         except BlockingIOError as error:
             raise InitializationError("template update is active; retry initialization after it finishes") from error
+        _ontology_checkpoint()
         yield
     finally:
         os.close(descriptor)
@@ -889,6 +960,7 @@ def exclusive(lock: Path) -> Iterator[None]:
             fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError as error:
             raise InitializationError("an initializer operation is active; retry after its writer exits") from error
+        _ontology_checkpoint()
         yield
     finally:
         # Unlinking permits another writer to create and lock a different inode
@@ -1099,6 +1171,8 @@ def asset_plan(destination: Path, *, mode: str, proposed: dict[str, bytes],
                preserved_licenses: dict[str, str]
                ) -> tuple[dict[str, bytes], dict[str, str | None], dict[str, str]]:
     selected, before, preserved = {}, {}, {}
+    ontology_before = ontology_inventory(destination)
+    preserve_ontology = bool(ontology_before) and ontology_before != ontology_files_inventory(original)
     for name, raw in proposed.items():
         if name in LICENSE_FILES and preserved_licenses and safe(destination / name).is_dir():
             # A project may use LICENSE/ as a directory. Preserve it without
@@ -1106,6 +1180,10 @@ def asset_plan(destination: Path, *, mode: str, proposed: dict[str, bytes],
             continue
         target = destination_file(destination, name)
         present = file_bytes(target) if target.exists() else None
+        if mode == "prepare-existing" and preserve_ontology and ontology_path(name):
+            if present is not None:
+                preserved[name] = sha(present)
+            continue
         if mode == "create":
             if present is not None:
                 raise InitializationError("new project changed before asset adoption")
@@ -1119,13 +1197,13 @@ def asset_plan(destination: Path, *, mode: str, proposed: dict[str, bytes],
                           or (name.startswith("Roles/") and name != ROLE_INDEX
                               and (destination / "Roles").is_dir())
                           or any(name.startswith(root + "/") and (destination / root).is_dir()
-                                 for root in (*MEMORY_TREES, *LEARNING_TREES)))
+                                 for root in (*MEMORY_TREES, *LEARNING_TREES, *ONTOLOGY_TREES)))
         existing_tasks = (name.startswith("Tasks/") and (destination / "Tasks").is_dir()
                           and any((destination / "Tasks").iterdir()))
         if present is not None:
             if (name == "AGENTS.md" and raw != original.get(name) and raw != present and raw == present + completion_link()):
                 selected[name], before[name] = raw, sha(present)
-            elif saved_identity is None and name in {"README.md", "memory.yaml"} and present == original.get(name):
+            elif saved_identity is None and name in {"README.md", "memory.yaml", "ontology.yaml", ADVANCED.CONFIG} and present == original.get(name):
                 selected[name], before[name] = raw, sha(present)
             else:
                 preserved[name] = sha(present)
@@ -1272,7 +1350,9 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
             raise InitializationError("existing setup receipt changes a source destination")
         if entry["adoption"] == "specialized" and (record["setup_contract"] not in MEMORY_CONTRACTS
                                                    or expected_destination not in SPECIALIZED_FILES
-                                                   or expected_destination == "AGENTS.md" and record["setup_contract"] not in LEARNING_CONTRACTS):
+                                                   or expected_destination == "AGENTS.md" and record["setup_contract"] not in LEARNING_CONTRACTS
+                                                   or expected_destination == ADVANCED.CONFIG and record["setup_contract"] not in ADVANCED_CONTRACTS
+                                                   or expected_destination == "ontology.yaml" and record["setup_contract"] not in ONTOLOGY_CONTRACTS):
             raise InitializationError("existing setup receipt has an unsupported specialization")
         if (record["setup_contract"] in LICENSE_CONTRACTS
                 and expected_destination in LICENSE_FILES
@@ -1305,6 +1385,8 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
         | (MEMORY_CONTRACT_FILES | MEMORY_HELPER_FILES if record["setup_contract"] in MEMORY_CONTRACTS else set())
         | (CAPTURE_HELPER_FILES if record["setup_contract"] in CAPTURE_CONTRACTS else set())
         | (LEARNING_FILES | {LEARNING_RESOLVER} if record["setup_contract"] in LEARNING_CONTRACTS else set())
+        | (ONTOLOGY_FILES | ONTOLOGY_SKILL_RESOURCES if record["setup_contract"] in ONTOLOGY_CONTRACTS else set())
+        | (ADVANCED.STARTERS | ADVANCED.RESOURCES if record["setup_contract"] in ADVANCED_CONTRACTS else set())
         | role_sources}
     if not required_sources <= seen_sources:
         raise InitializationError("existing setup receipt omits required starter source provenance")
@@ -1413,6 +1495,8 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
             # Only resources omitted to preserve an existing whole package or
             # nonempty Task tree can lack an adopted/preserved file digest.
             parts = Path(name).parts
+            if record["setup_contract"] in ONTOLOGY_CONTRACTS and ontology_path(name) and record.get("preserved_ontology"):
+                continue
             if name.startswith(".agents/skills/") and len(parts) > 3:
                 preserved_root = destination / Path(*parts[:3])
             elif legacy and name.startswith("sub-agent-roles/") and len(parts) > 2:
@@ -1452,6 +1536,7 @@ def validate_record(record: Any, destination: Path, identity: dict[str, Any]) ->
                 expected = "preserved-project-owned" if name in inventory else "skipped-existing-package"
                 if adoption != expected or digest != inventory.get(name):
                     raise InitializationError("learning source adoption mixes an existing whole package")
+    validate_ontology_preservation(record, destination, source_adoptions)
     if "assets" not in stages:
         before = record.get("recovery_before")
         if (not isinstance(before, dict) or before.keys() != record["owned_files"].keys()
@@ -1475,6 +1560,264 @@ def archive_record(destination: Path, raw: bytes) -> dict[str, str]:
     return {"path": relative, "sha256": checksum}
 
 
+def ontology_path(name: str) -> bool:
+    return name == "ontology.yaml" or any(name == root or name.startswith(root + "/") for root in ONTOLOGY_TREES)
+
+
+def ontology_inventory(destination: Path) -> dict[str, str]:
+    result = {name: digest for root in ONTOLOGY_TREES for name, digest in package_inventory(destination, root).items()}
+    config = destination_file(destination, "ontology.yaml")
+    if config.exists():
+        result["ontology.yaml"] = sha(file_bytes(config))
+    return result
+
+
+def ontology_files_inventory(files: dict[str, Any]) -> dict[str, str]:
+    result = {name: digest for root in ONTOLOGY_TREES
+              for name, digest in inventory_from_files(root, files).items()}
+    if "ontology.yaml" in files:
+        raw = files["ontology.yaml"]
+        result["ontology.yaml"] = sha(raw) if isinstance(raw, bytes) else raw
+    return result
+
+
+def validate_ontology_static(root: Path, files: dict[str, bytes], *, neutral: bool) -> dict[str, Any]:
+    """Check bounded declarations and import integrity without executing copied code."""
+    missing = sorted((ONTOLOGY_FILES | ONTOLOGY_SKILL_RESOURCES) - files.keys())
+    if missing:
+        raise InitializationError("ontology resources are missing: " + ", ".join(missing))
+    config = unique_json(files["ontology.yaml"])
+    keys = {"schema_version", "project", "context", "modules", "project_files", "binding_files", "source_allowlist", "retrieval", "publication"}
+    project = config.get("project") if isinstance(config, dict) else None
+    if (not isinstance(config, dict) or not keys <= set(config) or not set(config) <= keys | {"competency_files"} or type(config["schema_version"]) is not int or config["schema_version"] != 1
+            or not isinstance(project, dict) or set(project) != {"id", "name", "purpose", "namespace", "root"} or project["root"] != "."):
+        raise InitializationError("ontology configuration has an incompatible schema or project identity")
+    if neutral:
+        if project != {"id": None, "name": None, "purpose": None, "namespace": None, "root": "."} or config["publication"] != {"enabled": False, "binding": None}:
+            raise InitializationError("template ontology configuration is not a neutral starter")
+    elif (not isinstance(project["id"], str) or not ID_PATTERN.fullmatch(project["id"])
+          or any(not isinstance(project[key], str) or not project[key].strip() for key in ("name", "purpose", "namespace"))
+          or project["namespace"] != "urn:sys4ai:ontology:project:" + project["id"] + ":"):
+        raise InitializationError("ontology project identity or namespace is unspecialized or incompatible")
+    context = config["context"]
+    if (not isinstance(context, dict) or set(context) != {"path", "sha256"}
+            or context["path"] != "ONTOLOGY/contexts/context-v1.jsonld"
+            or context["sha256"] != ONTOLOGY_CONTEXT_SHA256 or context["sha256"] != sha(files[context["path"]])
+            or files[context["path"]] != files[ONTOLOGY_ROOT + "/contexts/context-v1.jsonld"]):
+        raise InitializationError("ontology trusted local context does not match its exact lock")
+    contract = unique_json(files[ONTOLOGY_ROOT + "/contract.json"])
+    if (not isinstance(contract, dict) or contract.get("schema_version") != 1
+            or contract.get("module_version") != "1.0.0" or contract.get("profile_version") != "1.0.0"):
+        raise InitializationError("ontology contract edition is incompatible")
+    modules = config["modules"]
+    if not isinstance(modules, list) or not modules:
+        raise InitializationError("ontology module selection is missing")
+    seen = set()
+    for module in modules:
+        if (not isinstance(module, dict) or set(module) != {"id", "version", "path", "sha256"}
+                or not isinstance(module["id"], str) or not ID_PATTERN.fullmatch(module["id"])
+                or not isinstance(module["version"], str) or not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", module["version"])
+                or module["id"] in seen or module["path"] != "ONTOLOGY/modules/" + module["id"] + "/" + module["version"]):
+            raise InitializationError("ontology module import is incompatible")
+        seen.add(module["id"])
+        prefix = module["path"] + "/"
+        manifest_path = prefix + "manifest.json"
+        if manifest_path not in files:
+            raise InitializationError("ontology module manifest is missing: " + manifest_path)
+        manifest = unique_json(files[manifest_path])
+        if (not isinstance(manifest, dict) or set(manifest) != {"schema_version", "module_id", "version", "files", "record_files"}
+                or manifest["schema_version"] != 1 or manifest["module_id"] != module["id"] or manifest["version"] != module["version"]
+                or not isinstance(manifest["files"], dict) or not manifest["files"]
+                or not isinstance(manifest["record_files"], list) or not manifest["record_files"]):
+            raise InitializationError("ontology module manifest is incompatible: " + manifest_path)
+        for name, digest in manifest["files"].items():
+            destination_file(root, prefix + name)
+            if (not isinstance(name, str) or not isinstance(digest, str) or not SHA256.fullmatch(digest)
+                    or Path(name).as_posix() != name or name == "manifest.json"
+                    or prefix + name not in files or sha(files[prefix + name]) != digest):
+                raise InitializationError("ontology module file differs from its lock: " + prefix + str(name))
+        for name in manifest["record_files"]:
+            if not isinstance(name, str) or prefix + name not in files:
+                raise InitializationError("ontology module record file is missing: " + str(name))
+            graph = unique_json(files[prefix + name])
+            if (not isinstance(graph, dict) or set(graph) != {"@context", "@graph"}
+                    or graph["@context"] != context["path"] or not isinstance(graph["@graph"], list)):
+                raise InitializationError("ontology module record file is incompatible: " + prefix + name)
+        actual = {name.removeprefix(prefix) for name in files if name.startswith(prefix)}
+        if (actual != set(manifest["files"]) | {"manifest.json"}
+                or module["sha256"] != sha(encoded(manifest["files"]))
+                or not set(manifest["record_files"]) <= manifest["files"].keys()
+                or manifest["files"].get("context-v1.jsonld") != context["sha256"]):
+            raise InitializationError("ontology module inventory or module digest does not match its lock: " + module["id"])
+    if neutral and ([(m["id"], m["version"]) for m in modules] != [("sys4ai-core", "1.0.0")]
+                    or config["project_files"] != ["ONTOLOGY/modules/project/project.jsonld"]
+                    or config["binding_files"] != ["ONTOLOGY/bindings/bindings.jsonld"]):
+        raise InitializationError("template ontology selects non-neutral project modules")
+    for key in ("project_files", "binding_files"):
+        if not isinstance(config[key], list) or not config[key]:
+            raise InitializationError("ontology lacks its declared local " + key)
+        for name in config[key]:
+            prefix = "ONTOLOGY/modules/project/" if key == "project_files" else "ONTOLOGY/bindings/"
+            endings = (".jsonld",) if key == "project_files" else (".jsonld", ".json")
+            if not isinstance(name, str) or not name.startswith(prefix) or not name.endswith(endings):
+                raise InitializationError("ontology canonical file path is incompatible")
+            destination_file(root, name)
+            if name not in files:
+                raise InitializationError("ontology canonical file is missing: " + name)
+            graph = unique_json(files[name])
+            if (not isinstance(graph, dict) or set(graph) != {"@context", "@graph"}
+                    or graph["@context"] != context["path"] or not isinstance(graph["@graph"], list)
+                    or neutral and graph["@graph"] != []):
+                raise InitializationError("ontology canonical graph is incompatible or non-neutral: " + name)
+    if not isinstance(config["source_allowlist"], list):
+        raise InitializationError("ontology source allowlist is incompatible")
+    for name in config["source_allowlist"]:
+        destination_file(root, name)
+        if any(char in name for char in "*?[]"):
+            raise InitializationError("ontology source allowlist must contain exact paths")
+    if not isinstance(config.get("competency_files", []), list):
+        raise InitializationError("ontology competency_files must be an array")
+    for name in config.get("competency_files", []):
+        if not isinstance(name, str) or not name.startswith("ONTOLOGY/modules/project/") or not name.endswith(".json"):
+            raise InitializationError("ontology competency path is incompatible")
+        destination_file(root, name)
+        if name not in files:
+            raise InitializationError("ontology competency file is missing: " + name)
+        unique_json(files[name])
+    if neutral and config.get("competency_files", []) != []:
+        raise InitializationError("template ontology contains project competency data")
+    if neutral:
+        allowed = {name for name in ONTOLOGY_FILES if name.startswith("ONTOLOGY/")}
+        if {name for name in files if name.startswith("ONTOLOGY/")} != allowed:
+            raise InitializationError("template ontology contains undeclared canonical or generated data")
+    retrieval = config["retrieval"]
+    if (not isinstance(retrieval, dict) or set(retrieval) != {"default_hops", "max_hops", "default_limit", "max_limit", "max_context_bytes"}
+            or any(type(value) is not int for value in retrieval.values())
+            or not 0 <= retrieval["default_hops"] <= retrieval["max_hops"] <= 8
+            or not 1 <= retrieval["default_limit"] <= retrieval["max_limit"] <= 100
+            or not 1024 <= retrieval["max_context_bytes"] <= 32000):
+        raise InitializationError("ontology retrieval settings exceed the release bounds")
+    interfaces = {"ontology.py": {"main"}, "ontology_core.py": {"load_project"},
+                  "ontology_modules.py": {"load_modules"}, "ontology_validate.py": {"validate_project"}}
+    for name in ONTOLOGY_HELPERS:
+        try:
+            tree = ast.parse(files[name], filename=name)
+            names = {node.name for node in tree.body if isinstance(node, (ast.FunctionDef, ast.ClassDef))}
+            if not interfaces.get(Path(name).name, set()) <= names:
+                raise InitializationError("ontology helper lacks its static interface: " + name)
+        except (SyntaxError, UnicodeError) as error:
+            raise InitializationError("ontology helper is syntactically incompatible: " + name) from error
+    return config
+
+
+def validate_ontology_sources(template: Path, files: dict[str, bytes]) -> None:
+    validate_ontology_static(template, files, neutral=True)
+
+
+def specialize_ontology(raw: bytes, identity: dict[str, Any], files: dict[str, bytes], *,
+                        destination: Path | None = None, owned_governance=frozenset()) -> bytes:
+    config = unique_json(raw)
+    config["project"] = {"id": identity["project_id"], "name": identity["project_name"],
+        "purpose": identity["purpose"], "namespace": "urn:sys4ai:ontology:project:" + identity["project_id"] + ":", "root": "."}
+    authority = []
+    for name in ("SOUL.md", "AGENTS.md", "ROLE.md"):
+        target = destination_file(destination, name) if destination is not None else None
+        current = file_bytes(target) if target is not None and target.exists() and name not in owned_governance else files[name]
+        authority.append({"path": name, "sha256": sha(current)})
+    config["publication"] = {"enabled": True, "binding": {"actor_id": "/root",
+        "scope": ["ONTOLOGY/modules/project", "ONTOLOGY/bindings"], "authority": authority}}
+    return encoded(config)
+
+
+def assess_ontology(destination: Path) -> dict[str, Any]:
+    result = {"module_id": ONTOLOGY_MODULE, "read_only": True, "structural_readiness": "unavailable",
+        "runtime": "not-exercised", "semantic_validation": "not-assessed", "source_freshness": "not-assessed", "inspector_execution": "none", "helper_code": "syntax-and-declarations-only", "director_binding": "not-assessed",
+        "authorized_publication": "unavailable", "operation_grant_checked": False, "diagnostics": []}
+    try:
+        inventory = ontology_inventory(destination)
+        files = {name: file_bytes(destination_file(destination, name)) for name, value in inventory.items() if value != "directory"}
+        config = validate_ontology_static(destination, files, neutral=False)
+        identity = unique_json(file_bytes(destination_file(destination, IDENTITY)))
+        if config["project"] != {"id": identity["project_id"], "name": identity["project_name"], "purpose": identity["purpose"],
+                                 "namespace": "urn:sys4ai:ontology:project:" + identity["project_id"] + ":", "root": "."}:
+            raise InitializationError("ontology.yaml identity differs from the selected destination")
+        result.update(structural_readiness="available", config_sha256=sha(files["ontology.yaml"]), project=config["project"], modules=config["modules"])
+        publication = config["publication"]
+        binding = publication.get("binding") if isinstance(publication, dict) else None
+        if (not isinstance(publication, dict) or set(publication) != {"enabled", "binding"} or type(publication["enabled"]) is not bool):
+            raise InitializationError("ontology publication configuration is incompatible")
+        result["director_binding"] = "absent"
+        result["publication_enabled"] = publication["enabled"]
+        if binding is not None:
+            if (not isinstance(binding, dict) or set(binding) != {"actor_id", "scope", "authority"} or not isinstance(binding["actor_id"], str) or not binding["actor_id"].strip()
+                    or not isinstance(binding["scope"], list) or not binding["scope"]
+                    or any(not isinstance(name, str) or name not in {"ONTOLOGY/modules/project", "ONTOLOGY/bindings"} for name in binding["scope"])
+                    or not isinstance(binding["authority"], list) or len(binding["authority"]) != 3
+                    or {ref.get("path") for ref in binding["authority"] if isinstance(ref, dict)} != {"SOUL.md", "AGENTS.md", "ROLE.md"}):
+                raise InitializationError("ontology publication binding is incompatible or outside ontology scope")
+            result["director_binding"] = "current"
+            result["publication_scope"] = list(binding["scope"])
+            result["publication_actor"] = binding["actor_id"]
+            for ref in binding["authority"]:
+                if set(ref) != {"path", "sha256"} or sha(file_bytes(destination_file(destination, ref["path"]))) != ref["sha256"]:
+                    result["director_binding"] = "stale"
+                    result["diagnostics"].append({"code": "stale_authority", "path": ref["path"], "message": "Current governance differs from the preserved ontology binding."})
+            if publication["enabled"] and result["director_binding"] == "current":
+                result["authorized_publication"] = "requires-current-operation-grant"
+        result["message"] = "Static configuration, import integrity and local binding assessed. Run ontology health for current semantic and source readiness."
+    except (InitializationError, OSError, ValueError, KeyError, TypeError) as error:
+        result["structural_readiness"] = "unavailable"
+        result["diagnostics"].append({"code": "ontology_unavailable", "path": "ontology.yaml or installed ontology package",
+            "message": str(error) if isinstance(error, InitializationError) else "Required ontology configuration or resources are incompatible."})
+    return result
+
+
+def validate_ontology_preservation(record, destination, source_adoptions):
+    if record["setup_contract"] not in ONTOLOGY_CONTRACTS:
+        if "preserved_ontology" in record or "current_ontology" in record:
+            raise InitializationError("older setup receipt contains a later ontology decision")
+        return
+    inventory = record.get("preserved_ontology")
+    if not isinstance(inventory, dict):
+        raise InitializationError("ontology setup receipt lacks complete preservation evidence")
+    for name, digest in inventory.items():
+        if (not isinstance(name, str) or not ontology_path(name) or not isinstance(digest, str)
+                or digest != "directory" and not SHA256.fullmatch(digest)
+                or name not in {"ontology.yaml", *ONTOLOGY_TREES} and inventory.get(Path(name).parent.as_posix()) != "directory"):
+            raise InitializationError("invalid ontology preservation inventory")
+        safe(destination / name)
+        if Path(name).as_posix() != name or ".." in Path(name).parts or Path(name).is_absolute():
+            raise InitializationError("invalid ontology preservation path")
+    if inventory:
+        original = {entry["destination"]: entry["source_sha256"] for entry in record["sources"] if ontology_path(entry["destination"])}
+        pristine = inventory == ontology_files_inventory(original)
+        for name, (adoption, digest) in source_adoptions.items():
+            if not ontology_path(name):
+                continue
+            expected = "preserved-project-owned" if name in inventory else "skipped-existing-package"
+            if not (pristine and name == "ontology.yaml" and adoption == "specialized") and (adoption != expected or digest != inventory.get(name)):
+                raise InitializationError("ontology source adoption mixes an existing whole installation")
+
+
+def check_ontology_adoption(destination: Path, record: dict[str, Any]) -> None:
+    if record["setup_contract"] not in ONTOLOGY_CONTRACTS:
+        return
+    expected = dict(record["preserved_ontology"])
+    owned = {name: digest for name, digest in record["owned_files"].items() if ontology_path(name)}
+    for name, digest in ontology_files_inventory(owned).items():
+        target = safe(destination / name)
+        if target.exists():
+            if digest == "directory":
+                expected[name] = digest
+            else:
+                current = sha(file_bytes(target))
+                if current not in {digest, record.get("recovery_before", {}).get(name)}:
+                    raise InitializationError("ontology file changed during asset adoption: " + name)
+                expected[name] = current
+    if ontology_inventory(destination) != expected:
+        raise InitializationError("ontology installation changed during asset adoption")
+
+
 def memory_capture_notice(destination: Path) -> dict[str, Any]:
     """Describe the installed state; never enable a preserved configuration here."""
     result = {"automatic_capture": None, "status": "unavailable", "opt_out_question": None}
@@ -1484,7 +1827,7 @@ def memory_capture_notice(destination: Path) -> dict[str, Any]:
         raw = file_bytes(destination_file(destination, "memory.yaml"))
         config = unique_json(raw)
         files = {name: file_bytes(destination_file(destination, name)) for name in MEMORY_HELPER_FILES}
-        check_memory_inspectors(files)
+        check_memory_inspectors(files, preserved=True)
         validate_memory_config(config, files, allow_template=False)
         enabled = config["integration"]["automatic_capture"]
         result.update(automatic_capture=enabled, config_sha256=sha(raw))
@@ -1521,7 +1864,7 @@ def assess_learning(destination: Path) -> dict[str, Any]:
         config_raw = file_bytes(destination_file(destination, "memory.yaml"))
         config = unique_json(config_raw)
         files = {name: file_bytes(destination_file(destination, name)) for name in MEMORY_HELPER_FILES}
-        check_memory_inspectors(files)
+        check_memory_inspectors(files, preserved=True)
         validate_memory_config(config, files, allow_template=False)
         identity = unique_json(file_bytes(destination_file(destination, IDENTITY)))
         if config["project"] != {"id": identity["project_id"], "name": identity["project_name"], "root": "."}:
@@ -1567,7 +1910,7 @@ def verify_project(destination: Path, record: dict[str, Any], *, allow_module_ga
         current_name = current_paths.get(name, name)
         target = destination_file(destination, current_name)
         if not target.is_file():
-            if allow_module_gaps and any(current_name.startswith(root + "/") for root in MODULE_PACKAGES):
+            if allow_module_gaps and (ontology_path(current_name) or any(current_name.startswith(root + "/") for root in MODULE_PACKAGES)):
                 continue
             raise InitializationError(f"project setup file is missing: {name}")
         current[current_name] = sha(file_bytes(target))
@@ -1588,6 +1931,8 @@ def verify_project(destination: Path, record: dict[str, Any], *, allow_module_ga
         record["current_memory"] = memory_inventory(destination)
     if record["setup_contract"] in LEARNING_CONTRACTS:
         record["current_learning"] = {name: digest for root in LEARNING_TREES for name, digest in package_inventory(destination, root).items()}
+    if record["setup_contract"] in ONTOLOGY_CONTRACTS:
+        record["current_ontology"] = ontology_inventory(destination)
     return current
 
 
@@ -1595,9 +1940,99 @@ MODULE_PACKAGES = (*LEARNING_TREES, ".agents/skills/memory", MEMORY_CONTRACT_ROO
 REFRESH_PACKAGES = {".agents/skills/memory", MEMORY_CONTRACT_ROOT}
 MODULE_STAGES = ["assets", "verification"]
 BASE_IMMUTABLE = ("schema_version", "setup_contract", "operation_id", "identity", "project_root",
-                  "sources", "owned_files", "preserved_files", "preserved_memory", "preserved_licenses", "preserved_learning", "created_at")
+                  "sources", "owned_files", "preserved_files", "preserved_memory", "preserved_licenses", "preserved_learning", "preserved_ontology", "created_at")
 MODULE_FROZEN = ("module_id", "module_version", "project_root", "identity", "base_receipt",
                  "refresh_dependencies", "new_memory", "sources", "packages", "files", "preserved_files")
+
+
+def module_packages(operation: dict[str, Any]) -> tuple[str, ...]:
+    if isinstance(operation, dict) and operation.get("module_id") == ADVANCED_MODULE:
+        return ADVANCED.packages(operation)
+    return ONTOLOGY_TREES if isinstance(operation, dict) and operation.get("module_id") == ONTOLOGY_MODULE else MODULE_PACKAGES
+
+
+def module_frozen(operation: dict[str, Any]) -> tuple[str, ...]:
+    if isinstance(operation, dict) and operation.get("module_id") == ADVANCED_MODULE:
+        return MODULE_FROZEN + ADVANCED.FROZEN
+    return MODULE_FROZEN + (("refresh_modules", "new_ontology") if isinstance(operation, dict) and operation.get("module_id") == ONTOLOGY_MODULE else ())
+
+
+def ontology_source_files(depot: Path) -> dict[str, bytes]:
+    original, _, _, _, _ = template_sources(depot)
+    return {name: raw for name, raw in original.items() if ontology_path(name)}
+
+
+def ontology_proposed_files(destination: Path, identity: dict[str, Any], original: dict[str, bytes], *, new_ontology: bool) -> dict[str, bytes]:
+    proposed = dict(original)
+    if new_ontology:
+        proposed["ontology.yaml"] = specialize_ontology(original["ontology.yaml"], identity, original, destination=destination)
+    else:
+        target = destination_file(destination, "ontology.yaml")
+        if target.exists():
+            try:
+                current = unique_json(file_bytes(target))
+                config = unique_json(original["ontology.yaml"])
+                # The selected package refresh updates imports, retaining existing
+                # project settings and its authority rather than renewing grants.
+                if isinstance(current, dict) and set(config) == set(current):
+                    current["context"], current["modules"] = config["context"], config["modules"]
+                    proposed["ontology.yaml"] = encoded(current)
+            except (InitializationError, ValueError, TypeError):
+                pass  # Preserved incompatible installation is never published.
+    return proposed
+
+
+def plan_ontology_adoption(depot: Path, destination: Path, record: dict[str, Any], previous_raw: bytes,
+                          refresh_modules: list[str]) -> tuple[dict[str, Any], dict[str, bytes]]:
+    before = ontology_inventory(destination)
+    original = ontology_source_files(depot)
+    proposed = ontology_proposed_files(destination, record["identity"], original, new_ontology=not bool(before))
+    after = ontology_files_inventory(proposed)
+    owned = {name: digest for name, digest in module_owned_files(record).items() if ontology_path(name)}
+    owned_before = ontology_files_inventory(owned) if owned else {}
+    decision, diagnostic = "adopted", None
+    if before:
+        decision = "preserved-package"
+        if refresh_modules:
+            if before == owned_before and owned:
+                decision = "refreshed-owned-package"
+            else:
+                decision = "preserved-incompatible-refresh"
+                diagnostic = {"code": "scoped_ontology_adoption_required", "path": "ontology.yaml and complete ontology installation",
+                    "different_resources": sorted(name for name in before.keys() | owned_before.keys() if before.get(name) != owned_before.get(name)),
+                    "message": "Preserved complete ontology installation: refresh requires every file and directory to match receipt-owned evidence. Customized, missing and incompatible content needs a separate reviewed adoption."}
+        if decision.startswith("preserved"):
+            after = dict(before)
+    packages, changes, preserved = {}, {}, {}
+    for root in ONTOLOGY_TREES:
+        prior = {name: digest for name, digest in before.items() if name == root or name.startswith(root + "/")}
+        final = {name: digest for name, digest in after.items() if name == root or name.startswith(root + "/")}
+        if not decision.startswith("preserved") and any((prior[name] == "directory") != (final[name] == "directory") for name in prior.keys() & final.keys()):
+            raise InitializationError("ontology package file/directory transition requires separate scoped adoption: " + root)
+        packages[root] = {"decision": decision, "before": prior, "after": final, "diagnostic": diagnostic}
+    if not decision.startswith("preserved"):
+        changes = {name: {"before": before.get(name), "after": after.get(name)} for name in sorted(before.keys() | after.keys())
+                   if before.get(name) != "directory" and after.get(name) != "directory"}
+    for name in (IDENTITY, "SOUL.md", "AGENTS.md", "ROLE.md", "memory.yaml", "ontology.yaml"):
+        target = destination_file(destination, name)
+        if name not in changes and target.exists():
+            preserved[name] = sha(file_bytes(target))
+    sources = []
+    for name, raw in sorted(original.items()):
+        digest = after.get(name)
+        adoption = ("specialized" if name == "ontology.yaml" else "adopted") if name in changes else "preserved-project-owned" if digest else "skipped-existing-package"
+        sources.append({"source": TEMPLATE + "/" + name, "destination": name, "source_sha256": sha(raw),
+            "source_version": "sha256:" + sha(raw), "destination_sha256": digest, "adoption": adoption})
+    digest = sha(previous_raw)
+    operation = {"schema_version": 1, "module_id": ONTOLOGY_MODULE,
+        "module_version": unique_json(original[ONTOLOGY_ROOT + "/contract.json"])["module_version"],
+        "operation_id": "module-adoption-" + uuid4().hex, "project_root": str(destination), "identity": deepcopy(record["identity"]),
+        "base_receipt": {"path": "control_records/project-setup-history/" + digest + ".json", "sha256": digest},
+        "refresh_dependencies": [], "new_memory": False, "refresh_modules": refresh_modules, "new_ontology": not bool(before),
+        "sources": sources, "packages": packages, "files": changes, "preserved_files": preserved,
+        "status": "partial", "completed_stages": [], "active_stage": "assets", "checks": [], "created_at": datetime.now(timezone.utc).isoformat()}
+    operation["manifest_sha256"] = sha(encoded({key: operation[key] for key in module_frozen(operation)}))
+    return operation, proposed
 
 
 def package_inventory(destination: Path, root: str) -> dict[str, str]:
@@ -1750,21 +2185,25 @@ def validate_module_adoptions(record: dict[str, Any], destination: Path) -> None
         raise InitializationError("invalid module adoption collection")
     seen = set()
     for index, operation in enumerate(operations):
-        required = {"schema_version", "operation_id", "manifest_sha256", "status", "completed_stages", "active_stage", "checks", "created_at", *MODULE_FROZEN}
-        optional = {"capabilities", "current_files", "verified_at", "recovery", "rerun"}
+        required = {"schema_version", "operation_id", "manifest_sha256", "status", "completed_stages", "active_stage", "checks", "created_at", *module_frozen(operation)}
+        optional = {"capabilities", "current_files", "verified_at", "recovery", "rerun", "static_health"}
         if (not isinstance(operation, dict) or not required <= operation.keys() or not operation.keys() <= required | optional
                 or type(operation["schema_version"]) is not int or operation["schema_version"] != 1
                 or any(not isinstance(operation[name], str) for name in ("module_id", "module_version", "project_root", "operation_id", "manifest_sha256", "status", "created_at"))
                 or operation["active_stage"] is not None and not isinstance(operation["active_stage"], str)
                 or not isinstance(operation["checks"], list)
-                or operation["module_id"] != LEARNING_MODULE
-                or operation["module_version"] != "1.0.0"
+                or operation["module_id"] not in {LEARNING_MODULE, ONTOLOGY_MODULE, ADVANCED_MODULE}
+                or operation["module_version"] != ("2.0.0" if operation["module_id"] == ADVANCED_MODULE else "1.0.0")
                 or operation["project_root"] != str(destination) or operation["identity"] != record["identity"]
                 or not isinstance(operation["operation_id"], str)
                 or not re.fullmatch(r"module-adoption-[0-9a-f]{32}", operation["operation_id"])
                 or operation["operation_id"] in seen or operation["refresh_dependencies"] not in ([], ["memory"])
+                or operation["module_id"] == ONTOLOGY_MODULE and (operation["refresh_dependencies"] != [] or operation["new_memory"] is not False
+                    or operation["refresh_modules"] not in ([], [ONTOLOGY_MODULE]) or type(operation["new_ontology"]) is not bool)
+                or operation["module_id"] == ADVANCED_MODULE and (operation["refresh_dependencies"] != [] or operation["new_memory"] is not False
+                    or type(operation["new_ontology"]) is not bool or type(operation["new_advanced"]) is not bool)
                 or type(operation["new_memory"]) is not bool
-                or operation["manifest_sha256"] != sha(encoded({key: operation[key] for key in MODULE_FROZEN}))):
+                or operation["manifest_sha256"] != sha(encoded({key: operation[key] for key in module_frozen(operation)}))):
             raise InitializationError("invalid module adoption identity or frozen manifest")
         seen.add(operation["operation_id"])
         stages = operation["completed_stages"]
@@ -1789,14 +2228,15 @@ def validate_module_adoptions(record: dict[str, Any], destination: Path) -> None
                        or prior.get("status") != "completed" for position, prior in enumerate(old_operations))):
             raise InitializationError("module adoption lacks its exact earlier operation provenance")
         previous_owned = module_owned_files(old)
-        if not isinstance(operation["packages"], dict) or set(operation["packages"]) != set(MODULE_PACKAGES):
+        if not isinstance(operation["packages"], dict) or set(operation["packages"]) != set(module_packages(operation)):
             raise InitializationError("invalid module package scope")
         for root, package in operation["packages"].items():
             if (not isinstance(package, dict) or set(package) != {"decision", "before", "after", "diagnostic"}
                     or not isinstance(package["decision"], str)
                     or package["diagnostic"] is not None and not isinstance(package["diagnostic"], dict)
                     or package["decision"] not in {"adopted", "preserved-package", "refreshed-owned-package", "preserved-incompatible-refresh"}
-                    or package["decision"] == "refreshed-owned-package" and (root not in REFRESH_PACKAGES or operation["refresh_dependencies"] != ["memory"])):
+                    or package["decision"] == "refreshed-owned-package" and (operation["module_id"] == LEARNING_MODULE and (root not in REFRESH_PACKAGES or operation["refresh_dependencies"] != ["memory"])
+                         or operation["module_id"] == ONTOLOGY_MODULE and operation["refresh_modules"] != [ONTOLOGY_MODULE])):
                 raise InitializationError("invalid module package adoption decision")
             for phase in ("before", "after"):
                 inventory = package[phase]
@@ -1826,16 +2266,18 @@ def validate_module_adoptions(record: dict[str, Any], destination: Path) -> None
         for name, change in operation["files"].items():
             if not isinstance(name, str):
                 raise InitializationError("invalid module target path")
-            allowed = any(name.startswith(root + "/") for root in MODULE_PACKAGES)
-            if not allowed and not (operation["new_memory"] and name in {"AGENTS.md", "memory.yaml"}):
+            allowed = any(name.startswith(root + "/") for root in module_packages(operation))
+            if not allowed and not (operation["new_memory"] and name in {"AGENTS.md", "memory.yaml"} or operation["module_id"] == ONTOLOGY_MODULE and name == "ontology.yaml"
+                    or operation["module_id"] == ADVANCED_MODULE and (name == ADVANCED.TOOL or name == "ontology.yaml" and operation["new_ontology"] or name == ADVANCED.CONFIG and operation["new_advanced"])):
                 raise InitializationError("module adoption target is outside its selected scope")
             destination_file(destination, name)
             if (not isinstance(change, dict) or set(change) != {"before", "after"}
                     or any(value is not None and (not isinstance(value, str) or not SHA256.fullmatch(value)) for value in change.values())
                     or change["before"] is None and change["after"] is None):
                 raise InitializationError("invalid module before/after evidence")
+        allowed_preserved = {IDENTITY, "SOUL.md", "AGENTS.md", "ROLE.md", "memory.yaml"} | ({"ontology.yaml"} if operation["module_id"] == ONTOLOGY_MODULE else set()) | ({"ontology.yaml", ADVANCED.CONFIG, ADVANCED.TOOL} if operation["module_id"] == ADVANCED_MODULE else set())
         for name, digest in operation["preserved_files"].items():
-            if name not in {IDENTITY, "SOUL.md", "AGENTS.md", "ROLE.md", "memory.yaml"} or not isinstance(digest, str) or not SHA256.fullmatch(digest) or name in operation["files"]:
+            if name not in allowed_preserved or not isinstance(digest, str) or not SHA256.fullmatch(digest) or name in operation["files"]:
                 raise InitializationError("invalid module preserved governing file")
             destination_file(destination, name)
         if not {IDENTITY, "SOUL.md", "ROLE.md"} <= operation["preserved_files"].keys():
@@ -1850,22 +2292,27 @@ def validate_module_adoptions(record: dict[str, Any], destination: Path) -> None
         for source in sources:
             name = source.get("destination") if isinstance(source, dict) else None
             if (not isinstance(name, str) or name in source_names or source.get("source") != TEMPLATE + "/" + name
-                    or not (name == "memory.yaml" or operation["new_memory"] and name == "AGENTS.md"
-                            or any(name.startswith(root + "/") for root in MODULE_PACKAGES))
+                    or not (operation["module_id"] == LEARNING_MODULE and (name == "memory.yaml" or operation["new_memory"] and name == "AGENTS.md")
+                            or operation["module_id"] == ONTOLOGY_MODULE and name == "ontology.yaml"
+                            or operation["module_id"] == ADVANCED_MODULE and name in ADVANCED.SPECIAL_FILES
+                            or any(name.startswith(root + "/") for root in module_packages(operation)))
                     or not isinstance(source.get("source_sha256"), str) or not SHA256.fullmatch(source["source_sha256"])
                     or source.get("source_version") != "sha256:" + source["source_sha256"]):
                 raise InitializationError("invalid nested module source provenance")
             source_names.add(name)
             destination_file(destination, name)
-            root = next((root for root in MODULE_PACKAGES if name.startswith(root + "/")), None)
+            root = next((root for root in module_packages(operation) if name.startswith(root + "/")), None)
             after = (operation["files"][name]["after"] if name in operation["files"] else
                      operation["packages"][root]["after"].get(name) if root else operation["preserved_files"].get(name))
-            adoption = ("specialized" if name in {"memory.yaml", "AGENTS.md"} else "adopted") if name in operation["files"] else "preserved-project-owned" if after else "skipped-existing-package"
+            adoption = ("specialized" if name in {"memory.yaml", "AGENTS.md", "ontology.yaml", ADVANCED.CONFIG} else "adopted") if name in operation["files"] else "preserved-project-owned" if after else "skipped-existing-package"
             if source.get("destination_sha256") != after or source.get("adoption") != adoption:
                 raise InitializationError("module source and target decisions disagree")
             if adoption == "adopted" and source["source_sha256"] != after:
                 raise InitializationError("module adopted bytes differ from their frozen source")
-        if not (LEARNING_FILES | {LEARNING_RESOLVER, "memory.yaml"}) <= source_names:
+        required_sources = (ONTOLOGY_FILES | ONTOLOGY_SKILL_RESOURCES if operation["module_id"] == ONTOLOGY_MODULE else
+                            ADVANCED.STARTERS | ADVANCED.RESOURCES | (ONTOLOGY_FILES if operation["new_ontology"] else ONTOLOGY_REFERENCE_FILES) if operation["module_id"] == ADVANCED_MODULE else
+                            LEARNING_FILES | {LEARNING_RESOLVER, "memory.yaml"})
+        if not required_sources <= source_names:
             raise InitializationError("module adoption omits required source evidence")
         for root, package in operation["packages"].items():
             selected = {name for name in package["before"].keys() | package["after"].keys()
@@ -1879,8 +2326,26 @@ def validate_module_adoptions(record: dict[str, Any], destination: Path) -> None
             if not {name for name, digest in package["after"].items() if digest != "directory" and not package["decision"].startswith("preserved")} <= source_names:
                 raise InitializationError("module adopted package omits source provenance")
 
+        if operation["module_id"] == ONTOLOGY_MODULE:
+            decisions = {package["decision"] for package in operation["packages"].values()}
+            if len(decisions) != 1:
+                raise InitializationError("ontology adoption mixes preserved and replaced packages")
+            config_change = operation["files"].get("ontology.yaml")
+            if any(item.startswith("preserved") for item in decisions) and config_change is not None:
+                raise InitializationError("ontology adoption writes preserved configuration")
+            if not any(item.startswith("preserved") for item in decisions) and config_change is None:
+                raise InitializationError("ontology adoption omits its configuration decision")
+            if operation["new_ontology"] and (decisions != {"adopted"} or config_change["before"] is not None):
+                raise InitializationError("new ontology installation lacks missing-before evidence")
+            if decisions == {"refreshed-owned-package"} and ("ontology.yaml" not in previous_owned or config_change["before"] != previous_owned["ontology.yaml"]):
+                raise InitializationError("ontology refresh lacks exact prior configuration ownership")
+        if operation["module_id"] == ADVANCED_MODULE:
+            _advanced("validate_operation", destination, operation)
+
 
 def check_module_state(destination: Path, operation: dict[str, Any], *, complete: bool = False) -> None:
+    if operation["module_id"] == ADVANCED_MODULE:
+        _advanced("check_protected", destination, operation)
     for name, digest in operation["preserved_files"].items():
         if sha(file_bytes(destination_file(destination, name))) != digest:
             raise InitializationError("preserved module input changed: " + name)
@@ -1901,44 +2366,67 @@ def check_module_state(destination: Path, operation: dict[str, Any], *, complete
 
 
 def check_module_sources(depot: Path, operation: dict[str, Any]) -> dict[str, bytes]:
-    original = module_source_files(depot, new_memory=operation["new_memory"])
+    original = (ontology_source_files(depot) if operation["module_id"] == ONTOLOGY_MODULE else
+                _advanced("selected_source_files", depot, operation) if operation["module_id"] == ADVANCED_MODULE else
+                module_source_files(depot, new_memory=operation["new_memory"]))
     expected = {entry["destination"]: entry["source_sha256"] for entry in operation["sources"]}
     if {name: sha(raw) for name, raw in original.items()} != expected:
         raise InitializationError("frozen module Template sources changed; restore the reviewed edition before recovery")
     return original
 
 
-def verify_module_current(destination: Path, operation: dict[str, Any]) -> None:
-    operation["current_files"] = {name: digest for root in MODULE_PACKAGES for name, digest in package_inventory(destination, root).items()}
-    operation["capabilities"] = assess_learning(destination)
-    operation["checks"] = [{"check": name, "outcome": "passed"} for name in ("module-manifest", "current-project-identity", "local-capability-assessment")]
+def verify_module_current(destination: Path, operation: dict[str, Any], record: dict[str, Any] | None = None) -> None:
+    operation["current_files"] = {name: digest for root in module_packages(operation) for name, digest in package_inventory(destination, root).items()}
+    operation["capabilities"] = (assess_ontology(destination) if operation["module_id"] == ONTOLOGY_MODULE else
+                                 _advanced("assess", destination) if operation["module_id"] == ADVANCED_MODULE else assess_learning(destination))
+    operation["checks"] = [{"check": name, "outcome": "passed"} for name in ("module-manifest", "current-project-identity")]
+    if record is not None:
+        _static("apply", destination, record, operation=operation)
     operation["verified_at"] = datetime.now(timezone.utc).isoformat()
 
 
 def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], previous_raw: bytes,
-                         refresh_dependencies: list[str]) -> dict[str, Any]:
+                         refresh_dependencies: list[str], *, module_id: str = LEARNING_MODULE, refresh_modules: list[str] | None = None) -> dict[str, Any]:
+    refresh_modules = refresh_modules or []
     if record["status"] != "completed" or record["completed_stages"] != STAGES:
         raise InitializationError("finish the incomplete base setup before selected module adoption")
     pending = [op for op in record.get("module_adoptions", []) if op["status"] != "completed"]
-    if pending and pending[0]["refresh_dependencies"] != refresh_dependencies:
+    if pending and (pending[0]["module_id"] != module_id or pending[0]["refresh_dependencies"] != refresh_dependencies
+                    or pending[0].get("refresh_modules", []) != refresh_modules):
         raise InitializationError("resume the exact pending module request and dependency selection")
-    matches = [op for op in record.get("module_adoptions", []) if op["refresh_dependencies"] == refresh_dependencies]
+    matches = [op for op in record.get("module_adoptions", []) if op["module_id"] == module_id
+               and (module_id == ONTOLOGY_MODULE and not refresh_modules or op["refresh_dependencies"] == refresh_dependencies and op.get("refresh_modules", []) == refresh_modules)]
     operation = pending[0] if pending else matches[-1] if matches else None
     record_path = destination_file(destination, RECORD)
     lock = depot / "depot" / (".initialize-" + sha(record["identity"]["relative_path"].encode())[:16] + ".lock")
     with exclusive(lock), ExitStack() as guard:
         if file_bytes(record_path) != previous_raw:
             raise InitializationError("setup receipt changed before module adoption")
-        if operation is None or operation["status"] != "completed":
+        template_locked = False
+        if (module_id == ONTOLOGY_MODULE and refresh_modules or module_id == ADVANCED_MODULE) and operation is not None and operation["status"] == "completed":
             guard.enter_context(template_read_lock(depot))
+            template_locked = True
+            selected_sources = {name: sha(raw) for name, raw in (ontology_source_files(depot) if module_id == ONTOLOGY_MODULE else _advanced("selected_source_files", depot, operation)).items()}
+            if selected_sources != {entry["destination"]: entry["source_sha256"] for entry in operation["sources"]}:
+                operation = None
+        if operation is None or operation["status"] != "completed":
+            if not template_locked:
+                guard.enter_context(template_read_lock(depot))
             if operation is None:
                 verify_project(destination, deepcopy(record), allow_module_gaps=True)
                 original, _, _, _, _ = template_sources(depot)
-                check_existing_role_layout(destination, original[ROLE_HELPER])
-                operation, proposed = plan_module_adoption(depot, destination, record, previous_raw, refresh_dependencies)
+                if module_id == LEARNING_MODULE:
+                    check_existing_role_layout(destination, original[ROLE_HELPER])
+                operation, proposed = (plan_ontology_adoption(depot, destination, record, previous_raw, refresh_modules)
+                                       if module_id == ONTOLOGY_MODULE else
+                                       _advanced("plan", depot, destination, record, previous_raw) if module_id == ADVANCED_MODULE else
+                                       plan_module_adoption(depot, destination, record, previous_raw, refresh_dependencies))
                 record.setdefault("module_adoptions", []).append(operation)
             else:
-                proposed = module_proposed_files(destination, record["identity"], check_module_sources(depot, operation), new_memory=operation["new_memory"])
+                proposed = (ontology_proposed_files(destination, record["identity"], check_module_sources(depot, operation), new_ontology=operation["new_ontology"])
+                            if module_id == ONTOLOGY_MODULE else
+                            _advanced("proposed_files", destination, record["identity"], check_module_sources(depot, operation), new_ontology=operation["new_ontology"], new_advanced=operation["new_advanced"]) if module_id == ADVANCED_MODULE else
+                            module_proposed_files(destination, record["identity"], check_module_sources(depot, operation), new_memory=operation["new_memory"]))
             check_module_sources(depot, operation)
             check_module_state(destination, operation)
             for name, change in operation["files"].items():
@@ -1959,7 +2447,7 @@ def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], 
         try:
             if operation["status"] == "completed":
                 verify_project(destination, deepcopy(record), allow_module_gaps=True)
-                verify_module_current(destination, operation)
+                verify_module_current(destination, operation, record)
                 operation["rerun"] = "verified-current-module-without-refresh"
                 checkpoint()
                 return record
@@ -1975,6 +2463,7 @@ def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], 
                     if current_digest != change["before"]:
                         raise InitializationError("module adoption target changed before publication: " + name)
                     if change["after"] is None:
+                        _ontology_checkpoint(targets=False)
                         target.unlink()
                     else:
                         atomic_write(target, proposed[name], current)
@@ -1982,6 +2471,7 @@ def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], 
                     for name in sorted(package["before"].keys() - package["after"].keys(), key=lambda value: len(Path(value).parts), reverse=True):
                         target = safe(destination / name)
                         if package["before"][name] == "directory" and target.exists():
+                            _ontology_checkpoint(targets=False)
                             target.rmdir()
                 check_module_state(destination, operation, complete=True)
                 check_module_sources(depot, operation)
@@ -1991,7 +2481,7 @@ def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], 
             checkpoint()
             check_module_state(destination, operation, complete=True)
             check_module_sources(depot, operation)
-            verify_module_current(destination, operation)
+            verify_module_current(destination, operation, record)
             if "verification" not in operation["completed_stages"]:
                 operation["completed_stages"].append("verification")
             checkpoint()
@@ -2016,13 +2506,18 @@ def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], 
 def run_initialization(
     *, mode: str, destination: Path, project_id: str, project_name: str, purpose: str,
     adopt_module: str | None = None, refresh_dependency: list[str] | None = None,
+    refresh_module: list[str] | None = None,
 ) -> dict[str, Any]:
     if mode not in {"create", "prepare-existing"}:
         raise InitializationError("unknown initialization route")
     refresh = sorted(set(refresh_dependency or []))
-    if (adopt_module not in {None, LEARNING_MODULE} or refresh not in ([], ["memory"])
-            or adopt_module is not None and mode != "prepare-existing" or refresh and adopt_module is None):
-        raise InitializationError("dependency refresh requires selected prepare-existing learning-module adoption")
+    refresh_modules = sorted(set(refresh_module or []))
+    if refresh_modules == [ONTOLOGY_MODULE] and adopt_module is None:
+        adopt_module = ONTOLOGY_MODULE
+    if (adopt_module not in {None, LEARNING_MODULE, ONTOLOGY_MODULE, ADVANCED_MODULE} or refresh not in ([], ["memory"])
+            or refresh_modules not in ([], [ONTOLOGY_MODULE]) or adopt_module is not None and mode != "prepare-existing"
+            or refresh and adopt_module != LEARNING_MODULE or refresh_modules and adopt_module != ONTOLOGY_MODULE):
+        raise InitializationError("refresh requires its exact selected prepare-existing module; memory is a separate learning dependency")
     depot, skill = installed_locations()
     validate_identity(project_id, project_name, purpose)
     registry, registry_before = read_registry(depot)
@@ -2044,7 +2539,7 @@ def run_initialization(
     if adopt_module is not None:
         if record is None:
             raise InitializationError("module adoption requires a valid completed base setup receipt")
-        return run_module_adoption(depot, destination, record, previous_raw, refresh)
+        return run_module_adoption(depot, destination, record, previous_raw, refresh, module_id=adopt_module, refresh_modules=refresh_modules)
     if record is not None:
         if any(operation["status"] != "completed" for operation in record.get("module_adoptions", [])):
             raise InitializationError("resume the exact pending selected module adoption before ordinary setup")
@@ -2070,6 +2565,7 @@ def run_initialization(
                           "preserved_files": preserved, "preserved_licenses": preserved_licenses,
                           "preserved_memory": preserved_memory,
                           "preserved_learning": {name: digest for root in LEARNING_TREES for name, digest in package_inventory(destination, root).items()},
+                          "preserved_ontology": ontology_inventory(destination),
                           "recovery_before": before,
                           "completed_stages": [], "active_stage": "assets", "checks": [],
                           "created_at": datetime.now(timezone.utc).isoformat(), "git_setup": "separate"}
@@ -2103,6 +2599,7 @@ def run_initialization(
             check_license_adoption(destination, record)
             check_memory_adoption(destination, record)
             check_learning_adoption(destination, record)
+            check_ontology_adoption(destination, record)
         lock = depot / "depot" / (".initialize-" + sha(relative.encode())[:16] + ".lock")
         with exclusive(lock):
             if mode == "create" and previous_raw is None and destination.exists() and any(destination.iterdir()):
@@ -2113,6 +2610,7 @@ def run_initialization(
                 check_license_adoption(destination, record)
                 check_memory_adoption(destination, record)
                 check_learning_adoption(destination, record)
+                check_ontology_adoption(destination, record)
             if not destination.exists():
                 destination.mkdir()
             if previous_raw is not None:
@@ -2123,7 +2621,7 @@ def run_initialization(
             was_completed = record["status"] == "completed"
             record.update(status="partial", checks=[])
             record["completed_stages"] = [stage for stage in record["completed_stages"] if stage == "assets"]
-            for key in ("verified_at", "current_files", "current_licenses", "current_memory", "current_learning", "memory_capture", "recovery", "rerun"):
+            for key in ("verified_at", "current_files", "current_licenses", "current_memory", "current_learning", "current_ontology", "ontology", "memory_capture", "recovery", "rerun", "static_health", "static_ready", "aggregate", "ready"):
                 record.pop(key, None)
 
             def checkpoint(stage: str | None = None) -> None:
@@ -2157,6 +2655,7 @@ def run_initialization(
                     check_license_adoption(destination, record)
                     check_memory_adoption(destination, record)
                     check_learning_adoption(destination, record)
+                    check_ontology_adoption(destination, record)
                     checkpoint("assets")
                 template_guard.close()
                 begin("registration")
@@ -2171,10 +2670,15 @@ def run_initialization(
                 record["registry"]["sha256"] = sha(registry_raw)
                 record["checks"] = [{"check": name, "outcome": "passed"}
                                     for name in ("project-identity", "project-files", "registration")]
-                checkpoint("verification")
                 record["memory_capture"] = memory_capture_notice(destination)
-                if contract in LEARNING_CONTRACTS or record.get("module_adoptions"):
+                if contract in LEARNING_CONTRACTS or any(op["module_id"] == LEARNING_MODULE for op in record.get("module_adoptions", [])):
                     record["learning"] = assess_learning(destination)
+                if contract in ONTOLOGY_CONTRACTS or any(op["module_id"] == ONTOLOGY_MODULE for op in record.get("module_adoptions", [])):
+                    record["ontology"] = assess_ontology(destination)
+                if contract in ADVANCED_CONTRACTS or any(op["module_id"] == ADVANCED_MODULE for op in record.get("module_adoptions", [])):
+                    record["ontology_advanced"] = _advanced("assess", destination)
+                _static("apply", destination, record)
+                checkpoint("verification")
                 record.update(status="completed", active_stage=None,
                               verified_at=datetime.now(timezone.utc).isoformat())
                 record.pop("recovery_before", None)
@@ -2205,15 +2709,22 @@ def main(argv: list[str] | None = None) -> int:
         route.add_argument("--project-name", required=True)
         route.add_argument("--purpose", required=True)
         if mode == "prepare-existing":
-            route.add_argument("--adopt-module", choices=[LEARNING_MODULE])
+            route.add_argument("--adopt-module", choices=[LEARNING_MODULE, ONTOLOGY_MODULE, ADVANCED_MODULE])
             route.add_argument("--refresh-dependency", action="append", choices=["memory"])
+            route.add_argument("--refresh-module", action="append", choices=[ONTOLOGY_MODULE])
     assessment = commands.add_parser("assess-learning", help="Inspect local learning capability without writing or contacting a backend")
     assessment.add_argument("--destination", type=Path, required=True)
+    ontology_assessment = commands.add_parser("assess-ontology", help="Statically inspect local ontology configuration and imports without executing copied code")
+    ontology_assessment.add_argument("--destination", type=Path, required=True)
+    advanced_assessment = commands.add_parser("assess-ontology-advanced", help="Inspect local advanced capability without executing project code or provisioning")
+    advanced_assessment.add_argument("--destination", type=Path, required=True)
     arguments = vars(parser.parse_args(argv))
     try:
-        result = assess_learning(arguments["destination"]) if arguments["mode"] == "assess-learning" else run_initialization(**arguments)
+        result = (assess_learning(arguments["destination"]) if arguments["mode"] == "assess-learning" else
+                  assess_ontology(arguments["destination"]) if arguments["mode"] == "assess-ontology" else
+                  _advanced("assess", arguments["destination"]) if arguments["mode"] == "assess-ontology-advanced" else run_initialization(**arguments))
         print(encoded(result).decode(), end="")
-        return 0
+        return 1 if result.get("static_ready") is False else 0
     except (InitializationError, OSError, subprocess.TimeoutExpired) as error:
         result = {"status": "failed", "error_type": type(error).__name__}
         if isinstance(error, InitializationError):
@@ -2223,6 +2734,95 @@ def main(argv: list[str] | None = None) -> int:
         print(encoded(result).decode(), end="")
         return 2
 
+
+
+# Optional action guard adapter.  Standalone/core use imports no ontology runtime.
+def _ontology_checkpoint(*, targets=True):
+    import sys as _sys
+    _module = _sys.modules.get("ontology_guards")
+    if _module is not None:
+        _module.checkpoint(targets=targets)
+
+
+def _ontology_guard_adapter(function, family, root_argument, target_paths):
+    import functools as _functools
+    import inspect as _inspect
+    @_functools.wraps(function)
+    def guarded(*args, **kwargs):
+        import importlib.util as _util
+        import sys as _sys
+        from pathlib import Path as _Path
+        arguments = dict(_inspect.signature(function).bind(*args, **kwargs).arguments)
+        if root_argument == "@depot":
+            selected_root = installed_locations()[0]
+        else:
+            selected_root = arguments[root_argument]
+            if not isinstance(selected_root, (_Path, str)):
+                selected_root = getattr(selected_root, "project_root", getattr(selected_root, "root", selected_root))
+        selected_root = _Path(selected_root).absolute()
+        config_path = selected_root / "ontology-advanced.yaml"
+        if not config_path.exists() and not config_path.is_symlink():
+            return function(*args, **kwargs)
+        if family == "template" and arguments.get("command") == "check":
+            return function(*args, **kwargs)
+        import json as _json
+        import hashlib as _hashlib
+        def unique_pairs(pairs):
+            value = {}
+            for key, item in pairs:
+                if key in value:
+                    raise ValueError("duplicate guard configuration key")
+                value[key] = item
+            return value
+        try:
+            if config_path.is_symlink():
+                raise ValueError("symbolic guard configuration")
+            config = _json.loads(config_path.read_text(), object_pairs_hook=unique_pairs)
+            selected = config.get("profiles", {}).get("guards", {"enabled": False})
+            if config.get("schema_version") != 1 or not isinstance(selected, dict) or type(selected.get("enabled")) is not bool:
+                raise ValueError("unsupported guard configuration")
+        except (OSError, ValueError, AttributeError) as exc:
+            raise _ontology_adapter_error("guard_schema", "Guard configuration is unreadable or unsupported.", {}) from exc
+        if not selected["enabled"]:
+            if set(selected) != {"enabled"}:
+                raise _ontology_adapter_error("guard_schema", "Disabled guard configuration has unsupported fields.", {})
+            return function(*args, **kwargs)
+        script = selected_root / ".agents/skills/ontology/scripts/ontology_guards.py"
+        if not script.is_file() or any(parent.is_symlink() for parent in (script, *script.parents)):
+            raise _ontology_adapter_error("guard_unavailable", "Enabled guards require their current project-local installed adapter.", {})
+        current_sha256 = _hashlib.sha256(script.read_bytes()).hexdigest()
+        module = _sys.modules.get("ontology_guards")
+        if module is not None and (_Path(module.__file__).resolve() != script.resolve()
+                or getattr(module, "ENGINE_SOURCE_SHA256", None) != current_sha256):
+            raise _ontology_adapter_error("guard_stale", "Loaded guard code differs from this selected project's current installed bytes; use a fresh owning-helper process after reviewed repair.", {})
+        if module is None:
+            spec = _util.spec_from_file_location("ontology_guards", script)
+            module = _util.module_from_spec(spec)
+            _sys.modules["ontology_guards"] = module
+            _sys.path.insert(0, str(script.parent))
+            spec.loader.exec_module(module)
+        targets = list(target_paths)
+        if family == "setup":
+            destination = _Path(arguments["destination"]).absolute()
+            try:
+                relative = destination.relative_to(selected_root).as_posix()
+            except ValueError:
+                raise _ontology_adapter_error("guard_scope", "Setup target escapes the selected depot.", {})
+            targets.extend([relative + "/control_records/project-setup.json", relative + "/AGENTS.md", relative + "/ROLE.md"])
+        try:
+            return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+        except module.GuardError as exc:
+            raise _ontology_adapter_error(exc.code, str(exc), exc.details) from exc
+    return guarded
+
+
+def _ontology_adapter_error(code, message, details):
+    return InitializationError(code + ": " + message, report=details)
+
+ONTOLOGY_GUARDED_ACTIONS = ['run_initialization', 'run_module_adoption']
+run_initialization = _ontology_guard_adapter(run_initialization, 'setup', '@depot', ['depot/projects.json'])
+
+run_module_adoption = _ontology_guard_adapter(run_module_adoption, "setup", "depot", ["depot/projects.json"])
 
 if __name__ == "__main__":
     raise SystemExit(main())

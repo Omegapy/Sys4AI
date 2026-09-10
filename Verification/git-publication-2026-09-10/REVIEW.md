@@ -1,0 +1,13 @@
+# Root and Template publication review
+
+The user explicitly requested `git add commit push` after verifying the root memory/ontology repair and Template currency. The selected root-owned source set also includes the previously uncommitted ontology foundations and required guard integrations, their Template delivery, canonical project records, and retained release evidence. This produces a coherent source tree rather than publishing only files modified during the last repair.
+
+The exact staging manifest is reviewed separately before commit. Runtime environments, caches, local coordination locks, independent product projects, and disposable test installations are excluded. Existing work is not deleted. Generic ignored `.log` files selected here are retained verification outputs, not application logs. Known secret-pattern matches were inspected: they are explicit synthetic rejection-test values, including bare private-key markers and the literal loopback `user:secret` URL; no credential was found in the reviewed matches.
+
+Publication validation ran the 91-test root suite. It initially exposed a stale initializer-adoption assertion: the test stopped at the prior ontology release. The test now follows the exact health-repair manifest and receipt, preserving the preceding hash-chain assertions and source/root equality. The corrected run passed 88 tests, with two errors for the absent independently owned Electronics project and one expected case-sensitive-filesystem skip. The Electronics tests and project boundary were not altered. Raw output is retained alongside this note.
+
+The repair's prior source/root/delivered ontology tests, final94 memory tests, initializer118 passes plus one explicit platform skip, and live31 checks remain historical observations bound to their actual code and receipt versions. This publication step changes only the additional root integration test and Git exclusion rules; no production helper, canonical plan, memory record, or runtime is revised. Earlier implementation reports intentionally still state that Git publication had not occurred at their observation time.
+
+Remote write access was confirmed for Omegapy/Sys4AI, branch main, under the existing repository author identity. No pull request or deployment is requested. Final commit and remote equality are checked after pushing.
+
+The source/documentation staged whitespace check passed. The complete staged check flags350 whitespace-only locations in generated wiki pages and retained evidence logs/patches; those exact bytes are preserved because receipts bind their hashes. Required source-level test fixtures remain included; only disposable verification project trees are excluded.

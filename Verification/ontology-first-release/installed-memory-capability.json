@@ -1,0 +1,344 @@
+{
+  "scenario": "memory-capability",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology.py",
+    "--project-root",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI",
+    "capability",
+    "memory retrieval"
+  ],
+  "returncode": 0,
+  "result": {
+    "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+    "context": {
+      "config_sha256": "de3973b748afa7dbce5aa74e049cc02bbdc9c445345fb047f96c28317f411d44",
+      "generator_version": "1.0.0",
+      "modules": [
+        {
+          "id": "sys4ai-core",
+          "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+          "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+          "version": "1.0.0"
+        }
+      ],
+      "profile_version": "1.0.0",
+      "project_id": "sys4ai-depot",
+      "snapshot_sha256": "1d5f7f78e4f0eb4929f4dfae1ff11dc623e4690959652c9903c6f145f65b8c24"
+    },
+    "diagnostics": [],
+    "limits": {
+      "hops": 2,
+      "limit": 20,
+      "max_bytes": 32000
+    },
+    "mutated": false,
+    "operation": "capability",
+    "project_id": "sys4ai-depot",
+    "query": "memory retrieval",
+    "results": [
+      {
+        "@id": "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "@type": [
+          "urn:sys4ai:ontology:core:OntologyConcept",
+          "urn:sys4ai:ontology:core:Capability"
+        ],
+        "aliases": [
+          "retrieve project memory",
+          "memory search",
+          "memory retrieval"
+        ],
+        "availability": "available",
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/12",
+        "constraints": [
+          "Current skill and project authority are required before execution."
+        ],
+        "definition": "The capability to retrieve permitted project memory evidence through the installed memory read and search interfaces, retaining provenance, lifecycle and source restrictions.",
+        "executed": false,
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "kind": "concept",
+        "label": "MemoryRetrieval",
+        "lifecycle": "approved",
+        "match_reason": "alias",
+        "module": "sys4ai-core",
+        "module_version": "1.0.0",
+        "relationships": [
+          {
+            "@id": "urn:sys4ai:ontology:core:relation-5",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "MemoryRetrieval retrieves MemoryRecord",
+            "lifecycle": "approved",
+            "module": "sys4ai-core",
+            "object": "urn:sys4ai:ontology:core:MemoryRecord",
+            "predicate": "urn:sys4ai:ontology:core:retrieves",
+            "qualifiers": {
+              "scope": "conceptual"
+            },
+            "sources": [
+              {
+                "locator": "section:Relationship vocabulary",
+                "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+                "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:core:MemoryRetrieval"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-capability-meaning",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "Project memory retrieval uses the shared capability meaning",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "Project memory retrieval uses the shared capability meaning",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:core:MemoryRetrieval",
+            "predicate": "urn:sys4ai:ontology:core:relatedTo",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-provides-shared",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "memory skill implements the shared MemoryRetrieval capability",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "memory skill implements the shared MemoryRetrieval capability",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:core:MemoryRetrieval",
+            "predicate": "urn:sys4ai:ontology:core:providesCapability",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+          }
+        ],
+        "source_status": [
+          {
+            "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "diagnostic": null,
+            "locator": "section:MemoryRetrieval",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:MemoryRetrieval",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+          }
+        ]
+      },
+      {
+        "@id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory",
+        "@type": [
+          "urn:sys4ai:ontology:core:Skill"
+        ],
+        "aliases": [
+          "memory skill installation"
+        ],
+        "availability": "available",
+        "bindings": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-skill-memory",
+            "@type": [
+              "urn:sys4ai:ontology:core:SourceBinding"
+            ],
+            "binding_type": "skill",
+            "definition": "Retrieve current eligible project memory with source evidence and explicit limitations. Historical records grant no execution or publication authority.",
+            "entity": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory",
+            "fact_kind": "asserted",
+            "kind": "binding",
+            "label": "Source binding binding-skill-memory",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ]
+          }
+        ],
+        "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/35",
+        "constraints": [
+          "Current skill and project authority are required before execution."
+        ],
+        "definition": "Retrieve current eligible project memory with source evidence and explicit limitations. Historical records grant no execution or publication authority.",
+        "executed": false,
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "kind": "instance",
+        "label": "Installed memory skill",
+        "lifecycle": "approved",
+        "match_reason": "capability_relation",
+        "module": "project",
+        "module_version": null,
+        "relationships": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-defined-by",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "memory skill is defined by its installed SKILL.md",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "memory skill is defined by its installed SKILL.md",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-memory",
+            "predicate": "urn:sys4ai:ontology:core:definedBy",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-governed-by",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "memory operations follow current installed source instructions",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "memory operations follow current installed source instructions",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-memory",
+            "predicate": "urn:sys4ai:ontology:core:governedBy",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-provides",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "memory skill provides Project memory retrieval",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "memory skill provides Project memory retrieval",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+            "predicate": "urn:sys4ai:ontology:core:providesCapability",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-provides-shared",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "memory skill implements the shared MemoryRetrieval capability",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "memory skill implements the shared MemoryRetrieval capability",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:core:MemoryRetrieval",
+            "predicate": "urn:sys4ai:ontology:core:providesCapability",
+            "sources": [
+              {
+                "locator": "section:Project memory",
+                "path": ".agents/skills/memory/SKILL.md",
+                "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-publish-requires-authority",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "Memory publication requires its own current grant",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "Memory publication requires its own current grant",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:memory-publication-authority",
+            "predicate": "urn:sys4ai:ontology:core:requiresAuthority",
+            "sources": [
+              {
+                "locator": "section:Preparing reviewed publication",
+                "path": ".agents/skills/memory/references/publication-examples.md",
+                "sha256": "2cb2fd172ccd053949c436aff78be5144e2689f82f4831582d879de352fe2ea7"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+          }
+        ],
+        "source_status": [
+          {
+            "actual_sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+            "diagnostic": null,
+            "locator": "section:Project memory",
+            "path": ".agents/skills/memory/SKILL.md",
+            "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Project memory",
+            "path": ".agents/skills/memory/SKILL.md",
+            "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+          }
+        ]
+      }
+    ],
+    "status": "ok",
+    "truncation": {
+      "available_results": 2,
+      "returned_results": 2,
+      "truncated": false
+    }
+  },
+  "stderr": ""
+}

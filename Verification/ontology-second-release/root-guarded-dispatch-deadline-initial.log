@@ -1,0 +1,41 @@
+test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) ... 
+  test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) (family='ontology') ... ERROR
+test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) ... 
+  test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) (family='ontology') ... FAIL
+test_every_declared_public_boundary_rejects_without_backend (test_guarded_dispatch.GuardedDispatchTests.test_every_declared_public_boundary_rejects_without_backend) ... ok
+
+======================================================================
+ERROR: test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) (family='ontology')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guarded_dispatch.py", line 262, in test_actual_family_matrix
+    receipt = call()
+              ^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guarded_dispatch.py", line 84, in <lambda>
+    call = lambda: module.publish(r, payload, selected_grant, expected_preview_sha256=selected_grant["preview_sha256"])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp8zdifpf9/project/.agents/skills/ontology/scripts/ontology_publication.py", line 239, in publish
+    require(pre["preview_sha256"] == expected_preview_sha256, "preview_changed", "Exact reviewed preview differs from current proposed state.")
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmp8zdifpf9/project/.agents/skills/ontology/scripts/ontology_core.py", line 40, in require
+    raise OntologyError(code, message, **location)
+ontology_core.OntologyError: Exact reviewed preview differs from current proposed state.
+
+======================================================================
+FAIL: test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) (family='ontology')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guarded_dispatch.py", line 311, in test_actual_under_lock_context_changes_block_each_family
+    self.assertEqual(changed, [True], str(rejected.exception))
+AssertionError: Lists differ: [] != [True]
+
+Second list contains 1 additional elements.
+First extra element 0:
+True
+
+- []
++ [True] : Exact reviewed preview differs from current proposed state.
+
+----------------------------------------------------------------------
+Ran 3 tests in 64.121s
+
+FAILED (failures=1, errors=1)

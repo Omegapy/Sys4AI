@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "observations": [
+    {
+      "case": "actual_worker_deadline",
+      "budget_seconds": 1,
+      "elapsed_seconds": 1.0334954999852926,
+      "backend_status": "cancelled",
+      "complete": false,
+      "worker": {
+        "platform": "Darwin",
+        "peak_rss_bytes": 59490304,
+        "rss_limit_bytes": 536870912,
+        "rss_overshoot_bytes": 0,
+        "elapsed_seconds": 0.9315,
+        "exit_code": -9,
+        "network_allowed": false,
+        "project_files_readable": false
+      }
+    },
+    {
+      "case": "actual_v2_phases",
+      "phase_limits": [
+        {
+          "phase": "dataset",
+          "limits": {
+            "query_seconds": 5,
+            "reasoning_seconds": 5
+          }
+        },
+        {
+          "phase": "validate",
+          "limits": {
+            "query_seconds": 5,
+            "reasoning_seconds": 5
+          }
+        },
+        {
+          "phase": "infer",
+          "limits": {
+            "query_seconds": 4,
+            "reasoning_seconds": 4
+          }
+        },
+        {
+          "phase": "validate",
+          "limits": {
+            "query_seconds": 4,
+            "reasoning_seconds": 4
+          }
+        }
+      ],
+      "shared_cancel_object": true,
+      "elapsed_seconds": 2.1551,
+      "budget_seconds": 5,
+      "canonical_unchanged": true
+    },
+    {
+      "case": "stable_review_identity",
+      "backend": "actual selected standards",
+      "matching_preview_sha256": "64c9faf4c5eac5305a169ae019e21e6b05422a33a0015d9234f5b2e4d03908f4",
+      "nondeterministic_elapsed_time_excluded": true
+    },
+    {
+      "case": "late_conformant_result",
+      "backend": "actual selected standards",
+      "clock": "explicit test-controlled deadline advance, not a wall-time measurement",
+      "owner_invoked": false,
+      "canonical_unchanged": true
+    }
+  ],
+  "limits": "The existing worker supervisor polls the shared deadline. Synchronous filesystem/preparation calls are checked at phase boundaries; a late result cannot be conformant or dispatch an owner."
+}

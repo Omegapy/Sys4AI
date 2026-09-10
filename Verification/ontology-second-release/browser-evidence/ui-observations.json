@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "observer": "/root",
+  "tool": "mcp__cua_repl.js",
+  "evidence_kind": "actual browser observation",
+  "observations": [
+    {
+      "case": "session-isolation",
+      "evidence": "CUA author tabs4/5 on port52431 remained usable after a browsing-only tab6 connected on port52432. The prior shared-cookie failure was fixed and independently regressed.",
+      "status": "passed"
+    },
+    {
+      "case": "keyboard-alias-search",
+      "evidence": "Filled verification bundle and pressed Enter; exactly one result, Release evidence bundle.",
+      "status": "passed"
+    },
+    {
+      "case": "concept-and-relation",
+      "evidence": "Inspector showed the generated sourced definition and ReleaseEvidenceBundle subtypeOf Artifact, plus equivalent list and graph controls.",
+      "status": "passed"
+    },
+    {
+      "case": "invalid-draft",
+      "evidence": "Browser form saved r1 with an empty definition; real validation showed missing_metadata and SHACL violation; no canonical publication occurred.",
+      "status": "passed"
+    },
+    {
+      "case": "revision-and-conflict",
+      "evidence": "Tab4 saved corrected r2. Tab5 stale save was rejected and retained its exact pending definition text.",
+      "status": "passed"
+    },
+    {
+      "case": "reject-and-reload",
+      "evidence": "Rejected r2 exposed no Publish control. Reload retained the same identity and rejected state. Explicit reopen and revalidation preceded review.",
+      "status": "passed"
+    },
+    {
+      "case": "review-publish-reopen",
+      "evidence": "Inspected exact before/after diff, accepted exact review, clicked Publish reviewed change; UI reported Published and reopened the canonical result. Receipt has current actor and conformant under-lock semantic guard.",
+      "status": "passed"
+    },
+    {
+      "case": "proof-and-query",
+      "evidence": "Expanded cax-sco proof with both sourced premises; selected inferred graph, ran actual SPARQL ASK, observed answer true and complete true.",
+      "status": "passed"
+    },
+    {
+      "case": "browsing-only",
+      "evidence": "Tab6 displayed Browsing session, Create a draft disabled, no Accept/Publish/Revise controls. Separate actual HTTP publication attempt returned403 publication_unavailable with unchanged canonical hash.",
+      "status": "passed"
+    },
+    {
+      "case": "visual-and-responsive",
+      "evidence": "Actual screenshots inspected review columns and non-graph concept view. Narrow tab6 measured clientWidth500, scrollWidth500, innerWidth520. The browser minimum prevented claiming a390-pixel run. Viewport override reset.",
+      "status": "passed"
+    },
+    {
+      "case": "source-text-execution",
+      "proposal_id": "ONTPROP-42a75637305143d1949892f255eb65b0",
+      "status": "passed",
+      "evidence": "Actual CUA tab6 displayed the literal img/onerror label in a draft semantic diff, document.title stayed Ontology workbench · Sys4AI, and the review contained zero img elements. Probe was not published."
+    },
+    {
+      "case": "native-proposal-attribution",
+      "status": "passed",
+      "evidence": "Actual CUA tab6 reopened native proposal ONTPROP-16ca267865ae4434aaeda32d064bbed2 revision2 and expanded source/generator attribution: actual native run, ONTGEN-native-release-002, exact request/result hashes, settings explicitly unobserved."
+    }
+  ],
+  "ui_proof": {
+    "query_form": "ASK",
+    "answer": true,
+    "complete": true,
+    "graph": "inferred",
+    "proof_rule": "cax-sco",
+    "premises": [
+      "browser-release-bundle type ReleaseEvidenceBundle",
+      "ReleaseEvidenceBundle subClassOf Artifact"
+    ],
+    "canonical_type": "ReleaseEvidenceBundle",
+    "inferred_type": "Artifact",
+    "text_safety_title": "Ontology workbench · Sys4AI",
+    "text_safety_img_elements": 0,
+    "narrow_client_width": 500,
+    "narrow_scroll_width": 500,
+    "viewport_restored": true
+  }
+}

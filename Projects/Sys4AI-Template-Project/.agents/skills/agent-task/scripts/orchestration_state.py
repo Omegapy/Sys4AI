@@ -562,6 +562,12 @@ def apply(task, event, root, folder, other_tasks=()):
     keys(event, ('event_id', 'actor', 'execution_id', 'generation', 'kind', 'data'))
     ident(event['event_id']); native_id(event['actor']); integer(event['generation'])
     kind = event['kind']; data = copy.deepcopy(event['data']); validate_event_data(kind, data)
+    # The owning Task transaction carries the exact semantic decision. This
+    # pure state transform does not create a second writer or acquire a lock.
+    import sys
+    guard = sys.modules.get('ontology_guards')
+    if guard is not None:
+        guard.checkpoint(targets=False)
     o = copy.deepcopy(task['orchestration']); validate(o); writes = []
     external_owners = [a for other in other_tasks if other.get('schema_version') == 2 and other['task_id'] != task['task_id'] for a in unresolved(other['orchestration'])]
     need(not any(e['event_id'] == event['event_id'] for e in o['events']), 'ORCH_DUPLICATE_EVENT', 'Event was already accepted; inspect state, do not replay.')

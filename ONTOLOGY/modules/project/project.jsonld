@@ -1,0 +1,1933 @@
+{
+  "@context": "ONTOLOGY/contexts/context-v1.jsonld",
+  "@graph": [
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:agent-task-capability-meaning",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Canonical Task ledger operations uses the shared capability meaning",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Canonical Task ledger operations uses the shared capability meaning",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:TaskManagement",
+      "predicate": "urn:sys4ai:ontology:core:relatedTo",
+      "sources": [
+        {
+          "locator": "section:Authority and root",
+          "path": ".agents/skills/agent-task/SKILL.md",
+          "sha256": "3f74b076a6fc2d008dc194c8a316bea16008a3e435cc11169555918ed0b879fa"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:capability-task-ledger"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:agent-task-defined-by",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "agent-task skill is defined by its installed SKILL.md",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "agent-task skill is defined by its installed SKILL.md",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-agent-task",
+      "predicate": "urn:sys4ai:ontology:core:definedBy",
+      "sources": [
+        {
+          "locator": "section:Authority and root",
+          "path": ".agents/skills/agent-task/SKILL.md",
+          "sha256": "3f74b076a6fc2d008dc194c8a316bea16008a3e435cc11169555918ed0b879fa"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-agent-task"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:agent-task-governed-by",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "agent-task operations follow current installed source instructions",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "agent-task operations follow current installed source instructions",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-agent-task",
+      "predicate": "urn:sys4ai:ontology:core:governedBy",
+      "sources": [
+        {
+          "locator": "section:Authority and root",
+          "path": ".agents/skills/agent-task/SKILL.md",
+          "sha256": "3f74b076a6fc2d008dc194c8a316bea16008a3e435cc11169555918ed0b879fa"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-agent-task"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:agent-task-provides",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "agent-task skill provides Canonical Task ledger operations",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "agent-task skill provides Canonical Task ledger operations",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-task-ledger",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Authority and root",
+          "path": ".agents/skills/agent-task/SKILL.md",
+          "sha256": "3f74b076a6fc2d008dc194c8a316bea16008a3e435cc11169555918ed0b879fa"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-agent-task"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:agent-task-provides-shared",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "agent-task skill implements the shared TaskManagement capability",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "agent-task skill implements the shared TaskManagement capability",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:TaskManagement",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Authority and root",
+          "path": ".agents/skills/agent-task/SKILL.md",
+          "sha256": "3f74b076a6fc2d008dc194c8a316bea16008a3e435cc11169555918ed0b879fa"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-agent-task"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-agents",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at AGENTS.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Root project instructions",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Project identity and boundaries",
+          "path": "AGENTS.md",
+          "sha256": "d16daa454d6bb19053f5d3dee26369635367d88eaed4f471c7237ed1389c4aa3"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-core-module",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Selected reusable core module",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "json:/@graph",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld",
+          "sha256": "b9b3bb90f8db47110588c02c99c8b4bedab62c1b4be9f533572aa3a6362e4f43"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-director-role",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at ROLE.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Root Director role definition",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Authority and non-authority",
+          "path": "ROLE.md",
+          "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-project-sub-agent-agents",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at Roles/project-sub-agent/AGENTS.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "project-sub-agent AGENTS.md source",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Required first reads",
+          "path": "Roles/project-sub-agent/AGENTS.md",
+          "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-project-sub-agent-role",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at Roles/project-sub-agent/ROLE.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "project-sub-agent ROLE.md source",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Purpose",
+          "path": "Roles/project-sub-agent/ROLE.md",
+          "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-registry",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at depot/projects.json.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Factual workspace registry",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "json:/projects",
+          "path": "depot/projects.json",
+          "sha256": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-agent-task",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at .agents/skills/agent-task/SKILL.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Installed agent-task skill source",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Authority and root",
+          "path": ".agents/skills/agent-task/SKILL.md",
+          "sha256": "3f74b076a6fc2d008dc194c8a316bea16008a3e435cc11169555918ed0b879fa"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-memory",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at .agents/skills/memory/SKILL.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Installed memory skill source",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Project memory",
+          "path": ".agents/skills/memory/SKILL.md",
+          "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-ontology",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at .agents/skills/ontology/SKILL.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Installed ontology skill source",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Ontology",
+          "path": ".agents/skills/ontology/SKILL.md",
+          "sha256": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-task",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at .agents/skills/task/SKILL.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Installed task skill source",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Intake and mode",
+          "path": ".agents/skills/task/SKILL.md",
+          "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-to-trd",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at .agents/skills/to-trd/SKILL.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Installed to-trd skill source",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:1. Activation and authority",
+          "path": ".agents/skills/to-trd/SKILL.md",
+          "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-soul",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at SOUL.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Root reasoning and verification guidance",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Verification discipline",
+          "path": "SOUL.md",
+          "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-specifications",
+      "@type": [
+        "urn:sys4ai:ontology:core:Specification"
+      ],
+      "definition": "The selected project-local source at SPECS.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Root technical specifications",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Ontology first release and initialization v8",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-agents",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at Roles/task-manager/AGENTS.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "task-manager AGENTS.md source",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Required first reads",
+          "path": "Roles/task-manager/AGENTS.md",
+          "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-role",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at Roles/task-manager/ROLE.md.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "task-manager ROLE.md source",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Purpose",
+          "path": "Roles/task-manager/ROLE.md",
+          "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-template-mapping",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "definition": "The selected project-local source at depot/template-update.json.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Explicit Template update mapping",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "json:/overrides",
+          "path": "depot/template-update.json",
+          "sha256": "e19ed6439a9d26407751e742bb5080e53f64d672842080d655deb5cd397afc88"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+      "@type": [
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "aliases": [
+        "retrieve project lessons",
+        "retrieve prior project decisions"
+      ],
+      "definition": "Retrieve current eligible project memory with source evidence and explicit limitations. Historical records grant no execution or publication authority.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Project memory retrieval",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Project memory",
+          "path": ".agents/skills/memory/SKILL.md",
+          "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-retrieval",
+      "@type": [
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "aliases": [
+        "resolve ontology terms",
+        "find semantic relationships"
+      ],
+      "definition": "Resolve selected ontology definitions, capabilities and typed relationships without invoking discovered operations or granting authority.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Project ontology retrieval",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Ontology",
+          "path": ".agents/skills/ontology/SKILL.md",
+          "sha256": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-task-ledger",
+      "@type": [
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "aliases": [
+        "inspect Task state",
+        "record Task response"
+      ],
+      "definition": "Inspect or mutate the canonical project Task ledger using its current helper and exact actor, revision and execution gates.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Canonical Task ledger operations",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Authority and root",
+          "path": ".agents/skills/agent-task/SKILL.md",
+          "sha256": "3f74b076a6fc2d008dc194c8a316bea16008a3e435cc11169555918ed0b879fa"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-task-management",
+      "@type": [
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "aliases": [
+        "manage governed work",
+        "activate project Task"
+      ],
+      "definition": "Route explicitly activated project Task work under the installed ownership and required-team gates. Mentioning a task does not activate this workflow.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Governed Task management",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Intake and mode",
+          "path": ".agents/skills/task/SKILL.md",
+          "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-trd-creation",
+      "@type": [
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "aliases": [
+        "capture requirements",
+        "create requirements document"
+      ],
+      "definition": "Discover user intent and create a managed TRD only through explicit to-trd activation. TRD creation does not create a Task or authorize implementation.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "TRD creation",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:1. Activation and authority",
+          "path": ".agents/skills/to-trd/SKILL.md",
+          "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager",
+      "@type": [
+        "urn:sys4ai:ontology:core:Role"
+      ],
+      "aliases": [
+        "installed Task manager role"
+      ],
+      "definition": "This persisted role can coordinate exactly one assigned Task only after a real native receipt and explicit manager activation. Reading the role does not establish a live manager.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Sys4AI confirmed Task manager role",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Required first reads",
+          "path": "Roles/task-manager/AGENTS.md",
+          "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+        },
+        {
+          "locator": "section:Purpose",
+          "path": "Roles/task-manager/ROLE.md",
+          "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager-defined-by-0",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Sys4AI confirmed Task manager role is defined by its selected source 1",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Sys4AI confirmed Task manager role is defined by its selected source 1",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-agents",
+      "predicate": "urn:sys4ai:ontology:core:definedBy",
+      "sources": [
+        {
+          "locator": "section:Required first reads",
+          "path": "Roles/task-manager/AGENTS.md",
+          "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager-defined-by-1",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Sys4AI confirmed Task manager role is defined by its selected source 2",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Sys4AI confirmed Task manager role is defined by its selected source 2",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-role",
+      "predicate": "urn:sys4ai:ontology:core:definedBy",
+      "sources": [
+        {
+          "locator": "section:Purpose",
+          "path": "Roles/task-manager/ROLE.md",
+          "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:depot",
+      "@type": [
+        "urn:sys4ai:ontology:core:Project"
+      ],
+      "definition": "Registry representation of Sys4AI depot at .. This record describes factual inventory only; it imports no internal vocabulary and grants no read, write or publication authority over that project.",
+      "fact_kind": "external",
+      "kind": "instance",
+      "label": "Registered Sys4AI depot",
+      "lifecycle": "approved",
+      "module": "project",
+      "scope_note": "Only the registry entry is represented; no child-project files are loaded.",
+      "sources": [
+        {
+          "locator": "json:/projects",
+          "path": "depot/projects.json",
+          "sha256": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:depot-has-director",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "The depot host has its local Director role",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "The depot host has its local Director role",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:host-director",
+      "predicate": "urn:sys4ai:ontology:core:hasRole",
+      "sources": [
+        {
+          "locator": "section:Authority and non-authority",
+          "path": "ROLE.md",
+          "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:depot"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:host-director",
+      "@type": [
+        "urn:sys4ai:ontology:core:Role"
+      ],
+      "aliases": [
+        "depot Director"
+      ],
+      "definition": "The host frames project work and owns workspace registration and reusable adoption decisions; an activated Task manager owns its exact assigned execution.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Sys4AI host Project Director",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Project identity and boundaries",
+          "path": "AGENTS.md",
+          "sha256": "d16daa454d6bb19053f5d3dee26369635367d88eaed4f471c7237ed1389c4aa3"
+        },
+        {
+          "locator": "section:Authority and non-authority",
+          "path": "ROLE.md",
+          "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:host-director-defined-by-0",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Sys4AI host Project Director is defined by its selected source 1",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Sys4AI host Project Director is defined by its selected source 1",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-agents",
+      "predicate": "urn:sys4ai:ontology:core:definedBy",
+      "sources": [
+        {
+          "locator": "section:Project identity and boundaries",
+          "path": "AGENTS.md",
+          "sha256": "d16daa454d6bb19053f5d3dee26369635367d88eaed4f471c7237ed1389c4aa3"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:host-director"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:host-director-defined-by-1",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Sys4AI host Project Director is defined by its selected source 2",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Sys4AI host Project Director is defined by its selected source 2",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-director-role",
+      "predicate": "urn:sys4ai:ontology:core:definedBy",
+      "sources": [
+        {
+          "locator": "section:Authority and non-authority",
+          "path": "ROLE.md",
+          "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:host-director"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-agent-task",
+      "@type": [
+        "urn:sys4ai:ontology:core:Skill"
+      ],
+      "aliases": [
+        "agent-task skill installation"
+      ],
+      "definition": "Inspect or mutate the canonical project Task ledger using its current helper and exact actor, revision and execution gates.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Installed agent-task skill",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Authority and root",
+          "path": ".agents/skills/agent-task/SKILL.md",
+          "sha256": "3f74b076a6fc2d008dc194c8a316bea16008a3e435cc11169555918ed0b879fa"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory",
+      "@type": [
+        "urn:sys4ai:ontology:core:Skill"
+      ],
+      "aliases": [
+        "memory skill installation"
+      ],
+      "definition": "Retrieve current eligible project memory with source evidence and explicit limitations. Historical records grant no execution or publication authority.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Installed memory skill",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Project memory",
+          "path": ".agents/skills/memory/SKILL.md",
+          "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology",
+      "@type": [
+        "urn:sys4ai:ontology:core:Skill"
+      ],
+      "aliases": [
+        "ontology skill installation"
+      ],
+      "definition": "Resolve selected ontology definitions, capabilities and typed relationships without invoking discovered operations or granting authority.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Installed ontology skill",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Ontology",
+          "path": ".agents/skills/ontology/SKILL.md",
+          "sha256": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-task",
+      "@type": [
+        "urn:sys4ai:ontology:core:Skill"
+      ],
+      "aliases": [
+        "task skill installation"
+      ],
+      "definition": "Route explicitly activated project Task work under the installed ownership and required-team gates. Mentioning a task does not activate this workflow.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Installed task skill",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Intake and mode",
+          "path": ".agents/skills/task/SKILL.md",
+          "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd",
+      "@type": [
+        "urn:sys4ai:ontology:core:Skill"
+      ],
+      "aliases": [
+        "to-trd skill installation"
+      ],
+      "definition": "Discover user intent and create a managed TRD only through explicit to-trd activation. TRD creation does not create a Task or authorize implementation.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Installed to-trd skill",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:1. Activation and authority",
+          "path": ".agents/skills/to-trd/SKILL.md",
+          "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:manager-manages-task",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A confirmed Task manager coordinates its assigned governed Task",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "A confirmed Task manager coordinates its assigned governed Task",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:Task",
+      "predicate": "urn:sys4ai:ontology:core:manages",
+      "sources": [
+        {
+          "locator": "section:Required first reads",
+          "path": "Roles/task-manager/AGENTS.md",
+          "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-capability-meaning",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Project memory retrieval uses the shared capability meaning",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Project memory retrieval uses the shared capability meaning",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:MemoryRetrieval",
+      "predicate": "urn:sys4ai:ontology:core:relatedTo",
+      "sources": [
+        {
+          "locator": "section:Project memory",
+          "path": ".agents/skills/memory/SKILL.md",
+          "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-defined-by",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "memory skill is defined by its installed SKILL.md",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "memory skill is defined by its installed SKILL.md",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-memory",
+      "predicate": "urn:sys4ai:ontology:core:definedBy",
+      "sources": [
+        {
+          "locator": "section:Project memory",
+          "path": ".agents/skills/memory/SKILL.md",
+          "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-governed-by",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "memory operations follow current installed source instructions",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "memory operations follow current installed source instructions",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-memory",
+      "predicate": "urn:sys4ai:ontology:core:governedBy",
+      "sources": [
+        {
+          "locator": "section:Project memory",
+          "path": ".agents/skills/memory/SKILL.md",
+          "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-provides",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "memory skill provides Project memory retrieval",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "memory skill provides Project memory retrieval",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Project memory",
+          "path": ".agents/skills/memory/SKILL.md",
+          "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-provides-shared",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "memory skill implements the shared MemoryRetrieval capability",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "memory skill implements the shared MemoryRetrieval capability",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:MemoryRetrieval",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Project memory",
+          "path": ".agents/skills/memory/SKILL.md",
+          "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-publication-authority",
+      "@type": [
+        "urn:sys4ai:ontology:core:Authority"
+      ],
+      "definition": "The memory publisher requires reviewed record bytes and a current memory-only grant. It does not publish or redefine ontology semantics.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Scoped memory publication authority",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Preparing reviewed publication",
+          "path": ".agents/skills/memory/references/publication-examples.md",
+          "sha256": "2cb2fd172ccd053949c436aff78be5144e2689f82f4831582d879de352fe2ea7"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-publish-requires-authority",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Memory publication requires its own current grant",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Memory publication requires its own current grant",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:memory-publication-authority",
+      "predicate": "urn:sys4ai:ontology:core:requiresAuthority",
+      "sources": [
+        {
+          "locator": "section:Preparing reviewed publication",
+          "path": ".agents/skills/memory/references/publication-examples.md",
+          "sha256": "2cb2fd172ccd053949c436aff78be5144e2689f82f4831582d879de352fe2ea7"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-retrieves",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Project memory retrieval retrieves MemoryRecord",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Project memory retrieval retrieves MemoryRecord",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:MemoryRecord",
+      "predicate": "urn:sys4ai:ontology:core:retrieves",
+      "sources": [
+        {
+          "locator": "section:Project memory",
+          "path": ".agents/skills/memory/SKILL.md",
+          "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-capability-meaning",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Project ontology retrieval uses the shared capability meaning",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Project ontology retrieval uses the shared capability meaning",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:OntologyRetrieval",
+      "predicate": "urn:sys4ai:ontology:core:relatedTo",
+      "sources": [
+        {
+          "locator": "section:Ontology",
+          "path": ".agents/skills/ontology/SKILL.md",
+          "sha256": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-retrieval"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-defined-by",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "ontology skill is defined by its installed SKILL.md",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "ontology skill is defined by its installed SKILL.md",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-ontology",
+      "predicate": "urn:sys4ai:ontology:core:definedBy",
+      "sources": [
+        {
+          "locator": "section:Ontology",
+          "path": ".agents/skills/ontology/SKILL.md",
+          "sha256": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-governed-by",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "ontology operations follow current installed source instructions",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "ontology operations follow current installed source instructions",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-ontology",
+      "predicate": "urn:sys4ai:ontology:core:governedBy",
+      "sources": [
+        {
+          "locator": "section:Ontology",
+          "path": ".agents/skills/ontology/SKILL.md",
+          "sha256": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "ontology skill provides Project ontology retrieval",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "ontology skill provides Project ontology retrieval",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-retrieval",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Ontology",
+          "path": ".agents/skills/ontology/SKILL.md",
+          "sha256": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-shared",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "ontology skill implements the shared OntologyRetrieval capability",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "ontology skill implements the shared OntologyRetrieval capability",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:OntologyRetrieval",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Ontology",
+          "path": ".agents/skills/ontology/SKILL.md",
+          "sha256": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-publication-authority",
+      "@type": [
+        "urn:sys4ai:ontology:core:Authority"
+      ],
+      "definition": "A current local Director or confirmed Task manager may publish only an exact reviewed ontology change within its granted scope. Validation and memory publication grants do not provide this authority.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Scoped ontology publication authority",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Authority and non-authority",
+          "path": "ROLE.md",
+          "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+        },
+        {
+          "locator": "section:Ontology first release and initialization v8",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-publish-requires-authority",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Ontology publication requires its own reviewed grant",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Ontology publication requires its own reviewed grant",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-publication-authority",
+      "predicate": "urn:sys4ai:ontology:core:requiresAuthority",
+      "sources": [
+        {
+          "locator": "section:Ontology first release and initialization v8",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-retrieves",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Project ontology retrieval retrieves OntologyConcept",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Project ontology retrieval retrieves OntologyConcept",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:OntologyConcept",
+      "predicate": "urn:sys4ai:ontology:core:retrieves",
+      "sources": [
+        {
+          "locator": "section:Ontology",
+          "path": ".agents/skills/ontology/SKILL.md",
+          "sha256": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-retrieval"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child",
+      "@type": [
+        "urn:sys4ai:ontology:core:Role"
+      ],
+      "aliases": [
+        "bounded project worker"
+      ],
+      "definition": "An ordinary child performs one bounded assignment and returns evidence; it has no canonical Task, role-index or shared publication ownership.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Sys4AI ordinary project sub-agent role",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Required first reads",
+          "path": "Roles/project-sub-agent/AGENTS.md",
+          "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+        },
+        {
+          "locator": "section:Purpose",
+          "path": "Roles/project-sub-agent/ROLE.md",
+          "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child-defined-by-0",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Sys4AI ordinary project sub-agent role is defined by its selected source 1",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Sys4AI ordinary project sub-agent role is defined by its selected source 1",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-project-sub-agent-agents",
+      "predicate": "urn:sys4ai:ontology:core:definedBy",
+      "sources": [
+        {
+          "locator": "section:Required first reads",
+          "path": "Roles/project-sub-agent/AGENTS.md",
+          "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child-defined-by-1",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Sys4AI ordinary project sub-agent role is defined by its selected source 2",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Sys4AI ordinary project sub-agent role is defined by its selected source 2",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-project-sub-agent-role",
+      "predicate": "urn:sys4ai:ontology:core:definedBy",
+      "sources": [
+        {
+          "locator": "section:Purpose",
+          "path": "Roles/project-sub-agent/ROLE.md",
+          "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:registered-template",
+      "@type": [
+        "urn:sys4ai:ontology:core:ProjectTemplate"
+      ],
+      "definition": "Registry representation of Sys4AI Template Project at Projects/Sys4AI-Template-Project. This record describes factual inventory only; it imports no internal vocabulary and grants no read, write or publication authority over that project.",
+      "fact_kind": "external",
+      "kind": "instance",
+      "label": "Registered Sys4AI Template Project",
+      "lifecycle": "approved",
+      "module": "project",
+      "scope_note": "Only the registry entry is represented; no child-project files are loaded.",
+      "sources": [
+        {
+          "locator": "json:/projects",
+          "path": "depot/projects.json",
+          "sha256": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:registry-describes-depot",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "The registry describes Sys4AI depot",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "The registry describes Sys4AI depot",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:depot",
+      "predicate": "urn:sys4ai:ontology:core:describes",
+      "sources": [
+        {
+          "locator": "json:/projects",
+          "path": "depot/projects.json",
+          "sha256": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-registry"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:registry-describes-registered-template",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "The registry describes Sys4AI Template Project",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "The registry describes Sys4AI Template Project",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:registered-template",
+      "predicate": "urn:sys4ai:ontology:core:describes",
+      "sources": [
+        {
+          "locator": "json:/projects",
+          "path": "depot/projects.json",
+          "sha256": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-registry"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:task-capability-meaning",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Governed Task management uses the shared capability meaning",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Governed Task management uses the shared capability meaning",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:TaskManagement",
+      "predicate": "urn:sys4ai:ontology:core:relatedTo",
+      "sources": [
+        {
+          "locator": "section:Intake and mode",
+          "path": ".agents/skills/task/SKILL.md",
+          "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:capability-task-management"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:task-defined-by",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "task skill is defined by its installed SKILL.md",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "task skill is defined by its installed SKILL.md",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-task",
+      "predicate": "urn:sys4ai:ontology:core:definedBy",
+      "sources": [
+        {
+          "locator": "section:Intake and mode",
+          "path": ".agents/skills/task/SKILL.md",
+          "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-task"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:task-governed-by",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "task operations follow current installed source instructions",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "task operations follow current installed source instructions",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-task",
+      "predicate": "urn:sys4ai:ontology:core:governedBy",
+      "sources": [
+        {
+          "locator": "section:Intake and mode",
+          "path": ".agents/skills/task/SKILL.md",
+          "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-task"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:task-provides",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "task skill provides Governed Task management",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "task skill provides Governed Task management",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-task-management",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Intake and mode",
+          "path": ".agents/skills/task/SKILL.md",
+          "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-task"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:task-provides-shared",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "task skill implements the shared TaskManagement capability",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "task skill implements the shared TaskManagement capability",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:TaskManagement",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Intake and mode",
+          "path": ".agents/skills/task/SKILL.md",
+          "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-task"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:template-derives-core",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Template vocabulary derives from the selected reusable core source",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Template vocabulary derives from the selected reusable core source",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-core-module",
+      "predicate": "urn:sys4ai:ontology:core:derivesFrom",
+      "sources": [
+        {
+          "locator": "json:/@graph",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld",
+          "sha256": "b9b3bb90f8db47110588c02c99c8b4bedab62c1b4be9f533572aa3a6362e4f43"
+        },
+        {
+          "locator": "json:/overrides",
+          "path": "depot/template-update.json",
+          "sha256": "e19ed6439a9d26407751e742bb5080e53f64d672842080d655deb5cd397afc88"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:registered-template"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:template-derives-mapping",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Template distribution follows the explicit reusable source mapping",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Template distribution follows the explicit reusable source mapping",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-template-mapping",
+      "predicate": "urn:sys4ai:ontology:core:derivesFrom",
+      "sources": [
+        {
+          "locator": "json:/overrides",
+          "path": "depot/template-update.json",
+          "sha256": "e19ed6439a9d26407751e742bb5080e53f64d672842080d655deb5cd397afc88"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:registered-template"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-capability-meaning",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "TRD creation uses the shared capability meaning",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "TRD creation uses the shared capability meaning",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:TRDCreation",
+      "predicate": "urn:sys4ai:ontology:core:relatedTo",
+      "sources": [
+        {
+          "locator": "section:1. Activation and authority",
+          "path": ".agents/skills/to-trd/SKILL.md",
+          "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:capability-trd-creation"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-defined-by",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "to-trd skill is defined by its installed SKILL.md",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "to-trd skill is defined by its installed SKILL.md",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-to-trd",
+      "predicate": "urn:sys4ai:ontology:core:definedBy",
+      "sources": [
+        {
+          "locator": "section:1. Activation and authority",
+          "path": ".agents/skills/to-trd/SKILL.md",
+          "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-governed-by",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "to-trd operations follow current installed source instructions",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "to-trd operations follow current installed source instructions",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-to-trd",
+      "predicate": "urn:sys4ai:ontology:core:governedBy",
+      "sources": [
+        {
+          "locator": "section:1. Activation and authority",
+          "path": ".agents/skills/to-trd/SKILL.md",
+          "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-produces",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "TRD creation produces a requirements document",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "TRD creation produces a requirements document",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:TRD",
+      "predicate": "urn:sys4ai:ontology:core:produces",
+      "sources": [
+        {
+          "locator": "section:1. Activation and authority",
+          "path": ".agents/skills/to-trd/SKILL.md",
+          "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-provides",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "to-trd skill provides TRD creation",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "to-trd skill provides TRD creation",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-trd-creation",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:1. Activation and authority",
+          "path": ".agents/skills/to-trd/SKILL.md",
+          "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-provides-shared",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "to-trd skill implements the shared TRDCreation capability",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "to-trd skill implements the shared TRDCreation capability",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:TRDCreation",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:1. Activation and authority",
+          "path": ".agents/skills/to-trd/SKILL.md",
+          "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-standards",
+      "@type": [
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "definition": "Project-local RDF datasets, read-only SPARQL queries, loss-aware interchange, and SHACL validation using the separately selected pinned standards backend.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Local RDF SPARQL SHACL",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-standards",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Project-local RDF datasets, read-only SPARQL queries, loss-aware interchange, and SHACL validation using the separately selected pinned standards backend.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Ontology skill provides Local RDF SPARQL SHACL",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-standards",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-inference",
+      "@type": [
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "definition": "Finite type and declared property inference from approved premises, with inspectable derivations, exact versions, and conflict/incomplete diagnostics.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Formal ontology inference",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-inference",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Finite type and declared property inference from approved premises, with inspectable derivations, exact versions, and conflict/incomplete diagnostics.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Ontology skill provides Formal ontology inference",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-inference",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-semantic",
+      "@type": [
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "definition": "A selected local embedding model ranks approved ontology records; similarity grants neither identity equivalence nor authority.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Semantic ontology retrieval",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-semantic",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A selected local embedding model ranks approved ontology records; similarity grants neither identity equivalence nor authority.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Ontology skill provides Semantic ontology retrieval",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-semantic",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-proposals",
+      "@type": [
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "definition": "A native agent generates attributed candidates from explicitly selected inputs, with validation, directed revision, exact review, and separately authorized publication.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Sourced ontology proposals",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-proposals",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A native agent generates attributed candidates from explicitly selected inputs, with validation, directed revision, exact review, and separately authorized publication.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Ontology skill provides Sourced ontology proposals",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-proposals",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-guards",
+      "@type": [
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "definition": "Declared ontology, memory, Task, TRD, plan, role, Template and setup helper boundaries validate semantic conditions and current authority before their owning mutation.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Guarded helper dispatch",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-guards",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Declared ontology, memory, Task, TRD, plan, role, Template and setup helper boundaries validate semantic conditions and current authority before their owning mutation.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Ontology skill provides Guarded helper dispatch",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-guards",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-workbench",
+      "@type": [
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "definition": "A local browser service searches definitions, inspects relationships and derivations, preserves draft revisions, reviews diffs, and publishes through the same guarded interfaces.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Ontology visual workbench",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-workbench",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A local browser service searches definitions, inspects relationships and derivations, preserves draft revisions, reviews diffs, and publishes through the same guarded interfaces.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Ontology skill provides Ontology visual workbench",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-workbench",
+      "predicate": "urn:sys4ai:ontology:core:providesCapability",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:GeneratedWikiPage",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A generated ontology wiki page is an Artifact subtype; it is rebuildable and does not replace canonical records.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Generated ontology wiki page",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:generated-wiki-page-artifact",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "Every generated ontology wiki page is an Artifact.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Generated wiki page is an Artifact",
+      "lifecycle": "approved",
+      "module": "project",
+      "object": "urn:sys4ai:ontology:core:Artifact",
+      "predicate": "urn:sys4ai:ontology:core:subtypeOf",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:project:sys4ai-depot:GeneratedWikiPage"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-wiki-index",
+      "@type": [
+        "urn:sys4ai:ontology:project:sys4ai-depot:GeneratedWikiPage"
+      ],
+      "definition": "The rebuildable ONTOLOGY/WIKI/INDEX.md is a generated ontology wiki page.",
+      "fact_kind": "asserted",
+      "kind": "instance",
+      "label": "Generated ontology wiki index",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Ontology second release and initialization v9",
+          "path": "SPECS.md",
+          "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+        }
+      ]
+    }
+  ]
+}

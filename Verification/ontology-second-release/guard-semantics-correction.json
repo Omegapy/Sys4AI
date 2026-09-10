@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "revision": 2,
+  "status": "bounded-source-correction-complete",
+  "observed_at": "2026-09-10T15:23:47.660245+00:00",
+  "finding": "REVIEW-001",
+  "requirement_ids": [
+    "REQ-022",
+    "REQ-023",
+    "REQ-024",
+    "REQ-025",
+    "REQ-026",
+    "REQ-042"
+  ],
+  "source_manifest": {
+    "path": "Verification/ontology-second-release/guard-semantics-correction-files-r2.json",
+    "sha256": "f8b6d0796762662ecf551fea3ee86b9ea5ebbffb8b59f716cfc1fe31bea41a33"
+  },
+  "files": [
+    {
+      "path": "ONTOLOGY-depo/actions/contracts-v1.json",
+      "sha256": "ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8",
+      "bytes": 35438,
+      "root_destination": "reference-assets/ONTOLOGY-depo/actions/contracts-v1.json",
+      "observed_installed_before_sha256": "dab3dcf3e4ce527e1a6d0d544ca1834104cbcc3f6045fb0550616c2f2250d964"
+    },
+    {
+      "path": "ONTOLOGY-depo/actions/action-shapes-v1.ttl",
+      "sha256": "03a84a21c38cf5e6da560d1a4516a51941a86f3e93a5751b7cf3e2e30c06ee36",
+      "bytes": 2298,
+      "root_destination": "reference-assets/ONTOLOGY-depo/actions/action-shapes-v1.ttl",
+      "observed_installed_before_sha256": "7cf34208f5c6f905d038d322e23b982bd3768a660e1bc765d0c92a5761857133"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_guards.py",
+      "sha256": "15251f5662731c4dfb998a086337e9f3607fa3d2fb685871daf54c50756e5125",
+      "bytes": 64079,
+      "root_destination": ".agents/skills/ontology/scripts/ontology_guards.py",
+      "observed_installed_before_sha256": "ea2b7d19294fd53bc732b728658be125307ed4deda469d60549f5857cd910765"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_guard_setup.py",
+      "sha256": "1cd332edc0775021f58df4bb493a34d4caaf4f71a904bcf2acb21adefbafacbf",
+      "bytes": 23872,
+      "root_destination": ".agents/skills/ontology/scripts/ontology_guard_setup.py",
+      "observed_installed_before_sha256": "b0d15271c49cc5065ddc1512ce0154d67361f18c65bc61d84ac4e51dbb2b9f6d"
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_guard_engine.py",
+      "sha256": "5bc156ae72a0c42f7de2a3d38e8c67e444ea1a8c938978e099ca2688e2b39bde",
+      "bytes": 9402,
+      "root_destination": ".agents/skills/ontology/tests/test_guard_engine.py",
+      "observed_installed_before_sha256": "33d4bf13efc190097875b6247ef6e6449de576558473d4462c901449b30b7863"
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_guarded_dispatch.py",
+      "sha256": "a36e6e79754b6d38a587574b9623ad1b3a7b28be50599f004a444d5bc7502201",
+      "bytes": 25113,
+      "root_destination": ".agents/skills/ontology/tests/test_guarded_dispatch.py",
+      "observed_installed_before_sha256": "5ba12bea04f61293f130281ca7b8d9fd631abf9c43996b318f89b78ed34723f6"
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_action_semantics.py",
+      "sha256": "197ed70353163a94ba19fb5a51dc80b00e91ac8f83d11a7a4515f4997edd3e7f",
+      "bytes": 17725,
+      "root_destination": ".agents/skills/ontology/tests/test_action_semantics.py",
+      "observed_installed_before_sha256": null
+    },
+    {
+      "path": "SKILLS-depo/ontology/references/action-guards.md",
+      "sha256": "b85309068ce1bfcaafdf953f1d86cda221db60ef7c4685034b0feeb7bac1cbfe",
+      "bytes": 5214,
+      "root_destination": ".agents/skills/ontology/references/action-guards.md",
+      "observed_installed_before_sha256": null
+    }
+  ],
+  "changes": [
+    "Reject caller-supplied semantic state and obtain normalized input/target facts through actual owning read interfaces.",
+    "Strict typed action contracts describe concrete provider capabilities, current governing sources, owned target paths, stable lifecycle identities, positive current revisions and permitted transitions.",
+    "Validate current Task orchestration generations/assignment targets, plan update targets and lifecycle requests, memory publication transitions and selected setup receipt state without replacing owner authorization.",
+    "Replace impossible injected shapes with natural invalid requests against the unchanged delivered contract for all eight families, with actual backend violations and no continuation invocation.",
+    "Preserve safe bounded action, condition, contract path/hash, backend status and finding identifiers in flattened role/ontology errors; malformed backend diagnostics cannot break failure rendering.",
+    "Validate complete v2 candidate extension, selected shape and companion bytes with actual standards and selected finite inference before semantic conformance.",
+    "Allow only exact accepted v2 extension/shape pre/post recovery while retaining current target snapshots, immutable intent checks and owning lock rechecks."
+  ],
+  "checks": [
+    {
+      "evidence": "guard-semantics-correction-final-tests.log",
+      "revision": 1,
+      "result": "24 focused tests passed",
+      "scope": "Engine, eight-family matrix, under-lock context changes, declared boundaries, recovery, profile configuration and first typed-action acceptance."
+    },
+    {
+      "evidence": "guard-semantics-correction-semantics-r2.log",
+      "revision": 2,
+      "result": "10 actual-backend semantic tests passed",
+      "scope": "Lifecycle values, concrete capabilities across eight families, actual plan CLI controls and nested transaction, Task orchestration generation, populated-v8 adoption, safe role/ontology error text, v2 selected shape failure, unsupported/inconsistent formal candidates, and guarded extension+shape partial recovery.",
+      "note": "The final malformed-backend diagnostic formatting and condition sanitization change was subsequently verified by the dedicated engine suite; host will run its final full suite on the exact frozen R2 bytes."
+    },
+    {
+      "evidence": "guard-semantics-correction-engine-r2.log",
+      "revision": 2,
+      "result": "9 focused decision-unit tests passed",
+      "scope": "Actual installed helper isolation plus mocked backend error/unknown-result cases, including null/non-list findings and non-string status sanitization."
+    },
+    {
+      "evidence": "guard-semantics-correction-migration.json",
+      "revision": 1,
+      "result": "Actual selected-backend prior-version repair passed",
+      "scope": "Copied actual previously installed engine/setup/contracts into a disposable project, interrupted after writing both new helpers, reloaded fresh modules, recovered under retained old shapes with an exact synthetic native grant, then reopened a guarded TRD result.",
+      "note": "R2 preserves the same setup code and contract schema/binding interface. Actual root R2 repair remains host-owned acceptance."
+    }
+  ],
+  "matrix": {
+    "revision": 1,
+    "families": 8,
+    "observations": 48,
+    "ordinary_dispatch_paths": 43,
+    "optional_root_path": "task:command_intake remains modeled; host root-owner matrix adds its actual installed declaration",
+    "natural_invalid_backend_results": "Eight complete SHACL violations with unchanged delivered rules and zero underlying continuation calls"
+  },
+  "migration": {
+    "schema_version": 1,
+    "semantic_profile": "sys4ai-actions-v1",
+    "disable_guard": false,
+    "required_change_set": [
+      "Exact new ontology_guards.py and ontology_guard_setup.py",
+      "Exact contracts-v1.json and action-shapes-v1.ttl",
+      "Current adapter/bootstrap bindings and companion selected last"
+    ],
+    "restart": "Use a fresh owning-helper process after repair. Retained old Request rules remain evaluable by the new setup helper for interrupted recovery.",
+    "authority": "Current exact reviewed setup grant; this source correction supplies no live native approval."
+  },
+  "limits": [
+    "Native grants and bootstrap selections in source tests are explicitly synthetic isolated fixtures.",
+    "No direct edits were made to installed .agents, root ontology/configuration, root Tasks/TRDs/plans/Roles/MEMORY, ordinary products, root tools or Git state.",
+    "The existing Template watcher may distribute mapped source changes; the host owns final explicit Template/root verification.",
+    "Direct host/shell/third-party writes and unintegrated private callbacks remain outside dispatch interception.",
+    "No cross-system atomicity or OS sandbox claim is made.",
+    "Guarded formal extension assertions require explicitly enabled inference; profiles are never enabled automatically.",
+    "Host owns actual root/generation-fixture repair, final current source suite and root-owner matrix, browser publication and independent completion review."
+  ],
+  "unresolved_source_items": [],
+  "evidence": [
+    {
+      "path": "Verification/ontology-second-release/guard-semantics-correction-files-r2.json",
+      "sha256": "f8b6d0796762662ecf551fea3ee86b9ea5ebbffb8b59f716cfc1fe31bea41a33"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-semantics-correction-final-tests.log",
+      "sha256": "a7a2c1065cee0958221ecb1bef11c99879f73fb1a1aef0ff5900cb6779373010"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-semantics-correction-matrix.json",
+      "sha256": "55d0a8f9569744348945d6b73dbe5ae939f90b2298b4c73232c3eae8ac12b2c6"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-semantics-correction-boundaries.json",
+      "sha256": "a5c0646dfebbb83c907b5ce266c285c1e75c68ef5b79eed32e67426d7b3f1bed"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-semantics-correction-semantics-r2.log",
+      "sha256": "63b57fd370d5d4d54684d459f99b6b2248941e29591d75909e6d07bcdf64b8cc"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-semantics-correction-engine-r2.log",
+      "sha256": "4fbc402c7852c6df1807060b8bbc39244d919ca9444338543c5372998eef62c1"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-semantics-correction-migration.json",
+      "sha256": "c6ff10690305090c14e9c8e0ac99332de394494a8c8eaa86b6fec51a01ce56e0"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-semantics-correction-migration.log",
+      "sha256": "af042a3d5e525f1fa859a829b088b73e1879b0d45d899503931a1b95a2a24651"
+    }
+  ]
+}

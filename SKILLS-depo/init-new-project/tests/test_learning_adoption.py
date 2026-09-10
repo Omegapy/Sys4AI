@@ -115,9 +115,13 @@ class LearningAdoptionTests(unittest.TestCase):
         memory_before = self.helper.memory_inventory(self.target)
         runtime = fixture.manifest(self.target / ".sys4ai")
         history = fixture.manifest(self.target / "control_records/memory")
-        after = self.adopt(refresh=True)
+        with self.assertRaisesRegex(self.helper.InitializationError, "incomplete") as caught:
+            self.adopt(refresh=True)
+        after = caught.exception.report
         operation = after["module_adoptions"][-1]
         self.assertEqual("preserved-incompatible-refresh", operation["packages"][".agents/skills/memory"]["decision"])
+        self.assertEqual("partial", operation["status"])
+        self.assertFalse(operation["static_health"]["static_ready"])
         self.assertIn(".agents/skills/memory/scripts/memory_recovery.py", operation["packages"][".agents/skills/memory"]["diagnostic"]["different_resources"])
         self.assertEqual("off", operation["capabilities"]["shared_automatic_checkpoint"])
         self.assertEqual(memory_before, self.helper.memory_inventory(self.target))
@@ -275,12 +279,16 @@ class LearningAdoptionTests(unittest.TestCase):
         self.historical(self.helper.LICENSE_CONTRACT)
         package = self.target / ".agents/skills/memory"
         package.mkdir()
-        result = self.adopt(refresh=True)
+        with self.assertRaisesRegex(self.helper.InitializationError, "incomplete") as caught:
+            self.adopt(refresh=True)
+        result = caught.exception.report
         decision = result["module_adoptions"][-1]["packages"][".agents/skills/memory"]
         self.assertEqual("preserved-incompatible-refresh", decision["decision"])
         self.assertEqual({".agents/skills/memory": "directory"}, decision["after"])
         self.assertEqual([], list(package.iterdir()))
         self.assertEqual("unavailable", result["module_adoptions"][-1]["capabilities"]["manual_review"])
+        self.assertEqual("partial", result["module_adoptions"][-1]["status"])
+        self.assertFalse(result["static_ready"])
 
 
 if __name__ == "__main__":

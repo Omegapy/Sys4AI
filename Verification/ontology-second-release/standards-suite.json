@@ -1,0 +1,29 @@
+{
+  "earlier_fixture_observation": {
+    "limitation": "A broader frozen-copy pattern also collected packet tests without their separate memory helper fixture. Those packet imports failed; all 21 then-current standards cases, four profile tests, and four publication cases passed. No final success claim includes that packet fixture.",
+    "path": "standards-suite-broad-fixture.json"
+  },
+  "manifest_sha256": "4b389d8896f9038869466bf8446df0603794fd0c9b99956e1ab23c74d7e48da9",
+  "observed_at": "2026-09-09T21:33:22.246994+00:00",
+  "passed": 26,
+  "schema_version": 1,
+  "scope": "Final source API runtime tests with actual pinned confined backend in disposable projects. Installed-root acceptance is separate.",
+  "status": "passed",
+  "suites": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/ontology/tests -p test_advanced_standards.py -v",
+      "exit_code": 0,
+      "passed": 22,
+      "seconds": 61.377,
+      "tests": 22
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/ontology/tests -p test_advanced_profiles.py -v",
+      "exit_code": 0,
+      "passed": 4,
+      "seconds": 0.22,
+      "tests": 4
+    }
+  ],
+  "tests": 26
+}

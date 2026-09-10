@@ -1,0 +1,29 @@
+{
+  "engine_sha256": "859b70f2d3c67b3588f22caad726e8e3558326ae83fb7fedb823b257e3ff4926",
+  "final_browser": "browser-guard-correction-acceptance.json",
+  "final_source_suite": "final-ontology-tests-r7.log",
+  "finding": "GUARD-RECHECK-002",
+  "implementation": "One per-decision monotonic deadline, shared worker cancellation and remaining limits, with rejection before accepting a late result. Exact candidate RDF is reused for selected SHACL after the complete core record checks. Owner publication validation remains unchanged.",
+  "independent_review": "guard-correction-review.json",
+  "installed_repairs": [
+    "root-deadline-guard-correction-receipt.json",
+    "combined-deadline-guard-correction-receipt.json"
+  ],
+  "limits": "Worker cancellation and phase-boundary rejection are enforced; this is not an OS real-time scheduling guarantee.",
+  "observed_initial_performance": {
+    "basis": "Actual read-only standards validation in the temporary v2 candidate before removing duplicate generated per-record shapes from the guard phase.",
+    "full_record_shacl_total_seconds": 5.724274999985937,
+    "status": "conformant",
+    "worker_seconds": 5.6457
+  },
+  "prior_runs": {
+    "final-ontology-tests-r4.log": "145 tests OK;1opt-in skip. Prior R1 correction.",
+    "final-ontology-tests-r5.log": "Host interrupted with SIGINT after the reviewer identified missing aggregate budget. Not a product-test failure and not acceptance evidence.",
+    "guard-deadline-tests-r2.log": "3deadline tests passed after exact graph reuse.",
+    "guard-deadline-tests.log": "Initial deadline attempt correctly blocked slow candidate validation, exposing redundant SHACL cost; retained failed run."
+  },
+  "schema_version": 1,
+  "source_manifest": "guard-semantics-correction-files-r3.json",
+  "status": "installed-and-verified",
+  "tests": "guard-deadline-acceptance.json"
+}

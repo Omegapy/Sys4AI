@@ -89,6 +89,28 @@ status_reason: "Created as a draft from an explicit user request."
 The helper renders `# Task Requirement Document: <title>` after the metadata.
 Do not put an H1 or frontmatter into the payload body.
 
+## Discovery and save boundary
+
+The agent follows [intent discovery](wayfinding.md) before ordinary synthesis.
+Its readiness review establishes supported meaning, the helper validates the
+artifact's structure, and the user approves the exact presented revision. These
+are distinct controls; passing `validate` or `completion.content_ready` cannot
+establish understanding or consent.
+
+An unresolved current-task choice remains intake even when phrased as a
+requirement for the next agent to determine the intended behavior. This is an
+agent semantic review, not a helper keyword rule. Supported future-user
+questions, research objectives, quoted labels, and URL queries remain legitimate
+content under the field rules below.
+
+Capture permits a new draft at the authorized synthesis boundary. Resume alone
+is read-only until explicit save. A revision requires an exact record read and
+authority for its content update. Questions and answers do not cause automatic
+persistence. An explicit incomplete-draft request permits known intent with
+declarative gaps, including zero requirements; a prohibition on follow-ups does
+not itself supply either missing intent or artifact authority. Read-only and
+lifecycle-only operations retain their existing boundaries.
+
 ## Current body contract
 
 Use these H2 headings exactly once, in this order:
@@ -149,6 +171,15 @@ entry. `Not yet specified` may preserve an unresolved in-scope area in a draft,
 but it must state the gap declaratively rather than ask a question or instruct a
 downstream agent. Optional future enhancements belong out of scope.
 
+An implementation choice is not an unresolved requirement when the desired
+behavior, scope, acceptance, and authority are already bounded. Record which
+choices remain with implementation planning under `Decisions`, including the
+constraints and basis for that boundary. Do not put ordinary library versions,
+internal APIs, or packaging details in `Not yet specified` merely because no
+implementation plan exists. A user-mandated technical constraint or a real
+behavior, compatibility, or permission gap remains a requirement-level issue.
+Moving a real gap to another heading does not make the document complete.
+
 The helper rejects current creation or update payloads that would persist
 question content in `Open questions` or a question mark in `Not yet specified`.
 Historical questions remain readable in legacy records and mechanically migrated
@@ -159,7 +190,12 @@ questions into document content or describe an unresolved area declaratively.
 
 Unfilled `{{template_slots}}` are rejected in runtime documents. The slots in
 `assets/trd-body-template.md` are intentional and must be replaced before writing.
-The concrete `assets/example-input.json` is valid as supplied.
+The template is an artifact-shape aid after discovery, not an intake checklist.
+For an honest zero-requirement draft, replace the entire sample requirement
+block with `No task requirements captured yet.`. The concrete
+`assets/example-input.json` is valid as supplied and labels its clarification
+as fictional. That answer changes the example's requirement and acceptance,
+not only its decision notes.
 
 ## Lifecycle
 
@@ -195,6 +231,37 @@ product requirements were implemented, tested, deployed, or otherwise satisfied.
 The agent must compare the document with the user's stated intent, sources,
 constraints, and acceptance criteria before representing it as complete. It
 must not invent approval or claim that document approval proves product behavior.
+
+The agent binds approval of a presented, unchanged revision to the helper's
+current digest. The user does not need to type a SHA-256. An unambiguous approval
+of that document is sufficient; a request to fix the skill, inspect status, or
+create a plan is not document approval. A normal capture with settled content
+ends with a reviewable artifact and one approval question if approval is missing
+and the current instructions permit questions.
+Explicit draft-only requests and read-only operations do not start that exchange.
+
+### Completion diagnostics
+
+Every document summary and write receipt includes a derived `completion` object:
+
+| Field | Meaning |
+| --- | --- |
+| `content_ready` | Whether the current-schema document passes the structural content gates; `null` for legacy schema 1. This is not semantic review or user approval. |
+| `blockers` | All content blockers, each with `code`, `section`, and a bounded `message`. |
+| `next_action` | `resolve_requirements`, `request_approval`, `none`, `restore_to_draft`, or `migrate`, according to content and lifecycle state. |
+
+Content blocker codes are `missing_requirements`, `open_questions`,
+`unspecified_requirements`, and `unconfirmed_assumptions`. Legacy records report
+`legacy_schema`. A rejected `trd_done` transition returns the same content
+blockers as `completion_blockers` in its error receipt. Missing confirmation,
+stale hashes, locks, and other operation failures retain their existing errors.
+
+Diagnostics use the same checks as the actual transition. They do not classify
+arbitrary prose, clear fields, approve a document, or persist new metadata.
+`request_approval` identifies the remaining workflow step, not a command to ask
+again when approval of that unchanged content already exists. A retired record
+first needs explicit restoration; a legacy record first needs explicit migration.
+Reading these fields changes neither canonical bytes nor index content.
 
 ### Revision and restoration
 

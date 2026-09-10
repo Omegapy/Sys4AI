@@ -1,18 +1,31 @@
 ---
 name: to-trd
-description: Capture user intent as a project-local Task Requirement Document and maintain its draft, trd_done, or retired document state. Use only when the user explicitly invokes $to-trd or explicitly asks to use the named to-trd skill. Do not use for ordinary questions, automatic task tracking, response logging, or implementing the captured requirements.
+description: Discover user intent through relevant inspection and live clarification, then derive a project-local Task Requirement Document and maintain its document state. Use only when the user explicitly invokes $to-trd or explicitly asks to use the named to-trd skill. Do not use for ordinary questions, automatic task tracking, response logging, or implementing the captured requirements.
 license: Upstream Wayfinder material is MIT; see ATTRIBUTION.md and licenses/wayfinder-MIT.txt.
 metadata:
-  version: "2.0.0"
+  version: "2.2.0"
 ---
 
 # To-TRD
 
-Turn the user's intended outcome into an actionable **Task Requirement Document
-(TRD)**. In this skill, **TRP is an alias the user may use for the same document**;
+Understand the user's intended outcome before deriving a **Task Requirement
+Document (TRD)**. Apply requirements-engineering judgment within the existing
+project role: inspect relevant facts, resolve material ambiguity with the user,
+and synthesize requirements from that understanding. Filling a template is not
+evidence that the intent is understood.
+
+In this skill, **TRP is an alias the user may use for the same document**;
 it does not mean a separate technical requirements artifact. The result is a
 list of task requirements with sources and acceptance criteria, not a product
 roadmap or an implementation plan.
+
+Completion concerns the requirements baseline. It does not require a finished
+technical design. Before treating an unknown as a blocker, distinguish missing
+required behavior, scope, acceptance, or authority from an implementation choice
+that can satisfy the already captured constraints. Record the latter boundary
+under `Decisions`, with its basis; do not put it in `Not yet specified` or invent
+an unconfirmed assumption. A user-mandated technology or unresolved permission
+rule remains a requirement. Do not relabel a real gap merely to pass approval.
 
 Use a lightweight adaptation of **Wayfinder by Matt Pocock**. Attribution,
 source identifiers, and the retained MIT notice are in [ATTRIBUTION.md](ATTRIBUTION.md).
@@ -52,39 +65,51 @@ When a selector is ambiguous, show names with IDs and obtain the selection.
 For a new capture, a clear new-document request is enough; do not force the user
 to inspect unrelated existing TRDs first.
 
-## 3. Capture and clarify intent
+## 3. Discover intent before synthesis
 
 Read [references/wayfinding.md](references/wayfinding.md) for the conversation
 procedure. Apply these rules:
 
-1. Read the request and supplied materials. Preserve the user's vocabulary,
-   intended outcome, constraints, exclusions, and already answered questions.
-2. Give a short playback of the destination and scope. Distinguish user intent,
-   source facts, proposed design choices, assumptions, and any material ambiguity
-   that still needs a conversational answer.
-3. **Use the fast path when intent is clear.** Synthesize directly; do not impose
-   tickets, a fixed questionnaire, or an extra approval exchange already answered.
-4. Otherwise survey uncertainty broadly, then ask **one material question at a
-   time** whose prerequisites are understood. Give brief context and useful
-   options, without answering for the human. After each answer, update the working
-   understanding and ask a focused follow-up only when the answer exposes another
-   material ambiguity.
-5. Research only factual gaps that affect requirements. Use available primary
-   sources or relevant local inspection; cite what was actually found. Do not
-   invent results or require additional plugins/skills to continue.
-6. A cheap sketch can clarify behavior only within the user's existing authority.
-   It is not product implementation. Human preferences and prototype choices
-   must come from the human, not the agent's selection.
-7. Keep clarification questions in the conversation. Translate each relevant
-   user answer into sourced captured intent, a decision, scope, a requirement,
-   an assumption, or acceptance criteria. Do not paste the question-and-answer
-   exchange or an unanswered interview prompt into the TRD. When an answer
-   changes required behavior or how success is recognized, update the affected
-   requirement or acceptance criteria rather than recording it only as a note.
-8. Honor “save a draft now.” Preserve unresolved areas declaratively under
-   `Not yet specified`, even when no requirements can yet be safely stated. Do
-   not phrase those entries as questions or instructions to a downstream agent,
-   force an endless interview, or fabricate a complete baseline.
+1. Read the request and relevant sources. Preserve the user's vocabulary,
+   constraints, exclusions, and settled answers. Inspect available facts; ask
+   the user about unresolved desired behavior, priorities, tradeoffs, and
+   authority. A source fact does not establish a preference or grant permission.
+2. **Check readiness before ordinary synthesis.** Consider each applicable area:
+   outcome; beneficiary and use; current state and requested change; scope and
+   exclusions; inputs, outputs, and behavior; constraints and authority;
+   observable success; and consequential edge cases. An area is understood from
+   the request, inspected facts, actual answers, or explicit delegation. A gap
+   is material if different answers change outcome, scope, interface,
+   constraints, acceptance, or action authority. Bounded implementation choices
+   may remain with planning. Do not invent choices to make the check pass.
+3. **Use the fast path when no material intake decision remains.** Synthesize
+   directly without a questionnaire, readiness score, or redundant confirmation.
+   Otherwise choose one consequential, answerable question whose prerequisites
+   are settled; address outcome and scope first when they remain unclear.
+4. **Ask, then wait for the actual user answer.** Explain briefly what depends
+   on the decision, ask one focused question, and end the response. Do not
+   synthesize a dependent baseline, create/update a TRD, or answer for the user
+   in that turn. Silence, elapsed time, a preselected recommendation, a tool
+   result, or an unrelated reply is not an answer. Resume only from an actual
+   answer or an explicit change of mode, subject to higher-priority host rules.
+5. Incorporate each answer before further discovery: update all affected intent,
+   scope, constraints, decisions, requirements, and acceptance criteria with its
+   source. A partial answer settles only its clear portion. Ask a focused
+   follow-up for the remaining material distinction. A changed answer invalidates
+   dependent assumptions and obsolete question branches; do not continue them.
+6. After substantial clarification, briefly summarize the consequential outcome,
+   scope, choices, exclusions, and success conditions. Seek confirmation only
+   for a material interpretation still unresolved. Agreement with this summary
+   does not approve an unseen document; mechanical validation also does not
+   prove understanding or consent.
+7. Honor an explicit incomplete-draft request immediately. Save known intent and
+   safely supported requirements, even zero, with declarative material gaps in
+   `Not yet specified`. Keep the record draft and do not invent answers or
+   accepted assumptions. This exception is not the default after asking a question.
+8. If the user or a higher-priority host instruction prohibits follow-ups, ask
+   none. State the unresolved material limits without choosing for the user.
+   Save an incomplete artifact only if the current request authorizes it; a
+   no-questions instruction alone supplies neither answers nor write authority.
 
 The `Open questions` section is retained for schema compatibility and must be
 `None.` in every newly created or content-updated TRD. If an older TRD contains
@@ -92,8 +117,10 @@ questions, resolve them with the user or convert still-vague subject areas into 
 `Not yet specified` entries before updating it. An explicitly resumed TRD provides
 the persisted context. Read only the relevant sources needed to clarify the next
 material ambiguity. Do not require a thread ID, memory service, response history,
-or automatic cross-thread machinery. Do not write or update the TRD between
-questions unless the user explicitly asks to save a draft.
+or automatic cross-thread machinery. Do not persist after each question or
+answer. New capture can write at its authorized synthesis boundary; a resumed
+draft stays read-only until explicit save, and revision needs content-update
+authority for the selected record.
 
 Mechanical migration preserves historical questions in draft or retired
 documents; it does not answer them or perform a content update.
@@ -114,11 +141,16 @@ Keep accepted assumptions visibly separate from requirements; keep unconfirmed
 assumptions and material contradictions in draft.
 
 Before saving, check both directions: every material user requirement and
-exclusion appears, and every generated requirement has a source or clearly
-identified proposed design basis. Keep IDs stable on revision. A removed
-requirement should be explicitly accounted for in scope/decisions rather than
+exclusion and clarification appears, and every normative requirement has a
+supporting source or explicitly authorized design basis. Label proposals as
+proposals; they cannot stand in for an unresolved user decision. Keep IDs stable
+on revision. A removed requirement should be accounted for in scope/decisions rather than
 quietly recycled under the same ID. Also confirm that `Open questions` is `None.`
-and that no other section contains a disguised prompt for a downstream agent.
+and that no other section assigns unresolved present-task intake to a downstream
+agent. "Determine the intended selection" or "Confirm the desired output" does
+not settle the requirement. Judge the purpose: legitimate future-user questions,
+requested research, quoted labels, and URL query strings are valid deliverable
+content, not failures merely because they contain question language.
 
 ## 5. Save through the helper
 
@@ -172,6 +204,10 @@ substitute for it.
   identified by its hash. Do not re-ask approval already given for that content.
   Compare the document with the user's intent and sources; approval requires no
   implementation evidence or completed product behavior.
+  The agent obtains and checks the hash; the user need not type it. An
+  unambiguous "approve this TRD" or "mark it trd_done" referring to the presented,
+  unchanged revision is sufficient. A request to fix this skill, a status
+  question, Task completion, or a request to start planning is not TRD approval.
 - A title or approval-bearing content update to `trd_done` atomically returns
   it to `draft`. A proven representation-only no-op preserves the canonical
   bytes, state, revision, timestamps, and index. See the contract for the narrow
@@ -203,11 +239,31 @@ Preserve historical questions, uncertainty, and assumptions in draft or retired
 documents. The mapped `trd_done` state still requires settled document content.
 Never invent answers, discard historical evidence, or silently migrate on a read.
 
-## 8. Return the artifact and stop
+## 8. Finish the document workflow
 
 Return the actual TRD path, stable ID, schema classification, state, requirement
-count, material unresolved items, and whether the index was updated. Explain any
-failure or verification limit.
+count, material unresolved items, and whether the index was updated. Use the
+helper's derived `completion` diagnostics to distinguish structural blockers
+from a draft that only needs semantic review and user approval.
+
+- For an explicit draft-only request, return the draft without an approval prompt.
+- For a capture intended to finish the requirements, resolve material
+  requirement gaps, save and validate the reviewable document, then ask one
+  concise approval question if the exact revision has not already been approved
+  and the current instructions permit questions.
+  Identify the document and explain that this skill requires document approval.
+  Do not end with a bare draft handoff when this is the only remaining step.
+- When approval of that unchanged revision is already present, perform
+  `set-status --status trd_done` with the current hash, reason, and `--confirmed`
+  in the same turn. Reopen the saved document and verify `status == trd_done`
+  before reporting completion. Do not merely promise a future state change.
+- List, show, validate, and ordinary status questions remain read-only; report
+  the actual state and next action without initiating an approval exchange.
+
+A draft TRD can already supply a draft implementation plan under that workflow's
+separate activation. Preserve its unsettled status and actual requirement gaps.
+Implementation choices left to planning do not by themselves block `trd_done`.
+Explain any failure or verification limit.
 
 Do not save this final reply. Do not generate a downstream implementation plan,
 execute requirements, or create external tickets unless the user separately asks

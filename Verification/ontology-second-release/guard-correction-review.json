@@ -1,0 +1,340 @@
+{
+  "addressed_findings": [
+    {
+      "basis": "R2 typed owning facts, delivered action shapes, capability checks and natural-invalid family tests remain installed. The original fabricated-state probe on final R3 rejects with guard_missing_evidence, exact action/contract diagnostics and no target change.",
+      "id": "REVIEW-001",
+      "status": "resolved"
+    },
+    {
+      "basis": "One _GuardBudget begins before semantic context and candidate evaluation. Candidate dataset, selected SHACL, formal inference and final action SHACL all use budget.evaluate with the same cancellation object and the remaining capped selected budget. Before/after checks and the final decision check reject expiration. No late conformant result reaches the owner in the actual-backend controlled-expiry regression.",
+      "id": "GUARD-RECHECK-002",
+      "status": "resolved"
+    }
+  ],
+  "current_matrix": {
+    "boundary_limit": "Malformed fixture requests can fail structural validation before semantic evaluation; valid enabled family dispatch and recovery are tested separately.",
+    "boundary_routes": 44,
+    "cases": 48,
+    "exact_engine": "859b70f2d3c67b3588f22caad726e8e3558326ae83fb7fedb823b257e3ff4926",
+    "families": 8,
+    "natural_invalid_all_backend_violations": true,
+    "status": "passed"
+  },
+  "deadline_evidence": {
+    "case_count": 4,
+    "cases": [
+      {
+        "backend_status": "cancelled",
+        "budget_seconds": 1,
+        "case": "actual_worker_deadline",
+        "complete": false,
+        "elapsed_seconds": 1.0459637920139357,
+        "worker": {
+          "elapsed_seconds": 0.9446,
+          "exit_code": -9,
+          "network_allowed": false,
+          "peak_rss_bytes": 58834944,
+          "platform": "Darwin",
+          "project_files_readable": false,
+          "rss_limit_bytes": 536870912,
+          "rss_overshoot_bytes": 0
+        }
+      },
+      {
+        "budget_seconds": 5,
+        "canonical_unchanged": true,
+        "case": "actual_v2_phases",
+        "elapsed_seconds": 4.7581,
+        "phase_limits": [
+          {
+            "limits": {
+              "query_seconds": 5,
+              "reasoning_seconds": 5
+            },
+            "phase": "dataset"
+          },
+          {
+            "limits": {
+              "query_seconds": 2,
+              "reasoning_seconds": 2
+            },
+            "phase": "validate"
+          },
+          {
+            "limits": {
+              "query_seconds": 2,
+              "reasoning_seconds": 2
+            },
+            "phase": "infer"
+          },
+          {
+            "limits": {
+              "query_seconds": 1,
+              "reasoning_seconds": 1
+            },
+            "phase": "validate"
+          }
+        ],
+        "shared_cancel_object": true
+      },
+      {
+        "backend": "actual selected standards",
+        "case": "stable_review_identity",
+        "matching_preview_sha256": "61649d4d5eaf58501d10cc96755e8230dab19e06a2a796e44b1b6857aaf4ee7b",
+        "nondeterministic_elapsed_time_excluded": true
+      },
+      {
+        "backend": "actual selected standards",
+        "canonical_unchanged": true,
+        "case": "late_conformant_result",
+        "clock": "explicit test-controlled deadline advance, not a wall-time measurement",
+        "owner_invoked": false
+      }
+    ],
+    "interpretation": "Actual worker cancellation, all four actual v2 backend phases with one cancellation object and decreasing limits, stable preview identity, and rejection of an actual conformant backend result after explicit controlled-clock expiry are separately labeled.",
+    "limits": "The five-second ceiling governs semantic evaluation. Existing worker polling can overshoot the selected deadline; synchronous preparation is checked at phase boundaries. This does not claim hard real-time scheduling or interruption of arbitrary filesystem calls.",
+    "status": "passed"
+  },
+  "evidence_references": [
+    {
+      "path": "Verification/ontology-second-release/guard-deadline-acceptance.json",
+      "sha256": "07d59494d714f5d7d5544752ddac16021c4816040d1febb0d5b3544cc6637a52"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-deadline-tests-final.log",
+      "sha256": "1eb70fc5e6c190a69013e962870804ab83d1894a751650e63bdc9eb893680455"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-deadline-adoption.json",
+      "sha256": "004ea2ed2c3ae2bd385fa4e6c38ed968117ed4c562204609e95644b986794d3c"
+    },
+    {
+      "path": "Verification/ontology-second-release/root-guarded-dispatch-corrected.json",
+      "sha256": "9489c779e0a87eec0b36761202008e53cc0755c6c358c0c63d7e283951141c35"
+    },
+    {
+      "path": "Verification/ontology-second-release/root-boundary-coverage-corrected.json",
+      "sha256": "821829cce2b64f7670ca4b5e275b76f2c6b2d7998134e0f8f7c65729765ac5a8"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-semantics-correction-semantics-r2.log",
+      "sha256": "63b57fd370d5d4d54684d459f99b6b2248941e29591d75909e6d07bcdf64b8cc"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-correction-review-r2.json",
+      "sha256": "660c1044d83d449d17ad3de0b8975a74b5e81b83c4a0c0d2914e1059b6954d44"
+    }
+  ],
+  "files_changed": [
+    "Verification/ontology-second-release/guard-correction-review.json"
+  ],
+  "historical_reports_preserved": [
+    {
+      "path": "Verification/ontology-second-release/independent-review.json",
+      "sha256": "e12719b8940f43a796858af38ba32a3807bcb82fbddea2be11e861a35dda90d5"
+    },
+    {
+      "path": "Verification/ontology-second-release/guard-correction-review-r2.json",
+      "sha256": "660c1044d83d449d17ad3de0b8975a74b5e81b83c4a0c0d2914e1059b6954d44"
+    }
+  ],
+  "installed_root_readonly_probe": {
+    "canonical_target_unchanged": true,
+    "engine_sha256": "859b70f2d3c67b3588f22caad726e8e3558326ae83fb7fedb823b257e3ff4926",
+    "original_invalid_action": {
+      "arguments": {
+        "_semantic_state": {
+          "currentState": "completed",
+          "nextState": "not-a-task-state",
+          "targetIdentity": "urn:sys4ai:ontology:core:Artifact",
+          "targetRevision": -1
+        }
+      },
+      "code": "guard_missing_evidence",
+      "contract_sha256": "ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8",
+      "family": "task",
+      "operation": "response_transaction",
+      "rejected": true,
+      "target": "ONTOLOGY/modules/project/project.jsonld"
+    },
+    "owning_mutations_invoked": false,
+    "publication_intent_created": false,
+    "two_actual_ontology_previews": {
+      "evaluation_seconds_omitted_from_both": true,
+      "first_preview_sha256": "e6b36442e532b57374526d40ed2cb50437f1df741e146e2c96c74a1abef6a01e",
+      "matching": true,
+      "operation_id": "ONTOP-independent-deadline-preview-20260910",
+      "second_preview_sha256": "e6b36442e532b57374526d40ed2cb50437f1df741e146e2c96c74a1abef6a01e",
+      "semantic_status": "conformant",
+      "stable_evaluation_budget_seconds": 5
+    }
+  },
+  "limits": [
+    "This pass is limited to the two guard findings and directly affected validation, preview, deadline and recovery behavior. It is not full project completion.",
+    "Host owns the full R7 source suite, browser revalidation, final preservation/traceability audit and release acceptance. This reviewer did not wait on or claim their completion.",
+    "Recorded fixture native grants remain synthetic; actual root repair receipts and installed-root read-only probes are identified separately.",
+    "No source, canonical ontology/Task/memory, dependency, service, product or Git mutation was performed by this reviewer. Only guard-correction-review.json was updated."
+  ],
+  "observed_at": "2026-09-10T15:55:56.518533+00:00",
+  "repair_receipts": [
+    {
+      "checks": {
+        "bootstrap_current": true,
+        "contract_current": true,
+        "engine_current": true,
+        "four_files": true,
+        "guard_retained": true,
+        "reopened_exact_hashes": true,
+        "status_complete": true
+      },
+      "contract": {
+        "path": "reference-assets/ONTOLOGY-depo/actions/contracts-v1.json",
+        "sha256": "ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8"
+      },
+      "engine": {
+        "path": ".agents/skills/ontology/scripts/ontology_guards.py",
+        "sha256": "859b70f2d3c67b3588f22caad726e8e3558326ae83fb7fedb823b257e3ff4926"
+      },
+      "files": [
+        {
+          "matches_receipt": true,
+          "path": ".agents/skills/ontology/scripts/ontology_guards.py",
+          "sha256": "859b70f2d3c67b3588f22caad726e8e3558326ae83fb7fedb823b257e3ff4926"
+        },
+        {
+          "matches_receipt": true,
+          "path": "control_records/ontology/guard-bootstrap/ONTGUARD-typed-root-deadline-verification.json",
+          "sha256": "9489c779e0a87eec0b36761202008e53cc0755c6c358c0c63d7e283951141c35"
+        },
+        {
+          "matches_receipt": true,
+          "path": "control_records/ontology/guard-bootstrap/ONTGUARD-typed-root-deadline-20260910-bootstrap.json",
+          "sha256": "f162cf2d79ed13fdcf3846e905fd34c7d4498af35645ce7ec6ee164ee7c6d427"
+        },
+        {
+          "matches_receipt": true,
+          "path": "ontology-advanced.yaml",
+          "sha256": "1753d09c27808273f8aaf5cee51b03883d3888b0a47a3321b9934546c57ec29a"
+        }
+      ],
+      "operation_id": "ONTGUARD-typed-root-deadline-20260910",
+      "path": "Verification/ontology-second-release/root-deadline-guard-correction-receipt.json",
+      "sha256": "7becccc31fad2de01e505ade7e2768c48f418049bb1c6bc56796f86373cb2273"
+    },
+    {
+      "checks": {
+        "bootstrap_current": true,
+        "contract_current": true,
+        "engine_current": true,
+        "four_files": true,
+        "guard_retained": true,
+        "reopened_exact_hashes": true,
+        "status_complete": true
+      },
+      "contract": {
+        "path": "reference-assets/ONTOLOGY-depo/actions/contracts-v1.json",
+        "sha256": "ae76feffff31b5541c868796c27926ec889e9e9400d68048a0797687c4cfc2b8"
+      },
+      "engine": {
+        "path": ".agents/skills/ontology/scripts/ontology_guards.py",
+        "sha256": "859b70f2d3c67b3588f22caad726e8e3558326ae83fb7fedb823b257e3ff4926"
+      },
+      "files": [
+        {
+          "matches_receipt": true,
+          "path": ".agents/skills/ontology/scripts/ontology_guards.py",
+          "sha256": "859b70f2d3c67b3588f22caad726e8e3558326ae83fb7fedb823b257e3ff4926"
+        },
+        {
+          "matches_receipt": true,
+          "path": "control_records/ontology/guard-bootstrap/ONTGUARD-typed-combined-deadline-verification.json",
+          "sha256": "9489c779e0a87eec0b36761202008e53cc0755c6c358c0c63d7e283951141c35"
+        },
+        {
+          "matches_receipt": true,
+          "path": "control_records/ontology/guard-bootstrap/ONTGUARD-typed-combined-deadline-20260910-bootstrap.json",
+          "sha256": "33dbc67ce5d8b287271427fb7b2d987c25dee4550295279ccf7cad073c6102b2"
+        },
+        {
+          "matches_receipt": true,
+          "path": "ontology-advanced.yaml",
+          "sha256": "8112c9ba5399d576a957bd25d97795e9ae6608aa4a85947ccdff0c23ddebec94"
+        }
+      ],
+      "operation_id": "ONTGUARD-typed-combined-deadline-20260910",
+      "path": "Verification/ontology-second-release/combined-deadline-guard-correction-receipt.json",
+      "sha256": "2876d81a836a8e21a4705f2838ca4bb4faaf5df8b531d308a08f9bb9430cf50b"
+    }
+  ],
+  "review_revision": 3,
+  "reviewer": "/root/final_release_review",
+  "role": {
+    "agents": {
+      "path": "Roles/project-sub-agent/AGENTS.md",
+      "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+    },
+    "catalog": {
+      "path": "Verification/ontology-second-release/guard-final-recheck-role-catalog.json",
+      "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397"
+    },
+    "definition": {
+      "path": "Roles/project-sub-agent/ROLE.md",
+      "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+    },
+    "settings": "Exact native full-history inheritance; no model/effort overrides or nested delegation."
+  },
+  "schema_version": 1,
+  "scope": {
+    "focus": [
+      "Original invalid-action conformance finding",
+      "Shared deadline and cancellation for newly strengthened v2 checks",
+      "Stable exact ontology preview identity",
+      "Retained core/selected-shape/inference validation and accepted partial recovery"
+    ],
+    "project_level_release_acceptance": false,
+    "requirements": [
+      "REQ-022",
+      "REQ-023",
+      "REQ-024",
+      "REQ-025",
+      "REQ-026",
+      "REQ-042"
+    ]
+  },
+  "source_and_installed_versions": [
+    {
+      "destination": ".agents/skills/ontology/scripts/ontology_guards.py",
+      "installed_matches": true,
+      "sha256": "859b70f2d3c67b3588f22caad726e8e3558326ae83fb7fedb823b257e3ff4926",
+      "source": "SKILLS-depo/ontology/scripts/ontology_guards.py",
+      "source_matches": true
+    },
+    {
+      "destination": ".agents/skills/ontology/tests/test_guard_deadline.py",
+      "installed_matches": true,
+      "sha256": "6b780af6718f6543e4dd0da946cb23b73e215f8a475e31c63a33e3dd11a5a497",
+      "source": "SKILLS-depo/ontology/tests/test_guard_deadline.py",
+      "source_matches": true
+    },
+    {
+      "destination": ".agents/skills/ontology/references/action-guards.md",
+      "installed_matches": true,
+      "sha256": "902a37d68abd46bfa7a1d47b7f69d08d0b9e5f026ecc4cead0513dc92ea83f98",
+      "source": "SKILLS-depo/ontology/references/action-guards.md",
+      "source_matches": true
+    }
+  ],
+  "source_manifest": {
+    "path": "Verification/ontology-second-release/guard-semantics-correction-files-r3.json",
+    "sha256": "0d841769e522c46fc687f1a27d841ec4d59fd360354bf22093444d65cc1e1741"
+  },
+  "status": "passed",
+  "stopping_condition": "Final bounded R3 recheck complete; both findings resolved at the documented observed level.",
+  "unresolved_findings": [],
+  "validation_semantics": {
+    "core_records": "ontology_core.load_project(validate=False) always executes validate_records and stores every finding; only exception raising is disabled. The guard rejects any error diagnostic, invalid lifecycle transition or stale source before constructing the candidate RDF graph.",
+    "inference": "Formal assertions still require selected inference, and unsupported, inconsistent, incomplete or untrusted results fail before conformance.",
+    "partial_recovery": "Retained exact accepted extension/shape pre/post recognition is unchanged from reviewed R2. R3 changes shared evaluation budgeting, graph reuse and deterministic receipt fields; actual R2 partial-recovery evidence remains correctly attributed.",
+    "selected_shapes": "The exact candidate asserted/derived graph is passed as explicit triples; ontology_standards._prepare still selects the base and all current extension shapes with exact overrides. This skips duplicate generated per-record SHACL shapes while preserving core checks and the actual selected project SHACL processor."
+  }
+}

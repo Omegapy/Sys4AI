@@ -1,0 +1,500 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-first-release/fixtures/root-preview/.agents/skills/ontology/scripts/ontology.py",
+    "--project-root",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-first-release/fixtures/root-preview",
+    "neighbors",
+    "Task"
+  ],
+  "returncode": 0,
+  "result": {
+    "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+    "context": {
+      "config_sha256": "bd144bbe70485baea5df1977085755d02c8843e69549377c3bf101771cdc2df4",
+      "generator_version": "1.0.0",
+      "modules": [
+        {
+          "id": "sys4ai-core",
+          "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+          "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+          "version": "1.0.0"
+        }
+      ],
+      "profile_version": "1.0.0",
+      "project_id": "sys4ai-depot",
+      "snapshot_sha256": "d99d7f41babf5e642c9a1cb388a30ea1eb2444c6c0b4b3c580632dcaf77792b7"
+    },
+    "diagnostics": [],
+    "limits": {
+      "hops": 2,
+      "limit": 20,
+      "max_bytes": 32000
+    },
+    "mutated": false,
+    "operation": "neighbors",
+    "project_id": "sys4ai-depot",
+    "query": "Task",
+    "results": [
+      {
+        "@id": "urn:sys4ai:ontology:core:relation-1",
+        "@type": [
+          "urn:sys4ai:ontology:core:Relationship"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/50",
+        "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+        "direction": "outgoing",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "hops": 1,
+        "kind": "relation",
+        "label": "Task relatedTo TRD",
+        "lifecycle": "approved",
+        "match_reason": "graph_traversal",
+        "module": "sys4ai-core",
+        "module_version": "1.0.0",
+        "object": "urn:sys4ai:ontology:core:TRD",
+        "predicate": "urn:sys4ai:ontology:core:relatedTo",
+        "qualifiers": {
+          "scope": "conceptual"
+        },
+        "source_status": [
+          {
+            "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "diagnostic": null,
+            "locator": "section:Relationship vocabulary",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Relationship vocabulary",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+          }
+        ],
+        "subject": "urn:sys4ai:ontology:core:Task",
+        "target_label": "TRD",
+        "traversed_from": "urn:sys4ai:ontology:core:Task",
+        "traversed_to": "urn:sys4ai:ontology:core:TRD"
+      },
+      {
+        "@id": "urn:sys4ai:ontology:core:relation-2",
+        "@type": [
+          "urn:sys4ai:ontology:core:Relationship"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/51",
+        "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+        "direction": "outgoing",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "hops": 1,
+        "kind": "relation",
+        "label": "Task relatedTo MemoryRecord",
+        "lifecycle": "approved",
+        "match_reason": "graph_traversal",
+        "module": "sys4ai-core",
+        "module_version": "1.0.0",
+        "object": "urn:sys4ai:ontology:core:MemoryRecord",
+        "predicate": "urn:sys4ai:ontology:core:relatedTo",
+        "qualifiers": {
+          "scope": "conceptual"
+        },
+        "source_status": [
+          {
+            "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "diagnostic": null,
+            "locator": "section:Relationship vocabulary",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Relationship vocabulary",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+          }
+        ],
+        "subject": "urn:sys4ai:ontology:core:Task",
+        "target_label": "MemoryRecord",
+        "traversed_from": "urn:sys4ai:ontology:core:Task",
+        "traversed_to": "urn:sys4ai:ontology:core:MemoryRecord"
+      },
+      {
+        "@id": "urn:sys4ai:ontology:core:relation-4",
+        "@type": [
+          "urn:sys4ai:ontology:core:Relationship"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/53",
+        "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+        "direction": "incoming",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "hops": 1,
+        "kind": "relation",
+        "label": "TaskManager manages Task",
+        "lifecycle": "approved",
+        "match_reason": "graph_traversal",
+        "module": "sys4ai-core",
+        "module_version": "1.0.0",
+        "object": "urn:sys4ai:ontology:core:Task",
+        "predicate": "urn:sys4ai:ontology:core:manages",
+        "qualifiers": {
+          "scope": "conceptual"
+        },
+        "source_status": [
+          {
+            "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "diagnostic": null,
+            "locator": "section:Relationship vocabulary",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Relationship vocabulary",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+          }
+        ],
+        "subject": "urn:sys4ai:ontology:core:TaskManager",
+        "target_label": "TaskManager",
+        "traversed_from": "urn:sys4ai:ontology:core:Task",
+        "traversed_to": "urn:sys4ai:ontology:core:TaskManager"
+      },
+      {
+        "@id": "urn:sys4ai:ontology:project:sys4ai-depot:manager-manages-task",
+        "@type": [
+          "urn:sys4ai:ontology:core:Relationship"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/39",
+        "definition": "A confirmed Task manager coordinates its assigned governed Task",
+        "direction": "incoming",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "hops": 1,
+        "kind": "relation",
+        "label": "A confirmed Task manager coordinates its assigned governed Task",
+        "lifecycle": "approved",
+        "match_reason": "graph_traversal",
+        "module": "project",
+        "module_version": null,
+        "object": "urn:sys4ai:ontology:core:Task",
+        "predicate": "urn:sys4ai:ontology:core:manages",
+        "source_status": [
+          {
+            "actual_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+            "diagnostic": null,
+            "locator": "section:Required first reads",
+            "path": "Roles/task-manager/AGENTS.md",
+            "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Required first reads",
+            "path": "Roles/task-manager/AGENTS.md",
+            "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+          }
+        ],
+        "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager",
+        "target_label": "Sys4AI confirmed Task manager role",
+        "traversed_from": "urn:sys4ai:ontology:core:Task",
+        "traversed_to": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+      },
+      {
+        "@id": "urn:sys4ai:ontology:core:relation-8",
+        "@type": [
+          "urn:sys4ai:ontology:core:Relationship"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/57",
+        "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+        "direction": "incoming",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "hops": 2,
+        "kind": "relation",
+        "label": "TaskRequirementDocument replacedBy TRD",
+        "lifecycle": "approved",
+        "match_reason": "graph_traversal",
+        "module": "sys4ai-core",
+        "module_version": "1.0.0",
+        "object": "urn:sys4ai:ontology:core:TRD",
+        "predicate": "urn:sys4ai:ontology:core:replacedBy",
+        "qualifiers": {
+          "scope": "conceptual"
+        },
+        "source_status": [
+          {
+            "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "diagnostic": null,
+            "locator": "section:Relationship vocabulary",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Relationship vocabulary",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+          }
+        ],
+        "subject": "urn:sys4ai:ontology:core:TaskRequirementDocument",
+        "target_label": "TaskRequirementDocument",
+        "traversed_from": "urn:sys4ai:ontology:core:TRD",
+        "traversed_to": "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      },
+      {
+        "@id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-produces",
+        "@type": [
+          "urn:sys4ai:ontology:core:Relationship"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/72",
+        "definition": "TRD creation produces a requirements document",
+        "direction": "incoming",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "hops": 2,
+        "kind": "relation",
+        "label": "TRD creation produces a requirements document",
+        "lifecycle": "approved",
+        "match_reason": "graph_traversal",
+        "module": "project",
+        "module_version": null,
+        "object": "urn:sys4ai:ontology:core:TRD",
+        "predicate": "urn:sys4ai:ontology:core:produces",
+        "source_status": [
+          {
+            "actual_sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+            "diagnostic": null,
+            "locator": "section:1. Activation and authority",
+            "path": ".agents/skills/to-trd/SKILL.md",
+            "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:1. Activation and authority",
+            "path": ".agents/skills/to-trd/SKILL.md",
+            "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+          }
+        ],
+        "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd",
+        "target_label": "Installed to-trd skill",
+        "traversed_from": "urn:sys4ai:ontology:core:TRD",
+        "traversed_to": "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd"
+      },
+      {
+        "@id": "urn:sys4ai:ontology:core:relation-5",
+        "@type": [
+          "urn:sys4ai:ontology:core:Relationship"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/54",
+        "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+        "direction": "incoming",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "hops": 2,
+        "kind": "relation",
+        "label": "MemoryRetrieval retrieves MemoryRecord",
+        "lifecycle": "approved",
+        "match_reason": "graph_traversal",
+        "module": "sys4ai-core",
+        "module_version": "1.0.0",
+        "object": "urn:sys4ai:ontology:core:MemoryRecord",
+        "predicate": "urn:sys4ai:ontology:core:retrieves",
+        "qualifiers": {
+          "scope": "conceptual"
+        },
+        "source_status": [
+          {
+            "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "diagnostic": null,
+            "locator": "section:Relationship vocabulary",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Relationship vocabulary",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+          }
+        ],
+        "subject": "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "target_label": "MemoryRetrieval",
+        "traversed_from": "urn:sys4ai:ontology:core:MemoryRecord",
+        "traversed_to": "urn:sys4ai:ontology:core:MemoryRetrieval"
+      },
+      {
+        "@id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-retrieves",
+        "@type": [
+          "urn:sys4ai:ontology:core:Relationship"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/47",
+        "definition": "Project memory retrieval retrieves MemoryRecord",
+        "direction": "incoming",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "hops": 2,
+        "kind": "relation",
+        "label": "Project memory retrieval retrieves MemoryRecord",
+        "lifecycle": "approved",
+        "match_reason": "graph_traversal",
+        "module": "project",
+        "module_version": null,
+        "object": "urn:sys4ai:ontology:core:MemoryRecord",
+        "predicate": "urn:sys4ai:ontology:core:retrieves",
+        "source_status": [
+          {
+            "actual_sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+            "diagnostic": null,
+            "locator": "section:Project memory",
+            "path": ".agents/skills/memory/SKILL.md",
+            "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Project memory",
+            "path": ".agents/skills/memory/SKILL.md",
+            "sha256": "97924f46aa2518ba2dfb112f851807bd523fc0d1ee22b7ec43caea1f5fbb1eb1"
+          }
+        ],
+        "subject": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+        "target_label": "Project memory retrieval",
+        "traversed_from": "urn:sys4ai:ontology:core:MemoryRecord",
+        "traversed_to": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval"
+      },
+      {
+        "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager-defined-by-0",
+        "@type": [
+          "urn:sys4ai:ontology:core:Relationship"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/27",
+        "definition": "Sys4AI confirmed Task manager role is defined by its selected source 1",
+        "direction": "outgoing",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "hops": 2,
+        "kind": "relation",
+        "label": "Sys4AI confirmed Task manager role is defined by its selected source 1",
+        "lifecycle": "approved",
+        "match_reason": "graph_traversal",
+        "module": "project",
+        "module_version": null,
+        "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-agents",
+        "predicate": "urn:sys4ai:ontology:core:definedBy",
+        "source_status": [
+          {
+            "actual_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+            "diagnostic": null,
+            "locator": "section:Required first reads",
+            "path": "Roles/task-manager/AGENTS.md",
+            "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Required first reads",
+            "path": "Roles/task-manager/AGENTS.md",
+            "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+          }
+        ],
+        "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager",
+        "target_label": "task-manager AGENTS.md source",
+        "traversed_from": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager",
+        "traversed_to": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-agents"
+      },
+      {
+        "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager-defined-by-1",
+        "@type": [
+          "urn:sys4ai:ontology:core:Relationship"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/28",
+        "definition": "Sys4AI confirmed Task manager role is defined by its selected source 2",
+        "direction": "outgoing",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "hops": 2,
+        "kind": "relation",
+        "label": "Sys4AI confirmed Task manager role is defined by its selected source 2",
+        "lifecycle": "approved",
+        "match_reason": "graph_traversal",
+        "module": "project",
+        "module_version": null,
+        "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-role",
+        "predicate": "urn:sys4ai:ontology:core:definedBy",
+        "source_status": [
+          {
+            "actual_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+            "diagnostic": null,
+            "locator": "section:Purpose",
+            "path": "Roles/task-manager/ROLE.md",
+            "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Purpose",
+            "path": "Roles/task-manager/ROLE.md",
+            "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+          }
+        ],
+        "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager",
+        "target_label": "task-manager ROLE.md source",
+        "traversed_from": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager",
+        "traversed_to": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-role"
+      }
+    ],
+    "status": "ok",
+    "traversal": {
+      "direction": "both",
+      "max_visited_nodes": 100,
+      "predicates": [],
+      "start": "urn:sys4ai:ontology:core:Task",
+      "visited_nodes": 11
+    },
+    "truncation": {
+      "available_results": 10,
+      "returned_results": 10,
+      "truncated": false
+    }
+  }
+}

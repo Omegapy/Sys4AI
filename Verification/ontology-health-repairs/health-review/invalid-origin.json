@@ -1,0 +1,7 @@
+{
+  "exception": "ValueError",
+  "message": "Invalid IPv6 URL",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology.py\", line 196, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology.py\", line 138, in main\n    result = dispatch(root, args)\n             ^^^^^^^^^^^^^^^^^^^^\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_advanced_cli.py\", line 74, in dispatch\n    return advanced_health(root, scope=args.scope, level=args.level, required=args.require, workbench_url=args.workbench_url)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_health.py\", line 71, in advanced_health\n    profiles[\"workbench\"] = assess_service(root, workbench_url) if workbench_url else {\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_workbench.py\", line 29, in assess_service\n    selected = urlsplit(origin)\n               ^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/parse.py\", line 514, in urlsplit\n    raise ValueError(\"Invalid IPv6 URL\")\nValueError: Invalid IPv6 URL\n"
+}

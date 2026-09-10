@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-10T19:49:12.808424+00:00",
+  "status": "preliminary_review_pending_final_execution_receipts",
+  "authority": "Bounded evidence reconciliation only; no canonical status or host acceptance changes.",
+  "instruction_sha256": {
+    "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+    "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+  },
+  "fresh_catalog_fingerprint_supplied": "ba245e8ebbde2fd020f851d21343d5348b3763692a37468cab019642775b3545",
+  "checks": {
+    "requirements": 30,
+    "verbatim_requirement_acceptance_criteria": 60,
+    "planned_tasks": 36,
+    "root_adoption_manifest": 59,
+    "changed_source_artifacts_including_template_only": 60,
+    "verbatim_criteria_equal_canonical_plan": true,
+    "task_actions_criteria_dependencies_targets_equal_canonical_plan": true,
+    "source_ontology": {
+      "status": "passed",
+      "tests": 183,
+      "skips": 0,
+      "failures": 0,
+      "errors": 0,
+      "receipt": "test-run-receipts/source-ontology-final.json"
+    },
+    "initializer": {
+      "status": "passed",
+      "tests": 119,
+      "passes": 118,
+      "expected_platform_skips": 1,
+      "receipt": "initializer/final-suite.receipt.json"
+    }
+  },
+  "findings": [
+    {
+      "id": "CR-001",
+      "kind": "mapping-refresh",
+      "state": "open",
+      "summary": "Draft reflects54 artifacts and182 ontology identities; current observed manifest59 and selected source gate183 must replace those stale counts.",
+      "new_root_sources": [
+        "SKILLS-depo/ontology/scripts/ontology_guards.py",
+        "SKILLS-depo/ontology/scripts/ontology_rdf.py",
+        "SKILLS-depo/ontology/tests/test_query_retrieval.py",
+        "SKILLS-depo/ontology/tests/test_rdf_canonicalization.py",
+        "SKILLS-depo/init-new-project/tests/test_learning_editions.py"
+      ]
+    },
+    {
+      "id": "CR-002",
+      "kind": "pending-version-freeze",
+      "state": "current_source_parity_observed_pending_final_delivery",
+      "summary": "An earlier inspection observed three in-flight memory source changes. The latest59-file manifest now matches all source hashes; final settled adoption/delivery evidence remains pending.",
+      "source_drift": [],
+      "prior_observation_sources": [
+        "SKILLS-depo/memory/scripts/memory.py",
+        "SKILLS-depo/memory/scripts/memory_evidence.py",
+        "SKILLS-depo/memory/tests/test_health_evidence.py"
+      ]
+    },
+    {
+      "id": "CR-003",
+      "kind": "reverse-map-completeness",
+      "state": "open",
+      "summary": "Include the changed Template-only contract test in the final artifact reverse map, separately from59 root-adoption destinations.",
+      "source": "SPECS-depo/template-tests/test_template_contract.py",
+      "delivery_destination": "Projects/Sys4AI-Template-Project/tests/test_template_contract.py",
+      "route": "explicit Template pipeline"
+    }
+  ],
+  "pending_gates": [
+    "Final settled source/adoption manifest and Template/root parity",
+    "Historical disposition through actual governed publication",
+    "Root memory/index/projection/ontology associations restored on final inputs",
+    "Populated and relocated delivered selected-runtime acceptance",
+    "Final live F1-F6 checks and protected-file preservation"
+  ],
+  "unchanged_inputs": {
+    "Verification/ontology-health-repairs/traceability-draft.json": "ce39a0db93cb0eac30e209e3e8072efb14056d22849f9ab79ce2275a9ccd8b54"
+  },
+  "current_change_manifest_sha256": "d87859d31c50e1184086700dfb79b04090707fd732b8a51f5848d72e720fe866"
+}

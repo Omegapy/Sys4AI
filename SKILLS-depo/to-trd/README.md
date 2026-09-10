@@ -1,7 +1,7 @@
 # To-TRD
 
-**Capture user intent as task requirements. Keep the resulting documents easy to
-find and their state explicit. Do not turn the conversation into a task ledger.**
+**Understand the intended outcome, resolve material ambiguity, and derive task
+requirements from the user's actual decisions.**
 
 To-TRD is an explicitly invoked, project-local skill. It uses a lightweight
 adaptation of **Wayfinder by Matt Pocock** to clarify the user's intended outcome,
@@ -9,7 +9,7 @@ then writes one **Task Requirement Document (TRD)**. `TRP` is supported as an
 alias from the originating request; it does not name a different technical
 requirements format here.
 
-Version 2.0.0 uses schema 2 and tracks completion of the requirements document.
+Version 2.2.0 uses schema 2 and tracks completion of the requirements document.
 Planning and implementation remain separate workflows.
 
 ## What it creates
@@ -106,13 +106,30 @@ IDs above are examples. Use an actual ID returned by your catalog. Natural-langu
 operations are interpreted by the agent and routed to the helper; `approve`,
 `retire`, and `resume` are not additional Python subcommands.
 
-With a clear request, the skill writes directly. With ambiguity, it briefly
-states the intended outcome, then asks one material question at a time. Each
-answer updates the working understanding and can lead to a focused follow-up.
-Before saving, the skill translates relevant answers into sourced intent,
-decisions, scope, requirements, assumptions, or acceptance criteria. It keeps
-the interview prompts in the conversation and waits to write until the intent is
-clear, unless you ask for a draft now. It does not force a long interview.
+The skill first checks the applicable outcome, use, current state, scope,
+interfaces, constraints, authority, success conditions, and consequential edge
+cases. If no material decision remains, it writes directly within the requested
+operation. Otherwise it inspects available facts and asks one focused question
+about a user-owned decision, then ends the response and waits. A recommended
+option, silence, or an unrelated reply is not an answer.
+
+Each answer changes every affected intent statement, scope boundary, requirement,
+and acceptance criterion. Partial answers settle only their clear portion; a
+changed choice invalidates obsolete assumptions and follow-up branches. The
+agent reviews the understood intent before synthesis. That review, mechanical
+validation, and approval of the exact saved document are distinct controls.
+
+You can interrupt discovery and request an incomplete draft, including one with
+zero requirements. Material gaps remain declarative in `Not yet specified` and
+the record stays draft. If follow-ups are prohibited, the skill reports the
+limits without inventing answers and saves only an authorized artifact. New
+capture permits a write at its synthesis boundary; resume alone stays read-only
+until explicit save. Answers never trigger automatic per-turn persistence.
+
+See the [synthetic interactions](references/interaction-examples.md) for these
+branches and their effect on requirements. Assigning a future agent to determine
+what the current user intended does not resolve intake. Questions that are
+themselves requested product behavior or research remain valid content.
 
 To continue later, explicitly select the TRD by exact ID, exact filename, or
 unique complete title. The current file provides the context. There is no
@@ -134,6 +151,25 @@ with a reason and confirmation. The agent checks that the document faithfully
 captures intent and acceptance criteria. Product implementation or test evidence
 is not part of this document completion gate.
 
+An implementation plan does not have to exist before the TRD can be completed.
+Library selection, exact versions, internal APIs, and distribution details can
+remain implementation choices when the required behavior and constraints are
+already clear. The skill records that boundary under `Decisions`. Only actual
+unresolved requirements belong in `Not yet specified`; moving a real scope,
+compatibility, or approval-authority gap elsewhere does not resolve it.
+
+For a normal capture, the agent presents the saved document and asks for approval
+once its requirements are settled and questions are permitted. You can approve the displayed, unchanged
+revision in ordinary language; the agent reads and checks its hash. It then
+changes the state and verifies `trd_done` in the saved file. An explicit request
+for a draft ends with the draft, and status questions do not start an approval
+exchange. Approval already given for that unchanged content is not requested again.
+
+Helper summaries now explain completion through `completion.content_ready`,
+`completion.blockers`, and `completion.next_action`. These distinguish missing
+requirements from a document awaiting approval. They are derived diagnostics,
+not another persisted state or an automatic approval mechanism.
+
 An approved title or approval-bearing content change atomically returns
 `trd_done` to `draft`. Only proven CRLF/LF or outer-blank-line differences are
 representation-only no-ops; these preserve the existing bytes, state, revision,
@@ -146,6 +182,9 @@ requests validate selection, digest, reason, and confirmation without writing.
 revision, digest, and document state does not activate planning or authorize
 implementation. Installation, migration, Git activity, publication, deployment,
 and external actions also retain their own authorization boundaries.
+A draft can also be used as an unsettled source for a separately requested draft
+plan. The plan preserves its real uncertainties instead of requiring every
+implementation detail to be decided in the TRD first.
 
 ## Direct helper use
 
@@ -315,12 +354,28 @@ result unless the user separately requests another kind of work.
 
 ## Verify or maintain the skill
 
-Run the focused tests from the project root:
+When maintaining the Sys4AI reusable source, run these commands from the depot
+root using its existing interpreter:
 
 ```bash
-python3 -m unittest discover -s .agents/skills/to-trd/tests -v
-python3 -m py_compile .agents/skills/to-trd/scripts/trd.py
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/to-trd/tests -v
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python - <<'PY'
+import ast
+from pathlib import Path
+import py_compile
+import tempfile
+
+with tempfile.TemporaryDirectory() as temporary:
+    for name in ('scripts/trd.py', 'tests/test_trd.py'):
+        source = Path('SKILLS-depo/to-trd') / name
+        ast.parse(source.read_text())
+        py_compile.compile(str(source), cfile=str(Path(temporary) / (source.stem + '.pyc')), doraise=True)
+PY
 ```
+
+For separately authorized installed-copy verification, use that installation's
+own test and helper paths and its approved interpreter. Testing the active-root
+copy does not verify edited source files.
 
 The suite tests naming, schema, source-independent body structure, all lifecycle
 pairs, document approval gates, exact selection, legacy migration and evidence
@@ -329,11 +384,21 @@ atomic failures, action IDs, planning handoff, and subprocess CLI workflows.
 Tests use temporary projects and do not implement the fictional contacts
 exporter. The package metadata check is not the upstream bundled skill validator.
 
-After installing in a real Codex host, use a disposable project to confirm that
-the skill appears, an unrelated prompt does not invoke it, an explicit clear
-request writes a TRD, an ambiguous draft preserves its unknowns, and a list/show
-request does not change files. This is a small deployment check, not a claimed
-result from the package's Python tests.
+Exercise [C01–C14](tests/interaction-scenarios.md) in disposable Codex projects
+using separate actual user turns and the deliberately selected candidate. Keep
+source/loaded-resource hashes, minimal visible exchanges, before/after writes,
+and artifact evidence. The critical ambiguity case needs a fresh host session.
+Report static checks, helper regressions, actual conversations, and fresh-host
+loading separately; prepared bodies and instruction-presence checks do not prove
+an interview worked. Identify blocked or unexercised cases explicitly.
+
+Sys4AI reusable edits belong in `SKILLS-depo/to-trd`. Its existing checked
+Template mapping can update the registered Template; inspect the pending set
+before applying and stop on unrelated work or conflicts. Active-root and
+ordinary product installations retain their own bytes until an exact source,
+destination, file set and preservation boundary are separately authorized.
+Disposable evaluation copies are test fixtures, not product adoption. Version
+parity does not establish host readiness, watcher state, or conversational success.
 
 ## Update or uninstall
 

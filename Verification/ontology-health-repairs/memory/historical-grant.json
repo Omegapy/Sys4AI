@@ -1,0 +1,56 @@
+{
+  "actor_id": "/root",
+  "actor_kind": "director",
+  "config_sha256": "3989830df89045033f5e53f7fc53be143f33b553acd7f5405a591fb14cdd475a",
+  "expires_at": "2026-09-10T19:54:45.753142+00:00",
+  "grant_id": "health-repair-supersede-2026-09-10T19:49:45.753142+00:00",
+  "native_receipt": {
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/memory_repairs",
+          "agent_status": {
+            "completed": "Both fixes are complete and source is frozen.\n\n- **93 memory tests passed**, including 16 focused controls.\n- Historical direct-source lookup is order-independent and rejects invalid retained proof.\n- INFO-only validation succeeds while reporting `verified_current_records` separately.\n- `memory_core.py` and its trusted hash remain unchanged.\n\nThe five changed memory files require Template delivery and fixture refresh before final runtime acceptance. No root or fixture state was directly changed."
+          }
+        },
+        {
+          "agent_name": "/root/shacl_repair",
+          "agent_status": {
+            "completed": "The required guard case now completes within its unchanged five-second budget.\n\n- Measured decision: **5.02s timeout → 2.18s conformant**.\n- All four existing deadline tests pass unchanged.\n- Six before/after RDF cases preserve exact quads and hashes.\n- Source runtime recertified; previous certificate retained.\n- Latest guard-engine positive case also passes.\n\nRDF source and regression tests are frozen. [Evidence and final hashes](/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/guard-budget/result.json)."
+          }
+        },
+        {
+          "agent_name": "/root/test_discovery",
+          "agent_status": "running"
+        }
+      ]
+    },
+    "tool": "collaboration.list_agents"
+  },
+  "observed_at": "2026-09-10T19:49:45.753142+00:00",
+  "operation": "supersede",
+  "payload_sha256": "0dc0b22b8de5cf2b48105391c3f98882464e0a1bccb5e9fc52d4205379d67218",
+  "privacy_redaction": false,
+  "project_id": "sys4ai-depot",
+  "reviewed_records": [
+    {
+      "expected_sha256": "10dd42811634e708e1197bf8ca1db463a38d86917d90b1f291788285c7b88a69",
+      "path": "MEMORY/MEM-20260909-89C402A6.md",
+      "sha256": "54b66fbd728775331f597a9ab2012d1dc205a8aa254d40263820d505885f25b9"
+    },
+    {
+      "expected_sha256": null,
+      "path": "MEMORY/MEM-20260910-0C531031.md",
+      "sha256": "46d59fb562583b5f8474feac13abf0c1cd1a726db929c77ed073d27480adcd7c"
+    }
+  ],
+  "schema_version": 1,
+  "scope": [
+    "MEMORY"
+  ],
+  "task": null
+}

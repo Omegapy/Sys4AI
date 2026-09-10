@@ -1,0 +1,954 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sys4AI governance starter setup receipt",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "setup_contract",
+    "status",
+    "mode",
+    "operation_id",
+    "identity",
+    "project_root",
+    "sources",
+    "owned_files",
+    "preserved_files",
+    "completed_stages",
+    "active_stage",
+    "checks",
+    "created_at",
+    "git_setup"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "setup_contract": {
+      "enum": [
+        "governance-starter-v1",
+        "governance-starter-v2",
+        "governance-starter-v3",
+        "governance-starter-v4",
+        "governance-starter-v5",
+        "governance-starter-v6",
+        "governance-starter-v7",
+        "governance-starter-v8",
+        "governance-starter-v9"
+      ]
+    },
+    "status": {
+      "enum": [
+        "partial",
+        "completed"
+      ]
+    },
+    "mode": {
+      "enum": [
+        "create",
+        "prepare-existing"
+      ]
+    },
+    "operation_id": {
+      "type": "string",
+      "pattern": "^project-setup-[0-9a-f]{32}$"
+    },
+    "identity": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "project_id",
+        "project_name",
+        "purpose",
+        "relative_path"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "project_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "project_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "relative_path": {
+          "type": "string",
+          "pattern": "^Projects/"
+        }
+      }
+    },
+    "project_root": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "destination",
+          "source_sha256",
+          "destination_sha256",
+          "source_version",
+          "adoption"
+        ],
+        "properties": {
+          "source": {
+            "type": "string",
+            "pattern": "^Projects/Sys4AI-Template-Project/"
+          },
+          "destination": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_sha256": {
+            "$ref": "#/$defs/sha"
+          },
+          "destination_sha256": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/sha"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_version": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "adoption": {
+            "enum": [
+              "adopted",
+              "specialized",
+              "preserved-project-owned",
+              "skipped-existing-package",
+              "skipped-existing-license"
+            ]
+          }
+        }
+      }
+    },
+    "owned_files": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/sha"
+      }
+    },
+    "preserved_files": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/sha"
+      }
+    },
+    "preserved_licenses": {
+      "description": "Original project-owned license markers and tree hashes for v4 and v5. An empty map records adoption of the Template license trio.",
+      "$ref": "#/$defs/licenseInventory"
+    },
+    "current_licenses": {
+      "description": "License marker paths and hashes observed during the latest v4 or v5 verification; original preservation evidence remains unchanged.",
+      "$ref": "#/$defs/licenseInventory"
+    },
+    "preserved_memory": {
+      "description": "Original complete memory configuration, canonical tree, contract assets and memory skill inventory for v5. Existing collections are not filled with missing files.",
+      "$ref": "#/$defs/memoryInventory"
+    },
+    "current_memory": {
+      "description": "Complete memory inventory observed during the latest v5 verification; original preservation evidence remains unchanged.",
+      "$ref": "#/$defs/memoryInventory"
+    },
+    "current_files": {
+      "type": "object",
+      "description": "Hashes observed at exact current paths. A v2 receipt after a proven case rename uses Roles paths here while its original source and adoption maps retain roles paths.",
+      "additionalProperties": {
+        "$ref": "#/$defs/sha"
+      }
+    },
+    "role_case_transition": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256",
+        "source",
+        "destination"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "const": ".sys4ai/roles-case-rename.json"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "source": {
+          "const": "roles"
+        },
+        "destination": {
+          "const": "Roles"
+        }
+      }
+    },
+    "recovery_before": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/sha"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "completed_stages": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "assets",
+          "registration",
+          "verification"
+        ]
+      }
+    },
+    "active_stage": {
+      "enum": [
+        "assets",
+        "registration",
+        "verification",
+        null
+      ]
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "check",
+          "outcome"
+        ],
+        "properties": {
+          "check": {
+            "enum": [
+              "project-identity",
+              "project-files",
+              "registration"
+            ]
+          },
+          "outcome": {
+            "const": "passed"
+          }
+        }
+      }
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "verified_at": {
+      "type": "string"
+    },
+    "git_setup": {
+      "const": "separate"
+    },
+    "registry": {
+      "type": "object",
+      "required": [
+        "entry",
+        "changed",
+        "sha256"
+      ],
+      "properties": {
+        "entry": {
+          "type": "object"
+        },
+        "changed": {
+          "type": "boolean"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha"
+        }
+      }
+    },
+    "memory_capture": {
+      "type": "object",
+      "description": "Latest capture setting and post-setup opt-out notice; existing choices are preserved.",
+      "required": [
+        "automatic_capture",
+        "status",
+        "message",
+        "opt_out_question"
+      ],
+      "properties": {
+        "automatic_capture": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "on",
+            "off",
+            "unavailable",
+            "not-installed"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "opt_out_question": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "config_sha256": {
+          "type": "string"
+        }
+      }
+    },
+    "module_adoptions": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/$defs/moduleAdoption"
+      }
+    },
+    "learning": {
+      "type": "object",
+      "description": "Current read-only module capability assessment. Publication still requires an exact current operation grant; backend readiness is not exercised."
+    },
+    "preserved_learning": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/sha"
+          },
+          {
+            "const": "directory"
+          }
+        ]
+      },
+      "description": "Original complete v7 learning skill and contract-package inventory."
+    },
+    "current_learning": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/sha"
+          },
+          {
+            "const": "directory"
+          }
+        ]
+      },
+      "description": "Current complete v7 learning package inventory; original preservation is retained."
+    },
+    "preserved_ontology": {
+      "description": "Complete original ontology preservation inventory.",
+      "$ref": "#/$defs/memoryInventory"
+    },
+    "current_ontology": {
+      "description": "Current ontology inventory, separate from original setup ownership.",
+      "$ref": "#/$defs/memoryInventory"
+    },
+    "ontology": {
+      "type": "object",
+      "description": "Static ontology configuration, import integrity and local publication binding assessment; runtime remains not exercised."
+    },
+    "ontology_advanced": {
+      "type": "object",
+      "description": "Current static advanced capability assessment; profile activation, current grants and actual runtime checks remain separate."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "setup_contract": {
+            "enum": [
+              "governance-starter-v5",
+              "governance-starter-v6",
+              "governance-starter-v7",
+              "governance-starter-v8",
+              "governance-starter-v9"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "preserved_memory"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "completed"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "current_memory"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "setup_contract": {
+            "enum": [
+              "governance-starter-v4",
+              "governance-starter-v5",
+              "governance-starter-v6",
+              "governance-starter-v7",
+              "governance-starter-v8",
+              "governance-starter-v9"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "preserved_licenses"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "completed"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "current_licenses"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "completed"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "registry",
+          "current_files",
+          "verified_at"
+        ],
+        "properties": {
+          "active_stage": {
+            "type": "null"
+          },
+          "completed_stages": {
+            "const": [
+              "assets",
+              "registration",
+              "verification"
+            ]
+          },
+          "checks": {
+            "const": [
+              {
+                "check": "project-identity",
+                "outcome": "passed"
+              },
+              {
+                "check": "project-files",
+                "outcome": "passed"
+              },
+              {
+                "check": "registration",
+                "outcome": "passed"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "setup_contract": {
+            "enum": [
+              "governance-starter-v7",
+              "governance-starter-v8",
+              "governance-starter-v9"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "preserved_learning"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "setup_contract": {
+            "enum": [
+              "governance-starter-v8",
+              "governance-starter-v9"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "preserved_ontology"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "memoryInventory": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/sha"
+          },
+          {
+            "const": "directory"
+          }
+        ]
+      }
+    },
+    "licenseInventory": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/sha"
+          },
+          {
+            "const": "directory"
+          }
+        ]
+      }
+    },
+    "sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "moduleAdoption": {
+      "type": "object",
+      "description": "Selected module operation extending the original base receipt; frozen manifests and checked recovery remain within this ledger.",
+      "required": [
+        "schema_version",
+        "module_id",
+        "module_version",
+        "operation_id",
+        "project_root",
+        "identity",
+        "base_receipt",
+        "refresh_dependencies",
+        "new_memory",
+        "sources",
+        "packages",
+        "files",
+        "preserved_files",
+        "manifest_sha256",
+        "status",
+        "completed_stages",
+        "active_stage",
+        "checks",
+        "created_at"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "module_id": {
+          "enum": [
+            "what-did-you-learn",
+            "ontology",
+            "ontology-advanced"
+          ]
+        },
+        "module_version": {
+          "enum": [
+            "1.0.0",
+            "2.0.0"
+          ]
+        },
+        "operation_id": {
+          "type": "string",
+          "pattern": "^module-adoption-[0-9a-f]{32}$"
+        },
+        "project_root": {
+          "type": "string"
+        },
+        "identity": {
+          "type": "object",
+          "required": [
+            "schema_version",
+            "project_id",
+            "project_name",
+            "purpose",
+            "relative_path"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "schema_version": {
+              "const": 1
+            },
+            "project_id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            },
+            "project_name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "purpose": {
+              "type": "string",
+              "minLength": 1
+            },
+            "relative_path": {
+              "type": "string",
+              "pattern": "^Projects/"
+            }
+          }
+        },
+        "base_receipt": {
+          "type": "object",
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string",
+              "pattern": "^control_records/project-setup-history/[0-9a-f]{64}\\.json$"
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha"
+            }
+          }
+        },
+        "refresh_dependencies": {
+          "enum": [
+            [],
+            [
+              "memory"
+            ]
+          ]
+        },
+        "new_memory": {
+          "type": "boolean"
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "source",
+              "destination",
+              "source_sha256",
+              "destination_sha256",
+              "source_version",
+              "adoption"
+            ],
+            "properties": {
+              "source": {
+                "type": "string",
+                "pattern": "^Projects/Sys4AI-Template-Project/"
+              },
+              "destination": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_sha256": {
+                "$ref": "#/$defs/sha"
+              },
+              "destination_sha256": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/sha"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "source_version": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              },
+              "adoption": {
+                "enum": [
+                  "adopted",
+                  "specialized",
+                  "preserved-project-owned",
+                  "skipped-existing-package",
+                  "skipped-existing-license"
+                ]
+              }
+            }
+          }
+        },
+        "packages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "decision",
+              "before",
+              "after",
+              "diagnostic"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "decision": {
+                "enum": [
+                  "adopted",
+                  "preserved-package",
+                  "refreshed-owned-package",
+                  "preserved-incompatible-refresh"
+                ]
+              },
+              "before": {
+                "type": "object",
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/sha"
+                    },
+                    {
+                      "const": "directory"
+                    }
+                  ]
+                }
+              },
+              "after": {
+                "type": "object",
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/sha"
+                    },
+                    {
+                      "const": "directory"
+                    }
+                  ]
+                }
+              },
+              "diagnostic": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "files": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "before",
+              "after"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "before": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/sha"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "after": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/sha"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "preserved_files": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/sha"
+          }
+        },
+        "manifest_sha256": {
+          "$ref": "#/$defs/sha"
+        },
+        "status": {
+          "enum": [
+            "partial",
+            "completed"
+          ]
+        },
+        "completed_stages": {
+          "enum": [
+            [],
+            [
+              "assets"
+            ],
+            [
+              "assets",
+              "verification"
+            ]
+          ]
+        },
+        "active_stage": {
+          "enum": [
+            "assets",
+            "verification",
+            null
+          ]
+        },
+        "checks": {
+          "type": "array"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "capabilities": {
+          "type": "object"
+        },
+        "current_files": {
+          "type": "object",
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/sha"
+              },
+              {
+                "const": "directory"
+              }
+            ]
+          }
+        },
+        "verified_at": {
+          "type": "string"
+        },
+        "recovery": {
+          "type": "object"
+        },
+        "rerun": {
+          "type": "string"
+        },
+        "refresh_modules": {
+          "enum": [
+            [],
+            [
+              "ontology"
+            ]
+          ]
+        },
+        "new_ontology": {
+          "type": "boolean"
+        },
+        "new_advanced": {
+          "type": "boolean"
+        },
+        "protected_inventory": {
+          "$ref": "#/$defs/memoryInventory"
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "module_id": {
+                "const": "ontology"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "refresh_modules",
+              "new_ontology"
+            ],
+            "properties": {
+              "new_memory": {
+                "const": false
+              },
+              "refresh_dependencies": {
+                "const": []
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "module_id": {
+                "const": "ontology-advanced"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "new_ontology",
+              "new_advanced",
+              "protected_inventory",
+              "prerequisites"
+            ],
+            "properties": {
+              "module_version": {
+                "const": "2.0.0"
+              },
+              "new_memory": {
+                "const": false
+              },
+              "refresh_dependencies": {
+                "const": []
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

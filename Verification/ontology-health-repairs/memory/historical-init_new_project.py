@@ -1,0 +1,1601 @@
+#!/usr/bin/env python3
+"""Create or prepare one selected Sys4AI project from governance starter assets.
+
+The installed skill determines the owning depot. Starter assets come only from
+its registered Template. The helper uses Python standard library facilities and
+read-only Git observations; project dependencies are managed separately.
+"""
+
+from __future__ import annotations
+
+import argparse
+import ast
+import fcntl
+import hashlib
+import json
+import os
+import re
+import stat
+import subprocess
+import sys
+import tempfile
+import types
+from collections.abc import Iterator
+from copy import deepcopy
+from contextlib import ExitStack, contextmanager
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+from uuid import uuid4
+
+TEMPLATE = "Projects/Sys4AI-Template-Project"
+REQUIRED_SKILLS = {
+    "agent-task", "communication", "init-new-project", "manage-subagent-roles", "task",
+    "to-implementation-plan", "to-trd",
+}
+TEMPLATE_POLICY = ".template/baseline-assets.json"
+README_RENDERER = ".template/project-readme.md"
+STARTER_FILES = {
+    "AGENTS.md", "ROLE.md", ".gitignore", "README.md", "SPECS.md",
+    "Implementation_Plans/subagent_role_system_implementation_plan.md",
+    "Implementation_Plans/task_system_implementation_plan.md", "Tasks/INDEX.md",
+}
+IDENTITY = "project.json"
+RECORD = "control_records/project-setup.json"
+SETUP_CONTRACT = "governance-starter-v6"
+MEMORY_CONTRACT = "governance-starter-v5"
+MEMORY_CONTRACTS = {MEMORY_CONTRACT, SETUP_CONTRACT}
+LICENSE_CONTRACT = "governance-starter-v4"
+PRE_LICENSE_CONTRACT = "governance-starter-v3"
+LOWERCASE_CONTRACT = "governance-starter-v2"
+LEGACY_CONTRACT = "governance-starter-v1"
+ROLE_ROOTS = {SETUP_CONTRACT: "Roles", MEMORY_CONTRACT: "Roles", LICENSE_CONTRACT: "Roles", PRE_LICENSE_CONTRACT: "Roles", LOWERCASE_CONTRACT: "roles",
+              LEGACY_CONTRACT: "sub-agent-roles"}
+LICENSE_CONTRACTS = {LICENSE_CONTRACT, *MEMORY_CONTRACTS}
+LICENSE_FILES = {"LICENSE", "LICENSE-CODE", "LICENSE-DOCS"}
+MEMORY_FILES = {"memory.yaml", "MEMORY/README.md"}
+MEMORY_CONTRACT_ROOT = "reference-assets/MEMORY-depo"
+MEMORY_CONTRACT_FILES = {MEMORY_CONTRACT_ROOT + "/" + name for name in (
+    "README.md", "policy.md", "publication-and-recovery.md",
+    "schema/config-v1.json", "schema/record-v1.json",
+    "schema/backend-projection-v1.json", "schema/normalization-v1.json",
+    "profiles/basic-memory-v0.23.0.json",
+)}
+MEMORY_TREES = ("MEMORY", MEMORY_CONTRACT_ROOT, ".agents/skills/memory")
+MEMORY_HELPER_FILES = {".agents/skills/memory/scripts/" + name for name in ("memory_core.py", "memory_paths.py")}
+CAPTURE_HELPER_FILES = {".agents/skills/memory/scripts/memory_capture.py",
+                        ".agents/skills/memory/references/automatic-capture.md"}
+SPECIALIZED_FILES = {"README.md", IDENTITY, "memory.yaml", "Roles/INDEX.md"}
+LICENSE_MARKER = re.compile(
+    r"(?:licen[cs]e(?:s|[._-].+)?|copying(?:[._-].+)?|copyright(?:[._-].+)?|unlicense(?:[._-].+)?)",
+    re.IGNORECASE,
+)
+ROLE_INDEX = "Roles/INDEX.md"
+ROLE_HELPER = ".agents/skills/manage-subagent-roles/scripts/role_catalog.py"
+CASE_RECEIPT = ".sys4ai/roles-case-rename.json"
+STAGES = ["assets", "registration", "verification"]
+SHA256 = re.compile(r"[0-9a-f]{64}\Z")
+ID_PATTERN = re.compile(r"[a-z][a-z0-9]*(?:-[a-z0-9]+)*\Z")
+EXCLUDED = {
+    ".git",
+    ".gitmodules",
+    ".gitignore_global",
+    ".venv",
+    "venv",
+    "env",
+    "ENV",
+    ".sys4ai",
+    ".template",
+    "__pycache__",
+    ".DS_Store",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".cache",
+    "models",
+    "logs",
+    ".cognee",
+    ".cognee_system",
+    ".data_storage",
+    "dist",
+    "build",
+    "node_modules",
+    ".env",
+    ".envrc",
+    ".secrets",
+    "secrets",
+    ".transition.json",
+}
+EXCLUDED_SUFFIXES = (".pyc", ".pyo", ".log", ".zip", ".whl", ".egg")
+RESERVED = {
+    "sys4ai",
+    "sys4ai-depot",
+    "sys4ai-template-project",
+    "template",
+}
+
+
+class InitializationError(RuntimeError):
+    """A bounded conflict or recorded incomplete operation."""
+
+    def __init__(self, reason: str, *, report: dict[str, Any] | None = None):
+        super().__init__(reason)
+        self.report = report
+
+
+def sha(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def encoded(value: Any) -> bytes:
+    return (
+        json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    ).encode()
+
+
+def unique_json(raw: bytes) -> Any:
+    def pairs(items: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, value in items:
+            if key in result:
+                raise InitializationError("duplicate JSON key")
+            result[key] = value
+        return result
+
+    try:
+        return json.loads(raw, object_pairs_hook=pairs)
+    except (ValueError, UnicodeError) as error:
+        raise InitializationError("invalid JSON document") from error
+
+
+def safe(candidate: Path) -> Path:
+    if not candidate.is_absolute() or ".." in candidate.parts:
+        raise InitializationError("absolute paths without traversal are required")
+    if any(item.is_symlink() for item in (candidate, *candidate.parents)):
+        raise InitializationError("paths must not cross symbolic links")
+    return candidate
+
+
+def file_bytes(candidate: Path) -> bytes:
+    safe(candidate)
+    info = candidate.stat()
+    if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1:
+        raise InitializationError("inputs must be regular non-aliased files")
+    data = candidate.read_bytes()
+    after = candidate.stat()
+    if (info.st_ino, info.st_size, info.st_mtime_ns) != (
+        after.st_ino,
+        after.st_size,
+        after.st_mtime_ns,
+    ):
+        raise InitializationError("input changed while being read")
+    return data
+
+
+def installed_locations() -> tuple[Path, Path]:
+    script = safe(Path(__file__).absolute())
+    skill = script.parent.parent
+    if skill.name != "init-new-project" or script.parent.name != "scripts":
+        raise InitializationError("helper must run from its installed skill package")
+    if skill.parent.name == "SKILLS-depo":
+        owner = skill.parent.parent
+    elif skill.parent.name == "skills" and skill.parent.parent.name == ".agents":
+        owner = skill.parent.parent.parent
+    else:
+        raise InitializationError(
+            "skill must be installed in the depot or a registered project's active skills"
+        )
+    # A copied initializer may live in the registered template or a consumer.
+    # Only its nearest owning registry can establish the depot; no cwd or caller
+    # argument can redirect it to another workspace.
+    for depot in (owner, *owner.parents):
+        registry_path = safe(depot / "depot/projects.json")
+        if not registry_path.exists():
+            continue
+        registry, _ = read_registry(depot)
+        relative = owner.relative_to(depot).as_posix()
+        if not any(entry["path"] == relative for entry in registry["projects"]):
+            raise InitializationError("installed skill owner is not a registered project")
+        if skill.parent.name == "SKILLS-depo" and owner != depot:
+            raise InitializationError("reusable source skills must belong to the depot root")
+        return depot, skill
+    raise InitializationError("the installed skill has no owning Sys4AI registry")
+
+
+def text_value(value: str, field: str, maximum: int) -> None:
+    if (
+        not isinstance(value, str)
+        or not value.strip()
+        or value != value.strip()
+        or len(value) > maximum
+        or any(ord(char) < 32 for char in value)
+    ):
+        raise InitializationError(f"{field} must be a nonblank single line")
+    if re.search(
+        r"(?i)(?:sk-[a-z0-9_-]{16,}|(?:password|api[_-]?key|secret|token)\s*[=:]|-----BEGIN|https?://[^ /]+:[^ /]+@)",
+        value,
+    ):
+        raise InitializationError(
+            "identity and purpose must not contain credential-like text"
+        )
+
+
+def validate_identity(
+    project_id: str, project_name: str, purpose: str
+) -> None:
+    if (
+        not isinstance(project_id, str)
+        or not ID_PATTERN.fullmatch(project_id)
+        or len(project_id) > 100
+        or project_id in RESERVED
+    ):
+        raise InitializationError("project ID is malformed or reserved")
+    text_value(project_name, "project name", 200)
+    text_value(purpose, "purpose", 4000)
+    if "sys4ai template project" in project_name.casefold():
+        raise InitializationError("a product needs its own name")
+
+
+def read_registry(depot: Path) -> tuple[dict[str, Any], bytes]:
+    registry_path = depot / "depot/projects.json"
+    raw = file_bytes(registry_path)
+    if len(raw) > 5_000_000:
+        raise InitializationError("registry is oversized")
+    registry = unique_json(raw)
+    if (
+        not isinstance(registry, dict)
+        or registry.get("schema_version") != 2
+        or registry.get("workspace_name") != "Sys4AI"
+        or not isinstance(registry.get("projects"), list)
+    ):
+        raise InitializationError(
+            "expected the Sys4AI schema-2 factual project registry"
+        )
+    ids: set[str] = set()
+    paths: set[str] = set()
+    for entry in registry["projects"]:
+        if (
+            not isinstance(entry, dict)
+            or not isinstance(entry.get("id"), str)
+            or not ID_PATTERN.fullmatch(entry["id"])
+        ):
+            raise InitializationError("registry project ID is invalid")
+        path = entry.get("path")
+        if (
+            not isinstance(path, str)
+            or not path
+            or Path(path).is_absolute()
+            or ".." in Path(path).parts
+            or Path(path).as_posix() != path
+        ):
+            raise InitializationError("registry path is not canonical and relative")
+        if path != "." and not path.startswith("Projects/"):
+            raise InitializationError("registry project path is outside Projects")
+        if entry["id"] in ids or path.casefold() in paths:
+            raise InitializationError("registry contains duplicate identity or path")
+        ids.add(entry["id"])
+        paths.add(path.casefold())
+        if (
+            entry.get("registered") is not True
+            or not isinstance(entry.get("name"), str)
+            or not entry["name"].strip()
+            or entry.get("kind")
+            not in {"depot-manager", "project-template", "product-project"}
+        ):
+            raise InitializationError("registry entry is incomplete")
+        for section, values in (
+            ("repository", {"initialized", "not_initialized"}),
+            ("github_pages", {"configured", "not_configured"}),
+        ):
+            state = entry.get(section)
+            link = "remote" if section == "repository" else "url"
+            if (
+                not isinstance(state, dict)
+                or state.get("status") not in values
+                or link not in state
+                or not (state[link] is None or isinstance(state[link], str))
+            ):
+                raise InitializationError(
+                    "registry external-state observation is invalid"
+                )
+            if state["status"].startswith("not_") and state[link] is not None:
+                raise InitializationError(
+                    "registry invents unconfigured external state"
+                )
+        target = safe(depot / path)
+        if not target.is_dir():
+            raise InitializationError("registry project does not exist")
+    required = {
+        "sys4ai-depot": (".", "depot-manager"),
+        "sys4ai-template-project": (TEMPLATE, "project-template"),
+    }
+    for identifier, (relative, kind) in required.items():
+        entries = [entry for entry in registry["projects"] if entry["id"] == identifier]
+        if (
+            len(entries) != 1
+            or entries[0]["path"] != relative
+            or entries[0]["kind"] != kind
+        ):
+            raise InitializationError(
+                "exact registered depot and template identities are required"
+            )
+    return registry, raw
+
+
+def validate_destination(
+    depot: Path, registry: dict[str, Any], destination: Path, project_id: str
+) -> str:
+    safe(destination)
+    projects = safe(depot / "Projects")
+    if destination == projects or not destination.is_relative_to(projects):
+        raise InitializationError(
+            "destination must be beneath this depot's Projects container"
+        )
+    relative = destination.relative_to(depot).as_posix()
+    if any(
+        part in EXCLUDED or part.startswith(".")
+        for part in destination.relative_to(projects).parts
+    ):
+        raise InitializationError("destination uses a reserved path component")
+    if not destination.parent.is_dir():
+        raise InitializationError(
+            "destination parent must already exist beneath Projects"
+        )
+    for entry in registry["projects"]:
+        other = depot / entry["path"]
+        if entry["path"] == ".":
+            continue
+        same = relative.casefold() == entry["path"].casefold()
+        if entry["id"] == project_id and not same:
+            raise InitializationError(
+                "project ID is already registered at another path"
+            )
+        if same and entry["id"] != project_id:
+            raise InitializationError("destination is registered to another project")
+        if not same and (
+            destination.is_relative_to(other) or other.is_relative_to(destination)
+        ):
+            raise InitializationError("destination overlaps another registered project")
+    if relative == TEMPLATE:
+        raise InitializationError("source projects cannot be initialization targets")
+    return relative
+
+
+def excluded(relative: Path) -> bool:
+    return any(
+        part in EXCLUDED or part.startswith(("._", ".env.")) for part in relative.parts
+    ) or relative.name.endswith(EXCLUDED_SUFFIXES)
+
+
+def tree_files(root: Path) -> dict[str, bytes]:
+    safe(root)
+    if not root.is_dir():
+        raise InitializationError("template asset tree is missing")
+    collected: dict[str, bytes] = {}
+    for current, directories, filenames in os.walk(root, followlinks=False):
+        directories[:] = sorted(
+            name for name in directories if not excluded(Path(name))
+        )
+        for name in directories:
+            safe(Path(current) / name)
+        for name in sorted(filenames):
+            candidate = Path(current) / name
+            relative = candidate.relative_to(root)
+            if not excluded(relative):
+                collected[relative.as_posix()] = file_bytes(candidate)
+    return collected
+
+
+def package_files(package: Path) -> dict[str, bytes]:
+    collected = tree_files(package)
+    if "SKILL.md" not in collected:
+        raise InitializationError("template skill has no SKILL.md")
+    validate_package(package.name, collected)
+    return collected
+
+
+def package_names(root: Path) -> list[str]:
+    safe(root)
+    if not root.is_dir():
+        raise InitializationError("template package collection is missing")
+    names = []
+    for package in sorted(root.iterdir()):
+        if excluded(Path(package.name)):
+            continue
+        safe(package)
+        if not package.is_dir():
+            continue
+        if not ID_PATTERN.fullmatch(package.name) or len(package.name) > 64:
+            raise InitializationError("template package name is invalid")
+        if package.name.casefold() in {name.casefold() for name in names}:
+            raise InitializationError("template package name collides")
+        names.append(package.name)
+    return names
+
+
+def validate_package(name: str, files: dict[str, bytes]) -> None:
+    body = files["SKILL.md"].decode()
+    if not body.startswith("---\n") or "\n---" not in body[4:]:
+        raise InitializationError("baseline skill frontmatter is missing")
+    frontmatter = body.split("---", 2)[1]
+    if not re.search(
+        r"(?m)^name:\s*[\"']?" + re.escape(name) + r"[\"']?\s*$", frontmatter
+    ) or not re.search(r"(?m)^description:\s*\S", frontmatter):
+        raise InitializationError(
+            "baseline skill metadata differs from its package identity"
+        )
+    for relative, raw in files.items():
+        if relative.endswith(".py"):
+            try:
+                ast.parse(raw, filename=relative)
+            except SyntaxError as error:
+                raise InitializationError(
+                    "baseline Python resource is invalid"
+                ) from error
+        elif relative.endswith(".json"):
+            unique_json(raw)
+
+
+def exact_role_root(root: Path, name: str, *, allow_absent: bool = False) -> None:
+    """Check directory entries, never case-insensitive path lookup."""
+    matches = sorted(entry.name for entry in root.iterdir() if entry.name.casefold() == name.casefold()) if root.is_dir() else []
+    if matches != [name]:
+        if not matches and allow_absent:
+            return
+        raise InitializationError("role directory spelling differs from its setup edition; an explicit case-rename transition is required")
+    target = safe(root / name)
+    if not target.is_dir():
+        raise InitializationError("role collection is not a regular directory")
+
+
+@contextmanager
+def role_validator(raw: bytes, *, role_root: str = "Roles") -> Iterator[Any]:
+    """Use the reviewed Template helper bytes, including its receipt validator."""
+    module_name = "_initializer_role_catalog_" + sha(raw)
+    helper = types.ModuleType(module_name)
+    helper.__file__ = ROLE_HELPER
+    sys.modules[module_name] = helper
+    try:
+        exec(compile(raw, ROLE_HELPER, "exec"), helper.__dict__)
+        if helper.ROLE_ROOT_NAME != role_root:
+            raise InitializationError("role helper requires an explicit active-layout transition")
+        yield helper
+    except (RuntimeError, AttributeError, OSError, UnicodeError, SyntaxError, ValueError) as error:
+        if isinstance(error, InitializationError):
+            raise
+        raise InitializationError(f"role validation failed: {error}") from error
+    finally:
+        sys.modules.pop(module_name, None)
+
+
+def role_index_bytes(files: dict[str, bytes], *, required: bool = False,
+                     contract: str = SETUP_CONTRACT) -> bytes:
+    """Render with one frozen role helper and disposable role files only."""
+    if not {ROLE_HELPER, "SOUL.md"} <= files.keys():
+        raise InitializationError("role index lacks its required helper or instruction source")
+    role_root = ROLE_ROOTS[contract]
+    role_index = role_root + "/INDEX.md"
+    with role_validator(files[ROLE_HELPER], role_root=role_root) as helper:
+        with tempfile.TemporaryDirectory(prefix="sys4ai-initializer-roles-") as temporary:
+            root = Path(temporary).resolve()
+            (root / role_root).mkdir()
+            for relative, raw in files.items():
+                if relative == "SOUL.md" or relative.startswith(role_root + "/") and relative != role_index:
+                    target = destination_file(root, relative)
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(raw)
+            catalog = helper.build_catalog(root)
+            if required and (catalog.invalid_roles or not {"project-sub-agent", "task-manager"} <= {entry.name for entry in catalog.valid_roles}):
+                raise InitializationError("template role pairs are invalid or required roles are missing")
+            return helper.render_index(catalog).encode()
+
+
+def template_sources(
+    depot: Path, *, contract: str = SETUP_CONTRACT,
+) -> tuple[dict[str, bytes], dict[str, Path], dict[str, str], bytes, bytes]:
+    template = safe(depot / TEMPLATE)
+    policy = file_bytes(template / TEMPLATE_POLICY)
+    specification = unique_json(policy)
+    if contract not in ROLE_ROOTS:
+        raise InitializationError("unsupported starter edition")
+    role_root = ROLE_ROOTS[contract]
+    exact_role_root(template, role_root)
+    if (
+        not isinstance(specification, dict)
+        or specification.get("schema_version") != 2
+        or specification.get("skills") != ".agents/skills"
+        or specification.get("roles") != role_root
+        or specification.get("soul") != "SOUL.md"
+        or specification.get("template") != TEMPLATE
+        or specification.get("readme_template") != README_RENDERER
+        or specification.get("optional_trees") != ["reference-assets"]
+    ):
+        raise InitializationError("template starter policy has unapproved source paths")
+    if set(specification) != {"schema_version", "skills", "roles", "soul", "template",
+                              "readme_template", "starter_files", "optional_starter_files", "optional_trees"}:
+        raise InitializationError("template starter policy has unsupported fields")
+    starter_files = specification.get("starter_files")
+    optional_files = specification.get("optional_starter_files")
+    if (
+        not isinstance(starter_files, list)
+        or not isinstance(optional_files, list)
+        or any(not isinstance(item, str) for item in starter_files + optional_files)
+        or len(set(starter_files + optional_files)) != len(starter_files + optional_files)
+        or set(starter_files) != required_starters(contract)
+        or optional_files != []
+    ):
+        raise InitializationError("template starter file allowlist is invalid")
+    copied: dict[str, bytes] = {}
+    origins: dict[str, Path] = {}
+    versions: dict[str, str] = {}
+
+    def include(relative: str, raw: bytes, *, version: str | None = None) -> None:
+        copied[relative] = raw
+        origins[relative] = template / relative
+        versions[relative] = version or "sha256:" + sha(raw)
+
+    for relative in starter_files + optional_files:
+        source = safe(template / relative)
+        if relative in optional_files and not source.exists():
+            continue
+        include(relative, file_bytes(source))
+    include("SOUL.md", file_bytes(template / "SOUL.md"))
+    for collection in (".agents/skills", role_root):
+        names = package_names(template / collection)
+        required = required_skills(contract) if collection == ".agents/skills" else ({"project-sub-agent"} if contract == LEGACY_CONTRACT else {"project-sub-agent", "task-manager"})
+        if not required.issubset(names):
+            raise InitializationError("template lacks required governance packages or generic role")
+        for name in names:
+            source = template / collection / name
+            package = package_files(source) if collection == ".agents/skills" else tree_files(source)
+            if collection == role_root and not {"AGENTS.md", "ROLE.md"}.issubset(package):
+                raise InitializationError("template role bundle lacks AGENTS.md or ROLE.md")
+            version = "sha256:" + sha(encoded({relative: sha(raw) for relative, raw in package.items()}))
+            for relative, raw in package.items():
+                include(f"{collection}/{name}/{relative}", raw, version=version)
+    if contract != LEGACY_CONTRACT:
+        role_index = role_root + "/INDEX.md"
+        index = file_bytes(template / role_index)
+        if index != role_index_bytes(copied, required=True, contract=contract):
+            raise InitializationError("template role index is stale; run the reviewed Template update")
+        include(role_index, index)
+    reference = safe(template / "reference-assets")
+    if reference.exists():
+        for relative, raw in tree_files(reference).items():
+            include("reference-assets/" + relative, raw)
+    if contract in MEMORY_CONTRACTS:
+        if not (MEMORY_CONTRACT_FILES | MEMORY_HELPER_FILES) <= copied.keys():
+            raise InitializationError("template lacks required memory contract assets")
+        if set(tree_files(template / "MEMORY")) != {"README.md"}:
+            raise InitializationError("template memory is not empty")
+    if contract == SETUP_CONTRACT and not CAPTURE_HELPER_FILES <= copied.keys():
+        raise InitializationError("template lacks automatic memory capture support")
+    renderer = file_bytes(template / README_RENDERER)
+    return copied, origins, versions, renderer, policy
+
+
+def required_starters(contract: str) -> set[str]:
+    # Older receipts retain the file inventory of their original edition.
+    return (STARTER_FILES | (LICENSE_FILES if contract in LICENSE_CONTRACTS else set())
+            | (MEMORY_FILES if contract in MEMORY_CONTRACTS else set()))
+
+
+def required_skills(contract: str) -> set[str]:
+    return REQUIRED_SKILLS | ({"memory"} if contract in MEMORY_CONTRACTS else set())
+
+
+def validate_memory_config(config: Any, files: dict[str, bytes], *, allow_template: bool) -> None:
+    """Run the pure validator from the same frozen Template skill edition."""
+    names = ("memory_paths", "_initializer_memory_core")
+    previous = {name: sys.modules.get(name) for name in names}
+    try:
+        modules = []
+        for name, filename in zip(names, ("memory_paths.py", "memory_core.py")):
+            relative = ".agents/skills/memory/scripts/" + filename
+            module = types.ModuleType(name)
+            module.__file__ = relative
+            sys.modules[name] = module
+            exec(compile(files[relative], relative, "exec"), module.__dict__)
+            modules.append(module)
+        try:
+            modules[1].validate_config(config, allow_template=allow_template)
+        except modules[0].MemoryError as error:
+            raise InitializationError(f"memory configuration failed validation: {error}") from error
+    except (KeyError, AttributeError, ImportError, UnicodeError, SyntaxError, ValueError) as error:
+        raise InitializationError("template memory configuration validator is unavailable or invalid") from error
+    finally:
+        for name, module in previous.items():
+            if module is None:
+                sys.modules.pop(name, None)
+            else:
+                sys.modules[name] = module
+
+
+def specialize_memory(raw: bytes, identity: dict[str, Any], files: dict[str, bytes],
+                      *, automatic: bool = False, destination: Path | None = None,
+                      owned_governance: frozenset[str] = frozenset()) -> bytes:
+    """Specialize only an empty, portable Template configuration."""
+    config = unique_json(raw)
+    validate_memory_config(config, files, allow_template=True)
+    if (not isinstance(config, dict) or config.get("schema_version") != 1
+            or config.get("project") != {"id": None, "name": None, "root": "."}
+            or config.get("canonical_root") != "MEMORY"
+            or config.get("contract_root") != MEMORY_CONTRACT_ROOT
+            or config.get("backend") != {"name": "basic-memory", "enabled": False, "semantic_enabled": False}
+            or config.get("publication") != {"director": None}
+            or config.get("corpus", {}).get("source_groups") != []):
+        raise InitializationError("template memory configuration is not an empty portable starter")
+    config["project"] = {"id": identity["project_id"], "name": identity["project_name"], "root": "."}
+    if automatic:
+        config["integration"]["automatic_capture"] = True
+        # Bind the new installation to this project's final governance, including
+        # preserved existing instructions, never to the depot's authority.
+        authority = []
+        for name in ("SOUL.md", "AGENTS.md", "ROLE.md"):
+            target = destination_file(destination, name) if destination is not None else None
+            raw_authority = (file_bytes(target) if name not in owned_governance
+                             and target is not None and target.exists() else files[name])
+            authority.append({"path": name, "sha256": sha(raw_authority)})
+        config["publication"]["director"] = {"actor_id": "/root", "authority": authority,
+            "scope": ["MEMORY", "control_records/memory", ".sys4ai/memory"]}
+    validate_memory_config(config, files, allow_template=False)
+    return encoded(config)
+
+
+def source_snapshot(
+    depot: Path, skill: Path, identity: dict[str, Any], *, contract: str = SETUP_CONTRACT,
+    destination: Path | None = None,
+    owned_governance: frozenset[str] = frozenset(),
+) -> tuple[dict[str, bytes], list[dict[str, str]], dict[str, bytes]]:
+    # The installed skill provides code only. Every starter input, including the
+    # allowlist and README renderer, is read from the registered template.
+    original, origins, versions, renderer, policy = template_sources(depot, contract=contract)
+    proposed = dict(original)
+    # Never copy a populated Task index as the new project's empty state.
+    if (
+        b"| None |" not in proposed["Tasks/INDEX.md"]
+        or b"TASK-" in proposed["Tasks/INDEX.md"]
+    ):
+        raise InitializationError("template Task index is not empty")
+    proposed["README.md"] = renderer.decode().format(**identity).encode()
+    proposed[IDENTITY] = encoded(identity)
+    if contract in MEMORY_CONTRACTS:
+        proposed["memory.yaml"] = specialize_memory(original["memory.yaml"], identity, original,
+            automatic=contract == SETUP_CONTRACT, destination=destination, owned_governance=owned_governance)
+    records = [
+        {
+            "source": source.relative_to(depot).as_posix(),
+            "source_sha256": sha(original[relative]),
+            "destination": relative,
+            "destination_sha256": sha(proposed[relative]),
+            "source_version": versions[relative],
+        }
+        for relative, source in sorted(origins.items())
+    ]
+    for relative, raw, destination in (
+        (README_RENDERER, renderer, "README.md"),
+        (TEMPLATE_POLICY, policy, IDENTITY),
+    ):
+        records.append({
+            "source": f"{TEMPLATE}/{relative}",
+            "source_sha256": sha(raw),
+            "destination": destination,
+            "destination_sha256": sha(proposed[destination]),
+            "source_version": "sha256:" + sha(raw),
+        })
+    for relative, raw in proposed.items():
+        if relative in {"README.md", IDENTITY} and b"Sys4AI Template Project" in raw:
+            raise InitializationError("product identity retains the template name")
+    return proposed, records, original
+
+
+def check_sources(depot: Path, records: list[dict[str, str]], *, contract: str = SETUP_CONTRACT) -> None:
+    expected = {entry["source"]: entry["source_sha256"] for entry in records}
+    try:
+        copied, origins, _, renderer, policy = template_sources(depot, contract=contract)
+    except (InitializationError, OSError) as error:
+        raise InitializationError("reviewed template source changed during adoption") from error
+    actual = {
+        origins[relative].relative_to(depot).as_posix(): sha(raw)
+        for relative, raw in copied.items()
+    }
+    actual[f"{TEMPLATE}/{README_RENDERER}"] = sha(renderer)
+    actual[f"{TEMPLATE}/{TEMPLATE_POLICY}"] = sha(policy)
+    if actual.keys() != expected.keys():
+        raise InitializationError("reviewed template source file set changed during adoption")
+    if actual != expected:
+        raise InitializationError("reviewed template source changed during adoption")
+
+
+def destination_file(root: Path, relative: str) -> Path:
+    candidate = safe(root / relative)
+    if (
+        not candidate.is_relative_to(root)
+        or relative in {"", "."}
+        or Path(relative).as_posix() != relative
+        or Path(relative).is_absolute()
+        or ".." in Path(relative).parts
+    ):
+        raise InitializationError("unsafe project file path")
+    for parent in candidate.parents:
+        if parent == root:
+            break
+        if parent.exists() and not parent.is_dir():
+            raise InitializationError("project file parent is not a directory")
+    if candidate.exists():
+        file_bytes(candidate)
+    return candidate
+
+
+def atomic_write(
+    target: Path, data: bytes, expected: bytes | None, *, mode: int = 0o644
+) -> None:
+    safe(target)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    safe(target)
+    current = file_bytes(target) if target.exists() else None
+    if current != expected:
+        raise InitializationError("destination changed before publication")
+    published_mode = (
+        stat.S_IMODE(target.stat().st_mode) if current is not None else mode
+    )
+    descriptor, name = tempfile.mkstemp(prefix=".initializer-", dir=target.parent)
+    staging = Path(name)
+    try:
+        with os.fdopen(descriptor, "wb") as stream:
+            os.fchmod(stream.fileno(), published_mode)
+            stream.write(data)
+            stream.flush()
+            os.fsync(stream.fileno())
+        if (file_bytes(target) if target.exists() else None) != expected:
+            raise InitializationError("destination changed during publication")
+        if expected is None:
+            # Hard-link publication gives create-only semantics even if another
+            # writer appears after the last check. The staging alias is removed.
+            os.link(staging, target, follow_symlinks=False)
+        else:
+            os.replace(staging, target)
+    finally:
+        staging.unlink(missing_ok=True)
+
+
+@contextmanager
+def template_read_lock(depot: Path) -> Iterator[None]:
+    """Coordinate authorized adoption with the optional depot-to-template updater."""
+    lock = safe(depot / ".sys4ai/template-update/lock")
+    lock.parent.mkdir(parents=True, exist_ok=True)
+    descriptor = os.open(lock, os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
+    try:
+        info = os.fstat(descriptor)
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1:
+            raise InitializationError("template update lock must be a regular non-aliased file")
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_SH | fcntl.LOCK_NB)
+        except BlockingIOError as error:
+            raise InitializationError("template update is active; retry initialization after it finishes") from error
+        yield
+    finally:
+        os.close(descriptor)
+
+
+@contextmanager
+def exclusive(lock: Path) -> Iterator[None]:
+    """Hold a crash-releasing lock on a stable inode; its presence is not a lease."""
+    safe(lock)
+    descriptor = os.open(lock, os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
+    try:
+        info = os.fstat(descriptor)
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1:
+            raise InitializationError("initializer lock must be a regular non-aliased file")
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as error:
+            raise InitializationError("an initializer operation is active; retry after its writer exits") from error
+        yield
+    finally:
+        # Unlinking permits another writer to create and lock a different inode
+        # while a contender still holds this one. Closing releases the kernel lock.
+        os.close(descriptor)
+
+
+def process(arguments: list[str], cwd: Path, *, json_output: bool = False,
+            timeout: int = 15) -> Any:
+    environment = {**os.environ, "GIT_OPTIONAL_LOCKS": "0"}
+    result = subprocess.run(arguments, cwd=cwd, env=environment, text=True,
+                            capture_output=True, timeout=timeout, check=False)
+    if result.returncode:
+        raise InitializationError(
+            f"{Path(arguments[0]).name} observation failed with exit code {result.returncode}"
+        )
+    return unique_json(result.stdout.encode()) if json_output else result.stdout.strip()
+
+
+def repository_observation(destination: Path) -> dict[str, Any]:
+    marker = destination / ".git"
+    if not marker.exists() and not marker.is_symlink():
+        return {"status": "not_initialized", "remote": None}
+    safe(marker)
+    top = process(
+        ["git", "-C", str(destination), "rev-parse", "--show-toplevel"],
+        destination,
+        json_output=False,
+    )
+    if Path(top) != destination:
+        raise InitializationError(
+            "Git metadata does not belong to this exact child root"
+        )
+    # A configured remote is optional, including for an empty new repository.
+    environment = {**os.environ, "GIT_OPTIONAL_LOCKS": "0"}
+    result = subprocess.run(
+        ["git", "-C", str(destination), "config", "--get", "remote.origin.url"],
+        cwd=destination,
+        env=environment,
+        text=True,
+        capture_output=True,
+        timeout=15,
+        check=False,
+    )
+    if result.returncode not in {0, 1}:
+        raise InitializationError("child Git remote observation failed")
+    remote = result.stdout.strip() or None
+    if remote:
+        text_value(remote, "observed remote", 2000)
+    return {"status": "initialized", "remote": remote}
+
+
+def registry_candidate(identity: dict[str, Any], destination: Path) -> dict[str, Any]:
+    return {
+        "id": identity["project_id"],
+        "name": identity["project_name"],
+        "path": identity["relative_path"],
+        "kind": "product-project",
+        "registered": True,
+        "repository": repository_observation(destination),
+        "github_pages": {"status": "not_configured", "url": None},
+        "notes": identity["purpose"],
+    }
+
+
+def register_project(
+    depot: Path, candidate: dict[str, Any], expected: bytes, *, preserve_existing: bool = False
+) -> dict[str, Any]:
+    with exclusive(depot / "depot/.projects-initializer.lock"):
+        registry, current = read_registry(depot)
+        if not isinstance(candidate, dict) or not isinstance(
+            candidate.get("path"), str
+        ):
+            raise InitializationError("registration candidate is malformed")
+        target = safe(depot / candidate["path"])
+        identity = unique_json(file_bytes(target / IDENTITY))
+        validate_identity(
+            identity["project_id"],
+            identity["project_name"],
+            identity["purpose"],
+        )
+        validate_destination(depot, registry, target, identity["project_id"])
+        if not target.is_dir() or (not preserve_existing and candidate != registry_candidate(identity, target)):
+            raise InitializationError(
+                "registration must match the specialized identity and observed repository"
+            )
+        same = [
+            entry
+            for entry in registry["projects"]
+            if entry["id"] == candidate["id"]
+            or entry["path"].casefold() == candidate["path"].casefold()
+        ]
+        if same:
+            if len(same) == 1 and same[0] == candidate:
+                return {"entry": candidate, "changed": False, "sha256": sha(current)}
+            if (preserve_existing and len(same) == 1 and same[0]["id"] == identity["project_id"]
+                    and same[0]["path"] == identity["relative_path"] and same[0]["kind"] == "product-project"):
+                return {"entry": same[0], "changed": False, "sha256": sha(current)}
+            raise InitializationError("registry identity or path conflicts")
+        if current != expected:
+            raise InitializationError(
+                "registry changed since preflight; retry after inspecting the current inventory"
+            )
+        if (
+            not target.is_dir()
+            or identity["project_id"] != candidate["id"]
+            or identity["relative_path"] != candidate["path"]
+            or identity["project_name"] != candidate["name"]
+        ):
+            raise InitializationError(
+                "specialized project must exist before registration"
+            )
+        registry["projects"].append(candidate)
+        updated = encoded(registry)
+        atomic_write(depot / "depot/projects.json", updated, current)
+        read_registry(depot)
+        return {"entry": candidate, "changed": True, "sha256": sha(updated)}
+
+
+def selected_identity(
+    destination: Path, *, project_id: str, project_name: str, purpose: str, relative: str
+) -> tuple[dict[str, Any], dict[str, Any] | None]:
+    validate_identity(project_id, project_name, purpose)
+    identity_path = destination_file(destination, IDENTITY)
+    saved = unique_json(file_bytes(identity_path)) if identity_path.exists() else None
+    if saved is not None:
+        if not isinstance(saved, dict) or saved.get("project_id") != project_id:
+            raise InitializationError("existing project identity differs from the selected project")
+        if not {"project_id", "project_name", "purpose", "relative_path"} <= saved.keys():
+            raise InitializationError("existing project identity is incomplete; preserve and resolve it before setup")
+        if saved.get("relative_path", relative) != relative:
+            raise InitializationError("existing project identity belongs to another destination")
+        project_name = saved.get("project_name", project_name)
+        purpose = saved.get("purpose", purpose)
+        validate_identity(project_id, project_name, purpose)
+    identity = {"schema_version": 1, "project_id": project_id, "project_name": project_name,
+                "purpose": purpose, "relative_path": relative}
+    return identity, saved
+
+
+def license_inventory(destination: Path) -> dict[str, str]:
+    """Record root license markers and their trees without changing project terms."""
+    result = {}
+    if destination.exists():
+        for marker in sorted(destination.iterdir()):
+            if not LICENSE_MARKER.fullmatch(marker.name):
+                continue
+            safe(marker)
+            for item in [marker, *sorted(marker.rglob("*"))] if marker.is_dir() else [marker]:
+                safe(item)
+                result[item.relative_to(destination).as_posix()] = (
+                    "directory" if item.is_dir() else sha(file_bytes(item)))
+    return result
+
+
+def check_license_adoption(destination: Path, record: dict[str, Any]) -> None:
+    """Recheck the reviewed licensing set, allowing only already-published starters."""
+    if record["setup_contract"] not in LICENSE_CONTRACTS:
+        return
+    expected = dict(record["preserved_licenses"])
+    for name in LICENSE_FILES & record["owned_files"].keys():
+        target = destination_file(destination, name)
+        if target.exists():
+            expected[name] = record["owned_files"][name]
+    if license_inventory(destination) != expected:
+        raise InitializationError("project licensing changed during asset adoption")
+
+
+def memory_path(name: str) -> bool:
+    return name == "memory.yaml" or any(name == root or name.startswith(root + "/") for root in MEMORY_TREES)
+
+
+def memory_inventory(destination: Path) -> dict[str, str]:
+    """Observe complete project-owned memory collections without filtering files."""
+    result = {}
+    for name in ("memory.yaml", *MEMORY_TREES):
+        marker = safe(destination / name)
+        if not marker.exists():
+            continue
+        if name != "memory.yaml" and not marker.is_dir():
+            raise InitializationError("existing memory collection is not a directory")
+        for item in [marker, *sorted(marker.rglob("*"))] if marker.is_dir() else [marker]:
+            safe(item)
+            result[item.relative_to(destination).as_posix()] = (
+                "directory" if item.is_dir() else sha(file_bytes(item)))
+    return result
+
+
+def check_memory_adoption(destination: Path, record: dict[str, Any]) -> None:
+    if record["setup_contract"] not in MEMORY_CONTRACTS:
+        return
+    expected = dict(record["preserved_memory"])
+    for name, checksum in record["owned_files"].items():
+        if memory_path(name) and destination_file(destination, name).exists():
+            prior = record.get("recovery_before", {}).get(name)
+            actual = sha(file_bytes(destination_file(destination, name)))
+            expected[name] = prior if prior is not None and actual == prior else checksum
+            parent = Path(name).parent
+            while memory_path(parent.as_posix()):
+                expected[parent.as_posix()] = "directory"
+                parent = parent.parent
+    if memory_inventory(destination) != expected:
+        raise InitializationError("project memory changed during asset adoption")
+
+
+def asset_plan(destination: Path, *, mode: str, proposed: dict[str, bytes],
+               original: dict[str, bytes], saved_identity: dict[str, Any] | None,
+               preserved_licenses: dict[str, str]
+               ) -> tuple[dict[str, bytes], dict[str, str | None], dict[str, str]]:
+    selected, before, preserved = {}, {}, {}
+    for name, raw in proposed.items():
+        if name in LICENSE_FILES and preserved_licenses and safe(destination / name).is_dir():
+            # A project may use LICENSE/ as a directory. Preserve it without
+            # trying to publish a regular starter file at the same path.
+            continue
+        target = destination_file(destination, name)
+        present = file_bytes(target) if target.exists() else None
+        if mode == "create":
+            if present is not None:
+                raise InitializationError("new project changed before asset adoption")
+            selected[name], before[name] = raw, None
+            continue
+        # A project owns an existing package as a whole. Filling missing resources
+        # from a newer Template could combine incompatible package versions.
+        parts = Path(name).parts
+        package_exists = ((name.startswith(".agents/skills/") and len(parts) > 3
+                           and (destination / Path(*parts[:3])).is_dir())
+                          or (name.startswith("Roles/") and name != ROLE_INDEX
+                              and (destination / "Roles").is_dir())
+                          or any(name.startswith(root + "/") and (destination / root).is_dir()
+                                 for root in MEMORY_TREES))
+        existing_tasks = (name.startswith("Tasks/") and (destination / "Tasks").is_dir()
+                          and any((destination / "Tasks").iterdir()))
+        if present is not None:
+            if saved_identity is None and name in {"README.md", "memory.yaml"} and present == original.get(name):
+                selected[name], before[name] = raw, sha(present)
+            else:
+                preserved[name] = sha(present)
+        elif not (package_exists or existing_tasks or name in LICENSE_FILES and preserved_licenses):
+            selected[name], before[name] = raw, None
+    if ROLE_INDEX in proposed:
+        index = planned_role_index(destination, proposed, selected)
+        present = file_bytes(destination / ROLE_INDEX) if (destination / ROLE_INDEX).exists() else None
+        if present is not None and present != index:
+            raise InitializationError("existing role index differs from current pairs; preserve it for explicit reindex")
+        if ROLE_INDEX in selected:
+            selected[ROLE_INDEX] = index
+    return selected, before, preserved
+
+
+def planned_role_index(destination: Path, proposed: dict[str, bytes], owned: dict[str, Any],
+                       *, contract: str = SETUP_CONTRACT) -> bytes:
+    effective = {name: proposed[name] if name in owned else file_bytes(destination / name) for name in ("SOUL.md", ROLE_HELPER)}
+    role_name = ROLE_ROOTS[contract]
+    role_index = role_name + "/INDEX.md"
+    exact_role_root(destination, role_name, allow_absent=True)
+    role_root = safe(destination / role_name)
+    if role_root.exists():
+        effective.update({role_name + "/" + name: raw for name, raw in tree_files(role_root).items() if name != "INDEX.md"})
+    effective.update({name: proposed[name] for name in owned if name.startswith(role_name + "/") and name != role_index})
+    return role_index_bytes(effective, contract=contract)
+
+
+def check_existing_role_layout(destination: Path, validator_raw: bytes) -> None:
+    exact_role_root(destination, "Roles", allow_absent=True)
+    legacy = safe(destination / "sub-agent-roles")
+    package = safe(destination / ".agents/skills/manage-subagent-roles")
+    if legacy.exists() and not package.exists():
+        raise InitializationError("existing legacy roles require an explicit reviewed transition before new starter adoption")
+    if package.exists():
+        helper = destination / ROLE_HELPER
+        if not helper.is_file():
+            raise InitializationError("existing role helper package needs explicit compatibility review")
+        try:
+            tree = ast.parse(file_bytes(helper))
+        except (SyntaxError, ValueError) as error:
+            raise InitializationError("existing role helper package needs explicit compatibility review") from error
+        roots = [node.value.value for node in tree.body if isinstance(node, ast.Assign)
+                 and any(isinstance(target, ast.Name) and target.id == "ROLE_ROOT_NAME" for target in node.targets)
+                 and isinstance(node.value, ast.Constant)]
+        if roots != ["Roles"]:
+            raise InitializationError("existing role helper requires an explicit active-layout transition")
+    if not legacy.exists():
+        return
+    # A copy-first transition retains the legacy directory. Its presence is not
+    # completion evidence; validate the exact receipt and live bytes read-only.
+    receipt_path = safe(destination / "Roles/.transition.json")
+    if not receipt_path.is_file():
+        raise InitializationError("retained legacy roles lack an explicit completed transition receipt")
+    functions = {node.name for node in tree.body if isinstance(node, ast.FunctionDef)}
+    if not {"build_catalog", "render_index", "transition_apply", "validate_transition_receipt"} <= functions:
+        raise InitializationError("existing role helper lacks the current transition contract")
+    with role_validator(validator_raw) as validator:
+        receipt = validator.load_manifest(receipt_path)
+        destinations = validator.validate_transition_receipt(receipt, destination)
+        current_paths = validator.transition_destination_paths(receipt, destination)
+        if receipt["status"] != "completed":
+            raise InitializationError("explicit role transition is incomplete; recover it before preparation")
+        preview = receipt["preview"]
+        fresh = validator.transition_preview(destination)
+        if fresh["legacy_fingerprint"] != preview["legacy_fingerprint"] or fresh["conflicts"]:
+            raise InitializationError("completed transition provenance changed or has a destination collision")
+        for pair in preview["pairs"]:
+            for entry in pair["files"]:
+                if sha(file_bytes(destination_file(destination, entry["source"]))) != entry["source_sha256"]:
+                    raise InitializationError("retained legacy role bytes changed after their reviewed transition")
+        if any(sha(file_bytes(destination_file(destination, current_paths[name]))) != checksum for name, checksum in destinations.items()):
+            raise InitializationError("active role bytes differ from the completed transition receipt")
+        catalog = validator.build_catalog(destination)
+        if catalog.invalid_roles or catalog.index_status != "current":
+            raise InitializationError("completed transition lacks current valid active roles and index")
+
+
+def record_role_paths(record: dict[str, Any], destination: Path
+                      ) -> tuple[str, dict[str, str], dict[str, str] | None]:
+    """Resolve an earlier edition only through its explicit completed rename."""
+    role_root = ROLE_ROOTS[record["setup_contract"]]
+    names = sorted(entry.name for entry in destination.iterdir()
+                   if entry.name.casefold() == "roles") if destination.is_dir() else []
+    if record["setup_contract"] == LOWERCASE_CONTRACT and names == ["Roles"]:
+        if "assets" not in record["completed_stages"]:
+            raise InitializationError("finish interrupted lowercase asset adoption before its explicit case rename")
+        receipt_path = destination_file(destination, CASE_RECEIPT)
+        if not receipt_path.is_file():
+            raise InitializationError("lowercase setup receipt requires an explicit completed case-rename receipt")
+        raw = file_bytes(receipt_path)
+        with role_validator(file_bytes(destination / ROLE_HELPER)) as validator:
+            proof = validator.validate_case_rename_receipt(unique_json(raw), destination)
+        paths = proof["destination_paths"]
+        for key in ("owned_files", "preserved_files"):
+            files = record.get(key)
+            if isinstance(files, dict) and any(isinstance(name, str) and name.startswith("roles/")
+                                               and name not in paths for name in files):
+                raise InitializationError("case-rename proof omits a recorded lowercase role file")
+        evidence = {"path": CASE_RECEIPT, "sha256": sha(raw), "source": "roles", "destination": "Roles"}
+        if "role_case_transition" in record and record["role_case_transition"] != evidence:
+            raise InitializationError("setup case-rename evidence changed since verification")
+        return "Roles", paths, evidence
+    if "role_case_transition" in record:
+        raise InitializationError("setup case-rename evidence has no matching current role layout")
+    exact_role_root(destination, role_root, allow_absent="assets" not in record["completed_stages"])
+    return role_root, {}, None
+
+
+def validate_record(record: Any, destination: Path, identity: dict[str, Any]) -> None:
+    if (not isinstance(record, dict) or record.get("schema_version") != 1
+            or not isinstance(record.get("setup_contract"), str)
+            or record.get("setup_contract") not in ROLE_ROOTS):
+        raise InitializationError("existing setup receipt has an unsupported contract")
+    if record.get("project_root") != str(destination) or record.get("identity") != identity:
+        raise InitializationError("existing setup receipt belongs to another project or request")
+    stages = record.get("completed_stages")
+    if (record.get("status") not in {"partial", "completed"}
+            or record.get("mode") not in {"create", "prepare-existing"}
+            or not isinstance(stages, list) or stages != STAGES[:len(stages)]
+            or record.get("active_stage") not in {*STAGES, None}
+            or not isinstance(record.get("sources"), list)
+            or not record["sources"]):
+        raise InitializationError("existing setup receipt has an invalid lifecycle")
+    if (not isinstance(record.get("operation_id"), str)
+            or not re.fullmatch(r"project-setup-[0-9a-f]{32}", record["operation_id"])):
+        raise InitializationError("existing setup receipt has an invalid operation identity")
+    source_adoptions = {}
+    seen_sources = set()
+    for entry in record["sources"]:
+        if (not isinstance(entry, dict) or not isinstance(entry.get("source"), str)
+                or not entry["source"].startswith(TEMPLATE + "/")
+                or entry["source"] in seen_sources
+                or not isinstance(entry.get("source_sha256"), str)
+                or not SHA256.fullmatch(entry["source_sha256"])
+                or not isinstance(entry.get("source_version"), str)
+                or not re.fullmatch(r"sha256:[0-9a-f]{64}", entry["source_version"])
+                or entry.get("adoption") not in {"adopted", "specialized", "preserved-project-owned", "skipped-existing-package", "skipped-existing-license"}):
+            raise InitializationError("existing setup receipt has invalid source provenance")
+        relative_source = entry["source"].removeprefix(TEMPLATE + "/")
+        expected_destination = {README_RENDERER: "README.md", TEMPLATE_POLICY: IDENTITY}.get(
+            relative_source, relative_source)
+        if entry.get("destination") != expected_destination:
+            raise InitializationError("existing setup receipt changes a source destination")
+        if entry["adoption"] == "specialized" and (record["setup_contract"] not in MEMORY_CONTRACTS
+                                                   or expected_destination not in SPECIALIZED_FILES):
+            raise InitializationError("existing setup receipt has an unsupported specialization")
+        if (record["setup_contract"] in LICENSE_CONTRACTS
+                and expected_destination in LICENSE_FILES
+                and entry["adoption"] == "skipped-existing-license"):
+            safe(destination / expected_destination)
+        else:
+            destination_file(destination, expected_destination)
+        checksum = entry.get("destination_sha256")
+        skipped = entry["adoption"] in {"skipped-existing-package", "skipped-existing-license"}
+        if (skipped and checksum is not None
+                or not skipped
+                and (not isinstance(checksum, str) or not SHA256.fullmatch(checksum))):
+            raise InitializationError("existing setup receipt has an invalid adoption digest")
+        adoption = (entry["adoption"], checksum)
+        if (expected_destination in source_adoptions
+                and source_adoptions[expected_destination] != adoption):
+            raise InitializationError("existing setup receipt has conflicting source adoption decisions")
+        source_adoptions[expected_destination] = adoption
+        seen_sources.add(entry["source"])
+    legacy = record["setup_contract"] == LEGACY_CONTRACT
+    role_root = ROLE_ROOTS[record["setup_contract"]]
+    role_sources = ({"sub-agent-roles/project-sub-agent/AGENTS.md", "sub-agent-roles/project-sub-agent/ROLE.md"} if legacy else
+        {role_root + "/INDEX.md", ROLE_HELPER, *(f"{role_root}/{role}/{filename}" for role in ("project-sub-agent", "task-manager") for filename in ("AGENTS.md", "ROLE.md"))})
+    incompatible = set(ROLE_ROOTS.values()) - {role_root}
+    if any(entry["destination"].startswith(tuple(name + "/" for name in incompatible)) for entry in record["sources"]):
+        raise InitializationError("existing setup receipt mixes incompatible role layouts")
+    required_sources = {TEMPLATE + "/" + name for name in
+        required_starters(record["setup_contract"]) | {"SOUL.md", TEMPLATE_POLICY, README_RENDERER}
+        | {f".agents/skills/{name}/SKILL.md" for name in required_skills(record["setup_contract"])}
+        | (MEMORY_CONTRACT_FILES | MEMORY_HELPER_FILES if record["setup_contract"] in MEMORY_CONTRACTS else set())
+        | (CAPTURE_HELPER_FILES if record["setup_contract"] == SETUP_CONTRACT else set())
+        | role_sources}
+    if not required_sources <= seen_sources:
+        raise InitializationError("existing setup receipt omits required starter source provenance")
+    for key in ("owned_files", "preserved_files"):
+        files = record.get(key)
+        if not isinstance(files, dict):
+            raise InitializationError("existing setup receipt has an invalid file inventory")
+        for name, checksum in files.items():
+            if not isinstance(name, str) or not isinstance(checksum, str) or not SHA256.fullmatch(checksum):
+                raise InitializationError("existing setup receipt has an invalid file digest")
+            if name not in source_adoptions:
+                raise InitializationError("existing setup receipt names an unreviewed project file")
+            destination_file(destination, name)
+    if (record["owned_files"].keys() & record["preserved_files"].keys()
+            or IDENTITY not in record["owned_files"].keys() | record["preserved_files"].keys()):
+        raise InitializationError("existing setup receipt has conflicting file ownership")
+    if record["setup_contract"] in LICENSE_CONTRACTS:
+        markers = record.get("preserved_licenses")
+        if not isinstance(markers, dict):
+            raise InitializationError("existing setup receipt lacks its licensing decision")
+        for name, checksum in markers.items():
+            if (not isinstance(name, str) or not name or Path(name).as_posix() != name
+                    or Path(name).is_absolute() or ".." in Path(name).parts
+                    or not LICENSE_MARKER.fullmatch(Path(name).parts[0])
+                    or not isinstance(checksum, str)
+                    or checksum != "directory" and not SHA256.fullmatch(checksum)):
+                raise InitializationError("existing setup receipt has invalid preserved licensing")
+            target = safe(destination / name)
+            if checksum == "directory":
+                if not target.is_dir():
+                    raise InitializationError("preserved license directory is missing")
+            elif not target.is_file():
+                raise InitializationError("preserved license file is missing")
+            else:
+                # Validate type/alias safety before any receipt or history write;
+                # current content may differ from the original preserved hash.
+                file_bytes(target)
+            if len(Path(name).parts) > 1 and markers.get(Path(name).parent.as_posix()) != "directory":
+                raise InitializationError("preserved license tree lacks its parent evidence")
+        for name in LICENSE_FILES:
+            adoption, checksum = source_adoptions[name]
+            if not markers:
+                if adoption != "adopted":
+                    raise InitializationError("license starter skip lacks preserved licensing")
+            elif adoption == "preserved-project-owned":
+                target = destination_file(destination, name)
+                if not any(value == checksum and value != "directory"
+                           and target.samefile(destination / marker)
+                           for marker, value in markers.items()):
+                    raise InitializationError("preserved license lacks matching marker evidence")
+            elif adoption != "skipped-existing-license":
+                raise InitializationError("existing setup receipt mixes project licensing with starters")
+    elif "preserved_licenses" in record or any(value[0] == "skipped-existing-license" for value in source_adoptions.values()):
+        raise InitializationError("older setup receipt contains a later licensing decision")
+    if record["setup_contract"] in MEMORY_CONTRACTS:
+        inventory = record.get("preserved_memory")
+        if not isinstance(inventory, dict):
+            raise InitializationError("existing setup receipt lacks its memory preservation decision")
+        for name, checksum in inventory.items():
+            if (not isinstance(name, str) or not memory_path(name)
+                    or not isinstance(checksum, str)
+                    or checksum != "directory" and not SHA256.fullmatch(checksum)):
+                raise InitializationError("existing setup receipt has invalid memory preservation evidence")
+            target = destination_file(destination, name) if checksum != "directory" else safe(destination / name)
+            if (Path(name).as_posix() != name or Path(name).is_absolute() or ".." in Path(name).parts
+                    or checksum == "directory" and name not in MEMORY_TREES
+                    and inventory.get(Path(name).parent.as_posix()) != "directory"):
+                raise InitializationError("existing setup receipt has an invalid memory preservation path")
+            if (checksum == "directory" and not target.is_dir()
+                    or checksum != "directory" and not target.is_file()):
+                raise InitializationError("preserved memory file or collection is missing")
+            if checksum != "directory":
+                file_bytes(target)
+                if name != "memory.yaml" and inventory.get(Path(name).parent.as_posix()) != "directory":
+                    raise InitializationError("preserved memory file lacks its parent evidence")
+        for name, (adoption, checksum) in source_adoptions.items():
+            if not memory_path(name):
+                continue
+            existing = (name == "memory.yaml" and name in inventory or any(
+                name.startswith(root + "/") and inventory.get(root) == "directory" for root in MEMORY_TREES))
+            expected_adoption = "preserved-project-owned" if name in inventory else "skipped-existing-package"
+            pristine_config = (name == "memory.yaml" and adoption == "specialized"
+                               and record["setup_contract"] == SETUP_CONTRACT
+                               and inventory.get(name) == next(entry["source_sha256"] for entry in record["sources"]
+                                                               if entry["destination"] == name))
+            if (existing and adoption != expected_adoption and not pristine_config
+                    or not existing and adoption == "skipped-existing-package"):
+                raise InitializationError("memory source adoption mixes an existing collection with new starters")
+            if adoption == "preserved-project-owned" and inventory.get(name) != checksum:
+                raise InitializationError("memory source preservation differs from its original inventory")
+            if name == "memory.yaml" and adoption not in {"specialized", "preserved-project-owned"}:
+                raise InitializationError("memory configuration lacks its specialization or preservation decision")
+    elif "preserved_memory" in record or "current_memory" in record:
+        raise InitializationError("older setup receipt contains a later memory decision")
+    current_role_root, _, _ = record_role_paths(record, destination)
+    expected_owned, expected_preserved = {}, {}
+    for name, (adoption, checksum) in source_adoptions.items():
+        if adoption in {"adopted", "specialized"}:
+            expected_owned[name] = checksum
+        elif adoption == "preserved-project-owned":
+            expected_preserved[name] = checksum
+        elif adoption == "skipped-existing-license":
+            if name not in LICENSE_FILES or not record.get("preserved_licenses"):
+                raise InitializationError("unsupported skipped license starter")
+        else:
+            # Only resources omitted to preserve an existing whole package or
+            # nonempty Task tree can lack an adopted/preserved file digest.
+            parts = Path(name).parts
+            if name.startswith(".agents/skills/") and len(parts) > 3:
+                preserved_root = destination / Path(*parts[:3])
+            elif legacy and name.startswith("sub-agent-roles/") and len(parts) > 2:
+                preserved_root = destination / Path(*parts[:2])
+            elif not legacy and name.startswith(role_root + "/") and len(parts) > 2:
+                preserved_root = destination / current_role_root
+            elif name == "Tasks/INDEX.md":
+                preserved_root = destination / "Tasks"
+            elif record["setup_contract"] in MEMORY_CONTRACTS and any(
+                    name.startswith(root + "/") and record["preserved_memory"].get(root) == "directory"
+                    for root in MEMORY_TREES):
+                preserved_root = destination / next(root for root in MEMORY_TREES if name.startswith(root + "/"))
+            else:
+                raise InitializationError("existing setup receipt skips a required standalone starter")
+            safe(preserved_root)
+            if (not preserved_root.is_dir()
+                    or name == "Tasks/INDEX.md" and not any(preserved_root.iterdir())):
+                raise InitializationError("existing setup receipt lacks its preserved package or Task tree")
+    if record["owned_files"] != expected_owned or record["preserved_files"] != expected_preserved:
+        raise InitializationError("existing setup receipt file inventories differ from source adoption decisions")
+    if "assets" not in stages:
+        before = record.get("recovery_before")
+        if (not isinstance(before, dict) or before.keys() != record["owned_files"].keys()
+                or any(value is not None and (not isinstance(value, str) or not SHA256.fullmatch(value))
+                       for value in before.values())):
+            raise InitializationError("partial setup receipt lacks its asset recovery inventory")
+    if record["status"] == "completed" and (stages != STAGES or record["active_stage"] is not None):
+        raise InitializationError("completed setup receipt lacks required stages")
+
+
+def archive_record(destination: Path, raw: bytes) -> dict[str, str]:
+    checksum = sha(raw)
+    relative = "control_records/project-setup-history/" + checksum + ".json"
+    target = destination_file(destination, relative)
+    if target.exists():
+        if file_bytes(target) != raw:
+            raise InitializationError("setup history differs from its captured digest")
+    else:
+        atomic_write(target, raw, None, mode=0o600)
+    return {"path": relative, "sha256": checksum}
+
+
+def memory_capture_notice(destination: Path) -> dict[str, Any]:
+    """Describe the installed state; never enable a preserved configuration here."""
+    result = {"automatic_capture": None, "status": "unavailable", "opt_out_question": None}
+    if not (destination / "memory.yaml").exists():
+        return {**result, "status": "not-installed", "message": "Project memory is not installed by this setup edition."}
+    try:
+        raw = file_bytes(destination_file(destination, "memory.yaml"))
+        config = unique_json(raw)
+        files = {name: file_bytes(destination_file(destination, name)) for name in MEMORY_HELPER_FILES}
+        validate_memory_config(config, files, allow_template=False)
+        enabled = config["integration"]["automatic_capture"]
+        result.update(automatic_capture=enabled, config_sha256=sha(raw))
+        if enabled:
+            if not destination_file(destination, ".agents/skills/memory/scripts/memory_capture.py").is_file():
+                raise InitializationError("the preserved memory package lacks automatic capture support")
+            director = config["publication"]["director"]
+            if not director or any(sha(file_bytes(destination_file(destination, ref["path"]))) != ref["sha256"]
+                                   for ref in director["authority"]):
+                raise InitializationError("project memory publication authority needs current local binding")
+        result.update(status="on" if enabled else "off",
+                      message="Memory automatic capture is " + ("on." if enabled else "off; your existing preference was preserved."),
+                      opt_out_question="Would you like to turn it off?" if enabled else None)
+    except (InitializationError, OSError, ValueError, KeyError, TypeError):
+        result["message"] = "Existing project memory was preserved; automatic capture readiness could not be verified. Inspect its configuration and installed memory package."
+    return result
+
+
+def verify_project(destination: Path, record: dict[str, Any]) -> dict[str, str]:
+    """Observe current adopted files without resetting normal project edits."""
+    validate_record(record, destination, record["identity"])
+    role_root, current_paths, case_evidence = record_role_paths(record, destination)
+    current = {}
+    for name in sorted(record["owned_files"].keys() | record["preserved_files"].keys()):
+        current_name = current_paths.get(name, name)
+        target = destination_file(destination, current_name)
+        if not target.is_file():
+            raise InitializationError(f"project setup file is missing: {name}")
+        current[current_name] = sha(file_bytes(target))
+    identity = record["identity"]
+    observed, saved = selected_identity(destination, **{key: identity[key] for key in
+        ("project_id", "project_name", "purpose")}, relative=identity["relative_path"])
+    if saved is None or observed != identity:
+        raise InitializationError("project identity changed during setup")
+    if record["setup_contract"] != LEGACY_CONTRACT:
+        current_contract = SETUP_CONTRACT if role_root == "Roles" else LOWERCASE_CONTRACT
+        if file_bytes(destination / role_root / "INDEX.md") != planned_role_index(destination, {}, {}, contract=current_contract):
+            raise InitializationError("project role index is stale; preserve role edits and explicitly reindex")
+    if case_evidence is not None:
+        record["role_case_transition"] = case_evidence
+    if record["setup_contract"] in LICENSE_CONTRACTS:
+        record["current_licenses"] = license_inventory(destination)
+    if record["setup_contract"] in MEMORY_CONTRACTS:
+        record["current_memory"] = memory_inventory(destination)
+    return current
+
+
+def run_initialization(
+    *, mode: str, destination: Path, project_id: str, project_name: str, purpose: str
+) -> dict[str, Any]:
+    if mode not in {"create", "prepare-existing"}:
+        raise InitializationError("unknown initialization route")
+    depot, skill = installed_locations()
+    validate_identity(project_id, project_name, purpose)
+    registry, registry_before = read_registry(depot)
+    relative = validate_destination(depot, registry, destination, project_id)
+    if destination.exists() and not destination.is_dir():
+        raise InitializationError("destination is not a directory")
+    record_path = destination_file(destination, RECORD)
+    previous_raw = file_bytes(record_path) if record_path.exists() else None
+    if mode == "create" and previous_raw is None and destination.exists() and any(destination.iterdir()):
+        raise InitializationError("new project destination is not empty")
+    if mode == "prepare-existing" and not destination.is_dir():
+        raise InitializationError("existing-project setup requires an existing selected directory")
+    identity, saved_identity = selected_identity(destination, project_id=project_id,
+        project_name=project_name, purpose=purpose, relative=relative)
+    record = unique_json(previous_raw) if previous_raw is not None else None
+    if record is not None:
+        validate_record(record, destination, identity)
+        record = deepcopy(record)
+        record["mode"] = mode
+    contract = record["setup_contract"] if record is not None else SETUP_CONTRACT
+    with ExitStack() as template_guard:
+        proposed = {}
+        if record is None or "assets" not in record["completed_stages"]:
+            proposed_all, sources, original = source_snapshot(depot, skill, identity, contract=contract,
+                destination=destination, owned_governance=frozenset(record["owned_files"]) if record else frozenset())
+            if record is None:
+                if mode == "prepare-existing":
+                    check_existing_role_layout(destination, proposed_all[ROLE_HELPER])
+                preserved_licenses = license_inventory(destination)
+                preserved_memory = memory_inventory(destination)
+                proposed, before, preserved = asset_plan(destination, mode=mode,
+                    proposed=proposed_all, original=original, saved_identity=saved_identity,
+                    preserved_licenses=preserved_licenses)
+                record = {"schema_version": 1, "setup_contract": SETUP_CONTRACT,
+                          "status": "partial", "mode": mode, "operation_id": "project-setup-" + uuid4().hex,
+                          "identity": identity, "project_root": str(destination), "sources": sources,
+                          "owned_files": {name: sha(raw) for name, raw in proposed.items()},
+                          "preserved_files": preserved, "preserved_licenses": preserved_licenses,
+                          "preserved_memory": preserved_memory,
+                          "recovery_before": before,
+                          "completed_stages": [], "active_stage": "assets", "checks": [],
+                          "created_at": datetime.now(timezone.utc).isoformat(), "git_setup": "separate"}
+                for entry in sources:
+                    name = entry["destination"]
+                    if name in preserved:
+                        entry.update(adoption="preserved-project-owned", destination_sha256=preserved[name])
+                    elif name not in proposed:
+                        entry.update(adoption="skipped-existing-license" if name in LICENSE_FILES
+                                     else "skipped-existing-package", destination_sha256=None)
+                    else:
+                        entry["adoption"] = ("specialized" if name in SPECIALIZED_FILES
+                                             and proposed[name] != original.get(name) else "adopted")
+                        entry["destination_sha256"] = sha(proposed[name])
+            else:
+                expected_sources = {(entry["source"], entry["source_sha256"]) for entry in record["sources"]}
+                actual_sources = {(entry["source"], entry["source_sha256"]) for entry in sources}
+                if expected_sources != actual_sources:
+                    raise InitializationError("partial asset adoption source changed; preserve existing owned state")
+                if contract != LEGACY_CONTRACT:
+                    role_index = ROLE_ROOTS[contract] + "/INDEX.md"
+                    proposed_all[role_index] = planned_role_index(destination, proposed_all, record["owned_files"], contract=contract)
+                for name, checksum in record["owned_files"].items():
+                    if name not in proposed_all or sha(proposed_all[name]) != checksum:
+                        raise InitializationError("partial asset adoption differs from the saved plan")
+                    proposed[name] = proposed_all[name]
+            template_guard.enter_context(template_read_lock(depot))
+            check_sources(depot, record["sources"], contract=contract)
+            if file_bytes(depot / "depot/projects.json") != registry_before:
+                raise InitializationError("registry changed during preflight")
+            check_license_adoption(destination, record)
+            check_memory_adoption(destination, record)
+        lock = depot / "depot" / (".initialize-" + sha(relative.encode())[:16] + ".lock")
+        with exclusive(lock):
+            if mode == "create" and previous_raw is None and destination.exists() and any(destination.iterdir()):
+                raise InitializationError("new project destination changed after preflight")
+            if (file_bytes(record_path) if record_path.exists() else None) != previous_raw:
+                raise InitializationError("setup receipt changed since preflight")
+            if "assets" not in record["completed_stages"]:
+                check_license_adoption(destination, record)
+                check_memory_adoption(destination, record)
+            if not destination.exists():
+                destination.mkdir()
+            if previous_raw is not None:
+                archived = archive_record(destination, previous_raw)
+                if archived not in record.setdefault("history", []):
+                    record["history"].append(archived)
+            current_record = previous_raw
+            was_completed = record["status"] == "completed"
+            record.update(status="partial", checks=[])
+            record["completed_stages"] = [stage for stage in record["completed_stages"] if stage == "assets"]
+            for key in ("verified_at", "current_files", "current_licenses", "current_memory", "memory_capture", "recovery", "rerun"):
+                record.pop(key, None)
+
+            def checkpoint(stage: str | None = None) -> None:
+                nonlocal current_record
+                if stage and stage not in record["completed_stages"]:
+                    record["completed_stages"].append(stage)
+                raw = encoded(record)
+                atomic_write(record_path, raw, current_record, mode=0o600)
+                current_record = raw
+
+            def begin(stage: str) -> None:
+                record["active_stage"] = stage
+                checkpoint()
+
+            try:
+                if "assets" not in record["completed_stages"]:
+                    begin("assets")
+                    check_sources(depot, record["sources"], contract=contract)
+                    for name, checksum in record["preserved_files"].items():
+                        if sha(file_bytes(destination_file(destination, name))) != checksum:
+                            raise InitializationError("preserved project file changed during adoption")
+                    for name, expected in record["recovery_before"].items():
+                        target = destination_file(destination, name)
+                        present = file_bytes(target) if target.exists() else None
+                        after = proposed[name]
+                        if present != after:
+                            if (sha(present) if present is not None else None) != expected:
+                                raise InitializationError("owned asset changed during interrupted adoption")
+                            atomic_write(target, after, present)
+                    check_sources(depot, record["sources"], contract=contract)
+                    check_license_adoption(destination, record)
+                    check_memory_adoption(destination, record)
+                    checkpoint("assets")
+                template_guard.close()
+                begin("registration")
+                record["registry"] = register_project(depot, registry_candidate(identity, destination), registry_before,
+                    preserve_existing=mode == "prepare-existing" or previous_raw is not None)
+                checkpoint("registration")
+                begin("verification")
+                record["current_files"] = verify_project(destination, record)
+                current_registry, registry_raw = read_registry(depot)
+                if record["registry"]["entry"] not in current_registry["projects"]:
+                    raise InitializationError("project registration changed during setup")
+                record["registry"]["sha256"] = sha(registry_raw)
+                record["checks"] = [{"check": name, "outcome": "passed"}
+                                    for name in ("project-identity", "project-files", "registration")]
+                checkpoint("verification")
+                record["memory_capture"] = memory_capture_notice(destination)
+                record.update(status="completed", active_stage=None,
+                              verified_at=datetime.now(timezone.utc).isoformat())
+                record.pop("recovery_before", None)
+                if was_completed:
+                    record["rerun"] = "verified-current-files-and-registration"
+                checkpoint()
+                return record
+            except (InitializationError, OSError, ValueError, KeyError, subprocess.TimeoutExpired) as error:
+                record["status"] = "partial"
+                record["recovery"] = {"stage": record["active_stage"],
+                    "completed_stages": list(record["completed_stages"]), "owned_record": str(record_path),
+                    "next_action": "Resolve the reported cause and repeat the same setup request; preserve project files.",
+                    "error_type": type(error).__name__,
+                    "reason": str(error) if isinstance(error, InitializationError) else "A local setup stage failed."}
+                try:
+                    checkpoint()
+                except (InitializationError, OSError):
+                    record["recovery"]["record_update"] = "failed; preserve the existing setup receipt"
+                raise InitializationError("project setup is incomplete; working state was retained", report=record) from error
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest="mode", required=True)
+    for mode in ("create", "prepare-existing"):
+        route = commands.add_parser(mode)
+        route.add_argument("--destination", type=Path, required=True)
+        route.add_argument("--project-id", required=True)
+        route.add_argument("--project-name", required=True)
+        route.add_argument("--purpose", required=True)
+    arguments = vars(parser.parse_args(argv))
+    try:
+        result = run_initialization(**arguments)
+        print(encoded(result).decode(), end="")
+        return 0
+    except (InitializationError, OSError, subprocess.TimeoutExpired) as error:
+        result = {"status": "failed", "error_type": type(error).__name__}
+        if isinstance(error, InitializationError):
+            result["reason"] = str(error)
+            if error.report:
+                result = {**error.report, "reason": str(error)}
+        print(encoded(result).decode(), end="")
+        return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,108 @@
+{
+  "scenario": "path",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology.py",
+    "--project-root",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI",
+    "path",
+    "Task",
+    "MemoryRecord"
+  ],
+  "returncode": 0,
+  "result": {
+    "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+    "context": {
+      "config_sha256": "de3973b748afa7dbce5aa74e049cc02bbdc9c445345fb047f96c28317f411d44",
+      "generator_version": "1.0.0",
+      "modules": [
+        {
+          "id": "sys4ai-core",
+          "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+          "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+          "version": "1.0.0"
+        }
+      ],
+      "profile_version": "1.0.0",
+      "project_id": "sys4ai-depot",
+      "snapshot_sha256": "1d5f7f78e4f0eb4929f4dfae1ff11dc623e4690959652c9903c6f145f65b8c24"
+    },
+    "diagnostics": [],
+    "limits": {
+      "hops": 2,
+      "limit": 20,
+      "max_bytes": 32000
+    },
+    "mutated": false,
+    "operation": "path",
+    "project_id": "sys4ai-depot",
+    "query": {
+      "source": "Task",
+      "target": "MemoryRecord"
+    },
+    "results": [
+      {
+        "@id": "urn:sys4ai:ontology:core:relation-2",
+        "@type": [
+          "urn:sys4ai:ontology:core:Relationship"
+        ],
+        "bindings": [],
+        "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/51",
+        "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+        "direction": "outgoing",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "kind": "relation",
+        "label": "Task relatedTo MemoryRecord",
+        "lifecycle": "approved",
+        "match_reason": "graph_traversal",
+        "module": "sys4ai-core",
+        "module_version": "1.0.0",
+        "object": "urn:sys4ai:ontology:core:MemoryRecord",
+        "predicate": "urn:sys4ai:ontology:core:relatedTo",
+        "qualifiers": {
+          "scope": "conceptual"
+        },
+        "source_status": [
+          {
+            "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "diagnostic": null,
+            "locator": "section:Relationship vocabulary",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Relationship vocabulary",
+            "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+            "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+          }
+        ],
+        "subject": "urn:sys4ai:ontology:core:Task",
+        "traversed_from": "urn:sys4ai:ontology:core:Task",
+        "traversed_to": "urn:sys4ai:ontology:core:MemoryRecord"
+      }
+    ],
+    "status": "ok",
+    "traversal": {
+      "direction": "outgoing",
+      "end": "urn:sys4ai:ontology:core:MemoryRecord",
+      "max_visited_nodes": 100,
+      "path_found": true,
+      "predicates": [],
+      "start": "urn:sys4ai:ontology:core:Task",
+      "visited_nodes": 3,
+      "within_hops": 2
+    },
+    "truncation": {
+      "available_results": 1,
+      "returned_results": 1,
+      "truncated": false
+    }
+  },
+  "stderr": ""
+}

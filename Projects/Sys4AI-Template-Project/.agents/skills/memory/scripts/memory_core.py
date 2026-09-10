@@ -284,8 +284,9 @@ def load_record(root, path, config=None):
     raw = safe_read_bytes(root, rel, max_bytes=250000)
     record = validate_record(parse_record(raw), config["project"]["id"])
     require(Path(rel).name == record["metadata"]["id"] + ".md", "record_identity", "Record filename must equal its stable ID.")
-    from memory_evidence import inspect_evidence
-    record.update(path=rel, sha256=sha256(raw), diagnostics=inspect_evidence(root, record, config))
+    from memory_evidence import assess_evidence
+    evidence = assess_evidence(root, record, config)
+    record.update(path=rel, sha256=sha256(raw), diagnostics=evidence["diagnostics"], evidence=evidence)
     from memory_recovery import pending_transactions
     pending = [operation for operation in pending_transactions(root) if any(change["path"] == rel for change in operation["records"])]
     if pending:
@@ -323,23 +324,108 @@ def load_records(root, config=None, historical=False):
     return sorted(records, key=lambda item: item["path"])
 
 
-def health(root):
+HEALTH_COMPONENTS = {"canonical", "evidence", "projection", "index", "backend"}
+
+
+def health(root, *, scope="selected", level="static", required=()):
+    """Versioned observation, never a repair or an enduring readiness promise."""
     root = project_root(root)
+    assessment = {"project_root": str(root), "project_id": None, "scope": scope, "level": level,
+                  "observed_at": datetime.now(timezone.utc).isoformat(), "required": [], "inputs": {}}
+    result = {"health_schema_version": 2, "assessment": assessment, "read_only": True,
+              "components": {}, "diagnostics": [], "failed_required": [], "ready": False, "aggregate": "invalid", "status": "invalid"}
+    assessment["input_versions"] = assessment["inputs"]
+    assessment["components"] = result["components"]
+    assessment["project"] = {"id": None, "root": str(root)}
     try:
+        require(scope in {"canonical", "selected"} and level in {"static", "operational"},
+                "health_selection", "Supported health scopes are canonical/selected and levels static/operational.")
+        require(isinstance(required, (list, tuple, set)) and all(isinstance(name, str) for name in required),
+                "health_component", "Required components must be a list of supported names.")
+        require(set(required) <= HEALTH_COMPONENTS, "health_component", "Unknown required memory health component.",
+                {"unknown": sorted(set(required) - HEALTH_COMPONENTS), "supported": sorted(HEALTH_COMPONENTS)})
         config = load_config(root, optional=True)
         if config is None:
-            return {"status": "absent", "backend": "unavailable", "records": 0, "read_only": True}
+            result.update(status="absent", aggregate="absent", backend="unavailable", records=0, failed_required=["configuration"])
+            return result
+        assessment["project_id"] = config["project"]["id"]
+        assessment["project"]["id"] = config["project"]["id"]
+        assessment["inputs"]["memory.yaml"] = sha256(safe_read_bytes(root, "memory.yaml"))
         for relative in ("README.md", "policy.md", "publication-and-recovery.md", "schema/record-v1.json", "schema/config-v1.json"):
-            content = safe_read_bytes(root, config["contract_root"] + "/" + relative, max_bytes=250000)
+            path = config["contract_root"] + "/" + relative
+            content = safe_read_bytes(root, path, max_bytes=250000)
+            assessment["inputs"][path] = sha256(content)
             if relative.endswith(".json"):
                 decode_json_yaml(content)
         records = load_records(root, config, historical=True)
-        backend = "disabled"
-        if config["backend"]["enabled"]:
-            from basic_memory_adapter import health as backend_health
-            backend = backend_health(root, config)
-        return {"status": "ready", "project_id": config["project"]["id"], "records": len(records),
-                "backend": backend,
-                "read_only": True, "diagnostics": [d for r in records for d in r["diagnostics"]]}
-    except MemoryError as exc:
-        return {"status": "invalid", "read_only": True, "error": exc.as_dict()}
+        for record in records:
+            assessment["inputs"][record["path"]] = record["sha256"]
+        result.update(project_id=config["project"]["id"], records=len(records), backend="disabled")
+        if config["backend"]["enabled"] and not config["backend"]["semantic_enabled"]:
+            result["backend"] = {"available": False, "mode": "lexical", "selection": "enabled_lexical_only",
+                                 "semantic_enabled": False, "runtime": {"status": "not_selected"},
+                                 "limitations": ["semantic_backend_not_selected"]}
+        selected = {"canonical", "evidence"} | set(required)
+        if scope == "selected":
+            from memory_maintenance import selected_products
+            selected.update(selected_products(root, config))
+            if config["backend"]["enabled"] and config["backend"]["semantic_enabled"]:
+                selected.add("backend")
+        if "backend" in selected:
+            selected.update({"projection", "index"})
+        assessment["required"] = sorted(selected)
+        components = result["components"]
+        components["canonical"] = {"status": "ready", "ready": True, "records": len(records)}
+        active_diagnostics = [dict(d, record_path=r["path"], record_state=r["metadata"]["state"])
+                              for r in records if r["metadata"]["state"] == "active" for d in r["diagnostics"]]
+        # A historical record remains inspectable without imposing its old versions
+        # on today's readiness. An active verified claim must be current.
+        for record in records:
+            if record["metadata"]["state"] == "active" and record["metadata"]["claim"]["level"] == "verified_outcome" and not record["evidence"]["verified_current"] and not record["diagnostics"]:
+                active_diagnostics.append({"code": "claim_not_current", "severity": "warning", "record_path": record["path"],
+                                           "message": "Active verified claim is explicitly historical; use governed historical-only disposition or current verification."})
+        components["evidence"] = {"status": "degraded" if active_diagnostics else "ready", "ready": not active_diagnostics,
+                                  "diagnostics": active_diagnostics,
+                                  "records": [{"path": r["path"], "state": r["metadata"]["state"], "evidence": r["evidence"]} for r in records]}
+        result["diagnostics"].extend(active_diagnostics)
+        for name in ("projection", "index", "backend"):
+            if name not in selected:
+                components[name] = {"status": "not_selected", "ready": None}
+                if name == "backend":
+                    components[name]["selection"] = "enabled_lexical_only" if config["backend"]["enabled"] else "disabled"
+                continue
+            try:
+                if name == "projection":
+                    from basic_memory_projection import verify_projection
+                    product = verify_projection(root, config)
+                    value = {"status": "ready", "ready": True, "documents": len(product["entries"])}
+                    manifest_path = config["state"]["projection"] + "/manifest.json"
+                    assessment["inputs"][manifest_path] = sha256(safe_read_bytes(root, manifest_path))
+                elif name == "index":
+                    from basic_memory_adapter import verify_index
+                    value = {"status": "ready", "ready": True, **verify_index(root, config)}
+                    assessment["inputs"][config["state"]["index"] + "/basic-memory.db"] = value["database_sha256"]
+                else:
+                    from basic_memory_adapter import health as backend_health
+                    value = backend_health(root, config, level=level)
+                    value.update(status="ready" if value["available"] else "degraded", ready=value["available"])
+                    result["backend"] = value
+                components[name] = value
+            except (MemoryError, OSError, ValueError, KeyError, TypeError) as exc:
+                error = exc.as_dict() if isinstance(exc, MemoryError) else {"code": "invalid_derived_state", "message": "Required derived state cannot be inspected.", "details": {"exception": type(exc).__name__}}
+                components[name] = {"status": "degraded", "ready": False, "error": error}
+            if not components[name]["ready"]:
+                components[name]["next_operation"] = "Inspect reindex-payload; authorize exact reindex, or backend-recover for an interrupted operation."
+                result["diagnostics"].append({"component": name, **components[name].get("error", {"code": "backend_unavailable", "details": components[name].get("diagnostics", [])})})
+        result["failed_required"] = sorted(name for name in selected if not components[name]["ready"])
+        result["ready"] = not result["failed_required"]
+        result["aggregate"] = result["status"] = "ready" if result["ready"] else "degraded"
+        return result
+    except (MemoryError, OSError, ValueError, KeyError, TypeError) as exc:
+        result["failed_required"] = ["assessment"]
+        result["error"] = exc.as_dict() if isinstance(exc, MemoryError) else {"code": "health_assessment_failed", "message": "Health inputs cannot be assessed.", "details": {"exception": type(exc).__name__}}
+        return result
+
+
+def health_exit(result):
+    return 0 if result.get("ready") else 2 if result.get("aggregate") == "invalid" else 1

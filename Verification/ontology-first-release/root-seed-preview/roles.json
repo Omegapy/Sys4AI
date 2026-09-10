@@ -1,0 +1,109 @@
+{
+  "@context": "ONTOLOGY/contexts/context-v1.jsonld",
+  "@graph": [
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-TaskManager",
+      "@type": [
+        "urn:sys4ai:ontology:core:SourceBinding"
+      ],
+      "binding_type": "role",
+      "definition": "This explicit binding traces the selected entity to its current local source.",
+      "entity": "urn:sys4ai:ontology:core:TaskManager",
+      "fact_kind": "asserted",
+      "kind": "binding",
+      "label": "Source binding binding-concept-TaskManager",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Required first reads",
+          "path": "Roles/task-manager/AGENTS.md",
+          "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+        },
+        {
+          "locator": "section:Purpose",
+          "path": "Roles/task-manager/ROLE.md",
+          "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-confirmed-task-manager",
+      "@type": [
+        "urn:sys4ai:ontology:core:SourceBinding"
+      ],
+      "binding_type": "role",
+      "definition": "This persisted role can coordinate exactly one assigned Task only after a real native receipt and explicit manager activation. Reading the role does not establish a live manager.",
+      "entity": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager",
+      "fact_kind": "asserted",
+      "kind": "binding",
+      "label": "Source binding binding-confirmed-task-manager",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Required first reads",
+          "path": "Roles/task-manager/AGENTS.md",
+          "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+        },
+        {
+          "locator": "section:Purpose",
+          "path": "Roles/task-manager/ROLE.md",
+          "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-host-director",
+      "@type": [
+        "urn:sys4ai:ontology:core:SourceBinding"
+      ],
+      "binding_type": "role",
+      "definition": "The host frames project work and owns workspace registration and reusable adoption decisions; an activated Task manager owns its exact assigned execution.",
+      "entity": "urn:sys4ai:ontology:project:sys4ai-depot:host-director",
+      "fact_kind": "asserted",
+      "kind": "binding",
+      "label": "Source binding binding-host-director",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Project identity and boundaries",
+          "path": "AGENTS.md",
+          "sha256": "d16daa454d6bb19053f5d3dee26369635367d88eaed4f471c7237ed1389c4aa3"
+        },
+        {
+          "locator": "section:Authority and non-authority",
+          "path": "ROLE.md",
+          "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-ordinary-child",
+      "@type": [
+        "urn:sys4ai:ontology:core:SourceBinding"
+      ],
+      "binding_type": "role",
+      "definition": "An ordinary child performs one bounded assignment and returns evidence; it has no canonical Task, role-index or shared publication ownership.",
+      "entity": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child",
+      "fact_kind": "asserted",
+      "kind": "binding",
+      "label": "Source binding binding-ordinary-child",
+      "lifecycle": "approved",
+      "module": "project",
+      "sources": [
+        {
+          "locator": "section:Required first reads",
+          "path": "Roles/project-sub-agent/AGENTS.md",
+          "sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2"
+        },
+        {
+          "locator": "section:Purpose",
+          "path": "Roles/project-sub-agent/ROLE.md",
+          "sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+        }
+      ]
+    }
+  ]
+}

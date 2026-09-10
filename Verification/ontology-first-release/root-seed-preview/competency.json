@@ -1,0 +1,186 @@
+{
+  "questions": [
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:core:Task"
+      ],
+      "expected_sources": [
+        ".agents/skills/task/SKILL.md"
+      ],
+      "expected_terms": [
+        "distinct from a TRD",
+        "Document approval does not activate a Task"
+      ],
+      "id": "root-task-source",
+      "intent": "definition",
+      "query": "Task"
+    },
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:core:TRD"
+      ],
+      "expected_sources": [
+        ".agents/skills/to-trd/SKILL.md"
+      ],
+      "expected_terms": [
+        "does not create a Task"
+      ],
+      "id": "root-trd-boundary",
+      "intent": "definition",
+      "query": "TRD"
+    },
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+      ],
+      "expected_sources": [
+        ".agents/skills/memory/SKILL.md"
+      ],
+      "id": "root-memory-capability",
+      "intent": "capability",
+      "query": "memory retrieval"
+    },
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory",
+        "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+        "urn:sys4ai:ontology:core:MemoryRetrieval"
+      ],
+      "id": "root-skill-to-capability",
+      "intent": "capability",
+      "query": "Installed memory skill"
+    },
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd"
+      ],
+      "expected_sources": [
+        ".agents/skills/to-trd/SKILL.md"
+      ],
+      "expected_terms": [
+        "does not create a Task"
+      ],
+      "id": "root-trd-capability",
+      "intent": "capability",
+      "query": "TRDCreation"
+    },
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:project:sys4ai-depot:installed-task",
+        "urn:sys4ai:ontology:project:sys4ai-depot:installed-agent-task"
+      ],
+      "expected_sources": [
+        ".agents/skills/task/SKILL.md",
+        ".agents/skills/agent-task/SKILL.md"
+      ],
+      "id": "root-task-capability",
+      "intent": "capability",
+      "query": "TaskManagement"
+    },
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+      ],
+      "expected_sources": [
+        "Roles/task-manager/AGENTS.md",
+        "Roles/task-manager/ROLE.md"
+      ],
+      "expected_terms": [
+        "does not establish a live manager"
+      ],
+      "id": "root-manager-pair",
+      "intent": "definition",
+      "query": "Sys4AI confirmed Task manager role"
+    },
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:project:sys4ai-depot:host-director"
+      ],
+      "expected_sources": [
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "expected_terms": [
+        "workspace registration"
+      ],
+      "id": "root-director-scope",
+      "intent": "definition",
+      "query": "Sys4AI host Project Director"
+    },
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child"
+      ],
+      "expected_sources": [
+        "Roles/project-sub-agent/AGENTS.md",
+        "Roles/project-sub-agent/ROLE.md"
+      ],
+      "id": "root-ordinary-child",
+      "intent": "definition",
+      "query": "Sys4AI ordinary project sub-agent role"
+    },
+    {
+      "expected_relations": [
+        {
+          "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-template-mapping",
+          "predicate": "urn:sys4ai:ontology:core:derivesFrom",
+          "subject": "urn:sys4ai:ontology:project:sys4ai-depot:registered-template"
+        }
+      ],
+      "id": "root-template-derivation",
+      "intent": "relationship",
+      "query": "Registered Sys4AI Template Project"
+    },
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:project:sys4ai-depot:registered-template"
+      ],
+      "expected_sources": [
+        "depot/projects.json"
+      ],
+      "expected_terms": [
+        "imports no internal vocabulary",
+        "grants no read, write or publication authority"
+      ],
+      "id": "root-child-authority",
+      "intent": "definition",
+      "query": "Registered Sys4AI Template Project"
+    },
+    {
+      "expected_relations": [
+        {
+          "object": "urn:sys4ai:ontology:project:sys4ai-depot:memory-publication-authority",
+          "predicate": "urn:sys4ai:ontology:core:requiresAuthority",
+          "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory"
+        }
+      ],
+      "id": "root-memory-publication-scope",
+      "intent": "relationship",
+      "query": "Installed memory skill"
+    },
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      ],
+      "expected_terms": [
+        "deprecated",
+        "urn:sys4ai:ontology:core:TRD",
+        "never reassigned"
+      ],
+      "id": "root-deprecated-replacement",
+      "intent": "definition",
+      "query": "TaskRequirementDocument"
+    },
+    {
+      "expected_sources": [
+        ".agents/skills/task/SKILL.md"
+      ],
+      "expected_status": "ok",
+      "id": "root-current-task-rules",
+      "intent": "current",
+      "query": "Task"
+    }
+  ],
+  "schema_version": 1
+}

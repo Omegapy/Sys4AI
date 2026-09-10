@@ -155,7 +155,7 @@ local policies; this Template keeps its explicit selection policy.
 The [memory skill](./.agents/skills/memory/SKILL.md), [record contracts](./reference-assets/MEMORY-depo/README.md),
 [empty memory directory](./MEMORY/README.md) and [configuration](./memory.yaml)
 provide portable project memory. The Template contains no learned records and
-its identity remains neutral. Initializer edition `governance-starter-v7`
+its identity remains neutral. Initializer edition `governance-starter-v8`
 specializes a new project's memory identity, enables automatic capture and binds
 its local Director. Setup reports that capture is on and asks whether to turn
 it off. Existing choices, learned memory and older setup receipts are preserved. Direct Markdown and lexical lookup need no backend.
@@ -173,7 +173,7 @@ no-durable-lesson result. The question alone permits no save or project change.
 Automatic persistence follows the existing preference and current owner/grant;
 capture off preserves explicit review and authorized save behavior.
 
-Edition v7 supplies this capability by default for new and first-prepared
+Edition v7 and later supply this capability by default for new and first-prepared
 projects. Existing prior-edition projects use the selected depot initializer's
 `prepare-existing --adopt-module what-did-you-learn` route. Explicit
 `--refresh-dependency memory` may refresh complete unchanged receipt-owned
@@ -182,3 +182,20 @@ preserved. Ordinary reruns retain their original setup edition. The existing
 setup receipt records module adoption and checked recovery. See the
 [initializer guide](./.agents/skills/init-new-project/README.md) for exact usage.
 This starter contains no learned records, active grant or runtime hooks.
+
+## Ontology starter
+
+The [ontology skill](./.agents/skills/ontology/SKILL.md), [profile](./reference-assets/ONTOLOGY-depo/profile.md)
+and [neutral configuration](./ontology.yaml) provide locked core concepts with
+empty local project and binding graphs under `ONTOLOGY/`. Initializer edition v8
+specializes project ID, name, purpose, namespace and local Director authority.
+Ontology operations use Python's standard library and do not require a service.
+
+Earlier completed projects select `prepare-existing --adopt-module ontology`.
+Explicit `--refresh-module ontology` accepts only complete unchanged receipt-owned
+installations. Customized and incomplete installations stay whole; ordinary
+reruns retain their original setup edition and locked imports. Use the initializer
+`assess-ontology` route for static configuration/import/binding checks and the
+installed ontology `health` command for semantic and source readiness. Canonical
+publication still needs its exact current operation grant. The Template contains
+no project definitions, instances, grants, generated wiki or runtime state.

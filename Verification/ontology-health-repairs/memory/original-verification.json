@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "claim_level": "verified_outcome",
+  "outcome": "passed",
+  "observed_at": "2026-09-09T02:31:12.103208+00:00",
+  "command": ".venv/bin/python Verification/automatic-memory-capture/verify_release.py",
+  "artifacts": [
+    {
+      "path": "memory.yaml",
+      "sha256": "3989830df89045033f5e53f7fc53be143f33b553acd7f5405a591fb14cdd475a"
+    },
+    {
+      "path": ".agents/skills/memory/scripts/memory_capture.py",
+      "sha256": "ef9d35c3ec0bc72a19292c78aacd986b8f4f0cb5ad0d128c2e64d511a1a5f67d"
+    },
+    {
+      "path": ".agents/skills/memory/scripts/memory_core.py",
+      "sha256": "a41175553ec3e4d81b7cede8cc26b81676eddb4a7a697db6c1a47aab5929d874"
+    },
+    {
+      "path": ".agents/skills/init-new-project/scripts/init_new_project.py",
+      "sha256": "8616e439dafedb057f46e685788cdc292b3300ab2c120ee90c2750c71bbe07bf"
+    },
+    {
+      "path": "reference-assets/MEMORY-depo/schema/config-v1.json",
+      "sha256": "9e0891e0ef6c0b9415510ad84272afbbc3f430306253ddd958229f0b3478140f"
+    }
+  ],
+  "details": {
+    "checks": {
+      "memory_root_parity": true,
+      "memory_template_parity": true,
+      "init-new-project_root_parity": true,
+      "init-new-project_template_parity": true,
+      "root_capture_on": true,
+      "template_default_on": true,
+      "template_empty": true,
+      "current_director_binding": true,
+      "adoption_hashes": true,
+      "protected_history_and_projects_unchanged": true,
+      "source-memory-tests.txt": true,
+      "source-initializer-tests-final.txt": true,
+      "installed-memory-tests.txt": true,
+      "installed-initializer-cli-tests.txt": true,
+      "repository-tests.txt": true,
+      "template-tests.txt": true,
+      "template_current": true
+    },
+    "tests": [
+      {
+        "log": "Verification/automatic-memory-capture/source-memory-tests.txt",
+        "sha256": "73954844a371a75ba8db2e6b41fdf6bb34ea1fde6e339a74f2447e9205372f5d",
+        "run": 66,
+        "skipped": 0,
+        "passed": true
+      },
+      {
+        "log": "Verification/automatic-memory-capture/source-initializer-tests-final.txt",
+        "sha256": "83b39ac9fd88376acda9baa57a1d1308d9ab55265c17f3991e7354370d94770c",
+        "run": 69,
+        "skipped": 1,
+        "passed": true
+      },
+      {
+        "log": "Verification/automatic-memory-capture/installed-memory-tests.txt",
+        "sha256": "7a81054e782ce41cc89034a5d406e46750eb9533ab985ecf286665cba2dfbded",
+        "run": 66,
+        "skipped": 0,
+        "passed": true
+      },
+      {
+        "log": "Verification/automatic-memory-capture/installed-initializer-cli-tests.txt",
+        "sha256": "9923b37d4021f538527819590fc1758128237b747f5b090905c3d1d5dd5baa94",
+        "run": 1,
+        "skipped": 0,
+        "passed": true
+      },
+      {
+        "log": "Verification/automatic-memory-capture/repository-tests.txt",
+        "sha256": "d24a6bb196052bc02c4e3680127629cc50c0a356db295e7038d7ad6e70256872",
+        "run": 88,
+        "skipped": 1,
+        "passed": true
+      },
+      {
+        "log": "Verification/automatic-memory-capture/template-tests.txt",
+        "sha256": "2327d9f210478dd629da17a9dbf4a9c4f7ee3c0076076251f575c64152342713",
+        "run": 9,
+        "skipped": 0,
+        "passed": true
+      }
+    ],
+    "requirements": {
+      "R1": "passed",
+      "R2": "passed",
+      "R3": "passed",
+      "R4": "passed",
+      "R5": "passed",
+      "R6": "passed"
+    }
+  },
+  "limitations": [
+    "Automatic capture is an agent completion workflow, not a background scheduler.",
+    "Initializer and first-capture integration ran in disposable projects; native receipts in those tests are fixtures.",
+    "No sub-agents were launched. Existing product projects were not upgraded.",
+    "One case-sensitive-filesystem check was skipped in each applicable suite on this case-insensitive volume.",
+    "No Git publication was performed for this change."
+  ]
+}

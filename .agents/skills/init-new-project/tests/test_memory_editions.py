@@ -23,7 +23,7 @@ class MemoryEditionTests(unittest.TestCase):
         for name in ("orchard", "meadow", "a"):
             target = self.root / "Projects" / name.title()
             report = self.run_setup(destination=target, project_id=name, project_name=name.title())
-            self.assertEqual("governance-starter-v7", report["setup_contract"])
+            self.assertEqual("governance-starter-v9", report["setup_contract"])
             config = json.loads((target / "memory.yaml").read_text())
             self.assertEqual({"id": name, "name": name.title(), "root": "."}, config["project"])
             self.assertEqual("reference-assets/MEMORY-depo", config["contract_root"])

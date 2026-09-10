@@ -1,0 +1,84 @@
+{
+  "browser": "Codex in-app browser",
+  "canonical_record": {
+    "@id": "urn:sys4ai:ontology:project:example:browser-release-bundle",
+    "@type": [
+      "urn:sys4ai:ontology:project:example:ReleaseEvidenceBundle"
+    ],
+    "aliases": [],
+    "definition": "A release evidence bundle for the combined native and browser acceptance run, collecting observed validation receipts without granting authority.",
+    "fact_kind": "asserted",
+    "history": [
+      {
+        "definition": "A release evidence bundle for the combined native and browser acceptance run, collecting observed validation receipts without granting authority.",
+        "lifecycle": "approved",
+        "reason": "Verify the final typed action guard and shared deadline with an exact visual edit.",
+        "sha256": "19dbcad8196e9687bc517998865e0ed6baa1847bcf0cc508747256aedceba767"
+      }
+    ],
+    "kind": "instance",
+    "label": "Browser verified release evidence bundle",
+    "lifecycle": "approved",
+    "module": "project",
+    "sources": [
+      {
+        "locator": "section:Release evidence bundles",
+        "path": "docs/release-evidence.md",
+        "sha256": "b67a7c24327bc503c44e05a3ceb8bc4443f9102a7c82fc35127940fe638f0abb"
+      }
+    ]
+  },
+  "engine_sha256": "859b70f2d3c67b3588f22caad726e8e3558326ae83fb7fedb823b257e3ff4926",
+  "evidence": [
+    {
+      "path": "Verification/ontology-second-release/browser-evidence/final-published-proposal.json",
+      "sha256": "f3f86f2ad25a35910dcff2d54ebc15923f9f4f2e31ad2259b73079d576770b72"
+    }
+  ],
+  "guard": {
+    "action_id": "urn:sys4ai:ontology:action:ontology:publish",
+    "authorization": "retained_in_owning_helper",
+    "context_sha256": "cf0e0fb0e3db0d1fc3acea9501f78dbe33c192478b36cce5567ac568106a8c16",
+    "evaluation_budget_seconds": 5,
+    "evaluation_seconds": 0.5039,
+    "execution_and_verification": "see_owning_helper_receipt",
+    "lock_rechecked": true,
+    "observations_sha256": "6acc1d5f4b89ee3471a9cd4213ebeb818f90ae89f628a9ce3da3347a82876e54",
+    "owning_helper": "returned",
+    "post_state_sha256": "576ab352997cf4cc396fe77cfd515de9cf2a82ee1dab476ef72276b55d53f091",
+    "pre_state_sha256": "139b5ae9bd1bed28a3a834afb6a819c5b7f1a0de35035b5bbe47bcd80b0b5e95",
+    "request_sha256": "786d6c0124db3033b5ae437d25947e1337e68bb3066155d1612e305cad3920c0",
+    "schema_version": 1,
+    "semantic_status": "conformant"
+  },
+  "limits": [
+    "This final pass covers the corrected guard edit/review/publication path. Wider visual, security, stale-tab, generation and browsing-only cases remain separately identified in browser-acceptance.json."
+  ],
+  "observation_tool": "mcp__cua_repl.js",
+  "observations": [
+    {
+      "case": "exact-edit-review",
+      "evidence": "Actual browser displayed the label/history diff and Core valid, Standards conformant, Inference ok, Competency passed before exact acceptance.",
+      "status": "passed"
+    },
+    {
+      "case": "actual-publish",
+      "evidence": "Clicked Accept exact review and Publish reviewed change. Actual proposal shows r1 published with current Director attribution and final engine digest.",
+      "status": "passed"
+    },
+    {
+      "case": "canonical-reopen",
+      "evidence": "Clicked Reopen canonical result and observed the new label, unchanged stable ID/type/definition/source, approved/asserted state. Reopened durable proposal and canonical file have the same exact published digest.",
+      "status": "passed"
+    }
+  ],
+  "observed_at": "2026-09-10T16:05:16.173452+00:00",
+  "prior_canonical_sha256": "d698139b568200c5d45fce11543504cc4181bcef6c8c7596df0a0b5d525113b6",
+  "project_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-second-release/fixtures/generation-native",
+  "published_operation": "ONTOP-248f4c65ff1b4babb874f64be0ba0c9c",
+  "published_proposal": "ONTPROP-339b1a5803a54d04a72674cc1430cf89",
+  "published_sha256": "109d88742cdb270addf17aceb5ac74047db07a4c21b0e9c23c02578cb057c384",
+  "revision": 1,
+  "schema_version": 1,
+  "status": "passed"
+}

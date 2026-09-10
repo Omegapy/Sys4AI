@@ -50,9 +50,12 @@ runpy.run_path(script,run_name='__main__')
             self.assertEqual(["project-sub-agent", "task-manager"], sorted(p.name for p in (fresh / "Roles").iterdir() if p.is_dir()))
             self.assertTrue((fresh / "Roles/INDEX.md").is_file())
             self.assertEqual(["Roles"], sorted(p.name for p in fresh.iterdir() if p.name.casefold() == "roles"))
-            self.assertEqual("governance-starter-v7", report["setup_contract"])
+            self.assertEqual("governance-starter-v9", report["setup_contract"])
             for name in (".venv", ".sys4ai", "Ontology", "config", "models", "INIT_MEMORY.md"):
-                self.assertFalse((fresh / name).exists(), name)
+                if name == "Ontology":
+                    self.assertNotIn(name, {p.name for p in fresh.iterdir()})
+                else:
+                    self.assertFalse((fresh / name).exists(), name)
             self.assertEqual(["assets", "registration", "verification"], report["completed_stages"])
             self.assertTrue(all(item["source"].startswith("Projects/Sys4AI-Template-Project/") for item in report["sources"]))
             for name in ("--principal-id", "--dataset-id", "--artifact-receipt"):
@@ -77,7 +80,10 @@ runpy.run_path(script,run_name='__main__')
                 self.assertEqual("verified-current-files-and-registration", repeated["rerun"])
                 self.assertEqual(identity_before, (target / "project.json").read_bytes())
                 for name in (".venv", ".sys4ai", "Ontology", "config", "models", "INIT_MEMORY.md"):
-                    self.assertFalse((target / name).exists(), name)
+                    if name == "Ontology":
+                        self.assertNotIn(name, {p.name for p in target.iterdir()})
+                    else:
+                        self.assertFalse((target / name).exists(), name)
             for name, raw in custom.items():
                 self.assertEqual(raw, (manual / name).read_bytes())
             registry = json.loads((root / "depot/projects.json").read_text())

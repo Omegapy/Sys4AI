@@ -130,7 +130,15 @@ class LearningIntegrationTests(unittest.TestCase):
         before = snapshot(self.root)
         hits = search(self.root, "selected project root", mode="lexical")["results"]
         self.assertEqual([record["metadata"]["id"]], [hit["record_id"] for hit in hits if hit["kind"] == "memory"])
-        self.assertEqual(result, capture(self.root, payload, grant, "/root", trigger="decision-recorded"))
+        retry = capture(self.root, payload, grant, "/root", trigger="decision-recorded")
+        # The immutable publication boundary is stable; readiness is observed anew.
+        first_publication = dict(result["publication"])
+        retry_publication = dict(retry["publication"])
+        first_readiness = first_publication.pop("current_readiness")
+        retry_readiness = retry_publication.pop("current_readiness")
+        self.assertEqual(first_publication, retry_publication)
+        self.assertEqual(first_readiness["pending"], retry_readiness["pending"])
+        self.assertEqual("pending", retry_readiness["status"])
         self.assert_no_write(before)
         self.assertFalse((self.root / "docs/file-selection.md").exists())
 

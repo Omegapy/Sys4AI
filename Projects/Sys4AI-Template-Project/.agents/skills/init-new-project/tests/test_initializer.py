@@ -18,7 +18,7 @@ from unittest.mock import patch
 
 SOURCE_SKILL = Path(__file__).resolve().parents[1]
 BASELINE = ("agent-task", "communication", "init-new-project", "manage-subagent-roles",
-            "memory", "task", "to-implementation-plan", "to-trd", "what-did-you-learn")
+            "memory", "ontology", "task", "to-implementation-plan", "to-trd", "what-did-you-learn")
 
 
 def load_helper(skill: Path):
@@ -57,10 +57,15 @@ def fixture_depot(base: Path) -> Path:
     mapping = json.loads((SOURCE_DEPOT / "depot/template-update.json").read_text())["overrides"]
     mapped = {destination: source for source, destination in mapping.items()}
     mapped.update({"memory.yaml": "MEMORY-depo/starter/memory.yaml",
-                   "MEMORY/README.md": "MEMORY-depo/starter/MEMORY/README.md"})
+                   "MEMORY/README.md": "MEMORY-depo/starter/MEMORY/README.md",
+                   "ontology-advanced.yaml": "ONTOLOGY-depo/starter/ontology-advanced.yaml",
+                   "tools/template_update.py": "SKILLS-depo/init-new-project/assets/template_update.py"})
     mapped.update({"reference-assets/LEARNING-depo/" + path.relative_to(SOURCE_DEPOT / "LEARNING-depo").as_posix():
                    path.relative_to(SOURCE_DEPOT).as_posix()
                    for path in (SOURCE_DEPOT / "LEARNING-depo").rglob("*") if path.is_file()})
+    mapped.update({"reference-assets/ONTOLOGY-depo/" + path.relative_to(SOURCE_DEPOT / "ONTOLOGY-depo").as_posix():
+                   path.relative_to(SOURCE_DEPOT).as_posix()
+                   for path in (SOURCE_DEPOT / "ONTOLOGY-depo").rglob("*") if path.is_file() and "starter" not in path.relative_to(SOURCE_DEPOT / "ONTOLOGY-depo").parts})
     for relative in policy["starter_files"]:
         target = template / relative
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -71,6 +76,8 @@ def fixture_depot(base: Path) -> Path:
     shutil.copytree(SOURCE_DEPOT / "MEMORY-depo", template / "reference-assets/MEMORY-depo",
                     ignore=shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc", "starter"))
     shutil.copytree(SOURCE_DEPOT / "LEARNING-depo", template / "reference-assets/LEARNING-depo", ignore=ignore, dirs_exist_ok=True)
+    shutil.copytree(SOURCE_DEPOT / "ONTOLOGY-depo", template / "reference-assets/ONTOLOGY-depo",
+                    ignore=shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc", "starter"), dirs_exist_ok=True)
     for relative, source in mapped.items():
         if relative.startswith(policy["roles"] + "/"):
             target = template / relative
@@ -94,8 +101,25 @@ def fixture_depot(base: Path) -> Path:
     return root
 
 
+def remove_ontology_edition(template: Path) -> None:
+    """Reconstruct a pre-ontology Template without upgrading its receipt."""
+    for name in (".agents/skills/ontology", "reference-assets/ONTOLOGY-depo", "ONTOLOGY"):
+        if (template / name).exists():
+            shutil.rmtree(template / name)
+    if (template / "ontology.yaml").exists():
+        (template / "ontology.yaml").unlink()
+    for name in ("ontology-advanced.yaml", "tools/template_update.py"):
+        if (template / name).exists():
+            (template / name).unlink()
+    policy = template / ".template/baseline-assets.json"
+    data = json.loads(policy.read_text())
+    data["starter_files"] = [name for name in data["starter_files"] if name not in {"ontology.yaml", "ontology-advanced.yaml", "tools/template_update.py"} and not name.startswith(("ONTOLOGY/", "reference-assets/ONTOLOGY-depo/"))]
+    policy.write_text(json.dumps(data, indent=2) + "\n")
+
+
 def remove_learning_edition(template: Path) -> None:
     """Remove learning assets when reconstructing an actual earlier Template."""
+    remove_ontology_edition(template)
     for name in (".agents/skills/what-did-you-learn", "reference-assets/LEARNING-depo"):
         if (template / name).exists():
             shutil.rmtree(template / name)

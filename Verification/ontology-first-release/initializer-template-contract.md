@@ -1,0 +1,16 @@
+test_all_embedded_packages_are_complete_and_parseable (test_template_contract.TemplateContractTests.test_all_embedded_packages_are_complete_and_parseable) ... ok
+test_ignore_rules_protect_local_artifacts_and_secrets (test_template_contract.TemplateContractTests.test_ignore_rules_protect_local_artifacts_and_secrets) ... ok
+test_learning_module_is_complete_local_and_neutral (test_template_contract.TemplateContractTests.test_learning_module_is_complete_local_and_neutral) ... ok
+test_memory_starter_is_empty_and_complete (test_template_contract.TemplateContractTests.test_memory_starter_is_empty_and_complete) ... ok
+test_ontology_starter_is_neutral_locked_and_service_independent (test_template_contract.TemplateContractTests.test_ontology_starter_is_neutral_locked_and_service_independent) ... ok
+test_project_guidance_links_resolve (test_template_contract.TemplateContractTests.test_project_guidance_links_resolve) ... ok
+test_setup_cli_matches_the_documented_governance_inputs (test_template_contract.TemplateContractTests.test_setup_cli_matches_the_documented_governance_inputs) ... ok
+test_starter_policy_has_no_product_runtime_bundle (test_template_contract.TemplateContractTests.test_starter_policy_has_no_product_runtime_bundle) ... ok
+test_starter_policy_uses_template_relative_sources (test_template_contract.TemplateContractTests.test_starter_policy_uses_template_relative_sources) ... ok
+test_template_is_neutral_and_has_no_product_runtime_or_git_state (test_template_contract.TemplateContractTests.test_template_is_neutral_and_has_no_product_runtime_or_git_state) ... ok
+test_transient_and_repository_metadata_categories_are_excluded (test_template_contract.TemplateContractTests.test_transient_and_repository_metadata_categories_are_excluded) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.433s
+
+OK

@@ -1,0 +1,64 @@
+--- original ontology_shacl.py
++++ repaired ontology_shacl.py
+@@ -13,11 +13,14 @@
+ 
+ 
+ def shapes_for_records(records):
++    """Build every target, sharing only equal immutable constraint subgraphs."""
+     from rdflib import Graph, URIRef, Literal, BNode
+     from rdflib.collection import Collection
+     from ontology_rdf import FIELD, PROV, ADV
+     from ontology_advanced import RDF, CORE
+     graph=Graph(); u=lambda v:URIRef(SH+v)
++    # Per-call caches never retain shapes across input or package revisions.
++    lists={}; properties={}
+     by_id={r['@id']:r for r in records}; parents={}
+     for r in records:
+         if r.get('predicate')==CORE+'subtypeOf': parents.setdefault(r.get('subject'),set()).add(r.get('object'))
+@@ -28,9 +31,12 @@
+                 if t not in found: found.add(t); todo.append(t)
+         return found
+     def prop(shape,path,**values):
+-        p=BNode(); graph.add((shape,u('property'),p)); graph.add((p,u('path'),URIRef(path)))
+-        for key,value in values.items(): graph.add((p,u(key),value if isinstance(value,URIRef) else Literal(value)))
+-        return p
++        constraints=tuple(sorted((key,value if isinstance(value,(URIRef,BNode)) else Literal(value)) for key,value in values.items()))
++        key=(path,constraints)
++        if key not in properties:
++            p=properties[key]=BNode(); graph.add((p,u('path'),URIRef(path)))
++            for name,value in constraints: graph.add((p,u(name),value))
++        graph.add((shape,u('property'),properties[key]))
+     for r in records:
+         rid=URIRef(r['@id']); shape=URIRef(ADV+'shape:'+r['@id']); graph.add((shape,URIRef(RDF+'type'),u('NodeShape'))); graph.add((shape,u('targetNode'),rid))
+         if r.get('lifecycle') in {'approved','deprecated'}:
+@@ -39,7 +45,6 @@
+             prop(shape,PROV+'wasDerivedFrom',minCount=1,nodeKind=u('IRI'))
+         for field in ('subject','predicate','object','entity'):
+             if field in r:
+-                p=prop(shape,FIELD+field,minCount=1,maxCount=1,nodeKind=u('IRI'))
+                 selected=list(by_id)
+                 if r['kind']=='relation' and r.get('predicate') in by_id:
+                     predicate=by_id[r['predicate']]
+@@ -47,12 +52,19 @@
+                         eligible=set(predicate.get('domain' if field=='subject' else 'range',[]))
+                         selected=[v['@id'] for v in records if types(v)&eligible]
+                     elif field=='predicate': selected=[v['@id'] for v in records if v['kind']=='predicate']
+-                seq=BNode(); Collection(graph,seq,[URIRef(x) for x in sorted(selected)]); graph.add((p,u('in'),seq))
++                # Equal immutable value lists may share RDF cells. Keep this
++                # cache local to this graph so changed inputs are always rebuilt.
++                values=tuple(sorted(selected))
++                if values not in lists:
++                    lists[values]=BNode()
++                    Collection(graph,lists[values],[URIRef(x) for x in values])
++                prop(shape,FIELD+field,minCount=1,maxCount=1,nodeKind=u('IRI'),**{'in':lists[values]})
+         for predicate in (v for v in records if v['kind']=='predicate'):
+             cardinality=predicate.get('cardinality',{})
+             if types(r)&set(predicate.get('domain',[])):
+-                p=prop(shape,predicate['@id'],minCount=cardinality.get('min',0))
+-                if cardinality.get('max') is not None: graph.add((p,u('maxCount'),Literal(cardinality['max'])))
++                values={'minCount':cardinality.get('min',0)}
++                if cardinality.get('max') is not None: values['maxCount']=cardinality['max']
++                prop(shape,predicate['@id'],**values)
+     return graph
+ 
+ 

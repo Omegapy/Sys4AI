@@ -1,0 +1,564 @@
+{
+  "associations_diagnostic": null,
+  "associations_status": "current",
+  "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+  "context": {
+    "config_sha256": "de3973b748afa7dbce5aa74e049cc02bbdc9c445345fb047f96c28317f411d44",
+    "generator_version": "1.0.0",
+    "modules": [
+      {
+        "id": "sys4ai-core",
+        "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc",
+        "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+        "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+        "version": "1.0.0"
+      }
+    ],
+    "profile_version": "1.0.0",
+    "project_id": "sys4ai-depot",
+    "snapshot_sha256": "1d5f7f78e4f0eb4929f4dfae1ff11dc623e4690959652c9903c6f145f65b8c24"
+  },
+  "diagnostics": [],
+  "intent": "mixed",
+  "limits": {
+    "hops": 2,
+    "limit": 20,
+    "max_bytes": 32000
+  },
+  "memory": {
+    "excluded": [],
+    "expansion": {
+      "concept_ids": [
+        "urn:sys4ai:ontology:core:TaskManager",
+        "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-agents",
+        "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-role"
+      ],
+      "max_queries": 8,
+      "queries": [
+        "prior Task manager failures",
+        "TaskManager",
+        "task-manager AGENTS.md source",
+        "task-manager ROLE.md source"
+      ],
+      "route": "original, resolved concepts, aliases and one-hop related vocabulary"
+    },
+    "limitations": [
+      "Ontology requests deterministic lexical memory retrieval; backend configuration is unchanged.",
+      "README.md: Stored normalization is stale; this result was extracted from the current source without updating the cache."
+    ],
+    "mode": "lexical",
+    "mutated": false,
+    "packet": null,
+    "project_id": "sys4ai-depot",
+    "source_type": "historical_memory",
+    "status": "ok"
+  },
+  "mutated": false,
+  "operation": "knowledge",
+  "project_id": "sys4ai-depot",
+  "query": "prior Task manager failures",
+  "results": [
+    {
+      "@id": "urn:sys4ai:ontology:core:TaskManager",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "bindings": [
+        {
+          "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-TaskManager",
+          "@type": [
+            "urn:sys4ai:ontology:core:SourceBinding"
+          ],
+          "binding_type": "role",
+          "definition": "This explicit binding traces the selected entity to its current local source.",
+          "entity": "urn:sys4ai:ontology:core:TaskManager",
+          "fact_kind": "asserted",
+          "kind": "binding",
+          "label": "Source binding binding-concept-TaskManager",
+          "lifecycle": "approved",
+          "module": "project",
+          "sources": [
+            {
+              "locator": "section:Required first reads",
+              "path": "Roles/task-manager/AGENTS.md",
+              "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+            },
+            {
+              "locator": "section:Purpose",
+              "path": "Roles/task-manager/ROLE.md",
+              "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+            }
+          ]
+        }
+      ],
+      "canonical_location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/35",
+      "definition": "A real native manager with confirmed activation, execution generation, assignment and canonical writer ownership for one Task. An ordinary child is not promoted by reading root guidance.",
+      "fact_kind": "asserted",
+      "freshness": "current",
+      "kind": "concept",
+      "label": "TaskManager",
+      "lifecycle": "approved",
+      "match_reason": "lexical",
+      "match_score": 30,
+      "module": "sys4ai-core",
+      "module_version": "1.0.0",
+      "relationships": [
+        {
+          "@id": "urn:sys4ai:ontology:core:relation-4",
+          "@type": [
+            "urn:sys4ai:ontology:core:Relationship"
+          ],
+          "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+          "fact_kind": "asserted",
+          "kind": "relation",
+          "label": "TaskManager manages Task",
+          "lifecycle": "approved",
+          "module": "sys4ai-core",
+          "object": "urn:sys4ai:ontology:core:Task",
+          "predicate": "urn:sys4ai:ontology:core:manages",
+          "qualifiers": {
+            "scope": "conceptual"
+          },
+          "sources": [
+            {
+              "locator": "section:Relationship vocabulary",
+              "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+              "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+            }
+          ],
+          "subject": "urn:sys4ai:ontology:core:TaskManager"
+        }
+      ],
+      "source_status": [
+        {
+          "actual_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+          "diagnostic": null,
+          "locator": "section:Purpose",
+          "path": "Roles/task-manager/ROLE.md",
+          "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+          "status": "current"
+        },
+        {
+          "actual_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+          "diagnostic": null,
+          "locator": "section:Required first reads",
+          "path": "Roles/task-manager/AGENTS.md",
+          "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+          "status": "current"
+        },
+        {
+          "actual_sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+          "diagnostic": null,
+          "locator": "section:TaskManager",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896",
+          "status": "current"
+        }
+      ],
+      "source_type": "ontology",
+      "sources": [
+        {
+          "locator": "section:TaskManager",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-agents",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "bindings": [
+        {
+          "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-task-manager-agents",
+          "@type": [
+            "urn:sys4ai:ontology:core:SourceBinding"
+          ],
+          "binding_type": "artifact",
+          "definition": "This explicit binding traces the selected entity to its current local source.",
+          "entity": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-agents",
+          "fact_kind": "asserted",
+          "kind": "binding",
+          "label": "Source binding binding-artifact-task-manager-agents",
+          "lifecycle": "approved",
+          "module": "project",
+          "sources": [
+            {
+              "locator": "section:Required first reads",
+              "path": "Roles/task-manager/AGENTS.md",
+              "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+            }
+          ]
+        }
+      ],
+      "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/18",
+      "definition": "The selected project-local source at Roles/task-manager/AGENTS.md.",
+      "fact_kind": "asserted",
+      "freshness": "current",
+      "kind": "instance",
+      "label": "task-manager AGENTS.md source",
+      "lifecycle": "approved",
+      "match_reason": "lexical",
+      "match_score": 30,
+      "module": "project",
+      "module_version": null,
+      "relationships": [
+        {
+          "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager-defined-by-0",
+          "@type": [
+            "urn:sys4ai:ontology:core:Relationship"
+          ],
+          "definition": "Sys4AI confirmed Task manager role is defined by its selected source 1",
+          "fact_kind": "asserted",
+          "kind": "relation",
+          "label": "Sys4AI confirmed Task manager role is defined by its selected source 1",
+          "lifecycle": "approved",
+          "module": "project",
+          "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-agents",
+          "predicate": "urn:sys4ai:ontology:core:definedBy",
+          "sources": [
+            {
+              "locator": "section:Required first reads",
+              "path": "Roles/task-manager/AGENTS.md",
+              "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+            }
+          ],
+          "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+        }
+      ],
+      "source_status": [
+        {
+          "actual_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+          "diagnostic": null,
+          "locator": "section:Required first reads",
+          "path": "Roles/task-manager/AGENTS.md",
+          "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+          "status": "current"
+        }
+      ],
+      "source_type": "ontology",
+      "sources": [
+        {
+          "locator": "section:Required first reads",
+          "path": "Roles/task-manager/AGENTS.md",
+          "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-role",
+      "@type": [
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "bindings": [
+        {
+          "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-task-manager-role",
+          "@type": [
+            "urn:sys4ai:ontology:core:SourceBinding"
+          ],
+          "binding_type": "artifact",
+          "definition": "This explicit binding traces the selected entity to its current local source.",
+          "entity": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-role",
+          "fact_kind": "asserted",
+          "kind": "binding",
+          "label": "Source binding binding-artifact-task-manager-role",
+          "lifecycle": "approved",
+          "module": "project",
+          "sources": [
+            {
+              "locator": "section:Purpose",
+              "path": "Roles/task-manager/ROLE.md",
+              "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+            }
+          ]
+        }
+      ],
+      "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/19",
+      "definition": "The selected project-local source at Roles/task-manager/ROLE.md.",
+      "fact_kind": "asserted",
+      "freshness": "current",
+      "kind": "instance",
+      "label": "task-manager ROLE.md source",
+      "lifecycle": "approved",
+      "match_reason": "lexical",
+      "match_score": 30,
+      "module": "project",
+      "module_version": null,
+      "relationships": [
+        {
+          "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager-defined-by-1",
+          "@type": [
+            "urn:sys4ai:ontology:core:Relationship"
+          ],
+          "definition": "Sys4AI confirmed Task manager role is defined by its selected source 2",
+          "fact_kind": "asserted",
+          "kind": "relation",
+          "label": "Sys4AI confirmed Task manager role is defined by its selected source 2",
+          "lifecycle": "approved",
+          "module": "project",
+          "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-role",
+          "predicate": "urn:sys4ai:ontology:core:definedBy",
+          "sources": [
+            {
+              "locator": "section:Purpose",
+              "path": "Roles/task-manager/ROLE.md",
+              "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+            }
+          ],
+          "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+        }
+      ],
+      "source_status": [
+        {
+          "actual_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+          "diagnostic": null,
+          "locator": "section:Purpose",
+          "path": "Roles/task-manager/ROLE.md",
+          "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+          "status": "current"
+        }
+      ],
+      "source_type": "ontology",
+      "sources": [
+        {
+          "locator": "section:Purpose",
+          "path": "Roles/task-manager/ROLE.md",
+          "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager",
+      "@type": [
+        "urn:sys4ai:ontology:core:Role"
+      ],
+      "aliases": [
+        "installed Task manager role"
+      ],
+      "bindings": [
+        {
+          "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-confirmed-task-manager",
+          "@type": [
+            "urn:sys4ai:ontology:core:SourceBinding"
+          ],
+          "binding_type": "role",
+          "definition": "This persisted role can coordinate exactly one assigned Task only after a real native receipt and explicit manager activation. Reading the role does not establish a live manager.",
+          "entity": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager",
+          "fact_kind": "asserted",
+          "kind": "binding",
+          "label": "Source binding binding-confirmed-task-manager",
+          "lifecycle": "approved",
+          "module": "project",
+          "sources": [
+            {
+              "locator": "section:Required first reads",
+              "path": "Roles/task-manager/AGENTS.md",
+              "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+            },
+            {
+              "locator": "section:Purpose",
+              "path": "Roles/task-manager/ROLE.md",
+              "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+            }
+          ]
+        }
+      ],
+      "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/26",
+      "definition": "This persisted role can coordinate exactly one assigned Task only after a real native receipt and explicit manager activation. Reading the role does not establish a live manager.",
+      "fact_kind": "asserted",
+      "freshness": "current",
+      "kind": "instance",
+      "label": "Sys4AI confirmed Task manager role",
+      "lifecycle": "approved",
+      "match_reason": "lexical",
+      "match_score": 30,
+      "module": "project",
+      "module_version": null,
+      "relationships": [
+        {
+          "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager-defined-by-0",
+          "@type": [
+            "urn:sys4ai:ontology:core:Relationship"
+          ],
+          "definition": "Sys4AI confirmed Task manager role is defined by its selected source 1",
+          "fact_kind": "asserted",
+          "kind": "relation",
+          "label": "Sys4AI confirmed Task manager role is defined by its selected source 1",
+          "lifecycle": "approved",
+          "module": "project",
+          "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-agents",
+          "predicate": "urn:sys4ai:ontology:core:definedBy",
+          "sources": [
+            {
+              "locator": "section:Required first reads",
+              "path": "Roles/task-manager/AGENTS.md",
+              "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+            }
+          ],
+          "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+        },
+        {
+          "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager-defined-by-1",
+          "@type": [
+            "urn:sys4ai:ontology:core:Relationship"
+          ],
+          "definition": "Sys4AI confirmed Task manager role is defined by its selected source 2",
+          "fact_kind": "asserted",
+          "kind": "relation",
+          "label": "Sys4AI confirmed Task manager role is defined by its selected source 2",
+          "lifecycle": "approved",
+          "module": "project",
+          "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-role",
+          "predicate": "urn:sys4ai:ontology:core:definedBy",
+          "sources": [
+            {
+              "locator": "section:Purpose",
+              "path": "Roles/task-manager/ROLE.md",
+              "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+            }
+          ],
+          "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+        },
+        {
+          "@id": "urn:sys4ai:ontology:project:sys4ai-depot:manager-manages-task",
+          "@type": [
+            "urn:sys4ai:ontology:core:Relationship"
+          ],
+          "definition": "A confirmed Task manager coordinates its assigned governed Task",
+          "fact_kind": "asserted",
+          "kind": "relation",
+          "label": "A confirmed Task manager coordinates its assigned governed Task",
+          "lifecycle": "approved",
+          "module": "project",
+          "object": "urn:sys4ai:ontology:core:Task",
+          "predicate": "urn:sys4ai:ontology:core:manages",
+          "sources": [
+            {
+              "locator": "section:Required first reads",
+              "path": "Roles/task-manager/AGENTS.md",
+              "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+            }
+          ],
+          "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+        }
+      ],
+      "source_status": [
+        {
+          "actual_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+          "diagnostic": null,
+          "locator": "section:Purpose",
+          "path": "Roles/task-manager/ROLE.md",
+          "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+          "status": "current"
+        },
+        {
+          "actual_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+          "diagnostic": null,
+          "locator": "section:Required first reads",
+          "path": "Roles/task-manager/AGENTS.md",
+          "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+          "status": "current"
+        }
+      ],
+      "source_type": "ontology",
+      "sources": [
+        {
+          "locator": "section:Required first reads",
+          "path": "Roles/task-manager/AGENTS.md",
+          "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+        },
+        {
+          "locator": "section:Purpose",
+          "path": "Roles/task-manager/ROLE.md",
+          "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        }
+      ]
+    },
+    {
+      "authority": "Current permitted source bytes control operational rules; ontology remains semantic context.",
+      "discrepancy": null,
+      "excerpt": "## Required first reads\n\n1. Read the [project soul](../../SOUL.md).\n2. Read this [role definition](./ROLE.md).\n3. Read the owning project's root ROLE.md and applicable local guidance.\n4. Read the complete delegation contract and the exact canonical Task,\n   execution, manager assignment and generation named by that contract.\n5. Read the installed Task, Agent Task and Manage Sub-Agent Roles skills before\n   using their governed state or assignment workflows.\n\n## Delegated-work rules\n\n- Own only the confirmed assigned Task execution. Reading this role or root\n  guidance does not activate a manager or grant canonical writer authority.\n- Wait for the recorded native receipt and explicit activation handoff. Match\n  your actual native ID and generation to the canonical manager assignment\n  before writing Task state or dispatching work.\n- Keep exactly one active manager and canonical writer. The host relays user\n  steering and results; ordinary workers return evidence without ledger writes.\n- Preserve project scope, protected files, action-specific authority, existing\n  history and the delegation contract's stopping condition.\n- Keep the exact model and reasoning effort inherited from the Project\n  Director. Verify that each team assignment retains the same effective values.\n- Do not create nested sub-agents unless the Project Director explicitly grants\n  that authority for this Task. Use native tools and fresh role-catalog fit\n  assessment for every granted function.\n- Return inspected outputs, checks, criterion evidence, current blockers,\n  reconciled native assignments and the truthful Task outcome to the host.\n- Stop dependent dispatch before cancellation, replacement or a model-setting\n  change; reconcile actual worker status and known changes before transferring\n  ownership. A stale timestamp or child claim is not stopping evidence.\n\n## Project memory inputs\n\nIf project memory is adopted, read its integration contract for the current\nassignment. Select previously acc",
+      "excerpt_line": 3,
+      "excerpt_truncated": true,
+      "freshness": "current",
+      "locator": "section:Required first reads",
+      "match_reason": "current_selected_governing_source",
+      "path": "Roles/task-manager/AGENTS.md",
+      "recorded_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+      "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+      "source_type": "current_governance"
+    },
+    {
+      "authority": "Current permitted source bytes control operational rules; ontology remains semantic context.",
+      "discrepancy": null,
+      "excerpt": "## Purpose\n\nAct as Project Director in task-manager mode for one confirmed Task execution.\nOwn its project-aware decomposition, role selection, bounded native team,\nacceptance, integration and canonical state after the explicit bootstrap\nhandoff. Remain a distinct native instance from the host and all team functions.\n\n## Suitable tasks\n\n- Manage an explicitly activated Task supplied by prompt, inspected file or\n  authorized skill handoff.\n- Coordinate generic, complex and extra-complex subtasks with their required\n  team structures, dependencies and acceptance gates.\n- Resume a confirmed live assignment or perform an explicitly authorized\n  recovery after actual native ownership has been reconciled.\n\n## Capabilities\n\n- Convert inspected intent and project context into bounded executable subtasks.\n- Assess function-specific role fit and granted authority against a fresh catalog.\n- Supervise independent candidates, one-to-one reviews, senior synthesis,\n  conflict recycling and dedicated implementation where required.\n- Use the existing deterministic Task helper for current-version decisions,\n  accountable ownership and append-only evidence.\n- Directly inspect delivered work and validate main-Task integration.\n\n## Tasks outside the role\n\n- Acting as manager merely because this file was read or because a candidate\n  or plan was approved.\n- Managing another Task, granting new user authority, changing unrelated\n  project policy, or replacing a still-active owner without reconciliation.\n- Becoming a solver, its reviewer, the senior synthesizer or the dedicated\n  implementation child for the same multi-solution subtask.\n- Installing dependencies, publishing, modifying user settings or taking\n  external actions without their own explicit authority.\n\n## Required Codex skills\n\n- The owning project's installed `task`, `agent-task` and\n  `manage-subagent-roles` skills.\n- Domain skills explicitly required by this Task's project context. Check\n  actual availability before assignme",
+      "excerpt_line": 8,
+      "excerpt_truncated": true,
+      "freshness": "current",
+      "locator": "section:Purpose",
+      "match_reason": "current_selected_governing_source",
+      "path": "Roles/task-manager/ROLE.md",
+      "recorded_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+      "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+      "source_type": "current_governance"
+    },
+    {
+      "authority": "Historical memory evidence; it does not establish current operational authority.",
+      "claim": {
+        "level": "verified_outcome",
+        "summary": "Root health, one lexical source lookup and validate preserved the inspected files with semantic retrieval disabled."
+      },
+      "confidence": "high",
+      "diagnostics": [],
+      "excerpt": "…state\n# Observed result\n\nWith the semantic backend disabled, the root memory helper returned README.md for the exact query `project-local`. Public health, lexical search and validate preserved the bytes and modification times of all 175 files in the recorded inspection scope. The evidence includes the actual commands, returned source and before/after hashes.\n\nUse direct Markdown and lexical lookup when semantic retrieval is unavailable. Reinspect current configuration and source versions before applying this recorded result to later work.\n",
+      "freshness": "current",
+      "heading": "Root lexical lookup preserves inspected state",
+      "kind": "memory",
+      "limitations": [
+        "The root test covered health, one exact-term source query and validate with no learned records initially.",
+        "This finding does not claim a backend pilot pass, native Task integration, arbitrary source formats or other project adoption."
+      ],
+      "locator": "MEMORY/MEM-20260908-6A59F482.md",
+      "match_reason": "ontology_expanded_memory_lexical",
+      "matched_queries": [
+        "task-manager AGENTS.md source",
+        "task-manager ROLE.md source"
+      ],
+      "path": "MEMORY/MEM-20260908-6A59F482.md",
+      "record_id": "MEM-20260908-6A59F482",
+      "representations": [
+        {
+          "locator": "MEMORY/MEM-20260908-6A59F482.md",
+          "path": "MEMORY/MEM-20260908-6A59F482.md",
+          "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292"
+        }
+      ],
+      "score": 12,
+      "sha256": "66555b0f61c19d46f292f37226cfc50481dae531a5114d2af08a7830ec963292",
+      "source_identity": "MEM-20260908-6A59F482",
+      "source_type": "historical_memory",
+      "sources": [
+        {
+          "kind": "verification",
+          "locator": "json:/outcome",
+          "path": "Verification/project-memory/root-lexical-observation.json",
+          "sha256": "4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811"
+        },
+        {
+          "kind": "source",
+          "locator": "section:def search",
+          "path": ".agents/skills/memory/scripts/memory_search.py",
+          "sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b"
+        }
+      ],
+      "state": "active"
+    }
+  ],
+  "status": "ok",
+  "truncation": {
+    "available_results": 7,
+    "returned_results": 7,
+    "truncated": false
+  }
+}

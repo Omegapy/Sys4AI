@@ -520,6 +520,7 @@ def atomic_write_text(path: Path, content: str) -> None:
             handle.write(content)
             handle.flush()
             os.fsync(handle.fileno())
+        _ontology_checkpoint(targets=False)
         os.replace(tmp_path, path)
     finally:
         tmp_path.unlink(missing_ok=True)
@@ -1610,6 +1611,7 @@ def acquire_lock(
     }
     try:
         atomic_write_json(lock_dir / "owner.json", owner)
+        _ontology_checkpoint()
         yield lock_dir
     finally:
         owner_path = lock_dir / "owner.json"
@@ -2119,6 +2121,7 @@ def response_transaction(
                 inject_fault("before_response_publish")
                 publish_orchestration_artifacts(folder, intent, allow_existing=False)
                 inject_fault("after_artifact_publish")
+                _ontology_checkpoint(targets=False)
                 os.replace(staged_response, response_path)
                 staged_response = None
                 inject_fault("after_response_publish")
@@ -2700,6 +2703,7 @@ def reconcile_redaction_intent(
                     raise TaskError(EXIT_INTEGRITY, "REDACTION_CORRECTION_MISMATCH", "Published correction response differs from intent evidence.", recovery_required=True)
             else:
                 staged = write_staged_text(correction_path, correction_content)
+                _ontology_checkpoint(targets=False)
                 os.replace(staged, correction_path)
 
             if state["revision"] == intent["expected_revision"]:
@@ -2867,6 +2871,7 @@ def reconcile_transaction(
                 publish_orchestration_artifacts(folder, intent, allow_existing=True)
                 if state["revision"] == expected and not response_path.exists():
                     staged = write_staged_text(response_path, response_content)
+                    _ontology_checkpoint(targets=False)
                     os.replace(staged, response_path)
             if state["revision"] == expected and response_path.is_file() and not response_path.is_symlink():
                 if hashlib.sha256(response_path.read_bytes()).hexdigest() != intent["response_sha256"]:
@@ -2875,6 +2880,7 @@ def reconcile_transaction(
                 state = planned
             elif state["revision"] == planned_revision and not response_path.exists():
                 staged = write_staged_text(response_path, response_content)
+                _ontology_checkpoint(targets=False)
                 os.replace(staged, response_path)
                 state = planned
             elif state["revision"] == planned_revision and response_path.is_file() and not response_path.is_symlink():
@@ -3113,6 +3119,7 @@ def reconcile_response_redaction(
                 intent_path = tmp_root / f"{operation_id}.json"
                 atomic_write_json(intent_path, intent)
                 inject_fault("before_redaction_correction_publish")
+                _ontology_checkpoint(targets=False)
                 os.replace(staged_response, correction_path)
                 staged_response = None
                 inject_fault("after_redaction_correction_publish")
@@ -3395,6 +3402,102 @@ def main(argv: list[str] | None = None) -> int:
     emit(result, args.format)
     return exit_code
 
+
+
+# Optional action guard adapter.  Standalone/core use imports no ontology runtime.
+def _ontology_checkpoint(*, targets=True):
+    import sys as _sys
+    _module = _sys.modules.get("ontology_guards")
+    if _module is not None:
+        _module.checkpoint(targets=targets)
+
+
+def _ontology_guard_adapter(function, family, root_argument, target_paths):
+    import functools as _functools
+    import inspect as _inspect
+    @_functools.wraps(function)
+    def guarded(*args, **kwargs):
+        import importlib.util as _util
+        import sys as _sys
+        from pathlib import Path as _Path
+        arguments = dict(_inspect.signature(function).bind(*args, **kwargs).arguments)
+        if root_argument == "@depot":
+            selected_root = installed_locations()[0]
+        else:
+            selected_root = arguments[root_argument]
+            if not isinstance(selected_root, (_Path, str)):
+                selected_root = getattr(selected_root, "project_root", getattr(selected_root, "root", selected_root))
+        selected_root = _Path(selected_root).absolute()
+        config_path = selected_root / "ontology-advanced.yaml"
+        if not config_path.exists() and not config_path.is_symlink():
+            return function(*args, **kwargs)
+        if family == "template" and arguments.get("command") == "check":
+            return function(*args, **kwargs)
+        import json as _json
+        import hashlib as _hashlib
+        def unique_pairs(pairs):
+            value = {}
+            for key, item in pairs:
+                if key in value:
+                    raise ValueError("duplicate guard configuration key")
+                value[key] = item
+            return value
+        try:
+            if config_path.is_symlink():
+                raise ValueError("symbolic guard configuration")
+            config = _json.loads(config_path.read_text(), object_pairs_hook=unique_pairs)
+            selected = config.get("profiles", {}).get("guards", {"enabled": False})
+            if config.get("schema_version") != 1 or not isinstance(selected, dict) or type(selected.get("enabled")) is not bool:
+                raise ValueError("unsupported guard configuration")
+        except (OSError, ValueError, AttributeError) as exc:
+            raise _ontology_adapter_error("guard_schema", "Guard configuration is unreadable or unsupported.", {}) from exc
+        if not selected["enabled"]:
+            if set(selected) != {"enabled"}:
+                raise _ontology_adapter_error("guard_schema", "Disabled guard configuration has unsupported fields.", {})
+            return function(*args, **kwargs)
+        script = selected_root / ".agents/skills/ontology/scripts/ontology_guards.py"
+        if not script.is_file() or any(parent.is_symlink() for parent in (script, *script.parents)):
+            raise _ontology_adapter_error("guard_unavailable", "Enabled guards require their current project-local installed adapter.", {})
+        current_sha256 = _hashlib.sha256(script.read_bytes()).hexdigest()
+        module = _sys.modules.get("ontology_guards")
+        if module is not None and (_Path(module.__file__).resolve() != script.resolve()
+                or getattr(module, "ENGINE_SOURCE_SHA256", None) != current_sha256):
+            raise _ontology_adapter_error("guard_stale", "Loaded guard code differs from this selected project's current installed bytes; use a fresh owning-helper process after reviewed repair.", {})
+        if module is None:
+            spec = _util.spec_from_file_location("ontology_guards", script)
+            module = _util.module_from_spec(spec)
+            _sys.modules["ontology_guards"] = module
+            _sys.path.insert(0, str(script.parent))
+            spec.loader.exec_module(module)
+        targets = list(target_paths)
+        if family == "setup":
+            destination = _Path(arguments["destination"]).absolute()
+            try:
+                relative = destination.relative_to(selected_root).as_posix()
+            except ValueError:
+                raise _ontology_adapter_error("guard_scope", "Setup target escapes the selected depot.", {})
+            targets.extend([relative + "/control_records/project-setup.json", relative + "/AGENTS.md", relative + "/ROLE.md"])
+        try:
+            return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+        except module.GuardError as exc:
+            raise _ontology_adapter_error(exc.code, str(exc), exc.details) from exc
+    return guarded
+
+
+def _ontology_adapter_error(code, message, details):
+    return TaskError(EXIT_INVALID, code, message, details=details)
+
+ONTOLOGY_GUARDED_ACTIONS = ['command_new', 'response_transaction', 'command_rebuild', 'command_reconcile', 'reconcile_transaction', 'reconcile_redaction_intent', 'reconcile_lock', 'reconcile_response_redaction', 'command_intake']
+command_new = _ontology_guard_adapter(command_new, 'task', 'project_root', ['Tasks'])
+response_transaction = _ontology_guard_adapter(response_transaction, 'task', 'project_root', ['Tasks'])
+command_rebuild = _ontology_guard_adapter(command_rebuild, 'task', 'project_root', ['Tasks'])
+command_reconcile = _ontology_guard_adapter(command_reconcile, 'task', 'project_root', ['Tasks'])
+reconcile_transaction = _ontology_guard_adapter(reconcile_transaction, 'task', 'project_root', ['Tasks'])
+reconcile_redaction_intent = _ontology_guard_adapter(reconcile_redaction_intent, 'task', 'project_root', ['Tasks'])
+reconcile_lock = _ontology_guard_adapter(reconcile_lock, 'task', 'project_root', ['Tasks'])
+reconcile_response_redaction = _ontology_guard_adapter(reconcile_response_redaction, 'task', 'project_root', ['Tasks'])
+
+command_intake = _ontology_guard_adapter(command_intake, 'task', 'project_root', ['Tasks'])
 
 if __name__ == "__main__":
     raise SystemExit(main())

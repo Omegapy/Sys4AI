@@ -315,6 +315,41 @@ class RepositoryContractTests(unittest.TestCase):
                 relative = entry["destination"][len(prefix):]
                 self.assertEqual(expected_current.get(relative), entry["before_sha256"])
                 expected_current[relative] = entry["after_sha256"]
+        ontology = json.loads((ROOT / "control_records/ontology/root-adoption.json").read_text())
+        self.assertEqual("PLAN-20260909-731308FD", ontology["plan_id"])
+        self.assertEqual("applied", ontology["status"])
+        for entry in ontology["entries"]:
+            if entry["destination"].startswith(prefix):
+                relative = entry["destination"][len(prefix):]
+                self.assertEqual(expected_current.get(relative), entry["before_sha256"])
+                if entry["after_sha256"] is None:
+                    expected_current.pop(relative, None)
+                else:
+                    expected_current[relative] = entry["after_sha256"]
+        advanced_path = ROOT / "Verification/ontology-second-release/root-adoption-manifest.json"
+        advanced = json.loads(advanced_path.read_text())
+        advanced_receipt = json.loads((ROOT / "Verification/ontology-second-release/root-adoption-receipt.json").read_text())
+        self.assertEqual("PLAN-20260909-4B15BB49", advanced["plan_id"])
+        self.assertEqual("adopted", advanced_receipt["status"])
+        self.assertEqual(hashlib.sha256(advanced_path.read_bytes()).hexdigest(), advanced_receipt["manifest_sha256"])
+        for entry in advanced["changes"]:
+            if entry["destination"].startswith(prefix):
+                relative = entry["destination"][len(prefix):]
+                self.assertEqual(expected_current.get(relative), entry["expected_sha256"])
+                self.assertEqual(entry["sha256"], advanced_receipt["reopened"][entry["destination"]])
+                expected_current[relative] = entry["sha256"]
+        repair_path = ROOT / "Verification/ontology-health-repairs/change-manifest.json"
+        repair = json.loads(repair_path.read_text())
+        repair_receipt = json.loads((repair_path.parent / "root-adoption.json").read_text())
+        self.assertEqual("PLAN-20260910-2C3A0863", repair["plan"])
+        self.assertEqual("adopted", repair_receipt["status"])
+        self.assertEqual(hashlib.sha256(repair_path.read_bytes()).hexdigest(), repair_receipt["manifest_sha256"])
+        for entry in repair["changes"]:
+            if entry["path"].startswith(prefix):
+                relative = entry["path"][len(prefix):]
+                self.assertEqual(expected_current.get(relative), entry["expected_sha256"])
+                self.assertEqual(entry["sha256"], repair_receipt["reopened"][entry["path"]])
+                expected_current[relative] = entry["sha256"]
         self.assertEqual(expected_current, manifest(source))
         self.assertEqual("applied", licensing["status"])
         self.assertEqual(current["initializer_files_sha256"], licensing["previous_initializer_files_sha256"])
@@ -357,12 +392,17 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertEqual(2, spec["schema_version"])
         self.assertNotIn("ontology", spec)
         for relative in ("Ontology", "INIT_MEMORY.md"):
-            self.assertFalse((TEMPLATE / relative).exists(), relative)
+            if relative == "Ontology":
+                self.assertNotIn(relative, {p.name for p in TEMPLATE.iterdir()})
+            else:
+                self.assertFalse((TEMPLATE / relative).exists(), relative)
         self.assertIn("[SPECS.md](./SPECS.md)", (ROOT / "README.md").read_text())
         self.assertIn("control_records/project-setup.json", (ROOT / "SPECS.md").read_text())
 
     def test_retired_service_files_and_entry_points_are_absent(self) -> None:
-        for relative in ("ONTOLOGY-depo", "Projects/Sys4AI-Memory-Service",
+        self.assertTrue((ROOT / "ONTOLOGY-depo/contract.json").is_file())
+        self.assertTrue((ROOT / "SKILLS-depo/ontology/SKILL.md").is_file())
+        for relative in ("Projects/Sys4AI-Memory-Service",
                          "config/memory.toml", "config/context.toml", "control_records/memory",
                          "schemas/memory", ".sys4ai/ontology-artifacts",
                          ".sys4ai/operational-verification"):

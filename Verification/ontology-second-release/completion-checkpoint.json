@@ -1,0 +1,50 @@
+{
+  "automatic_capture_enabled": true,
+  "disposition": "Useful observations are already implemented in this release and retained with reproducible tests. The plan's explicit canonical-memory preservation boundary is retained; no memory schema, record or runtime migration is part of this release.",
+  "evidence": [
+    {
+      "path": "Verification/ontology-second-release/learning-contract-check.json",
+      "sha256": "4393f039e3982c556b675ce0276afad60b65f9c8678c52f089822747704c67c3"
+    },
+    {
+      "path": "Verification/ontology-second-release/memory-capture-status.json",
+      "sha256": "62f81305b1ccc31feb0c1a28e9edc824331d6653ffbef927dc3259450ff7f45c"
+    },
+    {
+      "path": "Verification/ontology-second-release/completion-memory-search.json",
+      "sha256": "ce67080f079ba3100e31e7a463c899b447e5f22f80c53b31bab6d4eb2089ec6d"
+    }
+  ],
+  "findings": [
+    {
+      "disposition": "implemented",
+      "evidence": {
+        "path": "Verification/ontology-second-release/workbench-cookie-regression.log",
+        "sha256": "c1ad3109615f2bf91983219cceb4c6c96b0d5ab970f3a9544a0b7c60875692a8"
+      },
+      "finding": "Host-scoped browser cookies collide across different loopback ports; repeated same-port bootstraps must preserve current tabs."
+    },
+    {
+      "disposition": "implemented",
+      "evidence": {
+        "path": "Verification/ontology-second-release/import-isolation-regression.log",
+        "sha256": "cdf5d09ca0638c8a571cf3eb1915212e65ce112cb62f5b1ff8e8341fd8c93445"
+      },
+      "finding": "Tests switching installed helper packages must restore process imports so deleted fixture modules cannot contaminate later checks."
+    },
+    {
+      "disposition": "implemented",
+      "evidence": {
+        "path": "Verification/ontology-second-release/advanced-memory-acceptance.json",
+        "sha256": "8160842122f40791de336560e17afa7da479da63b5266b37da6a771a858f7a63"
+      },
+      "finding": "Explicit advanced mixed retrieval must retain proposals and historical memory as distinct source types."
+    }
+  ],
+  "memory_writes": false,
+  "observed_at": "2026-09-10T16:09:20.536161+00:00",
+  "personal_memory_update_authorized": false,
+  "recall_limit": "Read-only memory lookup reported a stale README normalization and used current lexical source text without maintaining its cache.",
+  "schema_version": 1,
+  "status": "reviewed"
+}

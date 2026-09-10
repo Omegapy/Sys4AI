@@ -2,7 +2,7 @@
 name: init-new-project
 description: Create or prepare a selected Sys4AI project using Template governance assets, preserved project content and factual registration.
 metadata:
-  version: 9.0.0
+  version: 11.1.0
 ---
 
 # Initialize a Sys4AI project
@@ -25,9 +25,9 @@ are rejected. There is no caller-controlled depot or Template override.
 
 Every starter input comes from the registered `Sys4AI-Template-Project`: its
 schema-2 `.template/baseline-assets.json`, README renderer, soul, complete skill
-and role packages, and selected reference assets. The nine required skills are
+and role packages, and selected reference assets. The ten required skills are
 `agent-task`, `communication`, `init-new-project`, `manage-subagent-roles`, `task`,
-`memory`, `to-implementation-plan`, `to-trd` and `what-did-you-learn`. The `project-sub-agent` and `task-manager` pairs and a validated `Roles/INDEX.md`
+`memory`, `ontology`, `to-implementation-plan`, `to-trd` and `what-did-you-learn`. The `project-sub-agent` and `task-manager` pairs and a validated `Roles/INDEX.md`
 are required for new projects. The initializer reads the Template and does not refresh it.
 
 The memory starters are `memory.yaml`, `MEMORY/README.md`, the complete memory
@@ -135,11 +135,103 @@ changed inputs or conflicting edits prevent replay. Ordinary reruns acquire no
 new edition; equivalent completed module requests preserve later project edits
 and verify current capability without an implicit package refresh.
 
+## Ontology setup and selected adoption
+
+Edition v8 adds the ontology skill, local contracts, locked core module, neutral
+`ontology.yaml` and empty `ONTOLOGY/` project and binding graphs. Create and first
+preparation specialize the saved project ID, name, purpose, unique namespace,
+import locks and destination-local Director binding. The binding covers only
+`ONTOLOGY/modules/project` and `ONTOLOGY/bindings`; exact operation grants remain
+required for publication. Setup neither installs nor starts a runtime or service.
+
+Use `assess-ontology --destination ABSOLUTE_PROJECT_PATH` for a read-only static
+assessment of configuration, complete import hashes and current local authority.
+It executes no copied project Python. `structural_readiness: available` and
+`runtime: not-exercised` are separate facts; use the installed ontology `health`
+command for semantic validation and source freshness. Copied files alone never
+establish runtime readiness or publication authority.
+
+An earlier completed receipt acquires ontology only through the exact selected
+`prepare-existing --adopt-module ontology` request. Ordinary reruns retain their
+base edition and locked versions. `prepare-existing --refresh-module ontology`
+selects a new reviewed Template inventory for a previously receipt-owned ontology
+installation; it may be combined with `--adopt-module ontology`. It does not
+select a memory dependency refresh. Repeating the same source request verifies
+current capability, while a changed Template source inventory creates a separate
+hash-bound operation in `module_adoptions` and archives prior receipt bytes.
+
+Treat `ontology.yaml`, `ONTOLOGY/`, the ontology skill and its contract package as
+one installation. A customized, incomplete or incompatible existing installation
+is preserved as a whole, with exact diagnostics and no partial merge. A complete
+pristine manual Template copy may specialize its neutral config. Refresh requires
+the complete file and directory inventory to equal prior receipt-owned evidence;
+missing files, extra files and custom edits block replacement of the entire
+installation. Existing ontology authority is retained on refresh. Existing
+memory choices, learning, governance, Tasks, roles, licenses and project records
+remain outside this operation. A partial ontology operation resumes only its
+same module/refresh selection, frozen Template hashes and expected target bytes.
+
+## Advanced ontology v9 and selected capability upgrades
+
+New and first-prepared projects receive `ontology-advanced.yaml`, complete
+advanced ontology contracts and interfaces, browser assets, pinned dependency
+manifests, the eight guarded action families and a reusable Template updater.
+All five advanced profiles start disabled. The companion gets its destination
+project ID and a separately scoped destination-local publication binding.
+No environment, dependency, model, backend process, service or guard bootstrap
+is provisioned or enabled. Static capability installation, profile enablement,
+current operation authorization, backend certification and observed runtime
+behavior are reported separately in `ontology_advanced`.
+
+The initializer's trusted static inventory requires the complete current
+ontology, memory and initializer packages, including shipped tests, the
+acceptance runner, local contracts and pinned dependency/model specifications.
+The inventory is bound to the executing initializer's reviewed digest. Unknown
+target Python is parsed for syntax without executing it. Only the known pure memory
+configuration validators, learning resolver and role-index inspector may execute during assessment;
+unknown customized inspectors are preserved and reported as unavailable.
+Role inspection accepts only the reviewed current helper or its exact known
+v1/v2 root-name variants; an ordinary rerun never grants custom helper execution.
+
+Use `assess-ontology-advanced --destination ABSOLUTE_PROJECT_PATH` to inspect
+capability and exact existing extension locks without executing project Python.
+An installed capability with `runtime: not-exercised` is not a ready backend.
+Existing configured profiles and certification may need separately selected
+setup or recertification after code changes.
+
+For a completed earlier setup, select
+`prepare-existing --adopt-module ontology-advanced` with the exact existing
+identity arguments. V1-v8 base editions and their original source/adoption
+records remain unchanged. This route updates only complete verified
+receipt-owned capability packages: ontology, memory, Task, TRD, plan, role and
+initializer skill code, ontology reference contracts, and the selected updater
+helper. It preserves `ontology.yaml`, existing `ontology-advanced.yaml`,
+authored project/binding/extension graphs, locked core imports, proposals,
+publication history, memory records/preferences, licensing and governance.
+It never uses whole `ONTOLOGY/` equality as a reason to replace authored data.
+
+A missing baseline ontology can be installed as an explicitly recorded neutral
+prerequisite inside the same `module_adoptions` operation. Partial, customized,
+missing receipt-owned or unowned incompatible packages are preserved and
+refused before writing. Exact known source-equal packages may be retained
+without overwriting them. An already enabled destination guard configuration
+requires its exact selected adapter repair before a capability upgrade; setup
+does not silently change guard bindings or disable enforcement.
+
+Repeated selected adoption verifies the current result when the Template
+inventory is unchanged. A newly selected Template capability inventory creates
+a new exact operation while preserving the original base receipt history.
+Partial operations resume only their original source inventory and recognized
+pre/post bytes. Changed authored data, configuration, source packages or unknown
+target edits stop replay and retain both the pending receipt and project work.
+The existing setup receipt and guarded transaction entry points own this flow;
+there is no second setup ledger.
+
 ## Completion and receipts
 
 The durable receipt is `control_records/project-setup.json`, schema version 1,
-with setup contract `governance-starter-v7`. Edition v7 adds the learning module;
-memory remains supported for v5-v7 and capture for v6-v7. Edition v6 defaults automatic
+with setup contract `governance-starter-v9`. Edition v9 adds neutral advanced capability; edition v8 adds ontology; edition v7 adds learning.
+Memory remains supported for v5-v9 and capture for v6-v9. Edition v6 defaults automatic
 capture on and binds the destination's own Director for reviewed memory writes.
 The `memory_capture` result reports the actual current setting and readiness.
 Edition v5 added memory starters and
@@ -149,7 +241,7 @@ original complete config and collections; `current_memory` records the latest
 observation. Missing resources inside an existing memory collection use
 `skipped-existing-package`, retaining every Template source entry.
 
-Editions v4, v5, v6 and v7 require the license trio
+Editions v4, v5, v6, v7, v8 and v9 require the license trio
 and records the original `preserved_licenses` inventory (empty when adopting
 the trio) separately from `current_licenses` observed during verification.
 Entries for absent companions use `skipped-existing-license`; every Template
@@ -171,13 +263,30 @@ that proof separately and observes hashes under the actual `Roles/` paths in
 Its stages are `assets`,
 `registration` and `verification`. A completed result contains all three stages
 and passed checks for project identity, project files and factual registration.
+`static_health` records the selected setup edition or module, observation time,
+input inventory versions, each required/preserved capability outcome, and
+`runtime: not-exercised`. `static_ready` and `aggregate` describe this current
+assessment. They never establish backend, model, guard or service operation.
+An adopted or explicitly selected capability that fails a required static check
+stops at `verification`, retains a partial receipt, and returns nonzero. Resolve
+its recorded cause and repeat the exact request; copying success is insufficient.
+
+Preserved customized capability may remain unavailable. In that case the base
+asset/registration receipt can complete, with `preserved-unverified` diagnostics,
+`static_ready: false`, `aggregate: degraded`, and CLI exit 1. Its completed base
+receipt keeps later governed module adoption possible. Do not describe that
+result as a complete healthy capability installation. Valid disabled publication
+and capture-off choices remain disabled. CLI exit 0 requires a passing selected
+static assessment; exit 2 retains the existing invalid/incomplete setup error
+contract. Reruns use the receipt's recorded edition and original source inventory,
+then assess current bytes; earlier completion evidence does not certify new edits.
 The receipt retains source hashes and the original adoption hashes separately
 from the hashes observed during the latest verification. A preserved or skipped
 resource is identified explicitly; copied Template bytes are not claimed for it.
 The receipt must account for every source destination in both directions:
 adopted files match `owned_files`, preserved files match `preserved_files`, and
 both maps match the source adoption hashes. Only explicitly skipped resources
-inside an existing package, nonempty Task tree, or a v4/v5/v6/v7 preserved licensing
+inside an existing package, nonempty Task tree, or a v4/v5/v6/v7/v8/v9 preserved licensing
 system may be absent from both maps.
 Standalone starters and the required source inventory cannot be omitted.
 

@@ -1,0 +1,195 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-first-release/fixtures/root-preview/.agents/skills/ontology/scripts/ontology.py",
+    "--project-root",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-first-release/fixtures/root-preview",
+    "term",
+    "Sys4AI confirmed Task manager role"
+  ],
+  "returncode": 0,
+  "result": {
+    "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+    "context": {
+      "config_sha256": "bd144bbe70485baea5df1977085755d02c8843e69549377c3bf101771cdc2df4",
+      "generator_version": "1.0.0",
+      "modules": [
+        {
+          "id": "sys4ai-core",
+          "manifest_sha256": "9ef9a448d4b30e7435bc9394cf3ccaec5bf80524308a58c35fce71b39d6bd0cc",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+          "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+          "version": "1.0.0"
+        }
+      ],
+      "profile_version": "1.0.0",
+      "project_id": "sys4ai-depot",
+      "snapshot_sha256": "d99d7f41babf5e642c9a1cb388a30ea1eb2444c6c0b4b3c580632dcaf77792b7"
+    },
+    "diagnostics": [],
+    "limits": {
+      "hops": 2,
+      "limit": 20,
+      "max_bytes": 32000
+    },
+    "mutated": false,
+    "operation": "term",
+    "project_id": "sys4ai-depot",
+    "query": "Sys4AI confirmed Task manager role",
+    "results": [
+      {
+        "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager",
+        "@type": [
+          "urn:sys4ai:ontology:core:Role"
+        ],
+        "aliases": [
+          "installed Task manager role"
+        ],
+        "bindings": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-confirmed-task-manager",
+            "@type": [
+              "urn:sys4ai:ontology:core:SourceBinding"
+            ],
+            "binding_type": "role",
+            "definition": "This persisted role can coordinate exactly one assigned Task only after a real native receipt and explicit manager activation. Reading the role does not establish a live manager.",
+            "entity": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager",
+            "fact_kind": "asserted",
+            "kind": "binding",
+            "label": "Source binding binding-confirmed-task-manager",
+            "lifecycle": "approved",
+            "module": "project",
+            "sources": [
+              {
+                "locator": "section:Required first reads",
+                "path": "Roles/task-manager/AGENTS.md",
+                "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+              },
+              {
+                "locator": "section:Purpose",
+                "path": "Roles/task-manager/ROLE.md",
+                "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+              }
+            ]
+          }
+        ],
+        "canonical_location": "ONTOLOGY/modules/project/project.jsonld#/@graph/26",
+        "definition": "This persisted role can coordinate exactly one assigned Task only after a real native receipt and explicit manager activation. Reading the role does not establish a live manager.",
+        "fact_kind": "asserted",
+        "freshness": "current",
+        "kind": "instance",
+        "label": "Sys4AI confirmed Task manager role",
+        "lifecycle": "approved",
+        "match_reason": "preferred_label",
+        "match_score": 1,
+        "module": "project",
+        "module_version": null,
+        "relationships": [
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager-defined-by-0",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "Sys4AI confirmed Task manager role is defined by its selected source 1",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "Sys4AI confirmed Task manager role is defined by its selected source 1",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-agents",
+            "predicate": "urn:sys4ai:ontology:core:definedBy",
+            "sources": [
+              {
+                "locator": "section:Required first reads",
+                "path": "Roles/task-manager/AGENTS.md",
+                "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager-defined-by-1",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "Sys4AI confirmed Task manager role is defined by its selected source 2",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "Sys4AI confirmed Task manager role is defined by its selected source 2",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-role",
+            "predicate": "urn:sys4ai:ontology:core:definedBy",
+            "sources": [
+              {
+                "locator": "section:Purpose",
+                "path": "Roles/task-manager/ROLE.md",
+                "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+          },
+          {
+            "@id": "urn:sys4ai:ontology:project:sys4ai-depot:manager-manages-task",
+            "@type": [
+              "urn:sys4ai:ontology:core:Relationship"
+            ],
+            "definition": "A confirmed Task manager coordinates its assigned governed Task",
+            "fact_kind": "asserted",
+            "kind": "relation",
+            "label": "A confirmed Task manager coordinates its assigned governed Task",
+            "lifecycle": "approved",
+            "module": "project",
+            "object": "urn:sys4ai:ontology:core:Task",
+            "predicate": "urn:sys4ai:ontology:core:manages",
+            "sources": [
+              {
+                "locator": "section:Required first reads",
+                "path": "Roles/task-manager/AGENTS.md",
+                "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+              }
+            ],
+            "subject": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager"
+          }
+        ],
+        "source_status": [
+          {
+            "actual_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+            "diagnostic": null,
+            "locator": "section:Purpose",
+            "path": "Roles/task-manager/ROLE.md",
+            "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443",
+            "status": "current"
+          },
+          {
+            "actual_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+            "diagnostic": null,
+            "locator": "section:Required first reads",
+            "path": "Roles/task-manager/AGENTS.md",
+            "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+            "status": "current"
+          }
+        ],
+        "source_type": "ontology",
+        "sources": [
+          {
+            "locator": "section:Required first reads",
+            "path": "Roles/task-manager/AGENTS.md",
+            "sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49"
+          },
+          {
+            "locator": "section:Purpose",
+            "path": "Roles/task-manager/ROLE.md",
+            "sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+          }
+        ]
+      }
+    ],
+    "status": "ok",
+    "truncation": {
+      "available_results": 1,
+      "returned_results": 1,
+      "truncated": false
+    }
+  }
+}

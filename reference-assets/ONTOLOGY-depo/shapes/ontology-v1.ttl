@@ -1,0 +1,19 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix adv: <urn:sys4ai:ontology:advanced:> .
+@prefix field: <urn:sys4ai:ontology:core:field:> .
+
+adv:ApprovedRecordShape a sh:NodeShape ;
+  sh:targetClass adv:ApprovedRecord ;
+  sh:property [ sh:path field:definition ; sh:minCount 1 ; sh:minLength 1 ] ;
+  sh:property [ sh:path field:label ; sh:minCount 1 ; sh:minLength 1 ] ;
+  sh:property [ sh:path field:module ; sh:minCount 1 ; sh:minLength 1 ] ;
+  sh:property [ sh:path prov:wasDerivedFrom ; sh:minCount 1 ; sh:nodeKind sh:IRI ] .
+
+adv:SourceReferenceShape a sh:NodeShape ;
+  sh:targetObjectsOf prov:wasDerivedFrom ;
+  sh:property [ sh:path adv:path ; sh:minCount 1 ; sh:maxCount 1 ; sh:minLength 1 ] ;
+  sh:property [ sh:path adv:sha256 ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "^[0-9a-f]{64}$" ] ;
+  sh:property [ sh:path adv:locator ; sh:minCount 1 ; sh:maxCount 1 ; sh:minLength 1 ] ;
+  sh:property [ sh:path adv:freshness ; sh:minCount 1 ; sh:in ( "current" "stale" "unavailable" ) ] .

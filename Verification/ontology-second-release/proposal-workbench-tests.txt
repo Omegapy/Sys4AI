@@ -1,0 +1,74 @@
+test_changed_expected_content_and_active_lock_prevent_mutation (test_publication.PublicationTests.test_changed_expected_content_and_active_lock_prevent_mutation) ... ok
+test_commit_projection_and_receipt_failures_recover_exact_operation (test_publication.PublicationTests.test_commit_projection_and_receipt_failures_recover_exact_operation) ... ok
+test_failure_before_intent_creates_no_accepted_change (test_publication.PublicationTests.test_failure_before_intent_creates_no_accepted_change) ... ok
+test_new_exact_selected_file_can_be_published_and_recovered (test_publication.PublicationTests.test_new_exact_selected_file_can_be_published_and_recovered) ... ok
+test_preview_is_read_only_and_publication_preserves_memory_and_governance (test_publication.PublicationTests.test_preview_is_read_only_and_publication_preserves_memory_and_governance) ... ok
+test_recovery_does_not_overwrite_unrelated_changes (test_publication.PublicationTests.test_recovery_does_not_overwrite_unrelated_changes) ... ok
+test_same_operation_is_idempotent_and_different_payload_is_rejected (test_publication.PublicationTests.test_same_operation_is_idempotent_and_different_payload_is_rejected) ... ok
+test_stale_source_can_be_rebound_by_current_reviewed_proposal (test_publication.PublicationTests.test_stale_source_can_be_rebound_by_current_reviewed_proposal) ... ok
+test_child_wrong_project_memory_grant_and_overbroad_scope_fail (test_authority.AuthorityTests.test_child_wrong_project_memory_grant_and_overbroad_scope_fail) ... ok
+test_current_director_is_authorized_without_creating_other_state (test_authority.AuthorityTests.test_current_director_is_authorized_without_creating_other_state) ... ok
+test_stale_authority_and_expired_native_evidence_fail (test_authority.AuthorityTests.test_stale_authority_and_expired_native_evidence_fail) ... ok
+test_stale_manager_task_digest_is_rejected (test_authority.AuthorityTests.test_stale_manager_task_digest_is_rejected) ... ok
+test_unverified_active_manager_blocks_instead_of_trusting_raw_json (test_authority.AuthorityTests.test_unverified_active_manager_blocks_instead_of_trusting_raw_json) ... ok
+test_changed_generation_and_overlapping_director_fail (test_authority.ConfirmedManagerAuthorityTests.test_changed_generation_and_overlapping_director_fail) ... ok
+test_confirmed_manager_publishes_with_current_exact_task_scope (test_authority.ConfirmedManagerAuthorityTests.test_confirmed_manager_publishes_with_current_exact_task_scope) ... ok
+test_changed_target_and_sources_invalidate_exact_review (test_proposals.ProposalTests.test_changed_target_and_sources_invalidate_exact_review) ... ERROR
+test_invalid_definition_never_becomes_eligible (test_proposals.ProposalTests.test_invalid_definition_never_becomes_eligible) ... ok
+test_partial_receipt_retains_accepted_review_for_exact_recovery (test_proposals.ProposalTests.test_partial_receipt_retains_accepted_review_for_exact_recovery) ... ok
+test_revision_history_rejection_and_stale_save_preserve_canonical (test_proposals.ProposalTests.test_revision_history_rejection_and_stale_save_preserve_canonical) ... ok
+test_validation_impact_and_publish_reopen (test_proposals.ProposalTests.test_validation_impact_and_publish_reopen) ... ok
+test_comparison_reports_negative_or_neutral_without_promised_gain (test_generation_contract.GenerationTests.test_comparison_reports_negative_or_neutral_without_promised_gain) ... ok
+test_fabricated_reference_and_runtime_expansion_fail (test_generation_contract.GenerationTests.test_fabricated_reference_and_runtime_expansion_fail) ... ok
+test_frozen_source_data_and_attributable_capture (test_generation_contract.GenerationTests.test_frozen_source_data_and_attributable_capture) ... ok
+test_initial_plus_two_finding_directed_revisions_and_repeated_failure_stop (test_generation_contract.GenerationTests.test_initial_plus_two_finding_directed_revisions_and_repeated_failure_stop) ... ok
+test_core_protection_unsafe_text_and_browsing_only_session (test_workbench_security.WorkbenchTests.test_core_protection_unsafe_text_and_browsing_only_session) ... ok
+test_origin_host_csrf_forged_authority_and_source_escape_are_rejected (test_workbench_security.WorkbenchTests.test_origin_host_csrf_forged_authority_and_source_escape_are_rejected) ... ok
+test_real_service_search_draft_invalid_validate_revise_review_publish_reopen (test_workbench_security.WorkbenchTests.test_real_service_search_draft_invalid_validate_revise_review_publish_reopen) ... ok
+test_two_clients_stale_save_reject_and_reload_preserve_work (test_workbench_security.WorkbenchTests.test_two_clients_stale_save_reject_and_reload_preserve_work) ... ok
+test_actual_standards_and_consistency_validate_isolated_candidate (test_advanced_publication.AdvancedPublicationTests.test_actual_standards_and_consistency_validate_isolated_candidate) ... ok
+test_profile_or_authority_changes_are_outside_semantic_publication (test_advanced_publication.AdvancedPublicationTests.test_profile_or_authority_changes_are_outside_semantic_publication) ... ok
+test_rdf_import_retains_full_quads_and_only_converts_lossless_axioms (test_advanced_publication.AdvancedPublicationTests.test_rdf_import_retains_full_quads_and_only_converts_lossless_axioms) ... ok
+test_v1_grant_cannot_publish_extension_and_exact_v2_partial_recovery (test_advanced_publication.AdvancedPublicationTests.test_v1_grant_cannot_publish_extension_and_exact_v2_partial_recovery) ... ERROR
+
+======================================================================
+ERROR: test_changed_target_and_sources_invalidate_exact_review (test_proposals.ProposalTests.test_changed_target_and_sources_invalidate_exact_review)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_proposals.py", line 74, in test_changed_target_and_sources_invalidate_exact_review
+    value = self.reviewed();authority = self.v2grant(value)
+            ^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_proposals.py", line 33, in reviewed
+    return decide(self.root, value["head"]["proposal_id"], expected_revision=1, decision="accept", reason="Reviewed exact source, meaning and checks.", validation_sha256=value["head"]["validation_sha256"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_proposals.py", line 244, in decide
+    assert_review_current(root, current)
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_proposal_validation.py", line 155, in assert_review_current
+    require(snapshot(root) == validation["target_snapshot"], "stale_review", "Sources, helpers, configuration or canonical targets changed after validation.")
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_core.py", line 40, in require
+    raise OntologyError(code, message, **location)
+ontology_core.OntologyError: Sources, helpers, configuration or canonical targets changed after validation.
+
+======================================================================
+ERROR: test_v1_grant_cannot_publish_extension_and_exact_v2_partial_recovery (test_advanced_publication.AdvancedPublicationTests.test_v1_grant_cannot_publish_extension_and_exact_v2_partial_recovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_advanced_publication.py", line 62, in test_v1_grant_cannot_publish_extension_and_exact_v2_partial_recovery
+    completed=recover(self.root,candidate["operation_id"],authority)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_publication.py", line 262, in recover
+    return decision.finish(_advance(root, intent, grant, fail_at=fail_at, decision=decision))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_publication.py", line 182, in _advance
+    advanced_validation = _advanced_checks(root, proposal)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_publication.py", line 128, in _advanced_checks
+    require(checked.get("complete") is True and checked.get("conforms") is True,
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_core.py", line 40, in require
+    raise OntologyError(code, message, **location)
+ontology_core.OntologyError: The exact advanced candidate did not complete conformant standards validation: stale_input
+
+----------------------------------------------------------------------
+Ran 32 tests in 98.861s
+
+FAILED (errors=2)

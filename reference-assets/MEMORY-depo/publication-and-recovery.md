@@ -107,3 +107,36 @@ redacted, it cannot later be replayed to restore the removed content.
 The record/config helper and transaction tests establish deterministic local
 behavior. Vendor backend, actual native ownership and complete project delivery
 need their own observed integration evidence.
+
+
+## Evidence retention and current readiness
+
+New `verified_outcome` claims require an actually observed receipt with explicit
+current applicability, exact live artifact versions and reviewed retained bytes
+under the governed evidence paths. Record schema v1 remains unchanged; the
+receipt's optional per-artifact `retained_path` extends its existing format.
+Retaining an archive is a separately scoped evidence write, not an implicit
+publication side effect. Reads never rewrite receipts, refresh hashes or create
+archives. Existing legacy receipts remain readable with explicit durability and
+historical/current applicability limitations. Missing or tampered historical
+proof cannot become a verified-current result. See the adopted memory skill's
+`references/evidence-and-lifecycle.md` for the exact compatible reader contract.
+
+Canonical transaction completion and current derived readiness have distinct
+meanings. Publication/capture return the original exact commit receipt plus a
+read-only `current_readiness` observation. A new record, lifecycle change or
+configuration change can invalidate a selected projection/index. The result
+reports the precise pending component and owning maintenance route; no publication
+grant silently authorizes reindex, recertification, ontology associations or a
+runtime operation. Exact retries preserve canonical idempotence and reevaluate
+current readiness. A prior receipt retains historical provenance after its inputs
+change and cannot be reused as current operational success.
+
+For unchanged legacy receipts, a reviewed historical-only proof companion may be
+retained at `Verification/project-memory/evidence/verification-<receipt-sha256>.json`.
+It binds the exact original receipt path/hash and the unchanged ordered artifact
+path/hash list to permitted retained copies. It provides a proof locator, not a
+new execution receipt or current claim. The original record, receipt and canonical
+transaction journal retain their original bytes until an explicitly reviewed
+ordinary lifecycle operation changes the record's lifecycle fields. The original
+claim, evidence identities and predecessor body remain preserved by supersession.

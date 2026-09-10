@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/restoration.py", line 84, in <module>
+    {'dispositions': dispositions, 'reindex': reindex}[sys.argv[1]](observation)
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/restoration.py", line 76, in reindex
+    result = reindex(ROOT, grant_file=grant_path, actor='/root', expected_payload_sha256=auth['payload_sha256'])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory_maintenance.py", line 428, in guarded
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 761, in dispatch
+    facts = schema_check(function.__globals__, family, operation, root, arguments)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 846, in schema_check
+    config = namespace["load_config"](root)
+             ~~~~~~~~~^^^^^^^^^^^^^^^
+KeyError: 'load_config'

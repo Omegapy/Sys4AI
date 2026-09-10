@@ -18,7 +18,7 @@ def collect_documents(root, config=None, historical=False):
                "source_identity": meta["id"], "metadata": meta,
                "segments": [{"text": meta["title"] + "\n" + record["body"],
                              "heading": meta["title"], "locator": record["path"]}],
-               "limitations": meta["limitations"], "diagnostics": record["diagnostics"]}
+               "limitations": meta["limitations"], "diagnostics": record["diagnostics"], "evidence": record["evidence"]}
         reject_sensitive(record["body"])
         documents.append(doc)
     for source in iter_corpus(root, config):
@@ -89,7 +89,8 @@ def rank_documents(documents, query, limit, ranking=None):
         if doc["kind"] == "memory":
             result.update({"record_id": doc["metadata"]["id"], "state": doc["metadata"]["state"],
                            "sources": doc["metadata"]["sources"], "claim": doc["metadata"]["claim"],
-                           "confidence": doc["metadata"]["confidence"]})
+                           "confidence": doc["metadata"]["confidence"], "evidence": doc.get("evidence"),
+                           "verified_current": doc.get("evidence", {}).get("verified_current", False)})
         ranked.append(result)
     ranked.sort(key=lambda r: (-r["score"], r["source_identity"], r["path"], r["locator"]))
     unique = {}

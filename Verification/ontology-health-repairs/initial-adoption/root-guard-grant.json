@@ -1,0 +1,205 @@
+{
+  "actor_id": "/root",
+  "actor_kind": "director",
+  "config_sha256": "de3973b748afa7dbce5aa74e049cc02bbdc9c445345fb047f96c28317f411d44",
+  "expires_at": "2026-09-10T19:54:45.753142+00:00",
+  "native_receipt": {
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/memory_repairs",
+          "agent_status": {
+            "completed": "Both fixes are complete and source is frozen.\n\n- **93 memory tests passed**, including 16 focused controls.\n- Historical direct-source lookup is order-independent and rejects invalid retained proof.\n- INFO-only validation succeeds while reporting `verified_current_records` separately.\n- `memory_core.py` and its trusted hash remain unchanged.\n\nThe five changed memory files require Template delivery and fixture refresh before final runtime acceptance. No root or fixture state was directly changed."
+          }
+        },
+        {
+          "agent_name": "/root/shacl_repair",
+          "agent_status": {
+            "completed": "The required guard case now completes within its unchanged five-second budget.\n\n- Measured decision: **5.02s timeout \u2192 2.18s conformant**.\n- All four existing deadline tests pass unchanged.\n- Six before/after RDF cases preserve exact quads and hashes.\n- Source runtime recertified; previous certificate retained.\n- Latest guard-engine positive case also passes.\n\nRDF source and regression tests are frozen. [Evidence and final hashes](/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/guard-budget/result.json)."
+          }
+        },
+        {
+          "agent_name": "/root/test_discovery",
+          "agent_status": "running"
+        }
+      ]
+    },
+    "tool": "collaboration.list_agents"
+  },
+  "observed_at": "2026-09-10T19:49:45.753142+00:00",
+  "operation": "guard-repair",
+  "preview_sha256": "b1f856dcfe3ee5707f288ccb06fd68a071d3f5eca2e3cbfe0f069b800ae3c51e",
+  "project_id": "sys4ai-depot",
+  "reviewed_records": [
+    {
+      "expected_sha256": "45e796a78d784b386efd9edcf0650844e7a1006773fb3aa100783b92fec31515",
+      "path": ".agents/skills/ontology/scripts/ontology.py",
+      "sha256": "9b1c193f7cb420b0afb090ab74cf069ba49eea449994f747316a7e1ff3db3bce"
+    },
+    {
+      "expected_sha256": "320bbb7dce8df6b26cbcdee85e0f4c9400c5f30191323d3d18fcba83b337c3fc",
+      "path": ".agents/skills/ontology/scripts/ontology_advanced_cli.py",
+      "sha256": "af57d0d25cd246feb864373ee898f7026a1bce8e97f14a58ef83e878c6eb3f94"
+    },
+    {
+      "expected_sha256": "859b70f2d3c67b3588f22caad726e8e3558326ae83fb7fedb823b257e3ff4926",
+      "path": ".agents/skills/ontology/scripts/ontology_guards.py",
+      "sha256": "f42506f6dde32f74a24c00cc1d0e046a12004fa9d03f00a5a49131607677442a"
+    },
+    {
+      "expected_sha256": null,
+      "path": ".agents/skills/ontology/scripts/ontology_health.py",
+      "sha256": "0ffe775f485de64d326fccebe13c35a7974e2ebb8ff432c562b5f75e7a32e0d0"
+    },
+    {
+      "expected_sha256": "cf18cb302ec8db26cad998fc65b30cc89f130947dc04e8a2ce97a485b1cf91e4",
+      "path": ".agents/skills/ontology/scripts/ontology_memory.py",
+      "sha256": "9e9e0e9b6d684ddc33106941a03c6cac47950316feaf03923c83bd96d5c37aa7"
+    },
+    {
+      "expected_sha256": "ad07e5077fa2308434bee2e19617a501247abadf0edcf0d8d18a499b235f6b79",
+      "path": ".agents/skills/ontology/scripts/ontology_profiles.py",
+      "sha256": "770c9604f2e8ea8ce16a3953858ae1e2019049a318dda5ea481857a524aa7ea8"
+    },
+    {
+      "expected_sha256": "1c314ccf1f3d8bb6e643dd5a13dadcc8018a58e5c4fdf423ff4dbd7af4d59fab",
+      "path": ".agents/skills/ontology/scripts/ontology_publication.py",
+      "sha256": "e9d8a2520807a4598a11890ddc9e6d470eeaa6611d6e67f6847aed3220a4b936"
+    },
+    {
+      "expected_sha256": "e582ade5c8de1801d37b7b7e1cd2cbc014fdc852183d2d5206bcfc12b5bc1223",
+      "path": ".agents/skills/ontology/scripts/ontology_rdf.py",
+      "sha256": "426b411a6e0746c563cd4be1293c997fc2ffc5ce619fdb248f3853f2227db5e1"
+    },
+    {
+      "expected_sha256": "6d4b30ae9ccd593dbb86ae3d97c48e8914ebe1684f78692bf1f4dfc2ef1a0738",
+      "path": ".agents/skills/ontology/scripts/ontology_retrieval.py",
+      "sha256": "43e6693e7a6d625e0a829e48e430f8e5d319a77e8d0679dfc29d7224a389da4f"
+    },
+    {
+      "expected_sha256": "71cc8a572962b09dfe1cd98adbc6046e236ab9b526a5f18d8b1c73d615ce6a3e",
+      "path": ".agents/skills/ontology/scripts/ontology_shacl.py",
+      "sha256": "0fac0205a07a05859f84a82a5743e675ed538d1a0cce5ca01c160b765958b669"
+    },
+    {
+      "expected_sha256": "db41ce2e0e2233e4305b68ebc812cd46485c9f8c1e5ac591d1a89e55cb825464",
+      "path": ".agents/skills/ontology/scripts/ontology_standards.py",
+      "sha256": "b1874e4c51ce5a002eb5b3183624129ccbbee99aef767b6337eb744390431351"
+    },
+    {
+      "expected_sha256": "06cc77cd43f19e7c22c58c30ae637368a8cec2771e4b8a548020138d8e5fab96",
+      "path": ".agents/skills/ontology/scripts/ontology_workbench.py",
+      "sha256": "9b75ffd7e58b61c0f67f77bb809ce571a89659f262a22725581552fa973a5bc7"
+    },
+    {
+      "expected_sha256": "1f0a625bd6a3462bb6074caa9c0d291df315ccb0e42c7554f971a2c8ac9d3482",
+      "path": ".agents/skills/memory/scripts/basic_memory_adapter.py",
+      "sha256": "6020b9e0619450da051febdc7f5ea6328cbd97647cb3ad38292c9e7e6fa699db"
+    },
+    {
+      "expected_sha256": "6d513c5f6695b7db3a169987d8729471884a81195a305d2c93045f4c6830293f",
+      "path": ".agents/skills/memory/scripts/basic_memory_projection.py",
+      "sha256": "a3e254131a88936f6a1a1eb292afea2d3645261ebde99632cae847b278dce512"
+    },
+    {
+      "expected_sha256": "4c7f8ac49c2ba94d4327017df29a7627e7b9654cf11da67d9fd0c62a664c9e40",
+      "path": ".agents/skills/memory/scripts/memory.py",
+      "sha256": "7c1acf6889b566d29b5eb1ca2b98407009cb4fc5cd4b320fe3560ceffa4d3125"
+    },
+    {
+      "expected_sha256": "cdfaa2060ea66784660cd0e90d616da5453949c4cb77c925143ca1071aae1831",
+      "path": ".agents/skills/memory/scripts/memory_capture.py",
+      "sha256": "0d3340dc4657205698416b870d1315d752aa641367d9b70ffc10e479a2967c70"
+    },
+    {
+      "expected_sha256": "a41175553ec3e4d81b7cede8cc26b81676eddb4a7a697db6c1a47aab5929d874",
+      "path": ".agents/skills/memory/scripts/memory_core.py",
+      "sha256": "48592604ac950e32e4c80aab24edd2e90d26d09df1b6af912dcad24bbc490a54"
+    },
+    {
+      "expected_sha256": "074f0d1a4eaf332d34dc10a8339a51247a9c034948352ac3c4d7608551c65ad5",
+      "path": ".agents/skills/memory/scripts/memory_evidence.py",
+      "sha256": "978ad22d79d5fccdaab7bdc5946c9ae187316e2aa6a5964765e72a210d9d2be7"
+    },
+    {
+      "expected_sha256": "8d46055e6c88d65378dbaa498d58063fa19fde585a0ee9d466252cc4a2c536ad",
+      "path": ".agents/skills/memory/scripts/memory_maintenance.py",
+      "sha256": "3c13efb17fcd217b631d9c8c09e842d2233261b0a8cfca744510c7253094734d"
+    },
+    {
+      "expected_sha256": "27bebd5bd3371bd2509c786ec3c43911f0c7a8a079d23fe46d82a7c2acb002f3",
+      "path": ".agents/skills/memory/scripts/memory_publish.py",
+      "sha256": "e8677752709cecea1bb7ed5ebab55dbf68cf6d714aec84ceafd17a07b14abf4c"
+    },
+    {
+      "expected_sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b",
+      "path": ".agents/skills/memory/scripts/memory_search.py",
+      "sha256": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca"
+    },
+    {
+      "expected_sha256": "43de9959d6531aaaf9638175be29a4a5da1822826084c82ee24ba518a67f33e8",
+      "path": ".agents/skills/init-new-project/scripts/init_new_project.py",
+      "sha256": "64218788dc5e6d0a98479894ee7d6d947838e2b9afef7ff5ccb66e3ff1debd7d"
+    },
+    {
+      "expected_sha256": "57e40df11c970940f25c1842976ff2b61b93004d2bd76224c3d0d6ad9006bcff",
+      "path": ".agents/skills/init-new-project/scripts/init_ontology_advanced.py",
+      "sha256": "40c009d9f8a29090e12f0f11771865a9e5cded8e0a257c1a9727d6b706a9ebe9"
+    },
+    {
+      "expected_sha256": null,
+      "path": ".agents/skills/init-new-project/scripts/init_static_health.py",
+      "sha256": "518bdfba9b867e8051f47459260f48997673293b7d48885975ece50e04fec757"
+    },
+    {
+      "expected_sha256": null,
+      "path": "control_records/ontology/guard-bootstrap/ONTGUARD-health-reliability-20260910-adapters.json",
+      "sha256": "1cf3ea34558e6461ea6ac899080342ee50299fc51c6f0464c89c331d046b0473"
+    },
+    {
+      "expected_sha256": null,
+      "path": "control_records/ontology/guard-bootstrap/ONTGUARD-health-reliability-20260910-bootstrap.json",
+      "sha256": "f2b3755787dc823b5a4afd26ff921b2bc056147e6903a908fa1a3e10e629a066"
+    },
+    {
+      "expected_sha256": "1753d09c27808273f8aaf5cee51b03883d3888b0a47a3321b9934546c57ec29a",
+      "path": "ontology-advanced.yaml",
+      "sha256": "ace32aac23a0a841ab89658c333bd697c82635684f1ba587ca91592d4711b919"
+    }
+  ],
+  "schema_version": 1,
+  "scope": [
+    ".agents/skills/ontology/scripts/ontology.py",
+    ".agents/skills/ontology/scripts/ontology_advanced_cli.py",
+    ".agents/skills/ontology/scripts/ontology_guards.py",
+    ".agents/skills/ontology/scripts/ontology_health.py",
+    ".agents/skills/ontology/scripts/ontology_memory.py",
+    ".agents/skills/ontology/scripts/ontology_profiles.py",
+    ".agents/skills/ontology/scripts/ontology_publication.py",
+    ".agents/skills/ontology/scripts/ontology_rdf.py",
+    ".agents/skills/ontology/scripts/ontology_retrieval.py",
+    ".agents/skills/ontology/scripts/ontology_shacl.py",
+    ".agents/skills/ontology/scripts/ontology_standards.py",
+    ".agents/skills/ontology/scripts/ontology_workbench.py",
+    ".agents/skills/memory/scripts/basic_memory_adapter.py",
+    ".agents/skills/memory/scripts/basic_memory_projection.py",
+    ".agents/skills/memory/scripts/memory.py",
+    ".agents/skills/memory/scripts/memory_capture.py",
+    ".agents/skills/memory/scripts/memory_core.py",
+    ".agents/skills/memory/scripts/memory_evidence.py",
+    ".agents/skills/memory/scripts/memory_maintenance.py",
+    ".agents/skills/memory/scripts/memory_publish.py",
+    ".agents/skills/memory/scripts/memory_search.py",
+    ".agents/skills/init-new-project/scripts/init_new_project.py",
+    ".agents/skills/init-new-project/scripts/init_ontology_advanced.py",
+    ".agents/skills/init-new-project/scripts/init_static_health.py",
+    "control_records/ontology/guard-bootstrap/ONTGUARD-health-reliability-20260910-adapters.json",
+    "control_records/ontology/guard-bootstrap/ONTGUARD-health-reliability-20260910-bootstrap.json",
+    "ontology-advanced.yaml"
+  ],
+  "task": null
+}

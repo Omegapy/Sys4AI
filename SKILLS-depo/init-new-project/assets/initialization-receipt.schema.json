@@ -31,7 +31,9 @@
         "governance-starter-v4",
         "governance-starter-v5",
         "governance-starter-v6",
-        "governance-starter-v7"
+        "governance-starter-v7",
+        "governance-starter-v8",
+        "governance-starter-v9"
       ]
     },
     "status": {
@@ -241,11 +243,19 @@
             "enum": [
               "project-identity",
               "project-files",
-              "registration"
+              "registration",
+              "static-capability:memory",
+              "static-capability:what-did-you-learn",
+              "static-capability:ontology",
+              "static-capability:ontology-advanced"
             ]
           },
           "outcome": {
-            "const": "passed"
+            "enum": [
+              "passed",
+              "failed",
+              "preserved-unverified"
+            ]
           }
         }
       }
@@ -354,6 +364,38 @@
         ]
       },
       "description": "Current complete v7 learning package inventory; original preservation is retained."
+    },
+    "preserved_ontology": {
+      "description": "Complete original ontology preservation inventory.",
+      "$ref": "#/$defs/memoryInventory"
+    },
+    "current_ontology": {
+      "description": "Current ontology inventory, separate from original setup ownership.",
+      "$ref": "#/$defs/memoryInventory"
+    },
+    "ontology": {
+      "type": "object",
+      "description": "Static ontology configuration, import integrity and local publication binding assessment; runtime remains not exercised."
+    },
+    "ontology_advanced": {
+      "type": "object",
+      "description": "Current static advanced capability assessment; profile activation, current grants and actual runtime checks remain separate."
+    },
+    "static_health": {
+      "type": "object",
+      "description": "Current trusted static assessment with required versus preserved capability outcomes; runtime is not exercised."
+    },
+    "static_ready": {
+      "type": "boolean"
+    },
+    "ready": {
+      "type": "boolean"
+    },
+    "aggregate": {
+      "enum": [
+        "ready",
+        "degraded"
+      ]
     }
   },
   "allOf": [
@@ -364,7 +406,9 @@
             "enum": [
               "governance-starter-v5",
               "governance-starter-v6",
-              "governance-starter-v7"
+              "governance-starter-v7",
+              "governance-starter-v8",
+              "governance-starter-v9"
             ]
           }
         }
@@ -399,7 +443,9 @@
               "governance-starter-v4",
               "governance-starter-v5",
               "governance-starter-v6",
-              "governance-starter-v7"
+              "governance-starter-v7",
+              "governance-starter-v8",
+              "governance-starter-v9"
             ]
           }
         }
@@ -452,20 +498,50 @@
             ]
           },
           "checks": {
-            "const": [
+            "minItems": 3,
+            "prefixItems": [
               {
-                "check": "project-identity",
-                "outcome": "passed"
+                "const": {
+                  "check": "project-identity",
+                  "outcome": "passed"
+                }
               },
               {
-                "check": "project-files",
-                "outcome": "passed"
+                "const": {
+                  "check": "project-files",
+                  "outcome": "passed"
+                }
               },
               {
-                "check": "registration",
-                "outcome": "passed"
+                "const": {
+                  "check": "registration",
+                  "outcome": "passed"
+                }
               }
-            ]
+            ],
+            "items": {
+              "type": "object",
+              "required": [
+                "check",
+                "outcome"
+              ],
+              "properties": {
+                "check": {
+                  "enum": [
+                    "static-capability:memory",
+                    "static-capability:what-did-you-learn",
+                    "static-capability:ontology",
+                    "static-capability:ontology-advanced"
+                  ]
+                },
+                "outcome": {
+                  "enum": [
+                    "passed",
+                    "preserved-unverified"
+                  ]
+                }
+              }
+            }
           }
         }
       }
@@ -474,13 +550,34 @@
       "if": {
         "properties": {
           "setup_contract": {
-            "const": "governance-starter-v7"
+            "enum": [
+              "governance-starter-v7",
+              "governance-starter-v8",
+              "governance-starter-v9"
+            ]
           }
         }
       },
       "then": {
         "required": [
           "preserved_learning"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "setup_contract": {
+            "enum": [
+              "governance-starter-v8",
+              "governance-starter-v9"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "preserved_ontology"
         ]
       }
     }
@@ -546,10 +643,17 @@
           "const": 1
         },
         "module_id": {
-          "const": "what-did-you-learn"
+          "enum": [
+            "what-did-you-learn",
+            "ontology",
+            "ontology-advanced"
+          ]
         },
         "module_version": {
-          "const": "1.0.0"
+          "enum": [
+            "1.0.0",
+            "2.0.0"
+          ]
         },
         "operation_id": {
           "type": "string",
@@ -821,8 +925,87 @@
         },
         "rerun": {
           "type": "string"
+        },
+        "refresh_modules": {
+          "enum": [
+            [],
+            [
+              "ontology"
+            ]
+          ]
+        },
+        "new_ontology": {
+          "type": "boolean"
+        },
+        "new_advanced": {
+          "type": "boolean"
+        },
+        "protected_inventory": {
+          "$ref": "#/$defs/memoryInventory"
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "static_health": {
+          "type": "object"
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "module_id": {
+                "const": "ontology"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "refresh_modules",
+              "new_ontology"
+            ],
+            "properties": {
+              "new_memory": {
+                "const": false
+              },
+              "refresh_dependencies": {
+                "const": []
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "module_id": {
+                "const": "ontology-advanced"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "new_ontology",
+              "new_advanced",
+              "protected_inventory",
+              "prerequisites"
+            ],
+            "properties": {
+              "module_version": {
+                "const": "2.0.0"
+              },
+              "new_memory": {
+                "const": false
+              },
+              "refresh_dependencies": {
+                "const": []
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

@@ -30,6 +30,8 @@ factual inventory and does not control the update mapping.
 | Remaining `MEMORY-depo/` contracts, schemas, profiles and inactive examples | `reference-assets/MEMORY-depo/` |
 | `LEARNING-depo/` policy, review contract, manifest and lesson-body assets | `reference-assets/LEARNING-depo/`, using the ordinary collection mapping |
 | `SKILLS-depo/what-did-you-learn/` | `.agents/skills/what-did-you-learn/`, using ordinary skill discovery |
+| `ONTOLOGY-depo/starter/` exact active paths | Neutral `ontology.yaml`, empty local project/binding graphs, context and locked core imports beneath `ONTOLOGY/` |
+| Remaining `ONTOLOGY-depo/` and `SKILLS-depo/ontology/` | `reference-assets/ONTOLOGY-depo/` and `.agents/skills/ontology/` through ordinary collection and skill discovery |
 | Other regular files in the remaining `*-depo` collections | `reference-assets/<collection>/`, preserving their relative paths |
 
 `overrides` place a file at its active template path instead of the default
@@ -53,6 +55,20 @@ is preserved as a whole; missing companions are explicitly skipped instead of
 combining systems. Earlier setup receipts retain their original edition.
 
 ## Check or update now
+
+Initializer edition v9 requires the ontology skill, contract resources and exact
+neutral starter inventory selected by the existing schema-2 fields. Active
+ontology starter paths use explicit file overrides; the ordinary collection and
+skill discovery supply the remaining contracts. Keep project identity, authority,
+instances, links, generated wiki and runtime out of these neutral sources. The
+initializer specializes local identity and authority without provisioning a
+service. Earlier completed receipts acquire ontology only through explicit
+`--adopt-module ontology`; `--refresh-module ontology` selects complete unchanged
+receipt-owned installations. No other registered project is automatically updated.
+Edition v9 also maps the neutral `ontology-advanced.yaml` companion and the
+reusable Template updater helper. Existing projects select
+`--adopt-module ontology-advanced` for capability-only adoption. Backends, models,
+services, and guarded activation remain separate selected setup operations.
 
 Initializer edition v7 requires the learning skill and the module's complete
 declared resource inventory. Its preflight verifies memory interfaces and the

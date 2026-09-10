@@ -41,6 +41,9 @@ Sys4AI/
   SPECS-depo/                   reusable project specifications and .gitignore
   LICENSES-depo/                reusable code and document licensing
   LEARNING-depo/                reusable learning policy, review and lesson assets
+  ONTOLOGY-depo/                reusable vocabulary, contracts and neutral starters
+  ONTOLOGY/                     selected project meanings, bindings and generated wiki
+  ontology.yaml                 project identity, module locks and publication scope
   Projects/                     independent project working trees
   depot/
     projects.json               factual workspace project registry
@@ -80,6 +83,7 @@ The template follows its automatic update mapping.
 - `ROLES-depo/` stores reusable Director and sub-agent role sources.
 - [LICENSES-depo](./LICENSES-depo/README.md) stores the three-file licensing template.
 - [LEARNING-depo](./LEARNING-depo/README.md) owns learning review and improvement policy; the existing memory capability owns persistence.
+- [ONTOLOGY-depo](./ONTOLOGY-depo/README.md) owns reusable ontology contracts and the versioned Sys4AI vocabulary.
 - For reusable project specifications, see [SPECS-depo/SPECS.md](./SPECS-depo/SPECS.md).
 
 These collections own reusable changes and feed the template. Root-specific
@@ -119,8 +123,8 @@ support projects beneath this depot's `Projects/` container.
 
 The helper copies the registered Template's selected starter files, complete
 skill and role packages, reference assets, and `SOUL.md`. It specializes project
-identity and records factual registration. Edition v7 requires the seven
-governance/setup skills plus memory and what-did-you-learn; additional complete
+identity and records factual registration. Edition v8 requires the seven
+governance/setup skills plus memory, what-did-you-learn and ontology; additional complete
 packages are discovered automatically.
 It also adopts the Template's three license files when the project has no
 existing license markers. Existing licensing is preserved as a whole, including
@@ -233,7 +237,7 @@ Capture off prevents automatic persistence while leaving explicit review and
 authorized saves available. This workflow uses instructions and explicit
 checkpoints; it does not provide runtime hooks or background scheduling.
 
-New projects and first preparation receive the module by default in initializer
+New projects and first preparation receive the module by default since initializer
 edition v7. A previously initialized project retains its original edition until
 the exact destination is selected for module adoption:
 
@@ -252,3 +256,46 @@ reports local capability separately from current publication authority and
 backend readiness. [Initialization and recovery](./.agents/skills/init-new-project/README.md)
 describe the nested `module_adoptions` receipt, exact retry requirements and
 preserved incompatibilities. Ordinary reruns perform no implicit upgrade.
+
+## Ontology knowledge
+
+The installed [ontology skill](./.agents/skills/ontology/SKILL.md) resolves project
+terms, typed relationships and installed capabilities. Its [configuration](./ontology.yaml)
+selects a locked local core module and explicit source bindings. Definitions,
+historical memory and current governing sources remain distinguishable in
+combined results. Finding a capability grants no permission to execute it.
+
+```text
+.venv/bin/python .agents/skills/ontology/scripts/ontology.py --project-root . term Task
+.venv/bin/python .agents/skills/ontology/scripts/ontology.py --project-root . capability "memory retrieval"
+.venv/bin/python .agents/skills/ontology/scripts/check_ontology.py --project-root .
+```
+
+The [generated wiki](./ONTOLOGY/WIKI/INDEX.md) links concepts, relationships,
+capabilities and their exact source versions. Edit canonical records through the
+reviewed publication workflow, then explicitly compile and build the wiki.
+Publication receipts under `control_records/ontology/` are durable evidence;
+generated files under `.sys4ai/ontology/` can be rebuilt.
+
+Initializer edition v9 gives new projects neutral ontology capability with their
+own identity and Director binding. Existing setup editions keep their original
+meaning. Select `prepare-existing --adopt-module ontology` for one existing
+project, or `--refresh-module ontology` for an unchanged receipt-owned ontology
+package. Read the [initializer contract](./.agents/skills/init-new-project/SKILL.md)
+for exact identity arguments, preservation and recovery. The depot release does
+not automatically adopt ontology in existing products.
+
+The core uses Python 3.12's standard library. The second release adds separately
+selected local RDF/SPARQL/SHACL, finite formal inference, semantic retrieval,
+sourced AI proposals, guarded helper dispatch, and a browser workbench. The
+[advanced companion](./ontology-advanced.yaml) records the selected profiles;
+ordinary lookup performs no installation, model preparation, or service startup.
+The [command reference](./.agents/skills/ontology/references/commands.md) describes
+setup, queries, draft review, exact publication, and recovery.
+
+For an existing project, select `prepare-existing --adopt-module ontology-advanced`
+with its current identity arguments. This installs neutral capability through the
+existing receipt and preserves prior setup editions, authored ontology, memory,
+licensing, and profile choices. Existing products require their own explicit
+adoption. [Second-release evidence](./Verification/ontology-second-release/RELEASE.md)
+records actual versions, exercised interfaces, guarded boundaries, and limits.

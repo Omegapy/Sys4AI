@@ -23,6 +23,7 @@ BASELINE = {
     "to-trd",
     "memory",
     "what-did-you-learn",
+    "ontology",
 }
 STARTERS = {
     "AGENTS.md",
@@ -92,7 +93,6 @@ class TemplateContractTests(unittest.TestCase):
             (TEMPLATE / "README.md").read_text().splitlines()[0],
         )
         forbidden_roots = {
-            "Ontology",
             "INIT_MEMORY.md",
             ".git",
             ".gitmodules",
@@ -110,6 +110,9 @@ class TemplateContractTests(unittest.TestCase):
             "staging",
             "exports",
         }
+        # APFS may resolve the retired spelling to the new ONTOLOGY folder.
+        self.assertNotIn("Ontology", {p.name for p in TEMPLATE.iterdir()})
+        self.assertIn("ONTOLOGY", {p.name for p in TEMPLATE.iterdir()})
         for relative in forbidden_roots:
             target = TEMPLATE / relative
             self.assertFalse(target.exists() or target.is_symlink(), relative)
@@ -189,9 +192,32 @@ class TemplateContractTests(unittest.TestCase):
         self.assertIsNone(config["project"]["id"])
         self.assertFalse((TEMPLATE / "control_records/project-setup.json").exists())
 
+    def test_ontology_starter_is_neutral_locked_and_service_independent(self):
+        files = {name: (TEMPLATE / name).read_bytes() for name, value in self.helper.ontology_inventory(TEMPLATE).items() if value != "directory"}
+        config = self.helper.validate_ontology_static(TEMPLATE, files, neutral=True)
+        self.assertEqual({"id": None, "name": None, "purpose": None, "namespace": None, "root": "."}, config["project"])
+        self.assertEqual({"enabled": False, "binding": None}, config["publication"])
+        for relative in ("ONTOLOGY/WIKI", "control_records/ontology", ".sys4ai/ontology"):
+            self.assertFalse((TEMPLATE / relative).exists(), relative)
+        for name in ("ONTOLOGY/modules/project/project.jsonld", "ONTOLOGY/bindings/bindings.jsonld"):
+            self.assertEqual([], json.loads((TEMPLATE / name).read_text())["@graph"])
+
+    def test_complete_static_capability_inventory_includes_health_and_test_delivery(self):
+        inventory = self.helper._static("inventory")
+        required = {name for names in inventory["packages"].values() for name in names}
+        for relative in (".agents/skills/ontology/scripts/ontology_health.py",
+                         ".agents/skills/ontology/tests/acceptance_runner.py",
+                         ".agents/skills/init-new-project/scripts/init_static_health.py"):
+            self.assertIn(relative, required)
+        files = {name: (TEMPLATE / name).read_bytes() for name in required}
+        self.helper._static("validate_source", files)
+        self.assertFalse(any(part.startswith((".venv", ".sys4ai")) or part == "control_records"
+                             for name in required for part in Path(name).parts))
+
     def test_starter_policy_uses_template_relative_sources(self):
         self.assertEqual("Projects/Sys4AI-Template-Project", self.allowlist["template"])
-        self.assertEqual(STARTERS, set(self.allowlist["starter_files"]))
+        self.assertEqual(STARTERS | self.helper.ONTOLOGY_FILES | self.helper.ADVANCED.STARTERS,
+                         set(self.allowlist["starter_files"]))
         self.assertEqual([], self.allowlist["optional_starter_files"])
         self.assertEqual(2, self.allowlist["schema_version"])
         self.assertEqual(".agents/skills", self.allowlist["skills"])
@@ -242,7 +268,10 @@ class TemplateContractTests(unittest.TestCase):
         self.assertNotIn("ontology", self.allowlist)
         self.assertEqual([], self.allowlist["optional_starter_files"])
         for retired in ("Ontology", "INIT_MEMORY.md"):
-            self.assertFalse((TEMPLATE / retired).exists(), retired)
+            if retired == "Ontology":
+                self.assertNotIn(retired, {p.name for p in TEMPLATE.iterdir()})
+            else:
+                self.assertFalse((TEMPLATE / retired).exists(), retired)
         roles = {p.name for p in (TEMPLATE / "Roles").iterdir() if p.is_dir()}
         self.assertEqual({"project-sub-agent", "task-manager"}, roles)
         self.assertEqual((TEMPLATE / "Roles/INDEX.md").read_bytes(), self.helper.planned_role_index(TEMPLATE, {}, {}))

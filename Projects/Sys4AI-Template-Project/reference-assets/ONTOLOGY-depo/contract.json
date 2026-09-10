@@ -1,0 +1,108 @@
+{
+  "canonical": [
+    "ontology.yaml",
+    "ONTOLOGY/modules/",
+    "ONTOLOGY/bindings/"
+  ],
+  "durable": [
+    "control_records/ontology/"
+  ],
+  "generated": [
+    ".sys4ai/ontology/",
+    "ONTOLOGY/WIKI/"
+  ],
+  "generator_version": "1.0.0",
+  "module_version": "1.0.0",
+  "operations": {
+    "durable": [
+      "freeze-packet",
+      "publish",
+      "recover"
+    ],
+    "generated": [
+      "compile",
+      "build-wiki",
+      "link-memory"
+    ],
+    "preview": [
+      "preview"
+    ],
+    "read": [
+      "health",
+      "term",
+      "search",
+      "read",
+      "neighbors",
+      "path",
+      "validate",
+      "capability",
+      "knowledge"
+    ]
+  },
+  "profile_version": "1.0.0",
+  "record_keys": [
+    "@id",
+    "@type",
+    "acyclic",
+    "aliases",
+    "ambiguity_with",
+    "binding_type",
+    "cardinality",
+    "definition",
+    "deprecation_reason",
+    "domain",
+    "entity",
+    "examples",
+    "fact_kind",
+    "history",
+    "kind",
+    "label",
+    "lifecycle",
+    "module",
+    "non_examples",
+    "object",
+    "predicate",
+    "qualifiers",
+    "range",
+    "replacement",
+    "scope_note",
+    "sources",
+    "subject"
+  ],
+  "runtime": "Python 3.12 standard library",
+  "schema_version": 1,
+  "unsupported": [
+    "remote contexts",
+    "arbitrary JSON-LD",
+    "SPARQL",
+    "RDF validation",
+    "inference engine",
+    "automatic publication",
+    "tool interception"
+  ],
+  "advanced": {
+    "schema_version": 1,
+    "profile_version": "1.0.0",
+    "companion": "ontology-advanced.yaml",
+    "canonical": [
+      "ONTOLOGY/extensions/"
+    ],
+    "durable": [
+      "ONTOLOGY/proposals/",
+      "control_records/ontology/generation/",
+      "control_records/ontology/profile-setup/"
+    ],
+    "profiles": [
+      "standards",
+      "inference",
+      "semantic",
+      "guards",
+      "workbench"
+    ],
+    "rules": "rules/finite-profile-v1.json",
+    "shapes": "shapes/ontology-v1.ttl",
+    "actions": "actions/contracts-v1.json",
+    "core_compatibility": "Compact record/configuration v1 remains unchanged; advanced Task packets use wrapper version 2.",
+    "source_dependencies": "Pinned standards and semantic environments are separately provisioned; new project setup leaves all advanced profiles disabled."
+  }
+}

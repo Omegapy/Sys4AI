@@ -90,51 +90,188 @@ def _locator(raw, locator):
     require(locator == "document", "invalid_locator", "Supported locators are document, line(s), section, label, json, and page.")
 
 
-def _verification(root, raw, claim_level):
+def _retained_companion(root, receipt_path, raw, receipt):
+    """Optional reviewed proof locator for an unchanged legacy receipt."""
+    companion_path = "Verification/project-memory/evidence/verification-" + sha256(raw) + ".json"
+    target = safe_path(root, companion_path, must_exist=False)
+    if not target.exists():
+        return receipt, None
+    companion_raw = safe_read_bytes(root, companion_path, max_bytes=250000)
+    reject_sensitive(companion_raw.decode("utf-8"))
+    companion = decode_json_yaml(companion_raw)
+    exact(companion, ("schema_version", "receipt", "applicability", "artifacts"))
+    require(companion["schema_version"] == 1 and companion["applicability"] == "historical",
+            "evidence_companion", "A retained-proof companion has historical applicability only.")
+    require(companion["receipt"] == {"path": receipt_path, "sha256": sha256(raw)},
+            "evidence_companion_mismatch", "Companion does not bind the exact original receipt path and digest.")
+    require(isinstance(companion["artifacts"], list) and len(companion["artifacts"]) == len(receipt["artifacts"]),
+            "evidence_companion_mismatch", "Companion must preserve every original artifact reference.")
+    for original, retained in zip(receipt["artifacts"], companion["artifacts"]):
+        exact(retained, ("path", "sha256", "retained_path"))
+        require({key: retained[key] for key in ("path", "sha256")} == {key: original[key] for key in ("path", "sha256")},
+                "evidence_companion_mismatch", "Companion must preserve original artifact order, paths and digests.")
+    return {**receipt, "artifacts": companion["artifacts"], "applicability": "historical"}, {
+        "path": companion_path, "sha256": sha256(companion_raw), "purpose": "historical proof locator; no new execution claim"}
+
+
+def _verification(root, raw, claim_level, receipt_path=None):
     receipt = decode_json_yaml(raw)
-    exact(receipt, ("schema_version", "claim_level", "outcome", "command", "observed_at", "artifacts"), ("limitations", "details"))
+    exact(receipt, ("schema_version", "claim_level", "outcome", "command", "observed_at", "artifacts"),
+          ("limitations", "details", "applicability"))
     require(receipt["schema_version"] == 1 and receipt["claim_level"] == claim_level, "claim_unsupported", "Verification receipt does not support this claim level.")
     outcomes = {"performed_work": {"performed"}, "verified_outcome": {"passed"},
                 "observed_failure": {"failed"}, "cancelled_work": {"cancelled"}}
     require(receipt["outcome"] in outcomes.get(claim_level, set()), "claim_unsupported", "Observed outcome does not support the stated claim.")
     text(receipt["command"]); timestamp(receipt["observed_at"])
+    require(receipt.get("applicability", "current") in {"current", "historical"},
+            "evidence_applicability", "Receipt applicability must be current or historical.")
     require(isinstance(receipt["artifacts"], list) and 1 <= len(receipt["artifacts"]) <= 200, "claim_unsupported", "Performed-work receipts require inspected artifact versions.")
+    receipt, companion = _retained_companion(root, receipt_path, raw, receipt) if receipt_path else (receipt, None)
+    artifacts, diagnostics, retained_bytes, seen = [], [], 0, set()
     for ref in receipt["artifacts"]:
-        exact(ref, ("path", "sha256")); digest(ref["sha256"])
-        require(sha256(safe_read_bytes(root, ref["path"])) == ref["sha256"], "evidence_changed", "Observed artifact differs from the verification receipt.")
+        exact(ref, ("path", "sha256"), ("retained_path",)); digest(ref["sha256"]); text(ref["path"])
+        require(ref["path"] not in seen, "evidence_duplicate", "Verification artifacts must be distinct.")
+        seen.add(ref["path"])
+        item = {"path": ref["path"], "expected_sha256": ref["sha256"],
+                "current_sha256": None, "historical_support": "unsupported", "current_applicability": "unverified",
+                "retained_path": ref.get("retained_path"), "retained": False}
+        try:
+            current = safe_read_bytes(root, ref["path"])
+            item["current_sha256"] = sha256(current)
+            item["current_applicability"] = "current" if item["current_sha256"] == ref["sha256"] else "changed"
+            if item["current_applicability"] == "current":
+                item["historical_support"] = "supported"
+        except MemoryError as exc:
+            item["current_error"] = exc.as_dict()
+        if "retained_path" in ref:
+            try:
+                retained = ref["retained_path"]
+                require(isinstance(retained, str) and retained.startswith(("Verification/", "control_records/memory/evidence/"))
+                        and retained != ref["path"], "evidence_retention_scope", "Retained proof needs a distinct governed evidence path.")
+                archived = safe_read_bytes(root, retained, max_bytes=16_000_000 - retained_bytes)
+                retained_bytes += len(archived)
+                require(sha256(archived) == ref["sha256"], "retained_evidence_changed", "Retained bytes differ from the observed artifact.",
+                        {"path": retained, "expected_sha256": ref["sha256"], "current_sha256": sha256(archived)})
+                if not archived.startswith(b"%PDF"):
+                    reject_sensitive(archived.decode("utf-8"))
+                item.update(retained=True, historical_support="supported")
+            except (MemoryError, UnicodeDecodeError) as exc:
+                item["historical_support"] = "unsupported"
+                diagnostics.append({"code": exc.code if isinstance(exc, MemoryError) else "invalid_encoding",
+                                    "severity": "warning", "path": ref["path"], "retained_path": ref["retained_path"],
+                                    "expected_sha256": ref["sha256"], "message": "Selected retained proof is absent, altered, unsafe, or unavailable."})
+        if item["current_applicability"] != "current":
+            diagnostics.append({"code": "evidence_changed" if item["current_sha256"] else "evidence_artifact_absent",
+                                "severity": "info" if item["historical_support"] == "supported" else "warning", "path": ref["path"], "expected_sha256": ref["sha256"],
+                                "current_sha256": item["current_sha256"], "historical_support": item["historical_support"],
+                                "message": "Observed artifact version is not current; this does not prove the historical observation false."})
+        if item["historical_support"] != "supported":
+            diagnostics.append({"code": "historical_evidence_unsupported", "severity": "warning", "path": ref["path"],
+                                "expected_sha256": ref["sha256"], "message": "Exact observed bytes are not accessible as valid proof."})
+        artifacts.append(item)
+    if receipt.get("applicability") == "historical":
+        diagnostics.append({"code": "claim_not_current", "severity": "info",
+                            "message": "The verification receipt explicitly limits this observation to historical applicability."})
+    historical = all(a["historical_support"] == "supported" for a in artifacts)
+    current = all(a["current_applicability"] == "current" for a in artifacts)
+    return {"historical_support": "supported" if historical else "unsupported",
+            "current_applicability": "current" if current else "changed" if any(a["current_applicability"] == "changed" for a in artifacts) else "unverified",
+            "durable": all(a["retained"] for a in artifacts), "applicability": receipt.get("applicability", "legacy-current"),
+            "observed_at": receipt["observed_at"], "companion": companion, "artifacts": artifacts, "diagnostics": diagnostics}
 
 
-def inspect_evidence(root, record, config=None):
-    diagnostics = []
+def _retained_direct_source(root, source, verifications):
+    """Resolve only exact proof already qualified by this record's receipts."""
+    for verification in verifications:
+        if (verification["historical_support"] != "supported"
+                or any(d["severity"] != "info" for d in verification["diagnostics"])):
+            continue
+        for artifact in verification["artifacts"]:
+            if (artifact["path"] != source["path"] or artifact["expected_sha256"] != source["sha256"]
+                    or not artifact["retained"]):
+                continue
+            raw = safe_read_bytes(root, artifact["retained_path"], max_bytes=16_000_000)
+            require(sha256(raw) == source["sha256"], "retained_evidence_changed",
+                    "Retained direct-source proof changed after receipt inspection.",
+                    {"path": artifact["retained_path"], "expected_sha256": source["sha256"], "current_sha256": sha256(raw)})
+            if not raw.startswith(b"%PDF"):
+                reject_sensitive(raw.decode("utf-8"))
+            _locator(raw, source["locator"])
+            return {"receipt_path": verification["receipt_path"], "receipt_sha256": verification["receipt_sha256"],
+                    "retained_path": artifact["retained_path"], "retained_sha256": sha256(raw)}
+    return None
+
+
+def assess_evidence(root, record, config=None):
+    diagnostics, verifications = [], []
+    source_integrity = True
     meta = record["metadata"]
     level = meta["claim"]["level"]
     supported = level == "historical_context"
-    for source in meta["sources"]:
+    # A direct old source can use its exact retained receipt proof regardless
+    # of citation order. Design/context citations do not create such proof.
+    for source in sorted(meta["sources"], key=lambda item: item["kind"] != "verification"):
         try:
             raw = safe_read_bytes(root, source["path"])
-            require(sha256(raw) == source["sha256"], "evidence_changed", "Source bytes changed; historical conclusions require applicability review.")
+            require(sha256(raw) == source["sha256"], "evidence_changed", "Cited evidence bytes changed.",
+                    {"path": source["path"], "expected_sha256": source["sha256"], "current_sha256": sha256(raw)})
             if not raw.startswith(b"%PDF"):
                 reject_sensitive(raw.decode("utf-8"))
             _locator(raw, source["locator"])
             if level == "accepted_design" and source["kind"] == "design":
                 supported = True
             elif source["kind"] == "verification" and level != "historical_context":
-                _verification(root, raw, level)
-                supported = True
+                verification = _verification(root, raw, level, source["path"])
+                verification["receipt_path"] = source["path"]
+                verification["receipt_sha256"] = source["sha256"]
+                verifications.append(verification)
+                diagnostics.extend(dict(d, receipt_path=source["path"]) for d in verification["diagnostics"])
+                supported = supported or verification["historical_support"] == "supported"
         except (MemoryError, UnicodeDecodeError) as exc:
-            diagnostics.append({"code": exc.code if isinstance(exc, MemoryError) else "invalid_encoding",
-                                "severity": "warning", "path": source["path"],
+            if (source["kind"] == "source" and isinstance(exc, MemoryError)
+                    and exc.code in {"evidence_changed", "file_absent"}):
+                try:
+                    retained = _retained_direct_source(root, source, verifications)
+                    if retained is not None:
+                        diagnostics.append({"code": "current_source_changed", "severity": "info", "path": source["path"],
+                                            "expected_sha256": source["sha256"], "current_sha256": exc.details.get("current_sha256"),
+                                            "historical_support": "supported", **retained,
+                                            "message": "The direct source is changed or absent; exact retained verification bytes support its historical locator only."})
+                        continue
+                except (MemoryError, UnicodeDecodeError) as retained_error:
+                    exc = retained_error
+            source_integrity = False
+            detail = exc.as_dict() if isinstance(exc, MemoryError) else {"code": "invalid_encoding", "details": {}}
+            diagnostics.append({"code": detail["code"], "severity": "warning", "path": source["path"],
+                                "details": detail["details"],
                                 "message": "Evidence is changed, missing, unsafe, or cannot support the claim; this does not prove the historical conclusion false."})
     if not supported:
-        diagnostics.append({"code": "claim_unsupported", "severity": "error", "message": "Current cited evidence does not support the stated claim level."})
+        diagnostics.append({"code": "claim_unsupported", "severity": "error", "message": "Accessible cited evidence does not support the stated claim level."})
     try:
         check_origin(root, meta["origin"])
     except MemoryError as exc:
-        diagnostics.append({"code": exc.code, "severity": "warning", "message": "Origin is absent, changed, or ineligible; current Task and role sources retain authority."})
-    return diagnostics
+        diagnostics.append({"code": exc.code, "severity": "warning", "details": exc.details,
+                            "message": "Origin is absent, changed, or ineligible; current Task and role sources retain authority."})
+    applicability = ("not_claimed" if level == "historical_context" else
+                     "changed" if any(v["current_applicability"] == "changed" for v in verifications) else
+                     "unverified" if diagnostics or any(v["applicability"] == "historical" for v in verifications) else "current")
+    return {"historical_support": ("context_only" if level == "historical_context" and not diagnostics else
+                                   "supported" if supported and source_integrity and not any(v["historical_support"] == "unsupported" for v in verifications) else "unsupported"),
+            "current_applicability": applicability, "durable": bool(verifications) and all(v["durable"] for v in verifications),
+            "verified_current": level == "verified_outcome" and applicability == "current" and not diagnostics and meta["state"] == "active",
+            "verifications": verifications, "diagnostics": diagnostics}
+
+
+def inspect_evidence(root, record, config=None):
+    """Legacy list interface; richer support/applicability is available separately."""
+    return assess_evidence(root, record, config)["diagnostics"]
 
 
 def validate_publication_evidence(root, record, config=None):
-    diagnostics = inspect_evidence(root, record, config)
-    require(not diagnostics, "evidence_unqualified", "Publication requires current evidence and real origin references.", {"diagnostics": diagnostics})
-    return diagnostics
+    evidence = assess_evidence(root, record, config)
+    require(not evidence["diagnostics"], "evidence_unqualified", "Publication requires supported evidence and real origin references.", {"diagnostics": evidence["diagnostics"]})
+    if record["metadata"]["claim"]["level"] == "verified_outcome":
+        require(evidence["durable"] and evidence["current_applicability"] == "current"
+                and all(v["applicability"] == "current" for v in evidence["verifications"]),
+                "durable_evidence_required", "New verified claims require retained observed bytes and explicit current applicability; legacy records remain readable.")
+    return evidence["diagnostics"]

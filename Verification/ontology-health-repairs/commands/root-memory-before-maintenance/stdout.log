@@ -1,0 +1,831 @@
+{
+  "aggregate": "degraded",
+  "assessment": {
+    "components": {
+      "backend": {
+        "available": false,
+        "diagnostics": [
+          {
+            "code": "backend_adapter_changed",
+            "details": {
+              "current_sha256": "6020b9e0619450da051febdc7f5ea6328cbd97647cb3ad38292c9e7e6fa699db",
+              "expected_sha256": "1f0a625bd6a3462bb6074caa9c0d291df315ccb0e42c7554f971a2c8ac9d3482",
+              "path": ".agents/skills/memory/scripts/basic_memory_adapter.py"
+            },
+            "message": "Query implementation changed after backend certification."
+          }
+        ],
+        "error": {
+          "code": "backend_adapter_changed",
+          "details": {
+            "current_sha256": "6020b9e0619450da051febdc7f5ea6328cbd97647cb3ad38292c9e7e6fa699db",
+            "expected_sha256": "1f0a625bd6a3462bb6074caa9c0d291df315ccb0e42c7554f971a2c8ac9d3482",
+            "path": ".agents/skills/memory/scripts/basic_memory_adapter.py"
+          },
+          "message": "Query implementation changed after backend certification."
+        },
+        "limitations": [
+          "backend_adapter_changed"
+        ],
+        "mode": "lexical",
+        "next_operation": "Inspect reindex-payload; authorize exact reindex, or backend-recover for an interrupted operation.",
+        "ready": false,
+        "runtime": {
+          "status": "not_exercised"
+        },
+        "status": "degraded"
+      },
+      "canonical": {
+        "ready": true,
+        "records": 4,
+        "status": "ready"
+      },
+      "evidence": {
+        "diagnostics": [],
+        "ready": true,
+        "records": [
+          {
+            "evidence": {
+              "current_applicability": "changed",
+              "diagnostics": [
+                {
+                  "code": "evidence_changed",
+                  "current_sha256": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca",
+                  "expected_sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b",
+                  "historical_support": "supported",
+                  "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                  "path": ".agents/skills/memory/scripts/memory_search.py",
+                  "receipt_path": "Verification/project-memory/root-lexical-observation.json",
+                  "severity": "info"
+                },
+                {
+                  "code": "claim_not_current",
+                  "message": "The verification receipt explicitly limits this observation to historical applicability.",
+                  "receipt_path": "Verification/project-memory/root-lexical-observation.json",
+                  "severity": "info"
+                },
+                {
+                  "code": "current_source_changed",
+                  "current_sha256": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca",
+                  "expected_sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b",
+                  "historical_support": "supported",
+                  "message": "The direct source is changed or absent; exact retained verification bytes support its historical locator only.",
+                  "path": ".agents/skills/memory/scripts/memory_search.py",
+                  "receipt_path": "Verification/project-memory/root-lexical-observation.json",
+                  "receipt_sha256": "4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811",
+                  "retained_path": "Verification/ontology-health-repairs/memory/lexical-retained/memory_search.py",
+                  "retained_sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b",
+                  "severity": "info"
+                }
+              ],
+              "durable": true,
+              "historical_support": "supported",
+              "verifications": [
+                {
+                  "applicability": "historical",
+                  "artifacts": [
+                    {
+                      "current_applicability": "current",
+                      "current_sha256": "b6ab18ddea2d3ebc73dbfe8b22d048036220bc9ebfcaada73e0bbfece8f6723b",
+                      "expected_sha256": "b6ab18ddea2d3ebc73dbfe8b22d048036220bc9ebfcaada73e0bbfece8f6723b",
+                      "historical_support": "supported",
+                      "path": "Verification/project-memory/root-lexical-inspection.json",
+                      "retained": true,
+                      "retained_path": "Verification/ontology-health-repairs/memory/lexical-retained/root-lexical-inspection.json"
+                    },
+                    {
+                      "current_applicability": "changed",
+                      "current_sha256": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca",
+                      "expected_sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b",
+                      "historical_support": "supported",
+                      "path": ".agents/skills/memory/scripts/memory_search.py",
+                      "retained": true,
+                      "retained_path": "Verification/ontology-health-repairs/memory/lexical-retained/memory_search.py"
+                    }
+                  ],
+                  "companion": {
+                    "path": "Verification/project-memory/evidence/verification-4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811.json",
+                    "purpose": "historical proof locator; no new execution claim",
+                    "sha256": "7643f47d80d5b338c2de5250aabac58d1be706b902e3e8c635067be370ea57e0"
+                  },
+                  "current_applicability": "changed",
+                  "diagnostics": [
+                    {
+                      "code": "evidence_changed",
+                      "current_sha256": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca",
+                      "expected_sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b",
+                      "historical_support": "supported",
+                      "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                      "path": ".agents/skills/memory/scripts/memory_search.py",
+                      "severity": "info"
+                    },
+                    {
+                      "code": "claim_not_current",
+                      "message": "The verification receipt explicitly limits this observation to historical applicability.",
+                      "severity": "info"
+                    }
+                  ],
+                  "durable": true,
+                  "historical_support": "supported",
+                  "observed_at": "2026-09-08T21:27:05.712306+00:00",
+                  "receipt_path": "Verification/project-memory/root-lexical-observation.json",
+                  "receipt_sha256": "4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811"
+                }
+              ],
+              "verified_current": false
+            },
+            "path": "MEMORY/MEM-20260908-6A59F482.md",
+            "state": "superseded"
+          },
+          {
+            "evidence": {
+              "current_applicability": "changed",
+              "diagnostics": [
+                {
+                  "code": "evidence_changed",
+                  "current_sha256": "0d3340dc4657205698416b870d1315d752aa641367d9b70ffc10e479a2967c70",
+                  "expected_sha256": "ef9d35c3ec0bc72a19292c78aacd986b8f4f0cb5ad0d128c2e64d511a1a5f67d",
+                  "historical_support": "supported",
+                  "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                  "path": ".agents/skills/memory/scripts/memory_capture.py",
+                  "receipt_path": "Verification/automatic-memory-capture/verification.json",
+                  "severity": "info"
+                },
+                {
+                  "code": "evidence_changed",
+                  "current_sha256": "48592604ac950e32e4c80aab24edd2e90d26d09df1b6af912dcad24bbc490a54",
+                  "expected_sha256": "a41175553ec3e4d81b7cede8cc26b81676eddb4a7a697db6c1a47aab5929d874",
+                  "historical_support": "supported",
+                  "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                  "path": ".agents/skills/memory/scripts/memory_core.py",
+                  "receipt_path": "Verification/automatic-memory-capture/verification.json",
+                  "severity": "info"
+                },
+                {
+                  "code": "evidence_changed",
+                  "current_sha256": "64218788dc5e6d0a98479894ee7d6d947838e2b9afef7ff5ccb66e3ff1debd7d",
+                  "expected_sha256": "8616e439dafedb057f46e685788cdc292b3300ab2c120ee90c2750c71bbe07bf",
+                  "historical_support": "supported",
+                  "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                  "path": ".agents/skills/init-new-project/scripts/init_new_project.py",
+                  "receipt_path": "Verification/automatic-memory-capture/verification.json",
+                  "severity": "info"
+                },
+                {
+                  "code": "claim_not_current",
+                  "message": "The verification receipt explicitly limits this observation to historical applicability.",
+                  "receipt_path": "Verification/automatic-memory-capture/verification.json",
+                  "severity": "info"
+                }
+              ],
+              "durable": true,
+              "historical_support": "supported",
+              "verifications": [
+                {
+                  "applicability": "historical",
+                  "artifacts": [
+                    {
+                      "current_applicability": "current",
+                      "current_sha256": "3989830df89045033f5e53f7fc53be143f33b553acd7f5405a591fb14cdd475a",
+                      "expected_sha256": "3989830df89045033f5e53f7fc53be143f33b553acd7f5405a591fb14cdd475a",
+                      "historical_support": "supported",
+                      "path": "memory.yaml",
+                      "retained": true,
+                      "retained_path": "Verification/ontology-health-repairs/memory/historical-memory.yaml"
+                    },
+                    {
+                      "current_applicability": "changed",
+                      "current_sha256": "0d3340dc4657205698416b870d1315d752aa641367d9b70ffc10e479a2967c70",
+                      "expected_sha256": "ef9d35c3ec0bc72a19292c78aacd986b8f4f0cb5ad0d128c2e64d511a1a5f67d",
+                      "historical_support": "supported",
+                      "path": ".agents/skills/memory/scripts/memory_capture.py",
+                      "retained": true,
+                      "retained_path": "Verification/ontology-health-repairs/memory/historical-memory_capture.py"
+                    },
+                    {
+                      "current_applicability": "changed",
+                      "current_sha256": "48592604ac950e32e4c80aab24edd2e90d26d09df1b6af912dcad24bbc490a54",
+                      "expected_sha256": "a41175553ec3e4d81b7cede8cc26b81676eddb4a7a697db6c1a47aab5929d874",
+                      "historical_support": "supported",
+                      "path": ".agents/skills/memory/scripts/memory_core.py",
+                      "retained": true,
+                      "retained_path": "Verification/ontology-health-repairs/memory/historical-memory_core.py"
+                    },
+                    {
+                      "current_applicability": "changed",
+                      "current_sha256": "64218788dc5e6d0a98479894ee7d6d947838e2b9afef7ff5ccb66e3ff1debd7d",
+                      "expected_sha256": "8616e439dafedb057f46e685788cdc292b3300ab2c120ee90c2750c71bbe07bf",
+                      "historical_support": "supported",
+                      "path": ".agents/skills/init-new-project/scripts/init_new_project.py",
+                      "retained": true,
+                      "retained_path": "Verification/ontology-health-repairs/memory/historical-init_new_project.py"
+                    },
+                    {
+                      "current_applicability": "current",
+                      "current_sha256": "9e0891e0ef6c0b9415510ad84272afbbc3f430306253ddd958229f0b3478140f",
+                      "expected_sha256": "9e0891e0ef6c0b9415510ad84272afbbc3f430306253ddd958229f0b3478140f",
+                      "historical_support": "supported",
+                      "path": "reference-assets/MEMORY-depo/schema/config-v1.json",
+                      "retained": true,
+                      "retained_path": "Verification/ontology-health-repairs/memory/historical-config-v1.json"
+                    }
+                  ],
+                  "companion": {
+                    "path": "Verification/project-memory/evidence/verification-06bad7195d7fabed2b8d7328a7bbe22c751b9262582ca151403cc436dba479e0.json",
+                    "purpose": "historical proof locator; no new execution claim",
+                    "sha256": "f01307389f32e8466dce4c32df00839e379a43e9befe37d54e27887a7aeee094"
+                  },
+                  "current_applicability": "changed",
+                  "diagnostics": [
+                    {
+                      "code": "evidence_changed",
+                      "current_sha256": "0d3340dc4657205698416b870d1315d752aa641367d9b70ffc10e479a2967c70",
+                      "expected_sha256": "ef9d35c3ec0bc72a19292c78aacd986b8f4f0cb5ad0d128c2e64d511a1a5f67d",
+                      "historical_support": "supported",
+                      "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                      "path": ".agents/skills/memory/scripts/memory_capture.py",
+                      "severity": "info"
+                    },
+                    {
+                      "code": "evidence_changed",
+                      "current_sha256": "48592604ac950e32e4c80aab24edd2e90d26d09df1b6af912dcad24bbc490a54",
+                      "expected_sha256": "a41175553ec3e4d81b7cede8cc26b81676eddb4a7a697db6c1a47aab5929d874",
+                      "historical_support": "supported",
+                      "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                      "path": ".agents/skills/memory/scripts/memory_core.py",
+                      "severity": "info"
+                    },
+                    {
+                      "code": "evidence_changed",
+                      "current_sha256": "64218788dc5e6d0a98479894ee7d6d947838e2b9afef7ff5ccb66e3ff1debd7d",
+                      "expected_sha256": "8616e439dafedb057f46e685788cdc292b3300ab2c120ee90c2750c71bbe07bf",
+                      "historical_support": "supported",
+                      "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                      "path": ".agents/skills/init-new-project/scripts/init_new_project.py",
+                      "severity": "info"
+                    },
+                    {
+                      "code": "claim_not_current",
+                      "message": "The verification receipt explicitly limits this observation to historical applicability.",
+                      "severity": "info"
+                    }
+                  ],
+                  "durable": true,
+                  "historical_support": "supported",
+                  "observed_at": "2026-09-09T02:31:12.103208+00:00",
+                  "receipt_path": "Verification/automatic-memory-capture/verification.json",
+                  "receipt_sha256": "06bad7195d7fabed2b8d7328a7bbe22c751b9262582ca151403cc436dba479e0"
+                }
+              ],
+              "verified_current": false
+            },
+            "path": "MEMORY/MEM-20260909-89C402A6.md",
+            "state": "superseded"
+          },
+          {
+            "evidence": {
+              "current_applicability": "not_claimed",
+              "diagnostics": [],
+              "durable": false,
+              "historical_support": "context_only",
+              "verifications": [],
+              "verified_current": false
+            },
+            "path": "MEMORY/MEM-20260910-0C531031.md",
+            "state": "active"
+          },
+          {
+            "evidence": {
+              "current_applicability": "not_claimed",
+              "diagnostics": [],
+              "durable": false,
+              "historical_support": "context_only",
+              "verifications": [],
+              "verified_current": false
+            },
+            "path": "MEMORY/MEM-20260910-12B430D5.md",
+            "state": "active"
+          }
+        ],
+        "status": "ready"
+      },
+      "index": {
+        "error": {
+          "code": "projection_implementation_changed",
+          "details": {
+            "current": {
+              "basic_memory_projection.py": "a3e254131a88936f6a1a1eb292afea2d3645261ebde99632cae847b278dce512",
+              "memory_normalization.py": "36bfb9800dc04fce004075295e00a5e830979c2b34fd66d1d5b6a1760bb48cda",
+              "memory_normalize_html.py": "34f82652d31b797f5b07ace50f0043e16766a8710c7ab3774e0cf3ef38b391af",
+              "memory_normalize_pdf.py": "cac3e93c9cb3318ec6466a01e6f719491ac6368156f9be5a2b55c63c009b5a8d",
+              "memory_normalize_tex.py": "c1fb0c6ed6f10c43586a6419f80a328119f1d0eccc2fcf265ae2a70f28bc8241",
+              "memory_search.py": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca"
+            },
+            "expected": null
+          },
+          "message": "Projection producer versions changed or were not recorded; explicit reindex is required."
+        },
+        "next_operation": "Inspect reindex-payload; authorize exact reindex, or backend-recover for an interrupted operation.",
+        "ready": false,
+        "status": "degraded"
+      },
+      "projection": {
+        "error": {
+          "code": "projection_implementation_changed",
+          "details": {
+            "current": {
+              "basic_memory_projection.py": "a3e254131a88936f6a1a1eb292afea2d3645261ebde99632cae847b278dce512",
+              "memory_normalization.py": "36bfb9800dc04fce004075295e00a5e830979c2b34fd66d1d5b6a1760bb48cda",
+              "memory_normalize_html.py": "34f82652d31b797f5b07ace50f0043e16766a8710c7ab3774e0cf3ef38b391af",
+              "memory_normalize_pdf.py": "cac3e93c9cb3318ec6466a01e6f719491ac6368156f9be5a2b55c63c009b5a8d",
+              "memory_normalize_tex.py": "c1fb0c6ed6f10c43586a6419f80a328119f1d0eccc2fcf265ae2a70f28bc8241",
+              "memory_search.py": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca"
+            },
+            "expected": null
+          },
+          "message": "Projection producer versions changed or were not recorded; explicit reindex is required."
+        },
+        "next_operation": "Inspect reindex-payload; authorize exact reindex, or backend-recover for an interrupted operation.",
+        "ready": false,
+        "status": "degraded"
+      }
+    },
+    "input_versions": {
+      "MEMORY/MEM-20260908-6A59F482.md": "2a5474c690ce849be8c175275dd47773f1503f10ba5bfa297bc0f4ff8b3ffaa7",
+      "MEMORY/MEM-20260909-89C402A6.md": "54b66fbd728775331f597a9ab2012d1dc205a8aa254d40263820d505885f25b9",
+      "MEMORY/MEM-20260910-0C531031.md": "46d59fb562583b5f8474feac13abf0c1cd1a726db929c77ed073d27480adcd7c",
+      "MEMORY/MEM-20260910-12B430D5.md": "72ea0c7c3a5c579422be6fbe47eda91421661c1ce703b8dbb97cbeaf18a3acb5",
+      "memory.yaml": "3989830df89045033f5e53f7fc53be143f33b553acd7f5405a591fb14cdd475a",
+      "reference-assets/MEMORY-depo/README.md": "c938096597a6c04c2fbadd70fbb2e933e11b8d5ce95ce0574893e612f115e825",
+      "reference-assets/MEMORY-depo/policy.md": "34f7a798b298a11fad9fa570de6b615765ecb98addfd5e8ae7fe251715a8c2f8",
+      "reference-assets/MEMORY-depo/publication-and-recovery.md": "89b65d36de332e8331b47fb77f9a7f1ac455f497cb880bddffab1a5404457cc6",
+      "reference-assets/MEMORY-depo/schema/config-v1.json": "9e0891e0ef6c0b9415510ad84272afbbc3f430306253ddd958229f0b3478140f",
+      "reference-assets/MEMORY-depo/schema/record-v1.json": "5170551e6536484798e60d07dfb70fbb0542d49528cd51cb93dd413a2afef59f"
+    },
+    "inputs": {
+      "MEMORY/MEM-20260908-6A59F482.md": "2a5474c690ce849be8c175275dd47773f1503f10ba5bfa297bc0f4ff8b3ffaa7",
+      "MEMORY/MEM-20260909-89C402A6.md": "54b66fbd728775331f597a9ab2012d1dc205a8aa254d40263820d505885f25b9",
+      "MEMORY/MEM-20260910-0C531031.md": "46d59fb562583b5f8474feac13abf0c1cd1a726db929c77ed073d27480adcd7c",
+      "MEMORY/MEM-20260910-12B430D5.md": "72ea0c7c3a5c579422be6fbe47eda91421661c1ce703b8dbb97cbeaf18a3acb5",
+      "memory.yaml": "3989830df89045033f5e53f7fc53be143f33b553acd7f5405a591fb14cdd475a",
+      "reference-assets/MEMORY-depo/README.md": "c938096597a6c04c2fbadd70fbb2e933e11b8d5ce95ce0574893e612f115e825",
+      "reference-assets/MEMORY-depo/policy.md": "34f7a798b298a11fad9fa570de6b615765ecb98addfd5e8ae7fe251715a8c2f8",
+      "reference-assets/MEMORY-depo/publication-and-recovery.md": "89b65d36de332e8331b47fb77f9a7f1ac455f497cb880bddffab1a5404457cc6",
+      "reference-assets/MEMORY-depo/schema/config-v1.json": "9e0891e0ef6c0b9415510ad84272afbbc3f430306253ddd958229f0b3478140f",
+      "reference-assets/MEMORY-depo/schema/record-v1.json": "5170551e6536484798e60d07dfb70fbb0542d49528cd51cb93dd413a2afef59f"
+    },
+    "level": "static",
+    "observed_at": "2026-09-10T19:50:22.604296+00:00",
+    "project": {
+      "id": "sys4ai-depot",
+      "root": "/Volumes/P-SSD/AngryOwl/Sys4AI"
+    },
+    "project_id": "sys4ai-depot",
+    "project_root": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+    "required": [
+      "backend",
+      "canonical",
+      "evidence",
+      "index",
+      "projection"
+    ],
+    "scope": "selected"
+  },
+  "backend": {
+    "available": false,
+    "diagnostics": [
+      {
+        "code": "backend_adapter_changed",
+        "details": {
+          "current_sha256": "6020b9e0619450da051febdc7f5ea6328cbd97647cb3ad38292c9e7e6fa699db",
+          "expected_sha256": "1f0a625bd6a3462bb6074caa9c0d291df315ccb0e42c7554f971a2c8ac9d3482",
+          "path": ".agents/skills/memory/scripts/basic_memory_adapter.py"
+        },
+        "message": "Query implementation changed after backend certification."
+      }
+    ],
+    "error": {
+      "code": "backend_adapter_changed",
+      "details": {
+        "current_sha256": "6020b9e0619450da051febdc7f5ea6328cbd97647cb3ad38292c9e7e6fa699db",
+        "expected_sha256": "1f0a625bd6a3462bb6074caa9c0d291df315ccb0e42c7554f971a2c8ac9d3482",
+        "path": ".agents/skills/memory/scripts/basic_memory_adapter.py"
+      },
+      "message": "Query implementation changed after backend certification."
+    },
+    "limitations": [
+      "backend_adapter_changed"
+    ],
+    "mode": "lexical",
+    "next_operation": "Inspect reindex-payload; authorize exact reindex, or backend-recover for an interrupted operation.",
+    "ready": false,
+    "runtime": {
+      "status": "not_exercised"
+    },
+    "status": "degraded"
+  },
+  "components": {
+    "backend": {
+      "available": false,
+      "diagnostics": [
+        {
+          "code": "backend_adapter_changed",
+          "details": {
+            "current_sha256": "6020b9e0619450da051febdc7f5ea6328cbd97647cb3ad38292c9e7e6fa699db",
+            "expected_sha256": "1f0a625bd6a3462bb6074caa9c0d291df315ccb0e42c7554f971a2c8ac9d3482",
+            "path": ".agents/skills/memory/scripts/basic_memory_adapter.py"
+          },
+          "message": "Query implementation changed after backend certification."
+        }
+      ],
+      "error": {
+        "code": "backend_adapter_changed",
+        "details": {
+          "current_sha256": "6020b9e0619450da051febdc7f5ea6328cbd97647cb3ad38292c9e7e6fa699db",
+          "expected_sha256": "1f0a625bd6a3462bb6074caa9c0d291df315ccb0e42c7554f971a2c8ac9d3482",
+          "path": ".agents/skills/memory/scripts/basic_memory_adapter.py"
+        },
+        "message": "Query implementation changed after backend certification."
+      },
+      "limitations": [
+        "backend_adapter_changed"
+      ],
+      "mode": "lexical",
+      "next_operation": "Inspect reindex-payload; authorize exact reindex, or backend-recover for an interrupted operation.",
+      "ready": false,
+      "runtime": {
+        "status": "not_exercised"
+      },
+      "status": "degraded"
+    },
+    "canonical": {
+      "ready": true,
+      "records": 4,
+      "status": "ready"
+    },
+    "evidence": {
+      "diagnostics": [],
+      "ready": true,
+      "records": [
+        {
+          "evidence": {
+            "current_applicability": "changed",
+            "diagnostics": [
+              {
+                "code": "evidence_changed",
+                "current_sha256": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca",
+                "expected_sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b",
+                "historical_support": "supported",
+                "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                "path": ".agents/skills/memory/scripts/memory_search.py",
+                "receipt_path": "Verification/project-memory/root-lexical-observation.json",
+                "severity": "info"
+              },
+              {
+                "code": "claim_not_current",
+                "message": "The verification receipt explicitly limits this observation to historical applicability.",
+                "receipt_path": "Verification/project-memory/root-lexical-observation.json",
+                "severity": "info"
+              },
+              {
+                "code": "current_source_changed",
+                "current_sha256": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca",
+                "expected_sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b",
+                "historical_support": "supported",
+                "message": "The direct source is changed or absent; exact retained verification bytes support its historical locator only.",
+                "path": ".agents/skills/memory/scripts/memory_search.py",
+                "receipt_path": "Verification/project-memory/root-lexical-observation.json",
+                "receipt_sha256": "4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811",
+                "retained_path": "Verification/ontology-health-repairs/memory/lexical-retained/memory_search.py",
+                "retained_sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b",
+                "severity": "info"
+              }
+            ],
+            "durable": true,
+            "historical_support": "supported",
+            "verifications": [
+              {
+                "applicability": "historical",
+                "artifacts": [
+                  {
+                    "current_applicability": "current",
+                    "current_sha256": "b6ab18ddea2d3ebc73dbfe8b22d048036220bc9ebfcaada73e0bbfece8f6723b",
+                    "expected_sha256": "b6ab18ddea2d3ebc73dbfe8b22d048036220bc9ebfcaada73e0bbfece8f6723b",
+                    "historical_support": "supported",
+                    "path": "Verification/project-memory/root-lexical-inspection.json",
+                    "retained": true,
+                    "retained_path": "Verification/ontology-health-repairs/memory/lexical-retained/root-lexical-inspection.json"
+                  },
+                  {
+                    "current_applicability": "changed",
+                    "current_sha256": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca",
+                    "expected_sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b",
+                    "historical_support": "supported",
+                    "path": ".agents/skills/memory/scripts/memory_search.py",
+                    "retained": true,
+                    "retained_path": "Verification/ontology-health-repairs/memory/lexical-retained/memory_search.py"
+                  }
+                ],
+                "companion": {
+                  "path": "Verification/project-memory/evidence/verification-4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811.json",
+                  "purpose": "historical proof locator; no new execution claim",
+                  "sha256": "7643f47d80d5b338c2de5250aabac58d1be706b902e3e8c635067be370ea57e0"
+                },
+                "current_applicability": "changed",
+                "diagnostics": [
+                  {
+                    "code": "evidence_changed",
+                    "current_sha256": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca",
+                    "expected_sha256": "294877068712251bfde91309e2d444eb47b13f1e8c8ca98e3882684dc4ab7f6b",
+                    "historical_support": "supported",
+                    "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                    "path": ".agents/skills/memory/scripts/memory_search.py",
+                    "severity": "info"
+                  },
+                  {
+                    "code": "claim_not_current",
+                    "message": "The verification receipt explicitly limits this observation to historical applicability.",
+                    "severity": "info"
+                  }
+                ],
+                "durable": true,
+                "historical_support": "supported",
+                "observed_at": "2026-09-08T21:27:05.712306+00:00",
+                "receipt_path": "Verification/project-memory/root-lexical-observation.json",
+                "receipt_sha256": "4f84c91e22d1aeb419553181e31b3d04f608de61f469273a4dd841d322329811"
+              }
+            ],
+            "verified_current": false
+          },
+          "path": "MEMORY/MEM-20260908-6A59F482.md",
+          "state": "superseded"
+        },
+        {
+          "evidence": {
+            "current_applicability": "changed",
+            "diagnostics": [
+              {
+                "code": "evidence_changed",
+                "current_sha256": "0d3340dc4657205698416b870d1315d752aa641367d9b70ffc10e479a2967c70",
+                "expected_sha256": "ef9d35c3ec0bc72a19292c78aacd986b8f4f0cb5ad0d128c2e64d511a1a5f67d",
+                "historical_support": "supported",
+                "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                "path": ".agents/skills/memory/scripts/memory_capture.py",
+                "receipt_path": "Verification/automatic-memory-capture/verification.json",
+                "severity": "info"
+              },
+              {
+                "code": "evidence_changed",
+                "current_sha256": "48592604ac950e32e4c80aab24edd2e90d26d09df1b6af912dcad24bbc490a54",
+                "expected_sha256": "a41175553ec3e4d81b7cede8cc26b81676eddb4a7a697db6c1a47aab5929d874",
+                "historical_support": "supported",
+                "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                "path": ".agents/skills/memory/scripts/memory_core.py",
+                "receipt_path": "Verification/automatic-memory-capture/verification.json",
+                "severity": "info"
+              },
+              {
+                "code": "evidence_changed",
+                "current_sha256": "64218788dc5e6d0a98479894ee7d6d947838e2b9afef7ff5ccb66e3ff1debd7d",
+                "expected_sha256": "8616e439dafedb057f46e685788cdc292b3300ab2c120ee90c2750c71bbe07bf",
+                "historical_support": "supported",
+                "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                "path": ".agents/skills/init-new-project/scripts/init_new_project.py",
+                "receipt_path": "Verification/automatic-memory-capture/verification.json",
+                "severity": "info"
+              },
+              {
+                "code": "claim_not_current",
+                "message": "The verification receipt explicitly limits this observation to historical applicability.",
+                "receipt_path": "Verification/automatic-memory-capture/verification.json",
+                "severity": "info"
+              }
+            ],
+            "durable": true,
+            "historical_support": "supported",
+            "verifications": [
+              {
+                "applicability": "historical",
+                "artifacts": [
+                  {
+                    "current_applicability": "current",
+                    "current_sha256": "3989830df89045033f5e53f7fc53be143f33b553acd7f5405a591fb14cdd475a",
+                    "expected_sha256": "3989830df89045033f5e53f7fc53be143f33b553acd7f5405a591fb14cdd475a",
+                    "historical_support": "supported",
+                    "path": "memory.yaml",
+                    "retained": true,
+                    "retained_path": "Verification/ontology-health-repairs/memory/historical-memory.yaml"
+                  },
+                  {
+                    "current_applicability": "changed",
+                    "current_sha256": "0d3340dc4657205698416b870d1315d752aa641367d9b70ffc10e479a2967c70",
+                    "expected_sha256": "ef9d35c3ec0bc72a19292c78aacd986b8f4f0cb5ad0d128c2e64d511a1a5f67d",
+                    "historical_support": "supported",
+                    "path": ".agents/skills/memory/scripts/memory_capture.py",
+                    "retained": true,
+                    "retained_path": "Verification/ontology-health-repairs/memory/historical-memory_capture.py"
+                  },
+                  {
+                    "current_applicability": "changed",
+                    "current_sha256": "48592604ac950e32e4c80aab24edd2e90d26d09df1b6af912dcad24bbc490a54",
+                    "expected_sha256": "a41175553ec3e4d81b7cede8cc26b81676eddb4a7a697db6c1a47aab5929d874",
+                    "historical_support": "supported",
+                    "path": ".agents/skills/memory/scripts/memory_core.py",
+                    "retained": true,
+                    "retained_path": "Verification/ontology-health-repairs/memory/historical-memory_core.py"
+                  },
+                  {
+                    "current_applicability": "changed",
+                    "current_sha256": "64218788dc5e6d0a98479894ee7d6d947838e2b9afef7ff5ccb66e3ff1debd7d",
+                    "expected_sha256": "8616e439dafedb057f46e685788cdc292b3300ab2c120ee90c2750c71bbe07bf",
+                    "historical_support": "supported",
+                    "path": ".agents/skills/init-new-project/scripts/init_new_project.py",
+                    "retained": true,
+                    "retained_path": "Verification/ontology-health-repairs/memory/historical-init_new_project.py"
+                  },
+                  {
+                    "current_applicability": "current",
+                    "current_sha256": "9e0891e0ef6c0b9415510ad84272afbbc3f430306253ddd958229f0b3478140f",
+                    "expected_sha256": "9e0891e0ef6c0b9415510ad84272afbbc3f430306253ddd958229f0b3478140f",
+                    "historical_support": "supported",
+                    "path": "reference-assets/MEMORY-depo/schema/config-v1.json",
+                    "retained": true,
+                    "retained_path": "Verification/ontology-health-repairs/memory/historical-config-v1.json"
+                  }
+                ],
+                "companion": {
+                  "path": "Verification/project-memory/evidence/verification-06bad7195d7fabed2b8d7328a7bbe22c751b9262582ca151403cc436dba479e0.json",
+                  "purpose": "historical proof locator; no new execution claim",
+                  "sha256": "f01307389f32e8466dce4c32df00839e379a43e9befe37d54e27887a7aeee094"
+                },
+                "current_applicability": "changed",
+                "diagnostics": [
+                  {
+                    "code": "evidence_changed",
+                    "current_sha256": "0d3340dc4657205698416b870d1315d752aa641367d9b70ffc10e479a2967c70",
+                    "expected_sha256": "ef9d35c3ec0bc72a19292c78aacd986b8f4f0cb5ad0d128c2e64d511a1a5f67d",
+                    "historical_support": "supported",
+                    "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                    "path": ".agents/skills/memory/scripts/memory_capture.py",
+                    "severity": "info"
+                  },
+                  {
+                    "code": "evidence_changed",
+                    "current_sha256": "48592604ac950e32e4c80aab24edd2e90d26d09df1b6af912dcad24bbc490a54",
+                    "expected_sha256": "a41175553ec3e4d81b7cede8cc26b81676eddb4a7a697db6c1a47aab5929d874",
+                    "historical_support": "supported",
+                    "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                    "path": ".agents/skills/memory/scripts/memory_core.py",
+                    "severity": "info"
+                  },
+                  {
+                    "code": "evidence_changed",
+                    "current_sha256": "64218788dc5e6d0a98479894ee7d6d947838e2b9afef7ff5ccb66e3ff1debd7d",
+                    "expected_sha256": "8616e439dafedb057f46e685788cdc292b3300ab2c120ee90c2750c71bbe07bf",
+                    "historical_support": "supported",
+                    "message": "Observed artifact version is not current; this does not prove the historical observation false.",
+                    "path": ".agents/skills/init-new-project/scripts/init_new_project.py",
+                    "severity": "info"
+                  },
+                  {
+                    "code": "claim_not_current",
+                    "message": "The verification receipt explicitly limits this observation to historical applicability.",
+                    "severity": "info"
+                  }
+                ],
+                "durable": true,
+                "historical_support": "supported",
+                "observed_at": "2026-09-09T02:31:12.103208+00:00",
+                "receipt_path": "Verification/automatic-memory-capture/verification.json",
+                "receipt_sha256": "06bad7195d7fabed2b8d7328a7bbe22c751b9262582ca151403cc436dba479e0"
+              }
+            ],
+            "verified_current": false
+          },
+          "path": "MEMORY/MEM-20260909-89C402A6.md",
+          "state": "superseded"
+        },
+        {
+          "evidence": {
+            "current_applicability": "not_claimed",
+            "diagnostics": [],
+            "durable": false,
+            "historical_support": "context_only",
+            "verifications": [],
+            "verified_current": false
+          },
+          "path": "MEMORY/MEM-20260910-0C531031.md",
+          "state": "active"
+        },
+        {
+          "evidence": {
+            "current_applicability": "not_claimed",
+            "diagnostics": [],
+            "durable": false,
+            "historical_support": "context_only",
+            "verifications": [],
+            "verified_current": false
+          },
+          "path": "MEMORY/MEM-20260910-12B430D5.md",
+          "state": "active"
+        }
+      ],
+      "status": "ready"
+    },
+    "index": {
+      "error": {
+        "code": "projection_implementation_changed",
+        "details": {
+          "current": {
+            "basic_memory_projection.py": "a3e254131a88936f6a1a1eb292afea2d3645261ebde99632cae847b278dce512",
+            "memory_normalization.py": "36bfb9800dc04fce004075295e00a5e830979c2b34fd66d1d5b6a1760bb48cda",
+            "memory_normalize_html.py": "34f82652d31b797f5b07ace50f0043e16766a8710c7ab3774e0cf3ef38b391af",
+            "memory_normalize_pdf.py": "cac3e93c9cb3318ec6466a01e6f719491ac6368156f9be5a2b55c63c009b5a8d",
+            "memory_normalize_tex.py": "c1fb0c6ed6f10c43586a6419f80a328119f1d0eccc2fcf265ae2a70f28bc8241",
+            "memory_search.py": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca"
+          },
+          "expected": null
+        },
+        "message": "Projection producer versions changed or were not recorded; explicit reindex is required."
+      },
+      "next_operation": "Inspect reindex-payload; authorize exact reindex, or backend-recover for an interrupted operation.",
+      "ready": false,
+      "status": "degraded"
+    },
+    "projection": {
+      "error": {
+        "code": "projection_implementation_changed",
+        "details": {
+          "current": {
+            "basic_memory_projection.py": "a3e254131a88936f6a1a1eb292afea2d3645261ebde99632cae847b278dce512",
+            "memory_normalization.py": "36bfb9800dc04fce004075295e00a5e830979c2b34fd66d1d5b6a1760bb48cda",
+            "memory_normalize_html.py": "34f82652d31b797f5b07ace50f0043e16766a8710c7ab3774e0cf3ef38b391af",
+            "memory_normalize_pdf.py": "cac3e93c9cb3318ec6466a01e6f719491ac6368156f9be5a2b55c63c009b5a8d",
+            "memory_normalize_tex.py": "c1fb0c6ed6f10c43586a6419f80a328119f1d0eccc2fcf265ae2a70f28bc8241",
+            "memory_search.py": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca"
+          },
+          "expected": null
+        },
+        "message": "Projection producer versions changed or were not recorded; explicit reindex is required."
+      },
+      "next_operation": "Inspect reindex-payload; authorize exact reindex, or backend-recover for an interrupted operation.",
+      "ready": false,
+      "status": "degraded"
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "projection_implementation_changed",
+      "component": "projection",
+      "details": {
+        "current": {
+          "basic_memory_projection.py": "a3e254131a88936f6a1a1eb292afea2d3645261ebde99632cae847b278dce512",
+          "memory_normalization.py": "36bfb9800dc04fce004075295e00a5e830979c2b34fd66d1d5b6a1760bb48cda",
+          "memory_normalize_html.py": "34f82652d31b797f5b07ace50f0043e16766a8710c7ab3774e0cf3ef38b391af",
+          "memory_normalize_pdf.py": "cac3e93c9cb3318ec6466a01e6f719491ac6368156f9be5a2b55c63c009b5a8d",
+          "memory_normalize_tex.py": "c1fb0c6ed6f10c43586a6419f80a328119f1d0eccc2fcf265ae2a70f28bc8241",
+          "memory_search.py": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca"
+        },
+        "expected": null
+      },
+      "message": "Projection producer versions changed or were not recorded; explicit reindex is required."
+    },
+    {
+      "code": "projection_implementation_changed",
+      "component": "index",
+      "details": {
+        "current": {
+          "basic_memory_projection.py": "a3e254131a88936f6a1a1eb292afea2d3645261ebde99632cae847b278dce512",
+          "memory_normalization.py": "36bfb9800dc04fce004075295e00a5e830979c2b34fd66d1d5b6a1760bb48cda",
+          "memory_normalize_html.py": "34f82652d31b797f5b07ace50f0043e16766a8710c7ab3774e0cf3ef38b391af",
+          "memory_normalize_pdf.py": "cac3e93c9cb3318ec6466a01e6f719491ac6368156f9be5a2b55c63c009b5a8d",
+          "memory_normalize_tex.py": "c1fb0c6ed6f10c43586a6419f80a328119f1d0eccc2fcf265ae2a70f28bc8241",
+          "memory_search.py": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca"
+        },
+        "expected": null
+      },
+      "message": "Projection producer versions changed or were not recorded; explicit reindex is required."
+    },
+    {
+      "code": "backend_adapter_changed",
+      "component": "backend",
+      "details": {
+        "current_sha256": "6020b9e0619450da051febdc7f5ea6328cbd97647cb3ad38292c9e7e6fa699db",
+        "expected_sha256": "1f0a625bd6a3462bb6074caa9c0d291df315ccb0e42c7554f971a2c8ac9d3482",
+        "path": ".agents/skills/memory/scripts/basic_memory_adapter.py"
+      },
+      "message": "Query implementation changed after backend certification."
+    }
+  ],
+  "failed_required": [
+    "backend",
+    "index",
+    "projection"
+  ],
+  "health_schema_version": 2,
+  "project_id": "sys4ai-depot",
+  "read_only": true,
+  "ready": false,
+  "records": 4,
+  "status": "degraded"
+}

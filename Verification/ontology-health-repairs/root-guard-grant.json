@@ -1,0 +1,67 @@
+{
+  "actor_id": "/root",
+  "actor_kind": "director",
+  "config_sha256": "de3973b748afa7dbce5aa74e049cc02bbdc9c445345fb047f96c28317f411d44",
+  "expires_at": "2026-09-10T20:00:31.688938+00:00",
+  "native_receipt": {
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/memory_repairs",
+          "agent_status": {
+            "completed": "Guard namespace fix is frozen. The one-line import repair passed **17 focused tests and 18 adapter tests**, with no failures or skips.\n\n[Fix receipt and hashes](/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/memory/final-guard-namespace-result.json) \u00b7 [Retained 93-test receipt](/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/memory/final-93-tests.receipt.json)\n\n`memory_core.py` is unchanged. Root amendment, full final validation, and runtime continuation remain with the host."
+          }
+        },
+        {
+          "agent_name": "/root/shacl_repair",
+          "agent_status": {
+            "completed": "The required guard case now completes within its unchanged five-second budget.\n\n- Measured decision: **5.02s timeout \u2192 2.18s conformant**.\n- All four existing deadline tests pass unchanged.\n- Six before/after RDF cases preserve exact quads and hashes.\n- Source runtime recertified; previous certificate retained.\n- Latest guard-engine positive case also passes.\n\nRDF source and regression tests are frozen. [Evidence and final hashes](/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/ontology-health-repairs/guard-budget/result.json)."
+          }
+        },
+        {
+          "agent_name": "/root/test_discovery",
+          "agent_status": "running"
+        }
+      ]
+    },
+    "tool": "collaboration.list_agents"
+  },
+  "observed_at": "2026-09-10T19:55:31.688938+00:00",
+  "operation": "guard-repair",
+  "preview_sha256": "30d6fb546972a98d1ce28e7d3f1580ed60618aa7accc660c29d8ee4ef21be584",
+  "project_id": "sys4ai-depot",
+  "reviewed_records": [
+    {
+      "expected_sha256": "3c13efb17fcd217b631d9c8c09e842d2233261b0a8cfca744510c7253094734d",
+      "path": ".agents/skills/memory/scripts/memory_maintenance.py",
+      "sha256": "700dffc0bd5d208731f9103002d534f52c22d4cb677298035fc0ad89f58c9073"
+    },
+    {
+      "expected_sha256": null,
+      "path": "control_records/ontology/guard-bootstrap/ONTGUARD-health-maintenance-binding-20260910-adapters.json",
+      "sha256": "8fab61452e9ffd374e51675ceedca9793304021916ad36c143e42ae499928fd2"
+    },
+    {
+      "expected_sha256": null,
+      "path": "control_records/ontology/guard-bootstrap/ONTGUARD-health-maintenance-binding-20260910-bootstrap.json",
+      "sha256": "3f61250b007d2f922052e7a82a97e170b8a07aaf90ec6b274b75dd325205bbf6"
+    },
+    {
+      "expected_sha256": "ace32aac23a0a841ab89658c333bd697c82635684f1ba587ca91592d4711b919",
+      "path": "ontology-advanced.yaml",
+      "sha256": "b234d82422d6f3881c190265391362a8f430c24b7d746bebf324c829b60641ae"
+    }
+  ],
+  "schema_version": 1,
+  "scope": [
+    ".agents/skills/memory/scripts/memory_maintenance.py",
+    "control_records/ontology/guard-bootstrap/ONTGUARD-health-maintenance-binding-20260910-adapters.json",
+    "control_records/ontology/guard-bootstrap/ONTGUARD-health-maintenance-binding-20260910-bootstrap.json",
+    "ontology-advanced.yaml"
+  ],
+  "task": null
+}

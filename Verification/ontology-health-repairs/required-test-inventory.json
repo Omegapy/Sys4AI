@@ -1,0 +1,1435 @@
+{
+  "schema_version": 1,
+  "plan": "PLAN-20260910-2C3A0863",
+  "baseline": {
+    "source": "Verification/system-health-2026-09-10/regression/summary.json",
+    "sha256": "eb0904991bacb120aa7a9c43e1ffbe5133731c14364b008c88ca45755cb59f5d",
+    "command": [
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      ".agents/skills/ontology/tests",
+      "-v"
+    ],
+    "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+    "exit_code": 1,
+    "tests_run": 153,
+    "passed": 120,
+    "errors": 9,
+    "skipped": 24,
+    "guard_errors": 9,
+    "guard_skips": 23,
+    "semantic_skips": 1
+  },
+  "profiles": {
+    "core": {
+      "required": true
+    },
+    "standards": {
+      "required_when_selected": true,
+      "selector": "SYS4AI_STANDARDS_PYTHON or exact selected package owner .venv-ontology-standards/bin/python",
+      "depot_fixture_selector": "SYS4AI_TEST_DEPOT_ROOT if depot-only guard fixture factories are unavailable in the selected owner"
+    },
+    "semantic": {
+      "required_when_selected": true,
+      "selector": "SYS4AI_SEMANTIC_ACCEPTANCE_ROOT"
+    }
+  },
+  "tests": [
+    {
+      "id": "test_acceptance_coverage.AcceptanceCoverageTests.test_missing_duplicate_and_unclassified_skips_cannot_replace_baseline",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_acceptance_coverage.AcceptanceCoverageTests.test_optional_class_skip_accounts_for_all_discovered_methods",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_acceptance_coverage.AcceptanceCoverageTests.test_optional_skip_requires_an_unselected_named_profile_and_reason",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_acceptance_coverage.AcceptanceCoverageTests.test_required_skip_fails_even_when_unittest_succeeds",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_acceptance_coverage.AcceptanceCoverageTests.test_setup_error_is_retained_for_each_unexecuted_identity",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_acceptance_coverage.AcceptanceCoverageTests.test_subtest_failure_is_retained_on_its_parent_identity",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_action_semantics.ActionSemanticsTests.test_actual_plan_cli_revision_fields_and_nested_transaction_succeed",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_action_semantics.ActionSemanticsTests.test_caller_forged_task_state_is_not_current_evidence",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_action_semantics.ActionSemanticsTests.test_candidate_validation_includes_external_authored_metadata",
+      "profile": "standards",
+      "baseline": null,
+      "added_for": "PLAN-20260910-2C3A0863 complete authoring scope in guarded candidates"
+    },
+    {
+      "id": "test_action_semantics.ActionSemanticsTests.test_concrete_capability_is_observed_from_the_provider_for_every_family",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_action_semantics.ActionSemanticsTests.test_current_task_orchestration_generation_is_read_before_dispatch",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_action_semantics.ActionSemanticsTests.test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_action_semantics.ActionSemanticsTests.test_missing_governing_source_and_unrecognized_rules_cannot_pass",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_action_semantics.ActionSemanticsTests.test_real_role_and_ontology_errors_retain_safe_action_and_version_text",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_action_semantics.ActionSemanticsTests.test_real_task_trd_and_plan_lifecycle_values_are_constrained",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_action_semantics.ActionSemanticsTests.test_v2_guarded_publication_recovers_accepted_extension_and_shape_pre_post",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_action_semantics.ActionSemanticsTests.test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_advanced_memory.AdvancedMemoryTests.test_actual_mixed_sources_and_unpublished_proposal_preserve_memory",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_packets.AdvancedPacketTests.test_changed_rules_and_profiles_require_manager_reassessment",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_packets.AdvancedPacketTests.test_explicit_version_preserves_existing_artifact_interface",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_packets.AdvancedPacketTests.test_proposal_store_and_arbitrary_advanced_sources_are_excluded",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_profiles.ProfileConfiguration.test_incomplete_enabled_guard_fails_closed",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_profiles.ProfileConfiguration.test_partial_receipt_recovery",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_profiles.ProfileConfiguration.test_selected_enable_and_replay",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_profiles.ProfileConfiguration.test_wrong_or_expired_authority_preserves_config",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_publication.AdvancedPublicationTests.test_actual_standards_and_consistency_validate_isolated_candidate",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_publication.AdvancedPublicationTests.test_profile_or_authority_changes_are_outside_semantic_publication",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_publication.AdvancedPublicationTests.test_rdf_import_retains_full_quads_and_only_converts_lossless_axioms",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_publication.AdvancedPublicationTests.test_v1_grant_cannot_publish_extension_and_exact_v2_partial_recovery",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_01_actual_profile_ready",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_02_v1_and_disabled_missing_versions",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_03_limits_are_finite",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_04_dataset_types_language_and_preservation",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_05_query_forms_and_from",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_06_prohibited_queries_and_partial",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_07_interchange_roundtrips",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_08_import_security",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_09_real_shacl_overlap_and_failure",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_10_guard_shapes_actual",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_11_generated_wiki_and_proofs",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_12_property_and_oracle",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_13_conflicts_negative_unproven",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_14_stale_unsupported_and_limits",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_15_unselected_symlink_and_core_redefinition",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_16_equivalence_identity_and_conflicts",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_17_draft_exclusion_and_preview",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_18_blanknode_semantic_roundtrip",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_19_query_budgets_and_selected_scope",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_20_real_worker_capacity",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_21_inferred_provenance_interchange",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_advanced_standards.StandardsAcceptance.test_22_negative_and_structured_metadata_export",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_authority.AuthorityTests.test_child_wrong_project_memory_grant_and_overbroad_scope_fail",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_authority.AuthorityTests.test_current_director_is_authorized_without_creating_other_state",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_authority.AuthorityTests.test_stale_authority_and_expired_native_evidence_fail",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_authority.AuthorityTests.test_stale_manager_task_digest_is_rejected",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_authority.AuthorityTests.test_unverified_active_manager_blocks_instead_of_trusting_raw_json",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_authority.ConfirmedManagerAuthorityTests.test_changed_generation_and_overlapping_director_fail",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_authority.ConfirmedManagerAuthorityTests.test_confirmed_manager_publishes_with_current_exact_task_scope",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_build.BuildTests.test_conflicting_and_unknown_generated_files_are_preserved",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_build.BuildTests.test_rebuild_byte_equivalence_and_recovery_after_deleted_projection",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_build.BuildTests.test_stale_source_blocks_build_before_output",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_build.BuildTests.test_write_failure_rolls_back_prior_outputs_without_success_manifest",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_fixture_discovery.FixtureDiscoveryTests.test_deep_initialized_project_layout",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_fixture_discovery.FixtureDiscoveryTests.test_installed_root_layout",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_fixture_discovery.FixtureDiscoveryTests.test_missing_own_contract_does_not_borrow_an_ancestor",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_fixture_discovery.FixtureDiscoveryTests.test_runtime_selection_is_exact_and_never_provisioned",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_fixture_discovery.FixtureDiscoveryTests.test_source_layout",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_fixture_discovery.FixtureDiscoveryTests.test_template_layout",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_generation_contract.GenerationTests.test_comparison_reports_negative_or_neutral_without_promised_gain",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_generation_contract.GenerationTests.test_fabricated_reference_and_runtime_expansion_fail",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_generation_contract.GenerationTests.test_frozen_source_data_and_attributable_capture",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_generation_contract.GenerationTests.test_initial_plus_two_finding_directed_revisions_and_repeated_failure_stop",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_guard_deadline.GuardDeadlineTests.test_actual_worker_is_cancelled_at_selected_shared_deadline",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_guard_deadline.GuardDeadlineTests.test_all_v2_backend_phases_share_one_remaining_budget",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_guard_deadline.GuardDeadlineTests.test_equivalent_previews_keep_the_same_review_hash",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_guard_deadline.GuardDeadlineTests.test_late_conformant_result_never_invokes_owner",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_guard_engine.GuardEngineTests.test_actual_owner_rejects_cached_other_project_engine_and_duplicate_config",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ERROR",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_guard_engine.GuardEngineTests.test_argument_target_rule_and_authority_changes_invalidate_pass",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ERROR",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_guard_engine.GuardEngineTests.test_disabled_profile_imports_no_optional_backend",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ERROR",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_guard_engine.GuardEngineTests.test_each_unknown_or_failed_backend_result_is_closed",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ERROR",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_guard_engine.GuardEngineTests.test_inline_file_envelopes_are_not_paths_and_bad_paths_are_bounded",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ERROR",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_guard_engine.GuardEngineTests.test_loaded_engine_and_manager_generation_cannot_change_after_check",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ERROR",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_guard_engine.GuardEngineTests.test_malformed_backend_diagnostics_retain_bounded_failure_text",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ERROR",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_guard_engine.GuardEngineTests.test_missing_duplicate_stale_and_unsupported_bindings_fail_closed",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ERROR",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_guard_engine.GuardEngineTests.test_selected_own_post_targets_do_not_invalidate_other_sources",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ERROR",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_guard_profiles.GuardedProfileConfiguration.test_actual_guarded_profile_enable_replay_and_separate_scope",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Actual selected standards backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_guard_profiles.GuardedProfileConfiguration.test_guard_dependency_and_missing_backend_block_without_disabling_guards",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Actual selected standards backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_guard_recovery.GuardRecoveryTests.test_actual_trd_task_and_plan_projection_recovery",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_guard_recovery.GuardRecoveryTests.test_guard_repair_preserves_accepted_pre_post_and_blocks_missing_backend",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_guard_recovery.GuardRecoveryTests.test_memory_and_ontology_actual_partial_recovery",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_guard_recovery.GuardRecoveryTests.test_template_and_setup_resume_their_actual_pending_operations",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Selected real backend is unavailable'"
+      }
+    },
+    {
+      "id": "test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Actual selected standards backend is not provisioned in this checkout'"
+      }
+    },
+    {
+      "id": "test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Actual selected standards backend is not provisioned in this checkout'"
+      }
+    },
+    {
+      "id": "test_guarded_dispatch.GuardedDispatchTests.test_every_declared_public_boundary_rejects_without_backend",
+      "profile": "standards",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Actual selected standards backend is not provisioned in this checkout'"
+      }
+    },
+    {
+      "id": "test_health_contract.HealthContractTests.test_neutral_and_explicit_required_missing_cli_preserve_bytes_and_times",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_health_contract.HealthContractTests.test_probe_rejects_external_credentials_and_redirect_surfaces",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_health_contract.HealthContractTests.test_selected_backend_and_guard_failure_are_not_masked",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_health_contract.HealthContractTests.test_selected_projection_failures_and_canonical_scope",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_health_contract.HealthContractTests.test_stale_authored_source_and_absent_invalid_configuration",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_health_contract.HealthContractTests.test_workbench_is_on_demand_and_probe_matches_exact_project",
+      "profile": "core",
+      "baseline": null
+    },
+    {
+      "id": "test_health_review_regressions.HealthReviewRegressions.test_malformed_endpoint_has_structured_invalid_request",
+      "profile": "core",
+      "baseline": null,
+      "added_for": "PLAN-20260910-2C3A0863 diagnostic/derived-state controls"
+    },
+    {
+      "id": "test_health_review_regressions.HealthReviewRegressions.test_manifest_cannot_hide_missing_required_compile_outputs",
+      "profile": "core",
+      "baseline": null,
+      "added_for": "PLAN-20260910-2C3A0863 diagnostic/derived-state controls"
+    },
+    {
+      "id": "test_health_review_regressions.HealthReviewRegressions.test_required_inference_rejects_complete_inconsistent_result",
+      "profile": "standards",
+      "baseline": null,
+      "added_for": "PLAN-20260910-2C3A0863 diagnostic/derived-state controls"
+    },
+    {
+      "id": "test_health_review_regressions.HealthReviewRegressions.test_service_deadline_covers_trickled_headers_and_body",
+      "profile": "core",
+      "baseline": null,
+      "added_for": "PLAN-20260910-2C3A0863 diagnostic/derived-state controls"
+    },
+    {
+      "id": "test_lifecycle.LifecycleTests.test_approved_meaning_change_needs_renewed_review",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_lifecycle.LifecycleTests.test_draft_approval_and_deprecation_preserve_id_and_history",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_lifecycle.LifecycleTests.test_removal_or_type_recycling_is_rejected",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_lifecycle.LifecycleTests.test_suggestion_transition_produces_candidate_without_mutating_input",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_loading.LoadingTests.test_configuration_boolean_schema_and_nested_file_lists_are_rejected",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_loading.LoadingTests.test_duplicate_json_keys_and_nonfinite_numbers_rejected",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_loading.LoadingTests.test_malformed_nested_shapes_return_bounded_profile_diagnostics",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_loading.LoadingTests.test_neutral_identity_and_current_saved_identity_rejected",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_loading.LoadingTests.test_paths_symlinks_hardlinks_and_fifo_fail_without_reading_target",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_loading.LoadingTests.test_reads_are_isolated_and_do_not_create_state",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_loading.LoadingTests.test_remote_context_and_unknown_profile_keys_rejected",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_loading.LoadingTests.test_stale_and_missing_sources_have_explicit_freshness",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_loading.LoadingTests.test_unselected_and_child_sources_rejected",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_modules.ModuleTests.test_changed_missing_and_extra_module_files_fail",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_modules.ModuleTests.test_core_redefinition_duplicate_and_foreign_namespace_fail",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_modules.ModuleTests.test_local_subtype_and_label_move_keep_identity",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_modules.ModuleTests.test_wrong_version_and_lock_fail",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_proposals.ProposalTests.test_changed_target_and_sources_invalidate_exact_review",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_proposals.ProposalTests.test_invalid_definition_never_becomes_eligible",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_proposals.ProposalTests.test_partial_receipt_retains_accepted_review_for_exact_recovery",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_proposals.ProposalTests.test_revision_history_rejection_and_stale_save_preserve_canonical",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_proposals.ProposalTests.test_validation_impact_and_publish_reopen",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_publication.PublicationTests.test_changed_expected_content_and_active_lock_prevent_mutation",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_publication.PublicationTests.test_commit_projection_and_receipt_failures_recover_exact_operation",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_publication.PublicationTests.test_failure_before_intent_creates_no_accepted_change",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_publication.PublicationTests.test_new_exact_selected_file_can_be_published_and_recovered",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_publication.PublicationTests.test_preview_is_read_only_and_publication_preserves_memory_and_governance",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_publication.PublicationTests.test_recovery_does_not_overwrite_unrelated_changes",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_publication.PublicationTests.test_same_operation_is_idempotent_and_different_payload_is_rejected",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_publication.PublicationTests.test_stale_source_can_be_rebound_by_current_reviewed_proposal",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_memory.MemoryQueryTests.test_ambiguous_links_and_corrupt_sidecar_do_not_change_mixed_definitions",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_memory.MemoryQueryTests.test_capability_discovers_installed_sources_without_invocation",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_memory.MemoryQueryTests.test_drafts_child_sources_and_frozen_live_memory_are_excluded",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_memory.MemoryQueryTests.test_exact_capability_precedes_unrelated_lexical_matches_and_keeps_provider",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_memory.MemoryQueryTests.test_link_freshness_includes_new_excluded_records_config_and_helpers",
+      "profile": "core",
+      "baseline": null,
+      "added_for": "PLAN-20260910-2C3A0863 diagnostic/derived-state controls"
+    },
+    {
+      "id": "test_query_memory.MemoryQueryTests.test_links_repeat_exact_versions_stale_detection_and_no_canonical_changes",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_memory.MemoryQueryTests.test_real_memory_search_expansion_source_separation_and_preservation",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_memory.MemoryQueryTests.test_sidecar_invalid_shape_and_tampering_are_not_evidence",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_memory.MemoryQueryTests.test_unavailable_no_evidence_stale_and_identity_boundaries",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_packets.PacketTests.test_actual_registration_equal_solver_inputs_and_frozen_late_isolation",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_packets.PacketTests.test_changed_exact_source_and_forged_definition_are_rejected",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_packets.PacketTests.test_real_frozen_memory_interface_excludes_new_live_records",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_packets.PacketTests.test_unselected_and_sibling_sources_and_unregistered_assignment_fail",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_packets.PacketTests.test_wrong_owner_scope_empty_size_and_immutability",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_retrieval.QueryTests.test_all_cli_reads_preserve_missing_and_stale_generated_state",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_retrieval.QueryTests.test_binding_freshness_and_current_operational_source",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_retrieval.QueryTests.test_combined_entry_fails_structural_and_semantic_negative_independently",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_retrieval.QueryTests.test_direction_cycles_path_and_serialized_bounds",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_retrieval.QueryTests.test_modeled_alias_ambiguity_returns_distinct_ids",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_retrieval.QueryTests.test_stable_exact_alias_lexical_lifecycle_and_no_match",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_query_retrieval.QueryTests.test_wiki_repeatability_navigation_and_edited_projection",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_rdf_canonicalization.RDFCanonicalizationTests.test_blank_nodes_keep_shared_cross_graph_identity_after_relabeling",
+      "profile": "standards",
+      "baseline": null,
+      "added_for": "PLAN-20260910-2C3A0863 measured guard dataset correction"
+    },
+    {
+      "id": "test_rdf_canonicalization.RDFCanonicalizationTests.test_ground_quads_keep_exact_terms_order_and_named_graph_identity",
+      "profile": "standards",
+      "baseline": null,
+      "added_for": "PLAN-20260910-2C3A0863 measured guard dataset correction"
+    },
+    {
+      "id": "test_semantic_index.SemanticIndexTests.test_changed_inputs_during_build_do_not_publish",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_semantic_index.SemanticIndexTests.test_changed_profile_is_stale_and_saved_matrix_is_preserved",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_semantic_index.SemanticIndexTests.test_explicit_build_and_read_does_not_rebuild",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_semantic_index.SemanticIndexTests.test_forged_or_nonfinite_vectors_are_rejected",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_semantic_packet.ActualSemanticPacketTests.test_selected_vectors_freeze_without_live_model_or_corpus_expansion",
+      "profile": "semantic",
+      "baseline": {
+        "outcome": "skipped",
+        "detail": " 'Select an existing local pinned semantic runtime for actual model acceptance.'"
+      }
+    },
+    {
+      "id": "test_semantic_retrieval.SemanticRetrievalTests.test_absent_profile_retains_lexical_and_exact_results",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_semantic_retrieval.SemanticRetrievalTests.test_enabled_unavailable_profile_preserves_lexical_with_diagnostic",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_semantic_retrieval.SemanticRetrievalTests.test_frozen_queries_cannot_open_live_embeddings",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_semantic_retrieval.SemanticRetrievalTests.test_selected_neutral_profile_uses_only_the_dedicated_defaults",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_semantic_retrieval.SemanticRetrievalTests.test_source_selection_excludes_memory_and_arbitrary_documents",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_shacl_lists.SharedShapeTests.test_changed_inputs_rebuild_complete_constraint_values",
+      "profile": "standards",
+      "baseline": null
+    },
+    {
+      "id": "test_shacl_lists.SharedShapeTests.test_custom_shapes_meta_validation_and_explicit_graph_scope",
+      "profile": "standards",
+      "baseline": null
+    },
+    {
+      "id": "test_shacl_lists.SharedShapeTests.test_domain_range_cardinality_and_source_constraints",
+      "profile": "standards",
+      "baseline": null
+    },
+    {
+      "id": "test_shacl_lists.SharedShapeTests.test_incomplete_resource_and_cancellation_outcomes_remain_distinct",
+      "profile": "standards",
+      "baseline": null
+    },
+    {
+      "id": "test_validation.ValidationTests.test_ambiguity_requires_all_candidates_and_distinctions",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_validation.ValidationTests.test_cardinality_and_qualifier_schema_are_executable",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_validation.ValidationTests.test_dangling_and_typed_endpoints",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_validation.ValidationTests.test_diagnostics_are_stable_with_reordered_record_input",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_validation.ValidationTests.test_only_declared_acyclic_relations_reject_cycles",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_validation.ValidationTests.test_required_metadata_and_provenance",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_workbench_security.WorkbenchTests.test_browser_cookie_jar_isolates_ports_and_preserves_existing_tabs",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_workbench_security.WorkbenchTests.test_composite_relation_draft_invalid_endpoint_and_deprecation_history",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_workbench_security.WorkbenchTests.test_core_protection_unsafe_text_and_browsing_only_session",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_workbench_security.WorkbenchTests.test_origin_host_csrf_forged_authority_and_source_escape_are_rejected",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_workbench_security.WorkbenchTests.test_real_service_search_draft_invalid_validate_revise_review_publish_reopen",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    },
+    {
+      "id": "test_workbench_security.WorkbenchTests.test_two_clients_stale_save_reject_and_reload_preserve_work",
+      "profile": "core",
+      "baseline": {
+        "outcome": "ok",
+        "detail": ""
+      }
+    }
+  ],
+  "optional_skip_reasons": {
+    "standards": [
+      "Actual selected standards backend is not provisioned in this checkout",
+      "Selected real backend is unavailable",
+      "Actual selected standards backend is unavailable",
+      "Optional standards acceptance is unselected; select an existing certified runtime with SYS4AI_STANDARDS_PYTHON."
+    ],
+    "semantic": [
+      "Select an existing local pinned semantic runtime for actual model acceptance."
+    ]
+  }
+}

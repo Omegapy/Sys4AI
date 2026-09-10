@@ -5134,9 +5134,19 @@ class PackageContractTests(unittest.TestCase):
             "requests.",
             "urllib.request",
         )
+        # Only the optional read-only adapter resolves the selected installed
+        # ontology helper. It grants no installation or cross-project writes.
+        tree = ast.parse(script)
+        adapter = next(node for node in tree.body if isinstance(node, ast.FunctionDef)
+                       and node.name == "_ontology_guard_adapter")
+        lines = script.splitlines()
+        source_without_adapter = "\n".join(lines[:adapter.lineno - 1] + lines[adapter.end_lineno:])
         for marker in prohibited:
             with self.subTest(marker=marker):
-                self.assertNotIn(marker, script)
+                self.assertNotIn(marker, source_without_adapter if marker == ".agents/skills" else script)
+        for node in ast.walk(adapter):
+            if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+                self.assertNotIn(node.func.attr, {"write_text", "write_bytes", "unlink", "replace", "copytree"})
 
 
 if __name__ == "__main__":

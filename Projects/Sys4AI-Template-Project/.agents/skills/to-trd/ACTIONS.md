@@ -21,6 +21,16 @@ permission: the current user's request and host permissions still govern work.
 | TO-TRD-012 | Return a completed document to draft | `set-status ... --status draft` from trd_done | Metadata and index |
 | TO-TRD-013 | Migrate a legacy schema-1 document | `migrate <selector> --expect-sha256 ... --reason ... --confirmed` | Selected schema-2 document and index, or validated no-op when already current |
 
+Capture reaches `create` only at the authorized synthesis boundary after
+[discovery](references/wayfinding.md), or when an incomplete draft is explicitly
+requested. A material question ends the response and waits; neither asking nor
+receiving an answer automatically writes. Resume remains read-only until
+explicit save. Revision resolves and reads the exact record before its authorized
+update; list/show/validate and lifecycle-only requests do not start an interview.
+When follow-ups are prohibited, report material gaps and save only an authorized
+incomplete artifact. No operation changes its ID or gains write authority from
+these conversational rules.
+
 Every `set-status` call requires `--expect-sha256 HASH`, `--reason TEXT`, and
 `--confirmed`. Every existing-document update requires the current content hash.
 Migration writes require the same hash, reason, and confirmation preconditions.

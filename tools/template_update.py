@@ -768,6 +768,7 @@ def atomic_write(path: Path, data: bytes, mode: int = 0o644) -> None:
             os.fchmod(stream.fileno(), mode)
             os.fsync(stream.fileno())
         safe(path)
+        _ontology_checkpoint(targets=False)
         os.replace(temporary, path)
         directory = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
         try:
@@ -783,6 +784,7 @@ def atomic_write(path: Path, data: bytes, mode: int = 0o644) -> None:
 def locked(root: Path, *, readonly: bool = False) -> Iterator[None]:
     path = safe(root / LOCK)
     if readonly and not path.exists():
+        _ontology_checkpoint(targets=False)
         yield
         return
     if not readonly:
@@ -798,6 +800,7 @@ def locked(root: Path, *, readonly: bool = False) -> Iterator[None]:
             fcntl.flock(fd, (fcntl.LOCK_SH if readonly else fcntl.LOCK_EX) | fcntl.LOCK_NB)
         except BlockingIOError as error:
             raise UpdateError("template is busy; another update or initializer holds the lock") from error
+        _ontology_checkpoint()
         yield
     finally:
         os.close(fd)
@@ -1056,6 +1059,94 @@ def main(argv: list[str] | None = None) -> int:
     print(json.dumps(report, sort_keys=True))
     return 1 if report["status"] == "outdated" else 0
 
+
+
+# Optional action guard adapter.  Standalone/core use imports no ontology runtime.
+def _ontology_checkpoint(*, targets=True):
+    import sys as _sys
+    _module = _sys.modules.get("ontology_guards")
+    if _module is not None:
+        _module.checkpoint(targets=targets)
+
+
+def _ontology_guard_adapter(function, family, root_argument, target_paths):
+    import functools as _functools
+    import inspect as _inspect
+    @_functools.wraps(function)
+    def guarded(*args, **kwargs):
+        import importlib.util as _util
+        import sys as _sys
+        from pathlib import Path as _Path
+        arguments = dict(_inspect.signature(function).bind(*args, **kwargs).arguments)
+        if root_argument == "@depot":
+            selected_root = installed_locations()[0]
+        else:
+            selected_root = arguments[root_argument]
+            if not isinstance(selected_root, (_Path, str)):
+                selected_root = getattr(selected_root, "project_root", getattr(selected_root, "root", selected_root))
+        selected_root = _Path(selected_root).absolute()
+        config_path = selected_root / "ontology-advanced.yaml"
+        if not config_path.exists() and not config_path.is_symlink():
+            return function(*args, **kwargs)
+        if family == "template" and arguments.get("command") == "check":
+            return function(*args, **kwargs)
+        import json as _json
+        import hashlib as _hashlib
+        def unique_pairs(pairs):
+            value = {}
+            for key, item in pairs:
+                if key in value:
+                    raise ValueError("duplicate guard configuration key")
+                value[key] = item
+            return value
+        try:
+            if config_path.is_symlink():
+                raise ValueError("symbolic guard configuration")
+            config = _json.loads(config_path.read_text(), object_pairs_hook=unique_pairs)
+            selected = config.get("profiles", {}).get("guards", {"enabled": False})
+            if config.get("schema_version") != 1 or not isinstance(selected, dict) or type(selected.get("enabled")) is not bool:
+                raise ValueError("unsupported guard configuration")
+        except (OSError, ValueError, AttributeError) as exc:
+            raise _ontology_adapter_error("guard_schema", "Guard configuration is unreadable or unsupported.", {}) from exc
+        if not selected["enabled"]:
+            if set(selected) != {"enabled"}:
+                raise _ontology_adapter_error("guard_schema", "Disabled guard configuration has unsupported fields.", {})
+            return function(*args, **kwargs)
+        script = selected_root / ".agents/skills/ontology/scripts/ontology_guards.py"
+        if not script.is_file() or any(parent.is_symlink() for parent in (script, *script.parents)):
+            raise _ontology_adapter_error("guard_unavailable", "Enabled guards require their current project-local installed adapter.", {})
+        current_sha256 = _hashlib.sha256(script.read_bytes()).hexdigest()
+        module = _sys.modules.get("ontology_guards")
+        if module is not None and (_Path(module.__file__).resolve() != script.resolve()
+                or getattr(module, "ENGINE_SOURCE_SHA256", None) != current_sha256):
+            raise _ontology_adapter_error("guard_stale", "Loaded guard code differs from this selected project's current installed bytes; use a fresh owning-helper process after reviewed repair.", {})
+        if module is None:
+            spec = _util.spec_from_file_location("ontology_guards", script)
+            module = _util.module_from_spec(spec)
+            _sys.modules["ontology_guards"] = module
+            _sys.path.insert(0, str(script.parent))
+            spec.loader.exec_module(module)
+        targets = list(target_paths)
+        if family == "setup":
+            destination = _Path(arguments["destination"]).absolute()
+            try:
+                relative = destination.relative_to(selected_root).as_posix()
+            except ValueError:
+                raise _ontology_adapter_error("guard_scope", "Setup target escapes the selected depot.", {})
+            targets.extend([relative + "/control_records/project-setup.json", relative + "/AGENTS.md", relative + "/ROLE.md"])
+        try:
+            return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+        except module.GuardError as exc:
+            raise _ontology_adapter_error(exc.code, str(exc), exc.details) from exc
+    return guarded
+
+
+def _ontology_adapter_error(code, message, details):
+    return UpdateError(code + ": " + message, report=details)
+
+ONTOLOGY_GUARDED_ACTIONS = ['update', 'recover']
+update = _ontology_guard_adapter(update, 'template', 'root', ['Projects/Sys4AI-Template-Project', '.sys4ai/template-update/state.json'])
+recover = _ontology_guard_adapter(recover, 'template', 'root', ['Projects/Sys4AI-Template-Project', '.sys4ai/template-update/state.json'])
 
 if __name__ == "__main__":
     raise SystemExit(main())

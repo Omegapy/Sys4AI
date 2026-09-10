@@ -142,3 +142,81 @@ and backend status are separate checks. Initialization provisions no runtime,
 service, model or dependency. Follow the installed
 [initializer contract](./.agents/skills/init-new-project/SKILL.md) and
 [learning entry](./.agents/skills/what-did-you-learn/SKILL.md) for usage.
+
+## Ontology first release and initialization v8
+
+`ONTOLOGY-depo/` owns the compact local JSON-LD profile, trusted vendored context,
+core module 1.0.0, publication contract and neutral starter. The installed ontology
+skill adopts `SKILLS-depo/ontology/`; `reference-assets/ONTOLOGY-depo/` holds the
+selected contracts. Canonical project content belongs in `ONTOLOGY/modules/`
+and `ONTOLOGY/bindings/`, with explicit identity and import locks in `ontology.yaml`.
+Stable shared IDs use `urn:sys4ai:ontology:core:` and project IDs use
+`urn:sys4ai:ontology:project:<project-id>:`.
+
+Parsing, validation, lexical lookup, typed traversal, source verification and
+wiki generation use Python 3.12's standard library. The profile supports its
+manifested keys only; it does not resolve remote contexts or provide general
+JSON-LD/RDF reasoning. Retrieval defaults to 2 hops and 20 results, with limits
+of 8 hops, 100 results and 32,000 UTF-8 bytes. Reads neither repair generated
+state nor publish canonical records.
+
+Compile and wiki builds record exact input versions. Derived graph/index/link
+outputs live under `.sys4ai/ontology/`; generated Markdown lives under
+`ONTOLOGY/WIKI/`. Reviewed publication intents, immutable receipts and bounded
+recovery records under `control_records/ontology/` are durable. Ontology authority
+is separate from memory grants, Task ownership and capability discovery.
+
+The ontology-owned memory adapter uses current installed read interfaces and
+derived sidecars; memory schema v1, corpus, backend and capture settings retain
+their existing semantics. Frozen ontology packets use existing Task artifact,
+baseline and assignment references, with the same 250,000-byte and 200-reference
+limits. Ontology operations create no Task and assign no role.
+
+Initializer edition `governance-starter-v8` specializes a neutral ontology for new
+and first-prepared projects. Selected ontology adoption or refresh extends the
+existing setup receipt without relabeling earlier editions or overwriting
+customized packages. Setup installs no dependency, service, model or product
+runtime. The [ontology contract](./ONTOLOGY-depo/profile.md) and
+[command reference](./.agents/skills/ontology/references/commands.md) define the
+supported operations; [release evidence](./Verification/ontology-first-release/RELEASE.md)
+records actual verification.
+
+## Ontology second release and initialization v9
+
+The first-release core and memory/Task schemas retain their existing versions.
+`ontology-advanced.yaml` is a separately versioned companion for selected local
+standards, inference, semantic, guard, and workbench profiles. Approved extension
+documents live in `ONTOLOGY/extensions/`; proposal revisions, reviews, imports,
+and publication receipts remain durable under ontology-owned paths.
+
+The standards profile pins RDFLib 7.6.0, pySHACL 0.40.1, and their complete lock in
+`.venv-ontology-standards`. It confines workers on the verified Darwin host and
+separates asserted, inferred, derived, and external graphs. Its finite rule
+profile supports declared type and property semantics; it does not claim full
+OWL 2 RL. Read-only SPARQL supports SELECT, ASK, CONSTRUCT, and the documented
+DESCRIBE profile. Ordinary reads neither install dependencies nor refresh state.
+The depot defines GeneratedWikiPage as an Artifact subtype and identifies its
+generated ontology wiki index as an instance; the inferred Artifact type is a
+derived conclusion, while the class declaration and source binding stay authored.
+
+Semantic retrieval uses a separately selected local model and environment,
+`.venv-ontology-semantic`, with exact model/package/index inputs. Similarity
+ranking does not establish identity, truth, approval, or execution authority.
+Frozen advanced packets retain the existing Task artifact path/hash interface
+and limits. Initial solvers share identical selected bytes and cannot retrieve
+new live facts, proposals, models, or documents through that packet.
+
+The loopback workbench uses the same proposal, validation, publication, and
+guarded helper interfaces as agents. Guards cover the declared ontology, memory,
+Task, TRD, plan, role, Template, and setup dispatch paths. Current authority and
+exact inputs are checked separately from semantic conformance. Direct filesystem
+edits and unintegrated host tools are outside that dispatch coverage.
+
+Initializer `governance-starter-v9` supplies neutral advanced profiles without
+runtime activation. Earlier receipt editions remain distinct; explicit
+`ontology-advanced` adoption uses exact previews and the existing receipt/recovery
+model. The Template updater distributes source assets only to its registered
+Template. Root adoption is separately manifested; no ordinary product is updated.
+See the [advanced contract](./ONTOLOGY-depo/advanced-profile.md),
+[operations](./.agents/skills/ontology/references/commands.md), and
+[second-release evidence](./Verification/ontology-second-release/RELEASE.md).
