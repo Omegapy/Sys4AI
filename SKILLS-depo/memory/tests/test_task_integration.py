@@ -19,6 +19,23 @@ from memory_normalization import digest
 
 
 class TaskMemoryIntegrationTests(unittest.TestCase):
+    def test_native_version_packet_preserves_task_and_exact_input_bytes(self):
+        fixture=orchestration_fixture.NativeOrchestrationFixture(writes=['packets'])
+        self.addCleanup(fixture.close)
+        root=fixture.root;setup_project(root);note(root)
+        task_path=str((fixture.folder/'task.json').relative_to(root))
+        original=(root/task_path).read_bytes();before=manifest(root)
+        args={'task_path':task_path,'execution_id':fixture.execution,'generation':1,'actor':fixture.actor}
+        packet=build_packet(root,**args)
+        self.assertEqual(before,manifest(root))
+        with self.assertRaises(MemoryError):build_packet(root,**{**args,'generation':2})
+        ref=freeze_packet(root,packet,'packets/native.json',actor=fixture.actor)
+        frozen=(root/ref['path']).read_bytes()
+        self.assertEqual(load_packet(root,ref),packet)
+        self.assertEqual((root/ref['path']).read_bytes(),frozen)
+        self.assertEqual((root/task_path).read_bytes(),original)
+        self.assertEqual(packet['task']['manager'],fixture.actor)
+
     def setUp(self):
         self.driver = orchestration_fixture.OrchestrationTests(methodName="test_legacy_and_v2_read_only_and_strict_keys")
         original = self.driver.manager_data

@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "<stdin>", line 5, in <module>
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory_maintenance.py", line 429, in guarded
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 772, in dispatch
+    return decision.finish(function())
+                           ^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory_maintenance.py", line 429, in <lambda>
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory_maintenance.py", line 220, in reindex
+    require(digest(canonical_json(payload)) == expected_payload_sha256,
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory_paths.py", line 25, in require
+    raise MemoryError(code, message, details)
+memory_paths.MemoryError: Reindex input differs from the reviewed payload.

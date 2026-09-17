@@ -307,3 +307,12 @@ Re-read the catalog and assess the function-specific fit before each assignment.
 Reservation precedes launch; an uncertain outcome is reconciled against the
 original reservation before any replacement. Follow the Task contract's current
 generation, artifact, stopping and recovery gates.
+
+## Curator roles
+
+Curator manager, Documentation Curator, Knowledge Curator and Improvement and
+Maintenance use this unchanged exact pair schema. Their function-specific fit
+records must establish relevant source, owner, tools and skill qualifications.
+A Curator manager requires an explicitly selected charter and actual activated
+Task ownership. Ordinary specialists retain no canonical publication authority.
+Catalog presence and role reads alone activate neither controller nor manager.

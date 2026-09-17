@@ -1,0 +1,95 @@
+{
+  "binding_files": [
+    "ONTOLOGY/bindings/bindings.jsonld",
+    "ONTOLOGY/bindings/curator.jsonld"
+  ],
+  "competency_files": [
+    "ONTOLOGY/modules/project/curator-competency.json"
+  ],
+  "context": {
+    "path": "ONTOLOGY/contexts/context-v1.jsonld",
+    "sha256": "7dd394c9ed0bb5398781b690988403e7ae60f6f70195fed24088dd1ef8654d92"
+  },
+  "modules": [
+    {
+      "id": "sys4ai-core",
+      "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+      "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+      "version": "1.0.0"
+    }
+  ],
+  "project": {
+    "id": "fault-verification",
+    "name": "Fault-Verification",
+    "namespace": "urn:sys4ai:ontology:project:fault-verification:",
+    "purpose": "Verify integrated fault-verification",
+    "root": "."
+  },
+  "project_files": [
+    "ONTOLOGY/modules/project/project.jsonld",
+    "ONTOLOGY/modules/project/curator.jsonld"
+  ],
+  "publication": {
+    "binding": {
+      "actor_id": "/root",
+      "authority": [
+        {
+          "path": "SOUL.md",
+          "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+        },
+        {
+          "path": "AGENTS.md",
+          "sha256": "bb059073b74cb0be617425c4a26f9f939b18e682c9af26e1038e032b2e57b58d"
+        },
+        {
+          "path": "ROLE.md",
+          "sha256": "31fb10cc37361deef967225025bc3ab4bb7a19e63343fd3c4571ed3421b8d8ae"
+        }
+      ],
+      "scope": [
+        "ONTOLOGY/modules/project",
+        "ONTOLOGY/bindings"
+      ]
+    },
+    "enabled": true
+  },
+  "retrieval": {
+    "default_hops": 2,
+    "default_limit": 20,
+    "max_context_bytes": 32000,
+    "max_hops": 8,
+    "max_limit": 100
+  },
+  "schema_version": 1,
+  "source_allowlist": [
+    "SOUL.md",
+    "AGENTS.md",
+    "ROLE.md",
+    "SPECS.md",
+    "depot/projects.json",
+    ".agents/skills/agent-task/SKILL.md",
+    ".agents/skills/curate/ACTIONS.md",
+    ".agents/skills/curate/SKILL.md",
+    ".agents/skills/curate/references/commands.md",
+    ".agents/skills/curate/references/session-maintenance.md",
+    ".agents/skills/curate/scripts/curator_integration.py",
+    ".agents/skills/curate/scripts/curator_logs.py",
+    ".agents/skills/curate/scripts/curator_products.py",
+    ".agents/skills/curate/scripts/curator_recovery.py",
+    ".agents/skills/memory/SKILL.md",
+    ".agents/skills/ontology/SKILL.md",
+    ".agents/skills/what-did-you-learn/SKILL.md",
+    "CURATOR.md",
+    "Roles/INDEX.md",
+    "Roles/curator-manager/AGENTS.md",
+    "Roles/curator-manager/ROLE.md",
+    "Roles/improvement-maintenance/AGENTS.md",
+    "Roles/improvement-maintenance/ROLE.md",
+    "Roles/knowledge-curator/AGENTS.md",
+    "Roles/knowledge-curator/ROLE.md",
+    "Roles/task-manager/AGENTS.md",
+    "Roles/task-manager/ROLE.md",
+    "curator-session.yaml",
+    "curator.yaml"
+  ]
+}

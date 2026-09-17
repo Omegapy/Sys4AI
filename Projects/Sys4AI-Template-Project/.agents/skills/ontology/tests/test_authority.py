@@ -85,3 +85,60 @@ class ConfirmedManagerAuthorityTests(unittest.TestCase):
 
 
 if __name__ == "__main__":unittest.main()
+
+class NativeOntologyFixture:
+    """Existing ontology owner and Task helper with synthetic native call frames."""
+    def __init__(self,protocol_version=1):
+        sys.path.insert(0,str(PACKAGE.parent/'agent-task/tests'))
+        from test_orchestration_state import NativeOrchestrationFixture
+        self.driver=NativeOrchestrationFixture(writes=['ONTOLOGY','control_records/ontology','ontology-advanced.yaml'],protocol_version=protocol_version)
+        self.root=make_project(self.driver.root);bind_director(self.root)
+        self.proposal=proposal(self.root,[record('native-published')])
+
+    def authority(self,context,profile='core-v1'):
+        value=grant(self.root,self.proposal,actor=self.driver.actor)
+        value.update(schema_version=3,owner_profile=profile,actor_kind='manager',controller_origin='curator',
+            native_receipt=self.driver.roster(self.driver.actor),task=self.driver.binding(),
+            broker_binding=self.driver.owner_binding(context,'ontology'))
+        return value
+
+    def close(self):self.driver.close()
+
+
+class NativeOntologyAuthorityTests(unittest.TestCase):
+    def test_v3_core_current_manager_publishes_with_exact_profile(self):
+        fixture=NativeOntologyFixture();self.addCleanup(fixture.close)
+        context=fixture.driver.context('ontology.publish');value=fixture.authority(context)
+        with fixture.driver.authority.invoke(context):
+            result=publish(fixture.root,fixture.proposal,value,expected_preview_sha256=value['preview_sha256'])
+        self.assertEqual(result['status'],'complete')
+        self.assertEqual(value['schema_version'],3)
+
+    def test_v3_without_live_context_wrong_owner_profile_or_actor_fails(self):
+        fixture=NativeOntologyFixture();self.addCleanup(fixture.close)
+        context=fixture.driver.context('ontology.publish');value=fixture.authority(context)
+        with self.assertRaises(OntologyError):
+            publish(fixture.root,fixture.proposal,value,expected_preview_sha256=value['preview_sha256'])
+        with fixture.driver.authority.invoke(context):
+            for key,bad in [('actor_kind','director'),('owner_profile','unknown'),('unknown',True)]:
+                candidate=copy.deepcopy(value);candidate[key]=bad
+                with self.assertRaises(OntologyError):
+                    publish(fixture.root,fixture.proposal,candidate,expected_preview_sha256=candidate['preview_sha256'])
+
+
+class ForkOntologyAuthorityTests(unittest.TestCase):
+    def test_old_or_unconfirmed_manager_epoch_cannot_publish_and_reconnected_v3_owner_can(self):
+        fixture=NativeOntologyFixture(protocol_version=2);self.addCleanup(fixture.close);driver=fixture.driver
+        old=driver.context('ontology_publish');old_authority=driver.authority
+        released=driver.release_receipt('native-manager');resumed=driver.resume_receipt('native-manager')
+        with self.assertRaises(driver.native.NativeError):
+            with old_authority.invoke(old):pass
+        context=driver.context('ontology_publish');value=fixture.authority(context)
+        with driver.authority.invoke(context),self.assertRaises(OntologyError):
+            publish(fixture.root,fixture.proposal,value,expected_preview_sha256=value['preview_sha256'])
+        driver.event('manager.reconnect',{'assignment_id':'native-manager','receipt':resumed,'release_receipt':released,
+            'role_reads':driver.role_acknowledgement('native-manager')})
+        context=driver.context('ontology_publish');value=fixture.authority(context)
+        with driver.authority.invoke(context):result=publish(fixture.root,fixture.proposal,value,expected_preview_sha256=value['preview_sha256'])
+        self.assertEqual(result['status'],'complete');self.assertEqual(value['schema_version'],3)
+        self.assertEqual(value['broker_binding']['call']['actor']['load_epoch'],2)

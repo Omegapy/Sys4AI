@@ -1,0 +1,31 @@
+test_authored_ontology_owner_hold_and_exact_continuation (test_integrated_setup.IntegratedSetupTests.test_authored_ontology_owner_hold_and_exact_continuation) ... ok
+test_create_cli_and_missing_function_is_not_ready (test_integrated_setup.IntegratedSetupTests.test_create_cli_and_missing_function_is_not_ready) ... ok
+test_first_prepare_and_manual_copy (test_integrated_setup.IntegratedSetupTests.test_first_prepare_and_manual_copy) ... ok
+test_prior_setup_without_curator_and_without_ontology (test_integrated_setup.IntegratedSetupTests.test_prior_setup_without_curator_and_without_ontology) ... ERROR
+test_v12_refresh_is_explicit_and_unchanged_repeat_deduplicates (test_integrated_setup.IntegratedSetupTests.test_v12_refresh_is_explicit_and_unchanged_repeat_deduplicates) ... ok
+
+======================================================================
+ERROR: test_prior_setup_without_curator_and_without_ontology (test_integrated_setup.IntegratedSetupTests.test_prior_setup_without_curator_and_without_ontology)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_integrated_setup.py", line 98, in test_prior_setup_without_curator_and_without_ontology
+    target,args,base=self.historical(name,without_ontology=missing)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_integrated_setup.py", line 86, in historical
+    (target/'Roles/INDEX.md').write_bytes(self.h.planned_role_index(target,{},{}))
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-integration-5q4c1jk2/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 1259, in planned_role_index
+    effective = {name: proposed[name] if name in owned else file_bytes(destination / name) for name in ("SOUL.md", ROLE_HELPER)}
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-integration-5q4c1jk2/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 249, in file_bytes
+    info = candidate.stat()
+           ^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py", line 840, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-integration-5q4c1jk2/Sys4AI/Projects/prior-no-ontology/.agents/skills/manage-subagent-roles/scripts/role_catalog.py'
+
+----------------------------------------------------------------------
+Ran 5 tests in 88.996s
+
+FAILED (errors=1)

@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-16T22:37:05.305606+00:00",
+  "status": "verified",
+  "requirement": "REQ-012-AC01",
+  "origin": "http://127.0.0.1:59173",
+  "browser": "Chrome",
+  "tab_id": "1492110953",
+  "observed_via": "mcp__cua_repl documented UI API",
+  "project_banner": "Sys4AI depot \u00b7 sys4ai-depot",
+  "readiness_banner": "Local service \u00b7 Standards: ready \u00b7 Browsing session",
+  "authentication": "Fresh existing one-use bootstrap exchanged by browser; URL fragment removed by application. No token or cookie value recorded.",
+  "navigation": [
+    {
+      "action": "search exact record ID",
+      "query": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-review",
+      "result_count": 1
+    },
+    {
+      "action": "open Curator review result",
+      "record_kind": "instance",
+      "lifecycle": "approved",
+      "fact": "asserted",
+      "definition": "Review scoped metadata or authenticated bounded source ownership; no canonical writes.",
+      "typed_relationships_observed": [
+        "curator-predicate-consumes",
+        "curator-predicate-coordinatesOwner",
+        "curator-predicate-maintains",
+        "curator-predicate-produces",
+        "providesCapability",
+        "curator-predicate-requiresPrerequisite",
+        "curator-predicate-triggeredBy"
+      ]
+    },
+    {
+      "action": "open source button",
+      "path": ".agents/skills/curate/ACTIONS.md",
+      "locator": "section:Curator actions",
+      "display_status": "Current source",
+      "heading": "# Curator actions",
+      "sha256": "3ae676c3f350e92ab25ab8a02776f11b946ecea3ba9785b882ffae8ef3e97dc5"
+    }
+  ],
+  "live_health": {
+    "project_id": "sys4ai-depot",
+    "root_sha256": "a5884732582056999336346c8cfc6780a0903b90917a291aa377dde0d3cdc328",
+    "schema_version": 1,
+    "service": "sys4ai-ontology-workbench",
+    "service_helper_sha256": "1a02494a3bbe9979f48a152527fd0b1c6a566bc53576665822aa7fc34a11318e",
+    "snapshot_sha256": "3e637461921c0ba584a8492393959049752dcc57d7f1452c9ccfc9668dd2064f",
+    "startup_config_sha256": "0d64004f993bb1ac94714262843b5667cd5eab712e188cad7a2ccbe980aa3554",
+    "startup_helpers_sha256": "dfd255db328cee1a9a9e3f7f89b85fdabb2300244ed260c02f6d39ec9e88a669"
+  },
+  "live_http_regressions": [
+    {
+      "name": "public link",
+      "method": "GET",
+      "path": "/",
+      "request_headers": {
+        "Sec-Fetch-Site": "cross-site",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Dest": "document"
+      },
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "iframe",
+      "method": "GET",
+      "path": "/",
+      "request_headers": {
+        "Sec-Fetch-Site": "cross-site",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Dest": "iframe"
+      },
+      "status": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "health cross-site",
+      "method": "GET",
+      "path": "/health",
+      "request_headers": {
+        "Sec-Fetch-Site": "cross-site",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Dest": "document"
+      },
+      "status": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "asset cross-site",
+      "method": "GET",
+      "path": "/app.js",
+      "request_headers": {
+        "Sec-Fetch-Site": "cross-site",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Dest": "document"
+      },
+      "status": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "wrong Origin",
+      "method": "GET",
+      "path": "/",
+      "request_headers": {
+        "Sec-Fetch-Site": "cross-site",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Dest": "document",
+        "Origin": "https://untrusted.example"
+      },
+      "status": 403,
+      "expected": 403,
+      "passed": true
+    }
+  ],
+  "preservation": {
+    "baseline": "Verification/integrated-curator-ontology/host/resume-20260916/origin-repair-root-preservation-before.json",
+    "files_checked": 34,
+    "only_changed": [
+      ".agents/skills/ontology/scripts/ontology_workbench.py"
+    ]
+  },
+  "lifecycle": {
+    "selected": "retain_on_demand_loopback_service_for_user",
+    "exec_session_id": 95823,
+    "pid": 16548,
+    "listener": "127.0.0.1:59173",
+    "old_service_44568_exit_code": 0,
+    "old_private_file_removed": true,
+    "consumed_private_bootstrap_file_removed": true,
+    "installed_service": false,
+    "autostart": false,
+    "background_ai": false,
+    "stop_instruction": "Ask the host to stop exec session95823, or send SIGINT to verified workbench PID 16548."
+  },
+  "verification_limits": [
+    "Browser read and navigation do not assert guarded authoring or canonical publication.",
+    "Temporary service remains running intentionally; final shutdown was not selected."
+  ]
+}

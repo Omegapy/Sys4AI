@@ -9,4 +9,4 @@ Project: `sys4ai-depot`
 - [Modules](modules.md)
 - [Capabilities and skills](capabilities.md)
 
-Input snapshot: `4077162b7f395b76749fcfc20b20ccfeb072053ad8a4104422b48904089c96e3`
+Input snapshot: `3e637461921c0ba584a8492393959049752dcc57d7f1452c9ccfc9668dd2064f`

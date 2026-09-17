@@ -1,0 +1,15 @@
+# Independent complete planning candidate
+
+Candidate `create-input.json` covers all 14 approved requirement outcomes, all 34 acceptance clauses and every original requirement dependency. `coverage.json` retains the clauses verbatim and maps their implementing/verifying tasks. The plan has seven phases and 21 planned tasks.
+
+The main proposed choice is a neutral versioned semantic recipe distributed through the ontology reference collection. The existing initializer would materialize complete destination-local Curator graph, bindings and competency files. This uses the existing multiple `project_files` and `binding_files` configuration capability, keeps the active Template graphs empty and leaves locked `sys4ai-core` unchanged. No unsupported imported module is assumed.
+
+The plan keeps current-owner resolution separate from ontology declarations. Installed governing role pairs, skill/action/session sources and exact hashes describe owner prerequisites; no live actor or current Task state is invented as semantic authority. Root configuration adoption precedes canonical owner publication. The current generic initializer cannot initialize the depot root, so the root needs an exact separately reviewed project-local adoption manifest and its existing authority boundary. This candidate does not claim a currently available new root adoption CLI command. If a supported exact operation cannot preserve root configuration, implementation must report that blocker.
+
+The proposed setup edition and integration edition are design choices. Ordinary historical reruns preserve their editions; selected integrated adoption and explicit refresh use the existing setup history, never a second ledger. New, first-existing, pristine manual-copy and prior Curator-without-ontology routes receive complete integration or exact non-ready diagnostics. Recovery, disabled choices, authored data and unselected projects have explicit controls.
+
+Validation used only the installed pure plan functions named in the assignment. Structure, lifecycle shape, dependencies and coverage passed. The helper reports `unresolved` solely because six engineering decisions remain proposed; no schema or coverage error exists. Exact plan approval remains necessary before readiness. All 30 source digests and non-symlink paths were rechecked, including the corrected guard report. No active Task JSON or generated plan index is an immutable material source.
+
+No implementation, source/Template change, ontology publication, managed-plan mutation, Task mutation, setup/adoption, session collection, service startup, memory lookup/publication or runtime test was performed. Only this solver's assigned work directory was written. The supplied frozen memory packet was explicitly empty. No sibling candidate or proposed note was read.
+
+Highest verification is static checks passed for the planning candidate. Native owner execution, browser operation and complete setup routes remain planned evidence gates. The stopping condition is reached.

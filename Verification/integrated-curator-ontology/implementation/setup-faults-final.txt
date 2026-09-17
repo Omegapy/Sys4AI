@@ -1,0 +1,16 @@
+test_generated_setup_asset_registration_and_verification_recovery (test_integrated_setup.IntegratedSetupTests.test_generated_setup_asset_registration_and_verification_recovery) ... ok
+test_owner_receipt_link_failure_reopens_same_owner_result (test_integrated_setup.IntegratedSetupTests.test_owner_receipt_link_failure_reopens_same_owner_result) ... FAIL
+
+======================================================================
+FAIL: test_owner_receipt_link_failure_reopens_same_owner_result (test_integrated_setup.IntegratedSetupTests.test_owner_receipt_link_failure_reopens_same_owner_result)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_integrated_setup.py", line 134, in test_owner_receipt_link_failure_reopens_same_owner_result
+    receipts=list((target/'control_records/ontology/integrations/receipts').glob('*.json'));self.assertEqual(len(receipts),1);before=receipts[0].read_bytes()
+                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 2 tests in 42.775s
+
+FAILED (failures=1)

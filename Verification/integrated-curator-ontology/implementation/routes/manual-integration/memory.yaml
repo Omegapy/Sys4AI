@@ -1,0 +1,91 @@
+{
+  "backend": {
+    "enabled": false,
+    "name": "basic-memory",
+    "semantic_enabled": false
+  },
+  "canonical_root": "MEMORY",
+  "contract_root": "reference-assets/MEMORY-depo",
+  "corpus": {
+    "exclude": [
+      "Projects/**",
+      "Tasks/**",
+      "Roles/**",
+      "roles/**",
+      "sub-agent-roles/**",
+      "**/*-depo/**",
+      "reference-assets/**",
+      ".git/**",
+      ".venv*/**",
+      "venv/**",
+      ".sys4ai/**",
+      ".agents/**",
+      ".codex/**",
+      "node_modules/**",
+      "build/**",
+      "dist/**",
+      "target/**",
+      "**/__pycache__/**",
+      "**/.env*",
+      "**/secrets/**",
+      "**/credentials/**",
+      "**/*.pem",
+      "**/*.key"
+    ],
+    "include": [
+      "README.md",
+      "docs/**/*.md",
+      "research/**/*.md",
+      "research/**/*.tex",
+      "research/**/*.pdf",
+      "research/**/*.html"
+    ],
+    "source_groups": []
+  },
+  "integration": {
+    "automatic_capture": true,
+    "task_packets": true
+  },
+  "project": {
+    "id": "manual-integration",
+    "name": "Manual-Integration",
+    "root": "."
+  },
+  "publication": {
+    "director": {
+      "actor_id": "/root",
+      "authority": [
+        {
+          "path": "SOUL.md",
+          "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+        },
+        {
+          "path": "AGENTS.md",
+          "sha256": "bb059073b74cb0be617425c4a26f9f939b18e682c9af26e1038e032b2e57b58d"
+        },
+        {
+          "path": "ROLE.md",
+          "sha256": "31fb10cc37361deef967225025bc3ab4bb7a19e63343fd3c4571ed3421b8d8ae"
+        }
+      ],
+      "scope": [
+        "MEMORY",
+        "control_records/memory",
+        ".sys4ai/memory"
+      ]
+    }
+  },
+  "retrieval": {
+    "max_results": 20,
+    "mode": "lexical"
+  },
+  "schema_version": 1,
+  "state": {
+    "backend_config": ".sys4ai/memory/backend-config",
+    "index": ".sys4ai/memory/index",
+    "maintenance": ".sys4ai/memory/maintenance",
+    "model_cache": ".sys4ai/memory/model-cache",
+    "normalized": ".sys4ai/memory/normalized",
+    "projection": ".sys4ai/memory/projection"
+  }
+}

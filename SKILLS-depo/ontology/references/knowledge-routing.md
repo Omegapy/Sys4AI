@@ -42,3 +42,13 @@ Frozen ontology queries require both global `--packet-file` and
 `--memory-packet-file` and `--memory-packet-sha256` before memory can be read.
 It cannot fall back to new live memory. Current-source excerpts are restricted
 to explicit exact documents frozen in the ontology packet.
+
+### Curator coordination
+
+Curator proposes neither, memory, ontology or both from attributable evidence.
+This owner retains stable identities, lifecycle/replacement relationships and
+authored/inferred provenance. A stale projection with no new knowledge routes to
+compile/wiki or the selected existing product owner, not canonical publication.
+Canonical/history changes precede recertification and derived maintenance. Failed
+required products stay pending; disabled optional backends stay disabled. Recheck
+final source and product-input digests after documentation or integration changes.

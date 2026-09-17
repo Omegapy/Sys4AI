@@ -1,0 +1,85 @@
+{
+  "binding_files": [
+    "ONTOLOGY/bindings/skills.json",
+    "ONTOLOGY/bindings/roles.json",
+    "ONTOLOGY/bindings/artifacts.json",
+    "ONTOLOGY/bindings/projects.json"
+  ],
+  "competency_files": [
+    "ONTOLOGY/modules/project/competency.json"
+  ],
+  "context": {
+    "path": "ONTOLOGY/contexts/context-v1.jsonld",
+    "sha256": "7dd394c9ed0bb5398781b690988403e7ae60f6f70195fed24088dd1ef8654d92"
+  },
+  "modules": [
+    {
+      "id": "sys4ai-core",
+      "path": "ONTOLOGY/modules/sys4ai-core/1.0.0",
+      "sha256": "0a89d0d6f671f95188f46e134b88ba33b5a83d05cb5c0800414ccc2f50cf44be",
+      "version": "1.0.0"
+    }
+  ],
+  "project": {
+    "id": "sys4ai-depot",
+    "name": "Sys4AI depot",
+    "namespace": "urn:sys4ai:ontology:project:sys4ai-depot:",
+    "purpose": "Manage reusable Sys4AI assets and factual local project inventory.",
+    "root": "."
+  },
+  "project_files": [
+    "ONTOLOGY/modules/project/project.jsonld"
+  ],
+  "publication": {
+    "binding": {
+      "actor_id": "/root",
+      "authority": [
+        {
+          "path": "SOUL.md",
+          "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+        },
+        {
+          "path": "AGENTS.md",
+          "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+        },
+        {
+          "path": "ROLE.md",
+          "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+        }
+      ],
+      "scope": [
+        "ONTOLOGY/modules/project",
+        "ONTOLOGY/bindings"
+      ]
+    },
+    "enabled": true
+  },
+  "retrieval": {
+    "default_hops": 2,
+    "default_limit": 20,
+    "max_context_bytes": 32000,
+    "max_hops": 8,
+    "max_limit": 100
+  },
+  "schema_version": 1,
+  "source_allowlist": [
+    ".agents/skills/agent-task/SKILL.md",
+    ".agents/skills/memory/SKILL.md",
+    ".agents/skills/memory/references/publication-examples.md",
+    ".agents/skills/ontology/SKILL.md",
+    ".agents/skills/task/SKILL.md",
+    ".agents/skills/to-implementation-plan/SKILL.md",
+    ".agents/skills/to-trd/SKILL.md",
+    "AGENTS.md",
+    "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld",
+    "ROLE.md",
+    "Roles/project-sub-agent/AGENTS.md",
+    "Roles/project-sub-agent/ROLE.md",
+    "Roles/task-manager/AGENTS.md",
+    "Roles/task-manager/ROLE.md",
+    "SOUL.md",
+    "SPECS.md",
+    "depot/projects.json",
+    "depot/template-update.json"
+  ]
+}

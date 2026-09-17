@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "source_rows": [
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_workbench.py",
+      "sha256": "1a02494a3bbe9979f48a152527fd0b1c6a566bc53576665822aa7fc34a11318e",
+      "before_sha256": "9b75ffd7e58b61c0f67f77bb809ce571a89659f262a22725581552fa973a5bc7",
+      "template_matches": true
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_workbench_security.py",
+      "sha256": "2528cef7de552d54ea7dc6b4a9707ff2cffead9d30638d98406e482318977ea5",
+      "before_sha256": "1ac5e57ba1cfa792b3f423465fb2aa05225a3a9e4a89d6de931a9bb4b571f322",
+      "template_matches": true
+    },
+    {
+      "path": "SKILLS-depo/init-new-project/assets/static-capability-v1.json",
+      "sha256": "204968dd1f576385af4d964215cdc485ff0e7a7ad7231b6ba48c3e899a104f58",
+      "before_sha256": "9ba2c3c313b10509fa4bb87a6983b75e308fca7ae26e834ea39870b481209a55",
+      "template_matches": true
+    },
+    {
+      "path": "SKILLS-depo/init-new-project/scripts/init_static_health.py",
+      "sha256": "9c26a8fe3251a93bd75a5b7a2bcf2a8b5b253a5170383629affcba81599efeb1",
+      "before_sha256": "c68bbe67817cf76da2901f0d0bc8caf0819d542017f2baabdd49cb98ad2992a7",
+      "template_matches": true
+    }
+  ],
+  "protected_hashes_reopened": 40,
+  "security_suite": {
+    "command": ".venv/bin/python -B -m unittest discover -s SKILLS-depo/ontology/tests -p test_workbench_security.py -v",
+    "exit_code": 0,
+    "tests": 10,
+    "elapsed_seconds": 10.299,
+    "receipt": "security-tests.txt"
+  },
+  "security_review": [
+    "Exact Host and supplied Origin checks precede exception.",
+    "Exception limited to raw / or /index.html, GET, navigate/document; no activation requirement.",
+    "No changes to session/bootstrap/cookie/CSRF/POST/CORS/limits.",
+    "Negative controls cover public query variants, API/health/assets, frame/subresource and bad Host/Origin."
+  ],
+  "template_status": "current",
+  "current_inventory_exact_one_resource_change": true,
+  "root_adoption": [
+    {
+      "source": "SKILLS-depo/ontology/scripts/ontology_workbench.py",
+      "path": ".agents/skills/ontology/scripts/ontology_workbench.py",
+      "expected_sha256": "9b75ffd7e58b61c0f67f77bb809ce571a89659f262a22725581552fa973a5bc7",
+      "sha256": "1a02494a3bbe9979f48a152527fd0b1c6a566bc53576665822aa7fc34a11318e"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "Verification/integrated-curator-ontology/implementation/workbench-entry-repair/verification.json",
+      "sha256": "0043d4fd43bd4d46cbf816ad937f1d5e8bd302101e50fc607dd13a51a3b77899"
+    },
+    {
+      "path": "Verification/integrated-curator-ontology/implementation/workbench-entry-repair/security-tests.txt",
+      "sha256": "9346909baecc18b5947f6aec6a0d2a6e1c67673aab11748b503d0c7a9188587e"
+    },
+    {
+      "path": "Verification/integrated-curator-ontology/implementation/workbench-entry-repair/template-check-after.json",
+      "sha256": "ca5a7dc7edaca2c33a85ff5d93def34666fdff3072166ec2df15acfd66d6f542"
+    },
+    {
+      "path": "Verification/integrated-curator-ontology/implementation/workbench-entry-repair/root-adoption-manifest.json",
+      "sha256": "e1decc7d09992058f52665bd52ae9e285a6cee99d8392212d0193d4f61155f96"
+    }
+  ]
+}

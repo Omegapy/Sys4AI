@@ -1,0 +1,54 @@
+test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) ... 
+  test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) (family='setup') ... ERROR
+test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) ... 
+  test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) (family='setup') ... FAIL
+test_every_declared_public_boundary_rejects_without_backend (test_guarded_dispatch.GuardedDispatchTests.test_every_declared_public_boundary_rejects_without_backend) ... ok
+
+======================================================================
+ERROR: test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) (family='setup')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guarded_dispatch.py", line 262, in test_actual_family_matrix
+    receipt = call()
+              ^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guarded_dispatch.py", line 149, in <lambda>
+    call = lambda: module.run_initialization(**args)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmph6di0t5x/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2813, in guarded
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmph6di0t5x/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 772, in dispatch
+    return decision.finish(function())
+                           ^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmph6di0t5x/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2813, in <lambda>
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmph6di0t5x/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2551, in run_initialization
+    proposed_all, sources, original = source_snapshot(depot, skill, identity, contract=contract,
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmph6di0t5x/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 788, in source_snapshot
+    original, origins, versions, renderer, policy = template_sources(depot, contract=contract)
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmph6di0t5x/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 598, in template_sources
+    raise InitializationError("template starter file allowlist is invalid")
+guard_setup_owner.InitializationError: template starter file allowlist is invalid
+
+======================================================================
+FAIL: test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) (family='setup')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guarded_dispatch.py", line 311, in test_actual_under_lock_context_changes_block_each_family
+    self.assertEqual(changed, [True], str(rejected.exception))
+AssertionError: Lists differ: [] != [True]
+
+Second list contains 1 additional elements.
+First extra element 0:
+True
+
+- []
++ [True] : template starter file allowlist is invalid
+
+----------------------------------------------------------------------
+Ran 3 tests in 64.476s
+
+FAILED (failures=1, errors=1)

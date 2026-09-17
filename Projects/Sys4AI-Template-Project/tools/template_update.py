@@ -251,6 +251,80 @@ def render_role_index(inputs: dict[str, bytes], role_root: str = "Roles") -> byt
         sys.modules.pop(module_name, None)
 
 
+def validate_curator_distribution(files, blobs):
+    """The selected Curator module must be complete and remain neutral in Template."""
+    if not any(name in files for name in ("CURATOR.md", "curator.yaml", "document-ownership.json")):
+        return
+    contract_path = "CURATION-depo/contract.json"
+    if contract_path not in blobs:
+        raise UpdateError("selected Curator starter lacks its current application contract")
+    contract = json_document(blobs[contract_path])
+    if not isinstance(contract, dict) or contract.get("schema_version") != 2 or contract.get("module_id") != "project-curator":
+        raise UpdateError("selected Curator application contract is unsupported")
+    required = {"CURATOR.md", "curator.yaml", "document-ownership.json"}
+    for key, prefix in (("required_skill_resources", ".agents/skills/curate/"), ("required_contract_resources", "reference-assets/CURATION-depo/")):
+        resources = contract.get(key)
+        if not isinstance(resources, list) or not resources or any(not isinstance(name, str) for name in resources):
+            raise UpdateError("Curator contract requires exact resource paths")
+        required.update(prefix + relative(name) for name in resources)
+    owners = {"CURATOR.md": "ROLES-depo/project-curator-CURATOR.md", "curator.yaml": "CURATION-depo/starter/curator.yaml", "document-ownership.json": "CURATION-depo/starter/document-ownership.json"}
+    for role in ("curator-manager", "documentation-curator", "knowledge-curator", "improvement-maintenance"):
+        for leaf in ("AGENTS.md", "ROLE.md"):
+            owners["Roles/" + role + "/" + leaf] = "ROLES-depo/" + role + "-" + leaf
+    required.update(owners)
+    missing = sorted(required - files.keys())
+    if missing:
+        raise UpdateError("incomplete Curator distribution: " + ", ".join(missing))
+    if any(files[target]["source"] != source for target, source in owners.items()):
+        raise UpdateError("Curator charter, configuration and paired roles require their exact source owners")
+    config = json_document(blobs[owners["curator.yaml"]])
+    inactive = {"schema_version": 1, "module_id": "project-curator", "module_version": "1.0.0",
+        "project": {"id": None, "repository_id": None, "coordination_root": None}, "branches": [],
+        "controller": {"kind": None, "charter": None}, "runtime": None, "accepted_policy": None,
+        "entitlements": [], "autonomous_write": False,
+        "schedule": {"enabled": False, "debounce_seconds": None, "catch_up_seconds": None, "dependency_cadence_seconds": None},
+        "bounds": {"model_calls": None, "work_seconds": None, "candidate_bytes": None, "concurrent_agents": None},
+        "trusted_sources": [], "tools": [], "network": [], "notifications": {"enabled": False, "destinations": []},
+        "service_installed": False, "hook_installed": False, "capabilities": []}
+    if encoded(config) != encoded(inactive):
+        raise UpdateError("Curator Template must remain neutral without project selection, standing grants, runtime or schedules")
+    if "ontology_integration" in contract:
+        # The integrated edition ships a neutral recipe, never populated active
+        # semantics, configured identities or enabled session authority.
+        session_source = "CURATION-depo/starter/curator-session.yaml"
+        if files.get("curator-session.yaml", {}).get("source") != session_source or session_source not in blobs:
+            raise UpdateError("integrated Curator distribution lacks its exact session starter owner")
+        session = json_document(blobs[session_source])
+        if session.get("project_id") is not None or session.get("enabled") is not False or session.get("unattended_background_ai") is not False:
+            raise UpdateError("Curator Template session must remain neutral and disabled")
+        recipe = "ONTOLOGY-depo/integrations/curator/1.0.0/"
+        manifest = json_document(blobs.get(recipe + "manifest.json", b"{}"))
+        if manifest.get("edition") != "curator-ontology-1.0.0" or set(manifest.get("files", {})) != {"recipe.json", "locators.json", "competency.json", "contract.md"}:
+            raise UpdateError("integrated Curator recipe manifest is incomplete")
+        for name, expected in manifest["files"].items():
+            source = recipe + name
+            if source not in blobs or digest(blobs[source]) != expected or files.get("reference-assets/" + source, {}).get("source") != source:
+                raise UpdateError("integrated Curator recipe resource is missing or changed: " + name)
+        config_source = files.get("ontology.yaml", {}).get("source")
+        if config_source not in blobs:
+            raise UpdateError("integrated Curator distribution requires neutral ontology configuration")
+        ontology = json_document(blobs[config_source])
+        if ontology.get("project", {}).get("id") is not None or ontology.get("publication") != {"enabled": False, "binding": None}:
+            raise UpdateError("Template ontology identity and publication authority must remain neutral")
+        if (ontology.get("project_files") != ["ONTOLOGY/modules/project/project.jsonld"]
+                or ontology.get("binding_files") != ["ONTOLOGY/bindings/bindings.jsonld"]
+                or ontology.get("competency_files", []) != []):
+            raise UpdateError("Template must retain its empty neutral canonical graph selection")
+        for name in ontology.get("project_files", []) + ontology.get("binding_files", []):
+            source = files.get(name, {}).get("source")
+            if source not in blobs or json_document(blobs[source]).get("@graph") != []:
+                raise UpdateError("Template active ontology graphs must remain empty")
+    ownership = json_document(blobs[owners["document-ownership.json"]])
+    if (not isinstance(ownership, dict) or ownership.get("schema_version") != 1 or not isinstance(ownership.get("entries"), list)
+            or any(not isinstance(entry, dict) or entry.get("sha256") is not None or any(section.get("sha256") is not None for section in entry.get("sections", [])) for entry in ownership["entries"])):
+        raise UpdateError("Curator Template ownership examples cannot carry selected project versions")
+
+
 def snapshot(root: Path) -> dict[str, Any]:
     """Read one validated source snapshot without touching the template."""
     safe(root)
@@ -362,6 +436,7 @@ def snapshot(root: Path) -> dict[str, Any]:
         raise UpdateError("template initialization policy must use schema 2")
     if policy.get("roles") != "Roles":
         raise UpdateError("template initialization policy must use the active roles layout")
+    validate_curator_distribution(files, blobs)
     inputs = role_index_inputs(files)
     index = render_role_index({target: blobs[entry["source"]] for target, entry in inputs.items()})
     files[ROLE_INDEX] = {"source": files[ROLE_HELPER]["source"], "sha256": digest(index), "mode": 0o644,

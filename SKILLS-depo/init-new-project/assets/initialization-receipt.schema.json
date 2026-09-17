@@ -33,7 +33,10 @@
         "governance-starter-v6",
         "governance-starter-v7",
         "governance-starter-v8",
-        "governance-starter-v9"
+        "governance-starter-v9",
+        "governance-starter-v10",
+        "governance-starter-v11",
+        "governance-starter-v12"
       ]
     },
     "status": {
@@ -396,6 +399,14 @@
         "ready",
         "degraded"
       ]
+    },
+    "curator_integration": {
+      "type": "object",
+      "description": "Exact v12 generated or current ontology-owner integration disposition and immutable receipt link."
+    },
+    "generated_files": {
+      "type": "object",
+      "description": "Exact generated Curator outputs, separately bound to neutral recipe manifest hashes."
     }
   },
   "allOf": [
@@ -408,7 +419,10 @@
               "governance-starter-v6",
               "governance-starter-v7",
               "governance-starter-v8",
-              "governance-starter-v9"
+              "governance-starter-v9",
+              "governance-starter-v10",
+              "governance-starter-v11",
+              "governance-starter-v12"
             ]
           }
         }
@@ -445,7 +459,10 @@
               "governance-starter-v6",
               "governance-starter-v7",
               "governance-starter-v8",
-              "governance-starter-v9"
+              "governance-starter-v9",
+              "governance-starter-v10",
+              "governance-starter-v11",
+              "governance-starter-v12"
             ]
           }
         }
@@ -553,7 +570,10 @@
             "enum": [
               "governance-starter-v7",
               "governance-starter-v8",
-              "governance-starter-v9"
+              "governance-starter-v9",
+              "governance-starter-v10",
+              "governance-starter-v11",
+              "governance-starter-v12"
             ]
           }
         }
@@ -570,7 +590,10 @@
           "setup_contract": {
             "enum": [
               "governance-starter-v8",
-              "governance-starter-v9"
+              "governance-starter-v9",
+              "governance-starter-v10",
+              "governance-starter-v11",
+              "governance-starter-v12"
             ]
           }
         }
@@ -640,13 +663,17 @@
       "additionalProperties": false,
       "properties": {
         "schema_version": {
-          "const": 1
+          "enum": [
+            1,
+            2
+          ]
         },
         "module_id": {
           "enum": [
             "what-did-you-learn",
             "ontology",
-            "ontology-advanced"
+            "ontology-advanced",
+            "project-curator"
           ]
         },
         "module_version": {
@@ -932,7 +959,13 @@
             [
               "ontology"
             ]
-          ]
+          ],
+          "items": {
+            "enum": [
+              "ontology",
+              "project-curator"
+            ]
+          }
         },
         "new_ontology": {
           "type": "boolean"
@@ -951,6 +984,30 @@
         },
         "static_health": {
           "type": "object"
+        },
+        "new_curator_files": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "CURATOR.md",
+              "curator.yaml",
+              "document-ownership.json",
+              "curator-session.yaml"
+            ]
+          }
+        },
+        "integration_edition": {
+          "const": "curator-ontology-1.0.0"
+        },
+        "curator_integration": {
+          "type": "object"
+        },
+        "generated_contents": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -1002,6 +1059,85 @@
               "refresh_dependencies": {
                 "const": []
               }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "module_id": {
+                "const": "project-curator"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "new_curator_files",
+              "protected_inventory",
+              "prerequisites"
+            ],
+            "properties": {
+              "module_version": {
+                "const": "1.0.0"
+              },
+              "new_memory": {
+                "const": false
+              },
+              "refresh_dependencies": {
+                "const": []
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "schema_version": {
+                "const": 2
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "module_id": {
+                "const": "project-curator"
+              }
+            },
+            "required": [
+              "integration_edition",
+              "refresh_modules",
+              "generated_contents",
+              "curator_integration"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "schema_version": {
+                "const": 1
+              }
+            }
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "integration_edition"
+                  ]
+                },
+                {
+                  "required": [
+                    "generated_contents"
+                  ]
+                },
+                {
+                  "required": [
+                    "curator_integration"
+                  ]
+                }
+              ]
             }
           }
         }

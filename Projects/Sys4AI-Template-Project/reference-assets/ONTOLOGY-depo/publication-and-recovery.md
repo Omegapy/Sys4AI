@@ -78,3 +78,35 @@ conformant semantic result is never a substitute for those checks.
 
 See [the proposal workflow](proposal-workflow.md) for immutable draft storage,
 native generation, browser session controls and lossless RDF staging.
+
+## Native Curator grant version 3
+
+Grant v1 core and grant v2 advanced remain unchanged. Grant v3 explicitly selects
+`owner_profile: core-v1` or `advanced-v2`, plus `controller_origin: curator` and
+a strict ontology-owned broker binding for the current live native call,
+protocol, charter and policy. Only the current confirmed version-2 Task manager
+can use this envelope. A memory grant supplies no ontology authority.
+
+The advanced profile retains companion config, proposal review/revision, preview,
+exact-file, lifecycle and publication checks. The grant is never converted into
+a legacy object to compute its digest. Canonical record/config schemas, proposal
+versions, journals and original-operation recovery keep their existing owners.
+Every v3 publication or recovery check requires a current protected live context;
+JSON evidence or an actor string alone cannot produce one. Native and OS proof
+remain separate release gates.
+
+## Curator integration owner operation
+
+The schema-1 `integrate-curator` operation is separate from ordinary publication.
+It selects only ontology.yaml and reserved curator.jsonld graph/binding and
+curator-competency.json files. Config changes append deduplicated recipe-required
+project, binding, competency and source-allowlist selections; identity, core locks,
+profiles, retrieval and publication configuration remain unchanged.
+
+Immutable intent records retain all original target bytes before graph, bindings,
+competencies and config are replaced in that order. Reads diagnose partial state.
+Recovery requires fresh current authority bound to the original preview and
+configuration predecessor, exact pre/post targets and unchanged sources/helpers.
+Third-state edits remain preserved. Publication receipts and completed v12 setup
+receipts establish exact generated integration ownership for explicit refresh.
+Equal unowned bytes do not establish ownership. No cross-file atomicity is claimed.

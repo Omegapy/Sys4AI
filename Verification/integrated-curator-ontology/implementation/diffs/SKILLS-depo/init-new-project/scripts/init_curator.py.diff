@@ -1,0 +1,148 @@
+--- before/SKILLS-depo/init-new-project/scripts/init_curator.py
++++ after/SKILLS-depo/init-new-project/scripts/init_curator.py
+@@ -10,13 +10,15 @@
+ from uuid import uuid4
+ 
+ MODULE = 'project-curator'
+-EDITION = 'governance-starter-v11'
++EDITION = 'governance-starter-v12'
+ SESSION = 'curator-session.yaml'
+ CONFIG = 'curator.yaml'
+ REFERENCE = 'reference-assets/CURATION-depo'
+ ROLES = ('curator-manager', 'documentation-curator', 'knowledge-curator', 'improvement-maintenance')
+ SKILLS = ('curate', 'agent-task', 'task', 'memory', 'ontology', 'what-did-you-learn', 'manage-subagent-roles', 'init-new-project')
+-PACKAGES = tuple('.agents/skills/' + name for name in SKILLS) + (REFERENCE,) + tuple('Roles/' + name for name in ROLES)
++LEGACY_PACKAGES = tuple('.agents/skills/' + name for name in SKILLS) + (REFERENCE,) + tuple('Roles/' + name for name in ROLES)
++INTEGRATION_REFERENCE = 'reference-assets/ONTOLOGY-depo/integrations/curator/1.0.0'
++PACKAGES = (*LEGACY_PACKAGES, INTEGRATION_REFERENCE)
+ SPECIAL_FILES = {CONFIG, SESSION, 'CURATOR.md', 'document-ownership.json', 'Roles/INDEX.md'}
+ STARTERS = {CONFIG, SESSION, 'CURATOR.md', 'document-ownership.json'}
+ RESOURCES = {REFERENCE + '/contract.json', *('.agents/skills/' + name + '/SKILL.md' for name in SKILLS),
+@@ -28,9 +30,9 @@
+     if not condition: raise h.InitializationError(message)
+ 
+ 
+-def source_files(h, depot):
++def source_files(h, depot, *, legacy=False):
+     original = h.template_sources(depot)[0]
+-    return {name: raw for name, raw in original.items() if name in SPECIAL_FILES or any(name.startswith(root + '/') for root in PACKAGES)}
++    return {name: raw for name, raw in original.items() if name in SPECIAL_FILES or any(name.startswith(root + '/') for root in (LEGACY_PACKAGES if legacy else PACKAGES))}
+ 
+ 
+ def validate_static(h, files, *, neutral, identity=None):
+@@ -115,7 +117,10 @@
+ 
+ 
+ def check_protected(h, destination, operation):
+-    fail(h, protected_inventory(h, destination, changed=operation['files']) == operation['protected_inventory'],
++    allowed=h._integration('owner_changes',destination,operation) if operation.get('schema_version')==2 else {}
++    current=protected_inventory(h, destination, changed=set(operation['files'])|set(allowed))
++    expected={name:value for name,value in operation['protected_inventory'].items() if name not in allowed}
++    fail(h, current == expected,
+          'Curator adoption observed changed authored records, settings, roles, identity or licensing')
+ 
+ 
+@@ -131,13 +136,15 @@
+     return proposed
+ 
+ 
+-def plan(h, depot, destination, record, previous_raw):
++def plan(h, depot, destination, record, previous_raw, refresh_modules=()):
+     original = source_files(h, depot); validate_static(h, original, neutral=True)
+     h.exact_role_root(destination, 'Roles')
+     new_files = sorted(name for name in STARTERS if not h.destination_file(destination, name).exists())
+     existing = {name: h.file_bytes(h.destination_file(destination, name)) for name in STARTERS if name not in new_files}
+     if CONFIG in existing:
+-        validate_static(h, {**original, **existing}, neutral=False, identity=record['identity'])
++        current={**original, **existing}
++        if SESSION in new_files:current.pop(SESSION,None)
++        validate_static(h, current, neutral=False, identity=record['identity'])
+         fail(h, h.unique_json(existing[CONFIG])['project']['coordination_root'] == str(destination), 'relocated Curator identity requires separately selected reconciliation')
+     proposed = proposed_files(h, destination, record['identity'], original, new_curator_files=new_files)
+     owned = h.module_owned_files(record); packages, changes = {}, {}
+@@ -178,21 +185,49 @@
+         adoption = ('specialized' if name in {CONFIG, SESSION, 'Roles/INDEX.md'} else 'adopted') if name in changes else 'preserved-project-owned' if final else 'skipped-existing-package'
+         sources.append({'source': h.TEMPLATE + '/' + name, 'destination': name, 'source_sha256': h.sha(raw), 'source_version': 'sha256:' + h.sha(raw), 'destination_sha256': final, 'adoption': adoption})
+     checksum = h.sha(previous_raw)
+-    operation = {'schema_version': 1, 'module_id': MODULE, 'module_version': '1.0.0', 'operation_id': 'module-adoption-' + uuid4().hex,
++    operation = {'schema_version': 2, 'integration_edition': h.INTEGRATION.EDITION, 'generated_contents': {}, 'refresh_modules': list(refresh_modules), 'curator_integration': {'edition':h.INTEGRATION.EDITION,'mode':'owner-publication','status':'pending','operation_id':None}, 'module_id': MODULE, 'module_version': '1.0.0', 'operation_id': 'module-adoption-' + uuid4().hex,
+                  'project_root': str(destination), 'identity': deepcopy(record['identity']),
+                  'base_receipt': {'path': 'control_records/project-setup-history/' + checksum + '.json', 'sha256': checksum},
+                  'refresh_dependencies': [], 'new_memory': False, 'sources': sources, 'packages': packages, 'files': changes,
+                  'preserved_files': preserved, 'new_curator_files': new_files, 'protected_inventory': protected_inventory(h, destination, changed=changes),
+                  'prerequisites': [{'module_id': name, 'disposition': 'existing-owner-compatible-package'} for name in ('task', 'memory', 'ontology', 'learning')],
+                  'status': 'partial', 'completed_stages': [], 'active_stage': 'assets', 'checks': [], 'created_at': datetime.now(timezone.utc).isoformat()}
++    prior_modules=record.get('module_adoptions',[])
++    if prior_modules and prior_modules[-1].get('module_id')==h.ONTOLOGY_MODULE and prior_modules[-1].get('new_ontology') and prior_modules[-1].get('status')=='completed':
++        effective=dict(original)
++        for name in list(effective):
++            target=h.destination_file(destination,name)
++            if name not in changes and target.is_file():effective[name]=h.file_bytes(target)
++        effective.update(proposed)
++        with h.INTEGRATION.owner(h) as api:
++            for name in api.source_paths(h.INTEGRATION.recipe_files(original)):
++                if name not in effective:effective[name]=h.file_bytes(h.destination_file(destination,name))
++        effective['ontology.yaml']=h.file_bytes(h.destination_file(destination,'ontology.yaml'))
++        generated=h._integration('render',record['identity'],effective,original)
++        for name,raw in generated.items():
++            target=h.destination_file(destination,name)
++            if name!='ontology.yaml' and target.exists():raise h.InitializationError('Reserved Curator graph is unowned: '+name)
++            changes[name]={'before':h.sha(h.file_bytes(target)) if target.exists() else None,'after':h.sha(raw)}
++            proposed[name]=raw
++            preserved.pop(name,None)
++        operation['generated_contents']={name:raw.decode() for name,raw in generated.items()}
++        operation['curator_integration']={'edition':h.INTEGRATION.EDITION,'mode':'setup-generated','status':'pending','files':{name:h.sha(raw) for name,raw in generated.items()},'prerequisite_operation':prior_modules[-1]['operation_id']}
++        operation['protected_inventory']=protected_inventory(h,destination,changed=changes)
+     operation['manifest_sha256'] = h.sha(h.encoded({key: operation[key] for key in h.module_frozen(operation)}))
+     return operation, proposed
+ 
+ 
+-def selected_source_files(h, depot, operation): return source_files(h, depot)
++def selected_source_files(h, depot, operation): return source_files(h, depot, legacy=operation.get('schema_version')==1)
+ 
+ 
+ def validate_operation(h, destination, operation):
++    if operation.get('schema_version')==2:
++        fail(h,operation.get('integration_edition')==h.INTEGRATION.EDITION and operation.get('refresh_modules') in ([],[MODULE])
++             and operation.get('curator_integration',{}).get('edition')==h.INTEGRATION.EDITION,'invalid integrated Curator operation edition/selection')
++        generated=operation.get('generated_contents',{})
++        fail(h,isinstance(generated,dict) and (not generated or set(generated)=={*h.INTEGRATION.GENERATED,'ontology.yaml'}),'invalid generated integration inventory')
++        for name,raw in generated.items():
++            fail(h,isinstance(raw,str) and operation['files'].get(name,{}).get('after')==h.sha(raw.encode()),'generated integration differs from frozen target')
+     fail(h, isinstance(operation['new_curator_files'], list) and operation['new_curator_files'] == sorted(set(operation['new_curator_files'])) and set(operation['new_curator_files']) <= STARTERS,
+          'invalid Curator missing-resource selection')
+     fail(h, operation['prerequisites'] == [{'module_id': name, 'disposition': 'existing-owner-compatible-package'} for name in ('task', 'memory', 'ontology', 'learning')], 'invalid Curator existing-owner prerequisites')
+@@ -205,7 +240,7 @@
+         h.safe(destination / name)
+ 
+ 
+-def assess(h, destination):
++def assess(h, destination, *, integration_required=None):
+     result = {'module_id': MODULE, 'module_version': '1.0.0', 'installed': False, 'configured': False, 'authorized': False,
+               'compatible': False, 'structural_readiness': 'unavailable', 'runtime_observed': False, 'runtime': 'not-exercised',
+               'inspector_execution': 'none', 'publication_enabled': False, 'diagnostics': [],
+@@ -217,14 +252,22 @@
+             if name != SESSION or h.destination_file(destination, name).exists():
+                 files[name] = h.file_bytes(h.destination_file(destination, name))
+         result['installed'] = (STARTERS - {SESSION}) <= files.keys()
+-        locked = h._static('inventory').get('curator_locked_resources', {})
+-        fail(h, bool(locked) and all(name in files and h.sha(files[name]) == expected for name,expected in locked.items()),
++        if integration_required is None:
++            receipt = h.destination_file(destination,h.RECORD)
++            saved = h.unique_json(h.file_bytes(receipt)) if receipt.exists() else {}
++            integration_required = saved.get('setup_contract') == h.SETUP_CONTRACT or any(op.get('integration_edition') == h.INTEGRATION.EDITION for op in saved.get('module_adoptions',[]))
++        locked = h._static('inventory', legacy=not integration_required).get('curator_locked_resources', {})
++        current_locked=h._static('inventory').get('curator_locked_resources',{})
++        fail(h, bool(locked) and all(name in files and h.sha(files[name]) in ({expected,current_locked.get(name)} if not integration_required else {expected}) for name,expected in locked.items()),
+              'Curator owner code differs from its reviewed compatibility inventory; customized code is preserved without execution')
+         identity = h.unique_json(h.file_bytes(h.destination_file(destination, h.IDENTITY)))
+         cfg = validate_static(h, files, neutral=False, identity=identity)
+         fail(h, cfg['project']['coordination_root'] == str(destination), 'Curator coordination root changed; reconcile relocation explicitly')
+         session = h.unique_json(files[SESSION]) if SESSION in files else None
+         enabled = session is not None and session['enabled']
++        semantic = h._integration('assess',destination) if integration_required else {'required':False,'edition':'historical-package-only'}
++        if integration_required: fail(h,semantic['compatible'],str(semantic['diagnostics']))
++        result['semantic_integration'] = semantic
+         result.update(installed=True, compatible=True, structural_readiness='available', project_id=identity['project_id'], config_sha256=h.sha(files[CONFIG]),
+                       configured=enabled, session_enabled=enabled, unattended_background_ai=False,
+                       state='installed_session_enabled' if enabled else 'installed_inactive')

@@ -270,3 +270,8 @@ Focused acceptance is in `test_advanced_ontology_setup.py`,
 The complete initializer suite also checks earlier editions, licenses, memory,
 learning, roles, CLI boundaries and recovery. All fixtures use disposable
 registered depots; they do not update the real Template or projects.
+
+Selected v11 installations enable [bounded session maintenance](../curate/references/session-maintenance.md) immediately.
+The Template remains neutral; explicit opt-outs and earlier setup receipts retain
+their choices. The unattended scheduler, services and runtime installation remain
+separate.

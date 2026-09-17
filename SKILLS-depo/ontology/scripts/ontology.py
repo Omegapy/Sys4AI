@@ -83,6 +83,15 @@ def main(argv=None):
     parser.add_argument("--packet-file")
     parser.add_argument("--packet-sha256")
     commands = parser.add_subparsers(dest="command", required=True)
+    command = commands.add_parser("integration-preview")
+    command.add_argument("selection")
+    command = commands.add_parser("integration-publish")
+    command.add_argument("proposal")
+    command.add_argument("--grant-file", required=True)
+    command.add_argument("--expected-preview-sha256", required=True)
+    command = commands.add_parser("integration-recover")
+    command.add_argument("operation_id")
+    command.add_argument("--grant-file", required=True)
     from ontology_health import arguments as health_arguments
     health_arguments(commands.add_parser("health"))
     commands.add_parser("validate")
@@ -173,6 +182,15 @@ def main(argv=None):
                     "invalid_packet_request", "Packet request requires current Task manager inputs and supported selection fields.")
             packet = build_packet(root, **payload)
             result = freeze_packet(root, packet, args.output, actor=payload["actor"])
+        elif args.command == "integration-preview":
+            from ontology_publication import integration_preview
+            result = integration_preview(root, read_json(safe_path(root, args.selection)))
+        elif args.command == "integration-publish":
+            from ontology_publication import integration_publish
+            result = integration_publish(root, read_json(safe_path(root, args.proposal)), read_json(safe_path(root, args.grant_file)), expected_preview_sha256=args.expected_preview_sha256)
+        elif args.command == "integration-recover":
+            from ontology_publication import integration_recover
+            result = integration_recover(root, args.operation_id, read_json(safe_path(root, args.grant_file)))
         elif args.command == "preview":
             from ontology_publication import preview
             result = preview(root, read_json(safe_path(root, args.proposal)))

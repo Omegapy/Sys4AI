@@ -1,0 +1,43 @@
+{
+  "event": {
+    "event_id": "observe_setup_complete_v3",
+    "actor": "/root/supported_curator_manager",
+    "execution_id": "curator_supported_cd80544e",
+    "generation": 2,
+    "kind": "assignment.observe",
+    "data": {
+      "assignment_id": "setup_worker_v2",
+      "receipt": {
+        "tool": "collaboration.list_agents",
+        "result": {
+          "agents": [
+            {
+              "agent_name": "/root/supported_curator_manager/setup_worker",
+              "agent_status": "completed"
+            }
+          ]
+        }
+      },
+      "changes": [
+        {
+          "path": ".curator-supported-CD80544E/setup_compatibility/manifest-v3.json",
+          "sha256": "5fc69f527c65571ae19732b2a0cbdf1d0e8ac609d0ddcd9d4b935d177005217d"
+        }
+      ]
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Observed original setup worker completed the current pinned package refresh; all delivered file/evidence/receipt hashes match."
+    ],
+    "verification_evidence": [
+      "Inspected current canonical binding and referenced exact evidence before the typed owner operation."
+    ],
+    "user_response_summary": "Observed original setup worker completed the current pinned package refresh; all delivered file/evidence/receipt hashes match.",
+    "current_summary": "Observed original setup worker completed the current pinned package refresh; all delivered file/evidence/receipt hashes match.",
+    "next_step": "Complete the retained caller/setup repairs and required combined verification.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

@@ -1,0 +1,19 @@
+--- before/SKILLS-depo/init-new-project/tests/test_initializer.py
++++ after/SKILLS-depo/init-new-project/tests/test_initializer.py
+@@ -17,7 +17,7 @@
+ from unittest.mock import patch
+ 
+ SOURCE_SKILL = Path(__file__).resolve().parents[1]
+-BASELINE = ("agent-task", "communication", "init-new-project", "manage-subagent-roles",
++BASELINE = ("curate", "agent-task", "communication", "init-new-project", "manage-subagent-roles",
+             "memory", "ontology", "task", "to-implementation-plan", "to-trd", "what-did-you-learn")
+ 
+ 
+@@ -76,6 +76,7 @@
+     shutil.copytree(SOURCE_DEPOT / "MEMORY-depo", template / "reference-assets/MEMORY-depo",
+                     ignore=shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc", "starter"))
+     shutil.copytree(SOURCE_DEPOT / "LEARNING-depo", template / "reference-assets/LEARNING-depo", ignore=ignore, dirs_exist_ok=True)
++    shutil.copytree(SOURCE_DEPOT / "CURATION-depo", template / "reference-assets/CURATION-depo", ignore=ignore, dirs_exist_ok=True)
+     shutil.copytree(SOURCE_DEPOT / "ONTOLOGY-depo", template / "reference-assets/ONTOLOGY-depo",
+                     ignore=shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc", "starter"), dirs_exist_ok=True)
+     for relative, source in mapped.items():

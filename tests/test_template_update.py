@@ -1061,5 +1061,77 @@ class TemplateUpdateTests(unittest.TestCase):
         self.assertEqual("conflict", json.loads(result.stdout)["status"])
 
 
+
+
+
+class CuratorDistributionTests(unittest.TestCase):
+    """The actual generic updater retains its guarantees for the v10 module."""
+    def fixture(self):
+        stage=HELPER.parents[1]
+        sys.path.insert(0,str(stage/'SKILLS-depo/init-new-project/tests'))
+        import test_curator_setup
+        temporary=test_curator_setup.fixture_directory('distribution');self.addCleanup(temporary.cleanup)
+        return test_curator_setup.compose(temporary.name)
+
+    def test_curator_missing_inputs_and_customizations_preserve_template(self):
+        root,helper,updater,_,_=self.fixture();template=root/updater.TEMPLATE
+        before=file_inventory(template);collection=root/'CURATION-depo';saved=root/'curation-fixture-input'
+        collection.rename(saved)
+        with self.assertRaises(updater.UpdateError):updater.update(root,'apply')
+        self.assertEqual(file_inventory(template),before);saved.rename(collection)
+        missing=root/'absent-volume'
+        with self.assertRaises(updater.UpdateError):updater.update(missing,'apply')
+        self.assertFalse(missing.exists());self.assertEqual(file_inventory(template),before)
+        target=template/'CURATOR.md';target.write_text('Project-specific charter edits.\n')
+        customized=file_inventory(template)
+        source=root/'ROLES-depo/project-curator-CURATOR.md';source.write_bytes(source.read_bytes()+b'\nUpdated source edition.\n')
+        with self.assertRaises(updater.UpdateError):updater.update(root,'apply')
+        self.assertEqual(file_inventory(template),customized)
+
+    def test_curator_source_drift_before_publication_preserves_template(self):
+        root,helper,updater,_,_=self.fixture();template=root/updater.TEMPLATE
+        source=root/'SKILLS-depo/curate/README.md';source.write_bytes(source.read_bytes()+b'\nSelected source update.\n')
+        before=file_inventory(template);original=updater.snapshot;calls=0
+        def changing(selected):
+            nonlocal calls
+            result=original(selected);calls+=1
+            if calls==1:source.write_bytes(source.read_bytes()+b'\nLater source edit.\n')
+            return result
+        with patch.object(updater,'snapshot',side_effect=changing),self.assertRaises(updater.UpdateError):updater.update(root,'apply')
+        self.assertEqual(file_inventory(template),before);self.assertFalse((root/updater.PENDING).exists())
+
+    def test_curator_complete_neutral_source_ownership_precedes_effects(self):
+        root,helper,updater,_,_=self.fixture();template=root/updater.TEMPLATE
+        before=file_inventory(template)
+        config=root/'CURATION-depo/starter/curator.yaml';original=config.read_bytes();data=json.loads(original);data['schedule']['enabled']=True;config.write_text(json.dumps(data))
+        with self.assertRaises(updater.UpdateError):updater.update(root,'apply')
+        self.assertEqual(file_inventory(template),before);config.write_bytes(original)
+        action=root/'SKILLS-depo/curate/ACTIONS.md';original=action.read_bytes();action.unlink()
+        with self.assertRaises(updater.UpdateError):updater.update(root,'apply')
+        self.assertEqual(file_inventory(template),before);action.write_bytes(original)
+        state=updater.load_state(root)
+        self.assertEqual(state['files']['CURATOR.md']['source'],'ROLES-depo/project-curator-CURATOR.md')
+        self.assertEqual(state['files']['Roles/INDEX.md']['generated']['kind'],'role-index-v1')
+        self.assertNotIn('Roles/INDEX.md',json.loads((root/updater.MANIFEST).read_text())['overrides'].values())
+
+    def test_curator_pending_recovery_preserves_unknown_and_later_target_edits(self):
+        root,helper,updater,_,_=self.fixture();template=root/updater.TEMPLATE
+        unknown=template/'.agents/skills/curate/project-owned.txt';unknown.write_text('Unknown project bytes survive.\n')
+        source=root/'SKILLS-depo/curate/README.md';source.write_bytes(source.read_bytes()+b'\nReviewed source update.\n')
+        target=template/'.agents/skills/curate/README.md';expected=source.read_bytes();original_write=updater.atomic_write
+        def interruption(path,data,*args,**kwargs):
+            result=original_write(path,data,*args,**kwargs)
+            if path==target:raise OSError('fixture interruption after exact Curator file write')
+            return result
+        with patch.object(updater,'atomic_write',side_effect=interruption),self.assertRaises(OSError):updater.update(root,'apply')
+        self.assertTrue((root/updater.PENDING).is_file());self.assertEqual(target.read_bytes(),expected)
+        target.write_text('Later human target edit.\n');later=target.read_bytes()
+        with self.assertRaises(updater.UpdateError):updater.update(root,'apply')
+        self.assertEqual(target.read_bytes(),later);self.assertEqual(unknown.read_text(),'Unknown project bytes survive.\n')
+        target.write_bytes(expected);updater.update(root,'apply')
+        self.assertFalse((root/updater.PENDING).exists());self.assertEqual(unknown.read_text(),'Unknown project bytes survive.\n')
+        self.assertEqual(updater.load_state(root)['files']['.agents/skills/curate/README.md']['sha256'],updater.digest(expected))
+
+
 if __name__ == "__main__":
     unittest.main()

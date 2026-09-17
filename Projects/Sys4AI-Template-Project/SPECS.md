@@ -151,3 +151,35 @@ no operation-specific publication authority. Existing receipts retain their
 original edition. Explicit ontology adoption and receipt-owned refresh use the
 [initializer contract](./.agents/skills/init-new-project/SKILL.md), preserving
 existing memory, learning, governance, Tasks, roles, licensing and project data.
+
+## Curator capability and initialization v10
+
+The current starter edition is `governance-starter-v10`; earlier v1-v9 setup
+receipts keep their original edition and recorded ownership. Curator adds its
+charter, inactive destination configuration, protected ownership map, complete
+skill/reference package and four paired roles. Existing role discovery owns the
+generated index. Source distribution installs no service, hook, environment,
+model, queue, credentials or live entitlement and copies no project knowledge.
+
+Curator status/review are read-only. Current Task intake/continuation can consult
+existing scoped Curator notices; unrelated work proceeds silently. Exact manual
+and automatic operations use the same Application route and original owner APIs.
+Fixed direct calls bind the actual current Task, manager, root, revision and exact
+selected arguments. Existing Broker callbacks retain their supported route and
+every owner still performs its own checks. Separate
+authority covers integration, canonical knowledge, governance, dependencies and
+runtime effects. Installed capability is not activation; selected native and
+host proof remains required. Explicit existing-project adoption uses the one
+setup receipt, retains licensing/capture/custom roles and preserves partial
+recovery and later edits without implicit refresh on completed reruns.
+
+New ordinary Curator executions use Task schema 2 with orchestration version 1.
+The read-only `validate_controller_selection` helper validates a versioned
+selection artifact against the prepared project, selected charter and policy,
+and current filesystem role catalog. Its exact bytes and source references enter
+the normal manager reservation's `source_refs` and context. Actual reservation,
+native launch receipt, required reads and confirmed activation remain mandatory;
+the selection artifact itself creates no Task or standing runtime permission.
+Existing orchestration version 2 records retain their original Broker and native
+protocol requirements and are never converted by ordinary selection. Static-ready
+setup remains installed-inactive and establishes no native or callback readiness.

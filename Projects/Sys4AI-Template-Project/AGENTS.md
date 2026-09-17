@@ -92,3 +92,33 @@ before the final handoff of substantive work. Capture useful new evidence-backed
 findings within current scope without a user reminder. Skip trivial or read-only
 requests and duplicate findings. Respect an explicit opt-out and preserve the
 existing publication, privacy, Task ownership and frozen-input checks.
+
+
+## Curator session checkpoint
+
+When `curator-session.yaml` is installed and enabled, use the
+[session maintenance entry](.agents/skills/curate/references/session-maintenance.md)
+on the first assistant turn and when returning after an interruption. Gather
+bounded catch-up observations and process eligible maintenance through the
+current owner within the configured session budget. Keep routine outcomes quiet,
+preserve pending work and original user work, and respect explicit opt-outs.
+This session mode enables no unattended background AI or persistent service.
+
+## Optional Curator selection
+
+The Project Director remains the default. An installed CURATOR.md is inactive
+until the owning project explicitly selects one Curator controller and charter
+for a new execution. New ordinary Curator intake uses Task schema 2 with
+orchestration version 1. First validate the schema-version-1 Curator selection
+artifact through the Curator helper; it binds project identity and exact
+project.json, CURATOR.md, curator.yaml and current role references. Include its
+exact bytes and returned source references in the normal reservation's
+`source_refs` and context. Reading or validating it creates no Task or activation.
+
+Actual manager reservation, native launch receipt, charter/policy/role reads and
+confirmed activation establish the sole canonical writer. Direct public owner
+calls retain the current Task, manager, root, revision and exact argument binding
+with every existing owner check. Existing orchestration version 2 records keep
+their Broker, controller_origin and native_protocol requirements; do not relabel
+or convert them or infer a callback. Read-only/no-op prompts create no Task, and
+missing evidence required by the selected execution mode holds its operations.

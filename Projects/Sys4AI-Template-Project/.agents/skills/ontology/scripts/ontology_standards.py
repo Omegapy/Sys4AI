@@ -92,6 +92,8 @@ def dataset(root,graphs=None,**kwargs): return call(root,'dataset',graphs=graphs
 def query(root,text,graphs=None,**kwargs): return call(root,'query',query=text,graphs=graphs or ['asserted'],**kwargs)
 def validate(root,graphs=None,shapes=None,triples=None,**kwargs): return call(root,'validate',graphs=graphs or ['asserted','derived','external'],shapes=shapes,triples=triples,**kwargs)
 def infer(root,goals=None,premise_ids=None,**kwargs): return call(root,'infer',goals=goals or [],premise_ids=premise_ids,**kwargs)
+def infer_diagnostic(root,goals=None,premise_ids=None,**kwargs):
+    return call(root,'infer',goals=goals or [],premise_ids=premise_ids,result_mode='diagnostic',**kwargs)
 def export(root,format,selected_graph=None,**kwargs): return call(root,'export',format=format,selected_graph=selected_graph,**kwargs)
 def stage_import(root,data,format,manifest=None,**kwargs): return call(root,'parse',data=data,format=format,manifest=manifest,**kwargs)
 

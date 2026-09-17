@@ -10,6 +10,7 @@ dataset(root, graphs=["asserted", "derived"])
 query(root, "SELECT ?s WHERE {?s ?p ?o} LIMIT 10", graphs=["asserted"])
 validate(root, graphs=["asserted", "derived"])
 infer(root, goals=[[subject_iri, predicate_iri, object_iri]], premise_ids=None)
+infer_diagnostic(root, goals=[], premise_ids=None)
 export(root, "json-ld")
 export(root, "json-ld", include_inferred=True)
 export(root, "turtle", selected_graph="asserted")
@@ -22,7 +23,13 @@ action validation. It runs pySHACL with inference, JS, imports, and advanced
 executable extensions disabled. Reports distinguish `conformant`, `violation`,
 unsupported features, and processing failure. The authoring path combines
 manifested shapes and exact per-record endpoint/cardinality constraints with
-core validation. Inferred graphs cannot supply missing approval or provenance.
+core validation. Generated NodeShapes group only identical complete constraint
+sets and retain every original targetNode. Inferred graphs cannot supply missing approval or provenance.
+
+Generated membership lists use deterministic named RDF cells with identical
+ordered suffixes shared within one call. Every member and list order remains
+intact; meta-SHACL still validates their first/rest structure. Named cells avoid
+repeated rendering of anonymous list tails in intermediate validator reports.
 
 `query` supports SELECT, ASK, CONSTRUCT, and DESCRIBE. It parses SPARQL, resolves
 prefixes, rejects Update and SERVICE, and restricts FROM/FROM NAMED to already
@@ -67,3 +74,19 @@ Primary backend references: [RDFLib source](https://github.com/RDFLib/rdflib),
 [pySHACL](https://github.com/RDFLib/pySHACL), and
 [OWL-RL](https://github.com/RDFLib/OWL-RL). The locked versions and actual runtime
 receipts determine delivered behavior.
+
+`infer_diagnostic` computes the same complete selected closure, negative assertions
+and conflicts as `infer` inside the same confined worker and unchanged budgets.
+Its explicit schema-1 diagnostic returns counts and canonical SHA-256 digests for
+selected premises, negatives, inferred triples, proofs, conflicts and provenance.
+It retains completeness, trust, failures and bounded goal classifications.
+`reasoning_scope` is `full_selected_closure` only without a premise subset;
+otherwise it is `selected_premise_closure`. `proof_detail` is always
+`counts_and_digests_only`. It delivers no full proof arrays. Digest counts on an
+incomplete result describe only that incomplete result; unavailable evidence is
+null. The operational health inference probe selects this diagnostic explicitly
+and reports that full proof delivery was not exercised. Default full `infer`,
+publication, knowledge retrieval and frozen proof replay retain their full proof
+contract and truthful `output_limit` when full detail exceeds the response budget.
+For proof detail call `infer` with exact premise/record IDs and goals; that query
+proves only its selected premise scope, not the complete project closure.

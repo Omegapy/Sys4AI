@@ -1,0 +1,14 @@
+import pathlib,json,subprocess,hashlib,sys
+r=pathlib.Path('/Volumes/P-SSD/AngryOwl/Sys4AI');f='Tasks/Task-plan-integrated-curator-ontology-and-project-initialization-2026-09-13--3ADCACFC';m=r/f/'artifacts/orchestration/manager';aid,slot,available=sys.argv[1:4]
+ref=lambda p:{'path':p,'sha256':hashlib.sha256((r/p).read_bytes()).hexdigest()}
+cat=subprocess.check_output([str(r/'.venv/bin/python'),str(r/'.agents/skills/manage-subagent-roles/scripts/role_catalog.py'),'--repo-root',str(r),'list','--format','json']);name='catalog-'+aid+'.json';(m/name).write_bytes(cat);row=next(x for x in json.loads(cat)['valid_roles'] if x['name']=='project-sub-agent')
+role={'name':row['name'],'agents_path':row['agents_file'],'role_path':row['role_file'],'agents_sha256':row['agents_sha256'],'role_sha256':row['role_sha256'],'catalog':ref(f+'/artifacts/orchestration/manager/'+name)}
+t=json.loads((r/f/'task.json').read_text());s=t['orchestration']['subtasks']['integrated_plan'];b=s['baseline'];context=[ref(f+'/artifacts/orchestration/baseline_'+s['digest']+'.json'),*b['inputs']]
+if slot=='senior':
+ for v in t['orchestration']['candidates'].values():
+  if v['current'] if 'current' in v else True:
+   a=t['orchestration']['artifacts'][v['artifact_id']];context.append({'path':f+'/'+a['path'],'sha256':a['sha256']})
+fit={'objective':b['objective'],'capabilities':['Project analysis','Documentation','Evidence-backed verification'],'reads':b['reads'],'writes':[f+'/artifacts/orchestration/work/'+aid],'deliverable':b['deliverable'],'tools':['exec_command'],'skills':['to-implementation-plan','ontology','init-new-project'],'authority':b['authority'],'risk':'Omitted acceptance clauses, unsupported ontology packaging or unsafe adoption assumptions. Complete source inspection and schema validation required.','stop':b['stop'],'rationale':'project-sub-agent permits bounded solver/senior analysis and documentation. Curator specialized roles require broker artifacts and actor profiles incompatible with this planning assignment; no narrower valid planning role exists.'}
+runtime={'tools':['spawn_agent','list_agents','send_message','followup_task','interrupt_agent'],'depth':2,'available_slots':int(available),'evidence':[ref(f+'/artifacts/orchestration/manager/'+('runtime-senior-v1.json' if slot=='senior' else 'runtime-planning-v1.json'))]};settings=t['orchestration']['settings']
+p={'event':{'event_id':'reserve_'+aid,'kind':'assignment.reserve','data':{'assignment_id':aid,'subtask_id':'integrated_plan','slot':slot,'role':role,'fit':fit,'runtime':runtime,'settings':settings,'context':context}},'summary':'Reserved '+slot+' as a distinct native full-problem planning function with fresh role catalog and exact current baseline.'}
+z=subprocess.run([str(r/'.venv/bin/python'),str(m/'event.py')],input=json.dumps(p),text=True);raise SystemExit(z.returncode)

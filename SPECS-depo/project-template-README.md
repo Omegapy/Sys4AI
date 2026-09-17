@@ -21,7 +21,7 @@ resulting product copy is project-local and receives no automatic updates.
 
 ## Start a new Sys4AI project
 
-Use the depot's [init-new-project skill](../../.agents/skills/init-new-project/SKILL.md)
+Use the depot's [init-new-project skill](../../SKILLS-depo/init-new-project/SKILL.md)
 with the real product name, stable ID, purpose, and destination.
 The `create` route specializes this Template's starter files, complete skill
 and role packages, reference assets, and soul, then records factual inventory.
@@ -199,3 +199,20 @@ reruns retain their original setup edition and locked imports. Use the initializ
 installed ontology `health` command for semantic and source readiness. Canonical
 publication still needs its exact current operation grant. The Template contains
 no project definitions, instances, grants, generated wiki or runtime state.
+
+## Project Curator starter
+
+The [Curator skill](./.agents/skills/curate/SKILL.md), [charter](./CURATOR.md),
+[neutral configuration](./curator.yaml), [document ownership](./document-ownership.json)
+and [application contract](./reference-assets/CURATION-depo/contract.json)
+coordinate selected project maintenance through the existing owners. Four paired
+Curator roles appear in the generated Roles index. The Template carries no live
+Task, grant, queue history, project-specific knowledge, enabled schedule or service.
+
+Initializer v10 binds destination identity while leaving runtime and standing
+permissions disabled. Existing projects adopt Curator only through the explicit
+initializer module route; their base setup, licensing, custom packages, role
+provenance and capture preference remain project-owned. `$curate` status and
+scoped review read metadata without model analysis or canonical writes. Exact
+manual and automatic mutations share current owner and authorization gates.
+Static/disposable checks do not establish native runtime or host-service readiness.

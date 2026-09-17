@@ -33,6 +33,12 @@ def read_task(root, path):
     except helper.TaskError as exc:
         raise MemoryError("invalid_task", "Installed Task inspection is unavailable or reports invalid state.") from exc
     require(not errors and state == canonical, "invalid_task", "Canonical Task fails the installed read-only validator.", {"codes": [e.get("code") for e in errors]})
+    if state.get('orchestration', {}).get('version') == 2:
+        try:
+            helper.orch.native.controller(state['orchestration']['controller_origin'])
+            helper.orch.native.protocol(state['orchestration']['native_protocol'])
+        except helper.orch.native.NativeError as exc:
+            raise MemoryError('native_provenance', 'Current Task native provenance is invalid.') from exc
     return state, helper
 
 

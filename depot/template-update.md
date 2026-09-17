@@ -224,3 +224,26 @@ open them before accessing the removable volume. They are separate from
 status and the conflicting source/destination; it is not evidence that the
 template is current. No Git commit, push, project-memory refresh or model
 activation is performed by these commands.
+
+## Curator source distribution
+
+`ROLES-depo/project-curator-CURATOR.md` owns `CURATOR.md`. Exact overrides map
+`CURATION-depo/starter/curator.yaml` and `document-ownership.json` into the neutral
+active starter positions; exact mirrors retain those neutral examples with the
+reference contract. Four Curator `AGENTS.md`/`ROLE.md` pairs map into `Roles/`.
+The existing role helper alone generates `Roles/INDEX.md`; no static override
+owns that index. Complete skills and CURATION reference resources follow normal
+collection discovery. `contract.json` is the current retained application
+contract; the initializer and Template checks use that same canonical resource.
+
+Run the existing check/apply transaction only for the registered Template. All
+existing unknown/unowned conflict, complete package, file-type, symlink, case,
+role-provenance, retirement and exact pending-operation recovery gates apply to
+Curator resources. A source update grants no active-root/product adoption,
+service/hook installation, runtime provisioning or publication. Existing products
+select the initializer's Curator module adoption separately.
+
+Curator integration resources under ONTOLOGY-depo/integrations/curator/1.0.0 are
+neutral source material mapped through the existing reference-assets distribution.
+The v12 initializer generates project-local semantic records after specialization;
+no populated Curator graph or receipt is distributed as a Template starter.

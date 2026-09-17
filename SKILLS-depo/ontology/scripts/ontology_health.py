@@ -83,7 +83,7 @@ def advanced_health(root, *, scope="selected", level="static", required=(), work
         components["canonical"] = {"required": True, "ready": not any(d["severity"] == "error" for d in project.diagnostics)
                                     and all(s["status"] == "current" for s in project.sources)}
         if level == "operational":
-            from ontology_standards import query, validate, infer
+            from ontology_standards import query, validate, infer_diagnostic
             from ontology_semantic import search
             for name, component in components.items():
                 if not component["required"] or name == "canonical":
@@ -94,7 +94,9 @@ def advanced_health(root, *, scope="selected", level="static", required=(), work
                         observed = {"query": query(root, "ASK { ?s ?p ?o }"), "validation": validate(root)}
                         component["ready"] = all(x.get("complete") and x.get("status") not in {"violation", "processing_failure"} for x in observed.values())
                     elif name == "inference":
-                        observed = infer(root)
+                        observed = infer_diagnostic(root)
+                        component['probe_scope'] = 'full_selected_closure; counts_and_digests_only'
+                        component['full_proof_delivery'] = 'not_exercised; default full infer may return output_limit'
                         component["ready"] = observed.get("complete") is True and observed.get("status") == "ok" and observed.get("trusted") is True
                     elif name == "semantic":
                         try:

@@ -1,0 +1,30 @@
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/manage-subagent-roles/scripts/role_catalog.py", line 1580, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/manage-subagent-roles/scripts/role_catalog.py", line 1479, in main
+    return run(args)
+           ^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/manage-subagent-roles/scripts/role_catalog.py", line 1429, in run
+    result = reindex(root)
+             ^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/manage-subagent-roles/scripts/role_catalog.py", line 1563, in guarded
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 768, in dispatch
+    decision = begin_action(root, family, operation, arguments, targets, _observed=facts)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 724, in begin_action
+    decision = Decision(root, family, operation, normalized, list(targets), _observed)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 626, in __init__
+    configured = load_advanced(root, required=True, _overrides=candidate_overrides)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology_advanced.py", line 49, in load_advanced
+    core = load_config(root)
+           ^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology_core.py", line 221, in load_config
+    require(saved.get("project_id") == p["id"] and saved.get("project_name") == p["name"] and saved.get("purpose") == p["purpose"], "identity_mismatch", "Ontology identity differs from project.json.")
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/ontology/scripts/ontology_core.py", line 40, in require
+    raise OntologyError(code, message, **location)
+ontology_core.OntologyError: Ontology identity differs from project.json.

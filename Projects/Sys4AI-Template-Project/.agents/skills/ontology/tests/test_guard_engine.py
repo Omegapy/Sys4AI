@@ -146,5 +146,43 @@ class GuardEngineTests(unittest.TestCase):
         self.assertLess(len(str(rejected.exception)) + len(str(rejected.exception.details)), 300)
 
 
+class GuardSnapshotCapacityTests(unittest.TestCase):
+    def test_complete_inventory_through_128_mib_and_rejects_overflow(self):
+        import ontology_guards as guards
+        block_bytes = 1024 * 1024
+        expected_digest = guards.digest(bytes(block_bytes))
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            inventory = root / "inventory"
+            inventory.mkdir()
+            for index in range(128):
+                with (inventory / f"{index:03}.bin").open("wb") as stream:
+                    stream.truncate(block_bytes)
+                if index + 1 in (32, 64, 80, 128):
+                    with self.subTest(mebibytes=index + 1):
+                        snapshot = guards._snapshot(root, ["inventory"])
+                        expected = {"inventory": None}
+                        expected.update({f"inventory/{number:03}.bin": expected_digest
+                                         for number in range(index + 1)})
+                        self.assertEqual(snapshot, expected)
+            (inventory / "overflow.bin").write_bytes(b"x")
+            with self.assertRaises(guards.GuardError) as rejected:
+                guards._snapshot(root, ["inventory"])
+            self.assertEqual(rejected.exception.code, "guard_resource_limit")
+
+    def test_file_count_limit_remains_enforced(self):
+        import ontology_guards as guards
+        self.assertEqual(guards.MAX_FILES, 10000)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            inventory = root / "inventory"
+            inventory.mkdir()
+            for index in range(10000):
+                (inventory / f"{index:05}.txt").touch()
+            with self.assertRaises(guards.GuardError) as rejected:
+                guards._snapshot(root, ["inventory"])
+            self.assertEqual(rejected.exception.code, "guard_resource_limit")
+
+
 if __name__ == "__main__":
     unittest.main()

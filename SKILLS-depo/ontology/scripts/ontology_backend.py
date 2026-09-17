@@ -73,7 +73,11 @@ def dispatch(operation,payload,bound):
         elif operation=='validate':
             from ontology_shacl import validate
             result=validate(ds,names,selected,payload['records'],payload.get('shapes',[]),bound,payload.get('triples'))
-        elif operation=='infer': result=_reason(payload,premises,bound)
+        elif operation=='infer':
+            mode=payload.get('result_mode','full')
+            require(type(mode) is str and mode in {'full','diagnostic'},'invalid_result_mode','Select full or diagnostic inference output.')
+            result=_reason(payload,premises,bound)
+            if mode=='diagnostic': result=_diagnostic(result,payload)
         elif operation=='export':
             from ontology_interchange import export
             result=export(ds,names,payload['format'],payload.get('selected_graph'))
@@ -105,6 +109,22 @@ def _reason(payload,premises,bound):
     from ontology_provenance import proof_quads
     result['provenance']=proof_quads(result,payload['context']['project_id'])
     return result
+
+
+def _diagnostic(result,payload):
+    """Summarize only after identical bounded reasoning and conflict detection."""
+    fields=('selected_premise_ids','negative_assertions','inferred','proofs','conflicts','provenance')
+    evidence={name:({'count':len(result[name]),'sha256':sha256(canonical_bytes(result[name]))}
+                    if name in result else None) for name in fields}
+    retained={k:v for k,v in result.items() if k not in fields}
+    return {**retained,'diagnostic_schema_version':1,'result_mode':'diagnostic',
+        'reasoning_scope':'full_selected_closure' if payload.get('premise_ids') is None else 'selected_premise_closure',
+        'proof_detail':'counts_and_digests_only','evidence':evidence,'authority':False,
+        'requested_premises':None if payload.get('premise_ids') is None else {
+            'count':len(payload['premise_ids']),'sha256':sha256(canonical_bytes(payload['premise_ids']))},
+        'proof_retrieval':{'api':'infer(root, premise_ids=[exact_assertion_or_record_id], goals=[triple])',
+            'scope':'An exact premise query proves only its selected premise closure.',
+            'full_proof_delivery':'not_exercised; default full infer retains its output bound and may return output_limit'}}
 
 
 def _probe(operation,payload,bound):

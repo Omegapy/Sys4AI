@@ -54,7 +54,7 @@ def review_binding(current):
             "review_sha256": current["head"]["review_sha256"]}
 
 
-def validate_native_observation(grant, *, now=None):
+def validate_native_observation(grant, *, now=None, native_helper=None):
     """Shared current native evidence gate, also usable by separately scoped setup."""
     require(grant.get("actor_kind") in {"director", "manager"} and isinstance(grant.get("actor_id"), str)
             and grant["actor_id"], "publisher_forbidden", "Only a current Director or confirmed manager may authorize this operation.")
@@ -65,6 +65,15 @@ def validate_native_observation(grant, *, now=None):
     except (ValueError, TypeError, AttributeError, KeyError):
         valid = False
     require(valid, "grant_expired", "A current native observation and grant lasting at most five minutes are required.")
+    if grant.get('schema_version') == 3:
+        native = native_helper
+        require(native is not None and grant.get('actor_kind') == 'manager' and grant.get('controller_origin') == 'curator', 'publisher_forbidden', 'Native Curator grant requires protected live manager context.')
+        try:
+            native.require_current(grant['broker_binding']['protocol'], grant['actor_id'], grant['broker_binding']['call'])
+            require(native.observation(grant['native_receipt'], subject=grant['actor_id'], session=native.protocol_key(grant['broker_binding']['protocol']), protocol_version=grant['broker_binding']['protocol']['schema_version']) == 'running', 'publisher_not_running', 'Native manager is not observed running.')
+        except (native.NativeError, KeyError) as exc:
+            raise OntologyError('native_receipt', 'No current verified native owner caller.') from exc
+        return grant
     native = grant["native_receipt"]
     exact(native, ("tool", "result"))
     require(native["tool"] == "collaboration.list_agents", "native_receipt", "Use actual current native list_agents evidence.")
@@ -98,9 +107,9 @@ def validate_manager_binding(project, actor, binding, paths):
     assignment = orch.get("assignments", {}).get(binding["assignment_id"], {})
     require(assignment.get("function") == "manager" and assignment.get("state") == "active" and assignment.get("generation") == binding["generation"] and assignment.get("native_id") == actor and assignment.get("role_reads"), "manager_unconfirmed", "Manager lacks current activation, native identity and role-read evidence.")
     try:
-        require(helper.orch.receipt(assignment["native_receipt"], launch=True) == actor, "manager_unconfirmed", "Manager native launch identity differs.")
+        require(helper.orch.receipt(assignment["native_receipt"], launch=True, version=orch["version"], session=helper.orch.native.protocol_key(orch.get("native_protocol")), native_protocol=orch.get("native_protocol")) == actor, "manager_unconfirmed", "Manager native launch identity differs.")
         helper.orch.role(assignment["role"], project.root)
-    except (helper.orch.OrchestrationError, KeyError) as exc:
+    except (helper.orch.OrchestrationError, helper.orch.native.NativeError, KeyError) as exc:
         raise OntologyError("manager_role_invalid", "Current manager role or native launch provenance is invalid.") from exc
     require(all(any(within(path, prefix) for prefix in assignment.get("fit", {}).get("writes", [])) for path in paths), "manager_scope", "Assigned Task writes do not include every proposed ontology file.")
     for other_path, _, other in active_managers(project.root):
@@ -112,12 +121,15 @@ def validate_manager_binding(project, actor, binding, paths):
 
 def authorize(project, grant, proposal, preview_sha256, *, now=None):
     version = grant.get("schema_version") if isinstance(grant, dict) else None
-    extra = ("advanced_config_sha256", "proposal_review") if version == 2 else ()
+    profile = grant.get('owner_profile') if version == 3 else 'advanced-v2' if version == 2 else 'core-v1'
+    require(profile in ('core-v1', 'advanced-v2'), 'grant_profile', 'Unsupported owner profile.')
+    advanced_profile = profile == 'advanced-v2'
+    extra = (("advanced_config_sha256", "proposal_review") if advanced_profile else ()) + (("controller_origin", "broker_binding", "owner_profile") if version == 3 else ())
     exact(grant, ("schema_version", "grant_id", "project_id", "actor_id", "actor_kind", "operation", "payload_sha256", "preview_sha256", "config_sha256", "scope", "native_receipt", "observed_at", "expires_at", "task", "reviewed_records", *extra))
-    require(type(version) is int and version in {1, 2} and isinstance(grant["grant_id"], str) and grant["grant_id"].startswith("ONTGRANT-"), "invalid_grant", "Expected a versioned ontology-specific grant.")
-    require(proposal["schema_version"] == 1 or version == 2, "grant_version", "Advanced publication needs an explicit v2 grant.")
+    require(type(version) is int and version in {1, 2, 3} and isinstance(grant["grant_id"], str) and grant["grant_id"].startswith("ONTGRANT-"), "invalid_grant", "Expected a versioned ontology-specific grant.")
+    require(proposal["schema_version"] == 1 or advanced_profile, "grant_version", "Advanced publication needs an explicit v2 grant.")
     advanced = None
-    if version == 2:
+    if advanced_profile:
         from ontology_advanced import load_advanced
         advanced = load_advanced(project.root)
         config_file = safe_path(project.root, "ontology-advanced.yaml", must_exist=False)
@@ -141,7 +153,11 @@ def authorize(project, grant, proposal, preview_sha256, *, now=None):
     require(isinstance(grant["actor_kind"], str) and grant["actor_kind"] in {"director", "manager"} and isinstance(grant["actor_id"], str) and grant["actor_id"], "publisher_forbidden", "Ordinary child actors cannot publish canonical ontology.")
     require(grant["operation"] == "publish" and proposal["operation"] == "publish" and grant["payload_sha256"] == sha256(canonical_bytes(proposal)) and grant["preview_sha256"] == preview_sha256, "grant_payload", "Grant must bind this exact ontology payload and reviewed preview.")
     require(grant["config_sha256"] == sha256(safe_path(project.root, "ontology.yaml")), "config_changed", "Ontology configuration changed after review.")
-    validate_native_observation(grant, now=now)
+    native_helper = None
+    if version == 3:
+        _, task_helper = read_task(project.root, grant['task']['path'])
+        native_helper = task_helper.orch.native
+    validate_native_observation(grant, now=now, native_helper=native_helper)
     paths = {c["path"] for c in proposal["changes"]}
     require(isinstance(grant["scope"], list) and all(isinstance(p, str) for p in grant["scope"]) and len(grant["scope"]) == len(paths) and set(grant["scope"]) == paths, "grant_scope", "Grant scope must name the exact reviewed changed files.")
     reviewed = [{k: c[k] for k in ("path", "sha256", "expected_sha256")} for c in proposal["changes"]]
@@ -156,7 +172,7 @@ def authorize(project, grant, proposal, preview_sha256, *, now=None):
         advanced_paths = paths - core_paths
         require(all(any(within(path, prefix) for prefix in binding["scope"]) for path in core_paths), "director_scope", "Publication exceeds the Director's bound core scope.")
         if advanced_paths:
-            require(version == 2 and advanced and advanced.get("publication", {}).get("enabled"), "advanced_publication_disabled", "Advanced publication requires separately bound destination-local authority.")
+            require(advanced_profile and advanced and advanced.get("publication", {}).get("enabled"), "advanced_publication_disabled", "Advanced publication requires separately bound destination-local authority.")
             advanced_binding = advanced["publication"].get("binding")
             require(advanced_binding and advanced_binding["actor_id"] == actor, "director_unbound", "Advanced authority names a different current Director.")
             require(all(any(within(path, prefix) for prefix in advanced_binding["scope"]) for path in advanced_paths), "director_scope", "Advanced publication exceeds its separately bound scope.")
@@ -167,4 +183,12 @@ def authorize(project, grant, proposal, preview_sha256, *, now=None):
             require(not any(within(path, scope) or within(scope, path) for path in paths for scope in writes), "manager_owns_scope", "An unreconciled manager owns overlapping canonical writes.")
     else:
         validate_manager_binding(project, actor, grant["task"], paths)
+        state, helper = read_task(project.root, grant['task']['path'])
+        if version == 3:
+            try:
+                helper.orch.native.validate_owner(grant, state['orchestration'], 'ontology')
+            except helper.orch.native.NativeError as exc:
+                raise OntologyError('native_provenance', 'Current native owner binding differs.') from exc
+        else:
+            require(state['orchestration']['version'] == 1, 'grant_version', 'Curator Task requires explicit native ontology grant v3.')
     return grant

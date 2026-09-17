@@ -129,3 +129,38 @@ class RecoveryTests(unittest.TestCase):
 
 
 if __name__ == "__main__": unittest.main()
+
+class NativeMemoryRecoveryTests(unittest.TestCase):
+    def test_original_journal_requires_fresh_verified_recovery_context(self):
+        from test_publication import NativeMemoryFixture
+        fixture=NativeMemoryFixture();self.addCleanup(fixture.close)
+        context=fixture.driver.context('memory.publish');path,_=fixture.grant(context)
+        def fail(boundary):
+            if boundary=='after_record_0':raise OSError('synthetic interruption')
+        with fixture.driver.authority.invoke(context):
+            with self.assertRaises(MemoryError):publish(fixture.root,fixture.payload,path,fixture.driver.actor,fault=fail)
+        fresh=fixture.driver.context('memory.recover');recovery_path,value=fixture.grant(fresh,'native-recover')
+        value['operation']='recover';write(fixture.root,recovery_path,json_bytes(value))
+        journal=JOURNAL_ROOT+'/'+fixture.payload['operation_id']+'.json'
+        with self.assertRaises(MemoryError):recover(fixture.root,journal,recovery_path,fixture.driver.actor)
+        with fixture.driver.authority.invoke(fresh):
+            result=recover(fixture.root,journal,recovery_path,fixture.driver.actor)
+        self.assertEqual(result['state'],'complete')
+        self.assertEqual(result['operation_id'],fixture.payload['operation_id'])
+
+    def test_later_human_edit_survives_rejected_native_recovery(self):
+        from test_publication import NativeMemoryFixture
+        fixture=NativeMemoryFixture();self.addCleanup(fixture.close)
+        context=fixture.driver.context('memory.publish');path,_=fixture.grant(context)
+        def fail(boundary):
+            if boundary=='after_record_0':raise OSError('synthetic interruption')
+        with fixture.driver.authority.invoke(context):
+            with self.assertRaises(MemoryError):publish(fixture.root,fixture.payload,path,fixture.driver.actor,fault=fail)
+        target=fixture.root/fixture.payload['changes'][0]['path']
+        target.write_bytes(target.read_bytes()+b'\nLater human text.\n');later=target.read_bytes()
+        fresh=fixture.driver.context('memory.recover');recovery_path,value=fixture.grant(fresh,'later-recover')
+        value['operation']='recover';write(fixture.root,recovery_path,json_bytes(value))
+        with fixture.driver.authority.invoke(fresh):
+            with self.assertRaises(MemoryError):
+                recover(fixture.root,JOURNAL_ROOT+'/'+fixture.payload['operation_id']+'.json',recovery_path,fixture.driver.actor)
+        self.assertEqual(target.read_bytes(),later)

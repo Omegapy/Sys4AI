@@ -1,0 +1,190 @@
+{
+  "schema_version": 2,
+  "module_id": "project-curator",
+  "module_version": "1.0.0",
+  "status": "retained_supported_owner_candidate",
+  "configuration_schema": 1,
+  "source_collection": "CURATION-depo",
+  "coordinating_skill": "curate",
+  "required_skill_resources": [
+    "ACTIONS.md",
+    "README.md",
+    "SKILL.md",
+    "agents/openai.yaml",
+    "references/commands.md",
+    "references/conversation.md",
+    "references/dependency-maintenance.md",
+    "references/technical-maintenance.md",
+    "scripts/curator.py",
+    "scripts/curator_awareness.py",
+    "scripts/curator_broker.py",
+    "scripts/curator_causality.py",
+    "scripts/curator_classification.py",
+    "scripts/curator_confinement.py",
+    "scripts/curator_dependencies.py",
+    "scripts/curator_documentation.py",
+    "scripts/curator_events.py",
+    "scripts/curator_git.py",
+    "scripts/curator_grants.py",
+    "scripts/curator_handoff.py",
+    "scripts/curator_host_macos.py",
+    "scripts/curator_integration.py",
+    "scripts/curator_knowledge.py",
+    "scripts/curator_learning.py",
+    "scripts/curator_logs.py",
+    "scripts/curator_maintenance.py",
+    "scripts/curator_metrics.py",
+    "scripts/curator_notices.py",
+    "scripts/curator_policy.py",
+    "scripts/curator_preflight.py",
+    "scripts/curator_products.py",
+    "scripts/curator_queue.py",
+    "scripts/curator_recovery.py",
+    "scripts/curator_scheduler.py",
+    "scripts/curator_snapshots.py",
+    "scripts/curator_workspace.py",
+    "scripts/curator_session.py",
+    "references/session-maintenance.md"
+  ],
+  "required_contract_resources": [
+    "README.md",
+    "adapters/local-events.md",
+    "adapters/macos.md",
+    "contract.json",
+    "coordination.md",
+    "dependencies.md",
+    "documentation.md",
+    "knowledge.md",
+    "metrics.md",
+    "recovery.md",
+    "scheduling.md",
+    "schema/checkpoint-v1.json",
+    "schema/config-v1.json",
+    "schema/event-v1.json",
+    "starter/curator.yaml",
+    "starter/document-ownership.json",
+    "state-paths.md",
+    "starter/curator-session.yaml"
+  ],
+  "owner_entry_points": {
+    ".agents/skills/curate/scripts/curator.py": [
+      "metadata_status",
+      "operation_preview",
+      "tick_preview",
+      "main"
+    ],
+    ".agents/skills/curate/scripts/curator_queue.py": [
+      "enqueue",
+      "record_delivery",
+      "status",
+      "advance_cursor"
+    ],
+    ".agents/skills/curate/scripts/curator_preflight.py": [
+      "preflight"
+    ],
+    ".agents/skills/curate/scripts/curator_knowledge.py": [
+      "decision",
+      "semantic_rebind",
+      "ontology_transition"
+    ],
+    ".agents/skills/curate/scripts/curator_products.py": [
+      "plan",
+      "next_operation",
+      "observe"
+    ],
+    ".agents/skills/curate/scripts/curator_handoff.py": [
+      "select",
+      "retain_original",
+      "continue_original"
+    ],
+    ".agents/skills/curate/scripts/curator_metrics.py": [
+      "metrics",
+      "operational_measures"
+    ],
+    ".agents/skills/curate/scripts/curator_session.py": [
+      "configuration",
+      "collect",
+      "effective_policy",
+      "dispatch"
+    ],
+    ".agents/skills/ontology/scripts/ontology_publication.py": [
+      "integration_preview",
+      "integration_publish",
+      "integration_recover"
+    ]
+  },
+  "existing_owners": {
+    "task": "Task lifecycle, current manager and canonical execution remain owned by agent-task.",
+    "memory": "Canonical memory publication, capture preference, lifecycle and reindex remain owned by memory.",
+    "ontology": "Canonical ontology publication, lifecycle and products remain owned by ontology.",
+    "learning": "Existing completion disposition remains owned by what-did-you-learn.",
+    "roles": "Role validation and generated Roles/INDEX.md remain owned by manage-subagent-roles.",
+    "setup": "Project setup and explicit module adoption remain owned by init-new-project.",
+    "distribution": "Exact source mappings and Template receipts remain owned by template_update.py."
+  },
+  "unchanged_api_dependencies": [
+    "scripts/curator_broker.py",
+    "scripts/curator_classification.py",
+    "scripts/curator_confinement.py",
+    "scripts/curator_grants.py",
+    "scripts/curator_logs.py"
+  ],
+  "neutral_installation": {
+    "standing_entitlements": [],
+    "live_project_selection": null,
+    "branches": [],
+    "schedule_enabled": false,
+    "service_installed": false,
+    "hook_installed": false,
+    "autonomous_write_enabled": false,
+    "network_entitlements": []
+  },
+  "compatibility": {
+    "declaration_scope": "Static retained package resources and function names only; operating compatibility requires separate current evidence.",
+    "setup_edition": "governance-starter-v12",
+    "preserved_setup_editions": [
+      "governance-starter-v1",
+      "governance-starter-v2",
+      "governance-starter-v3",
+      "governance-starter-v4",
+      "governance-starter-v5",
+      "governance-starter-v6",
+      "governance-starter-v7",
+      "governance-starter-v8",
+      "governance-starter-v9",
+      "governance-starter-v10",
+      "governance-starter-v11"
+    ],
+    "historical_receipts": "Preserved without relabeling or implicit role migration.",
+    "python": "Python 3.12 standard library"
+  },
+  "connected_application": {
+    "state": "not_exercised",
+    "code": "native_runtime_not_exercised",
+    "reason": "Current retained callers use supported owner interfaces. Ordinary disposable behavior is verified separately; native application dispatch remains a release check.",
+    "runtime_observed": false,
+    "publication_enabled": false
+  },
+  "distribution": {
+    "template": "Projects/Sys4AI-Template-Project",
+    "active_root_adoption": false,
+    "real_product_adoption": false,
+    "role_index": "generated by existing role owner"
+  },
+  "acceptance": "Independent ordinary results are partial evidence. Full retained requirements and connected outcomes remain pending.",
+  "session_installation": {
+    "enabled_on_selected_install": true,
+    "mode": "project-session",
+    "unattended_background_ai": false,
+    "template_neutral": true,
+    "explicit_opt_out_preserved": true
+  },
+  "ontology_integration": {
+    "edition": "curator-ontology-1.0.0",
+    "recipe": "reference-assets/ONTOLOGY-depo/integrations/curator/1.0.0",
+    "owner": "ontology",
+    "setup_generated": true,
+    "authored_publication": "exact integrate-curator owner grant",
+    "runtime_authority": false
+  }
+}

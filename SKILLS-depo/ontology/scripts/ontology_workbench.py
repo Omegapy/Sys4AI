@@ -304,7 +304,13 @@ class Workbench:
                 require(self.headers.get("Host") == service.host_header, "host_forbidden", "This request does not name the selected local service.")
                 origin = self.headers.get("Origin")
                 require((not mutation and origin is None) or origin == service.origin, "origin_forbidden", "Only this workbench's local origin may call its endpoints.")
-                require(self.headers.get("Sec-Fetch-Site") not in {"cross-site"}, "origin_forbidden", "Cross-site requests are forbidden.")
+                # Public top-level entry may be cross-site, including reloads
+                # without user activation; it exposes no session or project data.
+                public_entry = (not mutation and self.command == "GET" and self.path in {"/", "/index.html"}
+                                and self.headers.get("Sec-Fetch-Mode") == "navigate"
+                                and self.headers.get("Sec-Fetch-Dest") == "document")
+                require(self.headers.get("Sec-Fetch-Site") not in {"cross-site"} or public_entry,
+                        "origin_forbidden", "Cross-site requests are forbidden.")
 
             def do_GET(self):
                 try:

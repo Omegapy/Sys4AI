@@ -1,0 +1,22 @@
+test_order_suffix_sharing_empty_and_input_change (test_named_shacl_lists.NamedListStructureTests.test_order_suffix_sharing_empty_and_input_change) ... FAIL
+test_authored_first_and_rest_collisions_reject (test_named_shacl_lists.NamedListWorkerTests.test_authored_first_and_rest_collisions_reject) ... ok
+test_empty_eligible_membership_rejects_value (test_named_shacl_lists.NamedListWorkerTests.test_empty_eligible_membership_rejects_value) ... ok
+test_complete_target_membership_and_single_constraint_separation (test_shacl_grouping.ConstraintPlanTests.test_complete_target_membership_and_single_constraint_separation) ... ok
+test_each_shared_target_and_binding_metadata_cardinality (test_shacl_grouping.GroupedTargetNegatives.test_each_shared_target_and_binding_metadata_cardinality) ... ok
+test_changed_inputs_rebuild_complete_constraint_values (test_shacl_lists.SharedShapeTests.test_changed_inputs_rebuild_complete_constraint_values) ... ok
+test_custom_shapes_meta_validation_and_explicit_graph_scope (test_shacl_lists.SharedShapeTests.test_custom_shapes_meta_validation_and_explicit_graph_scope) ... ok
+test_domain_range_cardinality_and_source_constraints (test_shacl_lists.SharedShapeTests.test_domain_range_cardinality_and_source_constraints) ... ok
+test_incomplete_resource_and_cancellation_outcomes_remain_distinct (test_shacl_lists.SharedShapeTests.test_incomplete_resource_and_cancellation_outcomes_remain_distinct) ... ok
+
+======================================================================
+FAIL: test_order_suffix_sharing_empty_and_input_change (test_named_shacl_lists.NamedListStructureTests.test_order_suffix_sharing_empty_and_input_change)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_named_shacl_lists.py", line 52, in test_order_suffix_sharing_empty_and_input_change
+    self.assertIn(RDF+'nil',{o for s,p,o in new.triples if p==SH+'in'})
+AssertionError: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#nil' not found in {'urn:sys4ai:ontology:advanced:shape-list:ceee5aaea89382856904f1eb4e5fbfe4ba526cd9b2230062af654af14d552527', 'urn:sys4ai:ontology:advanced:shape-list:ab68462e4a4e4875068269a5d4d5dc966c53d4cb3c077e77b0b59416cb87acd7', 'urn:sys4ai:ontology:advanced:shape-list:8c3dd9f4ccde8fc2ab8dc51ca77086082f16bfe660c8c097acae867a645c2665', 'urn:sys4ai:ontology:advanced:shape-list:981c3b4460001dbf8c4a8c752dbe68b0ddbf5671972f47e30f51be7c04bbe0fa'}
+
+----------------------------------------------------------------------
+Ran 9 tests in 7.331s
+
+FAILED (failures=1)

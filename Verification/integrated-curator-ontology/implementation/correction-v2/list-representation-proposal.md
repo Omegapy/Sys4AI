@@ -1,0 +1,17 @@
+# Narrow SHACL list representation correction
+
+The accepted grouping retains all 412 targets and exact complete constraints in 35 generated NodeShapes, but the actual confined full-root corpus still times out at 10.0016 seconds. `constraint-equivalence.json` proves exact predecessor/proposed target and constraint equivalence. `root-copy-shacl.json` retains the failing operation.
+
+The confined diagnostic profile was interrupted deliberately at five seconds, below the unchanged ten-second supervisor deadline. It is diagnostic failure evidence, not a successful validation. Of the sampled 5.005 seconds, 4.627 occurred in pySHACL meta-validation, 3.885 in intermediate validation-report construction, 3.747 in `stringify_node`, and 3.375 in `stringify_blank_node`. See `shacl-profile.txt` and `root-copy-shacl-profile.json`. Earlier confined stack samples locate RDFLib `Graph.items` traversal.
+
+The installed locked `pyshacl/rdfutil/stringify.py` calls `stringify_list` for every blank node carrying `rdf:first`; it walks the entire remaining list tail to render intermediate logical-branch failures. The early list branch may fail during successful meta-validation, so a conforming input still pays this cost. URIRef values are rendered directly as identifiers. Naming list cells therefore removes the repeated tail rendering without removing list validation.
+
+Proposed source delta, limited to `ontology_shacl.py` and its tests:
+
+1. Replace generated anonymous RDF-list cells with deterministic URIRefs beneath the existing advanced namespace, using a dedicated `shape-list:` prefix and SHA-256 over the exact pair `(member IRI, next-cell IRI)`.
+2. Build lists from their tail toward the head, interning identical `(member, tail)` pairs in a per-call dictionary. Distinct ordered suffixes remain distinct. Every cell retains exactly one `rdf:first` and one `rdf:rest`, ending at `rdf:nil`. The empty ordered list uses `rdf:nil`, the RDF empty-list representation. Do not reuse cells between calls or input revisions.
+3. Keep every current `sh:in` ordered membership sequence, property constraint, target, generated shape group and authored shape. Preserve feature/import checks and all existing pySHACL options including meta-SHACL. Do not patch dependency code, cache validation outcomes, skip any validation phase, split the full corpus into separately budgeted successful claims, or raise any limit.
+4. Prove exact old/new list expansion, order, endpoint membership and per-target complete constraints. Include overlapping-but-not-identical suffixes, empty membership, changed input, and shared-cell structural integrity. Any authored shape that adds malformed first/rest structure to a generated cell must still be rejected by unchanged meta-SHACL. Existing wrong-domain/range/entity/cardinality/provenance and malformed/unsupported shape negatives must still reject.
+5. Re-run actual confined full-root validation under the same ten-second limit and retained full corpus. Record actual timing and all 48 competencies, diagnostic inference, bounded selected proof retrieval, and preserved default full inference `output_limit`. If validation still times out, retain the failure and report it.
+
+No production change implementing this list representation has been made. The proposal is a representation correction grounded in locked dependency code and bounded confined profiling; actual performance remains unverified until accepted and exercised.

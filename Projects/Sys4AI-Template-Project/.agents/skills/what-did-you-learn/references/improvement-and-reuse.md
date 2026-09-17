@@ -77,3 +77,12 @@ bounded follow-up proposal and state that benefit remains unobserved. Do not
 start work merely to fill the validation field. Canonical retrieval does not
 prove semantic-index readiness, and one observation does not establish a
 long-term or universal improvement.
+
+### Curator improvement disposition
+
+Use the same completion identity and memory checkpoint for Curator findings.
+Match objective, artifact and exact source versions before reusing active work.
+Current owners retain their assignments; terminal work is not reopened for
+activity. Already-repaired findings receive only remaining obligations. Suspected
+causes enter bounded investigation; future benefits are unobserved until checked.
+Capture off and review-only modes create no equivalent persistence route.

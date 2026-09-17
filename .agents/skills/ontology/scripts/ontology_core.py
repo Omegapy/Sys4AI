@@ -207,7 +207,11 @@ def parse_document(data, context_path, location):
 
 
 def load_config(root, expected_project_id=None):
-    cfg = read_json(safe_path(root, "ontology.yaml"))
+    return _validate_config(root, read_json(safe_path(root, "ontology.yaml")), expected_project_id)
+
+
+def _validate_config(root, cfg, expected_project_id=None):
+    """Data-only candidate validation; ordinary load overrides retain their scope."""
     exact(cfg, ("schema_version", "project", "context", "modules", "project_files", "binding_files", "source_allowlist", "retrieval", "publication"), ("competency_files",))
     require(type(cfg["schema_version"]) is int and cfg["schema_version"] == 1, "unsupported_schema", "Unsupported ontology configuration schema.")
     p = cfg["project"]
@@ -333,15 +337,19 @@ def source_status(project, source):
 
 
 def load_project(root, *, expected_project_id=None, validate=True, _overrides=None):
+    return _load_project(root, expected_project_id=expected_project_id, validate=validate, overrides=_overrides)
+
+
+def _load_project(root, *, expected_project_id=None, validate=True, overrides=None, config=None):
     selected = Path(root).absolute()
     require(selected.is_dir() and not selected.is_symlink(), "invalid_root", "Select an existing explicit project directory.")
     require(selected.resolve() == selected, "unsafe_root", "Project root must be resolved without symlink aliases.")
-    cfg = load_config(selected, expected_project_id)
-    overrides = _overrides or {}
+    cfg = load_config(selected, expected_project_id) if config is None else _validate_config(selected, config, expected_project_id)
+    overrides = overrides or {}
     require(set(overrides) <= set(cfg["project_files"] + cfg["binding_files"] + cfg.get("competency_files", [])), "canonical_scope", "Preview override lies outside selected canonical files.")
     from ontology_modules import load_modules
     records, modules, locations, inputs = load_modules(selected, cfg)
-    inputs.update({"ontology.yaml": sha256(selected / "ontology.yaml"), CONTEXT_PATH: cfg["context"]["sha256"]})
+    inputs.update({"ontology.yaml": sha256(selected / "ontology.yaml") if config is None else sha256(canonical_bytes(config)), CONTEXT_PATH: cfg["context"]["sha256"]})
     for path in cfg.get("competency_files", []):
         competency = safe_path(selected, path, must_exist=path not in overrides)
         data = overrides[path] if path in overrides else read_bytes(competency)

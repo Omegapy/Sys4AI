@@ -1,0 +1,2436 @@
+{
+  "schema_version": 2,
+  "task_id": "TASK-20260912-8EE3D229",
+  "name": "Capture root system health remediation requirements",
+  "original_name": "Capture root system health remediation requirements",
+  "slug": "capture-root-system-health-remediation-requirements",
+  "folder_name": "Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229",
+  "description": "Create and validate a managed TRD from the Sys4AI root health report, covering its remediation findings and verification gaps while preserving current operating modes and project boundaries. Present the exact draft for approval; do not implement repairs.",
+  "definition_of_done": [
+    "The health report and relevant diagnostic sources are retained with exact provenance and mapped to the requirements.",
+    "A current-schema root TRD covers the reported findings, observable acceptance criteria and preservation boundaries without authorizing implementation.",
+    "The emitted TRD and index validate, and the manager has reviewed source coverage in both directions.",
+    "The exact TRD revision is presented and user approval is recorded before this requirements-capture Task is completed."
+  ],
+  "created_at": "2026-09-12T21:07:01-06:00",
+  "updated_at": "2026-09-13T08:08:17-06:00",
+  "status": "cancelled",
+  "parent_task_id": null,
+  "revision": 23,
+  "response_count": 22,
+  "last_response": {
+    "response_id": "RESP-0022",
+    "sequence": 22,
+    "created_at": "2026-09-13T08:08:17-06:00",
+    "path": "responses/Task-Response-0022-2026-09-13T08-08-17-06-00.md",
+    "supersedes_response_id": null
+  },
+  "current_summary": "Rejected TRD-20260912-483C93BD is removed and the TRD index is current. This capture Task is cancelled; original health evidence and append-only Task history remain preserved.",
+  "next_step": "No further action is requested for this cancelled requirements-capture Task.",
+  "blockers": [],
+  "open_questions": [],
+  "thread_refs": [],
+  "orchestration": {
+    "acceptances": {},
+    "artifacts": {
+      "baseline_cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82": {
+        "assignment_id": "health_trd_manager",
+        "generation": 1,
+        "path": "artifacts/orchestration/baseline_cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82.json",
+        "sha256": "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82",
+        "size": 5501
+      },
+      "baseline_f5392b0928eb7c4de1f47a41326194a8c3875375771ff3f673fefab0c6670bd6": {
+        "assignment_id": "health_trd_manager",
+        "generation": 1,
+        "path": "artifacts/orchestration/baseline_f5392b0928eb7c4de1f47a41326194a8c3875375771ff3f673fefab0c6670bd6.json",
+        "sha256": "f5392b0928eb7c4de1f47a41326194a8c3875375771ff3f673fefab0c6670bd6",
+        "size": 5271
+      },
+      "managed_trd_draft_r2": {
+        "assignment_id": "health_trd_manager",
+        "generation": 1,
+        "path": "artifacts/orchestration/managed_trd_draft_r2.md",
+        "sha256": "f1526749e66c582d4192b89551095214ea054af19b02c660d2630092195b872d",
+        "size": 20891
+      },
+      "trd_coverage_v1": {
+        "assignment_id": "health_trd_worker",
+        "generation": 1,
+        "path": "artifacts/orchestration/trd_coverage_v1.json",
+        "sha256": "034026b52a88e9d719957e748d7e5c3cd6ee6e9c28ba401e008005b4aa11e243",
+        "size": 12675
+      },
+      "trd_coverage_v2": {
+        "assignment_id": "health_trd_worker",
+        "generation": 1,
+        "path": "artifacts/orchestration/trd_coverage_v2.json",
+        "sha256": "81a3324e5ef62fb6cfb4184b42e4d419789bf38caa0168355aa138d6acebf0e9",
+        "size": 2485
+      },
+      "trd_payload_v2": {
+        "assignment_id": "health_trd_worker",
+        "generation": 1,
+        "path": "artifacts/orchestration/trd_payload_v2.json",
+        "sha256": "9d5cc93827bc5cb51b8564e9411545625a4a47d1254b688e93a587ddf3c75bb7",
+        "size": 20650
+      }
+    },
+    "assignments": {
+      "health_trd_manager": {
+        "acceptance_id": null,
+        "assignment_id": "health_trd_manager",
+        "baseline": "c16b2d64865d97dccedde29c8284eb513ce05da6d04e15c538fd8991b4406bf6",
+        "context": [
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+            "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+            "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+            "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+            "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+            "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+            "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+            "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+            "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+            "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+          },
+          {
+            "path": "AGENTS.md",
+            "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+          },
+          {
+            "path": "SOUL.md",
+            "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+          },
+          {
+            "path": "ROLE.md",
+            "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+          },
+          {
+            "path": "SPECS.md",
+            "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+          },
+          {
+            "path": ".agents/skills/task/SKILL.md",
+            "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+          },
+          {
+            "path": ".agents/skills/to-trd/SKILL.md",
+            "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+          },
+          {
+            "path": ".agents/skills/to-trd/references/wayfinding.md",
+            "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+          },
+          {
+            "path": ".agents/skills/to-trd/references/trd-contract.md",
+            "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+          }
+        ],
+        "fit": {
+          "authority": "Document capture and selected Task/evidence writes only. No repairs, plans, installations, services, Git, external or other-project changes. No TRD approval before exact user approval. Memory checkpoint is review only: optional memory writes excluded because existing owner scope is unresolved.",
+          "capabilities": [
+            "Task management",
+            "requirements capture coordination",
+            "source traceability",
+            "document verification"
+          ],
+          "deliverable": "One validated current-schema draft TRD and a source coverage review; canonical Task awaiting exact user document approval.",
+          "objective": "Capture and validate the root system health remediation TRD for exact user approval.",
+          "rationale": "Persisted Task manager owns execution and delegates one bounded document worker.",
+          "reads": [
+            "Verification/root-health-followup-trd-20260912-v1",
+            "AGENTS.md",
+            "SOUL.md",
+            "ROLE.md",
+            "SPECS.md",
+            "Roles",
+            ".agents/skills",
+            "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229",
+            "curator.yaml",
+            "curator-session.yaml",
+            "memory.yaml",
+            "ontology.yaml",
+            "ontology-advanced.yaml"
+          ],
+          "risk": "Preserve prior records, distinguish verification gaps from faults, avoid inherited owner conflicts.",
+          "skills": [
+            "task",
+            "agent-task",
+            "manage-subagent-roles",
+            "to-trd",
+            "communication",
+            "memory"
+          ],
+          "stop": "Return validated draft and record awaiting_user; do not complete Task before TRD approval.",
+          "tools": [
+            "native collaboration",
+            "project Python helpers"
+          ],
+          "writes": [
+            "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229",
+            "TRDs",
+            "Verification/root-health-followup-trd-20260912-v1"
+          ]
+        },
+        "function": "manager",
+        "generation": 1,
+        "input_receipt": null,
+        "native_id": "/root/health_trd_manager",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/health_trd_manager"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "observations": [],
+        "perspective": "Project Director",
+        "role": {
+          "agents_path": "Roles/task-manager/AGENTS.md",
+          "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+          "catalog": {
+            "path": "Verification/root-health-followup-trd-20260912-v1/manager-catalog.json",
+            "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+          },
+          "name": "task-manager",
+          "role_path": "Roles/task-manager/ROLE.md",
+          "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        },
+        "role_reads": {
+          "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+          "evidence": "Actual collaboration message from /root/health_trd_manager acknowledges complete paired-role reads, current assigned Task and pending activation; no writes or delegation before handoff.",
+          "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        },
+        "round": 0,
+        "runtime": {
+          "available_slots": 3,
+          "depth": 2,
+          "evidence": [
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/native-capability.json",
+              "sha256": "70f08668aaed216608a98aa979a5b4010719cce590f24cd9b506064cf05ea022"
+            }
+          ],
+          "tools": [
+            "spawn_agent",
+            "list_agents",
+            "send_message",
+            "followup_task",
+            "interrupt_agent"
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/native-capability.json",
+              "sha256": "70f08668aaed216608a98aa979a5b4010719cce590f24cd9b506064cf05ea022"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "slot": "manager",
+        "state": "active",
+        "subtask_id": null
+      },
+      "health_trd_worker": {
+        "acceptance_id": null,
+        "assignment_id": "health_trd_worker",
+        "baseline": "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82",
+        "context": [
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+            "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+            "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+            "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+            "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+            "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+            "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+            "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+            "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+            "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+          },
+          {
+            "path": "AGENTS.md",
+            "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+          },
+          {
+            "path": "SOUL.md",
+            "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+          },
+          {
+            "path": "ROLE.md",
+            "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+          },
+          {
+            "path": "SPECS.md",
+            "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+          },
+          {
+            "path": ".agents/skills/task/SKILL.md",
+            "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+          },
+          {
+            "path": ".agents/skills/to-trd/SKILL.md",
+            "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+          },
+          {
+            "path": ".agents/skills/to-trd/references/wayfinding.md",
+            "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+          },
+          {
+            "path": ".agents/skills/to-trd/references/trd-contract.md",
+            "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/source-manifest.json",
+            "sha256": "572e6657c482fac410f79d772bd4294e0d4e2af081d49f7193de9ca32b451794"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/ontology_core.json",
+            "sha256": "49e6d11984389324f0e211369f7034f076404b7c9cc119c3bee7fab08199fc29"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/memory_operational.json",
+            "sha256": "7ddd523b171a81d6c790fdde70f0062b523292f8756e2ba4a8cb44dd51ef875c"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/curator_status.json",
+            "sha256": "0451ffdcd1bbdc8598d9cdc0a5760a675c7c3239d758ec30b6dc97ee8f94237e"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/curator_tests.stderr",
+            "sha256": "d4b9562980f0dfa50e3daaa6e5156546952aec901ff71658f01708c8a6c8b2ce"
+          },
+          {
+            "path": "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229/artifacts/orchestration/baseline_cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82.json",
+            "sha256": "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82"
+          },
+          {
+            "path": "Verification/root-health-followup-trd-20260912-v1/worker-correction.md",
+            "sha256": "08fc681303aeb531bba9bd33d1b58ec2fcbe72eae21ac588f5c3d1115d79c4cd"
+          }
+        ],
+        "fit": {
+          "authority": "Write only the bounded worker document payload and evidence in Verification/root-health-trd-worker-20260912-v1, explicitly authorized by the host to avoid the manager write lease. The manager integrates the exact accepted payload through To-TRD into its owned TRDs scope. No direct canonical TRD/Task/role/memory/ontology writes, approvals, repairs, plan, service startup, packages, Git or other-project changes.",
+          "capabilities": [
+            "source-grounded documentation",
+            "requirements capture",
+            "structural validation"
+          ],
+          "deliverable": "Complete current-schema To-TRD title/body JSON payload, all source/acceptance coverage, and exact input/output hashes for manager publication.",
+          "objective": "Author one complete To-TRD input payload and source coverage artifact for manager integration into the managed root TRD.",
+          "rationale": "General project role supports bounded documentation. Documentation-curator requires unavailable broker and actor controls outside this Task.",
+          "reads": [
+            "Verification/root-health-followup-trd-20260912-v1",
+            "AGENTS.md",
+            "SOUL.md",
+            "ROLE.md",
+            "SPECS.md",
+            "Roles/project-sub-agent",
+            ".agents/skills/to-trd",
+            ".agents/skills/communication",
+            "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229",
+            "TRDs"
+          ],
+          "risk": "Retain source claim strength, dated snapshot and ownership boundaries.",
+          "skills": [
+            "to-trd",
+            "communication"
+          ],
+          "stop": "Return the exact payload and coverage paths/hashes with role-read evidence; the manager integrates the payload, validates the managed document and presents it for exact user approval.",
+          "tools": [
+            "project Python helper",
+            "filesystem read/write"
+          ],
+          "writes": [
+            "Verification/root-health-trd-worker-20260912-v1"
+          ]
+        },
+        "function": "worker",
+        "generation": 1,
+        "input_receipt": {
+          "artifact_sha256s": [
+            "0451ffdcd1bbdc8598d9cdc0a5760a675c7c3239d758ec30b6dc97ee8f94237e",
+            "08fc681303aeb531bba9bd33d1b58ec2fcbe72eae21ac588f5c3d1115d79c4cd",
+            "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7",
+            "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b",
+            "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+            "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7",
+            "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+            "49e6d11984389324f0e211369f7034f076404b7c9cc119c3bee7fab08199fc29",
+            "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9",
+            "572e6657c482fac410f79d772bd4294e0d4e2af081d49f7193de9ca32b451794",
+            "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37",
+            "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b",
+            "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8",
+            "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+            "7ddd523b171a81d6c790fdde70f0062b523292f8756e2ba4a8cb44dd51ef875c",
+            "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b",
+            "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121",
+            "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166",
+            "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822",
+            "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82",
+            "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec",
+            "d4b9562980f0dfa50e3daaa6e5156546952aec901ff71658f01708c8a6c8b2ce",
+            "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122",
+            "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+          ],
+          "evidence": "Actual send_message queued the complete 24-reference context packet by path and exact SHA256 b5a12608b55516984fb251d72993a22872c62f1a0c139f69e6a58006790fe69f and named the exact correction digest; worker remains completed until gate and followup wake.",
+          "native_id": "/root/health_trd_manager/health_trd_worker",
+          "tool": "collaboration.send_message"
+        },
+        "native_id": "/root/health_trd_manager/health_trd_worker",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/health_trd_manager/health_trd_worker"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "observations": [
+          {
+            "changes": [
+              {
+                "path": "Verification/root-health-trd-worker-20260912-v1/trd-input.json",
+                "sha256": "54ebcd80fb6739a819ba208030368461e33e36c902f9750f9ddc0126143d0b81"
+              },
+              {
+                "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks.json",
+                "sha256": "034026b52a88e9d719957e748d7e5c3cd6ee6e9c28ba401e008005b4aa11e243"
+              }
+            ],
+            "receipt": {
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/health_trd_manager/health_trd_worker",
+                    "agent_status": "completed"
+                  }
+                ]
+              },
+              "tool": "collaboration.list_agents"
+            }
+          },
+          {
+            "changes": [
+              {
+                "path": "Verification/root-health-trd-worker-20260912-v1/trd-input-v2.json",
+                "sha256": "9d5cc93827bc5cb51b8564e9411545625a4a47d1254b688e93a587ddf3c75bb7"
+              },
+              {
+                "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks-v2.json",
+                "sha256": "81a3324e5ef62fb6cfb4184b42e4d419789bf38caa0168355aa138d6acebf0e9"
+              }
+            ],
+            "receipt": {
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/health_trd_manager/health_trd_worker",
+                    "agent_status": "completed"
+                  }
+                ]
+              },
+              "tool": "collaboration.list_agents"
+            }
+          },
+          {
+            "changes": [
+              {
+                "path": "Verification/root-health-trd-worker-20260912-v1/trd-input-v2.json",
+                "sha256": "9d5cc93827bc5cb51b8564e9411545625a4a47d1254b688e93a587ddf3c75bb7"
+              },
+              {
+                "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks-v2.json",
+                "sha256": "81a3324e5ef62fb6cfb4184b42e4d419789bf38caa0168355aa138d6acebf0e9"
+              }
+            ],
+            "receipt": {
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/health_trd_manager/health_trd_worker",
+                    "agent_status": "completed"
+                  }
+                ]
+              },
+              "tool": "collaboration.list_agents"
+            }
+          }
+        ],
+        "perspective": "Source-grounded requirements capture and structural validation",
+        "role": {
+          "agents_path": "Roles/project-sub-agent/AGENTS.md",
+          "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+          "catalog": {
+            "path": "Verification/root-health-followup-trd-20260912-v1/worker-catalog-v3.json",
+            "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+          },
+          "name": "project-sub-agent",
+          "role_path": "Roles/project-sub-agent/ROLE.md",
+          "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+        },
+        "role_reads": {
+          "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+          "evidence": "Actual native worker message explicitly acknowledges complete role-pair, SOUL, skill/contracts/template and canonical assignment reads with matching baseline; no prior writes.",
+          "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+        },
+        "round": 2,
+        "runtime": {
+          "available_slots": 2,
+          "depth": 2,
+          "evidence": [
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/worker-native-capability.json",
+              "sha256": "c134371f4257b610038f05aece14a4b0886a18ed39921876b99b809d4adab7b6"
+            }
+          ],
+          "tools": [
+            "spawn_agent",
+            "list_agents",
+            "send_message",
+            "followup_task",
+            "interrupt_agent"
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/native-capability.json",
+              "sha256": "70f08668aaed216608a98aa979a5b4010719cce590f24cd9b506064cf05ea022"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "slot": "document_worker",
+        "state": "completed",
+        "subtask_id": "capture_trd"
+      }
+    },
+    "authority": "Explicit $task and $to-trd. May delegate one generic document-capture worker with fresh role/native gates. Limited to current Task, TRD and selected evidence; excludes occupied memory scope.",
+    "blockers": [],
+    "bootstrap": "/root",
+    "candidates": {},
+    "conflicts": {},
+    "context": [
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+        "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+        "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+        "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+        "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+        "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+        "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+        "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+        "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+        "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+      },
+      {
+        "path": "AGENTS.md",
+        "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+      },
+      {
+        "path": "SOUL.md",
+        "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+      },
+      {
+        "path": "ROLE.md",
+        "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+      },
+      {
+        "path": "SPECS.md",
+        "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+      },
+      {
+        "path": ".agents/skills/task/SKILL.md",
+        "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+      },
+      {
+        "path": ".agents/skills/to-trd/SKILL.md",
+        "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+      },
+      {
+        "path": ".agents/skills/to-trd/references/wayfinding.md",
+        "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+      },
+      {
+        "path": ".agents/skills/to-trd/references/trd-contract.md",
+        "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+      }
+    ],
+    "events": [
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "health_trd_manager",
+          "authority": "Explicit $task and $to-trd. May delegate one generic document-capture worker with fresh role/native gates. Limited to current Task, TRD and selected evidence; excludes occupied memory scope.",
+          "bootstrap_receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root",
+                  "agent_status": "running"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          },
+          "context": [
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+              "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+              "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+              "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+              "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+              "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+              "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+              "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+              "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+              "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+            },
+            {
+              "path": "AGENTS.md",
+              "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+            },
+            {
+              "path": "SOUL.md",
+              "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+            },
+            {
+              "path": "ROLE.md",
+              "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+            },
+            {
+              "path": "SPECS.md",
+              "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+            },
+            {
+              "path": ".agents/skills/task/SKILL.md",
+              "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+            },
+            {
+              "path": ".agents/skills/to-trd/SKILL.md",
+              "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+            },
+            {
+              "path": ".agents/skills/to-trd/references/wayfinding.md",
+              "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+            },
+            {
+              "path": ".agents/skills/to-trd/references/trd-contract.md",
+              "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+            }
+          ],
+          "fit": {
+            "authority": "Document capture and selected Task/evidence writes only. No repairs, plans, installations, services, Git, external or other-project changes. No TRD approval before exact user approval. Memory checkpoint is review only: optional memory writes excluded because existing owner scope is unresolved.",
+            "capabilities": [
+              "Task management",
+              "requirements capture coordination",
+              "source traceability",
+              "document verification"
+            ],
+            "deliverable": "One validated current-schema draft TRD and a source coverage review; canonical Task awaiting exact user document approval.",
+            "objective": "Capture and validate the root system health remediation TRD for exact user approval.",
+            "rationale": "Persisted Task manager owns execution and delegates one bounded document worker.",
+            "reads": [
+              "Verification/root-health-followup-trd-20260912-v1",
+              "AGENTS.md",
+              "SOUL.md",
+              "ROLE.md",
+              "SPECS.md",
+              "Roles",
+              ".agents/skills",
+              "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229",
+              "curator.yaml",
+              "curator-session.yaml",
+              "memory.yaml",
+              "ontology.yaml",
+              "ontology-advanced.yaml"
+            ],
+            "risk": "Preserve prior records, distinguish verification gaps from faults, avoid inherited owner conflicts.",
+            "skills": [
+              "task",
+              "agent-task",
+              "manage-subagent-roles",
+              "to-trd",
+              "communication",
+              "memory"
+            ],
+            "stop": "Return validated draft and record awaiting_user; do not complete Task before TRD approval.",
+            "tools": [
+              "native collaboration",
+              "project Python helpers"
+            ],
+            "writes": [
+              "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229",
+              "TRDs",
+              "Verification/root-health-followup-trd-20260912-v1"
+            ]
+          },
+          "role": {
+            "agents_path": "Roles/task-manager/AGENTS.md",
+            "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+            "catalog": {
+              "path": "Verification/root-health-followup-trd-20260912-v1/manager-catalog.json",
+              "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+            },
+            "name": "task-manager",
+            "role_path": "Roles/task-manager/ROLE.md",
+            "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+          },
+          "runtime": {
+            "available_slots": 3,
+            "depth": 2,
+            "evidence": [
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/native-capability.json",
+                "sha256": "70f08668aaed216608a98aa979a5b4010719cce590f24cd9b506064cf05ea022"
+              }
+            ],
+            "tools": [
+              "spawn_agent",
+              "list_agents",
+              "send_message",
+              "followup_task",
+              "interrupt_agent"
+            ]
+          },
+          "settings": {
+            "effort": null,
+            "evidence": [
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/native-capability.json",
+                "sha256": "70f08668aaed216608a98aa979a5b4010719cce590f24cd9b506064cf05ea022"
+              }
+            ],
+            "mode": "verified_inheritance",
+            "model": null
+          },
+          "source_refs": [
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+              "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+              "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+              "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+              "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+              "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+              "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+              "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+              "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+              "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+            },
+            {
+              "path": "AGENTS.md",
+              "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+            },
+            {
+              "path": "SOUL.md",
+              "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+            },
+            {
+              "path": "ROLE.md",
+              "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+            },
+            {
+              "path": "SPECS.md",
+              "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+            },
+            {
+              "path": ".agents/skills/task/SKILL.md",
+              "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+            },
+            {
+              "path": ".agents/skills/to-trd/SKILL.md",
+              "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+            },
+            {
+              "path": ".agents/skills/to-trd/references/wayfinding.md",
+              "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+            },
+            {
+              "path": ".agents/skills/to-trd/references/trd-contract.md",
+              "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+            }
+          ]
+        },
+        "event_id": "reserve_health_trd_manager_v2",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "manager.reserve",
+        "revision": 2,
+        "sha256": "7b42b1568a424307d23bf0acbc8d3833dfdaa8296dbb1c5ec63cecfaeb600fb7"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "health_trd_manager",
+          "receipt": {
+            "result": {
+              "task_name": "/root/health_trd_manager"
+            },
+            "tool": "collaboration.spawn_agent"
+          }
+        },
+        "event_id": "receipt_health_trd_manager_v1",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "manager.receipt",
+        "revision": 3,
+        "sha256": "f6119bc3a5c7a207705b04a5ffd046abd75394cb663fbd529566c3718d4762f2"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "health_trd_manager",
+          "role_reads": {
+            "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+            "evidence": "Actual collaboration message from /root/health_trd_manager acknowledges complete paired-role reads, current assigned Task and pending activation; no writes or delegation before handoff.",
+            "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+          }
+        },
+        "event_id": "activate_health_trd_manager_v1",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "manager.activate",
+        "revision": 4,
+        "sha256": "4285fff8ac4453abe60eb52db77851d5bc3f44f46895226466b7b1d22fa1c52d"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "baseline": {
+            "authority": "Write one new managed TRD through the To-TRD helper and its generated index, plus worker coverage/check artifacts only. No approval, Task/role/memory/ontology writes, repair, implementation plan, service startup, installations, Git or other-project changes.",
+            "category": "generic",
+            "criteria": [
+              "The draft covers Curator ontology discovery, pending root catch-up owner disposition, the cancelled Task staged-response warning and on-demand workbench verification.",
+              "The draft preserves healthy memory and ontology behavior, session-only Curator mode, exact ownership reconciliation and separate document approval/action authority.",
+              "The current-schema TRD and generated index validate, all requirements have sources and observable acceptance, and bidirectional source coverage is documented."
+            ],
+            "deliverable": "Validated current-schema draft TRD, exact document receipt, source coverage and preservation/check evidence.",
+            "dependencies": [],
+            "implementation_required": true,
+            "inputs": [
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+                "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+                "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+                "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+                "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+                "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+                "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+                "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+                "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+                "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+              },
+              {
+                "path": "AGENTS.md",
+                "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+              },
+              {
+                "path": "SOUL.md",
+                "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+              },
+              {
+                "path": "ROLE.md",
+                "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+              },
+              {
+                "path": "SPECS.md",
+                "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+              },
+              {
+                "path": ".agents/skills/task/SKILL.md",
+                "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+              },
+              {
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+              },
+              {
+                "path": ".agents/skills/to-trd/references/wayfinding.md",
+                "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+              },
+              {
+                "path": ".agents/skills/to-trd/references/trd-contract.md",
+                "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/source-manifest.json",
+                "sha256": "572e6657c482fac410f79d772bd4294e0d4e2af081d49f7193de9ca32b451794"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/ontology_core.json",
+                "sha256": "49e6d11984389324f0e211369f7034f076404b7c9cc119c3bee7fab08199fc29"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/memory_operational.json",
+                "sha256": "7ddd523b171a81d6c790fdde70f0062b523292f8756e2ba4a8cb44dd51ef875c"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/curator_status.json",
+                "sha256": "0451ffdcd1bbdc8598d9cdc0a5760a675c7c3239d758ec30b6dc97ee8f94237e"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/curator_tests.stderr",
+                "sha256": "d4b9562980f0dfa50e3daaa6e5156546952aec901ff71658f01708c8a6c8b2ce"
+              }
+            ],
+            "objective": "Create and validate one managed root TRD that captures the health report findings and verification gaps for exact user approval.",
+            "protected": [
+              "curator.yaml",
+              "curator-session.yaml",
+              "memory.yaml",
+              "ontology.yaml",
+              "ontology-advanced.yaml",
+              "MEMORY",
+              "control_records",
+              "ONTOLOGY",
+              "Roles",
+              "SKILLS-depo",
+              "Projects",
+              "depot"
+            ],
+            "rationale": "One bounded document capture from supplied diagnostics; no competing technical solution or system implementation is requested.",
+            "reads": [
+              "Verification/root-health-followup-trd-20260912-v1",
+              "AGENTS.md",
+              "SOUL.md",
+              "ROLE.md",
+              "SPECS.md",
+              "Roles/project-sub-agent",
+              ".agents/skills/to-trd",
+              ".agents/skills/communication",
+              "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229",
+              "TRDs"
+            ],
+            "requirements": [
+              "TASK-DOD-001",
+              "TASK-DOD-002",
+              "TASK-DOD-003"
+            ],
+            "slots": [
+              {
+                "function": "worker",
+                "perspective": "Source-grounded requirements capture and structural validation",
+                "slot": "document_worker",
+                "solver_slot": null
+              }
+            ],
+            "stop": "Return draft ID/path/revision/hash, requirement count and completion diagnostics; remain draft pending exact user approval.",
+            "writes": [
+              "TRDs",
+              "Verification/root-health-followup-trd-20260912-v1/worker"
+            ]
+          },
+          "subtask_id": "capture_trd"
+        },
+        "event_id": "define_capture_trd_v1",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "subtask.define",
+        "revision": 5,
+        "sha256": "59189d9c612ab92c22da6404c35b6f02faa6cdc2ae88ea72eef559f60993bcda"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "baseline": {
+            "authority": "Write only the bounded worker document payload and evidence in Verification/root-health-trd-worker-20260912-v1, explicitly authorized by the host to avoid the manager write lease. The manager integrates the exact accepted payload through To-TRD into its owned TRDs scope. No direct canonical TRD/Task/role/memory/ontology writes, approvals, repairs, plan, service startup, packages, Git or other-project changes.",
+            "category": "generic",
+            "criteria": [
+              "The draft covers Curator ontology discovery, pending root catch-up owner disposition, the cancelled Task staged-response warning and on-demand workbench verification.",
+              "The draft preserves healthy memory and ontology behavior, session-only Curator mode, exact ownership reconciliation and separate document approval/action authority.",
+              "The To-TRD payload conforms to the current body contract, every requirement has sources and observable acceptance, and bidirectional source coverage is documented."
+            ],
+            "deliverable": "Complete current-schema To-TRD title/body JSON payload, all source/acceptance coverage, and exact input/output hashes for manager publication.",
+            "dependencies": [],
+            "implementation_required": true,
+            "inputs": [
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+                "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+                "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+                "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+                "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+                "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+                "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+                "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+                "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+                "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+              },
+              {
+                "path": "AGENTS.md",
+                "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+              },
+              {
+                "path": "SOUL.md",
+                "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+              },
+              {
+                "path": "ROLE.md",
+                "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+              },
+              {
+                "path": "SPECS.md",
+                "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+              },
+              {
+                "path": ".agents/skills/task/SKILL.md",
+                "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+              },
+              {
+                "path": ".agents/skills/to-trd/SKILL.md",
+                "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+              },
+              {
+                "path": ".agents/skills/to-trd/references/wayfinding.md",
+                "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+              },
+              {
+                "path": ".agents/skills/to-trd/references/trd-contract.md",
+                "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/source-manifest.json",
+                "sha256": "572e6657c482fac410f79d772bd4294e0d4e2af081d49f7193de9ca32b451794"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/ontology_core.json",
+                "sha256": "49e6d11984389324f0e211369f7034f076404b7c9cc119c3bee7fab08199fc29"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/memory_operational.json",
+                "sha256": "7ddd523b171a81d6c790fdde70f0062b523292f8756e2ba4a8cb44dd51ef875c"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/curator_status.json",
+                "sha256": "0451ffdcd1bbdc8598d9cdc0a5760a675c7c3239d758ec30b6dc97ee8f94237e"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/curator_tests.stderr",
+                "sha256": "d4b9562980f0dfa50e3daaa6e5156546952aec901ff71658f01708c8a6c8b2ce"
+              }
+            ],
+            "objective": "Author one complete To-TRD input payload and source coverage artifact for manager integration into the managed root TRD.",
+            "protected": [
+              "curator.yaml",
+              "curator-session.yaml",
+              "memory.yaml",
+              "ontology.yaml",
+              "ontology-advanced.yaml",
+              "MEMORY",
+              "control_records",
+              "ONTOLOGY",
+              "Roles",
+              "SKILLS-depo",
+              "Projects",
+              "depot"
+            ],
+            "rationale": "One bounded document capture from supplied diagnostics; no competing technical solution or system implementation is requested.",
+            "reads": [
+              "Verification/root-health-followup-trd-20260912-v1",
+              "AGENTS.md",
+              "SOUL.md",
+              "ROLE.md",
+              "SPECS.md",
+              "Roles/project-sub-agent",
+              ".agents/skills/to-trd",
+              ".agents/skills/communication",
+              "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229",
+              "TRDs"
+            ],
+            "requirements": [
+              "TASK-DOD-001",
+              "TASK-DOD-002",
+              "TASK-DOD-003"
+            ],
+            "slots": [
+              {
+                "function": "worker",
+                "perspective": "Source-grounded requirements capture and structural validation",
+                "slot": "document_worker",
+                "solver_slot": null
+              }
+            ],
+            "stop": "Return the exact payload and coverage paths/hashes with role-read evidence; the manager integrates the payload, validates the managed document and presents it for exact user approval.",
+            "writes": [
+              "Verification/root-health-trd-worker-20260912-v1"
+            ]
+          },
+          "reason": "The active manager owns TRDs and its evidence tree. Host explicitly authorized a separate worker evidence directory; worker drafts the complete payload and manager performs canonical document integration.",
+          "subtask_id": "capture_trd"
+        },
+        "event_id": "revise_capture_trd_v2",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "subtask.revise",
+        "revision": 6,
+        "sha256": "a4d865e60eb303fba5e278ea42dbf7c6f52ba00d61aa4d053d6cdb4015a6dfb2"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "assignment_id": "health_trd_worker",
+          "context": [
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+              "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+              "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+              "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+              "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+              "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+              "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+              "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+              "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+              "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+            },
+            {
+              "path": "AGENTS.md",
+              "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+            },
+            {
+              "path": "SOUL.md",
+              "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+            },
+            {
+              "path": "ROLE.md",
+              "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+            },
+            {
+              "path": "SPECS.md",
+              "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+            },
+            {
+              "path": ".agents/skills/task/SKILL.md",
+              "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+            },
+            {
+              "path": ".agents/skills/to-trd/SKILL.md",
+              "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+            },
+            {
+              "path": ".agents/skills/to-trd/references/wayfinding.md",
+              "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+            },
+            {
+              "path": ".agents/skills/to-trd/references/trd-contract.md",
+              "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/source-manifest.json",
+              "sha256": "572e6657c482fac410f79d772bd4294e0d4e2af081d49f7193de9ca32b451794"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/ontology_core.json",
+              "sha256": "49e6d11984389324f0e211369f7034f076404b7c9cc119c3bee7fab08199fc29"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/memory_operational.json",
+              "sha256": "7ddd523b171a81d6c790fdde70f0062b523292f8756e2ba4a8cb44dd51ef875c"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_status.json",
+              "sha256": "0451ffdcd1bbdc8598d9cdc0a5760a675c7c3239d758ec30b6dc97ee8f94237e"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_tests.stderr",
+              "sha256": "d4b9562980f0dfa50e3daaa6e5156546952aec901ff71658f01708c8a6c8b2ce"
+            },
+            {
+              "path": "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229/artifacts/orchestration/baseline_cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82.json",
+              "sha256": "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82"
+            }
+          ],
+          "fit": {
+            "authority": "Write only the bounded worker document payload and evidence in Verification/root-health-trd-worker-20260912-v1, explicitly authorized by the host to avoid the manager write lease. The manager integrates the exact accepted payload through To-TRD into its owned TRDs scope. No direct canonical TRD/Task/role/memory/ontology writes, approvals, repairs, plan, service startup, packages, Git or other-project changes.",
+            "capabilities": [
+              "source-grounded documentation",
+              "requirements capture",
+              "structural validation"
+            ],
+            "deliverable": "Complete current-schema To-TRD title/body JSON payload, all source/acceptance coverage, and exact input/output hashes for manager publication.",
+            "objective": "Author one complete To-TRD input payload and source coverage artifact for manager integration into the managed root TRD.",
+            "rationale": "General project role supports bounded documentation. Documentation-curator requires unavailable broker and actor controls outside this Task.",
+            "reads": [
+              "Verification/root-health-followup-trd-20260912-v1",
+              "AGENTS.md",
+              "SOUL.md",
+              "ROLE.md",
+              "SPECS.md",
+              "Roles/project-sub-agent",
+              ".agents/skills/to-trd",
+              ".agents/skills/communication",
+              "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229",
+              "TRDs"
+            ],
+            "risk": "Retain source claim strength, dated snapshot and ownership boundaries.",
+            "skills": [
+              "to-trd",
+              "communication"
+            ],
+            "stop": "Return the exact payload and coverage paths/hashes with role-read evidence; the manager integrates the payload, validates the managed document and presents it for exact user approval.",
+            "tools": [
+              "project Python helper",
+              "filesystem read/write"
+            ],
+            "writes": [
+              "Verification/root-health-trd-worker-20260912-v1"
+            ]
+          },
+          "role": {
+            "agents_path": "Roles/project-sub-agent/AGENTS.md",
+            "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+            "catalog": {
+              "path": "Verification/root-health-followup-trd-20260912-v1/worker-catalog-v2.json",
+              "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+            },
+            "name": "project-sub-agent",
+            "role_path": "Roles/project-sub-agent/ROLE.md",
+            "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+          },
+          "runtime": {
+            "available_slots": 2,
+            "depth": 2,
+            "evidence": [
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/worker-native-capability.json",
+                "sha256": "c134371f4257b610038f05aece14a4b0886a18ed39921876b99b809d4adab7b6"
+              }
+            ],
+            "tools": [
+              "spawn_agent",
+              "list_agents",
+              "send_message",
+              "followup_task",
+              "interrupt_agent"
+            ]
+          },
+          "settings": {
+            "effort": null,
+            "evidence": [
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/native-capability.json",
+                "sha256": "70f08668aaed216608a98aa979a5b4010719cce590f24cd9b506064cf05ea022"
+              }
+            ],
+            "mode": "verified_inheritance",
+            "model": null
+          },
+          "slot": "document_worker",
+          "subtask_id": "capture_trd"
+        },
+        "event_id": "reserve_health_trd_worker_v4",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "assignment.reserve",
+        "revision": 7,
+        "sha256": "63f53f8c0a7ad1f36a9afaddcbcfcf21cd26d26bb2685ddcfac9ee78e463286f"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "assignment_id": "health_trd_worker",
+          "receipt": {
+            "result": {
+              "task_name": "/root/health_trd_manager/health_trd_worker"
+            },
+            "tool": "collaboration.spawn_agent"
+          }
+        },
+        "event_id": "receipt_health_trd_worker_v1",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "assignment.receipt",
+        "revision": 8,
+        "sha256": "356fe5fd07d50ac2366084695f130c725324784ff4d081e2ff8056d5038a7fb6"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "assignment_id": "health_trd_worker",
+          "role_reads": {
+            "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+            "evidence": "Actual native worker message explicitly acknowledges complete role-pair, SOUL, skill/contracts/template and canonical assignment reads with matching baseline; no prior writes.",
+            "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+          }
+        },
+        "event_id": "reads_health_trd_worker_v1",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "assignment.reads",
+        "revision": 9,
+        "sha256": "a839bd139bdfed868866f4bb3c693244e3d5a76431e82351c0ac9209bae1f964"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "assignment_id": "health_trd_worker",
+          "changes": [
+            {
+              "path": "Verification/root-health-trd-worker-20260912-v1/trd-input.json",
+              "sha256": "54ebcd80fb6739a819ba208030368461e33e36c902f9750f9ddc0126143d0b81"
+            },
+            {
+              "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks.json",
+              "sha256": "034026b52a88e9d719957e748d7e5c3cd6ee6e9c28ba401e008005b4aa11e243"
+            }
+          ],
+          "receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root/health_trd_manager/health_trd_worker",
+                  "agent_status": "completed"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          }
+        },
+        "event_id": "observe_health_trd_worker_v1",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "assignment.observe",
+        "revision": 10,
+        "sha256": "70d5821f495f4911f892222454e640288d291f055b281a10decf7aebecc05430"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "assignment_id": "health_trd_worker",
+          "context": [
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+              "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+              "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+              "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+              "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+              "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+              "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+              "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+              "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+              "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+            },
+            {
+              "path": "AGENTS.md",
+              "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+            },
+            {
+              "path": "SOUL.md",
+              "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+            },
+            {
+              "path": "ROLE.md",
+              "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+            },
+            {
+              "path": "SPECS.md",
+              "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+            },
+            {
+              "path": ".agents/skills/task/SKILL.md",
+              "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+            },
+            {
+              "path": ".agents/skills/to-trd/SKILL.md",
+              "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+            },
+            {
+              "path": ".agents/skills/to-trd/references/wayfinding.md",
+              "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+            },
+            {
+              "path": ".agents/skills/to-trd/references/trd-contract.md",
+              "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/source-manifest.json",
+              "sha256": "572e6657c482fac410f79d772bd4294e0d4e2af081d49f7193de9ca32b451794"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/ontology_core.json",
+              "sha256": "49e6d11984389324f0e211369f7034f076404b7c9cc119c3bee7fab08199fc29"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/memory_operational.json",
+              "sha256": "7ddd523b171a81d6c790fdde70f0062b523292f8756e2ba4a8cb44dd51ef875c"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_status.json",
+              "sha256": "0451ffdcd1bbdc8598d9cdc0a5760a675c7c3239d758ec30b6dc97ee8f94237e"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_tests.stderr",
+              "sha256": "d4b9562980f0dfa50e3daaa6e5156546952aec901ff71658f01708c8a6c8b2ce"
+            },
+            {
+              "path": "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229/artifacts/orchestration/baseline_cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82.json",
+              "sha256": "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/worker-correction.md",
+              "sha256": "08fc681303aeb531bba9bd33d1b58ec2fcbe72eae21ac588f5c3d1115d79c4cd"
+            }
+          ],
+          "fit": {
+            "authority": "Write only the bounded worker document payload and evidence in Verification/root-health-trd-worker-20260912-v1, explicitly authorized by the host to avoid the manager write lease. The manager integrates the exact accepted payload through To-TRD into its owned TRDs scope. No direct canonical TRD/Task/role/memory/ontology writes, approvals, repairs, plan, service startup, packages, Git or other-project changes.",
+            "capabilities": [
+              "source-grounded documentation",
+              "requirements capture",
+              "structural validation"
+            ],
+            "deliverable": "Complete current-schema To-TRD title/body JSON payload, all source/acceptance coverage, and exact input/output hashes for manager publication.",
+            "objective": "Author one complete To-TRD input payload and source coverage artifact for manager integration into the managed root TRD.",
+            "rationale": "General project role supports bounded documentation. Documentation-curator requires unavailable broker and actor controls outside this Task.",
+            "reads": [
+              "Verification/root-health-followup-trd-20260912-v1",
+              "AGENTS.md",
+              "SOUL.md",
+              "ROLE.md",
+              "SPECS.md",
+              "Roles/project-sub-agent",
+              ".agents/skills/to-trd",
+              ".agents/skills/communication",
+              "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229",
+              "TRDs"
+            ],
+            "risk": "Retain source claim strength, dated snapshot and ownership boundaries.",
+            "skills": [
+              "to-trd",
+              "communication"
+            ],
+            "stop": "Return the exact payload and coverage paths/hashes with role-read evidence; the manager integrates the payload, validates the managed document and presents it for exact user approval.",
+            "tools": [
+              "project Python helper",
+              "filesystem read/write"
+            ],
+            "writes": [
+              "Verification/root-health-trd-worker-20260912-v1"
+            ]
+          },
+          "reason": "Host source review requires changing the event-record hash table header; values and requirements remain unchanged.",
+          "receipt": {
+            "artifact_sha256s": [
+              "0451ffdcd1bbdc8598d9cdc0a5760a675c7c3239d758ec30b6dc97ee8f94237e",
+              "08fc681303aeb531bba9bd33d1b58ec2fcbe72eae21ac588f5c3d1115d79c4cd",
+              "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7",
+              "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b",
+              "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41",
+              "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7",
+              "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+              "49e6d11984389324f0e211369f7034f076404b7c9cc119c3bee7fab08199fc29",
+              "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9",
+              "572e6657c482fac410f79d772bd4294e0d4e2af081d49f7193de9ca32b451794",
+              "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37",
+              "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b",
+              "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8",
+              "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+              "7ddd523b171a81d6c790fdde70f0062b523292f8756e2ba4a8cb44dd51ef875c",
+              "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b",
+              "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121",
+              "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166",
+              "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822",
+              "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82",
+              "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec",
+              "d4b9562980f0dfa50e3daaa6e5156546952aec901ff71658f01708c8a6c8b2ce",
+              "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122",
+              "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+            ],
+            "evidence": "Actual send_message queued the complete 24-reference context packet by path and exact SHA256 b5a12608b55516984fb251d72993a22872c62f1a0c139f69e6a58006790fe69f and named the exact correction digest; worker remains completed until gate and followup wake.",
+            "native_id": "/root/health_trd_manager/health_trd_worker",
+            "tool": "collaboration.send_message"
+          },
+          "role": {
+            "agents_path": "Roles/project-sub-agent/AGENTS.md",
+            "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+            "catalog": {
+              "path": "Verification/root-health-followup-trd-20260912-v1/worker-catalog-v3.json",
+              "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+            },
+            "name": "project-sub-agent",
+            "role_path": "Roles/project-sub-agent/ROLE.md",
+            "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+          },
+          "runtime": {
+            "available_slots": 2,
+            "depth": 2,
+            "evidence": [
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/worker-native-capability.json",
+                "sha256": "c134371f4257b610038f05aece14a4b0886a18ed39921876b99b809d4adab7b6"
+              }
+            ],
+            "tools": [
+              "spawn_agent",
+              "list_agents",
+              "send_message",
+              "followup_task",
+              "interrupt_agent"
+            ]
+          }
+        },
+        "event_id": "rebind_health_trd_worker_v2",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "assignment.inputs",
+        "revision": 11,
+        "sha256": "62ecf1e0548454ac44648404ca4c1e444a0521b139a155fbef5cf2f864524185"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "assignment_id": "health_trd_worker",
+          "changes": [
+            {
+              "path": "Verification/root-health-trd-worker-20260912-v1/trd-input-v2.json",
+              "sha256": "9d5cc93827bc5cb51b8564e9411545625a4a47d1254b688e93a587ddf3c75bb7"
+            },
+            {
+              "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks-v2.json",
+              "sha256": "81a3324e5ef62fb6cfb4184b42e4d419789bf38caa0168355aa138d6acebf0e9"
+            }
+          ],
+          "receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root/health_trd_manager/health_trd_worker",
+                  "agent_status": "completed"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          }
+        },
+        "event_id": "observe_health_trd_worker_v2",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "assignment.observe",
+        "revision": 12,
+        "sha256": "eb6f3d44932acd9f62cbd049dcf6ec8be2e660c742ce242d889495f6dfbb6526"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "artifact_id": "trd_payload_v2",
+          "assignment_id": "health_trd_worker",
+          "source_path": "Verification/root-health-trd-worker-20260912-v1/trd-input-v2.json"
+        },
+        "event_id": "register_trd_payload_v2",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "artifact.register",
+        "revision": 13,
+        "sha256": "e41c807160e0eebd2eada460fb976a8ed9e1509217778b362d467f5beb012f92"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "artifact_id": "trd_coverage_v1",
+          "assignment_id": "health_trd_worker",
+          "source_path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks.json"
+        },
+        "event_id": "register_trd_coverage_v1",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "artifact.register",
+        "revision": 14,
+        "sha256": "5644a0f9f02cfa0460fdb91c8548c23f9a9ab58e8443434e63708aa7dd0d7eaf"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "artifact_id": "trd_coverage_v2",
+          "assignment_id": "health_trd_worker",
+          "source_path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks-v2.json"
+        },
+        "event_id": "register_trd_coverage_v2",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "artifact.register",
+        "revision": 15,
+        "sha256": "c95f808b6403a80fa952f45a3fc1d7d483b49633d4af4e4d157e2b5379164139"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "artifact_id": "managed_trd_draft_r2",
+          "assignment_id": "health_trd_manager",
+          "source_path": "TRDs/trd_root-ontology-memory-and-curator-health-follow-up_2026-09-12.md"
+        },
+        "event_id": "register_managed_trd_draft_r2",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "artifact.register",
+        "revision": 16,
+        "sha256": "acd95b6e6810209acfbad6e462d438579885368383c3b63bfab13104b4cc9063"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "acceptance_id": null,
+          "artifact_ids": [
+            "trd_payload_v2",
+            "trd_coverage_v1",
+            "trd_coverage_v2"
+          ],
+          "assignment_id": "health_trd_worker",
+          "baseline": "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82",
+          "changes": [
+            {
+              "path": "Verification/root-health-trd-worker-20260912-v1/trd-input-v2.json",
+              "sha256": "9d5cc93827bc5cb51b8564e9411545625a4a47d1254b688e93a587ddf3c75bb7"
+            },
+            {
+              "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks.json",
+              "sha256": "034026b52a88e9d719957e748d7e5c3cd6ee6e9c28ba401e008005b4aa11e243"
+            },
+            {
+              "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks-v2.json",
+              "sha256": "81a3324e5ef62fb6cfb4184b42e4d419789bf38caa0168355aa138d6acebf0e9"
+            }
+          ],
+          "checks": [
+            {
+              "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks.json",
+              "sha256": "034026b52a88e9d719957e748d7e5c3cd6ee6e9c28ba401e008005b4aa11e243"
+            },
+            {
+              "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks-v2.json",
+              "sha256": "81a3324e5ef62fb6cfb4184b42e4d419789bf38caa0168355aa138d6acebf0e9"
+            }
+          ],
+          "limitations": [
+            "Document/source static checks only; no system repair or operational verification.",
+            "Managed TRD remains draft pending exact user approval."
+          ],
+          "result_id": "capture_trd_worker_result_v2",
+          "round": 2
+        },
+        "event_id": "record_capture_trd_worker_result_v2",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "result.record",
+        "revision": 17,
+        "sha256": "ad2af0bac83c6ad940a7d10dae0b06f2a29975849f09eec1efa005bbe127e0f0"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "acceptance_id": null,
+          "artifacts": [
+            "trd_payload_v2",
+            "trd_coverage_v1",
+            "trd_coverage_v2",
+            "managed_trd_draft_r2"
+          ],
+          "baseline": "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82",
+          "criteria": [
+            {
+              "criterion": "The draft covers Curator ontology discovery, pending root catch-up owner disposition, the cancelled Task staged-response warning and on-demand workbench verification.",
+              "evidence": "REQ-001 through REQ-004 directly reviewed against report and exact diagnostic records."
+            },
+            {
+              "criterion": "The draft preserves healthy memory and ontology behavior, session-only Curator mode, exact ownership reconciliation and separate document approval/action authority.",
+              "evidence": "REQ-005 through REQ-008 preserve the healthy systems, session mode, historical owner protocol and separate action authority; 10 protected root input hashes unchanged."
+            },
+            {
+              "criterion": "The To-TRD payload conforms to the current body contract, every requirement has sources and observable acceptance, and bidirectional source coverage is documented.",
+              "evidence": "Current-schema helper validation and index checks pass; eight requirements, no content blockers, 21 resolving links and bidirectional coverage verified."
+            }
+          ],
+          "inspection": [
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/manager-review.json",
+              "sha256": "7f2de7f419512833609cc0282f33cfec0e827cb39d9c5a98629d679c18959024"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/trd-final-validate.stdout.json",
+              "sha256": "d01b00fabbca3aa51eda50f779cc88c2d9fac5bbb3688925676b0defdacc45f2"
+            },
+            {
+              "path": "TRDs/trd_root-ontology-memory-and-curator-health-follow-up_2026-09-12.md",
+              "sha256": "f1526749e66c582d4192b89551095214ea054af19b02c660d2630092195b872d"
+            }
+          ],
+          "result_id": "capture_trd_worker_result_v2",
+          "round": 2,
+          "subtask_id": "capture_trd"
+        },
+        "event_id": "verify_capture_trd_v2",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "subtask.verify",
+        "revision": 18,
+        "sha256": "08bccfc7762b05cb8f83fb5bc299f1cf19407b844f4547e6040ff27a9a0a5351"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "action": "cancel",
+          "reason": "The user explicitly rejected the managed TRD and requested its removal, cancelling the document-capture objective."
+        },
+        "event_id": "stop_rejected_trd_capture_v1",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "stop.request",
+        "revision": 20,
+        "sha256": "a7a8e7b2c5b4d0d5412a955736a39c9e3a8a3c1ab859464f47b8c2f161c884c8"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "assignment_id": "health_trd_worker",
+          "changes": [
+            {
+              "path": "Verification/root-health-trd-worker-20260912-v1/trd-input-v2.json",
+              "sha256": "9d5cc93827bc5cb51b8564e9411545625a4a47d1254b688e93a587ddf3c75bb7"
+            },
+            {
+              "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks-v2.json",
+              "sha256": "81a3324e5ef62fb6cfb4184b42e4d419789bf38caa0168355aa138d6acebf0e9"
+            }
+          ],
+          "receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root/health_trd_manager/health_trd_worker",
+                  "agent_status": "completed"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          }
+        },
+        "event_id": "observe_worker_for_cancellation_v1",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "assignment.observe",
+        "revision": 21,
+        "sha256": "e37d8f58ef6ac01fca4ca9462d5456cdf39ae1e1b2e15ca3cac8ae3f1f3799cb"
+      },
+      {
+        "actor": "/root/health_trd_manager",
+        "data": {
+          "reason": "The single native worker is confirmed completed; no worker dispatch or unresolved child write owner remains."
+        },
+        "event_id": "finish_rejected_trd_stop_v1",
+        "execution_id": "health_trd_20260912",
+        "generation": 1,
+        "kind": "stop.finish",
+        "revision": 22,
+        "sha256": "21cff398d8b9d9d388eede9a5ee137572a1372f4f3f8eca95fa19b9531838545"
+      }
+    ],
+    "execution_id": "health_trd_20260912",
+    "generation": 1,
+    "history": [],
+    "manager_id": "health_trd_manager",
+    "results": {
+      "capture_trd_worker_result_v2": {
+        "acceptance_id": null,
+        "artifact_ids": [
+          "trd_payload_v2",
+          "trd_coverage_v1",
+          "trd_coverage_v2"
+        ],
+        "assignment_id": "health_trd_worker",
+        "baseline": "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82",
+        "changes": [
+          {
+            "path": "Verification/root-health-trd-worker-20260912-v1/trd-input-v2.json",
+            "sha256": "9d5cc93827bc5cb51b8564e9411545625a4a47d1254b688e93a587ddf3c75bb7"
+          },
+          {
+            "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks.json",
+            "sha256": "034026b52a88e9d719957e748d7e5c3cd6ee6e9c28ba401e008005b4aa11e243"
+          },
+          {
+            "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks-v2.json",
+            "sha256": "81a3324e5ef62fb6cfb4184b42e4d419789bf38caa0168355aa138d6acebf0e9"
+          }
+        ],
+        "checks": [
+          {
+            "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks.json",
+            "sha256": "034026b52a88e9d719957e748d7e5c3cd6ee6e9c28ba401e008005b4aa11e243"
+          },
+          {
+            "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks-v2.json",
+            "sha256": "81a3324e5ef62fb6cfb4184b42e4d419789bf38caa0168355aa138d6acebf0e9"
+          }
+        ],
+        "limitations": [
+          "Document/source static checks only; no system repair or operational verification.",
+          "Managed TRD remains draft pending exact user approval."
+        ],
+        "result_id": "capture_trd_worker_result_v2",
+        "round": 2
+      }
+    },
+    "reviews": {},
+    "settings": {
+      "effort": null,
+      "evidence": [
+        {
+          "path": "Verification/root-health-followup-trd-20260912-v1/native-capability.json",
+          "sha256": "70f08668aaed216608a98aa979a5b4010719cce590f24cd9b506064cf05ea022"
+        }
+      ],
+      "mode": "verified_inheritance",
+      "model": null
+    },
+    "source_refs": [
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+        "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+        "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+        "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+        "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+        "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+        "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+        "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+        "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+      },
+      {
+        "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+        "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+      },
+      {
+        "path": "AGENTS.md",
+        "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+      },
+      {
+        "path": "SOUL.md",
+        "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+      },
+      {
+        "path": "ROLE.md",
+        "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+      },
+      {
+        "path": "SPECS.md",
+        "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+      },
+      {
+        "path": ".agents/skills/task/SKILL.md",
+        "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+      },
+      {
+        "path": ".agents/skills/to-trd/SKILL.md",
+        "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+      },
+      {
+        "path": ".agents/skills/to-trd/references/wayfinding.md",
+        "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+      },
+      {
+        "path": ".agents/skills/to-trd/references/trd-contract.md",
+        "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+      }
+    ],
+    "stage": "stopped",
+    "subtasks": {
+      "capture_trd": {
+        "active_conflicts": [],
+        "baseline": {
+          "authority": "Write only the bounded worker document payload and evidence in Verification/root-health-trd-worker-20260912-v1, explicitly authorized by the host to avoid the manager write lease. The manager integrates the exact accepted payload through To-TRD into its owned TRDs scope. No direct canonical TRD/Task/role/memory/ontology writes, approvals, repairs, plan, service startup, packages, Git or other-project changes.",
+          "category": "generic",
+          "criteria": [
+            "The draft covers Curator ontology discovery, pending root catch-up owner disposition, the cancelled Task staged-response warning and on-demand workbench verification.",
+            "The draft preserves healthy memory and ontology behavior, session-only Curator mode, exact ownership reconciliation and separate document approval/action authority.",
+            "The To-TRD payload conforms to the current body contract, every requirement has sources and observable acceptance, and bidirectional source coverage is documented."
+          ],
+          "deliverable": "Complete current-schema To-TRD title/body JSON payload, all source/acceptance coverage, and exact input/output hashes for manager publication.",
+          "dependencies": [],
+          "implementation_required": true,
+          "inputs": [
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+              "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+              "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+              "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+              "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+              "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+              "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+              "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+              "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+              "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+            },
+            {
+              "path": "AGENTS.md",
+              "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+            },
+            {
+              "path": "SOUL.md",
+              "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+            },
+            {
+              "path": "ROLE.md",
+              "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+            },
+            {
+              "path": "SPECS.md",
+              "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+            },
+            {
+              "path": ".agents/skills/task/SKILL.md",
+              "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+            },
+            {
+              "path": ".agents/skills/to-trd/SKILL.md",
+              "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+            },
+            {
+              "path": ".agents/skills/to-trd/references/wayfinding.md",
+              "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+            },
+            {
+              "path": ".agents/skills/to-trd/references/trd-contract.md",
+              "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/source-manifest.json",
+              "sha256": "572e6657c482fac410f79d772bd4294e0d4e2af081d49f7193de9ca32b451794"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/ontology_core.json",
+              "sha256": "49e6d11984389324f0e211369f7034f076404b7c9cc119c3bee7fab08199fc29"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/memory_operational.json",
+              "sha256": "7ddd523b171a81d6c790fdde70f0062b523292f8756e2ba4a8cb44dd51ef875c"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_status.json",
+              "sha256": "0451ffdcd1bbdc8598d9cdc0a5760a675c7c3239d758ec30b6dc97ee8f94237e"
+            },
+            {
+              "path": "Verification/root-health-followup-trd-20260912-v1/curator_tests.stderr",
+              "sha256": "d4b9562980f0dfa50e3daaa6e5156546952aec901ff71658f01708c8a6c8b2ce"
+            }
+          ],
+          "objective": "Author one complete To-TRD input payload and source coverage artifact for manager integration into the managed root TRD.",
+          "protected": [
+            "curator.yaml",
+            "curator-session.yaml",
+            "memory.yaml",
+            "ontology.yaml",
+            "ontology-advanced.yaml",
+            "MEMORY",
+            "control_records",
+            "ONTOLOGY",
+            "Roles",
+            "SKILLS-depo",
+            "Projects",
+            "depot"
+          ],
+          "rationale": "One bounded document capture from supplied diagnostics; no competing technical solution or system implementation is requested.",
+          "reads": [
+            "Verification/root-health-followup-trd-20260912-v1",
+            "AGENTS.md",
+            "SOUL.md",
+            "ROLE.md",
+            "SPECS.md",
+            "Roles/project-sub-agent",
+            ".agents/skills/to-trd",
+            ".agents/skills/communication",
+            "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229",
+            "TRDs"
+          ],
+          "requirements": [
+            "TASK-DOD-001",
+            "TASK-DOD-002",
+            "TASK-DOD-003"
+          ],
+          "slots": [
+            {
+              "function": "worker",
+              "perspective": "Source-grounded requirements capture and structural validation",
+              "slot": "document_worker",
+              "solver_slot": null
+            }
+          ],
+          "stop": "Return the exact payload and coverage paths/hashes with role-read evidence; the manager integrates the payload, validates the managed document and presents it for exact user approval.",
+          "writes": [
+            "Verification/root-health-trd-worker-20260912-v1"
+          ]
+        },
+        "dependency_versions": {},
+        "digest": "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82",
+        "round": 2,
+        "task_digest": "c16b2d64865d97dccedde29c8284eb513ce05da6d04e15c538fd8991b4406bf6",
+        "verified": [
+          {
+            "acceptance_id": null,
+            "artifacts": [
+              "trd_payload_v2",
+              "trd_coverage_v1",
+              "trd_coverage_v2",
+              "managed_trd_draft_r2"
+            ],
+            "baseline": "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82",
+            "criteria": [
+              {
+                "criterion": "The draft covers Curator ontology discovery, pending root catch-up owner disposition, the cancelled Task staged-response warning and on-demand workbench verification.",
+                "evidence": "REQ-001 through REQ-004 directly reviewed against report and exact diagnostic records."
+              },
+              {
+                "criterion": "The draft preserves healthy memory and ontology behavior, session-only Curator mode, exact ownership reconciliation and separate document approval/action authority.",
+                "evidence": "REQ-005 through REQ-008 preserve the healthy systems, session mode, historical owner protocol and separate action authority; 10 protected root input hashes unchanged."
+              },
+              {
+                "criterion": "The To-TRD payload conforms to the current body contract, every requirement has sources and observable acceptance, and bidirectional source coverage is documented.",
+                "evidence": "Current-schema helper validation and index checks pass; eight requirements, no content blockers, 21 resolving links and bidirectional coverage verified."
+              }
+            ],
+            "inspection": [
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/manager-review.json",
+                "sha256": "7f2de7f419512833609cc0282f33cfec0e827cb39d9c5a98629d679c18959024"
+              },
+              {
+                "path": "Verification/root-health-followup-trd-20260912-v1/trd-final-validate.stdout.json",
+                "sha256": "d01b00fabbca3aa51eda50f779cc88c2d9fac5bbb3688925676b0defdacc45f2"
+              },
+              {
+                "path": "TRDs/trd_root-ontology-memory-and-curator-health-follow-up_2026-09-12.md",
+                "sha256": "f1526749e66c582d4192b89551095214ea054af19b02c660d2630092195b872d"
+              }
+            ],
+            "result_id": "capture_trd_worker_result_v2",
+            "round": 2,
+            "subtask_id": "capture_trd"
+          }
+        ],
+        "versions": [
+          {
+            "active_conflicts": [],
+            "baseline": {
+              "authority": "Write one new managed TRD through the To-TRD helper and its generated index, plus worker coverage/check artifacts only. No approval, Task/role/memory/ontology writes, repair, implementation plan, service startup, installations, Git or other-project changes.",
+              "category": "generic",
+              "criteria": [
+                "The draft covers Curator ontology discovery, pending root catch-up owner disposition, the cancelled Task staged-response warning and on-demand workbench verification.",
+                "The draft preserves healthy memory and ontology behavior, session-only Curator mode, exact ownership reconciliation and separate document approval/action authority.",
+                "The current-schema TRD and generated index validate, all requirements have sources and observable acceptance, and bidirectional source coverage is documented."
+              ],
+              "deliverable": "Validated current-schema draft TRD, exact document receipt, source coverage and preservation/check evidence.",
+              "dependencies": [],
+              "implementation_required": true,
+              "inputs": [
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+                  "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+                  "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+                  "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+                  "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+                  "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+                  "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+                  "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+                  "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+                  "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+                },
+                {
+                  "path": "AGENTS.md",
+                  "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+                },
+                {
+                  "path": "SOUL.md",
+                  "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+                },
+                {
+                  "path": "ROLE.md",
+                  "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+                },
+                {
+                  "path": "SPECS.md",
+                  "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+                },
+                {
+                  "path": ".agents/skills/task/SKILL.md",
+                  "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+                },
+                {
+                  "path": ".agents/skills/to-trd/SKILL.md",
+                  "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+                },
+                {
+                  "path": ".agents/skills/to-trd/references/wayfinding.md",
+                  "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+                },
+                {
+                  "path": ".agents/skills/to-trd/references/trd-contract.md",
+                  "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/source-manifest.json",
+                  "sha256": "572e6657c482fac410f79d772bd4294e0d4e2af081d49f7193de9ca32b451794"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/ontology_core.json",
+                  "sha256": "49e6d11984389324f0e211369f7034f076404b7c9cc119c3bee7fab08199fc29"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/memory_operational.json",
+                  "sha256": "7ddd523b171a81d6c790fdde70f0062b523292f8756e2ba4a8cb44dd51ef875c"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/curator_status.json",
+                  "sha256": "0451ffdcd1bbdc8598d9cdc0a5760a675c7c3239d758ec30b6dc97ee8f94237e"
+                },
+                {
+                  "path": "Verification/root-health-followup-trd-20260912-v1/curator_tests.stderr",
+                  "sha256": "d4b9562980f0dfa50e3daaa6e5156546952aec901ff71658f01708c8a6c8b2ce"
+                }
+              ],
+              "objective": "Create and validate one managed root TRD that captures the health report findings and verification gaps for exact user approval.",
+              "protected": [
+                "curator.yaml",
+                "curator-session.yaml",
+                "memory.yaml",
+                "ontology.yaml",
+                "ontology-advanced.yaml",
+                "MEMORY",
+                "control_records",
+                "ONTOLOGY",
+                "Roles",
+                "SKILLS-depo",
+                "Projects",
+                "depot"
+              ],
+              "rationale": "One bounded document capture from supplied diagnostics; no competing technical solution or system implementation is requested.",
+              "reads": [
+                "Verification/root-health-followup-trd-20260912-v1",
+                "AGENTS.md",
+                "SOUL.md",
+                "ROLE.md",
+                "SPECS.md",
+                "Roles/project-sub-agent",
+                ".agents/skills/to-trd",
+                ".agents/skills/communication",
+                "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229",
+                "TRDs"
+              ],
+              "requirements": [
+                "TASK-DOD-001",
+                "TASK-DOD-002",
+                "TASK-DOD-003"
+              ],
+              "slots": [
+                {
+                  "function": "worker",
+                  "perspective": "Source-grounded requirements capture and structural validation",
+                  "slot": "document_worker",
+                  "solver_slot": null
+                }
+              ],
+              "stop": "Return draft ID/path/revision/hash, requirement count and completion diagnostics; remain draft pending exact user approval.",
+              "writes": [
+                "TRDs",
+                "Verification/root-health-followup-trd-20260912-v1/worker"
+              ]
+            },
+            "dependency_versions": {},
+            "digest": "f5392b0928eb7c4de1f47a41326194a8c3875375771ff3f673fefab0c6670bd6",
+            "round": 1,
+            "task_digest": "c16b2d64865d97dccedde29c8284eb513ce05da6d04e15c538fd8991b4406bf6"
+          }
+        ]
+      }
+    },
+    "syntheses": {},
+    "task_digest": "c16b2d64865d97dccedde29c8284eb513ce05da6d04e15c538fd8991b4406bf6",
+    "verifications": [],
+    "version": 1,
+    "writer": "/root/health_trd_manager"
+  }
+}

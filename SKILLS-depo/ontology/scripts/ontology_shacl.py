@@ -12,37 +12,28 @@ ALLOWED={'NodeShape','PropertyShape','targetNode','targetClass','targetSubjectsO
     'languageIn','uniqueLang','alternativePath','inversePath','zeroOrMorePath','oneOrMorePath','zeroOrOnePath'}
 
 
-def shapes_for_records(records):
-    """Build every target, sharing only equal immutable constraint subgraphs."""
-    from rdflib import Graph, URIRef, Literal, BNode
-    from rdflib.collection import Collection
-    from ontology_rdf import FIELD, PROV, ADV
-    from ontology_advanced import RDF, CORE
-    graph=Graph(); u=lambda v:URIRef(SH+v)
-    # Per-call caches never retain shapes across input or package revisions.
-    lists={}; properties={}
-    by_id={r['@id']:r for r in records}; parents={}
+def record_constraints(records):
+    """Exact immutable constraints per target; optional packages are unnecessary."""
+    from ontology_rdf import FIELD, PROV
+    from ontology_advanced import CORE
+    by_id={r['@id']:r for r in records}; parents={}; type_cache={}
     for r in records:
         if r.get('predicate')==CORE+'subtypeOf': parents.setdefault(r.get('subject'),set()).add(r.get('object'))
     def types(r):
-        found=set(r.get('@type',[]))|({r['@id']} if r['kind']=='concept' else set()); todo=list(found)
-        while todo:
-            for t in parents.get(todo.pop(),()):
-                if t not in found: found.add(t); todo.append(t)
-        return found
-    def prop(shape,path,**values):
-        constraints=tuple(sorted((key,value if isinstance(value,(URIRef,BNode)) else Literal(value)) for key,value in values.items()))
-        key=(path,constraints)
-        if key not in properties:
-            p=properties[key]=BNode(); graph.add((p,u('path'),URIRef(path)))
-            for name,value in constraints: graph.add((p,u(name),value))
-        graph.add((shape,u('property'),properties[key]))
+        if r['@id'] not in type_cache:
+            found=set(r.get('@type',[]))|({r['@id']} if r['kind']=='concept' else set()); todo=list(found)
+            while todo:
+                for t in parents.get(todo.pop(),()):
+                    if t not in found: found.add(t); todo.append(t)
+            type_cache[r['@id']]=frozenset(found)
+        return type_cache[r['@id']]
+    result={}; predicates=[v for v in records if v['kind']=='predicate']
     for r in records:
-        rid=URIRef(r['@id']); shape=URIRef(ADV+'shape:'+r['@id']); graph.add((shape,URIRef(RDF+'type'),u('NodeShape'))); graph.add((shape,u('targetNode'),rid))
+        constraints=[]
+        def prop(path,**values): constraints.append([path,values])
         if r.get('lifecycle') in {'approved','deprecated'}:
-            for field in ('definition','label','module'):
-                prop(shape,FIELD+field,minCount=1,minLength=1)
-            prop(shape,PROV+'wasDerivedFrom',minCount=1,nodeKind=u('IRI'))
+            for field in ('definition','label','module'): prop(FIELD+field,minCount=1,minLength=1)
+            prop(PROV+'wasDerivedFrom',minCount=1,nodeKind=SH+'IRI')
         for field in ('subject','predicate','object','entity'):
             if field in r:
                 selected=list(by_id)
@@ -51,20 +42,54 @@ def shapes_for_records(records):
                     if field in ('subject','object'):
                         eligible=set(predicate.get('domain' if field=='subject' else 'range',[]))
                         selected=[v['@id'] for v in records if types(v)&eligible]
-                    elif field=='predicate': selected=[v['@id'] for v in records if v['kind']=='predicate']
-                # Equal immutable value lists may share RDF cells. Keep this
-                # cache local to this graph so changed inputs are always rebuilt.
-                values=tuple(sorted(selected))
-                if values not in lists:
-                    lists[values]=BNode()
-                    Collection(graph,lists[values],[URIRef(x) for x in values])
-                prop(shape,FIELD+field,minCount=1,maxCount=1,nodeKind=u('IRI'),**{'in':lists[values]})
-        for predicate in (v for v in records if v['kind']=='predicate'):
+                    elif field=='predicate': selected=[v['@id'] for v in predicates]
+                prop(FIELD+field,minCount=1,maxCount=1,nodeKind=SH+'IRI',**{'in':sorted(selected)})
+        for predicate in predicates:
             cardinality=predicate.get('cardinality',{})
             if types(r)&set(predicate.get('domain',[])):
                 values={'minCount':cardinality.get('min',0)}
                 if cardinality.get('max') is not None: values['maxCount']=cardinality['max']
-                prop(shape,predicate['@id'],**values)
+                prop(predicate['@id'],**values)
+        # RDF graphs are sets: equal constraints occur only once per target.
+        result[r['@id']]=[v for _,v in sorted({canonical_bytes(c):c for c in constraints}.items())]
+    return result
+
+
+def shapes_for_records(records):
+    """Group only identical complete constraint sets, retaining every target."""
+    from rdflib import Graph, URIRef, Literal, BNode
+    from ontology_rdf import ADV
+    from ontology_advanced import RDF
+    from ontology_core import sha256
+    graph=Graph(); u=lambda v:URIRef(SH+v)
+    lists={}; cells={}; properties={}; groups={}
+    for rid,constraints in record_constraints(records).items():
+        key=canonical_bytes(constraints)
+        if key not in groups:
+            shape=groups[key]=URIRef(ADV+'shape-group:'+sha256(key))
+            graph.add((shape,URIRef(RDF+'type'),u('NodeShape')))
+            for path,values in constraints:
+                pkey=canonical_bytes([path,values])
+                if pkey not in properties:
+                    prop=properties[pkey]=BNode(); graph.add((prop,u('path'),URIRef(path)))
+                    for name,value in values.items():
+                        if name=='in':
+                            members=tuple(value)
+                            if members not in lists:
+                                tail=URIRef(RDF+'nil')
+                                for member in reversed(members):
+                                    pair=(member,str(tail))
+                                    if pair not in cells:
+                                        cell=cells[pair]=URIRef(ADV+'shape-list:'+sha256(canonical_bytes(pair)))
+                                        graph.add((cell,URIRef(RDF+'first'),URIRef(member)))
+                                        graph.add((cell,URIRef(RDF+'rest'),tail))
+                                    tail=cells[pair]
+                                lists[members]=tail
+                            term=lists[members]
+                        else: term=URIRef(value) if name=='nodeKind' else Literal(value)
+                        graph.add((prop,u(name),term))
+                graph.add((shape,u('property'),properties[pkey]))
+        graph.add((groups[key],u('targetNode'),URIRef(rid)))
     return graph
 
 

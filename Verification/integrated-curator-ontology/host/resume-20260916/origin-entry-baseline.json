@@ -1,0 +1,38 @@
+{
+  "observed_at": "2026-09-16T22:19:55.667506+00:00",
+  "origin": "http://127.0.0.1:59173",
+  "browser_observation": "User-owned Chrome tab1492110953 now displays application JSON error origin_forbidden / Cross-site requests are forbidden / status rejected. Private URL fragment redacted.",
+  "probes": [
+    {
+      "method": "GET",
+      "path": "/",
+      "headers": {},
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "body": "Ontology workbench HTML shell"
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "headers": {
+        "Sec-Fetch-Site": "cross-site",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-User": "?1"
+      },
+      "status": 403,
+      "content_type": "application/json; charset=utf-8",
+      "body": {
+        "error": {
+          "code": "origin_forbidden",
+          "message": "Cross-site requests are forbidden.",
+          "path": null,
+          "record_id": null,
+          "severity": "error"
+        },
+        "status": "rejected"
+      }
+    }
+  ],
+  "scope": "No authentication, canonical data or security settings changed."
+}

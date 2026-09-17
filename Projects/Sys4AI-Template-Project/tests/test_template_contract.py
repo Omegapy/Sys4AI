@@ -24,6 +24,7 @@ BASELINE = {
     "memory",
     "what-did-you-learn",
     "ontology",
+    "curate",
 }
 STARTERS = {
     "AGENTS.md",
@@ -210,13 +211,13 @@ class TemplateContractTests(unittest.TestCase):
                          ".agents/skills/init-new-project/scripts/init_static_health.py"):
             self.assertIn(relative, required)
         files = {name: (TEMPLATE / name).read_bytes() for name in required}
-        self.helper._static("validate_source", files)
+        self.helper._static("validate_source", files, contract=self.helper.SETUP_CONTRACT)
         self.assertFalse(any(part.startswith((".venv", ".sys4ai")) or part == "control_records"
                              for name in required for part in Path(name).parts))
 
     def test_starter_policy_uses_template_relative_sources(self):
         self.assertEqual("Projects/Sys4AI-Template-Project", self.allowlist["template"])
-        self.assertEqual(STARTERS | self.helper.ONTOLOGY_FILES | self.helper.ADVANCED.STARTERS,
+        self.assertEqual(STARTERS | self.helper.ONTOLOGY_FILES | self.helper.ADVANCED.STARTERS | self.helper.CURATOR.STARTERS,
                          set(self.allowlist["starter_files"]))
         self.assertEqual([], self.allowlist["optional_starter_files"])
         self.assertEqual(2, self.allowlist["schema_version"])
@@ -273,9 +274,32 @@ class TemplateContractTests(unittest.TestCase):
             else:
                 self.assertFalse((TEMPLATE / retired).exists(), retired)
         roles = {p.name for p in (TEMPLATE / "Roles").iterdir() if p.is_dir()}
-        self.assertEqual({"project-sub-agent", "task-manager"}, roles)
+        self.assertEqual({"project-sub-agent", "task-manager", *self.helper.CURATOR.ROLES}, roles)
         self.assertEqual((TEMPLATE / "Roles/INDEX.md").read_bytes(), self.helper.planned_role_index(TEMPLATE, {}, {}))
         self.assertFalse((TEMPLATE / "Roles/.transition.json").exists())
+
+
+    def test_curator_contract_is_complete_neutral_and_owner_bound(self):
+        files = self.helper.template_sources(DEPOT)[0]
+        cfg = self.helper._curator("validate_static", files, neutral=True)
+        self.assertTrue(all(value is None for value in cfg["project"].values()))
+        self.assertFalse(cfg["schedule"]["enabled"]); self.assertEqual(cfg["entitlements"], [])
+        session = json.loads((TEMPLATE / "curator-session.yaml").read_text())
+        self.assertFalse(session["enabled"]); self.assertIsNone(session["project_id"])
+        self.assertFalse(session["unattended_background_ai"])
+        self.assertFalse(cfg["notifications"]["enabled"]); self.assertFalse(cfg["service_installed"]); self.assertFalse(cfg["hook_installed"])
+        self.assertIsNone(cfg["runtime"]); self.assertFalse(cfg["autonomous_write"])
+        for relative in ("control_records/curator", ".sys4ai/curator", "MEMORY/Records", "CURATION/records"):
+            self.assertFalse((TEMPLATE / relative).exists())
+        contract = json.loads((TEMPLATE / "reference-assets/CURATION-depo/contract.json").read_text())
+        self.assertEqual("project-curator", contract["module_id"])
+        self.assertEqual(2, contract["schema_version"])
+        self.assertEqual("governance-starter-v11", contract["compatibility"]["setup_edition"])
+        self.assertFalse(contract["connected_application"]["runtime_observed"])
+        self.assertEqual("agent-task", contract["existing_owners"]["task"].split("owned by ")[-1].rstrip("."))
+        for role in self.helper.CURATOR.ROLES:
+            self.assertTrue((TEMPLATE / "Roles" / role / "AGENTS.md").is_file())
+            self.assertTrue((TEMPLATE / "Roles" / role / "ROLE.md").is_file())
 
 
     def test_ignore_rules_protect_local_artifacts_and_secrets(self):

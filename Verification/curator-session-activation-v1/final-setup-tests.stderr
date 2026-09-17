@@ -1,0 +1,51 @@
+test_current_install_enables_session_and_preserves_opt_out (test_curator_session_setup.CuratorSessionSetupTests.test_current_install_enables_session_and_preserves_opt_out) ... ERROR
+test_first_preparation_neutral_copy_is_enabled (test_curator_session_setup.CuratorSessionSetupTests.test_first_preparation_neutral_copy_is_enabled) ... ERROR
+test_v10_receipt_does_not_acquire_session_on_recovery_or_rerun (test_curator_session_setup.CuratorSessionSetupTests.test_v10_receipt_does_not_acquire_session_on_recovery_or_rerun) ... ERROR
+
+======================================================================
+ERROR: test_current_install_enables_session_and_preserves_opt_out (test_curator_session_setup.CuratorSessionSetupTests.test_current_install_enables_session_and_preserves_opt_out)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_curator_session_setup.py", line 17, in test_current_install_enables_session_and_preserves_opt_out
+    result=h.run_initialization(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-setup-9bzd_bys/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2815, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-setup-9bzd_bys/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2598, in run_initialization
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-setup-9bzd_bys/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 803, in source_snapshot
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-setup-9bzd_bys/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 661, in template_sources
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-setup-9bzd_bys/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 195, in _static
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-setup-9bzd_bys/Sys4AI/SKILLS-depo/init-new-project/scripts/init_static_health.py", line 42, in validate_source
+curator_fixture_initializer_267756367374310417.InitializationError: starter profile or dependency lock differs from the reviewed static inventory: .agents/skills/curate/references/session-maintenance.md
+
+======================================================================
+ERROR: test_first_preparation_neutral_copy_is_enabled (test_curator_session_setup.CuratorSessionSetupTests.test_first_preparation_neutral_copy_is_enabled)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_curator_session_setup.py", line 37, in test_first_preparation_neutral_copy_is_enabled
+    result=h.run_initialization(mode='prepare-existing',destination=dest,project_id='prepared',project_name='Prepared',purpose='First preparation session fixture')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-prepare-fdu2qdgg/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2815, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-prepare-fdu2qdgg/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2598, in run_initialization
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-prepare-fdu2qdgg/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 803, in source_snapshot
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-prepare-fdu2qdgg/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 661, in template_sources
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-prepare-fdu2qdgg/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 195, in _static
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-prepare-fdu2qdgg/Sys4AI/SKILLS-depo/init-new-project/scripts/init_static_health.py", line 42, in validate_source
+curator_fixture_initializer_6525083095942616560.InitializationError: starter profile or dependency lock differs from the reviewed static inventory: .agents/skills/curate/references/session-maintenance.md
+
+======================================================================
+ERROR: test_v10_receipt_does_not_acquire_session_on_recovery_or_rerun (test_curator_session_setup.CuratorSessionSetupTests.test_v10_receipt_does_not_acquire_session_on_recovery_or_rerun)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_curator_session_setup.py", line 47, in test_v10_receipt_does_not_acquire_session_on_recovery_or_rerun
+    proposed,sources,original=h.source_snapshot(root,root/'SKILLS-depo/init-new-project',identity,contract=contract,destination=dest)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-v10-ifjroku5/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 803, in source_snapshot
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-v10-ifjroku5/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 661, in template_sources
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-v10-ifjroku5/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 195, in _static
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/curator-session-activation-v1/final-fixtures/curator-session-v10-ifjroku5/Sys4AI/SKILLS-depo/init-new-project/scripts/init_static_health.py", line 42, in validate_source
+curator_fixture_initializer_692031060898006440.InitializationError: starter profile or dependency lock differs from the reviewed static inventory: .agents/skills/curate/references/session-maintenance.md
+
+----------------------------------------------------------------------
+Ran 3 tests in 9.394s
+
+FAILED (errors=3)

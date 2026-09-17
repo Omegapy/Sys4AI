@@ -1,0 +1,7 @@
+# Host preview feedback
+
+After reviewing the exact six replacements, the host reported that the ordinary preview returned invalid, mutated false, with a HasValueConstraintComponent finding. This worker did not execute or diagnose the owner implementation. The prepared proposal has not been accepted for publication; keep the original failed preview evidence and do not continue to publish or derived builds on an invalid proposal.
+
+The public contract does not require unconditional standards recertification before preview. `reference-assets/ONTOLOGY-depo/advanced-profile.md` states that certification binds worker code, installed package bytes and interpreter and must be renewed after those inputs change. The installed command reference likewise conditions recertification on changed inputs. An instruction append, its ordinary configuration binding update or factual project identity correction does not by itself establish that trigger. A semantic conformance finding alone does not establish a stale certificate or justify recertification as a remedy.
+
+A current public diagnostic explicitly identifying changed certification inputs would justify assessing the separately selected ordinary `profile-setup standards` route. No such diagnostic is established by the reported preview result. No check implementation, profile, source rule, certificate or historical receipt should be altered to clear the finding. Further dependency diagnosis remains with the host within the permitted public interface scope.

@@ -1,0 +1,2931 @@
+{
+  "title": "Integrated Project Curator, ontology and project initialization",
+  "slug": "integrated-project-curator-ontology-and-project-initialization",
+  "status_reason": "Draft derived from approved TRD revision 2; engineering decisions are proposed and exact plan approval is pending. No planned implementation has been performed.",
+  "project": {
+    "root_hint": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+    "inspected_at": "2026-09-13T15:48:11.121857+00:00",
+    "guidance": [
+      {
+        "path": "AGENTS.md",
+        "observed_at": "2026-09-13T15:48:11.121857+00:00",
+        "digest": "sha256:595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37",
+        "summary": "Root depot governance, sole canonical owners, source-to-Template ownership and selected adoption boundaries."
+      },
+      {
+        "path": "SOUL.md",
+        "observed_at": "2026-09-13T15:48:11.121857+00:00",
+        "digest": "sha256:3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+        "summary": "Source-first engineering, exact scope and evidence discipline."
+      },
+      {
+        "path": "ROLE.md",
+        "observed_at": "2026-09-13T15:48:11.121857+00:00",
+        "digest": "sha256:15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b",
+        "summary": "Project Director ownership and separate Task/native/state authority."
+      },
+      {
+        "path": "SPECS.md",
+        "observed_at": "2026-09-13T15:48:11.121857+00:00",
+        "digest": "sha256:704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+        "summary": "Root interpreter, setup/ontology/memory architecture and source-specific editions."
+      },
+      {
+        "path": ".agents/skills/to-implementation-plan/SKILL.md",
+        "observed_at": "2026-09-13T15:48:11.121857+00:00",
+        "digest": "sha256:25333eec8b638aff350f434dc3b6c12840ba86c0790aa455656d09cb885790ec",
+        "summary": "Explicit planning-only operation; exact-revision approval is required before ready; helper owns canonical records."
+      }
+    ],
+    "baseline_facts": [
+      {
+        "fact": "The current root is sys4ai-depot, not a generic product; registry lists the depot and its neutral Template only.",
+        "evidence_locator": "depot/projects.json",
+        "observed_at": "2026-09-13T15:48:11.121857+00:00"
+      },
+      {
+        "fact": "Current ontology imports only locked sys4ai-core 1.0.0. Existing configuration supports multiple project-local and binding files without adding a module loader.",
+        "evidence_locator": "SKILLS-depo/ontology/scripts/ontology_modules.py and ontology_core.py",
+        "observed_at": "2026-09-13T15:48:11.121857+00:00"
+      },
+      {
+        "fact": "Neutral starter project and binding graphs are empty; current Curator adoption preserves ontology.yaml and ONTOLOGY rather than creating Curator semantics.",
+        "evidence_locator": "ONTOLOGY-depo/starter/ONTOLOGY and SKILLS-depo/init-new-project/scripts/init_curator.py",
+        "observed_at": "2026-09-13T15:48:11.121857+00:00"
+      },
+      {
+        "fact": "Root session maintenance is enabled, but unattended scheduler/services/autonomous writes remain disabled.",
+        "evidence_locator": "curator-session.yaml and curator.yaml",
+        "observed_at": "2026-09-13T15:48:11.121857+00:00"
+      },
+      {
+        "fact": "The separately authorized guard capacity repair is recorded as complete; installed initializer remains v9 and reusable/Template setup is v11.",
+        "evidence_locator": "Verification/guard-capacity-20260913/REPORT.md",
+        "observed_at": "2026-09-13T15:48:11.121857+00:00"
+      },
+      {
+        "fact": "The repository has existing tracked changes across governance, source, Template and ontology; they are pre-existing work to preserve rather than a clean baseline.",
+        "evidence_locator": "Read-only git status --short --untracked-files=no during this planning inspection",
+        "observed_at": "2026-09-13T15:48:11.121857+00:00"
+      }
+    ],
+    "constraints": [
+      "Use the selected root .venv Python 3.12; plan helpers need no new dependencies.",
+      "Author reusable changes only in their owning source collections; use checked Template distribution and separate exact root/destination adoption.",
+      "Preserve core schema/context/import locks, exact source/owner checks, current Task writer and all action-specific authority gates.",
+      "The active root initializer v9 is not automatically upgraded to source/Template v11; use the executing helper own current compatible fixture.",
+      "Source-current ontology declaration, installation, configuration, compatibility, authorization and runtime are distinct evidence states.",
+      "No current integration execution authority is conferred by this planning task or the approved TRD."
+    ],
+    "preserved_paths": [
+      "TRDs/trd_integrated-project-curator-ontology-and-project-initializati_2026-09-13.md",
+      "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+      "MEMORY",
+      "memory.yaml",
+      "ONTOLOGY/modules/sys4ai-core/1.0.0",
+      "ONTOLOGY/modules/project/project.jsonld",
+      "ONTOLOGY/bindings/artifacts.json",
+      "ONTOLOGY/bindings/roles.json",
+      "ONTOLOGY/bindings/skills.json",
+      "ONTOLOGY/bindings/projects.json",
+      "LICENSE",
+      "LICENSE-CODE",
+      "LICENSE-DOCS",
+      ".agents/skills/agent-task/scripts/task_state.py",
+      "Projects outside explicitly selected disposable fixtures",
+      "Historical control_records/project-setup-history receipts"
+    ],
+    "evidence_gaps": []
+  },
+  "objective": {
+    "summary": "Deliver one complete functional Curator process integrated with project ontology and every supported selected initialization route, then resolve the root health follow-up with current owner evidence.",
+    "user_value": "The user can discover what Curator does and which current owner governs it, and obtain the same usable integration from setup without hidden manual ontology work.",
+    "success_outcomes": [
+      "The active Sys4AI depot root shall expose one coherent project-local Curator process through its governance, charter, configuration, owner entry points and ontology, using the root's actual project identity and current operating policy.",
+      "The ontology shall represent the supported Curator process and its meaningful functions, including policy inspection, scoped review, owner-routed update and correction, exact retry/recovery, Task pause/resume, selected dispatch, session catch-up and bounded log access.",
+      "Curator ontology knowledge shall connect the process to project identity, governing skills and roles, Task lifecycle/current ownership, memory, ontology and maintenance obligations, with typed relationships and inspectable source provenance.",
+      "Reusable source collections and the registered Sys4AI Template shall contain the complete Curator project and ontology capability needed for destination specialization through the supported initializer.",
+      "Supported Sys4AI new-project creation shall deliver Curator project wiring and its functional ontology integration together as part of the same successful initialization workflow.",
+      "First-time Sys4AI preparation of a selected existing project shall supply the same integrated Curator process and ontology functionality while preserving the destination's established identity, authored content and explicit configuration choices.",
+      "Sys4AI shall provide a supported explicitly selected adoption or refresh route that completes Curator project and ontology integration for previously initialized projects, including those with an earlier Curator installation that lacks ontology integration.",
+      "Integration setup and adoption shall preserve authored ontology and memory, Task history, project identity, licensing, custom packages, unrelated roles and explicit opt-outs, with exact change boundaries and recoverable operations.",
+      "Curator project behavior and ontology representation shall consistently describe bounded session-start/return collection, subsequent current-owner evaluation and separately authorized execution, preserving the configured session-only operating mode.",
+      "The root's pending Curator catch-up obligations identified by the health report shall receive current-owner disposition based on fresh bounded evidence and current source/ownership checks.",
+      "The reported staged response under the cancelled historical Curator Task shall be investigated through the Task owner, with any lifecycle or native-write-ownership mismatch reconciled before a supported recovery or cleanup disposition.",
+      "The root health follow-up shall establish actual local browser behavior for the selected on-demand ontology workbench and report its operating state accurately without requiring an always-on service.",
+      "The integration and report follow-up shall preserve the working root memory retrieval, ontology core/backend behavior and their independent data, configuration and authority boundaries.",
+      "Final integration reporting shall cover root, reusable sources, neutral Template and each supported initialization/adoption route, relating every requirement and health finding to current evidence and explicit limits."
+    ]
+  },
+  "scope": {
+    "in_scope": [
+      "Functional process/owner/trigger/source semantics and current-root project integration.",
+      "Neutral reusable recipe, checked Template completeness and exact destination specialization.",
+      "New creation, first existing preparation, pristine Template-copy specialization and explicit integrated adoption/refresh of earlier initialized projects.",
+      "Preservation, historical editions, exact partial recovery and current receipt/static assessment.",
+      "Current-owner disposition of dated pending deliveries and historical staged Task evidence; separately selected on-demand browser observation; fresh memory/ontology health.",
+      "Requirement-level current evidence and explicit non-complete limits."
+    ],
+    "out_of_scope": [
+      "Performing any planned implementation, source/Template update, root/destination adoption, canonical ontology publication, staged Task cleanup or service startup during creation of this draft.",
+      "Bulk registered-project propagation, root generic project initialization, restoration of the rejected TRD, replacement of historical setup editions or receipts.",
+      "New background AI, unattended scheduling, service or hook installation, dependency/model/runtime provisioning, external communications, Git actions, publication or deployment.",
+      "Changing healthy unrelated backends, locked core imports, project memory schemas/data or publication grants to produce a healthy aggregate."
+    ],
+    "execution_authority": "Creating, approving or tracking this plan does not authorize implementation, installation, deletion, configuration adoption, ontology publication, Task recovery, service startup, real product adoption, Git publication or any other separately governed action. A later exact implementation request and current action-specific scopes control each planned task."
+  },
+  "sources": [
+    {
+      "source_id": "SRC-001",
+      "kind": "trd",
+      "locator": "TRDs/trd_integrated-project-curator-ontology-and-project-initializati_2026-09-13.md",
+      "title": "Approved integrated Curator TRD revision 2",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:4952b592a9bccf031d118002bd8ab95c5974884c1eabfbd971ddfd34ff7bd147",
+      "facts_used": [
+        "TRD-20260913-C85981B3 revision 2 is trd_done and contains 14 requirements, 34 acceptance clauses and no open questions or assumptions.",
+        "Functional Curator integration covers root, reusable neutral Template, new creation, first preparation and selected prior-project adoption; approval establishes requirements only.",
+        "Term identifiers, resource packaging, specialization and the next setup edition are planning choices, not missing user requirements."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": "TRD-20260913-C85981B3 revision 2"
+    },
+    {
+      "source_id": "SRC-002",
+      "kind": "file",
+      "locator": "AGENTS.md",
+      "title": "Depot instructions",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37",
+      "facts_used": [
+        "Source collections own reusable changes; checked Template distribution, selected adoption, current canonical owners and independent state systems remain required."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-003",
+      "kind": "file",
+      "locator": "SOUL.md",
+      "title": "Engineering and preservation rules",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+      "facts_used": [
+        "Inspect current sources, choose the smallest complete design and distinguish static, runtime and end-to-end evidence."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-004",
+      "kind": "file",
+      "locator": "ROLE.md",
+      "title": "Depot Director and Task authority",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b",
+      "facts_used": [
+        "The current confirmed manager owns its Task; the host owns registration and reusable adoption; roles and ontology do not grant action authority."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-005",
+      "kind": "file",
+      "locator": "SPECS.md",
+      "title": "Root technical specifications",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408",
+      "facts_used": [
+        "Root helpers use .venv Python 3.12, standard-library transactions and exact source hashes; project ontology and memory remain separate. Some edition prose is historical and executing helper bytes govern the actual selected edition."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-006",
+      "kind": "file",
+      "locator": ".agents/skills/curate/ACTIONS.md",
+      "title": "Installed Curator action inventory",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:3ae676c3f350e92ab25ab8a02776f11b946ecea3ba9785b882ffae8ef3e97dc5",
+      "facts_used": [
+        "Status/validate, review, update, correct, retry, pause/resume, tick and bounded log routes use fixed existing owners. Session collection creates no Task or activation."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-007",
+      "kind": "file",
+      "locator": ".agents/skills/curate/references/session-maintenance.md",
+      "title": "Installed session contract",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:c06a23c871c7c388e7d7f7c5939f282c134ef248442566a9d2aa3c39efb7055c",
+      "facts_used": [
+        "Enabled session-start/return collection queues changed inputs. Current owners dispatch at most one operation with two model calls, 30 seconds, 1,000,000 candidate bytes and at most three agent slots per checkpoint; actual capacity can be lower. Outcomes alone consume deliveries."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-008",
+      "kind": "file",
+      "locator": ".agents/skills/ontology/SKILL.md",
+      "title": "Installed ontology boundaries",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac",
+      "facts_used": [
+        "Read queries preserve current source context and do not repair, run a discovered action, publish or provision. Canonical ontology writes require an exact proposal and current ontology grant."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-009",
+      "kind": "file",
+      "locator": ".agents/skills/ontology/references/commands.md",
+      "title": "Ontology query, health and workbench interfaces",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:337099e13c269045dbe34e400b684ab87b043f2ca90a490914239b71090eed51",
+      "facts_used": [
+        "capability and knowledge --intent current are bounded reads; compile, build-wiki and link-memory are separate writes. Operational health differs from browser navigation and guarded dispatch. Private on-demand workbench browsing requires selected service startup."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-010",
+      "kind": "file",
+      "locator": "SKILLS-depo/ontology/scripts/ontology_modules.py",
+      "title": "Locked import implementation",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:d4cba6775bf4ed42bd4392ef37134ba19dd6b7d84cd82eb5997f4c8a23e47194",
+      "facts_used": [
+        "The loader accepts only sys4ai-core, verifies complete manifest and file hashes, and excludes imported project instances and bindings. A new imported Curator module is not supported today."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-011",
+      "kind": "file",
+      "locator": "SKILLS-depo/ontology/scripts/ontology_core.py",
+      "title": "Compact ontology configuration and local record loader",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:15336a6fbb542cb8abccf6db8cd4227fc846758f60868ef9e3782580ea18be1d",
+      "facts_used": [
+        "Existing project_files and binding_files allow multiple explicitly selected project-local files; records must use the destination namespace and module project. Canonical configuration admits exact allowlisted source paths and competency files."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-012",
+      "kind": "file",
+      "locator": "SKILLS-depo/ontology/scripts/ontology_validate.py",
+      "title": "Typed record and binding validator",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:33aea8e2878fa914ecdf370ba2e6be409ef5f14d12d732b34b61a5272e14bdfd",
+      "facts_used": [
+        "Concepts, instances, predicates, relations and bindings have exact constraints; role bindings require both AGENTS.md and ROLE.md and labels require explicit ambiguity handling."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-013",
+      "kind": "file",
+      "locator": "SKILLS-depo/ontology/scripts/ontology_knowledge.py",
+      "title": "Capability and current-source query behavior",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:feb9d2c2e5f7570db49d3d07c3961ee2f38c1ee629f3a135915ea003645c0d55",
+      "facts_used": [
+        "capability selects Skill/Capability types and providesCapability edges; current_sources reads selected source bytes with recorded and actual hashes. Current capability availability follows source freshness and must not be mistaken for runtime or authorization."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-014",
+      "kind": "file",
+      "locator": "ONTOLOGY-depo/publication-and-recovery.md",
+      "title": "Ontology owner publication and recovery",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:b25ea6e4198f430915b57d984fe6d994528386eee8ed81176999cec3c8a649bd",
+      "facts_used": [
+        "Canonical publish permits configured project, binding and competency files. Configuration and imported modules belong to separately authorized initializer/adoption work. Exact previews, current grants, lock-time checks, durable partial intent and unchanged replay are mandatory."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-015",
+      "kind": "file",
+      "locator": "ONTOLOGY-depo/starter/ontology.yaml",
+      "title": "Neutral ontology configuration",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:d72b1bf2adf772525aebc4c5e188cfdbc33116b9b48cb3d32bb94de39ffeaf9d",
+      "facts_used": [
+        "Template identity and publication binding are null, publication is disabled, core 1.0.0 is locked and only neutral empty project/binding starter files are selected."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-016",
+      "kind": "file",
+      "locator": "ONTOLOGY-depo/starter/ONTOLOGY/modules/project/project.jsonld",
+      "title": "Neutral project graph",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:2a0c69cdeb2e067acfa646bfbbcad5c3d790118c4b53069b3637c4874fb9c98f",
+      "facts_used": [
+        "The complete project graph is empty. Neutral definition recipes must not be mistaken for active project-instance records."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-017",
+      "kind": "file",
+      "locator": "ONTOLOGY-depo/starter/ONTOLOGY/bindings/bindings.jsonld",
+      "title": "Neutral source binding graph",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:2a0c69cdeb2e067acfa646bfbbcad5c3d790118c4b53069b3637c4874fb9c98f",
+      "facts_used": [
+        "The complete binding graph is empty; installed-source hashes require destination specialization."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-018",
+      "kind": "file",
+      "locator": "SKILLS-depo/init-new-project/SKILL.md",
+      "title": "Reusable initializer contract",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:6e4f9ac0b471fcab01a64f1ce4962bebf6229b246332501a0fde9204dffbcb22",
+      "facts_used": [
+        "Current reusable setup is governance-starter-v11. create and prepare-existing use only the registered Template. Selected --adopt-module curator covers earlier completed setups, with ordinary reruns preserving recorded editions and opt-outs."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-019",
+      "kind": "file",
+      "locator": "SKILLS-depo/init-new-project/scripts/init_curator.py",
+      "title": "Curator adoption and assessment implementation",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:ad1480038d09ceea4d5eaaea75d64667f3691e54f70233e503aa37c843e0adfc",
+      "facts_used": [
+        "source_files selects Curator resources and complete owner packages. protected_inventory protects ONTOLOGY and ontology.yaml; existing starters are preserved. Current assessment checks installation/configuration/interfaces but does not materialize functional ontology records."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-020",
+      "kind": "file",
+      "locator": "SKILLS-depo/init-new-project/scripts/init_new_project.py",
+      "title": "Initializer source and current edition",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:7801def2e6585e4f9f42cb0b5c129c52dd343456c4e2ec37f744fb7e2194b100",
+      "facts_used": [
+        "New setup specializes identity and Curator/session settings. Existing ontology packages are preserved as a whole unless pristine. The current source has edition-specific neutral validation and exact receipt stages; integration requires a coordinated new setup edition and selected module operation."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-021",
+      "kind": "file",
+      "locator": "CURATION-depo/contract.json",
+      "title": "Reusable Curator resource and owner contract",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:af3ad3c784705aa5c186c00372d3c9530009a421509cdb58885f19e418bd47d7",
+      "facts_used": [
+        "The complete resource inventory and owner entry points cover Task, memory, ontology, learning, roles, setup and distribution. Current contract states retained support and separately unexercised native dispatch."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-022",
+      "kind": "file",
+      "locator": "depot/template-update.md",
+      "title": "Template update and recovery guide",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:3dfc44def289f74d82903a1ad63efb10c2401972110845cc70c77e41c876cbda",
+      "facts_used": [
+        "Reusable sources reach only the registered Template via check/apply. Configuration overrides and reference collection discovery have distinct destinations. Unknown targets, drift, symlinks and exact pending recovery remain fail-closed."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-023",
+      "kind": "file",
+      "locator": "depot/template-update.json",
+      "title": "Current Template mappings",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:f895c4b3d875bd8451976d3befe99a5e98ada34b520ce9c16462551bc7f0cf76",
+      "facts_used": [
+        "The selected Template path is Projects/Sys4AI-Template-Project. Exact overrides select current empty ontology starter graphs; Curator source contracts follow reference collection discovery."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-024",
+      "kind": "file",
+      "locator": "depot/projects.json",
+      "title": "Factual project registry",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd",
+      "facts_used": [
+        "The current registry contains the sys4ai-depot manager and neutral sys4ai-template-project; registration supplies no bulk adoption or publication authority."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-025",
+      "kind": "file",
+      "locator": "curator.yaml",
+      "title": "Root Curator identity and inactive background configuration",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:1f7ecccb94923e64ec1e68564e7205edc3db1396daab5f87c87a5c97832c686e",
+      "facts_used": [
+        "The root identifies sys4ai-depot and its exact absolute coordination root; unattended schedule, autonomous writes, service and hook installation remain disabled."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-026",
+      "kind": "file",
+      "locator": "curator-session.yaml",
+      "title": "Root enabled session configuration",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:e2993673e8920666c76506ce146996fcd741fa82260426f1e1bb310ef767e10c",
+      "facts_used": [
+        "Root project-session maintenance is enabled with stated bounded catch-up; unattended_background_ai is false."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-027",
+      "kind": "file",
+      "locator": "ontology.yaml",
+      "title": "Root ontology selection",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:9649f876d356bb21e7a210100705cfc5a0a7977deebd73bf265d7e0c9b39b4c3",
+      "facts_used": [
+        "The root selects its existing authored project graph and four binding files, core 1.0.0 and sys4ai-depot namespace. Its source allowlist lacks the Curator skill/action/session sources; exact configuration adoption is needed before their canonical bindings."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-028",
+      "kind": "file",
+      "locator": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+      "title": "Dated supplied root health report",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7",
+      "facts_used": [
+        "September 12 observations reported no Curator ontology match, two pending catch-up signals, 42,406 changed-path metadata rows and a staged 1,425-byte response under cancelled TASK-20260910-7F1A11AE revision 238. These are dated observations.",
+        "At that observation memory retrieval and ontology backends passed; workbench had no selected endpoint and was not_assessed, not proved failed."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-029",
+      "kind": "file",
+      "locator": "Verification/curator-ontology-integration-trd-20260913-v1/integration-observation.json",
+      "title": "TRD integration source observation",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:ba62b9beb7cd99171290ca5163cfa3b630f2df4326aa3d5a10da216ea0aae00a",
+      "facts_used": [
+        "The retained observation binds empty source/Template graphs and the original preserved ontology adoption behavior; later inspected source bytes are separately recorded in this plan."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    },
+    {
+      "source_id": "SRC-030",
+      "kind": "file",
+      "locator": "Verification/guard-capacity-20260913/REPORT.md",
+      "title": "Separately authorized guard prerequisite repair",
+      "accessed_at": "2026-09-13T15:48:11.121857+00:00",
+      "digest": "sha256:6a981a0e8979478189f997e378a96aa6aaaeee0d69f43f88c303e338656895bb",
+      "facts_used": [
+        "A separate 64-to-128 MiB inventory capacity repair retained file-count, source, owner, freshness and deadline guards. Its root actual-backend dispatch and selected recovery checks are prerequisite evidence, not Curator integration completion.",
+        "The installed initializer remains v9 while reusable and Template are v11; the installed compatibility fixture must match the installed helper edition."
+      ],
+      "access_limitations": [],
+      "provenance_mode": "agent_inspected",
+      "inspection_method": "direct_text",
+      "external_id": null
+    }
+  ],
+  "requirements": [
+    {
+      "requirement_id": "REQ-001",
+      "title": "Integrate Curator into the root project",
+      "outcome": "The active Sys4AI depot root shall expose one coherent project-local Curator process through its governance, charter, configuration, owner entry points and ontology, using the root's actual project identity and current operating policy.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-001.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-006",
+        "SRC-007",
+        "SRC-008",
+        "SRC-014",
+        "SRC-024",
+        "SRC-025",
+        "SRC-026",
+        "SRC-027",
+        "SRC-028"
+      ],
+      "acceptance_criteria": [
+        "Root project guidance and ontology discovery identify the same Curator process, its configured project root and its supported owner routes; a bounded representative maintenance operation reaches the applicable current owner and produces attributable evidence under that owner's rules.",
+        "File presence, policy validity or ontology label discovery alone cannot establish completion of root process integration."
+      ],
+      "dependencies": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-009"
+      ],
+      "negative_requirements": [
+        "File presence, policy validity or name-only discovery is insufficient."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-002",
+      "title": "Represent Curator functionality in the ontology",
+      "outcome": "The ontology shall represent the supported Curator process and its meaningful functions, including policy inspection, scoped review, owner-routed update and correction, exact retry/recovery, Task pause/resume, selected dispatch, session catch-up and bounded log access.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-002.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-006",
+        "SRC-007",
+        "SRC-008",
+        "SRC-009",
+        "SRC-010",
+        "SRC-011",
+        "SRC-012",
+        "SRC-013",
+        "SRC-021",
+        "SRC-027"
+      ],
+      "acceptance_criteria": [
+        "Ontology queries can identify what each represented function does, its inputs and outputs, responsible owner, affected scope and prerequisites, with references to the installed governing source; unsupported operations are not presented as available.",
+        "The representation distinguishes Curator coordination from the canonical Task, memory, ontology and integration operations it coordinates. A name-only Curator capability entry fails acceptance."
+      ],
+      "dependencies": [],
+      "negative_requirements": [
+        "Do not present unsupported operations as available or confuse coordination with owner execution."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-003",
+      "title": "Make relationships and current sources discoverable",
+      "outcome": "Curator ontology knowledge shall connect the process to project identity, governing skills and roles, Task lifecycle/current ownership, memory, ontology and maintenance obligations, with typed relationships and inspectable source provenance.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-003.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-006",
+        "SRC-007",
+        "SRC-008",
+        "SRC-009",
+        "SRC-010",
+        "SRC-011",
+        "SRC-012",
+        "SRC-013",
+        "SRC-014",
+        "SRC-017",
+        "SRC-021",
+        "SRC-027",
+        "SRC-029"
+      ],
+      "acceptance_criteria": [
+        "Bounded capability, relationship and current-authority queries answer what Curator maintains, which owner controls a selected action, what triggers evaluation, and which source governs the result; outputs identify the exact source/version context and preserve ambiguity, missing-source and stale-source diagnostics.",
+        "Capability declaration, installation, configuration, authorization, compatibility, runtime observation, pending work and completed owner outcomes remain distinguishable. A historical ontology statement or memory record cannot replace a current owner/authority check.",
+        "Relevant generated ontology indexes, wiki and memory links remain consistent with the selected canonical Curator knowledge through their existing explicit maintenance operations; retrieval itself performs no repair or canonical write."
+      ],
+      "dependencies": [
+        "REQ-002"
+      ],
+      "negative_requirements": [
+        "Retrieval performs no repair or canonical write; historical ontology and memory never replace a current owner check."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-004",
+      "title": "Deliver complete neutral capability through the Template",
+      "outcome": "Reusable source collections and the registered Sys4AI Template shall contain the complete Curator project and ontology capability needed for destination specialization through the supported initializer.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-004.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-008",
+        "SRC-010",
+        "SRC-011",
+        "SRC-012",
+        "SRC-014",
+        "SRC-015",
+        "SRC-016",
+        "SRC-017",
+        "SRC-018",
+        "SRC-019",
+        "SRC-020",
+        "SRC-021",
+        "SRC-022",
+        "SRC-023",
+        "SRC-024",
+        "SRC-029",
+        "SRC-030"
+      ],
+      "acceptance_criteria": [
+        "The reviewed source-to-Template inventory accounts for the functional ontology content, bindings or specialization inputs, owner interfaces and project-session assets required by REQ-002 and REQ-003; source and Template checks detect omitted or incompatible integration resources.",
+        "The Template retains neutral project identity, unbound publication authority and disabled session operation. It contains no root-specific live owner, maintenance backlog, learned record, project-instance claim or runtime evidence, while still supplying the complete reusable integration.",
+        "Reusable changes originate in their owning source collections and reach only the registered Template through its checked update pipeline; root adoption and selected destination adoption remain distinct operations."
+      ],
+      "dependencies": [
+        "REQ-002",
+        "REQ-003"
+      ],
+      "negative_requirements": [
+        "Do not distribute root identity, live actors, backlog, learned records, project-instance claims or runtime evidence into the Template."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-005",
+      "title": "Complete both integrations during new-project creation",
+      "outcome": "Supported Sys4AI new-project creation shall deliver Curator project wiring and its functional ontology integration together as part of the same successful initialization workflow.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-005.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-007",
+        "SRC-011",
+        "SRC-015",
+        "SRC-016",
+        "SRC-017",
+        "SRC-018",
+        "SRC-019",
+        "SRC-020",
+        "SRC-022",
+        "SRC-029"
+      ],
+      "acceptance_criteria": [
+        "A representative new project created from the reviewed Template has destination-consistent Curator and ontology identity, source bindings, local owner routes and the discoverable functions/relationships in REQ-002 and REQ-003, without a separate manual ontology-integration step.",
+        "The resulting project has session maintenance enabled by the selected installation policy, subject to an explicit destination opt-out; its neutral runtime and service choices are preserved. Setup evidence distinguishes static readiness from a separately observed live session."
+      ],
+      "dependencies": [
+        "REQ-004",
+        "REQ-008",
+        "REQ-009"
+      ],
+      "negative_requirements": [
+        "No manual ontology follow-up may be omitted from successful new setup; installation is not live session evidence."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-006",
+      "title": "Complete both integrations during first existing-project preparation",
+      "outcome": "First-time Sys4AI preparation of a selected existing project shall supply the same integrated Curator process and ontology functionality while preserving the destination's established identity, authored content and explicit configuration choices.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-006.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-007",
+        "SRC-011",
+        "SRC-015",
+        "SRC-016",
+        "SRC-017",
+        "SRC-018",
+        "SRC-019",
+        "SRC-020",
+        "SRC-022",
+        "SRC-029"
+      ],
+      "acceptance_criteria": [
+        "Representative first preparation of an existing project and of an unspecialized Template copy yields the functional project and ontology integration required by REQ-002 and REQ-003, specialized to that destination, without a further manual ontology step.",
+        "Existing customizations and opt-outs remain intact. When preserved content prevents compatible integration, the workflow identifies the exact blocked capability and required selected reconciliation instead of reporting healthy integrated setup."
+      ],
+      "dependencies": [
+        "REQ-004",
+        "REQ-008",
+        "REQ-009"
+      ],
+      "negative_requirements": [
+        "Preserve authored content, established identity and explicit choices; incompatible preservation cannot be reported healthy."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-007",
+      "title": "Support selected adoption by previously initialized projects",
+      "outcome": "Sys4AI shall provide a supported explicitly selected adoption or refresh route that completes Curator project and ontology integration for previously initialized projects, including those with an earlier Curator installation that lacks ontology integration.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-007.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-007",
+        "SRC-011",
+        "SRC-014",
+        "SRC-015",
+        "SRC-018",
+        "SRC-019",
+        "SRC-020",
+        "SRC-022",
+        "SRC-024",
+        "SRC-029",
+        "SRC-030"
+      ],
+      "acceptance_criteria": [
+        "Representative prior initialized destinations can receive both parts of the integration through one supported selected workflow, with no separately omitted manual ontology-integration step; unavailable prerequisites or protected conflicts produce exact diagnostics and no false success.",
+        "Original setup editions, source inventories and receipts remain unchanged historical evidence. New adoption evidence identifies the selected integration edition and current destination state separately, using the existing setup receipt/history mechanism.",
+        "An ordinary rerun verifies its recorded edition without silently acquiring the new integration. Unselected registered projects remain untouched; an existing disabled setting remains disabled."
+      ],
+      "dependencies": [
+        "REQ-004",
+        "REQ-008",
+        "REQ-009"
+      ],
+      "negative_requirements": [
+        "No implicit new edition on ordinary reruns; no bulk propagation or change to existing disabled settings."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-008",
+      "title": "Preserve project data and recover exact setup operations",
+      "outcome": "Integration setup and adoption shall preserve authored ontology and memory, Task history, project identity, licensing, custom packages, unrelated roles and explicit opt-outs, with exact change boundaries and recoverable operations.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-008.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-008",
+        "SRC-010",
+        "SRC-011",
+        "SRC-012",
+        "SRC-014",
+        "SRC-015",
+        "SRC-018",
+        "SRC-019",
+        "SRC-020",
+        "SRC-022",
+        "SRC-023",
+        "SRC-024",
+        "SRC-027",
+        "SRC-029",
+        "SRC-030"
+      ],
+      "acceptance_criteria": [
+        "Before/after comparison accounts for every intended integration addition or selected change and proves preservation of unrelated project-owned material. Compatible pre-existing knowledge remains usable without wholesale graph or package replacement.",
+        "Customized, incompatible, partial or concurrently changed inputs produce attributable conflict or partial-operation evidence. Exact unchanged reruns resume or verify without duplicate capabilities, bindings or registrations; changed sources or destination edits cannot be replayed as an earlier approved operation.",
+        "Existing session-disabled, capture-off and disabled publication choices survive preparation, adoption and reruns. No existing-project or ontology overwrite authority is inferred from file equality, directory location or registry membership."
+      ],
+      "dependencies": [],
+      "negative_requirements": [
+        "No wholesale graph replacement, duplicate IDs, receipt relabeling, stale replay or inferred overwrite authority."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-009",
+      "title": "Preserve session triggers and canonical owner authority",
+      "outcome": "Curator project behavior and ontology representation shall consistently describe bounded session-start/return collection, subsequent current-owner evaluation and separately authorized execution, preserving the configured session-only operating mode.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-009.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-006",
+        "SRC-007",
+        "SRC-008",
+        "SRC-009",
+        "SRC-013",
+        "SRC-014",
+        "SRC-018",
+        "SRC-021",
+        "SRC-025",
+        "SRC-026"
+      ],
+      "acceptance_criteria": [
+        "A representative enabled session records changed-input catch-up and routes eligible work through the applicable current owner within the configured bounds. Collection, admission, dispatch and completed owner outcomes are reported separately; unavailable owners or exhausted budgets retain pending work.",
+        "Session checks and ontology queries do not create an unattended AI service, start a scheduler, invent a native actor, create a second canonical writer or acquire publication authority. Ontology discovery and saved memory do not themselves trigger canonical ontology updates.",
+        "Existing disabled session choices remain effective, and operation-specific authority, exact source checks and current Task lifecycle gates remain enforced for manual and session-origin work."
+      ],
+      "dependencies": [],
+      "negative_requirements": [
+        "No unattended AI, scheduler, invented actor, second canonical writer, implicit publication or mutation from discovery."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-010",
+      "title": "Resolve the reported pending owner maintenance",
+      "outcome": "The root's pending Curator catch-up obligations identified by the health report shall receive current-owner disposition based on fresh bounded evidence and current source/ownership checks.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-010.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-006",
+        "SRC-007",
+        "SRC-026",
+        "SRC-028"
+      ],
+      "acceptance_criteria": [
+        "Each still-relevant reported obligation is traced to its current delivery and owning workflow, then either completed with an attributable canonical owner receipt or retained with a specific blocker, owner and next eligible action. Already completed or superseded items retain their supporting history.",
+        "A delivery is consumed only after its completed owner outcome. Metadata row counts and partial path pages are not represented as failure counts, full source validation or completed maintenance; source drift requires a fresh observation."
+      ],
+      "dependencies": [
+        "REQ-009"
+      ],
+      "negative_requirements": [
+        "Do not consume a delivery before completed owner outcome or treat metadata rows as failure counts."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-011",
+      "title": "Reconcile the staged Task response through its owner",
+      "outcome": "The reported staged response under the cancelled historical Curator Task shall be investigated through the Task owner, with any lifecycle or native-write-ownership mismatch reconciled before a supported recovery or cleanup disposition.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-011.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-028"
+      ],
+      "acceptance_criteria": [
+        "The investigation identifies the exact current staged artifact, related transaction evidence, canonical Task revision/status and known write-owning assignments. It records whether the artifact is recoverable, already represented or requires a specific owner action without inferring safety from age, cancellation or roster absence alone.",
+        "Any authorized disposition uses the supported exact Task operation, preserves response history and unrelated work, and is followed by rereading the canonical Task state and running validation. If the evidence or authority is insufficient, the artifact remains preserved with a precise blocker; no Task is falsely completed or silently reopened."
+      ],
+      "dependencies": [],
+      "negative_requirements": [
+        "Do not infer safe cleanup from age, cancellation or roster absence; no silent reopen or false Task completion."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-012",
+      "title": "Verify the selected on-demand ontology workbench",
+      "outcome": "The root health follow-up shall establish actual local browser behavior for the selected on-demand ontology workbench and report its operating state accurately without requiring an always-on service.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-012.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-008",
+        "SRC-009",
+        "SRC-028"
+      ],
+      "acceptance_criteria": [
+        "A separately authorized on-demand verification opens the selected local workbench and exercises a representative read/navigation flow against the intended root. It records the observed result and safe lifecycle disposition while protecting the private session token.",
+        "Health evidence distinguishes not running, not assessed, observed operational and failed behavior. An absent endpoint alone is not classified as a failed service, and read/navigation evidence does not imply guarded writes or canonical publication passed."
+      ],
+      "dependencies": [],
+      "negative_requirements": [
+        "Do not expose private session token, require always-on service, classify absent endpoint as failure or infer write verification from browsing."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-013",
+      "title": "Preserve healthy memory and ontology behavior",
+      "outcome": "The integration and report follow-up shall preserve the working root memory retrieval, ontology core/backend behavior and their independent data, configuration and authority boundaries.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-013.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-008",
+        "SRC-009",
+        "SRC-014",
+        "SRC-025",
+        "SRC-027",
+        "SRC-028",
+        "SRC-030"
+      ],
+      "acceptance_criteria": [
+        "Fresh applicable health checks and a bounded actual memory retrieval demonstrate no integration regression against the previously working behavior, including canonical validity, relevant source freshness, projections and memory links.",
+        "Existing authored facts, accepted memory records, capture settings and locked imports retain their meaning and provenance. Unrelated backends, schemas, runtimes and publication grants are not changed to make the integration appear healthy."
+      ],
+      "dependencies": [],
+      "negative_requirements": [
+        "Do not alter independent authored facts, memory records, capture settings, locked imports, runtimes or grants to produce healthy status."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    },
+    {
+      "requirement_id": "REQ-014",
+      "title": "Report integration success with inspectable evidence",
+      "outcome": "Final integration reporting shall cover root, reusable sources, neutral Template and each supported initialization/adoption route, relating every requirement and health finding to current evidence and explicit limits.",
+      "intent": "Preserve the approved integrated outcome and source meaning in TRD-20260913-C85981B3 revision 2, REQ-014.",
+      "source_ids": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-003",
+        "SRC-004",
+        "SRC-005",
+        "SRC-009",
+        "SRC-013",
+        "SRC-018",
+        "SRC-020",
+        "SRC-021",
+        "SRC-022",
+        "SRC-023",
+        "SRC-024",
+        "SRC-028",
+        "SRC-030"
+      ],
+      "acceptance_criteria": [
+        "Evidence demonstrates functional ontology queries and coherent project wiring in the root and representative new, first-prepared and prior-initialized destinations; Template evidence proves neutral reusable completeness. Each route rejects file-install-only or missing-ontology success.",
+        "The report separates static contract checks, fixture checks, actual owner execution, browser observation and end-to-end setup behavior. It identifies any remaining blocker or unexercised behavior without describing the associated requirement as satisfied.",
+        "Current hashes, source/destination scope, receipts and final state support the reported result. The dated health report remains preserved, and no fixture or configured flag is substituted for a live observation."
+      ],
+      "dependencies": [
+        "REQ-001",
+        "REQ-004",
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-008",
+        "REQ-009",
+        "REQ-010",
+        "REQ-011",
+        "REQ-012",
+        "REQ-013"
+      ],
+      "negative_requirements": [
+        "No file-only success, stale counts, fixtures as live evidence or unexercised requirement marked satisfied."
+      ],
+      "status": "active",
+      "disposition": null,
+      "evidence": []
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "DEC-001",
+      "statement": "Preserve the approved 14-requirement functional scope across the depot root, neutral Template and all selected setup routes. TRD approval authorizes requirements only.",
+      "status": "approved",
+      "source_ids": [
+        "SRC-001"
+      ],
+      "authority_basis": "Approved TRD-20260913-C85981B3 revision 2 records the current user approval and its action boundary.",
+      "decided_at": "2026-09-13T09:02:47-06:00"
+    },
+    {
+      "decision_id": "DEC-002",
+      "statement": "Use a versioned neutral declarative recipe, proposed ONTOLOGY-depo/curator-integration/v1, distributed as reference-assets/ONTOLOGY-depo/curator-integration/v1. Materialize destination-local module project records and bindings in separate curator files using existing project_files/binding_files/competency_files support. Keep active neutral starter graphs empty. Do not add a new imported module or redefine sys4ai-core.",
+      "status": "proposed",
+      "source_ids": [
+        "SRC-001",
+        "SRC-010",
+        "SRC-011",
+        "SRC-014",
+        "SRC-015",
+        "SRC-016",
+        "SRC-017"
+      ],
+      "authority_basis": "Solver proposal constrained by the approved TRD and inspected existing interfaces; requires approval of the exact plan revision before readiness.",
+      "decided_at": null
+    },
+    {
+      "decision_id": "DEC-003",
+      "statement": "Propose integration edition curator-ontology-v1 and governance-starter-v12 for new and first-prepared setups. Extend selected curator adoption with an explicit integrated refresh selection; preserve v1-v11 original editions and ordinary rerun semantics. The actual next version must be confirmed against live source before implementation.",
+      "status": "proposed",
+      "source_ids": [
+        "SRC-001",
+        "SRC-018",
+        "SRC-019",
+        "SRC-020"
+      ],
+      "authority_basis": "Solver proposal constrained by the approved TRD and inspected existing interfaces; requires approval of the exact plan revision before readiness.",
+      "decided_at": null
+    },
+    {
+      "decision_id": "DEC-004",
+      "statement": "Use existing setup/module_adoptions history for child integration and existing ontology proposal/publish/recover for root canonical content. Root configuration/resource adoption is a separately reviewed project-local manifest and cannot be routed through generic child initialization or create a project.json. If a supported exact adoption route cannot honor root preservation, stop that action with an explicit blocker rather than invent a writer or ledger.",
+      "status": "proposed",
+      "source_ids": [
+        "SRC-002",
+        "SRC-004",
+        "SRC-014",
+        "SRC-018",
+        "SRC-027"
+      ],
+      "authority_basis": "Solver proposal constrained by the approved TRD and inspected existing interfaces; requires approval of the exact plan revision before readiness.",
+      "decided_at": null
+    },
+    {
+      "decision_id": "DEC-005",
+      "statement": "Treat the selected function owner as a current invocation-time resolution through the existing owner API. Ontology stores governing role/skill bindings and prerequisites, not current native actors, authority grants, dynamic Task statuses or completed delivery claims.",
+      "status": "proposed",
+      "source_ids": [
+        "SRC-006",
+        "SRC-007",
+        "SRC-009",
+        "SRC-013",
+        "SRC-021"
+      ],
+      "authority_basis": "Solver proposal constrained by the approved TRD and inspected existing interfaces; requires approval of the exact plan revision before readiness.",
+      "decided_at": null
+    },
+    {
+      "decision_id": "DEC-006",
+      "statement": "Retain existing capability query fields for compatibility while making declaration/source freshness distinct from installation, authorization and runtime in bounded explanatory metadata and assessment. No query executes an owner or repairs stale sources.",
+      "status": "proposed",
+      "source_ids": [
+        "SRC-008",
+        "SRC-009",
+        "SRC-013"
+      ],
+      "authority_basis": "Solver proposal constrained by the approved TRD and inspected existing interfaces; requires approval of the exact plan revision before readiness.",
+      "decided_at": null
+    },
+    {
+      "decision_id": "DEC-007",
+      "statement": "Run native owner and browser validation only under their actual selected action scopes. Disposable setup fixtures are sufficient to exercise implementation routes but must remain labeled fixtures; real product adoption, new runtime installation, service provisioning and Git publication remain separate requests.",
+      "status": "proposed",
+      "source_ids": [
+        "SRC-001",
+        "SRC-007",
+        "SRC-009",
+        "SRC-018"
+      ],
+      "authority_basis": "Solver proposal constrained by the approved TRD and inspected existing interfaces; requires approval of the exact plan revision before readiness.",
+      "decided_at": null
+    }
+  ],
+  "open_questions": [],
+  "assumptions": [],
+  "phases": [
+    {
+      "phase_id": "PHASE-001",
+      "title": "Bind scope and integration design",
+      "objective": "Establish exact evidence, owners and a complete semantic/setup contract.",
+      "scope": [
+        "Bind the implementation scope to fresh owner and source evidence",
+        "Specify the full functional ontology contract",
+        "Specify exact integration specialization and adoption transactions"
+      ],
+      "depends_on_phase_ids": [],
+      "entry_conditions": [
+        "Implementation of this exact plan is separately authorized; current action scopes are observed."
+      ],
+      "exit_criteria": [
+        "Every owned task meets its current criteria with exact evidence, or the phase remains incomplete with its precise blocker."
+      ],
+      "task_ids": [
+        "TASK-001",
+        "TASK-002",
+        "TASK-003"
+      ],
+      "risks": [
+        "Source or owner changes invalidate affected gates; preserve original work and rebind before proceeding."
+      ]
+    },
+    {
+      "phase_id": "PHASE-002",
+      "title": "Implement reusable semantics and exact setup behavior",
+      "objective": "Deliver neutral recipe, specialization, functional assessment and historical-safe transactions.",
+      "scope": [
+        "Implement the neutral recipe and deterministic destination materializer",
+        "Make static assessment require functional integration",
+        "Integrate new and first-preparation setup in one operation",
+        "Add selected integrated adoption and refresh for earlier setups",
+        "Prove exact failure and recovery behavior"
+      ],
+      "depends_on_phase_ids": [
+        "PHASE-001"
+      ],
+      "entry_conditions": [
+        "The exact semantic and transaction contracts from phase 1 are accepted for implementation."
+      ],
+      "exit_criteria": [
+        "Every owned task meets its current criteria with exact evidence, or the phase remains incomplete with its precise blocker."
+      ],
+      "task_ids": [
+        "TASK-004",
+        "TASK-005",
+        "TASK-006",
+        "TASK-007",
+        "TASK-008"
+      ],
+      "risks": [
+        "Source or owner changes invalidate affected gates; preserve original work and rebind before proceeding."
+      ]
+    },
+    {
+      "phase_id": "PHASE-003",
+      "title": "Distribute and verify neutral Template capability",
+      "objective": "Publish complete reusable assets into only the registered Template and prove neutral completeness.",
+      "scope": [
+        "Distribute the complete reusable edition through the checked Template pipeline",
+        "Verify neutral completeness and destination specialization controls"
+      ],
+      "depends_on_phase_ids": [
+        "PHASE-002"
+      ],
+      "entry_conditions": [
+        "Focused source, specialization and recovery checks passed for the selected source edition."
+      ],
+      "exit_criteria": [
+        "Every owned task meets its current criteria with exact evidence, or the phase remains incomplete with its precise blocker."
+      ],
+      "task_ids": [
+        "TASK-009",
+        "TASK-010"
+      ],
+      "risks": [
+        "Source or owner changes invalidate affected gates; preserve original work and rebind before proceeding."
+      ]
+    },
+    {
+      "phase_id": "PHASE-004",
+      "title": "Adopt and publish integrated root functionality",
+      "objective": "Bind the active root and publish functional ontology through its current owners.",
+      "scope": [
+        "Apply the exact active-root adoption and configuration selection",
+        "Publish the root functional ontology through its current owner",
+        "Refresh selected ontology products without changing memory meaning"
+      ],
+      "depends_on_phase_ids": [
+        "PHASE-003"
+      ],
+      "entry_conditions": [
+        "Root-specific adoption and ontology publication authority are current; protected root customization manifest is reviewed."
+      ],
+      "exit_criteria": [
+        "Every owned task meets its current criteria with exact evidence, or the phase remains incomplete with its precise blocker."
+      ],
+      "task_ids": [
+        "TASK-011",
+        "TASK-012",
+        "TASK-013"
+      ],
+      "risks": [
+        "Source or owner changes invalidate affected gates; preserve original work and rebind before proceeding."
+      ]
+    },
+    {
+      "phase_id": "PHASE-005",
+      "title": "Resolve root owner and browser evidence gaps",
+      "objective": "Obtain actual bounded owner outcomes and selected browser observations with honest blockers.",
+      "scope": [
+        "Obtain current-owner disposition of root session obligations",
+        "Reconcile the historical staged Task response through the Task owner",
+        "Observe the selected on-demand workbench read flow"
+      ],
+      "depends_on_phase_ids": [
+        "PHASE-004"
+      ],
+      "entry_conditions": [
+        "The root ontology/current-source integration is verified; cleanup and workbench startup actions have their separate selected scopes."
+      ],
+      "exit_criteria": [
+        "Every owned task meets its current criteria with exact evidence, or the phase remains incomplete with its precise blocker."
+      ],
+      "task_ids": [
+        "TASK-014",
+        "TASK-015",
+        "TASK-016"
+      ],
+      "risks": [
+        "Source or owner changes invalidate affected gates; preserve original work and rebind before proceeding."
+      ]
+    },
+    {
+      "phase_id": "PHASE-006",
+      "title": "Validate complete supported setup routes",
+      "objective": "Exercise new, first-prepared, manual-copy and prior initialized routes with preserved histories.",
+      "scope": [
+        "Exercise complete new-project initialization from the reviewed Template",
+        "Exercise existing-project and manual-copy preparation",
+        "Exercise selected prior-project adoption and historical reruns"
+      ],
+      "depends_on_phase_ids": [
+        "PHASE-003"
+      ],
+      "entry_conditions": [
+        "An isolated disposable depot/work area and exact reviewed Template edition are selected; no real product adoption is inferred."
+      ],
+      "exit_criteria": [
+        "Every owned task meets its current criteria with exact evidence, or the phase remains incomplete with its precise blocker."
+      ],
+      "task_ids": [
+        "TASK-017",
+        "TASK-018",
+        "TASK-019"
+      ],
+      "risks": [
+        "Source or owner changes invalidate affected gates; preserve original work and rebind before proceeding."
+      ]
+    },
+    {
+      "phase_id": "PHASE-007",
+      "title": "Verify final health, preservation and coverage",
+      "objective": "Prove current integrated outcomes and report every evidence limit.",
+      "scope": [
+        "Verify final root health and independent memory preservation",
+        "Publish the requirement-by-requirement integration evidence report"
+      ],
+      "depends_on_phase_ids": [
+        "PHASE-005",
+        "PHASE-006"
+      ],
+      "entry_conditions": [
+        "Root owner/browser results and representative setup routes have reviewable current evidence or explicit blockers."
+      ],
+      "exit_criteria": [
+        "Every owned task meets its current criteria with exact evidence, or the phase remains incomplete with its precise blocker."
+      ],
+      "task_ids": [
+        "TASK-020",
+        "TASK-021"
+      ],
+      "risks": [
+        "Source or owner changes invalidate affected gates; preserve original work and rebind before proceeding."
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "TASK-001",
+      "phase_id": "PHASE-001",
+      "title": "Bind the implementation scope to fresh owner and source evidence",
+      "action": "Before authorized execution, freeze the exact plan revision, approved TRD, root/source/Template hashes, current helper editions, guard bindings, factual registry and mixed-worktree preservation manifest. Use read-only current-owner inspection for overlapping assignments and name each later action grant separately. Preserve the completed 128 MiB guard repair as a prerequisite and reject incompatible old initializer fixtures.",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-008",
+        "REQ-009",
+        "REQ-010",
+        "REQ-011",
+        "REQ-012",
+        "REQ-013",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "Verification/integrated-curator/baseline.json",
+        "Verification/integrated-curator/authority-scope.json"
+      ],
+      "dependencies": [],
+      "parallel_group": null,
+      "risks": [
+        "Concurrent unrelated edits invalidate only overlapping planned inputs and require rebinding before writes. No existing dirty work is overwritten."
+      ],
+      "acceptance_criteria": [
+        "The manifest identifies every intended source, Template and root adoption target, protected file and selected fixture destination before any integration edit.",
+        "Current manager, guards and root v9 versus source/Template v11 divergence are observed; implementation, configuration adoption, canonical publication, cleanup and service-start grants are individually recorded or their work is blocked."
+      ],
+      "verification_steps": [
+        "Inspect current canonical Task assignment and actual native owners through their read-only helpers; do not infer actors from saved ontology or role names.",
+        "Hash intended targets and protected identities, licensing, authored ontology/memory, old receipts and unselected project inventories; retain current Git diff only as a preservation baseline."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-002",
+      "phase_id": "PHASE-001",
+      "title": "Specify the full functional ontology contract",
+      "action": "Define a versioned declarative Curator integration recipe with stable local suffixes, full function descriptions, inputs, outputs, prerequisites, effects and canonical owners. Represent policy inspection, scoped review, owner update/correct, original retry/recovery, Task pause/resume, selected dispatch, session catch-up and bounded log access. Use existing Capability/Skill typing and providesCapability relations; add typed local predicates only where existing vocabulary lacks a precise relation. Bind governing role pairs and skill/action/session sources by exact installed path, locator and digest. Model current-owner resolution as a required owner read, never a persistent assertion of a live actor or Task status.",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-009"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "ONTOLOGY-depo/curator-integration/v1/contract.json",
+        "ONTOLOGY-depo/curator-integration/v1/README.md",
+        "ONTOLOGY-depo/curator-integration/v1/competency.json"
+      ],
+      "dependencies": [
+        "TASK-001"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "A list of names cannot pass the functional contract. Data from source files cannot grant execution authority."
+      ],
+      "acceptance_criteria": [
+        "Every supported action has a queryable meaning, exact source, input/output, effect, owner, scope and prerequisite; aliases and domain/range/cardinality rules are explicit.",
+        "Declaration, installation, configuration, authorization, compatibility, runtime observation, pending delivery and completed outcome are separate concepts; no runtime or native authority is inferred from ontology availability.",
+        "The proposed representation uses project-local records generated from a neutral recipe and preserves the locked sys4ai-core module unchanged."
+      ],
+      "verification_steps": [
+        "Review the function matrix against installed Curator ACTIONS.md, commands and session contract and each fixed canonical owner route.",
+        "Map competency questions to bounded capability, read, neighbors/path and knowledge --intent current queries; include missing/ambiguous/stale-source and unsupported-operation negative cases."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-003",
+      "phase_id": "PHASE-001",
+      "title": "Specify exact integration specialization and adoption transactions",
+      "action": "Define integration edition curator-ontology-v1 and propose governance-starter-v12 for new/first preparation while preserving all v1-v11 bases. Extend the existing selected curator adoption with a hash-bound integrated edition/refresh, never an ordinary-rerun upgrade. Materialize new project-local curator.jsonld, binding and competency files plus exact ontology.yaml file-list and allowlist additions; retain the old graphs and core lock byte-for-byte. Use complete source/target inventory, missing prerequisites, duplicate/collision rules, package ownership checks and original operation recovery. The root uses an explicitly reviewed project-local configuration adoption manifest without generic project.json creation; child routes continue using existing setup receipts/module_adoptions.",
+      "requirement_ids": [
+        "REQ-004",
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-008",
+        "REQ-009"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "SKILLS-depo/init-new-project/references/curator-integration.md",
+        "SKILLS-depo/init-new-project/assets/initialization-receipt.schema.json",
+        "ONTOLOGY-depo/curator-integration/v1/contract.json"
+      ],
+      "dependencies": [
+        "TASK-001",
+        "TASK-002"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "Current init_curator.protected_inventory deliberately protects ontology; only exact selected integration targets may become writable. Existing-file equality never grants replacement."
+      ],
+      "acceptance_criteria": [
+        "The contract distinguishes new creation, first preparation, pristine manual copy, earlier setup without Curator and earlier setup with Curator but missing ontology.",
+        "Compatible existing ontology is extended through new configured files and exact config deltas; conflicts preserve whole project-owned data and return a specific blocked capability.",
+        "Recovery uses existing setup/module history and exact source/pre/post states; there is no second adoption ledger, relabeled historical edition or implicit publication grant."
+      ],
+      "verification_steps": [
+        "Review state transitions for preflight, staged configuration/record additions, registration, verification, partial replay and subsequent selected refresh.",
+        "Review preserved session-disabled, capture-off, publication-disabled, custom packages, legacy role-layout and independent core-import cases before implementing."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-004",
+      "phase_id": "PHASE-002",
+      "title": "Implement the neutral recipe and deterministic destination materializer",
+      "action": "Author complete neutral recipe/competency assets in ONTOLOGY-depo/curator-integration/v1 and a pure bounded materializer owned by the reusable initializer. Instantiate only module project records under the actual destination namespace into ONTOLOGY/modules/project/curator.jsonld, ONTOLOGY/bindings/curator.jsonld and ONTOLOGY/modules/project/curator-competency.json. Source hashes are derived from installed destination governing bytes after specialization. Reject unresolved required sources, duplicate local suffixes, graph collisions, mismatched namespace, invalid role pairs and malformed recipes before any write. Preserve the existing module loader and shared core IDs.",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-008"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "ONTOLOGY-depo/curator-integration/v1",
+        "SKILLS-depo/init-new-project/scripts/init_curator.py",
+        "SKILLS-depo/init-new-project/tests/test_curator_integration.py"
+      ],
+      "dependencies": [
+        "TASK-002",
+        "TASK-003"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "A recipe is a specialization input, not a new supported imported module. Source text is data; materialization must not execute target project Python."
+      ],
+      "acceptance_criteria": [
+        "The complete neutral recipe contains no actual project-instance fact, owner identity, task snapshot, grants, backlog, learned record or runtime evidence.",
+        "Repeated materialization from identical identity/source bytes is deterministic and produces all required typed function/relationship records and exact bindings without changing existing graphs or imports."
+      ],
+      "verification_steps": [
+        "Run new focused pure materializer tests using a non-root destination namespace and changed source hashes; validate generated records with the existing compact profile in a disposable configured destination.",
+        "Exercise missing sources, wrong role pairs, duplicate identifiers, unsafe paths, source drift and incomplete recipe failures with zero target writes."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-005",
+      "phase_id": "PHASE-002",
+      "title": "Make static assessment require functional integration",
+      "action": "Extend the current initializer static inventory and assess-curator output to require the recipe edition, installed owner interfaces, configured file selections, destination identity, exact source bindings and every functional competency. Report installed, configured, compatible, authorized and runtime_observed separately. Add a bounded read-only clarification to ontology capability output/documentation if needed so source-current declaration does not imply authorization, runtime or completed maintenance; preserve existing query identities and no-write behavior.",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "SKILLS-depo/init-new-project/scripts/init_static_health.py",
+        "SKILLS-depo/init-new-project/scripts/init_curator.py",
+        "SKILLS-depo/init-new-project/assets/static-capability-v1.json",
+        "SKILLS-depo/ontology/scripts/ontology_knowledge.py",
+        "SKILLS-depo/ontology/references/commands.md",
+        "SKILLS-depo/init-new-project/tests/test_static_readiness.py"
+      ],
+      "dependencies": [
+        "TASK-004"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "The assessment must not run unknown customized helpers or create runtime authority to satisfy its own check."
+      ],
+      "acceptance_criteria": [
+        "An installed Curator package or name-only capability with missing function, binding, source or owner prerequisite is non-ready with the exact capability diagnostic.",
+        "A neutral Template is assessed as reusable completeness with unbound/disabled operational state; an enabled flag or source-current result never reports runtime execution."
+      ],
+      "verification_steps": [
+        "Run targeted static-readiness tests for complete integration, omitted function, omitted binding, stale source, missing owner interface and preserved incompatible package.",
+        "Snapshot files and timestamps around bounded capability and current-source queries; verify no repairs, state writes, target Python execution or service startup."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-006",
+      "phase_id": "PHASE-002",
+      "title": "Integrate new and first-preparation setup in one operation",
+      "action": "Wire proposed governance-starter-v12 through template_sources, source_snapshot, asset planning, specialization and verification. After destination governance and identity are final, materialize exact local ontology additions and config selections inside the existing setup transaction before successful verification. Pristine Template copies specialize once; compatible authored ontology keeps its files and import locks while selected integration files are added. Existing opt-outs win. A preserved incompatible package yields exact degraded/non-ready evidence instead of integrated success.",
+      "requirement_ids": [
+        "REQ-004",
+        "REQ-005",
+        "REQ-006",
+        "REQ-008",
+        "REQ-009"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "SKILLS-depo/init-new-project/scripts/init_new_project.py",
+        "SKILLS-depo/init-new-project/scripts/init_curator.py",
+        "SKILLS-depo/init-new-project/assets/baseline-assets.json",
+        "SKILLS-depo/init-new-project/assets/initialization-receipt.schema.json",
+        "SKILLS-depo/init-new-project/SKILL.md"
+      ],
+      "dependencies": [
+        "TASK-003",
+        "TASK-004",
+        "TASK-005"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "Whole-package preservation cannot silently omit required integration; customized or unsafe inputs remain preserved and diagnosed."
+      ],
+      "acceptance_criteria": [
+        "Both create and first prepare-existing deliver project wiring and all ontology functionality without a manual ontology step.",
+        "Session policy is enabled only by the selected install policy; explicit session-off, capture-off and publication-disabled choices remain unchanged. Static setup records runtime not-exercised.",
+        "Every copied, specialized, added, retained and blocked resource has exact receipt provenance and existing historical editions remain accepted."
+      ],
+      "verification_steps": [
+        "Run focused new/first-preparation tests including empty destination, authored existing project and pristine manual Template copy.",
+        "Verify changed destination identity/name/purpose, hash bindings after governance specialization, opt-outs, configured file lists and CLI nonzero behavior for missing functional integration."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-007",
+      "phase_id": "PHASE-002",
+      "title": "Add selected integrated adoption and refresh for earlier setups",
+      "action": "Extend prepare-existing --adopt-module curator to select the integrated edition and add an explicit refresh selector for a later integration edition without implicit acquisition on ordinary rerun. Include earlier projects with no ontology as a recorded prerequisite and existing Curator without semantic integration. Reuse module_adoptions and archived original receipt hashes. Extend only recognized receipt-owned complete packages and exact selected config/file additions; preserve existing ontology graphs, authority settings and core locks. Reject legacy role layouts pending their existing separately selected transition.",
+      "requirement_ids": [
+        "REQ-004",
+        "REQ-007",
+        "REQ-008",
+        "REQ-009"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "SKILLS-depo/init-new-project/scripts/init_curator.py",
+        "SKILLS-depo/init-new-project/scripts/init_new_project.py",
+        "SKILLS-depo/init-new-project/assets/initialization-receipt.schema.json",
+        "SKILLS-depo/init-new-project/tests/test_curator_adoption.py",
+        "SKILLS-depo/init-new-project/README.md"
+      ],
+      "dependencies": [
+        "TASK-003",
+        "TASK-004",
+        "TASK-005",
+        "TASK-006"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "Missing, extra, customized or unowned package files cannot be overwritten as a dependency upgrade. Existing source-equal files are retained without inferring ownership."
+      ],
+      "acceptance_criteria": [
+        "One selected workflow installs both integrations or returns a specific prerequisite/conflict blocker; it cannot silently leave ontology for manual completion.",
+        "Original base edition, source/adoption inventories and historical receipt bytes are preserved; the new integration edition, selected targets and current observed state are separate.",
+        "Ordinary reruns verify their recorded edition and do not refresh newly available integration; same selected inputs add no duplicate IDs, bindings or registrations."
+      ],
+      "verification_steps": [
+        "Run targeted adoption cases for supported historical editions, earlier Curator installations, missing ontology, compatible authored ontology and already integrated destinations.",
+        "Verify historical receipt content hashes, disabled preferences, unselected registry entries and root-specific customized Task helper preservation."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-008",
+      "phase_id": "PHASE-002",
+      "title": "Prove exact failure and recovery behavior",
+      "action": "Extend current initializer recovery fixtures for interruption before/after config and ontology publication, registration and verification. Bind recipe version, installed helper/source inventory, identity, protected inventory and exact pre/post file states to the existing pending operation. Recheck protected content at every replay gate and preserve pending evidence on conflicting human edits, changed sources or competing writers.",
+      "requirement_ids": [
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-008",
+        "REQ-009",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "SKILLS-depo/init-new-project/tests/test_curator_recovery.py",
+        "SKILLS-depo/init-new-project/tests/test_ontology_recovery.py",
+        "SKILLS-depo/init-new-project/tests/test_setup_recovery.py",
+        "SKILLS-depo/init-new-project/scripts/init_curator.py"
+      ],
+      "dependencies": [
+        "TASK-006",
+        "TASK-007"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "Do not delete pending receipts or weaken hash, lock, symlink or owner checks to unblock a fixture. Synthetic identities remain fixture evidence."
+      ],
+      "acceptance_criteria": [
+        "Exact unchanged replay completes or verifies once, including partially published records, and never duplicates capabilities or registration.",
+        "Source/recipe/identity changes, concurrent target edits, unknown files and mismatched operation IDs block replay with explicit committed/pending state and preserve all project content.",
+        "Session/capture/publication opt-outs, custom ontology/memory and historical Task/receipt/role/license state survive preparation, adoption and reruns."
+      ],
+      "verification_steps": [
+        "Run the relevant Curator, ontology and setup recovery tests with explicit SYS4AI_CURATOR_TEST_SOURCE and separate disposable SYS4AI_CURATOR_TEST_WORK paths; do not invoke current v11 fixtures through installed v9.",
+        "Compare complete before/after file inventories and semantic records across failure injection points, including lock contention and replay after changed configured sources."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-009",
+      "phase_id": "PHASE-003",
+      "title": "Distribute the complete reusable edition through the checked Template pipeline",
+      "action": "Update only owning reusable collections, initializer resource pins/contracts, source Template tests and the exact mapping needed for recipe resources. The ordinary ONTOLOGY-depo reference collection distributes the neutral recipe; active project/binding starter graphs remain empty and destination specialization is explicit. Run tools/template_update.py check, review the entire current mapping and source inventory, then apply the authorized exact update to the registered Template only. Retain normal conflict and pending-operation recovery.",
+      "requirement_ids": [
+        "REQ-004",
+        "REQ-008",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "ONTOLOGY-depo/curator-integration/v1",
+        "CURATION-depo/contract.json",
+        "SKILLS-depo/init-new-project/assets/static-capability-v1.json",
+        "AGENTS-depo/project-template-AGENTS.md",
+        "SPECS-depo/project-template-SPECS.md",
+        "SPECS-depo/template-tests/test_template_contract.py",
+        "depot/template-update.json",
+        "depot/template-update.md"
+      ],
+      "dependencies": [
+        "TASK-004",
+        "TASK-005",
+        "TASK-006",
+        "TASK-007",
+        "TASK-008"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "The watcher may observe intermediate sources; stage a coherent selected edition and honor existing lock/recovery behavior without installing or reconfiguring the watcher."
+      ],
+      "acceptance_criteria": [
+        "The source-to-Template manifest accounts for every semantic recipe, competency, source binding input, owner interface and session asset; no incompatible resource is omitted.",
+        "The Template has null identity/unbound publication and disabled session mode with no root facts or runtime state; only the registered Template receives distribution.",
+        "Checked source pins and generated role/index assets match their intended complete current packages; no direct edits to generated Template copies occur."
+      ],
+      "verification_steps": [
+        "Run .venv/bin/python tools/template_update.py check before apply and again afterward; inspect structured receipts and exact final source/destination hashes.",
+        "Run the focused source/template contract and mapping tests; check empty graphs, null bindings, false session flag and absent learned/runtime/control history."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-010",
+      "phase_id": "PHASE-003",
+      "title": "Verify neutral completeness and destination specialization controls",
+      "action": "Use the reviewed Template as read-only source for an isolated neutral assessment and deterministic specialization rehearsal. Validate every recipe function and its source/owner prerequisites without claiming an unbound Template is a running project. Exercise missing recipe resources, incompatible helper pins, polluted instance facts, enabled session state and altered locked core imports.",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-008",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "SPECS-depo/template-tests/test_template_contract.py",
+        "SKILLS-depo/init-new-project/tests/test_curator_integration.py",
+        "Verification/integrated-curator/template-contract.json"
+      ],
+      "dependencies": [
+        "TASK-009"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "A polluted Template cannot be made neutral merely by disabling one flag. Fixtures establish static/functional behavior only."
+      ],
+      "acceptance_criteria": [
+        "Neutral completeness passes with empty active graphs because complete validated specialization inputs are present; omitted semantic resources fail.",
+        "The exact source/Template inventory contains no active root actor, source digest bound to a root-only file, maintenance delivery, Task status, learned record or runtime claim.",
+        "Materialization into a non-root identity demonstrates all functional and current-source competencies while retaining core 1.0.0."
+      ],
+      "verification_steps": [
+        "Run the Template contract using its documented interpreter and source tests against the exact mapped revision.",
+        "Inspect generated fixture records and source bindings, query all function competencies and compare the original Template and unrelated registry hashes afterward."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-011",
+      "phase_id": "PHASE-004",
+      "title": "Apply the exact active-root adoption and configuration selection",
+      "action": "Prepare and review a root-specific adoption manifest for only required new helper/contract resources and ontology.yaml source/file-list additions. Preserve root custom Task intake, identity, publication settings, original core lock, authored graphs and active guard choices. Apply through the explicitly selected existing adoption/configuration boundary with current Director authority; this is not generic project initialization and must not create project.json or replace the installed v9 initializer merely to match the Template. If affected guarded helper or governing hashes change, execute only the separately selected exact guard binding repair/recertification with actual native evidence, retaining its existing verification gates.",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-008",
+        "REQ-009",
+        "REQ-013"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "ontology.yaml",
+        ".agents/skills/ontology",
+        "reference-assets/ONTOLOGY-depo/curator-integration/v1",
+        "Verification/integrated-curator/root-adoption-manifest.json",
+        "Verification/integrated-curator/root-adoption-receipt.json"
+      ],
+      "dependencies": [
+        "TASK-001",
+        "TASK-009",
+        "TASK-010"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "No existing helper may be replaced wholesale if it contains root-specific changes. Missing action authority blocks the exact adoption or repair, not plan creation."
+      ],
+      "acceptance_criteria": [
+        "Exact adopted files and config additions are reviewable and verified; root-specific governance, custom Task behavior, identity, publication state and core import lock remain intact.",
+        "Curator governing sources and the dedicated future canonical file paths are selected before publication. Enabled guard bindings are current for changed dispatch code, or work remains blocked.",
+        "The root adoption does not imply product-project adoption, generic initializer conversion or provisioning authority."
+      ],
+      "verification_steps": [
+        "Compare every manifested pre/post byte and every protected root target; use installed read-only configuration and owner/guard checks after adoption.",
+        "If repair is required, rerun the exact installed-edition dispatch/recovery checks and inspect actual receipt/bindings; preserve existing 128 MiB capacity and all other guard limits."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-012",
+      "phase_id": "PHASE-004",
+      "title": "Publish the root functional ontology through its current owner",
+      "action": "Materialize the root-specific Curator records and exact installed source/paired-role bindings from the accepted recipe. Prepare an ontology proposal selecting only the new configured curator graph, binding and competency files with expected hashes. Obtain current ontology-specific Director or confirmed-manager authority, run read-only preview, publish through the existing guarded owner and recover only the original operation if partial. Do not persist live native identities, current Task status or maintenance outcomes as reusable capability declarations.",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-008",
+        "REQ-009"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "ONTOLOGY/modules/project/curator.jsonld",
+        "ONTOLOGY/bindings/curator.jsonld",
+        "ONTOLOGY/modules/project/curator-competency.json",
+        "control_records/ontology",
+        "Verification/integrated-curator/root-query-evidence.json"
+      ],
+      "dependencies": [
+        "TASK-011"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "Configuration selection belongs to prior adoption; publish may not expand allowlists, imports or authority. A valid graph or Task title supplies no grant."
+      ],
+      "acceptance_criteria": [
+        "Bounded root capability/read/relationship/current-source queries answer every function competency with actual sys4ai-depot identity, installed governing sources and current-versus-recorded digest context.",
+        "Owner routes are discoverable yet every actual action still requires its current canonical owner/authority check; publication has an attributable exact owner receipt.",
+        "Existing project records and locked core imports retain their bytes and meanings; missing, ambiguous and stale sources retain their diagnostics."
+      ],
+      "verification_steps": [
+        "Run exact preview and inspect the complete proposed graph before publication; reread final canonical files and immutable receipt after the current owner returns.",
+        "Run capability curator, per-function capability/read queries, typed neighbors/path and knowledge --intent current using bounded limits; prove unsupported actions and stale-source negative cases in fixtures."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-013",
+      "phase_id": "PHASE-004",
+      "title": "Refresh selected ontology products without changing memory meaning",
+      "action": "After root sources settle, assess current source freshness, compiled/wiki/link products and enabled backend certification. Use the existing explicit owners to rebuild only products made stale by the integration, in dependency order: current canonical sources and approved memory disposition, required backend recertification, existing memory projection/index maintenance when actually stale, then ontology compile/wiki/semantic/link products. Retain precise pending reasons for any unavailable authority or dependency.",
+      "requirement_ids": [
+        "REQ-003",
+        "REQ-008",
+        "REQ-013"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "ONTOLOGY/WIKI",
+        ".sys4ai/ontology/compiled",
+        ".sys4ai/ontology/links",
+        ".sys4ai/ontology/manifests",
+        "Verification/integrated-curator/product-health.json"
+      ],
+      "dependencies": [
+        "TASK-012"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "Changing later documentation invalidates source-linked products. Do not alter unrelated profiles or memory facts just to remove health warnings."
+      ],
+      "acceptance_criteria": [
+        "Required generated indexes/wiki and relevant memory links match the selected current canonical Curator records and current source contexts.",
+        "Healthy memory records/settings and independent backend choices retain meaning and provenance; retrieval performs no repair.",
+        "Any recertification or selected build has its own observed result and unperformed work remains pending."
+      ],
+      "verification_steps": [
+        "Run explicit compile, build-wiki and only necessary link-memory/semantic builds with current authority; validate wiki links and relevant generated manifests.",
+        "Run fresh ontology health --scope selected --level static and applicable operational advanced-health; compare selected inputs before and after and label guarded dispatch separately."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-014",
+      "phase_id": "PHASE-005",
+      "title": "Obtain current-owner disposition of root session obligations",
+      "action": "Reopen bounded current delivery and ownership evidence for every still-relevant obligation cited by the September 12 report. On an enabled representative start/return, collect changed-input catch-up and inspect actual usage and capacity. Admit at most the configured operation budget, route eligible work to its current existing owner and retain exact observation, admission, dispatch and completed outcome separately. Reuse actual owning Tasks where required; do not instantiate a fake Task or manager. Consume a delivery only after its canonical owner completes and supplies an attributable receipt. Retain supersession/completion history or exact blocker, owner and next eligible action for each item.",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-009",
+        "REQ-010",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "control_records/curator",
+        ".sys4ai/curator",
+        "Verification/integrated-curator/owner-dispositions.json",
+        "Verification/integrated-curator/live-session.json"
+      ],
+      "dependencies": [
+        "TASK-012",
+        "TASK-013"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "Reported counts and cancelled historical actors are not current ownership evidence. Work exceeding session bounds is retained for explicitly selected execution."
+      ],
+      "acceptance_criteria": [
+        "At least one representative bounded eligible maintenance operation reaches the applicable current owner with actual native attribution and an observed result; no static flag is substituted for root integration.",
+        "Each still-relevant reported obligation is completed with receipt or retained with explicit blocker/owner/next action; completed and superseded history remain attributable.",
+        "Disabled-session control performs no maintenance; unavailable owner or exhausted budget retains pending work without consumption, scheduler, second writer or invented authority."
+      ],
+      "verification_steps": [
+        "Use current read-only policy/delivery inspection and session-start collection; inspect exact observation snapshot and page bounds rather than interpreting metadata totals as failure counts.",
+        "Perform the selected actual-owner operation with current authority and source checks; reread canonical outcome/receipt and delivery state, then run focused session retention/consumption tests."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-015",
+      "phase_id": "PHASE-005",
+      "title": "Reconcile the historical staged Task response through the Task owner",
+      "action": "Use read-only Task and native ownership inspection to locate the exact current staged response originally reported under TASK-20260910-7F1A11AE, its transaction evidence, current canonical revision/status and known write-owning assignments. Reconcile actual owners before deciding recoverable, already represented or blocked. Perform only a supported exact recovery/disposition when its action-specific authority is present; otherwise preserve the artifact and state the smallest required owner action. Never delete based on age/cancellation or silently reopen the Task.",
+      "requirement_ids": [
+        "REQ-008",
+        "REQ-011",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "Verification/integrated-curator/staged-task-disposition.json",
+        "Task owner output for exact TASK-20260910-7F1A11AE"
+      ],
+      "dependencies": [
+        "TASK-001"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "Cancellation, age and roster absence alone cannot prove the writer is stopped or the staged response safely removable."
+      ],
+      "acceptance_criteria": [
+        "Evidence identifies the actual current artifact path/hash and transaction state or proves the dated artifact is already represented, with current owner evidence.",
+        "Any authorized change uses the Task helper, preserves response history and unrelated work, and is followed by canonical reread and validation; insufficient evidence leaves a precise blocker."
+      ],
+      "verification_steps": [
+        "Resolve the historical Task by exact ID through read-only show/validate and inspect only returned staged/transaction paths; the listed folder is a planning locator until the helper verifies its actual name.",
+        "After a supported disposition, reread canonical Task and response inventories and run validate; record unchanged preservation if no disposition is authorized."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-016",
+      "phase_id": "PHASE-005",
+      "title": "Observe the selected on-demand workbench read flow",
+      "action": "After separate service-start authorization and current selected-profile checks, start or select the root loopback ontology workbench in browsing-only mode using a new private one-use session file. Open its actual local browser UI, confirm intended root identity and exercise search/navigation from Curator capability to a representative function and current source. Record redacted observations without URLs containing secrets, then leave the service only in its authorized lifecycle state and verify private file cleanup when stopping.",
+      "requirement_ids": [
+        "REQ-008",
+        "REQ-012",
+        "REQ-013",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "Verification/integrated-curator/workbench-observation.json",
+        ".sys4ai/ontology/workbench"
+      ],
+      "dependencies": [
+        "TASK-012",
+        "TASK-013"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "Absent endpoint is not proof of failure. Missing service authority or browser capability is an explicit unexercised requirement, not a simulated pass."
+      ],
+      "acceptance_criteria": [
+        "Actual local browser navigation against the intended root is observed and attributed; endpoint-only probing is insufficient.",
+        "The report distinguishes not running, not assessed, observed operational and failed behavior; no always-on service or guarded-write success is inferred.",
+        "Private tokens stay out of screenshots, logs, reports, fixtures and Git, and final service/session-file disposition is verified."
+      ],
+      "verification_steps": [
+        "Run advanced-health with the selected token-free loopback endpoint and compare project/source/helper identity before using the private browsing session.",
+        "Use actual browser UI to inspect the representative Curator function and source, then stop the foreground service if selected and verify only its unchanged exclusively created private session file is cleaned."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-017",
+      "phase_id": "PHASE-006",
+      "title": "Exercise complete new-project initialization from the reviewed Template",
+      "action": "Select an isolated disposable depot copy and a new child identity; invoke the complete supported create CLI from its reviewed current reusable initializer and Template. Reopen setup receipt, identity, Curator/session configuration and ontology files, then run every functional/current-source competency. Observe static setup success independently of an actual new-project session. Recheck original source, registry and unselected project hashes after the disposable exercise.",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-005",
+        "REQ-008",
+        "REQ-009",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "Verification/integrated-curator/new-project-route.json",
+        "SKILLS-depo/init-new-project/tests/test_end_to_end.py"
+      ],
+      "dependencies": [
+        "TASK-009",
+        "TASK-010",
+        "TASK-008"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "Disposable full CLI evidence is end-to-end setup evidence for that fixture, not adoption of a real user product or proof of native session execution."
+      ],
+      "acceptance_criteria": [
+        "The full CLI workflow supplies Curator wiring, exact local source bindings, all function relationships and selected session policy without manual ontology work.",
+        "No root identifiers/actors, live memory, backlog or runtime data are copied; neutral backend/service and explicit opt-out choices are preserved.",
+        "Receipt evidence reports installed/configured/compatible/static success and separately not-exercised or actually observed runtime state."
+      ],
+      "verification_steps": [
+        "Run the complete create CLI in the selected disposable source/work layout; reopen receipt and query the destination using the copied helper with its exact project root.",
+        "Inspect all required files/functions and perform file-install-only/missing-ontology rejection control through the same static assessment."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-018",
+      "phase_id": "PHASE-006",
+      "title": "Exercise existing-project and manual-copy preparation",
+      "action": "Run full prepare-existing workflows for a representative authored project and a pristine unspecialized Template copy in isolated destinations. Seed authored ontology/memory, Task history, custom roles/licensing and explicit disabled preferences where applicable; record exact before inventories. Confirm compatible project knowledge stays usable and incompatible preserved content yields precise capability diagnostics without false integrated completion.",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-006",
+        "REQ-008",
+        "REQ-009",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "Verification/integrated-curator/first-preparation-routes.json",
+        "SKILLS-depo/init-new-project/tests/test_curator_setup.py",
+        "SKILLS-depo/init-new-project/tests/test_ontology_setup.py"
+      ],
+      "dependencies": [
+        "TASK-009",
+        "TASK-010",
+        "TASK-008"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "A completed base receipt with degraded capability is not integrated success. Pristine equality permits only the specifically contracted specialization."
+      ],
+      "acceptance_criteria": [
+        "Both representative first preparations yield destination-specific full functionality without a later manual integration step.",
+        "Compatible authored data and custom identity/README/roles/licensing survive; session-disabled, capture-off and publication-disabled values remain effective.",
+        "Incompatible custom packages/graphs are preserved and the exact blocked capability is reported as non-ready."
+      ],
+      "verification_steps": [
+        "Run prepare-existing with supplied destination identity, then compare complete before/after manifests and query both destinations for every approved function and typed relationship.",
+        "Run a preserved incompatible control and a same-request rerun; verify no hidden overwrite, duplicate binding or registration and no unknown project Python execution."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-019",
+      "phase_id": "PHASE-006",
+      "title": "Exercise selected prior-project adoption and historical reruns",
+      "action": "Run the selected integrated curator adoption/refresh workflow on representative prior initialized destinations with and without Curator semantic integration, using retained edition fixtures. Include supported old base editions, absent ontology prerequisite, compatible authored data, existing disabled settings and legacy layout refusal. Compare original receipt bytes and history, then perform ordinary and selected reruns, a changed-source operation and interrupted exact replay controls.",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-007",
+        "REQ-008",
+        "REQ-009",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "Verification/integrated-curator/prior-adoption-routes.json",
+        "SKILLS-depo/init-new-project/tests/test_curator_adoption.py",
+        "SKILLS-depo/init-new-project/tests/test_curator_recovery.py"
+      ],
+      "dependencies": [
+        "TASK-009",
+        "TASK-010",
+        "TASK-008"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "Legacy layouts require the existing selected transition and cannot be silently migrated or relabeled by a fixture."
+      ],
+      "acceptance_criteria": [
+        "Every supported selected adoption delivers both integrations in one workflow; missing prerequisites or conflicts fail explicitly without manual omissions.",
+        "Original editions, source inventories and receipt history remain unchanged and current integration edition/state are recorded separately.",
+        "Ordinary reruns do not acquire a new edition; selected unchanged reruns verify idempotently; explicit off settings and unselected projects remain untouched."
+      ],
+      "verification_steps": [
+        "Run full CLI operations and all function/relationship/current-source queries for representative completed prior setups; distinguish reconstructed historical fixtures from original historical binaries.",
+        "Compare receipt/history/config/core/authored-file hashes across ordinary rerun, explicit refresh and recovery; verify duplicate-free graph IDs and registry membership."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-020",
+      "phase_id": "PHASE-007",
+      "title": "Verify final root health and independent memory preservation",
+      "action": "After all selected source/configuration changes settle, rerun bounded actual memory retrieval and applicable fresh memory/ontology canonical, source, projection/link and selected backend health. Recheck root process queries, real owner receipts, staged Task disposition and token-free workbench state. Compare final exact inventories against the initial preservation manifest; recertify or rebuild only an authorized stale dependency and repeat affected checks when source drift occurs.",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-003",
+        "REQ-008",
+        "REQ-009",
+        "REQ-010",
+        "REQ-011",
+        "REQ-012",
+        "REQ-013",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "Verification/integrated-curator/final-health.json",
+        "Verification/integrated-curator/preservation.json",
+        "Verification/integrated-curator/final-source-manifest.json"
+      ],
+      "dependencies": [
+        "TASK-013",
+        "TASK-014",
+        "TASK-015",
+        "TASK-016",
+        "TASK-017",
+        "TASK-018",
+        "TASK-019"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "The active planning Task and new work legitimately alter runtime inventory; classify authorized changes instead of demanding stale global byte equality."
+      ],
+      "acceptance_criteria": [
+        "Actual bounded memory retrieval and fresh selected ontology checks demonstrate no regression while authored facts/records, capture settings, core locks and independent backend/grant choices retain meaning and provenance.",
+        "All final claims bind current root/source/Template/destination hashes; no last-minute guidance edit leaves source freshness or generated products silently stale.",
+        "Every protected path has an affirmative before/after preservation finding or an exact authorized change; unselected projects and dated health report remain preserved."
+      ],
+      "verification_steps": [
+        "Use the installed memory health and bounded search interfaces and ontology health/advanced-health; retain exact current exit/result state and probe scope.",
+        "Reopen canonical artifacts and actual owner receipts and compare the final source/destination inventory against TASK-001; inspect all residual diagnostics rather than a top-level ready flag."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    },
+    {
+      "task_id": "TASK-021",
+      "phase_id": "PHASE-007",
+      "title": "Publish the requirement-by-requirement integration evidence report",
+      "action": "Produce one final evidence report that maps all 14 requirement outcomes and 34 acceptance clauses to exact current source/destination artifacts, owner/setup/publication receipts and checks. Cover root, reusable sources, neutral Template and each new/first/manual/prior route. Explicitly label contract/static checks, deterministic fixtures, actual owner execution, browser navigation and complete setup workflows. Preserve blockers and unexercised behavior and record final project inspection after evidence through the plan helper before any completion transition.",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-008",
+        "REQ-009",
+        "REQ-010",
+        "REQ-011",
+        "REQ-012",
+        "REQ-013",
+        "REQ-014"
+      ],
+      "design_basis": [],
+      "target_artifacts": [
+        "Verification/integrated-curator/REPORT.md",
+        "Verification/integrated-curator/coverage.json",
+        "Implementation_Plans"
+      ],
+      "dependencies": [
+        "TASK-020"
+      ],
+      "parallel_group": null,
+      "risks": [
+        "A legitimate blocker for health maintenance or browser authority remains incomplete for the affected acceptance clause; it cannot be hidden by aggregate setup success."
+      ],
+      "acceptance_criteria": [
+        "Every requirement and clause has current evidence or an explicit unsatisfied/blocker disposition; reverse coverage accounts for every changed artifact and implemented task.",
+        "No fixture, configured flag, file installation, declared capability or dated observation is represented as live behavior or associated requirement completion.",
+        "The report identifies the highest verification level for each route and the exact remaining authority/capability limits; final canonical plan/Task completion requires their respective truthful evidence gates."
+      ],
+      "verification_steps": [
+        "Compare the report and bidirectional coverage directly with the unchanged approved TRD; reopen every material referenced receipt and final canonical artifact.",
+        "While the exact implementation plan is in_progress, append criterion/verification-step evidence and a final later project inspection through plan_state.py, then show/validate and inspect deterministic projections/index before the separate completion gate."
+      ],
+      "status": "planned",
+      "blocker_reason": null,
+      "pause_reason": null,
+      "skip_reason": null,
+      "skip_authority": null,
+      "evidence": [],
+      "completed_at": null
+    }
+  ],
+  "coverage": {
+    "source_to_requirement": [
+      {
+        "source_id": "SRC-001",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-002",
+          "REQ-003",
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008",
+          "REQ-009",
+          "REQ-010",
+          "REQ-011",
+          "REQ-012",
+          "REQ-013",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-002",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-002",
+          "REQ-003",
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008",
+          "REQ-009",
+          "REQ-010",
+          "REQ-011",
+          "REQ-012",
+          "REQ-013",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-003",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-002",
+          "REQ-003",
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008",
+          "REQ-009",
+          "REQ-010",
+          "REQ-011",
+          "REQ-012",
+          "REQ-013",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-004",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-002",
+          "REQ-003",
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008",
+          "REQ-009",
+          "REQ-010",
+          "REQ-011",
+          "REQ-012",
+          "REQ-013",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-005",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-002",
+          "REQ-003",
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008",
+          "REQ-009",
+          "REQ-010",
+          "REQ-011",
+          "REQ-012",
+          "REQ-013",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-006",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-002",
+          "REQ-003",
+          "REQ-009",
+          "REQ-010"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-007",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-002",
+          "REQ-003",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-009",
+          "REQ-010"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-008",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-002",
+          "REQ-003",
+          "REQ-004",
+          "REQ-008",
+          "REQ-009",
+          "REQ-012",
+          "REQ-013"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-009",
+        "requirement_ids": [
+          "REQ-002",
+          "REQ-003",
+          "REQ-009",
+          "REQ-012",
+          "REQ-013",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-010",
+        "requirement_ids": [
+          "REQ-002",
+          "REQ-003",
+          "REQ-004",
+          "REQ-008"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-011",
+        "requirement_ids": [
+          "REQ-002",
+          "REQ-003",
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-012",
+        "requirement_ids": [
+          "REQ-002",
+          "REQ-003",
+          "REQ-004",
+          "REQ-008"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-013",
+        "requirement_ids": [
+          "REQ-002",
+          "REQ-003",
+          "REQ-009",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-014",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-003",
+          "REQ-004",
+          "REQ-007",
+          "REQ-008",
+          "REQ-009",
+          "REQ-013"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-015",
+        "requirement_ids": [
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-016",
+        "requirement_ids": [
+          "REQ-004",
+          "REQ-005",
+          "REQ-006"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-017",
+        "requirement_ids": [
+          "REQ-003",
+          "REQ-004",
+          "REQ-005",
+          "REQ-006"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-018",
+        "requirement_ids": [
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008",
+          "REQ-009",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-019",
+        "requirement_ids": [
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-020",
+        "requirement_ids": [
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-021",
+        "requirement_ids": [
+          "REQ-002",
+          "REQ-003",
+          "REQ-004",
+          "REQ-009",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-022",
+        "requirement_ids": [
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-023",
+        "requirement_ids": [
+          "REQ-004",
+          "REQ-008",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-024",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-004",
+          "REQ-007",
+          "REQ-008",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-025",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-009",
+          "REQ-013"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-026",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-009",
+          "REQ-010"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-027",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-002",
+          "REQ-003",
+          "REQ-008",
+          "REQ-013"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-028",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-010",
+          "REQ-011",
+          "REQ-012",
+          "REQ-013",
+          "REQ-014"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-029",
+        "requirement_ids": [
+          "REQ-003",
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008"
+        ],
+        "disposition": null
+      },
+      {
+        "source_id": "SRC-030",
+        "requirement_ids": [
+          "REQ-004",
+          "REQ-007",
+          "REQ-008",
+          "REQ-013",
+          "REQ-014"
+        ],
+        "disposition": null
+      }
+    ],
+    "requirement_to_task": [
+      {
+        "requirement_id": "REQ-001",
+        "task_ids": [
+          "TASK-001",
+          "TASK-002",
+          "TASK-011",
+          "TASK-012",
+          "TASK-014",
+          "TASK-020",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-002",
+        "task_ids": [
+          "TASK-001",
+          "TASK-002",
+          "TASK-004",
+          "TASK-005",
+          "TASK-010",
+          "TASK-011",
+          "TASK-012",
+          "TASK-017",
+          "TASK-018",
+          "TASK-019",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-003",
+        "task_ids": [
+          "TASK-001",
+          "TASK-002",
+          "TASK-004",
+          "TASK-005",
+          "TASK-010",
+          "TASK-011",
+          "TASK-012",
+          "TASK-013",
+          "TASK-017",
+          "TASK-018",
+          "TASK-019",
+          "TASK-020",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-004",
+        "task_ids": [
+          "TASK-001",
+          "TASK-002",
+          "TASK-003",
+          "TASK-004",
+          "TASK-005",
+          "TASK-006",
+          "TASK-007",
+          "TASK-009",
+          "TASK-010",
+          "TASK-017",
+          "TASK-018",
+          "TASK-019",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-005",
+        "task_ids": [
+          "TASK-001",
+          "TASK-003",
+          "TASK-005",
+          "TASK-006",
+          "TASK-008",
+          "TASK-017",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-006",
+        "task_ids": [
+          "TASK-001",
+          "TASK-003",
+          "TASK-005",
+          "TASK-006",
+          "TASK-008",
+          "TASK-018",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-007",
+        "task_ids": [
+          "TASK-001",
+          "TASK-003",
+          "TASK-005",
+          "TASK-007",
+          "TASK-008",
+          "TASK-019",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-008",
+        "task_ids": [
+          "TASK-001",
+          "TASK-003",
+          "TASK-004",
+          "TASK-006",
+          "TASK-007",
+          "TASK-008",
+          "TASK-009",
+          "TASK-010",
+          "TASK-011",
+          "TASK-012",
+          "TASK-013",
+          "TASK-015",
+          "TASK-016",
+          "TASK-017",
+          "TASK-018",
+          "TASK-019",
+          "TASK-020",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-009",
+        "task_ids": [
+          "TASK-001",
+          "TASK-002",
+          "TASK-003",
+          "TASK-006",
+          "TASK-007",
+          "TASK-008",
+          "TASK-011",
+          "TASK-012",
+          "TASK-014",
+          "TASK-017",
+          "TASK-018",
+          "TASK-019",
+          "TASK-020",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-010",
+        "task_ids": [
+          "TASK-001",
+          "TASK-014",
+          "TASK-020",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-011",
+        "task_ids": [
+          "TASK-001",
+          "TASK-015",
+          "TASK-020",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-012",
+        "task_ids": [
+          "TASK-001",
+          "TASK-016",
+          "TASK-020",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-013",
+        "task_ids": [
+          "TASK-001",
+          "TASK-011",
+          "TASK-013",
+          "TASK-016",
+          "TASK-020",
+          "TASK-021"
+        ],
+        "disposition": null
+      },
+      {
+        "requirement_id": "REQ-014",
+        "task_ids": [
+          "TASK-001",
+          "TASK-005",
+          "TASK-008",
+          "TASK-009",
+          "TASK-010",
+          "TASK-014",
+          "TASK-015",
+          "TASK-016",
+          "TASK-017",
+          "TASK-018",
+          "TASK-019",
+          "TASK-020",
+          "TASK-021"
+        ],
+        "disposition": null
+      }
+    ]
+  }
+}

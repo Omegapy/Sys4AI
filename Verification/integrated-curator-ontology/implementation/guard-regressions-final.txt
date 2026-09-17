@@ -1,0 +1,37 @@
+test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) ... ok
+test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) ... ok
+test_every_declared_public_boundary_rejects_without_backend (test_guarded_dispatch.GuardedDispatchTests.test_every_declared_public_boundary_rejects_without_backend) ... ok
+test_actual_plan_cli_revision_fields_and_nested_transaction_succeed (test_action_semantics.ActionSemanticsTests.test_actual_plan_cli_revision_fields_and_nested_transaction_succeed) ... ok
+test_caller_forged_task_state_is_not_current_evidence (test_action_semantics.ActionSemanticsTests.test_caller_forged_task_state_is_not_current_evidence) ... ok
+test_candidate_validation_includes_external_authored_metadata (test_action_semantics.ActionSemanticsTests.test_candidate_validation_includes_external_authored_metadata) ... ok
+test_concrete_capability_is_observed_from_the_provider_for_every_family (test_action_semantics.ActionSemanticsTests.test_concrete_capability_is_observed_from_the_provider_for_every_family) ... ok
+test_current_task_orchestration_generation_is_read_before_dispatch (test_action_semantics.ActionSemanticsTests.test_current_task_orchestration_generation_is_read_before_dispatch) ... ok
+test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files (test_action_semantics.ActionSemanticsTests.test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files) ... ok
+test_missing_governing_source_and_unrecognized_rules_cannot_pass (test_action_semantics.ActionSemanticsTests.test_missing_governing_source_and_unrecognized_rules_cannot_pass) ... ok
+test_real_role_and_ontology_errors_retain_safe_action_and_version_text (test_action_semantics.ActionSemanticsTests.test_real_role_and_ontology_errors_retain_safe_action_and_version_text) ... ok
+test_real_task_trd_and_plan_lifecycle_values_are_constrained (test_action_semantics.ActionSemanticsTests.test_real_task_trd_and_plan_lifecycle_values_are_constrained) ... ok
+test_v2_guarded_publication_recovers_accepted_extension_and_shape_pre_post (test_action_semantics.ActionSemanticsTests.test_v2_guarded_publication_recovers_accepted_extension_and_shape_pre_post) ... ok
+test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner (test_action_semantics.ActionSemanticsTests.test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner) ... ok
+test_guarded_preview_publish_and_recovery (test_curator_guard_integration.CuratorGuardIntegrationTests.test_guarded_preview_publish_and_recovery) ... ERROR
+
+======================================================================
+ERROR: test_guarded_preview_publish_and_recovery (test_curator_guard_integration.CuratorGuardIntegrationTests.test_guarded_preview_publish_and_recovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_curator_guard_integration.py", line 31, in test_guarded_preview_publish_and_recovery
+    fixture_selection(root,contract=contract)
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/guard_support.py", line 100, in fixture_selection
+    adapters = coverage_manifest(root, definitions)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpf8j8r2iu/project/.agents/skills/ontology/scripts/ontology_guard_setup.py", line 35, in coverage_manifest
+    validate_contract(contract)
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpf8j8r2iu/project/.agents/skills/ontology/scripts/ontology_guards.py", line 76, in validate_contract
+    fail(action["input_type"] == family + "-" + operation + "-request" and action["target_type"] in {value + "-owned-artifact" for value in FAMILIES}
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpf8j8r2iu/project/.agents/skills/ontology/scripts/ontology_guards.py", line 122, in fail
+    raise GuardError(code, message, details)
+ontology_guards.GuardError: Unsupported input, target or concrete capability type. [condition=guard_unsupported; action=urn:sys4ai:ontology:action:ontology:integration_preview]
+
+----------------------------------------------------------------------
+Ran 15 tests in 164.926s
+
+FAILED (errors=1)

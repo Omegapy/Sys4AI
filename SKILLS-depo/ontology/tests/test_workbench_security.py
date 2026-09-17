@@ -16,6 +16,14 @@ class Client:
         self.csrf=""
         self.cookie=""
 
+    def get(self, path, **overrides):
+        connection=HTTPConnection("127.0.0.1",self.service.server.server_port,timeout=30)
+        connection.request("GET",path,headers={"Host":self.service.host_header,**overrides})
+        response=connection.getresponse();body=response.read()
+        result=(response.status,dict(response.getheaders()),body)
+        connection.close()
+        return result
+
     def post(self, endpoint, body, **overrides):
         connection=HTTPConnection("127.0.0.1",self.service.server.server_port,timeout=30)
         headers={"Host":self.service.host_header,"Origin":self.service.origin,"Content-Type":"application/json", "X-Ontology-CSRF":self.csrf,"Cookie":self.cookie,**overrides}
@@ -52,6 +60,70 @@ class WorkbenchTests(unittest.TestCase):
     def save(self, form=None, **args):
         path=read_json(self.root/"ontology.yaml")["project_files"][0]
         return self.client.post("draft",{"form":form or self.form(),"expected_target_sha256":sha256(self.root/path),**args})
+
+    def test_public_document_entry_and_reload_do_not_require_activation(self):
+        navigation={"Sec-Fetch-Mode":"navigate","Sec-Fetch-Dest":"document"}
+        headers=[{}, {**navigation,"Sec-Fetch-Site":"none"},
+                 {**navigation,"Sec-Fetch-Site":"same-origin"},
+                 {**navigation,"Sec-Fetch-Site":"cross-site"},
+                 {**navigation,"Sec-Fetch-Site":"cross-site","Sec-Fetch-User":"?1"}]
+        before=(dict(self.service.bootstrap),dict(self.service.sessions))
+        for path in ("/","/index.html"):
+            for selected in headers:
+                with self.subTest(path=path,headers=selected):
+                    for _ in range(2):  # Entry and subsequent reload.
+                        code,response,body=self.client.get(path,**selected)
+                        self.assertEqual(code,200)
+                        self.assertTrue(response["Content-Type"].startswith("text/html"))
+                        self.assertIn(b"Ontology workbench",body)
+                        self.assertNotIn("Set-Cookie",response)
+                        self.assertNotIn("Access-Control-Allow-Origin",response)
+                        self.assertEqual(response["Cache-Control"],"no-store")
+        self.assertEqual(before,(self.service.bootstrap,self.service.sessions))
+
+    def test_cross_site_exception_excludes_queries_other_paths_and_subresources(self):
+        cross={"Sec-Fetch-Site":"cross-site","Sec-Fetch-Mode":"navigate","Sec-Fetch-Dest":"document"}
+        for path in ("/?","/?query=1","/index.html?","/index.html?query=1",
+                     "/health","/app.js","/editor.js","/review.js","/advanced.js","/styles.css","/api/state"):
+            with self.subTest(path=path):
+                code,_,body=self.client.get(path,**cross)
+                self.assertEqual(code,403);self.assertEqual(json.loads(body)["error"]["code"],"origin_forbidden")
+        for path in ("/","/index.html"):
+            for mode,destination in (("navigate","iframe"),("no-cors","image"),("cors","empty"),
+                                     ("no-cors","script"),("navigate","empty"),("cors","document"),(None,"document"),("navigate",None)):
+                selected={"Sec-Fetch-Site":"cross-site"}
+                if mode is not None:selected["Sec-Fetch-Mode"]=mode
+                if destination is not None:selected["Sec-Fetch-Dest"]=destination
+                with self.subTest(path=path,headers=selected):
+                    self.assertEqual(self.client.get(path,**selected)[0],403)
+        self.assertEqual(self.client.get("/health")[0],200)
+        self.assertEqual(self.client.get("/app.js",**{"Sec-Fetch-Site":"same-origin"})[0],200)
+
+    def test_public_entry_still_requires_exact_host_and_supplied_origin(self):
+        cross={"Sec-Fetch-Site":"cross-site","Sec-Fetch-Mode":"navigate","Sec-Fetch-Dest":"document"}
+        for path in ("/","/index.html"):
+            for bad in ({"Host":"hostile.example"},{"Host":"localhost:"+str(self.service.server.server_port)},
+                        {"Origin":"https://hostile.example"},{"Origin":"null"}):
+                with self.subTest(path=path,headers=bad):
+                    self.assertEqual(self.client.get(path,**{**cross,**bad})[0],403)
+            self.assertEqual(self.client.get(path,**{**cross,"Origin":self.service.origin})[0],200)
+
+    def test_cross_site_entry_does_not_relax_session_or_authenticated_api(self):
+        cross={"Sec-Fetch-Site":"cross-site","Sec-Fetch-Mode":"navigate","Sec-Fetch-Dest":"document"}
+        token=parse_qs(urlsplit(self.service.bootstrap_url()).fragment)["bootstrap"][0]
+        self.assertEqual(self.client.post("session",{"bootstrap":token},**cross)[0],403)
+        self.assertIn(token,self.service.bootstrap)
+        for endpoint in ("state","records"):
+            self.assertEqual(self.client.post(endpoint,{},**cross)[0],403)
+        self.assertEqual(self.client.post("session",{"bootstrap":token})[0],200)
+        self.assertNotIn(token,self.service.bootstrap)
+        self.assertEqual(self.client.post("session",{"bootstrap":token})[0],403)
+        self.assertEqual(self.client.post("state",{})[0],200)
+        self.assertEqual(self.client.post("state",{},**{"X-Ontology-CSRF":"forged"})[0],403)
+        self.assertEqual(Client(self.service).post("state",{})[0],403)
+        sid=self.client.cookie.split("=",1)[1]
+        self.service.sessions[sid]["expires"]=0
+        self.assertEqual(self.client.post("state",{})[0],403)
 
     def test_origin_host_csrf_forged_authority_and_source_escape_are_rejected(self):
         before=sha256(self.root/"ontology.yaml")

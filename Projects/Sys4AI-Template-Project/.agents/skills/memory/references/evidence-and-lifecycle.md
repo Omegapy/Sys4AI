@@ -143,3 +143,13 @@ The `validate` command rejects warning/error or unclassified diagnostics while
 retaining informational applicability details. Its `verified_current_records`
 count separately reports current verified outcomes; `valid: true` for qualified
 history is not a claim that those historical observations apply to current code.
+
+### Curator owner routing
+
+Curator workers propose supported memory/ontology/both/neither dispositions.
+Publication and lifecycle changes still use this owner's strict current grants,
+original journals and exact source versions. A commit or validator pass alone is
+not evidence for a new assertion. Preserve historical meaning and stable identity;
+semantic rebinding requires reviewed applicability, not a substituted source hash.
+Restored/aborted reindex recovery can terminate its operation while products remain
+stale. A distinct selected subsequent reindex and final-input check is required.

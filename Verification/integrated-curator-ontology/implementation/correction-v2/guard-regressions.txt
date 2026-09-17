@@ -1,0 +1,117 @@
+test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) ... 
+  test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) (family='setup') ... ERROR
+test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) ... 
+  test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) (family='setup') ... FAIL
+test_every_declared_public_boundary_rejects_without_backend (test_guarded_dispatch.GuardedDispatchTests.test_every_declared_public_boundary_rejects_without_backend) ... ok
+test_actual_plan_cli_revision_fields_and_nested_transaction_succeed (test_action_semantics.ActionSemanticsTests.test_actual_plan_cli_revision_fields_and_nested_transaction_succeed) ... ok
+test_caller_forged_task_state_is_not_current_evidence (test_action_semantics.ActionSemanticsTests.test_caller_forged_task_state_is_not_current_evidence) ... ok
+test_candidate_validation_includes_external_authored_metadata (test_action_semantics.ActionSemanticsTests.test_candidate_validation_includes_external_authored_metadata) ... ok
+test_concrete_capability_is_observed_from_the_provider_for_every_family (test_action_semantics.ActionSemanticsTests.test_concrete_capability_is_observed_from_the_provider_for_every_family) ... ok
+test_current_task_orchestration_generation_is_read_before_dispatch (test_action_semantics.ActionSemanticsTests.test_current_task_orchestration_generation_is_read_before_dispatch) ... ok
+test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files (test_action_semantics.ActionSemanticsTests.test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files) ... ERROR
+test_missing_governing_source_and_unrecognized_rules_cannot_pass (test_action_semantics.ActionSemanticsTests.test_missing_governing_source_and_unrecognized_rules_cannot_pass) ... ok
+test_real_role_and_ontology_errors_retain_safe_action_and_version_text (test_action_semantics.ActionSemanticsTests.test_real_role_and_ontology_errors_retain_safe_action_and_version_text) ... ok
+test_real_task_trd_and_plan_lifecycle_values_are_constrained (test_action_semantics.ActionSemanticsTests.test_real_task_trd_and_plan_lifecycle_values_are_constrained) ... ok
+test_v2_guarded_publication_recovers_accepted_extension_and_shape_pre_post (test_action_semantics.ActionSemanticsTests.test_v2_guarded_publication_recovers_accepted_extension_and_shape_pre_post) ... ok
+test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner (test_action_semantics.ActionSemanticsTests.test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner) ... ok
+test_guarded_preview_publish_and_recovery (test_curator_guard_integration.CuratorGuardIntegrationTests.test_guarded_preview_publish_and_recovery) ... ok
+
+======================================================================
+ERROR: test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) (family='setup')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guarded_dispatch.py", line 262, in test_actual_family_matrix
+    receipt = call()
+              ^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guarded_dispatch.py", line 149, in <lambda>
+    call = lambda: module.run_initialization(**args)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpcqpyj8mc/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2904, in guarded
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpcqpyj8mc/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 793, in dispatch
+    return decision.finish(function())
+                           ^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpcqpyj8mc/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2904, in <lambda>
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpcqpyj8mc/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2625, in run_initialization
+    proposed_all, sources, original = source_snapshot(depot, skill, identity, contract=contract,
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpcqpyj8mc/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 811, in source_snapshot
+    original, origins, versions, renderer, policy = template_sources(depot, contract=contract)
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpcqpyj8mc/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 669, in template_sources
+    _static("validate_source", copied, contract=contract)
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpcqpyj8mc/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 203, in _static
+    return getattr(STATIC, name)(types.SimpleNamespace(**globals()), *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmpcqpyj8mc/Sys4AI/SKILLS-depo/init-new-project/scripts/init_static_health.py", line 42, in validate_source
+    raise h.InitializationError("starter profile or dependency lock differs from the reviewed static inventory: " + name)
+guard_setup_owner.InitializationError: starter profile or dependency lock differs from the reviewed static inventory: .agents/skills/ontology/scripts/ontology_backend.py
+
+======================================================================
+ERROR: test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files (test_action_semantics.ActionSemanticsTests.test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_action_semantics.py", line 150, in test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files
+    result = case.adopt()
+             ^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_advanced_ontology_adoption.py", line 37, in adopt
+    return self.run_setup(mode="prepare-existing",adopt_module="ontology-advanced")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_initializer.py", line 167, in run_setup
+    report = self.helper.run_initialization(**{**self.arguments, **overrides})
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-5z50l1re/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2904, in guarded
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-5z50l1re/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 793, in dispatch
+    return decision.finish(function())
+                           ^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-5z50l1re/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2904, in <lambda>
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-5z50l1re/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2616, in run_initialization
+    return run_module_adoption(depot, destination, record, previous_raw, refresh, module_id=adopt_module, refresh_modules=refresh_modules, integration_grant_file=integration_grant_file, integration_proposal_file=integration_proposal_file)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-5z50l1re/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2904, in guarded
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-5z50l1re/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 793, in dispatch
+    return decision.finish(function())
+                           ^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-5z50l1re/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2904, in <lambda>
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-5z50l1re/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2475, in run_module_adoption
+    original, _, _, _, _ = template_sources(depot)
+                           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-5z50l1re/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 669, in template_sources
+    _static("validate_source", copied, contract=contract)
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-5z50l1re/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 203, in _static
+    return getattr(STATIC, name)(types.SimpleNamespace(**globals()), *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-5z50l1re/Sys4AI/SKILLS-depo/init-new-project/scripts/init_static_health.py", line 42, in validate_source
+    raise h.InitializationError("starter profile or dependency lock differs from the reviewed static inventory: " + name)
+fixture_initializer.InitializationError: starter profile or dependency lock differs from the reviewed static inventory: .agents/skills/ontology/scripts/ontology_backend.py
+
+======================================================================
+FAIL: test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) (family='setup')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guarded_dispatch.py", line 311, in test_actual_under_lock_context_changes_block_each_family
+    self.assertEqual(changed, [True], str(rejected.exception))
+AssertionError: Lists differ: [] != [True]
+
+Second list contains 1 additional elements.
+First extra element 0:
+True
+
+- []
++ [True] : starter profile or dependency lock differs from the reviewed static inventory: .agents/skills/ontology/scripts/ontology_backend.py
+
+----------------------------------------------------------------------
+Ran 15 tests in 143.935s
+
+FAILED (failures=1, errors=2)

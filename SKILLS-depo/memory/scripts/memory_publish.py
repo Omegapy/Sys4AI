@@ -62,8 +62,10 @@ def authorize(root, config, grant_file, operation, payload_sha256, actor, *, pat
     root = project_root(root)
     require(config == load_config(root), "config_changed", "Supplied configuration is not the current project configuration.")
     grant = decode_json_yaml(safe_read_bytes(root, str(grant_file), max_bytes=250000))
-    exact(grant, ("schema_version", "grant_id", "project_id", "actor_id", "actor_kind", "operation", "payload_sha256", "config_sha256", "scope", "native_receipt", "observed_at", "expires_at", "task", "reviewed_records", "privacy_redaction"))
-    require(grant["schema_version"] == 1 and grant["project_id"] == config["project"]["id"], "grant_project", "Grant schema or project identity is incompatible.")
+    version = grant.get("schema_version") if isinstance(grant, dict) else None
+    extra = ("controller_origin", "broker_binding") if version == 2 else ()
+    exact(grant, ("schema_version", "grant_id", "project_id", "actor_id", "actor_kind", "operation", "payload_sha256", "config_sha256", "scope", "native_receipt", "observed_at", "expires_at", "task", "reviewed_records", "privacy_redaction", *extra))
+    require(type(version) is int and version in (1, 2) and grant["project_id"] == config["project"]["id"], "grant_project", "Grant schema or project identity is incompatible.")
     text(grant["grant_id"]); text(actor)
     require(grant["actor_id"] == actor and grant["actor_kind"] in {"director", "manager"}, "publisher_forbidden", "Grant must name the actual Director or confirmed manager.")
     digest(payload_sha256); digest(grant["payload_sha256"]); digest(grant["config_sha256"])
@@ -74,7 +76,10 @@ def authorize(root, config, grant_file, operation, payload_sha256, actor, *, pat
     now = now or datetime.now(timezone.utc)
     require(observed <= now <= expires and 0 < (expires - observed).total_seconds() <= 300,
             "grant_expired", "Publication requires a current native receipt and unexpired bounded grant.")
-    _native_receipt(grant["native_receipt"], actor)
+    if version == 1:
+        _native_receipt(grant["native_receipt"], actor)
+    else:
+        require(grant["actor_kind"] == "manager" and grant["controller_origin"] == "curator", "publisher_forbidden", "Native Curator grants require the current manager.")
     strings(grant["scope"], nonempty=True)
     require(type(grant["privacy_redaction"]) is bool, "invalid_grant", "Privacy-redaction authority must be explicit.")
     for scoped in grant["scope"]:
@@ -114,9 +119,14 @@ def authorize(root, config, grant_file, operation, payload_sha256, actor, *, pat
                 assignment.get("generation") == binding["generation"] and assignment.get("native_id") == actor and
                 assignment.get("role_reads"), "manager_unconfirmed", "Manager lacks current activation, generation, or role-read evidence.")
         try:
-            require(helper.orch.receipt(assignment["native_receipt"], launch=True) == actor, "manager_unconfirmed", "Launch identity differs.")
+            require(helper.orch.receipt(assignment["native_receipt"], launch=True, version=orch["version"], session=helper.orch.native.protocol_key(orch.get("native_protocol")), native_protocol=orch.get("native_protocol")) == actor, "manager_unconfirmed", "Launch identity differs.")
             helper.orch.role(assignment["role"], root)
-        except helper.orch.OrchestrationError as exc:
+            if version == 2:
+                helper.orch.native.validate_owner(grant, orch, 'memory')
+                require(helper.orch.native.observation(grant['native_receipt'], subject=actor, session=helper.orch.native.protocol_key(orch['native_protocol']), protocol_version=orch['native_protocol']['schema_version']) == 'running', 'publisher_not_running', 'Native manager is not observed running.')
+            else:
+                require(orch['version'] == 1, 'grant_version', 'Curator Task requires explicit native memory grant v2.')
+        except (helper.orch.OrchestrationError, helper.orch.native.NativeError) as exc:
             raise MemoryError("manager_role_invalid", "Current role or launch provenance failed the installed helper.") from exc
         writes = assignment["fit"]["writes"]
         require(all(any(within(p, prefix) for prefix in writes) for p in paths), "manager_scope", "Manager activation does not grant this memory write scope.")

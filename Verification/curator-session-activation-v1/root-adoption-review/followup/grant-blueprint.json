@@ -1,0 +1,61 @@
+{
+  "exact_completed_grant_keys": [
+    "schema_version",
+    "grant_id",
+    "project_id",
+    "actor_id",
+    "actor_kind",
+    "operation",
+    "payload_sha256",
+    "scope",
+    "task",
+    "reviewed_records",
+    "preview_sha256",
+    "config_sha256",
+    "native_receipt",
+    "observed_at",
+    "expires_at"
+  ],
+  "fixed_fields": {
+    "actor_id": "/root",
+    "actor_kind": "director",
+    "grant_id": "ONTGRANT-curator-session-agents-20260912-595f213c",
+    "operation": "publish",
+    "payload_sha256": "2ae2dcbd6f589d5dfd7445c5e5ca7dac8bf96e8c081b1084e2382facadea0cb1",
+    "project_id": "sys4ai-depot",
+    "reviewed_records": [
+      {
+        "expected_sha256": "43a822264ece4aaae53c355d7aa8aad65a807dac4d4f66b72c5e11528cce706a",
+        "path": "ONTOLOGY/bindings/artifacts.json",
+        "sha256": "cc64e2bb8ea32024af8486914360bbdbd6c9f4d33b5f6a890530aa026eea605a"
+      },
+      {
+        "expected_sha256": "bfcd7f277ce2d830147f901debe5c0bc329042828e1798f434702ed6dff2d3cc",
+        "path": "ONTOLOGY/bindings/roles.json",
+        "sha256": "d478ccf0a48bcbf440cb26e76fcae994c01e879ffcdcd5c7c35bbe24c9ca3520"
+      },
+      {
+        "expected_sha256": "aed74346a4ac05b9536361be3297322ac8651fbb83e32d27b9a24146e43b17c8",
+        "path": "ONTOLOGY/modules/project/project.jsonld",
+        "sha256": "3a922a73e39303749c7736a5f19c1e7e40158e488ee797e1a512ee6edc037e06"
+      }
+    ],
+    "schema_version": 1,
+    "scope": [
+      "ONTOLOGY/bindings/artifacts.json",
+      "ONTOLOGY/bindings/roles.json",
+      "ONTOLOGY/modules/project/project.jsonld"
+    ],
+    "task": null
+  },
+  "kind": "unfinished-grant-blueprint-not-an-executable-grant",
+  "live_fields_required": {
+    "config_sha256": "SHA256 of current root ontology.yaml after host adoption.",
+    "expires_at": "Actual expiry no more than five minutes after the observation.",
+    "native_receipt": "Actual normalized current collaboration.list_agents result: tool=collaboration.list_agents; result.agents records use agent_name and agent_status and show /root running. Preserve the actual observation.",
+    "observed_at": "Actual fresh roster observation time.",
+    "preview_sha256": "Exact value returned by the real preview after host adoption."
+  },
+  "note": "Do not write a purported completed grant until every live value is actually observed. No grant or publication authority is created by this blueprint.",
+  "serialization": "UTF-8 JSON, sorted keys, indent 2, ensure_ascii false, one trailing newline"
+}

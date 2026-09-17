@@ -77,5 +77,22 @@ class AutomaticCaptureTests(unittest.TestCase):
         state = cli("capture-status")
         self.assertTrue(cli("set-capture", "on", "--expected-config-sha256", state["config_sha256"])["automatic_capture"])
 
+    def test_native_grant_cannot_override_capture_off_but_explicit_publication_works(self):
+        from test_publication import NativeMemoryFixture
+        from memory_publish import publish
+        fixture=NativeMemoryFixture();self.addCleanup(fixture.close)
+        set_capture(fixture.root,False,capture_status(fixture.root)['config_sha256'])
+        context=fixture.driver.context('memory.publish');grant,_=fixture.grant(context)
+        before=snapshot(fixture.root)
+        with fixture.driver.authority.invoke(context):
+            result=capture(fixture.root,fixture.payload,grant,fixture.driver.actor,trigger='task-completed')
+        self.assertEqual(result['reason'],'automatic_capture_off')
+        self.assertEqual(before,snapshot(fixture.root))
+        context=fixture.driver.context('memory.publish');grant,_=fixture.grant(context,suffix='explicit-correction')
+        with fixture.driver.authority.invoke(context):
+            explicit=publish(fixture.root,fixture.payload,grant,fixture.driver.actor)
+        self.assertEqual(explicit['state'],'complete')
+        self.assertFalse(load_config(fixture.root)['integration']['automatic_capture'])
+
 
 if __name__ == "__main__": unittest.main()

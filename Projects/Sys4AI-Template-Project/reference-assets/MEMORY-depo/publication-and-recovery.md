@@ -140,3 +140,21 @@ new execution receipt or current claim. The original record, receipt and canonic
 transaction journal retain their original bytes until an explicitly reviewed
 ordinary lifecycle operation changes the record's lifecycle fields. The original
 claim, evidence identities and predecessor body remain preserved by supersession.
+
+## Native Curator grant version 2
+
+Grant v1, record/config v1 and existing journals retain their meanings. Grant v2
+adds `controller_origin: curator` and a strict `broker_binding` for the memory
+owner, actual live call, selected native protocol, charter and policy. The actor
+is the current confirmed manager of a version-2 Curator execution. It is never
+relabeled Director. Current Task bytes, generation, role reads, assigned paths,
+source evidence, privacy, exact payload and the five-minute freshness limit
+remain independently checked under the existing owner transactions.
+
+A serialized call or ordinary CLI invocation cannot authorize v2 publication.
+The actual protected transport must install its process-local caller context
+for every owner check, including recovery. Grants retain their original raw
+file digests and journal references. Recovery uses the original owner operation
+and preserves later edits. Automatic capture preferences remain unchanged;
+Curator's broker derives automatic versus explicit origin from trusted accepted
+run metadata, and explicit correction authority is independently selected.

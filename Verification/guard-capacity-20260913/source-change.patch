@@ -1,0 +1,68 @@
+--- SKILLS-depo/ontology/scripts/ontology_guards.py (before)
++++ SKILLS-depo/ontology/scripts/ontology_guards.py (proposed)
+@@ -24,7 +24,7 @@
+ BASE = "urn:sys4ai:ontology:action:"
+ FAMILIES = {"ontology", "memory", "task", "trd", "plan", "role", "template", "setup"}
+ MAX_FILES = 10000
+-MAX_BYTES = 64 * 1024 * 1024
++MAX_BYTES = 128 * 1024 * 1024
+ ENGINE_SOURCE_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+ CAPABILITIES = {
+     "ontology": "OntologyPublication", "memory": "MemoryMaintenance",
+--- SKILLS-depo/ontology/tests/test_guard_engine.py (before)
++++ SKILLS-depo/ontology/tests/test_guard_engine.py (proposed)
+@@ -146,5 +146,43 @@
+         self.assertLess(len(str(rejected.exception)) + len(str(rejected.exception.details)), 300)
+ 
+ 
++class GuardSnapshotCapacityTests(unittest.TestCase):
++    def test_complete_inventory_through_128_mib_and_rejects_overflow(self):
++        import ontology_guards as guards
++        block_bytes = 1024 * 1024
++        expected_digest = guards.digest(bytes(block_bytes))
++        with tempfile.TemporaryDirectory() as temporary:
++            root = Path(temporary)
++            inventory = root / "inventory"
++            inventory.mkdir()
++            for index in range(128):
++                with (inventory / f"{index:03}.bin").open("wb") as stream:
++                    stream.truncate(block_bytes)
++                if index + 1 in (32, 64, 80, 128):
++                    with self.subTest(mebibytes=index + 1):
++                        snapshot = guards._snapshot(root, ["inventory"])
++                        expected = {"inventory": None}
++                        expected.update({f"inventory/{number:03}.bin": expected_digest
++                                         for number in range(index + 1)})
++                        self.assertEqual(snapshot, expected)
++            (inventory / "overflow.bin").write_bytes(b"x")
++            with self.assertRaises(guards.GuardError) as rejected:
++                guards._snapshot(root, ["inventory"])
++            self.assertEqual(rejected.exception.code, "guard_resource_limit")
++
++    def test_file_count_limit_remains_enforced(self):
++        import ontology_guards as guards
++        self.assertEqual(guards.MAX_FILES, 10000)
++        with tempfile.TemporaryDirectory() as temporary:
++            root = Path(temporary)
++            inventory = root / "inventory"
++            inventory.mkdir()
++            for index in range(10000):
++                (inventory / f"{index:05}.txt").touch()
++            with self.assertRaises(guards.GuardError) as rejected:
++                guards._snapshot(root, ["inventory"])
++            self.assertEqual(rejected.exception.code, "guard_resource_limit")
++
++
+ if __name__ == "__main__":
+     unittest.main()
+--- SKILLS-depo/init-new-project/assets/static-capability-v1.json (before)
++++ SKILLS-depo/init-new-project/assets/static-capability-v1.json (proposed)
+@@ -466,7 +466,7 @@
+     ".agents/skills/ontology/scripts/ontology_generation.py": "625340e3b6ec4b360413f0acd0b30ac3c408c70d3eac1ad009a9fc8b188ca364",
+     ".agents/skills/ontology/scripts/ontology_graph.py": "4f286af79661a539a19c0b1658a7377817ff16c54d1fb650dfdff67b55245886",
+     ".agents/skills/ontology/scripts/ontology_guard_setup.py": "1cd332edc0775021f58df4bb493a34d4caaf4f71a904bcf2acb21adefbafacbf",
+-    ".agents/skills/ontology/scripts/ontology_guards.py": "f42506f6dde32f74a24c00cc1d0e046a12004fa9d03f00a5a49131607677442a",
++    ".agents/skills/ontology/scripts/ontology_guards.py": "a9213263d5163877596a7c4ece9b67db418bf8886ae0f785b101bebaaccfab7d",
+     ".agents/skills/ontology/scripts/ontology_health.py": "0ffe775f485de64d326fccebe13c35a7974e2ebb8ff432c562b5f75e7a32e0d0",
+     ".agents/skills/ontology/scripts/ontology_interchange.py": "51ca7df70ee4e133a686ff867a324e58f3a8fba6f3910653c0db4730745cba0a",
+     ".agents/skills/ontology/scripts/ontology_knowledge.py": "feb9d2c2e5f7570db49d3d07c3961ee2f38c1ee629f3a135915ea003645c0d55",

@@ -1,0 +1,172 @@
+--- before/SKILLS-depo/init-new-project/assets/initialization-receipt.schema.json
++++ after/SKILLS-depo/init-new-project/assets/initialization-receipt.schema.json
+@@ -35,7 +35,8 @@
+         "governance-starter-v8",
+         "governance-starter-v9",
+         "governance-starter-v10",
+-        "governance-starter-v11"
++        "governance-starter-v11",
++        "governance-starter-v12"
+       ]
+     },
+     "status": {
+@@ -398,6 +399,14 @@
+         "ready",
+         "degraded"
+       ]
++    },
++    "curator_integration": {
++      "type": "object",
++      "description": "Exact v12 generated or current ontology-owner integration disposition and immutable receipt link."
++    },
++    "generated_files": {
++      "type": "object",
++      "description": "Exact generated Curator outputs, separately bound to neutral recipe manifest hashes."
+     }
+   },
+   "allOf": [
+@@ -412,7 +421,8 @@
+               "governance-starter-v8",
+               "governance-starter-v9",
+               "governance-starter-v10",
+-              "governance-starter-v11"
++              "governance-starter-v11",
++              "governance-starter-v12"
+             ]
+           }
+         }
+@@ -451,7 +461,8 @@
+               "governance-starter-v8",
+               "governance-starter-v9",
+               "governance-starter-v10",
+-              "governance-starter-v11"
++              "governance-starter-v11",
++              "governance-starter-v12"
+             ]
+           }
+         }
+@@ -561,7 +572,8 @@
+               "governance-starter-v8",
+               "governance-starter-v9",
+               "governance-starter-v10",
+-              "governance-starter-v11"
++              "governance-starter-v11",
++              "governance-starter-v12"
+             ]
+           }
+         }
+@@ -580,7 +592,8 @@
+               "governance-starter-v8",
+               "governance-starter-v9",
+               "governance-starter-v10",
+-              "governance-starter-v11"
++              "governance-starter-v11",
++              "governance-starter-v12"
+             ]
+           }
+         }
+@@ -650,7 +663,10 @@
+       "additionalProperties": false,
+       "properties": {
+         "schema_version": {
+-          "const": 1
++          "enum": [
++            1,
++            2
++          ]
+         },
+         "module_id": {
+           "enum": [
+@@ -943,7 +959,13 @@
+             [
+               "ontology"
+             ]
+-          ]
++          ],
++          "items": {
++            "enum": [
++              "ontology",
++              "project-curator"
++            ]
++          }
+         },
+         "new_ontology": {
+           "type": "boolean"
+@@ -973,6 +995,18 @@
+               "document-ownership.json",
+               "curator-session.yaml"
+             ]
++          }
++        },
++        "integration_edition": {
++          "const": "curator-ontology-1.0.0"
++        },
++        "curator_integration": {
++          "type": "object"
++        },
++        "generated_contents": {
++          "type": "object",
++          "additionalProperties": {
++            "type": "string"
+           }
+         }
+       },
+@@ -1054,6 +1088,58 @@
+               }
+             }
+           }
++        },
++        {
++          "if": {
++            "properties": {
++              "schema_version": {
++                "const": 2
++              }
++            }
++          },
++          "then": {
++            "properties": {
++              "module_id": {
++                "const": "project-curator"
++              }
++            },
++            "required": [
++              "integration_edition",
++              "refresh_modules",
++              "generated_contents",
++              "curator_integration"
++            ]
++          }
++        },
++        {
++          "if": {
++            "properties": {
++              "schema_version": {
++                "const": 1
++              }
++            }
++          },
++          "then": {
++            "not": {
++              "anyOf": [
++                {
++                  "required": [
++                    "integration_edition"
++                  ]
++                },
++                {
++                  "required": [
++                    "generated_contents"
++                  ]
++                },
++                {
++                  "required": [
++                    "curator_integration"
++                  ]
++                }
++              ]
++            }
++          }
+         }
+       ]
+     }

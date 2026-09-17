@@ -1,0 +1,63 @@
+{
+  "actions": [
+    {
+      "command": [
+        ".venv/bin/python",
+        ".agents/skills/ontology/scripts/ontology.py",
+        "--project-root",
+        ".",
+        "compile"
+      ],
+      "exit_code": 0,
+      "evidence": "Verification/integrated-curator-ontology/host/resume-20260916/origin-refresh-compile.json",
+      "sha256": "ad577745ba971b57ae41c031621c8faef7be267ac0b13979a45895203fbb2bc7",
+      "status": "complete"
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        ".agents/skills/ontology/scripts/ontology.py",
+        "--project-root",
+        ".",
+        "build-wiki"
+      ],
+      "exit_code": 0,
+      "evidence": "Verification/integrated-curator-ontology/host/resume-20260916/origin-refresh-build-wiki.json",
+      "sha256": "fa08b29ea48bc5c01b5aba1dbae9e6add63f2655733d614ac0cac0b4f0ba0394",
+      "status": "complete"
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        ".agents/skills/ontology/scripts/ontology.py",
+        "--project-root",
+        ".",
+        "link-memory"
+      ],
+      "exit_code": 0,
+      "evidence": "Verification/integrated-curator-ontology/host/resume-20260916/origin-refresh-link-memory.json",
+      "sha256": "e319c37b31af9021af74e22798008d4a12bb09354ec5138645bc048ffa7a6e26",
+      "status": "complete"
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        ".agents/skills/ontology/scripts/ontology.py",
+        "--project-root",
+        ".",
+        "build-semantic-index"
+      ],
+      "exit_code": 0,
+      "evidence": "Verification/integrated-curator-ontology/host/resume-20260916/origin-refresh-build-semantic-index.json",
+      "sha256": "184d3c97dd59cc10b2a6c90a9eb0b85904a03d61985a2524c4e2ddf0050a4691",
+      "status": "built"
+    }
+  ],
+  "semantic_document_selection_preserved": [],
+  "memory_link_meanings_preserved": {
+    "records": true,
+    "associations": true,
+    "excluded": true
+  },
+  "scope": "Explicit rebuild of existing generated products after one helper digest changed; no canonical ontology or memory writes, no provisioning."
+}

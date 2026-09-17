@@ -24,7 +24,7 @@ ACTIVE = ContextVar("sys4ai_ontology_guard_actions", default=())
 BASE = "urn:sys4ai:ontology:action:"
 FAMILIES = {"ontology", "memory", "task", "trd", "plan", "role", "template", "setup"}
 MAX_FILES = 10000
-MAX_BYTES = 64 * 1024 * 1024
+MAX_BYTES = 128 * 1024 * 1024
 ENGINE_SOURCE_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
 CAPABILITIES = {
     "ontology": "OntologyPublication", "memory": "MemoryMaintenance",
@@ -338,6 +338,13 @@ def _external_argument_context(root, value, key=""):
 
 def _accepted_publication(root, arguments):
     proposal = arguments.get("proposal", arguments.get("intent", {}).get("proposal"))
+    if isinstance(proposal, dict) and proposal.get("operation") == "integrate-curator":
+        from ontology_integration import _paths, _intent
+        path = _paths(proposal.get("operation_id"))[0]
+        if not checked_path(root, path).is_file(): return None
+        intent = _intent(root, proposal["operation_id"])
+        fail(intent["proposal"] == proposal, "guard_stale", "Integration differs from its accepted intent.")
+        return path, intent
     if not isinstance(proposal, dict) or proposal.get("schema_version") != 2:
         return None
     identity = proposal.get("operation_id")
@@ -412,6 +419,15 @@ def _direct_facts(root, family, operation, arguments, budget):
     A JSON field named _semantic_state is never a source of observed facts.
     """
     facts = {"input_type": family + "-" + operation + "-request", "input_valid": True, "requested_paths": []}
+    if family == "ontology" and operation in {"integration_preview", "integration_publish", "integration_recover"}:
+        from ontology_integration import check_proposal
+        proposal = arguments.get("proposal", arguments.get("intent", {}).get("proposal"))
+        accepted = _accepted_publication(root, arguments)
+        prior = accepted[1]["prior_contents"] if accepted else None
+        old, candidate = check_proposal(root, proposal, prior)
+        facts["requested_paths"] = [change["path"] for change in proposal["changes"]]
+        facts["input_valid"] = not any(row["severity"] == "error" for row in candidate.diagnostics)
+        return facts
     if family == "ontology" and operation in {"preview", "publish", "recover"}:
         from ontology_publication import check_proposal
         from ontology_core import load_project, OntologyError
@@ -522,6 +538,11 @@ def _semantic_triples(root, family, operation, arguments, targets, facts, action
     for target in all_targets:
         literal("target", target)
         types = _target_type(root, target)
+        if family == "ontology" and operation in {"integration_preview", "integration_publish", "integration_recover"}:
+            from ontology_integration import TARGETS
+            # The direct owner validator proved the exact four-file candidate;
+            # this classification does not widen ordinary publication targets.
+            if target in TARGETS: types.add("ontology-owned-artifact")
         observed_type = family + "-owned-artifact" if family + "-owned-artifact" in types else (sorted(types)[0] if types else "unclassified-artifact")
         literal("targetType", observed_type)
     for key in ("targetIdentity", "currentState", "nextState", "targetRevision"):
@@ -540,7 +561,7 @@ def _semantic_triples(root, family, operation, arguments, targets, facts, action
         # Ontology publication uses direct checks rather than the generic wrapper.
         declared = operation in declarations or "Store." + operation in declarations
         if binding["path"] == ".agents/skills/ontology/scripts/ontology_publication.py":
-            declared = operation in {"preview", "publish", "recover"} and any(isinstance(n, ast.FunctionDef) and n.name == operation for n in tree.body)
+            declared = operation in {"preview", "publish", "recover", "integration_preview", "integration_publish", "integration_recover"} and any(isinstance(n, ast.FunctionDef) and n.name == operation for n in tree.body)
         provider_family = PROVIDERS.get(binding["path"])
         if declared and provider_family:
             observed_capabilities.add(BASE + "capability:" + CAPABILITIES[provider_family])

@@ -223,3 +223,30 @@ adds selected inference and separately labeled proposals to mixed results withou
 modifying memory. Ordinary mixed queries retain the first-release behavior;
 frozen queries cannot include live proposals. Advanced
 packet selection and material change gates are in [Task integration](task-integration.md).
+
+## Curator semantic integration
+
+`integration-preview SELECTION.json` returns the exact `proposal` and stable
+`preview_sha256`. The selection has schema_version 1, an `ONTOP-` operation_id,
+and a bounded reason. `integration-publish PROPOSAL.json --grant-file GRANT.json
+--expected-preview-sha256 DIGEST` publishes only ontology.yaml additive selections
+and the three reserved Curator files. `integration-recover OPERATION_ID
+--grant-file GRANT.json` continues the original accepted intent. All file arguments
+are confined project-relative paths. The separate `integrate-curator` grant binds
+the original configuration predecessor, even after a partial config commit.
+
+Use the current Director or confirmed manager; support roles do not own canonical
+publication. A schema-1 integration grant requires orchestration version 1 for a
+manager. Protected-native version 2 needs a separately supported grant contract
+and remains a diagnostic hold. Guard validation supplies no grant.
+
+The recipe describes policy inspection, scoped review, update/correction owners,
+exact retry, Task pause/resume, selected dispatch, session catch-up and bounded
+log access. Queries report declared source freshness and never certify execution.
+
+Operational `advanced-health` uses the explicit `infer_diagnostic` Python API to
+compute the full selected closure with counts and digests under existing limits.
+Its result states that full proof delivery is not exercised. Default full
+inference retains all proof/PROV detail and can return `output_limit`; use exact
+bounded premise queries for scoped proof detail. See [standards.md](standards.md)
+for the diagnostic scope and schema contract.

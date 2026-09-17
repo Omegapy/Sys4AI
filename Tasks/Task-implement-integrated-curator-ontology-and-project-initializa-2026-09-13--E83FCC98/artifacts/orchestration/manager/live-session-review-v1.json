@@ -1,0 +1,222 @@
+{
+  "checkpoint": "TASK-E83FCC98-one-source-review",
+  "actor": "/root/integration_manager",
+  "native_observation": {
+    "tool": "collaboration.list_agents",
+    "observed_at": "2026-09-13T20:21:57.573301+00:00",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/integration_manager",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/integration_manager/integration_implementer",
+          "agent_status": "completed"
+        },
+        {
+          "agent_name": "/root/integration_manager/integration_senior",
+          "agent_status": "completed"
+        }
+      ]
+    }
+  },
+  "task_binding": {
+    "task_id": "TASK-20260913-E83FCC98",
+    "revision": 29,
+    "execution_id": "integrated_curator_E83FCC98",
+    "generation": 1
+  },
+  "selection": {
+    "review-root-governance-E83FCC98": {
+      "tool": "target.classify",
+      "automatic": true,
+      "payload_sha256": "09fd1f8e39160ea8bbd66ad5caafcd2ace60c276a338bd73208ecc24b35dde71",
+      "owner_arguments_sha256": "d7c955c32e105ea86af0b7810279716ef056d23a84422006cd43ef8fc7e8ad04",
+      "task_binding": {
+        "task_id": "TASK-20260913-E83FCC98",
+        "revision": 29,
+        "execution_id": "integrated_curator_E83FCC98",
+        "generation": 1
+      },
+      "operation": {
+        "cost": {
+          "model_calls": 0,
+          "work_seconds": 10,
+          "candidate_bytes": 9701,
+          "concurrent_agents": 2
+        }
+      }
+    }
+  },
+  "request": {
+    "operation_id": "review-root-governance-E83FCC98",
+    "payload_sha256": "09fd1f8e39160ea8bbd66ad5caafcd2ace60c276a338bd73208ecc24b35dde71",
+    "payload": {
+      "analysis": "source-ownership",
+      "paths": [
+        "AGENTS.md"
+      ]
+    }
+  },
+  "owner_arguments": {
+    "root": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+    "ownership": {
+      "schema_version": 1,
+      "entries": [
+        {
+          "id": "project-instructions",
+          "path": "AGENTS.md",
+          "pattern": false,
+          "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37",
+          "class": "governance",
+          "owner": "project",
+          "generator": null,
+          "sources": [],
+          "sections": [],
+          "interfaces": []
+        },
+        {
+          "id": "project-readme",
+          "path": "README.md",
+          "pattern": false,
+          "sha256": null,
+          "class": "documentation",
+          "owner": "project",
+          "generator": null,
+          "sources": [],
+          "sections": [],
+          "interfaces": []
+        },
+        {
+          "id": "ontology-wiki",
+          "path": "ONTOLOGY/WIKI/*",
+          "pattern": true,
+          "sha256": null,
+          "class": "generated",
+          "owner": "ontology",
+          "generator": "ontology.wiki",
+          "sources": [
+            "ONTOLOGY/modules",
+            "ONTOLOGY/bindings"
+          ],
+          "sections": [],
+          "interfaces": []
+        },
+        {
+          "id": "task-response-history",
+          "path": "Tasks/*/responses/*",
+          "pattern": true,
+          "sha256": null,
+          "class": "historical",
+          "owner": "task",
+          "generator": null,
+          "sources": [],
+          "sections": [],
+          "interfaces": []
+        }
+      ]
+    },
+    "targets": [
+      {
+        "identity": {
+          "id": "project-instructions",
+          "path": "AGENTS.md",
+          "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+        },
+        "ranges": [
+          [
+            0,
+            9701
+          ]
+        ]
+      }
+    ]
+  },
+  "observation": {
+    "policy_sha256": "992dca4426fce3cd363edbe3979c79652437ad35c10262e30c7ce256443be22a",
+    "branch": "main",
+    "observed_at": "2026-09-13T20:21:57.573301+00:00",
+    "pending_since": "2026-09-13T20:21:57.573301+00:00",
+    "last_catch_up": null,
+    "last_dependency": null,
+    "usage": {
+      "model_calls": 1,
+      "work_seconds": 0,
+      "candidate_bytes": 0,
+      "concurrent_agents": 2
+    },
+    "iterations": 0,
+    "iteration_limit": 1,
+    "runtime_current": true,
+    "evidence": [
+      {
+        "root": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+        "path": "Tasks/Task-implement-integrated-curator-ontology-and-project-initializa-2026-09-13--E83FCC98/artifacts/orchestration/manager/session-native-observation-v1.json",
+        "sha256": "29111a28dd55d96b565ea7f92abc84c2b761a769900e155b37b1deb98d48d7af"
+      },
+      {
+        "root": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+        "path": "Tasks/Task-implement-integrated-curator-ontology-and-project-initializa-2026-09-13--E83FCC98/task.json",
+        "sha256": "4ca831f3e02c17bdf20f04f3a40f18286058f29174f4faef0f136cf4748da90f"
+      }
+    ]
+  },
+  "result": {
+    "state": "dispatched",
+    "outcome": {
+      "state": "reviewed",
+      "analysis": "source-ownership",
+      "results": [
+        {
+          "state": "classified",
+          "code": "bound",
+          "class": "governance",
+          "owner": "project",
+          "route": "project.governance",
+          "sources": [],
+          "interfaces": [],
+          "source_sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+        }
+      ],
+      "model_calls": 0,
+      "canonical_writes": 0,
+      "sources": [
+        {
+          "path": "AGENTS.md",
+          "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+        }
+      ]
+    },
+    "runtime_observed": true,
+    "preserve_pending": true,
+    "notify": false,
+    "receipt_required": "The live owner records delivery consumption only after its attributable completed outcome."
+  },
+  "actual_work_seconds": 0.07909987500170246,
+  "completed_iterations": 1,
+  "automatic_owner_model_calls": 0,
+  "maintenance_model_turns": 1,
+  "canonical_writes": 0,
+  "protected_before": {
+    "AGENTS.md": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37",
+    "document-ownership.json": "795b429ae9b997feac5c39569a117d6a0e6332d38af718320a66945980b44916",
+    "curator.yaml": "1f7ecccb94923e64ec1e68564e7205edc3db1396daab5f87c87a5c97832c686e",
+    "curator-session.yaml": "e2993673e8920666c76506ce146996fcd741fa82260426f1e1bb310ef767e10c",
+    "Tasks/Task-implement-integrated-curator-ontology-and-project-initializa-2026-09-13--E83FCC98/task.json": "4ca831f3e02c17bdf20f04f3a40f18286058f29174f4faef0f136cf4748da90f"
+  },
+  "protected_after": {
+    "AGENTS.md": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37",
+    "document-ownership.json": "795b429ae9b997feac5c39569a117d6a0e6332d38af718320a66945980b44916",
+    "curator.yaml": "1f7ecccb94923e64ec1e68564e7205edc3db1396daab5f87c87a5c97832c686e",
+    "curator-session.yaml": "e2993673e8920666c76506ce146996fcd741fa82260426f1e1bb310ef767e10c",
+    "Tasks/Task-implement-integrated-curator-ontology-and-project-initializa-2026-09-13--E83FCC98/task.json": "4ca831f3e02c17bdf20f04f3a40f18286058f29174f4faef0f136cf4748da90f"
+  },
+  "protected_unchanged": true,
+  "delivery_consumed": false,
+  "limitation": "This one-file completed source classification does not complete any whole catch-up delivery. Session collection, admission, owner dispatch and completed outcome are separate evidence."
+}

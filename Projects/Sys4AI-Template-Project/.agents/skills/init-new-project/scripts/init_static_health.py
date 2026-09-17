@@ -8,19 +8,19 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 INVENTORY = "assets/static-capability-v1.json"
-INVENTORY_SHA256 = "7c63b052c086a09697ca43514dd91f90e56183bdd62e93152fe298d12d7f32a5"
+INVENTORY_SHA256 = "204968dd1f576385af4d964215cdc485ff0e7a7ad7231b6ba48c3e899a104f58"
 
 
-def inventory(h):
-    raw = h.file_bytes(Path(__file__).resolve().parent.parent / INVENTORY)
-    if h.sha(raw) != INVENTORY_SHA256:
+def inventory(h, *, legacy=False):
+    raw = h.file_bytes(Path(__file__).resolve().parent.parent / ("assets/static-capability-v11.json" if legacy else INVENTORY))
+    if h.sha(raw) != ("27e6113622f908af73403d7af97e572e88aaa4dd0167eadc00d240e287f5f44d" if legacy else INVENTORY_SHA256):
         raise h.InitializationError("unknown static capability inventory; preserve it for reviewed helper adoption")
     return h.unique_json(raw)
 
 
-def validate_source(h, files):
+def validate_source(h, files, *, contract=None):
     selected = inventory(h)
-    required = {name for names in selected["packages"].values() for name in names}
+    required = {name for package,names in selected["packages"].items() for name in names if package not in selected.get("curator_packages", []) or contract in h.CURATOR_CONTRACTS}
     missing = sorted(required - files.keys())
     if missing:
         raise h.InitializationError("complete starter capability inventory is missing: " + ", ".join(missing[:20]))
@@ -35,12 +35,16 @@ def validate_source(h, files):
                 h.unique_json(files[name])
             except (ValueError, UnicodeError, h.InitializationError) as error:
                 raise h.InitializationError("starter capability JSON is invalid: " + name) from error
-    for name, expected in selected["locked_resources"].items():
+    locks = dict(selected["locked_resources"])
+    if contract in h.CURATOR_CONTRACTS: locks.update(selected.get("curator_locked_resources", {}))
+    for name, expected in locks.items():
         if h.sha(files[name]) != expected:
             raise h.InitializationError("starter profile or dependency lock differs from the reviewed static inventory: " + name)
 
 
 def _paths(h, module):
+    if module == h.CURATOR_MODULE:
+        return (*h.CURATOR.SPECIAL_FILES, *h.CURATOR.PACKAGES)
     if module == "memory":
         return ("memory.yaml", ".agents/skills/memory", h.MEMORY_CONTRACT_ROOT)
     if module == h.LEARNING_MODULE:
@@ -63,6 +67,7 @@ def assess(h, destination, record, *, operation=None):
         selected += ([h.LEARNING_MODULE] if contract in h.LEARNING_CONTRACTS else [])
         selected += ([h.ONTOLOGY_MODULE] if contract in h.ONTOLOGY_CONTRACTS else [])
         selected += ([h.ADVANCED_MODULE] if contract in h.ADVANCED_CONTRACTS else [])
+        selected += ([h.CURATOR_MODULE] if contract in h.CURATOR_CONTRACTS else [])
         selected += [op["module_id"] for op in record.get("module_adoptions", [])]
     source_rows = operation["sources"] if operation else record["sources"]
     if operation is None:
@@ -72,9 +77,12 @@ def assess(h, destination, record, *, operation=None):
             current_sources = {name: row for name, row in current_sources.items() if not _inside(name, roots)}
             current_sources.update({row["destination"]: row for row in adopted["sources"]})
         source_rows = [current_sources[name] for name in sorted(current_sources)]
-    locked = inventory(h)["locked_resources"]
+    integrated = (operation.get("schema_version") == 2 and operation.get("module_id") == h.CURATOR_MODULE) if operation else contract == h.SETUP_CONTRACT or any(op.get("integration_edition") == h.INTEGRATION.EDITION for op in record.get("module_adoptions",[]))
+    selected_inventory = inventory(h, legacy=not integrated and (operation is None or operation.get("module_id") == h.CURATOR_MODULE and operation.get("schema_version") == 1))
+    locked = selected_inventory["locked_resources"]
     components = []
     for module in dict.fromkeys(selected):
+        module_locks = {**locked, **(selected_inventory.get("curator_locked_resources", {}) if module == h.CURATOR_MODULE else {})}
         paths = _paths(h, module)
         sources = [row for row in source_rows if _inside(row["destination"], paths)]
         preserved = any(row["adoption"] in {"preserved-project-owned", "skipped-existing-package"} for row in sources)
@@ -87,7 +95,8 @@ def assess(h, destination, record, *, operation=None):
                 continue
             raw = h.file_bytes(target)
             observed[name] = h.sha(raw)
-            if name in locked and observed[name] != locked[name]:
+            compatible_lock = not integrated and observed[name] == {**inventory(h)["locked_resources"], **inventory(h).get("curator_locked_resources", {})}.get(name)
+            if name in module_locks and observed[name] != module_locks[name] and not compatible_lock:
                 diagnostics.append({"code": "capability_lock_changed", "path": name})
             if name.endswith(".py"):
                 try:
@@ -117,6 +126,9 @@ def assess(h, destination, record, *, operation=None):
                 available = available and detail["shared_automatic_checkpoint"] == "available" and detail["director_binding"] == "current"
             elif detail["shared_automatic_checkpoint"] == "unavailable":
                 detail["excluded_dependency"] = "Preserved memory was not selected for compatible refresh; shared capture is unverified."
+        elif module == h.CURATOR_MODULE:
+            detail = h._curator("assess", destination, integration_required=integrated)
+            available = detail["structural_readiness"] == "available" and detail["compatible"]
         else:
             detail = h.assess_ontology(destination) if module == h.ONTOLOGY_MODULE else h._advanced("assess", destination)
             available = detail["structural_readiness"] == "available"

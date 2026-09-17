@@ -170,3 +170,63 @@ class PublicationTests(unittest.TestCase):
 
 
 if __name__ == "__main__": unittest.main()
+
+class NativeMemoryFixture:
+    """Actual owner publication fixture; native request frames are synthetic."""
+    def __init__(self,protocol_version=1):
+        from test_core import SCRIPTS
+        sys.path.insert(0,str(SCRIPTS.parent.parent/'agent-task/tests'))
+        from test_orchestration_state import NativeOrchestrationFixture
+        self.driver=NativeOrchestrationFixture(writes=['MEMORY','control_records/memory'],protocol_version=protocol_version)
+        self.root=build_project(self.driver.root)
+        self.record=make_record(self.root)
+        self.record['metadata']['publication'].update(actor_id=self.driver.actor,actor_kind='manager')
+        self.payload=make_payload(self.root,self.record)
+
+    def grant(self,context,suffix='native'):
+        path=make_grant(self.root,self.payload,actor=self.driver.actor,suffix=suffix)
+        value=json.loads((self.root/path).read_text())
+        value.update(schema_version=2,actor_kind='manager',controller_origin='curator',
+            native_receipt=self.driver.roster(self.driver.actor),task=self.driver.binding(),
+            broker_binding=self.driver.owner_binding(context,'memory'))
+        write(self.root,path,json_bytes(value));return path,value
+
+    def close(self):self.driver.close()
+
+
+class NativeMemoryPublicationTests(unittest.TestCase):
+    def test_current_verified_manager_publishes_through_existing_owner(self):
+        fixture=NativeMemoryFixture();self.addCleanup(fixture.close)
+        context=fixture.driver.context('memory.publish');path,grant=fixture.grant(context)
+        with fixture.driver.authority.invoke(context):
+            result=publish(fixture.root,fixture.payload,path,fixture.driver.actor)
+        self.assertEqual(result['state'],'complete')
+        self.assertEqual((fixture.root/fixture.payload['changes'][0]['path']).exists(),True)
+        self.assertEqual(grant['schema_version'],2)
+
+    def test_serialized_context_worker_and_changed_owner_fail(self):
+        fixture=NativeMemoryFixture();self.addCleanup(fixture.close)
+        context=fixture.driver.context('memory.publish');path,grant=fixture.grant(context)
+        with self.assertRaises(MemoryError):publish(fixture.root,fixture.payload,path,fixture.driver.actor)
+        with fixture.driver.authority.invoke(context):
+            for change in (lambda g:g.update(actor_kind='director'),
+                           lambda g:g['broker_binding'].update(owner='ontology'),
+                           lambda g:g['task'].update(generation=999)):
+                bad=copy.deepcopy(grant);change(bad);write(fixture.root,path,json_bytes(bad))
+                with self.assertRaises(MemoryError):publish(fixture.root,fixture.payload,path,fixture.driver.actor)
+        self.assertFalse((fixture.root/fixture.payload['changes'][0]['path']).exists())
+
+
+class ForkMemoryPublicationTests(unittest.TestCase):
+    def test_new_load_cannot_publish_until_canonical_reconnect_then_existing_owner_commits(self):
+        fixture=NativeMemoryFixture(protocol_version=2);self.addCleanup(fixture.close);driver=fixture.driver
+        released=driver.release_receipt('native-manager');resumed=driver.resume_receipt('native-manager')
+        context=driver.context('memory_publish');path,value=fixture.grant(context,'new-epoch-held')
+        with driver.authority.invoke(context),self.assertRaises(MemoryError):publish(fixture.root,fixture.payload,path,driver.actor)
+        self.assertFalse((fixture.root/fixture.payload['changes'][0]['path']).exists())
+        driver.event('manager.reconnect',{'assignment_id':'native-manager','receipt':resumed,'release_receipt':released,
+            'role_reads':driver.role_acknowledgement('native-manager')})
+        context=driver.context('memory_publish');path,value=fixture.grant(context,'new-epoch-authorized')
+        with driver.authority.invoke(context):result=publish(fixture.root,fixture.payload,path,driver.actor)
+        self.assertEqual(result['state'],'complete');self.assertEqual(value['broker_binding']['call']['actor']['load_epoch'],2)
+        self.assertEqual(value['schema_version'],2);self.assertEqual(driver.historical_path.read_bytes(),driver.historical_bytes)

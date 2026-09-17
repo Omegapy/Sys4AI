@@ -1,0 +1,95 @@
+{
+  "backend": {
+    "enabled": true,
+    "name": "basic-memory",
+    "semantic_enabled": true
+  },
+  "canonical_root": "MEMORY",
+  "contract_root": "reference-assets/MEMORY-depo",
+  "corpus": {
+    "exclude": [
+      "Projects/**",
+      "Tasks/**",
+      "Roles/**",
+      "roles/**",
+      "sub-agent-roles/**",
+      "**/*-depo/**",
+      "reference-assets/**",
+      ".git/**",
+      ".venv*/**",
+      "venv/**",
+      ".sys4ai/**",
+      ".agents/**",
+      ".codex/**",
+      "node_modules/**",
+      "build/**",
+      "dist/**",
+      "target/**",
+      "**/__pycache__/**",
+      "**/.env*",
+      "**/secrets/**",
+      "**/credentials/**",
+      "**/*.pem",
+      "**/*.key"
+    ],
+    "include": [
+      "README.md",
+      "docs/**/*.md",
+      "research/**/*.md",
+      "research/**/*.tex",
+      "research/**/*.pdf",
+      "research/**/*.html"
+    ],
+    "source_groups": []
+  },
+  "integration": {
+    "automatic_capture": true,
+    "task_packets": true
+  },
+  "project": {
+    "id": "sys4ai-depot",
+    "name": "Sys4AI Depot",
+    "root": "."
+  },
+  "publication": {
+    "director": {
+      "actor_id": "/root",
+      "authority": [
+        {
+          "path": "SOUL.md",
+          "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+        },
+        {
+          "path": "AGENTS.md",
+          "sha256": "d16daa454d6bb19053f5d3dee26369635367d88eaed4f471c7237ed1389c4aa3"
+        },
+        {
+          "path": "ROLE.md",
+          "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+        }
+      ],
+      "scope": [
+        "MEMORY",
+        "Verification/project-memory",
+        ".sys4ai/memory/projection",
+        ".sys4ai/memory/normalized",
+        ".sys4ai/memory/index",
+        ".sys4ai/memory/backend-config",
+        ".sys4ai/memory/maintenance"
+      ]
+    }
+  },
+  "retrieval": {
+    "max_results": 20,
+    "mode": "hybrid"
+  },
+  "schema_version": 1,
+  "state": {
+    "backend_config": ".sys4ai/memory/backend-config",
+    "index": ".sys4ai/memory/index",
+    "maintenance": ".sys4ai/memory/maintenance",
+    "model_cache": ".sys4ai/memory/model-cache",
+    "normalized": ".sys4ai/memory/normalized",
+    "projection": ".sys4ai/memory/projection"
+  }
+}

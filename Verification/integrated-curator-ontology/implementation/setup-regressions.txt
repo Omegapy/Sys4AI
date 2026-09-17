@@ -1,0 +1,164 @@
+test_authored_ontology_owner_hold_and_exact_continuation (test_integrated_setup.IntegratedSetupTests.test_authored_ontology_owner_hold_and_exact_continuation) ... ok
+test_create_cli_and_missing_function_is_not_ready (test_integrated_setup.IntegratedSetupTests.test_create_cli_and_missing_function_is_not_ready) ... ok
+test_first_prepare_and_manual_copy (test_integrated_setup.IntegratedSetupTests.test_first_prepare_and_manual_copy) ... ok
+test_prior_setup_without_curator_and_without_ontology (test_integrated_setup.IntegratedSetupTests.test_prior_setup_without_curator_and_without_ontology) ... ok
+test_session_capture_and_publication_opt_outs_are_preserved (test_integrated_setup.IntegratedSetupTests.test_session_capture_and_publication_opt_outs_are_preserved) ... ok
+test_v12_refresh_is_explicit_and_unchanged_repeat_deduplicates (test_integrated_setup.IntegratedSetupTests.test_v12_refresh_is_explicit_and_unchanged_repeat_deduplicates) ... ok
+test_first_preparation_specializes_manual_template_copy (test_curator_setup.CuratorSetupTests.test_first_preparation_specializes_manual_template_copy) ... ok
+test_two_domains_neutral_complete_and_isolated (test_curator_setup.CuratorSetupTests.test_two_domains_neutral_complete_and_isolated) ... ok
+test_customized_partial_and_unowned_packages_preserve_exact_bytes (test_curator_adoption.CuratorAdoptionTests.test_customized_partial_and_unowned_packages_preserve_exact_bytes) ... ERROR
+test_selected_adoption_preserves_base_preferences_and_completed_rerun (test_curator_adoption.CuratorAdoptionTests.test_selected_adoption_preserves_base_preferences_and_completed_rerun) ... ERROR
+test_v1_through_v9_preserve_original_receipts_and_role_prerequisites (test_curator_adoption.CuratorAdoptionTests.test_v1_through_v9_preserve_original_receipts_and_role_prerequisites) ... 
+  test_v1_through_v9_preserve_original_receipts_and_role_prerequisites (test_curator_adoption.CuratorAdoptionTests.test_v1_through_v9_preserve_original_receipts_and_role_prerequisites) (edition=1) ... FAIL
+  test_v1_through_v9_preserve_original_receipts_and_role_prerequisites (test_curator_adoption.CuratorAdoptionTests.test_v1_through_v9_preserve_original_receipts_and_role_prerequisites) (edition=2) ... FAIL
+  test_v1_through_v9_preserve_original_receipts_and_role_prerequisites (test_curator_adoption.CuratorAdoptionTests.test_v1_through_v9_preserve_original_receipts_and_role_prerequisites) (edition=8) ... ERROR
+  test_v1_through_v9_preserve_original_receipts_and_role_prerequisites (test_curator_adoption.CuratorAdoptionTests.test_v1_through_v9_preserve_original_receipts_and_role_prerequisites) (edition=9) ... ERROR
+test_partial_exact_retry_changed_sources_and_later_edits (test_curator_recovery.CuratorRecoveryTests.test_partial_exact_retry_changed_sources_and_later_edits) ... ERROR
+test_current_install_enables_session_and_preserves_opt_out (test_curator_session_setup.CuratorSessionSetupTests.test_current_install_enables_session_and_preserves_opt_out) ... FAIL
+test_first_preparation_neutral_copy_is_enabled (test_curator_session_setup.CuratorSessionSetupTests.test_first_preparation_neutral_copy_is_enabled) ... ok
+test_v10_receipt_does_not_acquire_session_on_recovery_or_rerun (test_curator_session_setup.CuratorSessionSetupTests.test_v10_receipt_does_not_acquire_session_on_recovery_or_rerun) ... ok
+
+======================================================================
+ERROR: test_customized_partial_and_unowned_packages_preserve_exact_bytes (test_curator_adoption.CuratorAdoptionTests.test_customized_partial_and_unowned_packages_preserve_exact_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-preservation-mkweiehl/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2543, in run_module_adoption
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-preservation-mkweiehl/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 199, in _integration
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-preservation-mkweiehl/Sys4AI/SKILLS-depo/init-new-project/scripts/init_curator_integration.py", line 115, in complete
+curator_current_initializer_5847055162845358680.InitializationError: curator-integration-owner-grant-required: review saved curator_integration.preview and repeat the same setup with exact current --integration-grant-file
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_curator_adoption.py", line 101, in test_customized_partial_and_unowned_packages_preserve_exact_bytes
+    adopted=helper.run_initialization(**args);operation=adopted['module_adoptions'][-1]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-preservation-mkweiehl/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2854, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-preservation-mkweiehl/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2614, in run_initialization
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-preservation-mkweiehl/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2854, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-preservation-mkweiehl/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2566, in run_module_adoption
+curator_current_initializer_5847055162845358680.InitializationError: selected module adoption is incomplete; working state was retained
+
+======================================================================
+ERROR: test_selected_adoption_preserves_base_preferences_and_completed_rerun (test_curator_adoption.CuratorAdoptionTests.test_selected_adoption_preserves_base_preferences_and_completed_rerun)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-adoption-6tjckrhv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2543, in run_module_adoption
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-adoption-6tjckrhv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 199, in _integration
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-adoption-6tjckrhv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_curator_integration.py", line 115, in complete
+curator_current_initializer_3924047792125016848.InitializationError: curator-integration-owner-grant-required: review saved curator_integration.preview and repeat the same setup with exact current --integration-grant-file
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_curator_adoption.py", line 137, in test_selected_adoption_preserves_base_preferences_and_completed_rerun
+    adopted=helper.run_initialization(**args,adopt_module='curator')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-adoption-6tjckrhv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2854, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-adoption-6tjckrhv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2614, in run_initialization
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-adoption-6tjckrhv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2854, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-adoption-6tjckrhv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2566, in run_module_adoption
+curator_current_initializer_3924047792125016848.InitializationError: selected module adoption is incomplete; working state was retained
+
+======================================================================
+ERROR: test_v1_through_v9_preserve_original_receipts_and_role_prerequisites (test_curator_adoption.CuratorAdoptionTests.test_v1_through_v9_preserve_original_receipts_and_role_prerequisites) (edition=8)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-8-d1dftw60/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2543, in run_module_adoption
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-8-d1dftw60/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 199, in _integration
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-8-d1dftw60/Sys4AI/SKILLS-depo/init-new-project/scripts/init_curator_integration.py", line 153, in complete
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-8-d1dftw60/Sys4AI/SKILLS-depo/init-new-project/scripts/init_curator_integration.py", line 120, in _complete
+curator_current_initializer_7277300057009212246.InitializationError: curator-integration-owner-grant-required: review saved curator_integration.preview and repeat the same setup with exact current --integration-grant-file
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_curator_adoption.py", line 123, in test_v1_through_v9_preserve_original_receipts_and_role_prerequisites
+    else:
+          
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-8-d1dftw60/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2856, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-8-d1dftw60/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2616, in run_initialization
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-8-d1dftw60/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2856, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-8-d1dftw60/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2566, in run_module_adoption
+curator_current_initializer_7277300057009212246.InitializationError: selected module adoption is incomplete; working state was retained
+
+======================================================================
+ERROR: test_v1_through_v9_preserve_original_receipts_and_role_prerequisites (test_curator_adoption.CuratorAdoptionTests.test_v1_through_v9_preserve_original_receipts_and_role_prerequisites) (edition=9)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-9-1wg_hgz5/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2543, in run_module_adoption
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-9-1wg_hgz5/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 199, in _integration
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-9-1wg_hgz5/Sys4AI/SKILLS-depo/init-new-project/scripts/init_curator_integration.py", line 153, in complete
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-9-1wg_hgz5/Sys4AI/SKILLS-depo/init-new-project/scripts/init_curator_integration.py", line 120, in _complete
+curator_current_initializer_3241127793916511679.InitializationError: curator-integration-owner-grant-required: review saved curator_integration.preview and repeat the same setup with exact current --integration-grant-file
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_curator_adoption.py", line 123, in test_v1_through_v9_preserve_original_receipts_and_role_prerequisites
+    else:
+          
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-9-1wg_hgz5/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2856, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-9-1wg_hgz5/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2616, in run_initialization
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-9-1wg_hgz5/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2856, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-edition-9-1wg_hgz5/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2566, in run_module_adoption
+curator_current_initializer_3241127793916511679.InitializationError: selected module adoption is incomplete; working state was retained
+
+======================================================================
+ERROR: test_partial_exact_retry_changed_sources_and_later_edits (test_curator_recovery.CuratorRecoveryTests.test_partial_exact_retry_changed_sources_and_later_edits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-recovery-yo39oime/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2543, in run_module_adoption
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-recovery-yo39oime/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 199, in _integration
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-recovery-yo39oime/Sys4AI/SKILLS-depo/init-new-project/scripts/init_curator_integration.py", line 153, in complete
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-recovery-yo39oime/Sys4AI/SKILLS-depo/init-new-project/scripts/init_curator_integration.py", line 120, in _complete
+curator_current_initializer_2120958447739615513.InitializationError: curator-integration-owner-grant-required: review saved curator_integration.preview and repeat the same setup with exact current --integration-grant-file
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_curator_recovery.py", line 38, in test_partial_exact_retry_changed_sources_and_later_edits
+    source.write_bytes(source_before);updater.update(root,'apply')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-recovery-yo39oime/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2856, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-recovery-yo39oime/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2616, in run_initialization
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-recovery-yo39oime/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2856, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/integrated-curator-ontology/implementation/fixtures/curator-recovery-yo39oime/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2566, in run_module_adoption
+curator_current_initializer_2120958447739615513.InitializationError: selected module adoption is incomplete; working state was retained
+
+======================================================================
+FAIL: test_v1_through_v9_preserve_original_receipts_and_role_prerequisites (test_curator_adoption.CuratorAdoptionTests.test_v1_through_v9_preserve_original_receipts_and_role_prerequisites) (edition=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_curator_adoption.py", line 120, in test_v1_through_v9_preserve_original_receipts_and_role_prerequisites
+    self.assertEqual(snapshot(),before)
+AssertionError: {'pro[236 chars]n', 'ontology.yaml': b'{\n  "binding_files": [[4543293 chars]}\n'} != {'pro[236 chars]n', 'README.md': b"# Legacy\n\nPrior edition s[3006033 chars]}\n'}
+Diff is 35980340 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_v1_through_v9_preserve_original_receipts_and_role_prerequisites (test_curator_adoption.CuratorAdoptionTests.test_v1_through_v9_preserve_original_receipts_and_role_prerequisites) (edition=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_curator_adoption.py", line 120, in test_v1_through_v9_preserve_original_receipts_and_role_prerequisites
+    with self.assertRaises(h.InitializationError):h.run_initialization(**args,adopt_module='curator',integration_grant_file=grant_for)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'pro[236 chars]n', 'ontology.yaml': b'{\n  "binding_files": [[4562196 chars]}\n'} != {'pro[236 chars]n', 'README.md': b"# Legacy\n\nPrior edition s[3023043 chars].\n'}
+Diff is 36159660 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_current_install_enables_session_and_preserves_opt_out (test_curator_session_setup.CuratorSessionSetupTests.test_current_install_enables_session_and_preserves_opt_out)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_curator_session_setup.py", line 18, in test_current_install_enables_session_and_preserves_opt_out
+    result=h.run_initialization(**args)
+AssertionError: 'governance-starter-v12' != 'governance-starter-v11'
+- governance-starter-v12
+?                      ^
++ governance-starter-v11
+?                      ^
+
+
+----------------------------------------------------------------------
+Ran 15 tests in 487.784s
+
+FAILED (failures=3, errors=5)

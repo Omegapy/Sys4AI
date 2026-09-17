@@ -6,12 +6,49 @@ Receipts are evidence supplied by the coordinator, not OS authentication.
 from __future__ import annotations
 
 import copy
+from contextvars import ContextVar
+from functools import wraps
 import hashlib
 import importlib.util
 import json
 from pathlib import Path
 import re
 import sys
+
+
+# Share one protected live-context module across independently loaded owners.
+_native_path = Path(__file__).with_name('native_observations.py').resolve()
+_native_name = 'sys4ai_native_observations_v1_' + hashlib.sha256(str(_native_path).encode()).hexdigest()
+if _native_name in sys.modules:
+    native = sys.modules[_native_name]
+    if Path(native.__file__).resolve() != _native_path:
+        raise ImportError('Native observation helper belongs to another installation.')
+else:
+    _native_spec = importlib.util.spec_from_file_location(_native_name, _native_path)
+    native = importlib.util.module_from_spec(_native_spec)
+    sys.modules[_native_name] = native
+    _native_spec.loader.exec_module(native)
+_native_version = ContextVar('orchestration_native_version', default=1)
+_native_session = ContextVar('orchestration_native_session', default=None)
+_native_origin = ContextVar('orchestration_controller_origin', default=None)
+_native_protocol = ContextVar('orchestration_native_protocol', default=None)
+
+
+def versioned(function):
+    @wraps(function)
+    def wrapped(value, *args, **kwargs):
+        o = value.get('orchestration', value)
+        token = _native_version.set(o.get('version', 1))
+        selected_protocol = _native_protocol.set(o.get('native_protocol'))
+        session = _native_session.set(native.protocol_key(o.get('native_protocol')))
+        origin = _native_origin.set(o.get('controller_origin'))
+        try:
+            return function(value, *args, **kwargs)
+        except native.NativeError as exc:
+            raise OrchestrationError('ORCH_NATIVE_PROTOCOL', str(exc)) from exc
+        finally:
+            _native_version.reset(token); _native_session.reset(session); _native_origin.reset(origin); _native_protocol.reset(selected_protocol)
+    return wrapped
 
 
 class OrchestrationError(ValueError):
@@ -95,12 +132,63 @@ def evidence_list(values, root=None, nonempty=False):
         evidence(value, root)
 
 
-def native_id(value):
+def native_id(value, version=None):
+    if (version or _native_version.get()) == 2:
+        native.identity(value)
+        return
     text(value)
     need(re.fullmatch(r'/(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+', value) and len(value) < 300, 'ORCH_NATIVE_ID', 'Expected an actual canonical native agent ID, not a role or logical ID.')
 
 
-def receipt(value, *, launch=False, subject=None):
+def fork_protocol():
+    return _native_version.get() == 2 and (_native_protocol.get() or {}).get('schema_version') == 2
+
+
+def typed_receipt(value, kind, *, subject=None, assignment_id=None):
+    need(fork_protocol(), 'ORCH_NATIVE_PROTOCOL', 'Typed receipts require the explicit fork protocol.')
+    native.validate_observation_v2(value, expected_kind=kind, subject=subject,
+                                   broker_run_id=_native_session.get())
+    if assignment_id is not None:
+        need(value['reservation_id'] == assignment_id, 'ORCH_NATIVE_RESERVATION', 'Receipt belongs to another assignment reservation.')
+    return value['facts']
+
+
+def input_receipt(a, value, context):
+    if fork_protocol():
+        facts = typed_receipt(value, 'input_delivery', subject=a['native_id'], assignment_id=a['assignment_id'])
+        need(set(facts['artifact_sha256s']) == {r['sha256'] for r in context},
+             'ORCH_INPUT_RECEIPT', 'Actual input delivery differs from the exact rebound packet.')
+        return
+    keys(value, ('tool', 'native_id', 'artifact_sha256s', 'evidence'))
+    need(value['tool'] in (('codex.turn/steer', 'codex.turn/start') if _native_version.get() == 2 else
+                          ('collaboration.send_message', 'collaboration.followup_task'))
+         and value['native_id'] == a['native_id'], 'ORCH_INPUT_RECEIPT', 'Input handoff must target the same actual native instance.')
+    strings(value['artifact_sha256s']); text(value['evidence'])
+    need(set(value['artifact_sha256s']) == {r['sha256'] for r in context},
+         'ORCH_INPUT_RECEIPT', 'Input handoff must identify the exact packet digests.')
+
+
+def conflict_receipt(o, conflict, slot, value, explanation_sha256, *, current=False):
+    origins=[]
+    for candidate_id in conflict['candidate_ids']:
+        need(candidate_id in o['candidates'], 'ORCH_CONFLICT_DELIVERY', 'Missing originating candidate.')
+        aid=o['candidates'][candidate_id]['assignment_id']
+        need(aid in o['assignments'], 'ORCH_CONFLICT_DELIVERY', 'Missing originating assignment.')
+        a=o['assignments'][aid]
+        if a['slot']==slot and a not in origins:origins.append(a)
+    need(len(origins)==1 and (not current or origins[0]['state']!='revoked'), 'ORCH_CONFLICT_DELIVERY', 'Conflict must return to the exact originating solver.')
+    origin=origins[0]
+    facts=typed_receipt(value, 'conflict_delivery', subject=origin['native_id'], assignment_id=origin['assignment_id'])
+    need(facts['origin_assignment_id']==origin['assignment_id'] and facts['explanation_sha256']==explanation_sha256,
+         'ORCH_CONFLICT_DELIVERY', 'Actual conflict delivery differs from the originating assignment or common explanation.')
+
+
+def receipt(value, *, launch=False, subject=None, parent=None, version=None, session=None, native_protocol=None):
+    if (version or _native_version.get()) == 2:
+        selected = native_protocol if native_protocol is not None else _native_protocol.get()
+        return native.observation(value, launch=launch, subject=subject, parent=parent,
+                                  session=session or _native_session.get(),
+                                  protocol_version=(selected or {}).get('schema_version',1))
     keys(value, ('tool', 'result'))
     if launch:
         need(value['tool'] == 'collaboration.spawn_agent', 'ORCH_NATIVE_RECEIPT', 'Launch identity requires a native spawn receipt.')
@@ -135,7 +223,9 @@ def settings(value, root=None):
 def runtime(value, root=None):
     keys(value, ('tools', 'depth', 'available_slots', 'evidence'))
     strings(value['tools'], True); integer(value['depth'], 1); integer(value['available_slots'])
-    need({'spawn_agent', 'list_agents', 'send_message', 'followup_task', 'interrupt_agent'} <= set(value['tools']), 'ORCH_CAPABILITY', 'Native controls are unavailable.')
+    required=({'thread/fork','thread/read','turn/start','turn/steer','turn/interrupt','thread/resume','owned-runtime-release'} if fork_protocol()
+              else {'spawn_agent', 'list_agents', 'send_message', 'followup_task', 'interrupt_agent'})
+    need(required <= set(value['tools']), 'ORCH_CAPABILITY', 'Selected native controls are unavailable.')
     evidence_list(value['evidence'], root, nonempty=True)
 
 
@@ -191,20 +281,29 @@ ACCEPT_FIELDS = ('acceptance_id synthesis_id inspection').split()
 RESULT_FIELDS = ('result_id assignment_id acceptance_id baseline round artifact_ids changes checks limitations').split()
 
 
-def empty():
+def empty(version=1, controller_origin=None, native_protocol=None):
     o = {k: {} for k in COLLECTIONS}
     o.update(version=1, execution_id=None, generation=0, stage='unassigned', bootstrap=None, manager_id=None, writer=None, settings=None, context=[], source_refs=[], authority=None, task_digest=None, verifications=[], blockers=[], events=[], history=[])
+    if version == 2:
+        native.controller(controller_origin); native.protocol(native_protocol)
+        o.update(version=2, controller_origin=copy.deepcopy(controller_origin), native_protocol=copy.deepcopy(native_protocol))
+    else:
+        need(type(version) is int and version == 1 and controller_origin is None and native_protocol is None, 'ORCH_VERSION', 'Unsupported orchestration selection.')
     return o
 
 
+@versioned
 def validate(o):
-    keys(o, FIELDS); need(type(o['version']) is int and o['version'] == 1, 'ORCH_VERSION', 'Unsupported orchestration version.')
+    version = o.get('version'); extra = ('controller_origin', 'native_protocol') if version == 2 else ()
+    keys(o, (*FIELDS, *extra)); need(type(version) is int and version in (1, 2), 'ORCH_VERSION', 'Unsupported orchestration version.')
+    if version == 2:
+        native.controller(o['controller_origin']); native.protocol(o['native_protocol'])
     integer(o['generation'])
     need(o['stage'] in ('unassigned', 'reserved', 'receipt_recorded', 'active', 'stopping', 'stopped', 'blocked', 'finished'), 'ORCH_STAGE', 'Invalid execution stage.')
     if o['execution_id'] is not None:
         ident(o['execution_id']); digest(o['task_digest']); native_id(o['bootstrap']); native_id(o['writer']); settings(o['settings'])
     else:
-        need(o == empty(), 'ORCH_UNASSIGNED', 'Unassigned orchestration cannot invent execution state.')
+        need(o == empty(version, o.get('controller_origin'), o.get('native_protocol')), 'ORCH_UNASSIGNED', 'Unassigned orchestration cannot invent execution state.')
     for k in COLLECTIONS:
         need(isinstance(o[k], dict), 'ORCH_COLLECTION', 'Expected record map.')
         for record_id in o[k]: ident(record_id)
@@ -213,10 +312,16 @@ def validate(o):
         keys(a, ASSIGN_FIELDS); ident(a['assignment_id']); role(a['role']); fit(a['fit']); runtime(a['runtime']); settings(a['settings']); evidence_list(a['context'])
         need(a['state'] in ('reserved', 'launch_uncertain', 'active', 'stop_requested', 'stopped', 'completed', 'failed', 'revoked'), 'ORCH_ASSIGNMENT_STATE', 'Invalid assignment state.')
         integer(a['generation'], 1); digest(a['baseline']); integer(a['round'])
+        if version == 2 and a['role_reads'] is not None: role_reads(a, a['role_reads'])
+        if fork_protocol() and a['input_receipt'] is not None: input_receipt(a, a['input_receipt'], a['context'])
         if a['native_id'] is not None: native_id(a['native_id']); need(receipt(a['native_receipt'], launch=True) == a['native_id'], 'ORCH_NATIVE_RECEIPT', 'Native ID disagrees with stored launch receipt.')
         need(isinstance(a['observations'], list), 'ORCH_OBSERVATION', 'Invalid observations.')
         for obs in a['observations']:
-            keys(obs, ('receipt', 'changes')); receipt(obs['receipt'], subject=a['native_id']); evidence_list(obs['changes'])
+            keys(obs, ('receipt', 'changes'))
+            if fork_protocol():native.validate_observation_v2(obs['receipt'],subject=a['native_id'],broker_run_id=_native_session.get())
+            else:receipt(obs['receipt'], subject=a['native_id'])
+            evidence_list(obs['changes'])
+        if fork_protocol() and a['native_id'] is not None:native.loaded_actor(a)
     for s in o['subtasks'].values():
         keys(s, ('baseline', 'digest', 'task_digest', 'round', 'versions', 'verified', 'dependency_versions', 'active_conflicts'))
         baseline(s['baseline']); digest(s['digest']); digest(s['task_digest']); integer(s['round'], 1)
@@ -237,6 +342,10 @@ def validate(o):
             validate_event_data(event_kind, v)
     for v in o['conflicts'].values():
         keys(v, ('conflict_id', 'assignment_id', 'candidate_ids', 'baseline', 'round', 'explanation', 'deliveries', 'progress'))
+        if fork_protocol():
+            need(type(v['deliveries']) is dict and v['explanation'] in o['artifacts'], 'ORCH_CONFLICT_DELIVERY', 'Missing typed conflict delivery map or explanation.')
+            for slot, delivered in v['deliveries'].items():
+                conflict_receipt(o, v, slot, delivered, o['artifacts'][v['explanation']]['sha256'])
     need(isinstance(o['events'], list) and isinstance(o['history'], list) and isinstance(o['verifications'], list), 'ORCH_HISTORY', 'Invalid event/history array.')
     seen = set()
     for event in o['events']:
@@ -247,7 +356,7 @@ def validate(o):
         original = {k: event[k] for k in ('event_id', 'actor', 'execution_id', 'generation', 'kind', 'data')}
         need(hash_json(original) == event['sha256'], 'ORCH_EVENT_HASH', 'Stored event payload digest differs.')
     for old in o['history']:
-        keys(old, set(FIELDS) - {'history', 'events'}); validate({**old, 'events': [], 'history': []})
+        keys(old, (set(FIELDS) | ({'controller_origin', 'native_protocol'} if old.get('version') == 2 else set())) - {'history', 'events'}); validate({**old, 'events': [], 'history': []})
     if o['manager_id']:
         need(o['manager_id'] in o['assignments'], 'ORCH_REFERENCE', 'Missing manager assignment.')
     for key, a in o['assignments'].items():
@@ -334,12 +443,31 @@ def dependency_cycle(o, sid, seen):
 
 
 def unresolved(o, *, manager=True):
-    return [a for a in o['assignments'].values() if (manager or a['function'] != 'manager') and a['state'] in ('reserved', 'launch_uncertain', 'active', 'stop_requested')]
+    fork=o.get('version')==2 and o.get('native_protocol',{}).get('schema_version')==2
+    return [a for a in o['assignments'].values() if (manager or a['function'] != 'manager') and
+            (a['state'] in ('reserved', 'launch_uncertain', 'active', 'stop_requested') or
+             (fork and a['native_id'] is not None and not native.loaded_actor(a)['released']))]
 
 
+def writer_incarnation(o,actor):
+    if not fork_protocol():return
+    assigned=[a for a in o['assignments'].values() if a['native_id']==actor]
+    if not assigned:return  # The original bootstrap is separately bound by its live controller context.
+    need(len(assigned)==1,'ORCH_NATIVE_DISTINCT','Writer maps to multiple assignments.')
+    lease=native.loaded_actor(assigned[0]);current=native._current.get()
+    need(current is not None and not lease['released'] and lease['actor']==current.actor,
+         'ORCH_LOAD_EPOCH','Canonical writer incarnation is not current; explicit native reconnect is required.')
+
+
+@versioned
 def auth(task, payload, *, recovery=False, allow_unassigned=False):
     if task.get('schema_version') != 2: return
     o = task['orchestration']; validate(o)
+    if o['version'] == 2:
+        current = native._current.get()
+        need(current is not None, 'ORCH_CALLER', 'Curator mutation requires a protected live broker context.')
+        native.require_current(o['native_protocol'], payload.get('actor'), current.binding())
+        writer_incarnation(o,payload.get('actor'))
     for k in ('actor', 'execution_id', 'generation'): need(k in payload, 'ORCH_ACTOR_REQUIRED', 'Schema-2 writes require actor, execution_id and generation.')
     need(payload['execution_id'] == o['execution_id'] and payload['generation'] == o['generation'], 'ORCH_STALE_GENERATION', 'Execution/generation is stale.')
     if o['execution_id'] is None and allow_unassigned:
@@ -353,8 +481,13 @@ def auth(task, payload, *, recovery=False, allow_unassigned=False):
     need(payload['actor'] in allowed and payload['actor'] is not None, 'ORCH_WRITER', 'Only the designated current writer can mutate canonical state.')
 
 
+@versioned
 def lifecycle(task, payload, command, target, root=None, folder=None):
     if task.get('schema_version') != 2: return
+    if task['orchestration']['version'] == 2:
+        current = native._current.get()
+        need(current is not None, 'ORCH_CALLER', 'Curator lifecycle requires a live broker context.')
+        native.require_current(task['orchestration']['native_protocol'], payload.get('actor'), current.binding())
     if command == 'reopen':
         o = copy.deepcopy(task['orchestration'])
         need(payload.get('actor') == o['bootstrap'] and payload.get('execution_id') == o['execution_id'] and payload.get('generation') == o['generation'] and payload.get('user_authorized') is True, 'ORCH_RECOVERY_OWNER', 'Explicit reopening requires the original bootstrap and current execution binding.')
@@ -412,6 +545,7 @@ def producer(o, aid, function=None):
     need(aid in o['assignments'], 'ORCH_ASSIGNMENT', 'Unknown producer assignment.')
     a = o['assignments'][aid]
     need(a['generation'] == o['generation'] and a['state'] in ('active', 'completed') and a['native_id'] and a['role_reads'], 'ORCH_PRODUCER', 'Producer lacks current native/role-read provenance or ownership.')
+    if fork_protocol():role_reads(a,a['role_reads'],current_input=True)
     if a['subtask_id'] is not None:
         st = o['subtasks'][a['subtask_id']]
         matching = [x for x in st['baseline']['slots'] if x['slot'] == a['slot'] and x['function'] == a['function']]
@@ -488,7 +622,11 @@ EVENT_KEYS = {
 
 def validate_event_data(kind, data):
     need(kind in EVENT_KEYS, 'ORCH_EVENT_KIND', 'Unknown typed event kind.')
-    keys(data, EVENT_KEYS[kind])
+    extra=()
+    if fork_protocol():
+        if kind=='assignment.resume':extra=('receipt',)
+        elif kind=='manager.reconnect':extra=('release_receipt','role_reads')
+    keys(data, (*EVENT_KEYS[kind],*extra))
     for field, value in data.items():
         if field.endswith('_id') or field in ('slot', 'solver_slot', 'artifact_id') or (field == 'findings' and kind == 'review.record'):
             if value is not None: ident(value)
@@ -552,16 +690,35 @@ def reserve(o, data, task, root, folder, *, manager=False, external_owners=(), r
     if not manager: require_input_packet(o, o['assignments'][aid], task, root, folder)
 
 
-def role_reads(a, value):
-    keys(value, ('agents_sha256', 'role_sha256', 'evidence'))
+def role_reads(a, value, *, current_input=False):
+    if fork_protocol():
+        facts = typed_receipt(value, 'role_acknowledgement', subject=a['native_id'], assignment_id=a['assignment_id'])
+        if current_input and a.get('native_receipt') is not None:
+            need(value['actor']==native.loaded_actor(a)['actor'],'ORCH_ROLE_READS','Role acknowledgement belongs to an earlier incarnation.')
+        expected = {a['role']['agents_path']: a['role']['agents_sha256'],
+                         a['role']['role_path']: a['role']['role_sha256'],
+                         _native_origin.get()['charter']['path']: _native_origin.get()['charter']['sha256']}
+        if current_input: expected.update({r['path']: r['sha256'] for r in a['context']})
+        need(all(facts['reads'].get(path) == value for path, value in expected.items()),
+             'ORCH_ROLE_READS', 'Authenticated role/charter/input acknowledgement differs from the exact assigned packet.')
+        return
+    keys(value, ('agents_sha256', 'role_sha256', 'evidence', *(('charter_sha256',) if _native_version.get() == 2 else ())))
+    if _native_version.get() == 2:
+        need(value['charter_sha256'] == _native_origin.get()['charter']['sha256'], 'ORCH_CHARTER_READS', 'Selected charter read is required.')
     need(value['agents_sha256'] == a['role']['agents_sha256'] and value['role_sha256'] == a['role']['role_sha256'], 'ORCH_ROLE_READS', 'Worker did not confirm the selected exact role pair.')
     text(value['evidence'])
 
 
+@versioned
 def apply(task, event, root, folder, other_tasks=()):
     keys(event, ('event_id', 'actor', 'execution_id', 'generation', 'kind', 'data'))
     ident(event['event_id']); native_id(event['actor']); integer(event['generation'])
     kind = event['kind']; data = copy.deepcopy(event['data']); validate_event_data(kind, data)
+    if task['orchestration']['version'] == 2:
+        current = native._current.get()
+        need(current is not None, 'ORCH_CALLER', 'Curator event requires a protected live broker context.')
+        native.require_current(task['orchestration']['native_protocol'], event['actor'], current.binding())
+        if kind not in ('manager.reconnect','manager.replace'):writer_incarnation(task['orchestration'],event['actor'])
     # The owning Task transaction carries the exact semantic decision. This
     # pure state transform does not create a second writer or acquire a lock.
     import sys
@@ -573,6 +730,9 @@ def apply(task, event, root, folder, other_tasks=()):
     need(not any(e['event_id'] == event['event_id'] for e in o['events']), 'ORCH_DUPLICATE_EVENT', 'Event was already accepted; inspect state, do not replay.')
     starting = kind == 'manager.reserve' and o['stage'] in ('unassigned', 'finished')
     recovering = kind == 'manager.replace'
+    if o['version'] == 2:
+        evidence(o['controller_origin']['charter'], root); evidence(o['controller_origin']['policy'], root)
+        need(o['controller_origin']['coordination_root'] == str(root.resolve()), 'ORCH_PROJECT_ROOT', 'Curator coordination root differs.')
     if starting:
         need(event['execution_id'] is not None, 'ORCH_EXECUTION_ID', 'Supply a new stable execution ID for reservation.'); ident(event['execution_id'])
         need(event['generation'] == 1 and event['execution_id'] != o['execution_id'] and not any(h['execution_id'] == event['execution_id'] for h in o['history']), 'ORCH_EXECUTION_ID', 'New execution needs unique identity and generation 1.')
@@ -580,7 +740,7 @@ def apply(task, event, root, folder, other_tasks=()):
         history = o['history']; events = o['events']
         if o['execution_id']:
             history.append({k: v for k, v in o.items() if k not in ('history', 'events')})
-        o = empty(); o.update(execution_id=event['execution_id'], generation=1, bootstrap=event['actor'], writer=event['actor'], stage='reserved', task_digest=task_digest(task), history=history, events=events)
+        o = empty(o['version'], o.get('controller_origin'), o.get('native_protocol')); o.update(execution_id=event['execution_id'], generation=1, bootstrap=event['actor'], writer=event['actor'], stage='reserved', task_digest=task_digest(task), history=history, events=events)
         need(receipt(data['bootstrap_receipt'], subject=event['actor']) == 'running', 'ORCH_BOOTSTRAP_RECEIPT', 'Bootstrap must be observed running in the native roster.')
         settings(data['settings'], root); evidence_list(data['context'], root, True); evidence_list(data['source_refs'], root, True); text(data['authority'])
         o.update(settings=data['settings'], context=data['context'], source_refs=data['source_refs'], authority=data['authority'])
@@ -598,21 +758,33 @@ def apply(task, event, root, folder, other_tasks=()):
         if kind in ('manager.receipt', 'assignment.receipt'):
             aid = data['assignment_id']; need(aid in o['assignments'], 'ORCH_ASSIGNMENT', 'Unknown reservation.'); a = o['assignments'][aid]
             need(a['state'] in ('reserved', 'launch_uncertain') and a['native_id'] is None, 'ORCH_DUPLICATE_RECEIPT', 'The original reservation already has a receipt.')
-            nid = receipt(data['receipt'], launch=True)
             parent = o['bootstrap'] if a['function'] == 'manager' else o['writer']
-            need(nid != parent and nid.startswith(parent.rstrip('/') + '/') and not any(x['native_id'] == nid for x in [*o['assignments'].values(), *external_owners]), 'ORCH_NATIVE_DISTINCT', 'Native instance must be a new distinct child of the designated coordinator.')
+            if fork_protocol():typed_receipt(data['receipt'],'creation',assignment_id=aid)
+            nid = receipt(data['receipt'], launch=True, parent=parent)
+            need(nid != parent and (o['version'] == 2 or nid.startswith(parent.rstrip('/') + '/')) and not any(x['native_id'] == nid for x in [*o['assignments'].values(), *external_owners]), 'ORCH_NATIVE_DISTINCT', 'Native instance must be a new distinct child of the designated coordinator.')
             a.update(native_id=nid, native_receipt=data['receipt'], state='active')
             if a['function'] == 'manager': o['stage'] = 'receipt_recorded'
         elif kind in ('assignment.reads', 'manager.activate'):
             aid = data['assignment_id']; need(aid in o['assignments'], 'ORCH_ASSIGNMENT', 'Unknown assignment.'); a = o['assignments'][aid]
-            need(a['native_id'] and a['state'] == 'active', 'ORCH_RECEIPT_REQUIRED', 'A confirmed native receipt is required first.'); role_reads(a, data['role_reads']); a['role_reads'] = data['role_reads']
+            need(a['native_id'] and a['state'] == 'active', 'ORCH_RECEIPT_REQUIRED', 'A confirmed native receipt is required first.'); role_reads(a, data['role_reads'], current_input=True); a['role_reads'] = data['role_reads']
             if kind == 'manager.activate':
                 need(aid == o['manager_id'] and o['stage'] == 'receipt_recorded', 'ORCH_HANDOFF', 'Invalid manager activation.'); o.update(writer=a['native_id'], stage='active')
         elif kind == 'manager.reconnect':
             need(data['assignment_id'] == o['manager_id'], 'ORCH_MANAGER', 'Reconnect only the designated manager.')
             manager = o['assignments'][o['manager_id']]
             need(o['stage'] == 'active' and manager['native_id'] is not None and o['writer'] == manager['native_id'] and manager['role_reads'], 'ORCH_MANAGER_NOT_LIVE', 'Reconnection requires an activated confirmed manager, not a running bootstrap host.')
-            need(receipt(data['receipt'], subject=manager['native_id']) == 'running', 'ORCH_MANAGER_NOT_LIVE', 'Reconnect requires current native live evidence.')
+            if fork_protocol() and data['receipt'].get('kind')=='resume':
+                if data['release_receipt'] is not None:
+                    facts=typed_receipt(data['release_receipt'],'runtime_release',subject=manager['native_id'],assignment_id=manager['assignment_id'])
+                    need(facts['lease_released'],'ORCH_RESUME','Old manager incarnation is not confirmed released.')
+                    manager['observations'].append({'receipt':data['release_receipt'],'changes':[]})
+                typed_receipt(data['receipt'],'resume',subject=manager['native_id'],assignment_id=manager['assignment_id'])
+                manager['observations'].append({'receipt':data['receipt'],'changes':[]})
+                native.loaded_actor(manager);role_reads(manager,data['role_reads'],current_input=True);manager.update(role_reads=data['role_reads'],state='active')
+            else:
+                if fork_protocol():need(data['release_receipt'] is None and data['role_reads'] is None,'ORCH_RECONNECT','A status reconnect cannot smuggle release or role changes.')
+                need(receipt(data['receipt'], subject=manager['native_id']) == 'running', 'ORCH_MANAGER_NOT_LIVE', 'Reconnect requires current native live evidence.')
+            writer_incarnation(o,event['actor'])
         elif kind in ('subtask.define', 'subtask.revise'):
             sid = data['subtask_id']; ident(sid); baseline(data['baseline'], root)
             if kind == 'subtask.define': need(sid not in o['subtasks'], 'ORCH_DUPLICATE_SUBTASK', 'Subtask exists.')
@@ -652,10 +824,7 @@ def apply(task, event, root, folder, other_tasks=()):
             need(all(data['role'][key] == previous['role'][key] for key in ('name', 'agents_path', 'role_path', 'agents_sha256', 'role_sha256')), 'ORCH_ROLE_CHANGED', 'A context rebind cannot silently change the loaded role pair.')
             current_slot = [x for x in o['subtasks'][previous['subtask_id']]['baseline']['slots'] if x['slot'] == previous['slot'] and x['function'] == previous['function']]
             need(current_slot, 'ORCH_ASSIGNMENT_BASELINE', 'Incompatible category/function change requires revocation and a suitable replacement.')
-            text(data['reason']); keys(data['receipt'], ('tool', 'native_id', 'artifact_sha256s', 'evidence'))
-            need(data['receipt']['tool'] in ('collaboration.send_message', 'collaboration.followup_task') and data['receipt']['native_id'] == previous['native_id'], 'ORCH_INPUT_RECEIPT', 'Input handoff must target the same actual native instance.')
-            strings(data['receipt']['artifact_sha256s']); text(data['receipt']['evidence'])
-            need(set(data['receipt']['artifact_sha256s']) == {r['sha256'] for r in data['context']}, 'ORCH_INPUT_RECEIPT', 'Input handoff must identify the exact packet digests.')
+            text(data['reason']); input_receipt(previous, data['receipt'], data['context'])
             # Dependencies and historical candidates still resolve through this
             # record while reservation checks run. Exclude only its own lease.
             reserve(o, {'assignment_id':aid, 'subtask_id':previous['subtask_id'], 'slot':previous['slot'], 'role':data['role'], 'fit':data['fit'], 'runtime':data['runtime'], 'settings':previous['settings'], 'context':data['context']}, task, root, folder, external_owners=external_owners, rebinding=True)
@@ -667,6 +836,7 @@ def apply(task, event, root, folder, other_tasks=()):
             need(a['generation'] == o['generation'], 'ORCH_STALE_GENERATION', 'Old generation assignment.')
             need(a['state'] != 'revoked', 'ORCH_REVOKED', 'Revoked ownership cannot be restored by observation or uncertainty; reconcile unexpected native activity as a blocker.')
             if kind == 'assignment.observe':
+                if fork_protocol():need(data['receipt']['kind'] in ('status','interrupt','runtime_release'),'ORCH_NATIVE_PROTOCOL','Wrong observation family.')
                 observed = receipt(data['receipt'], subject=a['native_id']); evidence_list(data['changes'], root)
                 need(observed is not None, 'ORCH_NATIVE_UNCONFIRMED', 'Absence from a roster does not prove stopping.')
                 need(observed not in ('running', 'idle') or a['state'] not in ('completed', 'stopped', 'failed'), 'ORCH_RESUME_REQUIRED', 'Returning activity requires explicit assignment.resume with current capacity and scope checks.')
@@ -676,9 +846,16 @@ def apply(task, event, root, folder, other_tasks=()):
             elif kind == 'assignment.uncertain':
                 text(data['reason']); a['state'] = 'launch_uncertain'
             elif kind == 'assignment.revoke':
-                text(data['reason']); need(a['state'] in ('stopped', 'completed', 'failed') and a['observations'], 'ORCH_REVOKE_UNCONFIRMED', 'Revoke only an observed stopped/completed assignment.'); a['state'] = 'revoked'
+                text(data['reason']); need(a['state'] in ('stopped', 'completed', 'failed') and a['observations'], 'ORCH_REVOKE_UNCONFIRMED', 'Revoke only an observed stopped/completed assignment.')
+                if fork_protocol():
+                    need(native.loaded_actor(a)['released'], 'ORCH_REVOKE_UNCONFIRMED', 'Revocation requires confirmed local runtime release; a completed turn retains its lease.')
+                a['state'] = 'revoked'
             else:
                 text(data['reason']); runtime(data['runtime'], root); need(data['runtime']['available_slots'] > 0 and a['state'] in ('completed', 'stopped') and a['observations'], 'ORCH_RESUME', 'Reconnection requires observed state and capacity.')
+                if fork_protocol():
+                    need(a['function']!='manager','ORCH_RESUME','A manager incarnation requires the dedicated reconnect event.')
+                    typed_receipt(data['receipt'],'resume',subject=a['native_id'],assignment_id=aid)
+                    a['observations'].append({'receipt':data['receipt'],'changes':[]});native.loaded_actor(a);a['role_reads']=None
                 need(not any(overlap(p, q) for other in [*unresolved(o), *external_owners] if other is not a for p in a['fit']['writes'] for q in other['fit']['writes']), 'ORCH_WRITE_OVERLAP', 'Scope is now owned by another assignment.'); a['state'] = 'active'
         elif kind == 'artifact.register':
             ident(data['artifact_id']); need(data['artifact_id'] not in o['artifacts'], 'ORCH_ARTIFACT_COLLISION', 'Artifact version already exists.'); a = producer(o, data['assignment_id'])
@@ -741,9 +918,13 @@ def apply(task, event, root, folder, other_tasks=()):
         elif kind == 'conflict.deliver':
             need(data['conflict_id'] in o['conflicts'], 'ORCH_CONFLICT', 'Missing conflict.'); c = o['conflicts'][data['conflict_id']]; sid = o['assignments'][c['assignment_id']]['subtask_id']; slots = {o['assignments'][o['candidates'][cid]['assignment_id']]['slot'] for cid in c['candidate_ids']}
             need(data['solver_slot'] in slots and data['solver_slot'] not in c['deliveries'], 'ORCH_CONFLICT_DELIVERY', 'Invalid or repeated conflict recipient.')
-            keys(data['receipt'], ('native_id', 'explanation_sha256', 'evidence')); native_id(data['receipt']['native_id']); text(data['receipt']['evidence'])
-            need(any(a['slot'] == data['solver_slot'] and a['subtask_id'] == sid and a['native_id'] == data['receipt']['native_id'] and a['state'] != 'revoked' for a in o['assignments'].values()), 'ORCH_CONFLICT_DELIVERY', 'Delivery recipient is not the originating current solver.')
-            need(data['receipt']['explanation_sha256'] == evidence_current(o, c['explanation'], folder)['sha256'], 'ORCH_CONFLICT_DELIVERY', 'All solvers must receive identical conflict bytes.'); c['deliveries'][data['solver_slot']] = data['receipt']
+            if fork_protocol():
+                conflict_receipt(o, c, data['solver_slot'], data['receipt'], evidence_current(o, c['explanation'], folder)['sha256'], current=True)
+            else:
+                keys(data['receipt'], ('native_id', 'explanation_sha256', 'evidence')); native_id(data['receipt']['native_id']); text(data['receipt']['evidence'])
+                need(any(a['slot'] == data['solver_slot'] and a['subtask_id'] == sid and a['native_id'] == data['receipt']['native_id'] and a['state'] != 'revoked' for a in o['assignments'].values()), 'ORCH_CONFLICT_DELIVERY', 'Delivery recipient is not the originating current solver.')
+                need(data['receipt']['explanation_sha256'] == evidence_current(o, c['explanation'], folder)['sha256'], 'ORCH_CONFLICT_DELIVERY', 'All solvers must receive identical conflict bytes.')
+            c['deliveries'][data['solver_slot']] = data['receipt']
         elif kind == 'acceptance.record':
             syn = synthesis_current(o, data['synthesis_id'], task, root, folder)
             sid = o['assignments'][syn['assignment_id']]['subtask_id']
@@ -808,7 +989,13 @@ def apply(task, event, root, folder, other_tasks=()):
 
 
 
+@versioned
 def reconcile_observations(o, observations, root):
+    if fork_protocol():
+        current=native._current.get()
+        facts=typed_receipt(observations,'reconciliation',subject=current.thread_id if current is not None else None)
+        evidence_list(facts['owner_state'],root)
+        observations=[{'assignment_id':item['assignment_id'],'receipt':item['observation'],'changes':facts['owner_state']} for item in facts['assignments']]
     need(isinstance(observations, list), 'ORCH_RECOVERY_OWNER', 'Recovery needs exact native observations.')
     observed_ids = set()
     for item in observations:
@@ -816,7 +1003,10 @@ def reconcile_observations(o, observations, root):
         aid = item['assignment_id']; need(aid in o['assignments'] and aid not in observed_ids, 'ORCH_RECOVERY_OWNER', 'Invalid recovery observation mapping.'); observed_ids.add(aid)
         a = o['assignments'][aid]; state = receipt(item['receipt'], subject=a['native_id']); evidence_list(item['changes'], root)
         need(state in ('completed', 'interrupted', 'failed'), 'ORCH_RECOVERY_OWNER', 'Every native owner must be confirmed stopped, completed or failed.')
-        a['observations'].append({'receipt': item['receipt'], 'changes': item['changes']}); a['state'] = {'completed':'completed', 'interrupted':'stopped', 'failed':'failed'}[state]
+        if not fork_protocol() or not any(old['receipt']==item['receipt'] for old in a['observations']):
+            a['observations'].append({'receipt': item['receipt'], 'changes': item['changes']})
+        if fork_protocol():need(native.loaded_actor(a)['released'],'ORCH_RECOVERY_OWNER','Local actor ownership is not confirmed released.')
+        a['state'] = {'completed':'completed', 'interrupted':'stopped', 'failed':'failed'}[state]
 
 
 

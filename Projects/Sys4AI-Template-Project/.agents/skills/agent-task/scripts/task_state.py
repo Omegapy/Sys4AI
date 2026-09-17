@@ -157,8 +157,8 @@ class TaskError(Exception):
 def orchestration_call(fn, *args, **kwargs):
     try:
         return fn(*args, **kwargs)
-    except orch.OrchestrationError as exc:
-        raise TaskError(EXIT_INVALID, exc.code, str(exc)) from exc
+    except (orch.OrchestrationError, orch.native.NativeError) as exc:
+        raise TaskError(EXIT_INVALID, getattr(exc, "code", "ORCH_NATIVE_PROTOCOL"), str(exc)) from exc
 
 
 def state_fields(state):
@@ -478,6 +478,17 @@ def json_text(value: Any) -> str:
     return json.dumps(value, ensure_ascii=False, indent=2) + "\n"
 
 
+def task_json_text(state: dict[str, Any]) -> str:
+    """Preserve small-state bytes; encode larger complete states within the cap."""
+    content = json_text(state)
+    if len(content.encode("utf-8")) <= MAX_JSON_BYTES:
+        return content
+    content = json.dumps(state, ensure_ascii=False, separators=(",", ":")) + "\n"
+    if len(content.encode("utf-8")) > MAX_JSON_BYTES:
+        raise TaskError(EXIT_INVALID, "ORCH_STATE_LIMIT", "Canonical state exceeds its bounded size; preserve history and report a resource blocker.")
+    return content
+
+
 def canonical_state(state: dict[str, Any]) -> dict[str, Any]:
     fields = state_fields(state)
     if set(state) != set(fields):
@@ -540,6 +551,14 @@ def write_staged_text(path: Path, content: str) -> Path:
 
 def atomic_write_json(path: Path, value: dict[str, Any]) -> None:
     atomic_write_text(path, json_text(value))
+
+
+def transaction_intent_text(value: dict[str, Any]) -> str:
+    """Bound durable intent bytes without adding indentation to embedded state."""
+    content = json.dumps(value, ensure_ascii=False, separators=(",", ":")) + "\n"
+    if len(content.encode("utf-8")) > MAX_JSON_BYTES:
+        raise TaskError(EXIT_INVALID, "ORCH_INTENT_LIMIT", "Transaction evidence exceeds bounded intent size.")
+    return content
 
 
 def read_json_file(path: Path, label: str) -> tuple[dict[str, Any], str]:
@@ -961,7 +980,7 @@ def validate_state_shape(state: dict[str, Any], folder: Path, raw_text: str) -> 
                     errors.append(finding("SUPERSEDES_TYPE", "supersedes_response_id must be null or a response ID.", task_id=task_id))
 
     try:
-        canonical_text = json_text(canonical_state(state))
+        canonical_text = task_json_text(canonical_state(state))
         if raw_text != canonical_text:
             errors.append(finding("CANONICAL_JSON_FORMAT", "task.json does not use canonical key order or formatting.", task_id=task_id))
     except (KeyError, TypeError):
@@ -1460,6 +1479,76 @@ def command_list(project_root: Path, tasks_root: Path, statuses: list[str] | Non
     return result
 
 
+# Read-only optional Curator bridge. Only the exact reviewed adapter buffers may
+# execute; customized project Python is reported unavailable and never imported.
+CURATOR_AWARENESS_PINS = {'curator_policy': '6abbb157522ae151e60b3fc82704b6d9eb968c212cca27879dcd093985db568b', 'curator_classification': '00fbfcd59e69e510781e35da03c5207ae8b929956c3b40b7643405a3a0d5c858', 'curator_confinement': '56ccebc71ff1308a808701823317e49465ba1c4f2772d1f486e1a80093b50b42', 'curator_events': '15a74065e77baac8aa67f6f2c5c422d603756eec48a3815adebfd91f59ffa3e2', 'curator_queue': '731914209668fd45a7fa068da97a10eaac039793e7991ec016fd1feecd672aaf', 'curator_workspace': '12beabf09bebb1385eaba4a84034f3c4e1e7f52e147e3d74cb2f0dafd9437362', 'curator_awareness': '7e44001a0f549fb364cf19204d8150a2407a4d193ab3af73eb80fd2fc8eb1178'}
+
+
+def curator_awareness(project_root, affected_paths, *, required=False):
+    import builtins
+    import stat
+    import types
+    clear = {"state": "clear", "notices": [], "model_calls": 0, "task_writes": 0, "new_work": False}
+    config = project_root / "curator.yaml"
+    if not config.exists() and not config.is_symlink():
+        return {**clear, **({"state": "blocked", "infrastructure": "missing"} if required else {})}
+    def read_exact(path, limit):
+        if any(p.is_symlink() for p in (path, *path.parents)):
+            raise ValueError("linked Curator source")
+        fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+        with os.fdopen(fd, "rb") as stream:
+            before = os.fstat(stream.fileno())
+            if not stat.S_ISREG(before.st_mode) or before.st_nlink != 1 or before.st_size > limit:
+                raise ValueError("unbounded Curator source")
+            raw = stream.read(limit + 1)
+            after = os.fstat(stream.fileno()); current = path.stat(follow_symlinks=False)
+            identity = lambda v: (v.st_dev, v.st_ino, v.st_size, v.st_mtime_ns, v.st_ctime_ns)
+            if len(raw) > limit or identity(before) != identity(after) or identity(after) != identity(current):
+                raise ValueError("changed Curator source")
+            return raw
+    try:
+        script_root = project_root / ".agents/skills/curate/scripts"
+        buffers = {}
+        for name, expected in CURATOR_AWARENESS_PINS.items():
+            raw = read_exact(script_root / (name + ".py"), 250000)
+            if hashlib.sha256(raw).hexdigest() != expected:
+                raise ValueError("unreviewed Curator adapter")
+            buffers[name] = raw
+        modules = {}
+        def controlled_import(name, globals=None, locals=None, fromlist=(), level=0):
+            if name.startswith("curator_"):
+                if level or name not in modules:
+                    raise ImportError("unsupported Curator adapter dependency")
+                return modules[name]
+            return builtins.__import__(name, globals, locals, fromlist, level)
+        for name, raw in buffers.items():
+            module = types.ModuleType(name); module.__file__ = str(script_root / (name + ".py"))
+            module.__dict__["__builtins__"] = {**vars(builtins), "__import__": controlled_import}
+            exec(compile(raw, module.__file__, "exec"), module.__dict__)
+            modules[name] = module
+        policy = modules["curator_policy"].validate_policy(modules["curator_policy"].decode(read_exact(config, 250000)))
+        conflicts = []
+        catalog = scan_catalog(project_root / "Tasks")
+        require_valid_catalog(catalog)
+        for state in catalog["states"].values():
+            orchestration = state.get("orchestration")
+            if not orchestration: continue
+            assignments = [a for a in orchestration["assignments"].values() if a["state"] not in ("completed", "cancelled", "revoked")]
+            for assignment in assignments:
+                paths = assignment.get("fit", {}).get("writes", [])
+                if modules["curator_workspace"].overlaps(paths, affected_paths):
+                    conflicts.append({"paths": paths, "task_id": state["task_id"], "assignment_id": assignment["assignment_id"],
+                                      "owner": assignment["native_id"], "state": assignment["state"]})
+            if orchestration.get("writer") and not assignments and orchestration["stage"] not in ("completed", "cancelled"):
+                conflicts.append({"paths": list(affected_paths), "task_id": state["task_id"], "state": "uncertain"})
+        result = modules["curator_awareness"].inspect(project_root, policy, affected_paths=list(affected_paths), owner_conflicts=conflicts)
+        if required and not all(policy["project"].values()):
+            result.update(state="blocked", infrastructure="unselected")
+        return result
+    except (OSError, ValueError, ImportError, TaskError) as error:
+        return {**clear, "state": "blocked" if required else "clear", "infrastructure": "unavailable", "code": getattr(error, "code", "curator_adapter_unavailable")}
+
+
 def command_show(project_root: Path, tasks_root: Path, selector: str, *, continuation: bool = False) -> dict[str, Any]:
     command = "continue" if continuation else "show"
     result = base_result(command, project_root, tasks_root)
@@ -1514,11 +1603,17 @@ def validate_new_payload(payload: dict[str, Any]) -> dict[str, Any]:
     require_object_keys(
         payload,
         required={"name", "description", "definition_of_done"},
-        optional={"parent_task_id", "current_summary", "next_step", "blockers", "open_questions", "thread_refs", "orchestration_enabled"},
+        optional={"parent_task_id", "current_summary", "next_step", "blockers", "open_questions", "thread_refs", "orchestration_enabled", "orchestration_version", "controller_origin", "native_protocol"},
         label="new payload",
     )
     if "orchestration_enabled" in payload and type(payload["orchestration_enabled"]) is not bool:
         raise TaskError(EXIT_INVALID, "ORCH_ENABLE", "orchestration_enabled must be boolean.")
+    selected_version = payload.get("orchestration_version", 1)
+    if type(selected_version) is not int or selected_version not in (1, 2):
+        raise TaskError(EXIT_INVALID, "ORCH_VERSION", "Unsupported orchestration version.")
+    if selected_version == 2 and payload.get("orchestration_enabled") is not True:
+        raise TaskError(EXIT_INVALID, "ORCH_ENABLE", "Version 2 must be explicitly enabled on a new Task.")
+    orchestration_call(orch.empty, selected_version, payload.get("controller_origin"), payload.get("native_protocol"))
     name = require_text(payload["name"], "name", max_length=MAX_NAME)
     description = require_text(payload["description"], "description", max_length=MAX_DESCRIPTION)
     assert isinstance(name, str) and isinstance(description, str)
@@ -1533,6 +1628,9 @@ def validate_new_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "open_questions": require_string_list(payload.get("open_questions", []), "open_questions"),
         "thread_refs": [],
         "orchestration_enabled": payload.get("orchestration_enabled", False),
+        "orchestration_version": selected_version,
+        "controller_origin": payload.get("controller_origin"),
+        "native_protocol": payload.get("native_protocol"),
     }
     if result["parent_task_id"] is not None:
         result["parent_task_id"] = require_text(result["parent_task_id"], "parent_task_id", max_length=MAX_NAME)
@@ -1681,7 +1779,7 @@ def command_new(project_root: Path, tasks_root: Path, payload: dict[str, Any]) -
                 "blockers": validated["blockers"],
                 "open_questions": validated["open_questions"],
                 "thread_refs": validated["thread_refs"],
-                **({"orchestration": orch.empty()} if validated["orchestration_enabled"] else {}),
+                **({"orchestration": orch.empty(validated["orchestration_version"], validated["controller_origin"], validated["native_protocol"])} if validated["orchestration_enabled"] else {}),
             }
         )
         _, tmp_root = ensure_runtime_directories(tasks_root)
@@ -1692,9 +1790,9 @@ def command_new(project_root: Path, tasks_root: Path, payload: dict[str, Any]) -
         temp_folder.mkdir(mode=0o700)
         try:
             (temp_folder / "responses").mkdir(mode=0o700)
-            atomic_write_json(temp_folder / "task.json", state)
+            atomic_write_text(temp_folder / "task.json", task_json_text(state))
             atomic_write_text(temp_folder / "TASK.md", render_task_markdown(state))
-            validation_errors = validate_state_shape(state, final_folder, json_text(state))
+            validation_errors = validate_state_shape(state, final_folder, task_json_text(state))
             if validation_errors:
                 raise TaskError(EXIT_INTEGRITY, "INITIAL_STATE_INVALID", "Generated initial task state failed validation.", details={"findings": validation_errors})
             os.replace(temp_folder, final_folder)
@@ -2019,9 +2117,7 @@ def response_transaction(
                 response_path = folder / relpath
                 if response_path.exists() or response_path.is_symlink():
                     raise TaskError(EXIT_INTEGRITY, "RESPONSE_COLLISION", "Next Task Response path already exists.", details={"path": str(response_path)})
-                if len(json_text(updated).encode()) > MAX_JSON_BYTES:
-                    raise TaskError(EXIT_INVALID, "ORCH_STATE_LIMIT", "Canonical state exceeds its bounded size; preserve history and report a resource blocker.")
-                planned_errors = validate_state_shape(updated, folder, json_text(updated))
+                planned_errors = validate_state_shape(updated, folder, task_json_text(updated))
                 if planned_errors:
                     raise TaskError(EXIT_INTEGRITY, "PLANNED_STATE_INVALID", "Planned task state failed validation.", details={"findings": planned_errors})
                 table, response_errors = parse_response_text(response_path, response_text)
@@ -2046,11 +2142,10 @@ def response_transaction(
                     "created_at": timestamp,
                 }
                 if state["schema_version"] == 2 or command == "upgrade-orchestration":
-                    intent.update(schema_version=2, pre_state_sha256=hashlib.sha256((folder / "task.json").read_bytes()).hexdigest(), post_state_sha256=hashlib.sha256(json_text(updated).encode()).hexdigest(), actor=event["actor"] if event else payload.get("actor"), execution_id=event["execution_id"] if event else payload.get("execution_id"), generation=event["generation"] if event else payload.get("generation"), event_id=event["event_id"] if event else None, event_sha256=orch.hash_json(event) if event else None, artifacts=[{"path": w["path"], "sha256": hashlib.sha256(w["content"]).hexdigest(), "content_base64": base64.b64encode(w["content"]).decode()} for w in artifact_writes])
+                    intent.update(schema_version=2, pre_state_sha256=hashlib.sha256((folder / "task.json").read_bytes()).hexdigest(), post_state_sha256=hashlib.sha256(task_json_text(updated).encode()).hexdigest(), actor=event["actor"] if event else payload.get("actor"), execution_id=event["execution_id"] if event else payload.get("execution_id"), generation=event["generation"] if event else payload.get("generation"), event_id=event["event_id"] if event else None, event_sha256=orch.hash_json(event) if event else None, artifacts=[{"path": w["path"], "sha256": hashlib.sha256(w["content"]).hexdigest(), "content_base64": base64.b64encode(w["content"]).decode()} for w in artifact_writes])
+                intent_content = transaction_intent_text(intent)
                 intent_path = tmp_root / f"{operation_id}.json"
-                if len(json_text(intent).encode()) > MAX_JSON_BYTES:
-                    raise TaskError(EXIT_INVALID, "ORCH_INTENT_LIMIT", "Transaction evidence exceeds bounded intent size.")
-                atomic_write_json(intent_path, intent)
+                atomic_write_text(intent_path, intent_content)
                 inject_fault("before_response_publish")
                 publish_orchestration_artifacts(folder, intent, allow_existing=False)
                 inject_fault("after_artifact_publish")
@@ -2058,7 +2153,7 @@ def response_transaction(
                 os.replace(staged_response, response_path)
                 staged_response = None
                 inject_fault("after_response_publish")
-                atomic_write_json(folder / "task.json", updated)
+                atomic_write_text(folder / "task.json", task_json_text(updated))
                 core_committed = True
                 inject_fault("after_state_publish")
                 atomic_write_text(folder / "TASK.md", render_task_markdown(updated))
@@ -2095,6 +2190,8 @@ def response_transaction(
                 return result
     except TaskError as exc:
         if intent_path is None and not core_committed and not (response_path and response_path.exists()):
+            if staged_response is not None:
+                cleanup_staged_response(tasks_root, str(staged_response.relative_to(tasks_root)))
             raise
         details: dict[str, Any] = {
             "operation_id": operation_id,
@@ -2404,14 +2501,14 @@ def reconcile_redaction_intent(
                 raise TaskError(EXIT_INTEGRITY, "RECONCILE_TASK_MISSING", "Redaction task is missing.", recovery_required=True)
             state = catalog["states"][task_id]
             folder = catalog["folders"][task_id]
-            planned_errors = validate_state_shape(planned, folder, json_text(planned))
+            planned_errors = validate_state_shape(planned, folder, task_json_text(planned))
             if planned_errors:
                 raise TaskError(EXIT_INTEGRITY, "TRANSACTION_PLANNED_STATE", "Redaction planned state is invalid.", details={"findings": planned_errors})
             if intent.get("schema_version") == 2:
                 expected_keys = {"schema_version", "kind", "operation_id", "command", "task_id", "expected_revision", "old_response_id", "old_response_path", "original_sha256", "redacted_sha256", "redacted_content", "correction_response_id", "correction_response_path", "correction_response_sha256", "correction_response_content", "staged_response_path", "planned_state", "created_at", "pre_state_sha256", "post_state_sha256", "actor", "execution_id", "generation"}
                 require_object_keys(intent, required=expected_keys, optional=set(), label="schema-2 redaction intent")
                 live_sha = hashlib.sha256((folder / "task.json").read_bytes()).hexdigest()
-                if live_sha not in (intent["pre_state_sha256"], intent["post_state_sha256"]) or hashlib.sha256(json_text(planned).encode()).hexdigest() != intent["post_state_sha256"]:
+                if live_sha not in (intent["pre_state_sha256"], intent["post_state_sha256"]) or hashlib.sha256(task_json_text(planned).encode()).hexdigest() != intent["post_state_sha256"]:
                     raise TaskError(EXIT_INTEGRITY, "ORCH_RECOVERY_STATE_HASH", "Redaction state bytes differ from the exact reviewed transaction.")
                 if any((actor_payload or {}).get(k) != intent[k] for k in ("actor", "execution_id", "generation")):
                     orchestration_call(orch.auth, state, actor_payload or {})
@@ -2441,7 +2538,7 @@ def reconcile_redaction_intent(
                 os.replace(staged, correction_path)
 
             if state["revision"] == intent["expected_revision"]:
-                atomic_write_json(folder / "task.json", planned)
+                atomic_write_text(folder / "task.json", task_json_text(planned))
                 state = planned
             elif state["revision"] == planned["revision"]:
                 state = planned
@@ -2548,13 +2645,13 @@ def reconcile_transaction(
             planned = intent.get("planned_state")
             if not isinstance(planned, dict):
                 raise TaskError(EXIT_INTEGRITY, "TRANSACTION_PLANNED_STATE", "Transaction intent has no exact planned state.", recovery_required=True)
-            planned_errors = validate_state_shape(planned, folder, json_text(planned))
+            planned_errors = validate_state_shape(planned, folder, task_json_text(planned))
             if planned_errors:
                 raise TaskError(EXIT_INTEGRITY, "TRANSACTION_PLANNED_STATE", "Exact planned state is invalid.", details={"findings": planned_errors}, recovery_required=True)
             if intent.get("schema_version") == 2:
                 expected_keys = {"schema_version", "kind", "operation_id", "command", "task_id", "expected_revision", "response_id", "response_path", "response_sha256", "response_content", "staged_response_path", "planned_state", "created_at", "pre_state_sha256", "post_state_sha256", "actor", "execution_id", "generation", "event_id", "event_sha256", "artifacts"}
                 require_object_keys(intent, required=expected_keys, optional=set(), label="schema-2 transaction intent")
-                if hashlib.sha256(json_text(planned).encode()).hexdigest() != intent["post_state_sha256"]:
+                if hashlib.sha256(task_json_text(planned).encode()).hexdigest() != intent["post_state_sha256"]:
                     raise TaskError(EXIT_INTEGRITY, "ORCH_POST_STATE_HASH", "Planned state digest differs from intent.")
                 live_sha = hashlib.sha256((folder / "task.json").read_bytes()).hexdigest()
                 if live_sha not in (intent["pre_state_sha256"], intent["post_state_sha256"]):
@@ -2610,7 +2707,7 @@ def reconcile_transaction(
             if state["revision"] == expected and response_path.is_file() and not response_path.is_symlink():
                 if hashlib.sha256(response_path.read_bytes()).hexdigest() != intent["response_sha256"]:
                     raise TaskError(EXIT_INTEGRITY, "ORPHAN_RESPONSE_HASH", "Published orphan response differs from transaction evidence.", recovery_required=True)
-                atomic_write_json(folder / "task.json", planned)
+                atomic_write_text(folder / "task.json", task_json_text(planned))
                 state = planned
             elif state["revision"] == planned_revision and not response_path.exists():
                 staged = write_staged_text(response_path, response_content)
@@ -2819,7 +2916,7 @@ def reconcile_response_redaction(
                 correction_path = folder / relpath
                 if correction_path.exists() or correction_path.is_symlink():
                     raise TaskError(EXIT_INTEGRITY, "RESPONSE_COLLISION", "Correction Task Response path already exists.")
-                planned_errors = validate_state_shape(updated, folder, json_text(updated))
+                planned_errors = validate_state_shape(updated, folder, task_json_text(updated))
                 if planned_errors:
                     raise TaskError(EXIT_INTEGRITY, "PLANNED_STATE_INVALID", "Planned correction state failed validation.", details={"findings": planned_errors})
                 _, correction_errors = parse_response_text(correction_path, correction_text)
@@ -2849,15 +2946,16 @@ def reconcile_response_redaction(
                     "created_at": timestamp,
                 }
                 if state["schema_version"] == 2:
-                    intent.update(schema_version=2, pre_state_sha256=hashlib.sha256((folder / "task.json").read_bytes()).hexdigest(), post_state_sha256=hashlib.sha256(json_text(updated).encode()).hexdigest(), actor=payload.get("actor"), execution_id=payload.get("execution_id"), generation=payload.get("generation"))
+                    intent.update(schema_version=2, pre_state_sha256=hashlib.sha256((folder / "task.json").read_bytes()).hexdigest(), post_state_sha256=hashlib.sha256(task_json_text(updated).encode()).hexdigest(), actor=payload.get("actor"), execution_id=payload.get("execution_id"), generation=payload.get("generation"))
+                intent_content = transaction_intent_text(intent)
                 intent_path = tmp_root / f"{operation_id}.json"
-                atomic_write_json(intent_path, intent)
+                atomic_write_text(intent_path, intent_content)
                 inject_fault("before_redaction_correction_publish")
                 _ontology_checkpoint(targets=False)
                 os.replace(staged_response, correction_path)
                 staged_response = None
                 inject_fault("after_redaction_correction_publish")
-                atomic_write_json(folder / "task.json", updated)
+                atomic_write_text(folder / "task.json", task_json_text(updated))
                 core_committed = True
                 inject_fault("after_redaction_state_publish")
                 atomic_write_text(old_path, redacted_text)
@@ -2889,6 +2987,8 @@ def reconcile_response_redaction(
                 return result
     except TaskError as exc:
         if intent_path is None and not core_committed and not (correction_path and correction_path.exists()):
+            if staged_response is not None:
+                cleanup_staged_response(tasks_root, str(staged_response.relative_to(tasks_root)))
             raise
         details = {
             "operation_id": operation_id,
@@ -3011,6 +3111,11 @@ def build_parser() -> argparse.ArgumentParser:
         allow_documented_format_position(sub)
         sub.add_argument("selector")
 
+    awareness = subparsers.add_parser("curator-awareness", help="Read existing scoped Curator metadata without analysis or writes")
+    allow_documented_format_position(awareness)
+    awareness.add_argument("--scope", action="append", required=True)
+    awareness.add_argument("--required", action="store_true", help="Hold dependent work when required infrastructure is unavailable")
+
     new = subparsers.add_parser("new", help="Create a task from JSON")
     allow_documented_format_position(new)
     new.add_argument("--payload-file", default="-", help="One-use JSON payload path, or - for stdin")
@@ -3046,6 +3151,13 @@ def run(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
     project_root = establish_project_root(args.project_root)
     tasks_root = get_tasks_root(project_root)
     command = args.command
+    if command == "curator-awareness":
+        result = base_result(command, project_root, tasks_root)
+        result["curator_awareness"] = curator_awareness(project_root, args.scope, required=args.required)
+        if result["curator_awareness"]["state"] == "blocked":
+            result["status"] = "blocked"
+            return result, EXIT_LIFECYCLE
+        return result, EXIT_OK
     if command == "status":
         if args.limit < 1 or args.limit > 100:
             raise TaskError(EXIT_INVALID, "LIMIT", "status --limit must be between 1 and 100.")

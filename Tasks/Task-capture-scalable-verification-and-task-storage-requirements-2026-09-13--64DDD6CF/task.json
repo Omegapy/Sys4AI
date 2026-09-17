@@ -1,0 +1,1137 @@
+{
+  "schema_version": 2,
+  "task_id": "TASK-20260913-64DDD6CF",
+  "name": "Capture scalable verification and Task storage requirements",
+  "original_name": "Capture scalable verification and Task storage requirements",
+  "slug": "capture-scalable-verification-and-task-storage-requirements",
+  "folder_name": "Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF",
+  "description": "Use the To-TRD skill to create and validate a new project-local requirements document from the user-supplied scalability recommendations. Preserve the independent integration-planning Task and all existing canonical history; this execution authorizes requirements capture only.",
+  "definition_of_done": [
+    "The supplied scalability recommendations and relevant current project sources are inspected with attributable source references.",
+    "A separate schema-2 TRD captures the supported scalability outcomes, complete operation dependencies, preservation and integrity boundaries, diagnostics, representative verification, and proposed versus required design choices.",
+    "The emitted TRD and its index are reopened and validated, with forward and reverse source coverage and any material intake decisions resolved.",
+    "The user is shown the exact reviewable TRD revision; explicit approval is recorded as trd_done before this Task is marked complete.",
+    "Existing Task, TRD, plan and project-owned content is preserved; only the new Task, its evidence, new TRD, helper-managed indexes and any separately eligible scoped memory checkpoint are changed."
+  ],
+  "created_at": "2026-09-13T09:53:15-06:00",
+  "updated_at": "2026-09-13T12:57:59-06:00",
+  "status": "awaiting_user",
+  "parent_task_id": null,
+  "revision": 15,
+  "response_count": 14,
+  "last_response": {
+    "response_id": "RESP-0014",
+    "sequence": 14,
+    "created_at": "2026-09-13T12:57:59-06:00",
+    "path": "responses/Task-Response-0014-2026-09-13T12-57-59-06-00.md",
+    "supersedes_response_id": null
+  },
+  "current_summary": "Validated scalability TRD draft is ready for exact document approval; no material requirements gaps remain.",
+  "next_step": "Obtain explicit approval of TRD-20260913-8BACF221 revision 1 with SHA256 194a3365bc32210d8aa33ea81f51ea088ac03337e521dcd072405857d4296316, then promote that unchanged document through its owner helper, reverify current evidence and complete this Task.",
+  "blockers": [],
+  "open_questions": [
+    "Approve Scalable verification and Task storage (TRD-20260913-8BACF221), the presented unchanged draft revision 1, as the completed requirements baseline?"
+  ],
+  "thread_refs": [],
+  "orchestration": {
+    "acceptances": {},
+    "artifacts": {
+      "baseline_510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d": {
+        "assignment_id": "scalability_trd_manager",
+        "generation": 1,
+        "path": "artifacts/orchestration/baseline_510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d.json",
+        "sha256": "510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d",
+        "size": 3361
+      },
+      "trd_payload_v1": {
+        "assignment_id": "trd_worker",
+        "generation": 1,
+        "path": "artifacts/orchestration/trd_payload_v1.json",
+        "sha256": "7db00d4471a1494373af03873e7daa85c84e38d60621d8fdea0afa382c2cb415",
+        "size": 17955
+      }
+    },
+    "assignments": {
+      "scalability_trd_manager": {
+        "acceptance_id": null,
+        "assignment_id": "scalability_trd_manager",
+        "baseline": "d1ddc5b5396436afe07f8a80e6015c9dc15a57e0964352e747d5c56963990248",
+        "context": [
+          {
+            "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/delegation.md",
+            "sha256": "ef2db96016499210fdfd1f70185b8bd9fa679f5ece07aa1f5636cb240b994730"
+          },
+          {
+            "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/user-supplied-recommendations.md",
+            "sha256": "17c0c319bfe16af36722f216cabf123e72277000e3adceda5c1a933342f76353"
+          },
+          {
+            "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/request.json",
+            "sha256": "8c79dc7615975b3b5df4a8fe2867228a4f76ef2baeb373ddc6485c20cd07b660"
+          },
+          {
+            "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/runtime-evidence.json",
+            "sha256": "b02f5825b87d0f0a843f9dc61d5a3bd6aee97c8d81e6dca28ae258c45a14987f"
+          }
+        ],
+        "fit": {
+          "authority": "Explicit user $task new $to-trd request. Own only this execution after activation; bounded nested document work is authorized. No implementation, external action, or shared-memory writes.",
+          "capabilities": [
+            "Task orchestration",
+            "requirements coordination",
+            "document verification"
+          ],
+          "deliverable": "Verified separate scalability TRD and exact approval gate.",
+          "objective": "Manage separate scalability requirements capture through To-TRD.",
+          "rationale": "Task-manager has explicit canonical coordination and nested-delegation capability; ordinary document roles lack it.",
+          "reads": [
+            "SOUL.md",
+            "ROLE.md",
+            "AGENTS.md",
+            "SPECS.md",
+            ".agents/skills",
+            "Roles",
+            "depot/projects.json",
+            "SKILLS-depo",
+            "Verification/guard-capacity-20260913",
+            "ontology-advanced.yaml",
+            "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/user-supplied-recommendations.md"
+          ],
+          "risk": "Shared catalog guards and independent active owners; retain exact revision checks and serialize conflicting writes.",
+          "skills": [
+            "task",
+            "agent-task",
+            "manage-subagent-roles",
+            "to-trd",
+            "communication"
+          ],
+          "stop": "Validated reviewable TRD awaiting actual user approval, material intake blocker, or approved document with verified Task completion.",
+          "tools": [
+            "exec_command",
+            "spawn_agent",
+            "list_agents",
+            "send_message",
+            "followup_task",
+            "interrupt_agent"
+          ],
+          "writes": [
+            "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager"
+          ]
+        },
+        "function": "manager",
+        "generation": 1,
+        "input_receipt": null,
+        "native_id": "/root/scalability_trd_manager",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/scalability_trd_manager"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "observations": [],
+        "perspective": "Project Director",
+        "role": {
+          "agents_path": "Roles/task-manager/AGENTS.md",
+          "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+          "catalog": {
+            "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/role-catalog.json",
+            "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+          },
+          "name": "task-manager",
+          "role_path": "Roles/task-manager/ROLE.md",
+          "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        },
+        "role_reads": {
+          "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+          "evidence": "Native manager /root/scalability_trd_manager confirmed actual reads of SOUL.md, root ROLE.md, both exact task-manager role files, delegation and Task/Agent Task/Manage Sub-Agent Roles/To-TRD contracts before activation.",
+          "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        },
+        "round": 0,
+        "runtime": {
+          "available_slots": 3,
+          "depth": 2,
+          "evidence": [
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/runtime-evidence.json",
+              "sha256": "b02f5825b87d0f0a843f9dc61d5a3bd6aee97c8d81e6dca28ae258c45a14987f"
+            }
+          ],
+          "tools": [
+            "spawn_agent",
+            "list_agents",
+            "send_message",
+            "followup_task",
+            "interrupt_agent"
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/runtime-evidence.json",
+              "sha256": "b02f5825b87d0f0a843f9dc61d5a3bd6aee97c8d81e6dca28ae258c45a14987f"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "slot": "manager",
+        "state": "active",
+        "subtask_id": null
+      },
+      "trd_worker": {
+        "acceptance_id": null,
+        "assignment_id": "trd_worker",
+        "baseline": "510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d",
+        "context": [
+          {
+            "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/baseline_510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d.json",
+            "sha256": "510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d"
+          },
+          {
+            "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/user-supplied-recommendations.md",
+            "sha256": "17c0c319bfe16af36722f216cabf123e72277000e3adceda5c1a933342f76353"
+          },
+          {
+            "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/request.json",
+            "sha256": "8c79dc7615975b3b5df4a8fe2867228a4f76ef2baeb373ddc6485c20cd07b660"
+          },
+          {
+            "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/worker-delegation-v2.md",
+            "sha256": "43327adf856f28c861c01b7d685abd721eea82f53cd61b7a5e812c6a2478f5ab"
+          },
+          {
+            "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/user-integrity-choice.json",
+            "sha256": "3e1a7ff89a69e2bddc0b10d93e051622edaba324a22b576c7b4479f792c89fd4"
+          },
+          {
+            "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/worker-publication-restriction.md",
+            "sha256": "b485cf7f97ccad1fabbeee12f36194fcf8fa8961a73180737ec146fa8e238517"
+          }
+        ],
+        "fit": {
+          "authority": "Explicit user $task new $to-trd authorizes requirements capture only. User selected immediate current-dependency verification, hash verification of historical evidence on access, and separate full archive audits with possibly later detection of unrelated damage. No implementation or external action. Initial assignment writes evidence only; managed TRD publication waits for exact same-worker input rebind after unrelated ownership is resolved.",
+          "capabilities": [
+            "Project inspection",
+            "Requirements documentation",
+            "Source tracing",
+            "Managed document validation"
+          ],
+          "deliverable": "Complete To-TRD payload/body and source coverage prepared for managed publication after the existing TRDs owner is reconciled.",
+          "objective": "Create and validate a separate scalability TRD from supplied recommendations and the actual user integrity choice.",
+          "rationale": "General role supports document capture without the Curator-specific broker requirements of documentation-curator.",
+          "reads": [
+            "SOUL.md",
+            "ROLE.md",
+            "AGENTS.md",
+            "SPECS.md",
+            "Roles/project-sub-agent",
+            ".agents/skills",
+            "SKILLS-depo",
+            "Verification/guard-capacity-20260913",
+            "ontology-advanced.yaml",
+            "TRDs",
+            "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap",
+            "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager"
+          ],
+          "risk": "Preserve user intent and design latitude; an unrelated unresolved TRDs owner currently prevents managed publication.",
+          "skills": [
+            "to-trd",
+            "communication"
+          ],
+          "stop": "Complete payload and coverage prepared, or a material blocker. Do not create a canonical TRD before publication rebind.",
+          "tools": [
+            "exec_command"
+          ],
+          "writes": [
+            "Verification/scalability-trd-20260913/worker"
+          ]
+        },
+        "function": "worker",
+        "generation": 1,
+        "input_receipt": null,
+        "native_id": "/root/scalability_trd_manager/trd_worker",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/scalability_trd_manager/trd_worker"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "observations": [
+          {
+            "changes": [
+              {
+                "path": "Verification/scalability-trd-20260913/worker/trd-payload.json",
+                "sha256": "7db00d4471a1494373af03873e7daa85c84e38d60621d8fdea0afa382c2cb415"
+              },
+              {
+                "path": "Verification/scalability-trd-20260913/worker/payload-validation.json",
+                "sha256": "7b4814706e91a3111d1ce84e502030f231e46000ba2b3cfffcd5a5edee518c24"
+              },
+              {
+                "path": "Verification/scalability-trd-20260913/worker/source-coverage.md",
+                "sha256": "fede97016a4f813ea0c0de55736a5a714a0f34dea419bf75bb6319947bf8c4d8"
+              }
+            ],
+            "receipt": {
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/scalability_trd_manager/trd_worker",
+                    "agent_status": "completed"
+                  }
+                ]
+              },
+              "tool": "collaboration.list_agents"
+            }
+          }
+        ],
+        "perspective": "Source-grounded requirements capture",
+        "role": {
+          "agents_path": "Roles/project-sub-agent/AGENTS.md",
+          "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+          "catalog": {
+            "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/worker-role-catalog-v3.json",
+            "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+          },
+          "name": "project-sub-agent",
+          "role_path": "Roles/project-sub-agent/ROLE.md",
+          "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+        },
+        "role_reads": {
+          "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+          "evidence": "Actual native worker confirmed root SOUL and both role-file reads, exact baseline, delegation v2, user integrity answer and current publication restriction before work.",
+          "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+        },
+        "round": 1,
+        "runtime": {
+          "available_slots": 2,
+          "depth": 3,
+          "evidence": [
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/worker-runtime-v2.json",
+              "sha256": "6631e67f12c4ef928ee350a056b01efaa1e81813fb1833c539764b8b369df64a"
+            }
+          ],
+          "tools": [
+            "spawn_agent",
+            "list_agents",
+            "send_message",
+            "followup_task",
+            "interrupt_agent"
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/runtime-evidence.json",
+              "sha256": "b02f5825b87d0f0a843f9dc61d5a3bd6aee97c8d81e6dca28ae258c45a14987f"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "slot": "worker",
+        "state": "completed",
+        "subtask_id": "capture_trd"
+      }
+    },
+    "authority": "Explicit user $task new $to-trd request. Own only this execution after activation; bounded nested document work is authorized. No implementation, external action, or shared-memory writes.",
+    "blockers": [],
+    "bootstrap": "/root",
+    "candidates": {},
+    "conflicts": {},
+    "context": [
+      {
+        "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/delegation.md",
+        "sha256": "ef2db96016499210fdfd1f70185b8bd9fa679f5ece07aa1f5636cb240b994730"
+      },
+      {
+        "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/user-supplied-recommendations.md",
+        "sha256": "17c0c319bfe16af36722f216cabf123e72277000e3adceda5c1a933342f76353"
+      },
+      {
+        "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/request.json",
+        "sha256": "8c79dc7615975b3b5df4a8fe2867228a4f76ef2baeb373ddc6485c20cd07b660"
+      },
+      {
+        "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/runtime-evidence.json",
+        "sha256": "b02f5825b87d0f0a843f9dc61d5a3bd6aee97c8d81e6dca28ae258c45a14987f"
+      }
+    ],
+    "events": [
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "scalability_trd_manager",
+          "authority": "Explicit user $task new $to-trd request. Own only this execution after activation; bounded nested document work is authorized. No implementation, external action, or shared-memory writes.",
+          "bootstrap_receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root",
+                  "agent_status": "running"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          },
+          "context": [
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/delegation.md",
+              "sha256": "ef2db96016499210fdfd1f70185b8bd9fa679f5ece07aa1f5636cb240b994730"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/user-supplied-recommendations.md",
+              "sha256": "17c0c319bfe16af36722f216cabf123e72277000e3adceda5c1a933342f76353"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/request.json",
+              "sha256": "8c79dc7615975b3b5df4a8fe2867228a4f76ef2baeb373ddc6485c20cd07b660"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/runtime-evidence.json",
+              "sha256": "b02f5825b87d0f0a843f9dc61d5a3bd6aee97c8d81e6dca28ae258c45a14987f"
+            }
+          ],
+          "fit": {
+            "authority": "Explicit user $task new $to-trd request. Own only this execution after activation; bounded nested document work is authorized. No implementation, external action, or shared-memory writes.",
+            "capabilities": [
+              "Task orchestration",
+              "requirements coordination",
+              "document verification"
+            ],
+            "deliverable": "Verified separate scalability TRD and exact approval gate.",
+            "objective": "Manage separate scalability requirements capture through To-TRD.",
+            "rationale": "Task-manager has explicit canonical coordination and nested-delegation capability; ordinary document roles lack it.",
+            "reads": [
+              "SOUL.md",
+              "ROLE.md",
+              "AGENTS.md",
+              "SPECS.md",
+              ".agents/skills",
+              "Roles",
+              "depot/projects.json",
+              "SKILLS-depo",
+              "Verification/guard-capacity-20260913",
+              "ontology-advanced.yaml",
+              "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/user-supplied-recommendations.md"
+            ],
+            "risk": "Shared catalog guards and independent active owners; retain exact revision checks and serialize conflicting writes.",
+            "skills": [
+              "task",
+              "agent-task",
+              "manage-subagent-roles",
+              "to-trd",
+              "communication"
+            ],
+            "stop": "Validated reviewable TRD awaiting actual user approval, material intake blocker, or approved document with verified Task completion.",
+            "tools": [
+              "exec_command",
+              "spawn_agent",
+              "list_agents",
+              "send_message",
+              "followup_task",
+              "interrupt_agent"
+            ],
+            "writes": [
+              "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager"
+            ]
+          },
+          "role": {
+            "agents_path": "Roles/task-manager/AGENTS.md",
+            "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+            "catalog": {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/role-catalog.json",
+              "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+            },
+            "name": "task-manager",
+            "role_path": "Roles/task-manager/ROLE.md",
+            "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+          },
+          "runtime": {
+            "available_slots": 3,
+            "depth": 2,
+            "evidence": [
+              {
+                "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/runtime-evidence.json",
+                "sha256": "b02f5825b87d0f0a843f9dc61d5a3bd6aee97c8d81e6dca28ae258c45a14987f"
+              }
+            ],
+            "tools": [
+              "spawn_agent",
+              "list_agents",
+              "send_message",
+              "followup_task",
+              "interrupt_agent"
+            ]
+          },
+          "settings": {
+            "effort": null,
+            "evidence": [
+              {
+                "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/runtime-evidence.json",
+                "sha256": "b02f5825b87d0f0a843f9dc61d5a3bd6aee97c8d81e6dca28ae258c45a14987f"
+              }
+            ],
+            "mode": "verified_inheritance",
+            "model": null
+          },
+          "source_refs": [
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/user-supplied-recommendations.md",
+              "sha256": "17c0c319bfe16af36722f216cabf123e72277000e3adceda5c1a933342f76353"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/request.json",
+              "sha256": "8c79dc7615975b3b5df4a8fe2867228a4f76ef2baeb373ddc6485c20cd07b660"
+            }
+          ]
+        },
+        "event_id": "reserve_scalability_trd_manager",
+        "execution_id": "scalability_trd_exec",
+        "generation": 1,
+        "kind": "manager.reserve",
+        "revision": 2,
+        "sha256": "8c59e13aa940b85fc9b8221c489fdcd77b2e488aeafcb7d862d624fd0868fedb"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "scalability_trd_manager",
+          "receipt": {
+            "result": {
+              "task_name": "/root/scalability_trd_manager"
+            },
+            "tool": "collaboration.spawn_agent"
+          }
+        },
+        "event_id": "receipt_scalability_trd_manager",
+        "execution_id": "scalability_trd_exec",
+        "generation": 1,
+        "kind": "manager.receipt",
+        "revision": 3,
+        "sha256": "de4c1d5590e7697871c47b2eafd158538191c061b54f0d2d918b6fe6e8a2ef46"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "scalability_trd_manager",
+          "role_reads": {
+            "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+            "evidence": "Native manager /root/scalability_trd_manager confirmed actual reads of SOUL.md, root ROLE.md, both exact task-manager role files, delegation and Task/Agent Task/Manage Sub-Agent Roles/To-TRD contracts before activation.",
+            "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+          }
+        },
+        "event_id": "activate_scalability_trd_manager",
+        "execution_id": "scalability_trd_exec",
+        "generation": 1,
+        "kind": "manager.activate",
+        "revision": 4,
+        "sha256": "9a9ed61c016bf7cbc529819ae61d9d2fd52f5162ccef69fb2d751dde0c1fb7d9"
+      },
+      {
+        "actor": "/root/scalability_trd_manager",
+        "data": {
+          "baseline": {
+            "authority": "Explicit user $task new $to-trd authorizes requirements capture only. User selected immediate current-dependency verification, hash verification of historical evidence on access, and separate full archive audits with possibly later detection of unrelated damage. No implementation or external action.",
+            "category": "generic",
+            "criteria": [
+              "User sources and relevant current implementation facts have exact attributable references.",
+              "The separate schema-2 TRD captures supported scalability outcomes and the actual selected integrity behavior while preserving proposed versus required design choices.",
+              "The document and index are reopened and validated with forward and reverse source coverage.",
+              "No unrelated project content is changed; document approval remains an explicit user gate."
+            ],
+            "deliverable": "One separate reviewable schema-2 draft TRD and validation/source coverage evidence. Local document publication only.",
+            "dependencies": [],
+            "implementation_required": true,
+            "inputs": [
+              {
+                "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/user-supplied-recommendations.md",
+                "sha256": "17c0c319bfe16af36722f216cabf123e72277000e3adceda5c1a933342f76353"
+              },
+              {
+                "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/request.json",
+                "sha256": "8c79dc7615975b3b5df4a8fe2867228a4f76ef2baeb373ddc6485c20cd07b660"
+              },
+              {
+                "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/worker-delegation-v2.md",
+                "sha256": "43327adf856f28c861c01b7d685abd721eea82f53cd61b7a5e812c6a2478f5ab"
+              },
+              {
+                "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/user-integrity-choice.json",
+                "sha256": "3e1a7ff89a69e2bddc0b10d93e051622edaba324a22b576c7b4479f792c89fd4"
+              }
+            ],
+            "objective": "Create and validate a separate scalability TRD from supplied recommendations and the actual user integrity choice.",
+            "protected": [
+              "Tasks",
+              "Implementation_Plans",
+              "SKILLS-depo",
+              ".agents/skills",
+              "SOUL.md",
+              "ROLE.md",
+              "AGENTS.md",
+              "SPECS.md",
+              "depot",
+              "Projects",
+              "MEMORY",
+              "control_records/memory"
+            ],
+            "rationale": "One supplied research report and one settled user clarification require bounded requirements capture through an existing document helper. One accountable worker can produce the document; competing architecture proposals or implementation are not requested.",
+            "reads": [
+              "SOUL.md",
+              "ROLE.md",
+              "AGENTS.md",
+              "SPECS.md",
+              "Roles/project-sub-agent",
+              ".agents/skills",
+              "SKILLS-depo",
+              "Verification/guard-capacity-20260913",
+              "ontology-advanced.yaml",
+              "TRDs",
+              "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap",
+              "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager"
+            ],
+            "requirements": [
+              "DOD-1",
+              "DOD-2",
+              "DOD-3",
+              "DOD-5"
+            ],
+            "slots": [
+              {
+                "function": "worker",
+                "perspective": "Source-grounded requirements capture",
+                "slot": "worker",
+                "solver_slot": null
+              }
+            ],
+            "stop": "Validated draft awaiting exact user approval, or a material unmet prerequisite before dependent work.",
+            "writes": [
+              "Verification/scalability-trd-20260913/worker",
+              "TRDs/trd_scalable-verification-and-task-storage_2026-09-13.md",
+              "TRDs/INDEX.md"
+            ]
+          },
+          "subtask_id": "capture_trd"
+        },
+        "event_id": "define_capture_trd_resolved",
+        "execution_id": "scalability_trd_exec",
+        "generation": 1,
+        "kind": "subtask.define",
+        "revision": 7,
+        "sha256": "5ba879ef5ee724902d319bf39d33dc244a56f939b04d7f60a3e16f21849e868f"
+      },
+      {
+        "actor": "/root/scalability_trd_manager",
+        "data": {
+          "assignment_id": "trd_worker",
+          "context": [
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/baseline_510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d.json",
+              "sha256": "510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/user-supplied-recommendations.md",
+              "sha256": "17c0c319bfe16af36722f216cabf123e72277000e3adceda5c1a933342f76353"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/request.json",
+              "sha256": "8c79dc7615975b3b5df4a8fe2867228a4f76ef2baeb373ddc6485c20cd07b660"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/worker-delegation-v2.md",
+              "sha256": "43327adf856f28c861c01b7d685abd721eea82f53cd61b7a5e812c6a2478f5ab"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/user-integrity-choice.json",
+              "sha256": "3e1a7ff89a69e2bddc0b10d93e051622edaba324a22b576c7b4479f792c89fd4"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/worker-publication-restriction.md",
+              "sha256": "b485cf7f97ccad1fabbeee12f36194fcf8fa8961a73180737ec146fa8e238517"
+            }
+          ],
+          "fit": {
+            "authority": "Explicit user $task new $to-trd authorizes requirements capture only. User selected immediate current-dependency verification, hash verification of historical evidence on access, and separate full archive audits with possibly later detection of unrelated damage. No implementation or external action. Initial assignment writes evidence only; managed TRD publication waits for exact same-worker input rebind after unrelated ownership is resolved.",
+            "capabilities": [
+              "Project inspection",
+              "Requirements documentation",
+              "Source tracing",
+              "Managed document validation"
+            ],
+            "deliverable": "Complete To-TRD payload/body and source coverage prepared for managed publication after the existing TRDs owner is reconciled.",
+            "objective": "Create and validate a separate scalability TRD from supplied recommendations and the actual user integrity choice.",
+            "rationale": "General role supports document capture without the Curator-specific broker requirements of documentation-curator.",
+            "reads": [
+              "SOUL.md",
+              "ROLE.md",
+              "AGENTS.md",
+              "SPECS.md",
+              "Roles/project-sub-agent",
+              ".agents/skills",
+              "SKILLS-depo",
+              "Verification/guard-capacity-20260913",
+              "ontology-advanced.yaml",
+              "TRDs",
+              "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap",
+              "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager"
+            ],
+            "risk": "Preserve user intent and design latitude; an unrelated unresolved TRDs owner currently prevents managed publication.",
+            "skills": [
+              "to-trd",
+              "communication"
+            ],
+            "stop": "Complete payload and coverage prepared, or a material blocker. Do not create a canonical TRD before publication rebind.",
+            "tools": [
+              "exec_command"
+            ],
+            "writes": [
+              "Verification/scalability-trd-20260913/worker"
+            ]
+          },
+          "role": {
+            "agents_path": "Roles/project-sub-agent/AGENTS.md",
+            "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+            "catalog": {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/worker-role-catalog-v3.json",
+              "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+            },
+            "name": "project-sub-agent",
+            "role_path": "Roles/project-sub-agent/ROLE.md",
+            "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+          },
+          "runtime": {
+            "available_slots": 2,
+            "depth": 3,
+            "evidence": [
+              {
+                "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/worker-runtime-v2.json",
+                "sha256": "6631e67f12c4ef928ee350a056b01efaa1e81813fb1833c539764b8b369df64a"
+              }
+            ],
+            "tools": [
+              "spawn_agent",
+              "list_agents",
+              "send_message",
+              "followup_task",
+              "interrupt_agent"
+            ]
+          },
+          "settings": {
+            "effort": null,
+            "evidence": [
+              {
+                "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/runtime-evidence.json",
+                "sha256": "b02f5825b87d0f0a843f9dc61d5a3bd6aee97c8d81e6dca28ae258c45a14987f"
+              }
+            ],
+            "mode": "verified_inheritance",
+            "model": null
+          },
+          "slot": "worker",
+          "subtask_id": "capture_trd"
+        },
+        "event_id": "reserve_trd_worker_evidence",
+        "execution_id": "scalability_trd_exec",
+        "generation": 1,
+        "kind": "assignment.reserve",
+        "revision": 8,
+        "sha256": "71857d5b240e6c3a44b1ff4a6c127840c08c985b089252c51d4507e349468f9e"
+      },
+      {
+        "actor": "/root/scalability_trd_manager",
+        "data": {
+          "assignment_id": "trd_worker",
+          "receipt": {
+            "result": {
+              "task_name": "/root/scalability_trd_manager/trd_worker"
+            },
+            "tool": "collaboration.spawn_agent"
+          }
+        },
+        "event_id": "receipt_trd_worker",
+        "execution_id": "scalability_trd_exec",
+        "generation": 1,
+        "kind": "assignment.receipt",
+        "revision": 9,
+        "sha256": "cc0c6cc95b6bbafd6496e42dc459053c4575aeaa9a49344895de525c0602501f"
+      },
+      {
+        "actor": "/root/scalability_trd_manager",
+        "data": {
+          "assignment_id": "trd_worker",
+          "role_reads": {
+            "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+            "evidence": "Actual native worker confirmed root SOUL and both role-file reads, exact baseline, delegation v2, user integrity answer and current publication restriction before work.",
+            "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+          }
+        },
+        "event_id": "reads_trd_worker",
+        "execution_id": "scalability_trd_exec",
+        "generation": 1,
+        "kind": "assignment.reads",
+        "revision": 10,
+        "sha256": "35277f2b90f1c570d5d46019cb479d2c16a64504684117af8ba79b19e37e2f5c"
+      },
+      {
+        "actor": "/root/scalability_trd_manager",
+        "data": {
+          "assignment_id": "trd_worker",
+          "changes": [
+            {
+              "path": "Verification/scalability-trd-20260913/worker/trd-payload.json",
+              "sha256": "7db00d4471a1494373af03873e7daa85c84e38d60621d8fdea0afa382c2cb415"
+            },
+            {
+              "path": "Verification/scalability-trd-20260913/worker/payload-validation.json",
+              "sha256": "7b4814706e91a3111d1ce84e502030f231e46000ba2b3cfffcd5a5edee518c24"
+            },
+            {
+              "path": "Verification/scalability-trd-20260913/worker/source-coverage.md",
+              "sha256": "fede97016a4f813ea0c0de55736a5a714a0f34dea419bf75bb6319947bf8c4d8"
+            }
+          ],
+          "receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root/scalability_trd_manager/trd_worker",
+                  "agent_status": "completed"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          }
+        },
+        "event_id": "observe_completed_trd_worker",
+        "execution_id": "scalability_trd_exec",
+        "generation": 1,
+        "kind": "assignment.observe",
+        "revision": 11,
+        "sha256": "6055e6ed45cae32c1a2a2ad77e1756b22fb56082121baba3fd91994ed91e5d4f"
+      },
+      {
+        "actor": "/root/scalability_trd_manager",
+        "data": {
+          "artifact_id": "trd_payload_v1",
+          "assignment_id": "trd_worker",
+          "source_path": "Verification/scalability-trd-20260913/worker/trd-payload.json"
+        },
+        "event_id": "register_trd_payload_v1",
+        "execution_id": "scalability_trd_exec",
+        "generation": 1,
+        "kind": "artifact.register",
+        "revision": 12,
+        "sha256": "551c5ca72bf123262548014e317bc87d16e56687267d66a13569c5595a1422f3"
+      },
+      {
+        "actor": "/root/scalability_trd_manager",
+        "data": {
+          "acceptance_id": null,
+          "artifact_ids": [
+            "trd_payload_v1"
+          ],
+          "assignment_id": "trd_worker",
+          "baseline": "510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d",
+          "changes": [
+            {
+              "path": "Verification/scalability-trd-20260913/worker/trd-payload.json",
+              "sha256": "7db00d4471a1494373af03873e7daa85c84e38d60621d8fdea0afa382c2cb415"
+            },
+            {
+              "path": "Verification/scalability-trd-20260913/worker/trd-body.md",
+              "sha256": "6b0fbe84726cc5b34912ba79b22aa8fa250ea1e84a1602ed8434d4956bb10816"
+            }
+          ],
+          "checks": [
+            {
+              "path": "Verification/scalability-trd-20260913/worker/payload-validation.json",
+              "sha256": "7b4814706e91a3111d1ce84e502030f231e46000ba2b3cfffcd5a5edee518c24"
+            },
+            {
+              "path": "Verification/scalability-trd-20260913/worker/source-coverage.md",
+              "sha256": "fede97016a4f813ea0c0de55736a5a714a0f34dea419bf75bb6319947bf8c4d8"
+            },
+            {
+              "path": "Verification/scalability-trd-20260913/worker/source-inventory.json",
+              "sha256": "141227c30a5cfcf3c7ee29239ea5c0bd76095055e59dcb90c2cff96997757ff8"
+            }
+          ],
+          "limitations": [
+            "Worker wrote only prepared payload/evidence; host performed separate guarded managed TRD creation.",
+            "No implementation, new performance measurements, engine tests, fresh browsing or document approval."
+          ],
+          "result_id": "trd_capture_result_v1",
+          "round": 1
+        },
+        "event_id": "record_trd_capture_result_v1",
+        "execution_id": "scalability_trd_exec",
+        "generation": 1,
+        "kind": "result.record",
+        "revision": 13,
+        "sha256": "5d5d455c08e0ca5646cf6b473ae4ad7c87f7d7f2e1eeb4bbf859321a92605a10"
+      },
+      {
+        "actor": "/root/scalability_trd_manager",
+        "data": {
+          "acceptance_id": null,
+          "artifacts": [
+            "trd_payload_v1"
+          ],
+          "baseline": "510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d",
+          "criteria": [
+            {
+              "criterion": "User sources and relevant current implementation facts have exact attributable references.",
+              "evidence": "The supplied request/report/user answer and 19 local source files have exact references; manager reinspection found all 19 source digests unchanged."
+            },
+            {
+              "criterion": "The separate schema-2 TRD captures supported scalability outcomes and the actual selected integrity behavior while preserving proposed versus required design choices.",
+              "evidence": "Saved schema-2 draft contains 11 requirements; actual selected integrity timing is present throughout and optional numeric/technology choices remain design latitude."
+            },
+            {
+              "criterion": "The document and index are reopened and validated with forward and reverse source coverage.",
+              "evidence": "Manager reopened TRD-20260913-8BACF221 r1; body matches accepted payload; canonical catalog/index validation passed; both source coverage directions were inspected."
+            },
+            {
+              "criterion": "No unrelated project content is changed; document approval remains an explicit user gate.",
+              "evidence": "Worker wrote only bounded evidence. Host guarded create added one document/index; saved baseline comparison found all 20 pre-existing selected files unchanged. Exact document approval remains pending."
+            }
+          ],
+          "inspection": [
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/draft-delivery-inspection.json",
+              "sha256": "19cd1ede301ccb5ca959a7434d73e3afdb1698e971d293ae51d6dc399df63ca0"
+            },
+            {
+              "path": "TRDs/trd_scalable-verification-and-task-storage_2026-09-13.md",
+              "sha256": "194a3365bc32210d8aa33ea81f51ea088ac03337e521dcd072405857d4296316"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/trd-validation.json",
+              "sha256": "fff2d9ba5857e09decc4a7326b96f3f0c5774aaa544a814ccf6c90f93dd15d0e"
+            }
+          ],
+          "result_id": "trd_capture_result_v1",
+          "round": 1,
+          "subtask_id": "capture_trd"
+        },
+        "event_id": "verify_trd_capture_draft_v1",
+        "execution_id": "scalability_trd_exec",
+        "generation": 1,
+        "kind": "subtask.verify",
+        "revision": 14,
+        "sha256": "83388dfbfe1d9349da394f6d140ebe140ed7d658f350ebd29f15b61cb884d7df"
+      }
+    ],
+    "execution_id": "scalability_trd_exec",
+    "generation": 1,
+    "history": [],
+    "manager_id": "scalability_trd_manager",
+    "results": {
+      "trd_capture_result_v1": {
+        "acceptance_id": null,
+        "artifact_ids": [
+          "trd_payload_v1"
+        ],
+        "assignment_id": "trd_worker",
+        "baseline": "510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d",
+        "changes": [
+          {
+            "path": "Verification/scalability-trd-20260913/worker/trd-payload.json",
+            "sha256": "7db00d4471a1494373af03873e7daa85c84e38d60621d8fdea0afa382c2cb415"
+          },
+          {
+            "path": "Verification/scalability-trd-20260913/worker/trd-body.md",
+            "sha256": "6b0fbe84726cc5b34912ba79b22aa8fa250ea1e84a1602ed8434d4956bb10816"
+          }
+        ],
+        "checks": [
+          {
+            "path": "Verification/scalability-trd-20260913/worker/payload-validation.json",
+            "sha256": "7b4814706e91a3111d1ce84e502030f231e46000ba2b3cfffcd5a5edee518c24"
+          },
+          {
+            "path": "Verification/scalability-trd-20260913/worker/source-coverage.md",
+            "sha256": "fede97016a4f813ea0c0de55736a5a714a0f34dea419bf75bb6319947bf8c4d8"
+          },
+          {
+            "path": "Verification/scalability-trd-20260913/worker/source-inventory.json",
+            "sha256": "141227c30a5cfcf3c7ee29239ea5c0bd76095055e59dcb90c2cff96997757ff8"
+          }
+        ],
+        "limitations": [
+          "Worker wrote only prepared payload/evidence; host performed separate guarded managed TRD creation.",
+          "No implementation, new performance measurements, engine tests, fresh browsing or document approval."
+        ],
+        "result_id": "trd_capture_result_v1",
+        "round": 1
+      }
+    },
+    "reviews": {},
+    "settings": {
+      "effort": null,
+      "evidence": [
+        {
+          "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/runtime-evidence.json",
+          "sha256": "b02f5825b87d0f0a843f9dc61d5a3bd6aee97c8d81e6dca28ae258c45a14987f"
+        }
+      ],
+      "mode": "verified_inheritance",
+      "model": null
+    },
+    "source_refs": [
+      {
+        "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/user-supplied-recommendations.md",
+        "sha256": "17c0c319bfe16af36722f216cabf123e72277000e3adceda5c1a933342f76353"
+      },
+      {
+        "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/request.json",
+        "sha256": "8c79dc7615975b3b5df4a8fe2867228a4f76ef2baeb373ddc6485c20cd07b660"
+      }
+    ],
+    "stage": "active",
+    "subtasks": {
+      "capture_trd": {
+        "active_conflicts": [],
+        "baseline": {
+          "authority": "Explicit user $task new $to-trd authorizes requirements capture only. User selected immediate current-dependency verification, hash verification of historical evidence on access, and separate full archive audits with possibly later detection of unrelated damage. No implementation or external action.",
+          "category": "generic",
+          "criteria": [
+            "User sources and relevant current implementation facts have exact attributable references.",
+            "The separate schema-2 TRD captures supported scalability outcomes and the actual selected integrity behavior while preserving proposed versus required design choices.",
+            "The document and index are reopened and validated with forward and reverse source coverage.",
+            "No unrelated project content is changed; document approval remains an explicit user gate."
+          ],
+          "deliverable": "One separate reviewable schema-2 draft TRD and validation/source coverage evidence. Local document publication only.",
+          "dependencies": [],
+          "implementation_required": true,
+          "inputs": [
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/user-supplied-recommendations.md",
+              "sha256": "17c0c319bfe16af36722f216cabf123e72277000e3adceda5c1a933342f76353"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/request.json",
+              "sha256": "8c79dc7615975b3b5df4a8fe2867228a4f76ef2baeb373ddc6485c20cd07b660"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/worker-delegation-v2.md",
+              "sha256": "43327adf856f28c861c01b7d685abd721eea82f53cd61b7a5e812c6a2478f5ab"
+            },
+            {
+              "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/user-integrity-choice.json",
+              "sha256": "3e1a7ff89a69e2bddc0b10d93e051622edaba324a22b576c7b4479f792c89fd4"
+            }
+          ],
+          "objective": "Create and validate a separate scalability TRD from supplied recommendations and the actual user integrity choice.",
+          "protected": [
+            "Tasks",
+            "Implementation_Plans",
+            "SKILLS-depo",
+            ".agents/skills",
+            "SOUL.md",
+            "ROLE.md",
+            "AGENTS.md",
+            "SPECS.md",
+            "depot",
+            "Projects",
+            "MEMORY",
+            "control_records/memory"
+          ],
+          "rationale": "One supplied research report and one settled user clarification require bounded requirements capture through an existing document helper. One accountable worker can produce the document; competing architecture proposals or implementation are not requested.",
+          "reads": [
+            "SOUL.md",
+            "ROLE.md",
+            "AGENTS.md",
+            "SPECS.md",
+            "Roles/project-sub-agent",
+            ".agents/skills",
+            "SKILLS-depo",
+            "Verification/guard-capacity-20260913",
+            "ontology-advanced.yaml",
+            "TRDs",
+            "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap",
+            "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager"
+          ],
+          "requirements": [
+            "DOD-1",
+            "DOD-2",
+            "DOD-3",
+            "DOD-5"
+          ],
+          "slots": [
+            {
+              "function": "worker",
+              "perspective": "Source-grounded requirements capture",
+              "slot": "worker",
+              "solver_slot": null
+            }
+          ],
+          "stop": "Validated draft awaiting exact user approval, or a material unmet prerequisite before dependent work.",
+          "writes": [
+            "Verification/scalability-trd-20260913/worker",
+            "TRDs/trd_scalable-verification-and-task-storage_2026-09-13.md",
+            "TRDs/INDEX.md"
+          ]
+        },
+        "dependency_versions": {},
+        "digest": "510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d",
+        "round": 1,
+        "task_digest": "d1ddc5b5396436afe07f8a80e6015c9dc15a57e0964352e747d5c56963990248",
+        "verified": [
+          {
+            "acceptance_id": null,
+            "artifacts": [
+              "trd_payload_v1"
+            ],
+            "baseline": "510d6d7056b9220514ad09d4fa4277071029cbb7d17de8264df08132c43f113d",
+            "criteria": [
+              {
+                "criterion": "User sources and relevant current implementation facts have exact attributable references.",
+                "evidence": "The supplied request/report/user answer and 19 local source files have exact references; manager reinspection found all 19 source digests unchanged."
+              },
+              {
+                "criterion": "The separate schema-2 TRD captures supported scalability outcomes and the actual selected integrity behavior while preserving proposed versus required design choices.",
+                "evidence": "Saved schema-2 draft contains 11 requirements; actual selected integrity timing is present throughout and optional numeric/technology choices remain design latitude."
+              },
+              {
+                "criterion": "The document and index are reopened and validated with forward and reverse source coverage.",
+                "evidence": "Manager reopened TRD-20260913-8BACF221 r1; body matches accepted payload; canonical catalog/index validation passed; both source coverage directions were inspected."
+              },
+              {
+                "criterion": "No unrelated project content is changed; document approval remains an explicit user gate.",
+                "evidence": "Worker wrote only bounded evidence. Host guarded create added one document/index; saved baseline comparison found all 20 pre-existing selected files unchanged. Exact document approval remains pending."
+              }
+            ],
+            "inspection": [
+              {
+                "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/draft-delivery-inspection.json",
+                "sha256": "19cd1ede301ccb5ca959a7434d73e3afdb1698e971d293ae51d6dc399df63ca0"
+              },
+              {
+                "path": "TRDs/trd_scalable-verification-and-task-storage_2026-09-13.md",
+                "sha256": "194a3365bc32210d8aa33ea81f51ea088ac03337e521dcd072405857d4296316"
+              },
+              {
+                "path": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/manager/trd-validation.json",
+                "sha256": "fff2d9ba5857e09decc4a7326b96f3f0c5774aaa544a814ccf6c90f93dd15d0e"
+              }
+            ],
+            "result_id": "trd_capture_result_v1",
+            "round": 1,
+            "subtask_id": "capture_trd"
+          }
+        ],
+        "versions": []
+      }
+    },
+    "syntheses": {},
+    "task_digest": "d1ddc5b5396436afe07f8a80e6015c9dc15a57e0964352e747d5c56963990248",
+    "verifications": [],
+    "version": 1,
+    "writer": "/root/scalability_trd_manager"
+  }
+}

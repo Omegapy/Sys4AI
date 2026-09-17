@@ -1,0 +1,35 @@
+test_complete_inventory_through_128_mib_and_rejects_overflow (test_guard_engine.GuardSnapshotCapacityTests.test_complete_inventory_through_128_mib_and_rejects_overflow) ... 
+  test_complete_inventory_through_128_mib_and_rejects_overflow (test_guard_engine.GuardSnapshotCapacityTests.test_complete_inventory_through_128_mib_and_rejects_overflow) (mebibytes=80) ... ERROR
+  test_complete_inventory_through_128_mib_and_rejects_overflow (test_guard_engine.GuardSnapshotCapacityTests.test_complete_inventory_through_128_mib_and_rejects_overflow) (mebibytes=128) ... ERROR
+test_file_count_limit_remains_enforced (test_guard_engine.GuardSnapshotCapacityTests.test_file_count_limit_remains_enforced) ... ok
+
+======================================================================
+ERROR: test_complete_inventory_through_128_mib_and_rejects_overflow (test_guard_engine.GuardSnapshotCapacityTests.test_complete_inventory_through_128_mib_and_rejects_overflow) (mebibytes=80)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guard_engine.py", line 163, in test_complete_inventory_through_128_mib_and_rejects_overflow
+    snapshot = guards._snapshot(root, ["inventory"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_guards.py", line 275, in _snapshot
+    fail(len(result) < MAX_FILES and count <= MAX_BYTES, "guard_resource_limit", "Guard target inventory exceeds its supported bound.")
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_guards.py", line 122, in fail
+    raise GuardError(code, message, details)
+ontology_guards.GuardError: Guard target inventory exceeds its supported bound. [condition=guard_resource_limit]
+
+======================================================================
+ERROR: test_complete_inventory_through_128_mib_and_rejects_overflow (test_guard_engine.GuardSnapshotCapacityTests.test_complete_inventory_through_128_mib_and_rejects_overflow) (mebibytes=128)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guard_engine.py", line 163, in test_complete_inventory_through_128_mib_and_rejects_overflow
+    snapshot = guards._snapshot(root, ["inventory"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_guards.py", line 275, in _snapshot
+    fail(len(result) < MAX_FILES and count <= MAX_BYTES, "guard_resource_limit", "Guard target inventory exceeds its supported bound.")
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_guards.py", line 122, in fail
+    raise GuardError(code, message, details)
+ontology_guards.GuardError: Guard target inventory exceeds its supported bound. [condition=guard_resource_limit]
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.378s
+
+FAILED (errors=2)

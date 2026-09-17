@@ -1,0 +1,53 @@
+--- before/SKILLS-depo/init-new-project/scripts/init_static_health.py
++++ after/SKILLS-depo/init-new-project/scripts/init_static_health.py
+@@ -8,12 +8,12 @@
+ from pathlib import Path
+ 
+ INVENTORY = "assets/static-capability-v1.json"
+-INVENTORY_SHA256 = "737e9ae5d05976f5fe0b216f3e2966e35168859ce10c87a605b3bbb63b43c001"
++INVENTORY_SHA256 = "5064a50a5c80a67f53b9bbd6a192dea092338d9545e3ba807623b9194c3c5ce4"
+ 
+ 
+-def inventory(h):
+-    raw = h.file_bytes(Path(__file__).resolve().parent.parent / INVENTORY)
+-    if h.sha(raw) != INVENTORY_SHA256:
++def inventory(h, *, legacy=False):
++    raw = h.file_bytes(Path(__file__).resolve().parent.parent / ("assets/static-capability-v11.json" if legacy else INVENTORY))
++    if h.sha(raw) != ("27e6113622f908af73403d7af97e572e88aaa4dd0167eadc00d240e287f5f44d" if legacy else INVENTORY_SHA256):
+         raise h.InitializationError("unknown static capability inventory; preserve it for reviewed helper adoption")
+     return h.unique_json(raw)
+ 
+@@ -77,10 +77,12 @@
+             current_sources = {name: row for name, row in current_sources.items() if not _inside(name, roots)}
+             current_sources.update({row["destination"]: row for row in adopted["sources"]})
+         source_rows = [current_sources[name] for name in sorted(current_sources)]
+-    locked = inventory(h)["locked_resources"]
++    integrated = (operation.get("schema_version") == 2 and operation.get("module_id") == h.CURATOR_MODULE) if operation else contract == h.SETUP_CONTRACT or any(op.get("integration_edition") == h.INTEGRATION.EDITION for op in record.get("module_adoptions",[]))
++    selected_inventory = inventory(h, legacy=not integrated and (operation is None or operation.get("module_id") == h.CURATOR_MODULE and operation.get("schema_version") == 1))
++    locked = selected_inventory["locked_resources"]
+     components = []
+     for module in dict.fromkeys(selected):
+-        module_locks = {**locked, **(inventory(h).get("curator_locked_resources", {}) if module == h.CURATOR_MODULE else {})}
++        module_locks = {**locked, **(selected_inventory.get("curator_locked_resources", {}) if module == h.CURATOR_MODULE else {})}
+         paths = _paths(h, module)
+         sources = [row for row in source_rows if _inside(row["destination"], paths)]
+         preserved = any(row["adoption"] in {"preserved-project-owned", "skipped-existing-package"} for row in sources)
+@@ -93,7 +95,8 @@
+                 continue
+             raw = h.file_bytes(target)
+             observed[name] = h.sha(raw)
+-            if name in module_locks and observed[name] != module_locks[name]:
++            compatible_lock = not integrated and observed[name] == {**inventory(h)["locked_resources"], **inventory(h).get("curator_locked_resources", {})}.get(name)
++            if name in module_locks and observed[name] != module_locks[name] and not compatible_lock:
+                 diagnostics.append({"code": "capability_lock_changed", "path": name})
+             if name.endswith(".py"):
+                 try:
+@@ -124,7 +127,7 @@
+             elif detail["shared_automatic_checkpoint"] == "unavailable":
+                 detail["excluded_dependency"] = "Preserved memory was not selected for compatible refresh; shared capture is unverified."
+         elif module == h.CURATOR_MODULE:
+-            detail = h._curator("assess", destination)
++            detail = h._curator("assess", destination, integration_required=integrated)
+             available = detail["structural_readiness"] == "available" and detail["compatible"]
+         else:
+             detail = h.assess_ontology(destination) if module == h.ONTOLOGY_MODULE else h._advanced("assess", destination)

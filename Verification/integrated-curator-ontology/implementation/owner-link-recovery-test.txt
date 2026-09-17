@@ -1,0 +1,15 @@
+test_owner_receipt_link_failure_reopens_same_owner_result (test_integrated_setup.IntegratedSetupTests.test_owner_receipt_link_failure_reopens_same_owner_result) ... FAIL
+
+======================================================================
+FAIL: test_owner_receipt_link_failure_reopens_same_owner_result (test_integrated_setup.IntegratedSetupTests.test_owner_receipt_link_failure_reopens_same_owner_result)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_integrated_setup.py", line 134, in test_owner_receipt_link_failure_reopens_same_owner_result
+    receipts=list((target/'control_records/ontology/integrations/receipts').glob('*.json'));self.assertEqual(len(receipts),1,str(failure.exception)+' '+str(failure.exception.report and failure.exception.report.get('recovery'))+' cause '+str(failure.exception.__cause__));before=receipts[0].read_bytes()
+                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : inputs must be regular non-aliased files None cause None
+
+----------------------------------------------------------------------
+Ran 1 test in 11.437s
+
+FAILED (failures=1)

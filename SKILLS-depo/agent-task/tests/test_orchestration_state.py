@@ -422,3 +422,331 @@ class OrchestrationTests(unittest.TestCase):
 
 
 if __name__ == '__main__': unittest.main()
+
+class NativeOrchestrationFixture:
+    """Real disposable owner operations with explicitly synthetic transport frames."""
+    def __init__(self, writes=(), policy_factory=None, protocol_version=1):
+        self.protocol_version=protocol_version
+        self.driver = OrchestrationTests(methodName='test_legacy_and_v2_read_only_and_strict_keys')
+        self.driver.setUp()
+        self.root = self.driver.root
+        self.historical_path = self.driver.folder / 'task.json'
+        self.historical_bytes = self.historical_path.read_bytes()
+        shutil.copytree(SKILL_ROOT, self.root / '.agents/skills/agent-task',
+                        ignore=shutil.ignore_patterns('__pycache__'))
+        helper_path=self.root / '.agents/skills/agent-task/scripts/task_state.py'
+        spec=importlib.util.spec_from_file_location('_native_fixture_task_'+hashlib.sha256(str(self.root).encode()).hexdigest(),helper_path)
+        self.helper=importlib.util.module_from_spec(spec);spec.loader.exec_module(self.helper)
+        self.native=self.helper.orch.native
+        (self.root/'CURATOR.md').write_text('# Synthetic Curator charter\n')
+        (self.root/'curator.yaml').write_text(json.dumps(policy_factory(self.root)) if policy_factory else 'Synthetic protected policy binding.\n')
+        self.origin={'kind':'curator','charter':self.driver.ref('CURATOR.md'),
+            'policy':self.driver.ref('curator.yaml'),'project_id':'fixture','repository_id':'fixture',
+            'coordination_root':str(self.root)}
+        self.protocol={'schema_version':1,'backend':'codex-app-server-v2','session_id':'session-fixture',
+            'runtime_sha256':'1'*64,'schema_sha256':'2'*64,'profile_sha256':'3'*64}
+        if protocol_version==2:
+            self.protocol={'schema_version':2,'backend':'codex-app-server-v2','broker_run_id':'fork-fixture','lineage_kind':'thread-fork',
+                'runtime_sha256':'1'*64,'schema_sha256':'2'*64,'profile_sha256':'3'*64,'source_sha256':'4'*64}
+        result=self.helper.command_new(self.root,self.root/'Tasks',{'name':'Native owner fixture',
+            'description':'Verify explicit native owner grants.','definition_of_done':['Verified native owner.'],
+            'orchestration_enabled':True,'orchestration_version':2,'controller_origin':self.origin,'native_protocol':self.protocol})
+        self.folder=Path(result['task_folder']);self.state=json.loads((self.folder/'task.json').read_text())
+        self.actor='controller-native';self.execution='native-fixture';self.seq=0
+        self.authority=self.native.TransportAuthority('session-fixture')
+        self.actors={};self.authorities={}
+        if protocol_version==2:
+            self.registry=self.native.LoadedActorRegistry('fork-fixture');self.bind_actor(self.actor)
+        data=self.driver.manager_data('native-manager')
+        if protocol_version==2:data['runtime']['tools']=['thread/fork','thread/read','turn/start','turn/steer','turn/interrupt','thread/resume','owned-runtime-release']
+        data['bootstrap_receipt']=self.roster(self.actor)
+        data['fit']['writes']=list(writes)
+        self.event('manager.reserve',data)
+        self.event('manager.receipt',{'assignment_id':'native-manager','receipt':self.launch(self.actor,'manager-native')})
+        reads=self.driver.reads();reads['charter_sha256']=self.origin['charter']['sha256']
+        if protocol_version==2:reads=self.role_acknowledgement('native-manager')
+        self.event('manager.activate',{'assignment_id':'native-manager','role_reads':reads})
+        self.actor='manager-native'
+
+    def close(self):
+        self.driver.tearDown()
+
+    def observation(self,method,params,child=None):
+        event={'method':method,'params':params}
+        out={'schema_version':1,'backend':'codex-app-server-v2','session_id':'session-fixture',
+            'sequence':self.seq+1,'raw_sha256':hashlib.sha256(self.native.canonical(event)).hexdigest(),'event':event}
+        if child:out['child']=child
+        return out
+
+    def roster(self,actor):
+        if self.protocol_version==2:
+            return self.typed('status','native-manager' if actor=='manager-native' else 'bootstrap',actor,
+                [{'method':'thread/status/changed','params':{'threadId':actor,'status':{'type':'active'}}}],{'native_state':'active'})
+        return self.observation('thread/status/changed',{'threadId':actor,'status':{'type':'active','activeFlags':[]}})
+
+    def launch(self,parent,child,assignment_id='native-manager'):
+        if self.protocol_version==2:
+            self.bind_actor(child)
+            metadata={'id':child,'sessionId':'shared-fixture-session','parentThreadId':None,'forkedFromId':parent,
+                'source':'vscode','path':'/synthetic/'+child+'.jsonl','model':'gpt-6-astra','reasoningEffort':'xhigh','modelProvider':'openai'}
+            settings={'model':'gpt-6-astra','reasoning_effort':'xhigh','provider':'openai','profile_id':'fixture-profile','cwd':str(self.root)}
+            params={'threadId':parent,'lastTurnId':'source-turn','model':'gpt-6-astra','modelProvider':'openai',
+                'config':{'model_reasoning_effort':'xhigh'},'permissions':'fixture-profile','cwd':str(self.root)}
+            result={'thread':metadata,'model':'gpt-6-astra','modelProvider':'openai','reasoningEffort':'xhigh',
+                'activePermissionProfile':{'id':'fixture-profile'},'cwd':str(self.root)}
+            frames=[{'id':1,'method':'thread/fork','params':params},{'id':1,'result':result},
+                {'id':2,'method':'thread/read','params':{'threadId':child,'includeTurns':False}},{'id':2,'result':{'thread':metadata}}]
+            return self.typed('creation',assignment_id,child,frames,{'source_thread_id':parent,'logical_parent_id':parent,
+                'metadata':metadata,'settings':settings,'history_cut':{'mode':'lastTurnId','turn_id':'source-turn','history_sha256':'5'*64,'input_sha256':'6'*64}})
+        return self.observation('item/completed',{'threadId':parent,'turnId':'turn-fixture','item':{
+            'type':'collabAgentToolCall','id':'spawn-fixture','tool':'spawnAgent','status':'completed',
+            'senderThreadId':parent,'receiverThreadIds':[child],'agentsStates':{child:{'status':'running'}}}},
+            {'id':child,'parentThreadId':parent,'source':{'subAgent':{'thread_spawn':{'parent_thread_id':parent,'depth':1}}}})
+
+    def context(self,tool='task.event',actor=None):
+        self.seq+=1
+        frame={'id':self.seq,'method':'item/tool/call','params':{'callId':'call'+str(self.seq),
+            'threadId':actor or self.actor,'turnId':'turn'+str(self.seq),'tool':tool,'arguments':{}}}
+        if self.protocol_version==2:
+            self.authority=self.authorities[actor or self.actor];frame['params']['tool']=tool.replace('.','_')
+            return self.authority.capture(frame,self.seq,self.native.canonical(frame)+b'\n')
+        return self.authority.capture(frame,self.seq)
+
+    def bind_actor(self,actor,epoch=1):
+        old=self.actors.get(actor)
+        if old is not None and self.registry.current.get(actor)==old:self.registry.close_admission(old)
+        binding={'thread_id':actor,'session_id':'shared-fixture-session','connection_id':actor+'-load-'+str(epoch),'load_epoch':epoch,
+            'runtime_instance':{'pid':100+len(self.actors)+epoch,'parent':1,'group':100+len(self.actors)+epoch,'uid':501,'started':[1,epoch],'executable':'/synthetic/codex'}}
+        self.registry.bind(binding);self.actors[actor]=binding
+        self.authorities[actor]=self.native.TransportAuthorityV2(self.protocol,binding,self.registry)
+        self.authority=self.authorities[actor]
+
+    def typed(self,kind,assignment_id,actor,frames,facts):
+        records=[self.native.wire_record('sent' if frame.get('method') in ('thread/fork','thread/read','thread/resume','turn/start','turn/steer') else 'received',
+            index+1,self.native.canonical(frame)+b'\n') for index,frame in enumerate(frames)]
+        return {'schema_version':2,'backend':'codex-app-server-v2','broker_run_id':'fork-fixture','kind':kind,
+            'actor':copy.deepcopy(self.actors[actor]),'operation_id':'fixture-'+kind,'reservation_id':assignment_id,'frames':records,'facts':facts}
+
+    def role_acknowledgement(self,assignment_id):
+        assignment=self.state['orchestration']['assignments'][assignment_id];actor=assignment['native_id']
+        reads={ref['path']:ref['sha256'] for ref in assignment['context']}
+        reads.update({assignment['role']['agents_path']:assignment['role']['agents_sha256'],assignment['role']['role_path']:assignment['role']['role_sha256'],
+            self.origin['charter']['path']:self.origin['charter']['sha256']})
+        frame={'id':3,'method':'item/tool/call','params':{'threadId':actor,'turnId':'role-turn','callId':'role-call','tool':'role_acknowledge','arguments':{'reads':reads}}}
+        return self.typed('role_acknowledgement',assignment_id,actor,[frame],{'reads':reads,'call_id':'role-call'})
+
+    def release_receipt(self,assignment_id):
+        a=self.state['orchestration']['assignments'][assignment_id];actor=a['native_id']
+        return self.typed('runtime_release',assignment_id,actor,[{'method':'turn/completed','params':{'threadId':actor,'turn':{'id':'last-turn','status':'completed'}}}],
+            {'admission_closed':True,'owner_reconciled':True,'local_runtime_absent':True,'local_companion_absent':True,'lease_released':True,
+             'provider_outcome':'completed','cleanup_sha256':'7'*64})
+
+    def resume_receipt(self,assignment_id):
+        a=self.state['orchestration']['assignments'][assignment_id];value=copy.deepcopy(a['native_receipt']);actor=a['native_id']
+        self.bind_actor(actor,self.actors[actor]['load_epoch']+1);value['kind']='resume';value['actor']=copy.deepcopy(self.actors[actor])
+        frames=[copy.deepcopy(row['frame']) for row in value['frames']]
+        frames[0]['method']='thread/resume';frames[0]['params']['threadId']=actor;frames[0]['params'].pop('lastTurnId')
+        value['frames']=self.typed('resume',assignment_id,actor,frames,value['facts'])['frames'];return value
+
+    def binding(self):
+        state=json.loads((self.folder/'task.json').read_text());self.state=state
+        return {'path':str((self.folder/'task.json').relative_to(self.root)),
+            'sha256':hashlib.sha256((self.folder/'task.json').read_bytes()).hexdigest(),
+            'task_id':state['task_id'],'execution_id':self.execution,'generation':1,'assignment_id':'native-manager'}
+
+    def owner_binding(self,context,owner):
+        return {'owner':owner,'call':context.binding(),'protocol':self.protocol,
+            'charter':self.origin['charter'],'policy':self.origin['policy']}
+
+    def event(self,kind,data,*,actor=None):
+        context=self.context(actor=actor)
+        event={'event_id':'native'+str(self.seq),'actor':actor or self.actor,
+            'execution_id':self.execution,'generation':1,'kind':kind,'data':data}
+        with self.authority.invoke(context):
+            result=self.helper.response_transaction('orchestrate',self.root,self.root/'Tasks',
+                self.state['task_id'],self.state['revision'],{'event':event,'response':self.driver.response_payload(self.state)})
+        self.state=json.loads((self.folder/'task.json').read_text())
+        return result
+
+
+class NativeVersionTests(unittest.TestCase):
+    def test_new_native_task_transfers_writer_and_preserves_historical_record(self):
+        fixture=NativeOrchestrationFixture();self.addCleanup(fixture.close)
+        self.assertEqual(fixture.state['orchestration']['writer'],'manager-native')
+        self.assertEqual(fixture.state['orchestration']['version'],2)
+        self.assertEqual(fixture.historical_path.read_bytes(),fixture.historical_bytes)
+        with self.assertRaises(fixture.helper.TaskError):
+            fixture.event('block',{'reason':'Attempted old controller write'},actor='controller-native')
+
+    def test_native_actor_string_without_live_context_cannot_write(self):
+        fixture=NativeOrchestrationFixture();self.addCleanup(fixture.close)
+        with self.assertRaises(fixture.helper.orch.OrchestrationError):
+            fixture.helper.orch.auth(fixture.state,{'actor':'manager-native','execution_id':fixture.execution,'generation':1})
+
+    def test_unknown_native_fields_and_wrong_charter_are_rejected(self):
+        fixture=NativeOrchestrationFixture();self.addCleanup(fixture.close)
+        bad=copy.deepcopy(fixture.state['orchestration']);bad['native_protocol']['forged']=True
+        with self.assertRaises(fixture.helper.orch.OrchestrationError):fixture.helper.orch.validate(bad)
+        bad=copy.deepcopy(fixture.state['orchestration']);bad['controller_origin']['kind']='director'
+        with self.assertRaises(fixture.helper.orch.OrchestrationError):fixture.helper.orch.validate(bad)
+
+
+class ForkReceiptOwnerTests(unittest.TestCase):
+    """Owner field semantics against typed synthetic wire receipts, not native proof."""
+    def setUp(self):
+        self.orch=task_state.orch;self.native=self.orch.native
+        self.protocol={'schema_version':2,'backend':'codex-app-server-v2','broker_run_id':'fork-owner-fixture',
+            'lineage_kind':'thread-fork',**{key:'1'*64 for key in ('runtime_sha256','schema_sha256','source_sha256','profile_sha256')}}
+        self.scope={'version':2,'native_protocol':self.protocol,'controller_origin':{'charter':{'path':'CURATOR.md','sha256':'2'*64}}}
+        self.actor={'thread_id':'worker-native','session_id':'shared-session','connection_id':'worker-connection','load_epoch':1,
+            'runtime_instance':{'pid':123,'parent':12,'group':123,'uid':501,'started':[1,123],'executable':'/synthetic/codex'}}
+        self.assignment={'assignment_id':'worker1','native_id':'worker-native','role':{'agents_path':'Roles/worker/AGENTS.md',
+            'role_path':'Roles/worker/ROLE.md','agents_sha256':'3'*64,'role_sha256':'4'*64},'context':[{'path':'packet.json','sha256':'5'*64}]}
+        self.reads={'CURATOR.md':'2'*64,'Roles/worker/AGENTS.md':'3'*64,'Roles/worker/ROLE.md':'4'*64,'packet.json':'5'*64}
+
+    def wire(self,direction,sequence,frame):
+        return self.native.wire_record(direction,sequence,self.native.canonical(frame)+b'\n')
+
+    def receipt(self,kind,facts,frames):
+        return {'schema_version':2,'backend':'codex-app-server-v2','broker_run_id':self.protocol['broker_run_id'],
+            'kind':kind,'actor':self.actor,'operation_id':'observed-operation','reservation_id':'worker1','facts':facts,'frames':frames}
+
+    def acknowledgement(self,reads=None):
+        reads=reads or self.reads
+        frame={'id':1,'method':'item/tool/call','params':{'threadId':'worker-native','turnId':'native-turn',
+            'callId':'role-call','tool':'role_acknowledge','arguments':{'reads':reads}}}
+        return self.receipt('role_acknowledgement',{'reads':reads,'call_id':'role-call'},[self.wire('received',1,frame)])
+
+    def delivery(self):
+        content=[{'type':'text','text':'Exact packet digest: '+'5'*64,'text_elements':[]}]
+        params={'threadId':'worker-native','input':content}
+        frames=[self.wire('sent',2,{'id':2,'method':'turn/start','params':params}),
+                self.wire('received',3,{'id':2,'result':{'turn':{'id':'delivered-turn'}}})]
+        return self.receipt('input_delivery',{'recipient':'worker-native','turn_id':'delivered-turn',
+            'input_sha256':hashlib.sha256(self.native.canonical(content)).hexdigest(),'artifact_sha256s':['5'*64]},frames)
+
+    def owner(self,function,*args,**kwargs):
+        return self.orch.versioned(lambda scope:function(*args,**kwargs))(self.scope)
+
+    def test_role_callback_binds_actor_reservation_pair_charter_and_current_input(self):
+        self.owner(self.orch.role_reads,self.assignment,self.acknowledgement(),current_input=True)
+        cases=[]
+        missing=dict(self.reads);del missing['packet.json'];cases.append(self.acknowledgement(missing))
+        changed=dict(self.reads);changed['CURATOR.md']='6'*64;cases.append(self.acknowledgement(changed))
+        altered=self.acknowledgement();altered['reservation_id']='other';cases.append(altered)
+        altered=self.acknowledgement();altered['actor']={**self.actor,'thread_id':'other-native'};cases.append(altered)
+        cases.append(self.delivery())
+        for value in cases:
+            with self.subTest(value=value['kind']),self.assertRaises(self.orch.OrchestrationError):
+                self.owner(self.orch.role_reads,self.assignment,value,current_input=True)
+
+    def test_historical_role_acknowledgement_does_not_claim_reading_a_rebound_input(self):
+        old=self.acknowledgement();rebound=copy.deepcopy(self.assignment);rebound['context'][0]['sha256']='6'*64
+        self.owner(self.orch.role_reads,rebound,old)
+        with self.assertRaises(self.orch.OrchestrationError):
+            self.owner(self.orch.role_reads,rebound,old,current_input=True)
+
+    def test_input_delivery_requires_its_actual_recipient_packet_and_receipt_family(self):
+        value=self.delivery();self.owner(self.orch.input_receipt,self.assignment,value,self.assignment['context'])
+        altered=self.delivery();altered['reservation_id']='other'
+        wrong_input=[{'path':'packet.json','sha256':'6'*64}]
+        for candidate,refs in ((altered,self.assignment['context']),(value,wrong_input),
+                               (self.acknowledgement(),self.assignment['context'])):
+            with self.assertRaises(self.orch.OrchestrationError):
+                self.owner(self.orch.input_receipt,self.assignment,candidate,refs)
+        altered=self.delivery();altered['frames'][0]=self.wire('sent',2,{'id':2,'method':'turn/start',
+            'params':{'threadId':'foreign-native','input':[{'type':'text','text':'5'*64,'text_elements':[]}]}})
+        with self.assertRaises(self.orch.OrchestrationError):
+            self.owner(self.orch.input_receipt,self.assignment,altered,self.assignment['context'])
+
+    def test_typed_conflict_returns_to_originating_assignment_and_common_explanation(self):
+        origin={**self.assignment,'slot':'solver_a','state':'active'}
+        scope={'assignments':{'worker1':origin},'candidates':{'candidate1':{'assignment_id':'worker1'}}}
+        conflict={'candidate_ids':['candidate1']}
+        value=self.delivery();value['kind']='conflict_delivery'
+        value['facts'].update(origin_assignment_id='worker1',explanation_sha256='5'*64)
+        self.owner(self.orch.conflict_receipt,scope,conflict,'solver_a',value,'5'*64,current=True)
+        for selected,explanation in ((self.delivery(),'5'*64),(value,'6'*64)):
+            with self.assertRaises(self.orch.OrchestrationError):
+                self.owner(self.orch.conflict_receipt,scope,conflict,'solver_a',selected,explanation,current=True)
+        wrong=copy.deepcopy(value);wrong['facts']['origin_assignment_id']='replacement'
+        with self.assertRaises(self.orch.OrchestrationError):
+            self.owner(self.orch.conflict_receipt,scope,conflict,'solver_a',wrong,'5'*64,current=True)
+        origin['state']='revoked'
+        self.owner(self.orch.conflict_receipt,scope,conflict,'solver_a',value,'5'*64)
+        with self.assertRaises(self.orch.OrchestrationError):
+            self.owner(self.orch.conflict_receipt,scope,conflict,'solver_a',value,'5'*64,current=True)
+
+
+class ForkOwnerIntegrationTests(unittest.TestCase):
+    def fixture(self):
+        value=NativeOrchestrationFixture(protocol_version=2);self.addCleanup(value.close);return value
+
+    def test_completed_worker_cannot_be_revoked_until_its_local_lease_is_released(self):
+        f=self.fixture();f.event('subtask.define',{'subtask_id':'subtask1','baseline':f.driver.base()})
+        f.driver.state=f.state;f.driver.folder=f.folder
+        data=f.driver.assignment_data('worker-case','worker');data['runtime']=copy.deepcopy(f.state['orchestration']['assignments']['native-manager']['runtime'])
+        f.event('assignment.reserve',data)
+        f.event('assignment.receipt',{'assignment_id':'worker-case','receipt':f.launch(f.actor,'worker-native','worker-case')})
+        f.event('assignment.reads',{'assignment_id':'worker-case','role_reads':f.role_acknowledgement('worker-case')})
+        completed=f.typed('status','worker-case','worker-native',[{'method':'turn/completed','params':{'threadId':'worker-native','turn':{'id':'worker-turn','status':'completed'}}}],{'native_state':'completed'})
+        f.event('assignment.observe',{'assignment_id':'worker-case','receipt':completed,'changes':[]})
+        before=(f.folder/'task.json').read_bytes()
+        with self.assertRaises(f.helper.TaskError) as error:
+            f.event('assignment.revoke',{'assignment_id':'worker-case','reason':'The completed turn does not release this worker.'})
+        self.assertEqual(error.exception.code,'ORCH_REVOKE_UNCONFIRMED')
+        self.assertEqual((f.folder/'task.json').read_bytes(),before)
+        f.event('assignment.observe',{'assignment_id':'worker-case','receipt':f.release_receipt('worker-case'),'changes':[]})
+        f.event('assignment.revoke',{'assignment_id':'worker-case','reason':'The local runtime and helper were released.'})
+        assignment=f.state['orchestration']['assignments']['worker-case']
+        self.assertEqual(assignment['state'],'revoked');self.assertTrue(f.native.loaded_actor(assignment)['released'])
+        self.assertNotIn('worker-case',[a['assignment_id'] for a in f.helper.orch.unresolved(f.state['orchestration'])])
+
+    def test_actual_owner_requires_reconnect_and_fresh_role_ack_after_same_id_resume(self):
+        f=self.fixture();a=f.state['orchestration']['assignments']['native-manager'];original=copy.deepcopy(a['native_receipt']);old_reads=copy.deepcopy(a['role_reads'])
+        old_context=f.context('task_response');old_authority=f.authority
+        released=f.release_receipt('native-manager');resumed=f.resume_receipt('native-manager')
+        context=f.context('task_response')
+        with f.authority.invoke(context),self.assertRaises(f.helper.orch.OrchestrationError):
+            f.helper.orch.auth(f.state,{'actor':f.actor,'execution_id':f.execution,'generation':1})
+        before=(f.folder/'task.json').read_bytes()
+        with self.assertRaises(f.helper.TaskError):
+            f.event('manager.reconnect',{'assignment_id':'native-manager','receipt':resumed,'release_receipt':released,'role_reads':old_reads})
+        self.assertEqual((f.folder/'task.json').read_bytes(),before)
+        f.event('manager.reconnect',{'assignment_id':'native-manager','receipt':resumed,'release_receipt':released,
+            'role_reads':f.role_acknowledgement('native-manager')})
+        a=f.state['orchestration']['assignments']['native-manager'];self.assertEqual(a['native_receipt'],original)
+        self.assertEqual(f.native.loaded_actor(a)['actor']['load_epoch'],2)
+        self.assertEqual([v['receipt']['kind'] for v in a['observations']],['runtime_release','resume'])
+        context=f.context('task_response')
+        with f.authority.invoke(context):f.helper.orch.auth(f.state,{'actor':f.actor,'execution_id':f.execution,'generation':1})
+        with self.assertRaises(f.native.NativeError):
+            with old_authority.invoke(old_context):pass
+        self.assertEqual(f.historical_path.read_bytes(),f.historical_bytes)
+
+    def test_reconnect_rejects_another_native_tool_as_role_acknowledgement(self):
+        f=self.fixture();released=f.release_receipt('native-manager');resumed=f.resume_receipt('native-manager')
+        before=(f.folder/'task.json').read_bytes()
+        for override in ({'tool':'artifact_submit'},{'namespace':'curator'}):
+            reads=f.role_acknowledgement('native-manager');frame=copy.deepcopy(reads['frames'][0]['frame'])
+            frame['params'].update(override);reads['frames'][0]=f.native.wire_record('received',1,f.native.canonical(frame)+b'\n')
+            with self.subTest(override=override),self.assertRaises(f.helper.TaskError):
+                f.event('manager.reconnect',{'assignment_id':'native-manager','receipt':resumed,'release_receipt':released,'role_reads':reads})
+            self.assertEqual((f.folder/'task.json').read_bytes(),before)
+
+    def test_completed_native_turn_does_not_release_the_canonical_owner_lease(self):
+        f=self.fixture();o=copy.deepcopy(f.state['orchestration']);a=o['assignments']['native-manager'];a['state']='completed'
+        completed=f.typed('status','native-manager',f.actor,[{'method':'turn/completed','params':{'threadId':f.actor,'turn':{'id':'native-turn','status':'completed'}}}],{'native_state':'completed'})
+        a['observations'].append({'receipt':completed,'changes':[]})
+        self.assertEqual(f.native.status_value_v2(completed),'completed')
+        self.assertFalse(f.native.loaded_actor(a)['released']);self.assertEqual(len(f.helper.orch.unresolved(o)),1)
+        a['observations'].append({'receipt':f.release_receipt('native-manager'),'changes':[]})
+        self.assertTrue(f.native.loaded_actor(a)['released']);self.assertEqual(f.helper.orch.unresolved(o),[])
+        a['observations'].append(copy.deepcopy(a['observations'][-1]))
+        with self.assertRaises(f.native.NativeError):f.native.loaded_actor(a)
+
+    def test_fork_runtime_tuple_rejects_intrinsic_collaboration_as_capability_evidence(self):
+        f=self.fixture();value=copy.deepcopy(f.state['orchestration']['assignments']['native-manager']['runtime'])
+        value['tools']=['spawn_agent','list_agents','send_message','followup_task','interrupt_agent']
+        with self.assertRaises(f.helper.orch.OrchestrationError):
+            f.helper.orch.versioned(lambda o:f.helper.orch.runtime(value))(f.state['orchestration'])

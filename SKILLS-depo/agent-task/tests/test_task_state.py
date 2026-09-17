@@ -46,6 +46,20 @@ SPEC.loader.exec_module(task_state)
 class TaskStateTests(unittest.TestCase):
     maxDiff = None
 
+    def test_native_version_requires_explicit_enable_without_touching_history(self):
+        _,folder=self.create_task('Preserved historical Task')
+        historical=(folder/'task.json').read_bytes();before=self.tree_hash()
+        payload={'name':'Unselected native Task','description':'Check explicit version selection.',
+                 'definition_of_done':['No implicit native execution.'],'orchestration_version':2}
+        for enabled in (None,False):
+            candidate=dict(payload)
+            if enabled is not None:candidate['orchestration_enabled']=enabled
+            completed,result=self.run_cli('new',payload=candidate)
+            self.assertNotEqual(completed.returncode,0)
+            self.assertEqual(result['errors'][0]['code'],'ORCH_ENABLE')
+            self.assertEqual(self.tree_hash(),before)
+            self.assertEqual((folder/'task.json').read_bytes(),historical)
+
     def setUp(self) -> None:
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name) / "project"

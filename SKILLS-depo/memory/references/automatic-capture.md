@@ -158,3 +158,13 @@ say: "Memory automatic capture is on. Would you like to turn it off?" Initializa
 is already complete; keep capture on unless the user opts out. Preserve an
 existing off preference on reruns. An incompatible preserved installation needs
 a scoped upgrade; never substitute an "on" readiness claim for that limitation.
+
+### Curator completion coordination
+
+Curator uses this same completion checkpoint and capture preference; it does not
+create a parallel saver. Deduplicate by exact completion/objective/artifact/source
+identity, coordinate the current Task owner and return only remaining obligations
+for already-repaired findings. Capture off prevents equivalent automatic memory
+or ontology persistence through Curator. Explicit correction retains its own
+selected owner authority. Suspected causes remain bounded investigation and later
+benefit stays unobserved until evidence exists.

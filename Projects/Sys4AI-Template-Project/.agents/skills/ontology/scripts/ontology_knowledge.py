@@ -24,6 +24,9 @@ def capability(value, query, *, limit=None, max_bytes=None):
         row = explain(p, record, reason)
         row["executed"] = False
         row["availability"] = "available" if row["freshness"] == "current" else row["freshness"]
+        row["availability_basis"] = "declared_source_freshness"
+        row["runtime_observed"] = False
+        row["authorization"] = "not_assessed"
         row["constraints"] = [record.get("scope_note", "Current skill and project authority are required before execution.")]
         results.append(row)
     return envelope(p, "capability", query, results, bound, status="ok" if results else "no_match")

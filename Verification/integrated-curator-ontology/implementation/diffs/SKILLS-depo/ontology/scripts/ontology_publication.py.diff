@@ -1,0 +1,40 @@
+--- before/SKILLS-depo/ontology/scripts/ontology_publication.py
++++ after/SKILLS-depo/ontology/scripts/ontology_publication.py
+@@ -9,7 +9,7 @@
+ from ontology_authority import authorize
+ 
+ CONTROL = "control_records/ontology/"
+-ONTOLOGY_GUARDED_ACTIONS = ["preview", "publish", "recover"]
++ONTOLOGY_GUARDED_ACTIONS = ["preview", "publish", "recover", "integration_preview", "integration_publish", "integration_recover"]
+ 
+ 
+ def _guard(root, operation, arguments, targets):
+@@ -262,3 +262,28 @@
+     with operation_lock(root, CONTROL + "publication.lock"):
+         require(_read_intent(root, operation_id) == intent, "intent_changed", "Accepted intent changed while acquiring recovery lock.")
+         return decision.finish(_advance(root, intent, grant, fail_at=fail_at, decision=decision))
++
++
++def _integration_guard(root, operation, arguments):
++    from ontology_integration import TARGETS
++    return _guard(root, operation, arguments, TARGETS)
++
++
++def integration_preview(root, selection):
++    from ontology_integration import preview
++    result = preview(root, selection)
++    decision = _integration_guard(root, "integration_preview", {"proposal": result["proposal"]})
++    decision.recheck()
++    # Guard observations are independent of the stable semantic preview digest.
++    decision.finish({"valid": True})
++    return result
++
++
++def integration_publish(root, proposal, grant, *, expected_preview_sha256, fail_at=None):
++    from ontology_integration import publish
++    return publish(root, proposal, grant, expected_preview_sha256=expected_preview_sha256, fail_at=fail_at)
++
++
++def integration_recover(root, operation_id, grant, *, fail_at=None):
++    from ontology_integration import recover
++    return recover(root, operation_id, grant, fail_at=fail_at)

@@ -1,0 +1,57 @@
+{
+  "objective": "Correct reproduced origin_forbidden rejection of legitimate top-level public HTML entry links, preserving all endpoint/session/Host/Origin protections.",
+  "authority": "User explicit current fix request within accepted integration implementation and REQ-012; same original implementer, accepted proposal retained. This packet supersedes earlier report-only and backend-correction directions only for this bounded repair.",
+  "requirements": [
+    "Permit cross-site GET only for exact public shell / or /index.html with no query and Sec-Fetch-Mode navigate plus Sec-Fetch-Dest document; do not require Sec-Fetch-User activation, because reload/redirect entry can lack it.",
+    "Preserve exact Host and supplied Origin validation; cross-site health, assets, APIs, iframe and subresource requests remain rejected. No CORS, auth, CSRF, cookie, token lifetime or authority changes.",
+    "Focused HTTP regression tests cover activated and unactivated cross-site public entry, direct/no metadata/none/same-origin entry and reload, rejected query variants, non-shell paths, iframe/subresources, bad Host/Origin, cross-site POST session and authenticated API, and unchanged session/CSRF behavior.",
+    "Update only current v12 inventory workbench hash and its current INVENTORY_SHA256 pin if needed. Preserve every historical edition, especially v11.",
+    "Use supported Template check/update pipeline, no direct mapped-copy edits. Run only focused workbench security tests and current-pin/Template checks necessary for this repair.",
+    "Stop source writes after exact evidence and manifest freeze. Return new helper SHA plus root predecessor SHA, exact changed files and test results, and proof historical pins preserved. Do not change root installed copies, Task/plan/registry/memory, UI/service or final five reports."
+  ],
+  "writes": [
+    "SKILLS-depo/ontology/scripts/ontology_workbench.py",
+    "SKILLS-depo/ontology/tests/test_workbench_security.py",
+    "SKILLS-depo/init-new-project/assets/static-capability-v1.json",
+    "SKILLS-depo/init-new-project/scripts/init_static_health.py",
+    "Projects/Sys4AI-Template-Project",
+    ".sys4ai/template-update",
+    "Verification/integrated-curator-ontology/implementation/workbench-entry-repair"
+  ],
+  "before": [
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_workbench.py",
+      "sha256": "9b75ffd7e58b61c0f67f77bb809ce571a89659f262a22725581552fa973a5bc7"
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_workbench_security.py",
+      "sha256": "1ac5e57ba1cfa792b3f423465fb2aa05225a3a9e4a89d6de931a9bb4b571f322"
+    },
+    {
+      "path": "SKILLS-depo/init-new-project/assets/static-capability-v1.json",
+      "sha256": "9ba2c3c313b10509fa4bb87a6983b75e308fca7ae26e834ea39870b481209a55"
+    },
+    {
+      "path": "SKILLS-depo/init-new-project/scripts/init_static_health.py",
+      "sha256": "c68bbe67817cf76da2901f0d0bc8caf0819d542017f2baabdd49cb98ad2992a7"
+    }
+  ],
+  "root_predecessor": {
+    "path": ".agents/skills/ontology/scripts/ontology_workbench.py",
+    "sha256": "9b75ffd7e58b61c0f67f77bb809ce571a89659f262a22725581552fa973a5bc7"
+  },
+  "material_evidence": [
+    {
+      "path": "Verification/integrated-curator-ontology/host/resume-20260916/origin-entry-baseline.json",
+      "sha256": "c5cfa2d9d084a4971da371fc05641cb2a28e11a33247e0d6ad801a47b57cbb78"
+    }
+  ],
+  "primary_guidance": "https://www.w3.org/TR/fetch-metadata/ sections1.1,2,4.3,4.4; document navigate requests from links can be cross-site, user activation is independent.",
+  "native_observation": {
+    "prior_canonical_state": "completed",
+    "current_roster_state": "pending_init",
+    "interrupt_previous_status": "pending_init",
+    "interpretation": "Restored original instance has not entered a turn; retain prior actual completion receipt, bind inputs before waking and confirm startup."
+  },
+  "stop": "Deliver reviewable frozen repair and stop; host will adopt and restart exact root service."
+}

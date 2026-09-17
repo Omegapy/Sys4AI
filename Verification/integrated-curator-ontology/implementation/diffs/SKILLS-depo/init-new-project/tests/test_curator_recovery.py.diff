@@ -1,0 +1,19 @@
+--- before/SKILLS-depo/init-new-project/tests/test_curator_recovery.py
++++ after/SKILLS-depo/init-new-project/tests/test_curator_recovery.py
+@@ -3,6 +3,7 @@
+ from pathlib import Path
+ import tempfile
+ import unittest
++from test_integrated_setup import grant_for
+ from unittest.mock import patch
+ from test_curator_setup import fixture_directory,load
+ from test_curator_adoption import historical_project,current_sources
+@@ -12,7 +13,7 @@
+     def test_partial_exact_retry_changed_sources_and_later_edits(self):
+         with fixture_directory('recovery') as temp:
+             root,destination,base=historical_project(temp);helper=current_sources(root)
+-            args=dict(mode='prepare-existing',destination=destination,project_id='legacy',project_name='Legacy',purpose='Prior edition software',adopt_module='project-curator')
++            args=dict(mode='prepare-existing',destination=destination,project_id='legacy',project_name='Legacy',purpose='Prior edition software',adopt_module='project-curator',integration_grant_file=grant_for)
+             original_write=helper.atomic_write;selected=destination/'.agents/skills/curate/README.md'
+             def interrupted(path,raw,*values,**options):
+                 result=original_write(path,raw,*values,**options)

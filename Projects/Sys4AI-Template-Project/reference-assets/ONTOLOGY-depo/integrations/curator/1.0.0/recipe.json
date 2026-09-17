@@ -1,0 +1,177 @@
+{
+  "edition": "curator-ontology-1.0.0",
+  "functions": [
+    {
+      "definition": "Inspect bounded selected policy and current metadata without repair or model analysis.",
+      "id": "status",
+      "input": "policy",
+      "output": "policy-status",
+      "owner": "curate",
+      "prerequisite": "read-scope",
+      "scope": "selected-project",
+      "source": "actions"
+    },
+    {
+      "definition": "Validate selected policy structure without admitting or performing maintenance.",
+      "id": "validate",
+      "input": "policy",
+      "output": "validation-result",
+      "owner": "curate",
+      "prerequisite": "read-scope",
+      "scope": "selected-project",
+      "source": "actions"
+    },
+    {
+      "definition": "Review scoped metadata or authenticated bounded source ownership; no canonical writes.",
+      "id": "review",
+      "input": "review-request",
+      "output": "review-findings",
+      "owner": "curate",
+      "prerequisite": "current-owner",
+      "scope": "selected-source-scope",
+      "source": "commands"
+    },
+    {
+      "definition": "Route exact reviewed updates to existing integration, memory, ontology or derived-product owner.",
+      "id": "update",
+      "input": "reviewed-change",
+      "output": "owner-receipt",
+      "owner": "integration",
+      "prerequisite": "current-grant",
+      "scope": "selected-owner-targets",
+      "source": "commands"
+    },
+    {
+      "definition": "Route exact reviewed integration or canonical lifecycle corrections through the current owner.",
+      "id": "correct",
+      "input": "reviewed-correction",
+      "output": "owner-receipt",
+      "owner": "integration",
+      "prerequisite": "current-grant",
+      "scope": "selected-owner-targets",
+      "source": "commands"
+    },
+    {
+      "definition": "Recover the original exact operation and prior journal through its known owner recovery pair.",
+      "id": "retry",
+      "input": "original-intent",
+      "output": "owner-receipt",
+      "owner": "integration",
+      "prerequisite": "current-grant",
+      "scope": "original-targets",
+      "source": "recovery"
+    },
+    {
+      "definition": "Pause existing Task lifecycle with interruption and reconciliation of current native write owners.",
+      "id": "pause",
+      "input": "task-selection",
+      "output": "lifecycle-result",
+      "owner": "task",
+      "prerequisite": "current-owner",
+      "scope": "selected-task",
+      "source": "task"
+    },
+    {
+      "definition": "Resume existing Task through its lifecycle owner after current native ownership reconciliation.",
+      "id": "resume",
+      "input": "task-selection",
+      "output": "lifecycle-result",
+      "owner": "task",
+      "prerequisite": "current-owner",
+      "scope": "selected-task",
+      "source": "task"
+    },
+    {
+      "definition": "Dispatch selected maintenance within cadence and budget through an actual host actor or Broker callback.",
+      "id": "tick",
+      "input": "selected-dispatch",
+      "output": "owner-receipt",
+      "owner": "curate",
+      "prerequisite": "live-actor-budget",
+      "scope": "selected-owner-targets",
+      "source": "commands"
+    },
+    {
+      "definition": "Collect changed-input observations at session start or return and retain deliveries; current-owner evaluation and selected dispatch are separate.",
+      "id": "session-catch-up",
+      "input": "changed-input-observation",
+      "output": "retained-delivery",
+      "owner": "curate",
+      "prerequisite": "session-enabled-budget",
+      "scope": "selected-project",
+      "source": "catch-up"
+    },
+    {
+      "definition": "Register an exact permitted log source using the bounded existing log owner protocol.",
+      "id": "log-register",
+      "input": "log-selection",
+      "output": "registered-log",
+      "owner": "logs",
+      "prerequisite": "current-owner",
+      "scope": "selected-log",
+      "source": "logs"
+    },
+    {
+      "definition": "List registered log metadata within the selected bounds.",
+      "id": "log-list",
+      "input": "log-selection",
+      "output": "log-metadata",
+      "owner": "logs",
+      "prerequisite": "read-scope",
+      "scope": "selected-log",
+      "source": "logs"
+    },
+    {
+      "definition": "Read a bounded summary of a registered log while preserving full underlying logs.",
+      "id": "log-summary",
+      "input": "log-selection",
+      "output": "log-summary",
+      "owner": "logs",
+      "prerequisite": "read-scope",
+      "scope": "selected-log",
+      "source": "logs"
+    },
+    {
+      "definition": "Query bounded registered log records using exact filters and pagination.",
+      "id": "log-query",
+      "input": "log-query",
+      "output": "log-results",
+      "owner": "logs",
+      "prerequisite": "read-scope",
+      "scope": "selected-log",
+      "source": "logs"
+    }
+  ],
+  "namespace_suffix": "curator-",
+  "owners": {
+    "curate": {
+      "role": "curator-manager",
+      "skill": "curate"
+    },
+    "integration": {
+      "role": "improvement-maintenance",
+      "skill": "curate"
+    },
+    "logs": {
+      "role": "curator-manager",
+      "skill": "curate"
+    },
+    "memory": {
+      "role": "knowledge-curator",
+      "skill": "memory"
+    },
+    "ontology": {
+      "role": "knowledge-curator",
+      "skill": "ontology"
+    },
+    "products": {
+      "role": "knowledge-curator",
+      "skill": "ontology"
+    },
+    "task": {
+      "role": "task-manager",
+      "skill": "agent-task"
+    }
+  },
+  "schema_version": 1
+}

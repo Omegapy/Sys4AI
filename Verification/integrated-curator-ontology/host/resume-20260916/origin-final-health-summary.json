@@ -1,0 +1,126 @@
+{
+  "checks": [
+    {
+      "action": [
+        "health"
+      ],
+      "exit_code": 0,
+      "status": "ready",
+      "ready": true,
+      "level": "static",
+      "failed_required": [],
+      "components": {
+        "build-wiki": {
+          "status": "current",
+          "ready": true,
+          "observed_operation": null,
+          "next_operation": null
+        },
+        "canonical": {
+          "status": null,
+          "ready": true,
+          "observed_operation": null,
+          "next_operation": null
+        },
+        "compile": {
+          "status": "current",
+          "ready": true,
+          "observed_operation": null,
+          "next_operation": null
+        },
+        "link-memory": {
+          "status": "current",
+          "ready": true,
+          "observed_operation": null,
+          "next_operation": null
+        }
+      },
+      "evidence": "Verification/integrated-curator-ontology/host/resume-20260916/origin-final-health.json",
+      "sha256": "08fc62e3541a1b409c844e616717a502fc5d62527091cb2913e97281ebe88728"
+    },
+    {
+      "action": [
+        "advanced-health",
+        "--level",
+        "operational",
+        "--workbench-url",
+        "http://127.0.0.1:59173"
+      ],
+      "exit_code": 0,
+      "status": "ready",
+      "ready": true,
+      "level": "operational",
+      "failed_required": [],
+      "components": {
+        "canonical": {
+          "status": null,
+          "ready": true,
+          "observed_operation": null,
+          "next_operation": null
+        },
+        "guards": {
+          "status": "ready",
+          "ready": true,
+          "observed_operation": {
+            "status": "conformant",
+            "complete": true,
+            "conforms": true,
+            "authority": false,
+            "worker": {
+              "exit_code": 0,
+              "elapsed_seconds": 0.3602
+            }
+          },
+          "next_operation": null
+        },
+        "inference": {
+          "status": "ready",
+          "ready": true,
+          "observed_operation": {
+            "status": "ok",
+            "complete": true,
+            "authority": false,
+            "profile": "finite-profile-v1",
+            "worker": {
+              "exit_code": 0,
+              "elapsed_seconds": 0.274
+            }
+          },
+          "next_operation": null
+        },
+        "semantic": {
+          "status": "ready",
+          "ready": true,
+          "observed_operation": {
+            "status": "ok",
+            "authority": "Semantic source data; current user, project, role, skill and Task authority control action.",
+            "mutated": false,
+            "operation": "semantic-search"
+          },
+          "next_operation": null
+        },
+        "standards": {
+          "status": "ready",
+          "ready": true,
+          "observed_operation": {},
+          "next_operation": null
+        },
+        "workbench": {
+          "status": "ready",
+          "ready": true,
+          "observed_operation": {
+            "status": "ready",
+            "running": true,
+            "service_state": "running",
+            "observed_operation": "loopback_identity_and_current_inputs",
+            "mutated": false,
+            "mode": "on_demand"
+          },
+          "next_operation": null
+        }
+      },
+      "evidence": "Verification/integrated-curator-ontology/host/resume-20260916/origin-final-advanced-health.json",
+      "sha256": "d68cdbdc60f07c5c58704d53c1d601a163719be8b7ded4f8e56441a31768a4a9"
+    }
+  ]
+}

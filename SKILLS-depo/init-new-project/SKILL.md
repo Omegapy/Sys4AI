@@ -2,7 +2,7 @@
 name: init-new-project
 description: Create or prepare a selected Sys4AI project using Template governance assets, preserved project content and factual registration.
 metadata:
-  version: 11.1.0
+  version: 12.0.0
 ---
 
 # Initialize a Sys4AI project
@@ -25,10 +25,17 @@ are rejected. There is no caller-controlled depot or Template override.
 
 Every starter input comes from the registered `Sys4AI-Template-Project`: its
 schema-2 `.template/baseline-assets.json`, README renderer, soul, complete skill
-and role packages, and selected reference assets. The ten required skills are
+and role packages, and selected reference assets. The eleven required skills are
 `agent-task`, `communication`, `init-new-project`, `manage-subagent-roles`, `task`,
-`memory`, `ontology`, `to-implementation-plan`, `to-trd` and `what-did-you-learn`. The `project-sub-agent` and `task-manager` pairs and a validated `Roles/INDEX.md`
+`memory`, `ontology`, `to-implementation-plan`, `to-trd`, `what-did-you-learn` and
+`curate`. The `project-sub-agent` and `task-manager` pairs and a validated `Roles/INDEX.md`
 are required for new projects. The initializer reads the Template and does not refresh it.
+
+New Curator installations enable bounded project-session maintenance. Setup
+assessment is static and does not prove a live session. The reviewed
+package inventory binds the current supported owner interfaces and retained
+callers. Installing or assessing the package does not establish native runtime
+operation; assessment reports runtime as not exercised.
 
 The memory starters are `memory.yaml`, `MEMORY/README.md`, the complete memory
 skill, and `reference-assets/MEMORY-depo/` contract assets. The Template config
@@ -230,8 +237,9 @@ there is no second setup ledger.
 ## Completion and receipts
 
 The durable receipt is `control_records/project-setup.json`, schema version 1,
-with setup contract `governance-starter-v9`. Edition v9 adds neutral advanced capability; edition v8 adds ontology; edition v7 adds learning.
-Memory remains supported for v5-v9 and capture for v6-v9. Edition v6 defaults automatic
+with setup contract `governance-starter-v11`. Edition v11 enables session maintenance
+on installation; v10 preserves its inactive Curator defaults. Edition v9 adds neutral advanced capability; edition v8 adds ontology; edition v7 adds learning.
+Memory remains supported for v5-v11 and capture for v6-v11. Edition v6 defaults automatic
 capture on and binds the destination's own Director for reviewed memory writes.
 The `memory_capture` result reports the actual current setting and readiness.
 Edition v5 added memory starters and
@@ -331,3 +339,91 @@ process exit. The shared Template lock prevents adoption during an updater
 transaction and is released after asset adoption.
 
 See [README.md](README.md) for verification commands and boundaries.
+
+## Curator session installation and explicit existing-project adoption
+
+New and first-prepared projects use `governance-starter-v11`. They receive
+`CURATOR.md`, destination-specialized `curator.yaml`, enabled `curator-session.yaml`, protected
+`document-ownership.json`, complete Curator/owner packages, current reference
+contracts and four paired Curator roles. The existing role owner generates
+`Roles/INDEX.md`. Repository/branch selection, runtime, standing entitlements,
+autonomous writes, unattended schedules, external notifications, service and hook activation
+remain disabled. Automatic memory capture retains the existing new-project
+on/default notice and existing explicit opt-outs.
+
+Earlier v1-v10 receipts retain their base edition and exact inventories. Ordinary
+reruns do not acquire session maintenance or Curator or refresh an adopted Curator edition. For a selected
+completed project, use `prepare-existing --adopt-module curator` with its
+exact existing identity and destination. The existing receipt records the original
+receipt hash/history, source manifest, complete package before/after inventories,
+charter/configuration preservation, role index and current checks. No second
+adoption store or canonical Task writer is created.
+
+Adoption may add missing Curator files or refresh complete unchanged receipt-owned
+owner packages. Customized, unknown or incomplete packages require selected repair;
+existing charters/configuration/maps are preserved. Legacy role layouts require
+the existing explicit role transition before adopting active `Roles/` pairs.
+Authored knowledge, Tasks, project identity, licensing, capture choice, unrelated
+roles and runtime state remain protected. An interrupted operation resumes only
+with its original source bytes and exact recognized target pre/post bytes. Later
+edits and changed sources hold recovery. Completed reruns verify current installed
+state without refreshing new source editions implicitly.
+
+Static assessment parses selected source and configuration; it executes no unknown
+customized project Python. Installed, configured, authorized, compatible and
+runtime-observed are distinct fields. Neutral capability can be statically
+available while authorization and runtime observation remain false. Native,
+service and optional backend/model checks require their separate selected gates.
+
+`assess-curator --destination ABSOLUTE_PROJECT_PATH` is the read-only Curator
+assessment entry. It reports installed, configured, authorized, compatible and
+runtime-observed states separately, without executing unknown project Python.
+`prepare-existing --adopt-module curator` is the preferred selected adoption
+spelling; `project-curator` remains a compatible alias for the canonical module ID.
+
+The affected-owner fixture tests use explicitly selected read-only depot sources
+and an isolated, existing work directory. They do not require private release
+snapshots or a special source-directory name and never choose a live source root
+implicitly. Set `SYS4AI_CURATOR_TEST_SOURCE` to the real absolute selected depot
+source root containing its packaged starter assets and registered Template;
+set `SYS4AI_CURATOR_TEST_WORK` to a separate fixture directory (never that source
+root or its ancestor). Only new temporary children of the work directory are
+written. Run the selected interpreter with `PYTHONDONTWRITEBYTECODE=1` and
+`PYTHONPATH` pointing to this package's `tests` directory:
+
+```sh
+python -m unittest test_curator_setup test_curator_adoption test_curator_recovery -v
+```
+
+The source root is copied for testing; its registry, Template and reusable
+collections are read-only inputs. Earlier editions are explicitly reconstructed
+from packaged baseline assets. Historical role helpers execute only after their
+reconstructed bytes match the existing approved pin. These fixtures are not
+original historical binaries. v1/v2 retain incompatible role layouts and require
+the existing separately selected transition; tests never force migration or
+relabel completed receipts to make Curator adoption succeed.
+
+Selected v11 installations enable [bounded session maintenance](../curate/references/session-maintenance.md) immediately.
+The Template remains neutral; explicit opt-outs and earlier setup receipts retain
+their choices. The unattended scheduler, services and runtime installation remain
+separate.
+
+## Integrated Curator edition
+
+New and first preparation select governance-starter-v12. This edition specializes
+the Curator process and all function semantics after identity, session choice,
+owner packages and Roles/INDEX.md settle. The Template retains empty active graphs,
+null project identity, unbound authority and disabled session policy.
+
+For a previously initialized project, select `prepare-existing --adopt-module
+curator`. To refresh an earlier Curator installation explicitly add
+`--refresh-module curator`; `project-curator` is the retained alias. An ordinary
+rerun verifies its recorded edition. Original setup receipts and v1-v11 meanings
+remain unchanged. Unchanged completed selections verify without new operations.
+
+Compatible authored ontology uses an exact ontology-owner publication. A missing
+grant leaves a resumable `curator_integration.preview` in the setup receipt. Supply
+`--integration-grant-file` and optionally `--integration-proposal-file` on the same
+request after exact review. API callers may supply a trusted current grant callback.
+This route adds no installation, background AI, Git or unselected-project authority.
+Static semantic success is separate from current runtime execution.

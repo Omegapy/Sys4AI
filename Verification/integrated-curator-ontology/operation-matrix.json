@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "plan": "PLAN-20260913-64A6385B",
+  "revision": 1,
+  "operations": [
+    {
+      "operation": "create",
+      "selection": "absent or empty selected destination",
+      "edition": "governance-starter-v12",
+      "owner_route": "setup-generated",
+      "evidence": "project-setup.json",
+      "constraint": "No native grant; no observed runtime implied"
+    },
+    {
+      "operation": "prepare-existing",
+      "selection": "first selected project with absent or pristine ontology",
+      "edition": "governance-starter-v12",
+      "owner_route": "setup-generated",
+      "evidence": "project-setup.json",
+      "constraint": "Preserve authored files, identity, licensing, opt-outs"
+    },
+    {
+      "operation": "prepare-existing-authored",
+      "selection": "compatible authored ontology",
+      "edition": "governance-starter-v12",
+      "owner_route": "integration owner publication",
+      "evidence": "project-setup.json plus exact ontology owner receipt",
+      "constraint": "Missing current grant retains resumable preview"
+    },
+    {
+      "operation": "adopt-module curator",
+      "selection": "earlier completed setup with current Roles",
+      "edition": "original base plus module schema 2",
+      "owner_route": "owner publication or recorded neutral prerequisite/setup generation",
+      "evidence": "original base and appended module operation",
+      "constraint": "Lowercase/legacy role layouts are preserved holds"
+    },
+    {
+      "operation": "refresh-module curator",
+      "selection": "earlier Curator or already integrated project; explicit selection",
+      "edition": "original base plus current integration edition",
+      "owner_route": "exact existing receipt ownership",
+      "evidence": "new module operation only for changed/first selected inventory",
+      "constraint": "Ordinary rerun preserves recorded edition"
+    },
+    {
+      "operation": "integration-preview",
+      "selection": "finalized source/recipe and current selected identity",
+      "edition": "integrate-curator schema 1",
+      "owner_route": "read-only exact four-file review",
+      "evidence": "none",
+      "constraint": "Reject reserved collisions, stale bindings, forbidden config changes"
+    },
+    {
+      "operation": "integration-publish",
+      "selection": "current Director or confirmed manager grant",
+      "edition": "integrate-curator schema 1",
+      "owner_route": "ontology owner transaction",
+      "evidence": "immutable intent plus completion receipt",
+      "constraint": "Guard semantics are independent of authority"
+    },
+    {
+      "operation": "integration-recover",
+      "selection": "original accepted intent and renewed current grant",
+      "edition": "original exact preview/predecessor",
+      "owner_route": "ontology owner recovery",
+      "evidence": "same immutable intent/receipt",
+      "constraint": "Pre/post only; reject third-state/helper/source changes"
+    }
+  ],
+  "locks": [
+    "Template shared read",
+    "destination setup",
+    "ontology publication"
+  ],
+  "release_template_before_registry": true,
+  "publication_targets": [
+    "ONTOLOGY/modules/project/curator.jsonld",
+    "ONTOLOGY/bindings/curator.jsonld",
+    "ONTOLOGY/modules/project/curator-competency.json",
+    "ontology.yaml"
+  ]
+}

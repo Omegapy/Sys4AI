@@ -1080,6 +1080,81 @@
         "owner-semantics"
       ],
       "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:ontology:integration_preview",
+      "family": "ontology",
+      "operation": "integration_preview",
+      "input_type": "ontology-integration_preview-request",
+      "target_type": "ontology-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:OntologyPublication",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/ontology/scripts/ontology_publication.py",
+        "symbol": "integration_preview"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:ontology:integration_publish",
+      "family": "ontology",
+      "operation": "integration_publish",
+      "input_type": "ontology-integration_publish-request",
+      "target_type": "ontology-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:OntologyPublication",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/ontology/scripts/ontology_publication.py",
+        "symbol": "integration_publish"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
+    },
+    {
+      "id": "urn:sys4ai:ontology:action:ontology:integration_recover",
+      "family": "ontology",
+      "operation": "integration_recover",
+      "input_type": "ontology-integration_recover-request",
+      "target_type": "ontology-owned-artifact",
+      "capability": "urn:sys4ai:ontology:action:capability:OntologyPublication",
+      "governing_sources": [
+        "SOUL.md",
+        "AGENTS.md",
+        "ROLE.md"
+      ],
+      "dispatch": {
+        "path": ".agents/skills/ontology/scripts/ontology_publication.py",
+        "symbol": "integration_recover"
+      },
+      "semantic_rules": [
+        "typed-input",
+        "owned-targets",
+        "installed-capability",
+        "current-governance",
+        "owner-semantics"
+      ],
+      "lifecycle": null
     }
   ],
   "uncovered": [

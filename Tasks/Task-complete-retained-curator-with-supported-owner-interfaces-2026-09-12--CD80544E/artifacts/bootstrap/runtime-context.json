@@ -1,0 +1,61 @@
+{
+  "kind": "CurrentNativeManagerCapability",
+  "observed_at": "2026-09-12T17:59:20.518032+00:00",
+  "root_native_id": "/root",
+  "roster": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/curator_manager",
+          "agent_status": "completed"
+        },
+        {
+          "agent_name": "/root/curator_manager/application_source_worker",
+          "agent_status": "completed"
+        },
+        {
+          "agent_name": "/root/curator_manager/foundation_implementer",
+          "agent_status": "completed"
+        }
+      ]
+    }
+  },
+  "active_concurrency_limit": 4,
+  "observed_active_agents": 1,
+  "available_slots": 3,
+  "native_tools": [
+    "spawn_agent",
+    "list_agents",
+    "send_message",
+    "followup_task",
+    "interrupt_agent",
+    "wait_agent"
+  ],
+  "manager_depth": 1,
+  "nested_delegation_basis": "The current native collaboration tool contract gives children the same tools and permits their own bounded subagents; actual existing roster also contains nested children.",
+  "settings_mode": "verified_inheritance",
+  "inheritance_basis": "The current collaboration.spawn_agent contract guarantees full-history forks inherit the parent model and reasoning effort. Use fork_turns all and omit model/effort overrides.",
+  "selected_context_mode": "all",
+  "manager_context_scope": "This is a manager, not an independent solver. Any solver team must separately satisfy independence and frozen-input rules.",
+  "selected_configuration_fields": [
+    {
+      "path": "/Users/alex.omegapy/.codex/config.toml",
+      "present": true,
+      "default_subagent_model": null,
+      "default_subagent_reasoning_effort": null,
+      "custom_agent_names": []
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.codex/config.toml",
+      "present": false,
+      "default_subagent_model": null,
+      "default_subagent_reasoning_effort": null,
+      "custom_agent_names": []
+    }
+  ]
+}

@@ -218,3 +218,47 @@ When automatic capture is on, include a bounded memory/evidence write scope in
 the manager reservation. The manager performs the memory skill's automatic
 checkpoint after verification and before its terminal response, using its current
 publication grant. This changes neither the category team nor Task event schema.
+
+## Explicit Curator Task provenance
+
+The Project Director remains the default. An installed CURATOR.md is inactive
+until the owning project explicitly selects one Curator controller and charter
+for a new execution. Ordinary Curator intake can use the existing Task schema 2
+with orchestration_version 1. Validate the versioned selection artifact with
+`curator.validate_controller_selection`, then bind its exact bytes and project,
+charter, policy and role references in the manager reservation's source_refs and
+context. The artifact records a selection; it creates no Task or manager.
+
+The normal Task owner creates the new record and reserves exactly one manager.
+Record the actual native launch receipt, required role/charter/policy reads and
+confirmed activation before transferring canonical writing. Existing category,
+team, settings, source-version, ownership and completion gates remain unchanged.
+Current fixed public-owner calls retain their own Task and publication checks.
+
+Existing orchestration_version 2 records and their controller_origin and
+native_protocol requirements retain their original meaning and admission rules.
+Do not convert existing records or claim version 2 callback admission from an
+ordinary selection artifact. Read-only/no-op prompts create no Task, and reading
+another charter never changes an execution's selected controller.
+
+## Existing Curator awareness and conversational handoff
+
+Before starting or resuming work with a known affected scope, run the read-only
+Agent Task helper `curator-awareness --scope <project-relative-path>` for each
+selected path. Add `--required` when this operation depends on the Curator
+infrastructure. This reads the existing delivery owner and current canonical
+Task owners; it creates no Task, analysis, queue, model call or repair. Unrelated
+items remain silent. Show only relevant scope, impact and next action. A held
+item, conflicting active/paused/uncertain owner, or invalid required adapter
+blocks dependent execution. Route through that current owner; a notice cannot
+transfer its authority. Ordinary status/list/show remain unchanged.
+
+A clear contextual “do it” can select one fresh, exact offered maintenance item
+through `Application.handoff`; no command syntax is mandatory. Bind the complete
+original objective, Task/execution, source versions, constraints, assumptions and
+authority to the selected offer before retention. Multiple, stale or conflicting
+offers and read-only questions require selection or remain read-only. The result
+enters this existing intake workflow and grants no new execution or action by
+itself. Preserve the original work while its prerequisite is handled. After
+maintenance, use `continue_original` with fresh integrity, scope and authority
+observations; unresolved prerequisites hold dependent continuation.

@@ -98,3 +98,40 @@ class AdvancedPublicationTests(unittest.TestCase):
 
 if __name__=="__main__":
     unittest.main()
+
+class NativeAdvancedPublicationTests(unittest.TestCase):
+    def test_v3_advanced_keeps_owner_profile_and_raw_grant_digest(self):
+        import sys
+        from support import PACKAGE
+        from support import add_records
+        sys.path.insert(0,str(PACKAGE.parent/'agent-task/tests'))
+        from test_orchestration_state import NativeOrchestrationFixture
+        driver=NativeOrchestrationFixture(writes=['ONTOLOGY','ontology-advanced.yaml','control_records/ontology'])
+        self.addCleanup(driver.close)
+        root=make_advanced(driver.root);bind_director(root)
+        add_records(root,[record('LocalClass',kind='concept',type_name='OntologyConcept'),record('OtherClass',kind='concept',type_name='OntologyConcept')])
+        extension(root)
+        config=read_json(root/'ontology-advanced.yaml')
+        config['publication']={'enabled':True,'binding':{'actor_id':'/root','scope':['ontology-advanced.yaml','ONTOLOGY/extensions'],
+            'authority':[{'path':name,'sha256':sha256(root/name)} for name in ('SOUL.md','AGENTS.md','ROLE.md')]}}
+        write_json(root/'ontology-advanced.yaml',config)
+        existing=AdvancedPublicationTests(methodName='test_v1_grant_cannot_publish_extension_and_exact_v2_partial_recovery')
+        existing.root=root;candidate=existing.candidate()
+        context=driver.context('ontology.publish')
+        value=existing.authority(candidate)
+        value.update(schema_version=3,owner_profile='advanced-v2',actor_kind='manager',actor_id=driver.actor,
+            controller_origin='curator',task=driver.binding(),native_receipt=driver.roster(driver.actor),
+            broker_binding=driver.owner_binding(context,'ontology'))
+        before=sha256(canonical_bytes(value))
+        with driver.authority.invoke(context):
+            for altered in ('advanced_config_sha256','proposal_review'):
+                bad=copy.deepcopy(value)
+                if altered=='advanced_config_sha256':bad[altered]='0'*64
+                else:bad['owner_profile']='core-v1'
+                with self.assertRaises(OntologyError):
+                    publish(root,candidate,bad,expected_preview_sha256=value['preview_sha256'])
+            result=publish(root,candidate,value,expected_preview_sha256=value['preview_sha256'])
+        self.assertEqual(result['status'],'complete')
+        self.assertEqual(sha256(canonical_bytes(value)),before)
+        self.assertEqual(value['schema_version'],3)
+        self.assertEqual(read_json(root/'ONTOLOGY/extensions/semantics.json')['version'],'1.0.1')

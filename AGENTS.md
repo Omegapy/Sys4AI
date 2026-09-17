@@ -156,3 +156,20 @@ before the final handoff of substantive work. Capture useful new evidence-backed
 findings within current scope without a user reminder. Skip trivial or read-only
 requests and duplicate findings. Respect an explicit opt-out and preserve the
 existing publication, privacy, Task ownership and frozen-input checks.
+
+## Curator session checkpoint
+
+When `curator-session.yaml` is installed and enabled, use the
+[session maintenance entry](.agents/skills/curate/references/session-maintenance.md)
+on the first assistant turn and when returning after an interruption. Preserve
+the existing read-only Task startup check. Gather bounded catch-up observations
+and process eligible maintenance through its current owner within the configured
+session budget. Keep routine outcomes quiet, retain pending work when an owner
+is unavailable or the budget is exhausted, and preserve original user work and
+explicit opt-outs. This mode enables no unattended background AI or service.
+
+For new child-project installations managed by this depot, use the current
+reusable [initializer](SKILLS-depo/init-new-project/SKILL.md) and its
+`SKILLS-depo/init-new-project/scripts/init_new_project.py` entry. It selects the
+current Template and activates session maintenance on new installations. Existing
+setup receipts and project opt-outs retain their recorded choices.

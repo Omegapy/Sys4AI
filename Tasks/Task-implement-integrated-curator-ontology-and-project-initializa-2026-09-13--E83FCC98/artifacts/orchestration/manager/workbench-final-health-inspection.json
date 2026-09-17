@@ -1,0 +1,81 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "action": [
+        "health"
+      ],
+      "status": "ready",
+      "ready": true,
+      "components": {
+        "build-wiki": {
+          "status": "current",
+          "ready": true
+        },
+        "canonical": {
+          "status": null,
+          "ready": true
+        },
+        "compile": {
+          "status": "current",
+          "ready": true
+        },
+        "link-memory": {
+          "status": "current",
+          "ready": true
+        }
+      },
+      "evidence": {
+        "path": "Verification/integrated-curator-ontology/host/resume-20260916/origin-final-health.json",
+        "sha256": "08fc62e3541a1b409c844e616717a502fc5d62527091cb2913e97281ebe88728"
+      }
+    },
+    {
+      "action": [
+        "advanced-health",
+        "--level",
+        "operational",
+        "--workbench-url",
+        "http://127.0.0.1:59173"
+      ],
+      "status": "ready",
+      "ready": true,
+      "components": {
+        "canonical": {
+          "status": null,
+          "ready": true
+        },
+        "guards": {
+          "status": "ready",
+          "ready": true
+        },
+        "inference": {
+          "status": "ready",
+          "ready": true
+        },
+        "semantic": {
+          "status": "ready",
+          "ready": true
+        },
+        "standards": {
+          "status": "ready",
+          "ready": true
+        },
+        "workbench": {
+          "status": "ready",
+          "ready": true
+        }
+      },
+      "evidence": {
+        "path": "Verification/integrated-curator-ontology/host/resume-20260916/origin-final-advanced-health.json",
+        "sha256": "d68cdbdc60f07c5c58704d53c1d601a163719be8b7ded4f8e56441a31768a4a9"
+      }
+    }
+  ],
+  "derived_refresh": {
+    "path": "Verification/integrated-curator-ontology/host/resume-20260916/origin-refresh-result.json",
+    "sha256": "5ace0022dcf99386f01f47239995775bc57ae76df5c37ad589cff1b2f3afe95d"
+  },
+  "root_workbench_sha256": "1a02494a3bbe9979f48a152527fd0b1c6a566bc53576665822aa7fc34a11318e",
+  "inspection": "Reopened final host health raw bytes by exact digest, selected required components ready and no failures. Four derived refreshes completed after exact helper repair; memory-link records/associations/exclusions and selected semantic documents preserved. No unrelated checks rerun."
+}

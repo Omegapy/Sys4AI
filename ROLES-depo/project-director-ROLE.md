@@ -235,3 +235,34 @@ Task manager receives bounded `MEMORY/` and `control_records/memory/` write scop
 in its initial reservation when it owns this checkpoint. Preserve user opt-out,
 current authority checks, and accepted evidence; do not require per-note user
 approval already covered by that scope.
+
+
+## Curator session checkpoint
+
+When `curator-session.yaml` is installed and enabled, use the
+[session maintenance entry](.agents/skills/curate/references/session-maintenance.md)
+on the first assistant turn and when returning after an interruption. Gather
+bounded catch-up observations and process eligible maintenance through the
+current owner within the configured session budget. Keep routine outcomes quiet,
+preserve pending work and original user work, and respect explicit opt-outs.
+This session mode enables no unattended background AI or persistent service.
+
+## Optional Curator controller
+
+The Project Director remains the default. An installed CURATOR.md is inactive
+until the owning project explicitly selects one Curator controller and charter
+for a new execution. New ordinary Curator intake uses Task schema 2 with
+orchestration version 1. Validate the schema-version-1 selection artifact through
+`validate_controller_selection`; it binds project identity and exact project,
+charter, policy and current role references. Freeze the artifact and returned
+source references in the normal reservation's `source_refs` and context.
+
+The actual manager reservation, native launch receipt, required charter/policy/
+role reads and confirmed activation establish the sole canonical Task writer.
+Direct public owner routes retain the actual current Task, manager, root,
+revision and exact selected arguments with all existing owner checks. Existing
+orchestration version 2 records retain their Broker, controller_origin and
+native_protocol requirements; this route does not convert them or supply a
+missing callback. Read-only/no-op prompts create no Task. The Director remains
+the default for unselected work, and every selected mode retains its required
+current native evidence.

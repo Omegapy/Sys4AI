@@ -1,0 +1,139 @@
+test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) ... 
+  test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) (family='setup') ... ERROR
+test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) ... 
+  test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) (family='setup') ... FAIL
+test_every_declared_public_boundary_rejects_without_backend (test_guarded_dispatch.GuardedDispatchTests.test_every_declared_public_boundary_rejects_without_backend) ... ok
+test_actual_plan_cli_revision_fields_and_nested_transaction_succeed (test_action_semantics.ActionSemanticsTests.test_actual_plan_cli_revision_fields_and_nested_transaction_succeed) ... ok
+test_caller_forged_task_state_is_not_current_evidence (test_action_semantics.ActionSemanticsTests.test_caller_forged_task_state_is_not_current_evidence) ... ok
+test_candidate_validation_includes_external_authored_metadata (test_action_semantics.ActionSemanticsTests.test_candidate_validation_includes_external_authored_metadata) ... ok
+test_concrete_capability_is_observed_from_the_provider_for_every_family (test_action_semantics.ActionSemanticsTests.test_concrete_capability_is_observed_from_the_provider_for_every_family) ... ok
+test_current_task_orchestration_generation_is_read_before_dispatch (test_action_semantics.ActionSemanticsTests.test_current_task_orchestration_generation_is_read_before_dispatch) ... ok
+test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files (test_action_semantics.ActionSemanticsTests.test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files) ... ERROR
+test_missing_governing_source_and_unrecognized_rules_cannot_pass (test_action_semantics.ActionSemanticsTests.test_missing_governing_source_and_unrecognized_rules_cannot_pass) ... ok
+test_real_role_and_ontology_errors_retain_safe_action_and_version_text (test_action_semantics.ActionSemanticsTests.test_real_role_and_ontology_errors_retain_safe_action_and_version_text) ... ok
+test_real_task_trd_and_plan_lifecycle_values_are_constrained (test_action_semantics.ActionSemanticsTests.test_real_task_trd_and_plan_lifecycle_values_are_constrained) ... ok
+test_v2_guarded_publication_recovers_accepted_extension_and_shape_pre_post (test_action_semantics.ActionSemanticsTests.test_v2_guarded_publication_recovers_accepted_extension_and_shape_pre_post) ... ok
+test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner (test_action_semantics.ActionSemanticsTests.test_v2_selected_shape_failure_and_formal_inconsistency_stop_before_owner) ... ok
+test_guarded_preview_publish_and_recovery (test_curator_guard_integration.CuratorGuardIntegrationTests.test_guarded_preview_publish_and_recovery) ... ERROR
+
+======================================================================
+ERROR: test_actual_family_matrix (test_guarded_dispatch.GuardedDispatchTests.test_actual_family_matrix) (family='setup')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guarded_dispatch.py", line 262, in test_actual_family_matrix
+    receipt = call()
+              ^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guarded_dispatch.py", line 149, in <lambda>
+    call = lambda: module.run_initialization(**args)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmppqp9q0vc/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2897, in guarded
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmppqp9q0vc/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 788, in dispatch
+    return decision.finish(function())
+                           ^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmppqp9q0vc/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2897, in <lambda>
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmppqp9q0vc/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2618, in run_initialization
+    proposed_all, sources, original = source_snapshot(depot, skill, identity, contract=contract,
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmppqp9q0vc/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 811, in source_snapshot
+    original, origins, versions, renderer, policy = template_sources(depot, contract=contract)
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmppqp9q0vc/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 637, in template_sources
+    raise InitializationError("template lacks required governance packages or generic role")
+guard_setup_owner.InitializationError: template lacks required governance packages or generic role
+
+======================================================================
+ERROR: test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files (test_action_semantics.ActionSemanticsTests.test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_action_semantics.py", line 150, in test_guarded_populated_v8_adoption_retains_its_receipt_and_authored_files
+    result = case.adopt()
+             ^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_advanced_ontology_adoption.py", line 37, in adopt
+    return self.run_setup(mode="prepare-existing",adopt_module="ontology-advanced")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_initializer.py", line 166, in run_setup
+    report = self.helper.run_initialization(**{**self.arguments, **overrides})
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-0kua6_kn/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2897, in guarded
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-0kua6_kn/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 788, in dispatch
+    return decision.finish(function())
+                           ^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-0kua6_kn/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2897, in <lambda>
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-0kua6_kn/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2609, in run_initialization
+    return run_module_adoption(depot, destination, record, previous_raw, refresh, module_id=adopt_module, refresh_modules=refresh_modules, integration_grant_file=integration_grant_file, integration_proposal_file=integration_proposal_file)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-0kua6_kn/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2897, in guarded
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-0kua6_kn/Sys4AI/.agents/skills/ontology/scripts/ontology_guards.py", line 788, in dispatch
+    return decision.finish(function())
+                           ^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-0kua6_kn/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2897, in <lambda>
+    return module.dispatch(lambda: function(*args, **kwargs), family, function.__name__, selected_root, arguments, targets)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-0kua6_kn/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2470, in run_module_adoption
+    original, _, _, _, _ = template_sources(depot)
+                           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/sys4ai-governance-initializer-0kua6_kn/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 637, in template_sources
+    raise InitializationError("template lacks required governance packages or generic role")
+fixture_initializer.InitializationError: template lacks required governance packages or generic role
+
+======================================================================
+ERROR: test_guarded_preview_publish_and_recovery (test_curator_guard_integration.CuratorGuardIntegrationTests.test_guarded_preview_publish_and_recovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmptv7eytw7/project/.agents/skills/ontology/scripts/ontology_publication.py", line 18, in _guard
+    decision = begin_action(root, "ontology", operation, arguments, targets)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmptv7eytw7/project/.agents/skills/ontology/scripts/ontology_guards.py", line 740, in begin_action
+    decision = Decision(root, family, operation, normalized, list(targets), _observed)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmptv7eytw7/project/.agents/skills/ontology/scripts/ontology_guards.py", line 663, in __init__
+    fail(isinstance(self.backend, dict) and backend_status == "conformant" and self.backend.get("complete") is True,
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmptv7eytw7/project/.agents/skills/ontology/scripts/ontology_guards.py", line 122, in fail
+    raise GuardError(code, message, details)
+ontology_guards.GuardError: Enabled semantic validation did not establish conformance; restore the backend or resolve its findings before retrying. [condition=guard_violation; action=urn:sys4ai:ontology:action:ontology:integration_preview; source=reference-assets/ONTOLOGY-depo/actions/contracts-v1.json@1d7c133b1ad5e3c150c6364529ff9b9731bb68974b9b234c0b71d3b03c318275; backend=violation; findings=InConstraintComponent]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_curator_guard_integration.py", line 19, in test_guarded_preview_publish_and_recovery
+    pre=owner.integration_preview(root,{'schema_version':1,'operation_id':'ONTOP-guarded-curator','reason':'Actual disposable guard integration.'})
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmptv7eytw7/project/.agents/skills/ontology/scripts/ontology_publication.py", line 275, in integration_preview
+    decision = _integration_guard(root, "integration_preview", {"proposal": result["proposal"]})
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmptv7eytw7/project/.agents/skills/ontology/scripts/ontology_publication.py", line 269, in _integration_guard
+    return _guard(root, operation, arguments, TARGETS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/tmptv7eytw7/project/.agents/skills/ontology/scripts/ontology_publication.py", line 22, in _guard
+    raise OntologyError(exc.code, str(exc)) from exc
+ontology_core.OntologyError: Enabled semantic validation did not establish conformance; restore the backend or resolve its findings before retrying. [condition=guard_violation; action=urn:sys4ai:ontology:action:ontology:integration_preview; source=reference-assets/ONTOLOGY-depo/actions/contracts-v1.json@1d7c133b1ad5e3c150c6364529ff9b9731bb68974b9b234c0b71d3b03c318275; backend=violation; findings=InConstraintComponent]
+
+======================================================================
+FAIL: test_actual_under_lock_context_changes_block_each_family (test_guarded_dispatch.GuardedDispatchTests.test_actual_under_lock_context_changes_block_each_family) (family='setup')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/tests/test_guarded_dispatch.py", line 311, in test_actual_under_lock_context_changes_block_each_family
+    self.assertEqual(changed, [True], str(rejected.exception))
+AssertionError: Lists differ: [] != [True]
+
+Second list contains 1 additional elements.
+First extra element 0:
+True
+
+- []
++ [True] : template lacks required governance packages or generic role
+
+----------------------------------------------------------------------
+Ran 15 tests in 133.310s
+
+FAILED (failures=1, errors=3)

@@ -1,0 +1,20 @@
+--- before/SKILLS-depo/init-new-project/tests/test_curator_setup.py
++++ after/SKILLS-depo/init-new-project/tests/test_curator_setup.py
+@@ -47,7 +47,7 @@
+     for name in ('template-update.json','template-update.md','projects.json'):shutil.copyfile(source/'depot'/name,root/'depot'/name)
+     registry=json.loads((root/'depot/projects.json').read_text());registry['projects']=[row for row in registry['projects'] if row['id'] in ('sys4ai-depot','sys4ai-template-project')]
+     (root/'depot/projects.json').write_text(json.dumps(registry,indent=2)+'\n')
+-    shutil.copyfile(source/'tools/template_update.py',root/'tools/template_update.py')
++    shutil.copyfile(source/'SKILLS-depo/init-new-project/assets/template_update.py',root/'tools/template_update.py')
+     for name in ('Implementation_Plans/subagent_role_system_implementation_plan.md','Implementation_Plans/task_system_implementation_plan.md','Tasks/INDEX.md'):
+         destination=root/'Projects/Sys4AI-Template-Project'/name;destination.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source/'Projects/Sys4AI-Template-Project'/name,destination)
+     updater=load(root/'tools/template_update.py','curator_fixture_updater_'+str(abs(hash(str(root)))))
+@@ -93,7 +93,7 @@
+             first=root/'Projects/software';second=root/'Projects/teaching'
+             for destination,description in ((first,'A software build project'),(second,'A teaching curriculum')):
+                 record=helper.run_initialization(mode='create',destination=destination,project_id=destination.name,project_name=destination.name.title(),purpose=description)
+-                self.assertEqual(record['setup_contract'],'governance-starter-v11');self.assertEqual(record['status'],'completed');self.assertTrue(record['static_ready'])
++                self.assertEqual(record['setup_contract'],'governance-starter-v12');self.assertEqual(record['status'],'completed');self.assertTrue(record['static_ready'])
+                 config=json.loads((destination/'curator.yaml').read_text());self.assertEqual(config['project']['id'],destination.name);self.assertEqual(config['project']['coordination_root'],str(destination))
+                 self.assertIsNone(config['project']['repository_id']);self.assertFalse(config['schedule']['enabled']);self.assertEqual(config['entitlements'],[]);self.assertFalse(config['service_installed']);self.assertFalse(config['hook_installed']);self.assertIsNone(config['runtime'])
+                 self.assertFalse((destination/'control_records/curator').exists());self.assertFalse((destination/'.sys4ai/curator').exists())

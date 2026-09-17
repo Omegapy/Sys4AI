@@ -382,3 +382,21 @@ conflict and assignment-input gates. A publication receipt is normal evidence;
 memory recovery cannot manufacture acceptance or replay committed Task events.
 See the [memory integration contract](../../memory/references/task-integration.md)
 for packet selection, limits and retrieval behavior.
+
+## Explicit Curator version 2
+
+New Task creation can select `orchestration_enabled: true` and
+`orchestration_version: 2` together with exact `controller_origin` and
+`native_protocol` bindings. Default creation and every historical record retain
+their existing versions. The selected Curator origin binds charter, policy and
+canonical project identity; the native protocol binds backend, session, runtime,
+schema and profile hashes. Unknown fields and incompatible selections fail.
+
+Version 2 records actual App Server IDs and versioned observations. Completed
+spawn items must agree with observed child parent/source lineage. A completed
+turn means idle, not permanent shutdown. The sole manager reservation, role and
+charter acknowledgements, writer transfer, category teams, current reviews,
+recovery and exact artifact rules remain mandatory. Version 2 writes require a
+current protected broker context; serialized evidence is insufficient. This is
+a logical owner check whose security depends on independently proven process
+confinement. No migration, Task creation or activation occurs during inspection.
