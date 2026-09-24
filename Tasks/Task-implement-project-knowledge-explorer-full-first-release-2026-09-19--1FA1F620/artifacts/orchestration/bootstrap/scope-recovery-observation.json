@@ -1,0 +1,30 @@
+{
+  "revision": 9,
+  "generation": 2,
+  "native_receipt": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/explorer_manager",
+          "agent_status": "interrupted"
+        },
+        {
+          "agent_name": "/root/explorer_manager_g2",
+          "agent_status": "interrupted"
+        }
+      ]
+    }
+  },
+  "subtasks": [
+    "BASELINE"
+  ],
+  "workers_launched": false,
+  "canonical_locks": [],
+  "source": "orchestration_state.py reserve checks active manager fit.writes against new worker fit.writes. Original host reservation was overly broad. Narrow only manager own file writes to artifacts/orchestration/manager; full Task implementation authority and baseline remain intact.",
+  "user_authority": "Bounded reversible repair of host bootstrap necessary for the already-authorized full implementation and resumed goal; no product or scope decision is changed."
+}

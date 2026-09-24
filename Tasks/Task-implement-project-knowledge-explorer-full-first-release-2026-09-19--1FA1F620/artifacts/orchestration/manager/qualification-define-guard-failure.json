@@ -1,0 +1,23 @@
+{
+  "status": "Actual helper rejection; no canonical event committed and no worker reserved or launched.",
+  "command": ".venv/bin/python .agents/skills/agent-task/scripts/task_state.py --project-root . orchestrate TASK-20260919-1FA1F620 --expected-revision173 --payload-file /tmp/EV_QUALIFICATION_DEFINE.json",
+  "exit_code": 2,
+  "attempted_event": "EV_QUALIFICATION_DEFINE",
+  "error": {
+    "code": "guard_stale",
+    "message": "A bound guard source changed; select an exact reviewed repair.",
+    "path": ".agents/skills/agent-task/scripts/task_state.py",
+    "action_id": "urn:sys4ai:ontology:action:task:response_transaction",
+    "contract": {
+      "path": "reference-assets/ONTOLOGY-depo/actions/contracts-v1.json",
+      "sha256": "1d7c133b1ad5e3c150c6364529ff9b9731bb68974b9b234c0b71d3b03c318275"
+    }
+  },
+  "current_task": {
+    "revision": 173,
+    "sha256": "a219cd4523742b581f33ea0b0bc666e10cd79457983f7bb2a30f87f627c9cd67",
+    "bytes": 940322
+  },
+  "approved_helper_sha256": "b53bca05601b742b28bd9d8f87c4dcee0bb22500f210b21666a508e45440d604",
+  "disposition": "Primary host reviews exact maintenance for the newly approved helper source; no guard bypass, unreviewed provenance rewrite, event replay or new native reservation."
+}

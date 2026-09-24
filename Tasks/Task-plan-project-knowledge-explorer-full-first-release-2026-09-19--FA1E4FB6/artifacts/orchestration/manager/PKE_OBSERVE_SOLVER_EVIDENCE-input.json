@@ -1,0 +1,55 @@
+{
+  "event": {
+    "event_id": "PKE_OBSERVE_SOLVER_EVIDENCE",
+    "actor": "/root/pke_plan_manager",
+    "execution_id": "EXEC_PKE_PLAN_20260919",
+    "generation": 1,
+    "kind": "assignment.observe",
+    "data": {
+      "assignment_id": "solver_evidence",
+      "receipt": {
+        "tool": "collaboration.list_agents",
+        "result": {
+          "agents": [
+            {
+              "agent_name": "/root",
+              "agent_status": "running"
+            },
+            {
+              "agent_name": "/root/pke_plan_manager",
+              "agent_status": "running"
+            },
+            {
+              "agent_name": "/root/pke_plan_manager/solver_arch",
+              "agent_status": "running"
+            },
+            {
+              "agent_name": "/root/pke_plan_manager/solver_evidence",
+              "agent_status": "completed"
+            }
+          ]
+        }
+      },
+      "changes": [
+        {
+          "path": "Tasks/Task-plan-project-knowledge-explorer-full-first-release-2026-09-19--FA1E4FB6/artifacts/orchestration/work/solver_evidence/candidate.json",
+          "sha256": "0ab7a5c8cff1a0ba29405e4ed19700f77c713441e2a8fb67ad7effdb0e38a025"
+        }
+      ]
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Observed evidence solver complete and exact candidate bytes present."
+    ],
+    "verification_evidence": [
+      "Current exact Task state and event evidence inspected."
+    ],
+    "user_response_summary": "Observed evidence solver complete and exact candidate bytes present.",
+    "current_summary": "Observed evidence solver complete and exact candidate bytes present.",
+    "next_step": "Produce and validate the full-release managed draft plan.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "assignment_id": "FIXTURES_WORKER_G3",
+  "native_id": "/root/explorer_manager_g3/fixtures_worker",
+  "app_thread_id": "01a0bf21-d190-7a21-8e99-49de7498f706",
+  "baseline": "c450eff02c17624c6b46be61a7da4ce28fa263d128eb408051155fa5b5fd1658",
+  "task_scope": "TASK-003",
+  "outcome": "bounded_fixture_and_initial_mapping_delivered",
+  "canonical_project_or_task_mutation": false,
+  "fixture_checks": {
+    "passed": true,
+    "count": 57,
+    "receipt": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/result.json"
+  },
+  "schema_checks": {
+    "passed": true,
+    "count": 8,
+    "receipt": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/schema-result.json",
+    "qualification": "Test-only existing jsonschema interpreter; no memory workflow or runtime dependency."
+  },
+  "canonical_scale_results": [
+    {
+      "scale": "small",
+      "loaded_records": 216,
+      "loaded_relations": 109,
+      "canonical_validated": true,
+      "competency_passed": 16,
+      "source_reference_tuples": 345,
+      "reader_admission_observed": false
+    },
+    {
+      "scale": "representative",
+      "loaded_records": 6066,
+      "loaded_relations": 5009,
+      "canonical_validated": true,
+      "competency_passed": 16,
+      "source_reference_tuples": 6195,
+      "reader_admission_observed": false
+    },
+    {
+      "scale": "stress",
+      "loaded_records": 55066,
+      "loaded_relations": 50009,
+      "canonical_validated": true,
+      "competency_passed": 16,
+      "source_reference_tuples": 55195,
+      "reader_admission_observed": false
+    }
+  ],
+  "stress_stage_qualification": "Initial combined45s timeout retained. Staged load completed36.590s including inventory/count overhead; separate competency-only helper passed16questions in31.042s. These single observations are not production timings. PeakRSS270729216bytes; accepted reader limits remain unchanged.",
+  "capacity_qualification": {
+    "reference_boundary_entries": [
+      957,
+      958
+    ],
+    "reference_tuple_counts": [
+      1024,
+      1025
+    ],
+    "canonical_array_first_rejected_records": 10001,
+    "canonical_file_first_rejected_bytes": 2000001,
+    "stress_aggregate_canonical_bytes": 43961774,
+    "stress_loaded_relations": 50009,
+    "predicted_reader_limits": [
+      "source_reference_tuples",
+      "selected_input_bytes",
+      "aggregate_relationships"
+    ],
+    "observed_reader_limit_response": false
+  },
+  "coverage": {
+    "requirements": 49,
+    "acceptance_scenarios": 36,
+    "plan_tasks": 33,
+    "phases": 8,
+    "scenario_catalog": 31,
+    "acceptance_text": "verbatim TRD revision2 with original source qualifiers",
+    "all_at_status": "not_run",
+    "frozen_initial_map": true,
+    "later_runtime_evidence": "Separate current release records; preserve this map."
+  },
+  "commands": [
+    ".venv/bin/python -B SKILLS-depo/ontology/tests/fixtures/explorer/build_matrix.py",
+    ".venv/bin/python -B SKILLS-depo/ontology/tests/fixtures/explorer/verify_fixtures.py",
+    ".venv-memory-pilot/bin/python -B SKILLS-depo/ontology/tests/fixtures/explorer/verify_schema.py",
+    ".venv/bin/python -B SKILLS-depo/ontology/tests/fixtures/explorer/verify_stress_competency.py",
+    "git diff --check -- SKILLS-depo/ontology/tests/explorer_support.py SKILLS-depo/ontology/tests/fixtures/explorer Verification/project-knowledge-explorer-first-release/acceptance-matrix.json"
+  ],
+  "static_checks": [
+    "Python AST parsing passed for five source scripts",
+    "Every required frozen plan/TRD/contract/schema hash still matches",
+    "All delivery files <=250000bytes",
+    "Scoped git diff --check returned0"
+  ],
+  "limitations": [
+    "These are canonical fixtures and coverage/protocols. No production reader, HTTP dispatcher, signed cursor, session, renderer, browser, accessibility, human walkthrough or timing target was tested.",
+    "load_elapsed_seconds and RSS are single canonical-loader observations in an isolated test subprocess, not production latency p95, reader RSS limits or browser performance.",
+    "Representative/stress source tuples exceed the accepted 1024 cap. Resource_limit is predicted from counts, not an observed service response. Stress may also exceed aggregate byte/relation budgets after imports; retain actual counts.",
+    "45-second canonical probe timeout is a fixture-test bound, not the five-second service deadline. Any timeout means loading not established for that exact workload, not permission to increase shared caps.",
+    "Graph10000 probe uses invalid placeholder records to isolate array-count admission; unsupported_kind at10000 does not establish semantic validity. Normal generated shards validate separately.",
+    "Exact source extraction, process partial/stale projection and source/hash admission need future reader tests; canonical substring presence is not proof of exact section extraction.",
+    "No general aggregate canonical loader capacity guarantee or all-threshold search is claimed. Exact single-file byte/record boundaries and near owner-tuple admission cases are separately measured.",
+    "No production asset manifest exists at this stage; source placement and normative exclusions alone do not establish installed HTTP exclusion.",
+    "All three scales passed canonical structural and16competency questions after the separately evidenced stress probe; the earlier combined timeout remains a real observed outcome."
+  ],
+  "distribution_inspection": {
+    "fixture_source": "SKILLS-depo/ontology/tests/fixtures/explorer",
+    "runtime_manifest_present": false,
+    "observed": "source_placement_and_accepted_contract_exclusion_only",
+    "http_bundle_exclusion": "not_exercised",
+    "note": "Existing updater can copy tests as installed test resources; that is separate from HTTP runtime assets. Later actual bundle/manifest/HTTP evidence remains mandatory."
+  },
+  "input_refs": [
+    {
+      "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+      "sha256": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b"
+    },
+    {
+      "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+      "sha256": "bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d"
+    },
+    {
+      "path": "SKILLS-depo/ontology/references/explorer-contract.md",
+      "sha256": "de02c72a60fb30a707d6d83bae915cac358eaab09378788e826640654ee8ae00"
+    },
+    {
+      "path": "ONTOLOGY-depo/schema/explorer-v1.json",
+      "sha256": "8e6d0ceb47c98e77d518f4d7c935986ab6982d1a1c15e12377a726e90fbbb7a4"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "SKILLS-depo/ontology/tests/explorer_support.py",
+      "sha256": "c41e45aeb143e6d8203e4178730ac8bd1ffe34a4472bbba11bd23a7ad928aaba",
+      "bytes": 18585
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/acceptance-matrix.json",
+      "sha256": "4bbfd181b1ec4efe2e59443ed52bc1b68130f64d3e44de2e55f2b3129a94fcec",
+      "bytes": 206461
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/README.md",
+      "sha256": "73884354ff513b41cb4b04b30d66ecb4aba392d66993743dc829b2a900c2662f",
+      "bytes": 8117
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/build_matrix.py",
+      "sha256": "0a98573cfd27215fb6e34f657291bf6813935ba9729586fdb49ed6c793dd4e31",
+      "bytes": 15755
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/protocol-cases.json",
+      "sha256": "5855a5db0850ffe51859fdc442020df681decb6356fa5460f25d991d5a01b02c",
+      "bytes": 9121
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/initial-stress-probe.json",
+      "sha256": "d2039bf1d6019da59adf0114dd42120f8e57f4212e4cef2510c9427d41780d39",
+      "bytes": 1525
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/representative-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/representative-stdout.json",
+      "sha256": "42691f9637416a2631eec017ede2a5db973bb0ccf72dccefdfc42833d6821fea",
+      "bytes": 116215
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/representative-stdout.jsonl",
+      "sha256": "2334a551632b9eaa61a062577072c06786618885732204d6da9c023687d1fb14",
+      "bytes": 116935
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/result.json",
+      "sha256": "b94d232ca3c6df60c666b74a2091796ed1632f4c591d0de941f67550d2e114a7",
+      "bytes": 23270
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/schema-result.json",
+      "sha256": "b7d2de7c029e9b4e7ead3e3004c9f5e844ff2acb6e72b3c3adbb6a4e61c03c92",
+      "bytes": 1494
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/small-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/small-stdout.json",
+      "sha256": "7eb9091c86a8cc6e21541c195cc166fe51b51bb6b02b14788fbfb3a5c7158fd8",
+      "bytes": 111007
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/small-stdout.jsonl",
+      "sha256": "67d1002b3a7a2cbe1d5d744d425138257797fdcfafed55e45fd29594b01452df",
+      "bytes": 111717
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/stress-competency-result.json",
+      "sha256": "9c27892a4f0a5fbd6ddd2524d3d9a5b40b29e6211c70c2f6ff055c35f60f40a6",
+      "bytes": 5943
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/stress-competency-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/stress-competency-stdout.json",
+      "sha256": "8b30b34c96f8c23c5e9cbea757ac013307db1866af5e40d3e4a3d45108f6a886",
+      "bytes": 190780
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/stress-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/stress-stdout.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/stress-stdout.jsonl",
+      "sha256": "5b36919076c9a944ad60150ef2ba6b8ffb7b212ed2b526a1761519a499b50053",
+      "bytes": 730
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/verify_fixtures.py",
+      "sha256": "541689f93c108a8ef32bb981b1d8becf5a618bad85713b00176031fe87a2ffe6",
+      "bytes": 16127
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/verify_schema.py",
+      "sha256": "d6a7426f8c643fbdaf79ff3eb38fc9ad842aa34b82dfdb04d84e13218ed23352",
+      "bytes": 3299
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/verify_stress_competency.py",
+      "sha256": "fabcd1566a0de917cf639b2ea04d993a5e358e24b3f1430d3510deea196d7206",
+      "bytes": 2367
+    }
+  ],
+  "stopping_condition": "Both TASK003 criteria delivered with direct canonical/schema/competency evidence and exact complete coverage mapping. Future runtime/production/human acceptance remains explicitly unperformed."
+}

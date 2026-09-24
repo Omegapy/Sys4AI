@@ -1,0 +1,124 @@
+{
+  "status": "released_for_single_root_execution_per_frozen_job",
+  "actor": "/root/explorer_manager_g3",
+  "revision": 188,
+  "runtime_manifest": {
+    "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+    "sha256": "c59422dc85017405ff9c92e335a459f770e649a2a59507d7dc7b7f449d04ae4a"
+  },
+  "build_id": "09b4571b34594b39e9d19be3320f334bf7d608a333e0d06902dfda0a361259b8",
+  "jobs": [
+    {
+      "number": "03",
+      "kind": "advanced",
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+        "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9"
+      },
+      "manifest": {
+        "path": "/private/tmp/explorer-process-catalog-browser-03/inputs.json",
+        "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55"
+      },
+      "inputs_checked": 111,
+      "expected_groups": 28,
+      "drivers_exactly_equal_preserved_preimages": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/tests/frontend/host-advanced.py",
+          "sha256": "1886259bbb345171d26821233b4512e6827472f188867eb6e844815254441d4d"
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/tests/frontend/browser-advanced.cjs",
+          "sha256": "aeefe282e3e9c88c26135db671c24edcd40b1433c440d5849043227b3d4d0297"
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/tests/frontend/fixture.py",
+          "sha256": "68bf9ffb1f58eb225c4aa7c507be822ed4f695fe5054cffa275d64ef9417e2d0"
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/tests/frontend/mutate-snapshot.py",
+          "sha256": "b4b44f8a39a53603e32d5ec367c733529f7d535993186dac298b7028c3f4dfce"
+        }
+      ],
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-I",
+        "-B",
+        "/private/tmp/explorer-process-catalog-browser-03/host-playwright-driver.py"
+      ],
+      "timeout_seconds": 180
+    },
+    {
+      "number": "04",
+      "kind": "bounds",
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-04.json",
+        "sha256": "b323ed69cd25e57b95eb1890459c24a0fcff17da84b9d39896d9fc4e6dd31426"
+      },
+      "manifest": {
+        "path": "/private/tmp/explorer-process-catalog-browser-04/inputs.json",
+        "sha256": "b5429596492463574686c4af23f573995343a58a7e7b035b927fa9e18dcaf197"
+      },
+      "inputs_checked": 109,
+      "expected_groups": 4,
+      "drivers_exactly_equal_preserved_preimages": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/tests/frontend/host-bounds.py",
+          "sha256": "54e9771206823821825f2515274c9cfd44f141faad235887832219db349914e7"
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/tests/frontend/browser-bounds.cjs",
+          "sha256": "d3a752c5428a858b361157c4a92bbc3d71a5469061f8d6b35be7f53da83098c0"
+        }
+      ],
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-I",
+        "-B",
+        "/private/tmp/explorer-process-catalog-browser-04/host-playwright-driver.py"
+      ],
+      "timeout_seconds": 180
+    },
+    {
+      "number": "05",
+      "kind": "neutral",
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-05.json",
+        "sha256": "b075b7741a6249742381f02eb757e691e3326c556e6af7e414457dfd17958564"
+      },
+      "manifest": {
+        "path": "/private/tmp/explorer-process-catalog-browser-05/inputs.json",
+        "sha256": "e07d8524815c70c69cc85b0400f035a93901dfbbfbbb2ceb03393fe94b1484af"
+      },
+      "inputs_checked": 109,
+      "expected_groups": 7,
+      "drivers_exactly_equal_preserved_preimages": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/tests/frontend/host-neutral.py",
+          "sha256": "5eb0d1bd7a8ab8d0159926e84be76da4050c729b45b28b24b0dc65c58dcd3d25"
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/tests/frontend/browser-neutral.cjs",
+          "sha256": "39c29a76d894c6fdb5f8bd145cb556e961e9cebaae04c72f74b0b2bfb65f98a3"
+        }
+      ],
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-I",
+        "-B",
+        "/private/tmp/explorer-process-catalog-browser-05/host-playwright-driver.py"
+      ],
+      "timeout_seconds": 180
+    }
+  ],
+  "review": "Frozen drivers/scripts/fixture mutations match previously inspected and accepted build19 suite source byte-for-byte; current generated runtime is the newly built correction. Each staged regular file and all live runtime members independently rehashed without following links. These broad regression suites are distinct from new catalog06 behavior tests.",
+  "root_requirements": [
+    "Independently pin/capture actual5tools and all staged inputs; exact groups must pass.",
+    "Retain private raw reports, initial/final input/tool checks and child/descendant cleanup.",
+    "Advanced permits only its three declared synthetic fixture paths; bounds/neutral require unchanged synthetic fixtures. These fixture path checks do not claim full protected live-root nonmutation or every unobserved field assertion.",
+    "Parallel disposable diagnostics are allowed, with no performance inference. Current source/assets must remain frozen for a given result; preserve any failures."
+  ],
+  "qualifications": [
+    "No native accessibility, participant comprehension, root adoption or whole release acceptance.",
+    "Former suite results remain historical. Current-run receipts must bind this actual asset manifest."
+  ]
+}

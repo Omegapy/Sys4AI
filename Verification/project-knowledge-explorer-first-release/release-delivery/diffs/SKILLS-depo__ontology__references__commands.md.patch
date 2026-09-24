@@ -1,0 +1,65 @@
+--- a/SKILLS-depo/ontology/references/commands.md
++++ b/SKILLS-depo/ontology/references/commands.md
+@@ -31,18 +31,10 @@
+ identify the exact project, observation time, input versions, required components
+ and failures. A later input change requires a fresh assessment.
+ 
+-For the on-demand workbench, static health reports `running: null` and
+-`service_state: not_assessed` until `--workbench-url http://127.0.0.1:PORT` selects
+-an actual endpoint. The read-only two-second probe checks project/root identity,
+-current source snapshot, server helper and startup configuration. It reports
+-running, stopped, unreachable, timeout, wrong-project, stale-service or invalid-response
+-state. It accepts no credentials, redirects, remote host, query or bootstrap
+-fragment and starts no service. Its total network deadline bounds header and
+-body reads even when a peer trickles bytes. `/health` exposes only bounded identity hashes;
+-all data/authoring APIs retain session, Host, Origin and CSRF checks. Explicit
+-CLI service startup reports its observed service and current dependencies,
+-separately from unexercised runtime behavior. Normal shutdown removes only its
+-unchanged exclusively created private session file.
++The workbench component is retained for configuration compatibility and reports
++`retired`. An enabled or explicitly required retired workbench remains non-ready;
++no old endpoint is probed. Use `explorer-health` for the separate reader. The
++legacy `--workbench-url` option cannot revive the service.
+ 
+ Default SHACL authoring scope is `asserted`, `derived`, and `external`. External
+ metadata belongs to authored external-classified records and is needed for
+@@ -182,7 +174,7 @@
+ standards backend required by an enabled guard. Provisioning restores missing
+ packages separately; no read performs it.
+ 
+-## Proposals and browser authoring
++## Trusted proposal commands
+ 
+ `generation-prepare request.json` freezes selected sources and approved context.
+ Deliver that returned request to the current permitted native agent.
+@@ -201,13 +193,10 @@
+ --expected-review-sha256 HASH`. The current v2 grant binds that exact proposal,
+ validation and review. The result includes the actual receipt and reopened files.
+ 
+-`workbench --authority-file authority.json --session-file
+-.sys4ai/ontology/workbench/session.json` starts the enabled local service.
+-The private session file contains a short-lived, one-use link. Without an
+-authority file, the session permits browsing only. A trusted local actor supplies
+-current native identity and exact authoring scope; browser fields cannot grant
+-authority. A new session must use a new private runtime file. Stop the foreground
+-service with Ctrl-C. Tokens and bootstrap URLs never belong in saved evidence.
++`workbench` returns the documented `workbench_retired` error and starts no
++service. Its former `--authority-file`, `--session-file` and `--port` options are
++not accepted. Use `explore --open` for reading and the trusted proposal commands
++above for authoring. Old browser credentials are not migrated.
+ 
+ `guard-preview`, `guard-apply` and `guard-recover` take reviewed JSON operation
+ payloads through the existing ontology guard setup/repair protocol. Enablement
+@@ -303,8 +292,7 @@
+ requires a fresh verified local launch. Refresh knowledge only updates data
+ within an unchanged executing package.
+ 
+-The existing `workbench`, proposal, publication, recovery, query and agent CLI
+-interfaces retain their current behavior during this implementation stage.
+-They are separate trusted interfaces and are not reachable through Explorer's
+-six read endpoints. Workbench retirement requires the later qualified cutover;
+-adding the reader command does not itself perform that cutover.
++Proposal, publication, recovery, query and agent CLI interfaces retain their
++trusted local routes. They are not reachable through Explorer's six read
++endpoints. See [Explorer operations](explorer-operations.md) for selected-project
++configuration, package maintenance and exact rollback boundaries.

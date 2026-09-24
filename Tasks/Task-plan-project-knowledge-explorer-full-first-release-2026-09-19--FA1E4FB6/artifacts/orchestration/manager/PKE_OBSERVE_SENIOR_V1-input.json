@@ -1,0 +1,59 @@
+{
+  "event": {
+    "event_id": "PKE_OBSERVE_SENIOR_V1",
+    "actor": "/root/pke_plan_manager",
+    "execution_id": "EXEC_PKE_PLAN_20260919",
+    "generation": 1,
+    "kind": "assignment.observe",
+    "data": {
+      "assignment_id": "senior",
+      "receipt": {
+        "tool": "collaboration.list_agents",
+        "result": {
+          "agents": [
+            {
+              "agent_name": "/root",
+              "agent_status": "running"
+            },
+            {
+              "agent_name": "/root/pke_plan_manager",
+              "agent_status": "running"
+            },
+            {
+              "agent_name": "/root/pke_plan_manager/senior",
+              "agent_status": "completed"
+            },
+            {
+              "agent_name": "/root/pke_plan_manager/solver_arch",
+              "agent_status": "completed"
+            },
+            {
+              "agent_name": "/root/pke_plan_manager/solver_evidence",
+              "agent_status": "completed"
+            }
+          ]
+        }
+      },
+      "changes": [
+        {
+          "path": "Tasks/Task-plan-project-knowledge-explorer-full-first-release-2026-09-19--FA1E4FB6/artifacts/orchestration/work/senior/proposal.json",
+          "sha256": "68a98087547e42a964ab95f9fb05b101c7e141dd381e536856d51f52aadfb103"
+        }
+      ]
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Observed senior complete; canonical size preflight requires one bounded same-owner correction before acceptance."
+    ],
+    "verification_evidence": [
+      "Current exact Task state and event evidence inspected."
+    ],
+    "user_response_summary": "Observed senior complete; canonical size preflight requires one bounded same-owner correction before acceptance.",
+    "current_summary": "Observed senior complete; canonical size preflight requires one bounded same-owner correction before acceptance.",
+    "next_step": "Produce and validate the full-release managed draft plan.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

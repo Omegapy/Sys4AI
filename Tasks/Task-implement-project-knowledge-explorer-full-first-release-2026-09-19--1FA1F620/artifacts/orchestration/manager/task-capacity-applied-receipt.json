@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "status": "applied_and_verified",
+  "authorization": {
+    "user_text": "I accept all",
+    "context": "Explicit answer to the displayed tested project-local 2 MB Task-capacity policy proposal",
+    "approved_patch_sha256": "cd43a667a4aa1d5c2e3ab51027a7583431c1527cf34f64808f17358acd130b5c"
+  },
+  "executor": "Primary host /root; ordinary exec_command git apply after exact before-hash and git apply --check verification",
+  "scope": "Only active project-local Task helper, its contract, and new capacity regression tests. No reusable source, Template, other-project, Task-data or memory edits.",
+  "limits": {
+    "json_state_and_intent_bytes": 2000000,
+    "pretty_encoding_threshold_bytes": 1000000,
+    "request_payload_bytes": 1000000,
+    "evidence_and_response_bytes": 250000
+  },
+  "task": {
+    "id": "TASK-20260919-1FA1F620",
+    "revision_before": 173,
+    "revision_after_patch": 173,
+    "bytes": 940322,
+    "sha256_before_and_after": "a219cd4523742b581f33ea0b0bc666e10cd79457983f7bb2a30f87f627c9cd67"
+  },
+  "files": [
+    {
+      "path": ".agents/skills/agent-task/scripts/task_state.py",
+      "before_sha256": "22b550cf35892adb1b6cdfdbbedc149448d72c9a2e7b027e2ffa4f7d1137bc4c",
+      "after_sha256": "b53bca05601b742b28bd9d8f87c4dcee0bb22500f210b21666a508e45440d604"
+    },
+    {
+      "path": ".agents/skills/agent-task/references/task-system-contract.md",
+      "before_sha256": "7f44e6956cfc2ad4682f2852c72d41ea305c941de777733dc099c2a8aefe4d94",
+      "after_sha256": "3da7d4be0c593ed9ef1ade97396e36bc6db7d2afb1bd535c53c1d2e4b6f729f3"
+    },
+    {
+      "path": ".agents/skills/agent-task/tests/test_task_capacity.py",
+      "before_sha256": null,
+      "after_sha256": "20b3ed75b5cbc8fa872da4552658bbcef27fd7c8c469590b7b66faaf3ba26395"
+    }
+  ],
+  "verification": {
+    "proposal_full_suite": {
+      "tests": 121,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "final_proposal_focused_tests": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "installed_focused_tests": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "receipt": "/private/tmp/explorer-task-capacity-proposal-0jl7e8zw/installed-focused-test-result.json"
+    },
+    "live_task_validation": {
+      "command": ".venv/bin/python -B .agents/skills/agent-task/scripts/task_state.py --project-root . validate TASK-20260919-1FA1F620",
+      "exit_code": 0,
+      "status": "valid_with_warnings",
+      "errors": [],
+      "warning": "Existing STAGED_RESPONSE in unrelated TASK-20260910-7F1A11AE; preserved."
+    }
+  },
+  "remaining": "Full original Explorer plan, all49 requirements/36 acceptance scenarios/33 tasks/eight phases; qualification, actual Safari/VoiceOver and participant work, performance, preservation, adoption, cutover/rollback and final audit remain.",
+  "recorded_at": "2026-09-22T17:12:43.119085+00:00"
+}

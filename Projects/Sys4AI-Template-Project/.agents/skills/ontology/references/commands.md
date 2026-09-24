@@ -31,18 +31,10 @@ neutral starter; explicitly requiring a disabled profile is non-ready. Results
 identify the exact project, observation time, input versions, required components
 and failures. A later input change requires a fresh assessment.
 
-For the on-demand workbench, static health reports `running: null` and
-`service_state: not_assessed` until `--workbench-url http://127.0.0.1:PORT` selects
-an actual endpoint. The read-only two-second probe checks project/root identity,
-current source snapshot, server helper and startup configuration. It reports
-running, stopped, unreachable, timeout, wrong-project, stale-service or invalid-response
-state. It accepts no credentials, redirects, remote host, query or bootstrap
-fragment and starts no service. Its total network deadline bounds header and
-body reads even when a peer trickles bytes. `/health` exposes only bounded identity hashes;
-all data/authoring APIs retain session, Host, Origin and CSRF checks. Explicit
-CLI service startup reports its observed service and current dependencies,
-separately from unexercised runtime behavior. Normal shutdown removes only its
-unchanged exclusively created private session file.
+The workbench component is retained for configuration compatibility and reports
+`retired`. An enabled or explicitly required retired workbench remains non-ready;
+no old endpoint is probed. Use `explorer-health` for the separate reader. The
+legacy `--workbench-url` option cannot revive the service.
 
 Default SHACL authoring scope is `asserted`, `derived`, and `external`. External
 metadata belongs to authored external-classified records and is needed for
@@ -182,7 +174,7 @@ configuration preserves guard and publication scope and cannot disable the
 standards backend required by an enabled guard. Provisioning restores missing
 packages separately; no read performs it.
 
-## Proposals and browser authoring
+## Trusted proposal commands
 
 `generation-prepare request.json` freezes selected sources and approved context.
 Deliver that returned request to the current permitted native agent.
@@ -201,13 +193,10 @@ Publish with `proposal-publish PROPOSAL_ID --revision N --grant-file grant.json
 --expected-review-sha256 HASH`. The current v2 grant binds that exact proposal,
 validation and review. The result includes the actual receipt and reopened files.
 
-`workbench --authority-file authority.json --session-file
-.sys4ai/ontology/workbench/session.json` starts the enabled local service.
-The private session file contains a short-lived, one-use link. Without an
-authority file, the session permits browsing only. A trusted local actor supplies
-current native identity and exact authoring scope; browser fields cannot grant
-authority. A new session must use a new private runtime file. Stop the foreground
-service with Ctrl-C. Tokens and bootstrap URLs never belong in saved evidence.
+`workbench` returns the documented `workbench_retired` error and starts no
+service. Its former `--authority-file`, `--session-file` and `--port` options are
+not accepted. Use `explore --open` for reading and the trusted proposal commands
+above for authoring. Old browser credentials are not migrated.
 
 `guard-preview`, `guard-apply` and `guard-recover` take reviewed JSON operation
 payloads through the existing ontology guard setup/repair protocol. Enablement
@@ -250,3 +239,60 @@ Its result states that full proof delivery is not exercised. Default full
 inference retains all proof/PROV detail and can return `output_limit`; use exact
 bounded premise queries for scoped proof detail. See [standards.md](standards.md)
 for the diagnostic scope and schema contract.
+
+## Project Knowledge Explorer
+
+`explore` explicitly starts the selected project's separate, read-only loopback
+service. It does not enable an advanced profile, install dependencies, build
+assets, execute an ontology capability, or use the authoring workbench session.
+
+```sh
+python scripts/ontology.py --project-root /resolved/project explore --open
+python scripts/ontology.py --project-root /resolved/project explore --port 51781
+python scripts/ontology.py --project-root /resolved/project explorer-health --url http://127.0.0.1:51781
+```
+
+Use the project's selected Python 3.12 interpreter. The foreground service binds
+only `127.0.0.1`; an omitted port selects an available port. Stop this owned
+process with Ctrl-C or its normal termination signal. `--open` opens the browser
+only as part of this explicit launch. Without it, launch reports the private
+session-file location and credential-free service origin. Open the one-use URL
+from that mode-0600 file privately; never paste it into logs or shared evidence.
+`--session-file` may choose a new JSON filename only inside the selected project's
+mode-0700 `.sys4ai/ontology/explorer/` directory. Existing files are not replaced.
+Cleanup removes only unchanged files created by that exact service instance.
+
+The one-use bootstrap expires after 60 seconds. The bundled bootstrap removes
+its fragment from the visible URL and history before the first request. A fresh
+exchange creates an isolated reader cookie and in-memory request token; reload
+can resume the same unexpired session without extending its absolute lifetime.
+An expired session requires fresh local reopening. The browser preserves safe
+desired context and recorded text; it cannot restart a stopped Python process.
+
+`explorer-health` performs bounded read-only checks of the selected local package,
+configuration and canonical readability. `--url` accepts only an explicit
+`http://127.0.0.1:<port>` origin, with an optional trailing slash. It rejects
+bootstrap URLs, credentials, queries, alternate hosts and redirects. Its public
+endpoint reports only `sys4ai-project-knowledge-explorer`, instance/build identity,
+protocol and running/package-change state. Local installation, configuration,
+readability, source staleness, endpoint reachability and wrong-project evidence
+are separate facts. `null` means not established. In particular, public health
+alone cannot prove a root identity; a matching selected-root private instance
+receipt supplies that comparison. A timeout, denied probe or malformed peer
+means unavailable, not proved stopped. No optional readiness sweep, repair or
+service startup occurs. A bounded disposable read worker may be used for local
+canonical validation and is reaped before the command returns.
+
+A missing or invalid runtime bundle reports `package_incomplete`. Use the
+installed [Explorer build instructions](../explorer/BUILD.md) for explicit
+maintenance in an authorized build workspace. Startup never runs npm. Installed
+package metadata includes its exact dependency lock and third-party notices;
+HTTP serves only the validated runtime manifest members. Changing helper,
+schema or manifested asset bytes while the service runs revokes sessions and
+requires a fresh verified local launch. Refresh knowledge only updates data
+within an unchanged executing package.
+
+Proposal, publication, recovery, query and agent CLI interfaces retain their
+trusted local routes. They are not reachable through Explorer's six read
+endpoints. See [Explorer operations](explorer-operations.md) for selected-project
+configuration, package maintenance and exact rollback boundaries.

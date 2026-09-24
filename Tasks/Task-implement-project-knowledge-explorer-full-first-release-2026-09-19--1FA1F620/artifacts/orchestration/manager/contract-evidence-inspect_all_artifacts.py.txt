@@ -1,0 +1,26 @@
+from pathlib import Path,PurePosixPath
+import json,hashlib,base64,tarfile,re
+R=Path('/Volumes/P-SSD/AngryOwl/Sys4AI');S=Path('/tmp/explorer-contracts-implement-g3')
+receipt=json.loads((R/'Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/host-dependency-runtime-receipt.json').read_text());lock=json.loads((R/'SKILLS-depo/ontology/explorer/package-lock.json').read_text())
+assert hashlib.sha256((S/'package-lock.json').read_bytes()).hexdigest()==receipt['lock_sha256'];assert (S/'package-lock.json').read_bytes()==(R/'SKILLS-depo/ontology/explorer/package-lock.json').read_bytes()
+out=[];texts={}
+for a in receipt['archives']:
+ p=Path(a['archive']);b=p.read_bytes();expected=lock['packages']['node_modules/'+a['name']];assert 'sha512-'+base64.b64encode(hashlib.sha512(b).digest()).decode()==expected['integrity'];files=[]
+ with tarfile.open(p,'r:gz') as t:
+  members=t.getmembers();assert all(not x.issym() and not x.islnk() for x in members);assert all(not PurePosixPath(x.name).is_absolute() and '..' not in PurePosixPath(x.name).parts for x in members)
+  pkg=json.loads(t.extractfile('package/package.json').read());assert pkg['name']==a['name'] and pkg['version']==expected['version'];licenses=[]
+  for x in members:
+   if x.isfile() and re.search(r'licen[sc]e|notice|copyright|copying',PurePosixPath(x.name).name,re.I) and not re.search(r'\.(?:js|mjs|cjs|ts|map)$',x.name):
+    data=t.extractfile(x).read();text=data.decode('utf8');h=hashlib.sha256(data).hexdigest();texts.setdefault(h,{'bytes':len(data),'text':text,'sources':[]})['sources'].append({'package':a['name'],'version':a['version'],'member':x.name});licenses.append({'member':x.name,'bytes':len(data),'sha256':h})
+  hooks={k:v for k,v in pkg.get('scripts',{}).items() if k in ['preinstall','install','postinstall','prepare','prepublish','prepublishOnly','prepack','postpack']}
+  gyp=any(x.name=='package/binding.gyp' for x in members)
+  scripts={x.name:t.extractfile(x).read().decode('utf8') for x in members if x.isfile() and x.name in ['package/bin/tsc','package/bin/tsserver','package/bin/vite.js','package/license-update.mjs','package/binding.gyp','package/node/index.js','package/scripts/postinstall.js','package/postinstall.js']}
+  out.append({'name':a['name'],'version':a['version'],'archive_bytes':len(b),'archive_sha256':hashlib.sha256(b).hexdigest(),'integrity':expected['integrity'],'tarball':expected['resolved'],'license':pkg.get('license'),'repository':pkg.get('repository'),'licenses':licenses,'hooks':hooks,'bin':pkg.get('bin'),'types':pkg.get('types') or pkg.get('typings'),'exports':pkg.get('exports'),'binding_gyp_present':gyp,'lock_hasInstallScript':expected.get('hasInstallScript',False),'inspected_script_bodies':scripts,'member_names':[x.name for x in members]})
+(S/'all-artifacts.json').write_text(json.dumps(out,indent=2)+'\n');(S/'all-license-texts.json').write_text(json.dumps(texts,indent=2)+'\n')
+print('artifacts',len(out),'license members',sum(len(a['licenses']) for a in out),'unique license texts',len(texts),'unique text bytes',sum(x['bytes'] for x in texts.values()))
+for a in out:
+ print(a['name'],a['version'],'licenses',[(x['member'],x['bytes']) for x in a['licenses']],'hooks',a['hooks'],'bin',a['bin'],'types',a['types'])
+print('script bodies')
+for a in out:
+ for path,text in a['inspected_script_bodies'].items():
+  if path not in ['package/license-update.mjs']:print(a['name'],path,text[:10000])

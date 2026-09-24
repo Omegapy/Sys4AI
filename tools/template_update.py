@@ -151,6 +151,11 @@ def read_file(path: Path, *, optional: bool = False) -> bytes | None:
 
 
 def excluded(path: str) -> bool:
+    # Generated Explorer fixtures and captured test output are retained source
+    # evidence, not neutral starter assets. Do not parse or copy their contents.
+    fixtures = "SKILLS-depo/ontology/tests/fixtures/explorer"
+    if path == fixtures or path.startswith(fixtures + "/"):
+        return True
     parts = PurePosixPath(path).parts
     return any(
         part.lower() in EXCLUDED or part.lower().startswith(("._", ".env."))

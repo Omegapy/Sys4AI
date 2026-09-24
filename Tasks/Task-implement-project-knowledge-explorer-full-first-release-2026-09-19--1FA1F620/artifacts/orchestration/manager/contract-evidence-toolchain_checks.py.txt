@@ -1,0 +1,21 @@
+from pathlib import Path
+import json,hashlib,subprocess,os,tarfile,base64
+S=Path('/tmp/explorer-contracts-implement-g3').resolve();R=Path('/Volumes/P-SSD/AngryOwl/Sys4AI');env={**os.environ,'NODE_COMPILE_CACHE':str(S/'node-compile-cache')};out=[]
+def run(args,expected=0):
+ p=subprocess.run(args,cwd=S,env=env,capture_output=True,text=True,timeout=60);item={'argv':args,'exit_code':p.returncode,'stdout':p.stdout,'stderr':p.stderr};out.append(item);assert p.returncode==expected,item;return p
+run(['node','--version']);run(['npm','--version']);run(['node','node_modules/typescript/bin/tsc','--version']);run(['node','node_modules/vite/bin/vite.js','--version']);run(['node','node_modules/rolldown/bin/cli.mjs','--version']);run(['node','node_modules/typescript/bin/tsc','--project','tsconfig.contract.json']);run(['node','runtime-contract-smoke.mjs'])
+(S/'bad-types-smoke.ts').write_text('const invalid: number = "not a number";\n');p=subprocess.run(['node','node_modules/typescript/bin/tsc','--noEmit','--strict','--ignoreConfig','bad-types-smoke.ts'],cwd=S,env=env,capture_output=True,text=True,timeout=60);out.append({'argv':p.args,'exit_code':p.returncode,'stdout':p.stdout,'stderr':p.stderr});assert p.returncode!=0 and 'TS2322' in p.stdout,p.stdout
+(S/'rolldown-input-smoke.js').write_text('export const answer = 42;\n');run(['node','node_modules/rolldown/bin/cli.mjs','rolldown-input-smoke.js','--file','rolldown-output-smoke.js']);assert '42' in (S/'rolldown-output-smoke.js').read_text()
+receipt=json.loads((R/'Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/host-dependency-runtime-receipt.json').read_text());art={x['name']:x for x in receipt['archives']};installed=[]
+for x in receipt['installed_packages']:
+ base=S/'node_modules'/x['name'];n=0
+ with tarfile.open(art[x['name']]['archive'],'r:gz') as t:
+  for member in t.getmembers():
+   if member.isfile():
+    dest=base/str(Path(member.name).relative_to('package'));expected=t.extractfile(member).read();assert dest.read_bytes()==expected,(x['name'],str(dest));n+=1
+ installed.append({'name':x['name'],'version':x['version'],'archive_files_equal':n})
+links=[]
+for name in ['tsc','vite','rolldown']:
+ p=S/'node_modules/.bin'/name;target=p.resolve();assert target.is_relative_to(S/'node_modules');links.append({'bin':name,'target':str(target.relative_to(S)),'sha256':hashlib.sha256(target.read_bytes()).hexdigest()})
+result={'checks':out,'installed_packages':installed,'installed_bins':links,'installed_file_count':sum(a['archive_files_equal'] for a in installed),'platform':'darwin-arm64','production_build':False,'browser_csp':False,'other_platform_binaries_executed':False}
+(S/'toolchain-results.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))

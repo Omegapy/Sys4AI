@@ -1,0 +1,44 @@
+{
+  "status": "released_one_same_owner_local_build_after_current_security_report_binding",
+  "task_revision": 236,
+  "executor": "Original qualification worker only",
+  "script": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/reproduce-build-v4.py",
+    "sha256": "c7bdcbe4d20d739acd517d852880d82a338213d52e75984bfa51d51471c398ae"
+  },
+  "preparation": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/build-preparation-04.json",
+    "sha256": "f31aa4dcfcb6adc346dcfe71c6b9fd4e1cd04e183ff175c527cb62372fdcbcf7"
+  },
+  "security_phase_acceptance": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-current-v4-TASK020-acceptance.json",
+    "sha256": "8da0b4be49245748f9258ce296df9825168a9ee005ddb34323f304110ad5b8d5"
+  },
+  "command": [
+    ".venv/bin/python",
+    "-I",
+    "-B",
+    "Verification/project-knowledge-explorer-first-release/qualification-tests/reproduce-build-v4.py",
+    "run",
+    "04"
+  ],
+  "stage": "/private/tmp/explorer-qualification-build-04",
+  "checks": "Full script read; manager executed captured read-only source_inputs/dependency_inputs definitions only. All28 live/staged current authored files,19 SHA512 locked archives,1001 shared/staged files,exact4 confined links/hidden lock and Node25.9.0/npm11.12.1 identities verified. No build by manager.",
+  "build_commands": [
+    [
+      "/opt/homebrew/bin/npm",
+      "run",
+      "build"
+    ],
+    [
+      "/opt/homebrew/bin/npm",
+      "run",
+      "package:runtime"
+    ]
+  ],
+  "per_command_timeout_seconds": 120,
+  "write_boundary": "Existing owned build04 stage outputs/cache and versioned Q build04/current-v4 evidence only; production source/runtime/shareddeps unchanged. Empty separate npm configs, exact noninherited environment and no install/download.",
+  "gate": "Owner first binds actual current six-case/four-browser TASK020 results in security-results.json preserving exact previous bytes. Script gate requires current build/AT24\u201327.",
+  "expected_result": "Actual byte-for-byte equality of live manifest and all5 rebuilt assets, current build/source record and complete source/shared/stageddependency closure preserved. No claims until real command result.",
+  "qualification": "TASK021 local build only; no hostbrowser/native/Task022/performance or fullrelease pass."
+}

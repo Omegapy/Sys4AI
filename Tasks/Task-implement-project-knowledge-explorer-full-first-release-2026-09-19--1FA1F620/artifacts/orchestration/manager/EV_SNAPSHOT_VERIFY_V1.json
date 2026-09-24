@@ -1,0 +1,77 @@
+{
+  "event": {
+    "event_id": "EV_SNAPSHOT_VERIFY_V1",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "subtask.verify",
+    "data": {
+      "subtask_id": "SNAPSHOT",
+      "baseline": "96787a00f2b7fff4cd29bdf0e3d7a3e1731251b7a4ca0fe4f3ec5fd6b92b059b",
+      "round": 1,
+      "result_id": "RES_SNAPSHOT_V1",
+      "acceptance_id": null,
+      "artifacts": [
+        "ART_SNAPSHOT_DELIVERY_V1"
+      ],
+      "criteria": [
+        {
+          "criterion": "Mixed-version inputs yield snapshot_changed/knowledge_updating; entry/relations/graph/cursor output never silently mixes snapshots.",
+          "evidence": "Snapshot-layer current source and run05 directly pass: test_byte_capture_never_loads_mid_read_replacement, test_continuous_churn_stops_after_three_attempts, test_unchanged_mtime_bytes_invalidate_expected_snapshot, test_source_only_observation_does_not_advance_view_or_allow_canonical_change. Manager source/test inspection and snapshot-acceptance.json bind current bytes. Full wire/browser/supervisor integration remains separately required."
+        },
+        {
+          "criterion": "Cache keys include selected root/project, snapshot, helper/adapter and presentation versions; cache memory/concurrency/lifetime are bounded.",
+          "evidence": "Snapshot-layer current source and run05 directly pass: test_no_read_writes_and_deep_immutable_cache, test_two_view_lifetime_reader_failure_and_capacity, test_same_identity_other_root_isolated, test_package_helper_schema_asset_and_set_drift_sticky, test_semantic_validator_runs_before_current_swap, test_selected_and_view_resources_are_bounded. Manager source/test inspection and snapshot-acceptance.json bind current bytes. Full wire/browser/supervisor integration remains separately required."
+        },
+        {
+          "criterion": "Stale evidence does not erase safe canonical definitions and no read creates publication locks, repairs hashes or builds products.",
+          "evidence": "Snapshot-layer current source and run05 directly pass: test_stale_and_missing_sources_preserve_recorded_definition, test_no_read_writes_and_deep_immutable_cache, test_source_file_and_full_tuple_limits_are_independent. Manager source/test inspection and snapshot-acceptance.json bind current bytes. Full wire/browser/supervisor integration remains separately required."
+        },
+        {
+          "criterion": "Interrupted multi-file publication with stable bytes is rejected until existing owner state establishes completion or recovery; malformed or unreadable relevant coordination returns a safe bounded diagnostic.",
+          "evidence": "Snapshot-layer current source and run05 directly pass: test_ordinary_partial_stable_commit_and_retained_recovery, test_integration_partial_multifile_and_recovery_receipt_shapes, test_all_target_bytes_without_receipt_remain_unresolved, test_malformed_orphan_and_mismatched_journals_fail_closed, test_complete_historical_receipt_accepts_later_superseding_publication, test_disjoint_unresolved_actual_transaction_is_excluded. Manager source/test inspection and snapshot-acceptance.json bind current bytes. Full wire/browser/supervisor integration remains separately required."
+        },
+        {
+          "criterion": "Read-only coordination brackets materialization and covers missing-to-present lock races; ordinary browsing creates no lock, intent, receipt, repaired source hash or generated output.",
+          "evidence": "Snapshot-layer current source and run05 directly pass: test_existing_exclusive_lock_is_busy_and_read_does_not_replace_it, test_shared_lock_blocks_actual_publisher_through_postcheck, test_missing_lock_actual_completed_publication_retries, test_missing_lock_barrier_with_active_actual_publisher, test_absent_parent_creation_retries_without_creating_lock, test_unsafe_coordination_is_bounded_refusal. Manager source/test inspection and snapshot-acceptance.json bind current bytes. Full wire/browser/supervisor integration remains separately required."
+        }
+      ],
+      "inspection": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/snapshot-acceptance.json",
+          "sha256": "a81189f3ebf617fa1dc079bcc1e944009c55706139273ffab19c89232a68d30c"
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/snapshot-tests/delivery.json",
+          "sha256": "29cba3f88b1cc256243746c0a61dedd5de1f8e92d241849f2031afa67c8ede93"
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/snapshot-tests/HANDOFF.md",
+          "sha256": "6f2fa4b32efa2e0ba6bcd0083454d92c3fc48b6609e41504833f558c494389ed"
+        },
+        {
+          "path": "SKILLS-depo/ontology/scripts/ontology_explorer_snapshot.py",
+          "sha256": "44eb178d170f1348a8f86c28ff0450b537809f2cc9a799e2de81be8ca1f6144b"
+        },
+        {
+          "path": "SKILLS-depo/ontology/tests/test_explorer_snapshot.py",
+          "sha256": "6b2974c04d6e4d6ffd9c152868f76e4fb1970af18ddc30b58685ce972d734e47"
+        }
+      ]
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Verified all five snapshot criteria at their bounded implementation layer against current source and direct tests."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Verified all five snapshot criteria at their bounded implementation layer against current source and direct tests.",
+    "current_summary": "Verified all five snapshot criteria at their bounded implementation layer against current source and direct tests.",
+    "next_step": "Reserve READER_DATA with exact snapshot API/handoff, then archive accepted snapshot child for capacity.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

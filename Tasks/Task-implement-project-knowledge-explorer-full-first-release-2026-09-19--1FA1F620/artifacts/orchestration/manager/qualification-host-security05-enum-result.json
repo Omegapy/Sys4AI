@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "actor": "/root",
+  "purpose": "Observe the exact failing variant and allowlisted error enum while retaining original security-05 test assertions and production bytes. This is diagnostic evidence, not a passing test or a changed acceptance rule.",
+  "source_stage": "/private/tmp/explorer-security-host-4xl8qvlu/captured-stage",
+  "manifest_sha256": "cc675b1cda566e31d74c93574370128ab4a0dd3909f23538bc39654f3ee1da59",
+  "driver_sha256": "99ac15f63621d3f5b4a20ffa404d00e395fd2e700c7303981fa524a05b6128f4",
+  "diagnostic_script_sha256": "3a79dea9533e0c41d3fbe401b7aec6f6eb81c53c37566f16ec0151d4a23759ab",
+  "method": "Only unittest.TextTestRunner.run wraps the one test instance denied() method to record a safe enum and variant, then calls the original denied() assertion unchanged. Real Service/Reader and fixture code execute unchanged.",
+  "observations": [
+    {
+      "variant": "symlink",
+      "http_status": 422,
+      "observed_error_code": "source_unavailable",
+      "recognized_enum": true
+    },
+    {
+      "variant": "oversized",
+      "http_status": 503,
+      "observed_error_code": "resource_limit",
+      "recognized_enum": true
+    }
+  ],
+  "original_assertion_exit": 1,
+  "original_safe_result": {
+    "elapsed_seconds": 2.7646848750300705,
+    "errors": 0,
+    "failures": 1,
+    "inputs_unchanged": true,
+    "observations": [],
+    "owned_children_reaped": true,
+    "safe_test_log": "test_at26_source_replacement_never_follows_or_repairs (test_explorer_security.SecurityTests.test_at26_source_replacement_never_follows_or_repairs) ... FAIL\n\n======================================================================\nFAIL: test_at26_source_replacement_never_follows_or_repairs (test_explorer_security.SecurityTests.test_at26_source_replacement_never_follows_or_repairs)\n----------------------------------------------------------------------\n{\"case\": \"test_explorer_security.SecurityTests.test_at26_source_replacement_never_follows_or_repairs\", \"exception_type\": \"AssertionError\", \"frames\": [{\"file\": \"case.py\", \"function\": \"testPartExecutor\", \"line\": 58}, {\"file\": \"case.py\", \"function\": \"run\", \"line\": 634}, {\"file\": \"case.py\", \"function\": \"_callTestMethod\", \"line\": 589}, {\"file\": \"test_explorer_security.py\", \"function\": \"test_at26_source_replacement_never_follows_or_repairs\", \"line\": 97}, {\"file\": \"explorer-security05-enum-diagnostic.py\", \"function\": \"denied\", \"line\": 32}, {\"file\": \"test_explorer_security.py\", \"function\": \"denied\", \"line\": 32}, {\"file\": \"case.py\", \"function\": \"assertIn\", \"line\": 1152}, {\"file\": \"case.py\", \"function\": \"fail\", \"line\": 715}]}\n----------------------------------------------------------------------\nRan 1 test in 2.765s\n\nFAILED (failures=1)\n",
+    "skips": 0,
+    "status": "failed",
+    "tests_run": 1
+  },
+  "elapsed_seconds": 2.804759292048402,
+  "inputs_unchanged": true,
+  "observed_owned_processes": [
+    {
+      "pid": 84469,
+      "exit_code": -9
+    }
+  ],
+  "owned_processes_reaped": true,
+  "stderr_bytes": 0,
+  "raw_stderr_retained": false
+}

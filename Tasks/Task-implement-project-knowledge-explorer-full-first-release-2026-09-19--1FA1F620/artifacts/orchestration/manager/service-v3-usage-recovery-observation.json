@@ -1,0 +1,64 @@
+{
+  "status": "same_original_model_control_turn_succeeded",
+  "actor": "/root/explorer_manager_g3",
+  "canonical_revision_before": 190,
+  "input_packet": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-v3-input-packet.json",
+    "sha256": "d94f72539c3b7c2c8e826a6639c9d51ed88038130e20a5515fac014785e65ab0"
+  },
+  "unchanged_current_refs_verified": 111,
+  "original_criteria": 14,
+  "failed_native_list": {
+    "agents": [
+      {
+        "agent_name": "/root",
+        "agent_status": "running"
+      },
+      {
+        "agent_name": "/root/explorer_manager_g3",
+        "agent_status": "running"
+      },
+      {
+        "agent_name": "/root/explorer_manager_g3/service_package_worker",
+        "agent_status": {
+          "errored": "You\u2019ve hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 26th, 2026 2:19 AM."
+        }
+      }
+    ]
+  },
+  "failed_app_turn_status": "failed",
+  "failed_turn_only_command": "cat Roles/project-sub-agent/AGENTS.md && cat Roles/project-sub-agent/ROLE.md && cat exact service-v3-input-packet.json",
+  "failed_command_status": "completed exit0; read-only",
+  "partial_write_observation": "No service-v3 directory exists; all111 bound current references match. No write tool or later command was observed before usage error.",
+  "interrupt_lookup_result": {
+    "previous_status": {
+      "errored": "You\u2019ve hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 26th, 2026 2:19 AM."
+    }
+  },
+  "after_interrupt_status": "Same errored status; not relabeled as a helper-supported failed/interrupted receipt.",
+  "recovery_authority": "User explicitly requested resume. Root reported fresh ordinary usage allowed/0percent used and authorized one bounded same-owner recovery attempt, unchanged model/settings.",
+  "control_turn": "Actual same-owner followup requested final acknowledgement only, no tools/read/write/test/delegation/product work. It succeeded and returned the recorded stopped acknowledgement.",
+  "actual_completed_receipt": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/explorer_manager_g3",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/explorer_manager_g3/service_package_worker",
+          "agent_status": {
+            "completed": "Acknowledged. SERVICE V3 remains stopped pending manager reconciliation. This control turn performed no tools, reads, writes, tests, delegation, or product work."
+          }
+        }
+      ]
+    }
+  },
+  "scope_settings_or_identity_changed": false,
+  "service_verification_has_not_run": true
+}

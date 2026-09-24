@@ -1,0 +1,44 @@
+{
+  "event": {
+    "event_id": "EV_G3_BASELINE_RESUME",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "assignment.resume",
+    "data": {
+      "assignment_id": "BASELINE_WORKER_G3",
+      "runtime": {
+        "available_slots": 2,
+        "depth": 2,
+        "evidence": [
+          {
+            "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/runtime-baseline.json",
+            "sha256": "e60e8d39162981db099d93d7cf7be255eef8cd4765d7e7f3275f3f460cd18483"
+          }
+        ],
+        "tools": [
+          "spawn_agent",
+          "list_agents",
+          "send_message",
+          "followup_task",
+          "interrupt_agent"
+        ]
+      },
+      "reason": "Same baseline and inputs; original native worker completes manager-required count/size/timing corrections without replaying pending health probe. Existing unavailable health result is retained accurately."
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Resumed the existing baseline assignment with unchanged scope and input baseline."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Resumed the existing baseline assignment with unchanged scope and input baseline.",
+    "current_summary": "Resumed the existing baseline assignment with unchanged scope and input baseline.",
+    "next_step": "Wake the same worker for final evidence corrections and final result.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

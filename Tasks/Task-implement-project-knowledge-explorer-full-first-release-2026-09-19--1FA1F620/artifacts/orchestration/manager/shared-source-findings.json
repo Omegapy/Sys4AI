@@ -1,0 +1,31 @@
+{
+  "evidence_level": "Direct source inspection, not a solver candidate",
+  "files": [
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_core.py",
+      "sha256": "09bc25023e873e4d7b1fcf9163e90be9f3ae46c23b8bbbe1928695c5d92e8e52"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_workbench.py",
+      "sha256": "1a02494a3bbe9979f48a152527fd0b1c6a566bc53576665822aa7fc34a11318e"
+    }
+  ],
+  "findings": [
+    {
+      "source": "ontology_core.py:78-110",
+      "fact": "read_bytes opens parent directories with no-follow descriptors, bounds bytes, requires a regular single-link file."
+    },
+    {
+      "source": "ontology_workbench.py:256-270",
+      "fact": "Existing Workbench constructor requires the advanced workbench enabled profile."
+    },
+    {
+      "source": "ontology_workbench.py:380-389",
+      "fact": "Existing authoring handler includes raw str(exc) in one failure branch and uses ThreadingHTTPServer; dedicated Explorer criteria require independent bounded safe service behavior."
+    },
+    {
+      "source": "ontology_workbench.py:389-392",
+      "fact": "Existing code notes cookies are host-scoped rather than port-scoped and uses a port suffix for isolation."
+    }
+  ]
+}

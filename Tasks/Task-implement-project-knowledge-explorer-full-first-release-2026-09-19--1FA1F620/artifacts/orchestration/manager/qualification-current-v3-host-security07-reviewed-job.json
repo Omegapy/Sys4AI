@@ -1,0 +1,41 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-qualification-security-07/host-security-runner.py"
+  ],
+  "staging_root": "/private/tmp/explorer-qualification-security-07",
+  "manifest": {
+    "path": "/private/tmp/explorer-qualification-security-07/inputs.json",
+    "sha256": "0bc574aa99e2f6b62193da02e331853d2fdcbc785b69c7d8af7b3d1c11596064"
+  },
+  "external_tools": [
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "resolved": "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+      "sha256": "31b9c9a8d50289f3a13f014b3efd8ea3534fc3eea7ca7d9809e166139910b805",
+      "bytes": 52448
+    },
+    {
+      "path": "/bin/ps",
+      "resolved": "/bin/ps",
+      "sha256": "3bbba882e30d91fc4ff6e6844ca7c59fef4351b9a3fea35dca55708d6d487d1c",
+      "bytes": 170432
+    }
+  ],
+  "timeout_seconds": 300,
+  "inputs_count": 107,
+  "source_writes": false,
+  "intended_writes": [
+    "Owned /private/tmp/explorer-http-* fixtures and services only; test mutations target only those synthetic roots. Every service/child is reaped."
+  ],
+  "credentials": "Private files and process memory only; no raw URL, headers, responses or exception values in evidence.",
+  "scenarios": [
+    "AT-24 closed write families",
+    "AT-25 hostile credentials and two namespaces",
+    "AT-26 source/path authority",
+    "AT-27 inert wire and strict CSP",
+    "actual in-process Reader forbidden-call audit; browser malicious-text behavior follows separately"
+  ]
+}

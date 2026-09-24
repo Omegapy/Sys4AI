@@ -13,7 +13,7 @@ def arguments(parser, *, advanced=False):
     parser.add_argument("--level", choices=("static", "operational"), default="static")
     parser.add_argument("--require", action="append", default=[], choices=sorted(PROFILES if advanced else PRODUCTS))
     if advanced:
-        parser.add_argument("--workbench-url", help="Explicit http://127.0.0.1:PORT origin; never a bootstrap URL.")
+        parser.add_argument("--workbench-url", help="Retired workbench option; use explorer-health --url.")
 
 
 def aggregate(result, root, scope, level, components, context=None):
@@ -58,7 +58,6 @@ def advanced_health(root, *, scope="selected", level="static", required=(), work
     from ontology_advanced import load_advanced
     from ontology_profiles import health
     from ontology_semantic import health as semantic_health
-    from ontology_workbench import assess_service
     require(set(required) <= PROFILES, "invalid_assessment", "Unknown required advanced component.")
     try:
         cfg = load_advanced(root)
@@ -69,10 +68,10 @@ def advanced_health(root, *, scope="selected", level="static", required=(), work
         profiles = {"standards": health(root), "inference": health(root, "inference"),
                     "semantic": semantic_health(root), "guards": guard_health(root)}
         enabled = bool(cfg and cfg["profiles"].get("workbench", {}).get("enabled"))
-        profiles["workbench"] = assess_service(root, workbench_url) if workbench_url else {
-            "status": "ready" if enabled else "disabled", "enabled": enabled,
-            "service_state": "not_assessed", "running": None, "mode": "on_demand",
-            "observed_operation": "not_exercised"}
+        profiles["workbench"] = {
+            "status": "retired", "enabled": enabled, "running": None,
+            "service_state": "retired", "observed_operation": "not_exercised",
+            "next_operation": "explorer-health"}
         components = {}
         for name, detail in profiles.items():
             selected = bool(cfg and cfg["profiles"].get(name, {}).get("enabled"))

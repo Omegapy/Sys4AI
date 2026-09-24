@@ -1,0 +1,1208 @@
+{
+  "schema_version": 2,
+  "task_id": "TASK-20260919-46D79848",
+  "name": "Capture Project Knowledge Explorer requirements",
+  "original_name": "Capture Project Knowledge Explorer requirements",
+  "slug": "capture-project-knowledge-explorer-requirements",
+  "folder_name": "Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848",
+  "description": "Use the explicitly invoked To-TRD skill to discover and capture requirements from the user-supplied Sys4AI Project Knowledge Explorer Recommendations. Treat the recommendations as source material and resolve material scope choices with the user. This Task authorizes a project-local requirements document only, not implementation or publication.",
+  "definition_of_done": [
+    "The user's intended outcome, selected scope, exclusions and material constraints are settled and traced to the current request, supplied recommendations and actual clarification answers.",
+    "A new project-local schema-2 TRD is created through the To-TRD helper with stable requirement IDs, sources and observable acceptance criteria, then directly inspected and validated with its index.",
+    "The exact reviewed TRD revision receives explicit user approval and its saved state is verified as trd_done; downstream planning, implementation and external actions remain separately authorized."
+  ],
+  "created_at": "2026-09-19T17:38:53-06:00",
+  "updated_at": "2026-09-19T19:57:00-06:00",
+  "status": "completed",
+  "parent_task_id": null,
+  "revision": 21,
+  "response_count": 20,
+  "last_response": {
+    "response_id": "RESP-0020",
+    "sequence": 20,
+    "created_at": "2026-09-19T19:57:00-06:00",
+    "path": "responses/Task-Response-0020-2026-09-19T19-57-00-06-00.md",
+    "supersedes_response_id": null
+  },
+  "current_summary": "Requirements capture complete. User-approved TRD-20260919-B6D51106 revision 2 is verified trd_done with 49 requirements, complete source coverage, current index and preserved existing records.",
+  "next_step": null,
+  "blockers": [],
+  "open_questions": [],
+  "thread_refs": [
+    {
+      "thread_id": "01a0bc07-f87e-77d0-b2bd-e602095a7902",
+      "title": "Capture Project Knowledge Explorer requirements",
+      "first_seen_at": "2026-09-19T19:00:00-06:00",
+      "last_seen_at": "2026-09-19T19:00:00-06:00"
+    }
+  ],
+  "orchestration": {
+    "acceptances": {},
+    "artifacts": {
+      "baseline_d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24": {
+        "assignment_id": "knowledge_explorer_manager",
+        "generation": 1,
+        "path": "artifacts/orchestration/baseline_d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24.json",
+        "sha256": "d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24",
+        "size": 2694
+      },
+      "document_checks_v1": {
+        "assignment_id": "document_worker",
+        "generation": 1,
+        "path": "artifacts/orchestration/document_checks_v1.json",
+        "sha256": "5fe57b9fe212cbe235c93bcbbd79f67cbeb9bc9c7e48ab02d6500c25f48c1e60",
+        "size": 1917
+      },
+      "document_coverage_v1": {
+        "assignment_id": "document_worker",
+        "generation": 1,
+        "path": "artifacts/orchestration/document_coverage_v1.json",
+        "sha256": "4086616da4b434e94319433c3a8b4ea4d626aadefe3fc8a791e1891002077a3e",
+        "size": 19458
+      },
+      "document_payload_v1": {
+        "assignment_id": "document_worker",
+        "generation": 1,
+        "path": "artifacts/orchestration/document_payload_v1.json",
+        "sha256": "74a595375bfa750a082ad080e380fd1fa5debaf74f9e9cdc70b2f1ff3ca63b49",
+        "size": 60638
+      }
+    },
+    "assignments": {
+      "document_worker": {
+        "acceptance_id": null,
+        "assignment_id": "document_worker",
+        "baseline": "d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24",
+        "context": [
+          {
+            "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/baseline_d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24.json",
+            "sha256": "d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24"
+          },
+          {
+            "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/source-recommendations.md",
+            "sha256": "b79d6122615b85f2ca42f0334cdecd7677578085014bb6c82565180e6264d38e"
+          },
+          {
+            "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/document-worker-handoff.md",
+            "sha256": "356466341b4562caa7ec0c4709d3aae755635853b4c2d3bf713e0e5393bae6ac"
+          }
+        ],
+        "fit": {
+          "authority": "Task-scoped document payload and evidence only; host expressly authorized the exact Verification directory. No TRD publication, Task writes, implementation, dependencies, Git, external actions or delegation.",
+          "capabilities": [
+            "Requirements documentation",
+            "Source traceability",
+            "Read-only structural validation"
+          ],
+          "deliverable": "Complete trd-payload.json, coverage and check evidence in the exact permitted Verification directory.",
+          "objective": "Prepare the complete source-traced first-release Project Knowledge Explorer To-TRD payload for host publication.",
+          "rationale": "project-sub-agent supports bounded original documentation. documentation-curator requires broker/profile capabilities not granted here; no narrower eligible drafting role exists.",
+          "reads": [
+            "SOUL.md",
+            "ROLE.md",
+            "AGENTS.md",
+            "SPECS.md",
+            ".agents/skills/to-trd",
+            ".agents/skills/communication",
+            "Roles/project-sub-agent",
+            "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848"
+          ],
+          "risk": "Unsupported normative additions, omissions or confusing capture with implementation.",
+          "skills": [
+            "to-trd",
+            "communication"
+          ],
+          "stop": "Return checked payload paths/hashes and source coverage, then stop for manager inspection.",
+          "tools": [
+            "exec_command"
+          ],
+          "writes": [
+            "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848"
+          ]
+        },
+        "function": "worker",
+        "generation": 1,
+        "input_receipt": null,
+        "native_id": "/root/knowledge_explorer_manager/document_worker",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/knowledge_explorer_manager/document_worker"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "observations": [
+          {
+            "changes": [
+              {
+                "path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/trd-payload.json",
+                "sha256": "74a595375bfa750a082ad080e380fd1fa5debaf74f9e9cdc70b2f1ff3ca63b49"
+              },
+              {
+                "path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/coverage.json",
+                "sha256": "4086616da4b434e94319433c3a8b4ea4d626aadefe3fc8a791e1891002077a3e"
+              },
+              {
+                "path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/checks.json",
+                "sha256": "5fe57b9fe212cbe235c93bcbbd79f67cbeb9bc9c7e48ab02d6500c25f48c1e60"
+              }
+            ],
+            "receipt": {
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root",
+                    "agent_status": "running"
+                  },
+                  {
+                    "agent_name": "/root/knowledge_explorer_manager",
+                    "agent_status": "running"
+                  },
+                  {
+                    "agent_name": "/root/knowledge_explorer_manager/document_worker",
+                    "agent_status": "completed"
+                  }
+                ]
+              },
+              "tool": "collaboration.list_agents"
+            }
+          }
+        ],
+        "perspective": "Source-grounded requirements documentation",
+        "role": {
+          "agents_path": "Roles/project-sub-agent/AGENTS.md",
+          "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+          "catalog": {
+            "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/document-worker-role-catalog.json",
+            "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+          },
+          "name": "project-sub-agent",
+          "role_path": "Roles/project-sub-agent/ROLE.md",
+          "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+        },
+        "role_reads": {
+          "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+          "evidence": "Actual native document_worker sent both exact read digests through collaboration.send_message before substantive writes.",
+          "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+        },
+        "round": 1,
+        "runtime": {
+          "available_slots": 1,
+          "depth": 3,
+          "evidence": [
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/document-worker-native-evidence.json",
+              "sha256": "b180412561d3edc57ddb187866a3b0a1b5880df141a6d6fc37911311f0ca172a"
+            }
+          ],
+          "tools": [
+            "spawn_agent",
+            "list_agents",
+            "send_message",
+            "followup_task",
+            "interrupt_agent"
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/bootstrap-native-evidence.json",
+              "sha256": "449daac4ed8325be3a33605adb0279ea1b1f4f1c26abe87901c23aa72c167613"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "slot": "document_worker",
+        "state": "completed",
+        "subtask_id": "prepare_requirements"
+      },
+      "knowledge_explorer_manager": {
+        "acceptance_id": null,
+        "assignment_id": "knowledge_explorer_manager",
+        "baseline": "3413276b144267071fb9c8f491797def8d04bbf4abf63cc88990cd98d0988b83",
+        "context": [
+          {
+            "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-handoff.md",
+            "sha256": "932550c8ff67745dba092d5ac7dff6aaebd09c4938b8a9ca35cd0df7539fd8dd"
+          },
+          {
+            "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/source-recommendations.md",
+            "sha256": "b79d6122615b85f2ca42f0334cdecd7677578085014bb6c82565180e6264d38e"
+          }
+        ],
+        "fit": {
+          "authority": "Manage only this document-capture Task. Requirements and TRD helper work only after scope is resolved; no downstream implementation or external actions. Nested required Task team permitted within available native capacity.",
+          "capabilities": [
+            "Task coordination",
+            "requirements capture",
+            "source traceability",
+            "artifact verification"
+          ],
+          "deliverable": "Truthful Task state plus validated requirements artifact after scope resolution.",
+          "objective": "Manage Project Knowledge Explorer requirements capture and pending scope clarification.",
+          "rationale": "The task-manager pair explicitly supports canonical ownership and nested Task coordination; ordinary worker roles do not.",
+          "reads": [
+            "SOUL.md",
+            "ROLE.md",
+            "AGENTS.md",
+            "SPECS.md",
+            ".agents/skills",
+            "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848",
+            "depot/projects.json"
+          ],
+          "risk": "Treating source recommendations as current authority or inventing unresolved scope.",
+          "skills": [
+            "task",
+            "agent-task",
+            "manage-subagent-roles",
+            "to-trd"
+          ],
+          "stop": "Record pending user scope and stop; after an actual reply, produce the requirements document and wait for exact approval.",
+          "tools": [
+            "exec_command",
+            "spawn_agent",
+            "list_agents",
+            "send_message",
+            "followup_task",
+            "interrupt_agent"
+          ],
+          "writes": [
+            "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848"
+          ]
+        },
+        "function": "manager",
+        "generation": 1,
+        "input_receipt": null,
+        "native_id": "/root/knowledge_explorer_manager",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/knowledge_explorer_manager"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "observations": [],
+        "perspective": "Project Director",
+        "role": {
+          "agents_path": "Roles/task-manager/AGENTS.md",
+          "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+          "catalog": {
+            "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/bootstrap-role-catalog.json",
+            "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+          },
+          "name": "task-manager",
+          "role_path": "Roles/task-manager/ROLE.md",
+          "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        },
+        "role_reads": {
+          "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+          "evidence": "Actual native /root/knowledge_explorer_manager confirmed complete role reads and exact digests through collaboration.send_message, plus root guidance, handoff, skills and canonical revision 3. No writes before activation.",
+          "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+        },
+        "round": 0,
+        "runtime": {
+          "available_slots": 3,
+          "depth": 2,
+          "evidence": [
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/bootstrap-native-evidence.json",
+              "sha256": "449daac4ed8325be3a33605adb0279ea1b1f4f1c26abe87901c23aa72c167613"
+            }
+          ],
+          "tools": [
+            "exec_command",
+            "spawn_agent",
+            "list_agents",
+            "send_message",
+            "followup_task",
+            "interrupt_agent"
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/bootstrap-native-evidence.json",
+              "sha256": "449daac4ed8325be3a33605adb0279ea1b1f4f1c26abe87901c23aa72c167613"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "slot": "manager",
+        "state": "active",
+        "subtask_id": null
+      }
+    },
+    "authority": "Manage only this document-capture Task. Requirements and TRD helper work only after scope is resolved; no downstream implementation or external actions. Nested required Task team permitted within available native capacity.",
+    "blockers": [],
+    "bootstrap": "/root",
+    "candidates": {},
+    "conflicts": {},
+    "context": [
+      {
+        "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-handoff.md",
+        "sha256": "932550c8ff67745dba092d5ac7dff6aaebd09c4938b8a9ca35cd0df7539fd8dd"
+      },
+      {
+        "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/source-recommendations.md",
+        "sha256": "b79d6122615b85f2ca42f0334cdecd7677578085014bb6c82565180e6264d38e"
+      }
+    ],
+    "events": [
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "knowledge_explorer_manager",
+          "authority": "Manage only this document-capture Task. Requirements and TRD helper work only after scope is resolved; no downstream implementation or external actions. Nested required Task team permitted within available native capacity.",
+          "bootstrap_receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root",
+                  "agent_status": "running"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          },
+          "context": [
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-handoff.md",
+              "sha256": "932550c8ff67745dba092d5ac7dff6aaebd09c4938b8a9ca35cd0df7539fd8dd"
+            },
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/source-recommendations.md",
+              "sha256": "b79d6122615b85f2ca42f0334cdecd7677578085014bb6c82565180e6264d38e"
+            }
+          ],
+          "fit": {
+            "authority": "Manage only this document-capture Task. Requirements and TRD helper work only after scope is resolved; no downstream implementation or external actions. Nested required Task team permitted within available native capacity.",
+            "capabilities": [
+              "Task coordination",
+              "requirements capture",
+              "source traceability",
+              "artifact verification"
+            ],
+            "deliverable": "Truthful Task state plus validated requirements artifact after scope resolution.",
+            "objective": "Manage Project Knowledge Explorer requirements capture and pending scope clarification.",
+            "rationale": "The task-manager pair explicitly supports canonical ownership and nested Task coordination; ordinary worker roles do not.",
+            "reads": [
+              "SOUL.md",
+              "ROLE.md",
+              "AGENTS.md",
+              "SPECS.md",
+              ".agents/skills",
+              "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848",
+              "depot/projects.json"
+            ],
+            "risk": "Treating source recommendations as current authority or inventing unresolved scope.",
+            "skills": [
+              "task",
+              "agent-task",
+              "manage-subagent-roles",
+              "to-trd"
+            ],
+            "stop": "Record pending user scope and stop; after an actual reply, produce the requirements document and wait for exact approval.",
+            "tools": [
+              "exec_command",
+              "spawn_agent",
+              "list_agents",
+              "send_message",
+              "followup_task",
+              "interrupt_agent"
+            ],
+            "writes": [
+              "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848"
+            ]
+          },
+          "role": {
+            "agents_path": "Roles/task-manager/AGENTS.md",
+            "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+            "catalog": {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/bootstrap-role-catalog.json",
+              "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+            },
+            "name": "task-manager",
+            "role_path": "Roles/task-manager/ROLE.md",
+            "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+          },
+          "runtime": {
+            "available_slots": 3,
+            "depth": 2,
+            "evidence": [
+              {
+                "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/bootstrap-native-evidence.json",
+                "sha256": "449daac4ed8325be3a33605adb0279ea1b1f4f1c26abe87901c23aa72c167613"
+              }
+            ],
+            "tools": [
+              "exec_command",
+              "spawn_agent",
+              "list_agents",
+              "send_message",
+              "followup_task",
+              "interrupt_agent"
+            ]
+          },
+          "settings": {
+            "effort": null,
+            "evidence": [
+              {
+                "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/bootstrap-native-evidence.json",
+                "sha256": "449daac4ed8325be3a33605adb0279ea1b1f4f1c26abe87901c23aa72c167613"
+              }
+            ],
+            "mode": "verified_inheritance",
+            "model": null
+          },
+          "source_refs": [
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/source-recommendations.md",
+              "sha256": "b79d6122615b85f2ca42f0334cdecd7677578085014bb6c82565180e6264d38e"
+            },
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-handoff.md",
+              "sha256": "932550c8ff67745dba092d5ac7dff6aaebd09c4938b8a9ca35cd0df7539fd8dd"
+            }
+          ]
+        },
+        "event_id": "reserve_knowledge_explorer_manager",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "manager.reserve",
+        "revision": 2,
+        "sha256": "9079872f34020257315d471608bad82da6b5c05159950eba8d8f4e6a5a534edd"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "knowledge_explorer_manager",
+          "receipt": {
+            "result": {
+              "task_name": "/root/knowledge_explorer_manager"
+            },
+            "tool": "collaboration.spawn_agent"
+          }
+        },
+        "event_id": "receipt_knowledge_explorer_manager",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "manager.receipt",
+        "revision": 3,
+        "sha256": "8ae8281202b2689257235214f6e208ae4f9b832795479d23c3b3c004222fd73d"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "knowledge_explorer_manager",
+          "role_reads": {
+            "agents_sha256": "b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49",
+            "evidence": "Actual native /root/knowledge_explorer_manager confirmed complete role reads and exact digests through collaboration.send_message, plus root guidance, handoff, skills and canonical revision 3. No writes before activation.",
+            "role_sha256": "3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443"
+          }
+        },
+        "event_id": "activate_knowledge_explorer_manager",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "manager.activate",
+        "revision": 4,
+        "sha256": "8c9e1b634806307bb213c40276da945af02e2c646c71a72f6365de4bfd1a4cb9"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "assignment_id": "knowledge_explorer_manager",
+          "receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root",
+                  "agent_status": "running"
+                },
+                {
+                  "agent_name": "/root/knowledge_explorer_manager",
+                  "agent_status": "running"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          }
+        },
+        "event_id": "reconnect_manager_full_scope",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "manager.reconnect",
+        "revision": 6,
+        "sha256": "6e33851a0fda595947b9e9b5e767d839675dcfd9d837d0bb928d20778a80d354"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "baseline": {
+            "authority": "Task-scoped document payload and evidence only; host expressly authorized the exact Verification directory. No TRD publication, Task writes, implementation, dependencies, Git, external actions or delegation.",
+            "category": "generic",
+            "criteria": [
+              "Payload conforms to current To-TRD title/body contract with source-linked stable requirements and observable acceptance; no material unknowns or unconfirmed assumptions remain.",
+              "All 36 source acceptance scenarios and material first-release outcomes/exclusions are mapped to requirement IDs with no unsupported normative additions.",
+              "Proposed numeric benchmarks, fixtures and display/tuning values retain exact values and qualified status; current backend limits and existing agent contracts remain intact.",
+              "Authority, source/Template/explicit root adoption, security, canonical semantics and protected history are faithfully bounded; no downstream plan or implementation is produced."
+            ],
+            "deliverable": "Complete trd-payload.json, coverage and check evidence in the exact permitted Verification directory.",
+            "dependencies": [],
+            "implementation_required": false,
+            "inputs": [
+              {
+                "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/source-recommendations.md",
+                "sha256": "b79d6122615b85f2ca42f0334cdecd7677578085014bb6c82565180e6264d38e"
+              },
+              {
+                "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/document-worker-handoff.md",
+                "sha256": "356466341b4562caa7ec0c4709d3aae755635853b4c2d3bf713e0e5393bae6ac"
+              }
+            ],
+            "objective": "Prepare the complete source-traced first-release Project Knowledge Explorer To-TRD payload for host publication.",
+            "protected": [
+              "TRDs",
+              "Tasks/INDEX.md",
+              "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/task.json",
+              "Roles",
+              "MEMORY",
+              "SKILLS-depo",
+              "Projects",
+              "depot/projects.json"
+            ],
+            "rationale": "User settled the complete source scope. This is bounded documentation transformation and source traceability, with one accountable worker and manager verification; no independent design alternatives need synthesis.",
+            "reads": [
+              "SOUL.md",
+              "ROLE.md",
+              "AGENTS.md",
+              "SPECS.md",
+              ".agents/skills/to-trd",
+              ".agents/skills/communication",
+              "Roles/project-sub-agent",
+              "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848"
+            ],
+            "requirements": [
+              "U01",
+              "U02",
+              "SRC-full-first-release"
+            ],
+            "slots": [
+              {
+                "function": "worker",
+                "perspective": "Source-grounded requirements documentation",
+                "slot": "document_worker",
+                "solver_slot": null
+              }
+            ],
+            "stop": "Return checked payload paths/hashes and source coverage, then stop for manager inspection.",
+            "writes": [
+              "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848"
+            ]
+          },
+          "subtask_id": "prepare_requirements"
+        },
+        "event_id": "define_document_preparation",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "subtask.define",
+        "revision": 8,
+        "sha256": "2cf76be16497c1e00596aaf8a026a1d2b26ce9ee6a054b3a14d056857af33e71"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "assignment_id": "document_worker",
+          "context": [
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/baseline_d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24.json",
+              "sha256": "d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24"
+            },
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/source-recommendations.md",
+              "sha256": "b79d6122615b85f2ca42f0334cdecd7677578085014bb6c82565180e6264d38e"
+            },
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/document-worker-handoff.md",
+              "sha256": "356466341b4562caa7ec0c4709d3aae755635853b4c2d3bf713e0e5393bae6ac"
+            }
+          ],
+          "fit": {
+            "authority": "Task-scoped document payload and evidence only; host expressly authorized the exact Verification directory. No TRD publication, Task writes, implementation, dependencies, Git, external actions or delegation.",
+            "capabilities": [
+              "Requirements documentation",
+              "Source traceability",
+              "Read-only structural validation"
+            ],
+            "deliverable": "Complete trd-payload.json, coverage and check evidence in the exact permitted Verification directory.",
+            "objective": "Prepare the complete source-traced first-release Project Knowledge Explorer To-TRD payload for host publication.",
+            "rationale": "project-sub-agent supports bounded original documentation. documentation-curator requires broker/profile capabilities not granted here; no narrower eligible drafting role exists.",
+            "reads": [
+              "SOUL.md",
+              "ROLE.md",
+              "AGENTS.md",
+              "SPECS.md",
+              ".agents/skills/to-trd",
+              ".agents/skills/communication",
+              "Roles/project-sub-agent",
+              "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848"
+            ],
+            "risk": "Unsupported normative additions, omissions or confusing capture with implementation.",
+            "skills": [
+              "to-trd",
+              "communication"
+            ],
+            "stop": "Return checked payload paths/hashes and source coverage, then stop for manager inspection.",
+            "tools": [
+              "exec_command"
+            ],
+            "writes": [
+              "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848"
+            ]
+          },
+          "role": {
+            "agents_path": "Roles/project-sub-agent/AGENTS.md",
+            "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+            "catalog": {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/document-worker-role-catalog.json",
+              "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+            },
+            "name": "project-sub-agent",
+            "role_path": "Roles/project-sub-agent/ROLE.md",
+            "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+          },
+          "runtime": {
+            "available_slots": 1,
+            "depth": 3,
+            "evidence": [
+              {
+                "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/document-worker-native-evidence.json",
+                "sha256": "b180412561d3edc57ddb187866a3b0a1b5880df141a6d6fc37911311f0ca172a"
+              }
+            ],
+            "tools": [
+              "spawn_agent",
+              "list_agents",
+              "send_message",
+              "followup_task",
+              "interrupt_agent"
+            ]
+          },
+          "settings": {
+            "effort": null,
+            "evidence": [
+              {
+                "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/bootstrap-native-evidence.json",
+                "sha256": "449daac4ed8325be3a33605adb0279ea1b1f4f1c26abe87901c23aa72c167613"
+              }
+            ],
+            "mode": "verified_inheritance",
+            "model": null
+          },
+          "slot": "document_worker",
+          "subtask_id": "prepare_requirements"
+        },
+        "event_id": "reserve_document_worker",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "assignment.reserve",
+        "revision": 9,
+        "sha256": "385cea180d3649a5ba3a5a58b245de1e44245abc616c0c689ee5f1b4f696dbe4"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "assignment_id": "document_worker",
+          "receipt": {
+            "result": {
+              "task_name": "/root/knowledge_explorer_manager/document_worker"
+            },
+            "tool": "collaboration.spawn_agent"
+          }
+        },
+        "event_id": "receipt_document_worker",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "assignment.receipt",
+        "revision": 10,
+        "sha256": "f126c57381bbbfc3da334960f7b2d128d25980d20603b316a5f10405720286e8"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "assignment_id": "document_worker",
+          "role_reads": {
+            "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+            "evidence": "Actual native document_worker sent both exact read digests through collaboration.send_message before substantive writes.",
+            "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+          }
+        },
+        "event_id": "reads_document_worker",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "assignment.reads",
+        "revision": 11,
+        "sha256": "f009afca18697d12db5111bfa3939c8d0106bdf0b47e0c8d583fffe11538f74f"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "assignment_id": "document_worker",
+          "changes": [
+            {
+              "path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/trd-payload.json",
+              "sha256": "74a595375bfa750a082ad080e380fd1fa5debaf74f9e9cdc70b2f1ff3ca63b49"
+            },
+            {
+              "path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/coverage.json",
+              "sha256": "4086616da4b434e94319433c3a8b4ea4d626aadefe3fc8a791e1891002077a3e"
+            },
+            {
+              "path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/checks.json",
+              "sha256": "5fe57b9fe212cbe235c93bcbbd79f67cbeb9bc9c7e48ab02d6500c25f48c1e60"
+            }
+          ],
+          "receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root",
+                  "agent_status": "running"
+                },
+                {
+                  "agent_name": "/root/knowledge_explorer_manager",
+                  "agent_status": "running"
+                },
+                {
+                  "agent_name": "/root/knowledge_explorer_manager/document_worker",
+                  "agent_status": "completed"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          }
+        },
+        "event_id": "observe_document_worker_complete",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "assignment.observe",
+        "revision": 12,
+        "sha256": "033347a83d5a4466a60245cee24c3788b0afe3a42a660c2dfd6650318ae1b457"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "artifact_id": "document_payload_v1",
+          "assignment_id": "document_worker",
+          "source_path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/trd-payload.json"
+        },
+        "event_id": "register_document_payload_v1",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "artifact.register",
+        "revision": 13,
+        "sha256": "941f067b63c7347f43376720cf260fb04ed839ffa521fa2d6d0b61e663daa2f6"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "artifact_id": "document_coverage_v1",
+          "assignment_id": "document_worker",
+          "source_path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/coverage.json"
+        },
+        "event_id": "register_document_coverage_v1",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "artifact.register",
+        "revision": 14,
+        "sha256": "f9758bf86c4ba05db2509b5fb84aabc310886cd4162f8c92727b3a04cad5ea9c"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "artifact_id": "document_checks_v1",
+          "assignment_id": "document_worker",
+          "source_path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/checks.json"
+        },
+        "event_id": "register_document_checks_v1",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "artifact.register",
+        "revision": 15,
+        "sha256": "64607799e3ebdd49750c8312f4b6022005e0200abf4befc81ca213db4d909b66"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "acceptance_id": null,
+          "artifact_ids": [
+            "document_payload_v1",
+            "document_coverage_v1",
+            "document_checks_v1"
+          ],
+          "assignment_id": "document_worker",
+          "baseline": "d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24",
+          "changes": [
+            {
+              "path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/trd-payload.json",
+              "sha256": "74a595375bfa750a082ad080e380fd1fa5debaf74f9e9cdc70b2f1ff3ca63b49"
+            },
+            {
+              "path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/coverage.json",
+              "sha256": "4086616da4b434e94319433c3a8b4ea4d626aadefe3fc8a791e1891002077a3e"
+            }
+          ],
+          "checks": [
+            {
+              "path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/checks.json",
+              "sha256": "5fe57b9fe212cbe235c93bcbbd79f67cbeb9bc9c7e48ab02d6500c25f48c1e60"
+            },
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-document-verification.json",
+              "sha256": "e007b6394add4ea06b212052a952dce3d5e261938bb192ac663ad133ddc508bb"
+            }
+          ],
+          "limitations": [
+            "Document-only preparation. Managed TRD creation and exact-revision user approval are still pending. No product implementation/runtime or adoption verified."
+          ],
+          "result_id": "document_preparation_v1",
+          "round": 1
+        },
+        "event_id": "record_document_preparation_result",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "result.record",
+        "revision": 16,
+        "sha256": "84325f90e3b8441fa022f8fa83d3e244c8826434ea03614ecb3a25f854bb7f57"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "acceptance_id": null,
+          "artifacts": [
+            "document_payload_v1",
+            "document_coverage_v1",
+            "document_checks_v1"
+          ],
+          "baseline": "d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24",
+          "criteria": [
+            {
+              "criterion": "Payload conforms to current To-TRD title/body contract with source-linked stable requirements and observable acceptance; no material unknowns or unconfirmed assumptions remain.",
+              "evidence": "Read-only installed To-TRD parser validates exact title/body payload and all 49 stable source-linked requirements; no completion blockers or assumptions."
+            },
+            {
+              "criterion": "All 36 source acceptance scenarios and material first-release outcomes/exclusions are mapped to requirement IDs with no unsupported normative additions.",
+              "evidence": "Direct full-source review plus independent exact scenario comparison covers all 36 AT cases, 15 mandatory outcomes and 25 source sections; all normative requirements have traceable source support."
+            },
+            {
+              "criterion": "Proposed numeric benchmarks, fixtures and display/tuning values retain exact values and qualified status; current backend limits and existing agent contracts remain intact.",
+              "evidence": "Direct numeric review preserved qualified benchmark/fixture/layout/display/debounce/usability values and the existing 2/20 defaults, 8/100/32000 maximums and 100-node traversal cap."
+            },
+            {
+              "criterion": "Authority, source/Template/explicit root adoption, security, canonical semantics and protected history are faithfully bounded; no downstream plan or implementation is produced.",
+              "evidence": "Direct manager and host review confirmed document-only authority, source/Template/root boundaries, read-only security, canonical semantics and history preservation with no implementation plan or code."
+            }
+          ],
+          "inspection": [
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-document-verification.json",
+              "sha256": "e007b6394add4ea06b212052a952dce3d5e261938bb192ac663ad133ddc508bb"
+            },
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-payload-inspection.json",
+              "sha256": "d74ebc7ee0954a89971286799db0170a6386eaab27fde63648bfe47d244a3db2"
+            }
+          ],
+          "result_id": "document_preparation_v1",
+          "round": 1,
+          "subtask_id": "prepare_requirements"
+        },
+        "event_id": "verify_document_preparation",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "subtask.verify",
+        "revision": 17,
+        "sha256": "0a9a5be30c6d57c29885ee6e200f329af661dd6a35bf1b8899a2213a84e6a52a"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "assignment_id": "knowledge_explorer_manager",
+          "receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root",
+                  "agent_status": "running"
+                },
+                {
+                  "agent_name": "/root/knowledge_explorer_manager",
+                  "agent_status": "running"
+                },
+                {
+                  "agent_name": "/root/knowledge_explorer_manager/document_worker",
+                  "agent_status": "completed"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          }
+        },
+        "event_id": "reconnect_after_exact_trd_approval",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "manager.reconnect",
+        "revision": 19,
+        "sha256": "a09968e109beff5946e8e0320e336eb4b8cf50919f020f93e206611c3ace1892"
+      },
+      {
+        "actor": "/root/knowledge_explorer_manager",
+        "data": {
+          "criteria": [
+            {
+              "criterion": "The user's intended outcome, selected scope, exclusions and material constraints are settled and traced to the current request, supplied recommendations and actual clarification answers.",
+              "evidence": "The actual user selected the full proposed first release; the accepted source-traced 49-requirement baseline covers all 15 mandatory outcomes, all 36 scenarios, all 25 sections, exclusions and qualified values with no material gaps or assumptions."
+            },
+            {
+              "criterion": "A new project-local schema-2 TRD is created through the To-TRD helper with stable requirement IDs, sources and observable acceptance criteria, then directly inspected and validated with its index.",
+              "evidence": "The To-TRD helper created schema-2 TRD-20260919-B6D51106 with 49 stable requirements and 119 acceptance fields; the manager independently parsed the saved document and verified exact title/body equality with accepted immutable payload and canonical_valid/index_current true."
+            },
+            {
+              "criterion": "The exact reviewed TRD revision receives explicit user approval and its saved state is verified as trd_done; downstream planning, implementation and external actions remain separately authorized.",
+              "evidence": "The actual user replied I approve the exact current content for unchanged draft revision 1. The host used set-status with its exact hash; the manager reopened trd_done revision 2 SHA256 bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d and verified unchanged requirement body. Approval grants no planning, implementation or external authority."
+            }
+          ],
+          "inspection": [
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/final-approved-trd-verification-v2.json",
+              "sha256": "6869555b4acdfc31b00f157edd015191c8fc50d558a6816c3d805e26a7772f14"
+            },
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-document-verification.json",
+              "sha256": "e007b6394add4ea06b212052a952dce3d5e261938bb192ac663ad133ddc508bb"
+            }
+          ],
+          "outcome": "delivered"
+        },
+        "event_id": "finish_approved_requirements_capture",
+        "execution_id": "knowledge_explorer_trd_20260919",
+        "generation": 1,
+        "kind": "execution.finish",
+        "revision": 20,
+        "sha256": "2d8aa490baf0bdfbba6c69e659e590ea538a09d7fa01dbdee0fe68d52092e9b5"
+      }
+    ],
+    "execution_id": "knowledge_explorer_trd_20260919",
+    "generation": 1,
+    "history": [],
+    "manager_id": "knowledge_explorer_manager",
+    "results": {
+      "document_preparation_v1": {
+        "acceptance_id": null,
+        "artifact_ids": [
+          "document_payload_v1",
+          "document_coverage_v1",
+          "document_checks_v1"
+        ],
+        "assignment_id": "document_worker",
+        "baseline": "d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24",
+        "changes": [
+          {
+            "path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/trd-payload.json",
+            "sha256": "74a595375bfa750a082ad080e380fd1fa5debaf74f9e9cdc70b2f1ff3ca63b49"
+          },
+          {
+            "path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/coverage.json",
+            "sha256": "4086616da4b434e94319433c3a8b4ea4d626aadefe3fc8a791e1891002077a3e"
+          }
+        ],
+        "checks": [
+          {
+            "path": "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848/checks.json",
+            "sha256": "5fe57b9fe212cbe235c93bcbbd79f67cbeb9bc9c7e48ab02d6500c25f48c1e60"
+          },
+          {
+            "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-document-verification.json",
+            "sha256": "e007b6394add4ea06b212052a952dce3d5e261938bb192ac663ad133ddc508bb"
+          }
+        ],
+        "limitations": [
+          "Document-only preparation. Managed TRD creation and exact-revision user approval are still pending. No product implementation/runtime or adoption verified."
+        ],
+        "result_id": "document_preparation_v1",
+        "round": 1
+      }
+    },
+    "reviews": {},
+    "settings": {
+      "effort": null,
+      "evidence": [
+        {
+          "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/bootstrap-native-evidence.json",
+          "sha256": "449daac4ed8325be3a33605adb0279ea1b1f4f1c26abe87901c23aa72c167613"
+        }
+      ],
+      "mode": "verified_inheritance",
+      "model": null
+    },
+    "source_refs": [
+      {
+        "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/source-recommendations.md",
+        "sha256": "b79d6122615b85f2ca42f0334cdecd7677578085014bb6c82565180e6264d38e"
+      },
+      {
+        "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-handoff.md",
+        "sha256": "932550c8ff67745dba092d5ac7dff6aaebd09c4938b8a9ca35cd0df7539fd8dd"
+      }
+    ],
+    "stage": "finished",
+    "subtasks": {
+      "prepare_requirements": {
+        "active_conflicts": [],
+        "baseline": {
+          "authority": "Task-scoped document payload and evidence only; host expressly authorized the exact Verification directory. No TRD publication, Task writes, implementation, dependencies, Git, external actions or delegation.",
+          "category": "generic",
+          "criteria": [
+            "Payload conforms to current To-TRD title/body contract with source-linked stable requirements and observable acceptance; no material unknowns or unconfirmed assumptions remain.",
+            "All 36 source acceptance scenarios and material first-release outcomes/exclusions are mapped to requirement IDs with no unsupported normative additions.",
+            "Proposed numeric benchmarks, fixtures and display/tuning values retain exact values and qualified status; current backend limits and existing agent contracts remain intact.",
+            "Authority, source/Template/explicit root adoption, security, canonical semantics and protected history are faithfully bounded; no downstream plan or implementation is produced."
+          ],
+          "deliverable": "Complete trd-payload.json, coverage and check evidence in the exact permitted Verification directory.",
+          "dependencies": [],
+          "implementation_required": false,
+          "inputs": [
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/source-recommendations.md",
+              "sha256": "b79d6122615b85f2ca42f0334cdecd7677578085014bb6c82565180e6264d38e"
+            },
+            {
+              "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/document-worker-handoff.md",
+              "sha256": "356466341b4562caa7ec0c4709d3aae755635853b4c2d3bf713e0e5393bae6ac"
+            }
+          ],
+          "objective": "Prepare the complete source-traced first-release Project Knowledge Explorer To-TRD payload for host publication.",
+          "protected": [
+            "TRDs",
+            "Tasks/INDEX.md",
+            "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/task.json",
+            "Roles",
+            "MEMORY",
+            "SKILLS-depo",
+            "Projects",
+            "depot/projects.json"
+          ],
+          "rationale": "User settled the complete source scope. This is bounded documentation transformation and source traceability, with one accountable worker and manager verification; no independent design alternatives need synthesis.",
+          "reads": [
+            "SOUL.md",
+            "ROLE.md",
+            "AGENTS.md",
+            "SPECS.md",
+            ".agents/skills/to-trd",
+            ".agents/skills/communication",
+            "Roles/project-sub-agent",
+            "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848"
+          ],
+          "requirements": [
+            "U01",
+            "U02",
+            "SRC-full-first-release"
+          ],
+          "slots": [
+            {
+              "function": "worker",
+              "perspective": "Source-grounded requirements documentation",
+              "slot": "document_worker",
+              "solver_slot": null
+            }
+          ],
+          "stop": "Return checked payload paths/hashes and source coverage, then stop for manager inspection.",
+          "writes": [
+            "Verification/knowledge-explorer-trd-capture/TASK-20260919-46D79848"
+          ]
+        },
+        "dependency_versions": {},
+        "digest": "d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24",
+        "round": 1,
+        "task_digest": "3413276b144267071fb9c8f491797def8d04bbf4abf63cc88990cd98d0988b83",
+        "verified": [
+          {
+            "acceptance_id": null,
+            "artifacts": [
+              "document_payload_v1",
+              "document_coverage_v1",
+              "document_checks_v1"
+            ],
+            "baseline": "d5f9d412a571c24b8d55c098e43db2935e33c1e8a519246ce0fb20b42a6faa24",
+            "criteria": [
+              {
+                "criterion": "Payload conforms to current To-TRD title/body contract with source-linked stable requirements and observable acceptance; no material unknowns or unconfirmed assumptions remain.",
+                "evidence": "Read-only installed To-TRD parser validates exact title/body payload and all 49 stable source-linked requirements; no completion blockers or assumptions."
+              },
+              {
+                "criterion": "All 36 source acceptance scenarios and material first-release outcomes/exclusions are mapped to requirement IDs with no unsupported normative additions.",
+                "evidence": "Direct full-source review plus independent exact scenario comparison covers all 36 AT cases, 15 mandatory outcomes and 25 source sections; all normative requirements have traceable source support."
+              },
+              {
+                "criterion": "Proposed numeric benchmarks, fixtures and display/tuning values retain exact values and qualified status; current backend limits and existing agent contracts remain intact.",
+                "evidence": "Direct numeric review preserved qualified benchmark/fixture/layout/display/debounce/usability values and the existing 2/20 defaults, 8/100/32000 maximums and 100-node traversal cap."
+              },
+              {
+                "criterion": "Authority, source/Template/explicit root adoption, security, canonical semantics and protected history are faithfully bounded; no downstream plan or implementation is produced.",
+                "evidence": "Direct manager and host review confirmed document-only authority, source/Template/root boundaries, read-only security, canonical semantics and history preservation with no implementation plan or code."
+              }
+            ],
+            "inspection": [
+              {
+                "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-document-verification.json",
+                "sha256": "e007b6394add4ea06b212052a952dce3d5e261938bb192ac663ad133ddc508bb"
+              },
+              {
+                "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-payload-inspection.json",
+                "sha256": "d74ebc7ee0954a89971286799db0170a6386eaab27fde63648bfe47d244a3db2"
+              }
+            ],
+            "result_id": "document_preparation_v1",
+            "round": 1,
+            "subtask_id": "prepare_requirements"
+          }
+        ],
+        "versions": []
+      }
+    },
+    "syntheses": {},
+    "task_digest": "3413276b144267071fb9c8f491797def8d04bbf4abf63cc88990cd98d0988b83",
+    "verifications": [
+      {
+        "criteria": [
+          {
+            "criterion": "The user's intended outcome, selected scope, exclusions and material constraints are settled and traced to the current request, supplied recommendations and actual clarification answers.",
+            "evidence": "The actual user selected the full proposed first release; the accepted source-traced 49-requirement baseline covers all 15 mandatory outcomes, all 36 scenarios, all 25 sections, exclusions and qualified values with no material gaps or assumptions."
+          },
+          {
+            "criterion": "A new project-local schema-2 TRD is created through the To-TRD helper with stable requirement IDs, sources and observable acceptance criteria, then directly inspected and validated with its index.",
+            "evidence": "The To-TRD helper created schema-2 TRD-20260919-B6D51106 with 49 stable requirements and 119 acceptance fields; the manager independently parsed the saved document and verified exact title/body equality with accepted immutable payload and canonical_valid/index_current true."
+          },
+          {
+            "criterion": "The exact reviewed TRD revision receives explicit user approval and its saved state is verified as trd_done; downstream planning, implementation and external actions remain separately authorized.",
+            "evidence": "The actual user replied I approve the exact current content for unchanged draft revision 1. The host used set-status with its exact hash; the manager reopened trd_done revision 2 SHA256 bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d and verified unchanged requirement body. Approval grants no planning, implementation or external authority."
+          }
+        ],
+        "inspection": [
+          {
+            "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/final-approved-trd-verification-v2.json",
+            "sha256": "6869555b4acdfc31b00f157edd015191c8fc50d558a6816c3d805e26a7772f14"
+          },
+          {
+            "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/manager-document-verification.json",
+            "sha256": "e007b6394add4ea06b212052a952dce3d5e261938bb192ac663ad133ddc508bb"
+          }
+        ],
+        "outcome": "delivered"
+      }
+    ],
+    "version": 1,
+    "writer": "/root/knowledge_explorer_manager"
+  }
+}

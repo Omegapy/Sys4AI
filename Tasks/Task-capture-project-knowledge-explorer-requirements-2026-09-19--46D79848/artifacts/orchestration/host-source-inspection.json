@@ -1,0 +1,40 @@
+{
+  "observed_at": "2026-09-19T19:04:31.843726-06:00",
+  "verification_level": "Source inspection and read-only document catalog validation; no product runtime exercised",
+  "head": "744c8b06d5fda905201145ed313a2da8de2e601f",
+  "files": {
+    "SKILLS-depo/ontology/workbench/index.html": "d626d3fa2fb95c940cd12e221c430e295927a5b006d7258d4b99b9fc0af7d9d3",
+    "SKILLS-depo/ontology/workbench/app.js": "84ec3b7992922059f5e610fd4f021e5c2b546540d14251c434667a68ee850b96",
+    "SKILLS-depo/ontology/scripts/ontology_workbench.py": "1a02494a3bbe9979f48a152527fd0b1c6a566bc53576665822aa7fc34a11318e",
+    "SKILLS-depo/ontology/scripts/ontology_retrieval.py": "43e6693e7a6d625e0a829e48e430f8e5d319a77e8d0679dfc29d7224a389da4f",
+    ".agents/skills/ontology/SKILL.md": "70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac",
+    "ontology.yaml": "1fec8476ccd835068c199d5470a5817cab66189bc09f2df9d25124f79a601027",
+    "depot/projects.json": "6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd",
+    "depot/template-update.json": "f895c4b3d875bd8451976d3befe99a5e98ada34b520ce9c16462551bc7f0cf76"
+  },
+  "observations": [
+    "Workbench HTML and startup JS expose and mount Explore, Draft editor, Review and Advanced authoring modules.",
+    "drawGraph slices displayed identities to nine and uses fixed SVG positions.",
+    "Canonical search defaults semantic=True; deterministic explorer behavior requires semantic fallback disabled.",
+    "Existing Python workbench combines loopback/session/source protections and browser authoring dispatch.",
+    "Registry identifies Sys4AI depot and Projects/Sys4AI-Template-Project.",
+    "Root retrieval config declares default hops 2, default item limit 20, maximum hops 8, maximum item limit 100 and context bytes 32000.",
+    "Thirteen pre-existing TRDs validate with canonical_valid true and index_current true; their bytes and registry were hashed before this new capture."
+  ],
+  "external_sources": [
+    {
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "inspected_by": "web open and targeted find",
+      "support": "WCAG 2.2 AA target; minimum target size 24 CSS pixels subject to exceptions; vertical content reflow 320 CSS pixels; AA includes Level A and AA criteria."
+    },
+    {
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/",
+      "inspected_by": "web open and targeted find",
+      "support": "Combobox suggestion keyboard interactions; project requirement keeps Escape from erasing query."
+    }
+  ],
+  "limits": [
+    "No prototype, implementation, browser launch, performance benchmark, accessibility conformance result or product adoption performed.",
+    "Source document exact snapshot is the requirements basis selected by the user; its design proposals are not claims of existing features."
+  ]
+}

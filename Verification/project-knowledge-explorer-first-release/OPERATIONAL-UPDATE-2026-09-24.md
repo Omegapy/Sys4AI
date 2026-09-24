@@ -1,0 +1,9 @@
+# Explorer operational update — 2026-09-24
+
+The installed reader and the non-test delivery in [RELEASE.md](RELEASE.md) are unchanged. The user approved continuation of `PLAN-20260920-9B9964BA` revision 1 while keeping further product testing stopped. The canonical plan file remains at that revision and its prior lifecycle state; this note records the conversation decision without editing the managed plan.
+
+The local Template watcher now checks whether an update is needed before invoking the guarded apply route. Its existing guarded apply remains the path for a noncurrent Template. After reloading the same launch-agent configuration, the watcher reported `ready=true`, `status=current`, and exit code `0` twice on the live process. The [repair receipt](watcher-operational-repair/receipt.json) and [follow-up status](watcher-operational-repair/confirmation.json) record the exact code change, unchanged launch-agent plist, and observations. No product test suite or source-change update was run.
+
+The installed root reader was launched on the user's request through the normal command in [RELEASE.md](RELEASE.md). The local service reported running, and Chrome displayed the Sys4AI depot overview with reading navigation and term categories. This is a launch observation, not full product verification. Original PLAN revision 1 verification, including the user-waived accessibility, performance, participant, and final integrated checks, is still incomplete. The managed plan's canonical lifecycle record was not changed by this operational repair.
+
+At the user's request, Task `TASK-20260919-1FA1F620` was [closed as cancelled](../../Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/responses/Task-Response-0256-2026-09-24T08-17-25-06-00.md) at revision 257. This preserves the delivered feature and historical evidence without claiming its original full-verification definition of done was met.

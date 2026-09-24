@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "purpose": "Input checklist for later AT-33 and final preservation owner, not a new preservation result or second orchestration ledger.",
+  "baseline": {
+    "path": "Verification/project-knowledge-explorer-first-release/baseline.json",
+    "sha256": "4ad6cd20681048fc79c4329683ad660a325f4801dc612344d4618a0e92664fd7"
+  },
+  "generated_baseline": {
+    "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/generated-preservation.json",
+    "sha256": "d7ea8599087e3e21022a1d8b724951c1c161ba8ec0f59038c5c15b85c86f8ce6"
+  },
+  "observed_original_exclusions": [
+    ".DS_Store",
+    ".git",
+    ".sys4ai",
+    "__pycache__",
+    "build",
+    "dist",
+    "node_modules"
+  ],
+  "observed_generated_exclusions": {
+    "credential_runtime": ".sys4ai/ontology/workbench/* (session URL and private logs never copied)",
+    "model_weight_caches": [
+      ".sys4ai/ontology/semantic/models",
+      ".sys4ai/memory/model-cache"
+    ],
+    "other_runtime": "All .sys4ai paths outside the exact selections are unexamined."
+  },
+  "required_reconciliation": [
+    "The broad initial .sys4ai exclusion is supplemented only by the exact generated selections; it is not final full protected-state proof.",
+    "Generated before/after equality began after the initial tests and cannot prove those earlier tests preserved generated products.",
+    "At AT-33 inventory every protected canonical/source configuration, memory data/configuration, proposal/intent/receipt/history and generated product path before and after the complete production workflows.",
+    "Inspect currently existing .sys4ai entries against exact selected/generated trees. Classify each omitted path explicitly, including named model-cache directories and old workbench private runtime; do not claim unexamined paths unchanged.",
+    "Private token contents must never enter evidence; byte hashes/stat values may be used without copying credential plaintext.",
+    "Only exact documented new-reader startup/session files and harmless preference keys are permitted browsing exceptions. No blanket .sys4ai, cache, generated, workbench or session directory waiver.",
+    "Source/Template/root adoption, Task bookkeeping, release evidence and separately authorized provenance maintenance have separate write attribution and manifests; they are not reader mutations.",
+    "The final affirmative manifest occurs after all current implementation, distribution, manual/browser/performance and handoff evidence, and classifies every authorized exception.",
+    "If unrelated active writers change protected paths, preserve evidence and attribute observed concurrent activity; do not silently report equality or restore older state."
+  ],
+  "status": "future verification obligations; no AT-33 pass recorded"
+}

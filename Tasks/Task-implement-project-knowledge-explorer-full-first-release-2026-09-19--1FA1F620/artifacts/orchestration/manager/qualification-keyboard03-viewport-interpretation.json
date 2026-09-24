@@ -1,0 +1,32 @@
+{
+  "producer": "manager source-based interpretation, separate from actual root observation and frozen protocol result",
+  "task_revision": 214,
+  "observation": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-keyboard03-host-partial-observation.json",
+    "sha256": "94b4b4d990db77089a2b5dc8976b37469cb9d211f28cafc236215e6510449b49"
+  },
+  "sources": [
+    {
+      "url": "https://www.w3.org/TR/cssom-view-1/#dom-window-innerwidth",
+      "finding": "Window innerWidth includes a rendered scrollbar."
+    },
+    {
+      "url": "https://www.w3.org/TR/cssom-view-1/#dom-element-clientwidth",
+      "finding": "Root clientWidth excludes the rendered scrollbar."
+    },
+    {
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
+      "finding": "Reflow guidance distinguishes viewport dimensions from resolution and illustrates scrollbar-related reduction."
+    }
+  ],
+  "measured_facts": {
+    "innerWidth": 320,
+    "innerHeight": 800,
+    "clientWidth": 303,
+    "visualWidth": 303,
+    "devicePixelRatio": 1,
+    "scrollWidth": 303
+  },
+  "interpretation": "The measured320 innerWidth and303 clientWidth are consistent with a320CSSpixel window viewport containing a17CSSpixel vertical scrollbar. The Light content was actually observed at the narrower303CSSpixel content width, with scrollWidth303 for the measured List. The protocol requirement that both metrics equal320 was an additional overconstraint for classic scrollbars, not language in original AT30. Preserve its miss as historical and do not remove or rewrite the frozen protocol.",
+  "acceptance_limit": "This supports actual native narrow measurement and only the specifically observed content. It does not establish unseen Dark source/definition, all controls, general WCAG/AT30/TASK022 acceptance, speech, full transient-motion behavior or driver success. No product change or scrollbar-preference mutation is needed to make two metrics artificially equal."
+}

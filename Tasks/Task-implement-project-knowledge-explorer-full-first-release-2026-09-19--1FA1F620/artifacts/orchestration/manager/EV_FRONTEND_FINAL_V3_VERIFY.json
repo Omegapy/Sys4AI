@@ -1,0 +1,157 @@
+{
+  "event": {
+    "event_id": "EV_FRONTEND_FINAL_V3_VERIFY",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "subtask.verify",
+    "data": {
+      "subtask_id": "FRONTEND",
+      "baseline": "d548997fff1e19b519c26586ca35e96bde3220cef8f5db2ecd1ebfb44c5ae79c",
+      "round": 3,
+      "result_id": "RES_FRONTEND_FINAL_V3",
+      "acceptance_id": null,
+      "artifacts": [
+        "ART_FRONTEND_DELIVERY_FINAL_V3"
+      ],
+      "criteria": [
+        {
+          "criterion": "Pure state transitions preserve distinct identity/focus/query/filter/snapshot/expansion/source/preference fields and reject obsolete response sequences even when cancellation loses a race.",
+          "evidence": "C01: State/request generations reject obsolete entry, catalog, session and context replies even when abort is ignored. Catalog headers have an independent finite allowlist and cannot change selection/history/entry state. Checked unit, catalog07, advanced03, service_v3_browser_late_session, service_v3_browser_late_context, accepted_foundations, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Route codecs encode exact IDs and safe view state; bootstrap/session values and source bodies cannot enter copied links, history state or durable preference storage.",
+          "evidence": "C02: Exact route hydration, synchronous fragment erasure and safe history are checked; ordinary new-tab entry resumes authentication and copied links exclude bootstrap/session data. Checked unit, advanced03, service_v3_browser_basic, accepted_foundations, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Selection emits one navigation event, camera changes emit none, snapshot conflict retains old coherent context, and explicit refresh discards incompatible cursor/expansion state atomically.",
+          "evidence": "C03: Actual selection creates one history item while the camera stays fixed. Snapshot conflict retains the old view; atomic refresh updates retained graph identities and resets incompatible category/cursor/expansion state. Checked advanced03, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Only the shared read client initiates allowed reads; later screens and renderer consume state and emit intentions. Browser-level Back/Forward and focus integration are assigned to TASK-019.",
+          "evidence": "C04: ReadClient owns all fetch paths, including separately cancelled finite catalog reads. Screens and renderer emit intentions. Current keyboard, navigation and late-reply flows use that shared owner. Checked unit, catalog07, advanced03, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "The first screen exposes only reading destinations and no authoring/advanced modules; no giant graph or management counters are initial navigation.",
+          "evidence": "C05: Bootstrap exposes Overview, Terms, Processes and Map with visible search and no initial canvas. Neutral empty-local data retains reading navigation rather than management counters. Checked advanced03, neutral05, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Overview uses validated project purpose/starting IDs; empty local graph explains imported core vocabulary and offers categories/search.",
+          "evidence": "C06: Validated context supplies purpose and starting IDs; the neutral fixture explains imported vocabulary, offers Terms/categories/search and truthfully reports no configured process catalog. Checked advanced03, neutral05, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Visible labeled search and submit work without shortcuts; autocomplete follows Arrow/Enter/Escape behavior without deleting query.",
+          "evidence": "C07: Actual keyboard typing, Escape, submit and result-to-entry work without shortcuts. Unit generation/Arrow endpoint regressions preserve query and reject dismissed or obsolete suggestions. Checked keyboard01, unit, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Results show supported category, preferred label, recorded excerpt and distinctions; lower-frequency filters remain under one control.",
+          "evidence": "C08: Two Alignment results retain exact identities, recorded excerpts and filter controls. Duplicate autocomplete and configured-process labels remain distinguishable by exact ID; non-starting process names are read from headers. Checked advanced03, unit, catalog07, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "All bound/incomplete/empty cases preserve query and offer useful narrow/clear/continue actions without invented totals.",
+          "evidence": "C09: Empty search retains query/clear action; bounded continuation preserves the unconsumed page and offers deliberate narrowed/reset progress. Shared content-budget refusal is not admitted as success. Checked neutral05, bounds04, unit, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Definitions/aliases/scope/examples/non-examples remain exact; historical status, source freshness and authority meanings are distinct with warnings by affected information.",
+          "evidence": "C10: Exact definition, aliases, scope, examples and non-examples, historical replacement/authority warnings and changed source freshness are observed. Definition spans three pages/66,023 UTF-8 bytes; catalog full-name access reads 15,011 exact bytes after preview disclosure. Checked advanced03, catalog07, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Relationship member, qualifier, direction and exact ID are independently inspectable; lengthy qualifiers remain accessible and cannot look unconditional.",
+          "evidence": "C11: Map/List and entry retain exact direction/member IDs/qualifiers and sources. Two qualifier pages preserve 44,066 UTF-8 bytes; unsafe numeric qualifiers are not rounded while endpoint strings are projected losslessly. Checked advanced03, unit, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Opening source retains entry, moves focus meaningfully, escapes text and returns focus to exact trigger on close.",
+          "evidence": "C12: Source opens with heading focus, escaped exact text, retained entry and exact trigger return. Current native 200% observations cover ordinary source and process-step source with visible vertical reading and focus return. Checked keyboard01, advanced03, service_v3_os_open_zoom, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Purpose/applicability/roles/inputs/outputs/skills/documents/order each link to exact selected canonical or source support; unsupported fields are omitted.",
+          "evidence": "C13: Documented process fields and order resolve exact canonical/direct-binding support, including an owner found through a later field. Bounded discovery preserves incomplete continuation. Current catalog resolves recorded non-starting names and the native run reads recorded ordered steps and their source. Checked advanced03, unit, catalog07, service_v3_os_open_zoom, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Absent ordering displays exactly: An ordered description has not been recorded. These are the documented relationships.",
+          "evidence": "C14: The actual unordered-process flow asserts the complete required sentence verbatim, without converting recorded relationships into an execution sequence. Checked advanced03, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Paths/dependencies/layout are never inferred as process execution order; process pages execute nothing, and no additional graph library or authoring is introduced.",
+          "evidence": "C15: Process pages render only recorded supported fields/order and execute no process. Source/import and locked build correspondence retain the single Cytoscape dependency and read-only architecture. Checked advanced03, build, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "The normalized model retains all returned node/relation IDs, canonical endpoints/predicates/direction, qualifiers, sources, warnings, filters and limits without inferring completeness.",
+          "evidence": "C16: Actual DOM/canvas comparison retains canonical node/relation IDs, endpoints, direction, qualifiers, sources, classification, warnings and returned scope; normalized model and refusal metadata remain current. Checked advanced03, accepted_foundations, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "List entry/evidence/focus/expand actions work using keyboard and the shared read/state layer with the renderer module absent; no canvas/drag/hover/double-click is required.",
+          "evidence": "C17: With renderer import blocked, keyboard List selection, source reading, More connections, Focus here and useful return remain operational. Canvas loss/layout refusal retain the same readable List model. Checked keyboard01, advanced03, bounds04, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Selection and returned scope survive switching intentions; actual Map/List parity is a required integration gate in TASK-019 after the renderer is connected.",
+          "evidence": "C18: Exact current Map/List semantic parity and selection/scope survive route switching, copied explicit focus/selection, filter history and same-ID refreshed content. Checked advanced03, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Initial Map uses a selected ID or reviewed picker and one-step bounded data; selecting updates details without camera/focus change.",
+          "evidence": "C19: Map loads lazily from an exact selected ID or picker and bounded neighborhood. Selecting updates entry details and exactly one history item without a camera/focus change. Checked advanced03, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Focus here deliberately replaces neighborhood; expansion preserves existing positions where practical, stops bounded layout and respects cumulative 100-node/200-edge proposed ceiling and tighter service limits.",
+          "evidence": "C20: Keyboard Focus here replaces scope; More connections appends bounded scope. High-degree continuation stops at the tighter display budget and rereads unconsumed data after reset. Renderer keeps surviving positions and prunes removed positions; layout deadline retains List. Checked keyboard01, advanced03, bounds04, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Parallel IDs, self-loops, cycles, conditional qualifiers, direction and selected/adjacent labels remain faithful; no continuous hidden simulation or unsupported semantic position claim.",
+          "evidence": "C21: Production canvas/List agree on parallel relation IDs, self-loop, canonical direction, unsafe qualifiers and relation-as-endpoint identities; retargeted retained edges update actual endpoints. Current unchanged renderer uses bounded preset positions, visible unusual-kind markers and peripheral/selected labels. Dense-fit comprehension remains qualified. Checked advanced03, bounds04, accepted_service_v3, final_live_closure. Dense inner map captions can still crowd in the 25-node/26-edge initial-fit view. Exact model/List parity and selected/peripheral label handling do not establish human comprehension or every association being unobscured. TASK-025 remains mandatory."
+        },
+        {
+          "criterion": "Renderer reads the normalized model and emits intentions; it never initiates source/ontology reads. Legend and guidance retain: Select a term to read it. Use Focus here to explore its connections.",
+          "evidence": "C22: Renderer consumes normalized model only. Authored controls retain the exact required guidance, clear legend and deliberate focus/expansion actions; renderer has no source or ontology fetch path. Checked advanced03, build, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "AT-21, AT-22, AT-23, AT-34 preserve useful context, reject stale responses and mixed snapshots, discard incompatible expansions/cursors on refresh and keep List/evidence usable if renderer fails.",
+          "evidence": "C23: Session/snapshot/route races retain useful recorded views and reject mixed or late responses; refresh uses new context and lower limits. Import failure, canvas loss and bounded layout refusal preserve List/source actions. Checked catalog07, advanced03, bounds04, service_v3_browser_late_session, service_v3_browser_late_context, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "When no relationships are recorded in the returned view, say No relationships are recorded in this view; byte/time/traversal limits and incomplete data are distinguished from absence.",
+          "evidence": "C24: The accepted Reader proves the ActionType returned view complete and empty before the exact absence sentence is asserted. High-degree/local budget/incomplete paths retain their limit disclosure and continuation rather than claiming absence. Checked neutral05, bounds04, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "320 CSS-pixel layouts, substantial zoom, both themes and reduced motion preserve controls, reading, narrow drawers and vertically flowing process/source text.",
+          "evidence": "C25: Separate current 320 CSS-pixel/dark/reduced-motion and light/system/reset checks complement actual native Chrome 90% to 200% to 90% controls/catalog/ordered-process/source reading. Native Map/List at 200% remains unexercised; no CSS zoom substitution. Checked advanced03, neutral05, service_v3_os_open_zoom, accepted_service_v3, final_live_closure. Native Chrome zoom was 90% to 200% and restored to the actual original 90%. Current controls, corrected process catalog, ordered process reading and both source paths were observed. Native Map/List usability at 200% was not exercised. The separate current advanced03 check covers 320 CSS pixels, dark theme and reduced motion; neutral05 covers light/system/reset. Earlier 200% text sizing is not native browser zoom."
+        },
+        {
+          "criterion": "Back/Forward restores useful reading/map context; deliberate node selection pushes one history item while camera movements do not spam history.",
+          "evidence": "C26: Repeated Back/Forward restores selection, same-focus filter scope and useful map context; focused-search Back cancels pending preview and restores query. Node selection pushes once; camera motion does not push history. Checked advanced03, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Terms/Map switching preserves exact identity; credentials are absent from safe routes and copied links; normal new-tab entry links work after authentication where practical.",
+          "evidence": "C27: Terms/Map and copied relation-subject routes preserve exact focus/selection identities, including a relation used as a genuine endpoint. Normal new-tab entry resumes an authenticated session and copied routes are secret-free. Checked advanced03, service_v3_browser_basic, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "Theme light/dark/system and reset affect presentation only; source bodies and knowledge are not persisted to browser databases/storage.",
+          "evidence": "C28: Light/dark/system/reset affect presentation only, with preference-only storage. Theme updates preserve catalog in-flight identity and focused links; source bodies and ontology content are not stored in browser databases. Checked neutral05, advanced03, unit, catalog07, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        },
+        {
+          "criterion": "AT-16 and AT-29 compare exact Map/List relation IDs, direction, qualifiers, sources, warnings, filters, selection and returned scope. Every substantive map action remains usable through List when graph import or rendering fails.",
+          "evidence": "C29: Current exact Map/List relation IDs, endpoints, direction, qualifiers, source descriptors, warnings, filters, selection and scope are compared in production Chrome. Blocked import, canvas loss and layout refusal all retain useful keyboard List actions and entry/source reading. Checked advanced03, keyboard01, bounds04, accepted_service_v3, final_live_closure. Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+        }
+      ],
+      "inspection": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/frontend-acceptance-final-v3.json",
+          "sha256": "9a381004c7cecb42632617a898d098717248cb58a11779555acd368c555223a1"
+        }
+      ]
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Verify stopped current FRONTEND final-v3:all29 exact criteria,20 unit groups,50 browser groups,current SERVICE V3 and actual native zoom;556 current refs and all5 runtime members inspected."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Verify stopped current FRONTEND final-v3:all29 exact criteria,20 unit groups,50 browser groups,current SERVICE V3 and actual native zoom;556 current refs and all5 runtime members inspected.",
+    "current_summary": "Verify stopped current FRONTEND final-v3:all29 exact criteria,20 unit groups,50 browser groups,current SERVICE V3 and actual native zoom;556 current refs and all5 runtime members inspected.",
+    "next_step": "Prepare complete current packet and rebind the SAME qualification owner. Finish original security/browser/accessibility/preservation/performance/participant gates, then remaining distribution/adoption/cutover/rollback/release and full49REQ/36AT completion.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

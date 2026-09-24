@@ -1,10 +1,100 @@
 #!/usr/bin/env python3
 """Project-local ontology: read, validate, explicitly build, freeze or publish."""
+# Reader launches isolate before any discoverable standard-library imports.
+# Legacy commands retain their existing import behavior and trusted interfaces.
+import sys
+
+
+def _reader_requested(argv):
+    valued = ("--project-root", "--format", "--packet-file", "--packet-sha256")
+    i = 0
+    while i < len(argv):
+        value = argv[i]
+        if value == "--":
+            return i + 1 < len(argv) and argv[i+1] in ("explore", "explorer-health")
+        if value.startswith("--"):
+            key = value.split("=", 1)[0]
+            matches = [name for name in valued if name.startswith(key)]
+            i += 2 if "=" not in value and len(matches) == 1 else 1
+        elif value.startswith("-"):
+            i += 1
+        else:
+            return value in ("explore", "explorer-health")
+    return False
+
+
+if __name__ == "__main__" and _reader_requested(sys.argv[1:]) and not (sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode):
+    if "posix" not in sys.builtin_module_names:
+        sys.stdout.write('{"status":"unavailable","error":"resource_limit"}\n')
+        raise SystemExit(2)
+    import posix
+    posix.execve(sys.executable, [sys.executable, "-I", "-S", "-B", __file__, *sys.argv[1:]],
+                 {"PATH":"/usr/bin:/bin", "LANG":"en_US.UTF-8", "PYTHONDONTWRITEBYTECODE":"1"})
+
 import argparse
 import json
 from pathlib import Path
-import sys
 sys.dont_write_bytecode = True
+
+# Fixed reader bootstrap is deliberately duplicated at the trusted CLI boundary.
+# Capture/hash selected source without a preliminary project-module import.
+_READER_BOOTSTRAP = 'import os,sys,stat,hashlib,types,json\np=sys.argv[1]; expected=sys.argv[2]\ntry:\n fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)\n try:\n  s=os.fstat(fd)\n  if not stat.S_ISREG(s.st_mode) or s.st_nlink!=1 or s.st_size>2000000: raise ValueError()\n  raw=os.read(fd,2000001)\n  if hashlib.sha256(raw).hexdigest()!=expected: raise ValueError()\n finally: os.close(fd)\nexcept (OSError,ValueError):\n if sys.argv[4:]==[\'--worker\']:\n  body=b\'{"kind":"failed","code":"package_changed"}\'\n  os.write(1,len(body).to_bytes(4,\'big\')+body)\n else:\n  print(\'{"status":"unavailable","error":"package_changed"}\')\n sys.exit(2)\nm=types.ModuleType(\'_explorer_boot\');m.__file__=p;sys.modules[m.__name__]=m\nexec(compile(raw,p,\'exec\',dont_inherit=True),m.__dict__)\nsys.exit(m.verified_entry(sys.argv[4:],raw,sys.argv[3]))\n'
+
+
+def _reader_launch(argv, command, *, replace=False):
+    import hashlib
+    import os
+    import stat
+    scripts = Path(__file__).absolute().parent
+    def captured(name):
+        fd = os.open("/", os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            for part in scripts.parts[1:]:
+                nxt = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+                os.close(fd); fd = nxt
+            member = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=fd)
+            try:
+                st = os.fstat(member)
+                if not stat.S_ISREG(st.st_mode) or st.st_nlink != 1 or st.st_size > 2000000: raise ValueError()
+                raw = bytearray()
+                while len(raw) <= 2000000:
+                    part = os.read(member, min(65536, 2000001-len(raw)))
+                    if not part: break
+                    raw.extend(part)
+                if len(raw) > 2000000: raise ValueError()
+                return hashlib.sha256(raw).hexdigest()
+            finally: os.close(member)
+        finally: os.close(fd)
+    try:
+        child = [sys.executable, "-I", "-S", "-B", "-c", _READER_BOOTSTRAP,
+                 str(scripts / "ontology_explorer.py"), captured("ontology_explorer.py"),
+                 captured("ontology_explorer_snapshot.py"), *argv]
+        environment = {"PATH": "/usr/bin:/bin", "LANG": "en_US.UTF-8", "PYTHONDONTWRITEBYTECODE": "1"}
+        if replace: os.execve(sys.executable, child, environment)
+        import subprocess
+        return subprocess.call(child, env=environment)
+    except (OSError, ValueError):
+        if command == "explorer-health":
+            print(json.dumps({"operation":"explorer-health","service":"sys4ai-project-knowledge-explorer",
+                "installed":False,"configured":None,"running":None,"readable":False,"stale":None,
+                "wrong_project":None,"unavailable":True,"endpoint":{"status":"not_examined"},
+                "local":{"status":"unavailable","error":"package_incomplete"},"mutated":False}))
+            return 1
+        print(json.dumps({"status":"unavailable","error":"package_incomplete",
+            "maintenance":"See the installed Explorer BUILD.md for explicit package maintenance."}))
+        return 2
+
+
+if __name__ == "__main__":
+    _reader_parser = argparse.ArgumentParser(add_help=False)
+    _reader_parser.add_argument("--project-root")
+    _reader_parser.add_argument("--format")
+    _reader_parser.add_argument("--packet-file")
+    _reader_parser.add_argument("--packet-sha256")
+    _reader_parser.add_argument("command", nargs="?")
+    _reader_args, _reader_rest = _reader_parser.parse_known_args()
+    if _reader_args.command in {"explore", "explorer-health"}:
+        raise SystemExit(_reader_launch(sys.argv[1:], _reader_args.command, replace=True))
 
 from ontology_core import OntologyError, load_project, read_json, safe_path, sha256, require
 from ontology_retrieval import human, read, search, term
@@ -83,6 +173,12 @@ def main(argv=None):
     parser.add_argument("--packet-file")
     parser.add_argument("--packet-sha256")
     commands = parser.add_subparsers(dest="command", required=True)
+    reader_launch = commands.add_parser("explore", help="Start the closed local knowledge reader.")
+    reader_launch.add_argument("--port", type=int, default=0)
+    reader_launch.add_argument("--session-file")
+    reader_launch.add_argument("--open", action="store_true")
+    reader_health = commands.add_parser("explorer-health", help="Inspect only the selected reader package and endpoint.")
+    reader_health.add_argument("--url")
     command = commands.add_parser("integration-preview")
     command.add_argument("selection")
     command = commands.add_parser("integration-publish")
@@ -131,6 +227,8 @@ def main(argv=None):
     from ontology_advanced_cli import register, COMMANDS as ADVANCED_COMMANDS, READ_COMMANDS as ADVANCED_READS
     register(commands)
     args = parser.parse_args(argv)
+    if args.command in {"explore", "explorer-health"}:
+        return _reader_launch(sys.argv[1:] if argv is None else argv, args.command)
     try:
         root = Path(args.project_root).absolute()
         require(root.is_dir() and root.resolve() == root and not root.is_symlink(), "invalid_root", "Select an explicit resolved project root.")

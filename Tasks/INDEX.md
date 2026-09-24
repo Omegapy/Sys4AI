@@ -2,14 +2,17 @@
 
 # Tasks
 
-- Generated: 2026-09-16T16:51:32-06:00
+- Generated: 2026-09-24T08:17:27-06:00
 - Integrity: valid
-- Counts: open=0, paused=0, awaiting_user=2, blocked=0, completed=21, cancelled=5, close-old-task=0
+- Counts: open=0, paused=0, awaiting_user=2, blocked=0, completed=23, cancelled=6, close-old-task=0
 
 | Task ID | Name | Status | Created | Updated | Parent | Latest response | Next step |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | TASK-20260913-64DDD6CF | Capture scalable verification and Task storage requirements | awaiting_user | 2026-09-13T09:53:15-06:00 | 2026-09-13T12:57:59-06:00 | None | [RESP-0014](Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/responses/Task-Response-0014-2026-09-13T12-57-59-06-00.md) | Obtain explicit approval of TRD-20260913-8BACF221 revision 1 with SHA256 194a3365bc32210d8aa33ea81f51ea088ac03337e521dcd072405857d4296316, then promote that unchanged document through its owner helper, reverify current evidence and complete this Task. |
 | TASK-20260913-2F67C831 | Capture integrated Curator ontology and initialization requirements | awaiting_user | 2026-09-13T08:30:19-06:00 | 2026-09-13T08:53:50-06:00 | TASK-20260912-8EE3D229 | [RESP-0015](Task-capture-integrated-curator-ontology-and-initialization-requi-2026-09-13--2F67C831/responses/Task-Response-0015-2026-09-13T08-53-50-06-00.md) | User approves or requests changes to the presented unchanged TRD revision 1; the host owns its To-TRD approval publication and the manager retains this Task. |
+| TASK-20260919-1FA1F620 | Implement Project Knowledge Explorer full first release | cancelled | 2026-09-19T21:17:50-06:00 | 2026-09-24T08:17:25-06:00 | TASK-20260919-FA1E4FB6 | [RESP-0256](Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/responses/Task-Response-0256-2026-09-24T08-17-25-06-00.md) | No further work is planned under this Task; Git publication is a separate host-owned action. |
+| TASK-20260919-FA1E4FB6 | Plan Project Knowledge Explorer full first release | completed | 2026-09-19T20:00:48-06:00 | 2026-09-19T20:52:52-06:00 | None | [RESP-0035](Task-plan-project-knowledge-explorer-full-first-release-2026-09-19--FA1E4FB6/responses/Task-Response-0035-2026-09-19T20-52-52-06-00.md) | None |
+| TASK-20260919-46D79848 | Capture Project Knowledge Explorer requirements | completed | 2026-09-19T17:38:53-06:00 | 2026-09-19T19:57:00-06:00 | None | [RESP-0020](Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/responses/Task-Response-0020-2026-09-19T19-57-00-06-00.md) | None |
 | TASK-20260913-E83FCC98 | Implement integrated Curator ontology and project initialization | completed | 2026-09-13T12:46:27-06:00 | 2026-09-16T16:51:31-06:00 | None | [RESP-0058](Task-implement-integrated-curator-ontology-and-project-initializa-2026-09-13--E83FCC98/responses/Task-Response-0058-2026-09-16T16-51-31-06-00.md) | None |
 | TASK-20260913-3ADCACFC | Plan integrated Curator ontology and project initialization | completed | 2026-09-13T09:07:59-06:00 | 2026-09-13T10:11:40-06:00 | TASK-20260913-2F67C831 | [RESP-0029](Task-plan-integrated-curator-ontology-and-project-initialization-2026-09-13--3ADCACFC/responses/Task-Response-0029-2026-09-13T10-11-40-06-00.md) | None |
 | TASK-20260912-8EE3D229 | Capture root system health remediation requirements | cancelled | 2026-09-12T21:07:01-06:00 | 2026-09-13T08:08:17-06:00 | None | [RESP-0022](Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229/responses/Task-Response-0022-2026-09-13T08-08-17-06-00.md) | No further action is requested for this cancelled requirements-capture Task. |

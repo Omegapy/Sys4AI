@@ -1,0 +1,53 @@
+{
+  "scope": "Implement the existing SERVICE_PACKAGE baseline without reducing any of its14 criteria or the immutable plan. Reader and pure client are accepted; full UI remains later.",
+  "required_reads": [
+    "SKILLS-depo/ontology/references/explorer-contract.md",
+    "ONTOLOGY-depo/schema/explorer-v1.json",
+    "Verification/project-knowledge-explorer-first-release/reader-data-tests/HANDOFF.md",
+    "SKILLS-depo/ontology/explorer/tests/client-foundations/HANDOFF.md",
+    "SKILLS-depo/ontology/explorer/BUILD.md",
+    "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-assets-integration-handoff.json"
+  ],
+  "integration": [
+    "Use one supervised reader call at a time. Reader stores per-request deadline state; do not share it in an unbounded ThreadingHTTPServer. Service deadline includes queue plus IPC plus reader work; enforce opaque loader/parser and process RSS limits outside the worker.",
+    "The actual executing transport/worker/bootstrap and all read dependencies must be verified captured bytes bound to the epoch and private worker handshake. Ordinary import of the adapter/snapshot before verification does not prove provenance. Reject ambient sys.path/project shadow imports and optional authoring/profiles/query modules.",
+    "Construct Reader in the exact same private VerifiedPackage as SnapshotStore and install its complete presentation validator before the first lease/candidate swap. See explicit READ_CLOSURE and same-package exception types in reader HANDOFF.",
+    "Session expiry passed to Reader is absolute milliseconds on the same service-start monotonic clock; service_secret stays32 random bytes in memory. Derive session_scope from authenticated session only. Never trust scope/project/root/epoch authority fields from request JSON.",
+    "Serialize adapter envelopes with exact compact UTF8. Known ReaderError/SnapshotError use the fixed error mapping; unknown failures produce fixed internal_error without raw exception text, paths, tokens or project data. All186 fixed cases currently fit659 bytes.",
+    "Production load_assets must receive real schema hash, exact lock and notices. Check the whole pinned package epoch before/after static responses, not only selected member+manifest. A nested manifest entry must retain correct relative imports through canonical document routing; do not narrow schema silently.",
+    "Raw client wire admission is mandatory: bound response bytes before buffering, then decodeReadResponse; Response.json or prior JSON.parse loses token fidelity. The manager five-response bridge passes against settled bytes but has no HTTP/authenticated policy claim.",
+    "Unsafe qualifier numbers consume an exact relation detail_required field_limit marker and preserve actual digits/signed zero through canonical_json text chunks. Do not parse those chunk texts back into JS Number. Ordinary edges remain browsable.",
+    "Minimal production bootstrap must erase one-use fragment before its first await and retain only safe desired context; actual subsequent full reader UI, authenticated deep-link hydration and Back/focus behavior remain frontend obligations.",
+    "Old authoring CLI semantics remain until the separately qualified cutover. Keep advanced-health/optional workbench/profile readiness out of Explorer readiness. Earlier endpoint53698 was observed stopped; that is historical, not proof of eventual cutover.",
+    "Build/service tests use disposable private roots and exact already-reviewed dependency closure. Existing verified staging can be reused or copied without hooks or installs when sufficient. Source main/index/assets may be written only within baseline scope. No root-installed or Template writes by this worker.",
+    "Keep every evidence file below250000 bytes; manifests may hash-bind larger runtime files and manager will directly inspect them. Capture current source/test/runtime manifest/build receipt hashes; do not substitute immutable output copies to conceal later edits. All shared main/assets changes later require supported current-result reverification.",
+    "A direct source/helpers change can change ontology loader helper snapshot without changing optional backend certification WORKER_FILES. No broad recertification or maintenance scope is authorized by this assignment.",
+    "Use ordinary commands. Current user approvals already cover exact scoped dependencies/build/service launch. Do not repeat routine permission requests; obey actual runtime policy if a specific command is rejected."
+  ],
+  "known_toolchain": {
+    "node": "25.9.0",
+    "npm": "11.12.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.0",
+    "cytoscape": "3.34.3",
+    "python": ".venv/bin/python",
+    "test_only_jsonschema": ".venv-memory-pilot/bin/python"
+  },
+  "staging": [
+    "/private/tmp/explorer-package-tools-g3-final/ontology/explorer",
+    "/private/tmp/explorer-client-foundations-u194tx8_",
+    "/tmp/explorer-contracts-implement-g3"
+  ],
+  "acceptance": {
+    "reader_result": "RES_READER_DATA_V1",
+    "client_result": "RES_CLIENT_FOUNDATIONS_V1",
+    "snapshot_result": "RES_SNAPSHOT_V2",
+    "package_result": "RES_PACKAGE_TOOLS_V1"
+  },
+  "not_yet_proved": [
+    "HTTP sessions/isolation/supervisor resource enforcement",
+    "actual production bootstrap and full-policy response correlation",
+    "full frontend/List/Map/browser/offline/CSP/accessibility",
+    "full release performance/human walkthrough/distribution/root cutover/preservation"
+  ]
+}

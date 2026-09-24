@@ -124,7 +124,8 @@ SECRET_PATTERNS = (
 )
 
 MAX_PAYLOAD_BYTES = 1_000_000
-MAX_JSON_BYTES = 1_000_000
+MAX_PRETTY_JSON_BYTES = 1_000_000
+MAX_JSON_BYTES = 2_000_000
 MAX_RESPONSE_BYTES = 250_000
 MAX_NAME = 300
 MAX_DESCRIPTION = 20_000
@@ -485,7 +486,7 @@ def json_text(value: Any) -> str:
 def task_json_text(state: dict[str, Any]) -> str:
     """Preserve small-state bytes; encode larger complete states within the cap."""
     content = json_text(state)
-    if len(content.encode("utf-8")) <= MAX_JSON_BYTES:
+    if len(content.encode("utf-8")) <= MAX_PRETTY_JSON_BYTES:
         return content
     content = json.dumps(state, ensure_ascii=False, separators=(",", ":")) + "\n"
     if len(content.encode("utf-8")) > MAX_JSON_BYTES:

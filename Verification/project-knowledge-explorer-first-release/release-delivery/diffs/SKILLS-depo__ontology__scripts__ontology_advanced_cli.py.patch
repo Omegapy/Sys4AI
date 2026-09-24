@@ -1,0 +1,46 @@
+--- a/SKILLS-depo/ontology/scripts/ontology_advanced_cli.py
++++ b/SKILLS-depo/ontology/scripts/ontology_advanced_cli.py
+@@ -58,9 +58,7 @@
+     publish = commands.add_parser("proposal-publish")
+     publish.add_argument("proposal_id"); publish.add_argument("--revision", type=int, required=True)
+     publish.add_argument("--grant-file", required=True); publish.add_argument("--expected-review-sha256", required=True)
+-    workbench = commands.add_parser("workbench")
+-    workbench.add_argument("--authority-file"); workbench.add_argument("--port", type=int, default=0)
+-    workbench.add_argument("--session-file", required=True, help="Private runtime file for the short-lived local bootstrap URL.")
++    commands.add_parser("workbench", help="Retired browser authoring command; use explore --open.")
+ 
+ 
+ def _json(root, path):
+@@ -165,30 +163,6 @@
+             exact(data, ("preview", "grant")); return guards.apply(root, **data)
+         exact(data, ("operation_id", "grant")); return guards.recover(root, **data)
+     if name == "workbench":
+-        import os
+-        from ontology_workbench import Workbench, trusted_authority
+-        authority = trusted_authority(root, **_json(root, args.authority_file)) if args.authority_file else None
+-        service = Workbench(root, authority, port=args.port)
+-        require(args.session_file.startswith(".sys4ai/ontology/workbench/"), "session_scope", "Session credentials belong only in the private workbench runtime directory.")
+-        target = safe_path(root, args.session_file, must_exist=False)
+-        require(not target.exists(), "session_conflict", "Select a new private session file.")
+-        target.parent.mkdir(parents=True, exist_ok=True)
+-        # Tokens are written only to this private runtime file, never CLI logs.
+-        with os.fdopen(os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600), "w") as stream:
+-            json.dump({"url": service.bootstrap_url(), "origin": service.origin}, stream)
+-        session_digest = sha256(target)
+-        try:
+-            service.start()
+-            print(json.dumps({"status": "running", "origin": service.origin, "session_file": args.session_file,
+-                              "current_readiness": service.startup_readiness}), flush=True)
+-            while service.thread.is_alive():
+-                service.thread.join(timeout=1)
+-        except KeyboardInterrupt:
+-            pass
+-        finally:
+-            service.close()
+-            # Only this call's exclusively created private runtime credential.
+-            if target.exists() and not target.is_symlink() and sha256(target) == session_digest:
+-                target.unlink()
+-        return {"status": "stopped", "origin": service.origin}
++        require(False, "workbench_retired",
++                "The browser workbench is retired. Use explore --open for the read-only Explorer; use trusted proposal commands for authoring.")
+     require(False, "unsupported_operation", "Unknown advanced operation.")

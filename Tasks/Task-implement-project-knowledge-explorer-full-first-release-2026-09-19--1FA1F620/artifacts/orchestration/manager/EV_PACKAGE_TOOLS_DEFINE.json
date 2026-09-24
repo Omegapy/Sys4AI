@@ -1,0 +1,107 @@
+{
+  "event": {
+    "event_id": "EV_PACKAGE_TOOLS_DEFINE",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "subtask.define",
+    "data": {
+      "subtask_id": "PACKAGE_TOOLS",
+      "baseline": {
+        "reads": [
+          "SOUL.md",
+          "ROLE.md",
+          "SPECS.md",
+          "SKILLS-depo/ontology",
+          "ONTOLOGY-depo",
+          "depot",
+          "tools",
+          "Implementation_Plans",
+          "TRDs",
+          "Verification/project-knowledge-explorer-first-release"
+        ],
+        "protected": [
+          "MEMORY",
+          "memory.yaml",
+          "ONTOLOGY",
+          "ontology.yaml",
+          "ontology-advanced.yaml",
+          "control_records",
+          "Projects",
+          ".agents"
+        ],
+        "inputs": [
+          {
+            "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+            "sha256": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b"
+          },
+          {
+            "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+            "sha256": "bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d"
+          },
+          {
+            "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_SYNTHESIS_V1.md",
+            "sha256": "21238a8c00030d433315c8ffa3abb5237e8001fea0cee6b9f9153550e1d64785"
+          }
+        ],
+        "objective": "Implement the frozen pure asset-manifest validator, explicit build/publisher tooling and neutral presentation starter from TASK-010. This independent tooling slice precedes HTTP integration and final frontend production generation; it does not by itself complete TASK-010.",
+        "category": "generic",
+        "rationale": "The accepted extra-complex CONTRACTS synthesis fixes manifest, identity, build, configuration, offline and file-safety architecture. One worker implements this pure bounded tooling slice; service and real frontend integration remain explicit later criteria, with no claim that fixtures prove HTTP or production behavior.",
+        "requirements": [
+          "REQ-013",
+          "REQ-028",
+          "REQ-032",
+          "REQ-037",
+          "REQ-039",
+          "REQ-049"
+        ],
+        "dependencies": [
+          "CONTRACTS",
+          "FIXTURES"
+        ],
+        "writes": [
+          "SKILLS-depo/ontology/scripts/ontology_explorer_assets.py",
+          "SKILLS-depo/ontology/tests/test_explorer_assets.py",
+          "SKILLS-depo/ontology/explorer/vite.config.ts",
+          "SKILLS-depo/ontology/explorer/tsconfig.json",
+          "SKILLS-depo/ontology/explorer/BUILD.md",
+          "SKILLS-depo/ontology/explorer/scripts/package-runtime.mjs",
+          "ONTOLOGY-depo/starter/ontology-explorer.yaml",
+          "Verification/project-knowledge-explorer-first-release/package-tools-tests"
+        ],
+        "deliverable": "Frozen package tooling and neutral starter with exact no-follow manifest/identity/import-closure and actual disposable production build/publisher tests. Final application assets and HTTP tests are explicitly reserved for later consumer integration.",
+        "authority": "Write only named source, tooling, starter and evidence paths. Use disposable /private/tmp build fixtures and already verified exact dependencies. No edits to frozen contract/package/lock/notices/schema, frontend application source/assets, shared canonical helpers, Task, memory, active root installation, Template or Git.",
+        "stop": "All tooling criteria pass current meaningful tests; any accepted-contract defect is returned to manager without silent architecture or dependency change.",
+        "criteria": [
+          "Asset validation accepts only the exact closed manifest shape, safe no-follow single-link bounded files, correct paths/MIME/hashes/entry/import closure, excluding metadata and repository paths from the runtime map.",
+          "Build tools compute exact source_digest and noncircular build_id, inject build/schema identity, use pinned existing Node/npm/Vite/TypeScript and stage/validate complete output before manifest-last publication; only prior reviewed manifest-owned assets may be removed.",
+          "Neutral starter is exact strict schema version1, project_id null and empty mappings; active specialization is separate. No depot identity, browser authority, hooks or runtime dependencies are introduced.",
+          "Actual disposable minimal Vite production build and publisher tests prove deterministic identities, valid closed package, tamper/traversal/symlink/hardlink/unknown/missing/over-budget rejection and preservation outside the owned output inventory. This is tooling evidence, not final product/browser/HTTP acceptance."
+        ],
+        "slots": [
+          {
+            "slot": "package_worker",
+            "function": "worker",
+            "perspective": "Pure offline manifest and reproducible publisher implementation",
+            "solver_slot": null
+          }
+        ],
+        "implementation_required": true
+      }
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Defined the independent TASK010 package-tooling slice without claiming final frontend or HTTP acceptance."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Defined the independent TASK010 package-tooling slice without claiming final frontend or HTTP acceptance.",
+    "current_summary": "Defined the independent TASK010 package-tooling slice without claiming final frontend or HTTP acceptance.",
+    "next_step": "Reserve one bounded worker while snapshot implementation proceeds.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

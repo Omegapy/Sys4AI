@@ -1,0 +1,169 @@
+{
+  "caller_count": 602,
+  "captured_at": "2026-09-20T04:52:29.303105+00:00",
+  "categories": {
+    "distribution": 39,
+    "docs": 26,
+    "historical": 513,
+    "launcher": 3,
+    "runtime": 24,
+    "shared helper": 9,
+    "test": 18
+  },
+  "entries_chunks": [
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/caller-entries-01.json",
+      "sha256": "0e82b568f6cdbd886cc70d35c38035bf46b7095a072322626fe56f4e49d9895e"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/caller-entries-02.json",
+      "sha256": "46f4f6cd6c137d28b398384bced9dd4c724711d80ab621896f4f28be1c4b2bbe"
+    }
+  ],
+  "initializer": {
+    "advanced_module_contract": "governance-starter-v9",
+    "current_manifest": "SKILLS-depo/init-new-project/assets/static-capability-v1.json",
+    "current_setup_contract": "governance-starter-v12",
+    "qualification": "Current root installed initializer manifest and source manifest have distinct current bytes. Preserve each until separately scoped reviewed adoption; previous v1-v11 edition requirements must retain semantics.",
+    "required_old_frontend_assets": [
+      "workbench/index.html",
+      "workbench/app.js",
+      "workbench/editor.js",
+      "workbench/review.js",
+      "workbench/advanced.js",
+      "workbench/styles.css"
+    ],
+    "retained_previous_manifest": "SKILLS-depo/init-new-project/assets/static-capability-v11.json",
+    "sources": [
+      {
+        "locator": "line:46",
+        "path": "SKILLS-depo/init-new-project/scripts/init_new_project.py",
+        "sha256": "5b5d958a9b45e73e6da21c7b6a46724fce64f26348ba80a444029c9cf4604c04"
+      },
+      {
+        "locator": "line:30",
+        "path": "SKILLS-depo/init-new-project/scripts/init_ontology_advanced.py",
+        "sha256": "40c009d9f8a29090e12f0f11771865a9e5cded8e0a257c1a9727d6b706a9ebe9"
+      }
+    ]
+  },
+  "scan": {
+    "argv": [
+      "rg",
+      "-l",
+      "-i",
+      "--hidden",
+      "--glob",
+      "!**/__pycache__/**",
+      "--glob",
+      "!**/*.pyc",
+      "--glob",
+      "!**/node_modules/**",
+      "--glob",
+      "!**/.git/**",
+      "workbench|ontology_workbench|trusted_authority|TrustedAuthority|assess_service",
+      "SKILLS-depo",
+      ".agents",
+      "tools",
+      "depot",
+      "ONTOLOGY-depo",
+      "reference-assets/ONTOLOGY-depo",
+      "SPECS-depo",
+      "Projects/Sys4AI-Template-Project",
+      "README.md",
+      "SPECS.md",
+      "ontology-advanced.yaml"
+    ],
+    "excluded": [
+      "Git internals",
+      "Python caches",
+      "node_modules",
+      "independent product projects",
+      "Task candidate contents",
+      "private runtime/session files"
+    ],
+    "historical_argv": [
+      "git",
+      "grep",
+      "-l",
+      "-i",
+      "workbench",
+      "HEAD",
+      "--",
+      "Verification"
+    ],
+    "historical_returncode": 0,
+    "returncode": 0,
+    "roots": [
+      "SKILLS-depo",
+      ".agents",
+      "tools",
+      "depot",
+      "ONTOLOGY-depo",
+      "reference-assets/ONTOLOGY-depo",
+      "SPECS-depo",
+      "Projects/Sys4AI-Template-Project",
+      "README.md",
+      "SPECS.md",
+      "ontology-advanced.yaml"
+    ]
+  },
+  "schema_version": 1,
+  "shared_helper_findings": [
+    {
+      "fact": "ontology_health imports assess_service from ontology_workbench; CLI and test fixtures import Workbench and trusted_authority. Preserve health and authority behavior when retiring human frontend.",
+      "sources": [
+        {
+          "locator": "line:61",
+          "path": "SKILLS-depo/ontology/scripts/ontology_health.py",
+          "sha256": "a0c0824afd92749d28a998ebe3a312ede8c204bafcec899d55d9192cf1c34f5b"
+        },
+        {
+          "locator": "line:169",
+          "path": "SKILLS-depo/ontology/scripts/ontology_advanced_cli.py",
+          "sha256": "af57d0d25cd246feb864373ee898f7026a1bce8e97f14a58ef83e878c6eb3f94"
+        }
+      ]
+    },
+    {
+      "fact": "TrustedAuthority delegates native observation, Director/manager validation, active manager checks and grants to ontology_authority. Publication, proposals, guards, profiles and integration use ontology_authority independently.",
+      "sources": [
+        {
+          "locator": "line:95",
+          "path": "SKILLS-depo/ontology/scripts/ontology_workbench.py",
+          "sha256": "1a02494a3bbe9979f48a152527fd0b1c6a566bc53576665822aa7fc34a11318e"
+        },
+        {
+          "locator": "line:9",
+          "path": "SKILLS-depo/ontology/scripts/ontology_publication.py",
+          "sha256": "98edba94ccab38da7a4c7e3549e44fd91c479616829da5ad04ecb9d7d8a3da8d"
+        }
+      ]
+    }
+  ],
+  "template_distribution": {
+    "excluded_output_names": [
+      "dist",
+      "build",
+      "node_modules",
+      ".sys4ai",
+      "models",
+      "logs"
+    ],
+    "exclusion_source": {
+      "locator": "line:55",
+      "path": "tools/template_update.py",
+      "sha256": "2542e3bc60ddb0c5dc85ee20b5cae9970ada9da9571b4b2d066e16974bf811ff"
+    },
+    "implication": "New production assets cannot rely on excluded dist/build output shipping automatically. Explicit current asset manifest and neutral Template package validation are later release work.",
+    "mapping": {
+      "path": "depot/template-update.json",
+      "sha256": "f895c4b3d875bd8451976d3befe99a5e98ada34b520ce9c16462551bc7f0cf76"
+    },
+    "template": "Projects/Sys4AI-Template-Project",
+    "updater": {
+      "path": "tools/template_update.py",
+      "sha256": "2542e3bc60ddb0c5dc85ee20b5cae9970ada9da9571b4b2d066e16974bf811ff"
+    }
+  }
+}

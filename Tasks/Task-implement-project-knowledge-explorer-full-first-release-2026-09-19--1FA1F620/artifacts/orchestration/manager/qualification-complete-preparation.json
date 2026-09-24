@@ -1,0 +1,277 @@
+{
+  "status": "Prepared only; no baseline definition, assignment or acceptance. Exact task objects retained from immutable plan1.",
+  "plan": {
+    "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+    "sha256": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b"
+  },
+  "tasks": [
+    {
+      "acceptance_criteria": [
+        "AT-24, AT-25, AT-26, AT-27 pass with direct old-write requests, hostile scope/credentials, traversal/symlink/oversized files and malicious labels/source links, while protected bytes remain unchanged.",
+        "No generic dispatch, optional service invocation, runtime secret leakage, broad CORS, arbitrary source/asset access or cross-project route/session/cache data exists."
+      ],
+      "action": "Run adversarial request/asset/source/session tests and runtime import/call audits against the built reader and simultaneous selected projects.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-019"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-005",
+      "requirement_ids": [
+        "REQ-026",
+        "REQ-028",
+        "REQ-029",
+        "REQ-030",
+        "REQ-031",
+        "REQ-032",
+        "REQ-033",
+        "REQ-038",
+        "REQ-043"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "SKILLS-depo/ontology/tests/test_explorer_security.py",
+        "Verification/project-knowledge-explorer-first-release/security-results.json"
+      ],
+      "task_id": "TASK-020",
+      "title": "Verify dedicated service security and isolation",
+      "verification_steps": [
+        "Run targeted HTTP suites with two namespaces and one shared label/different meanings; exercise resource exhaustion, bounded retry and safe failures.",
+        "Inspect import/call graph for authoring/provisioning/build/wiki/memory functions; instrument forbidden operations to fail if invoked.",
+        "Record an individual observed result and exact evidence locator for each scenario: AT-24, AT-25, AT-26, AT-27. Aggregate suite success does not replace per-scenario evidence."
+      ]
+    },
+    {
+      "acceptance_criteria": [
+        "AT-01, AT-02, AT-03, AT-04, AT-05, AT-06, AT-07, AT-08, AT-09, AT-10, AT-11, AT-12, AT-13, AT-14, AT-15, AT-16, AT-17, AT-18, AT-19, AT-20, AT-21, AT-22, AT-23, AT-28, AT-29, AT-32, AT-34 each has observed production evidence and exact fixture/build identity.",
+        "Installed bundle works without Node server, external assets, embeddings/RDF/inference, profile enablement or Director publication grants; missing assets fail specifically."
+      ],
+      "action": "Build from the exact approved dependency lock and exercise actual production launch, health, all reader destinations, history, sources and graph/list under real CSP and network denial.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-020"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-005",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-005",
+        "REQ-010",
+        "REQ-012",
+        "REQ-019",
+        "REQ-020",
+        "REQ-023",
+        "REQ-025",
+        "REQ-028",
+        "REQ-039",
+        "REQ-043",
+        "REQ-049"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "Verification/project-knowledge-explorer-first-release/production-build.json",
+        "Verification/project-knowledge-explorer-first-release/browser-results.json",
+        "Verification/project-knowledge-explorer-first-release/offline-csp-results.json"
+      ],
+      "task_id": "TASK-021",
+      "title": "Verify actual production offline user workflows",
+      "verification_steps": [
+        "Execute documented production build only after explicit dependency/build authorization, then launch explicit reader with target Python runtime; no dev-server evidence substitutes.",
+        "Use Playwright or existing equivalent for complete search-entry-source-history-map/list/process flows under denied external network and actual CSP; store safe screenshots/results.",
+        "Record an individual observed result and exact evidence locator for each scenario: AT-01, AT-02, AT-03, AT-04, AT-05, AT-06, AT-07, AT-08, AT-09, AT-10, AT-11, AT-12, AT-13, AT-14, AT-15, AT-16, AT-17, AT-18, AT-19, AT-20, AT-21, AT-22, AT-23, AT-28, AT-29, AT-32, AT-34. Aggregate suite success does not replace per-scenario evidence."
+      ]
+    },
+    {
+      "acceptance_criteria": [
+        "AT-29, AT-30, labeled search/combobox behavior, visible unobscured focus, contrast and applicable 24px target exceptions have specific evidence.",
+        "Actual browser/AT versions include macOS VoiceOver/Safari; Windows combination is tested when available or its non-exercise is explicit.",
+        "A scanner pass is never an unqualified WCAG compliance claim and diagram exception never excuses surrounding text/control reflow."
+      ],
+      "action": "Evaluate production interface semantics, contrasts, targets, reflow, focus and essential actions using automated scans plus manual keyboard and screen-reader knowledge tasks.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-021"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-005",
+      "requirement_ids": [
+        "REQ-017",
+        "REQ-019",
+        "REQ-034",
+        "REQ-035",
+        "REQ-036",
+        "REQ-043",
+        "REQ-044"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "Verification/project-knowledge-explorer-first-release/accessibility-results.json",
+        "Verification/project-knowledge-explorer-first-release/manual-keyboard-voiceover.md"
+      ],
+      "task_id": "TASK-022",
+      "title": "Record keyboard and assistive technology acceptance",
+      "verification_steps": [
+        "Run automated accessibility checks on all destinations, states and both themes.",
+        "Manually follow search, entry, sources, map/list, menus, Escape/focus return, narrow/zoom and reduced-motion tasks; retain exact environments and failures.",
+        "Record an individual observed result and exact evidence locator for each scenario: AT-29, AT-30. Aggregate suite success does not replace per-scenario evidence."
+      ]
+    },
+    {
+      "acceptance_criteria": [
+        "AT-33 establishes unchanged ontology/source configuration, memory data/config, proposals, publication receipts and generated products across all reads.",
+        "Only exact documented startup session/runtime files and harmless preference keys are exempt; no broad .sys4ai exemption exists.",
+        "Opening evidence never repairs source hashes and stale/missing wiki never triggers rebuild or blocks definitions."
+      ],
+      "action": "Compare complete protected-state hashes and relevant timestamps before and after the actual production browser read workflow, including optional services absent and wiki/memory missing or stale.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-021",
+        "TASK-022"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-005",
+      "requirement_ids": [
+        "REQ-026",
+        "REQ-027",
+        "REQ-028",
+        "REQ-031",
+        "REQ-041",
+        "REQ-043"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "Verification/project-knowledge-explorer-first-release/browser-nonmutation.json"
+      ],
+      "task_id": "TASK-023",
+      "title": "Prove end-to-end browsing nonmutation",
+      "verification_steps": [
+        "Hash/stat protected paths before and after safe reads, expansion, source open, malformed requests and expiry.",
+        "Inspect runtime artifacts created by explicit launch and classify every change; unexpected mutations fail the gate.",
+        "Record an individual observed result and exact evidence locator for each scenario: AT-33. Aggregate suite success does not replace per-scenario evidence."
+      ]
+    },
+    {
+      "acceptance_criteria": [
+        "AT-36 reports repeated-run median and p95, memory, enforced limits and graceful degradation at approximate 50/100, 1000/5000 and 5000/50000 entry/relation targets, with loader capacity measured.",
+        "Proposed 2s cold first-read, warm search p95 200ms excluding debounce, entry p95 250ms, 1.5s focused 25/50 graph and 100ms loaded selection remain reported targets; actual misses remain visible.",
+        "Additional connections leave the old view usable with bounded progress/cancellation; source validation cost and compressed bundle size are measured separately."
+      ],
+      "action": "Measure production performance and resource behavior at small, representative and stress fixture shapes with actual hardware/browser/build/limits and cold/warm conditions.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-003",
+        "TASK-021",
+        "TASK-023"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-005",
+      "requirement_ids": [
+        "REQ-018",
+        "REQ-022",
+        "REQ-025",
+        "REQ-033",
+        "REQ-043",
+        "REQ-045",
+        "REQ-046"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "Verification/project-knowledge-explorer-first-release/performance-results.json",
+        "Verification/project-knowledge-explorer-first-release/performance-protocol.md"
+      ],
+      "task_id": "TASK-024",
+      "title": "Benchmark bounded representative and pathological workloads",
+      "verification_steps": [
+        "Run cold/warm repetitions and high-degree/long-definition/many-source/cycles/cancellation fixtures; document sample counts and timing boundaries.",
+        "If profiling shows source validation dominates, test validated immutable reuse before proposing a contract change; never use stale-as-current data to improve timings.",
+        "Record an individual observed result and exact evidence locator for each scenario: AT-36. Aggregate suite success does not replace per-scenario evidence.",
+        "Record the first unsupported loader-capacity threshold with safe bounded failure; do not silently increase shared agent caps to force the stress fixture to load."
+      ]
+    },
+    {
+      "acceptance_criteria": [
+        "Participant can attempt find/explain term, distinguish terms, interpret relation endpoints/meaning, visit neighbor/return, understand supported or absent process order and inspect freshness.",
+        "Record completion, wrong turns, mistaken meanings, requests for help and participant wording; 30s known-term target stays proposed and no statistical generalization is made.",
+        "Resolve high-impact reversed-direction or layout-causality misconceptions before claiming usable release; owner-only results state the limitation."
+      ],
+      "action": "Conduct small exploratory production knowledge-task walkthroughs with someone unfamiliar with implementation, or document owner-only walkthrough and broader validation as unperformed.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-021",
+        "TASK-022",
+        "TASK-024"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-005",
+      "requirement_ids": [
+        "REQ-010",
+        "REQ-019",
+        "REQ-043",
+        "REQ-047"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "Verification/project-knowledge-explorer-first-release/usability-results.md"
+      ],
+      "task_id": "TASK-025",
+      "title": "Validate comprehension with people",
+      "verification_steps": [
+        "Run the named knowledge tasks without implementation vocabulary coaching; record safe concise observations and elapsed time.",
+        "Recheck any high-impact fix through the affected focused browser/semantic/accessibility tests and targeted walkthrough."
+      ]
+    }
+  ],
+  "gates": [
+    "Do not start until current FRONTEND and its SERVICE dependency are verified. Execute the original internal task dependencies, not just group-level ordering.",
+    "The qualification owner writes tests/evidence only. Shipping defects return to existing product owners and invalidate affected evidence.",
+    "Use current raw receipts only for the exact observed assertion/build/fixture; fill actual missing scenario evidence rather than relabel aggregate passes.",
+    "Primary host executes reviewed frozen listener/browser/manual OS jobs when the child cannot. Preserve exact producer and tool attribution.",
+    "Actual Safari/VoiceOver observations and exact environment/restoration are mandatory; DOM snapshots do not establish screen-reader announcements.",
+    "Human TASK025 requires actual participant or owner observations and words; prior all-command approval is not participation. Prepare concrete tasks before requesting the walkthrough.",
+    "Performance timings are isolated repeated measurements, with approximate target shapes, actual admission/refusal thresholds, source costs and misses explicitly reported.",
+    "AT33 covers the full named protected set with exact startup/runtime/preference exceptions; no broad .sys4ai exemption.",
+    "Rehash current source, build inputs and every runtime asset including the large member before and after final acceptance. Do not substitute copied output or old checks for live changed bytes."
+  ]
+}

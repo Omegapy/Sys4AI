@@ -1,0 +1,301 @@
+
+interface Schema {
+  $ref?: string; type?: string; const?: unknown; enum?: unknown[];
+  properties?: Record<string, Schema>; required?: string[];
+  additionalProperties?: boolean | Schema; items?: Schema;
+  oneOf?: Schema[]; anyOf?: Schema[]; allOf?: Schema[];
+  if?: Schema; then?: Schema; else?: Schema; not?: Schema;
+  minimum?: number; maximum?: number; minLength?: number; maxLength?: number;
+  minItems?: number; maxItems?: number; uniqueItems?: boolean; pattern?: string;
+  'x-max-utf8-bytes'?: number; 'x-json-token-type'?: string;
+}
+export const LIFECYCLES: Lifecycle[] = ['draft', 'approved', 'deprecated'];
+export const FACT_KINDS: FactKind[] = ['asserted', 'derived', 'inferred', 'external'];
+export const REASONS: Reason[] = ['item_limit','byte_limit','time_limit','visited_limit','scan_limit','display_limit','item_omitted','field_limit'];
+export const INVALID_RESPONSE = {code: 'invalid_response', message: 'The reader returned an invalid response.'} as const;
+export type InvalidResponse = typeof INVALID_RESPONSE;
+export type Checked<T> = {ok: true; value: T} | {ok: false; error: InvalidResponse};
+const encoder = new TextEncoder();
+export function utf8Length(s: string): number { return encoder.encode(s).length; }
+export function validUnicode(s: string): boolean {
+  for (let i = 0; i < s.length; i++) {
+    const c = s.charCodeAt(i);
+    if (c >= 0xd800 && c <= 0xdbff) { const d = s.charCodeAt(++i); if (!(d >= 0xdc00 && d <= 0xdfff)) return false; }
+    else if (c >= 0xdc00 && c <= 0xdfff) return false;
+  }
+  return true;
+}
+export function queryText(s: string): string | null {
+  const chars = Array.from(s); let a = 0, b = chars.length;
+  while (a < b && WHITESPACE.has(chars[a]!.codePointAt(0)!)) a++;
+  while (b > a && WHITESPACE.has(chars[b - 1]!.codePointAt(0)!)) b--;
+  return a === b ? null : chars.slice(a, b).join('');
+}
+export function normalizeQuery(s: string): string {
+  const folded = Array.from(s, c => CASEFOLD[c] ?? c).join('');
+  const words: string[] = []; let word = '';
+  for (const c of folded) { if (WHITESPACE.has(c.codePointAt(0)!)) { if (word) words.push(word); word = ''; } else word += c; }
+  if (word) words.push(word); return words.join(' ');
+}
+export function plainObject(v: unknown): v is Record<string, unknown> {
+  if (v === null || typeof v !== 'object' || Array.isArray(v)) return false;
+  const proto = Object.getPrototypeOf(v);
+  return (proto === Object.prototype || proto === null) && Reflect.ownKeys(v).every(k => typeof k === 'string' && Object.getOwnPropertyDescriptor(v, k)?.get === undefined && Object.getOwnPropertyDescriptor(v, k)?.set === undefined);
+}
+export function stableJson(v: unknown): string {
+  if (Array.isArray(v)) { if (Object.keys(v).length !== v.length || Array.from({length:v.length},(_,i)=>i).some(i=>!Object.hasOwn(v,i))) throw new TypeError('Non-JSON array.'); return '[' + v.map(stableJson).join(',') + ']'; }
+  if (plainObject(v)) return '{' + Object.keys(v).sort().map(k => JSON.stringify(k) + ':' + stableJson(v[k])).join(',') + '}';
+  if (v !== null && typeof v !== 'string' && typeof v !== 'boolean' && typeof v !== 'number' || typeof v === 'string' && !validUnicode(v)) throw new TypeError('Non-JSON comparison value.');
+  const serialized = JSON.stringify(v);
+  if (serialized === undefined || typeof v === 'number' && !Number.isFinite(v)) throw new TypeError('Non-JSON comparison value.');
+  return serialized;
+}
+function same(a: unknown, b: unknown): boolean { return stableJson(a) === stableJson(b); }
+function jsonSafe(v: unknown, depth = 0, seen = new Set<object>()): boolean {
+  if (depth > 16) return false;
+  if (v === null || typeof v === 'boolean') return true;
+  if (typeof v === 'number') return Number.isFinite(v);
+  if (typeof v === 'string') return validUnicode(v);
+  if (typeof v !== 'object' || seen.has(v)) return false;
+  seen.add(v);
+  const result = Array.isArray(v)
+    ? Object.keys(v).length === v.length && Array.from({length:v.length},(_,i)=>i).every(i=>Object.hasOwn(v,i)) && v.every(x => jsonSafe(x, depth + 1, seen))
+    : plainObject(v) && Object.entries(v).every(([k,x]) => validUnicode(k) && jsonSafe(x, depth + 1, seen));
+  seen.delete(v); return result;
+}
+function base64url(s:string):boolean { try { if(s.length%4===1)return false; return btoa(atob(s.replace(/-/gu,'+').replace(/_/gu,'/')+'='.repeat((4-s.length%4)%4))).replace(/=/gu,'').replace(/\+/gu,'-').replace(/\//gu,'_')===s; } catch { return false; } }
+function scalarSemantics(name:string,v:unknown):boolean {
+  if(name==='Token')return typeof v==='string'&&v.length===43&&base64url(v);
+  if(name==='Cursor'){if(typeof v!=='string')return false;const [payload,mac,...rest]=v.split('.');return rest.length===0&&!!payload&&!!mac&&mac.length===43&&base64url(payload)&&base64url(mac);}
+  return true;
+}
+function matches(s: Schema, v: unknown, path: string, floats: Set<string>): boolean {
+  if (s.$ref) { const def = DEFINITIONS[s.$ref.slice('#/$defs/'.length)]; if (!def || !scalarSemantics(s.$ref.slice('#/$defs/'.length),v) || !matches(def, v, path, floats)) return false; }
+  if ('const' in s && (!same(v, s.const) || (typeof s.const === 'number' && Number.isInteger(s.const) && floats.has(path)))) return false;
+  if (s.enum && !s.enum.some(x => same(v, x))) return false;
+  if (s.oneOf && s.oneOf.filter(x => matches(x, v, path, floats)).length !== 1) return false;
+  if (s.anyOf && !s.anyOf.some(x => matches(x, v, path, floats))) return false;
+  if (s.allOf && !s.allOf.every(x => matches(x, v, path, floats))) return false;
+  if (s.not && matches(s.not, v, path, floats)) return false;
+  if (s.if && !matches(matches(s.if, v, path, floats) ? s.then ?? {} : s.else ?? {}, v, path, floats)) return false;
+  if (s.type === 'null' && v !== null) return false;
+  if (s.type === 'boolean' && typeof v !== 'boolean') return false;
+  if (s.type === 'string' && typeof v !== 'string') return false;
+  if ((s.type === 'number' || s.type === 'integer') && (typeof v !== 'number' || !Number.isFinite(v))) return false;
+  if (s.type === 'integer' && (typeof v !== 'number' || !Number.isSafeInteger(v) || floats.has(path))) return false;
+  if (s.type === 'array' && !Array.isArray(v)) return false;
+  if (s.type === 'object' && !plainObject(v)) return false;
+  if (typeof v === 'number' && ((s.minimum !== undefined && v < s.minimum) || (s.maximum !== undefined && v > s.maximum))) return false;
+  if (typeof v === 'string') {
+    const n = Array.from(v).length;
+    if ((s.minLength !== undefined && n < s.minLength) || (s.maxLength !== undefined && n > s.maxLength) || (s['x-max-utf8-bytes'] !== undefined && utf8Length(v) > s['x-max-utf8-bytes'])) return false;
+    if (s.pattern === '^\\s*$') { if (!Array.from(v).every(c=>WHITESPACE.has(c.codePointAt(0)!))) return false; }
+    else if (s.pattern) { const match = new RegExp(s.pattern, 'u').exec(v); if (!match || match.index !== 0 || match[0].length !== v.length) return false; }
+  }
+  if (Array.isArray(v)) {
+    if ((s.minItems !== undefined && v.length < s.minItems) || (s.maxItems !== undefined && v.length > s.maxItems)) return false;
+    if (s.uniqueItems && new Set(v.map(stableJson)).size !== v.length) return false;
+    if (s.items && !v.every((x,i) => matches(s.items!, x, path + '/' + i, floats))) return false;
+  }
+  if (plainObject(v)) {
+    if (s.required?.some(k => !Object.hasOwn(v, k))) return false;
+    for (const [k,x] of Object.entries(v)) {
+      const p = path + '/' + k.replace(/~/g,'~0').replace(/\//g,'~1');
+      const def = s.properties?.[k];
+      if (def) { if (!matches(def, x, p, floats)) return false; }
+      else if (s.additionalProperties === false) return false;
+      else if (typeof s.additionalProperties === 'object' && !matches(s.additionalProperties, x, p, floats)) return false;
+    }
+  }
+  return true;
+}
+/** Shape guard only. Network callers must use decodeReadResponse for token,
+ * byte, cross-field, request correlation and cryptographic identity checks. */
+export function isWire<K extends keyof WireTypes>(name: K, value: unknown): value is WireTypes[K] {
+  try { return jsonSafe(value) && utf8Length(JSON.stringify(value)) <= 2000000 && scalarSemantics(name,value) && matches(DEFINITIONS[name]!, value, '', new Set()); } catch { return false; }
+}
+
+// Compare decimal spellings without converting their integer coefficient to a
+// floating-point number. This catches unsafe integers, underflow and rounded
+// fraction/exponent tokens while accepting equivalent ordinary double spellings.
+function exactNumberToken(token: string, value: number): boolean {
+  if (!Number.isFinite(value) || Object.is(value, -0)) return false;
+  if (!/[.eE]/u.test(token)) return Number.isSafeInteger(value);
+  const decimal = (text: string): string => {
+    const match = /^(-?)([0-9]+)(?:\.([0-9]+))?(?:[eE]([+-]?[0-9]+))?$/u.exec(text)!;
+    let digits = (match[2]! + (match[3] ?? '')).replace(/^0+/u, '');
+    if (!digits) return '0';
+    let exponent = BigInt(match[4] ?? '0') - BigInt((match[3] ?? '').length);
+    const trailing = /0+$/u.exec(digits)?.[0].length ?? 0;
+    if (trailing) { digits = digits.slice(0, -trailing); exponent += BigInt(trailing); }
+    return match[1] + digits + 'e' + exponent.toString();
+  };
+  return decimal(token) === decimal(String(value));
+}
+/** Strict parser keeps integer lexical provenance (1.0 and 1e0 are not integer
+ * tokens), rejects duplicate decoded keys, invalid Unicode and excessive depth.
+ * Output objects have null prototypes; opaque canonical keys remain data. */
+function parseWire(input: string | Uint8Array, maxBytes: number): {value: unknown; floats: Set<string>; bytes: number} {
+  const text = typeof input === 'string' ? input : new TextDecoder('utf-8', {fatal: true, ignoreBOM: true}).decode(input);
+  const bytes = typeof input === 'string' ? utf8Length(input) : input.byteLength;
+  if (bytes > maxBytes || !validUnicode(text)) throw new Error('invalid');
+  let i = 0; const floats = new Set<string>();
+  const ws = () => { while (/[\x20\t\r\n]/u.test(text[i] ?? '\0')) i++; };
+  const string = (): string => {
+    const start = i++; let escaped = false;
+    while (i < text.length) { const c = text[i++]!; if (!escaped && c === '"') { const s: unknown = JSON.parse(text.slice(start, i)); if (typeof s !== 'string' || !validUnicode(s)) throw new Error('invalid'); return s; } if (!escaped && c === '\\') escaped = true; else escaped = false; }
+    throw new Error('invalid');
+  };
+  const value = (path: string, depth: number): unknown => {
+    if (depth > 16) throw new Error('invalid'); ws(); const c = text[i];
+    if (c === '"') return string();
+    if (c === '[') {
+      i++; ws(); const a: unknown[] = []; if (text[i] === ']') { i++; return a; }
+      while (true) { a.push(value(path + '/' + a.length, depth + 1)); ws(); if (text[i] === ']') { i++; return a; } if (text[i++] !== ',') throw new Error('invalid'); }
+    }
+    if (c === '{') {
+      i++; ws(); const o: Record<string, unknown> = Object.create(null); if (text[i] === '}') { i++; return o; }
+      while (true) { ws(); if (text[i] !== '"') throw new Error('invalid'); const k = string(); if (Object.hasOwn(o, k)) throw new Error('invalid'); ws(); if (text[i++] !== ':') throw new Error('invalid'); o[k] = value(path + '/' + k.replace(/~/g,'~0').replace(/\//g,'~1'), depth + 1); ws(); if (text[i] === '}') { i++; return o; } if (text[i++] !== ',') throw new Error('invalid'); }
+    }
+    for (const [word, v] of [['true',true],['false',false],['null',null]] as const) if (text.startsWith(word, i)) { i += word.length; return v; }
+    const m = /^-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?/u.exec(text.slice(i));
+    if (!m) throw new Error('invalid'); i += m[0].length; const n = Number(m[0]);
+    if (!exactNumberToken(m[0],n)) throw new Error('invalid'); if (/[.eE]/u.test(m[0])) floats.add(path); return n;
+  };
+  const v = value('', 0); ws(); if (i !== text.length) throw new Error('invalid'); return {value:v, floats, bytes};
+}
+export function decodeWire<K extends keyof WireTypes>(name: K, input: string | Uint8Array, maxBytes = 32000): Checked<WireTypes[K]> {
+  try { const p = parseWire(input, Math.min(maxBytes, name.startsWith('Session') || name === 'PreAuthErrorResponse' || name === 'ErrorResponse' ? 1024 : 32000)); if (!matches(DEFINITIONS[name]!, p.value, '', p.floats) || !isWire(name, p.value)) return {ok:false,error:INVALID_RESPONSE}; return {ok:true,value:p.value}; } catch { return {ok:false,error:INVALID_RESPONSE}; }
+}
+export interface ResponseExpectation {
+  operation: Operation; request_id: RequestId;
+  code_epoch: Digest; service_instance: InstanceId; session_scope: SessionScope;
+  project: ProjectIdentity | null; snapshot: Digest | null;
+  scope: SuccessResponse['scope']; policy: EffectivePolicy | null;
+}
+export function scopeForRequest(operation: Operation, request: unknown): SuccessResponse['scope'] | null {
+  const names = {context:'ContextRequest',search:'SearchRequest',entry:'EntryRequest',relationships:'RelationshipsRequest',neighborhood:'NeighborhoodRequest',source:'SourceRequest'} as const;
+  if (!isWire(names[operation], request)) return null;
+  const p = request.params;
+  if ('query' in p) { const q = queryText(p.query); if (p.sort !== (q === null ? 'label' : 'relevance')) return null; return {query:q,normalized_query:q === null ? null : normalizeQuery(q),category:p.category === 'all' ? null : p.category,lifecycles:LIFECYCLES.filter(x=>p.lifecycles.includes(x)),fact_kinds:FACT_KINDS.filter(x=>p.fact_kinds.includes(x)),sort:p.sort,limit:p.limit}; }
+  if ('predicate_ids' in p) { const {cursor: _cursor, ...scope} = p; return {...scope,predicate_ids:[...p.predicate_ids].sort(),lifecycles:LIFECYCLES.filter(x=>p.lifecycles.includes(x)),fact_kinds:FACT_KINDS.filter(x=>p.fact_kinds.includes(x))}; }
+  if ('owner_id' in p) return {owner_id:p.owner_id,reference_id:p.reference_id};
+  if ('id' in p) return p.section === 'header' && p.cursor !== null ? null : {id:p.id,section:p.section};
+  return p;
+}
+function ordered<T>(values: T[], order: T[]): boolean { return same(values, order.filter(x => values.includes(x))); }
+function sourceConsistent(r: SourceRef): boolean {
+  return r.source_state === 'unavailable' ? r.observed_sha256 === null : r.observed_sha256 !== null && ((r.observed_sha256 === r.recorded_sha256) === (r.source_state === 'current'));
+}
+function markerConsistent(m: Marker): boolean { return m.id === m.detail.id && (m.reason === 'visited_limit' ? m.item_kind === 'relation' && m.detail.section === 'details' : (m.item_kind === 'entry' ? ['header','label','details'] : ['qualifiers','label','details']).includes(m.detail.section)); }
+function summaryConsistent(s: Summary): boolean { return s.match_reason === 'alias' ? s.matched_alias !== null : s.matched_alias === null && !s.matched_alias_truncated; }
+function uniqueIds(a: {id: string}[]): boolean { return new Set(a.map(x=>x.id)).size === a.length; }
+function chunksConsistent(chunks: TextChunk[]): boolean {
+  const previous = new Map<string, TextChunk>();
+  for (const c of chunks) {
+    if (['details','qualifiers'].includes(c.field) && c.encoding !== 'canonical_json') return false;
+    if (['label','definition','scope_note'].includes(c.field) && (c.encoding !== 'plain' || c.item_index !== null)) return false;
+    if (['aliases','examples','non_examples'].includes(c.field) && (c.encoding !== 'plain' || c.item_index === null)) return false;
+    if (c.field === 'source' && c.item_index !== null) return false;
+    const key = c.field + ':' + c.item_index + ':' + c.encoding, before = previous.get(key);
+    if (before && (!before.more_in_field || before.offset + utf8Length(before.text) !== c.offset)) return false;
+    previous.set(key,c);
+  }
+  return true;
+}
+export function responseSemantics(r: ReadResponse, expected?: ResponseExpectation): boolean {
+  if (!isWire('ReadResponse', r)) return false;
+  if (r.status === 'error') {
+    return utf8Length(JSON.stringify(r)) <= 1024 && (!expected || (r.operation === null || r.operation === expected.operation) && (r.request_id === null || r.request_id === expected.request_id));
+  }
+  if (r.project.namespace !== 'urn:sys4ai:ontology:project:' + r.project.id + ':') return false;
+  if (expected && (r.operation !== expected.operation || r.request_id !== expected.request_id || r.code_epoch !== expected.code_epoch || r.service_instance !== expected.service_instance || r.session_scope !== expected.session_scope || expected.project !== null && !same(r.project,expected.project) || expected.snapshot !== null && r.snapshot !== expected.snapshot || !same(r.scope,expected.scope))) return false;
+  if (utf8Length(JSON.stringify(r)) > r.limits.bytes) return false;
+  const policy = r.operation === 'context' ? r.data.resource_policy : expected?.policy;
+  if (policy && (r.limits.items > policy.page_items || r.limits.bytes > policy.response_bytes || r.limits.visited_nodes > policy.visited_nodes || r.limits.seconds > policy.request_seconds)) return false;
+  if (!ordered(r.coverage.reasons, REASONS) || r.coverage.complete && r.coverage.reasons.length > 0) return false;
+  if (r.page.has_more === false && r.page.next_cursor !== null || r.page.has_more === true && r.page.next_cursor === null) return false;
+  if ('lifecycles' in r.scope && (!ordered(r.scope.lifecycles,LIFECYCLES) || !ordered(r.scope.fact_kinds,FACT_KINDS))) return false;
+  if ('predicate_ids' in r.scope && !same(r.scope.predicate_ids,[...r.scope.predicate_ids].sort())) return false;
+  let count = 0, markers: Marker[] = [], refs: SourceRef[] = [];
+  switch (r.operation) {
+    case 'context': {
+      count = 1; const d = r.data, p = d.resource_policy;
+      if (d.project.id !== r.project.id || d.project.namespace !== r.project.namespace || d.root_scope_id !== r.project.root_scope_id || d.service.instance !== r.service_instance || d.service.code_epoch !== r.code_epoch || d.service.schema_sha256 !== CONTRACT_SCHEMA_SHA256) return false;
+      if (r.page.has_more !== false || r.page.next_cursor !== null || r.page.total !== null || !uniqueIds(d.categories) || !uniqueIds(d.starting_points) || !d.starting_points.every(summaryConsistent)) return false;
+      if (p.default_page_items > p.page_items || p.initial_nodes > Math.min(p.display_nodes,p.visited_nodes,p.page_items) || p.initial_edges > Math.min(p.display_edges,p.page_items) || p.cursor_seconds > p.session_seconds) return false;
+      break;
+    }
+    case 'search': {
+      count = r.data.items.length;
+      if (queryText(r.scope.query ?? '') !== r.scope.query || r.scope.normalized_query !== (r.scope.query === null ? null : normalizeQuery(r.scope.query)) || r.scope.category === 'all' || count > r.scope.limit) return false;
+      const ids: string[] = [];
+      for (const x of r.data.items) { if (x.kind === 'detail_required') { if (x.item_kind !== 'entry') return false; markers.push(x); ids.push(x.id); } else { const s = x.entry; if (!summaryConsistent(s) || !r.scope.lifecycles.includes(s.lifecycle) || !r.scope.fact_kinds.includes(s.fact_kind) || r.scope.category !== null && !s.category_ids.includes(r.scope.category)) return false; ids.push(s.id); } }
+      if (new Set(ids).size !== ids.length) return false;
+      break;
+    }
+    case 'entry': {
+      const d = r.data;
+      if (d.id !== r.scope.id || d.section !== r.scope.section || d.header !== null && d.header.id !== d.id || !chunksConsistent(d.chunks)) return false;
+      count = d.section === 'header' ? 1 : d.chunks.length + d.references.length + d.process_items.length;
+      refs = d.references; if (refs.some(x => x.owner_id !== d.id)) return false;
+      if (d.section === 'header' && (r.page.next_cursor !== null || r.page.has_more !== false)) return false;
+      if (d.process) {
+        if (d.process.order_state === 'recorded' && (!d.process.ordered_reference_id || !d.process.observed_source_sha256)) return false;
+        if (d.process_items.some(x=>x.kind === 'ordered_step' && (d.process!.order_state !== 'recorded' || x.reference_id !== d.process!.ordered_reference_id))) return false;
+        for (const x of d.process_items) if (x.kind === 'field' && (x.relation_ids.length > r.limits.items || x.reference_ids.length > r.limits.items)) return false;
+      }
+      break;
+    }
+    case 'relationships': case 'neighborhood': {
+      const d = r.data, id = r.operation === 'relationships' ? r.data.id : r.data.focus;
+      if (id !== r.scope.id || d.direction !== r.scope.direction || !uniqueIds(d.nodes)) return false;
+      const endpoints = new Set<string>(), ids = new Set<string>(); let edges = 0;
+      const nodes = new Set(d.nodes.map(n=>n.id)); count = d.items.length;
+      for (const x of d.items) {
+        const key = x.kind === 'edge' ? x.edge.id : x.id; if (ids.has(key)) return false; ids.add(key);
+        if (x.kind === 'detail_required') { if (x.item_kind !== 'relation') return false; markers.push(x); continue; }
+        const e = x.edge; edges++; endpoints.add(e.subject); endpoints.add(e.object);
+        if (!nodes.has(e.subject) || !nodes.has(e.object) || !r.scope.lifecycles.includes(e.lifecycle) || !r.scope.fact_kinds.includes(e.fact_kind) || r.scope.predicate_ids.length && !r.scope.predicate_ids.includes(e.predicate)) return false;
+        if (r.scope.direction === 'incoming' ? e.object !== id : r.scope.direction === 'outgoing' ? e.subject !== id : e.subject !== id && e.object !== id) return false;
+        if (e.source_count < e.source_references.length || e.sources_complete !== (e.source_count === e.source_references.length) || e.source_references.length > r.limits.items || e.source_references.some(s=>s.owner_id !== e.id)) return false;
+        refs.push(...e.source_references);
+      }
+      if (d.nodes.some(n=>!endpoints.has(n.id) && !(r.operation === 'neighborhood' && n.id === id)) || d.nodes.length > r.limits.visited_nodes || r.operation === 'neighborhood' && d.nodes.length > r.scope.node_limit || count > r.scope.limit) return false;
+      if (r.coverage.returned_edges !== edges || r.coverage.returned_nodes !== d.nodes.length || r.coverage.visited_nodes !== null && r.coverage.visited_nodes < d.nodes.length) return false;
+      break;
+    }
+    case 'source': {
+      const d = r.data; count = d.chunks.length; refs = [d.reference];
+      if (d.reference.owner_id !== r.scope.owner_id || d.reference.reference_id !== r.scope.reference_id || d.reference.observed_sha256 !== d.observation.sha256 || d.reference.source_state !== d.observation.state || !chunksConsistent(d.chunks) || d.chunks.some(c=>c.field !== 'source' || c.item_index !== null || c.encoding !== (d.extraction.kind === 'exact_json' ? 'canonical_json' : 'plain'))) return false;
+      if (policy && d.chunks.reduce((n,c)=>n+utf8Length(c.text),0) > policy.source_excerpt_bytes) return false;
+      break;
+    }
+  }
+  if (refs.some(x=>!sourceConsistent(x)) || new Set(refs.map(x=>x.reference_id)).size !== refs.length || markers.some(x=>!markerConsistent(x))) return false;
+  if (markers.length && (r.coverage.complete || !r.coverage.reasons.includes('item_omitted') || markers.some(x=>!r.coverage.reasons.includes(x.reason)))) return false;
+  if (count !== r.page.returned || count > r.limits.items || r.page.total !== null && r.page.total.value < count) return false;
+  if (r.page.total !== null) { const scope = r.operation === 'search' ? 'filtered_query' : r.operation === 'relationships' || r.operation === 'neighborhood' ? 'incident_relations' : 'section_items'; if (r.page.total.scope !== scope) return false; }
+  const stale = r.operation === 'source' && r.data.observation.state === 'stale';
+  const status = stale ? 'source_changed' : !r.coverage.complete || markers.length ? 'incomplete' : r.status === 'ambiguous' && r.operation === 'search' ? 'ambiguous' : count === 0 && r.page.has_more === false ? 'empty' : 'ok';
+  return r.status === status && !(count === 0 && r.coverage.complete && r.page.has_more !== false);
+}
+/** Core canonical_bytes differs from compact cursor/scope serialization. */
+export function coreCanonicalJson(v: unknown): string {
+  const sorted = (x: unknown): unknown => Array.isArray(x) ? x.map(sorted) : plainObject(x) ? Object.fromEntries(Object.keys(x).sort().map(k=>[k,sorted(x[k])])) : x;
+  return JSON.stringify(sorted(v), null, 2) + '\n';
+}
+async function sha256(s: string): Promise<string> { const bytes = encoder.encode(s); const digest = await globalThis.crypto.subtle.digest('SHA-256',bytes); return Array.from(new Uint8Array(digest), b=>b.toString(16).padStart(2,'0')).join(''); }
+async function integrity(r: ReadResponse): Promise<boolean> {
+  if (r.status === 'error') return true;
+  if (r.operation === 'context' && await sha256(coreCanonicalJson(r.data.resource_policy)) !== r.data.effective_policy_sha256) return false;
+  const refs = r.operation === 'source' ? [r.data.reference] : r.operation === 'entry' ? r.data.references : r.operation === 'neighborhood' || r.operation === 'relationships' ? r.data.items.flatMap(x=>x.kind === 'edge' ? x.edge.source_references : []) : [];
+  for (const r of refs) if (await sha256(coreCanonicalJson({owner_id:r.owner_id,binding_id:r.binding_id,path:r.path,locator:r.locator,recorded_sha256:r.recorded_sha256})) !== r.reference_id) return false;
+  return true;
+}
+/** Sole network-read admission. Does not fetch, store or log the input. */
+export async function decodeReadResponse(input: string | Uint8Array, expected: ResponseExpectation): Promise<Checked<ReadResponse>> {
+  const checked = decodeWire('ReadResponse',input,expected.policy?.response_bytes ?? 32000);
+  if (!checked.ok) return checked;
+  try { if (checked.value.status === 'error' && (typeof input === 'string' ? utf8Length(input) : input.byteLength) > 1024 || !responseSemantics(checked.value,expected) || !await integrity(checked.value)) return {ok:false,error:INVALID_RESPONSE}; return checked; } catch { return {ok:false,error:INVALID_RESPONSE}; }
+}

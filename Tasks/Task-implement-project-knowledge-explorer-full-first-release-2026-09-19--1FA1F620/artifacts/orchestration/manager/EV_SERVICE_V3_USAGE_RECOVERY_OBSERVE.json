@@ -1,0 +1,53 @@
+{
+  "event": {
+    "event_id": "EV_SERVICE_V3_USAGE_RECOVERY_OBSERVE",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "assignment.observe",
+    "data": {
+      "assignment_id": "SERVICE_PACKAGE_WORKER_G3",
+      "receipt": {
+        "tool": "collaboration.list_agents",
+        "result": {
+          "agents": [
+            {
+              "agent_name": "/root",
+              "agent_status": "running"
+            },
+            {
+              "agent_name": "/root/explorer_manager_g3",
+              "agent_status": "running"
+            },
+            {
+              "agent_name": "/root/explorer_manager_g3/service_package_worker",
+              "agent_status": {
+                "completed": "Acknowledged. SERVICE V3 remains stopped pending manager reconciliation. This control turn performed no tools, reads, writes, tests, delegation, or product work."
+              }
+            }
+          ]
+        }
+      },
+      "changes": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-v3-usage-recovery-observation.json",
+          "sha256": "1dc9a5f363dd0ae0041cc2574ca757167110b9a4bbeb91d251a66c5a813fdcff"
+        }
+      ]
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Reconciled original service usage failure after fresh availability: one control-only same-model acknowledgement succeeded, no service evidence writes occurred, and actual native completed receipt is recorded."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Reconciled original service usage failure after fresh availability: one control-only same-model acknowledgement succeeded, no service evidence writes occurred, and actual native completed receipt is recorded.",
+    "current_summary": "Reconciled original service usage failure after fresh availability: one control-only same-model acknowledgement succeeded, no service evidence writes occurred, and actual native completed receipt is recorded.",
+    "next_step": "Resume unchanged original service assignment through current runtime gate, then continue V3 verification of all14 criteria.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

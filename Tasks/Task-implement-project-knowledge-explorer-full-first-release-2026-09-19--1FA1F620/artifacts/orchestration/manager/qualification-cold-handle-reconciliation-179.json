@@ -1,0 +1,73 @@
+{
+  "status": "pending_init_not_valid_native_stopped_receipt",
+  "canonical_revision_unchanged": 179,
+  "native_id": "/root/explorer_manager_g3/qualification_worker",
+  "actual_app_stopped_evidence": {
+    "tool": "mcp__codex_app__read_thread",
+    "thread_id": "01a0ca2e-94b5-7b81-8be1-d6a30da93951",
+    "turn_id": "01a0ca49-d1bb-7270-8d37-453efdff9c75",
+    "turn_status": "completed",
+    "completed_at": 1790103271,
+    "final": "All writes stopped for original frontend correction."
+  },
+  "checkpoint": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/same-owner-checkpoint-02.json",
+    "sha256": "6ee82af752ee2780f4c40b13b72ca059fdfd1e102b1cd4a6b38ebea9e50f6a92"
+  },
+  "observed_sequence": [
+    {
+      "tool": "collaboration.list_agents",
+      "input": {
+        "path_prefix": "/root/explorer_manager_g3/qualification_worker"
+      },
+      "result": {
+        "agents": []
+      }
+    },
+    {
+      "tool": "collaboration.interrupt_agent",
+      "result": {
+        "previous_status": "not_found"
+      }
+    },
+    {
+      "tool": "collaboration.send_message",
+      "result": "success; queued remain-stopped control message only; no wake or new write scope"
+    },
+    {
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/explorer_manager_g3/qualification_worker",
+            "agent_status": "pending_init"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "collaboration.interrupt_agent",
+      "result": {
+        "previous_status": "pending_init"
+      }
+    },
+    {
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/explorer_manager_g3/qualification_worker",
+            "agent_status": "pending_init"
+          }
+        ]
+      }
+    }
+  ],
+  "canonical_observation_committed": false,
+  "qualifications": [
+    "App completed evidence is not relabeled as native list evidence.",
+    "Native pending_init is not a helper-supported completed or stopped status.",
+    "No qualification work, process, source write, changed input or new native identity was started.",
+    "Original app was unarchived by root without waking after its archive removed it from available native listings."
+  ]
+}

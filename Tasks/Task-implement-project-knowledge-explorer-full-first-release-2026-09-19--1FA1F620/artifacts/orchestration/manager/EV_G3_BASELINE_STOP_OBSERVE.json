@@ -1,0 +1,47 @@
+{
+  "event": {
+    "event_id": "EV_G3_BASELINE_STOP_OBSERVE",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "assignment.observe",
+    "data": {
+      "assignment_id": "BASELINE_WORKER_G3",
+      "receipt": {
+        "tool": "collaboration.list_agents",
+        "result": {
+          "agents": [
+            {
+              "agent_name": "/root/explorer_manager_g3",
+              "agent_status": "running"
+            },
+            {
+              "agent_name": "/root/explorer_manager_g3/baseline_worker",
+              "agent_status": "interrupted"
+            }
+          ]
+        }
+      },
+      "changes": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/result.json",
+          "sha256": "ddb80b59ec178ccdf9eebc4bf0a35989fead5368c679e165af02507d46a8ff5f"
+        }
+      ]
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Interrupted the original baseline worker pending a duplicate read-only health approval; existing evidence is preserved."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Interrupted the original baseline worker pending a duplicate read-only health approval; existing evidence is preserved.",
+    "current_summary": "Interrupted the original baseline worker pending a duplicate read-only health approval; existing evidence is preserved.",
+    "next_step": "Resume the same worker to finish bounded evidence corrections; preserve any unavailable health observation as a limitation.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

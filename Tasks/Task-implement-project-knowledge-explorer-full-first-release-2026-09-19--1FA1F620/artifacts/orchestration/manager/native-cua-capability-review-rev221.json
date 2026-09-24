@@ -1,0 +1,20 @@
+{
+  "status": "documented_capability_review_only",
+  "actor": "/root/explorer_manager_g3",
+  "canonical_revision": 221,
+  "observed_calls": [
+    "cua.getState()",
+    "cua.getBrowser({id: observed Chrome browser ID})",
+    "browser.capabilities.list()"
+  ],
+  "UI_actions_performed": false,
+  "documented_native_boundary": "macOS getApp accepts app name/path/bundle; listWindows is Linux/Windows-only. No documented native macOS full-frame or numeric-window-id query in available App API.",
+  "actual_optional_browser_capabilities": [
+    "viewport"
+  ],
+  "browser_rectangle_candidate": "Read-only Window.screenX/screenY/outerWidth/outerHeight are web-exposed CSSOM geometry, not native window identity or guaranteed exact OS frame. Not measured on user tabs or promoted to native restoration proof.",
+  "primary_source": "https://www.w3.org/TR/cssom-view/#extensions-to-the-window-interface",
+  "privacy_note": "CSSOM permits privacy-limited web-exposed screen information. Native frame/identity cannot be inferred from screenshot dimensions or providerTabId components.",
+  "decision": "Replace prospective move/resize recovery with a no-geometry/no-zoom lifecycle check. Prior failed frame restoration stays false and disclosed. No AppleScript/osascript/JXA/UI-scripting fallback is authorized or used by this review.",
+  "unrelated_inventory_content_retained": false
+}

@@ -1,0 +1,37 @@
+{
+  "status": "same_native_delivery_succeeded",
+  "native_id": "/root/explorer_manager_g3/frontend_worker",
+  "capacity": 4,
+  "same_target_allocation_available": true,
+  "observed_roster": [
+    {
+      "agent_name": "/root",
+      "agent_status": "running"
+    },
+    {
+      "agent_name": "/root/explorer_manager_g3",
+      "agent_status": "running"
+    },
+    {
+      "agent_name": "/root/explorer_manager_g3/frontend_worker",
+      "agent_status": "pending_init"
+    },
+    {
+      "agent_name": "/root/explorer_manager_g3/qualification_worker",
+      "agent_status": "completed"
+    }
+  ],
+  "evidence": "Actual same-ID send_message succeeded without wake. Existing pending_init target can take its single bounded turn; no new thread or settings override. Qualification is actually stopped and canonically observed completed at180. Root watcher is quiesced.",
+  "settings": {
+    "effort": null,
+    "evidence": [
+      {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/bootstrap/native-capability-generation3.json",
+        "sha256": "6dd60b9516f70383108cef38a5db76add702f2b54d69334548c84420d4e3f19e"
+      }
+    ],
+    "mode": "verified_inheritance",
+    "model": null
+  },
+  "scope": "Same original frontend identity/function/baseline round2; no model or effort overrides."
+}

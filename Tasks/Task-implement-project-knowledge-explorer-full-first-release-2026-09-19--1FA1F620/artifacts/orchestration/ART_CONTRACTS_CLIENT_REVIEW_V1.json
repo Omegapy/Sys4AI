@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "task_id": "TASK-20260919-1FA1F620",
+  "execution_generation": 3,
+  "assignment_id": "CONTRACTS_CLIENT_REVIEW_G3",
+  "reviewer_slot": "review_client",
+  "solver_slot": "solver_client",
+  "native_path": "/root/explorer_manager_g3/review_client",
+  "CODEX_THREAD_ID": "01a0bd48-4c13-75f2-aed9-2024a6d52a04",
+  "model_and_reasoning_effort": "Exact parent settings inherited through the native launch; no overrides requested or configured. This reviewer does not independently observe model/version labels.",
+  "role_digests": {
+    "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+  },
+  "receipt_acknowledgment": "Manager confirmed actual native receipt committed at Task revision 40 before this file was written.",
+  "outcome": "rejected",
+  "candidate": "CAND_CONTRACTS_CLIENT_V1",
+  "candidate_path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+  "candidate_sha256": "1036d20a1ae93bd516717d5dfd26c7b55bcf6642f2fcf6a70c0c21795cbe7f8e",
+  "baseline": "98347b9a813fc5f461b595a1270fad47b6b43b81768a5fb329edaf5cff01d433",
+  "baseline_path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/baseline_98347b9a813fc5f461b595a1270fad47b6b43b81768a5fb329edaf5cff01d433.json",
+  "review_scope": "Independent full-problem review of the assigned immutable proposal against all four TASK-002 criteria, governing requirements and frozen source packet. This is contract proposal review, not runtime or release acceptance.",
+  "assessed_requirement_ids": [
+    "REQ-001",
+    "REQ-002",
+    "REQ-003",
+    "REQ-004",
+    "REQ-005",
+    "REQ-006",
+    "REQ-009",
+    "REQ-010",
+    "REQ-014",
+    "REQ-018",
+    "REQ-021",
+    "REQ-022",
+    "REQ-023",
+    "REQ-024",
+    "REQ-025",
+    "REQ-028",
+    "REQ-029",
+    "REQ-030",
+    "REQ-031",
+    "REQ-032",
+    "REQ-033",
+    "REQ-037",
+    "REQ-038",
+    "REQ-039",
+    "REQ-040",
+    "REQ-041",
+    "REQ-049"
+  ],
+  "criterion_findings": [
+    {
+      "criterion": 1,
+      "text": "Contracts define exact request/envelope/error/cursor shapes and numeric request/time/concurrency/cache limits subordinate to canonical limits.",
+      "outcome": "rejected",
+      "mandatory_defect_ids": [
+        "CLIENT-R1-02"
+      ],
+      "evidence": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "40-98",
+          "observation": "Strict presentation configuration and numerical ceilings are proposed, but the allowed limits JSON keys and per-key numeric domains are not defined."
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "139-213",
+          "observation": "Six operations, envelopes, HTTP errors, byte accounting and continuation are substantially specified. Category response shape and several wire domains remain prose-only."
+        }
+      ],
+      "assessment": "The resource choices are concrete and preserve canonical ceilings, but consumers cannot implement one exact strict configuration schema from the current proposal."
+    },
+    {
+      "criterion": 2,
+      "text": "Selected dependency versions, build-only Node version, built-in layout, notices and source provenance are pinned after current primary-source review; any required installation has separate recorded authority.",
+      "outcome": "passed",
+      "mandatory_defect_ids": [],
+      "evidence": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "231-249",
+          "observation": "Pins Cytoscape 3.34.3, TypeScript 7.0.2, Vite 8.3.0 and build-only Node 25.9.0; selects built-in preset/grid, manifest-only runtime delivery, real lock generation and exact-package license text inspection."
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/dependency-source-observations.json",
+          "lines": null,
+          "observation": "Frozen manager metadata supports selected versions, license labels, engines, registry provenance and integrity values."
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/user-approval-scope.json",
+          "lines": null,
+          "observation": "Supplied approval includes scoped build/test dependencies, adoption and gated cutover; no installation was performed by this reviewer."
+        }
+      ],
+      "assessment": "Pass at proposal level. Actual lock, dependency tarball license notices, compiler compatibility, production build and CSP remain expressly required implementer evidence; their future status is not a reason to reject this proposal."
+    },
+    {
+      "criterion": 3,
+      "text": "The contract includes selected-input unresolved-transaction detection, bounded coherent snapshot reads, precise source-reference identity, per-service and per-session cursor scope, independent List normalization and shared state/route ownership.",
+      "outcome": "rejected",
+      "mandatory_defect_ids": [
+        "CLIENT-R1-01",
+        "CLIENT-R1-03"
+      ],
+      "evidence": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "104-119",
+          "observation": "Both transaction families, stable partial intents, noncreating shared lock observation, inode/missing-lock races, bounded retries and retiring views are covered."
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "201-229",
+          "observation": "Source identities, session-bound HMAC cursor, independent state fields and response correlation are specified, but query scope loses canonical case-sensitive semantics and context omits the root preference identity required by state."
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "231-235",
+          "observation": "List/model remain independent of the lazy renderer; semantic and accessible controls remain available on renderer failure."
+        }
+      ],
+      "assessment": "Transaction, source and renderer boundaries are coherent at proposal level. Mandatory cursor and shared context fixes are required before passing."
+    },
+    {
+      "criterion": 4,
+      "text": "The change map names source files, generated Template destinations, prospective exact root adoption and current initializer capability compatibility; each preserves its independent authority boundary.",
+      "outcome": "passed",
+      "mandatory_defect_ids": [],
+      "evidence": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "251-272",
+          "observation": "Names source ownership, Template generation, separately manifested root adoption, preservation of historical initializer resources, current capability path, cutover gates and knowledge-preserving rollback."
+        },
+        {
+          "path": "SKILLS-depo/init-new-project/scripts/init_ontology_advanced.py",
+          "lines": "12-38,54-67",
+          "observation": "Existing v9 edition and resource set includes all six old frontend files and current static capability asset; proposal avoids redefining historical receipt meaning."
+        },
+        {
+          "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+          "lines": "DEC-002, DEC-011, TASK-002",
+          "observation": "Proposal explicitly incorporates all plan decisions; DEC-002 already selects explorer-health and deprecation of workbench. These inherited decisions prevent interpreting the shorter candidate wording as permission for an authoring alias."
+        }
+      ],
+      "assessment": "Pass for a proposal change map. Exact generated asset filenames/hashes and final adoption/deletion manifests are implementation outputs, explicitly required before adoption. Current root/Template/independent-project boundaries are preserved."
+    }
+  ],
+  "mandatory_defects": [
+    {
+      "id": "CLIENT-R1-01",
+      "severity": "mandatory",
+      "title": "Cursor scope collapses queries that canonical ranking treats differently",
+      "criteria": [
+        3
+      ],
+      "requirement_ids": [
+        "REQ-005",
+        "REQ-023",
+        "REQ-024"
+      ],
+      "evidence": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "207-209",
+          "observation": "Requires canonical normalize/match scoring but binds scope_digest to the normalized effective query."
+        },
+        {
+          "path": "SKILLS-depo/ontology/scripts/ontology_retrieval.py",
+          "lines": "25-30",
+          "observation": "normalize casefolds all text, while tokens splits CamelCase before casefold."
+        },
+        {
+          "path": "SKILLS-depo/ontology/scripts/ontology_retrieval.py",
+          "lines": "33-64",
+          "observation": "query_text preserves case after trimming, exact stable-ID matching compares the original query, and ranked uses those match results."
+        },
+        {
+          "path": "SKILLS-depo/ontology/scripts/ontology_core.py",
+          "lines": "25-26",
+          "observation": "Canonical record IDs permit upper- and lowercase local characters."
+        },
+        {
+          "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+          "lines": "83-88,225-230",
+          "observation": "Canonical search order must be preserved and an incompatible query must not resume another result sequence."
+        }
+      ],
+      "counterexample": "ProjectDirector and projectdirector have the same normalize() value but tokens() yields {project,director} versus {projectdirector}. Similarly, a mixed-case exact URN and its casefolded spelling can change stable_id matching. With all other request fields equal, the proposed scope digest accepts the original cursor while the effective match set or ordering can change, allowing skipped or repeated identities. This is a static counterexample from the inspected functions, not an executed runtime test.",
+      "required_correction": "Bind the cursor scope to every ranking-relevant query input: retain the exact query_text result in addition to the normalized query (or an explicitly equivalent complete canonical match-input representation). Preserve original-case exact-ID and tokenization semantics. State that a request whose effective raw query differs is cursor_scope unless equivalence is actually established; do not lowercase the query passed to match. Add contract examples for CamelCase and case-distinct stable IDs."
+    },
+    {
+      "id": "CLIENT-R1-02",
+      "severity": "mandatory",
+      "title": "Strict limits configuration lacks its exact property names and numeric domains",
+      "criteria": [
+        1
+      ],
+      "requirement_ids": [
+        "REQ-023",
+        "REQ-028",
+        "REQ-033"
+      ],
+      "evidence": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "42-68",
+          "observation": "Unknown configuration properties are rejected, top-level limits is {}, and limits is said to accept only numeric settings enumerated below."
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "74-98",
+          "observation": "The table supplies human resource labels and ceilings but no JSON key names, integer/real domains or valid lower bounds for limits settings."
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "190-201",
+          "observation": "The context response references Category without an exact Category wire declaration, while the same section is called exact operation schemas."
+        },
+        {
+          "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+          "lines": "TASK-002 acceptance criterion 1",
+          "observation": "Exact request/envelope/error/cursor shapes and numeric limits must be frozen before consumer implementation."
+        }
+      ],
+      "impact": "Two independent implementers can choose incompatible keys such as request_bytes versus request_body_bytes, different minimums (including zero workers/pages), or different Category response members while both follow this proposal. The strict schema and client validators are therefore not yet a single frozen contract.",
+      "required_correction": "Add a concrete limits property table or schema with every permitted JSON key, exact numeric type, minimum, default, hard maximum and canonical-clamping relationship; identify which resource ceilings are fixed service internals and therefore not configurable. Define the Category response fields explicitly, and provide the exact bounds/validation source for shared ID/hash/session/cursor scalar types instead of leaving those wire declarations open. Preserve all current upper ceilings and unknown-key rejection."
+    },
+    {
+      "id": "CLIENT-R1-03",
+      "severity": "mandatory",
+      "title": "The root-specific preference identity required by the frontend is unavailable at context load",
+      "criteria": [
+        3
+      ],
+      "requirement_ids": [
+        "REQ-025",
+        "REQ-038"
+      ],
+      "evidence": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "192",
+          "observation": "Exact context data lists name, purpose, namespace, starting entries, categories, capabilities, available filters, local additions and build ID; there is no root identity digest or preference namespace."
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "157-184",
+          "observation": "The shared envelope project object is only id and namespace; no other envelope field supplies this digest."
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "227",
+          "observation": "Preferences must use API version, canonical project/namespace and a server-provided root identity digest."
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+          "lines": "209",
+          "observation": "root_digest appears only inside a continuation cursor, which need not exist for an initial context or empty/single-page project."
+        },
+        {
+          "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+          "lines": "328-333",
+          "observation": "Different selected projects must demonstrate isolated preferences, routes, caches, sources and sessions."
+        }
+      ],
+      "impact": "The frontend cannot form its mandated preference key after an initial context read without an undeclared endpoint/field or decoding an optional continuation token. Falling back to project ID/namespace alone loses the contract distinction between separate roots with the same identity.",
+      "required_correction": "Add an explicit non-sensitive stable preference namespace or root digest to the authenticated context response and its validator. Specify derivation and lifetime across service restart, snapshot change and root change, with no raw absolute path disclosure. State that the client uses that field directly and does not derive identity from cursors."
+    }
+  ],
+  "optional_notes": [],
+  "inspected_sources": [
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_CLIENT_V1.md",
+      "sha256": "1036d20a1ae93bd516717d5dfd26c7b55bcf6642f2fcf6a70c0c21795cbe7f8e"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/baseline_98347b9a813fc5f461b595a1270fad47b6b43b81768a5fb329edaf5cff01d433.json",
+      "sha256": "98347b9a813fc5f461b595a1270fad47b6b43b81768a5fb329edaf5cff01d433"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/contracts-shared-inputs.json",
+      "sha256": "1b0dff2e448d418fdfa102511321a594b8d7875da2497ad9ad926b69f2003825"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/contracts-review-checklist.md",
+      "sha256": "7de8e8c698d6e31759f556bf23b1383dbdfaa4a9485a45a2945e7df53c0fd89f"
+    },
+    {
+      "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+      "sha256": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b"
+    },
+    {
+      "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+      "sha256": "bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_retrieval.py",
+      "sha256": "43e6693e7a6d625e0a829e48e430f8e5d319a77e8d0679dfc29d7224a389da4f"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_core.py",
+      "sha256": "09bc25023e873e4d7b1fcf9163e90be9f3ae46c23b8bbbe1928695c5d92e8e52"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_graph.py",
+      "sha256": "4f286af79661a539a19c0b1658a7377817ff16c54d1fb650dfdff67b55245886"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_publication.py",
+      "sha256": "98edba94ccab38da7a4c7e3549e44fd91c479616829da5ad04ecb9d7d8a3da8d"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_integration.py",
+      "sha256": "5f39d2d312eb2ef459934ee7948aed7777c9bc9fb92378d2d8c7e7d3737ef503"
+    },
+    {
+      "path": "SKILLS-depo/init-new-project/scripts/init_ontology_advanced.py",
+      "sha256": "40c009d9f8a29090e12f0f11771865a9e5cded8e0a257c1a9727d6b706a9ebe9"
+    },
+    {
+      "path": "SKILLS-depo/init-new-project/scripts/init_new_project.py",
+      "sha256": "5b5d958a9b45e73e6da21c7b6a46724fce64f26348ba80a444029c9cf4604c04"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/dependency-source-observations.json",
+      "sha256": "5a6078356661b8e7d18ba2544a4d4c8742b5fecbe52e190703ecd7d56445f509"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/shared-source-findings.json",
+      "sha256": "50af02ebdb0717b0287df57556a9cc842b25e3a872d7847af4906b192e33690e"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/user-approval-scope.json",
+      "sha256": "71e67930318e4606566ca7da32d4bd095f3d6a925b305bd7aee5098419bbe58a"
+    }
+  ],
+  "checks": [
+    "Reopened the assigned candidate and verified its exact expected SHA256 before review and immediately before output.",
+    "Verified all seven contracts-shared-inputs references against their frozen hashes.",
+    "Verified immutable plan and TRD hashes against the CONTRACTS baseline input references.",
+    "Read the four canonical TASK-002 acceptance criteria and governing TRD requirements; inspected relevant retrieval, core lock/identity/locator, graph, publication, integration and initializer source.",
+    "Compared selected dependency choices against frozen official metadata; no redundant network requests.",
+    "Review file alone is written; no product, canonical Task, role, memory or source changes."
+  ],
+  "limitations": [
+    "Highest product verification level is inspected only. Hash comparisons and JSON output validation establish artifact integrity, not executable product behavior.",
+    "No services, installations, builds, runtime experiments, browser tests, assistive technology trials or nested agents were used.",
+    "No sibling candidate or peer review was opened; assigned-candidate review remains independent.",
+    "The startup global memory keyword search was not used as solution or current-state evidence; no project memory retrieval was performed.",
+    "Mandatory findings are bounded contract defects. Explicit later lock/build/runtime/license-text/accessibility/performance evidence remains required and has not been represented as passed."
+  ],
+  "stopping_condition": "Precise mandatory contract defects identified with authoritative source evidence and actionable correction; no optional polishing requested."
+}

@@ -1,0 +1,60 @@
+{
+  "status": "available_for_same_native_continuation",
+  "native_id": "/root/explorer_manager_g3/frontend_worker",
+  "tools": [
+    "spawn_agent",
+    "list_agents",
+    "send_message",
+    "followup_task",
+    "interrupt_agent"
+  ],
+  "capacity": 4,
+  "available_slots": 1,
+  "depth": 2,
+  "actual_roster": {
+    "agents": [
+      {
+        "agent_name": "/root",
+        "agent_status": "running"
+      },
+      {
+        "agent_name": "/root/explorer_manager_g3",
+        "agent_status": "running"
+      },
+      {
+        "agent_name": "/root/explorer_manager_g3/frontend_worker",
+        "agent_status": {
+          "completed": "7of9 is paused with all writes stopped. The [checkpoint](/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/pause-checkpoint.json) preserves exact changes and resume steps.\n\nThe correction is incomplete: three typecheck errors remain. No new build or browser run started; runtime stays on build 19, and the watcher remains quiesced."
+        }
+      }
+    ]
+  },
+  "settings": {
+    "effort": null,
+    "evidence": [
+      {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/bootstrap/native-capability-generation3.json",
+        "sha256": "6dd60b9516f70383108cef38a5db76add702f2b54d69334548c84420d4e3f19e"
+      }
+    ],
+    "mode": "verified_inheritance",
+    "model": null
+  },
+  "current_admission": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/user-resume-from185-inspection.json",
+    "sha256": "b192b41257e3028c0f457fd48cdfa9e315ff961fc633b6084f2948dde053aee3"
+  },
+  "fresh_catalog": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/catalog-FRONTEND_RESUME_FROM_185.json",
+    "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+  },
+  "scope_unchanged": [
+    "SKILLS-depo/ontology/explorer/src/api.ts",
+    "SKILLS-depo/ontology/explorer/src/app.ts",
+    "SKILLS-depo/ontology/explorer/src/processes.ts",
+    "SKILLS-depo/ontology/explorer/assets/",
+    "SKILLS-depo/ontology/explorer/tests/frontend/",
+    "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction"
+  ],
+  "continuation": "Existing original frontend handle is completed and owns unchanged bounded correction scope. Resume uses no new reservation, role, inputs or model/effort override. Exact four saved own outputs are intentional current prestates; all unaffected frozen refs and prior evidence match."
+}

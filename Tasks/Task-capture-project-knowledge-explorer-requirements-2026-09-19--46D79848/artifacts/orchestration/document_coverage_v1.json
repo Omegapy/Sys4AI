@@ -1,0 +1,640 @@
+{
+  "task": "TASK-20260919-46D79848",
+  "source_sha256": "b79d6122615b85f2ca42f0334cdecd7677578085014bb6c82565180e6264d38e",
+  "payload_sha256": "74a595375bfa750a082ad080e380fd1fa5debaf74f9e9cdc70b2f1ff3ca63b49",
+  "scope_basis": "U02 selects full proposed first release; no document approval or implementation authority inferred",
+  "source_sections": {
+    "1": "REQ-001, REQ-002, REQ-027, REQ-031, REQ-040, REQ-049; scope and authority",
+    "2": "Context and sources; REQ-042; D08",
+    "3": "REQ-001, REQ-005, REQ-009, REQ-010, REQ-026, REQ-027, REQ-029, REQ-037, REQ-042",
+    "4": "REQ-006, REQ-009, REQ-012, REQ-013, REQ-015, REQ-025, REQ-049; D02",
+    "5": "All 15 outcome IDs mapped below; In scope and Out of scope",
+    "6": "REQ-001, REQ-003, REQ-012, REQ-036; D03-D04",
+    "7": "REQ-004, REQ-006, REQ-008, REQ-009, REQ-010, REQ-011, REQ-020",
+    "8": "REQ-009, REQ-014 through REQ-019; optional path search excluded; D05",
+    "9": "REQ-005, REQ-006, REQ-007, REQ-024, REQ-025, REQ-034; D04",
+    "10": "REQ-003, REQ-008, REQ-009, REQ-011, REQ-027",
+    "11": "REQ-002, REQ-023, REQ-028, REQ-031, REQ-049; D02",
+    "12": "REQ-002, REQ-006, REQ-007, REQ-009, REQ-011, REQ-016, REQ-018, REQ-021, REQ-023, REQ-024, REQ-031, REQ-033; D03",
+    "13": "REQ-011, REQ-021, REQ-022, REQ-026, REQ-027",
+    "14": "REQ-012, REQ-013, REQ-019, REQ-025, REQ-037; D02-D03",
+    "15": "REQ-020, REQ-028 through REQ-033, REQ-039",
+    "16": "REQ-017, REQ-019, REQ-034 through REQ-036, REQ-044; D04",
+    "17": "REQ-014, REQ-018, REQ-020, REQ-022, REQ-025, REQ-033, REQ-045, REQ-046; D04-D05",
+    "18": "REQ-037 through REQ-042, REQ-048",
+    "19": "REQ-030, REQ-039 through REQ-042",
+    "20": "Required outcomes/evidence in REQ-042 through REQ-048; phases are not reproduced as a plan; D01",
+    "21": "AT-01..36 matrix below; REQ-043",
+    "22": "REQ-047, REQ-048",
+    "23": "Preserved through requirements, exclusions, and D01-D08; no reintroduction or blanket propagation",
+    "24": "Captured outcome in REQ-001..049; delivery evidence REQ-048; embedded commands/brief carry no execution authority",
+    "25": "Context and sources; inherited SRC locators; dependency/version review in REQ-049; official standards targets in REQ-034/036/044"
+  },
+  "source_outcomes": {
+    "UX-01": [
+      "REQ-001",
+      "REQ-031",
+      "REQ-040"
+    ],
+    "UX-02": [
+      "REQ-004",
+      "REQ-005",
+      "REQ-006",
+      "REQ-007",
+      "REQ-034"
+    ],
+    "UX-03": [
+      "REQ-009",
+      "REQ-016",
+      "REQ-017"
+    ],
+    "UX-04": [
+      "REQ-014",
+      "REQ-015",
+      "REQ-017",
+      "REQ-018"
+    ],
+    "UX-05": [
+      "REQ-010",
+      "REQ-042"
+    ],
+    "UX-06": [
+      "REQ-012",
+      "REQ-015",
+      "REQ-020",
+      "REQ-021",
+      "REQ-025"
+    ],
+    "UX-07": [
+      "REQ-019",
+      "REQ-020",
+      "REQ-034",
+      "REQ-035",
+      "REQ-036",
+      "REQ-044"
+    ],
+    "DATA-01": [
+      "REQ-002",
+      "REQ-007",
+      "REQ-008",
+      "REQ-021",
+      "REQ-022",
+      "REQ-023"
+    ],
+    "DATA-02": [
+      "REQ-003",
+      "REQ-009",
+      "REQ-016",
+      "REQ-019"
+    ],
+    "DATA-03": [
+      "REQ-003",
+      "REQ-011",
+      "REQ-021",
+      "REQ-032"
+    ],
+    "DATA-04": [
+      "REQ-026",
+      "REQ-027",
+      "REQ-028"
+    ],
+    "SAFE-01": [
+      "REQ-001",
+      "REQ-026",
+      "REQ-028",
+      "REQ-031"
+    ],
+    "SAFE-02": [
+      "REQ-028",
+      "REQ-029",
+      "REQ-030",
+      "REQ-032",
+      "REQ-033",
+      "REQ-038"
+    ],
+    "PORT-01": [
+      "REQ-028",
+      "REQ-037",
+      "REQ-038",
+      "REQ-039",
+      "REQ-040"
+    ],
+    "PERF-01": [
+      "REQ-007",
+      "REQ-014",
+      "REQ-018",
+      "REQ-022",
+      "REQ-023",
+      "REQ-024",
+      "REQ-025",
+      "REQ-033",
+      "REQ-045",
+      "REQ-046"
+    ]
+  },
+  "acceptance_scenarios": {
+    "AT-01": {
+      "source_scenario": "Launch the human interface. Only reading/exploration destinations appear; no authoring modules or controls load.",
+      "source_outcome_ids": [
+        "UX-01",
+        "SAFE-01"
+      ],
+      "requirements": [
+        "REQ-001"
+      ]
+    },
+    "AT-02": {
+      "source_scenario": "Search a preferred label, alias, exact ID, and words in a definition. Matching is deterministic and relevant.",
+      "source_outcome_ids": [
+        "UX-02"
+      ],
+      "requirements": [
+        "REQ-005"
+      ]
+    },
+    "AT-03": {
+      "source_scenario": "Two entries share a label/alias. Both appear with distinctions; neither is silently selected.",
+      "source_outcome_ids": [
+        "UX-02",
+        "DATA-01"
+      ],
+      "requirements": [
+        "REQ-006"
+      ]
+    },
+    "AT-04": {
+      "source_scenario": "Apply category/lifecycle filters to a multi-page result set. Filtering happens before pagination; valid later matches remain reachable.",
+      "source_outcome_ids": [
+        "UX-02",
+        "PERF-01"
+      ],
+      "requirements": [
+        "REQ-007"
+      ]
+    },
+    "AT-05": {
+      "source_scenario": "Search returns more matches than one page permits. Continuation is stable, with no duplicate or skipped identities within the same snapshot.",
+      "source_outcome_ids": [
+        "PERF-01"
+      ],
+      "requirements": [
+        "REQ-007"
+      ]
+    },
+    "AT-06": {
+      "source_scenario": "A result is omitted by a byte/time/traversal bound. The UI reports incomplete coverage rather than “nothing exists.”",
+      "source_outcome_ids": [
+        "DATA-01",
+        "PERF-01"
+      ],
+      "requirements": [
+        "REQ-018"
+      ]
+    },
+    "AT-07": {
+      "source_scenario": "Read an entry with definition, aliases, scope note, and examples. Present fields faithfully; omit absent sections without inventing content.",
+      "source_outcome_ids": [
+        "DATA-01"
+      ],
+      "requirements": [
+        "REQ-008"
+      ]
+    },
+    "AT-08": {
+      "source_scenario": "Open a deprecated entry by exact ID. Show its status and recorded replacement without silently rewriting history.",
+      "source_outcome_ids": [
+        "DATA-02"
+      ],
+      "requirements": [
+        "REQ-003"
+      ]
+    },
+    "AT-09": {
+      "source_scenario": "A draft or inferred record is available under an explicit permitted filter. Its status remains distinct from approved asserted knowledge.",
+      "source_outcome_ids": [
+        "DATA-02"
+      ],
+      "requirements": [
+        "REQ-003"
+      ]
+    },
+    "AT-10": {
+      "source_scenario": "Select a graph node. Details change, but the camera and graph focus do not unexpectedly move.",
+      "source_outcome_ids": [
+        "UX-04",
+        "UX-06"
+      ],
+      "requirements": [
+        "REQ-015"
+      ]
+    },
+    "AT-11": {
+      "source_scenario": "Choose Focus here. The neighborhood changes deliberately, and Back restores the prior useful state.",
+      "source_outcome_ids": [
+        "UX-04",
+        "UX-06"
+      ],
+      "requirements": [
+        "REQ-015"
+      ]
+    },
+    "AT-12": {
+      "source_scenario": "Expand a high-degree node. Limits remain enforced and omitted connections are clearly disclosed.",
+      "source_outcome_ids": [
+        "UX-04",
+        "PERF-01"
+      ],
+      "requirements": [
+        "REQ-018"
+      ]
+    },
+    "AT-13": {
+      "source_scenario": "Two predicates connect the same endpoints. Both canonical relationship IDs and their meanings remain inspectable.",
+      "source_outcome_ids": [
+        "UX-03",
+        "DATA-02"
+      ],
+      "requirements": [
+        "REQ-009"
+      ]
+    },
+    "AT-14": {
+      "source_scenario": "Traverse an incoming relationship. Arrow and sentence retain the canonical subject–predicate–object direction.",
+      "source_outcome_ids": [
+        "UX-03",
+        "DATA-02"
+      ],
+      "requirements": [
+        "REQ-009"
+      ]
+    },
+    "AT-15": {
+      "source_scenario": "Render self-loops, cycles, and qualified relationships. No infinite expansion or semantic merging occurs.",
+      "source_outcome_ids": [
+        "DATA-02",
+        "PERF-01"
+      ],
+      "requirements": [
+        "REQ-016"
+      ]
+    },
+    "AT-16": {
+      "source_scenario": "Switch between map and list. Selection, filters, returned scope, and warnings agree.",
+      "source_outcome_ids": [
+        "UX-07",
+        "DATA-02"
+      ],
+      "requirements": [
+        "REQ-019"
+      ]
+    },
+    "AT-17": {
+      "source_scenario": "Open a supported process. Purpose, roles, inputs/outputs, and ordering appear only where supported by the selected source.",
+      "source_outcome_ids": [
+        "UX-05"
+      ],
+      "requirements": [
+        "REQ-010"
+      ]
+    },
+    "AT-18": {
+      "source_scenario": "A process has no recorded step order. Show the gap; do not infer a sequence from graph layout or unrelated relations.",
+      "source_outcome_ids": [
+        "UX-05",
+        "DATA-01"
+      ],
+      "requirements": [
+        "REQ-010"
+      ]
+    },
+    "AT-19": {
+      "source_scenario": "Open a definition's or relationship's source. Show the authorized locator/excerpt and evidence status for the correct identity.",
+      "source_outcome_ids": [
+        "DATA-03"
+      ],
+      "requirements": [
+        "REQ-011"
+      ]
+    },
+    "AT-20": {
+      "source_scenario": "The source bytes change after the entry loads. Do not present the new bytes as the originally recorded evidence without a warning/version distinction.",
+      "source_outcome_ids": [
+        "DATA-03"
+      ],
+      "requirements": [
+        "REQ-011"
+      ]
+    },
+    "AT-21": {
+      "source_scenario": "Canonical inputs change during navigation or publication. Reject mixed-version continuations; refresh the display coherently.",
+      "source_outcome_ids": [
+        "DATA-01"
+      ],
+      "requirements": [
+        "REQ-021"
+      ]
+    },
+    "AT-22": {
+      "source_scenario": "A slow response for entry A arrives after selecting B. B remains the current entry.",
+      "source_outcome_ids": [
+        "UX-06"
+      ],
+      "requirements": [
+        "REQ-025"
+      ]
+    },
+    "AT-23": {
+      "source_scenario": "Session expires or service stops. Preserve readable context and desired route; explain reconnection without making unauthorized startup claims.",
+      "source_outcome_ids": [
+        "UX-06",
+        "SAFE-02"
+      ],
+      "requirements": [
+        "REQ-020"
+      ]
+    },
+    "AT-24": {
+      "source_scenario": "Submit direct browser requests to old write or execution endpoints. They fail; no protected artifacts change.",
+      "source_outcome_ids": [
+        "SAFE-01"
+      ],
+      "requirements": [
+        "REQ-031"
+      ]
+    },
+    "AT-25": {
+      "source_scenario": "Use invalid Host/Origin/CSRF/session values or another service's credentials. Requests fail without leaking project data.",
+      "source_outcome_ids": [
+        "SAFE-02"
+      ],
+      "requirements": [
+        "REQ-029"
+      ]
+    },
+    "AT-26": {
+      "source_scenario": "Attempt encoded traversal, absolute-path access, symlink escape, or an unselected source reference. Access is denied.",
+      "source_outcome_ids": [
+        "SAFE-02"
+      ],
+      "requirements": [
+        "REQ-032"
+      ]
+    },
+    "AT-27": {
+      "source_scenario": "Labels/source text contain HTML, script-like text, or malicious links. They display safely and do not execute.",
+      "source_outcome_ids": [
+        "SAFE-02"
+      ],
+      "requirements": [
+        "REQ-032"
+      ]
+    },
+    "AT-28": {
+      "source_scenario": "Load the production bundle under the production CSP with no internet. Reader and graph work without remote assets.",
+      "source_outcome_ids": [
+        "SAFE-02",
+        "PORT-01"
+      ],
+      "requirements": [
+        "REQ-028"
+      ]
+    },
+    "AT-29": {
+      "source_scenario": "Complete all major reading tasks by keyboard and via the relationship list. No drag, hover, or canvas-only action is required.",
+      "source_outcome_ids": [
+        "UX-07"
+      ],
+      "requirements": [
+        "REQ-019"
+      ]
+    },
+    "AT-30": {
+      "source_scenario": "Use narrow viewport, browser zoom, reduced motion, and both themes. Text reflows, controls remain operable, and important states remain legible.",
+      "source_outcome_ids": [
+        "UX-07"
+      ],
+      "requirements": [
+        "REQ-036"
+      ]
+    },
+    "AT-31": {
+      "source_scenario": "Browse the root and neutral template, then a separate namespace fixture. No hard-coded project identity, cache leakage, or source crossover occurs.",
+      "source_outcome_ids": [
+        "PORT-01",
+        "SAFE-02"
+      ],
+      "requirements": [
+        "REQ-038"
+      ]
+    },
+    "AT-32": {
+      "source_scenario": "Perform all read workflows with missing optional embedding/RDF services. Core reading works; nothing is installed or started implicitly.",
+      "source_outcome_ids": [
+        "DATA-04",
+        "SAFE-01"
+      ],
+      "requirements": [
+        "REQ-028"
+      ]
+    },
+    "AT-33": {
+      "source_scenario": "Compare protected file hashes/timestamps before and after the read workflow. Ontology, memory, proposals, receipts, and generated products are unchanged.",
+      "source_outcome_ids": [
+        "DATA-04",
+        "SAFE-01"
+      ],
+      "requirements": [
+        "REQ-026"
+      ]
+    },
+    "AT-34": {
+      "source_scenario": "Disable or fail the graph renderer. Definitions, relationship list, and evidence access still work.",
+      "source_outcome_ids": [
+        "UX-07",
+        "PERF-01"
+      ],
+      "requirements": [
+        "REQ-020"
+      ]
+    },
+    "AT-35": {
+      "source_scenario": "Run existing agent retrieval, publication/recovery, and template contract tests. No unintended behavioral regression occurs.",
+      "source_outcome_ids": [
+        "DATA-01",
+        "PORT-01"
+      ],
+      "requirements": [
+        "REQ-040"
+      ]
+    },
+    "AT-36": {
+      "source_scenario": "Measure the representative and stress fixtures. Publish actual timings, memory/limits, and graceful-degradation results rather than assumed performance.",
+      "source_outcome_ids": [
+        "PERF-01"
+      ],
+      "requirements": [
+        "REQ-045"
+      ]
+    }
+  },
+  "reverse_requirement_sources": {
+    "REQ-001": [
+      "U02; SRC §§1.1-1.4, 5, 6, 7.1, 19.2, 24; UX-01, SAFE-01."
+    ],
+    "REQ-002": [
+      "U02; SRC §§1.4, 3.4-3.5, 5 DATA-01/DATA-02, 11.1, 12.2, 23; GOV."
+    ],
+    "REQ-003": [
+      "U02; SRC §§6.4, 7.7, 9.2, 10.1-10.4, 12.2; DATA-02, DATA-03."
+    ],
+    "REQ-004": [
+      "U02; SRC §§6, 7.1, 18.5; UX-02, PORT-01."
+    ],
+    "REQ-005": [
+      "U02; SRC §§3.3, 5 UX-02, 9.1, 11.3, 24; LIVE retrieval defaults to semantic=True."
+    ],
+    "REQ-006": [
+      "U02; SRC §§7.2, 9.3-9.5, 12.2-12.3; UX-02, DATA-01."
+    ],
+    "REQ-007": [
+      "U02; SRC §§7.2, 7.7, 9.2, 12.3-12.5; UX-02, PERF-01."
+    ],
+    "REQ-008": [
+      "U02; SRC §§6.4, 7.3, 10.1-10.2, 12.2; DATA-01."
+    ],
+    "REQ-009": [
+      "U02; SRC §§4.2, 7.3-7.4, 8.4, 10.1, 12.6-12.7; UX-03, DATA-02."
+    ],
+    "REQ-010": [
+      "U02; SRC §§3.8, 7.5, 20, 21 AT-17/AT-18; UX-05."
+    ],
+    "REQ-011": [
+      "U02; SRC §§7.6, 10.3, 12.1, 13.3, 15.6; DATA-03."
+    ],
+    "REQ-012": [
+      "U02; SRC §§4.1, 6.3, 8.2, 14.2; UX-06."
+    ],
+    "REQ-013": [
+      "U02; SRC §§4.1, 5.3, 6.1, 14.2, 16.4."
+    ],
+    "REQ-014": [
+      "U02; SRC §§8.1, 8.6, 17.3; UX-04, PERF-01; LIVE current retrieval bounds."
+    ],
+    "REQ-015": [
+      "U02; SRC §§8.2, 14.2; UX-04, UX-06."
+    ],
+    "REQ-016": [
+      "U02; SRC §§8.3-8.4, 12.6-12.7; DATA-02, UX-03."
+    ],
+    "REQ-017": [
+      "U02; SRC §§8.3, 8.5, 14.5, 16.6, 17.5."
+    ],
+    "REQ-018": [
+      "U02; SRC §§7.7, 8.6, 12.4, 17.3; PERF-01, DATA-01."
+    ],
+    "REQ-019": [
+      "U02; SRC §§1.1, 8.2, 14.4, 16.2; UX-07."
+    ],
+    "REQ-020": [
+      "U02; SRC §§7.7, 12.8, 16.6, 17.5; UX-06, UX-07, PERF-01."
+    ],
+    "REQ-021": [
+      "U02; SRC §§12.4-12.6, 13.1-13.2; DATA-01."
+    ],
+    "REQ-022": [
+      "U02; SRC §§13.2-13.3, 17.4, 18.5."
+    ],
+    "REQ-023": [
+      "U02; SRC §§11.1, 12.1-12.4, 12.6, 12.8, 15.7; PERF-01."
+    ],
+    "REQ-024": [
+      "U02; SRC §12.5; PERF-01."
+    ],
+    "REQ-025": [
+      "U02; SRC §§14.2-14.5, 17.4."
+    ],
+    "REQ-026": [
+      "U02; SRC §§5 SAFE-01/DATA-04, 13.4-13.5, 21 AT-33."
+    ],
+    "REQ-027": [
+      "U02; SRC §§1.4, 3.5, 10.5, 11.1, 13.4; DATA-04."
+    ],
+    "REQ-028": [
+      "U02; SRC §§11.2-11.4, 15.1-15.2, 15.7, 17.4; PORT-01, SAFE-02."
+    ],
+    "REQ-029": [
+      "U02; SRC §§3.6, 15.1-15.2; SAFE-02."
+    ],
+    "REQ-030": [
+      "U02; SRC §§6.3, 15.2-15.3, 19.3; SAFE-02."
+    ],
+    "REQ-031": [
+      "U02; SRC §§1.3, 11.3, 12.1, 15.4, 19.4; SAFE-01."
+    ],
+    "REQ-032": [
+      "U02; SRC §§7.6, 12.1, 15.5-15.6; SAFE-02."
+    ],
+    "REQ-033": [
+      "U02; SRC §§12.4, 12.8, 15.7, 17.3."
+    ],
+    "REQ-034": [
+      "U02; SRC §§9.4, 16.1-16.4; STD; UX-07."
+    ],
+    "REQ-035": [
+      "U02; SRC §§8.2, 16.2-16.3, 16.6."
+    ],
+    "REQ-036": [
+      "U02; SRC §§6.2, 16.4-16.6; STD; UX-07."
+    ],
+    "REQ-037": [
+      "U02; SRC §§3.7, 18.1, 18.5, 24; GOV."
+    ],
+    "REQ-038": [
+      "U02; SRC §§3.7, 18.1, 18.5, 24; GOV; PORT-01."
+    ],
+    "REQ-039": [
+      "U02; SRC §§12.1, 15.2, 18.2-18.3, 19.3."
+    ],
+    "REQ-040": [
+      "U02; SRC §§1.3, 18.1-18.2, 19.2-19.4; DATA-01, PORT-01."
+    ],
+    "REQ-041": [
+      "U02; SRC §§18.4, 19.5, 23, 24; GOV."
+    ],
+    "REQ-042": [
+      "U02; SRC §§2, 3.8, 18.2, 19.1, 20, 23; LIVE; GOV."
+    ],
+    "REQ-043": [
+      "U02; SRC §§20, 21.1-21.3, 24."
+    ],
+    "REQ-044": [
+      "U02; SRC §§16.1, 16.7, 21.2; STD."
+    ],
+    "REQ-045": [
+      "U02; SRC §§17.1, 17.4, 21 AT-36, 24; PERF-01."
+    ],
+    "REQ-046": [
+      "U02; SRC §17.2; AT-36; PERF-01."
+    ],
+    "REQ-047": [
+      "U02; SRC §§21.2, 22.1-22.2, 23."
+    ],
+    "REQ-048": [
+      "U02; SRC §§21.3, 22.3, 24."
+    ],
+    "REQ-049": [
+      "U02; SRC §§1.2, 4, 11.2-11.4, 23-25; GOV."
+    ]
+  },
+  "numeric_qualifications": {
+    "display": "REQ-014/018 and D05: depth 1, proposed ~25 nodes/50 edges, proposed cumulative 100 nodes/200 edges within stricter existing limits",
+    "agent_limits": "REQ-014/033 and D05: defaults 2 hops/20 results, maximums 8 hops/100 results/32000 bytes, inspected 100 visited-node cap retained",
+    "visual": "D04: proposed rail 224-260 CSS px, lines 65-75 characters, map panel 320-400 px, reading ~16 px, comfort primary controls ~44 px",
+    "accessibility": "REQ-034/036: WCAG AA 4.5:1 normal contrast, 24x24 CSS px target with exceptions, 320 CSS px reflow test; not compliance claims",
+    "search_tuning": "D04: roughly 150-200 ms debounce proposed; excluded from warm search target",
+    "timing": "REQ-045: ~2 s cold first readable screen; p95 200 ms warm search; p95 250 ms entry; ~1.5 s initial graph; 100 ms loaded selection; repeated median/p95 evidence",
+    "fixtures": "REQ-046: approximately 50/100, 1000/5000, 5000/50000 entries/relationships as suggested synthetic scales",
+    "usability": "REQ-047: roughly 30 seconds known-term target, not universal or measured"
+  },
+  "exclusions_and_choices": "Out of scope and D01-D08 retain full first-release exclusions and separate implementation choices, authoring/history preservation, source/Template/root adoption, source commands as data, and optional future enhancements."
+}

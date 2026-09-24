@@ -1,0 +1,68 @@
+{
+  "status": "read_only_preparation_not_executed",
+  "producer": "Primary host /root source review; manager bound current source references",
+  "task_revision": 222,
+  "references": [
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+      "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+      "bytes": 44942
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+      "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+      "bytes": 9202
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/keyboard-browser.cjs",
+      "sha256": "8203bfedae31f4f7ff9f0ab800f49372f419f000d194b06afdf03f25b36a2d52",
+      "bytes": 9997
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/accessibility-browser.cjs",
+      "sha256": "5d9a278752276dbbf01324b1f79b957252d97b7759ca7aee54021e389d5f5e6d",
+      "bytes": 18744
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/geometry-browser.cjs",
+      "sha256": "295a7695813e2487536c7601afb399fc1b553350bcbfe1ae5b7076783ea662f5",
+      "bytes": 27640
+    }
+  ],
+  "preserve_coverage": {
+    "accessibility_states": 54,
+    "geometry_scans": 30,
+    "qualification_criteria": 16,
+    "all_original_requirements_and_acceptance_scenarios_unchanged": true
+  },
+  "findings": [
+    {
+      "area": "narrow navigation",
+      "finding": "At <=760CSSpx the sole rail/navigation/tools move into closed reading-navigation dialog. Existing keyboard Processes link and wide-only Reader help assumptions do not cover this mode.",
+      "later_owner_action": "Use Open navigation through keyboard, assert aria-expanded/open-dialog visible focus, close/Escape/link activation and focus return before accessing destination links. Do not treat hidden links as ordinary reachable controls."
+    },
+    {
+      "area": "phone selected details",
+      "finding": "Current320px scans do not exercise new selected-details-toggle/selected-map-details open/closed state, close/Escape or toggle focus/aria-expanded.",
+      "later_owner_action": "Retain all original scans and add current toggle/open/closed/focus states for both themes. Verify exact identity/scope remains unchanged using existing frontend evidence plus current qualified integration."
+    },
+    {
+      "area": "source return through hidden parent",
+      "finding": "Current source logic reopens hidden map details when returning to its exact trigger; old source flows mostly start from wide entry.",
+      "later_owner_action": "Exercise narrow Map source-open, parent details dismissal, source Escape/close and exact visible trigger re-exposure. Preserve process/source exact text and identity rules."
+    },
+    {
+      "area": "modal target/focus evidence",
+      "finding": "Old scans do not include modal-open target geometry/backdrop occlusion/focus trapping. Rectangles alone cannot establish actual keyboard reachability through a modal/inert background.",
+      "later_owner_action": "Qualify active targets with current modal/inert behavior and actual keyboard focus; closed-dialog descendants remain inactive. Preserve target-spacing/label exceptions and distinguish actual trusted input from inferred accessibility."
+    }
+  ],
+  "gates": "No QUALIFICATION edits, refreeze, execution or AT pass now. After current SERVICE and original FRONTEND final verification, rebind same original qualification owner with this preparation and current inputs through its normal full16 gates.",
+  "history": "Prior scanner/geometry/keyboard results remain historical for their exact earlier bundle; no loss or reinterpretation.",
+  "separate_requirements": [
+    "Actual native Safari/VoiceOver spoken observations",
+    "Real participant comprehension",
+    "Protected-state window and performance prerequisites"
+  ],
+  "watcher": "Held; no source/Task/watcher actions by this preparation."
+}

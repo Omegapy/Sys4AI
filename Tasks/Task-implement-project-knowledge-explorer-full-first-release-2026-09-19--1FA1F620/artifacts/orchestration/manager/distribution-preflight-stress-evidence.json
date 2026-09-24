@@ -1,0 +1,30 @@
+{
+  "producer": "/root/explorer_manager_g3",
+  "status": "open_distribution_integration_finding",
+  "command": [
+    ".venv/bin/python",
+    "-B",
+    "tools/template_update.py",
+    "check"
+  ],
+  "observed_exit_code": 2,
+  "observed_conflict": "invalid JSON source: SKILLS-depo/ontology/tests/fixtures/explorer/validation/stress-stdout.json",
+  "current_source": {
+    "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/stress-stdout.json",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "provenance": {
+    "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/initial-stress-probe.json",
+    "sha256": "d2039bf1d6019da59adf0114dd42120f8e57f4212e4cef2510c9427d41780d39",
+    "bytes": 1525
+  },
+  "accepted_delivery": {
+    "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/delivery.json",
+    "sha256": "3f6e471217bda741a031de41e2ba360103c261e99c0d2b634f0aff8a9aa513f9",
+    "bytes": 11620
+  },
+  "finding": "The zero-byte .json file is authentic preserved stdout from the initial45-second stress timeout, not a missing canonical fixture. The Template updater parses every nonexcluded .json source before mapping.",
+  "required_disposition": "TASK026 distribution owner must preserve accepted historical evidence while selecting an explicit faithful nonshipping/history boundary or supported successor mapping. Do not rewrite this accepted historical file into invented JSON or drop its evidence. Any changed live upstream output requires current version/reverification.",
+  "separate_state": "This read-only conflict is distinct from the live watcher backend five-second guard timeout. No update apply, source edit or watcher operation performed by manager."
+}

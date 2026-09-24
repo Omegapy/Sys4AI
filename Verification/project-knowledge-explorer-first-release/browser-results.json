@@ -1,0 +1,1354 @@
+{
+  "status": "production_phase_evidence_complete_pending_manager_acceptance",
+  "plan_task": "TASK-021",
+  "criterion_number": 3,
+  "exact_criterion": "AT-01, AT-02, AT-03, AT-04, AT-05, AT-06, AT-07, AT-08, AT-09, AT-10, AT-11, AT-12, AT-13, AT-14, AT-15, AT-16, AT-17, AT-18, AT-19, AT-20, AT-21, AT-22, AT-23, AT-28, AT-29, AT-32, AT-34 each has observed production evidence and exact fixture/build identity.",
+  "build_id": "c02987099e81beb795595984e64bb81fcf2e64f4adee04d4c9fa607c16e72d5a",
+  "runtime_manifest_sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+  "scenarios": {
+    "AT-01": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Launching the human interface shows only reading/exploration destinations and loads no draft, review, publish, inference, query-console, AI-generation, or other authoring modules or controls, including hidden Advanced modes.",
+      "observations": [
+        {
+          "source": "P",
+          "locator": "checks[0]",
+          "name": "AT-01 AT-32 production read destinations and disabled authoring/semantic capabilities",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[0]",
+          "name": "AT-01 AT-32 production read destinations and disabled authoring/semantic capabilities",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[0]",
+          "name": "bootstrap_overview_four_reading_destinations_lazy_graph",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-02": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Searches for a preferred label, alias, exact ID, and words in a definition return deterministic relevant identities and match reasons with `semantic=False`; the existing agent search default/contract is preserved.",
+      "observations": [
+        {
+          "source": "P",
+          "locator": "checks[1]",
+          "name": "AT-02 preferred_label browser search",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[1]",
+          "name": "AT-02 preferred_label browser search",
+          "status": "passed"
+        },
+        {
+          "source": "P",
+          "locator": "checks[2]",
+          "name": "AT-02 alias browser search",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[2]",
+          "name": "AT-02 alias browser search",
+          "status": "passed"
+        },
+        {
+          "source": "P",
+          "locator": "checks[3]",
+          "name": "AT-02 stable_id browser search",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[3]",
+          "name": "AT-02 stable_id browser search",
+          "status": "passed"
+        },
+        {
+          "source": "P",
+          "locator": "checks[4]",
+          "name": "AT-02 lexical browser search",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[4]",
+          "name": "AT-02 lexical browser search",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-03": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "When two entries share a label or alias, both appear with distinctions and neither is silently selected. An alias match retains the preferred label and canonical identity rather than creating another page/node.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[1]",
+          "name": "explicit_search_preserves_two_exact_identities",
+          "status": "passed"
+        },
+        {
+          "source": "P",
+          "locator": "checks[2]",
+          "name": "AT-02 alias browser search",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[2]",
+          "name": "AT-02 alias browser search",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-04": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Category/lifecycle filtering across a multi-page result set preserves valid later matches.",
+      "observations": [
+        {
+          "source": "P",
+          "locator": "checks[5]",
+          "name": "AT-04 AT-05 AT-06 filtered continuation preserves every expected later identity",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[5]",
+          "name": "AT-04 AT-05 AT-06 filtered continuation preserves every expected later identity",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-05": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Within one snapshot, continuation produces no duplicate or skipped identities.",
+      "observations": [
+        {
+          "source": "P",
+          "locator": "checks[5]",
+          "name": "AT-04 AT-05 AT-06 filtered continuation preserves every expected later identity",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[5]",
+          "name": "AT-04 AT-05 AT-06 filtered continuation preserves every expected later identity",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-06": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Omission by byte, time, traversal, or item bounds yields visible incomplete coverage, its reason, displayed scope, and a way to narrow/continue rather than an assertion that nothing exists.",
+      "observations": [
+        {
+          "source": "P",
+          "locator": "checks[5]",
+          "name": "AT-04 AT-05 AT-06 filtered continuation preserves every expected later identity",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[5]",
+          "name": "AT-04 AT-05 AT-06 filtered continuation preserves every expected later identity",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[12]",
+          "name": "long_unicode_definition_pages_preserve_every_byte",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[13]",
+          "name": "long_qualifiers_remain_complete_and_paged",
+          "status": "passed"
+        },
+        {
+          "source": "F17",
+          "locator": "checks[1]",
+          "name": "high_degree_continuation_stops_at_tighter_display_budget_and_rereads_unconsumed_page",
+          "status": "passed"
+        },
+        {
+          "source": "TIME",
+          "locator": "checks[0]",
+          "name": "AT-06 entry_deadline retains exact recorded entry and desired route with explicit reopening guidance",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-07": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Definition, aliases, scope note, examples, and non-examples appear faithfully when recorded; absent sections are omitted without runtime paraphrase or invented explanations. Technical IDs do not precede the human definition.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[2]",
+          "name": "entry_exact_definition",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[3]",
+          "name": "aliases_scope_examples_and_non_examples_preserve_exact_recorded_text",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[12]",
+          "name": "long_unicode_definition_pages_preserve_every_byte",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[13]",
+          "name": "long_qualifiers_remain_complete_and_paged",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-08": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "An exact-ID lookup of a deprecated entry retains its historical definition, status, and recorded replacement link rather than rewriting history.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[11]",
+          "name": "historical_definition_replacement_and_independent_authority_warning",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-09": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "A draft or inferred record exposed through an explicit permitted filter remains visibly distinct from approved asserted knowledge. Default reading prioritizes approved, explicitly recorded information.",
+      "observations": [
+        {
+          "source": "P",
+          "locator": "checks[6]",
+          "name": "AT-09 explicit draft and inferred results retain visible lifecycle/classification",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[6]",
+          "name": "AT-09 explicit draft and inferred results retain visible lifecycle/classification",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-10": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Selecting a node highlights it and updates readable details without moving the camera or changing graph focus.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[7]",
+          "name": "selection_one_history_event_camera_retained",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[19]",
+          "name": "selection_preserves_keyboard_focus",
+          "status": "passed"
+        },
+        {
+          "source": "F15",
+          "locator": "checks[7]",
+          "name": "details_presentation_retains_actual_renderer_camera_and_returned_ids",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-11": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Focus here deliberately changes the neighborhood, and Back restores the prior useful state.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[8]",
+          "name": "back_restores_selection_and_map",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[18]",
+          "name": "copied_relation_subject_route_and_focus_here_preserve_explicit_focus_selection",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[20]",
+          "name": "repeated_history_restores_same_focus_filter_scope",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[22]",
+          "name": "failed_lazy_renderer_keeps_list_entry_and_evidence_usable",
+          "status": "passed"
+        },
+        {
+          "source": "KEY",
+          "locator": "checks[2]",
+          "name": "AT-29 renderer-independent keyboard List selection, More connections and Focus here",
+          "status": "passed"
+        },
+        {
+          "source": "F15",
+          "locator": "checks[4]",
+          "name": "phone_details_keyboard_dismiss_reopen_preserves_scope_selection_history_and_list_nodes",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-12": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "High-degree expansion remains bounded and discloses omitted connections.",
+      "observations": [
+        {
+          "source": "F17",
+          "locator": "checks[1]",
+          "name": "high_degree_continuation_stops_at_tighter_display_budget_and_rereads_unconsumed_page",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-13": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Distinct predicates between the same endpoints preserve both canonical relationship IDs, meanings, classifications, and evidence; endpoint-pair grouping never discards a relation. Any visual bundle exposes its count and every member.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[5]",
+          "name": "production_map_list_exact_ids_and_self_loop",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[6]",
+          "name": "map_list_exact_direction_qualifiers_classification_and_source_descriptor_parity",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[13]",
+          "name": "long_qualifiers_remain_complete_and_paged",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[17]",
+          "name": "relation_route_focuses_subject_and_relation_endpoint_has_distinct_renderer_identity",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-14": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Incoming traversal retains the canonical subject-predicate-object meaning and directed arrow. An inverse phrase requires a reviewed mapping; otherwise the original sentence order is shown. A friendly relatedTo label never becomes depends on or causes.",
+      "observations": [
+        {
+          "source": "P",
+          "locator": "checks[7]",
+          "name": "AT-14 incoming traversal preserves actual canonical endpoints and arrow",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[7]",
+          "name": "AT-14 incoming traversal preserves actual canonical endpoints and arrow",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[6]",
+          "name": "map_list_exact_direction_qualifiers_classification_and_source_descriptor_parity",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-15": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Parallel relations, self-loops, cycles, and qualified relations render without semantic merging or infinite expansion. Relation records normally render as edges; predicate records remain inspectable through labels.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[5]",
+          "name": "production_map_list_exact_ids_and_self_loop",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[6]",
+          "name": "map_list_exact_direction_qualifiers_classification_and_source_descriptor_parity",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[13]",
+          "name": "long_qualifiers_remain_complete_and_paged",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[17]",
+          "name": "relation_route_focuses_subject_and_relation_endpoint_has_distinct_renderer_identity",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[18]",
+          "name": "copied_relation_subject_route_and_focus_here_preserve_explicit_focus_selection",
+          "status": "passed"
+        },
+        {
+          "source": "F17",
+          "locator": "checks[1]",
+          "name": "high_degree_continuation_stops_at_tighter_display_budget_and_rereads_unconsumed_page",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-16": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Map/List switching retains selection, filters, returned scope, relationship IDs, direction, and warnings. List users can open entries, inspect evidence, focus a term, and request more connections with the same semantics.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[5]",
+          "name": "production_map_list_exact_ids_and_self_loop",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[6]",
+          "name": "map_list_exact_direction_qualifiers_classification_and_source_descriptor_parity",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[20]",
+          "name": "repeated_history_restores_same_focus_filter_scope",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[22]",
+          "name": "failed_lazy_renderer_keeps_list_entry_and_evidence_usable",
+          "status": "passed"
+        },
+        {
+          "source": "KEY",
+          "locator": "checks[2]",
+          "name": "AT-29 renderer-independent keyboard List selection, More connections and Focus here",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-17": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "A supported process displays only supported fields and sequence. Ordered text appears before any flow diagram; process pages do not execute a workflow.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[14]",
+          "name": "ordered_process_uses_exact_direct_binding_source",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[15]",
+          "name": "process_source_owner_discovered_through_later_relation_and_unsafe_details",
+          "status": "passed"
+        },
+        {
+          "source": "KEY",
+          "locator": "checks[3]",
+          "name": "AT-29 keyboard process reading and exact step-source return",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-18": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "When order is absent, the page states \"An ordered description has not been recorded. These are the documented relationships.\" and shows those relationships and sources. Graph paths, relatedTo edges, dependencies, and left-to-right layout never establish execution order.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[16]",
+          "name": "unordered_process_exact_missing_order_text",
+          "status": "passed"
+        },
+        {
+          "source": "F18",
+          "locator": "checks[3]",
+          "name": "neutral_process_gap_is_truthful",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-19": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "The correct selected identity/reference opens its authorized section or bounded excerpt with evidence status. Hashes remain available under Details while the current entry is retained.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[4]",
+          "name": "source_read_and_exact_focus_return",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[14]",
+          "name": "ordered_process_uses_exact_direct_binding_source",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[15]",
+          "name": "process_source_owner_discovered_through_later_relation_and_unsafe_details",
+          "status": "passed"
+        },
+        {
+          "source": "KEY",
+          "locator": "checks[1]",
+          "name": "AT-29 source read and exact Escape return by keyboard",
+          "status": "passed"
+        },
+        {
+          "source": "KEY",
+          "locator": "checks[3]",
+          "name": "AT-29 keyboard process reading and exact step-source return",
+          "status": "passed"
+        },
+        {
+          "source": "F15",
+          "locator": "checks[5]",
+          "name": "source_close_reexposes_exact_trigger_after_parent_details_dismissal",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-20": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Changed source bytes are revalidated on opening and visibly distinguished from the originally recorded evidence version; safe recorded definitions remain visible with the mismatch warning, and no provenance hash is repaired by the read.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[26]",
+          "name": "changed_source_stays_plain_text_and_distinct_from_entry_snapshot",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-21": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Changes during navigation/publication reject mixed-version continuations with a specific snapshot-changed response, preserve the route/screen, and offer Refresh knowledge. Refresh replaces entry, relationships, and graph coherently and discards incompatible cursors and expansions.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[24]",
+          "name": "snapshot_conflict_retains_old_view_then_atomic_refresh_updates_retained_graph_ids",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[25]",
+          "name": "atomic_refresh_rebuilds_removed_category_controls_and_uses_lower_policy",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-22": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "A late entry-A response cannot replace selected entry B; obsolete search cancellation is supported where practical and sequence checks still reject superseded responses even if cancellation loses the race.",
+      "observations": [
+        {
+          "source": "P",
+          "locator": "checks[8]",
+          "name": "AT-22 late real entry response is ignored after newer entry",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[8]",
+          "name": "AT-22 late real entry response is ignored after newer entry",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[21]",
+          "name": "focused_search_back_cancels_pending_preview_and_restores_query",
+          "status": "passed"
+        },
+        {
+          "source": "F15",
+          "locator": "checks[8]",
+          "name": "delayed_entry_response_does_not_reopen_dismissed_details_or_steal_focus",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-23": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Session expiry or service stop preserves readable context and the desired route, explains reopening/reconnection, and makes no unauthorized process-restart claim. Loading and regional errors preserve other readable content.",
+      "observations": [
+        {
+          "source": "EXP",
+          "locator": "checks[0]",
+          "name": "AT-23 expiry retains exact recorded entry and desired route with explicit reopening guidance",
+          "status": "passed"
+        },
+        {
+          "source": "STOP",
+          "locator": "checks[0]",
+          "name": "AT-23 stop retains exact recorded entry and desired route with explicit reopening guidance",
+          "status": "passed"
+        },
+        {
+          "source": "F14",
+          "locator": "checks[0]",
+          "name": "narrow_close_session_preserves_visible_focus_and_exposes_closed_status",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-28": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "The actual production reader and graph function offline under their real Content Security Policy without remote scripts, CDN downloads, fonts, images, analytics, or cloud logging.",
+      "observations": [
+        {
+          "source": "P",
+          "locator": "checks[7]",
+          "name": "AT-14 incoming traversal preserves actual canonical endpoints and arrow",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[7]",
+          "name": "AT-14 incoming traversal preserves actual canonical endpoints and arrow",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[5]",
+          "name": "production_map_list_exact_ids_and_self_loop",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[6]",
+          "name": "map_list_exact_direction_qualifiers_classification_and_source_descriptor_parity",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-29": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Major reading and exploration tasks can be completed through keyboard and list without canvas, dragging, hover, or double-click. A small control set avoids hundreds of invisible graph controls in tab order; meaningful result/selection changes are announced rather than every layout frame.",
+      "observations": [
+        {
+          "source": "KEY",
+          "locator": "checks[0]",
+          "name": "AT-29 actual keyboard typing, Escape, submit and result-to-entry",
+          "status": "passed"
+        },
+        {
+          "source": "KEY",
+          "locator": "checks[1]",
+          "name": "AT-29 source read and exact Escape return by keyboard",
+          "status": "passed"
+        },
+        {
+          "source": "KEY",
+          "locator": "checks[2]",
+          "name": "AT-29 renderer-independent keyboard List selection, More connections and Focus here",
+          "status": "passed"
+        },
+        {
+          "source": "KEY",
+          "locator": "checks[3]",
+          "name": "AT-29 keyboard process reading and exact step-source return",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[19]",
+          "name": "selection_preserves_keyboard_focus",
+          "status": "passed"
+        },
+        {
+          "source": "F16",
+          "locator": "checks[22]",
+          "name": "failed_lazy_renderer_keeps_list_entry_and_evidence_usable",
+          "status": "passed"
+        },
+        {
+          "source": "F15",
+          "locator": "checks[0]",
+          "name": "320px_native_drawer_keyboard_open_close_hidden_navigation_and_persistent_search",
+          "status": "passed"
+        },
+        {
+          "source": "F15",
+          "locator": "checks[2]",
+          "name": "keyboard_destination_closes_drawer_and_restores_reading_focus",
+          "status": "passed"
+        },
+        {
+          "source": "F15",
+          "locator": "checks[4]",
+          "name": "phone_details_keyboard_dismiss_reopen_preserves_scope_selection_history_and_list_nodes",
+          "status": "passed"
+        }
+      ],
+      "qualification": "TASK021 establishes actual keyboard reachability, visible focus and browser DOM/live-region feedback. Actual Safari/VoiceOver utterances and final global AT29 closure remain pending in TASK022; DOM or AX text is not observed speech.",
+      "live_region_observations": {
+        "source": "KEY",
+        "locator": "live_regions",
+        "method": "Actual DOM status-region text sampled after keyboard actions; no claim of spoken output.",
+        "observations": [
+          {
+            "asserted_phrase": "entries returned",
+            "observed_steps": [
+              {
+                "step": "search_results",
+                "texts": [
+                  "Displayed knowledge version254b156df60d347e2202eba39dc85c3926785426c971f5c865e5e9e5092ecf61Refresh knowledge",
+                  "2 entries returned."
+                ]
+              }
+            ]
+          },
+          {
+            "asserted_phrase": "Selected FixtureTaskManager.",
+            "observed_steps": [
+              {
+                "step": "list_selection",
+                "texts": [
+                  "Reading entry…Displayed knowledge version254b156df60d347e2202eba39dc85c3926785426c971f5c865e5e9e5092ecf61Refresh knowledge",
+                  "Selected FixtureTaskManager."
+                ]
+              }
+            ]
+          },
+          {
+            "asserted_phrase": "Returned connections updated.",
+            "observed_steps": [
+              {
+                "step": "more_connections",
+                "texts": [
+                  "Displayed knowledge version254b156df60d347e2202eba39dc85c3926785426c971f5c865e5e9e5092ecf61Refresh knowledge",
+                  "Returned connections updated. 10 relationship records or detail markers are retained."
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "AT-32": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Core reads work with optional embedding/RDF/standards/inference services absent; nothing is installed or started implicitly. A reader session does not require enabling the old advanced workbench profile or a Director publication grant.",
+      "observations": [
+        {
+          "source": "P",
+          "locator": "checks[0]",
+          "name": "AT-01 AT-32 production read destinations and disabled authoring/semantic capabilities",
+          "status": "passed"
+        },
+        {
+          "source": "P2",
+          "locator": "checks[0]",
+          "name": "AT-01 AT-32 production read destinations and disabled authoring/semantic capabilities",
+          "status": "passed"
+        }
+      ]
+    },
+    "AT-34": {
+      "status": "observed_current_production_phase_evidence",
+      "exact_acceptance": "Renderer failure leaves definitions, equivalent relationship lists, and evidence access usable; recovery neither enables remote computation/services nor hides missing data as an empty graph.",
+      "observations": [
+        {
+          "source": "F16",
+          "locator": "checks[22]",
+          "name": "failed_lazy_renderer_keeps_list_entry_and_evidence_usable",
+          "status": "passed"
+        },
+        {
+          "source": "F17",
+          "locator": "checks[2]",
+          "name": "lost_canvas_disposes_renderer_and_retry_keeps_list_model",
+          "status": "passed"
+        },
+        {
+          "source": "F17",
+          "locator": "checks[3]",
+          "name": "injected_layout_deadline_refuses_visual_layout_and_keeps_list",
+          "status": "passed"
+        },
+        {
+          "source": "KEY",
+          "locator": "checks[2]",
+          "name": "AT-29 renderer-independent keyboard List selection, More connections and Focus here",
+          "status": "passed"
+        },
+        {
+          "source": "F15",
+          "locator": "checks[10]",
+          "name": "failed_renderer_keeps_phone_list_focus_expand_and_details_reopen",
+          "status": "passed"
+        }
+      ]
+    }
+  },
+  "sources": {
+    "P": {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07/stdout.json",
+        "sha256": "8e74f5f23ca8736255d246903cc257ab7e9370b13e40ec5a8f447b2fd7e26aec",
+        "bytes": 132069
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07/receipt.json",
+        "sha256": "d0e4879d385b09112ac2b3c4f595c3bab0b6dc3d783d2f72732e5b6a625c5e83",
+        "bytes": 2451
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07/reviewed-job.json",
+        "sha256": "6214b70320049b2535daffe08cf59f21a92d605647773ee6d9a0081ea9860432",
+        "bytes": 15400
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07/attribution.json",
+        "sha256": "75d30c3156494ff0521d818d53a6afa0b0857d2352cf3d12db35eaf486823eb6",
+        "bytes": 4897
+      }
+    },
+    "P2": {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07-confirmation/stdout.json",
+        "sha256": "deee4ba22598420c99a95f61ba00c56d32123928261080f4b8288af1c05ce6e5",
+        "bytes": 132108
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07-confirmation/receipt.json",
+        "sha256": "e24f8a1d6c3d4e46e0bc0da2453a8739205afa520c2e061e883832cc4713e92e",
+        "bytes": 2552
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07-confirmation/reviewed-job.json",
+        "sha256": "6214b70320049b2535daffe08cf59f21a92d605647773ee6d9a0081ea9860432",
+        "bytes": 15400
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07-confirmation/attribution.json",
+        "sha256": "a274f103bf44ed52e63ce3e4114d029bbcf7e3bc89f3906fce3c689b4dc82c73",
+        "bytes": 5263
+      }
+    },
+    "KEY": {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-keyboard-04/stdout.json",
+        "sha256": "febecf3161e2a521718e4310536f77b3492cd970a9a1ea3d239899dbfcc48767",
+        "bytes": 6783
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-keyboard-04/receipt.json",
+        "sha256": "a2d276b6c6c5a4ca2576e11b9798264fc94a304248303a37eb2fa2b54de976d1",
+        "bytes": 2162
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-keyboard-04/reviewed-job.json",
+        "sha256": "b62c67669b625893629352f36f009a998c77aab9d55856d162ec822d2023299f",
+        "bytes": 14574
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-keyboard-04/attribution.json",
+        "sha256": "c28c85228c0605358b482bd9f51f344c7e4b9ee54b5a07409b35ac1b984e8195",
+        "bytes": 2564
+      }
+    },
+    "EXP": {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-lifecycle-06-expiry/stdout.json",
+        "sha256": "e2f0f8b8b92b36a2df217be93fa34cc0b004b57d89bcd9008a6cbff2eb5d08c1",
+        "bytes": 8222
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-lifecycle-06-expiry/receipt.json",
+        "sha256": "ddf3104b886c10ddd78e883e2d2b862e867867b162a6f5851cbeb397498403c4",
+        "bytes": 2016
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-lifecycle-06-expiry/reviewed-job.json",
+        "sha256": "83116684f354331b6aacbb846e1610f03d0ef21a73796672e52d1374a75cef58",
+        "bytes": 14689
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-lifecycle-06-expiry/attribution.json",
+        "sha256": "7be2d363f03d82141d1ab0b815d80d5911f81f9f95a989531164e35d8ec9b574",
+        "bytes": 2838
+      }
+    },
+    "STOP": {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-lifecycle-06-stop/stdout.json",
+        "sha256": "945b8a7395aa478bbe096a309b7519172a3ef53ca463673699a6c692ae785d00",
+        "bytes": 8216
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-lifecycle-06-stop/receipt.json",
+        "sha256": "1273c2e35275b9dc516d224e9e6d67df76795de8082de16db4983c6fe6e6d375",
+        "bytes": 2006
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-lifecycle-06-stop/reviewed-job.json",
+        "sha256": "c20c67ab692c5db053cd1f5d8022b8c1856b048238ad840c3e9c17f91ec8284e",
+        "bytes": 14687
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-lifecycle-06-stop/attribution.json",
+        "sha256": "ec9f77b385ab880f37fde1b4df13dd870ecd99d507b99a75be26774b112eb877",
+        "bytes": 2820
+      }
+    },
+    "TIME": {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-lifecycle-06-deadline/stdout.json",
+        "sha256": "e67a97b8351ff3b5f5d7a856fb2694ba772cbb7469e85c863a18d373aaf06fb3",
+        "bytes": 8341
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-lifecycle-06-deadline/receipt.json",
+        "sha256": "592e8f78fddd26993e8ed8711448fdee2abcff047b47ceecadfa527e56b9256b",
+        "bytes": 2049
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-lifecycle-06-deadline/reviewed-job.json",
+        "sha256": "1fad624b8ebeaaba3e41ec58d6145806fa1794b6c6b8beff342b1f6b281d57aa",
+        "bytes": 14907
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-lifecycle-06-deadline/attribution.json",
+        "sha256": "9b72f4598a4c845258b4a8d9d384a4385b44b044d557b6fb093d9285348044fa",
+        "bytes": 3003
+      }
+    },
+    "F14": {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-14/stdout.json",
+        "sha256": "fd9a03fb10fbb8b718a32bfc83b098e036127988ff33562d509768a74f0d9864",
+        "bytes": 1317
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-14/receipt.json",
+        "sha256": "5e03403604e4e4c7492c66f0783d1e7a26cf524f1a44b98a741887aa77847d67",
+        "bytes": 2216
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-browser-job-14.json",
+        "sha256": "ae03e6775f1885853f52cead2160c1382e4323162e977114bf9735dc24e94e6e",
+        "bytes": 14172
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/stage-browser-14-inputs.json",
+        "sha256": "3fedc7b32bbe5968de5a54de34b3aa5643315b3efd8d5a61e3730369b27d1bd1",
+        "bytes": 20436
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-14/attribution.json",
+        "sha256": "d940ba35628e5300a2d4670509becbc954adb96a0511725dd0d0606c0d949c54",
+        "bytes": 2435
+      },
+      "fixture_scope": "Every disposable fixture regular file unchanged."
+    },
+    "F15": {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+        "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+        "bytes": 5896
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+        "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+        "bytes": 2878
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-browser-job-15.json",
+        "sha256": "3a48aea178ff82cd1d496f0ef3c4795bc0457da658e6a8b26f9292c6abbe2411",
+        "bytes": 14171
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/stage-browser-15-inputs.json",
+        "sha256": "2da83d9458a756c63e3128e567756c27367fadee9f78918cf257743492ec6d60",
+        "bytes": 20436
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/attribution.json",
+        "sha256": "b9df05567242cb88ef6b1883a489c06607424bd1ba10e1ff3f94c1d51663eb07",
+        "bytes": 7617
+      },
+      "fixture_scope": "Every disposable fixture regular file unchanged."
+    },
+    "F16": {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+        "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+        "bytes": 6461
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+        "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+        "bytes": 1994
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-browser-job-16.json",
+        "sha256": "1568b5db1aa46d263dff551c89157182be146eea9836d0b5dc0cfd8cdc8b86d3",
+        "bytes": 14327
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/stage-browser-16-inputs.json",
+        "sha256": "1164edecc1fc78b8f0b5bd483fb4705e5e573d53b2ec75113917803302ec7e37",
+        "bytes": 20591
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/attribution.json",
+        "sha256": "cc537b0b37cf96543f4b521a59ed8c0304495e8d2811acc56dfbc5e444340a6b",
+        "bytes": 2055
+      },
+      "fixture_scope": "Exactly three declared disposable fixture paths changed; other fixture files unchanged. This is path-scoped preservation, not an assertion that every field within the three changed files is unchanged."
+    },
+    "F17": {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/stdout.json",
+        "sha256": "d6e8d287f00cabfb6aafb27901510597a7eea2145bb391d626d1a78e3b613f98",
+        "bytes": 1405
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/receipt.json",
+        "sha256": "a9a8b6e79615b2e8abad12fbce0c2b338f7d623a51ec3b638aa93d62a3845695",
+        "bytes": 1993
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-browser-job-17.json",
+        "sha256": "c9f75c9014923b2880c7856f6b1e8c640bb9722f999620beea3c51222fb0963b",
+        "bytes": 14171
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/stage-browser-17-inputs.json",
+        "sha256": "bc3ee31ad8662d1e7b8e6eff6c69e48e871502b496082675a14e3dbb22efd937",
+        "bytes": 20290
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/attribution.json",
+        "sha256": "11907980af30d7e79893e928e96adf954ca112019d904cc5c80918b0420f9ebb",
+        "bytes": 1902
+      },
+      "fixture_scope": "Every disposable fixture regular file unchanged."
+    },
+    "F18": {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/stdout.json",
+        "sha256": "0870417237844cb2d17e7e05b53a32611c897070424522d75618fd92b2630db5",
+        "bytes": 1342
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/receipt.json",
+        "sha256": "df4e18e43fc11b898337711a686ffb6b28736debbced02303613e1b002bc7d9e",
+        "bytes": 1993
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-browser-job-18.json",
+        "sha256": "619c4300a2f675fd476497804d13634793793c4d9a0672397608fce238a6e4c9",
+        "bytes": 14172
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/stage-browser-18-inputs.json",
+        "sha256": "0a59346e46d4401e701d633567644a317092ab25ca255d81b905878efa7f6885",
+        "bytes": 20291
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/attribution.json",
+        "sha256": "e2afe9902bbd4a6352ed0d89c7167c0601e825fa68439339f25be5cbee884526",
+        "bytes": 1902
+      },
+      "fixture_scope": "Every disposable fixture regular file unchanged."
+    },
+    "S_service_http": {
+      "id": "service_http",
+      "status": "passed",
+      "executor": "Primary host /root under exact reviewed frozen-job protocol.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/service-host-receipt.json",
+        "sha256": "e5d2d3484cca21d872d7d8eac970cf7f1ab43417e65b5b254e0bade1d50e26e0",
+        "bytes": 1992
+      },
+      "report": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/service-host-output.json",
+        "sha256": "fb2b2200a5ef321051dff2b7b3fcc70073621b12107fd9e448fd710b3b31d182",
+        "bytes": 22611
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/host-batch-01.json",
+        "sha256": "33e7d44c331fe3cade39d0ec61ebf56c0de5c93636a6634009b12dab57fc443b",
+        "bytes": 1021
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/stage-batch-01-inputs.json",
+        "sha256": "75d9648fd69a02857c98a18c1bb562aaddf24fe94cb9aa81938edc0d2ba2f51d",
+        "bytes": 19815
+      },
+      "original_wrapper_status": "failed",
+      "order_only_adjudication": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/service-host-adjudication.json",
+        "sha256": "026321e6864a933b43133c0d7e3a7ba0a6340fc1ffa11ceb3303950b8b315d23",
+        "bytes": 1734
+      },
+      "independent_retained_output_check": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/service-adjudication-check.json",
+        "sha256": "5b7de2114bf11d4eb4ba1079e195adcb4219d36fce1b903c429cd3329ec81344",
+        "bytes": 1080
+      },
+      "qualification": "Actual runner passed; original wrapper failed only source-order versus unittest-order validation. Exact 28-case set adjudicated without rerun; failed receipt preserved.",
+      "tests_run": 28,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "case_ids": [
+        "test_explorer_service.AdditionalPackageTests.test_optional_config_defaults_and_explicit_private_path_confinement",
+        "test_explorer_service.AdditionalPackageTests.test_schema_or_asset_or_helper_addition_is_sticky",
+        "test_explorer_service.PackageRaceTests.test_missing_assets_and_invalid_configuration",
+        "test_explorer_service.PackageRaceTests.test_mutated_snapshot_never_executes_before_child_admission",
+        "test_explorer_service.PackageRaceTests.test_nested_manifest_entry_redirect",
+        "test_explorer_service.QualifierTests.test_1025_scalar_qualifiers_survive_reader_ipc_http",
+        "test_explorer_service.ResourceTests.test_actual_worker_rss_overshoot_killed_and_reaped",
+        "test_explorer_service.ResourceTests.test_header_body_absolute_timeout_and_eight_socket_cap",
+        "test_explorer_service.ServiceTests.test_actual_parent_rss_refuses_new_work",
+        "test_explorer_service.ServiceTests.test_closed_transport_and_error_bounds",
+        "test_explorer_service.ServiceTests.test_nonmutation_private_modes_and_cleanup",
+        "test_explorer_service.ServiceTests.test_raw_header_limits_duplicates_and_paths",
+        "test_explorer_service.ServiceTests.test_sticky_helper_schema_asset_drift",
+        "test_explorer_service.ServiceTests.test_success_all_operations_and_safe_assets",
+        "test_explorer_service.ServiceTests.test_worker_timeout_discards_preexisting_queue",
+        "test_explorer_sessions.SessionTests.test_cancel_or_expire_a_preserves_healthy_worker_for_b",
+        "test_explorer_sessions.SessionTests.test_capacity_does_not_evict_and_close_is_isolated",
+        "test_explorer_sessions.SessionTests.test_replay_replacement_resume_and_expiry",
+        "test_explorer_sessions.SessionTests.test_two_root_cookie_csrf_bootstrap_cursor_isolation",
+        "test_explorer_sessions.SessionTests.test_worker_drift_survives_discarded_client",
+        "test_explorer_health.HealthTests.test_cli_launch_and_no_optional_imports",
+        "test_explorer_health.HealthTests.test_missing_bundle_health_facts_and_legacy_help",
+        "test_explorer_health.HealthTests.test_slow_health_peer_has_absolute_header_body_deadline",
+        "test_explorer_health.HealthTests.test_static_and_endpoint_facts_preserve_files",
+        "test_explorer_health.HealthTests.test_wrong_selected_configuration_and_neutral",
+        "test_explorer_health.InstalledLayoutTests.test_installed_package_serves_and_cli_health_reads_real_root_contracts",
+        "test_explorer_health.LauncherRaceTests.test_documented_reader_cli_rejects_ambient_stdlib_shadows",
+        "test_explorer_health.LauncherRaceTests.test_public_cli_captures_before_selected_service_execution"
+      ],
+      "all_owned_cleanup_verified": true,
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/service-host-output.json",
+        "sha256": "fb2b2200a5ef321051dff2b7b3fcc70073621b12107fd9e448fd710b3b31d182",
+        "bytes": 22611
+      }
+    },
+    "S_browser_basic": {
+      "id": "browser_basic",
+      "status": "passed",
+      "executor": "Primary host /root, actual fully pinned Headless Shell151.0.7922.34, Playwright1.62.1 isolated context. No system-Chrome equivalence.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-basic-receipt.json",
+        "sha256": "12a136e15d936c035270e4d7ef645fd6c6b74143ce447c79ac34610c8d372b0a",
+        "bytes": 2036
+      },
+      "report": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-basic-stdout.json",
+        "sha256": "7f3e7f5cc9d89ecb438f97a2157284fb78020df88ea08e85701f7e0d80dfee93",
+        "bytes": 2000
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/host-browser-basic-02.json",
+        "sha256": "d010b6ea002d2d6253797c05e6bcc50e7cca0caef36fd51dbba2cc182a9fcd3f",
+        "bytes": 14421
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/stage-browser-02-inputs.json",
+        "sha256": "f0a5aa504e70cc373032aaa2420e64c2e4bb23b61040f4e2ce1801a27c3b52fa",
+        "bytes": 20435
+      },
+      "groups": 7,
+      "checks": [
+        {
+          "name": "full_ui_bootstrap_clean_route_cookie",
+          "status": "passed"
+        },
+        {
+          "name": "copied_local_link_has_safe_route_only",
+          "status": "passed"
+        },
+        {
+          "name": "resume_retains_exact_entry_route",
+          "status": "passed"
+        },
+        {
+          "name": "isolated_close_retains_recorded_entry",
+          "status": "passed"
+        },
+        {
+          "name": "narrow_close_dismisses_modal_and_exposes_status_focus",
+          "status": "passed"
+        },
+        {
+          "name": "same_document_fragment_cleared_and_consumed_token_rejected",
+          "status": "passed"
+        },
+        {
+          "name": "new_document_fragment_cleared_and_consumed_token_rejected",
+          "status": "passed"
+        }
+      ],
+      "browser_version": "151.0.7922.34",
+      "qualification": "Current actual production full UI over real HTTP in pinned Headless Shell151.0.7922.34. Clipboard capture and abort-insensitive response delay are explicitly test instrumentation. No native zoom, OS dispatch, VoiceOver, release or human usability claim.",
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-basic-stdout.json",
+        "sha256": "7f3e7f5cc9d89ecb438f97a2157284fb78020df88ea08e85701f7e0d80dfee93",
+        "bytes": 2000
+      }
+    },
+    "S_browser_late_session": {
+      "id": "browser_late_session",
+      "status": "passed",
+      "executor": "Primary host /root, actual fully pinned Headless Shell151.0.7922.34, Playwright1.62.1 isolated context. No system-Chrome equivalence.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-session-receipt.json",
+        "sha256": "c967628c23dcd3d03c0fa6ff2fb018ef25ded9cd9e0d25dd819554401c4e7ce5",
+        "bytes": 2071
+      },
+      "report": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-session-stdout.json",
+        "sha256": "cacc219698b1ee92d440bb5592ad4035f8bdf83249d61c4f303d453b7889cf48",
+        "bytes": 1554
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/host-browser-late_session-02.json",
+        "sha256": "c85d3f4087f98789683f6a6cca81c2a67051b2aba4c44185560182897736fb4d",
+        "bytes": 14442
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/stage-browser-02-inputs.json",
+        "sha256": "f0a5aa504e70cc373032aaa2420e64c2e4bb23b61040f4e2ce1801a27c3b52fa",
+        "bytes": 20435
+      },
+      "groups": 1,
+      "checks": [
+        {
+          "abort_ignored_intentionally": true,
+          "context_requests": 1,
+          "current_route_and_text_retained": true,
+          "name": "late_session_ignored_after_fresh_same_document_connection",
+          "real_http_response_held": true,
+          "status": "passed"
+        }
+      ],
+      "browser_version": "151.0.7922.34",
+      "qualification": "Current actual production full UI over real HTTP in pinned Headless Shell151.0.7922.34. Clipboard capture and abort-insensitive response delay are explicitly test instrumentation. No native zoom, OS dispatch, VoiceOver, release or human usability claim.",
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-session-stdout.json",
+        "sha256": "cacc219698b1ee92d440bb5592ad4035f8bdf83249d61c4f303d453b7889cf48",
+        "bytes": 1554
+      }
+    },
+    "S_browser_late_context": {
+      "id": "browser_late_context",
+      "status": "passed",
+      "executor": "Primary host /root, actual fully pinned Headless Shell151.0.7922.34, Playwright1.62.1 isolated context. No system-Chrome equivalence.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-context-receipt.json",
+        "sha256": "9a35d7513ba4fd2e6d0f37b9d1163212c408aab0b66ed489d1f6d5ea0d2bd5b1",
+        "bytes": 2071
+      },
+      "report": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-context-stdout.json",
+        "sha256": "84a5bcdc77c6b7cd2a7031cba05023c1f93f9eff2d6e04271ab0c9544092e352",
+        "bytes": 1595
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/host-browser-late_context-02.json",
+        "sha256": "a824a32562d2218fe6a755d7e830774e16bd38859dca9bdea53299e83f414c7e",
+        "bytes": 14442
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/stage-browser-02-inputs.json",
+        "sha256": "f0a5aa504e70cc373032aaa2420e64c2e4bb23b61040f4e2ce1801a27c3b52fa",
+        "bytes": 20435
+      },
+      "groups": 1,
+      "checks": [
+        {
+          "abort_ignored_intentionally": true,
+          "context_requests": 2,
+          "current_route_and_text_retained": true,
+          "name": "late_context_ignored_after_fresh_same_document_connection",
+          "real_http_response_held": true,
+          "status": "passed"
+        }
+      ],
+      "browser_version": "151.0.7922.34",
+      "qualification": "Current actual production full UI over real HTTP in pinned Headless Shell151.0.7922.34. Clipboard capture and abort-insensitive response delay are explicitly test instrumentation. No native zoom, OS dispatch, VoiceOver, release or human usability claim.",
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-context-stdout.json",
+        "sha256": "84a5bcdc77c6b7cd2a7031cba05023c1f93f9eff2d6e04271ab0c9544092e352",
+        "bytes": 1595
+      }
+    }
+  },
+  "production_build": {
+    "path": "Verification/project-knowledge-explorer-first-release/production-build.json",
+    "sha256": "24c8390d566178c3ebeaf4dbf33ec03387ebc16870972aafe56aae24d2ba56ce",
+    "bytes": 11235
+  },
+  "current_runtime_audit": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/runtime-audit.json",
+    "sha256": "81330c73259a9e5bbc1dba1a12d23fa8358b63557d39c1988762d3dff80f7a44",
+    "bytes": 1526
+  },
+  "reused_current_input_closure": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/task021-current-evidence-closure.json",
+    "sha256": "ed81e6d67234d0deedef5d9a94d6118f11da950185320c3e0ff78329fa7e4464",
+    "bytes": 40756
+  },
+  "frontend_current_groups": 53,
+  "service_current_cases": 28,
+  "service_current_browser_groups": 9,
+  "complete_scenario_count": 27,
+  "production_discrepancy": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/production-discrepancy.json",
+    "sha256": "7ce5a19cd545d61f99c95a7d5a7da3e609232f597799784854d0fcb630785715",
+    "bytes": 4866
+  },
+  "preserved_prestate": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/prestates/browser-results.json",
+    "sha256": "0a7839a8e70f750f81c7c0e29867b36562929d689d3f42098ece2ffcb27a0687",
+    "bytes": 29416
+  },
+  "highest_verification": "Actual current production browser workflows in explicitly pinned Headless Shell151.0.7922.34; five frontend runs, two diagnostic production runs, keyboard and lifecycle, plus accepted current service evidence.",
+  "proof_boundaries": [
+    "All actual listener/browser execution is attributed to root; reproducible build04 was executed by this worker.",
+    "Accepted frontend fixture mutations are limited to each recorded test scope; this is not whole live-depot nonmutation.",
+    "AT29 browser-layer keyboard/live-region evidence supports entering TASK022; actual speech and complete accessibility remain pending.",
+    "Production06 remains an unexplained failure; two diagnostic07 passes are separately retained.",
+    "Service runner passed all28 cases; its original wrapper order-only failure and exact adjudication remain preserved.",
+    "No native Safari/VoiceOver, participant comprehension, performance or final TASK023 preservation pass is implied."
+  ]
+}

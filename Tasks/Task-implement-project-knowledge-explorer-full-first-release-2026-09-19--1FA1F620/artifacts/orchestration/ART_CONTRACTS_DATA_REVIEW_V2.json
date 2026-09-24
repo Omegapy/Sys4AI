@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "task_id": "TASK-20260919-1FA1F620",
+  "plan_task_id": "TASK-002",
+  "reviewer": "CONTRACTS_DATA_REVIEW_G3",
+  "native_path": "/root/explorer_manager_g3/review_data",
+  "codex_thread_id": "01a0bd4b-412a-7b22-9512-e6a41b5490ea",
+  "runtime_inheritance": {
+    "model": "Exact parent effective model inherited without override",
+    "reasoning_effort": "Exact parent effective reasoning effort inherited without override",
+    "limitation": "Concrete model and effort names are not independently exposed in this child context; no different values were requested or configured."
+  },
+  "role_digests": {
+    "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+  },
+  "receipt_acknowledgment": "Manager confirmed exact re-review input handoff committed at revision 66 before this review began.",
+  "outcome": "passed",
+  "candidate": "CAND_CONTRACTS_DATA_V2",
+  "candidate_path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_DATA_V2.md",
+  "candidate_sha256": "c65cf06c202fbb3ea6c1f3393a6f46d70a61db536614674786e20f9ecb9cf08f",
+  "baseline_path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/baseline_98347b9a813fc5f461b595a1270fad47b6b43b81768a5fb329edaf5cff01d433.json",
+  "baseline_sha256": "98347b9a813fc5f461b595a1270fad47b6b43b81768a5fb329edaf5cff01d433",
+  "verification_level": "Static source and proposal review; no implementation or runtime acceptance",
+  "summary": "All four TASK-002 proposal criteria pass. DATA-R1 through DATA-R4 are resolved by explicit normative contracts. The revision retains the prior publication/source/process/session/List/distribution boundaries and introduces no identified mandatory contradiction. This accepts the proposal for the assigned review purpose; it does not certify implemented schemas, dependency locks, runtime behavior or release acceptance.",
+  "criterion_findings": [
+    {
+      "criterion": 1,
+      "text": "Contracts define exact request/envelope/error/cursor shapes and numeric request/time/concurrency/cache limits subordinate to canonical limits.",
+      "outcome": "passed",
+      "candidate_evidence": [
+        "ART_CONTRACTS_DATA_V2.md:90-122 retains independent API/display/visited/serialized-byte/deadline/concurrency/memory ceilings subordinate to canonical limits.",
+        "ART_CONTRACTS_DATA_V2.md:153-267 supplies closed scalars, configuration intervals, EffectivePolicy, requests, operation scopes/data unions, full envelope, nullable error metadata and logical item counts.",
+        "ART_CONTRACTS_DATA_V2.md:269-313 assigns one HTTP status, fixed message and retry enum to each closed error code and defines session/health bodies.",
+        "ART_CONTRACTS_DATA_V2.md:315-344 defines consuming detail markers, deferred items, terminal unrepresentable items, exact Q identity, signed LastKey variants and full scope binding."
+      ],
+      "findings": "Exact normative response/request/error/cursor shapes and scalar/configuration bounds now replace the former placeholders. Canonical Q and separate N prevent query-scope collisions. Oversized result markers consume one stable identity while deferred items do not; even-marker failure is explicit and non-progress is not hidden by automatic retries. Numeric policy remains bounded and independent of runtime performance claims.",
+      "mandatory_defects": [],
+      "requirements": [
+        "REQ-005",
+        "REQ-014",
+        "REQ-018",
+        "REQ-023",
+        "REQ-024",
+        "REQ-033"
+      ]
+    },
+    {
+      "criterion": 2,
+      "text": "Selected dependency versions, build-only Node version, built-in layout, notices and source provenance are pinned after current primary-source review; any required installation has separate recorded authority.",
+      "outcome": "passed",
+      "candidate_evidence": [
+        "ART_CONTRACTS_DATA_V2.md:384-406 retains built-in preset layout, exact direct package versions, build-only Node 25.9.0, actual lock-generation instructions, reviewed hook/bin/license steps and offline manifest/notices requirements.",
+        "Bound manager/dependency-source-observations.json and manager/user-approval-scope.json hashes are unchanged and verified in the 15-reference packet."
+      ],
+      "findings": "Pass remains at proposal selection level. Current frozen primary metadata supports the exact chosen versions and licenses; the future implementer still must generate the complete lock, inspect actual artifacts/transitives and produce notices before frontend consumers. No completed install/build/browser-CSP proof is inferred.",
+      "mandatory_defects": [],
+      "requirements": [
+        "REQ-028",
+        "REQ-049"
+      ]
+    },
+    {
+      "criterion": 3,
+      "text": "The contract includes selected-input unresolved-transaction detection, bounded coherent snapshot reads, precise source-reference identity, per-service and per-session cursor scope, independent List normalization and shared state/route ownership.",
+      "outcome": "passed",
+      "candidate_evidence": [
+        "ART_CONTRACTS_DATA_V2.md:124-139 retains bounded existing-lock/journal observation, unresolved selected-intent detection, full snapshot manifests and qualified fresh-source observation.",
+        "ART_CONTRACTS_DATA_V2.md:141-151 pins the actual loaded source closure and its startup code epoch; sticky drift invalidates sessions/cursors, stops knowledge/assets, reaps the owned worker and requires explicit fresh reopening.",
+        "ART_CONTRACTS_DATA_V2.md:245-265,333-348 specifies exact owner/binding/path/locator/hash source identity, entry/source continuation and service/session/root/snapshot/query/policy cursor scopes.",
+        "ART_CONTRACTS_DATA_V2.md:350-386 retains source-supported process sequencing, loopback/Host/Origin/session/CSRF confinement, one shared state/route owner, code-epoch and exact-Q response guards, independent List and renderer cleanup."
+      ],
+      "findings": "Both previously deficient identity boundaries are explicit: cursors and response keys bind exact canonical Q, and snapshots cannot advertise replacement helper hashes while old modules execute. Reloadable knowledge/presentation inputs are distinguished from executing package/schema/frontend inputs. Loaded-byte provenance, session build/schema handshake and sticky drift prevent silent cross-epoch refresh. Other transaction, source/process semantics, List and client ownership commitments remain intact.",
+      "mandatory_defects": [],
+      "requirements": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-006",
+        "REQ-009",
+        "REQ-010",
+        "REQ-021",
+        "REQ-022",
+        "REQ-024",
+        "REQ-025",
+        "REQ-029",
+        "REQ-030",
+        "REQ-031",
+        "REQ-032"
+      ]
+    },
+    {
+      "criterion": 4,
+      "text": "The change map names source files, generated Template destinations, prospective exact root adoption and current initializer capability compatibility; each preserves its independent authority boundary.",
+      "outcome": "passed",
+      "candidate_evidence": [
+        "ART_CONTRACTS_DATA_V2.md:38-56 retains source module/frontend ownership; lines 408-428 retain exact later adoption manifests and independently authorized source/Template/root distribution.",
+        "ART_CONTRACTS_DATA_V2.md:418-428 retains old shared-helper callers, current initializer compatibility, historical v9/v11/v12 preservation, production-gated cutover and rollback that does not restore obsolete knowledge."
+      ],
+      "findings": "The revision does not expand authority or alter the previously passing distribution boundary. It still requires actual per-file manifests before adoption, owner-mediated Template updates, neutral identity, independent products, preserved initializer history/shared trusted helpers and production checks before retiring the active workbench.",
+      "mandatory_defects": [],
+      "requirements": [
+        "REQ-037",
+        "REQ-038",
+        "REQ-039",
+        "REQ-040",
+        "REQ-041"
+      ]
+    }
+  ],
+  "mandatory_defects": [],
+  "optional_notes": [],
+  "inspected_sources": [
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/EV_G3_DATA_REVIEW_INPUTS_V2-packet.json",
+      "sha256_verified": "c947d03f4b01364d69b8c8412d917f708d25470a01579cc36aa996bdbec02f44",
+      "scope": "Exact input packet and all 15 bound source digests"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_DATA_V2.md",
+      "sha256_verified": "c65cf06c202fbb3ea6c1f3393a6f46d70a61db536614674786e20f9ecb9cf08f",
+      "scope": "Complete assigned candidate plus exact V1-to-V2 diff; targeted correction and contradiction review"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_DATA_REVIEW_V1.json",
+      "sha256_verified": "723778e13b8233d13ac1ec0611b0baa8729edd3cd4c38543e1ff80a11bacd17d",
+      "scope": "All four prior mandatory findings and preserved earlier evidence"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/baseline_98347b9a813fc5f461b595a1270fad47b6b43b81768a5fb329edaf5cff01d433.json",
+      "sha256_verified": "98347b9a813fc5f461b595a1270fad47b6b43b81768a5fb329edaf5cff01d433",
+      "scope": "Unchanged four criteria and all 27 governing requirement IDs; original inspected bytes remain hash-identical"
+    },
+    {
+      "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+      "sha256_verified": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b",
+      "scope": "Original inspected TASK-002 criteria/artifacts/risks remain hash-identical"
+    },
+    {
+      "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+      "sha256_verified": "bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d",
+      "scope": "Original governing requirements remain hash-identical"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/contracts-review-checklist.md",
+      "scope": "Unchanged full-problem review checklist"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/dependency-source-observations.json",
+      "scope": "Unchanged frozen primary-source version/license/engine/integrity evidence"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/user-approval-scope.json",
+      "scope": "Unchanged scoped implementation/dependency/adoption/cutover authority"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_core.py",
+      "scope": "Narrow current ID_RE/project scalar source check and prior source/helper-hash semantics"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_validate.py",
+      "scope": "Current lifecycle/fact_kind admissible values"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_modules.py",
+      "scope": "Current locked module-version grammar"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_retrieval.py",
+      "scope": "Previously inspected exact query_text/normalize/tokens/match/rank distinction retained as direct code evidence; no runtime experiment"
+    }
+  ],
+  "checks_performed": [
+    "Verified exact re-review packet SHA256 and all 15 context path/hash bindings.",
+    "Read exact assigned V2 and compared V1/V2 textual changes; retrieved no sibling proposal or peer review.",
+    "Reassessed each of DATA-R1 through DATA-R4 with exact corrected contract clauses and checked cross-section consistency.",
+    "Checked newly explicit scalar enums/identity/module-version constraints against bounded existing source sections.",
+    "Reassessed all four full TASK-002 criteria and retained all 27 governing requirement IDs.",
+    "Preserved V1 bytes; reopened the new JSON and checked output size, outcome, four criteria and four resolved findings."
+  ],
+  "limitations": [
+    "Static proposal review only. No service, product implementation, package installation, network re-fetch, runtime test, browser/CSP/accessibility/performance experiment, or human validation was performed.",
+    "Actual runtime schema enforcement, exact lock and transitive notice inventory, loaded-code verification implementation, minimal error serialization, build output and production acceptance still require their later assigned evidence.",
+    "The review passes the proposal, not the overall Task or release. Existing baseline/runtime qualifications remain unchanged.",
+    "No sibling candidate, peer review, synthesis, extra project memory, or unauthorized context was retrieved.",
+    "Only the new assigned review-v2.json was written; V1, product/canonical files, Task state, role index, memory, dependencies and Git were preserved."
+  ],
+  "stopping_condition": "All unchanged mandatory proposal criteria pass and all four prior defects are resolved; no mandatory contradiction identified. Stopped without optional polish.",
+  "review_version": 2,
+  "input_packet": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/EV_G3_DATA_REVIEW_INPUTS_V2-packet.json",
+    "sha256": "c947d03f4b01364d69b8c8412d917f708d25470a01579cc36aa996bdbec02f44",
+    "verified_context_references": 15
+  },
+  "prior_review": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/work/CONTRACTS_DATA_REVIEW_G3/review-v1.json",
+    "sha256": "723778e13b8233d13ac1ec0611b0baa8729edd3cd4c38543e1ff80a11bacd17d",
+    "preserved": true
+  },
+  "prior_defect_dispositions": [
+    {
+      "id": "DATA-R1",
+      "outcome": "resolved",
+      "evidence": [
+        "ART_CONTRACTS_DATA_V2.md:212-218",
+        "ART_CONTRACTS_DATA_V2.md:331-344",
+        "ART_CONTRACTS_DATA_V2.md:380"
+      ],
+      "finding": "Exact trimmed Q preserves case and interior characters and is distinct from normalized N. Nonempty queries use canonical relevance order; browse uses label order. Cursor scope hashes exact OperationScope plus policy/epoch. Explicit TaskManager/taskmanager, case-sensitive stable-ID and whitespace examples define compatibility. Client keys reject late responses across Q changes."
+    },
+    {
+      "id": "DATA-R2",
+      "outcome": "resolved",
+      "evidence": [
+        "ART_CONTRACTS_DATA_V2.md:153-265",
+        "ART_CONTRACTS_DATA_V2.md:267-313"
+      ],
+      "finding": "Normative closed scalar types, intervals, per-operation data/scope shapes, section/source/marker unions, effective-limit fields and error metadata are now stated. Each error has one HTTP status, fixed message and retry enum. Session/health shapes are separately closed. Minimal-error byte proof remains an implementation check, not a proposal-level runtime claim."
+    },
+    {
+      "id": "DATA-R3",
+      "outcome": "resolved",
+      "evidence": [
+        "ART_CONTRACTS_DATA_V2.md:247-248",
+        "ART_CONTRACTS_DATA_V2.md:315-340"
+      ],
+      "finding": "Full items and typed detail markers share one ordered logical result stream. A marker consumes exactly its stable key and remains visibly incomplete; merely deferred items do not consume keys. If even a marker/cursor cannot fit, resource_limit terminates without hidden skipping or automatic retry. First/middle oversized-item examples preserve identity order. Text/source continuation requires nonempty Unicode-boundary progress."
+    },
+    {
+      "id": "DATA-R4",
+      "outcome": "resolved",
+      "evidence": [
+        "ART_CONTRACTS_DATA_V2.md:132-151",
+        "ART_CONTRACTS_DATA_V2.md:308-313",
+        "ART_CONTRACTS_DATA_V2.md:380"
+      ],
+      "finding": "The startup manifest is tied to actual verified loaded source bytes and a supervisor/worker handshake rather than only post-import disk hashes. Executable/schema/asset drift is sticky, revokes sessions/cursors, stops new knowledge/assets, and requires a fresh service/client epoch. Reloadable data refresh remains distinct; late cross-epoch responses are not applied."
+    }
+  ]
+}

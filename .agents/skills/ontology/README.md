@@ -19,7 +19,7 @@ a real native manager assignment, browser publication, or external deployment.
 The second release adds read-only RDF/SPARQL interchange, SHACL constraints,
 finite inference with derivation evidence, native AI proposal generation and
 review, ontology-only semantic retrieval, semantic guards in the supported
-owning helper paths, and a loopback visual workbench. These capabilities use a
+owning helper paths. These capabilities use a
 strict `ontology-advanced.yaml` companion; compact v1 records and imported core
 identities retain their meaning. New project setup supplies disabled profiles.
 
@@ -44,12 +44,13 @@ remain independent of memory's corpus, configuration and backend.
 `generation-prepare` creates an immutable selected source handoff. The current
 permitted native agent then generates a result; `generation-capture` records its
 actual attribution and exact bytes. Saved candidates have independent revisions,
-validation, review and publication outcomes. The browser and CLI share these
+validation, review and publication outcomes. The trusted CLI retains these
 interfaces. See [proposal generation](references/proposal-generation.md) and
 [Task packets](references/task-integration.md) for source and ownership limits.
 
-Start `workbench` only for one selected local project, with a private runtime
-session file and current trusted authority when authoring is needed. The
-workbench supports keyboard forms and a list alternative to its graph. Saved
-drafts survive reloads, validation failures and conflicts. Actual publication
-requires a current exact review and grant; a save or validation does not publish.
+Use `explore --open` for the read-only Project Knowledge Explorer. It opens
+Overview, Terms, Processes and a bounded Map with an equivalent List. Source
+reading retains recorded provenance and freshness limits. The old browser
+authoring command is retired; proposal and publication remain trusted CLI
+operations. See [Explorer operations](references/explorer-operations.md) for
+package configuration, normal launch, compatibility and rollback.

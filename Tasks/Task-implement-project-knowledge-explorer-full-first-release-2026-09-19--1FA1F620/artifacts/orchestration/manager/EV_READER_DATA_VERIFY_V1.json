@@ -1,0 +1,97 @@
+{
+  "event": {
+    "event_id": "EV_READER_DATA_VERIFY_V1",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "subtask.verify",
+    "data": {
+      "subtask_id": "READER_DATA",
+      "baseline": "b233451edb8f7838bd33f034e2004c4fcca8785ccf432c044fc9ae159a44f71d",
+      "round": 1,
+      "result_id": "RES_READER_DATA_V1",
+      "acceptance_id": null,
+      "artifacts": [
+        "ART_READER_DATA_DELIVERY_V1"
+      ],
+      "criteria": [
+        {
+          "criterion": "Exact IDs, labels, aliases and lexical definitions retain deterministic order/reasons; duplicates remain distinct and aliases retain preferred identity.",
+          "evidence": "Current run-08: SearchTests.test_duplicates_aliases_preferred_identity_and_canonical_ranking, SearchTests.test_exact_query_case_interior_whitespace_and_outer_whitespace. Manager delivery/input rehash and reader-client-precision-bridge.json bind final bytes; service/browser gates remain separate."
+        },
+        {
+          "criterion": "Category/lifecycle filters apply before paging; one snapshot has no duplicate/skipped IDs and byte-limited empty output is explicitly incomplete.",
+          "evidence": "Current run-08: SearchTests.test_filters_before_paging_and_oversized_label_consumes_once, SearchTests.test_deferred_fitting_items_never_become_markers, SearchTests.test_oversized_summary_byte_marker_preserves_later_identities, ReadTests.test_atomic_1024_refusal_and_all_fixed_error_envelopes. Manager delivery/input rehash and reader-client-precision-bridge.json bind final bytes; service/browser gates remain separate."
+        },
+        {
+          "criterion": "Changing query, filters, direction, sort, project/root, snapshot, service instance or reading session invalidates a cursor; endpoint bounds never widen agent contracts.",
+          "evidence": "Current run-08: SearchTests.test_scope_session_service_root_policy_and_tampering, SearchTests.test_cursor_expiry_and_graph_direction, ReadTests.test_deadline_and_lowered_canonical_limits_never_widen. Manager delivery/input rehash and reader-client-precision-bridge.json bind final bytes; service/browser gates remain separate."
+        },
+        {
+          "criterion": "Entry fields are faithful, missing sections are absent, deprecated history/replacement survives exact-ID access, and fact/lifecycle/freshness remain distinct.",
+          "evidence": "Current run-08: ReadTests.test_exact_header_deprecated_details_history_and_status, ReadTests.test_lossless_unicode_text_and_optional_absence. Manager delivery/input rehash and reader-client-precision-bridge.json bind final bytes; service/browser gates remain separate."
+        },
+        {
+          "criterion": "Parallel relations retain individual IDs; incoming traversal does not reverse semantic direction; loops/cycles/high-degree data stay bounded with meaningful coverage.",
+          "evidence": "Current run-08: ReadTests.test_exact_relations_loops_parallel_qualifiers_and_direction, ReadTests.test_neighborhood_node_limit_markers_and_scope, ReadTests.test_tight_graph_final_coverage_fits_without_skipping_identities, ReadTests.test_unsafe_numeric_qualifiers_mark_edge_and_preserve_exact_detail. Manager delivery/input rehash and reader-client-precision-bridge.json bind final bytes; service/browser gates remain separate."
+        },
+        {
+          "criterion": "No whole-project browser response is used for layout/start selection; list and map receive the same normalized records and omission semantics.",
+          "evidence": "Current run-08: ReadTests.test_context_is_compact_exact_and_no_whole_graph, ReadTests.test_exact_relations_loops_parallel_qualifiers_and_direction. Manager delivery/input rehash and reader-client-precision-bridge.json bind final bytes; service/browser gates remain separate."
+        },
+        {
+          "criterion": "A source request cannot browse arbitrary paths or another record/project; recorded/current hashes and freshness are distinct.",
+          "evidence": "Current run-08: SourceTests.test_full_tuple_identity_direct_binding_and_owner_projection, SourceTests.test_missing_binary_symlink_and_canonical_drift_fail_safely, SourceTests.test_source_only_change_keeps_reference_snapshot_and_continuation_hash. Manager delivery/input rehash and reader-client-precision-bridge.json bind final bytes; service/browser gates remain separate."
+        },
+        {
+          "criterion": "Exact supported section/line/JSON locators yield precise evidence; unreliable extraction labels bounded excerpt; changed bytes remain visibly stale without repairing provenance.",
+          "evidence": "Current run-08: SourceTests.test_source_exact_json_lines_sections_and_inert_text, SourceTests.test_ambiguous_nonheading_and_markdown_structural_boundaries, SourceTests.test_canonical_json_legacy_pointer_semantics_and_resolved_containment, SourceTests.test_source_only_change_keeps_reference_snapshot_and_continuation_hash. Manager delivery/input rehash and reader-client-precision-bridge.json bind final bytes; service/browser gates remain separate."
+        },
+        {
+          "criterion": "Text is escaped, sizes are bounded, source bodies stay transient and no external link is fetched automatically.",
+          "evidence": "Current run-08: SourceTests.test_source_exact_json_lines_sections_and_inert_text, SourceTests.test_source_page_aggregate_bytes_and_exact_continuation, SourceTests.test_many_refs_paged_and_source_body_not_retained, ReadTests.test_no_write_or_optional_imports_and_same_mtime_snapshot_change. Manager delivery/input rehash and reader-client-precision-bridge.json bind final bytes; service/browser gates remain separate."
+        },
+        {
+          "criterion": "Backend process sections follow the accepted exact configured identities, relation/source field support, ordered-source verification and missing/partial/stale states; UI rendering and keyboard/source-drawer acceptance remain explicit later TASK-016 obligations.",
+          "evidence": "Current run-08: ProcessTests.test_ordered_unordered_partial_stale_states_and_exact_purpose, ProcessTests.test_process_support_and_text_fragments_page_losslessly, ProcessTests.test_configured_identity_not_name_or_type_and_invalid_selector_rejected, ProcessTests.test_invalid_source_owner_widening_and_overlapping_steps_rejected, ProcessTests.test_source_change_during_candidate_callback_never_accepts_mixed_order, ProcessTests.test_process_missing_source_retains_definition_and_no_order. Manager delivery/input rehash and reader-client-precision-bridge.json bind final bytes; service/browser gates remain separate."
+        }
+      ],
+      "inspection": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/reader-data-acceptance.json",
+          "sha256": "666fba8afce015f53d7071911025641da68a347e396df2ba4e308615d18165cf"
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/reader-data-tests/result.json",
+          "sha256": "4dd6f0920174c081e2a0d8be5d8d70fed0958b917249f7aa5cc01a5c0375c1dc"
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/reader-client-precision-bridge.json",
+          "sha256": "21ffe5c9c72a2d5609e1a82f61e1a9a07fc93482f502dcb1e80d2b3d4974d8cf"
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/reader-data-tests/run-08.json",
+          "sha256": "66c4ffec8b2a78b34c1e5db8ad8a8e4bc9feb0d507c92d1f7730c4632078b8cb"
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/reader-data-tests/delivery.json",
+          "sha256": "ea07048a54451eb8c75a6e84360103902ee466132af352f5317590d0ab57bb49"
+        }
+      ]
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Verify current READER_DATA delivery with direct final-byte evidence."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Verify current READER_DATA delivery with direct final-byte evidence.",
+    "current_summary": "Verify current READER_DATA delivery with direct final-byte evidence.",
+    "next_step": "Continue SERVICE_PACKAGE and complete frontend implementation within unchanged full release plan.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

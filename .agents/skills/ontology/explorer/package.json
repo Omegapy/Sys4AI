@@ -1,0 +1,22 @@
+{
+  "name": "@sys4ai/project-knowledge-explorer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "25.9.0"
+  },
+  "packageManager": "npm@11.12.1",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && vite build",
+    "package:runtime": "node scripts/package-runtime.mjs"
+  },
+  "dependencies": {
+    "cytoscape": "3.34.3"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
+  }
+}

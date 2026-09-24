@@ -2,9 +2,9 @@
 
 # Task Requirement Documents
 
-Canonical snapshot: 2026-09-13T12:54:42-06:00.
+Canonical snapshot: 2026-09-19T19:53:52-06:00.
 
-draft: 4 | trd_done: 9 | retired: 0
+draft: 4 | trd_done: 10 | retired: 0
 
 | TRD ID | Name | State | Schema compatibility | Created | Updated | Revision |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -12,6 +12,7 @@ draft: 4 | trd_done: 9 | retired: 0
 | TRD-20260907-B18FEF5C | [To-TRD intent discovery and conversational verification](trd_to-trd-intent-discovery-and-conversational-verification_2026-09-07.md) | draft | current | 2026-09-07T21:49:11-06:00 | 2026-09-07T21:49:11-06:00 | 1 |
 | TRD-20260828-D209CF52 | [Tracked implementation-plan skill](trd_tracked-implementation-plan-skill_2026-08-28.md) | draft | current | 2026-08-28T21:30:06-06:00 | 2026-09-04T15:34:27-06:00 | 2 |
 | TRD-20260902-C2F3AF2B | [Task-triggered Project Director orchestration](trd_task-triggered-project-director-orchestration_2026-09-02.md) | draft | current | 2026-09-02T09:54:52-06:00 | 2026-09-04T15:34:26-06:00 | 7 |
+| TRD-20260919-B6D51106 | [Project Knowledge Explorer - full first release](trd_project-knowledge-explorer-full-first-release_2026-09-19.md) | trd_done | current | 2026-09-19T19:17:23-06:00 | 2026-09-19T19:53:52-06:00 | 2 |
 | TRD-20260913-C85981B3 | [Integrated Project Curator, ontology and project initialization](trd_integrated-project-curator-ontology-and-project-initializati_2026-09-13.md) | trd_done | current | 2026-09-13T08:52:09-06:00 | 2026-09-13T09:02:47-06:00 | 2 |
 | TRD-20260910-EF54FD98 | [Sys4AI Project Curator shared-source capability](trd_sys4ai-project-curator-shared-source-capability_2026-09-10.md) | trd_done | current | 2026-09-10T16:55:12-06:00 | 2026-09-10T16:58:08-06:00 | 2 |
 | TRD-20260910-F345F166 | [Ontology and health reliability repairs and initialization prevention](trd_ontology-and-health-reliability-repairs-and-initialization-p_2026-09-10.md) | trd_done | current | 2026-09-10T11:16:22-06:00 | 2026-09-10T11:24:09-06:00 | 2 |

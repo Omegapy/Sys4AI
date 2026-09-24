@@ -1,0 +1,13 @@
+{
+  "scope": "Already-authorized service test execution using primary host runtime capability; does not grant new action authority or product ownership.",
+  "rules": [
+    "Service worker remains sole product/test/evidence writer. Primary host may execute a reviewed exact test command against named disposable frozen staging and capture stdout/stderr/exit only.",
+    "Before a host test, worker supplies exact command, staging root, source/test/fixture input manifest and intended writes. Manager reviews actual code and bounds; host rehashes immediately before execution. All writes must be confined to disposable staging/runtime or named local process state, not product, canonical Task or worker evidence files.",
+    "Worker must not change the handed-off stage while host executes it. Independent authored source may change only when clearly excluded from the frozen stage; such runs are historical unless their input hashes still match final accepted outputs.",
+    "Use direct current source-byte compilation where required; -B alone prevents pyc writes but not stale pyc reads. Apply same actual loaded-byte provenance gates to test bootstraps and real service startup/replacement.",
+    "Host returns actual executor attribution, command, exact input hashes, return status and safe captured output. Worker records its evidence from those actual observations without claiming it executed the host command.",
+    "No credentials/bootstrap values in command strings, outputs or evidence. Test processes are owned, explicitly stopped/reaped unless a named approved browser-test session needs a live listener, whose ownership and cleanup must be explicit.",
+    "The current child socket.bind EPERM is a runtime capability limit, not missing user scope authority. Do not repeat escalation prompts for this known boundary; prepare host-executable batches instead. Other ordinary safe child work continues under its actual permission policy.",
+    "Final delivery requires current direct runtime tests for every14 SERVICE_PACKAGE criterion, including HTTP isolation, race/bootstrap provenance, queue/time/RSS, cancellation/session isolation, health/CLI and installed production assets. Initial smoke proves none of those broader gates."
+  ]
+}

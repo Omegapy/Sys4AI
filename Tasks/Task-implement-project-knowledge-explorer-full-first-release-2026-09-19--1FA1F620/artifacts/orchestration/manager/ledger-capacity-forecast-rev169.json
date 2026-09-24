@@ -1,0 +1,49 @@
+{
+  "status": "Planning arithmetic, not a second Task ledger or an attempted helper mutation. No fake receipts or future results.",
+  "observed_revision": 169,
+  "observed_canonical_bytes": 876258,
+  "unchanged_limit_bytes": 1000000,
+  "remaining_bytes": 123742,
+  "observed_actual_cycle_costs": {
+    "service_v2_acceptance_growth": 46358,
+    "front_dependency_revise_and_inputs_net_growth": 15684,
+    "service_result_payload_bytes": 16480,
+    "service_verify_payload_bytes": 5576,
+    "result_event_plus_current_table_duplication_bytes": 32960,
+    "verify_event_plus_subtask_duplication_bytes": 11152
+  },
+  "remaining_groups": [
+    {
+      "group": "FRONTEND final",
+      "criteria_count": 29,
+      "exact_criteria_json_bytes": 4808
+    },
+    {
+      "group": "PRODUCTION_QUALIFICATION",
+      "criteria_count": 16,
+      "exact_criteria_json_bytes": 2699,
+      "prepared_baseline_json_bytes": 7089
+    },
+    {
+      "group": "DELIVERY_AND_CUTOVER",
+      "criteria_count": 27,
+      "exact_criteria_json_bytes": 4846
+    }
+  ],
+  "future_mandatory_reverification": [
+    "TASK029 changes at least ontology.py and commands.md currently bound by SERVICE V2, so current service result/checks must be refreshed.",
+    "A new service verification changes FRONTEND dependency version: unchanged baseline revision, same-owner input handoff, new current result and29-criterion verification remain required.",
+    "Any qualification dependency version bound before cutover must be refreshed with current affected checks after those changes."
+  ],
+  "scenario_assumptions": [
+    "Current FRONTEND final result is not yet delivered; its actual payload size cannot yet be calculated.",
+    "Future qualification/release output/check references are not yet settled; no assumption that all will fit is justified.",
+    "Known SERVICE V2 cost46358B is an observed comparable cycle, not a guaranteed lower bound for a narrower final service recheck.",
+    "No unknown future event is being simulated as canonical state. Measure each actual event before commitment and keep every direct live product/check, exact criterion and history gate."
+  ],
+  "capacity_risk": "123742B current headroom must hold frontend finalization, two full remaining groups, final changed-source service/frontend/dependent reverification and execution completion. The observed service cycle alone used46358B. A naive repeat of similarly sized cycles risks exceeding the fixed ceiling. This is an evidenced planning risk, not a current helper-cap failure or authority to change limits/history/scope.",
+  "actions": [
+    "Keep full input packets bounded with explicit recursive verification, concise references and no duplicate inspection ref lists.",
+    "Construct actual future payloads and measure their serialized increment before dispatch. If required work cannot fit, report the exact rejected/required payload rather than altering cap/schema/history or silently dropping criteria."
+  ]
+}

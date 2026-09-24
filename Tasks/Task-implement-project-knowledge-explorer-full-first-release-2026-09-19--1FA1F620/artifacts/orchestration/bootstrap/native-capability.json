@@ -1,0 +1,24 @@
+{
+  "tools": [
+    "spawn_agent",
+    "list_agents",
+    "send_message",
+    "followup_task",
+    "wait_agent",
+    "interrupt_agent"
+  ],
+  "observed_roster": {
+    "agents": [
+      {
+        "agent_name": "/root",
+        "agent_status": "running"
+      }
+    ]
+  },
+  "capacity": 4,
+  "available_slots": 3,
+  "nesting": "Developer native API supports child spawning and nested child spawning. Manager may delegate within four shared active slots.",
+  "settings": "Developer guarantee: full-history forks inherit exact parent model and reasoning effort and do not accept overrides. No agents.default_subagent_model/default_subagent_reasoning_effort or custom agent entries in user config; project .codex/config.toml absent. Use fork_turns all, omit overrides.",
+  "independence": "Manager is coordinator. All initial solvers must be dispatched before sibling candidate contents enter coordinator history; returns paths/hashes/status until dispatch complete.",
+  "memory": "No writes to Codex memories or project MEMORY during this execution: higher-priority developer requires an explicit user memory request. Read-only context remains permitted."
+}

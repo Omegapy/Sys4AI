@@ -1,0 +1,122 @@
+{
+  "event": {
+    "event_id": "EV_G3_BASELINE_RESERVE",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "assignment.reserve",
+    "data": {
+      "assignment_id": "BASELINE_WORKER_G3",
+      "subtask_id": "BASELINE",
+      "slot": "baseline_worker",
+      "role": {
+        "name": "project-sub-agent",
+        "agents_path": "Roles/project-sub-agent/AGENTS.md",
+        "role_path": "Roles/project-sub-agent/ROLE.md",
+        "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+        "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+        "catalog": {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/catalog-baseline.json",
+          "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+        }
+      },
+      "fit": {
+        "objective": "Capture the actual checkout, protected-file hashes/timestamps, current launch identity, relevant read/agent/Template results and all active workbench callers. Inventory selected canonical types, predicates, sources and supported process fields/order across linked sections. Inspect current initializer edition/resource callers and updater shipping exclusions, including publication intents/recovery state relevant to selected canonical inputs.",
+        "reads": [
+          "SOUL.md",
+          "ROLE.md",
+          "SPECS.md",
+          "SKILLS-depo",
+          "ONTOLOGY-depo",
+          "ONTOLOGY",
+          "ontology.yaml",
+          "ontology-advanced.yaml",
+          "depot",
+          "tools",
+          ".agents/skills/ontology",
+          "control_records/ontology",
+          "Implementation_Plans",
+          "TRDs"
+        ],
+        "writes": [
+          "Verification/project-knowledge-explorer-first-release/baseline.json",
+          "Verification/project-knowledge-explorer-first-release/caller-inventory.json",
+          "Verification/project-knowledge-explorer-first-release/process-content-inventory.json",
+          "Verification/project-knowledge-explorer-first-release/baseline-tests"
+        ],
+        "deliverable": "Baseline, caller inventory and process evidence inventory plus raw named check logs.",
+        "authority": "Read-only investigation and exact new evidence files only; no builds, installations, product edits, memory or canonical writes.",
+        "stop": "All TASK-001 acceptance criteria have direct evidence or exact unavailable-check explanation.",
+        "rationale": "Bounded read-only baseline collection follows explicit inspected commands and inventories; it requires one accountable evidence worker, not alternative architectural solutions.",
+        "capabilities": [
+          "Project analysis",
+          "Focused testing and verification",
+          "Evidence-backed result reporting"
+        ],
+        "tools": [
+          "exec_command"
+        ],
+        "skills": [
+          "ontology"
+        ],
+        "risk": "Read-only baseline collection; preserve canonical data and all unrelated work."
+      },
+      "runtime": {
+        "tools": [
+          "spawn_agent",
+          "list_agents",
+          "send_message",
+          "followup_task",
+          "interrupt_agent"
+        ],
+        "depth": 2,
+        "available_slots": 2,
+        "evidence": [
+          {
+            "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/runtime-baseline.json",
+            "sha256": "e60e8d39162981db099d93d7cf7be255eef8cd4765d7e7f3275f3f460cd18483"
+          }
+        ]
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/bootstrap/native-capability-generation3.json",
+            "sha256": "6dd60b9516f70383108cef38a5db76add702f2b54d69334548c84420d4e3f19e"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "context": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/baseline_5736ba5847323c5d12448c578e7715b8cad31a604377088b5030bc5a44051fe9.json",
+          "sha256": "5736ba5847323c5d12448c578e7715b8cad31a604377088b5030bc5a44051fe9"
+        },
+        {
+          "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+          "sha256": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b"
+        },
+        {
+          "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+          "sha256": "bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d"
+        }
+      ]
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Reserved one evidence worker for the unchanged BASELINE subtask."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Reserved one evidence worker for the unchanged BASELINE subtask.",
+    "current_summary": "Reserved one evidence worker for the unchanged BASELINE subtask.",
+    "next_step": "Launch the reserved baseline worker and record its actual native receipt.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

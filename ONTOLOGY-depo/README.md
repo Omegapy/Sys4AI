@@ -9,3 +9,10 @@ Use the installed ontology skill for `term Task`, `read` by stable ID, `capabili
 Each project imports the module version and complete file-set digest explicitly. A newer depot module never silently replaces a selected project version. Use distinct project URNs for extensions; shared core IDs cannot be redefined. Root-specific instances, publication grants, memory records, Task state and generated outputs do not belong in this collection.
 
 The first release uses only Python 3.12's standard library. SPARQL, RDF conversion and standards validation, ontology embeddings, inference, graph databases, visual editing and execution interception are outside this release. Project memory remains a separate store and keeps its existing backend choices.
+
+The current package also provides the read-only Project Knowledge Explorer via
+`explore --open`. `schema/explorer-v1.json` is its closed contract and the neutral
+`starter/ontology-explorer.yaml` is an optional presentation template. Explorer
+reads selected canonical knowledge and sources without enabling advanced
+profiles or browser authoring. Use the installed ontology skill's Explorer
+operations guide for adoption and launch.

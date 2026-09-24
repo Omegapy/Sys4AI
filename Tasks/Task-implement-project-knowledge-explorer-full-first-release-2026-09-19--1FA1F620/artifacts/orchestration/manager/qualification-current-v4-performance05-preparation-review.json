@@ -1,0 +1,58 @@
+{
+  "status": "refreeze_equality_reviewed_not_executed_or_released",
+  "job": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/host-performance-recipes-05.json",
+    "sha256": "8c944337c4a9017a3387b5a115adb36070492c4c241f2ea25eb92417bdbfbcea"
+  },
+  "prior_job": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/host-performance-recipes-04.json",
+    "sha256": "f22b12aaa67dcef65b56c14d1d6b0683e0f547566ac705daa391b83ad536d9b8"
+  },
+  "manifest": {
+    "path": "/private/tmp/explorer-qualification-performance-recipes-05/inputs.json",
+    "sha256": "3c98c4d5228ac714433bdd8411d93c8fa589bc7827d9c9763c13c736ff853605"
+  },
+  "verified_stage_and_live_files": 112,
+  "verified_tool_pins": 30,
+  "same_six_measurement_sources": [
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/host-performance-recipes.py",
+      "sha256": "9353df19f0e91d639bd21a2a87142ef753654399f605ff7edfe58d41b5044674"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/performance-case.py",
+      "sha256": "b473ca111f5fda6cbb7deff5915d4c089cf492d68a6c8f784ba0208af7a1e2c8"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/performance-control.py",
+      "sha256": "8582af3fd959de8bb6c3732691f146dd564f8e421ea52ac38fbcc8a942d0477d"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/performance-browser-case.py",
+      "sha256": "38f46373c661f80e848ef1a85c166445ac8d2b48ff1e3589bca6b219bacd2f8c"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/performance-browser.cjs",
+      "sha256": "e88cf7878eec15c176194342ca4ceb73ed448e5e406708bfc3c53115359fb820"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/compressed-runtime.cjs",
+      "sha256": "8b3afa84de0d95ebbc576d31d516bc5c5a4697a172a64664afbedf5e6d2cc27f"
+    }
+  ],
+  "runtime_metadata_source": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-headless-runtime-admission-v3.json",
+    "sha256": "dc54ad75688e722fc61aa93320c520a71c16063e33aba20e0bdb90047492eb14"
+  },
+  "unchanged_fields": [
+    "budget",
+    "gate",
+    "timeout_seconds",
+    "scenarios",
+    "source_writes",
+    "intended_writes",
+    "browser_runtime"
+  ],
+  "qualification": "Read-only equality/admission review. Actual TASK024 measurements remain unexecuted behind TASK022 then TASK023, with no concurrent test work at eventual run. No compression, fixture generation, child process or browser measurement performed here.",
+  "manager_preflight": "Initial live-mapping guess looked for runtime JSON under Q and stopped read-only with FileNotFoundError. Inspected actual prepare-performance-v4.py: named source is exact manager runtime admission SHA dc54ad756...eb14; used that source only. No stage/test/product changes or execution."
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "assignment_id": "CONTRACTS_IMPLEMENT_G3",
+  "accepted_proposal": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_SYNTHESIS_V1.md",
+    "sha256": "21238a8c00030d433315c8ffa3abb5237e8001fea0cee6b9f9153550e1d64785"
+  },
+  "finding_id": "CONTRACT_IMPL_NEUTRALITY_01",
+  "severity": "required implementation placement correction",
+  "source": {
+    "path": "ONTOLOGY-depo/schema/explorer-v1.json",
+    "sha256": "352b4c34f0582bb6f90ffb687c5537609ea8c8b2d6515132705763633987d1c6"
+  },
+  "observation": "The reusable schema includes $defs.ChangeMap.plan_id const PLAN-20260920-9B9964BA and local release ChangeRow definitions. The accepted reusable schema responsibility is presentation configuration and wire/session/cursor/package data; local plan/change-map traceability belongs in the release evidence.",
+  "requested_correction": "Remove the local release-only ChangeMap and ChangeRow definitions from the reusable schema, retain their complete exact local format and plan-specific validation in implementation-decisions or its documented disposable checker. Preserve every actual configuration/wire/session/cursor/build definition unchanged. Keep change-map actual plan_id/revision exactly unchanged. Re-run full schema and affected local-map checks, refresh dependent actual hashes and neutrality scan.",
+  "not_a_design_change": "No accepted runtime contract, plan requirement, file scope, dependency pin or authority changes. Existing incomplete dependency-artifact gate remains.",
+  "inspection_rule": "Do not erase original check history; mark old schema checks as historical when their hash changes and add current evidence."
+}

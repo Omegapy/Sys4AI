@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "source": {
+    "path": "SKILLS-depo/ontology/scripts/ontology_core.py",
+    "sha256": "09bc25023e873e4d7b1fcf9163e90be9f3ae46c23b8bbbe1928695c5d92e8e52"
+  },
+  "observed_function": "canonical_bytes(value) = (json.dumps(value, sort_keys=True, ensure_ascii=False, indent=2, allow_nan=False) + newline).encode(utf-8)",
+  "accepted_contract": {
+    "path": "SKILLS-depo/ontology/references/explorer-contract.md",
+    "sha256": "de02c72a60fb30a707d6d83bae915cac358eaab09378788e826640654ee8ae00"
+  },
+  "implementation_obligation": "Preserve the contract distinction between identities explicitly defined using canonical_bytes/core canonical_bytes and separately compact canonical JSON used for cursor wire/scope. Equivalent JSON object values do not imply equal digest bytes. Do not substitute one serialization without the exact contract basis.",
+  "qualification": "Source observation for fixture/read/build owners; no runtime implementation or contract change."
+}

@@ -1,0 +1,159 @@
+{
+  "event": {
+    "event_id": "EV_SNAPSHOT_RESERVE_G3",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "assignment.reserve",
+    "data": {
+      "assignment_id": "SNAPSHOT_WORKER_G3",
+      "subtask_id": "SNAPSHOT",
+      "slot": "snapshot_worker",
+      "role": {
+        "name": "project-sub-agent",
+        "agents_path": "Roles/project-sub-agent/AGENTS.md",
+        "role_path": "Roles/project-sub-agent/ROLE.md",
+        "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+        "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+        "catalog": {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/catalog-SNAPSHOT_WORKER_G3.json",
+          "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+        }
+      },
+      "fit": {
+        "objective": "Implement a thin immutable snapshot adapter over load_project, complete pre/post selected-input digests and non-creating read-only observation of existing publication coordination; reject active or unresolved selected-input transactions, bound retries/cache lifetime and retire views after active readers finish.",
+        "reads": [
+          "SOUL.md",
+          "ROLE.md",
+          "SPECS.md",
+          "SKILLS-depo/ontology",
+          "ONTOLOGY-depo",
+          "depot",
+          "tools",
+          "Implementation_Plans",
+          "TRDs",
+          "Verification/project-knowledge-explorer-first-release"
+        ],
+        "writes": [
+          "SKILLS-depo/ontology/scripts/ontology_explorer_snapshot.py",
+          "SKILLS-depo/ontology/tests/test_explorer_snapshot.py",
+          "Verification/project-knowledge-explorer-first-release/snapshot-tests"
+        ],
+        "deliverable": "Exact coherent immutable snapshot adapter, deterministic transaction/race/cache/nonmutation tests, and bounded actual results. Preserve TASK-004 verification steps verbatim from the immutable plan.",
+        "authority": "Implement only the selected snapshot module, tests and bounded verification receipts under the accepted contract. Use disposable /tmp fixtures for real publication and recovery tests. Never invoke publication against active root canonical files or modify shared writer helpers, root installation, Template, Task, memory or Git.",
+        "stop": "All five TASK-004 criteria pass direct current targeted evidence or a concrete contract defect is returned for manager reconciliation.",
+        "capabilities": [
+          "Project analysis",
+          "Bounded implementation",
+          "Focused testing and verification",
+          "Evidence-backed result reporting"
+        ],
+        "tools": [
+          "exec_command",
+          "web.run"
+        ],
+        "skills": [
+          "ontology"
+        ],
+        "risk": "Preserve coupled security, semantic, canonical-state and delivery contracts; report unsupported facts.",
+        "rationale": "project-sub-agent is valid for this bounded worker function; manager and curator-maintenance roles grant irrelevant responsibilities."
+      },
+      "runtime": {
+        "tools": [
+          "spawn_agent",
+          "list_agents",
+          "send_message",
+          "followup_task",
+          "interrupt_agent"
+        ],
+        "depth": 2,
+        "available_slots": 2,
+        "evidence": [
+          {
+            "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/runtime-SNAPSHOT_WORKER_G3.json",
+            "sha256": "337e599bcaa70e25a571303f40ba50f5116572e108bb6cbba2a2fb96546a71ce"
+          }
+        ]
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/bootstrap/native-capability-generation3.json",
+            "sha256": "6dd60b9516f70383108cef38a5db76add702f2b54d69334548c84420d4e3f19e"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "context": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/baseline_96787a00f2b7fff4cd29bdf0e3d7a3e1731251b7a4ca0fe4f3ec5fd6b92b059b.json",
+          "sha256": "96787a00f2b7fff4cd29bdf0e3d7a3e1731251b7a4ca0fe4f3ec5fd6b92b059b"
+        },
+        {
+          "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+          "sha256": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b"
+        },
+        {
+          "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+          "sha256": "bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d"
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_SYNTHESIS_V1.md",
+          "sha256": "21238a8c00030d433315c8ffa3abb5237e8001fea0cee6b9f9153550e1d64785"
+        },
+        {
+          "path": "SKILLS-depo/ontology/references/explorer-contract.md",
+          "sha256": "de02c72a60fb30a707d6d83bae915cac358eaab09378788e826640654ee8ae00"
+        },
+        {
+          "path": "ONTOLOGY-depo/schema/explorer-v1.json",
+          "sha256": "8e6d0ceb47c98e77d518f4d7c935986ab6982d1a1c15e12377a726e90fbbb7a4"
+        },
+        {
+          "path": "SKILLS-depo/ontology/tests/explorer_support.py",
+          "sha256": "c41e45aeb143e6d8203e4178730ac8bd1ffe34a4472bbba11bd23a7ad928aaba"
+        },
+        {
+          "path": "SKILLS-depo/ontology/tests/fixtures/explorer/README.md",
+          "sha256": "73884354ff513b41cb4b04b30d66ecb4aba392d66993743dc829b2a900c2662f"
+        },
+        {
+          "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/delivery.json",
+          "sha256": "3f6e471217bda741a031de41e2ba360103c261e99c0d2b634f0aff8a9aa513f9"
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/fixtures-acceptance.json",
+          "sha256": "811f4b9fcfe42c53897a6d4978f3fdbb288aaa4ba185a8f6e1d497b18118d814"
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/canonical-serialization-handoff.json",
+          "sha256": "e588334225874f92b14d61ce80b99689fe0267ff571dfe19ad1bacda5b63b76f"
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/current-root-source-reference-count-v2.json",
+          "sha256": "af73fdc578eea6ebf5115bdaca5a9b7c1305714c1dd5b5f708a98326528c1768"
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/user-command-approval-scope.json",
+          "sha256": "32056cf5231c577f301d8f3ddfc8723286a71d768dae5a8af42a3b63ec1b4b57"
+        }
+      ]
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Reserved SNAPSHOT_WORKER_G3 for bounded SNAPSHOT worker work."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Reserved SNAPSHOT_WORKER_G3 for bounded SNAPSHOT worker work.",
+    "current_summary": "Reserved SNAPSHOT_WORKER_G3 for bounded SNAPSHOT worker work.",
+    "next_step": "Launch the exact reserved native assignment and record its receipt.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

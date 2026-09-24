@@ -105,9 +105,10 @@ raw internal log.
 ## Canonical state
 
 `task.json` uses UTF-8, deterministic key order, and one terminating newline.
-Its selected encoding is lossless and bounded to 1,000,000 bytes. Use the
-existing two-space-indented encoding, byte-for-byte, whenever that complete
-encoding fits. Otherwise use compact JSON with `ensure_ascii=False` and
+Its selected encoding is lossless and bounded to 2,000,000 bytes in this
+project-local installation. Preserve the existing 1,000,000-byte pretty-encoding
+threshold: use the two-space-indented encoding, byte-for-byte, whenever that
+complete encoding is at most 1,000,000 bytes. Otherwise use compact JSON with `ensure_ascii=False` and
 separators `(",", ":")`, retaining every field, value, list entry, and historical
 record. Reject the operation if that complete compact encoding also exceeds
 the unchanged limit; never discard history or raise the limit to make it fit.
@@ -117,7 +118,7 @@ Readers validate the selected encoding; state writers and transaction recovery
 use the same choice for publication and exact post-state SHA256 bindings.
 Existing small states and old pretty-encoded transaction intents retain their
 semantics. Reading a state does not rewrite it. Transaction intents have their
-own unchanged 1,000,000-byte limit and use compact JSON to avoid duplicating
+own 2,000,000-byte limit and use compact JSON to avoid duplicating
 indentation around embedded state; this does not change the Task schema.
 
 Schema version 1 contains these fields in this order:

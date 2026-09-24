@@ -1,0 +1,77 @@
+{
+  "event": {
+    "event_id": "EV_SNAPSHOT_VERIFY_V2",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "subtask.verify",
+    "data": {
+      "subtask_id": "SNAPSHOT",
+      "baseline": "96787a00f2b7fff4cd29bdf0e3d7a3e1731251b7a4ca0fe4f3ec5fd6b92b059b",
+      "round": 1,
+      "result_id": "RES_SNAPSHOT_V2",
+      "acceptance_id": null,
+      "artifacts": [
+        "ART_SNAPSHOT_DELIVERY_V2"
+      ],
+      "criteria": [
+        {
+          "criterion": "Mixed-version inputs yield snapshot_changed/knowledge_updating; entry/relations/graph/cursor output never silently mixes snapshots.",
+          "evidence": "Current run06 and result-v2.json directly map test_byte_capture_never_loads_mid_read_replacement, test_continuous_churn_stops_after_three_attempts, test_unchanged_mtime_bytes_invalidate_expected_snapshot, test_source_only_observation_does_not_advance_view_or_allow_canonical_change, test_malformed_module_manifest_containers_are_fixed_errors, test_malformed_graph_and_source_containers_are_fixed_errors, test_malformed_nested_config_and_identity_containers_are_fixed_errors. Manager snapshot-acceptance-v2.json binds live source/tests and corrected fixed-error probe; broader integration gates remain separate."
+        },
+        {
+          "criterion": "Cache keys include selected root/project, snapshot, helper/adapter and presentation versions; cache memory/concurrency/lifetime are bounded.",
+          "evidence": "Current run06 and result-v2.json directly map test_no_read_writes_and_deep_immutable_cache, test_two_view_lifetime_reader_failure_and_capacity, test_same_identity_other_root_isolated, test_package_helper_schema_asset_and_set_drift_sticky, test_semantic_validator_runs_before_current_swap, test_selected_and_view_resources_are_bounded. Manager snapshot-acceptance-v2.json binds live source/tests and corrected fixed-error probe; broader integration gates remain separate."
+        },
+        {
+          "criterion": "Stale evidence does not erase safe canonical definitions and no read creates publication locks, repairs hashes or builds products.",
+          "evidence": "Current run06 and result-v2.json directly map test_stale_and_missing_sources_preserve_recorded_definition, test_no_read_writes_and_deep_immutable_cache, test_source_file_and_full_tuple_limits_are_independent. Manager snapshot-acceptance-v2.json binds live source/tests and corrected fixed-error probe; broader integration gates remain separate."
+        },
+        {
+          "criterion": "Interrupted multi-file publication with stable bytes is rejected until existing owner state establishes completion or recovery; malformed or unreadable relevant coordination returns a safe bounded diagnostic.",
+          "evidence": "Current run06 and result-v2.json directly map test_ordinary_partial_stable_commit_and_retained_recovery, test_integration_partial_multifile_and_recovery_receipt_shapes, test_all_target_bytes_without_receipt_remain_unresolved, test_malformed_orphan_and_mismatched_journals_fail_closed, test_complete_historical_receipt_accepts_later_superseding_publication, test_disjoint_unresolved_actual_transaction_is_excluded. Manager snapshot-acceptance-v2.json binds live source/tests and corrected fixed-error probe; broader integration gates remain separate."
+        },
+        {
+          "criterion": "Read-only coordination brackets materialization and covers missing-to-present lock races; ordinary browsing creates no lock, intent, receipt, repaired source hash or generated output.",
+          "evidence": "Current run06 and result-v2.json directly map test_existing_exclusive_lock_is_busy_and_read_does_not_replace_it, test_shared_lock_blocks_actual_publisher_through_postcheck, test_missing_lock_actual_completed_publication_retries, test_missing_lock_barrier_with_active_actual_publisher, test_absent_parent_creation_retries_without_creating_lock, test_unsafe_coordination_is_bounded_refusal. Manager snapshot-acceptance-v2.json binds live source/tests and corrected fixed-error probe; broader integration gates remain separate."
+        }
+      ],
+      "inspection": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/snapshot-acceptance-v2.json",
+          "sha256": "e03cb133e4b04410f045dfe61ea5c7f7eba6e4bc965efbc3dcb4ac695d364cd5"
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/snapshot-tests/delivery-v2.json",
+          "sha256": "3915a6f858b9f3aae1e047d9f5240bac15e83910c82282a768d3cead71729ec5"
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/snapshot-tests/HANDOFF-v2.md",
+          "sha256": "90a4307ae4c433feff7338ace8ec27217e25497d303a169ef584026d7d7a658c"
+        },
+        {
+          "path": "SKILLS-depo/ontology/scripts/ontology_explorer_snapshot.py",
+          "sha256": "d684c3039680b28c24680222e8f47a4de78638259d5e7426d33576399687324d"
+        },
+        {
+          "path": "SKILLS-depo/ontology/tests/test_explorer_snapshot.py",
+          "sha256": "757f1f8fbd9b85244e824b5a8442cd539302f0ddc12238b694cf24945c734077"
+        }
+      ]
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Reverified all five snapshot criteria on current corrected source, preserving prior accepted evidence historically."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Reverified all five snapshot criteria on current corrected source, preserving prior accepted evidence historically.",
+    "current_summary": "Reverified all five snapshot criteria on current corrected source, preserving prior accepted evidence historically.",
+    "next_step": "Archive accepted completed snapshot child and reserve reader implementation; keep packaging active.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

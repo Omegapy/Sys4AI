@@ -16,3 +16,4 @@
 | `PLAN-20260910-FAE2A15B` | Implement Sys4AI Project Curator shared-source capability | `retired` | 6 | 2026-09-12T14:20:44.726356Z | `Plan_sys4ai-project-curator-shared-source-capability_2026-09-10_FAE2A15B` | 11 | 50 | `pass` |
 | `PLAN-20260912-3CF9C73F` | Project Curator retained application plan | `completed` | 228 | 2026-09-12T22:51:49.148699Z | `Plan_project-curator-retained-application_2026-09-12_3CF9C73F` | 10 | 40 | `pass` |
 | `PLAN-20260913-64A6385B` | Integrated Project Curator, ontology and project initialization | `draft` | 1 | 2026-09-13T16:05:55.769210Z | `Plan_integrated-curator-ontology-project-initialization_2026-09-13_64A6385B` | 7 | 23 | `unresolved` |
+| `PLAN-20260920-9B9964BA` | Project Knowledge Explorer - full first release | `draft` | 1 | 2026-09-20T02:47:38.906176Z | `Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA` | 8 | 33 | `unresolved` |

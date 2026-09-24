@@ -1,0 +1,187 @@
+{
+  "event": {
+    "event_id": "EV_READER_DATA_RESERVE_G3",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "assignment.reserve",
+    "data": {
+      "assignment_id": "READER_DATA_WORKER_G3",
+      "subtask_id": "READER_DATA",
+      "slot": "reader_worker",
+      "role": {
+        "name": "project-sub-agent",
+        "agents_path": "Roles/project-sub-agent/AGENTS.md",
+        "role_path": "Roles/project-sub-agent/ROLE.md",
+        "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+        "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+        "catalog": {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/catalog-READER_DATA_WORKER_G3.json",
+          "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+        }
+      },
+      "fit": {
+        "objective": "Implement the exact accepted read adapter and selected-source helper for TASK005-007: deterministic compact search/browse, authenticated scoped keyset continuation, exact entry sections, typed one-hop relationships/neighborhoods and registered evidence extraction. Include the already specified backend process-section projection so later TASK016 UI consumes a complete frozen API; TASK016 browser/display acceptance remains with its frontend owner.",
+        "reads": [
+          "SOUL.md",
+          "ROLE.md",
+          "SPECS.md",
+          "SKILLS-depo/ontology",
+          "ONTOLOGY-depo",
+          "depot",
+          "tools",
+          "Implementation_Plans",
+          "TRDs",
+          "Verification/project-knowledge-explorer-first-release"
+        ],
+        "writes": [
+          "SKILLS-depo/ontology/scripts/ontology_explorer_read.py",
+          "SKILLS-depo/ontology/scripts/ontology_explorer_source.py",
+          "SKILLS-depo/ontology/tests/test_explorer_search.py",
+          "SKILLS-depo/ontology/tests/test_explorer_read.py",
+          "SKILLS-depo/ontology/tests/test_explorer_sources.py",
+          "SKILLS-depo/ontology/tests/test_explorer_processes.py",
+          "Verification/project-knowledge-explorer-first-release/reader-data-tests"
+        ],
+        "deliverable": "Current thin read adapter/source implementation and source-owned tests for all TASK005-007 criteria and backend process-section semantics, with direct fixture comparisons and boundary/cursor/source results.",
+        "authority": "Implement only the exact reader adapter/source helper, associated tests and bounded evidence. Reuse canonical normalization/ranking/loader/confinement semantics without changing agent defaults or shared writer code. Use synthetic temporary roots; no live canonical, memory, installed root, Template, Task or Git writes.",
+        "stop": "Every TASK005-007 criterion has direct current evidence; backend process API checks pass and remaining TASK016 UI obligations are explicitly handed off; no unresolved contract defect.",
+        "capabilities": [
+          "Project analysis",
+          "Bounded implementation",
+          "Focused testing and verification",
+          "Evidence-backed result reporting"
+        ],
+        "tools": [
+          "exec_command",
+          "web.run"
+        ],
+        "skills": [
+          "ontology"
+        ],
+        "risk": "Preserve coupled security, semantic, canonical-state and delivery contracts; report unsupported facts.",
+        "rationale": "project-sub-agent is valid for this bounded worker function; manager and curator-maintenance roles grant irrelevant responsibilities."
+      },
+      "runtime": {
+        "tools": [
+          "spawn_agent",
+          "list_agents",
+          "send_message",
+          "followup_task",
+          "interrupt_agent"
+        ],
+        "depth": 2,
+        "available_slots": 1,
+        "evidence": [
+          {
+            "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/runtime-READER_DATA_WORKER_G3.json",
+            "sha256": "0986066f5f944c32ed9216f4e95505a4125ab3f5f6c4d85c30cec3e6857bdd7d"
+          }
+        ]
+      },
+      "settings": {
+        "effort": null,
+        "evidence": [
+          {
+            "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/bootstrap/native-capability-generation3.json",
+            "sha256": "6dd60b9516f70383108cef38a5db76add702f2b54d69334548c84420d4e3f19e"
+          }
+        ],
+        "mode": "verified_inheritance",
+        "model": null
+      },
+      "context": [
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/baseline_b233451edb8f7838bd33f034e2004c4fcca8785ccf432c044fc9ae159a44f71d.json",
+          "sha256": "b233451edb8f7838bd33f034e2004c4fcca8785ccf432c044fc9ae159a44f71d"
+        },
+        {
+          "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+          "sha256": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b"
+        },
+        {
+          "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+          "sha256": "bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d"
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_SYNTHESIS_V1.md",
+          "sha256": "21238a8c00030d433315c8ffa3abb5237e8001fea0cee6b9f9153550e1d64785"
+        },
+        {
+          "path": "SKILLS-depo/ontology/references/explorer-contract.md",
+          "sha256": "de02c72a60fb30a707d6d83bae915cac358eaab09378788e826640654ee8ae00"
+        },
+        {
+          "path": "ONTOLOGY-depo/schema/explorer-v1.json",
+          "sha256": "8e6d0ceb47c98e77d518f4d7c935986ab6982d1a1c15e12377a726e90fbbb7a4"
+        },
+        {
+          "path": "SKILLS-depo/ontology/scripts/ontology_explorer_snapshot.py",
+          "sha256": "d684c3039680b28c24680222e8f47a4de78638259d5e7426d33576399687324d"
+        },
+        {
+          "path": "SKILLS-depo/ontology/scripts/ontology_retrieval.py",
+          "sha256": "43e6693e7a6d625e0a829e48e430f8e5d319a77e8d0679dfc29d7224a389da4f"
+        },
+        {
+          "path": "SKILLS-depo/ontology/tests/explorer_support.py",
+          "sha256": "c41e45aeb143e6d8203e4178730ac8bd1ffe34a4472bbba11bd23a7ad928aaba"
+        },
+        {
+          "path": "SKILLS-depo/ontology/tests/fixtures/explorer/README.md",
+          "sha256": "73884354ff513b41cb4b04b30d66ecb4aba392d66993743dc829b2a900c2662f"
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/snapshot-tests/delivery-v2.json",
+          "sha256": "3915a6f858b9f3aae1e047d9f5240bac15e83910c82282a768d3cead71729ec5"
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/snapshot-tests/HANDOFF.md",
+          "sha256": "6f2fa4b32efa2e0ba6bcd0083454d92c3fc48b6609e41504833f558c494389ed"
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/snapshot-tests/HANDOFF-v2.md",
+          "sha256": "90a4307ae4c433feff7338ace8ec27217e25497d303a169ef584026d7d7a658c"
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/process-content-inventory.json",
+          "sha256": "74ac863158a239d7d5e92713ee3f65ff0b9f521e975a2685845a31dc07e3c6a9"
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/snapshot-acceptance-v2.json",
+          "sha256": "e03cb133e4b04410f045dfe61ea5c7f7eba6e4bc965efbc3dcb4ac695d364cd5"
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/reader-integration-handoff.json",
+          "sha256": "219962418220116dc92ce1e0518efddd0f92fd75a9bb588096daf93620fec325"
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/canonical-serialization-handoff.json",
+          "sha256": "e588334225874f92b14d61ce80b99689fe0267ff571dfe19ad1bacda5b63b76f"
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/current-root-source-reference-count-v2.json",
+          "sha256": "af73fdc578eea6ebf5115bdaca5a9b7c1305714c1dd5b5f708a98326528c1768"
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/user-command-approval-scope.json",
+          "sha256": "32056cf5231c577f301d8f3ddfc8723286a71d768dae5a8af42a3b63ec1b4b57"
+        }
+      ]
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Reserved READER_DATA_WORKER_G3 for bounded READER_DATA worker work."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Reserved READER_DATA_WORKER_G3 for bounded READER_DATA worker work.",
+    "current_summary": "Reserved READER_DATA_WORKER_G3 for bounded READER_DATA worker work.",
+    "next_step": "Launch the exact reserved native assignment and record its receipt.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

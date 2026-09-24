@@ -1,0 +1,44 @@
+{
+  "event": {
+    "event_id": "EV_SERVICE_V3_USAGE_RECOVERY_RESUME",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "assignment.resume",
+    "data": {
+      "assignment_id": "SERVICE_PACKAGE_WORKER_G3",
+      "runtime": {
+        "available_slots": 1,
+        "depth": 2,
+        "evidence": [
+          {
+            "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/runtime-service-v3-usage-recovery.json",
+            "sha256": "6c88936e3e535f1f88ff311f7ac5ffa977c831a561ddd27cea5620ab8f297f4c"
+          }
+        ],
+        "tools": [
+          "spawn_agent",
+          "list_agents",
+          "send_message",
+          "followup_task",
+          "interrupt_agent"
+        ]
+      },
+      "reason": "Original model successfully completed one control-only recovery after explicit user resume/fresh usage availability. Actual stopped observation committed at191; same111-ref packet/full14criteria/settings/scope unchanged and no partial writes."
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Resumed the same original SERVICE V3 assignment after actual successful usage recovery and supported stopped-state reconciliation."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Resumed the same original SERVICE V3 assignment after actual successful usage recovery and supported stopped-state reconciliation.",
+    "current_summary": "Resumed the same original SERVICE V3 assignment after actual successful usage recovery and supported stopped-state reconciliation.",
+    "next_step": "Wake original service owner to perform unchanged V3 verification; stop and report if a new usage failure occurs, without unchanged repeated attempts.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

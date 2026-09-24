@@ -1,0 +1,133 @@
+{
+  "event": {
+    "event_id": "EV_SERVICE_PACKAGE_DEFINE",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "subtask.define",
+    "data": {
+      "subtask_id": "SERVICE_PACKAGE",
+      "baseline": {
+        "reads": [
+          "SOUL.md",
+          "ROLE.md",
+          "SPECS.md",
+          "SKILLS-depo/ontology",
+          "ONTOLOGY-depo",
+          "depot",
+          "tools",
+          "Implementation_Plans",
+          "TRDs",
+          "Verification/project-knowledge-explorer-first-release"
+        ],
+        "protected": [
+          "MEMORY",
+          "memory.yaml",
+          "ONTOLOGY",
+          "ontology.yaml",
+          "ontology-advanced.yaml",
+          "control_records",
+          "Projects",
+          ".agents"
+        ],
+        "inputs": [
+          {
+            "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+            "sha256": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b"
+          },
+          {
+            "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+            "sha256": "bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d"
+          },
+          {
+            "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_SYNTHESIS_V1.md",
+            "sha256": "21238a8c00030d433315c8ffa3abb5237e8001fea0cee6b9f9153550e1d64785"
+          }
+        ],
+        "objective": "Implement TASK008-011 in internal plan order: closed bounded reader service, supervised worker, isolated sessions, exact asset-serving integration and explicit explore/explorer-health launch. Integrate accepted package tools with a minimal production bootstrap fixture before the later complete frontend build.",
+        "category": "generic",
+        "rationale": "The accepted extra-complex CONTRACTS synthesis fixes the complete service/session/worker/asset/launch architecture. A single accountable worker implements these coupled service files; package tooling is an independently verified dependency. Any contract defect returns to the originating design cycle.",
+        "implementation_required": true,
+        "requirements": [
+          "REQ-012",
+          "REQ-013",
+          "REQ-020",
+          "REQ-023",
+          "REQ-026",
+          "REQ-028",
+          "REQ-029",
+          "REQ-030",
+          "REQ-031",
+          "REQ-032",
+          "REQ-033",
+          "REQ-037",
+          "REQ-039",
+          "REQ-040",
+          "REQ-049"
+        ],
+        "dependencies": [
+          "SNAPSHOT",
+          "READER_DATA",
+          "PACKAGE_TOOLS"
+        ],
+        "writes": [
+          "SKILLS-depo/ontology/scripts/ontology_explorer.py",
+          "SKILLS-depo/ontology/scripts/ontology_explorer_worker.py",
+          "SKILLS-depo/ontology/scripts/ontology_explorer_health.py",
+          "SKILLS-depo/ontology/scripts/ontology.py",
+          "SKILLS-depo/ontology/references/commands.md",
+          "SKILLS-depo/ontology/tests/test_explorer_service.py",
+          "SKILLS-depo/ontology/tests/test_explorer_sessions.py",
+          "SKILLS-depo/ontology/tests/test_explorer_health.py",
+          "SKILLS-depo/ontology/explorer/index.html",
+          "SKILLS-depo/ontology/explorer/src/main.ts",
+          "SKILLS-depo/ontology/explorer/assets/",
+          "Verification/project-knowledge-explorer-first-release/service-tests"
+        ],
+        "deliverable": "Actual closed service/session/worker/health/CLI implementation and minimal offline production bootstrap, all14 verbatim TASK008-011 criteria with direct current HTTP/resource/isolation/build/launch evidence. Complete later reader UI remains TASK012-021.",
+        "authority": "Write only listed sources, runtime output inventory and evidence. Use exact accepted reader/package APIs; no shared canonical loader/writer, frozen contract/lock/schema/notices, package-tool source, active root adoption, Template, memory, Task or Git writes. No workbench retirement until separate later qualified gate. Disposable fixtures and explicit scoped build/service launch permitted.",
+        "stop": "All14 exact TASK008-011 criteria have current direct evidence, or a concrete accepted-contract defect/actual capability blocker is returned without lowering criteria.",
+        "criteria": [
+          "The service imports only reader/transport dependencies and cannot invoke old authoring, query, generic execute or profile/Task/skill mutation operations.",
+          "Responses carry schema/project/snapshot/scope/filter/page/effective-limits/coverage/diagnostics, unknown hasMore is null and totals label exact count scope.",
+          "Installed/configured/running/readable/stale/wrong-project/unavailable are distinct health facts, independent of optional readiness sweeps.",
+          "Invalid Host/Origin/CSRF/session and other-service credentials disclose no project data; server fixes root and rejects browser authority/scope fields.",
+          "Bootstrap consumes once, leaves visible URL/history before navigation and never appears in copied local links, diagnostics, test fixtures or evidence.",
+          "Expiry uses fresh reader sessions and preserves safe desired context; browser never claims it restarts Python.",
+          "Installed production assets include build identity, dependency lock and notices in the package; HTTP serves only runtime assets with correct MIME/no-store/nosniff/referrer/CSP protections.",
+          "Missing bundle returns incomplete-package error with a maintenance route; no browser launch performs npm/build/install or enables advanced profiles.",
+          "Strict explorer configuration is optional-safe-default or explicit validated selected-project configuration; no depot IDs/labels become shared frontend constants.",
+          "Manifest, hashed runtime files and notices are included by the unchanged Template discovery rules; dist/build exclusions stay effective. The manifest names runtime assets only, while the lock and build instructions remain package metadata outside HTTP access.",
+          "The proposed explore --open command starts only the selected reader service and optionally opens a fresh safe bootstrap entry under explicit launch authority.",
+          "Health distinguishes installed/configured/running/readable/stale/wrong-project/unavailable without unrelated optional readiness sweeps or startup side effects.",
+          "Service identity differs from sys4ai-ontology-workbench; health uses a bounded explicit loopback origin and never accepts a bootstrap URL.",
+          "Old authoring CLI behavior is classified and preserved until qualified cutover; no documentation claims the reader can restart a stopped process from a web page."
+        ],
+        "slots": [
+          {
+            "slot": "service_worker",
+            "function": "worker",
+            "perspective": "Closed transport/session/worker and explicit production bootstrap integration",
+            "solver_slot": null
+          }
+        ]
+      }
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Defined coupled TASK008-011 service implementation with all14 original criteria and current reader/package dependencies."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Defined coupled TASK008-011 service implementation with all14 original criteria and current reader/package dependencies.",
+    "current_summary": "Defined coupled TASK008-011 service implementation with all14 original criteria and current reader/package dependencies.",
+    "next_step": "Finish and accept snapshot/package tools, then reader data; dispatch this service owner only after prerequisites pass.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": [
+      "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/observed-capacity-recovery.json"
+    ]
+  }
+}

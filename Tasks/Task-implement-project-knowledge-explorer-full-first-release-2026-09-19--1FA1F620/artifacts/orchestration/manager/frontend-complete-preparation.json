@@ -1,0 +1,416 @@
+{
+  "status": "Prepared complete frontend problem packet; not an assignment, implementation, browser pass or canonical subtask definition.",
+  "source": {
+    "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+    "sha256": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b"
+  },
+  "plan_tasks": [
+    {
+      "acceptance_criteria": [
+        "Pure state transitions preserve distinct identity/focus/query/filter/snapshot/expansion/source/preference fields and reject obsolete response sequences even when cancellation loses a race.",
+        "Route codecs encode exact IDs and safe view state; bootstrap/session values and source bodies cannot enter copied links, history state or durable preference storage.",
+        "Selection emits one navigation event, camera changes emit none, snapshot conflict retains old coherent context, and explicit refresh discards incompatible cursor/expansion state atomically.",
+        "Only the shared read client initiates allowed reads; later screens and renderer consume state and emit intentions. Browser-level Back/Forward and focus integration are assigned to TASK-019."
+      ],
+      "action": "Implement one versioned API client and explicit state transitions for identity, focus, search/filter, snapshot, expansion, source selection and preferences; encode stable-ID hash routes and transient session handling before screen consumers are connected.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-002",
+        "TASK-005",
+        "TASK-006",
+        "TASK-007",
+        "TASK-009",
+        "TASK-010",
+        "TASK-011"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-003",
+      "requirement_ids": [
+        "REQ-012",
+        "REQ-013",
+        "REQ-015",
+        "REQ-020",
+        "REQ-025",
+        "REQ-030",
+        "REQ-035"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "SKILLS-depo/ontology/explorer/src/api.ts",
+        "SKILLS-depo/ontology/explorer/src/state.ts",
+        "SKILLS-depo/ontology/explorer/src/routes.ts",
+        "SKILLS-depo/ontology/explorer/src/preferences.ts",
+        "SKILLS-depo/ontology/explorer/tests/state.test.ts"
+      ],
+      "task_id": "TASK-012",
+      "title": "Implement shared read client, state and safe route foundations",
+      "verification_steps": [
+        "Run pure route/state tests for IDs, query/filter round trips, late entry-A-after-B responses, cancelled requests, snapshot conflict/refresh and preference reset.",
+        "Test bootstrap consumption and safe desired-route restoration with a stubbed session exchange; inspect serialized route/preferences for forbidden secrets or source content."
+      ]
+    },
+    {
+      "acceptance_criteria": [
+        "The first screen exposes only reading destinations and no authoring/advanced modules; no giant graph or management counters are initial navigation.",
+        "Overview uses validated project purpose/starting IDs; empty local graph explains imported core vocabulary and offers categories/search."
+      ],
+      "action": "Create Overview/Terms/Processes/Map navigation with persistent project/search, configured real starting identities, responsive semantic landmarks and secondary theme/help.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-011",
+        "TASK-012"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-003",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-004",
+        "REQ-006",
+        "REQ-013",
+        "REQ-020",
+        "REQ-034",
+        "REQ-036"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "SKILLS-depo/ontology/explorer/src/app.ts",
+        "SKILLS-depo/ontology/explorer/src/overview.ts",
+        "SKILLS-depo/ontology/explorer/src/styles.css"
+      ],
+      "task_id": "TASK-013",
+      "title": "Implement semantic reader shell and Overview",
+      "verification_steps": [
+        "Inspect production module graph and DOM for AT-01 exclusion compliance.",
+        "Exercise a neutral-only fixture and a specialized category mapping without editing shared frontend code."
+      ]
+    },
+    {
+      "acceptance_criteria": [
+        "Visible labeled search and submit work without shortcuts; autocomplete follows Arrow/Enter/Escape behavior without deleting query.",
+        "Results show supported category, preferred label, recorded excerpt and distinctions; lower-frequency filters remain under one control.",
+        "All bound/incomplete/empty cases preserve query and offer useful narrow/clear/continue actions without invented totals."
+      ],
+      "action": "Build compact results, alphabetical/category browse, removable filter chips, preserved query empty states and optional accessible autocomplete using deterministic API responses.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-013",
+        "TASK-005",
+        "TASK-012"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-003",
+      "requirement_ids": [
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-018",
+        "REQ-034",
+        "REQ-035"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "SKILLS-depo/ontology/explorer/src/search.ts",
+        "SKILLS-depo/ontology/explorer/tests/search.spec.ts"
+      ],
+      "task_id": "TASK-014",
+      "title": "Implement discoverable accessible search and browsing",
+      "verification_steps": [
+        "Browser-test AT-02 through AT-06 including multi-page filtering and ambiguity; verify no automatic identity selection.",
+        "Keyboard-test suggestions, announcements and focus while typing/cancelling; a late prior query cannot replace current results."
+      ]
+    },
+    {
+      "acceptance_criteria": [
+        "Definitions/aliases/scope/examples/non-examples remain exact; historical status, source freshness and authority meanings are distinct with warnings by affected information.",
+        "Relationship member, qualifier, direction and exact ID are independently inspectable; lengthy qualifiers remain accessible and cannot look unconditional.",
+        "Opening source retains entry, moves focus meaningfully, escapes text and returns focus to exact trigger on close."
+      ],
+      "action": "Build name/definition-first entry reading with optional canonical context, relationships, technical Details, source drawer, View on map and safe copy actions.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-013",
+        "TASK-006",
+        "TASK-007",
+        "TASK-012"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-003",
+      "requirement_ids": [
+        "REQ-003",
+        "REQ-008",
+        "REQ-009",
+        "REQ-011",
+        "REQ-020",
+        "REQ-032",
+        "REQ-035"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "SKILLS-depo/ontology/explorer/src/entry.ts",
+        "SKILLS-depo/ontology/explorer/src/sources.ts",
+        "SKILLS-depo/ontology/explorer/tests/entry.spec.ts"
+      ],
+      "task_id": "TASK-015",
+      "title": "Implement faithful entries and evidence drawer",
+      "verification_steps": [
+        "Run AT-07, AT-08, AT-09, AT-13, AT-14, AT-19, AT-20, AT-27 with defined/missing sections, deprecated replacements, long qualifiers and stale sources.",
+        "Check Copy local link excludes session data and states dependence on the live local service; stable-ID copy is durable."
+      ]
+    },
+    {
+      "acceptance_criteria": [
+        "Purpose/applicability/roles/inputs/outputs/skills/documents/order each link to exact selected canonical or source support; unsupported fields are omitted.",
+        "Absent ordering displays exactly: An ordered description has not been recorded. These are the documented relationships.",
+        "Paths/dependencies/layout are never inferred as process execution order; process pages execute nothing, and no additional graph library or authoring is introduced."
+      ],
+      "action": "Project supported process fields with numbered source-backed order when recorded and preserve the exact missing-order text when sequence is absent or ambiguous.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-001",
+        "TASK-006",
+        "TASK-007",
+        "TASK-015",
+        "TASK-012"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-003",
+      "requirement_ids": [
+        "REQ-010",
+        "REQ-011",
+        "REQ-020",
+        "REQ-027",
+        "REQ-042"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "SKILLS-depo/ontology/explorer/src/processes.ts",
+        "SKILLS-depo/ontology/scripts/ontology_explorer_processes.py",
+        "SKILLS-depo/ontology/tests/test_explorer_processes.py"
+      ],
+      "task_id": "TASK-016",
+      "title": "Implement source-supported process reading",
+      "verification_steps": [
+        "Run AT-17, AT-18 with supported ordered, unordered, ambiguous branch and stale/missing source examples.",
+        "Compare displayed sequence/branches to source sections; inspect process navigation through keyboard and source drawer."
+      ]
+    },
+    {
+      "acceptance_criteria": [
+        "The normalized model retains all returned node/relation IDs, canonical endpoints/predicates/direction, qualifiers, sources, warnings, filters and limits without inferring completeness.",
+        "List entry/evidence/focus/expand actions work using keyboard and the shared read/state layer with the renderer module absent; no canvas/drag/hover/double-click is required.",
+        "Selection and returned scope survive switching intentions; actual Map/List parity is a required integration gate in TASK-019 after the renderer is connected."
+      ],
+      "action": "Build one normalized relationship model and semantic List over bounded reader data, preserving exact selection, filters, returned scope, identity/direction/qualifier/evidence and focus/more-connection intentions independently of the graph library.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-006",
+        "TASK-015",
+        "TASK-012"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-004",
+      "requirement_ids": [
+        "REQ-009",
+        "REQ-015",
+        "REQ-016",
+        "REQ-018",
+        "REQ-019",
+        "REQ-034"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "SKILLS-depo/ontology/explorer/src/map/list.ts",
+        "SKILLS-depo/ontology/explorer/tests/map-list.spec.ts",
+        "SKILLS-depo/ontology/explorer/src/map/data.ts"
+      ],
+      "task_id": "TASK-017",
+      "title": "Implement normalized relationship data and independent List",
+      "verification_steps": [
+        "Compare List and normalized API records against exact fixture identities, direction, qualifiers, sources and coverage; complete neighbor/source/focus/more/return using keyboard with the renderer unavailable.",
+        "Verify List has no renderer import dependency and exposes meaningful result/selection announcements without hundreds of hidden controls. AT-16 and AT-29 actual Map/List switching is verified by TASK-019."
+      ]
+    },
+    {
+      "acceptance_criteria": [
+        "Initial Map uses a selected ID or reviewed picker and one-step bounded data; selecting updates details without camera/focus change.",
+        "Focus here deliberately replaces neighborhood; expansion preserves existing positions where practical, stops bounded layout and respects cumulative 100-node/200-edge proposed ceiling and tighter service limits.",
+        "Parallel IDs, self-loops, cycles, conditional qualifiers, direction and selected/adjacent labels remain faithful; no continuous hidden simulation or unsupported semantic position claim.",
+        "Renderer reads the normalized model and emits intentions; it never initiates source/ontology reads. Legend and guidance retain: Select a term to read it. Use Focus here to explore its connections."
+      ],
+      "action": "Implement the renderer adapter and bounded stable 2D map with distinct select/focus/expand, canonical IDs, directed labeled edges, qualifier inspection, pan/zoom/Fit/Reset and failure fallback.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-006",
+        "TASK-012",
+        "TASK-017"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-004",
+      "requirement_ids": [
+        "REQ-009",
+        "REQ-014",
+        "REQ-015",
+        "REQ-016",
+        "REQ-017",
+        "REQ-018",
+        "REQ-025",
+        "REQ-033"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+        "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+        "SKILLS-depo/ontology/explorer/tests/map.spec.ts"
+      ],
+      "task_id": "TASK-018",
+      "title": "Implement focused graph renderer and controls",
+      "verification_steps": [
+        "Run AT-10, AT-11, AT-12, AT-13, AT-14, AT-15 on actual production renderer, high-degree fixture and timeout fallback.",
+        "Measure that selection does not recreate graph, leaving Map disposes instances/listeners/timers/observers, and reduced motion stops animation."
+      ]
+    },
+    {
+      "acceptance_criteria": [
+        "AT-21, AT-22, AT-23, AT-34 preserve useful context, reject stale responses and mixed snapshots, discard incompatible expansions/cursors on refresh and keep List/evidence usable if renderer fails.",
+        "When no relationships are recorded in the returned view, say No relationships are recorded in this view; byte/time/traversal limits and incomplete data are distinguished from absence.",
+        "320 CSS-pixel layouts, substantial zoom, both themes and reduced motion preserve controls, reading, narrow drawers and vertically flowing process/source text.",
+        "Back/Forward restores useful reading/map context; deliberate node selection pushes one history item while camera movements do not spam history.",
+        "Terms/Map switching preserves exact identity; credentials are absent from safe routes and copied links; normal new-tab entry links work after authentication where practical.",
+        "Theme light/dark/system and reset affect presentation only; source bodies and knowledge are not persisted to browser databases/storage.",
+        "AT-16 and AT-29 compare exact Map/List relation IDs, direction, qualifiers, sources, warnings, filters, selection and returned scope. Every substantive map action remains usable through List when graph import or rendering fails."
+      ],
+      "action": "Integrate region-scoped loading/errors, session/service recovery, coherent Refresh knowledge, response sequence checks, renderer fallback and responsive theme/reflow behavior.",
+      "blocker_reason": null,
+      "completed_at": null,
+      "dependencies": [
+        "TASK-014",
+        "TASK-015",
+        "TASK-012",
+        "TASK-016",
+        "TASK-018",
+        "TASK-017"
+      ],
+      "design_basis": [],
+      "evidence": [],
+      "parallel_group": null,
+      "pause_reason": null,
+      "phase_id": "PHASE-004",
+      "requirement_ids": [
+        "REQ-013",
+        "REQ-017",
+        "REQ-018",
+        "REQ-020",
+        "REQ-021",
+        "REQ-025",
+        "REQ-035",
+        "REQ-036"
+      ],
+      "risks": [],
+      "skip_authority": null,
+      "skip_reason": null,
+      "status": "planned",
+      "target_artifacts": [
+        "SKILLS-depo/ontology/explorer/src/feedback.ts",
+        "SKILLS-depo/ontology/explorer/src/styles.css",
+        "SKILLS-depo/ontology/explorer/tests/resilience.spec.ts",
+        "SKILLS-depo/ontology/explorer/tests/navigation.spec.ts",
+        "SKILLS-depo/ontology/explorer/tests/map-list.spec.ts"
+      ],
+      "task_id": "TASK-019",
+      "title": "Integrate truthful loading and failure recovery",
+      "verification_steps": [
+        "Inject out-of-order fetches, session expiry, server stop, invalid config, renderer exception, layout timeout and mid-navigation publication.",
+        "Observe focus restoration/announcements, 320px reflow, zoom and dark/light contrast on production assets.",
+        "Test route round-trips, back/forward, malformed ID, old project context, safe post-auth restoration and AT-22 response races.",
+        "Inspect browser storage after sources/maps and reset; only documented harmless project-specific preferences and necessary transient session handling remain.",
+        "Run real Map/List switching and keyboard-only neighbor/source/focus/more/return flows, including absent renderer module, layout timeout and truncated data; compare both views against the same normalized response."
+      ]
+    }
+  ],
+  "criteria_count": 29,
+  "proposed_subtask": "FRONTEND",
+  "category": "generic",
+  "category_basis": "The accepted extra-complex architecture freezes wire, state, route, source, process, renderer, layout, limits and session contracts. One accountable worker implements their coupled DOM/API/browser integration; any new contradictory architecture commitment returns to originating design gates.",
+  "dependencies": [
+    "SERVICE_PACKAGE",
+    "READER_DATA",
+    "CLIENT_FOUNDATIONS"
+  ],
+  "required_artifacts": "Actual shared API client; Overview/Terms/Processes/Map shell; accessible search; faithful entry and source drawer; configured supported process projection; shared-model List and lazy bounded Cytoscape renderer; responsive state/feedback/history; production assets and direct current functional browser evidence for every29 criterion.",
+  "frozen_consumers": [
+    "Use accepted contracts.ts/state.ts/routes.ts/preferences.ts/model.ts as pure foundation APIs. These are owned delivered files; route any defects to their existing owner. The frontend owns api.ts and actual browser/DOM integration.",
+    "Use accepted Reader process projection in ontology_explorer_read.py. The planned process helper function is integrated there; do not invent a second inference layer based on types or labels.",
+    "Map data uses the accepted pure src/model.ts. Map/List both consume identical admitted identities/qualifiers/sources/limits, including consuming detail markers. A separate data module may adapt calls but must not fork semantics.",
+    "Only shared api.ts performs allowed session/read HTTP calls. Renderers and screens emit intentions. Decode raw bounded wire before numbers or duplicate keys can be lost.",
+    "Treat authenticated deep-link parsing and Back/Forward as atomic complete route-state admission. Current navigate(kind=route) changes route/options without hydrating query/filters/selection/focus; frontend must restore those coherently before beginRequest and create one actual history event.",
+    "Exact qualifier canonical_json chunks remain literal text, never parsed into lossy Numbers. Markers must visibly retain conditional/unknown relation detail rather than imply unconditional edges.",
+    "Keep current14 service criteria valid after production main/index/assets replacement. Reverification is mandatory against actual final files; frozen snapshots of old outputs do not retain current acceptance."
+  ],
+  "shared_output_gate": [
+    "Dispatch only after SERVICE_PACKAGE acceptance and its writer is observed completed; no overlapping live main/index/assets owners.",
+    "Implement full frontend in original internal task dependency order. Keep bounded stage evidence historical, then stop final product writes and observe actual completion.",
+    "Rebind same service owner with exact current production inputs and current fresh role/runtime. Verify service isolation/resource/session/asset/CLI behavior against final main/index/assets; record and verify SERVICE V2 with current live file hashes.",
+    "Because the helper binds dependency verification hashes, revise FRONTEND to its unchanged complete baseline after all affected owners are stopped, retaining the prior round. Replace obsolete same-path context hashes, send exact packet, commit assignment.inputs, then wake same frontend owner for final current-input verification.",
+    "Record final frontend result and all29 exact criteria only after current service dependency and final output checks agree. No lowered criteria or claim that earlier checks cover changed bytes."
+  ],
+  "separate_later_gates": [
+    "TASK020 adversarial security",
+    "TASK021 final offline/CSP production",
+    "TASK022 actual Safari/VoiceOver and available platform validation",
+    "TASK023 full browser protected-state comparison",
+    "TASK024 exact measured performance and first refusal threshold",
+    "TASK025 actual owner/participant walkthrough",
+    "TASK026\u2013033 distribution/adoption/cutover/regression/rollback/release/final audit"
+  ],
+  "preservation": "No live canonical knowledge, memory, unrelated edits, active root adoption, Template writes, workbench retirement or Git publication in frontend implementation.",
+  "evidence_size": "Keep current live product files and necessary checks explicitly bound. Historical detailed receipts may be indexed in bounded delivery manifests and directly audited. No limit changes, hidden ledger, history deletion or output-copy freshness bypass."
+}

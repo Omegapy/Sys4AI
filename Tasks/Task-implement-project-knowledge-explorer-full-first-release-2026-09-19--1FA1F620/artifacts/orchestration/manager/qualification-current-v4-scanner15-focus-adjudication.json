@@ -1,0 +1,94 @@
+{
+  "status": "test_assertion_overconstraint_observed_no_product_defect_inferred",
+  "root_receipt": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-current-v4-scanner15-failed-receipt.json",
+    "sha256": "67d45d12509fc298512c2494d86618fd1e4d4b30907255ca45a602080a4f4742"
+  },
+  "root_stdout": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-current-v4-scanner15-failed-stdout.json",
+    "sha256": "10cf3841837bd37e35d758015f83f67e8c0d2998619b85a691ebec8a739e859e"
+  },
+  "earlier_failure": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-current-v4-scanner14-failed-receipt.json",
+    "sha256": "1c9c5a69bf463b0f489087156a0a9eeb2a040672a9687c7cb64356a59b644451"
+  },
+  "actual_focus_observations": [
+    {
+      "active_disabled": false,
+      "active_id": "",
+      "active_is_body": true,
+      "active_is_root": false,
+      "active_role": null,
+      "active_tab_index": -1,
+      "active_tag": "BODY",
+      "dialog_open": true,
+      "display": "block",
+      "document_has_focus": false,
+      "hidden_attribute_ancestor": false,
+      "inert_attribute_ancestor": false,
+      "inside_dialog": false,
+      "modal_open": true,
+      "rect": {
+        "height": 7626.390625,
+        "width": 320,
+        "x": 0,
+        "y": 0
+      },
+      "step": "after_tab_8",
+      "theme": "light",
+      "visibility": "visible"
+    },
+    {
+      "active_disabled": false,
+      "active_id": "",
+      "active_is_body": false,
+      "active_is_root": false,
+      "active_role": null,
+      "active_tab_index": 0,
+      "active_tag": "BUTTON",
+      "dialog_open": true,
+      "display": "inline-block",
+      "document_has_focus": true,
+      "hidden_attribute_ancestor": false,
+      "inert_attribute_ancestor": false,
+      "inside_dialog": true,
+      "modal_open": true,
+      "rect": {
+        "height": 44,
+        "width": 147.171875,
+        "x": 16,
+        "y": 16
+      },
+      "step": "failure_forward_tab_8",
+      "theme": "light",
+      "visibility": "visible"
+    },
+    {
+      "active_disabled": false,
+      "active_id": "",
+      "active_is_body": true,
+      "active_is_root": false,
+      "active_role": null,
+      "active_tab_index": -1,
+      "active_tag": "BODY",
+      "dialog_open": true,
+      "display": "block",
+      "document_has_focus": false,
+      "hidden_attribute_ancestor": false,
+      "inert_attribute_ancestor": false,
+      "inside_dialog": false,
+      "modal_open": true,
+      "rect": {
+        "height": 7626.390625,
+        "width": 320,
+        "x": 0,
+        "y": 0
+      },
+      "step": "failure_reverse_tab_8",
+      "theme": "light",
+      "visibility": "visible"
+    }
+  ],
+  "assessment": "The original assertion required modal.contains(activeElement) even after the document lost focus. Actual departure is BODY with document.hasFocus false; forward Tab restores a modal button. No active background control was observed. Browser-chrome destination is an interpretation, not a native UI observation. Correct only the test to permit this narrowly recorded out-of-document state and still reject focused in-document targets outside actual modal.",
+  "remaining": "Both14/15 runs failed and remain partial17/70. No full scanner/geometry or focus certification from this adjudication; newly reviewed complete runs required."
+}

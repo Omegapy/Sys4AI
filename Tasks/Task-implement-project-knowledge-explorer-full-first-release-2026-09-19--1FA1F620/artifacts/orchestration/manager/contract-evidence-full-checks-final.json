@@ -1,0 +1,800 @@
+{
+  "level": "Draft 2020-12 meta-schema validation and targeted cases with required integer/UTF-8 semantic checks",
+  "full_draft202012_validator": "jsonschema 4.26.0; Draft202012Validator.check_schema passed; targeted cases use strict integer-token and UTF-8 semantic extensions",
+  "schema_sha256": "8e6d0ceb47c98e77d518f4d7c935986ab6982d1a1c15e12377a726e90fbbb7a4",
+  "definitions": 124,
+  "local_references_checked": 412,
+  "unclosed_protocol_objects": [],
+  "targeted_cases": 123,
+  "cases": [
+    {
+      "name": "neutral config",
+      "result": "pass",
+      "definition": "configuration"
+    },
+    {
+      "name": "unknown root",
+      "result": "pass",
+      "definition": "configuration"
+    },
+    {
+      "name": "unknown nested limit",
+      "result": "pass",
+      "definition": "configuration"
+    },
+    {
+      "name": "boolean limit",
+      "result": "pass",
+      "definition": "configuration"
+    },
+    {
+      "name": "float limit",
+      "result": "pass",
+      "definition": "configuration"
+    },
+    {
+      "name": "lower response below minimum",
+      "result": "pass",
+      "definition": "configuration"
+    },
+    {
+      "name": "nonconfig request rejected",
+      "result": "pass",
+      "definition": "configuration"
+    },
+    {
+      "name": "label control rejected",
+      "result": "pass",
+      "definition": "DisplayLabel"
+    },
+    {
+      "name": "blank display label rejected",
+      "result": "pass",
+      "definition": "DisplayLabel"
+    },
+    {
+      "name": "invalid ID case preserved",
+      "result": "pass",
+      "definition": "Id"
+    },
+    {
+      "name": "unsafe path ../x",
+      "result": "pass",
+      "definition": "RelativePath"
+    },
+    {
+      "name": "unsafe path a/../x",
+      "result": "pass",
+      "definition": "RelativePath"
+    },
+    {
+      "name": "unsafe path a//b",
+      "result": "pass",
+      "definition": "RelativePath"
+    },
+    {
+      "name": "unsafe path /etc/passwd",
+      "result": "pass",
+      "definition": "RelativePath"
+    },
+    {
+      "name": "unsafe path a/./b",
+      "result": "pass",
+      "definition": "RelativePath"
+    },
+    {
+      "name": "unsafe path a\\b",
+      "result": "pass",
+      "definition": "RelativePath"
+    },
+    {
+      "name": "safe relative path",
+      "result": "pass",
+      "definition": "RelativePath"
+    },
+    {
+      "name": "search request",
+      "result": "pass",
+      "definition": "SearchRequest"
+    },
+    {
+      "name": "nonempty label sort rejected",
+      "result": "pass",
+      "definition": "SearchRequest"
+    },
+    {
+      "name": "empty browse",
+      "result": "pass",
+      "definition": "SearchRequest"
+    },
+    {
+      "name": "empty lifecycle rejected",
+      "result": "pass",
+      "definition": "SearchRequest"
+    },
+    {
+      "name": "source selector injection rejected",
+      "result": "pass",
+      "definition": "SearchRequest"
+    },
+    {
+      "name": "search snapshot required",
+      "result": "pass",
+      "definition": "SearchRequest"
+    },
+    {
+      "name": "context initial request",
+      "result": "pass",
+      "definition": "ContextRequest"
+    },
+    {
+      "name": "header continuation rejected",
+      "result": "pass",
+      "definition": "EntryRequest"
+    },
+    {
+      "name": "nonempty Unicode chunk",
+      "result": "pass",
+      "definition": "TextChunk"
+    },
+    {
+      "name": "empty advancing chunk rejected",
+      "result": "pass",
+      "definition": "TextChunk"
+    },
+    {
+      "name": "process text",
+      "result": "pass",
+      "definition": "ProcessField"
+    },
+    {
+      "name": "mixed process parts rejected",
+      "result": "pass",
+      "definition": "ProcessField"
+    },
+    {
+      "name": "missing header rejected",
+      "result": "pass",
+      "definition": "EntryData"
+    },
+    {
+      "name": "fixed error invalid_request",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error invalid_request",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed invalid_request",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error cursor_invalid",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error cursor_invalid",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed cursor_invalid",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error request_too_large",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error request_too_large",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed request_too_large",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error content_type_invalid",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error content_type_invalid",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed content_type_invalid",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error session_expired",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error session_expired",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed session_expired",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error session_invalid",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error session_invalid",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed session_invalid",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error host_forbidden",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error host_forbidden",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed host_forbidden",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error origin_forbidden",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error origin_forbidden",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed origin_forbidden",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error csrf_forbidden",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error csrf_forbidden",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed csrf_forbidden",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error source_forbidden",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error source_forbidden",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed source_forbidden",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error resource_forbidden",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error resource_forbidden",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed resource_forbidden",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error identity_unavailable",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error identity_unavailable",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed identity_unavailable",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error endpoint_unavailable",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error endpoint_unavailable",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed endpoint_unavailable",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error method_forbidden",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error method_forbidden",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed method_forbidden",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error snapshot_changed",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error snapshot_changed",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed snapshot_changed",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error cursor_scope_changed",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error cursor_scope_changed",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed cursor_scope_changed",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error cursor_expired",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error cursor_expired",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed cursor_expired",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error source_observation_changed",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error source_observation_changed",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed source_observation_changed",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error package_changed",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error package_changed",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed package_changed",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error canonical_invalid",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error canonical_invalid",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed canonical_invalid",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error presentation_invalid",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error presentation_invalid",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed presentation_invalid",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error configuration_needed",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error configuration_needed",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed configuration_needed",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error identity_mismatch",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error identity_mismatch",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed identity_mismatch",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error source_unavailable",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error source_unavailable",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed source_unavailable",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error source_locator_invalid",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error source_locator_invalid",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed source_locator_invalid",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error service_busy",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error service_busy",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed service_busy",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error knowledge_updating",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error knowledge_updating",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed knowledge_updating",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error package_incomplete",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error package_incomplete",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed package_incomplete",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error resource_limit",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error resource_limit",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed resource_limit",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error deadline_exceeded",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error deadline_exceeded",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed deadline_exceeded",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "fixed error internal_error",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    },
+    {
+      "name": "preauth error internal_error",
+      "result": "pass",
+      "definition": "PreAuthErrorResponse"
+    },
+    {
+      "name": "error text closed internal_error",
+      "result": "pass",
+      "definition": "ErrorResponse"
+    }
+  ],
+  "errors": [
+    {
+      "code": "invalid_request",
+      "http_status": 400,
+      "serialized_bytes": 628
+    },
+    {
+      "code": "cursor_invalid",
+      "http_status": 400,
+      "serialized_bytes": 608
+    },
+    {
+      "code": "request_too_large",
+      "http_status": 413,
+      "serialized_bytes": 627
+    },
+    {
+      "code": "content_type_invalid",
+      "http_status": 415,
+      "serialized_bytes": 613
+    },
+    {
+      "code": "session_expired",
+      "http_status": 401,
+      "serialized_bytes": 636
+    },
+    {
+      "code": "session_invalid",
+      "http_status": 401,
+      "serialized_bytes": 621
+    },
+    {
+      "code": "host_forbidden",
+      "http_status": 403,
+      "serialized_bytes": 626
+    },
+    {
+      "code": "origin_forbidden",
+      "http_status": 403,
+      "serialized_bytes": 625
+    },
+    {
+      "code": "csrf_forbidden",
+      "http_status": 403,
+      "serialized_bytes": 631
+    },
+    {
+      "code": "source_forbidden",
+      "http_status": 403,
+      "serialized_bytes": 629
+    },
+    {
+      "code": "resource_forbidden",
+      "http_status": 403,
+      "serialized_bytes": 630
+    },
+    {
+      "code": "identity_unavailable",
+      "http_status": 404,
+      "serialized_bytes": 640
+    },
+    {
+      "code": "endpoint_unavailable",
+      "http_status": 404,
+      "serialized_bytes": 622
+    },
+    {
+      "code": "method_forbidden",
+      "http_status": 405,
+      "serialized_bytes": 629
+    },
+    {
+      "code": "snapshot_changed",
+      "http_status": 409,
+      "serialized_bytes": 637
+    },
+    {
+      "code": "cursor_scope_changed",
+      "http_status": 409,
+      "serialized_bytes": 640
+    },
+    {
+      "code": "cursor_expired",
+      "http_status": 409,
+      "serialized_bytes": 643
+    },
+    {
+      "code": "source_observation_changed",
+      "http_status": 409,
+      "serialized_bytes": 650
+    },
+    {
+      "code": "package_changed",
+      "http_status": 409,
+      "serialized_bytes": 650
+    },
+    {
+      "code": "canonical_invalid",
+      "http_status": 422,
+      "serialized_bytes": 630
+    },
+    {
+      "code": "presentation_invalid",
+      "http_status": 422,
+      "serialized_bytes": 634
+    },
+    {
+      "code": "configuration_needed",
+      "http_status": 503,
+      "serialized_bytes": 658
+    },
+    {
+      "code": "identity_mismatch",
+      "http_status": 422,
+      "serialized_bytes": 633
+    },
+    {
+      "code": "source_unavailable",
+      "http_status": 422,
+      "serialized_bytes": 619
+    },
+    {
+      "code": "source_locator_invalid",
+      "http_status": 422,
+      "serialized_bytes": 645
+    },
+    {
+      "code": "service_busy",
+      "http_status": 429,
+      "serialized_bytes": 623
+    },
+    {
+      "code": "knowledge_updating",
+      "http_status": 503,
+      "serialized_bytes": 640
+    },
+    {
+      "code": "package_incomplete",
+      "http_status": 503,
+      "serialized_bytes": 629
+    },
+    {
+      "code": "resource_limit",
+      "http_status": 503,
+      "serialized_bytes": 652
+    },
+    {
+      "code": "deadline_exceeded",
+      "http_status": 504,
+      "serialized_bytes": 624
+    },
+    {
+      "code": "internal_error",
+      "http_status": 500,
+      "serialized_bytes": 626
+    }
+  ],
+  "max_error_bytes": 659,
+  "lockfile_version": 3,
+  "locked_packages": 62,
+  "lock_sha256": "c56e429ba8b70fe0e56ab5f879853f5267083eb7facbc0a6da36322b94afdbf9",
+  "direct_integrities_match_frozen_evidence": true,
+  "installed_bins": "Observed independently in toolchain-results.json; tsc7.0.2, Vite8.3.0, Rolldown1.2.9 on darwin-arm64",
+  "runtime_behavior": "not implemented or tested",
+  "prior_neighborhood_only_max_bytes": 658,
+  "exhaustive_error_operation_combinations": 186,
+  "maximum_error_cases": [
+    {
+      "code": "configuration_needed",
+      "operation": "relationships",
+      "bytes": 659
+    }
+  ],
+  "schema_source": "live delivered ONTOLOGY-depo/schema/explorer-v1.json"
+}

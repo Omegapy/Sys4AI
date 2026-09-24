@@ -1,0 +1,40 @@
+{
+  "status": "static_preparation_review_requires_one_rollback_wording_correction",
+  "task_revision": 243,
+  "checkpoint": {
+    "path": "Verification/project-knowledge-explorer-first-release/release-delivery/checkpoint.json",
+    "sha256": "59112ce96c748e957f0740a928623262436ffe33789e172a7319c66d21d7a307"
+  },
+  "scope": "Read-only source/manifest/preimage review; no tests, product imports, builds, launches or installation commands.",
+  "distinct_files_inspected": 1001,
+  "template_rows": 504,
+  "template_changes": 92,
+  "root_rows": 52,
+  "patch_rows": 15,
+  "trusted_helper_bodies_preserved": [
+    "TrustedAuthority",
+    "trusted_authority",
+    "_source",
+    "draft_form"
+  ],
+  "mapping_delta": "Only one override and one mirror added, original key order preserved.",
+  "capability_delta": "Only four ontology helper pins and42 resource paths added; old resources and other locks retained.",
+  "profile_delta": "Only guards binding change in intermediate; only workbench.enabled false after it.",
+  "review_preflight_notes": [
+    "First manager status literal assumed writes_stopped; actual recorded value is prepared-writes-stopped-review-required. Corrected reader only.",
+    "Worker chat said77 creates/15 replacements; exact frozen artifact and504 rows actually show78 creates/14 replacements. No product operation or test was run."
+  ],
+  "required_correction": "Rollback must retain the two new guard adapter/bootstrap records and any intent/receipt as durable append-only history once created; publish successor bindings instead of deleting them. All old checkpoint/manifests must be retained when correcting metadata.",
+  "native_observation": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root/explorer_manager_g3/delivery_worker",
+          "agent_status": "completed"
+        }
+      ]
+    }
+  },
+  "production_acceptance": false
+}

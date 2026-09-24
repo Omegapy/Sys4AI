@@ -1,0 +1,89 @@
+{
+  "observed_at": "2026-09-19T19:56:09.694728-06:00",
+  "actor": "/root/knowledge_explorer_manager",
+  "execution_id": "knowledge_explorer_trd_20260919",
+  "generation": 1,
+  "user_approval": {
+    "source": "Actual current user reply relayed by host",
+    "text": "I approve the exact current content",
+    "approved_draft_revision": 1,
+    "approved_draft_sha256": "e9b4d23e4fdb22b39af22996e0a5be9140ffc8d6a18a6536bb9c93fd01844c6f"
+  },
+  "final_document": {
+    "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+    "sha256": "bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d"
+  },
+  "trd_id": "TRD-20260919-B6D51106",
+  "schema_version": 2,
+  "status": "trd_done",
+  "revision": 2,
+  "requirement_count": 49,
+  "acceptance_fields": 119,
+  "content_ready": true,
+  "completion_blockers": [],
+  "next_action": "none",
+  "title_body_equal_accepted_payload": true,
+  "approval_receipt": {
+    "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/managed-trd-approval-receipt-v2.json",
+    "sha256": "214480537feacbd1afd53ff58a856786a29ba7a5fab3ac79bd6e244518063737"
+  },
+  "host_verification": {
+    "path": "Tasks/Task-capture-project-knowledge-explorer-requirements-2026-09-19--46D79848/artifacts/orchestration/host-approved-trd-verification.json",
+    "sha256": "0a71eba4d92697d311687f249a9c96fa3d52364d44166eb66fc7a415b643f616"
+  },
+  "catalog_validation": {
+    "exit_code": 0,
+    "canonical_valid": true,
+    "index_current": true,
+    "document_count": 14,
+    "warnings": []
+  },
+  "preservation": {
+    "baseline_file_count": 14,
+    "changed": [],
+    "scope": "All13 pre-existing TRDs and depot/projects.json"
+  },
+  "native_receipt": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/knowledge_explorer_manager",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/knowledge_explorer_manager/document_worker",
+          "agent_status": "completed"
+        }
+      ]
+    }
+  },
+  "criteria": [
+    {
+      "criterion": "The user's intended outcome, selected scope, exclusions and material constraints are settled and traced to the current request, supplied recommendations and actual clarification answers.",
+      "evidence": "The actual user selected the full proposed first release; the accepted source-traced 49-requirement baseline covers all 15 mandatory outcomes, all 36 scenarios, all 25 sections, exclusions and qualified values with no material gaps or assumptions."
+    },
+    {
+      "criterion": "A new project-local schema-2 TRD is created through the To-TRD helper with stable requirement IDs, sources and observable acceptance criteria, then directly inspected and validated with its index.",
+      "evidence": "The To-TRD helper created schema-2 TRD-20260919-B6D51106 with 49 stable requirements and 119 acceptance fields; the manager independently parsed the saved document and verified exact title/body equality with accepted immutable payload and canonical_valid/index_current true."
+    },
+    {
+      "criterion": "The exact reviewed TRD revision receives explicit user approval and its saved state is verified as trd_done; downstream planning, implementation and external actions remain separately authorized.",
+      "evidence": "The actual user replied I approve the exact current content for unchanged draft revision 1. The host used set-status with its exact hash; the manager reopened trd_done revision 2 SHA256 bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d and verified unchanged requirement body. Approval grants no planning, implementation or external authority."
+    }
+  ],
+  "checkpoint": {
+    "reused": "Prior bounded checkpoint in manager-payload-inspection.json and managed-trd-verification.json",
+    "finding": "Approval changes only managed document metadata; requirement body and accepted evidence are unchanged. No new durable lesson or publication is warranted.",
+    "published": false,
+    "personal_memory_changed": false
+  },
+  "highest_verification": "Static checks passed, direct semantic/source comparison and managed lifecycle result verified; no product runtime or implementation performed.",
+  "limits": [
+    "Planning, product implementation, installation, project adoption, Git publication, runtime security/accessibility/performance and other external behavior remain unexercised and separately authorized."
+  ]
+}

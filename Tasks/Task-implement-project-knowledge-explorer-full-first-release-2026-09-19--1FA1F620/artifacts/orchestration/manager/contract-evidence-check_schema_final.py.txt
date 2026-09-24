@@ -1,0 +1,86 @@
+"""Disposable subset evaluator, not a Draft 2020-12 conformance validator."""
+import json,re,copy,hashlib
+from pathlib import Path
+S=Path('/tmp/explorer-contracts-implement-g3');schema=json.loads(Path('/Volumes/P-SSD/AngryOwl/Sys4AI/ONTOLOGY-depo/schema/explorer-v1.json').read_text());D=schema['$defs'];checks=[]
+def eq(a,b):return type(a)==type(b) and a==b
+# Implements only the exact generated schema vocabulary for targeted examples.
+from jsonschema import Draft202012Validator, validators, ValidationError
+import importlib.metadata
+Draft202012Validator.check_schema(schema)
+def byte_limit(validator, bound, instance, selected):
+ if isinstance(instance,str) and len(instance.encode('utf-8'))>bound:
+  yield ValidationError('UTF-8 byte limit exceeded')
+Strict = validators.extend(Draft202012Validator, {'x-max-utf8-bytes':byte_limit}, type_checker=Draft202012Validator.TYPE_CHECKER.redefine('integer',lambda checker, value:type(value) is int))
+def valid(v,s):
+ if isinstance(s,bool):return s
+ return Strict({'$defs':D,**s}).is_valid(v)
+def ck(name,v,typ,want=True):
+ actual=valid(v,schema if typ=='configuration' else D[typ]);assert actual==want,(name,typ,actual);checks.append({'name':name,'result':'pass','definition':typ})
+refs=[];unclosed=[]
+def walk(s,where):
+ if isinstance(s,dict):
+  if '$ref'in s:assert s['$ref'].startswith('#/$defs/') and s['$ref'][8:] in D,where;refs.append(s['$ref'])
+  if s.get('type')=='object' and s.get('additionalProperties') is not False and not where.startswith('/$defs/CanonicalJson'):unclosed.append(where)
+  if 'properties' in s:assert set(s.get('required',[]))<=set(s['properties']),where
+  if 'pattern'in s:re.compile(s['pattern'])
+  for k,v in s.items():walk(v,where+'/'+k)
+ elif isinstance(s,list):
+  for i,v in enumerate(s):walk(v,where+'/'+str(i))
+walk(schema,'');assert not unclosed,unclosed
+ck('neutral config',{'schema_version':1,'project_id':None},'configuration')
+ck('unknown root',{'schema_version':1,'project_id':'demo','root':'/tmp'},'configuration',False)
+ck('unknown nested limit',{'schema_version':1,'project_id':'demo','limits':{'max_bytes':5000}},'configuration',False)
+ck('boolean limit',{'schema_version':1,'project_id':'demo','limits':{'page_items':True}},'configuration',False)
+ck('float limit',{'schema_version':1,'project_id':'demo','limits':{'page_items':1.0}},'configuration',False)
+ck('lower response below minimum',{'schema_version':1,'project_id':'demo','limits':{'response_bytes':1023}},'configuration',False)
+ck('nonconfig request rejected',{'schema_version':1,'request_id':'r','code_epoch':'a'*64,'snapshot':None,'params':{'refresh':False}},'configuration',False)
+ck('label control rejected','a\x00b','DisplayLabel',False);ck('blank display label rejected','   ','DisplayLabel',False)
+ck('invalid ID case preserved','urn:sys4ai:ontology:project:Bad:Task','Id',False)
+for v in ['../x','a/../x','a//b','/etc/passwd','a/./b','a\\b'] :ck('unsafe path '+v,v,'RelativePath',False)
+ck('safe relative path','docs/guide.md','RelativePath')
+q={'schema_version':1,'request_id':'r','code_epoch':'a'*64,'snapshot':'b'*64,'params':{'query':'TaskManager','category':None,'lifecycles':['approved'],'fact_kinds':['asserted'],'sort':'relevance','limit':20,'cursor':None}}
+ck('search request',q,'SearchRequest');x=copy.deepcopy(q);x['params']['sort']='label';ck('nonempty label sort rejected',x,'SearchRequest',False)
+x=copy.deepcopy(q);x['params']['query']=' ';x['params']['sort']='label';ck('empty browse',x,'SearchRequest')
+x=copy.deepcopy(q);x['params']['lifecycles']=[];ck('empty lifecycle rejected',x,'SearchRequest',False)
+x=copy.deepcopy(q);x['params']['root']='/tmp';ck('source selector injection rejected',x,'SearchRequest',False)
+x=copy.deepcopy(q);x['snapshot']=None;ck('search snapshot required',x,'SearchRequest',False)
+c={'schema_version':1,'request_id':'r','code_epoch':'a'*64,'snapshot':None,'params':{'refresh':False}};ck('context initial request',c,'ContextRequest')
+i='urn:sys4ai:ontology:core:Task'
+e={'schema_version':1,'request_id':'r','code_epoch':'a'*64,'snapshot':'b'*64,'params':{'id':i,'section':'header','cursor':'e30.YQ'}};ck('header continuation rejected',e,'EntryRequest',False)
+t={'field':'definition','item_index':None,'offset':0,'text':'é','encoding':'plain','more_in_field':False};ck('nonempty Unicode chunk',t,'TextChunk');t['text']='';ck('empty advancing chunk rejected',t,'TextChunk',False)
+p={'kind':'field','item_index':0,'part':'text','name':'purpose','relation_ids':[],'reference_ids':[],'text':'Exact recorded text','offset':0,'more_in_field':False};ck('process text',p,'ProcessField');p['relation_ids']=[i];ck('mixed process parts rejected',p,'ProcessField',False)
+ed={'id':i,'section':'header','header':None,'chunks':[],'references':[],'process':None,'process_items':[]};ck('missing header rejected',ed,'EntryData',False)
+# All fixed errors, with longest valid request identity and largest authenticated limits.
+errors=[]
+for branch in D['Error']['oneOf']:
+ error={k:v['const'] for k,v in branch['properties'].items()}
+ v={'schema_version':1,'request_id':'r'*32,'operation':'neighborhood','code_epoch':None,'service_instance':None,'session_scope':None,'project':None,'snapshot':None,'status':'error','scope':{},'data':None,'page':{'returned':0,'next_cursor':None,'has_more':None,'total':None},'limits':{'items':100,'bytes':32000,'visited_nodes':100,'seconds':5},'coverage':{'complete':False,'reasons':[],'filter_exclusions':None,'visited_nodes':None,'returned_nodes':None,'returned_edges':None},'diagnostics':[],'error':error}
+ ck('fixed error '+error['code'],v,'ErrorResponse');b=len(json.dumps(v,ensure_ascii=False,separators=(',',':')).encode());assert b<=1024
+ errors.append({'code':error['code'],'http_status':branch['x-http-status'],'serialized_bytes':b})
+ v['request_id']=None;v['operation']=None;v['limits']={'items':1,'bytes':1024,'visited_nodes':1,'seconds':1};ck('preauth error '+error['code'],v,'PreAuthErrorResponse')
+ v['error']['message']='bad arbitrary message';ck('error text closed '+error['code'],v,'ErrorResponse',False)
+lock=json.loads(Path('/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/explorer/package-lock.json').read_text());package=json.loads(Path('/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/explorer/package.json').read_text());assert lock['lockfileVersion']==3
+assert lock['packages']['']['dependencies']==package['dependencies'];assert lock['packages']['']['devDependencies']==package['devDependencies']
+for n,p in lock['packages'].items():
+ if n:assert p['resolved'].startswith('https://registry.npmjs.org/') and p['integrity'].startswith('sha512-') and p.get('version')
+expected={'vite':'sha512-lhZBVvEHefgE+HQZC9O7EBJgCU/nVzFNl7vkS4RE0APtWLP02/8QVIkQtzBxPquh7lq5/78NHipTj7ODQ6XuyQ==','typescript':'sha512-8FYau96o3NKOhbjKi/qNvG/W5jhzxkbdm5sj9AbZ/5T5sWqn3hJgLfGx27sRKZWTvyzCP8dLRBTf5tBTSRVUNA==','cytoscape':'sha512-yfYGhRcGAntq6YBD583j4n0Eg3jIxvWmZtz/5uz9UYkeIStSlMxuUja+ec5j3iBD8nv1rwaOAYMW09tBdkSeaQ=='}
+for k,v in expected.items():assert lock['packages']['node_modules/'+k]['integrity']==v
+report={'level':'Draft 2020-12 meta-schema validation and targeted cases with required integer/UTF-8 semantic checks','full_draft202012_validator':'jsonschema '+importlib.metadata.version('jsonschema')+'; Draft202012Validator.check_schema passed; targeted cases use strict integer-token and UTF-8 semantic extensions','schema_sha256':hashlib.sha256(Path('/Volumes/P-SSD/AngryOwl/Sys4AI/ONTOLOGY-depo/schema/explorer-v1.json').read_bytes()).hexdigest(),'definitions':len(D),'local_references_checked':len(refs),'unclosed_protocol_objects':unclosed,'targeted_cases':len(checks),'cases':checks,'errors':errors,'max_error_bytes':max(x['serialized_bytes'] for x in errors),'lockfile_version':3,'locked_packages':len(lock['packages'])-1,'lock_sha256':hashlib.sha256(Path('/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/explorer/package-lock.json').read_bytes()).hexdigest(),'direct_integrities_match_frozen_evidence':True,'installed_bins':'not available','runtime_behavior':'not implemented or tested'}
+# Exhaust every ErrorCode x authenticated operation; relationships is longer than neighborhood.
+exhaustive=[]
+for branch in D['Error']['oneOf']:
+ error={k:v['const'] for k,v in branch['properties'].items()}
+ for operation in ['context','search','entry','relationships','neighborhood','source']:
+  envelope={'schema_version':1,'request_id':'r'*32,'operation':operation,'code_epoch':None,'service_instance':None,'session_scope':None,'project':None,'snapshot':None,'status':'error','scope':{},'data':None,'page':{'returned':0,'next_cursor':None,'has_more':None,'total':None},'limits':{'items':100,'bytes':32000,'visited_nodes':100,'seconds':5},'coverage':{'complete':False,'reasons':[],'filter_exclusions':None,'visited_nodes':None,'returned_nodes':None,'returned_edges':None},'diagnostics':[],'error':error}
+  assert valid(envelope,D['ErrorResponse'])
+  n=len(json.dumps(envelope,ensure_ascii=False,separators=(',',':')).encode('utf8'));assert n<=1024
+  exhaustive.append({'code':error['code'],'operation':operation,'bytes':n})
+report['prior_neighborhood_only_max_bytes']=report['max_error_bytes']
+report['max_error_bytes']=max(x['bytes'] for x in exhaustive)
+report['exhaustive_error_operation_combinations']=len(exhaustive)
+report['maximum_error_cases']=[x for x in exhaustive if x['bytes']==report['max_error_bytes']]
+report['schema_source']='live delivered ONTOLOGY-depo/schema/explorer-v1.json'
+report['installed_bins']='Observed independently in toolchain-results.json; tsc7.0.2, Vite8.3.0, Rolldown1.2.9 on darwin-arm64'
+assert report['max_error_bytes']==659 and len(exhaustive)==186
+(S/'full-checks-final.json').write_text(json.dumps(report,indent=2)+'\n')
+print(json.dumps({k:v for k,v in report.items() if k not in ['cases','errors']},indent=2))

@@ -1,0 +1,31 @@
+{
+  "executor": "Primary host /root ordinary exec_command plus native CUA browser observation",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-service-os-open-01/host-browser-driver.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "evidence": [
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-host-os-open-01-output.jsonl",
+      "sha256": "3deb880ec9036731204c3476c99180f6631b8050aea0458460ae858d9520349d"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-host-os-open-01-native.json",
+      "sha256": "00da1446ddfbf77029e654d4b31d1523e4657944b58a1a89fd28b4770e065c44"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-host-os-open-01-executor.json",
+      "sha256": "8dc17a6c05090a635d029394a6f78f1d7da92a5e52415ad0041b9d3d87724ca7"
+    }
+  ],
+  "job": {
+    "path": "Verification/project-knowledge-explorer-first-release/service-tests/host-os-open-job-01.json",
+    "sha256": "c9d7486713502d3cad91341b4cb16c3826c25eda62266df34639bdef6bd0c726"
+  },
+  "qualification": "Actual OS default-browser dispatch through captured verified production command in-process; public CLI is covered separately in current service batch05. Native Chrome existing test tab showed clean URL and recorded context, then only that created tab was closed. Minimal UI only; full frontend and accessibility remain unverified.",
+  "historical_lookup": "Automatic chooser selected IAB; exact existing-tab lookup failed there. Explicit discovered Chrome matched the actual OS-created tab; inspector did not navigate or create a substitute page."
+}

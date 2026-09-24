@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "task_id": "TASK-20260919-1FA1F620",
+  "plan_task_id": "TASK-002",
+  "reviewer": "CONTRACTS_DATA_REVIEW_G3",
+  "native_path": "/root/explorer_manager_g3/review_data",
+  "codex_thread_id": "01a0bd4b-412a-7b22-9512-e6a41b5490ea",
+  "runtime_inheritance": {
+    "model": "Exact parent effective model inherited without override",
+    "reasoning_effort": "Exact parent effective reasoning effort inherited without override",
+    "limitation": "Concrete model and effort names are not independently exposed in this child context; no different values were requested or configured."
+  },
+  "role_digests": {
+    "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+  },
+  "receipt_acknowledgment": "Manager confirmed actual native receipt at Task revision 46 before this artifact was written.",
+  "outcome": "rejected",
+  "candidate": "CAND_CONTRACTS_DATA_V1",
+  "candidate_path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_DATA_V1.md",
+  "candidate_sha256": "c968e980540d0fc56dea7fd092189892bed4039e68612bab1530ae31f5ac90c9",
+  "baseline_path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/baseline_98347b9a813fc5f461b595a1270fad47b6b43b81768a5fb329edaf5cff01d433.json",
+  "baseline_sha256": "98347b9a813fc5f461b595a1270fad47b6b43b81768a5fb329edaf5cff01d433",
+  "verification_level": "Static source and proposal review; no implementation or runtime acceptance",
+  "summary": "The proposal supplies a coherent read-only architecture, conservative publication observation, explicit resource ceilings, separate List state, and credible distribution boundaries. Four contract ambiguities must be resolved before independent consumers implement it: exact query binding, complete wire definitions, progress past oversized items, and runtime helper-version changes. No rejection is based on later browser, performance, installation, or human-validation work being unperformed.",
+  "criterion_findings": [
+    {
+      "criterion": 1,
+      "text": "Contracts define exact request/envelope/error/cursor shapes and numeric request/time/concurrency/cache limits subordinate to canonical limits.",
+      "outcome": "rejected",
+      "candidate_evidence": [
+        "ART_CONTRACTS_DATA_V1.md:71-111 defines configuration bounds, full-envelope byte accounting, distinct graph/result/visited caps, supervised deadlines and bounded HTTP/worker/cache resources.",
+        "ART_CONTRACTS_DATA_V1.md:132-194 defines closed request selectors, common envelope, compact result semantics, error categories, HMAC continuation and source-reference identity."
+      ],
+      "findings": "The resource policy is present and subordinate to canonical limits. Exact protocol acceptance is incomplete because operation data objects and several validation/status choices remain prose placeholders. Cursor scope can collapse queries that have different canonical ranking semantics, and the oversized-item rule does not define a progressing continuation.",
+      "mandatory_defects": ["DATA-R1", "DATA-R2", "DATA-R3"],
+      "requirements": ["REQ-005", "REQ-014", "REQ-018", "REQ-023", "REQ-024", "REQ-033"]
+    },
+    {
+      "criterion": 2,
+      "text": "Selected dependency versions, build-only Node version, built-in layout, notices and source provenance are pinned after current primary-source review; any required installation has separate recorded authority.",
+      "outcome": "passed",
+      "candidate_evidence": [
+        "ART_CONTRACTS_DATA_V1.md:230 selects built-in preset layout with bounded deterministic coordinates and explicit cleanup.",
+        "ART_CONTRACTS_DATA_V1.md:236-252 pins Cytoscape 3.34.3, Vite 8.3.0, TypeScript 7.0.2 and build-only Node 25.9.0; defines lock generation, script/hook/bin review, browser build targets, offline assets and actual third-party notices.",
+        "manager/dependency-source-observations.json supplies matching primary registry versions, engines, licenses, repositories and integrity values.",
+        "manager/user-approval-scope.json records scoped dependency/build authorization while retaining exact boundaries."
+      ],
+      "findings": "Pass for proposal selection and implementation instructions. The candidate explicitly requires the dedicated implementer to create the complete real lock and inspect transitive licenses before frontend consumers. It does not claim a completed build, CSP check, installed executable check, or dependency license inventory.",
+      "mandatory_defects": [],
+      "requirements": ["REQ-028", "REQ-049"]
+    },
+    {
+      "criterion": 3,
+      "text": "The contract includes selected-input unresolved-transaction detection, bounded coherent snapshot reads, precise source-reference identity, per-service and per-session cursor scope, independent List normalization and shared state/route ownership.",
+      "outcome": "rejected",
+      "candidate_evidence": [
+        "ART_CONTRACTS_DATA_V1.md:115-128 distinguishes lock presence/absence races, unresolved intents, complete receipts, retained recovery, source observations and immutable snapshots.",
+        "ART_CONTRACTS_DATA_V1.md:190-200 binds reference tuples and constrains source extraction and source-supported process ordering.",
+        "ART_CONTRACTS_DATA_V1.md:204-218 separates loopback transport, fresh bootstrap/session/CSRF, source and asset confinement, public health and authoring compatibility.",
+        "ART_CONTRACTS_DATA_V1.md:222-232 defines shared app state, region sequence validation, atomic refresh, exact-ID routes, independent List normalization and renderer disposal."
+      ],
+      "findings": "Publication coordination matches the inspected existing intent/receipt/recovery model, including retained partial recovery and historical completed receipts. Source identity, fresh-source observation, process evidence limits, service/session isolation, List independence and client ownership are sound proposal-level commitments. Query-scope ambiguity remains mandatory, and helper-digest changes lack a rule connecting observed disk bytes to executing Python modules.",
+      "mandatory_defects": ["DATA-R1", "DATA-R4"],
+      "requirements": ["REQ-001", "REQ-002", "REQ-003", "REQ-004", "REQ-006", "REQ-009", "REQ-010", "REQ-021", "REQ-022", "REQ-024", "REQ-025", "REQ-029", "REQ-030", "REQ-031", "REQ-032"]
+    },
+    {
+      "criterion": 4,
+      "text": "The change map names source files, generated Template destinations, prospective exact root adoption and current initializer capability compatibility; each preserves its independent authority boundary.",
+      "outcome": "passed",
+      "candidate_evidence": [
+        "ART_CONTRACTS_DATA_V1.md:27-45 names source module and frontend ownership.",
+        "ART_CONTRACTS_DATA_V1.md:256-274 supplies reusable-source, updater-owned Template, separately adopted root, initializer and rollback boundaries; exact manifests replace prospective patterns when bytes exist.",
+        "tools/template_update.py:55-65 retains dist/build/node_modules/runtime exclusions.",
+        "SKILLS-depo/init-new-project/scripts/init_new_project.py:46-47 distinguishes current v12 and retained v11; init_ontology_advanced.py:29-34 still inventories legacy workbench helpers/assets."
+      ],
+      "findings": "The proposal preserves historical editions, shared trusted helpers, independent product authority, neutral Template content and non-knowledge rollback. Its later requirement to enumerate actual manifest paths before adoption is appropriate to this proposal stage; it does not treat broad patterns as an executed adoption. Cutover stays behind production and initializer gates.",
+      "mandatory_defects": [],
+      "requirements": ["REQ-037", "REQ-038", "REQ-039", "REQ-040", "REQ-041"]
+    }
+  ],
+  "mandatory_defects": [
+    {
+      "id": "DATA-R1",
+      "title": "Bind continuation to the exact query semantics, not only casefolded normalization",
+      "severity": "mandatory",
+      "criteria": [1, 3],
+      "requirements": ["REQ-005", "REQ-024"],
+      "candidate_evidence": ["ART_CONTRACTS_DATA_V1.md:162 says scope contains the normalized query.", "ART_CONTRACTS_DATA_V1.md:190 hashes normalized selectors without defining an exact trimmed query component."],
+      "governing_evidence": ["SKILLS-depo/ontology/scripts/ontology_retrieval.py:25-36: normalize casefolds and collapses whitespace, whereas query_text only strips outer whitespace.", "SKILLS-depo/ontology/scripts/ontology_retrieval.py:29-30,39-64: exact-ID equality uses the original query and lexical tokenization splits CamelCase before casefolding; ranked results therefore depend on distinctions discarded by normalize().", "TRD REQ-005 retains canonical ranking, and REQ-024 requires a changed query to begin a new sequence."],
+      "failure_case": "TaskManager and taskmanager have the same normalize() result but different lexical token sets. Likewise a case-changed canonical ID loses exact-ID precedence. A cursor keyed only by normalize() may validate against a different ranking and apply the old last_key, skipping or duplicating results. The current wording permits that implementation.",
+      "correction": "Define the exact search query identity as canonical query_text(query), preserving case and interior characters, with an explicit separate empty-browse representation. Bind that exact value or its digest into the cursor scope and client response-acceptance key. Keep any casefolded value as an additional display/search component, not the sole identity. Specify the nonempty sort behavior consistently with canonical relevance ranking. Add contract examples requiring a new sequence or cursor_scope_changed for TaskManager/taskmanager and case-changed stable IDs; trimming equivalence may remain explicit."
+    },
+    {
+      "id": "DATA-R2",
+      "title": "Finish the exact operation and error wire definitions before consumer implementation",
+      "severity": "mandatory",
+      "criteria": [1],
+      "requirements": ["REQ-023", "REQ-033"],
+      "candidate_evidence": ["ART_CONTRACTS_DATA_V1.md:138-143 lists the six requests but describes several response data objects only by meaning.", "ART_CONTRACTS_DATA_V1.md:148-159 still uses scope:{...validated normalized operation scope...} and data:{...operation data...}.", "ART_CONTRACTS_DATA_V1.md:168-173 groups several HTTP statuses with several codes without a one-to-one mapping.", "ART_CONTRACTS_DATA_V1.md:180-184 mentions section chunks and omitted-item metadata but gives no enclosing entry/source/omitted-item response shape."],
+      "governing_evidence": ["CONTRACTS baseline criterion 1 requires exact request/envelope/error/cursor shapes.", "manager/contracts-review-checklist.md requires exact response envelopes, code/status agreement, field types and text/ID caps.", "TRD REQ-023 requires validated operation responses with explicit scope, coverage, limits, continuation and distinguishable safe failures."],
+      "failure_case": "Independent server and frontend implementers must choose field names and nesting for context capabilities, entry sections, source content/observations, omitted relationships, and allowed source_state values. They must also choose which status resource_limit uses and what request_id/operation contain when a malformed unauthenticated request cannot supply them. Those choices cannot yet be mechanically checked for agreement from this proposal.",
+      "correction": "Supply closed per-operation data and scope schemas, including nullability, enums, required/optional keys, exact section/source/omitted-item nesting and allowed ID/string limits. Give each error code exactly one HTTP status, safe message class and retry enum, including malformed pre-auth request metadata. Define explicit lower bounds/types for the lowerable configuration keys and the resulting effective-limits response. A compact normative schema/table is sufficient; product code or completed runtime tests are not required for this revision."
+    },
+    {
+      "id": "DATA-R3",
+      "title": "Define forward progress when one result cannot fit the response budget",
+      "severity": "mandatory",
+      "criteria": [1],
+      "requirements": ["REQ-018", "REQ-023", "REQ-024"],
+      "candidate_evidence": ["ART_CONTRACTS_DATA_V1.md:182 requires omitting an edge whose complete qualifiers cannot fit, while retaining its exact ID.", "ART_CONTRACTS_DATA_V1.md:184 says not to advance continuation beyond a removed item, then permits a bounded omitted-item record for a single oversized item.", "ART_CONTRACTS_DATA_V1.md:190 defines last_key as the last returned ranking key or relation ID without saying whether an omitted marker consumes that key."],
+      "governing_evidence": ["TRD REQ-018 requires honest bounded degradation plus narrowing/continuation.", "TRD REQ-024 and AT-05 require stable bounded continuation without skipped or duplicate identities.", "The CONTRACTS checklist explicitly requires continuation semantics and honest coverage."],
+      "failure_case": "If the next qualifying relation has qualifiers larger than the full configured envelope, repeating the same cursor can keep returning the same omitted marker while the 'do not advance' rule prevents reaching later small relations. Advancing without a defined consumed marker instead risks silently skipping the oversized relation. The two policies are not reconciled.",
+      "correction": "Distinguish a temporarily byte-deferred item from a permanently unrenderable item. Define a typed omitted/detail marker that consumes exactly that stable key, counts under an explicit page rule, remains visibly incomplete and offers lossless entry-section access; allow next_cursor to advance past that returned marker. Alternatively define an explicit bounded alternate continuation operation with equivalent no-silent-loss semantics. Specify examples with an oversized first/middle item followed by fitting items and the case where even a marker cannot fit."
+    },
+    {
+      "id": "DATA-R4",
+      "title": "Bind snapshot helper identity to the code actually loaded by the service",
+      "severity": "mandatory",
+      "criteria": [3],
+      "requirements": ["REQ-021", "REQ-022", "REQ-025"],
+      "candidate_evidence": ["ART_CONTRACTS_DATA_V1.md:47 starts one Python worker from fixed installed scripts at service startup.", "ART_CONTRACTS_DATA_V1.md:122-126 includes exact helper/adapter digests in snapshots and says helper changes create a new validated candidate snapshot.", "ART_CONTRACTS_DATA_V1.md:224-226 permits an existing client to refresh atomically to a newly accepted snapshot."],
+      "governing_evidence": ["SKILLS-depo/ontology/scripts/ontology_core.py:388-389 hashes current on-disk ontology*.py files when materializing a snapshot; it does not reload executing modules.", "TRD REQ-021 requires one coherent selected-input version and REQ-022 explicitly keys caches by helper/adapter version.", "manager/contracts-review-checklist.md requires helper/presentation-change coordination."],
+      "failure_case": "Replacing a loaded helper or adapter file during service life changes disk hashes while Python continues executing its already imported code. Rematerializing under the newly observed digests can claim new helper semantics while executing old semantics; an already loaded frontend can likewise retain a different contract/build epoch. Digest-before/after equality alone does not solve loaded-code identity.",
+      "correction": "Pin the executing helper/adapter/schema/build closure at startup and define code-epoch drift separately from reloadable ontology/presentation data. The simplest rule is fail closed with a documented reopen/package-changed error when any executing-code or wire-schema/build member changes, preserve the old visible context, and require a fresh verified service/client session before accepting new reads. A supervised full worker restart is another option only if it verifies the complete new closure and explicitly invalidates affected sessions/cursors/client contract state. State that no new snapshot may advertise helper hashes that do not identify its executing code."
+    }
+  ],
+  "optional_notes": [],
+  "inspected_sources": [
+    {"path": "SOUL.md", "scope": "Required behavior and evidence discipline"},
+    {"path": "Roles/project-sub-agent/AGENTS.md", "scope": "Bounded child authority and independence"},
+    {"path": "Roles/project-sub-agent/ROLE.md", "scope": "Assigned reviewer role"},
+    {"path": ".agents/skills/ontology/SKILL.md", "scope": "Read/canonical/projection authority boundaries"},
+    {"path": ".agents/skills/communication/SKILL.md", "scope": "Required reporting style"},
+    {"path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_DATA_V1.md", "scope": "Complete assigned candidate", "sha256_verified": "c968e980540d0fc56dea7fd092189892bed4039e68612bab1530ae31f5ac90c9"},
+    {"path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/baseline_98347b9a813fc5f461b595a1270fad47b6b43b81768a5fb329edaf5cff01d433.json", "scope": "All four criteria, governing requirements, reads/writes and stopping condition", "sha256_verified": "98347b9a813fc5f461b595a1270fad47b6b43b81768a5fb329edaf5cff01d433"},
+    {"path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json", "scope": "TASK-002 exact acceptance, artifacts and risks", "sha256_verified": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b"},
+    {"path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md", "scope": "TASK-002 governing requirements and associated continuation/source/List/navigation criteria"},
+    {"path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/contracts-shared-inputs.json", "scope": "All seven listed direct input digests verified; frozen source boundary honored"},
+    {"path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/contracts-review-checklist.md", "scope": "Complete full-problem review criteria"},
+    {"path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/shared-source-findings.json", "scope": "No-follow reads and old workbench dependencies/dispatch"},
+    {"path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/dependency-source-observations.json", "scope": "Frozen primary-source package/version/license/integrity and Node evidence"},
+    {"path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/user-approval-scope.json", "scope": "Current scoped implementation/dependency/adoption/cutover authority"},
+    {"path": "Verification/project-knowledge-explorer-first-release/baseline.json", "scope": "Behavior defaults, baseline limits and verification qualifications; bounded inspection"},
+    {"path": "Verification/project-knowledge-explorer-first-release/caller-inventory.json", "scope": "Compatibility and distribution inventory; bounded inspection"},
+    {"path": "Verification/project-knowledge-explorer-first-release/process-content-inventory.json", "scope": "Recorded counts, ordering qualification and representative process evidence"},
+    {"path": "Verification/project-knowledge-explorer-first-release/baseline-tests/result.json", "scope": "Prior baseline result and explicit liveness/runtime limitations; no rerun claimed"},
+    {"path": "SKILLS-depo/ontology/scripts/ontology_retrieval.py", "scope": "limits, normalize, tokens, query_text, match, ranked, explain and search"},
+    {"path": "SKILLS-depo/ontology/scripts/ontology_core.py", "scope": "Project context, source locator/status, load_project validation and helper hashing"},
+    {"path": "SKILLS-depo/ontology/scripts/ontology_publication.py", "scope": "Preview/intents/receipts/recovery/lock lifecycle, lines 140-285"},
+    {"path": "tools/template_update.py", "scope": "Runtime/build/dependency exclusions, lines 45-70"},
+    {"path": "SKILLS-depo/init-new-project/scripts/init_new_project.py", "scope": "Current v12 and preserved v11 edition declarations"},
+    {"path": "SKILLS-depo/init-new-project/scripts/init_ontology_advanced.py", "scope": "Existing shared helper and workbench asset inventory"}
+  ],
+  "checks_performed": [
+    "Verified assigned candidate and CONTRACTS baseline SHA256 exactly match delegation.",
+    "Verified all seven direct shared-input SHA256 values and exact plan SHA256.",
+    "Inspected all four TASK-002 criteria against assigned proposal and current bounded source sections.",
+    "Compared publication observation against the actual writer's intent, completed receipt and retained recovery shapes.",
+    "Compared query/cursor identity against original query_text, normalize, tokens and match semantics.",
+    "Reviewed service/source/session/asset boundaries, client state/List cleanup, processes, dependency evidence and distribution compatibility as one coupled contract."
+  ],
+  "limitations": [
+    "Proposal review only. No package installation, production implementation, service startup, source extraction runtime, browser/CSP, accessibility, performance or human comprehension experiment was authorized or performed.",
+    "The future complete lock, transitive notices and production asset manifest remain implementation deliverables, as the candidate explicitly states.",
+    "No sibling solver candidate, peer review, synthesis, or additional project memory was retrieved.",
+    "Official dependency metadata was used from the frozen shared evidence; no redundant external lookup was performed.",
+    "Only the assigned review JSON was written; no canonical knowledge, product, Task ledger, role index, memory, dependency or Git mutation was performed."
+  ],
+  "stopping_condition": "All four mandatory criteria were inspected and precise mandatory contract defects identified; optional polish was not pursued."
+}

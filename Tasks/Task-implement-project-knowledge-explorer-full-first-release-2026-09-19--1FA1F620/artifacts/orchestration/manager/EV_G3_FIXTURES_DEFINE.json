@@ -1,0 +1,100 @@
+{
+  "event": {
+    "event_id": "EV_G3_FIXTURES_DEFINE",
+    "actor": "/root/explorer_manager_g3",
+    "execution_id": "EXE_EXPLORER_1FA1F620",
+    "generation": 3,
+    "kind": "subtask.define",
+    "data": {
+      "subtask_id": "FIXTURES",
+      "baseline": {
+        "objective": "Extend existing source-owned fixture construction and establish explicit AT-01 through AT-36 cases, using neutral imports and a second namespace with a shared label of different meaning.",
+        "requirements": [
+          "REQ-003",
+          "REQ-006",
+          "REQ-007",
+          "REQ-009",
+          "REQ-010",
+          "REQ-016",
+          "REQ-018",
+          "REQ-038",
+          "REQ-043",
+          "REQ-046"
+        ],
+        "inputs": [
+          {
+            "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+            "sha256": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b"
+          },
+          {
+            "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+            "sha256": "bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d"
+          }
+        ],
+        "dependencies": [
+          "BASELINE",
+          "CONTRACTS"
+        ],
+        "criteria": [
+          "Fixtures cover small/representative/stress target shapes, duplicates/aliases, long fields, many sources, parallel predicates, loops/cycles/hubs, broken references and process ordered/unordered examples.",
+          "Every TRD requirement and AT item maps to a fixture, code task and evidence owner; generated scale is a proposed workload, never a loader-capacity claim."
+        ],
+        "category": "generic",
+        "rationale": "Canonical fixture construction and requirement/acceptance mapping implement the accepted contracts through one accountable worker; no independent architectural choice remains in this bounded task.",
+        "reads": [
+          "SOUL.md",
+          "ROLE.md",
+          "SPECS.md",
+          "SKILLS-depo/ontology",
+          "ONTOLOGY-depo",
+          "depot",
+          "tools",
+          "Implementation_Plans",
+          "TRDs",
+          "Verification/project-knowledge-explorer-first-release"
+        ],
+        "writes": [
+          "SKILLS-depo/ontology/tests/explorer_support.py",
+          "SKILLS-depo/ontology/tests/fixtures/explorer/",
+          "Verification/project-knowledge-explorer-first-release/acceptance-matrix.json"
+        ],
+        "protected": [
+          "MEMORY",
+          "memory.yaml",
+          "ONTOLOGY",
+          "ontology.yaml",
+          "ontology-advanced.yaml",
+          "control_records",
+          "Projects",
+          ".agents"
+        ],
+        "authority": "Create only explicit synthetic fixture sources and complete acceptance mapping in listed paths. Validate through current canonical schema helpers using temporary roots. No live canonical, memory, Task, Git or product-project writes.",
+        "implementation_required": true,
+        "deliverable": "Source-owned small/representative/stress/pathological fixtures and exact49-REQ/36-AT acceptance mapping retaining every qualification.",
+        "stop": "Both TASK-003 criteria have current direct fixture validation and mapping evidence.",
+        "slots": [
+          {
+            "slot": "fixture_worker",
+            "function": "worker",
+            "perspective": "Reproducible canonical fixtures and exact acceptance coverage",
+            "solver_slot": null
+          }
+        ]
+      }
+    }
+  },
+  "response": {
+    "work_completed": [
+      "Defined fixture and acceptance mapping work from TASK-003 without weakening its targets."
+    ],
+    "verification_evidence": [
+      "Current canonical revision, role/input bindings and referenced evidence inspected."
+    ],
+    "user_response_summary": "Defined fixture and acceptance mapping work from TASK-003 without weakening its targets.",
+    "current_summary": "Defined fixture and acceptance mapping work from TASK-003 without weakening its targets.",
+    "next_step": "Finish baseline and accepted contract delivery before fixture implementation.",
+    "blockers": [],
+    "open_questions": [],
+    "relevant_files": []
+  }
+}

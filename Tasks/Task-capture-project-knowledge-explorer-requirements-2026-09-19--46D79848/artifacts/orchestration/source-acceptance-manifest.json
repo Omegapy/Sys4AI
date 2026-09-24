@@ -1,0 +1,354 @@
+{
+  "source_sha256": "b79d6122615b85f2ca42f0334cdecd7677578085014bb6c82565180e6264d38e",
+  "mandatory_outcomes": [
+    {
+      "source_id": "UX-01",
+      "requirement": "Replace the workbench product model.",
+      "observable_outcome": "No draft, review, publish, query-console, or AI-generation controls in the explorer."
+    },
+    {
+      "source_id": "UX-02",
+      "requirement": "Find project meanings quickly.",
+      "observable_outcome": "Search finds preferred labels, aliases, IDs, and relevant definition text."
+    },
+    {
+      "source_id": "UX-03",
+      "requirement": "Make relationships understandable.",
+      "observable_outcome": "A user can read both endpoints, the relationship label, and its direction."
+    },
+    {
+      "source_id": "UX-04",
+      "requirement": "Support visual exploration.",
+      "observable_outcome": "The map supports selection, pan, zoom, focus, and bounded expansion."
+    },
+    {
+      "source_id": "UX-05",
+      "requirement": "Explain processes.",
+      "observable_outcome": "Process pages expose only source-supported descriptions and ordering."
+    },
+    {
+      "source_id": "UX-06",
+      "requirement": "Preserve context.",
+      "observable_outcome": "Back/Forward and view switching retain the selected identity and route state."
+    },
+    {
+      "source_id": "UX-07",
+      "requirement": "Work without the graph.",
+      "observable_outcome": "All substantive graph information and navigation have a text alternative."
+    },
+    {
+      "source_id": "DATA-01",
+      "requirement": "Keep canonical authority.",
+      "observable_outcome": "Reader and graph information trace to the selected canonical ontology."
+    },
+    {
+      "source_id": "DATA-02",
+      "requirement": "Preserve semantic distinctions.",
+      "observable_outcome": "Multiple relations, qualifiers, lifecycle, and fact classifications are not silently merged."
+    },
+    {
+      "source_id": "DATA-03",
+      "requirement": "Keep evidence discoverable.",
+      "observable_outcome": "Definitions and relations link to source references and freshness information."
+    },
+    {
+      "source_id": "DATA-04",
+      "requirement": "Keep memory separate.",
+      "observable_outcome": "Initial browsing neither searches nor changes the memory subsystem."
+    },
+    {
+      "source_id": "SAFE-01",
+      "requirement": "Enforce read-only access.",
+      "observable_outcome": "Browser requests cannot draft, publish, run a skill, mutate a Task, or change profiles."
+    },
+    {
+      "source_id": "SAFE-02",
+      "requirement": "Preserve local confidentiality.",
+      "observable_outcome": "Loopback, session, origin, source-allowlist, and safe-rendering protections remain effective."
+    },
+    {
+      "source_id": "PORT-01",
+      "requirement": "Support independent projects.",
+      "observable_outcome": "The same code works with the root, neutral template, and another explicitly selected project."
+    },
+    {
+      "source_id": "PERF-01",
+      "requirement": "Bound work and payloads.",
+      "observable_outcome": "Large graphs remain navigable through limits, paging, and visible incompleteness."
+    }
+  ],
+  "acceptance_scenarios": [
+    {
+      "source_id": "AT-01",
+      "scenario": "Launch the human interface. Only reading/exploration destinations appear; no authoring modules or controls load.",
+      "source_requirements": [
+        "UX-01",
+        "SAFE-01"
+      ]
+    },
+    {
+      "source_id": "AT-02",
+      "scenario": "Search a preferred label, alias, exact ID, and words in a definition. Matching is deterministic and relevant.",
+      "source_requirements": [
+        "UX-02"
+      ]
+    },
+    {
+      "source_id": "AT-03",
+      "scenario": "Two entries share a label/alias. Both appear with distinctions; neither is silently selected.",
+      "source_requirements": [
+        "UX-02",
+        "DATA-01"
+      ]
+    },
+    {
+      "source_id": "AT-04",
+      "scenario": "Apply category/lifecycle filters to a multi-page result set. Filtering happens before pagination; valid later matches remain reachable.",
+      "source_requirements": [
+        "UX-02",
+        "PERF-01"
+      ]
+    },
+    {
+      "source_id": "AT-05",
+      "scenario": "Search returns more matches than one page permits. Continuation is stable, with no duplicate or skipped identities within the same snapshot.",
+      "source_requirements": [
+        "PERF-01"
+      ]
+    },
+    {
+      "source_id": "AT-06",
+      "scenario": "A result is omitted by a byte/time/traversal bound. The UI reports incomplete coverage rather than \u201cnothing exists.\u201d",
+      "source_requirements": [
+        "DATA-01",
+        "PERF-01"
+      ]
+    },
+    {
+      "source_id": "AT-07",
+      "scenario": "Read an entry with definition, aliases, scope note, and examples. Present fields faithfully; omit absent sections without inventing content.",
+      "source_requirements": [
+        "DATA-01"
+      ]
+    },
+    {
+      "source_id": "AT-08",
+      "scenario": "Open a deprecated entry by exact ID. Show its status and recorded replacement without silently rewriting history.",
+      "source_requirements": [
+        "DATA-02"
+      ]
+    },
+    {
+      "source_id": "AT-09",
+      "scenario": "A draft or inferred record is available under an explicit permitted filter. Its status remains distinct from approved asserted knowledge.",
+      "source_requirements": [
+        "DATA-02"
+      ]
+    },
+    {
+      "source_id": "AT-10",
+      "scenario": "Select a graph node. Details change, but the camera and graph focus do not unexpectedly move.",
+      "source_requirements": [
+        "UX-04",
+        "UX-06"
+      ]
+    },
+    {
+      "source_id": "AT-11",
+      "scenario": "Choose Focus here. The neighborhood changes deliberately, and Back restores the prior useful state.",
+      "source_requirements": [
+        "UX-04",
+        "UX-06"
+      ]
+    },
+    {
+      "source_id": "AT-12",
+      "scenario": "Expand a high-degree node. Limits remain enforced and omitted connections are clearly disclosed.",
+      "source_requirements": [
+        "UX-04",
+        "PERF-01"
+      ]
+    },
+    {
+      "source_id": "AT-13",
+      "scenario": "Two predicates connect the same endpoints. Both canonical relationship IDs and their meanings remain inspectable.",
+      "source_requirements": [
+        "UX-03",
+        "DATA-02"
+      ]
+    },
+    {
+      "source_id": "AT-14",
+      "scenario": "Traverse an incoming relationship. Arrow and sentence retain the canonical subject\u2013predicate\u2013object direction.",
+      "source_requirements": [
+        "UX-03",
+        "DATA-02"
+      ]
+    },
+    {
+      "source_id": "AT-15",
+      "scenario": "Render self-loops, cycles, and qualified relationships. No infinite expansion or semantic merging occurs.",
+      "source_requirements": [
+        "DATA-02",
+        "PERF-01"
+      ]
+    },
+    {
+      "source_id": "AT-16",
+      "scenario": "Switch between map and list. Selection, filters, returned scope, and warnings agree.",
+      "source_requirements": [
+        "UX-07",
+        "DATA-02"
+      ]
+    },
+    {
+      "source_id": "AT-17",
+      "scenario": "Open a supported process. Purpose, roles, inputs/outputs, and ordering appear only where supported by the selected source.",
+      "source_requirements": [
+        "UX-05"
+      ]
+    },
+    {
+      "source_id": "AT-18",
+      "scenario": "A process has no recorded step order. Show the gap; do not infer a sequence from graph layout or unrelated relations.",
+      "source_requirements": [
+        "UX-05",
+        "DATA-01"
+      ]
+    },
+    {
+      "source_id": "AT-19",
+      "scenario": "Open a definition's or relationship's source. Show the authorized locator/excerpt and evidence status for the correct identity.",
+      "source_requirements": [
+        "DATA-03"
+      ]
+    },
+    {
+      "source_id": "AT-20",
+      "scenario": "The source bytes change after the entry loads. Do not present the new bytes as the originally recorded evidence without a warning/version distinction.",
+      "source_requirements": [
+        "DATA-03"
+      ]
+    },
+    {
+      "source_id": "AT-21",
+      "scenario": "Canonical inputs change during navigation or publication. Reject mixed-version continuations; refresh the display coherently.",
+      "source_requirements": [
+        "DATA-01"
+      ]
+    },
+    {
+      "source_id": "AT-22",
+      "scenario": "A slow response for entry A arrives after selecting B. B remains the current entry.",
+      "source_requirements": [
+        "UX-06"
+      ]
+    },
+    {
+      "source_id": "AT-23",
+      "scenario": "Session expires or service stops. Preserve readable context and desired route; explain reconnection without making unauthorized startup claims.",
+      "source_requirements": [
+        "UX-06",
+        "SAFE-02"
+      ]
+    },
+    {
+      "source_id": "AT-24",
+      "scenario": "Submit direct browser requests to old write or execution endpoints. They fail; no protected artifacts change.",
+      "source_requirements": [
+        "SAFE-01"
+      ]
+    },
+    {
+      "source_id": "AT-25",
+      "scenario": "Use invalid Host/Origin/CSRF/session values or another service's credentials. Requests fail without leaking project data.",
+      "source_requirements": [
+        "SAFE-02"
+      ]
+    },
+    {
+      "source_id": "AT-26",
+      "scenario": "Attempt encoded traversal, absolute-path access, symlink escape, or an unselected source reference. Access is denied.",
+      "source_requirements": [
+        "SAFE-02"
+      ]
+    },
+    {
+      "source_id": "AT-27",
+      "scenario": "Labels/source text contain HTML, script-like text, or malicious links. They display safely and do not execute.",
+      "source_requirements": [
+        "SAFE-02"
+      ]
+    },
+    {
+      "source_id": "AT-28",
+      "scenario": "Load the production bundle under the production CSP with no internet. Reader and graph work without remote assets.",
+      "source_requirements": [
+        "SAFE-02",
+        "PORT-01"
+      ]
+    },
+    {
+      "source_id": "AT-29",
+      "scenario": "Complete all major reading tasks by keyboard and via the relationship list. No drag, hover, or canvas-only action is required.",
+      "source_requirements": [
+        "UX-07"
+      ]
+    },
+    {
+      "source_id": "AT-30",
+      "scenario": "Use narrow viewport, browser zoom, reduced motion, and both themes. Text reflows, controls remain operable, and important states remain legible.",
+      "source_requirements": [
+        "UX-07"
+      ]
+    },
+    {
+      "source_id": "AT-31",
+      "scenario": "Browse the root and neutral template, then a separate namespace fixture. No hard-coded project identity, cache leakage, or source crossover occurs.",
+      "source_requirements": [
+        "PORT-01",
+        "SAFE-02"
+      ]
+    },
+    {
+      "source_id": "AT-32",
+      "scenario": "Perform all read workflows with missing optional embedding/RDF services. Core reading works; nothing is installed or started implicitly.",
+      "source_requirements": [
+        "DATA-04",
+        "SAFE-01"
+      ]
+    },
+    {
+      "source_id": "AT-33",
+      "scenario": "Compare protected file hashes/timestamps before and after the read workflow. Ontology, memory, proposals, receipts, and generated products are unchanged.",
+      "source_requirements": [
+        "DATA-04",
+        "SAFE-01"
+      ]
+    },
+    {
+      "source_id": "AT-34",
+      "scenario": "Disable or fail the graph renderer. Definitions, relationship list, and evidence access still work.",
+      "source_requirements": [
+        "UX-07",
+        "PERF-01"
+      ]
+    },
+    {
+      "source_id": "AT-35",
+      "scenario": "Run existing agent retrieval, publication/recovery, and template contract tests. No unintended behavioral regression occurs.",
+      "source_requirements": [
+        "DATA-01",
+        "PORT-01"
+      ]
+    },
+    {
+      "source_id": "AT-36",
+      "scenario": "Measure the representative and stress fixtures. Publish actual timings, memory/limits, and graceful-degradation results rather than assumed performance.",
+      "source_requirements": [
+        "PERF-01"
+      ]
+    }
+  ],
+  "interpretation": "Exact source-derived coverage aid; scenarios are future acceptance behavior, not performed verification."
+}

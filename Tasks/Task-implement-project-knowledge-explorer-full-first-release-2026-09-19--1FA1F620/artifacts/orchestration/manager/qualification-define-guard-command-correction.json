@@ -1,0 +1,22 @@
+{
+  "corrects": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-define-guard-failure.json",
+    "sha256": "8b80c5a53f5331a7d28bc6c229d9c6f976deec49bdad676bb85632265f543ae1"
+  },
+  "reason": "The explanatory command string omitted a space before173. Actual tool invocation used separate expected-revision and173 arguments; this correction does not change the observed guard failure.",
+  "actual_argv": [
+    ".venv/bin/python",
+    ".agents/skills/agent-task/scripts/task_state.py",
+    "--project-root",
+    ".",
+    "orchestrate",
+    "TASK-20260919-1FA1F620",
+    "--expected-revision",
+    "173",
+    "--payload-file",
+    "/tmp/EV_QUALIFICATION_DEFINE.json"
+  ],
+  "actual_exit_code": 2,
+  "actual_error": "guard_stale",
+  "task_revision_after": 173
+}

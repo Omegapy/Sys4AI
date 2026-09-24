@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "status": "watcher_idle_readiness_restored",
+  "recorded_at": "2026-09-24T13:48:44.549759+00:00",
+  "scope": "Local root watcher engine_apply only: read-only owner check first; guarded owner apply still used whenever check is nonzero.",
+  "code_pre_sha256": "4c41448c567a136333c7b60224e5592e65e41840ed205f1afecf9aac557b3813",
+  "code_post": {
+    "path": "tools/template_watch.py",
+    "sha256": "8d2b9caaa8d00b9911e24ae85ba702de202b30bd5626584affffeb5fb6e3e476",
+    "bytes": 13735
+  },
+  "before": {
+    "path": "Verification/project-knowledge-explorer-first-release/watcher-operational-repair/before-status.json",
+    "sha256": "ca6603ece43def7fd0a08422313b910be99966bc83b6509b3e5aa7819be85f5c",
+    "bytes": 873
+  },
+  "install": {
+    "path": "Verification/project-knowledge-explorer-first-release/watcher-operational-repair/install-result.json",
+    "sha256": "7f9c19a2c59c6418e427351a504494b13c3cd31157ed24e94b7a4d548da2f1fd",
+    "bytes": 872
+  },
+  "after": {
+    "path": "Verification/project-knowledge-explorer-first-release/watcher-operational-repair/after-status.json",
+    "sha256": "f010c478ecb3474366dadefadba87024452634bb242a37577eef50d40ad320f0",
+    "bytes": 789
+  },
+  "plist_sha256_before_after": "6d62dbbf0d74ba10433c7508916d9a3c4e8a32d087f67d8659dbbbc157a89755",
+  "observed_before": {
+    "pid": 85800,
+    "ready": false,
+    "last_exit_code": 2
+  },
+  "observed_after": {
+    "pid": 151,
+    "ready": true,
+    "status": "current",
+    "exit_code": 0
+  },
+  "tests_run": false,
+  "limits": [
+    "An actual future source-change update was not exercised; its noncurrent path still invokes guarded apply by source inspection.",
+    "Original PLAN revision1 qualification remains unperformed under current user instruction."
+  ]
+}

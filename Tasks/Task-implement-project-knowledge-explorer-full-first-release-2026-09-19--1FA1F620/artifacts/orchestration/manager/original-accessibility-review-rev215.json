@@ -1,0 +1,227 @@
+{
+  "status": "manager_original_scope_review_concrete_frontend_defects_require_same_owner_correction",
+  "task_revision": 215,
+  "source_refs": [
+    {
+      "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+      "sha256": "bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d",
+      "bytes": 60630
+    },
+    {
+      "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+      "sha256": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b",
+      "bytes": 233996
+    },
+    {
+      "path": "SKILLS-depo/ontology/references/explorer-contract.md",
+      "sha256": "de02c72a60fb30a707d6d83bae915cac358eaab09378788e826640654ee8ae00",
+      "bytes": 107820
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/acceptance-matrix.json",
+      "sha256": "4bbfd181b1ec4efe2e59443ed52bc1b68130f64d3e44de2e55f2b3129a94fcec",
+      "bytes": 206461
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+      "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+      "bytes": 38466
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/preferences.ts",
+      "sha256": "3326130b95927a5fd3d94b507e4c2b1bda1f523736155d51cb59ae9ef6d42544",
+      "bytes": 2884
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/state.ts",
+      "sha256": "942452d77292e7d4b140550028bcf63cd53f99eb0a3f77da96c174e5324cf8d7",
+      "bytes": 16676
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/entry.ts",
+      "sha256": "499073e0aac71490487b19a36864eb4c3077bb96d09250a803e1b02bee1aac59",
+      "bytes": 5554
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/feedback.ts",
+      "sha256": "76e2de9f7cef5ef1f6fe603036f1b7f3a54c880a750e44eed63f713a3d912ac8",
+      "bytes": 4721
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+      "sha256": "1bbcf6fc0fa1508895d749f73fbcd31d08e3833e940af89c4b5ef18b83bd0d7d",
+      "bytes": 9723
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+      "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+      "bytes": 6025
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+      "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+      "bytes": 8928
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+      "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+      "bytes": 4838
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+      "sha256": "c59422dc85017405ff9c92e335a459f770e649a2a59507d7dc7b7f449d04ae4a",
+      "bytes": 1507
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/criterion-evidence.json",
+      "sha256": "ffadc4c5bdf3494d6f700bfeb92278c813eb73a7a9f858023b1fb28ebd15e75e",
+      "bytes": 190807
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/accessibility-adjudication-13.json",
+      "sha256": "1a8ae7aee8cf41432d97d6bea4ab65818bee535b69d4c1cc5b0626d23b22440c",
+      "bytes": 20994
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/same-owner-checkpoint-07.json",
+      "sha256": "fe59c1a8903239bbf19a009eebac7185f758e2607b59c0615a65d55d513dbb9e",
+      "bytes": 7382
+    }
+  ],
+  "original_scope": {
+    "plan_id": "PLAN-20260920-9B9964BA",
+    "revision": 1,
+    "requirements": 49,
+    "acceptance_scenarios": 36,
+    "tasks": 33,
+    "phases": 8,
+    "unchanged": true
+  },
+  "requirements_excerpt": [
+    {
+      "id": "REQ-019",
+      "requirement": "Provide a first-class accessible List view driven by the same normalized relationship data as Map, with equivalent substantive information and navigation.",
+      "acceptance": [
+        "AT-16: Map/List switching retains selection, filters, returned scope, relationship IDs, direction, and warnings. List users can open entries, inspect evidence, focus a term, and request more connections with the same semantics.",
+        "AT-29: Major reading and exploration tasks can be completed through keyboard and list without canvas, dragging, hover, or double-click. A small control set avoids hundreds of invisible graph controls in tab order; meaningful result/selection changes are announced rather than every layout frame."
+      ]
+    },
+    {
+      "id": "REQ-034",
+      "requirement": "Target WCAG 2.2 AA using semantic navigation, headings, inputs, buttons, lists, visible unobscured focus, and keyboard alternatives for every essential action.",
+      "acceptance": [
+        "Search retains a visible labeled input and submit action; autocomplete follows the WAI-ARIA combobox pattern with Arrow Up/Down, Enter, and Escape that dismisses suggestions without erasing the query. Command/Ctrl+K may supplement but never replace visible search.",
+        "The page does not use a whole-page application role merely for the graph. Zoom, Fit current view, Focus here, source inspection, and other essential actions work without dragging, hovering, double-clicking, or memorized shortcuts.",
+        "Normal text meets 4.5:1 contrast and large text/relevant non-text controls meet their applicable requirements; the WCAG 2.2 AA 24-by-24 CSS-pixel target criterion and its exceptions are assessed correctly. Color is supplemented by labels/icons/line styles, with selection more prominent than decoration."
+      ]
+    },
+    {
+      "id": "REQ-035",
+      "requirement": "Manage focus and announcements across sources, menus, navigation, and asynchronous reads without trapping users or discarding context.",
+      "acceptance": [
+        "Opening a source drawer moves focus to its heading or first meaningful control; closing it restores the evidence trigger. Escape closes temporary menus/drawers and returns focus predictably; route changes do not leave focus in removed components.",
+        "Loading preserves current context, errors stay beside the failed region, and updates announce meaningful changes rather than continuous layout frames or whole-page blank flashes."
+      ]
+    },
+    {
+      "id": "REQ-036",
+      "requirement": "Keep the reader and surrounding controls operable and legible across narrow layouts, substantial zoom, both themes, and reduced-motion settings.",
+      "acceptance": [
+        "AT-30: At a 320 CSS-pixel viewport and with substantial browser zoom, menus and text reflow, controls remain usable, and status remains legible. Spatial-diagram exceptions do not excuse non-reflowing surrounding UI.",
+        "Narrow navigation becomes a drawer and entry text receives primary space; a phone Map is dedicated with dismissible selected details and a visible List option. Process/source text reads vertically without squeezed parallel columns.",
+        "Light and dark themes receive independent checks; reduced motion stops unnecessary animation and settled layouts. System fonts, comfortable line spacing, restrained surfaces, and small consistent spacing support reading; exact visual tuning remains proposed in Decisions."
+      ]
+    },
+    {
+      "id": "REQ-043",
+      "requirement": "Supply a requirement-to-implementation-and-evidence matrix covering all SRC AT-01 through AT-36 with real canonical fixtures and the actual production bundle.",
+      "acceptance": [
+        "Unit evidence covers normalization/ranking/category mappings/cursors, relation identities/direction, graph-list projection, source selection, and state transitions; service evidence covers isolation, assets, sessions, freshness, budgets, snapshot conflict, non-mutation, and inaccessible writes.",
+        "Browser evidence covers search-entry-history, selection/focus, sources, keyboard, responsiveness, expiry, CSP, renderer failure, and production offline operation; manual evidence covers readability, focus, screen-reader use, relationship comprehension, and knowledge tasks. Tool choice may use Playwright or the established equivalent.",
+        "A production build, explicit launch, safe reads, search/process access, interactive map/text equivalence, root/Template behavior, updated docs, and preserved agent workflows each have direct evidence. Skips, pre-existing failures, content gaps, environment limits, and untested behavior remain separate from passes; screenshots or unit tests alone never establish integrated completion."
+      ]
+    },
+    {
+      "id": "REQ-044",
+      "requirement": "Evaluate the actual interface against its WCAG 2.2 AA target with automated browser checks and manual keyboard/screen-reader use, reporting tested environments precisely.",
+      "acceptance": [
+        "Evidence names actual browser and assistive-technology versions/combinations, including the relevant macOS VoiceOver/Safari walkthrough; a Windows screen-reader/browser combination is added when available, otherwise that limit is reported.",
+        "Automated scan results supplement manual knowledge-task and focus checks; component-library selection or a passing scanner never supports an unqualified accessibility/compliance claim."
+      ]
+    }
+  ],
+  "confirmed_product_gaps": [
+    {
+      "id": "NARROW_NAV_DRAWER",
+      "requirement": "REQ-036 second acceptance sentence; TASK013/TASK019; original FRONTEND criterion25",
+      "trigger": "Open any destination on a narrow/320CSS-pixel viewport.",
+      "expected": "Navigation becomes an operable drawer while entry/reading content gets primary space; keyboard open/close/Escape/focus semantics satisfyREQ034/035.",
+      "actual": "app.ts constructor permanently appends navigation and tools to an aside rail. styles.css<=760 changes rail nav to wrapping rows. No navigation drawer container, open/close button/state or Escape/focus lifecycle exists. Static wrapping reflow is not the required drawer.",
+      "source_locations": [
+        "src/app.ts:55-61,nav()",
+        "src/styles.css:7",
+        "src/preferences.ts:rail enum is declared but no control uses it"
+      ]
+    },
+    {
+      "id": "PHONE_MAP_DETAILS_DISMISS",
+      "requirement": "REQ-036 same acceptance sentence; TASK019 and original FRONTEND criterion25",
+      "trigger": "Open Map with a selected entry on a phone/narrow viewport.",
+      "expected": "Dedicated Map retains visible List and selected details can be dismissed/reopened without discarding canonical selection/focus/filters/scope/history or evidence access.",
+      "actual": "renderRoute(map) always appends entryHost beside MapView; media rules only stack columns. EntryView and MapView expose no selected-details dismiss/reopen action, and no app logic hides that host for deliberate dismissal. SourceDrawer close and Identity/provenance disclosure are different features.",
+      "source_locations": [
+        "src/app.ts:renderRoute map branch and makeEntry",
+        "src/entry.ts:EntryActions/showHeader",
+        "src/map/controller.ts:constructor/show",
+        "src/styles.css:6-7"
+      ]
+    }
+  ],
+  "theme_key_discrepancy": {
+    "classification": "actual unresolved browser/input observation; no confirmed product defect yet",
+    "facts": "Native02 reported keyboardLight success. Native03 focused theme then Space/Down/Return twice leftSystem; AXmenuLight fallback succeeded. Preserve both.",
+    "source_review": "Theme is a native HTMLselect with system/light/dark options, labeled through an HTMLlabel; ordinary change listener synchronously saves valid preferences then applies value and rootdata-theme. No custom key handler or key-preventing ancestor covers theme. Preference memory value is retained even if storage fails, and ordinary response admission clones currentstate.",
+    "not_proven": "Source inspection and programmatic selectOption/browser tests do not prove actual Safari keyboard interaction. Do not invent key handling or replace native control merely to match one failed sequence.",
+    "next_probe": "After narrowUI correction, a short current-bundle Safari keyboard test should record exact focused Theme control, menu/active-option state, key sequence, actual selectedvalue and visible resolvedtheme before/after. Read-only current-control inspection may corroborate; no programmatic value change can count as keyboard. Reproduce before assigning any distinct theme product repair."
+  },
+  "requirement_vs_protocol_adjudication": [
+    {
+      "topic": "320CSSpixel viewport",
+      "decision": "OriginalAT30 requires viewport/reflow, not innerWidth==clientWidth. Preserve frozen03miss, and use CSSOM320inner/303content observation as real narrow evidence for exactly observed Light content/Darkheader. No artificial scrollbar-preference change or blanketallstate pass.",
+      "source": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-keyboard03-viewport-interpretation.json",
+        "sha256": "caea31448c381a32cfcb321b24a210d8e92efd8419eb734be397bab091412780"
+      }
+    },
+    {
+      "topic": "24px targets",
+      "decision": "REQ034 asks applicable targetcriterion/exceptions assessed correctly. Existing current54-state/304candidate/individualspacing,label and inactive-state adjudication is specific evidence. No original requirement demands a new blanketallnative24px proof. Recheck affected targets after UI/layoutchanges; no blanketWCAGpass."
+    },
+    {
+      "topic": "Reduced motion",
+      "decision": "REQ036 requires operability/legibility and stopping unnecessary animation. It does not require ordinary mode to animate or continuous video. Current authored CSS has a reduced-motion rule disablinganimation/transition and autoscroll; renderer initialpreset explicitlyanimate:false and uses immediateposition/fit/zoom updates, with no authored animation calls. Actual native03 supplied settled-frame checks underbothOSsettings. Preserve inability to prove interveningframes, but do not invent an ordinary-vs-reduced animationdifference requirement. Newdrawer behavior must honorprefers-reduced-motion and receive proportionate current checks."
+    },
+    {
+      "topic": "Themes/browser matrix",
+      "decision": "Both themes require independent checks and relevant actual Safari/VoiceOver evidence; no source sentence requires every combination/state to be duplicated in every browser. Current light/dark automated/manual/native scopes can be combined honestly. UnseenSafariDarksource remains unexercised as a scope limit, not automatic newuniversal testmatrix."
+    },
+    {
+      "topic": "Native03 timeout",
+      "decision": "Failed driver deadline is preserved, not passed. It does not erase actual supported groupobservations or truefixture/stage/worker/windowcleanup. No originalcriterion demands rerunning an unchangedwhole850sjob just toturnitsstatusgreen. Use a focused successor only for a realremaininggap; preserve timelycontrolledstop and restoration."
+    },
+    {
+      "topic": "Speech",
+      "decision": "REQ035/044 and frozenTASK022 require actual manualscreenreaderuse/meaningfulannouncements. Processactivation, DOM/AXnames or approval cannot supply actualwords. This remains a true observation/participant need; no clipboard observer admitted."
+    }
+  ],
+  "accepted_evidence_correction": "Earlier frontendcriterion25 acceptance established testedreflow/source behavior but did not substantiate the explicit narrow-navigation-drawer/Mapdetaildismiss clauses. Keep earlier tests/history true to their tested scope; open a newcurrentFrontend revision for the missing original behavior. No immutableplan/TRD/scope reduction.",
+  "repair_scope": "Same originalFRONTEND_WORKER_G3, originalgenericrole/settings/all29criteria. Narrow current app/style/entry/source orMapcontroller integration and tests/generatedassets only; no contract/schema/purefoundation/Python/dependency change or newauthority.",
+  "verification_outline": [
+    "Actual320CSSlayout and wide\u2194narrow changes: keyboarddraweropen/close/Escape/visiblefocusreturn; destinations/query/contentstable; routechangeclosesdrawer withoutfocusloss.",
+    "Map selecteddetaildismiss/reopen in narrowlayout preserves normalizedmodel, focus, selection, filters, scope and route/history; SourceDrawer focus remains honest ifparentdismissed.",
+    "No hiddenbackgroundtabtargets/focustrap; correct expanded/controls labels; theme/help accessible; both themes/reducedmotion/zoom, absent renderer and late/read/error states continueworking.",
+    "Preserve productionsecurity, source fidelity, processcatalog, strictAPI/state/route foundations and storagewhitelist. Build through approvedtooling/currentdependencyadmission and fullruntimeaudit.",
+    "Provisionalfrontend delivery then currentSERVICEreverification, refreshedsamefrontendfinal29criteria and independentqualificationcurrentbuild. All49REQ36AT33tasks/eightphases retained; no speech/participant substitution."
+  ],
+  "authority": "Manager review only, no product/Task mutation yet. Parent explicitly approved proceeding original-owner in-scope repair after this exact source finding. Watcher remainsheld; Q is actuallycompleted; no hostjobcurrentlyrunning or released."
+}

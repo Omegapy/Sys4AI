@@ -1,0 +1,94 @@
+{
+  "status": "released_for_one_root_run_each_not_results",
+  "actor": "/root/explorer_manager_g3",
+  "task_revision": 219,
+  "jobs": [
+    {
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/host-browser-basic-02.json",
+        "sha256": "d010b6ea002d2d6253797c05e6bcc50e7cca0caef36fd51dbba2cc182a9fcd3f"
+      },
+      "manifest": {
+        "path": "/private/tmp/explorer-service-v4-browser-02/inputs.json",
+        "sha256": "f0a5aa504e70cc373032aaa2420e64c2e4bb23b61040f4e2ce1801a27c3b52fa"
+      },
+      "inputs": 112,
+      "live_inputs": 107,
+      "driver": {
+        "path": "host-playwright-driver-v2.py",
+        "sha256": "7f8be6f60942d9f60687d569c68b7af48d19a8322265e9735c0925d8e0296937",
+        "bytes": 6119
+      },
+      "timeout_seconds": 100
+    },
+    {
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/host-browser-late_session-02.json",
+        "sha256": "c85d3f4087f98789683f6a6cca81c2a67051b2aba4c44185560182897736fb4d"
+      },
+      "manifest": {
+        "path": "/private/tmp/explorer-service-v4-browser-02/inputs.json",
+        "sha256": "f0a5aa504e70cc373032aaa2420e64c2e4bb23b61040f4e2ce1801a27c3b52fa"
+      },
+      "inputs": 112,
+      "live_inputs": 107,
+      "driver": {
+        "path": "host-playwright-driver-v2.py",
+        "sha256": "7f8be6f60942d9f60687d569c68b7af48d19a8322265e9735c0925d8e0296937",
+        "bytes": 6119
+      },
+      "timeout_seconds": 100
+    },
+    {
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/host-browser-late_context-02.json",
+        "sha256": "a824a32562d2218fe6a755d7e830774e16bd38859dca9bdea53299e83f414c7e"
+      },
+      "manifest": {
+        "path": "/private/tmp/explorer-service-v4-browser-02/inputs.json",
+        "sha256": "f0a5aa504e70cc373032aaa2420e64c2e4bb23b61040f4e2ce1801a27c3b52fa"
+      },
+      "inputs": 112,
+      "live_inputs": 107,
+      "driver": {
+        "path": "host-playwright-driver-v2.py",
+        "sha256": "7f8be6f60942d9f60687d569c68b7af48d19a8322265e9735c0925d8e0296937",
+        "bytes": 6119
+      },
+      "timeout_seconds": 100
+    }
+  ],
+  "expected_groups": {
+    "basic": [
+      "full_ui_bootstrap_clean_route_cookie",
+      "copied_local_link_has_safe_route_only",
+      "resume_retains_exact_entry_route",
+      "isolated_close_retains_recorded_entry",
+      "narrow_close_dismisses_modal_and_exposes_status_focus",
+      "same_document_fragment_cleared_and_consumed_token_rejected",
+      "new_document_fragment_cleared_and_consumed_token_rejected"
+    ],
+    "late_session": [
+      "late_session_ignored_after_fresh_same_document_connection"
+    ],
+    "late_context": [
+      "late_context_ignored_after_fresh_same_document_connection"
+    ]
+  },
+  "review": "Complete successor diff inspected: only separate manifest_digests and owned_descendants names; Source loader and tool postcheck no longer lose manifest. Original driver/stage/failed01 preserved; original browser JS/all9 assertions/product/tools unchanged. Full112 stage/live counterpart equality and28 tool hashes rechecked.",
+  "binding_regression": {
+    "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/driver-bindings-check.json",
+    "sha256": "f042a35e4d42eee49e26a90992c504da243c9886f5715b9c63fd18039f8cf75d"
+  },
+  "prior_release": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-v4-browser-native-release.json",
+    "sha256": "78ff6b2f45cbc51863fa809cbe8b44957366c2c291352a6a4da863818811ff64"
+  },
+  "failed_actual_basic01": {
+    "path": "/private/tmp/explorer-service-v4-browser-basic-host-eos6g5em/receipt.json",
+    "sha256": "842bac6fb75ab89b62bb0fb0c62a939305d99987a33a2375b2c187d3383bb138",
+    "scope": "Childexit1/stdout0; no browser group accepted. Exact inputs/tools/cleanup passed."
+  },
+  "native01_unchanged": true,
+  "limits": "Same100s outer/60s child/250KB safe output; no raw stderr/secret/trace/HAR/screenshots; full original/captured/live/tool postchecks and owned cleanup required. Exact actualHeadless151. No native or speech claim."
+}

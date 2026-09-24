@@ -100,12 +100,13 @@ def write_status(root: Path, value: dict) -> None:
 
 
 def engine_apply(root: Path) -> dict:
-    process = subprocess.run(
-        [sys.executable, str(root / 'tools/template_update.py'),
-         '--project-root', str(root), 'apply'],
-        capture_output=True, text=True, timeout=120,
-        env={**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'},
-    )
+    command = [sys.executable, str(root / 'tools/template_update.py'),
+               '--project-root', str(root)]
+    options = {'capture_output': True, 'text': True, 'timeout': 120,
+               'env': {**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}}
+    checked = subprocess.run([*command, 'check'], **options)
+    process = (checked if checked.returncode == 0 else
+               subprocess.run([*command, 'apply'], **options))
     try:
         result = json.loads(process.stdout)
     except json.JSONDecodeError:

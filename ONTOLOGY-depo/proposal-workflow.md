@@ -73,50 +73,16 @@ The candidate preserves the original import, retains previous extension
 statements, and changes only the selected extension and its companion lock.
 Standards validation, review and publication remain separate required steps.
 
-## Local workbench
+## Browser entry and retained local helpers
 
-Enable `profiles.workbench` explicitly in the selected advanced companion, then
-start `ontology.py --project-root ROOT workbench --session-file
-.sys4ai/ontology/workbench/SESSION.json`. A trusted local authority file may be
-selected with `--authority-file`. It contains the exact `trusted_authority`
-arguments: `actor_id`, `actor_kind`, normalized actual `native_receipt`,
-`observed_at`, exact canonical-file `scope`, and optional confirmed `task`.
-The current owner supplies this file; HTTP requests cannot supply these fields.
-Without it the service permits browsing only.
+Use the installed ontology skill's `explore --open` command for the read-only
+Project Knowledge Explorer. Authoring uses the trusted proposal, validation,
+review, publication and recovery commands described above. The old `workbench`
+command returns `workbench_retired` and rejects former authority/session options.
 
-The selected profile supports `enabled`, loopback `host: 127.0.0.1`, `port`
-(0 chooses an available port), `session_seconds` from 60 to 3600, and
-`max_request_bytes` from 1024 to 1000000. Basic browsing requires no remote
-service or Node dependency. Advanced operations expose their real backend
-readiness. Current native publication evidence lasts at most five minutes;
-expired authority requires a fresh trusted observation, independently of the
-browser session's lifetime.
-
-Open the one-use bootstrap URL from the private runtime session file. Its token
-is exchanged for a same-site HTTP-only session cookie and a CSRF token. The
-fragment is removed from browser history after connection. Do not place the
-session file or URL in evidence logs, canonical content, fixtures or Git.
-Host and Origin checks reject cross-origin calls; CSP and text-only rendering
-prevent labels, evidence and imported text from executing. Source navigation
-opens only already selected evidence. The listener supports loopback only;
-remote exposure needs a separate deployment and access policy.
-
-Search supports ID, label and alias with module, kind, type, lifecycle and fact
-filters. Both list buttons and graph nodes open definitions, directed relations
-and source evidence. Imported assertions, project assertions, inferred facts
-and proposals have readable labels. The inference view shows rule/premise
-chains with source buttons and a bounded complete-result inspector.
-
-The editor provides forms for concepts, instances, predicates and qualifier
-properties, typed relations, cardinality/acyclic constraints and source
-bindings. Imported IDs are protected. Deprecation retains historical meaning
-and a distinct optional replacement; deleting or recycling approved identities
-is rejected. All actions are available through labeled keyboard controls;
-dragging and color interpretation are not required. Cancel preserves saved
-drafts. Reject and discard preserve approved content. The review view retains
-validation failures, exact diffs, history, actual partial receipts and canonical
-reopen actions.
-
-These checks are cooperative local process controls, not operating-system
-identity authentication. Report actual browser and native evidence separately
-from HTTP contract tests or screenshots.
+`TrustedAuthority`, `trusted_authority` and `draft_form` retain their local helper
+interfaces for trusted callers. They confer no browser access. Historical setup
+receipts and six exact workbench assets remain compatibility resources; the
+current package has no authoring HTTP implementation. Old session credentials
+are not migrated. Review the installed `references/explorer-operations.md` for
+normal launch, configuration and code/assets/configuration rollback boundaries.

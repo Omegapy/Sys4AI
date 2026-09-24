@@ -1,0 +1,7 @@
+# One bounded synthesis correction
+
+Direct in-memory owner normalization of proposal SHA256 68a98087547e42a964ab95f9fb05b101c7e141dd381e536856d51f52aadfb103 produces 257036 canonical bytes before any managed write. Task evidence references require regular files at most 250000 bytes. The proposal is 248387 bytes, but generated identity/history/validation fields exceed the limit after normalization.
+
+Preserve the first proposal/dispositions/validation files as version 1. Produce proposal-v2.json and corresponding v2 validation/dispositions. Reduce redundant prose enough to leave safe canonical headroom (target below 235000 canonical bytes), without changing any source requirement title/outcome/119 exact acceptance sentences/dependencies, required scope, task coverage or substantive chosen design. The negative_requirements arrays currently duplicate complete acceptance sentences; replace these repeated strings with concise exact negative obligations while retaining the original acceptance sentences verbatim. Further remove repetitive boilerplate only if needed.
+
+Run the existing structural/fidelity/AT/order checks and report the fully normalized canonical byte size including identity/history/validation. This is one artifact-integration correction, not a new product requirement or optional polish. Do not mutate the original solver candidates, Task ledger or managed plan. Stop after the bounded corrected synthesis passes. All prior context remains unchanged.

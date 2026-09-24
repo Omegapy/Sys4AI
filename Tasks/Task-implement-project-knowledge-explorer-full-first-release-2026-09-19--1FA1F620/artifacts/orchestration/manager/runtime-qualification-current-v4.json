@@ -1,0 +1,66 @@
+{
+  "task_revision": 234,
+  "actual_after_nonwaking_message_roster": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/explorer_manager_g3",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/explorer_manager_g3/frontend_worker",
+          "agent_status": "completed"
+        },
+        {
+          "agent_name": "/root/explorer_manager_g3/qualification_worker",
+          "agent_status": "pending_init"
+        }
+      ]
+    }
+  },
+  "actual_delivery": {
+    "tool": "collaboration.send_message",
+    "target": "/root/explorer_manager_g3/qualification_worker",
+    "message": {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-current-v4-input-message.txt",
+      "sha256": "63ce5454a73a99e18842bc0a86ee3197af254afc9d43d33d5afba7c216b8b2db"
+    },
+    "result": "Successful returned tool call; exact same target appeared pending_init. No normal wake or work turn before input binding."
+  },
+  "target_slot_actually_allocated": true,
+  "additional_spawn_slots_claimed": 0,
+  "catalog": {
+    "name": "project-sub-agent",
+    "agents_path": "Roles/project-sub-agent/AGENTS.md",
+    "role_path": "Roles/project-sub-agent/ROLE.md",
+    "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+    "catalog": {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/catalog-QUALIFICATION_CURRENT_V4.json",
+      "sha256": "11a14b3aed3f0fd9d4a59c84ec27e26cba4a56d7890ee8f7e3ebb8f808af21a9"
+    }
+  },
+  "settings": {
+    "effort": null,
+    "evidence": [
+      {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/bootstrap/native-capability-generation3.json",
+        "sha256": "6dd60b9516f70383108cef38a5db76add702f2b54d69334548c84420d4e3f19e"
+      }
+    ],
+    "mode": "verified_inheritance",
+    "model": null
+  },
+  "packet": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-current-v4-input-packet.json",
+    "sha256": "d7d53a2a07893182f45410c345f4a948f92df4c04a5ad75fecc27539aa3db75d"
+  },
+  "current_refs": 386,
+  "preserved_owner_files": 826,
+  "scope": "Original native target, same inherited settings, full16 criteria; no new worker/Task or topology change."
+}

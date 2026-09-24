@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "inputs": [
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/reader-data-tests/precision-wire-fixture.json",
+      "sha256": "9a202830fb975063e05175be68dc6f8f1a63dabb0ff35ff6f9eb7b32327adf36"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/contracts.ts",
+      "sha256": "5ac271b7c461797bbceba5ae7afae8c3b8ef2ecaadf26d07a2b48d1dfd3f914b"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_explorer_read.py",
+      "sha256": "2fd6393a842dd34575e147293299945f98afbccf452cca28e4c8fc7321723dab"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_explorer_source.py",
+      "sha256": "393082592bcd1d0630dec628379e6626f116f6b60bfba098125264dd73a6b1f8"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/reader-data-tests/delivery.json",
+      "sha256": "ea07048a54451eb8c75a6e84360103902ee466132af352f5317590d0ab57bb49"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/client-foundations-tests/delivery.json",
+      "sha256": "da5dcc999baea3196c47797d567bec7e206407a66f324a9b5c2f0e2ee5a65145"
+    }
+  ],
+  "compiler_command": [
+    "node",
+    "/private/tmp/explorer-client-foundations-u194tx8_/node_modules/typescript/bin/tsc",
+    "--ignoreConfig",
+    "--strict",
+    "--noUncheckedIndexedAccess",
+    "--target",
+    "ES2022",
+    "--module",
+    "Node16",
+    "--moduleResolution",
+    "node16",
+    "--lib",
+    "ES2022,DOM",
+    "--outDir",
+    "/private/tmp/explorer-manager-bridge-kg09mqgr/out",
+    "/private/tmp/explorer-manager-bridge-kg09mqgr/contracts.ts"
+  ],
+  "compiler_exit": 0,
+  "compiled_output": {
+    "path": "/private/tmp/explorer-manager-bridge-kg09mqgr/out/contracts.js",
+    "sha256": "52dfcb332ddcb64daeff6fbc159777c8c2e2957d05a8cb71a1e22eae38a4ec7d"
+  },
+  "check_code": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/reader-client-precision-bridge.cjs",
+    "sha256": "3ace7294ad661ec351c966f8c2b0f3703aabd0b2c6412251e23fa06539afcf40"
+  },
+  "checks": {
+    "status": "passed",
+    "responses": 5,
+    "correlation_negative_cases": 5,
+    "numeric_markers": 3,
+    "safe_edge_preserved": true,
+    "exact_qualifier_text_preserved": true,
+    "unsafe_numeric_cases_rejected": 7,
+    "ordinary_numeric_cases_admitted": 3,
+    "exact_text_sha256": "2956d7c43cd8654f552907b654e4bd500e05ef2ba2107e3c9c12b523e9b741b3",
+    "qualification": "Actual adapter fixture through freshly compiled current pure client APIs; no HTTP, browser, full policy handshake or production UI claim."
+  },
+  "historical_probe_correction": "Initial manager deepStrictEqual compared deliberately null-prototype admitted JSON objects to ordinary JSON.parse objects. Changed assertion to exact serialized chunk equality; no product edit or byte-content defect."
+}
