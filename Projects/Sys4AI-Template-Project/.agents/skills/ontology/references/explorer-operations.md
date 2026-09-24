@@ -11,7 +11,7 @@ Launch uses the packaged assets and never installs, builds or activates optional
 profiles. A stopped Python process must be launched locally again. The browser
 cannot restart it. Keep bootstrap links and private session files out of logs,
 version control and shared evidence. See [commands](commands.md) for optional
-port/session selection, expiry, reconnection and the separate `explorer-health`
+port/session selection, bootstrap expiry, reconnection and the separate `explorer-health`
 command. [BUILD.md](../explorer/BUILD.md) owns explicit package maintenance.
 
 `ontology.yaml` owns project identity and permitted knowledge. Optional
@@ -48,4 +48,3 @@ valid guard bindings; it never restores old ontology, memory, proposals, Tasks,
 receipts or publication history. Keep the Template watcher held until the owner
 has approved the complete distribution state; restoring it can immediately apply
 all pending source changes.
-

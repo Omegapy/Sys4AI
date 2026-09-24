@@ -446,7 +446,6 @@ class Service:
     def prune(self):
         now = self.now()
         self.bootstraps = {k:v for k,v in self.bootstraps.items() if now < v}
-        self.sessions = {k:v for k,v in self.sessions.items() if now < v['expires']}
 
     def error(self, code, connection=None):
         err, status = self.errors.get(code, self.errors['internal_error'])
@@ -543,14 +542,12 @@ class Service:
         value = values.get(self.cookie)
         need(is_token(value) and value in self.sessions,'session_invalid')
         session = self.sessions[value]
-        if self.now() >= session['expires']:
-            del self.sessions[value]; raise ServiceError('session_expired')
         if csrf: need(hmac.compare_digest(c.headers.get('x-explorer-csrf',''),session['csrf']),'csrf_forbidden')
         return value, session
 
     def session_result(self, session):
         return dict(schema_version=1,status='connected',csrf=session['csrf'],session_scope=session['scope'],
-            expires_in=max(1,math.ceil(session['expires']-self.now())),service_instance=self.instance,
+            service_instance=self.instance,
             code_epoch=self.package.code_epoch,build_id=self.assets.manifest['build_id'],
             schema_sha256=hashlib.sha256(self.package.member_bytes['schema']).hexdigest())
 
@@ -570,9 +567,9 @@ class Service:
             need(len(self.sessions)-(1 if previous else 0) < self.policy['sessions'], 'service_busy')
             del self.bootstraps[body['bootstrap']]
             if previous: del self.sessions[previous]
-            value = token(); session = {'scope':os.urandom(16).hex(), 'csrf':token(), 'created':self.now(), 'expires':self.now()+self.policy['session_seconds']}
+            value = token(); session = {'scope':os.urandom(16).hex(), 'csrf':token()}
             self.sessions[value] = session
-            cookie = self.cookie+'='+value+'; HttpOnly; SameSite=Strict; Path='+API+'; Max-Age='+str(self.policy['session_seconds'])
+            cookie = self.cookie+'='+value+'; HttpOnly; SameSite=Strict; Path='+API
             result = self.session_result(session)
         elif op == 'session-resume':
             _, session = self.authenticate(c); result = self.session_result(session)
@@ -608,7 +605,6 @@ class Service:
             need(body['code_epoch'] == self.package.code_epoch,'package_changed')
             need(self.waiting is None,'service_busy')
             job = {'kind':'read','operation':op,'request':body,'scope':session['scope'],
-                   'expires':int((session['expires']-self.started)*1000),
                    'deadline':c.accepted+self.policy['request_seconds']}
             c.job = job; c.stage = 'queued'
             if self.active is None: self.start_job(c)
@@ -645,8 +641,6 @@ class Service:
             self.active=None;return
         need(self.module.validate(value['policy'],'EffectivePolicy',self.schema),'internal_error')
         self.policy = value['policy']
-        for session in self.sessions.values():
-            session['expires']=min(session['expires'],session['created']+self.policy['session_seconds'])
         if body['status'] != 'error':
             need(body['request_id'] == c.request_id and body['operation'] == c.operation and
                  body['session_scope'] == c.job['scope'] and body['service_instance'] == self.instance and
@@ -654,8 +648,8 @@ class Service:
         need(self.now() < c.job['deadline'],'deadline_exceeded')
         if c.closed:
             self.active = None; return
-        if not any(s['scope']==c.job['scope'] and self.now()<s['expires'] for s in self.sessions.values()):
-            self.fail(c,'session_expired');self.active=None;return
+        if not any(s['scope']==c.job['scope'] for s in self.sessions.values()):
+            self.fail(c,'session_invalid');self.active=None;return
         self.verify(); raw = compact(body); need(len(raw)<=body['limits']['bytes'],'resource_limit')
         if body.get('error',{}):
             code = body['error']['code']

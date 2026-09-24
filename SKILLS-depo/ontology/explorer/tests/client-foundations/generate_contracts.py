@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[5]
 SCHEMA = ROOT / "ONTOLOGY-depo/schema/explorer-v1.json"
-EXPECTED = "8e6d0ceb47c98e77d518f4d7c935986ab6982d1a1c15e12377a726e90fbbb7a4"
+EXPECTED = "f494fde5dfb796a3dfd88db40d20487d965ce57d15b87d82117651dd5c8766ee"
 raw = SCHEMA.read_bytes()
 assert hashlib.sha256(raw).hexdigest() == EXPECTED
 schema = json.loads(raw)

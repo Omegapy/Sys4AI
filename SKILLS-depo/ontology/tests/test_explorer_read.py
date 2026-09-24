@@ -32,7 +32,7 @@ class ReaderCase(unittest.TestCase):
         self.store=self.snapshot_module.SnapshotStore(self.root,self.package)
         self.reader=self.module.Reader(self.store,service_instance='1'*32,build_id='2'*64,
             schema_sha256=hashlib.sha256(self.package.member_bytes['schema']).hexdigest(),service_secret=b'x'*32)
-        self.session='3'*32;self.expires=900000
+        self.session='3'*32
         self.snapshot=None
         self.context=self.call('context',{'refresh':False})
         self.snapshot=self.context['snapshot']
@@ -44,7 +44,7 @@ class ReaderCase(unittest.TestCase):
     def call(self,op,params,**kw):
         request=dict(schema_version=1,request_id='test',code_epoch=self.package.code_epoch,snapshot=self.snapshot,params=params)
         request.update(kw.pop('request',{}))
-        result=self.reader.read(op,request,session_scope=kw.pop('session',self.session),session_expires_ms=kw.pop('expires',self.expires),**kw)
+        result=self.reader.read(op,request,session_scope=kw.pop('session',self.session),**kw)
         self.assertTrue(self.module.validate(result,op.title()+'Response',self.reader.schema))
         self.assertLessEqual(len(self.module.compact(result)),result['limits']['bytes'])
         try:

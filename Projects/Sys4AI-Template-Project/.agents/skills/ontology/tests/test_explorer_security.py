@@ -128,7 +128,7 @@ class CallAuditTests(unittest.TestCase):
                     if name in forbidden:raise AssertionError('Forbidden operation invoked: '+name)
             before=inventory(h.root);sys.setprofile(profile)
             def read(op,params,snapshot=None):
-                value=reader.read(op,dict(schema_version=1,request_id='audit',code_epoch=h.package.code_epoch,snapshot=snapshot,params=params),session_scope='2'*32,session_expires_ms=900000)
+                value=reader.read(op,dict(schema_version=1,request_id='audit',code_epoch=h.package.code_epoch,snapshot=snapshot,params=params),session_scope='2'*32)
                 self.assertIn(value['status'],('ok','ambiguous','incomplete','empty'))
                 self.assertIsNotNone(value['data']);self.assertEqual(value['operation'],op)
                 self.assertTrue(mod.validate(value,op.title()+'Response',reader.schema),'valid_read_response')

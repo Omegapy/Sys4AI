@@ -200,7 +200,6 @@ class Reader:
         p["default_page_items"] = min(p["page_items"],canonical["default_limit"])
         p["initial_nodes"] = min(p["initial_nodes"],p["display_nodes"],p["visited_nodes"],p["page_items"])
         p["initial_edges"] = min(p["initial_edges"],p["display_edges"],p["page_items"])
-        p["cursor_seconds"] = min(p["cursor_seconds"],p["session_seconds"])
         for k,v in self.store.limits.items(): p[k] = min(p[k],v)
         return p
 
@@ -333,7 +332,7 @@ class Reader:
                     snapshot=view.snapshot_id,operation=operation,scope_sha256=sha(compact(dict(code_epoch=view.code_epoch,
                     effective_policy_sha256=sha(canonical_bytes(policy)),operation=operation,scope=scope))),sort=sort)
 
-    def decode_cursor(self,token,base,policy,session_expires):
+    def decode_cursor(self,token,base,policy):
         if token is None: return None
         need(type(token) is str and len(token)<=2048 and re.fullmatch(r"[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+",token),"cursor_invalid")
         try:
@@ -349,16 +348,15 @@ class Reader:
             raise ReaderError("cursor_invalid") from None
         need(all(data[k]==v for k,v in base.items()),"cursor_scope_changed")
         now=self.now()
-        need(data["issued"]<=now and data["expires"]>data["issued"] and data["expires"]-data["issued"]<=1000*policy["cursor_seconds"] and data["expires"]<=session_expires,"cursor_invalid")
+        need(data["issued"]<=now and data["expires"]>data["issued"] and data["expires"]-data["issued"]<=1000*policy["cursor_seconds"],"cursor_invalid")
         need(now<data["expires"],"cursor_expired")
         return data["last_key"]
 
     @staticmethod
     def b64(raw): return base64.urlsafe_b64encode(raw).decode().rstrip("=")
 
-    def encode_cursor(self,base,key,policy,session_expires,issued):
-        expires=min(issued+policy["cursor_seconds"]*1000,session_expires)
-        need(issued<expires,"session_expired")
+    def encode_cursor(self,base,key,policy,issued):
+        expires=issued+policy["cursor_seconds"]*1000
         raw=compact(dict(base,last_key=key,issued=issued,expires=expires))
         token=self.b64(raw)+"."+self.b64(hmac.digest(self.secret,raw,"sha256"))
         need(len(token)<=2048,"resource_limit")
@@ -391,11 +389,10 @@ class Reader:
         self.tick()
         return response
 
-    def read(self,operation,request,*,session_scope,session_expires_ms,deadline=None):
+    def read(self,operation,request,*,session_scope,deadline=None):
         """Authenticated fixed dispatch. Caller serializes jobs in its one worker."""
         need(operation in OPERATIONS,"endpoint_unavailable")
-        need(validate(session_scope,"SessionScope",self.schema) and type(session_expires_ms) is int,"session_invalid")
-        need(self.now()<session_expires_ms,"session_expired")
+        need(validate(session_scope,"SessionScope",self.schema),"session_invalid")
         try:
             raw=compact(request)
             need(len(raw)<=16384,"request_too_large")
@@ -408,11 +405,11 @@ class Reader:
                 # source-only observations deliberately do not lease a new view.
                 view=next((v for v in (self.store.current,self.store.retiring) if v is not None and v.snapshot_id==request["snapshot"]),None)
                 need(view is not None,"snapshot_changed")
-                return self._read(view,operation,request,session_scope,session_expires_ms,len(raw))
+                return self._read(view,operation,request,session_scope,len(raw))
             expected=request["snapshot"]
             if operation=="context" and request["params"]["refresh"]: expected=None
             with self.store.lease(expected_snapshot=expected,deadline=self._deadline) as view:
-                return self._read(view,operation,request,session_scope,session_expires_ms,len(raw))
+                return self._read(view,operation,request,session_scope,len(raw))
         except self.store.error_type as exc:
             raise ReaderError(exc.code) from None
         except sources.SourceError as exc:
@@ -420,7 +417,7 @@ class Reader:
         except (UnicodeError,RecursionError,OverflowError):
             raise ReaderError("invalid_request") from None
 
-    def _read(self,view,operation,request,session,session_expires,size):
+    def _read(self,view,operation,request,session,size):
         policy=self.policy(view);self._deadline=min(self._deadline,self._request_started+policy["request_seconds"])
         need(size<=policy["request_bytes"],"request_too_large")
         scope=self.scope(operation,request["params"],view,policy)
@@ -428,8 +425,8 @@ class Reader:
         if operation=="context": return self.context(view,response,policy)
         sort=scope["sort"] if operation=="search" else "relation_id" if operation in ("relationships","neighborhood") else "source_offset" if operation=="source" else "section_order"
         base=self._cursor_base(view,operation,scope,policy,session,sort)
-        last=self.decode_cursor(request["params"]["cursor"],base,policy,session_expires)
-        token=lambda key:self.encode_cursor(base,key,policy,session_expires,self.now())
+        last=self.decode_cursor(request["params"]["cursor"],base,policy)
+        token=lambda key:self.encode_cursor(base,key,policy,self.now())
         if operation=="search": return self.search(view,response,policy,last,token)
         if operation in ("relationships","neighborhood"): return self.graph(view,response,policy,last,token)
         if operation=="entry": return self.entry(view,response,policy,last,token)

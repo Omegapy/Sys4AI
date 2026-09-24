@@ -223,7 +223,7 @@ export function responseSemantics(r: ReadResponse, expected?: ResponseExpectatio
       count = 1; const d = r.data, p = d.resource_policy;
       if (d.project.id !== r.project.id || d.project.namespace !== r.project.namespace || d.root_scope_id !== r.project.root_scope_id || d.service.instance !== r.service_instance || d.service.code_epoch !== r.code_epoch || d.service.schema_sha256 !== CONTRACT_SCHEMA_SHA256) return false;
       if (r.page.has_more !== false || r.page.next_cursor !== null || r.page.total !== null || !uniqueIds(d.categories) || !uniqueIds(d.starting_points) || !d.starting_points.every(summaryConsistent)) return false;
-      if (p.default_page_items > p.page_items || p.initial_nodes > Math.min(p.display_nodes,p.visited_nodes,p.page_items) || p.initial_edges > Math.min(p.display_edges,p.page_items) || p.cursor_seconds > p.session_seconds) return false;
+      if (p.default_page_items > p.page_items || p.initial_nodes > Math.min(p.display_nodes,p.visited_nodes,p.page_items) || p.initial_edges > Math.min(p.display_edges,p.page_items)) return false;
       break;
     }
     case 'search': {

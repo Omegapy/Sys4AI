@@ -88,14 +88,14 @@ class SearchTests(ReaderCase):
         view=self.store.current;policy=self.reader.policy(view);scope=self.reader.scope('search',params,view,policy)
         base=self.reader._cursor_base(view,'search',scope,policy,self.session,'label')
         changed={**base,'root_scope':'0'*64}
-        key=self.reader.decode_cursor(cursor,base,policy,self.expires)
-        wrong=self.reader.encode_cursor(changed,key,policy,self.expires,self.reader.now())
+        key=self.reader.decode_cursor(cursor,base,policy)
+        wrong=self.reader.encode_cursor(changed,key,policy,self.reader.now())
         self.error('cursor_scope_changed','search',{**continuation,'cursor':wrong})
         changed={**base,'project_id':'other-project'}
-        wrong=self.reader.encode_cursor(changed,key,policy,self.expires,self.reader.now())
+        wrong=self.reader.encode_cursor(changed,key,policy,self.reader.now())
         self.error('cursor_scope_changed','search',{**continuation,'cursor':wrong})
         key['label_sha256']='0'*64
-        wrong=self.reader.encode_cursor(base,key,policy,self.expires,self.reader.now())
+        wrong=self.reader.encode_cursor(base,key,policy,self.reader.now())
         self.error('cursor_invalid','search',{**continuation,'cursor':wrong})
 
     def test_cursor_expiry_and_graph_direction(self):

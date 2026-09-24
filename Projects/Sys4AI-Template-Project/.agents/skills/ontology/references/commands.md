@@ -265,9 +265,10 @@ Cleanup removes only unchanged files created by that exact service instance.
 The one-use bootstrap expires after 60 seconds. The bundled bootstrap removes
 its fragment from the visible URL and history before the first request. A fresh
 exchange creates an isolated reader cookie and in-memory request token; reload
-can resume the same unexpired session without extending its absolute lifetime.
-An expired session requires fresh local reopening. The browser preserves safe
-desired context and recorded text; it cannot restart a stopped Python process.
+can resume that session while the local service is running. The session has no
+time limit and ends when the reader's Close reading session action is used or
+the service stops. The browser preserves safe desired context and recorded text;
+it cannot restart a stopped Python process.
 
 `explorer-health` performs bounded read-only checks of the selected local package,
 configuration and canonical readability. `--url` accepts only an explicit

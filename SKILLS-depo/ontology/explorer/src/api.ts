@@ -46,7 +46,6 @@ export class ReadClient {
   private discoveryController:AbortController|null=null;
   private connection:AbortController|null=null;
   private controllers=new Map<Region,AbortController>();
-  private expiry:ReturnType<typeof setTimeout>|undefined;
   constructor(private build:string,private schema:string,private changed:()=>void){}
   get connected():boolean{return this.session!==null&&this.state.freshness!=='disconnected';}
   apply(transition:StateTransition):boolean {
@@ -121,13 +120,12 @@ export class ReadClient {
   }
   disconnect(message:string):void {
     this.cancelCatalog();this.cancelDiscovery();++this.generation;this.session=null;this.connection?.abort();for(const c of this.controllers.values())c.abort();this.controllers.clear();
-    if(this.expiry!==undefined)clearTimeout(this.expiry);
     this.state={...this.state,freshness:'disconnected',session_scope:null,cursors:{},regional_requests:{},refresh:null};
     this.message=message;this.changed();
   }
   async connect(fragment:CapturedFragment):Promise<SuccessResponse|null> {
     this.cancelCatalog();this.cancelDiscovery();const generation=++this.generation;this.connection?.abort();for(const c of this.controllers.values())c.abort();this.controllers.clear();
-    if(this.expiry!==undefined)clearTimeout(this.expiry);this.session=null;
+    this.session=null;
     this.state={...this.state,regional_requests:{},cursors:{},refresh:null,freshness:this.state.snapshot?'stale':'unconnected'};
     const controller=new AbortController();this.connection=controller;
     this.message='Connecting to the local reader.';this.changed();
@@ -143,7 +141,6 @@ export class ReadClient {
       // A fresh authenticated session starts a coherent context; the UI retains
       // the old recorded DOM until that new context has been admitted.
       this.state=connectIdentity(createReaderState(),session).state;
-      this.expiry=setTimeout(()=>{if(generation===this.generation&&this.session===session)this.disconnect('The reading session expired. Reopen the local reader to continue.');},session.expires_in*1000);
       const context=await this.read('context',{refresh:false});
       if(generation!==this.generation||this.session!==session)return null;
       if(!context||context.operation!=='context'){this.disconnect('Current knowledge is unavailable. Reopen or inspect local reader health.');return null;}

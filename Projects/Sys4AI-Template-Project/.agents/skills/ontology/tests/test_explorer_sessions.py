@@ -13,7 +13,7 @@ class SessionTests(unittest.TestCase):
     def setUp(self):self.h=Harness().start()
     def tearDown(self):self.h.close()
     def code(self,result):return json.loads(result[2])['error']['code']
-    def test_replay_replacement_resume_and_expiry(self):
+    def test_replay_replacement_and_resume_without_expiry(self):
         h=self.h;bootstrap=h.bootstrap();a=h.connect(bootstrap=bootstrap);b=h.connect()
         data={'schema_version':1,'bootstrap':bootstrap,'client_build_id':h.assets.manifest['build_id'],
               'schema_sha256':a['value']['schema_sha256']}
@@ -26,11 +26,11 @@ class SessionTests(unittest.TestCase):
         old_build={**data,'bootstrap':h.bootstrap(),'client_build_id':'0'*64}
         self.assertEqual(self.code(h.request('/api/explorer/v1/session',old_build)),'package_changed')
         self.assertFalse(h.service.changed);self.assertEqual(h.read(b)[0],200)
-        key=a2['cookie'].split('=',1)[1];h.service.sessions[key]['expires']=time.monotonic()-1
-        self.assertEqual(self.code(h.read(a2)),'session_expired')
+        key=a2['cookie'].split('=',1)[1];self.assertNotIn('expires',h.service.sessions[key])
+        self.assertEqual(h.read(a2)[0],200)
         self.assertEqual(h.read(b)[0],200)
         attrs=a['headers']['Set-Cookie'];self.assertTrue('HttpOnly' in attrs and 'SameSite=Strict' in attrs and 'Path=/api/explorer/v1/' in attrs)
-        self.assertFalse('Domain=' in attrs or 'Secure' in attrs)
+        self.assertFalse('Domain=' in attrs or 'Secure' in attrs or 'Max-Age=' in attrs or 'Expires=' in attrs)
     def test_capacity_does_not_evict_and_close_is_isolated(self):
         h=self.h;sessions=[h.connect() for _ in range(8)]
         body={'schema_version':1,'bootstrap':h.bootstrap(),'client_build_id':h.assets.manifest['build_id'],
@@ -42,7 +42,7 @@ class SessionTests(unittest.TestCase):
             headers={'Cookie':replacement['cookie'],'X-Explorer-CSRF':replacement['value']['csrf']})
         self.assertEqual(result[0],200);self.assertTrue('Max-Age=0' in result[1]['Set-Cookie'])
         self.assertEqual(h.read(sessions[1])[0],200);self.assertEqual(self.code(h.read(replacement)),'session_invalid')
-    def test_cancel_or_expire_a_preserves_healthy_worker_for_b(self):
+    def test_cancel_or_close_a_preserves_healthy_worker_for_b(self):
         h=self.h;a=h.connect();b=h.connect();pid=h.service.worker.process.pid
         os.kill(pid,signal.SIGSTOP)
         sock=socket.create_connection(('127.0.0.1',h.service.port));body=json.dumps({'schema_version':1,'request_id':'cancel',
@@ -57,10 +57,12 @@ class SessionTests(unittest.TestCase):
         thread=threading.Thread(target=lambda:result.setdefault('a',h.read(a)));thread.start()
         deadline=time.monotonic()+1
         while h.service.active is None and time.monotonic()<deadline:time.sleep(.01)
-        key=a['cookie'].split('=',1)[1];h.service.sessions[key]['expires']=time.monotonic()-1;os.kill(pid,signal.SIGCONT);thread.join(5)
-        self.assertEqual(self.code(result['a']),'session_expired');self.assertEqual(h.read(b)[0],200)
+        closed=h.request('/api/explorer/v1/session-close',{'schema_version':1,'code_epoch':h.package.code_epoch},
+            headers={'Cookie':a['cookie'],'X-Explorer-CSRF':a['value']['csrf']})
+        self.assertEqual(closed[0],200);os.kill(pid,signal.SIGCONT);thread.join(5)
+        self.assertEqual(self.code(result['a']),'session_invalid');self.assertEqual(h.read(b)[0],200)
         self.assertEqual(h.service.worker.process.pid,pid)
-        OBSERVATIONS.append({'case':'two_session_cancellation_expiry','same_worker_retained':True})
+        OBSERVATIONS.append({'case':'two_session_cancellation_close','same_worker_retained':True})
     def test_two_root_cookie_csrf_bootstrap_cursor_isolation(self):
         h=self.h
         def different_meaning(other):

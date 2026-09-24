@@ -48,12 +48,11 @@ def run(package,assets,initial):
         package.verify();send(ready)
         while True:
             job=receive()
-            transport.need(isinstance(job,dict) and set(job)=={'kind','operation','request','scope','expires','deadline'} and job['kind']=='read')
+            transport.need(isinstance(job,dict) and set(job)=={'kind','operation','request','scope','deadline'} and job['kind']=='read')
             transport.need(job['operation'] in transport.OPERATIONS)
             try:
                 package.verify()
-                body=reader.read(job['operation'],job['request'],session_scope=job['scope'],
-                    session_expires_ms=job['expires'],deadline=job['deadline'])
+                body=reader.read(job['operation'],job['request'],session_scope=job['scope'],deadline=job['deadline'])
                 package.verify()
             except (reader.error_type,store.error_type,package.error_type) as exc:
                 _,body=reader.error_response(exc.code,operation=job['operation'],request_id=job['request'].get('request_id'),
