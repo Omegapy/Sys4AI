@@ -20,7 +20,7 @@ Canonical edit location: [ONTOLOGY/modules/project/project.jsonld#/@graph/67](<.
 ## Sources
 
 - [ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld](<../../ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld>) `json:/@graph` SHA256 `b9b3bb90f8db47110588c02c99c8b4bedab62c1b4be9f533572aa3a6362e4f43` (current)
-- [depot/template-update.json](<../../depot/template-update.json>) `json:/overrides` SHA256 `f895c4b3d875bd8451976d3befe99a5e98ada34b520ce9c16462551bc7f0cf76` (current)
+- [depot/template-update.json](<../../depot/template-update.json>) `json:/overrides` SHA256 `4dce9d10cff5ded3657112a2c52f4e7a7d0f44ed660c709601a3d1397d895d3c` (current)
 
 ## Backlinks
 

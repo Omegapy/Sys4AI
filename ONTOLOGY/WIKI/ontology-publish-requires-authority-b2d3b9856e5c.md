@@ -19,7 +19,7 @@ Canonical edit location: [ONTOLOGY/modules/project/project.jsonld#/@graph/54](<.
 
 ## Sources
 
-- [SPECS.md](<../../SPECS.md>) `section:Ontology first release and initialization v8` SHA256 `704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408` (current)
+- [SPECS.md](<../../SPECS.md>) `section:Ontology first release and initialization v8` SHA256 `0b70e312ab29785f4d003b4ea4dc7b920a239c6b1a5cceeec69a173f12a96bf6` (current)
 
 ## Backlinks
 

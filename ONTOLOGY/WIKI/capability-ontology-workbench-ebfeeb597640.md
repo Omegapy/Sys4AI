@@ -6,20 +6,26 @@
 
 Stable ID: `urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-workbench`
 
-Kind: instance. Lifecycle: **approved**. Fact classification: asserted.
+Kind: instance. Lifecycle: **deprecated**. Fact classification: asserted.
 Module: project (project-local). Source freshness: current.
 
 A local browser service searches definitions, inspects relationships and derivations, preserves draft revisions, reviews diffs, and publishes through the same guarded interfaces.
 
 Canonical edit location: [ONTOLOGY/modules/project/project.jsonld#/@graph/85](<../../ONTOLOGY/modules/project/project.jsonld>) `/@graph/85`
 
+## Deprecation reason
+
+The browser authoring workbench is retired. Project Knowledge Explorer replaces browser knowledge reading only; trusted proposal and publication commands retain separate authority.
+
+Replacement: [Project Knowledge Explorer](capability-project-knowledge-explorer-9dbae96fcfc8.md)
+
 ## Relationships
 
-- [Installed ontology skill](installed-ontology-42d57dd9a77d.md) → [provides capability](providesCapability-09a9a79bbe94.md) → [Ontology visual workbench](capability-ontology-workbench-ebfeeb597640.md) (asserted; approved)
+- [Installed ontology skill](installed-ontology-42d57dd9a77d.md) → [provides capability](providesCapability-09a9a79bbe94.md) → [Ontology visual workbench](capability-ontology-workbench-ebfeeb597640.md) (asserted; deprecated)
 
 ## Sources
 
-- [SPECS.md](<../../SPECS.md>) `section:Ontology second release and initialization v9` SHA256 `704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408` (current)
+- [SPECS.md](<../../SPECS.md>) `section:Ontology second release and initialization v9` SHA256 `0b70e312ab29785f4d003b4ea4dc7b920a239c6b1a5cceeec69a173f12a96bf6` (current)
 
 ## Backlinks
 

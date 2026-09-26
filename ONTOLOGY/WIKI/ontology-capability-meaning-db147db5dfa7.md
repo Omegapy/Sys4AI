@@ -19,7 +19,7 @@ Canonical edit location: [ONTOLOGY/modules/project/project.jsonld#/@graph/48](<.
 
 ## Sources
 
-- [.agents/skills/ontology/SKILL.md](<../../.agents/skills/ontology/SKILL.md>) `section:Ontology` SHA256 `70626fc04928371731865d3b1bc020446e0c5aa724b583185daaefd2a0a887ac` (current)
+- [.agents/skills/ontology/SKILL.md](<../../.agents/skills/ontology/SKILL.md>) `section:Ontology` SHA256 `6b8c22d082031a46c7cf702f6e40f4ea33537c8dad2e3bd08cfd91614676f4a7` (current)
 
 ## Backlinks
 

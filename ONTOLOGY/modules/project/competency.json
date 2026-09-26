@@ -243,15 +243,62 @@
     },
     {
       "expected_ids": [
-        "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-workbench",
-        "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+        "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-workbench"
       ],
       "expected_sources": [
         "SPECS.md"
       ],
+      "expected_terms": [
+        "deprecated",
+        "retired",
+        "urn:sys4ai:ontology:project:sys4ai-depot:capability-project-knowledge-explorer"
+      ],
       "id": "root-advanced-workbench",
-      "intent": "capability",
+      "intent": "definition",
       "query": "Ontology visual workbench"
+    },
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:project:sys4ai-depot:capability-project-knowledge-explorer",
+        "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+      ],
+      "expected_sources": [
+        "SPECS.md",
+        ".agents/skills/ontology/SKILL.md"
+      ],
+      "expected_terms": [
+        "Overview, Terms, Processes, and Map",
+        "without authoring or execution authority"
+      ],
+      "id": "root-explorer-capability",
+      "intent": "capability",
+      "query": "Project Knowledge Explorer"
+    },
+    {
+      "expected_ids": [
+        "urn:sys4ai:ontology:project:sys4ai-depot:capability-project-knowledge-explorer"
+      ],
+      "expected_terms": [
+        "no automatic time limit",
+        "Close reading session",
+        "service stop",
+        "Closing a browser tab alone does not revoke"
+      ],
+      "id": "root-explorer-session-lifetime",
+      "intent": "definition",
+      "query": "urn:sys4ai:ontology:project:sys4ai-depot:capability-project-knowledge-explorer"
+    },
+    {
+      "expected_relations": [
+        {
+          "object": "urn:sys4ai:ontology:project:sys4ai-depot:capability-project-knowledge-explorer",
+          "predicate": "urn:sys4ai:ontology:core:providesCapability",
+          "subject": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology"
+        }
+      ],
+      "id": "root-explorer-provider",
+      "intent": "relationship",
+      "query": "Project Knowledge Explorer"
     }
   ],
   "schema_version": 1

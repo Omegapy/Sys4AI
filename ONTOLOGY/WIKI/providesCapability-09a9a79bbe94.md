@@ -42,6 +42,7 @@ Canonical edit location: [ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph
 - [memory skill provides Project memory retrieval](memory-provides-5ba30e2f08f1.md)
 - [memory skill implements the shared MemoryRetrieval capability](memory-provides-shared-e98a83fd3710.md)
 - [ontology skill provides Project ontology retrieval](ontology-provides-547071f2306f.md)
+- [Ontology skill provides Project Knowledge Explorer](ontology-provides-explorer-3feae4cf2ea6.md)
 - [Ontology skill provides Guarded helper dispatch](ontology-provides-guards-c4c574752548.md)
 - [Ontology skill provides Formal ontology inference](ontology-provides-inference-d113ded460d1.md)
 - [Ontology skill provides Sourced ontology proposals](ontology-provides-proposals-8c806b652459.md)
