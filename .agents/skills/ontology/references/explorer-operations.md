@@ -14,6 +14,20 @@ version control and shared evidence. See [commands](commands.md) for optional
 port/session selection, bootstrap expiry, reconnection and the separate `explorer-health`
 command. [BUILD.md](../explorer/BUILD.md) owns explicit package maintenance.
 
+## Reading sessions
+
+An active reading session has no automatic timeout. Use **Close reading session**
+to revoke it; stopping the local service also invalidates all of that instance's
+sessions. Closing a browser tab alone does not revoke the server session. Reload
+can resume against the same live service. After a restart, use the newly opened
+tab because the previous port and session belong to the stopped instance.
+
+The one-use launch link must still be used within 60 seconds, and pagination
+cursors retain their bounded lifetime. These deadlines do not end an active
+reading session. Package changes invalidate sessions and require explicit restart.
+
+## Configuration and package adoption
+
 `ontology.yaml` owns project identity and permitted knowledge. Optional
 `ontology-explorer.yaml` controls presentation only and must match that project
 ID. Its closed schema is `reference-assets/ONTOLOGY-depo/schema/explorer-v1.json`.

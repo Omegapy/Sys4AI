@@ -200,6 +200,19 @@ installed ontology `health` command for semantic and source readiness. Canonical
 publication still needs its exact current operation grant. The Template contains
 no project definitions, instances, grants, generated wiki or runtime state.
 
+## Project Knowledge Explorer starter
+
+The Template includes the read-only Explorer package. Its presentation
+configuration is neutral and cannot launch as the depot; a real project uses
+its own ontology identity and selected configuration. Installation starts no
+service and installs no runtime dependencies.
+
+See [the Explorer specifications](./SPECS.md#project-knowledge-explorer-and-initialization-v13)
+and [operations guide](./.agents/skills/ontology/references/explorer-operations.md)
+for launch, configuration, session closure, and scoped existing-project adoption.
+The former browser authoring workbench is retired; trusted proposal and
+publication commands retain separate authority checks.
+
 ## Project Curator starter
 
 The [Curator skill](./.agents/skills/curate/SKILL.md), [charter](./CURATOR.md),

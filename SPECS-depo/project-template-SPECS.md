@@ -134,7 +134,7 @@ initializer contracts for supported commands and exact recovery boundaries.
 
 ## Ontology starter and initialization v8
 
-Initializer 10.0.0 uses `governance-starter-v8` for new and first-prepared projects.
+Initializer 10.0.0 introduced the `governance-starter-v8` ontology assets.
 The [ontology contract](./reference-assets/ONTOLOGY-depo/profile.md) defines a
 strict JSON-LD subset with pinned local contexts and versioned core imports.
 Canonical project graphs and bindings live under `ONTOLOGY/`; `ontology.yaml`
@@ -154,7 +154,7 @@ existing memory, learning, governance, Tasks, roles, licensing and project data.
 
 ## Curator capability and initialization v10
 
-The current starter edition is `governance-starter-v10`; earlier v1-v9 setup
+Edition `governance-starter-v10` introduced the Curator assets; earlier v1-v9 setup
 receipts keep their original edition and recorded ownership. Curator adds its
 charter, inactive destination configuration, protected ownership map, complete
 skill/reference package and four paired roles. Existing role discovery owns the
@@ -183,3 +183,37 @@ the selection artifact itself creates no Task or standing runtime permission.
 Existing orchestration version 2 records retain their original Broker and native
 protocol requirements and are never converted by ordinary selection. Static-ready
 setup remains installed-inactive and establishes no native or callback readiness.
+
+## Project Knowledge Explorer and initialization v13
+
+Edition `governance-starter-v13` includes the read-only Project Knowledge Explorer
+and its static capability inventory. Earlier receipts keep their original
+edition and ownership. Setup copies static capability without starting a reader,
+building frontend assets, or provisioning a product environment.
+
+The reader uses Python 3.12 and a packaged local frontend. Explicit
+`explore --open` starts one loopback service for the selected project root;
+Overview, Terms, Processes, and Map read canonical knowledge and permitted
+sources. No browser route grants authoring or execution authority, and core
+reads require no optional advanced profile. The old browser workbench is retired.
+
+`ontology.yaml` owns the destination's identity and permitted knowledge.
+Optional `ontology-explorer.yaml` controls presentation and must match that
+identity. The Template's `project_id: null` is intentionally neutral and reports
+`configuration_needed` if launched directly. A destination uses documented
+absent-file defaults or explicitly specializes its presentation configuration.
+Existing product packages require scoped adoption; Template synchronization
+does not update them.
+
+An active reading session has no automatic time limit. Close reading session
+revokes the selected session; service stop or package replacement also invalidates
+it. Closing a browser tab alone does not revoke the server session. The one-use
+bootstrap retains its 60-second lifetime, and pagination cursors remain bounded.
+Loopback, Host/Origin, session/CSRF, source confinement, and per-request budgets
+remain enforced. Reload can resume against the same live service.
+
+Use [Explorer operations](./.agents/skills/ontology/references/explorer-operations.md)
+for launch and package adoption, [the reader contract](./.agents/skills/ontology/references/explorer-contract.md)
+for API/resource rules, and [BUILD.md](./.agents/skills/ontology/explorer/BUILD.md)
+for explicit production builds. Static installation and package checks do not
+establish live browser, accessibility, performance, or participant validation.

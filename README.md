@@ -277,7 +277,7 @@ reviewed publication workflow, then explicitly compile and build the wiki.
 Publication receipts under `control_records/ontology/` are durable evidence;
 generated files under `.sys4ai/ontology/` can be rebuilt.
 
-Initializer edition v9 gives new projects neutral ontology capability with their
+The initializer gives new projects neutral ontology capability with their
 own identity and Director binding. Existing setup editions keep their original
 meaning. Select `prepare-existing --adopt-module ontology` for one existing
 project, or `--refresh-module ontology` for an unchanged receipt-owned ontology
@@ -287,7 +287,9 @@ not automatically adopt ontology in existing products.
 
 The core uses Python 3.12's standard library. The second release adds separately
 selected local RDF/SPARQL/SHACL, finite formal inference, semantic retrieval,
-sourced AI proposals, guarded helper dispatch, and a browser workbench. The
+sourced AI proposals, and guarded helper dispatch. Its former browser authoring
+workbench is retired; trusted proposal, publication, and recovery commands remain
+available through their separate authority checks. The
 [advanced companion](./ontology-advanced.yaml) records the selected profiles;
 ordinary lookup performs no installation, model preparation, or service startup.
 The [command reference](./.agents/skills/ontology/references/commands.md) describes
@@ -299,3 +301,24 @@ existing receipt and preserves prior setup editions, authored ontology, memory,
 licensing, and profile choices. Existing products require their own explicit
 adoption. [Second-release evidence](./Verification/ontology-second-release/RELEASE.md)
 records actual versions, exercised interfaces, guarded boundaries, and limits.
+
+## Project Knowledge Explorer
+
+The read-only Explorer provides Overview, Terms, Processes, and Map views of
+this depot's recorded knowledge. Launch it from this root:
+
+```sh
+.venv/bin/python -B .agents/skills/ontology/scripts/ontology.py --project-root "$PWD" explore --open
+```
+
+The reading session has no automatic time limit. Use **Close reading session**
+to revoke it, or stop the local service with Ctrl-C in its launch terminal.
+Closing a browser tab alone does not revoke the server session. Use the newest
+tab after restarting the reader; an old port belongs to the earlier service.
+
+See [the current specifications](./SPECS.md#project-knowledge-explorer-and-initialization-v13)
+and [Explorer operations](./.agents/skills/ontology/references/explorer-operations.md)
+for configuration, package maintenance, and existing-project adoption.
+[Delivery records](./Verification/project-knowledge-explorer-first-release/OPERATIONAL-UPDATE-2026-09-24.md)
+retain the original release's incomplete verification and user-requested Task
+closure. Installation and a successful launch do not establish full-plan validation.

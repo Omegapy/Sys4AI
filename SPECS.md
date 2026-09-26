@@ -28,9 +28,8 @@ Inspect the selected interpreter and package manager with:
 .venv/bin/python -m pip --version
 ```
 
-The active [skill directory](./.agents/skills/) contains `agent-task`,
-`communication`, `init-new-project`, `manage-subagent-roles`, `task`,
-`to-implementation-plan` and `to-trd`. Their `SKILL.md` files own their usage
+The active [skill directory](./.agents/skills/) contains the installed project
+packages. Their `SKILL.md` files own their usage
 contracts; [SKILLS-depo](./SKILLS-depo/) owns separate reusable sources.
 
 ## Git exclusions
@@ -206,8 +205,10 @@ Frozen advanced packets retain the existing Task artifact path/hash interface
 and limits. Initial solvers share identical selected bytes and cannot retrieve
 new live facts, proposals, models, or documents through that packet.
 
-The loopback workbench uses the same proposal, validation, publication, and
-guarded helper interfaces as agents. Guards cover the declared ontology, memory,
+The second release originally exposed proposal, validation, publication, and
+guarded helper interfaces through a loopback browser workbench. That browser
+authoring service is now retired. Trusted agent/CLI routes retain their separate
+authority checks. Guards cover the declared ontology, memory,
 Task, TRD, plan, role, Template, and setup dispatch paths. Current authority and
 exact inputs are checked separately from semantic conformance. Direct filesystem
 edits and unintegrated host tools are outside that dispatch coverage.
@@ -220,3 +221,38 @@ Template. Root adoption is separately manifested; no ordinary product is updated
 See the [advanced contract](./ONTOLOGY-depo/advanced-profile.md),
 [operations](./.agents/skills/ontology/references/commands.md), and
 [second-release evidence](./Verification/ontology-second-release/RELEASE.md).
+
+## Project Knowledge Explorer and initialization v13
+
+The current browser interface is the read-only Project Knowledge Explorer.
+Its installed `explore --open` command serves the reviewed local frontend on
+`127.0.0.1` for one server-selected project root. Overview, Terms, Processes,
+and Map read canonical knowledge and permitted sources; the browser grants no
+authoring or execution authority. Core reads require Python 3.12 and packaged
+assets, without activating optional advanced profiles or installing dependencies.
+
+`ontology-explorer.yaml` controls presentation only and must match the project's
+identity in `ontology.yaml`. The root uses `sys4ai-depot`; the Template's null
+presentation identity stays neutral. An explicitly selected destination may use
+the documented absent-file defaults or specialize its presentation configuration.
+Existing projects need scoped adoption; neither registration nor Template updates
+replace their local packages.
+
+The reading session has no automatic deadline. The Close reading session action
+revokes its cookie and request token; service stop or package replacement also
+invalidates the session. Closing a tab alone does not revoke it. The one-use
+bootstrap still expires after 60 seconds, and pagination cursors retain their
+bounded lifetime. Host, Origin, session, CSRF, source confinement, request budgets,
+and read-only dispatch remain enforced. Reload can resume an existing session
+against the same live service.
+
+Initializer edition `governance-starter-v13` carries the Explorer's static
+capability inventory. Earlier setup receipts retain their original editions and
+ownership. Setup installs static assets; it starts no reader and provisions no
+product environment. [Explorer operations](./.agents/skills/ontology/references/explorer-operations.md)
+owns launch and adoption procedures, [the contract](./SKILLS-depo/ontology/references/explorer-contract.md)
+owns the wire and resource rules, and [BUILD.md](./.agents/skills/ontology/explorer/BUILD.md)
+owns explicit builds. Current package identity is recorded in
+[the runtime manifest](./.agents/skills/ontology/explorer/assets/manifest.json).
+The original full-release verification remains incomplete under the user's
+testing-stop instruction; historical evidence is not upgraded by this documentation.
