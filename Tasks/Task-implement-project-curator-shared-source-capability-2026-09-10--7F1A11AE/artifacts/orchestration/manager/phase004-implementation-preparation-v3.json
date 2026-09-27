@@ -1,0 +1,108 @@
+{
+  "kind": "Phase004BoundedImplementationPreparation",
+  "state": "prepared_not_active",
+  "plan": {
+    "path": "Implementation_Plans/Plan_sys4ai-project-curator-shared-source-capability_2026-09-10_FAE2A15B/plan.json",
+    "sha256": "71b7ca5cafa0eae40f82335089261bce4fe94b9e24e63251e50c7837cce6d539"
+  },
+  "tasks": [
+    {
+      "id": "TASK-014",
+      "title": "Implement durable transport and cursors",
+      "criteria": [
+        "Manual corrections survive restart; project/repository/branch/snapshot/causal/policy/source IDs are retained.",
+        "Transport cannot claim Task lifecycle or canonical publication outcomes; cache cleanup cannot erase durable events."
+      ],
+      "targets": [
+        "SKILLS-depo/curate/scripts/curator_queue.py",
+        "CURATION-depo/schema/event-v1.json",
+        "CURATION-depo/state-paths.md"
+      ]
+    },
+    {
+      "id": "TASK-015",
+      "title": "Implement bounded local event adapters",
+      "criteria": [
+        "Human and agent commits are equivalent candidates; hooks only record bounded IDs and signal transport.",
+        "Existing hook managers are preserved; no live hook or service is installed by distribution."
+      ],
+      "targets": [
+        "SKILLS-depo/curate/scripts/curator_events.py",
+        "SKILLS-depo/curate/scripts/curator_git.py",
+        "CURATION-depo/adapters/local-events.md"
+      ]
+    },
+    {
+      "id": "TASK-016",
+      "title": "Implement branch and snapshot checkpoints",
+      "criteria": [
+        "Rebase, squash, force update, rename, deletion and branch switch recompute affected obligations.",
+        "Feature-branch knowledge does not become another branch current; assessment alone never advances reconciliation."
+      ],
+      "targets": [
+        "SKILLS-depo/curate/scripts/curator_snapshots.py",
+        "CURATION-depo/schema/checkpoint-v1.json"
+      ]
+    },
+    {
+      "id": "TASK-017",
+      "title": "Implement deterministic preflight and coalescing",
+      "criteria": [
+        "No relevant delta, due check or pending work yields zero model calls, Tasks, knowledge records or content rewrite.",
+        "Unknown classes hold or receive bounded assessment; cache/control timestamps do not cause full reanalysis."
+      ],
+      "targets": [
+        "SKILLS-depo/curate/scripts/curator_preflight.py"
+      ]
+    },
+    {
+      "id": "TASK-018",
+      "title": "Implement causal deduplication and stopping",
+      "criteria": [
+        "Duplicate/retried/out-of-order deliveries produce one logical outcome.",
+        "A code repair still receives documentation/knowledge follow-through; derivative-only follow-up does not restart the repair.",
+        "Unchanged failures/output and selected limits stop expansion with the unresolved finding retained."
+      ],
+      "targets": [
+        "SKILLS-depo/curate/scripts/curator_causality.py",
+        "SKILLS-depo/curate/scripts/curator_metrics.py"
+      ]
+    }
+  ],
+  "classification": "Generic deterministic implementation candidate: approved plan/state-paths already select durable immutable deliveries, branch-bound snapshots and existing owner routes; no alternative architecture is requested. Confirm exact scope when assigning.",
+  "interfaces": {
+    "event": "Strict version1 envelope: event/causal/operation IDs; project/repository/root/branch; source snapshot and policy/source hashes; typed manual correction, commit or due-check; bounded payload/source references; no credentials or shell commands.",
+    "queue": "Exclusive immutable event publication plus exact digest replay; conflicting sameID rejected; append-only delivery receipts and compare-and-swap cursor; missing cache cannot erase events. Query/status are read-only.",
+    "git": "Selected executable and local repository identity, NUL-delimited bounded metadata; only branch/commit/diff/ancestry reads. No hooks installed, reset/checkout/stash/fetch/commit or external access. Preserve human/agent source neutrality.",
+    "snapshots": "Observed, assessed, integrated and reconciled checkpoints remain separate per selected branch. Rewritten ancestry/renames/deletions trigger typed obligations; assessment alone never advances reconciliation. Unavailable volume/root is unavailable, not deletion.",
+    "preflight": "Pure deterministic relevance/due/pending checks from exact inputs and existing classifier. Ignore known control/cache churn. No relevant work produces zero model/task/knowledge/rewrites. Unknown/mixed classes held or bounded assessment, not mutation.",
+    "causality": "Original operation ID plus branch/source/obligation type deduplicates duplicate/reordered delivery. Repair creates documentation/knowledge follow-through; derived-only event cannot re-enter repair. Repeated unchanged failures stop under finite selected limits.",
+    "metrics": "Read-only measures derived from events/outcomes; no competing lifecycle or mutable metric ledger."
+  },
+  "verification_cases": [
+    "Restart and deleted rebuildable cache preserve queued manual correction.",
+    "Exact replay idempotent; altered duplicate rejected; reordered inputs converge.",
+    "Rebase/squash/force-update/branch switch/rename/delete remain branch-bound and distinct from assessment.",
+    "Noop/irrelevant/cache-only checks have zero model/owner writes.",
+    "Missing root/runtime holds pending work.",
+    "Repair follow-through does not recurse into duplicate repair.",
+    "Finite count/time/byte iteration bounds stop repeated unchanged work."
+  ],
+  "staging": "Implement/test a complete candidate package in owned staging, then promote only reviewed source files together. Keep G1 frozen runtime closure untouched during native execution; no active scheduler/service/hook.",
+  "acceptance_gate": "PHASE004 completion remains held until required PHASE003 native/confinement integration passes. Independent deterministic source work may proceed under the new broad user instruction.",
+  "next_assignment_files": [
+    "CURATION-depo/adapters/local-events.md",
+    "CURATION-depo/schema/checkpoint-v1.json",
+    "CURATION-depo/schema/event-v1.json",
+    "CURATION-depo/state-paths.md",
+    "SKILLS-depo/curate/scripts/curator_causality.py",
+    "SKILLS-depo/curate/scripts/curator_events.py",
+    "SKILLS-depo/curate/scripts/curator_git.py",
+    "SKILLS-depo/curate/scripts/curator_metrics.py",
+    "SKILLS-depo/curate/scripts/curator_preflight.py",
+    "SKILLS-depo/curate/scripts/curator_queue.py",
+    "SKILLS-depo/curate/scripts/curator_snapshots.py",
+    "SKILLS-depo/curate/tests/test_delivery.py"
+  ],
+  "preservation": "Current state-paths contract is adequate; avoid editing it solely to satisfy target inventory. Original phase001 editions retained; no active-root/product adoption or Git publication."
+}

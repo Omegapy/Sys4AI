@@ -1,0 +1,158 @@
+{
+  "stage": "fixed_direct_routes_ready_for_manager_validation",
+  "operations": [
+    {
+      "operation": "task.event",
+      "module": "task_state",
+      "function": "response_transaction",
+      "public_signature": "command: str, project_root: Path, tasks_root: Path, selector: str, expected_revision: int, raw_payload: dict[str, Any]",
+      "source_path": ".curator-supported-CD80544E/candidate/SKILLS-depo/agent-task/scripts/task_state.py",
+      "source_sha256": "90c077df7c725b9ed260aaddfcbdf7e5b65e36a7d8d2ba8fb2f02ad8a3f25556"
+    },
+    {
+      "operation": "task.response",
+      "module": "task_state",
+      "function": "response_transaction",
+      "public_signature": "command: str, project_root: Path, tasks_root: Path, selector: str, expected_revision: int, raw_payload: dict[str, Any]",
+      "source_path": ".curator-supported-CD80544E/candidate/SKILLS-depo/agent-task/scripts/task_state.py",
+      "source_sha256": "90c077df7c725b9ed260aaddfcbdf7e5b65e36a7d8d2ba8fb2f02ad8a3f25556"
+    },
+    {
+      "operation": "task.recover",
+      "module": "task_state",
+      "function": "command_reconcile",
+      "public_signature": "project_root: Path, tasks_root: Path, selector: str | None, expected_revision: int | None, raw_payload: dict[str, Any]",
+      "source_path": ".curator-supported-CD80544E/candidate/SKILLS-depo/agent-task/scripts/task_state.py",
+      "source_sha256": "90c077df7c725b9ed260aaddfcbdf7e5b65e36a7d8d2ba8fb2f02ad8a3f25556"
+    },
+    {
+      "operation": "memory.publish",
+      "module": "memory_publish",
+      "function": "publish",
+      "public_signature": "root, payload, grant_file, actor, *, fault=None",
+      "source_path": ".curator-supported-CD80544E/candidate/SKILLS-depo/memory/scripts/memory_publish.py",
+      "source_sha256": "12df681916ef98e1163b3786fd2cc06692086aff01aead66eb5042434bde0096"
+    },
+    {
+      "operation": "memory.recover",
+      "module": "memory_recovery",
+      "function": "recover",
+      "public_signature": "root, journal_path, grant_file, actor, *, fault=None",
+      "source_path": ".curator-supported-CD80544E/candidate/SKILLS-depo/memory/scripts/memory_recovery.py",
+      "source_sha256": "4a288ac8aaa33e1055f0ef878e90726df6d808385781c9f6a7b0e76be8ae2005"
+    },
+    {
+      "operation": "ontology.publish",
+      "module": "ontology_publication",
+      "function": "publish",
+      "public_signature": "root, proposal, grant, *, expected_preview_sha256, fail_at=None",
+      "source_path": ".curator-supported-CD80544E/candidate/SKILLS-depo/ontology/scripts/ontology_publication.py",
+      "source_sha256": "e9d8a2520807a4598a11890ddc9e6d470eeaa6611d6e67f6847aed3220a4b936"
+    },
+    {
+      "operation": "ontology.recover",
+      "module": "ontology_publication",
+      "function": "recover",
+      "public_signature": "root, operation_id, grant, *, fail_at=None",
+      "source_path": ".curator-supported-CD80544E/candidate/SKILLS-depo/ontology/scripts/ontology_publication.py",
+      "source_sha256": "e9d8a2520807a4598a11890ddc9e6d470eeaa6611d6e67f6847aed3220a4b936"
+    },
+    {
+      "operation": "target.classify",
+      "module": "curator_classification",
+      "function": "classify_target",
+      "public_signature": "trusted_map, target_identity, proposed_ranges, snapshot",
+      "source_path": ".curator-supported-CD80544E/candidate/SKILLS-depo/curate/scripts/curator_classification.py",
+      "source_sha256": "00fbfcd59e69e510781e35da03c5207ae8b929956c3b40b7643405a3a0d5c858"
+    }
+  ],
+  "host_inputs": "Actual actor, exact current Task binding, exact JSON operation arguments plus selected real owner modules. Existing owner arguments and checks are retained.",
+  "task_selection": "Task event/response/recovery target the exact selected canonical Task and root. Intake continues through the existing Task owner before an Application is constructed.",
+  "state_transitions": "Pause/resume/recovery/review may reach the documented owner transition while current writer/version/execution binding stays exact. Other direct mutations require active/open state.",
+  "call": {
+    "constructor_keywords": [
+      "operation_owners",
+      "operation_arguments"
+    ],
+    "invocation": "Application.run(action, request, actor=actual_current_actor, origin=origin)",
+    "accepted_operation_fields": [
+      "tool",
+      "automatic",
+      "payload_sha256",
+      "task_binding",
+      "owner_arguments_sha256"
+    ],
+    "path_encoding": "Use JSON path strings in reviewed arguments; the caller converts only fixed owner path parameters after comparing their exact digest.",
+    "preserved_broker": "When no direct arguments are selected for a Broker operation, the existing Broker/context path is preserved."
+  },
+  "argument_contracts": {
+    "task.event": {
+      "command": "orchestrate",
+      "project_root": "exact owning root",
+      "tasks_root": "exact root/Tasks",
+      "selector": "current canonical Task ID",
+      "expected_revision": "current exact revision",
+      "raw_payload": "exact request payload with event and response"
+    },
+    "task.response": {
+      "command": "record-response or pause",
+      "project_root": "exact owning root",
+      "tasks_root": "exact root/Tasks",
+      "selector": "current canonical Task ID",
+      "expected_revision": "current exact revision",
+      "raw_payload": "exact request payload; actor/execution_id/generation match current binding"
+    },
+    "task.recover": {
+      "project_root": "exact owning root",
+      "tasks_root": "exact root/Tasks",
+      "selector": "current canonical Task ID",
+      "expected_revision": "current exact revision",
+      "raw_payload": "original transaction recovery selection"
+    },
+    "memory.publish": {
+      "root": "owner root",
+      "payload": "exact request payload",
+      "grant_file": "actual selected owner record",
+      "actor": "actual current actor"
+    },
+    "memory.recover": {
+      "root": "owner root",
+      "journal_path": "original owner journal",
+      "grant_file": "actual current owner record",
+      "actor": "actual current actor"
+    },
+    "ontology.publish": {
+      "root": "owner root",
+      "proposal": "exact request payload",
+      "grant": "actual current owner record naming actor_id",
+      "expected_preview_sha256": "actual reviewed preview digest"
+    },
+    "ontology.recover": {
+      "root": "owner root",
+      "operation_id": "original owner operation",
+      "grant": "actual current owner record naming actor_id"
+    },
+    "target.classify": {
+      "root": "selected source root",
+      "ownership": "exact selected map",
+      "targets": "ordered identity/ranges pairs matching payload.paths"
+    }
+  },
+  "ordinary_controller_selection": {
+    "helper": "validate_controller_selection(project_root, selection, catalog_owner=role_catalog)",
+    "schema_version": 1,
+    "exact_fields": [
+      "schema_version",
+      "controller",
+      "project_id",
+      "project",
+      "charter",
+      "policy",
+      "role"
+    ],
+    "project_charter_policy_refs": "Exact {path,sha256} for project.json, CURATOR.md, curator.yaml",
+    "role": "Exact {name,agents,role}, with current {path,sha256} references",
+    "task_mode": "New Task schema 2 with orchestration version 1; real manager reservation/receipt/activation remains owned by Task. Existing version2 records unchanged.",
+    "effects": "No Task creation, actor activation, ledger, schedule or canonical write."
+  }
+}

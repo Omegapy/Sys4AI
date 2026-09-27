@@ -1,0 +1,28 @@
+{
+  "kind": "ExistingGenericWorkerCorrection",
+  "baseline": "e0c3b4be30df4f27782474c177eff2a3fb3aa4d2f414fe6a6bacd6a5a8363d8d",
+  "frozen_package": {
+    "path": ".curator-phase004-stage/evidence/final-v2/index.json",
+    "sha256": "92a49983f3d5132e5a41be66e203aea26994b14f281f4726966c164ec297ce8f"
+  },
+  "findings": [
+    {
+      "path": "Verification/project-curator-release/phase004-source-review/root-index.json",
+      "sha256": "0b22378454700a1175677dbf2fa9c26c9705035d641aeeff79ceaa9d7da3ea8f"
+    },
+    {
+      "path": "Verification/project-curator-release/phase004-source-review/manager-semantics.json",
+      "sha256": "cd390dcab18654a3a37a3d0d0a729ff43a5c7688209327b633dbc8d830d940bf"
+    },
+    {
+      "path": "Verification/project-curator-release/phase004-source-review/root-four-fixes-passed.json",
+      "sha256": "cdb03927a56ca6bd28740f8adbe168b6c853a157dbc956bab9cd2a143bc9473a"
+    }
+  ],
+  "required": [
+    "R05: index-only content/identity changes must change the returned snapshot binding and invalidate affected decisions, even with unchanged HEAD/worktree/dirty bool.",
+    "M01: a changed predecessor checkpoint, including new same-context obligations, cannot leave later stages currently reconciled; keep exact replay idempotent and preserve prior historical evidence.",
+    "M02: different input versions under one outcome key cannot inherit an old satisfied current claim or hide new unresolved findings; hold or validate an explicit current-input selection. Ordered/reordered observations must agree."
+  ],
+  "scope": "Existing staged paths and criteria only; preserve R01\u2013R04 fixes. Focused affected snapshot/causality/metrics tests, no new broad audit. Return a new frozen package; no live source promotion."
+}

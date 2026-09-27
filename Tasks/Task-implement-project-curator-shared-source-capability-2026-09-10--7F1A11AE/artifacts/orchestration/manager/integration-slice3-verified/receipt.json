@@ -1,0 +1,124 @@
+{
+  "kind": "owner-chain-caller-flow-publication-and-archive-slice",
+  "sources": {
+    "SKILLS-depo/agent-task/scripts/native_observations.py": "cc3bf1eaad4ac248c44c84da356d35a9a8186a181d214ff3fb15ed0ca0436e31",
+    "SKILLS-depo/agent-task/scripts/orchestration_state.py": "d4901e205c1ed23f9f11a7da5043883dd2df6c8f4e168830ab46913dbc2965f8",
+    "SKILLS-depo/agent-task/tests/test_orchestration_state.py": "df61cbd098c6e2e10b70a2cbdd4f1a9f03c48c7f4aae8ce6fab9bd30203945b0",
+    "SKILLS-depo/curate/scripts/curator_runtime.py": "91f2d1b612f6eac282cd7e511c70cf57ab1874a4eb2d6d6ab5bc11109cf2a635",
+    "SKILLS-depo/curate/scripts/curator_runtime_codex.py": "1ed532d08743eb78f37cc0b3acd6ec973a97e8dbcb5b3bd32c5be73b8480aa82",
+    "SKILLS-depo/curate/scripts/curator_broker.py": "9e9d81d8e97327a4f5330c4ec430ebbe876db11203914222db60c33d540ade95",
+    "SKILLS-depo/curate/tests/test_runtime_lifecycle.py": "08abf33117c69c82ffee02bd04b3f1865dc45b9a40758f4a19cbc41a3374b6a5",
+    "SKILLS-depo/curate/tests/test_native_protocol.py": "3546410551d6e77d29271350f6103c9cca1e39a8089dea0be1fc33c611878040",
+    "SKILLS-depo/curate/tests/test_broker.py": "a9c99a229c27f6a0244aa7352a5c7aa3ebd91f24107f80d406cd4481183d9479",
+    "SKILLS-depo/memory/tests/test_publication.py": "2e7ff64eaf2e00f54f965757ba985df5078e5886fc07b9b8410ebee15b6cdcf1",
+    "SKILLS-depo/ontology/tests/test_authority.py": "7ef6899d33763c23fd14947c632f58cb5d0c1c1375dfeb175667a7c0f8db7c91"
+  },
+  "checks": [
+    {
+      "name": "broker",
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "SKILLS-depo/curate/tests",
+        "-p",
+        "test_broker.py"
+      ],
+      "exit_code": 0,
+      "stdout": "broker.stdout.txt",
+      "stderr": "broker.stderr.txt"
+    },
+    {
+      "name": "archive",
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "SKILLS-depo/curate/tests",
+        "-p",
+        "test_native_protocol.py",
+        "-k",
+        "ProtectedArchiveTests"
+      ],
+      "exit_code": 0,
+      "stdout": "archive.stdout.txt",
+      "stderr": "archive.stderr.txt"
+    },
+    {
+      "name": "protocol",
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "SKILLS-depo/curate/tests",
+        "-p",
+        "test_native_protocol.py",
+        "-k",
+        "ForkProtocolTests"
+      ],
+      "exit_code": 0,
+      "stdout": "protocol.stdout.txt",
+      "stderr": "protocol.stderr.txt"
+    },
+    {
+      "name": "memory",
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "SKILLS-depo/memory/tests",
+        "-p",
+        "test_publication.py",
+        "-k",
+        "ForkMemoryPublicationTests"
+      ],
+      "exit_code": 0,
+      "stdout": "memory.stdout.txt",
+      "stderr": "memory.stderr.txt"
+    },
+    {
+      "name": "ontology",
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "SKILLS-depo/ontology/tests",
+        "-p",
+        "test_authority.py",
+        "-k",
+        "ForkOntologyAuthorityTests"
+      ],
+      "exit_code": 0,
+      "stdout": "ontology.stdout.txt",
+      "stderr": "ontology.stderr.txt"
+    }
+  ],
+  "logs": {
+    "memory.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ontology.stderr.txt": "adfe3cc48ae35f7046601872035a95e80b9fd4a3a18abad0cecb9778c7716b7a",
+    "broker.stderr.txt": "61911fd17470340a7e9cfde1a8129d29b561bb883ce94377ac1f19af27ca3598",
+    "protocol.stderr.txt": "d5a4875b4579cd8d17f8638658e481f105ebc0103894fd6f33918fb7e91153a0",
+    "archive.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ontology.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "memory.stderr.txt": "d8df0dc19643c9124f8d862d700a5edaedac0ecb259b3e7a30055de6af228531",
+    "broker.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "protocol.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "archive.stderr.txt": "41919cc1849a5baca889b145de1b4eb93cc6286c4e6b996e80ebf7981eee9f1c"
+  },
+  "native_calls": 0,
+  "state": "deterministic integration slice; P1 preparation continues",
+  "scope_note": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/foundation-implementation-scope-v2-lifecycle-tests.json",
+    "sha256": "4c97f8e92d256d618e90eba5ce3159565313f9e95ab25362a420c238f867e232"
+  }
+}

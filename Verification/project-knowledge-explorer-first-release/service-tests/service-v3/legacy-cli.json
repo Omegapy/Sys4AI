@@ -1,0 +1,38 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-knowledge-explorer-first-release/service-tests/service-v3/check-legacy-cli.py"
+  ],
+  "exit_code": 0,
+  "executor": "Same assigned service worker, read-only/no-listener local execution",
+  "script_sha256": "e2c51d0c1287dd69484c4e174faf4bc6f0a5ec52051749fd405a810b4a84b795",
+  "result": {
+    "baseline_cli_sha256": "c3023af183e46f1299c3fde6f9ba0e2d4bc807c31086fa6e69bd4a29dba12a54",
+    "baseline_source": "Git HEAD ontology.py read-only comparison; both commands use identical current other-helper bytes and disposable canonical fixture.",
+    "canonical_fixture_unchanged": true,
+    "cases": [
+      {
+        "exit_code": 0,
+        "operation": "term",
+        "same_knowledge_and_metadata_except_loader_snapshot": true
+      },
+      {
+        "exit_code": 0,
+        "operation": "search",
+        "same_knowledge_and_metadata_except_loader_snapshot": true
+      },
+      {
+        "exit_code": 0,
+        "operation": "read",
+        "same_knowledge_and_metadata_except_loader_snapshot": true
+      }
+    ],
+    "current_cli_sha256": "aa030b2697bd93b8849874af540a5cb1f280b415cda8b68205c91283bfcd1b17",
+    "expected_difference": "Only context.snapshot_sha256 differs because canonical retrieval binds actual ontology helper bytes, including changed CLI.",
+    "qualification": "Three ordinary reads plus separately exercised workbench help. No authoring mutation, workbench retirement or broad optional-backend certification claimed.",
+    "status": "passed"
+  },
+  "current_runtime_manifest_sha256": "c59422dc85017405ff9c92e335a459f770e649a2a59507d7dc7b7f449d04ae4a"
+}

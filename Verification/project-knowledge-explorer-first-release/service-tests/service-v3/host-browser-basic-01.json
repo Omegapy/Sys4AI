@@ -1,0 +1,40 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-service-v3-browser-01/host-playwright-driver.py",
+    "basic"
+  ],
+  "stage": "/private/tmp/explorer-service-v3-browser-01",
+  "manifest": {
+    "path": "/private/tmp/explorer-service-v3-browser-01/inputs.json",
+    "sha256": "d8c82cfa105c1a8ae517245e3c37faa5118828e5b4551054ce26278adeba2e29"
+  },
+  "inputs_count": 110,
+  "external_test_tools": [
+    {
+      "path": "/Users/alex.omegapy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "sha256": "27db838bb204ef7c21df2931f5656e4c8fb32e6e947f363a402b49714d32b5b1",
+      "bytes": 121306800
+    },
+    {
+      "path": "/Users/alex.omegapy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/package.json",
+      "sha256": "ca170ec143a88ed3043ac953eb3b2377b2b97304104f4e1e23316684ce2c35af",
+      "bytes": 1416
+    },
+    {
+      "path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "sha256": "665d2bd8a3744c551de136f07ae4df7b561dd39b7051e5876b1b52578568e9d5",
+      "bytes": 367696
+    }
+  ],
+  "timeout_seconds": 100,
+  "intended_writes": [
+    "Independent disposable explorer-http-* fixture/private runtime and fresh Playwright Chrome profile only."
+  ],
+  "cleanup": "Close context/browser, stop/reap reader and recorded browser descendants, audit unchanged fixture/stage/tools.",
+  "credential_boundary": "No private URL/CSRF/body/raw exception output, trace/HAR or screenshots. Delayed real response lives only in browser memory. Clipboard capture does not change OS clipboard.",
+  "scope": "Current full UI bootstrap/resume/copy-link/close/replays and abort-insensitive late session/context modes. Race comparison waits for recorded catalog names to finish current reads; no fake response substitution.",
+  "same_product_inputs_as": "host-batch-01.json"
+}

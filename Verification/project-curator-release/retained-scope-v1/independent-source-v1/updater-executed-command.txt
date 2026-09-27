@@ -1,0 +1,9 @@
+python3 - <<'PY'
+import re,hashlib,json
+from pathlib import Path
+s=Path('/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-clean-stage');p=s/'SKILLS-depo/init-new-project/scripts/init_static_health.py';value=hashlib.sha256((s/'SKILLS-depo/init-new-project/assets/static-capability-v1.json').read_bytes()).hexdigest();t=p.read_text();t=re.sub(r'INVENTORY_SHA256 = "[0-9a-f]{64}"','INVENTORY_SHA256 = "'+value+'"',t);p.write_text(t)
+for row in json.loads((s.parent/'Verification/project-curator-clean-inputs-v1/sources.json').read_text())['files']:
+ p=s/row['source'];(s/'fixture-source'/row['source']).write_bytes(p.read_bytes())
+print('Recorded exact generated inventory digest; runtime dependency pins unchanged.')
+PY
+PYTHONDONTWRITEBYTECODE=1 SYS4AI_CURATOR_TEST_SOURCE=/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-clean-stage/fixture-source SYS4AI_CURATOR_TEST_WORK=/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-clean-stage/ordinary-work TMPDIR=/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-clean-stage/ordinary-tmp python3 -B -m unittest test_template_update.CuratorDistributionTests.test_curator_complete_neutral_source_ownership_precedes_effects test_template_update.CuratorDistributionTests.test_curator_pending_recovery_preserves_unknown_and_later_target_edits > /Volumes/P-SSD/AngryOwl/Sys4AI/.curator-clean-stage/evidence/distribution-v1.txt 2>&1

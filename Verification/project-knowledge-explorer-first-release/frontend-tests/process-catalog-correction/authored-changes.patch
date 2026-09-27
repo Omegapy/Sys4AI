@@ -1,0 +1,235 @@
+--- preimage/SKILLS-depo/ontology/explorer/src/api.ts
++++ SKILLS-depo/ontology/explorer/src/api.ts
+@@ -1,4 +1,4 @@
+-import {decodeReadResponse,decodeWire,isWire,scopeForRequest,utf8Length} from './contracts';
++import {decodeReadResponse,decodeWire,isWire,scopeForRequest,stableJson,utf8Length} from './contracts';
+ import type {Operation,ReadRequest,SessionResponse,SuccessResponse} from './contracts';
+ import {applyResponse,beginRequest,connectIdentity,createReaderState,failRequest} from './state';
+ import type {ReaderState,Region,StateTransition} from './state';
+@@ -40,6 +40,8 @@
+   private session:SessionResponse|null=null;
+   private generation=0;
+   private sequence=0;
++  private catalogGeneration=0;
++  private catalogController:AbortController|null=null;
+   private discoveryGeneration=0;
+   private discoveryController:AbortController|null=null;
+   private connection:AbortController|null=null;
+@@ -49,9 +51,44 @@
+   get connected():boolean{return this.session!==null&&this.state.freshness!=='disconnected';}
+   apply(transition:StateTransition):boolean {
+     if(!transition.accepted)return false;
++    const next=transition.state,prior=this.state;
++    if(next.route_generation!==prior.route_generation||next.snapshot!==prior.snapshot||next.session_scope!==prior.session_scope||next.code_epoch!==prior.code_epoch||next.service_instance!==prior.service_instance||next.root_scope_id!==prior.root_scope_id||next.refresh)this.cancelCatalog();
+     if(transition.abort.length||transition.state.source_selection?.owner_id!==this.state.source_selection?.owner_id||transition.state.source_selection?.reference_id!==this.state.source_selection?.reference_id)this.cancelDiscovery();
+     for(const region of transition.abort){this.controllers.get(region)?.abort();this.controllers.delete(region);}
+     this.state=transition.state;this.changed();return true;
++  }
++  cancelCatalog():void {++this.catalogGeneration;this.catalogController?.abort();this.catalogController=null;}
++  processCatalog():CatalogReader|null {
++    const session=this.session,state=this.state,context=state.content.context;
++    if(!session||!this.connected||state.freshness!=='current'||state.refresh||state.route?.destination!=='processes'||context?.operation!=='context'||context.snapshot!==state.snapshot||context.data.process_ids.length>64)return null;
++    this.cancelCatalog();const generation=this.catalogGeneration,connection=this.generation,routeGeneration=state.route_generation,snapshot=state.snapshot;
++    const rootScope=state.root_scope_id,ids=new Set(context.data.process_ids),project=stableJson(state.project),policy=stableJson(context.data.resource_policy);let busy=false;
++    const valid=()=>{const currentContext=this.state.content.context;return generation===this.catalogGeneration&&connection===this.generation&&this.session===session&&this.connected&&this.state.freshness==='current'&&!this.state.refresh&&this.state.route?.destination==='processes'&&this.state.route_generation===routeGeneration&&this.state.snapshot===snapshot&&this.state.code_epoch===session.code_epoch&&this.state.service_instance===session.service_instance&&this.state.session_scope===session.session_scope&&this.state.root_scope_id===rootScope&&stableJson(this.state.project)===project&&currentContext?.operation==='context'&&stableJson(currentContext.data.resource_policy)===policy;};
++    return {valid,cancel:()=>{if(generation===this.catalogGeneration)this.cancelCatalog();},header:async(id)=>{
++      if(!valid())return {kind:'canceled'};
++      if(!ids.has(id)||!isWire('Id',id))return {kind:'unavailable',code:'unselected_process'};
++      if(busy)return {kind:'unavailable',code:'service_busy'};
++      busy=true;const controller=new AbortController();this.catalogController=controller;
++      const request={schema_version:1,request_id:'catalog-'+(++this.sequence),code_epoch:session.code_epoch,snapshot,params:{id,section:'header',cursor:null}};
++      const scope=scopeForRequest('entry',request);if(!scope){busy=false;this.catalogController=null;return {kind:'unavailable',code:'invalid_request'};}let expired=false,timer:ReturnType<typeof setTimeout>|undefined;
++      const canceled=():CatalogHeader=>({kind:'canceled'});
++      const work=async():Promise<CatalogHeader>=>{try{
++        const response=await this.post('entry',request,controller.signal,session.csrf);
++        const decoded=await decodeReadResponse(await boundedBytes(response,context.data.resource_policy.response_bytes),{operation:'entry',request_id:request.request_id,code_epoch:session.code_epoch,service_instance:session.service_instance,session_scope:session.session_scope,project:state.project,snapshot,scope,policy:context.data.resource_policy});
++        if(!valid()||expired)return canceled();
++        if(!decoded.ok)return {kind:'unavailable',code:'invalid_response'};
++        if(decoded.value.status==='error'){
++          const error=decoded.value.error;
++          if(error.retry==='refresh'){this.state={...this.state,freshness:'stale'};this.cancelCatalog();this.changed();}
++          if(error.retry==='reopen')this.disconnect('The reading session ended. Reopen the local reader.');
++          return {kind:'unavailable',code:error.code};
++        }
++        const header=decoded.value.operation==='entry'?decoded.value.data.header:null;
++        return header&&header.id===id?{kind:'recorded',label:header.label,label_truncated:header.label_truncated}:{kind:'unavailable',code:'invalid_response'};
++      }catch{return valid()&&!expired?{kind:'unavailable',code:'read_unavailable'}:canceled();}};
++      try{return await Promise.race([work(),new Promise<CatalogHeader>(resolve=>{timer=setTimeout(()=>{expired=true;controller.abort();resolve(valid()?{kind:'unavailable',code:'deadline_exceeded'}:canceled());},10000);})]);}
++      finally {if(timer!==undefined)clearTimeout(timer);busy=false;if(this.catalogController===controller)this.catalogController=null;}
++    }};
+   }
+   cancelDiscovery():void {++this.discoveryGeneration;this.discoveryController?.abort();this.discoveryController=null;}
+   discover(processId:string,referenceId:string):DiscoveryReader|null {return this.inspector(processId,referenceId);}
+@@ -83,13 +120,13 @@
+       headers:{'Content-Type':'application/json',...(csrf?{'X-Explorer-CSRF':csrf}:{})},body:serialized});
+   }
+   disconnect(message:string):void {
+-    this.cancelDiscovery();++this.generation;this.session=null;this.connection?.abort();for(const c of this.controllers.values())c.abort();this.controllers.clear();
++    this.cancelCatalog();this.cancelDiscovery();++this.generation;this.session=null;this.connection?.abort();for(const c of this.controllers.values())c.abort();this.controllers.clear();
+     if(this.expiry!==undefined)clearTimeout(this.expiry);
+     this.state={...this.state,freshness:'disconnected',session_scope:null,cursors:{},regional_requests:{},refresh:null};
+     this.message=message;this.changed();
+   }
+   async connect(fragment:CapturedFragment):Promise<SuccessResponse|null> {
+-    this.cancelDiscovery();const generation=++this.generation;this.connection?.abort();for(const c of this.controllers.values())c.abort();this.controllers.clear();
++    this.cancelCatalog();this.cancelDiscovery();const generation=++this.generation;this.connection?.abort();for(const c of this.controllers.values())c.abort();this.controllers.clear();
+     if(this.expiry!==undefined)clearTimeout(this.expiry);this.session=null;
+     this.state={...this.state,regional_requests:{},cursors:{},refresh:null,freshness:this.state.snapshot?'stale':'unconnected'};
+     const controller=new AbortController();this.connection=controller;
+@@ -156,3 +193,6 @@
+ }
+ 
+ export interface DiscoveryReader {entry:(id:string,section:'header'|'sources'|'details'|'process',cursor:string|null)=>Promise<import('./contracts').EntryResponse|null>;valid:()=>boolean;cancel:()=>void}
++
++export type CatalogHeader={kind:'recorded';label:string;label_truncated:boolean}|{kind:'unavailable';code:string}|{kind:'canceled'};
++export interface CatalogReader {valid:()=>boolean;cancel:()=>void;header:(id:string)=>Promise<CatalogHeader>}
+--- preimage/SKILLS-depo/ontology/explorer/src/app.ts
++++ SKILLS-depo/ontology/explorer/src/app.ts
+@@ -14,7 +14,7 @@
+ import {SearchBox,filterControl,resultList} from './search';
+ import {EntryView} from './entry';
+ import {SourceDrawer,ProcessSourceDiscovery,EndpointStrings} from './sources';
+-import {processCatalog,processSection} from './processes';
++import {ProcessCatalog,processSection} from './processes';
+ import {MapView} from './map/controller';
+ import {relationshipList,modelSummary} from './map/list';
+ 
+@@ -39,6 +39,7 @@
+   private entry:EntryView|null=null;private retainedEntry:HTMLElement|null=null;private entryHost=el('div',undefined,'entry-host');private mapView:MapView|null=null;private model:RelationshipModel|null=null;
+   private continuation:ContinuationIntent|null=null;private continuationId:string|null=null;private graphControls=el('div');private searchResults=el('div');
+   private navigation=el('nav');private routeSerial=0;private historySerial=0;private browserHistory=new Map<number,SafeHistory>();private currentHistory:number|null=null;private modelRevision=0;private historyModels=new Map<number,number>();
++  private catalog:ProcessCatalog|null=null;
+   private sourceCursor:string|null=null;private sourceSerial=0;
+   private color=matchMedia('(prefers-color-scheme: dark)');private motion=matchMedia('(prefers-reduced-motion: reduce)');
+   private announcement='';
+@@ -75,7 +76,7 @@
+   }
+   private nav():void {if(!this.context)return;this.navigation.replaceChildren();for(const [destination,label] of [['overview','Overview'],['terms','Terms'],['processes','Processes'],['map','Map']] as const){const route=this.route(destination,destination==='map'?this.client.state.focus_id??this.client.state.selection?.id:undefined);if(destination==='map'&&this.client.state.focus_id&&this.client.state.selection)route.options.selected=this.client.state.selection.id;const link=routeLink(label,route,value=>void this.go(value));link.dataset.destination=destination;this.navigation.append(link);}}
+   private connectionChanged():void {
+-    const state=this.client.state;this.close.hidden=!this.client.connected;this.status.replaceChildren();
++    const state=this.client.state;this.catalog?.sync();this.close.hidden=!this.client.connected;this.status.replaceChildren();
+     if(state.freshness==='disconnected')this.status.append(warning(this.client.message));
+     else if(state.refresh)this.status.append(el('p','Refreshing a coherent reading view. The previous snapshot remains visible.'));
+     else if(state.freshness==='stale'){this.status.append(warning('This displayed knowledge view is stale. Refresh to read a coherent current snapshot.'),button('Refresh reading view',()=>void this.refresh()));}
+@@ -110,11 +111,12 @@
+   }
+   private async renderRoute(sameMap:boolean,restoring:boolean,expansions:string[]):Promise<void> {
+     const state=this.client.state,route=state.route;if(!route||!this.context)return;const serial=this.routeSerial;
++    this.catalog?.dispose();this.catalog=null;
+     for(const item of this.navigation.querySelectorAll<HTMLElement>('[data-destination]')){const active=route.destination==='entry'?'terms':route.destination==='process'?'processes':route.destination;item.setAttribute('aria-current',item.dataset.destination===active?'page':'false');}
+     if(route.destination!=='map'){this.mapView?.dispose();this.mapView=null;this.model=null;this.continuation=null;}
+     if(route.destination==='overview'){this.entry=null;this.retainedEntry=null;this.reading.replaceChildren(overview(this.context,r=>void this.go(r)));}
+     else if(route.destination==='terms'){this.entry=null;this.retainedEntry=null;this.searchResults=el('div');this.reading.replaceChildren(heading(state.query?'Search results':'Terms'),filterControl(this.context,state.filters,value=>this.changeFilters(value)),this.searchResults);await this.searchPage(null);}
+-    else if(route.destination==='processes'){this.entry=null;this.retainedEntry=null;this.reading.replaceChildren(processCatalog(this.context,r=>void this.go(r)));}
++    else if(route.destination==='processes'){this.entry=null;this.retainedEntry=null;this.showProcessCatalog(this.context);}
+     else if(route.destination==='entry'||route.destination==='process'){this.reading.replaceChildren();this.makeEntry();this.reading.append(this.entryHost);await this.loadEntry(route.destination==='process');}
+     else if(route.destination==='map'){
+       if(!state.focus_id){this.mapView?.dispose();this.mapView=null;this.model=null;this.entry=null;const picker=el('section');picker.append(heading('Choose a focus'),el('p','Choose a starting term or search for an exact entry. The first map reads only its bounded one-step neighborhood.'));for(const item of this.context.data.starting_points)picker.append(button(item.label,()=>this.focusHere(item.id)));picker.append(button('Browse terms',()=>void this.go(this.route('terms'))));this.reading.replaceChildren(picker);}
+@@ -129,6 +131,7 @@
+     }
+     if(serial===this.routeSerial&&!sameMap&&!restoring)focus(this.entry?.title??this.reading.querySelector<HTMLElement>('h2'));
+   }
++  private showProcessCatalog(context:ContextResponse):void {this.catalog?.dispose();this.catalog=new ProcessCatalog(context,this.client.processCatalog(),route=>void this.go(route));this.reading.replaceChildren(this.catalog.element);}
+   private makeEntry():void {this.entry?.pending(true);const retained=this.retainedEntry,previous=retained??this.entry?.element??null;this.entry=new EntryView({section:(section,cursor)=>void this.loadSection(section,cursor??null),source:(owner,reference,trigger)=>void this.openSource(owner,reference,trigger),map:()=>this.focusHere(this.client.state.selection!.id),relationships:()=>void this.entryRelationships(),copyId:()=>void this.copy(this.client.state.selection!.id,'Stable ID copied.'),copyLink:()=>void this.copyLocalLink()});this.entryHost=el('div',undefined,'entry-host');if(previous){this.retainedEntry=retained??el('section',undefined,'retained-entry');if(!retained)this.retainedEntry.append(warning('Previous recorded entry retained while the new selection is read. Its controls are temporarily unavailable.'),previous);this.entry.element.hidden=true;this.entryHost.append(this.retainedEntry);}this.entryHost.append(this.entry.element);}
+   private showEntryHeader(response:EntryResponse):void {this.retainedEntry?.remove();this.retainedEntry=null;if(this.entry){this.entry.element.hidden=false;this.entry.showHeader(response);}}
+   openEntry(id:string):void {if(!this.context)return;const route=this.route('entry',id);void this.go(route);}
+@@ -234,7 +237,7 @@
+     this.context=context;++this.sourceSerial;this.source.close();this.sourceCursor=null;this.model=newModel;++this.modelRevision;this.continuation=newContinuation;this.continuationId=this.client.state.focus_id;this.prefs.bind(context);if(this.client.state.route)this.client.state.route.options.category=this.client.state.filters.category??'all';this.nav();this.saveBrowserHistory(false);
+     if(route.destination==='terms'&&search?.operation==='search')this.searchResults.replaceChildren(resultList(search,context,r=>void this.go(r),()=>void this.searchPage(search!.page.next_cursor),()=>this.changeFilters({...this.client.state.filters,category:null})));
+     else if(header&&this.entry){this.showEntryHeader(header);if(section){if(section.data.section==='process')this.entry.replaceSection(processSection(section,id=>this.openEntry(id),(owner,reference,trigger)=>void this.openProcessSource(owner,reference,trigger),()=>void this.loadSection('process',section!.page.next_cursor)));else this.entry.showSection(section);}this.updateMap();this.graphContinuation();}
+-    else if(route.destination==='overview')this.reading.replaceChildren(overview(context,r=>void this.go(r)));else if(route.destination==='processes')this.reading.replaceChildren(processCatalog(context,r=>void this.go(r)));
++    else if(route.destination==='overview')this.reading.replaceChildren(overview(context,r=>void this.go(r)));else if(route.destination==='processes')this.showProcessCatalog(context);
+     const filters=this.reading.querySelector('.filter-control');if(filters&&(route.destination==='terms'||route.destination==='map')){const open=filters.querySelector('details')?.open??false,next=filterControl(context,this.client.state.filters,value=>this.changeFilters(value),route.destination==='map');next.querySelector('details')!.open=open;filters.replaceWith(next);}
+     this.say('A coherent current snapshot is now displayed. Previous expansions, source reading and continuations were cleared.');
+   }
+--- preimage/SKILLS-depo/ontology/explorer/src/processes.ts
++++ SKILLS-depo/ontology/explorer/src/processes.ts
+@@ -2,10 +2,30 @@
+ import type {Route} from './routes';
+ import {button,coverage,el,heading,routeLink,warning} from './feedback';
+ export const MISSING_ORDER='An ordered description has not been recorded. These are the documented relationships.';
+-export function processCatalog(context:ContextResponse,go:(route:Route)=>void):HTMLElement {
+-  const view=el('section');view.append(heading('Processes'),el('p','Read explicitly selected process descriptions and their recorded support.'));
+-  if(!context.data.process_ids.length)view.append(el('p','No process descriptions have been selected for this reader. You can still find related terms through Search.'));
+-  const list=el('ul',undefined,'results');for(const id of context.data.process_ids){const name=context.data.starting_points.find(x=>x.id===id)?.label??id;const item=el('li');item.append(routeLink(name,{project_id:context.project.id,destination:'process',id,options:{}},go));list.append(item);}view.append(list);return view;
++import type {CatalogReader} from './api';
++export class ProcessCatalog {
++  readonly element=el('section');private rows=new Map<string,{link:HTMLAnchorElement;status:HTMLElement;state:'pending'|'recorded'|'unavailable'}>();
++  private retry:HTMLButtonElement;private running=false;private disposed=false;
++  constructor(context:ContextResponse,private reader:CatalogReader|null,go:(route:Route)=>void){
++    this.element.append(heading('Processes'),el('p','Read explicitly selected process descriptions and their recorded support.'));
++    if(!context.data.process_ids.length)this.element.append(el('p','No process descriptions have been selected for this reader. You can still find related terms through Search.'));
++    const list=el('ul',undefined,'results');
++    for(const id of context.data.process_ids){const item=el('li'),summary=context.data.starting_points.find(entry=>entry.id===id),link=routeLink(summary?.label??'Read this process',{project_id:context.project.id,destination:'process',id,options:{}},go),status=el('p','Reading the recorded process name…','muted');
++      item.dataset.processId=id;item.append(link,el('code',id,'identity'),status);list.append(item);this.rows.set(id,{link,status,state:'pending'});
++    }
++    this.retry=button('Retry process names',()=>void this.load());this.retry.hidden=true;this.element.append(list,this.retry);void this.load();
++  }
++  sync():void {if(this.disposed||this.reader?.valid())return;for(const row of this.rows.values())if(row.state!=='recorded'){row.state='unavailable';row.status.textContent='The recorded name has not been read. Refresh or reopen this reading view to try again; the exact process link remains available.';}this.updateRetry();}
++  private updateRetry():void {const available=!!this.reader?.valid()&&[...this.rows.values()].some(row=>row.state==='unavailable');this.retry.hidden=!available&&document.activeElement!==this.retry;this.retry.setAttribute('aria-disabled',String(this.running||!available));this.retry.setAttribute('aria-busy',String(this.running));this.retry.textContent=this.running?'Reading process names…':available?'Retry process names':this.reader?.valid()?'Process names read':'Name reads stopped; refresh this reading view';}
++  private async load():Promise<void> {
++    if(this.disposed||this.running)return;if(!this.reader?.valid()){this.sync();return;}
++    this.running=true;this.updateRetry();
++    try {for(const [id,row] of this.rows){if(this.disposed||!this.reader.valid())break;if(row.state==='recorded')continue;row.state='pending';row.status.textContent='Reading the recorded process name…';const result=await this.reader.header(id);if(this.disposed)break;
++      if(result.kind==='recorded'&&this.reader.valid()){row.link.textContent=result.label;row.state='recorded';row.status.textContent=result.label_truncated?'Name preview; open the process and its Full name section for the complete recorded name.':'Recorded process name.';}
++      else {row.state='unavailable';row.status.textContent='The recorded name could not be read. This does not establish that the process or its name is absent. Open its exact link or retry the name read.';}
++    }}finally{this.running=false;if(!this.disposed){this.sync();this.updateRetry();}}
++  }
++  dispose():void {if(this.disposed)return;this.disposed=true;this.reader?.cancel();}
+ }
+ export function processSection(response:EntryResponse,read:(id:string)=>void,source:(owner:string,reference:string,trigger:HTMLElement)=>void,more:()=>void):HTMLElement {
+   const view=el('section');view.append(heading('Recorded process',3),coverage(response));
+--- preimage/SKILLS-depo/ontology/explorer/tests/frontend/unit.cjs
++++ SKILLS-depo/ontology/explorer/tests/frontend/unit.cjs
+@@ -5,6 +5,7 @@
+ const {EndpointStrings,ProcessSourceDiscovery}=require(path.join(out,'sources.js'));
+ const {hydrateRoute}=require(path.join(out,'app.js'));
+ const {SearchBox}=require(path.join(out,'search.js'));
++const {ProcessCatalog}=require(path.join(out,'processes.js'));
+ const prior=fs.readFileSync(path.join(root,'SKILLS-depo/ontology/explorer/tests/client-foundations/client-foundations.test.cjs'),'utf8').split('(async()=>{')[0];
+ const box={require,process:{env:{EXPLORER_FOUNDATIONS_OUT:out,EXPLORER_FOUNDATIONS_ROOT:root}},structuredClone,Buffer,module:{exports:{}}};
+ new Function('require','process','module',prior+'\nmodule.exports={context,graph,source,header,search,summary,session,ready,id,identity,envelope,coverage,policy,epoch,digest};')(require,box.process,box.module);
+@@ -76,5 +77,43 @@
+  global.fetch=async(url,options)=>{request=JSON.parse(options.body);return pending.promise;};const prior=client.read('source',{...source.scope,cursor:null});client.apply(S.navigate(client.state,{kind:'closeSource'}));const reader=client.discover(F.id('A'),'f'.repeat(64));assert.ok(reader.valid());const response=clone(source);response.request_id=request.request_id;pending.resolve(new Response(JSON.stringify(response)));assert.equal(await prior,null);assert.equal(client.state.content.source,undefined);assert.ok(reader.valid());
+  client.state.source_selection={owner_id:F.id('A'),reference_id:'f'.repeat(64)};const next=client.discover(F.id('A'),'f'.repeat(64));client.apply(S.navigate(client.state,{kind:'preferences',preferences:{...client.state.preferences,theme:'dark'}}));assert.ok(next.valid());client.apply(S.navigate(client.state,{kind:'closeSource'}));assert.ok(!next.valid());client.disconnect('done');
+ });
++function catalogClient(ids=['A','B']) {const client=new ReadClient(F.context().data.service.build_id,C.CONTRACT_SCHEMA_SHA256,()=>{});client.session=F.session();client.state=hydrateRoute(F.ready(),{project_id:F.identity.id,destination:'processes',options:{}});client.state.content.context.data.process_ids=ids.map(F.id);client.state.selection={kind:'entry',id:F.id('A')};return client;}
++function headerFor(req,label='Recorded process') {const response=F.header(req.params.id.split(':').at(-1));response.request_id=req.request_id;response.data.header.label=label;return response;}
++await test('finite process catalog reads recorded non-starting labels without state/history/entry mutation',async()=>{
++ const client=catalogClient(Array.from({length:64},(_,i)=>'P'+i));const before=JSON.stringify(client.state);let count=0,active=0,peak=0;
++ global.fetch=async(url,options)=>{count++;peak=Math.max(peak,++active);const req=JSON.parse(options.body);assert.equal(req.params.section,'header');assert.equal(req.params.cursor,null);await Promise.resolve();active--;return new Response(JSON.stringify(headerFor(req,'Exact recorded name')));};
++ const reader=client.processCatalog();assert.ok(reader);assert.equal((await reader.header(F.id('outside'))).kind,'unavailable');assert.equal(count,0);
++ const pending=reader.header(F.id('P0'));assert.equal((await reader.header(F.id('P1'))).code,'service_busy');assert.equal((await pending).label,'Exact recorded name');
++ for(let i=1;i<64;i++)assert.equal((await reader.header(F.id('P'+i))).kind,'recorded');assert.equal(count,64);assert.equal(peak,1);assert.equal(JSON.stringify(client.state),before);client.disconnect('done');
++});
++await test('catalog response identity/request/snapshot/policy admission rejects mismatches',async()=>{
++ for(const mutate of [r=>r.request_id='obsolete',r=>r.snapshot='0'.repeat(64),r=>r.session_scope='0'.repeat(32),r=>r.code_epoch='0'.repeat(64),r=>r.scope.id=F.id('B'),r=>r.data.header.id=F.id('B'),r=>r.data.header.label='L'.repeat(40000)]){
++  const client=catalogClient();const before=JSON.stringify(client.state);global.fetch=async(url,options)=>{const response=headerFor(JSON.parse(options.body));mutate(response);return new Response(JSON.stringify(response));};assert.equal((await client.processCatalog().header(F.id('A'))).kind,'unavailable');assert.equal(JSON.stringify(client.state),before);client.disconnect('done');
++ }
++});
++await test('catalog ignores abort-insensitive route snapshot and session changes; preferences preserve it',async()=>{
++ for(const change of [client=>client.apply({state:{...client.state,route_generation:client.state.route_generation+1},accepted:true,history:'none',abort:[]}),client=>client.apply({state:{...client.state,snapshot:'a'.repeat(64)},accepted:true,history:'none',abort:[]}),client=>client.disconnect('closed')]){
++  const client=catalogClient(),reply=delayed();let request;global.fetch=async(url,options)=>{request=JSON.parse(options.body);return reply.promise;};const reader=client.processCatalog(),pending=reader.header(F.id('A'));change(client);reply.resolve(new Response(JSON.stringify(headerFor(request))));assert.equal((await pending).kind,'canceled');assert.equal(reader.valid(),false);client.disconnect('done');
++ }
++ const client=catalogClient(),reply=delayed();let request;global.fetch=async(url,options)=>{request=JSON.parse(options.body);return reply.promise;};const reader=client.processCatalog(),pending=reader.header(F.id('A'));client.apply(S.navigate(client.state,{kind:'preferences',preferences:{...client.state.preferences,theme:'dark'}}));assert.ok(reader.valid());reply.resolve(new Response(JSON.stringify(headerFor(request))));assert.equal((await pending).kind,'recorded');client.disconnect('done');
++});
++await test('catalog cancellation is independent from source discovery and normal entry requests',async()=>{
++ const client=catalogClient(),catalogReply=delayed(),sourceReply=delayed(),entryReply=delayed();const requests={};global.fetch=async(url,options)=>{const request=JSON.parse(options.body);const kind=request.request_id.split('-')[0];requests[kind]={request,signal:options.signal};return ({catalog:catalogReply,discovery:sourceReply,read:entryReply})[kind].promise;};
++ const catalog=client.processCatalog(),source=client.discover(F.id('A'),'f'.repeat(64));assert.ok(catalog.valid()&&source.valid());const a=catalog.header(F.id('B')),b=source.entry(F.id('A'),'header',null),c=client.read('entry',{id:F.id('A'),section:'header',cursor:null});client.cancelCatalog();assert.equal(requests.discovery.signal.aborted,false);assert.equal(requests.read.signal.aborted,false);assert.ok(source.valid());
++ catalogReply.resolve(new Response(JSON.stringify(headerFor(requests.catalog.request))));sourceReply.resolve(new Response(JSON.stringify(headerFor(requests.discovery.request))));entryReply.resolve(new Response(JSON.stringify(headerFor(requests.read.request))));assert.equal((await a).kind,'canceled');assert.ok(await b);assert.ok(await c);client.disconnect('done');
++});
++await test('catalog deadline settles unavailable even when fetch ignores abort and discards its later reply',async()=>{
++ const client=catalogClient(),reply=delayed(),oldSet=setTimeout,oldClear=clearTimeout;let expire,request,signal;global.setTimeout=fn=>(expire=fn,1);global.clearTimeout=()=>{};
++ try{global.fetch=async(url,options)=>{request=JSON.parse(options.body);signal=options.signal;return reply.promise;};const before=JSON.stringify(client.state),reader=client.processCatalog(),pending=reader.header(F.id('A'));expire();assert.equal((await pending).code,'deadline_exceeded');assert.equal(signal.aborted,true);reply.resolve(new Response(JSON.stringify(headerFor(request))));await new Promise(setImmediate);assert.equal(JSON.stringify(client.state),before);}finally{global.setTimeout=oldSet;global.clearTimeout=oldClear;client.disconnect('done');}
++});
++await test('catalog updates focused links in place, retains duplicate IDs and discloses truncated names',async()=>{
++ const context=F.context();context.data.process_ids=[F.id('A'),F.id('B')];context.data.starting_points=[];const a=delayed(),b=delayed();let valid=true;const reader={valid:()=>valid,cancel:()=>valid=false,header:id=>id===F.id('A')?a.promise:b.promise};const view=new ProcessCatalog(context,reader,()=>{}),first=view.rows.get(F.id('A')).link,second=view.rows.get(F.id('B')).link;first.focus();a.resolve({kind:'recorded',label:'Recorded duplicate',label_truncated:true});await new Promise(setImmediate);assert.equal(document.activeElement,first);assert.equal(view.rows.get(F.id('A')).link,first);assert.equal(first.textContent,'Recorded duplicate');assert.match(view.rows.get(F.id('A')).status.textContent,/preview.*Full name/);second.focus();b.resolve({kind:'recorded',label:'Recorded duplicate',label_truncated:false});await new Promise(setImmediate);assert.equal(document.activeElement,second);assert.equal(second.textContent,first.textContent);assert.notEqual(first.href,second.href);assert.equal(view.rows.size,2);view.dispose();
++});
++await test('catalog failure offers one bounded retry without replacing successful or focused links',async()=>{
++ const context=F.context();context.data.process_ids=[F.id('A'),F.id('B')];context.data.starting_points=[];let valid=true,count=0;const reader={valid:()=>valid,cancel:()=>valid=false,header:async id=>{count++;return id===F.id('A')&&count<=2?{kind:'unavailable',code:'service_busy'}:{kind:'recorded',label:'Exact '+id,label_truncated:false};}};const view=new ProcessCatalog(context,reader,()=>{});await new Promise(setImmediate);assert.equal(count,2);assert.equal(view.retry.hidden,false);const link=view.rows.get(F.id('A')).link;link.focus();assert.match(view.rows.get(F.id('A')).status.textContent,/does not establish/);view.retry.dispatch('click');await new Promise(setImmediate);assert.equal(count,3);assert.equal(view.rows.get(F.id('A')).link,link);assert.equal(document.activeElement,link);assert.equal(view.retry.hidden,true);view.dispose();
++});
++await test('keyboard retry keeps its focused button present through pending and completed reads',async()=>{
++ const context=F.context();context.data.process_ids=[F.id('A')];context.data.starting_points=[];const reply=delayed();let count=0;const reader={valid:()=>true,cancel(){},header:async()=>++count===1?{kind:'unavailable',code:'service_busy'}:reply.promise};const view=new ProcessCatalog(context,reader,()=>{});await new Promise(setImmediate);view.retry.focus();view.retry.dispatch('click');assert.equal(view.retry.hidden,false);assert.equal(document.activeElement,view.retry);assert.equal(view.retry.attrs['aria-busy'],'true');reply.resolve({kind:'recorded',label:'Recorded retry',label_truncated:false});await new Promise(setImmediate);assert.equal(view.retry.hidden,false);assert.equal(document.activeElement,view.retry);assert.equal(view.retry.attrs['aria-busy'],'false');assert.equal(view.retry.attrs['aria-disabled'],'true');view.dispose();
++});
+ console.log(JSON.stringify({status:checks.every(x=>x.status==='passed')?'passed':'failed',checks,qualification:'Focused Node tests of actual compiled frontend modules with explicitly mocked network/DOM boundaries; not real browser evidence.'},null,2));process.exitCode=checks.some(x=>x.status!=='passed')?1:0;
+ })().catch(()=>{console.log(JSON.stringify({status:'failed',reason:'unit_runner_failed'}));process.exitCode=1;});

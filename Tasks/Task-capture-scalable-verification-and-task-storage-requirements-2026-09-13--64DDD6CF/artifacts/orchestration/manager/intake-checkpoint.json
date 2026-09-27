@@ -1,0 +1,23 @@
+{
+  "decision": "For the scalability TRD, should each operation immediately verify its own dependencies, while unrelated historical evidence is checked when accessed and through separate full audits? This improves scalability but can detect unrelated archive damage later.",
+  "status": "awaiting actual user answer",
+  "source": "Tasks/Task-capture-scalable-verification-and-task-storage-requirements-2026-09-13--64DDD6CF/artifacts/orchestration/bootstrap/user-supplied-recommendations.md",
+  "basis": "Recommendation 3 explicitly identifies detection timing as a deliberate contract decision; To-TRD requires a user answer before dependent synthesis.",
+  "verified_current_facts": [
+    "Active guard MAX_BYTES is 128 * 1024 * 1024 and MAX_FILES is 10000.",
+    "Guard _snapshot reads whole file bytes and sorts recursive enumeration before enforcing its combined inventory bounds.",
+    "Guard context includes Tasks and Roles directories."
+  ],
+  "helper_attempt": {
+    "kind": "subtask.define",
+    "mutated": false,
+    "error": "ORCH_WRITE_SCOPE",
+    "finding": "Generic baseline writes reject all Tasks/ paths, including worker evidence under artifacts. Future worker evidence needs a separate authorized project path; helper can import immutable copies into the Task."
+  },
+  "preserved": [
+    "No TRD created.",
+    "No worker reserved or launched.",
+    "Independent planning Task untouched.",
+    "No implementation, guard or policy change."
+  ]
+}

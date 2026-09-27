@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "stage": "initial-native-feasibility",
+  "scope_sha256": "7eb48f8cd6a1eda1b17aadeef59fcdd93acbfea21d24889be5f5456c98e6495a",
+  "started_at": "2026-09-11T03:31:39.442039+00:00",
+  "state": "failed",
+  "identities": {},
+  "settings": {},
+  "artifacts": {},
+  "native_controls": [],
+  "command_probes": [],
+  "stopping": {},
+  "turns": {},
+  "checkpoints": [
+    {
+      "kind": "effective_tool_closure_passed",
+      "at": "2026-09-11T03:31:39.504783+00:00"
+    },
+    {
+      "kind": "selected_model_advertised",
+      "at": "2026-09-11T03:31:39.515834+00:00",
+      "model": "gpt-6-astra",
+      "effort": "xhigh"
+    }
+  ],
+  "errors": [],
+  "token_usage": {},
+  "limits": {
+    "host_turn_starts": 5,
+    "expected_native_identities": 3,
+    "supervised_seconds": 420,
+    "stop_grace_seconds": 20,
+    "io_wait_seconds": 30,
+    "frame_bytes": 2000000,
+    "artifact_bytes": 20000,
+    "hard_model_call_or_token_cap": "not exposed by inspected protocol",
+    "native_spawn_total_cap": "not established; observed identity count triggers stop, not a claimed hard native cap"
+  },
+  "production_readiness": "not_proven",
+  "effective_tool_configuration": {
+    "features": {
+      "apps": false,
+      "plugins": false,
+      "hooks": false,
+      "memories": false,
+      "chronicle": false,
+      "image_generation": false,
+      "browser_use": false,
+      "browser_use_external": false,
+      "computer_use": false,
+      "in_app_browser": false,
+      "remote_plugin": false,
+      "goals": false,
+      "browser_use_full_cdp_access": false,
+      "enable_mcp_apps": false,
+      "realtime_conversation": false,
+      "code_mode": false,
+      "code_mode_host": false,
+      "code_mode_only": false,
+      "code_mode_prewarm": false,
+      "code_mode_interrupt": false,
+      "plugin_sharing": false,
+      "recommended_plugins": false,
+      "skill_mcp_dependency_install": false,
+      "in_app_local_automation": false,
+      "in_app_chat": false,
+      "tool_suggest": false,
+      "auth_elicitation": false,
+      "shell_snapshot": false
+    },
+    "mcp_servers": {
+      "linear": false,
+      "node_repl": false,
+      "notebooklm": false,
+      "computer-use": false
+    },
+    "web_search": "disabled",
+    "surfaces": {
+      "browser_default": "deny",
+      "browser_history": false,
+      "browser_origin_overrides": 0,
+      "computer_default": "deny",
+      "apps_enabled": false,
+      "desktop_voice_screen_context": false,
+      "desktop_remote_awake": false,
+      "desktop_ui_keys": [
+        "appearanceLightChromeTheme",
+        "appearanceLightCodeThemeId",
+        "avatar-overlay-mascot-width-px",
+        "conversationDetailMode",
+        "dock-icon-preference",
+        "enabled-reasoning-efforts",
+        "followUpQueueMode",
+        "keepRemoteControlAwakeWhilePluggedIn",
+        "microphoneInputDeviceId",
+        "open-in-target-preferences",
+        "preventSleepWhileRunning",
+        "realtimeVoiceScreenContextEnabled",
+        "selected-avatar-id",
+        "show-context-window-usage",
+        "toys-audio-visualizer-enabled",
+        "toys-confetti-enabled"
+      ],
+      "configured_tool_keys": []
+    }
+  },
+  "model_catalog": {
+    "model": "gpt-6-astra",
+    "effort": "xhigh",
+    "advertised": true,
+    "provider_execution": "not_yet_observed"
+  },
+  "code": "wire_union",
+  "message": "Native value does not match schema union.",
+  "method_counts": {
+    "response": 3,
+    "remoteControl/status/changed": 1
+  },
+  "request_counts": {
+    "initialize": 1,
+    "config/read": 1,
+    "model/list": 1
+  },
+  "final_turns": {},
+  "cleanup": {
+    "pid": 79683,
+    "process_group": 79683,
+    "state": "owned_process_group_stopped",
+    "parent_returncode": 0
+  },
+  "canaries_unchanged": true,
+  "finished_at": "2026-09-11T03:31:39.520830+00:00",
+  "host_turn_starts": 0
+}

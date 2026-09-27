@@ -1,0 +1,204 @@
+{
+  "kind": "RetainedMetricCollectionScenario",
+  "provenance": {
+    "events": "Actual DeliveryQueue.status from four enqueue calls including one exact replay; three immutable event records.",
+    "runtime": "Actual idle preflight result; only state and counters projected with exact saved source digest.",
+    "outcomes": "Synthetic two failed attempts with identical finding/input for one obligation.",
+    "checkpoint": "Synthetic observed-only transition through the actual pure checkpoint function."
+  },
+  "source_records": {
+    "events": [
+      {
+        "branch": "main",
+        "causal_parent": null,
+        "coordination_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-clean-stage/ordinary-work/tmpiqok1jtx",
+        "created_at": "2026-09-12T12:00:00+00:00",
+        "event_id": "evt-21365692b8b074ca776a96f4f62f4ca06a15a1ec03c2beb4f52278962d53b4fc",
+        "kind": "dependency_due",
+        "operation_id": "dependency-1",
+        "payload": {
+          "check_id": "declared-package",
+          "due_at": "2026-09-12T12:00:00+00:00"
+        },
+        "policy_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "project_id": "fixture-project",
+        "repository_id": "fixture-repository",
+        "schema_version": 1,
+        "snapshot": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "sources": []
+      },
+      {
+        "branch": "main",
+        "causal_parent": null,
+        "coordination_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-clean-stage/ordinary-work/tmpiqok1jtx",
+        "created_at": "2026-09-12T12:00:01+00:00",
+        "event_id": "evt-7e4af540f3e8738906c113ef546dcba3dc79645888fbbd608ae65bbf781da51b",
+        "kind": "commit",
+        "operation_id": "git-5402247ea6516c7d194410d1e9f71045507c32ad9d2ed56d921f7a33d7591936",
+        "payload": {
+          "commit": "1111111111111111111111111111111111111111"
+        },
+        "policy_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "project_id": "fixture-project",
+        "repository_id": "fixture-repository",
+        "schema_version": 1,
+        "snapshot": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "sources": []
+      },
+      {
+        "branch": "main",
+        "causal_parent": null,
+        "coordination_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-clean-stage/ordinary-work/tmpiqok1jtx",
+        "created_at": "2026-09-12T12:00:00+00:00",
+        "event_id": "evt-9bedf690ae8d96dd7fd6d4a3eb481ab7ec48b56a20878598f56938d6c80b0528",
+        "kind": "commit",
+        "operation_id": "git-5402247ea6516c7d194410d1e9f71045507c32ad9d2ed56d921f7a33d7591936",
+        "payload": {
+          "commit": "1111111111111111111111111111111111111111"
+        },
+        "policy_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "project_id": "fixture-project",
+        "repository_id": "fixture-repository",
+        "schema_version": 1,
+        "snapshot": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "sources": []
+      }
+    ],
+    "outcomes": [
+      {
+        "key": "8f845642d1cb066f6fb707c383d4914cca34159ebb79348fdb4397cfce97d5d2",
+        "attempt": 1,
+        "status": "failed",
+        "input_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "output_sha256": null,
+        "finding_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "reference": null,
+        "elapsed_ms": 10,
+        "bytes": 20
+      },
+      {
+        "key": "8f845642d1cb066f6fb707c383d4914cca34159ebb79348fdb4397cfce97d5d2",
+        "attempt": 2,
+        "status": "failed",
+        "input_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "output_sha256": null,
+        "finding_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "reference": null,
+        "elapsed_ms": 10,
+        "bytes": 20
+      }
+    ],
+    "checkpoint": {
+      "schema_version": 1,
+      "project_id": "fixture-project",
+      "repository_id": "fixture-repository",
+      "coordination_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-clean-stage/ordinary-work/tmpiqok1jtx",
+      "branch": "main",
+      "observed": {
+        "context": {
+          "project_id": "fixture-project",
+          "repository_id": "fixture-repository",
+          "coordination_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-clean-stage/ordinary-work/tmpiqok1jtx",
+          "branch": "main",
+          "snapshot": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "policy_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        },
+        "evidence": [],
+        "obligations": [],
+        "predecessor_sha256": null
+      },
+      "assessed": null,
+      "integrated": null,
+      "reconciled": null
+    },
+    "preflight": {
+      "state": "idle",
+      "reasons": [],
+      "routes": [],
+      "event_ids": [],
+      "counters": {
+        "model_calls": 0,
+        "task_writes": 0,
+        "knowledge_writes": 0,
+        "content_writes": 0
+      }
+    },
+    "preflight_sha256": "fe79f0cecd6b3b986559c951347722349cda3685659bac00ae810d3b068f4f56"
+  },
+  "projection": {
+    "reference": {
+      "owner": "curate",
+      "path": "preflight.json",
+      "sha256": "fe79f0cecd6b3b986559c951347722349cda3685659bac00ae810d3b068f4f56"
+    },
+    "value": {
+      "state": "idle",
+      "counters": {
+        "model_calls": 0,
+        "task_writes": 0,
+        "knowledge_writes": 0,
+        "content_writes": 0
+      }
+    }
+  },
+  "base": {
+    "source": "supplied immutable delivery and owner-observation records",
+    "delivery_records": 3,
+    "logical_events": 2,
+    "event_types": {
+      "commit": 1,
+      "dependency_due": 1
+    },
+    "logical_outcomes": 1,
+    "satisfied_effects": 0,
+    "held_effects": 0,
+    "pending_effects": 1,
+    "observed_branches": 1,
+    "assessed_current": 0,
+    "integrated_current": 0,
+    "reconciled_current": 0
+  },
+  "measures": {
+    "scope": "caller-selected immutable evidence set; not a global or assumed time-window total",
+    "unresolved_staleness": 1,
+    "unknown_checkpoint_branches": 0,
+    "duplicate_signals": 1,
+    "repeated_attempt_outputs": 0,
+    "unchanged_repeated_failures": 1,
+    "conflicting_outcome_keys": 0,
+    "observed_reversals": null,
+    "broken_or_ambiguous_transition_chains": null,
+    "attributed_protected_write_violations": null,
+    "denied_unchanged_attempts": null,
+    "confirmed_dependency_exposure": null,
+    "dependency_exposure_unassessed": null,
+    "reconciliation_delay_ms": null,
+    "reconciliation_intervals_unknown": null,
+    "idle_model_calls": 0,
+    "observed_task_writes": 0,
+    "observed_knowledge_writes": 0,
+    "missing_observation_families": [
+      "transitions",
+      "dependencies",
+      "reconciliation"
+    ],
+    "source_references": {
+      "runtime": [
+        {
+          "owner": "curate",
+          "path": "preflight.json",
+          "sha256": "fe79f0cecd6b3b986559c951347722349cda3685659bac00ae810d3b068f4f56"
+        }
+      ]
+    },
+    "calculator_model_calls": 0,
+    "calculator_writes": 0,
+    "benefit_baseline": null
+  },
+  "observed_calculator_file_changes": 0,
+  "limits": "No connected owner/runtime, global total, timing measurement or benefit baseline claimed."
+}

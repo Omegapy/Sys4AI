@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "executor": "qualification_worker local execution",
+  "command": [
+    ".venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-qualification-security-04/host-security-runner.py",
+    "--redaction-self-test"
+  ],
+  "exit_code": 0,
+  "deliberate_assertion_failure": true,
+  "secret_sentinel_absent_from_report": true,
+  "safe_frame_locations_retained": true,
+  "runner_sha256": "99ac15f63621d3f5b4a20ffa404d00e395fd2e700c7303981fa524a05b6128f4",
+  "qualification": "Actual deliberately failing unittest assertNotIn included a synthetic private sentinel; custom result formatting omitted its value while preserving safe traceback filenames/line numbers/functions. No real credentials were used."
+}

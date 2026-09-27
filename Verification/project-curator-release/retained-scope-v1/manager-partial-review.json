@@ -1,0 +1,100 @@
+{
+  "kind": "ManagerRetainedPartialReview",
+  "observed_at": "2026-09-12T15:48:23.558067+00:00",
+  "native_observation": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root/curator_manager/application_source_worker",
+          "agent_status": "completed"
+        }
+      ]
+    }
+  },
+  "verification": {
+    "manifest_entries": 490,
+    "manifest_entry_bytes": 6414719,
+    "digest_mismatches": 0,
+    "stage_targets": 87,
+    "unchanged_live_source_before_states": 87,
+    "unchanged_named_root_baseline_items": 15,
+    "criterion_rows": 192,
+    "unique_ids": 192,
+    "exact_plan_criterion_text": true,
+    "executed_worker_case_passes": 12,
+    "retained_setup_prerequisite_failures": 4,
+    "source_matched_supporting_root_cases": 20,
+    "new_manager_test_runs": 0
+  },
+  "current_plan": {
+    "path": "Implementation_Plans/Plan_project-curator-retained-application_2026-09-12_3CF9C73F/plan.json",
+    "revision": 9,
+    "sha256": "b84400b94d3c0d5f86f2c6861ef85be9a8ab2d56e3176b353c971e165db3736c",
+    "completed_tasks": [
+      "TASK-001"
+    ],
+    "limit": "TASK-001 is baseline inspection only. No full retained implementation acceptance."
+  },
+  "evidence": [
+    {
+      "path": "Verification/project-curator-release/retained-scope-v1/independent-retention.json",
+      "sha256": "d52417018ef28064e6b6289c91dd8817bb4d930ec8d1ccdfb60b5a59b91a9ec4"
+    },
+    {
+      "path": "Verification/project-curator-release/retained-scope-v1/manager-neutral-package-v1.json",
+      "sha256": "809b13011c7a79359e7422a7ec5e5feb21cbaa51ace106d1a06ed9fed70ba3b5"
+    },
+    {
+      "path": "Verification/project-curator-release/retained-scope-v1/memory-checkpoint.json",
+      "sha256": "e4365eb7f33273d6c244eac5005bd37d077278de2565a063785961b45aa47498"
+    },
+    {
+      "path": "Verification/project-curator-release/retained-scope-v1/independent-source-v1/manifest.json",
+      "sha256": "2d2525b642cafd220a7ab53c147a5a430d90b74c4ef73ee2c2b2a4fa7f88ad0c"
+    },
+    {
+      "path": "Verification/project-curator-release/retained-scope-v1/independent-source-v1/test-receipt.json",
+      "sha256": "e36216f651bc0a8ace64ac103a82e3ff6e66a04dee6c73950d6af9d4f1fa5518"
+    },
+    {
+      "path": "Verification/project-curator-release/retained-scope-v1/independent-source-v1/criterion-map.json",
+      "sha256": "157e53d7be909a6c0095f6e7c950e3df768c8ff2aba0e73076804d8132a7b5d5"
+    },
+    {
+      "path": "Verification/project-curator-release/retained-scope-v1/independent-source-v1/source-manifest.json",
+      "sha256": "512671b6a73a5f0aff25744865af9527f2374609c3b3de7c79197cb8640dbb1e"
+    },
+    {
+      "path": "Verification/project-curator-release/retained-scope-v1/independent-source-v1/preservation.json",
+      "sha256": "622c8df01f41db0a915f6ed554c1179e4376c802f9702862a6cee6e0550281ef"
+    }
+  ],
+  "public_reviews": [
+    {
+      "path": "Verification/project-curator-clean-plan-approval-v1/neutral-package-public-review.json",
+      "sha256": "cc712a92a43b7622a03ed91a80a078dff84ab0c5506efc76c6ac2a9d13cf1a03"
+    },
+    {
+      "path": "Verification/project-curator-clean-plan-approval-v1/retained-public-interface-review.json",
+      "sha256": "9ff34aef9e605423cd74e8d7006ebdee7892764070f625429fc658eec3e48e4f"
+    },
+    {
+      "path": "Verification/project-curator-clean-plan-approval-v1/task-history-routing-review.json",
+      "sha256": "80f0b92ba176b83b996ce47162f76b46cc320395fe5dfa436aa7fd74c60ffcf7"
+    }
+  ],
+  "decision": "Retain as partial staged work; not promotable and not full Task/subtask acceptance.",
+  "blockers": [
+    "Connected Application requires an existing public control interface that the selected dependency does not provide. No dependency replacement is authorized within current scope.",
+    "Setup cannot complete with the selected missing resource and incompatible unchanged dependency pins. Preserve the working default initializer and Template.",
+    "The installed Task owner has no historical subtask retirement route; terminal delivered closure cannot be fabricated."
+  ],
+  "unperformed": [
+    "Live source or Template promotion",
+    "Active-root or product adoption",
+    "Connected runtime or owner completion",
+    "Successful new-project setup, adoption, historical-edition and domain validation"
+  ],
+  "next_step": "Root reviews this bounded checkpoint and resolves the remaining retained compatibility/administrative boundary; no automatic retry or source promotion."
+}

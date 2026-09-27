@@ -1,0 +1,75 @@
+{
+  "kind": "same_accepted_target_P0_local_environment_correction",
+  "target": "foundation_acceptance_v2",
+  "target_unchanged": true,
+  "prior_complete_context": [
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/baseline_5f5b585a11fb163884395a7b285d26a5276d64dd19dd6293a6c81b7ca4621d7b.json",
+      "sha256": "5f5b585a11fb163884395a7b285d26a5276d64dd19dd6293a6c81b7ca4621d7b"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_proposal_v2.md",
+      "sha256": "ae3e9aeb730cdf7a68a2d1e678ab5b92a84ce7930059664750e305fa8e6578f8"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-fork-p0-history-index-correction-context.json",
+      "sha256": "643187fbbf05e61fcbb8b3234cbbf82efb0a73051f1480d360d9350c3dfc766d"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-fork-p0-v3-native-fork-p0-result.json",
+      "sha256": "a19c510448dae559e21984c0dd147ac496f8f46e8bc1b40767fa49bda17bd889"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-fork-p0-post-stop-diagnostic-v3.json",
+      "sha256": "2b50d3db795a343367fa1e6610800a9b56de9bfc8ba11209003c9feecf4aba63"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-fork-p0-v3-post-user-index-metadata.json",
+      "sha256": "35322699703fc831434ff8c545ca23470a6bfb08d9832ffc124f43595feafd35"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-fork-p0-v3-history-index-handoff.json",
+      "sha256": "bd0082926f67dcb13c678fd5cd583b161bf1c5d1050909b80f68eeaeec691281"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-local-environment-source/receipt.json",
+      "sha256": "02c075ad97407d43d680d0011e9d1ed8cd896ff639e5c51324de3d3b0fe27ffe"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-local-environment-source/core/src/environment_selection.rs",
+      "sha256": "4030838ad4dbac5a58ee7ac69596993839ac2c282d15db3182c4e295510b9fd3"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-local-environment-source/exec-server/src/environment.rs",
+      "sha256": "3b7fceb0502f6bae88c2274a48d4ca33b03f8277f3534127f5fbd1cc079ed0b7"
+    }
+  ],
+  "schema_evidence": {
+    "path": "native-fork-p0-v3-scope.packet.json",
+    "keys": [
+      "schemas.experimental.v2/ThreadStartParams.json",
+      "schemas.experimental.v2/EnvironmentStatusParams.json",
+      "schemas.experimental.v2/EnvironmentStatusResponse.json",
+      "schemas.experimental.v2/EnvironmentInfoParams.json",
+      "schemas.experimental.v2/EnvironmentInfoResponse.json"
+    ],
+    "meaning": "Pinned local schemas already contain the relevant exact request/response definitions. environments=[] disables environment access; omitted uses default environments."
+  },
+  "observed": "P0v3 created one real seed, passed pre-user storage and host visibility, completed one model turn with only no-command-tool self-report, and blocked with0 commands/callbacks/forks. Both-index/JSONL final metadata and canaries passed. Original group_status_unavailable remains recorded; independent post-stop PID/PGID94649 are absent. Actual state_5 row now has paginated mode and expected path/settings.",
+  "source_resolution": "P0 explicitly selected environments=[]; working v12 omitted it. Tagged EnvironmentManager reserves local against remote registration; default selection may include additional configured environments. The actual established environments.toml is absent, and runner process environment omits exec-server/noise routing variables.",
+  "required_corrections": [
+    "Select exactly the reserved local execution environment for seed and all model-bearing turns, with fixture cwd and explicitly bounded runtime roots. Preserve the existing named read-only filesystem/network profile; do not select default/remote environments or alter file permissions to restore tools.",
+    "Before any native allocation, require actual environment/status and environment/info for only local to confirm ready and expected local shell/cwd metadata. Load and statically validate their pinned schemas and preserve bounded correlation evidence. Do not call environment/add or recover/probe a remote environment.",
+    "Bind and freshly verify the absent established environments.toml condition before every owned AppServer starts; continue passing only the existing minimal environment without exec-server/noise routing variables. Presence or changed routing selection holds rather than enabling unreviewed environments.",
+    "Inspect fork environment attachment semantics and preserve exact local selection before each child model turn; honestly distinguish source-derived default creation from observed execution. Do not claim a missing ThreadFork parameter exists.",
+    "For cleanup, treat an intermediate PermissionError from the exact owned group absence probe as uncertainty and repeat read-only observation inside the existing deadline. Never signal a group without current kernel identity binding, never broaden authority, and retain uncertainty if no definitive final absence is observed.",
+    "Add focused request-shape/environment-selection/absent-config/unknown-environment and transient-versus-persistent group-observation checks. Retain raw outputs and old tests; no optional architecture changes.",
+    "Preserve all three prior native seeds and original blocked records/source archives. Prepare a fresh exact new-seed P0 packet retaining them, same runtime/model/account/2 actors/2 turns/420+20s and both database metadata scope; do not execute it before host assessment."
+  ],
+  "limitations": [
+    "No P0 pass from v3; command/callback/fork/history-equality still required.",
+    "P1/full NP001-014, complete foundation integration and37 remaining plan tasks stay in scope."
+  ]
+}

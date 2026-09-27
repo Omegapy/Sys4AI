@@ -1,0 +1,225 @@
+{
+  "baseline": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/baseline_29ff9e796ab5b7d53e6ddc75fc82a2d584c8ff912b729779ac3b396b8c7a482d.json",
+    "sha256": "29ff9e796ab5b7d53e6ddc75fc82a2d584c8ff912b729779ac3b396b8c7a482d",
+    "bytes": 5749
+  },
+  "criteria": [
+    {
+      "id": "SERVICE_PACKAGE-C01",
+      "criterion": "The service imports only reader/transport dependencies and cannot invoke old authoring, query, generic execute or profile/Task/skill mutation operations.",
+      "status": "current_checks_supported_pending_full_service_gate",
+      "check_ids": [
+        "service_http"
+      ],
+      "current_service_cases": [
+        "test_explorer_service.ServiceTests.test_closed_transport_and_error_bounds",
+        "test_explorer_service.PackageRaceTests.test_mutated_snapshot_never_executes_before_child_admission",
+        "test_explorer_health.HealthTests.test_cli_launch_and_no_optional_imports",
+        "test_explorer_health.LauncherRaceTests.test_public_cli_captures_before_selected_service_execution",
+        "test_explorer_health.LauncherRaceTests.test_documented_reader_cli_rejects_ambient_stdlib_shadows"
+      ],
+      "evidence_scope": "Closed dispatch and captured loaded-module identity cover only the reader/transport closure. Initial public CLI and worker/replacement compile captured admitted bytes."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C02",
+      "criterion": "Responses carry schema/project/snapshot/scope/filter/page/effective-limits/coverage/diagnostics, unknown hasMore is null and totals label exact count scope.",
+      "status": "current_checks_supported_pending_full_service_gate",
+      "check_ids": [
+        "service_http",
+        "error_bounds"
+      ],
+      "current_service_cases": [
+        "test_explorer_service.ServiceTests.test_success_all_operations_and_safe_assets",
+        "test_explorer_service.QualifierTests.test_1025_scalar_qualifiers_survive_reader_ipc_http"
+      ],
+      "evidence_scope": "All six real Reader responses preserve the schema metadata and coverage contract; actual 1025-scalar qualifier map survives IPC/HTTP at 14484 bytes. Fixed errors keep unknown has_more and total null."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C03",
+      "criterion": "Installed/configured/running/readable/stale/wrong-project/unavailable are distinct health facts, independent of optional readiness sweeps.",
+      "status": "current_checks_supported_pending_full_service_gate",
+      "check_ids": [
+        "service_http",
+        "local_health"
+      ],
+      "current_service_cases": [
+        "test_explorer_health.HealthTests.test_static_and_endpoint_facts_preserve_files",
+        "test_explorer_health.HealthTests.test_wrong_selected_configuration_and_neutral",
+        "test_explorer_health.HealthTests.test_missing_bundle_health_facts_and_legacy_help"
+      ],
+      "evidence_scope": "Health facts remain independent; actual stale local source stays readable, absent endpoint remains unknown, and invalid/configuration-needed cases retain fixed meanings."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C04",
+      "criterion": "Invalid Host/Origin/CSRF/session and other-service credentials disclose no project data; server fixes root and rejects browser authority/scope fields.",
+      "status": "current_checks_supported_pending_full_service_gate",
+      "check_ids": [
+        "service_http"
+      ],
+      "current_service_cases": [
+        "test_explorer_service.ServiceTests.test_closed_transport_and_error_bounds",
+        "test_explorer_sessions.SessionTests.test_two_root_cookie_csrf_bootstrap_cursor_isolation",
+        "test_explorer_sessions.SessionTests.test_capacity_does_not_evict_and_close_is_isolated"
+      ],
+      "evidence_scope": "Actual wrong host/origin/CSRF/session and cross-root credentials are rejected; fixed selected root and strict request key admission exclude browser authority fields."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C05",
+      "criterion": "Bootstrap consumes once, leaves visible URL/history before navigation and never appears in copied local links, diagnostics, test fixtures or evidence.",
+      "status": "pending_native_evidence",
+      "check_ids": [
+        "browser_basic",
+        "browser_late_session",
+        "browser_late_context",
+        "os_open_zoom"
+      ],
+      "current_service_cases": [
+        "test_explorer_sessions.SessionTests.test_replay_replacement_resume_and_expiry"
+      ],
+      "evidence_scope": "Actual current full UI clears fragments before network, copies safe route only, and rejects consumed token on same and separate new documents. Real delayed session/context responses cannot replace a newer connection; the corrected catalog finishes its current name reads before the comparison."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C06",
+      "criterion": "Expiry uses fresh reader sessions and preserves safe desired context; browser never claims it restarts Python.",
+      "status": "current_checks_supported_pending_full_service_gate",
+      "check_ids": [
+        "service_http",
+        "browser_basic",
+        "browser_late_session",
+        "browser_late_context"
+      ],
+      "current_service_cases": [
+        "test_explorer_sessions.SessionTests.test_replay_replacement_resume_and_expiry",
+        "test_explorer_sessions.SessionTests.test_cancel_or_expire_a_preserves_healthy_worker_for_b"
+      ],
+      "evidence_scope": "Current service absolute expiry/isolation cases pass. Full UI resume retains exact entry route; closure retains recorded text. Fresh connection preserves its newer Processes route despite old delayed session/context responses. Explicit reopen instructions cannot restart Python from the page."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C07",
+      "criterion": "Installed production assets include build identity, dependency lock and notices in the package; HTTP serves only runtime assets with correct MIME/no-store/nosniff/referrer/CSP protections.",
+      "status": "current_checks_supported_pending_full_service_gate",
+      "check_ids": [
+        "service_http",
+        "live_runtime",
+        "authored_build",
+        "browser_basic"
+      ],
+      "current_service_cases": [
+        "test_explorer_service.ServiceTests.test_success_all_operations_and_safe_assets",
+        "test_explorer_service.PackageRaceTests.test_nested_manifest_entry_redirect",
+        "test_explorer_health.InstalledLayoutTests.test_installed_package_serves_and_cli_health_reads_real_root_contracts"
+      ],
+      "evidence_scope": "Current full five-asset production package and large Cytoscape member pass accepted verifier, real HTTP asset reads, current full-browser CSS/JS loading with strict CSP, and source/installed layouts. Lock/notices/build metadata stay outside HTTP."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C08",
+      "criterion": "Missing bundle returns incomplete-package error with a maintenance route; no browser launch performs npm/build/install or enables advanced profiles.",
+      "status": "current_checks_supported_pending_full_service_gate",
+      "check_ids": [
+        "service_http",
+        "local_health"
+      ],
+      "current_service_cases": [
+        "test_explorer_service.PackageRaceTests.test_missing_assets_and_invalid_configuration",
+        "test_explorer_health.HealthTests.test_missing_bundle_health_facts_and_legacy_help",
+        "test_explorer_health.HealthTests.test_cli_launch_and_no_optional_imports"
+      ],
+      "evidence_scope": "Missing bundle launch returns package_incomplete and BUILD.md maintenance route. Startup has no package-manager/build/profile path."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C09",
+      "criterion": "Strict explorer configuration is optional-safe-default or explicit validated selected-project configuration; no depot IDs/labels become shared frontend constants.",
+      "status": "current_checks_supported_pending_full_service_gate",
+      "check_ids": [
+        "service_http",
+        "browser_basic"
+      ],
+      "current_service_cases": [
+        "test_explorer_service.AdditionalPackageTests.test_optional_config_defaults_and_explicit_private_path_confinement",
+        "test_explorer_health.HealthTests.test_wrong_selected_configuration_and_neutral",
+        "test_explorer_sessions.SessionTests.test_two_root_cookie_csrf_bootstrap_cursor_isolation"
+      ],
+      "evidence_scope": "Absent optional explorer configuration uses bounded defaults; explicit configuration is checked against selected identity. Frontend renders real context strings; no depot identity constants."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C10",
+      "criterion": "Manifest, hashed runtime files and notices are included by the unchanged Template discovery rules; dist/build exclusions stay effective. The manifest names runtime assets only, while the lock and build instructions remain package metadata outside HTTP access.",
+      "status": "current_checks_supported_pending_full_service_gate",
+      "check_ids": [
+        "discovery",
+        "live_runtime",
+        "authored_build"
+      ],
+      "current_service_cases": [
+        "test_explorer_service.ServiceTests.test_success_all_operations_and_safe_assets"
+      ],
+      "evidence_scope": "Unchanged discovery predicate includes all five current runtime files plus manifest/notices/lock/BUILD, retaining dist/build/node_modules exclusions. No Template adoption."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C11",
+      "criterion": "The proposed explore --open command starts only the selected reader service and optionally opens a fresh safe bootstrap entry under explicit launch authority.",
+      "status": "pending_native_evidence",
+      "check_ids": [
+        "service_http",
+        "os_open_zoom",
+        "browser_basic"
+      ],
+      "current_service_cases": [
+        "test_explorer_health.HealthTests.test_cli_launch_and_no_optional_imports",
+        "test_explorer_health.InstalledLayoutTests.test_installed_package_serves_and_cli_health_reads_real_root_contracts"
+      ],
+      "evidence_scope": "Actual current public CLI process is separately covered by V4 service batch01. Actual OS-created current reader tab and required narrow navigation, selected-detail identity controls, process/source reading, 200percent browser zoom, exact prior zoom/window restoration and owned cleanup must be supported by native-check.json. No prior-version or headless substitution."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C12",
+      "criterion": "Health distinguishes installed/configured/running/readable/stale/wrong-project/unavailable without unrelated optional readiness sweeps or startup side effects.",
+      "status": "current_checks_supported_pending_full_service_gate",
+      "check_ids": [
+        "service_http",
+        "local_health"
+      ],
+      "current_service_cases": [
+        "test_explorer_health.HealthTests.test_static_and_endpoint_facts_preserve_files",
+        "test_explorer_health.HealthTests.test_slow_health_peer_has_absolute_header_body_deadline",
+        "test_explorer_health.HealthTests.test_wrong_selected_configuration_and_neutral"
+      ],
+      "evidence_scope": "No optional sweep/listener/runtime-file health side effects. Actual trickle peer ends near2 seconds and malformed/TE/redirect peers reject; failures remain unavailable/unknown rather than proved stopped."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C13",
+      "criterion": "Service identity differs from sys4ai-ontology-workbench; health uses a bounded explicit loopback origin and never accepts a bootstrap URL.",
+      "status": "pending_native_evidence",
+      "check_ids": [
+        "service_http",
+        "os_open_zoom"
+      ],
+      "current_service_cases": [
+        "test_explorer_health.HealthTests.test_static_and_endpoint_facts_preserve_files",
+        "test_explorer_health.HealthTests.test_slow_health_peer_has_absolute_header_body_deadline"
+      ],
+      "evidence_scope": "Distinct sys4ai-project-knowledge-explorer identity, numeric loopback origin grammar, bounded headers/body/overall deadline, bootstrap URL rejection, and no redirect following."
+    },
+    {
+      "id": "SERVICE_PACKAGE-C14",
+      "criterion": "Old authoring CLI behavior is classified and preserved until qualified cutover; no documentation claims the reader can restart a stopped process from a web page.",
+      "status": "current_checks_supported_pending_full_service_gate",
+      "check_ids": [
+        "service_http",
+        "legacy_cli"
+      ],
+      "current_service_cases": [
+        "test_explorer_health.HealthTests.test_missing_bundle_health_facts_and_legacy_help"
+      ],
+      "evidence_scope": "Ordinary term/search/read preserve knowledge and metadata except expected helper snapshot digest; workbench help retains authority/session flags, legacy dispatch is preserved and documentation classifies later cutover. No authoring mutation or retirement performed."
+    }
+  ],
+  "criterion_count": 14,
+  "original_verbatim_criteria_preserved": true,
+  "additional_native_gate": {
+    "status": "pending",
+    "check_id": "os_open_zoom",
+    "scope": "Corrected recorded-name Processes catalog plus vertical source/process/control reading at actual200percent browser zoom, exact prior-setting restoration. Native Map/List-at200percent requires separate direct observation."
+  },
+  "acceptance_authority": "Manager only. No partial service acceptance, frontend acceptance or main-Task completion by this worker."
+}

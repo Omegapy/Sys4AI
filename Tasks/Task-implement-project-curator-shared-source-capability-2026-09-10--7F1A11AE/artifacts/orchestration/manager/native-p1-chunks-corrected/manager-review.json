@@ -1,0 +1,180 @@
+{
+  "kind": "manager-P1-chunk-and-archive-budget-review",
+  "state": "passed_for_host_assessment",
+  "packet": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-4c65rze5/scope.packet.json",
+  "canonical_sha256": "f9e8aab32bc4fc728376b1ff66d6a151815a410ad9755fd1d67a20f1fabbdc92",
+  "packet_file_sha256": "54c0809ee4f099cafbb3e684ffe5263e690869733dfaa26b55d156c3be519a5f",
+  "original_source_check_receipt": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-chunks-corrected/original/frozen-checks/receipt.json",
+    "sha256": "9a3c01ae1b45a4477f264b986409514f823945d3153f550f9eb971a71bb9b5fd"
+  },
+  "source_manifest_entries": 42,
+  "execution_source_entries": 80,
+  "source_changes": [
+    "SKILLS-depo/curate/tests/test_native_protocol.py",
+    "Verification/project-curator-release/run-native-proof.py"
+  ],
+  "verify_packet": "passed_read_only",
+  "independent_tests": [
+    {
+      "name": "instruction-chunks",
+      "tests": 3,
+      "exit_code": 0,
+      "stdout": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-chunks-corrected/instruction-chunks-manager.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-chunks-corrected/instruction-chunks-manager.stderr",
+        "sha256": "c99d509f8878df547d7778f11176c78342b3cc76759b2227e6554a83ea4bba4a"
+      }
+    },
+    {
+      "name": "existing-p1-evidence",
+      "tests": 5,
+      "exit_code": 0,
+      "stdout": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-chunks-corrected/existing-p1-evidence-manager.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-chunks-corrected/existing-p1-evidence-manager.stderr",
+        "sha256": "e5b28acc12dc7e9592ed6eabea2b32bb6912e7aef83c5de61d9fe08d158b4452"
+      }
+    }
+  ],
+  "wire_preflight": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-chunks-corrected/wire-preflight.json",
+    "sha256": "83abd060f45fbc82518b38917137d9d20ecb42a385ae93ecc04cf5b20393937c"
+  },
+  "instruction_chunks": {
+    "read_cells_per_bootstrap": 32,
+    "bootstrap_count": 6,
+    "serialized_output_bytes_per_cell": 24000,
+    "exec_metadata_allowance_bytes": 4096,
+    "other_cells": 54,
+    "maximum_selected_cells": 252,
+    "algorithm": "Sorted logical files, contiguous Unicode-character slices sized against ASCII-escaped exec output plus 4096 metadata bytes; actual plain-text content is checked and reassembled byte-exactly.",
+    "acknowledgement_gate": "Six selected same-actor history flushes retain complete prior native cells and the pending exact acknowledgement call in the same turn; no acknowledgement admission before full output reconstruction.",
+    "overflow": "Hold before dependent dispatch; never enlarge any token, cell, input-byte, actor or turn bound."
+  },
+  "initial_counts": {
+    "controller": 13,
+    "manager": 13,
+    "solver_a": 10,
+    "solver_b": 10
+  },
+  "captured_counts": {
+    "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-p1-captured-chunks-ejenpqhf/receipt.json",
+    "sha256": "1d9236c53a644bc04dba8f25accee707d403f70bd35a49d1476a233b4d78f538",
+    "stages": [
+      {
+        "stage": "controller-initial",
+        "selected_bytes": 88551,
+        "files": 12,
+        "read_cells": 13,
+        "ack_cells": 1,
+        "maximum_synthetic_outer_output_bytes": 20026,
+        "complete_text_sha256": "1a94ccfe6a412d3aeba487dc4eedddfe92fce790e7ec76064617842aceb56536"
+      },
+      {
+        "stage": "manager-dynamic",
+        "selected_bytes": 115084,
+        "files": 13,
+        "read_cells": 15,
+        "ack_cells": 1,
+        "maximum_synthetic_outer_output_bytes": 20026,
+        "complete_text_sha256": "5f7cb2e7b646f8d48de5612fa794a2522dbb50235b480fbc6959446e299d3e00"
+      },
+      {
+        "stage": "solver-a-dynamic",
+        "selected_bytes": 140825,
+        "files": 11,
+        "read_cells": 16,
+        "ack_cells": 1,
+        "maximum_synthetic_outer_output_bytes": 20026,
+        "complete_text_sha256": "96b2ed8049d4d6419fa66560c29762174edef78aad596ca540f1669a9668067a"
+      },
+      {
+        "stage": "solver-b-common-derived",
+        "selected_bytes": 140825,
+        "files": 11,
+        "read_cells": 16,
+        "ack_cells": 1,
+        "maximum_synthetic_outer_output_bytes": 20026,
+        "complete_text_sha256": "96b2ed8049d4d6419fa66560c29762174edef78aad596ca540f1669a9668067a"
+      },
+      {
+        "stage": "solver-a-rebound-derived",
+        "selected_bytes": 140992,
+        "files": 12,
+        "read_cells": 17,
+        "ack_cells": 1,
+        "maximum_synthetic_outer_output_bytes": 20026,
+        "complete_text_sha256": "d5783cf2771a285416f761a1fb99f9e8d38112c40263833542720ee4accf6958"
+      },
+      {
+        "stage": "solver-a-resumed-derived",
+        "selected_bytes": 140992,
+        "files": 12,
+        "read_cells": 17,
+        "ack_cells": 1,
+        "maximum_synthetic_outer_output_bytes": 20026,
+        "complete_text_sha256": "d5783cf2771a285416f761a1fb99f9e8d38112c40263833542720ee4accf6958"
+      }
+    ],
+    "planned_cells": 154
+  },
+  "additional_same_actor_history_flushes": [
+    "p1-bootstrap-evidence-1-controller",
+    "p1-bootstrap-evidence-2-manager",
+    "p1-bootstrap-evidence-3-solver_a",
+    "p1-bootstrap-evidence-4-solver_b",
+    "p1-bootstrap-evidence-5-solver_a",
+    "p1-bootstrap-evidence-6-solver_a"
+  ],
+  "archive_budget": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-chunks-corrected/archive-budget-assessment.json",
+    "sha256": "2c66981b17284b2dce409848e233f207e53a88f048515b7f91e05081cf328c48"
+  },
+  "bounds": {
+    "host_turn_starts": 64,
+    "expected_native_identities": 4,
+    "supervised_seconds": 1800,
+    "stop_grace_seconds": 60,
+    "io_wait_seconds": 30,
+    "frame_bytes": 2000000,
+    "artifact_bytes": 20000,
+    "hard_model_call_or_token_cap": "not exposed by inspected protocol",
+    "native_spawn_total_cap": "Three admitted fork operations and one same-ID resume, with intrinsic delegation disabled; no provider/global cap claimed.",
+    "history_turns": 100,
+    "history_bytes": 16000000,
+    "final_storage_reserved_seconds": 15,
+    "owned_runtime_incarnations": 5,
+    "loaded_actors": 4,
+    "history_pages": 100,
+    "wire_archive_bytes": 64000000,
+    "total_wire_archive_bytes": 128000000,
+    "owned_log_bytes": 64000000,
+    "helper_program_bytes": 20000,
+    "selected_instruction_bytes": 160000,
+    "engine_output_tokens": 40000,
+    "dynamic_callbacks": 256,
+    "helper_cells": 256
+  },
+  "prior_returned_ids": 16,
+  "native_allocations": 0,
+  "limitations": [
+    "Pre-ACK live history flushing still requires native observation.",
+    "All prior P1 attempts remain blocked; no P1/full category/foundation pass.",
+    "Only source packaging and evidence headroom changed; new attempt requires exact host assessment."
+  ],
+  "captured_counts_archived": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-chunks-corrected/captured-chunk-counts.json",
+    "sha256": "1d9236c53a644bc04dba8f25accee707d403f70bd35a49d1476a233b4d78f538"
+  },
+  "evidence_index": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-chunks-corrected/index.json",
+    "sha256": "f951355234f7fc7b28aad30953516f986f9980ace22f41fb5e31791fe7319edc"
+  }
+}

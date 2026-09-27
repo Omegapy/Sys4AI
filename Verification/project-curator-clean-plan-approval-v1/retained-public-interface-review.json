@@ -1,0 +1,58 @@
+{
+  "kind": "RetainedPublicInterfaceReview",
+  "scope": "Current public signature receipt and selected caller/package declarations only. No dependency internals inspected or changed.",
+  "inputs": [
+    {
+      "path": ".curator-clean-stage/evidence/ordinary-interface-blocker-v1/receipt-corrected.json",
+      "sha256": "c52a3dbe9fc1f167e8a741ed8ba0c2b3095ab7a8558dfe5569bdad0b892d924d"
+    },
+    {
+      "path": ".curator-clean-stage/SKILLS-depo/curate/scripts/curator.py",
+      "sha256": "853cab37f3591b48e3daf3b6bf0153f539c60ba1c9d8e2f65e65e00305e73aa2"
+    },
+    {
+      "path": ".curator-clean-stage/CURATION-depo/contract.json",
+      "sha256": "869241deee717a83df97a1b1f899c62cfbce5ff0bf0ea2c508b117224531a71a"
+    },
+    {
+      "path": ".curator-clean-stage/SKILLS-depo/init-new-project/scripts/init_curator.py",
+      "sha256": "1e4bb21b335fe598c1437a0fcb8e9f7f491bd6ab9b118709d08ce37eb821a1fa"
+    },
+    {
+      "path": ".curator-clean-stage/tools/template_update.py",
+      "sha256": "619edd14aa74a76357223ef768cc979a4c18a8bb76eda9315b5def7c5d4745af"
+    }
+  ],
+  "findings": [
+    {
+      "area": "application",
+      "status": "blocked_current_interface",
+      "evidence": "Public constructor rejects application_controls; selected Application initialization additionally requires broker.control. Omitting the keyword alone cannot satisfy the caller.",
+      "caller_lines": [
+        110,
+        118
+      ]
+    },
+    {
+      "area": "neutral_package",
+      "status": "in_scope_work_remaining",
+      "evidence": "Selected contract.json is schema1 phase001_contract_only. Initializer and updater name contract-v2.json and require schema2. Names or bodies cannot be substituted without completing a consistent truthful neutral package declaration.",
+      "initializer_lines": [
+        21,
+        37,
+        38
+      ],
+      "updater_lines": [
+        258,
+        262
+      ]
+    }
+  ],
+  "next_steps": [
+    "Record unavailable connected interface outcomes explicitly and preserve the full retained outcome as pending.",
+    "Complete independent retained source functions, neutral package declarations, setup/distribution compatibility and ordinary functional checks.",
+    "Do not change the opaque dependency or manufacture an equivalent; do not promote an incomplete package as a completed release."
+  ],
+  "source_edits": 0,
+  "goal_completed": false
+}

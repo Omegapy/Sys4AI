@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "actual_executor": "/root/explorer_manager_g3/qualification_worker",
+  "command": [
+    ".venv/bin/python",
+    "-I",
+    "-B",
+    "Verification/project-knowledge-explorer-first-release/qualification-tests/reproduce-build-v4.py",
+    "run",
+    "04"
+  ],
+  "exit_code": 0,
+  "script": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/reproduce-build-v4.py",
+    "sha256": "c7bdcbe4d20d739acd517d852880d82a338213d52e75984bfa51d51471c398ae",
+    "bytes": 10651
+  },
+  "manager_release": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-current-v4-build04-release.json",
+    "sha256": "cf62ceda288cf2f0768515d05dc06addfdd3db36381d01f407f91061b9755752",
+    "bytes": 2451
+  },
+  "security_gate": {
+    "path": "Verification/project-knowledge-explorer-first-release/security-results.json",
+    "sha256": "851f65e007dc933f244ad4c006e31947395edc2f0c2ac3905437085ba7b35ae7",
+    "bytes": 11790
+  },
+  "candidate": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/production-build-candidate.json",
+    "sha256": "d65eac7a8c66ea3459eb04dc98e1b88e44180887c35f81b40180e7df98ad1493",
+    "bytes": 10645
+  },
+  "reproduced_build_inputs": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/build-inputs-reproduced-04.json",
+    "sha256": "d1141a712a83dd136573cd230436c99896af6dd4d0625657bf89d1eb74840ecd",
+    "bytes": 6310
+  },
+  "build_id": "c02987099e81beb795595984e64bb81fcf2e64f4adee04d4c9fa607c16e72d5a",
+  "runtime_manifest_sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+  "checks": [
+    {
+      "command": [
+        "/opt/homebrew/bin/npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.636358250048943
+    },
+    {
+      "command": [
+        "/opt/homebrew/bin/npm",
+        "run",
+        "package:runtime"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.856074208044447
+    }
+  ],
+  "verification": "All5 assets+manifest byte-equal;28 full authored inputs and1001 dependency files/19archives/exact4links/hiddenlock preserved before/after. Exact environment in candidate; no network/install/product/shared-dependency write.",
+  "scope": "Local disposable build execution only; browser/native/performance/participant gates separate."
+}

@@ -1,0 +1,40 @@
+{
+  "status": "Preserved historical failures and diagnostics; no historical pass substitutes for current product verification.",
+  "builds": {
+    "01": "Dependency copy dereferenced npm .bin links, changing TypeScript relative import base; corrected by separately checked internal tooling symlinks. No product compilation yet.",
+    "02": "Pinned Cytoscape actually ships types; removed incorrect declaration assumption and used its own interfaces.",
+    "03": "Strict local Cytoscape type errors corrected (literal groups/style units/void callback).",
+    "04-16": "Strict compilation, production build and reviewed manifest-last publication passed on their exact source versions; only latest matching live inputs can be current.",
+    "04-19": "Strict compilation, production build and reviewed manifest-last publication passed on their exact source versions. Only source-matching live build is current."
+  },
+  "unit_setup": [
+    "Initial package API import failed because pinned TypeScript7 exposes its compiler executable rather than the assumed JS API; test runner uses the actual compiler CLI.",
+    "Node16 test compilation needed only a staged explicit renderer.js dynamic-import suffix; production compiler/config unchanged.",
+    "Test helper vm realm produced foreign Object prototypes; fixtures now execute in the same test realm.",
+    "Unit09 exposed the explicit fake DOM lacking dataset after the duplicate-identity option change. Added the real API surface to the mock and a duplicate recorded-ID regression; Unit10 onward passes12 focused groups."
+  ],
+  "browser": {
+    "01": "Build04: seven production flows passed, reflow stopped on a test selector mismatch; one inline Cytoscape stylesheet CSP violation.",
+    "02": "Build07: ten flows passed; CSP still failed because Vite removed the authored link id. Corrected by verifying and identifying the loaded legitimate external stylesheet before lazy renderer creation.",
+    "03": "Unexecuted frozen stage. Review caught lossy JavaScript canonical fixture rewriting; replacement uses exact Python field mutation and untouched-record assertions.",
+    "04": "Build11:22 extended flows passed. Later retained-edge endpoint retarget correction was not exercised by this stage.",
+    "05": "Build11:6 neutral flows passed. Historical now that current product changes exist.",
+    "06-09": "Current build16 packets pending host evidence.",
+    "06": "Build16:10 checks passed before long-definition strict locator matched multiple legitimate chunks; test-only correction uses first chunk readiness, exact all-chunk comparison retained.",
+    "07": "Build16:4 bounded-scope/canvas-loss/layout-deadline groups passed.",
+    "08": "Build16:4 visual/keyboard/reflow/navigation-failure groups passed; initial screenshots did not frame full canvas/source/process reading.",
+    "09": "Build16:6 neutral groups passed.",
+    "10": "Build16:23 checks passed; hidden rebuilt filter select caused test selector failure. Exact long definition and qualifier paging, failed-renderer keyboard actions and live endpoint retarget passed.",
+    "11": "Build16:framed captures revealed unreadably small/crowded Map captions and narrow source text below viewport. Final pending-entry check lacked restored entry readiness. Both visual defects required scoped product correction.",
+    "12": "Build16:all26 advanced checks passed, proving category refresh/lowered policy.06/10 failures were test selector faults.",
+    "13": "Build17:7 visual groups passed, numeric12px label floor improved, but source text received focus contrary to normative heading contract and crowded incoming captions remained. Historical diagnostic only.",
+    "14": "Build18:7 visual groups passed, exact distinct autocomplete IDs, normative source heading focus, visible source text and exact unobscured trigger return. Full canvas still required incoming-caption peripheral placement.",
+    "18": "Currentbuild19:7 actual visual/keyboard/geometry/navigation-failure groups passed;12 reviewed images. Exact dense-fit qualification retained.",
+    "15": "Build18:28 advanced checks passed, including exact section text and complete DOM/canvas direction, qualifier, classification and source tuple parity.",
+    "16": "Build18:test expected imported Artifact to be empty, but actual canonical source and Reader prove one incident approved/asserted relation. Preserved incorrect fixture expectation; no product defect. Replacement uses actual Reader-proved empty ActionType.",
+    "17": "Build18:4 bounded graph/canvas loss/layout deadline groups passed.",
+    "19": "Currentbuild19:7 neutral groups passed, including Reader-proved complete empty ActionType neighborhood.",
+    "20": "Currentbuild19:28 advanced groups passed with exact section/source/process/paging/history/parity/refresh semantics. Raw semantic stdout bytes equal15; distinct executor receipt binds actual current inputs.",
+    "21": "Currentbuild19:4 bounded high-degree/canvas-loss/layout-deadline groups passed. Raw semantic stdout bytes equal17; distinct executor receipt binds actual current inputs."
+  }
+}

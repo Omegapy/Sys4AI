@@ -1,0 +1,28 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-service-os-open-01/host-browser-driver.py"
+  ],
+  "stage": "/private/tmp/explorer-service-os-open-01",
+  "manifest": {
+    "path": "/private/tmp/explorer-service-os-open-01/inputs.json",
+    "sha256": "5d752d47fa2ac797a6d55190cdc4bb86ce10374c1a49a7221798cc5daa50fb90"
+  },
+  "inputs_count": 106,
+  "same_products_as": "host-batch-05.json",
+  "timeout_seconds": 180,
+  "intended_writes": [
+    "Only disposable /private/tmp/explorer-http-* fixture tree, its exact owned private runtime files and service/read worker. The ordinary OS default browser opens one new tab using its existing settings."
+  ],
+  "credential_boundary": "Actual command handler calls explore --open and passes private URL to stdlib webbrowser in process memory. It emits no bootstrap URL/token. Do not inventory or inspect the new browser tab before browser_ready has confirmed the context request; if no ready event, report unavailable inspection and let the 150-second lifetime close the service.",
+  "inspection": [
+    "After browser_ready only, select exactly expected_clean_url, positively verify bootstrap is absent from the current URL before emitting URL/text/screenshot; check recorded heading Explorer fixture explorer-browser-smoke and selected project purpose.",
+    "Record actual browser/app identity and current clean URL/recorded text only. Do not read credentials, cookies, private runtime files or unrelated tab contents. Do not change default browser or accessibility settings.",
+    "Close only the newly created exact test tab after observation and restore prior focus if practical. Stop exactly this owned driver using SIGTERM (its production command handler handles it) and wait for browser_cleanup; no broad process kill."
+  ],
+  "cleanup": "SIGTERM to exact started driver PID or its 150-second bounded lifetime sets production service stopping; normal command closes socket/private files/worker. Driver compares fixture regular bytes and reaps worker, then removes only its disposable fixture. Host verifies owned driver exit and closes the exact created browser tab.",
+  "attribution": "Actual OS default-browser dispatch through in-process verified production command(... explore --open), with native browser inspection separate. Literal public CLI startup is independently covered by service batch05; this job must not be relabeled a public CLI subprocess invocation.",
+  "scope": "Minimal service bootstrap only; no full frontend/Map/accessibility/performance/release acceptance."
+}

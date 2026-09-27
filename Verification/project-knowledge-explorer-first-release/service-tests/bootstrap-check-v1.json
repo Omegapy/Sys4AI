@@ -1,0 +1,62 @@
+{
+  "command": [
+    "node",
+    "Verification/project-knowledge-explorer-first-release/service-tests/check-bootstrap.cjs",
+    "SKILLS-depo/ontology/explorer/assets"
+  ],
+  "exit_code": 0,
+  "script_sha256": "c0f420ab0b5b658d9f8ad1918a4051ff664183d887a67dd7837409cb70e586da",
+  "result": {
+    "status": "passed",
+    "asset_sha256": "4942b63a564f203d0a1df649ade36a3bb550b90815f7f9fee6f64101bc4e07f8",
+    "cases": [
+      {
+        "case": "bootstrap",
+        "passed": true,
+        "clean_before_network": true
+      },
+      {
+        "case": "desired",
+        "passed": true,
+        "clean_before_network": true
+      },
+      {
+        "case": "nested",
+        "passed": true,
+        "clean_before_network": true
+      },
+      {
+        "case": "resume",
+        "passed": true,
+        "clean_before_network": true
+      },
+      {
+        "case": "duplicate",
+        "passed": true,
+        "clean_before_network": true
+      },
+      {
+        "case": "unknown",
+        "passed": true,
+        "clean_before_network": true
+      },
+      {
+        "case": "external-route",
+        "passed": true,
+        "clean_before_network": true
+      },
+      {
+        "case": "bad-token",
+        "passed": true,
+        "clean_before_network": true
+      },
+      {
+        "case": "query-credential",
+        "passed": true,
+        "clean_before_network": true
+      }
+    ],
+    "qualification": "Actual built JavaScript with instrumented browser boundaries. No claim of real browser history, DOM accessibility or full reader UI."
+  },
+  "historical_probe": "Initial instrumented environment omitted browser atob/btoa, causing valid Token admission to fail. Adding these browser globals fixed the fixture; no product change."
+}

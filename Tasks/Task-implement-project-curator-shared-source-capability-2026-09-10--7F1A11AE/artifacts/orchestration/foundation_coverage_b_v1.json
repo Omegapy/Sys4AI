@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "baseline_sha256": "28958166623093a6d3d90c6c1c3c1ee99f9f36b2b20eb1d4c718e147866f5841",
+  "criteria": [
+    {
+      "criterion_id": "FND-01",
+      "criterion": "Neutral starter has no live identity/branch set, standing grant, schedule or autonomous-write permission.",
+      "plan_task": "TASK-005",
+      "required_checks": [
+        "F-POLICY"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-02",
+      "criterion": "Missing, malformed, expired or incompatible selections produce precise unavailable/blocked diagnostics.",
+      "plan_task": "TASK-005",
+      "required_checks": [
+        "F-POLICY",
+        "F-PROTOCOL"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-03",
+      "criterion": "Project specialization is capability-only; standing entitlements remain absent until deliberately accepted at adoption.",
+      "plan_task": "TASK-005",
+      "required_checks": [
+        "F-POLICY"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-04",
+      "criterion": "AGENTS.md, README sections, generated wiki and Task responses have distinct owners and update routes.",
+      "plan_task": "TASK-006",
+      "required_checks": [
+        "F-CLASS"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-05",
+      "criterion": "Overrides, generators, stable identities and protected sections resolve conservatively; unknown/mixed targets hold unsafe edits.",
+      "plan_task": "TASK-006",
+      "required_checks": [
+        "F-CLASS",
+        "F-CONFINEMENT",
+        "NP-011",
+        "NP-012"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-06",
+      "criterion": "Grants bind actor/project/branch/policy/source/payload/scope/owner and freshness; valid standing entitlements avoid redundant approval.",
+      "plan_task": "TASK-007",
+      "required_checks": [
+        "F-POLICY",
+        "F-BROKER"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-07",
+      "criterion": "Candidate-controlled code and environment cannot alter broker policy, credentials or effective approval logic.",
+      "plan_task": "TASK-007",
+      "required_checks": [
+        "F-BROKER",
+        "F-CONFINEMENT",
+        "NP-010",
+        "NP-011",
+        "NP-012"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-08",
+      "criterion": "Broker routes canonical mutations to their existing helper owners and rejects arbitrary shell instructions.",
+      "plan_task": "TASK-007",
+      "required_checks": [
+        "F-BROKER",
+        "F-TASK",
+        "F-MEMORY",
+        "F-ONTOLOGY"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-09",
+      "criterion": "Caller identity comes from the trusted native request envelope and current manager binding, not an actor string in model arguments; workers cannot read private grants or broker credentials.",
+      "plan_task": "TASK-007",
+      "required_checks": [
+        "F-BROKER",
+        "NP-009",
+        "NP-010",
+        "NP-011"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-10",
+      "criterion": "One controller/charter is selected per execution; reading a charter does not activate it.",
+      "plan_task": "TASK-008",
+      "required_checks": [
+        "F-ROLE",
+        "F-TASK",
+        "NP-002"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-11",
+      "criterion": "Specialist responsibilities, qualifications, role reads, scope and stopping rules are explicit; generic Director use and category rules are preserved.",
+      "plan_task": "TASK-008",
+      "required_checks": [
+        "F-ROLE",
+        "NP-003",
+        "NP-004",
+        "NP-005",
+        "NP-006"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-12",
+      "criterion": "New provenance is schema-versioned and validated; historical records retain bytes/meaning and unknown fields are rejected.",
+      "plan_task": "TASK-009",
+      "required_checks": [
+        "F-TASK",
+        "F-MEMORY",
+        "F-ONTOLOGY"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-13",
+      "criterion": "Curator bootstrap reserves exactly one manager, activates only the real receipt identity and relinquishes canonical Task writing.",
+      "plan_task": "TASK-009",
+      "required_checks": [
+        "F-TASK",
+        "NP-003",
+        "NP-008"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-14",
+      "criterion": "Existing record/configuration schemas keep their meaning; any changed grant envelope has explicit version dispatch.",
+      "plan_task": "TASK-010",
+      "required_checks": [
+        "F-MEMORY",
+        "F-ONTOLOGY"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-15",
+      "criterion": "Only the current confirmed manager with exact operation scope can publish Curator knowledge; ordinary workers and forged provenance fail.",
+      "plan_task": "TASK-010",
+      "required_checks": [
+        "F-BROKER",
+        "F-MEMORY",
+        "F-ONTOLOGY",
+        "NP-009"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-16",
+      "criterion": "Activation, manager/child discovery, supervision, interrupt and resume observations are mapped without forging collaboration receipts.",
+      "plan_task": "TASK-011",
+      "required_checks": [
+        "F-PROTOCOL",
+        "NP-001",
+        "NP-003",
+        "NP-008"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-17",
+      "criterion": "Effective model/effort and independent contexts are checked; missing capabilities hold work.",
+      "plan_task": "TASK-011",
+      "required_checks": [
+        "F-PROTOCOL",
+        "NP-007"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-18",
+      "criterion": "Real observations establish identities, reservation-before-launch, one canonical writer, full required teams, settings inheritance and isolated solver input.",
+      "plan_task": "TASK-012",
+      "required_checks": [
+        "NP-002",
+        "NP-003",
+        "NP-004",
+        "NP-005",
+        "NP-006",
+        "NP-007",
+        "NP-009"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-19",
+      "criterion": "Capacity queuing preserves every required agent; uncertain or absent observations are named non-passes.",
+      "plan_task": "TASK-012",
+      "required_checks": [
+        "F-TASK",
+        "F-PROTOCOL",
+        "NP-007",
+        "NP-008"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-20",
+      "criterion": "Candidate writes to trusted policy/broker, canonical ledgers, control records, grants and credentials are denied by the enforced boundary.",
+      "plan_task": "TASK-013",
+      "required_checks": [
+        "NP-010",
+        "NP-012"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-21",
+      "criterion": "Malicious branch/diff/note/config, process execution and broker-request cases cannot gain authority or bypass publication.",
+      "plan_task": "TASK-013",
+      "required_checks": [
+        "F-CLASS",
+        "F-BROKER",
+        "NP-011",
+        "NP-012"
+      ],
+      "implementation_status": "proposed",
+      "proof_status": "not_run"
+    }
+  ]
+}

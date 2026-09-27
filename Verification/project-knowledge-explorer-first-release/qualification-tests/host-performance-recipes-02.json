@@ -1,0 +1,50 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-qualification-performance-recipes-02/host-performance-recipes.py"
+  ],
+  "staging_root": "/private/tmp/explorer-qualification-performance-recipes-02",
+  "manifest": {
+    "path": "/private/tmp/explorer-qualification-performance-recipes-02/inputs.json",
+    "sha256": "7eaaab725df9fe24b0152e9741a83fac135e372b38d4f1d38428711df0750d41"
+  },
+  "inputs_count": 107,
+  "external_tools": [
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "resolved": "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+      "sha256": "31b9c9a8d50289f3a13f014b3efd8ea3534fc3eea7ca7d9809e166139910b805",
+      "bytes": 52448
+    },
+    {
+      "path": "/bin/ps",
+      "resolved": "/bin/ps",
+      "sha256": "3bbba882e30d91fc4ff6e6844ca7c59fef4351b9a3fea35dca55708d6d487d1c",
+      "bytes": 170432
+    },
+    {
+      "path": "/usr/sbin/sysctl",
+      "resolved": "/usr/sbin/sysctl",
+      "sha256": "0fb3ea0ef2b943cf56f290628bb26531c36f190094b28e22609d59839f146689",
+      "bytes": 119088
+    },
+    {
+      "path": "/usr/bin/sw_vers",
+      "resolved": "/usr/bin/sw_vers",
+      "sha256": "2e5c391fb977b04bb22c360cb35145ca3a10b865db1223d2b25223134f750d77",
+      "bytes": 135248
+    }
+  ],
+  "timeout_seconds": 1100,
+  "gate": "Execute only after TASK023 and with no concurrent owned scanner/build/browser work. Sequential fresh subprocesses; preserve full recipe counts and every admitted/refused result.",
+  "source_writes": false,
+  "intended_writes": [
+    "Only new /private/tmp/explorer-perfdata-* canonical fixtures, private result/job files and dedicated loopback service workers. No source or shared configuration edits. Cleanup retains evidence and removes every owned runtime process."
+  ],
+  "credentials": "Bootstrap URL only in 0600 per-instance file/process memory, no raw errors, headers, response bytes, traces or HAR.",
+  "scenarios": [
+    "TASK024 complete small/representative/stress canonical-loader and Service repetitions,20 warm HTTP samples per operation for admitted shape,adjacent one-axis capacity boundary,source-validation immutable-reuse profile. Browser/compression measurement is separate."
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "module_id": "project-curator",
+  "module_version": "1.0.0",
+  "status": "phase001_contract_only",
+  "design": {
+    "plan_id": "PLAN-20260910-FAE2A15B",
+    "revision": 3,
+    "sha256": "71b7ca5cafa0eae40f82335089261bce4fe94b9e24e63251e50c7837cce6d539",
+    "trd_id": "TRD-20260910-EF54FD98",
+    "trd_revision": 2,
+    "trd_sha256": "24668cf48e56868ef4ea68cccc94d86a5b4dafd654f467dcc0bf764ad35c0232"
+  },
+  "source_collection": "CURATION-depo",
+  "coordinating_skill": {
+    "name": "curate",
+    "source": "SKILLS-depo/curate",
+    "planned_required_resources": [
+      "ACTIONS.md",
+      "README.md",
+      "SKILL.md",
+      "agents/openai.yaml",
+      "references/commands.md",
+      "references/conversation.md",
+      "references/dependency-maintenance.md",
+      "references/governance-maintenance.md",
+      "references/technical-maintenance.md",
+      "scripts/curator.py",
+      "scripts/curator_awareness.py",
+      "scripts/curator_broker.py",
+      "scripts/curator_causality.py",
+      "scripts/curator_classification.py",
+      "scripts/curator_confinement.py",
+      "scripts/curator_dependencies.py",
+      "scripts/curator_documentation.py",
+      "scripts/curator_events.py",
+      "scripts/curator_git.py",
+      "scripts/curator_governance.py",
+      "scripts/curator_grants.py",
+      "scripts/curator_handoff.py",
+      "scripts/curator_host_macos.py",
+      "scripts/curator_integration.py",
+      "scripts/curator_knowledge.py",
+      "scripts/curator_learning.py",
+      "scripts/curator_maintenance.py",
+      "scripts/curator_metrics.py",
+      "scripts/curator_notices.py",
+      "scripts/curator_policy.py",
+      "scripts/curator_preflight.py",
+      "scripts/curator_products.py",
+      "scripts/curator_queue.py",
+      "scripts/curator_recovery.py",
+      "scripts/curator_runtime.py",
+      "scripts/curator_runtime_codex.py",
+      "scripts/curator_scheduler.py",
+      "scripts/curator_snapshots.py",
+      "scripts/curator_workspace.py"
+    ]
+  },
+  "planned_required_resources": [
+    "README.md",
+    "adapters/local-events.md",
+    "adapters/macos.md",
+    "authority.md",
+    "contract.json",
+    "coordination.md",
+    "dependencies.md",
+    "documentation.md",
+    "knowledge.md",
+    "metrics.md",
+    "recovery.md",
+    "runtime-adapter.md",
+    "scheduling.md",
+    "schema/checkpoint-v1.json",
+    "schema/config-v1.json",
+    "schema/event-v1.json",
+    "schema/grant-v1.json",
+    "starter/curator.yaml",
+    "starter/document-ownership.json",
+    "state-paths.md",
+    "trust-boundary.md"
+  ],
+  "owners": [
+    {
+      "owner": "curation-contract",
+      "source": "CURATION-depo",
+      "owns": [
+        "charter interface",
+        "protected policy contract",
+        "neutral config schema",
+        "Curator delivery/assessment/checkpoint contract"
+      ],
+      "excludes": [
+        "Task lifecycle",
+        "knowledge canonical content",
+        "role registry",
+        "setup history"
+      ]
+    },
+    {
+      "owner": "curate",
+      "source": "SKILLS-depo/curate",
+      "owns": [
+        "coordinating CLI",
+        "deterministic preflight",
+        "delivery transport",
+        "broker/native adapter",
+        "owner dispatch"
+      ],
+      "excludes": [
+        "alternate publishers",
+        "alternate ledgers",
+        "private credentials in source"
+      ]
+    },
+    {
+      "owner": "role-catalog",
+      "source": "SKILLS-depo/manage-subagent-roles",
+      "owns": [
+        "fresh Roles pair discovery",
+        "fit validation",
+        "generated Roles/INDEX.md"
+      ],
+      "role_sources": "ROLES-depo"
+    },
+    {
+      "owner": "task",
+      "source": "SKILLS-depo/agent-task",
+      "entry_contract": "SKILLS-depo/task/SKILL.md",
+      "owns": [
+        "Tasks canonical execution",
+        "manager reservation and activation",
+        "generation and writer gates",
+        "category topology",
+        "acceptance and completion"
+      ],
+      "mutation_helper": "scripts/task_state.py"
+    },
+    {
+      "owner": "memory",
+      "source": "SKILLS-depo/memory",
+      "owns": [
+        "MEMORY canonical records",
+        "capture preference",
+        "memory grants/publication/lifecycle/recovery",
+        "selected memory products"
+      ],
+      "mutation_helper": "scripts/memory_publish.py"
+    },
+    {
+      "owner": "ontology",
+      "source": "SKILLS-depo/ontology",
+      "owns": [
+        "ONTOLOGY canonical knowledge",
+        "ontology grants/publication/lifecycle/recovery",
+        "ontology projections/wiki/associations"
+      ],
+      "authority_helper": "scripts/ontology_authority.py"
+    },
+    {
+      "owner": "learning",
+      "source": "SKILLS-depo/what-did-you-learn",
+      "contract_source": "LEARNING-depo",
+      "owns": [
+        "one existing learning/completion disposition"
+      ],
+      "persistence_owner": "memory"
+    },
+    {
+      "owner": "setup",
+      "source": "SKILLS-depo/init-new-project",
+      "owns": [
+        "control_records/project-setup.json",
+        "starter editions",
+        "exact selected module adoption and recovery"
+      ],
+      "mutation_helper": "scripts/init_new_project.py"
+    },
+    {
+      "owner": "template-distribution",
+      "source": "tools/template_update.py",
+      "mapping": "depot/template-update.json",
+      "mirrored_source": "SKILLS-depo/init-new-project/assets/template_update.py",
+      "owns": [
+        "registered Template destinations",
+        ".sys4ai/template-update transactions"
+      ],
+      "excludes": [
+        "active root adoption",
+        "real product adoption"
+      ]
+    }
+  ],
+  "neutral_installation": {
+    "standing_entitlements": [],
+    "live_project_selection": null,
+    "branch_selection": [],
+    "schedule_enabled": false,
+    "service_installed": false,
+    "hook_installed": false,
+    "autonomous_write_enabled": false,
+    "network_entitlements": []
+  },
+  "compatibility": {
+    "python": "3.12 standard library",
+    "encoding": "UTF-8 JSON and JSON-compatible YAML",
+    "task": "Preserve strict existing schema-2/orchestration-v1 records; explicit version dispatch for extensions",
+    "memory": "Preserve record/config schema-v1 and grant-v1; explicit new grant envelope required",
+    "ontology": "Preserve core/advanced record and grant-v1/v2 semantics; explicit extension required",
+    "setup": {
+      "observed_skill_version": "11.1.0",
+      "observed_starter": "governance-starter-v9",
+      "planned_starter": "governance-starter-v10",
+      "preserve_editions": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5",
+        "v6",
+        "v7",
+        "v8",
+        "v9"
+      ]
+    },
+    "runtime": {
+      "candidate": "Codex App Server v2 over broker-owned stdio",
+      "host_reported_cli_version": "0.139.0",
+      "native_item_candidate": "collabAgentToolCall",
+      "verification": "inspection_only",
+      "unattended_mutation": "blocked_pending_native_and_enforcement_proof"
+    }
+  },
+  "distribution": {
+    "template": "Projects/Sys4AI-Template-Project",
+    "policy": "exact overrides for active starters; ordinary collection/skill discovery elsewhere",
+    "generated_roles_index_owner": "role-catalog",
+    "active_root_adoption": false,
+    "real_product_adoption": false
+  },
+  "state_paths_contract": "state-paths.md",
+  "authority_contract": "authority.md",
+  "trust_contract": "trust-boundary.md",
+  "native_contract": "runtime-adapter.md",
+  "release_rule": "Every exact requirement criterion needs current artifact and observed check evidence. No native or enforcement pass is established by this contract."
+}

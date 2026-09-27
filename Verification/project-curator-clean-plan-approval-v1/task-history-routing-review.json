@@ -1,0 +1,61 @@
+{
+  "kind": "InstalledTaskHistoricalSubtaskRouteReview",
+  "inspection_scope": "Installed owner code and contract only; no stored subtask content inspected.",
+  "owner": {
+    "path": ".agents/skills/agent-task/scripts/orchestration_state.py",
+    "sha256": "9e2ad68ec90980c736ec5fc6bb1396aff0ea98e90918a20f3adc75b685546368"
+  },
+  "findings": [
+    {
+      "fact": "Subtask schema has no active, historical, retired, skipped or disposition field.",
+      "lines": [
+        183,
+        186,
+        220,
+        228
+      ]
+    },
+    {
+      "fact": "Supported subtask events are define, revise and verify; no retirement/removal event exists.",
+      "lines": [
+        470,
+        616,
+        638,
+        763
+      ]
+    },
+    {
+      "fact": "subtask.revise preserves prior baselines in versions but the record remains in the same active subtask collection.",
+      "lines": [
+        637,
+        638
+      ]
+    },
+    {
+      "fact": "A revised baseline still needs a performed work result or accepted synthesis and current criterion evidence. It is not a historical exemption.",
+      "lines": [
+        763,
+        782
+      ]
+    },
+    {
+      "fact": "Both delivered execution finish and completed Task lifecycle inspect every stored subtask.",
+      "lines": [
+        366,
+        373,
+        793,
+        798
+      ]
+    },
+    {
+      "fact": "Stopped/cancelled closure paths preserve history but do not prove delivered completion.",
+      "lines": [
+        793,
+        799
+      ]
+    }
+  ],
+  "supported_history_exemption": false,
+  "source_or_task_mutations": false,
+  "next_action": "Continue retained implementation. Keep historical records untouched; do not claim delivered Task closure or manufacture verification for withdrawn work. Reassess the remaining administrative closure boundary after retained delivery evidence is complete."
+}

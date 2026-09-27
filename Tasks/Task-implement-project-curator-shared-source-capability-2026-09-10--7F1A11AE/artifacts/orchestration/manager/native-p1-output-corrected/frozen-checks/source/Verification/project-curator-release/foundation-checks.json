@@ -1,0 +1,588 @@
+{
+  "schema_version": 1,
+  "checkpoint": "partial_foundation",
+  "task_id": "TASK-20260910-7F1A11AE",
+  "plan_id": "PLAN-20260910-FAE2A15B",
+  "assignment_id": "foundation_implementer",
+  "acceptance_id": "foundation_acceptance_v1",
+  "created_at": "2026-09-11T05:03:00.026536+00:00",
+  "state": "blocked",
+  "production_readiness": "not_proven",
+  "proof_is_not_release_or_adoption_authority": true,
+  "criteria": [
+    {
+      "id": "FND-01",
+      "task": "TASK-005",
+      "criterion": "Neutral starter has no live identity/branch set, standing grant, schedule or autonomous-write permission.",
+      "checks": [
+        "F-POLICY"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-02",
+      "task": "TASK-005",
+      "criterion": "Missing, malformed, expired or incompatible selections produce precise unavailable/blocked diagnostics.",
+      "checks": [
+        "F-POLICY",
+        "F-PROTOCOL"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-03",
+      "task": "TASK-005",
+      "criterion": "Project specialization is capability-only; standing entitlements remain absent until deliberately accepted at adoption.",
+      "checks": [
+        "F-POLICY"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-04",
+      "task": "TASK-006",
+      "criterion": "AGENTS.md, README sections, generated wiki and Task responses have distinct owners and update routes.",
+      "checks": [
+        "F-CLASS"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-05",
+      "task": "TASK-006",
+      "criterion": "Overrides, generators, stable identities and protected sections resolve conservatively; unknown/mixed targets hold unsafe edits.",
+      "checks": [
+        "F-CLASS",
+        "F-CONFINEMENT",
+        "NP-011",
+        "NP-012"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-06",
+      "task": "TASK-007",
+      "criterion": "Grants bind actor/project/branch/policy/source/payload/scope/owner and freshness; valid standing entitlements avoid redundant approval.",
+      "checks": [
+        "F-POLICY",
+        "F-BROKER"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-07",
+      "task": "TASK-007",
+      "criterion": "Candidate-controlled code and environment cannot alter broker policy, credentials or effective approval logic.",
+      "checks": [
+        "F-BROKER",
+        "F-CONFINEMENT",
+        "NP-010",
+        "NP-011",
+        "NP-012"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-08",
+      "task": "TASK-007",
+      "criterion": "Broker routes canonical mutations to their existing helper owners and rejects arbitrary shell instructions.",
+      "checks": [
+        "F-BROKER",
+        "F-TASK",
+        "F-MEMORY",
+        "F-ONTOLOGY"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-09",
+      "task": "TASK-007",
+      "criterion": "Caller identity comes from the trusted native request envelope and current manager binding, not an actor string in model arguments; workers cannot read private grants or broker credentials.",
+      "checks": [
+        "F-BROKER",
+        "NP-009",
+        "NP-010",
+        "NP-011"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-10",
+      "task": "TASK-008",
+      "criterion": "One controller/charter is selected per execution; reading a charter does not activate it.",
+      "checks": [
+        "F-ROLE",
+        "F-TASK",
+        "NP-002"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-11",
+      "task": "TASK-008",
+      "criterion": "Specialist responsibilities, qualifications, role reads, scope and stopping rules are explicit; generic Director use and category rules are preserved.",
+      "checks": [
+        "F-ROLE",
+        "NP-003",
+        "NP-004",
+        "NP-005",
+        "NP-006"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-12",
+      "task": "TASK-009",
+      "criterion": "New provenance is schema-versioned and validated; historical records retain bytes/meaning and unknown fields are rejected.",
+      "checks": [
+        "F-TASK",
+        "F-MEMORY",
+        "F-ONTOLOGY"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-TYPED-CONTROLS",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-13",
+      "task": "TASK-009",
+      "criterion": "Curator bootstrap reserves exactly one manager, activates only the real receipt identity and relinquishes canonical Task writing.",
+      "checks": [
+        "F-TASK",
+        "NP-003",
+        "NP-008"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-14",
+      "task": "TASK-010",
+      "criterion": "Existing record/configuration schemas keep their meaning; any changed grant envelope has explicit version dispatch.",
+      "checks": [
+        "F-MEMORY",
+        "F-ONTOLOGY"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-15",
+      "task": "TASK-010",
+      "criterion": "Only the current confirmed manager with exact operation scope can publish Curator knowledge; ordinary workers and forged provenance fail.",
+      "checks": [
+        "F-BROKER",
+        "F-MEMORY",
+        "F-ONTOLOGY",
+        "NP-009"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-16",
+      "task": "TASK-011",
+      "criterion": "Activation, manager/child discovery, supervision, interrupt and resume observations are mapped without forging collaboration receipts.",
+      "checks": [
+        "F-PROTOCOL",
+        "NP-001",
+        "NP-003",
+        "NP-008"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-TYPED-CONTROLS",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-17",
+      "task": "TASK-011",
+      "criterion": "Effective model/effort and independent contexts are checked; missing capabilities hold work.",
+      "checks": [
+        "F-PROTOCOL",
+        "NP-007"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-18",
+      "task": "TASK-012",
+      "criterion": "Real observations establish identities, reservation-before-launch, one canonical writer, full required teams, settings inheritance and isolated solver input.",
+      "checks": [
+        "NP-002",
+        "NP-003",
+        "NP-004",
+        "NP-005",
+        "NP-006",
+        "NP-007",
+        "NP-009"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-19",
+      "task": "TASK-012",
+      "criterion": "Capacity queuing preserves every required agent; uncertain or absent observations are named non-passes.",
+      "checks": [
+        "F-TASK",
+        "F-PROTOCOL",
+        "NP-007",
+        "NP-008"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-20",
+      "task": "TASK-013",
+      "criterion": "Candidate writes to trusted policy/broker, canonical ledgers, control records, grants and credentials are denied by the enforced boundary.",
+      "checks": [
+        "NP-010",
+        "NP-012"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-21",
+      "task": "TASK-013",
+      "criterion": "Malicious branch/diff/note/config, process execution and broker-request cases cannot gain authority or bypass publication.",
+      "checks": [
+        "F-CLASS",
+        "F-BROKER",
+        "NP-011",
+        "NP-012"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    }
+  ],
+  "suites": [
+    {
+      "group": "F-TASK",
+      "state": "passed",
+      "tests_run": 96,
+      "skipped": 0,
+      "seconds": 89.421,
+      "evidence": {
+        "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-xpc9n6vn/task-final-checks.txt",
+        "sha256": "c4301f5d76d34675305c3695e28326cab40f2c60e80302884a236a097a2aeed5"
+      },
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/agent-task/tests -v",
+      "evidence_level": "deterministic fixtures and actual disposable owner/helper operations; synthetic native envelopes"
+    },
+    {
+      "group": "F-MEMORY",
+      "state": "passed",
+      "tests_run": 100,
+      "skipped": 0,
+      "seconds": 28.503,
+      "evidence": {
+        "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-xpc9n6vn/memory-final-checks.txt",
+        "sha256": "1cbb82931dd5e87a16107fdb82ae0b9dfaedec771d460b2d56bd8208fda15722"
+      },
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/memory/tests -v",
+      "evidence_level": "deterministic fixtures and actual disposable owner/helper operations; synthetic native envelopes"
+    },
+    {
+      "group": "F-CURATE",
+      "state": "passed",
+      "tests_run": 52,
+      "skipped": 0,
+      "seconds": 7.474,
+      "evidence": {
+        "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-xpc9n6vn/curate-final-checks-v2.txt",
+        "sha256": "16867c7d50b1d0db93bb1f3d16a41a361eb42fb3ca0fb05bcccac942db094501"
+      },
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/curate/tests -v",
+      "evidence_level": "deterministic fixtures and actual disposable owner/helper operations; synthetic native envelopes"
+    },
+    {
+      "group": "F-ONTOLOGY",
+      "state": "passed",
+      "tests_run": 183,
+      "skipped": 1,
+      "seconds": 353.632,
+      "evidence": {
+        "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-xpc9n6vn/ontology-tests-final.txt",
+        "sha256": "2ed235c9734c3d15e1db0765c785bd9ef46ab09b7c71867840000e8c4a2d45b4"
+      },
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/ontology/tests -v",
+      "evidence_level": "deterministic fixtures and actual disposable owner/helper operations; synthetic native envelopes"
+    }
+  ],
+  "planned_test_inventory": [
+    {
+      "planned_path": "SKILLS-depo/curate/tests/test_foundation_policy.py",
+      "sha256": "b30732a112a47ebebfa53c1efa2ed63c8449f28cde05f38509be3b637cace508",
+      "contract": "Neutral values, pure status/validate, strict malformed/expired/incompatible selectors and every permission; specialization does not accept entitlements.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/curate/tests/test_classification.py",
+      "sha256": "f428120b03bd1bdfa8713c0904bece194200bcc52244584a46cc642ac79b9a91",
+      "contract": "All four document routes, stable IDs, anchors, generator/override conflicts and protected minimum.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/curate/tests/test_broker.py",
+      "sha256": "37865bc4cadfe581af6ac76251bbf40fca77fae495b9d4da7e252ed5b5279c0c",
+      "contract": "Authenticated envelope and finite routing, all grant bindings, actual disposable owner calls, replay/partial-state/fault recovery and worker denial.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/curate/tests/test_native_protocol.py",
+      "sha256": "783147bc4168b9c584344b5ac9208a14b4a06d3b58552aa5ec48a88d85d9da65",
+      "contract": "Pinned schema/event parsing, actual-ID lineage, settings versus requests, child bootstrap/artifact routing, complete teams and uncertainty.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/curate/tests/test_confinement_contract.py",
+      "sha256": "86878cac1899fb7dd867bf714fd327bf2f99a976bbe624d1057b2c043ac8c8e5",
+      "contract": "Strict source/import/profile manifests, path/link aliases and enabled-tool inventory; fixtures cannot pass OS proof.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/curate/tests/test_foundation_roles.py",
+      "sha256": "9621be1adf4c0c8bfc9bdfa78acbb13a5ce337cb5b7abfa21707a085ec046692",
+      "contract": "Real role helper in disposable exact Roles layout; Director default, selected Curator and missing capabilities.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/agent-task/tests/test_orchestration_state.py",
+      "sha256": "5cdbc70ec831bf76f55701f3361d645ece9d2eed959af32086ffb90b46406971",
+      "contract": "Extend version 2 cases while retaining every current v1 case, category/review/current candidate gate and legacy byte comparison.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/agent-task/tests/test_task_state.py",
+      "sha256": "30fdf456dc026507f0b7445412a81cd2596d9dcfea9c9731c19eb6d39768fe95",
+      "contract": "Explicit v2 selection, historical schema preservation, no-op/read-only behavior and checked writer handoff.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/memory/tests/test_publication.py",
+      "sha256": "e198465a4e8deac351833b2f0a4cc50c48cb294472da0a2d17528af7af87f6ac",
+      "contract": "Grant v2 manager positive, forged/worker negative and independent operation binding.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/memory/tests/test_task_integration.py",
+      "sha256": "0b154b070346d7aaff63a0efd538ad566dcbd994154d1c7175add775568bf30d",
+      "contract": "Explicit native version/current assignment, ownership and frozen inputs.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/memory/tests/test_recovery.py",
+      "sha256": "d47df96bfbe25855409333ed9b45fe55acedaf2be2fe79e9808963f9b2b4a6c3",
+      "contract": "Fresh verified context at original exact owner journal recovery and later-edit preservation.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/memory/tests/test_automatic_capture.py",
+      "sha256": "885117a8f3cbc0b720656d8fa02e1a4511d5d42720096987f7ef1f457a3840f2",
+      "contract": "Automatic capture opt-out remains effective; explicit authorized correction remains distinct.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/ontology/tests/test_authority.py",
+      "sha256": "7af9de7954b15ceec96c6a0769939d8de19b72067698653aa47f94630d978656",
+      "contract": "v3 core-v1/advanced-v2 branches, strict unknown fields, current manager and overlap controls.",
+      "changed": true
+    },
+    {
+      "planned_path": "SKILLS-depo/ontology/tests/test_publication.py",
+      "sha256": "e8d186024773069a8a96a1ef6238895b36fa58ca6f876adc3d8e138a87c0d3c2",
+      "contract": "Actual owner publication under v3 and original v1 behavior.",
+      "changed": false,
+      "coverage_disposition": "Existing v1 publication/recovery cases retained. Actual core-v1 v3 publication and denial live in test_authority.NativeOntologyAuthorityTests; actual advanced-v2 v3 publication is in test_advanced_publication.NativeAdvancedPublicationTests. No duplicate test was added merely to change this file."
+    },
+    {
+      "planned_path": "SKILLS-depo/ontology/tests/test_advanced_publication.py",
+      "sha256": "c04631309df9a97c1cf839a5bb389bc1bd30d31d1a11a6bba171d8f482ec4b5a",
+      "contract": "All advanced v2 semantics retained for v3 advanced profile, with raw grant digest and no downgrade.",
+      "changed": true
+    }
+  ],
+  "protected_inputs": [
+    {
+      "path": "Implementation_Plans/Plan_sys4ai-project-curator-shared-source-capability_2026-09-10_FAE2A15B/plan.json",
+      "sha256": "71b7ca5cafa0eae40f82335089261bce4fe94b9e24e63251e50c7837cce6d539",
+      "unchanged": true
+    },
+    {
+      "path": "CURATION-depo/contract.json",
+      "sha256": "869241deee717a83df97a1b1f899c62cfbce5ff0bf0ea2c508b117224531a71a",
+      "unchanged": true
+    },
+    {
+      "path": "CURATION-depo/authority.md",
+      "sha256": "c306590412788ea3f6d66f293d683f614d2829f2ff5f03b44c403322ba37395e",
+      "unchanged": true
+    },
+    {
+      "path": "CURATION-depo/trust-boundary.md",
+      "sha256": "0c40abfa6368c2523c5eaf46bd86e46878e9917cfa553f4a7f3845b97a94530d",
+      "unchanged": true
+    },
+    {
+      "path": "CURATION-depo/runtime-adapter.md",
+      "sha256": "11c05edd784cdcc0df139211518e0c5d008aa2c56bdcdd4aa300a64008553ffc",
+      "unchanged": true
+    },
+    {
+      "path": "CURATION-depo/state-paths.md",
+      "sha256": "839c8ec48e2bc05629993992d9bda3b3066d1543680301af1877643a8c8355d2",
+      "unchanged": true
+    },
+    {
+      "path": "Verification/project-curator-release/native-proof-protocol.md",
+      "sha256": "9e44614e185c2ccdd5ff61355e44bef890df5bd67dd10bed53d7fd892161fbb1",
+      "unchanged": true
+    }
+  ],
+  "neutral_publication": {
+    "staging_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-xpc9n6vn",
+    "receipt": {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-xpc9n6vn/neutral-publication.json",
+      "sha256": "b8937b4c7d51da8627611e765bca98bbb168c50ce163e7f91203e00feb90cd87"
+    },
+    "destination": "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate",
+    "live_modes": "not advertised; neutral status/validate only"
+  },
+  "template_check": {
+    "receipt": {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-xpc9n6vn/template-check-evidence-correction.json",
+      "sha256": "0a1eb06bf0b3daf7b926d9be8dad959de0d48bd2232c11a638e6779b31dc5792"
+    },
+    "result": {
+      "additions": [],
+      "adoptions": [],
+      "conflicts": [],
+      "deletions": [],
+      "managed_files": 350,
+      "recovered": false,
+      "source_files": 346,
+      "status": "current",
+      "updates": []
+    }
+  },
+  "gaps": [
+    {
+      "id": "G-NATIVE-ROUTE",
+      "state": "blocked",
+      "detail": "Astra v2 does not provide the accepted legacy agent_type spawn contract. Protected child configuration, actual lineage and peer/context-control isolation are not established. Tagged default-role overrides do not supply the required native-delegation disable. The alternative thread/fork proposal awaits manager revalidation; it is neither implemented nor launched."
+    },
+    {
+      "id": "G-NATIVE-PROOF",
+      "state": "blocked",
+      "detail": "No complete Curator bootstrap, confirmed native manager handoff, full generic/complex/extra-complex teams, identical isolated solver inputs, native owner publication, adversarial process/tool confinement or final NP reconciliation has passed."
+    },
+    {
+      "id": "G-TYPED-CONTROLS",
+      "state": "blocked",
+      "detail": "The complete accepted native input-delivery/follow-up/conflict/reconciliation event mapping and resume semantics remain incomplete pending the native-route redesign. Legacy-shaped synthetic event fixtures cannot certify actual Astra v2 behavior."
+    },
+    {
+      "id": "G-CAPACITY",
+      "state": "blocked",
+      "detail": "Bound native sessions retain their logical capacity through readiness, idle, interruption and failure. A supported trusted observation of native slot release and enforceable dispatch/work bounds are still required; coordinator counters do not enforce a native spawn cap."
+    },
+    {
+      "id": "G-TEMPLATE",
+      "state": "passed",
+      "detail": "Fresh read-only Template check returned current, with no additions, updates, deletions, adoptions or conflicts; no updater or Template mutation was performed by this evidence correction."
+    },
+    {
+      "id": "G-HISTORICAL-SOURCE",
+      "state": "blocked",
+      "detail": "The executed v12 packet binds the historical runner digest and was verified before launch. The exact pre-matcher runner byte copy was not retained by this implementer; no reconstructed copy is claimed. Current runner/coordinator bytes differ and historical proof is not relabeled current release evidence."
+    }
+  ],
+  "all_21_criteria_verified": false,
+  "previous_template_check": {
+    "receipt": {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-xpc9n6vn/template-check-partial.json",
+      "sha256": "d2861b6c30f13e7874a34df2149bbc300c9f18a909f372bc8ded938a964227d8"
+    },
+    "result": {
+      "conflicts": [
+        "template is busy; another update or initializer holds the lock"
+      ],
+      "status": "blocked"
+    }
+  }
+}

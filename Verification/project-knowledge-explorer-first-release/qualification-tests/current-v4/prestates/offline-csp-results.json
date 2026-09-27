@@ -1,0 +1,74 @@
+{
+  "status": "passed",
+  "plan_task": "TASK-021",
+  "production_build": {
+    "path": "Verification/project-knowledge-explorer-first-release/production-build.json",
+    "sha256": "db305674bd080534b3913d36eca5a47ce777032f5163b8ccac72b7455f8bbd30",
+    "bytes": 10645
+  },
+  "source": {
+    "raw": {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/actual-production-05/stdout.json",
+      "sha256": "862d167997b800d7abe3257c62a80157948678f90e6575dc75c62df3c16340c0",
+      "bytes": 106767
+    },
+    "receipt": {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/actual-production-05/receipt.json",
+      "sha256": "c89ba7a3a9f2cae187d7529d9ce621c18c3a4b31aa870316b9e3c0904eba1ee8",
+      "bytes": 4147
+    },
+    "job": {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/actual-production-05/reviewed-job.json",
+      "sha256": "494c29afc58001912eb278082352f170f630a7a09f40d823fc9864feaa7a3afc",
+      "bytes": 2685
+    },
+    "attribution": {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/actual-production-05/attribution.json",
+      "sha256": "bc4be77d9ad10f9679d5975a3b13ad2c5e1e8a4564adebeed65f81f32f139196",
+      "bytes": 1634
+    }
+  },
+  "network": {
+    "external_requests": 0,
+    "csp_violations": [],
+    "page_errors": 0,
+    "server": "Actual dedicated Python Service; Node was browser-test tooling only, not a serving/dev process."
+  },
+  "optional_services_absent": true,
+  "publication_enabled": false,
+  "generated_products": {
+    "absent": [
+      "ONTOLOGY/WIKI/concepts.md"
+    ],
+    "actual_stale_index_sha256": "9d10d02dbabe6ae0cf477b6d26454608f6841125d564f4624ca3d2de527b24a1",
+    "generated_output_count": 221,
+    "ownership_manifest": {
+      "path": ".sys4ai/ontology/manifests/build-wiki.json",
+      "sha256": "33c34fe68f89b1a470157fd8448c6553287b74df2edd5d4040c7485efea92891"
+    },
+    "present_stale": [
+      "ONTOLOGY/WIKI/INDEX.md",
+      ".sys4ai/ontology/manifests/build-wiki.json"
+    ],
+    "qualification": "Actual generator ran only in explicit disposable fixture setup. Original ownership manifest retained; listed index then altered and listed concepts.md removed before the read baseline.",
+    "recorded_owned_hashes": {
+      "ONTOLOGY/WIKI/INDEX.md": "a5922081fa9f7845532b006ecc321e8e530504de9304722642be49038c2bf86e",
+      "ONTOLOGY/WIKI/concepts.md": "35bd7a2e1b45b33466a0c41d54fd9e9aa51921848ad176f545d9950a6254f615"
+    },
+    "setup_owner": "ontology_wiki.build_wiki -> ontology_build.write_generated",
+    "setup_status": "complete"
+  },
+  "generated_files_unchanged": true,
+  "generated_absences_preserved": true,
+  "fixture_regular_files_unchanged": true,
+  "missing_assets_evidence": {
+    "raw": {
+      "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/service-host-output.json",
+      "sha256": "c8737da61e1cd3cff9960e26c1e03914782583afa415ce7fee27a13d42b39c7b",
+      "bytes": 22606
+    },
+    "case": "test_explorer_service.PackageRaceTests.test_missing_assets_and_invalid_configuration",
+    "scope": "Actual accepted current Service V3 missing manifest/invalid configuration fail package preparation before a browser UI is served. Complete stage input closure rechecked in current-evidence-closure-v3.json."
+  },
+  "qualification": "Explicit fixture setup ran the actual wiki generator before measurement, retained its real manifest, changed its listed index and removed its listed concepts.md. Browsing neither rebuilt nor depended on those products. Full selected live-depot nonmutation is TASK023."
+}

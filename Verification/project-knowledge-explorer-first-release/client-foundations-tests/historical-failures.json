@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "historical_only": true,
+  "failures": [
+    {
+      "stage": "initial runtime compiler command",
+      "observed_error": "TS5108: Option moduleResolution=node10 has been removed.",
+      "resolution": "Compile private copied sources using Node16 module and moduleResolution; exact project compiler configuration is separately checked unchanged."
+    },
+    {
+      "stage": "run_checks first attempt",
+      "receipt": "checks-run-1.json",
+      "observed_error": "TS5112: tsconfig.json is present but will not be loaded if files are specified on commandline.",
+      "resolution": "Use explicit --ignoreConfig only for isolated command-line runtime and deliberate-negative checks."
+    },
+    {
+      "stage": "pure suite runs 1 and 2",
+      "receipts": [
+        "test-run-1.json",
+        "test-run-2.json"
+      ],
+      "observed_failure": "Successful browse correlation fixture incorrectly supplied null query to SearchRequest.",
+      "resolution": "Use empty string request query and preserve null in returned browse scope."
+    },
+    {
+      "stage": "host observation before final tests",
+      "observed_failure": "Graph scope included own cursor:undefined property; JavaScript numbers could silently round unsafe integers.",
+      "resolution": "Structurally omit cursor and reject lossy numeric tokens; passing final regressions cover both."
+    }
+  ]
+}

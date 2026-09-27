@@ -1,0 +1,235 @@
+--- original/SKILLS-depo/ontology/explorer/src/app.ts
++++ current/SKILLS-depo/ontology/explorer/src/app.ts
+@@ -34,40 +34,93 @@
+ }
+ export class ExplorerApp {
+   readonly client:ReadClient;
+-  private reading=el('main');private projectName=el('p','Project Knowledge Explorer','project-name');private status=el('div');private announce=el('p',undefined,'sr-only');private close=button('Close reading session',()=>void this.client.close());
++  private reading=el('main');private projectName=el('p','Project Knowledge Explorer','project-name');private status=el('div');private announce=el('p',undefined,'sr-only');private close=button('Close reading session',()=>void this.closeReadingSession());
+   private search:SearchBox;private source:SourceDrawer;private prefs:ReturnType<typeof createPreferences>;private theme=el('select');private context:ContextResponse|null=null;
+   private entry:EntryView|null=null;private retainedEntry:HTMLElement|null=null;private entryHost=el('div',undefined,'entry-host');private mapView:MapView|null=null;private model:RelationshipModel|null=null;
+   private continuation:ContinuationIntent|null=null;private continuationId:string|null=null;private graphControls=el('div');private searchResults=el('div');
+   private navigation=el('nav');private routeSerial=0;private historySerial=0;private browserHistory=new Map<number,SafeHistory>();private currentHistory:number|null=null;private modelRevision=0;private historyModels=new Map<number,number>();
+   private catalog:ProcessCatalog|null=null;
+   private sourceCursor:string|null=null;private sourceSerial=0;
++  private narrow=matchMedia('(max-width:760px)');private rail=el('aside',undefined,'rail');private shell=el('div',undefined,'shell');private navigationDrawer=el('dialog',undefined,'navigation-drawer');
++  private navigationToggle=button('Open navigation',()=>this.openNavigation());private navigationClose=button('Close navigation',()=>this.closeNavigation());
++  private detailsOpen=true;private mapDetails:HTMLElement|null=null;private detailsToggle:HTMLButtonElement|null=null;private detailsClose:HTMLButtonElement|null=null;private detailsHeading:HTMLElement|null=null;
+   private color=matchMedia('(prefers-color-scheme: dark)');private motion=matchMedia('(prefers-reduced-motion: reduce)');
+   private announcement='';
+   constructor(root:HTMLElement,build:string,schema:string){
+     this.client=new ReadClient(build,schema,()=>this.connectionChanged());
+     let storage:Storage|undefined;try{storage=localStorage;}catch{/* Presentation remains memory-only. */}this.prefs=createPreferences(null,storage);
+     this.search=new SearchBox((text,generation)=>void this.previewSearch(text,generation),text=>this.submitSearch(text),id=>this.openEntry(id));
+-    this.source=new SourceDrawer(()=>this.closeSource(),()=>void this.readSource(this.sourceCursor));
+-    this.status.id='read-status';this.status.setAttribute('role','status');this.announce.setAttribute('role','status');this.announce.setAttribute('aria-live','polite');
++    this.source=new SourceDrawer(()=>this.closeSource(),()=>void this.readSource(this.sourceCursor),trigger=>this.sourceReturnTarget(trigger));
++    this.status.id='read-status';this.status.tabIndex=-1;this.status.setAttribute('role','status');this.announce.setAttribute('role','status');this.announce.setAttribute('aria-live','polite');
+     this.reading.id='reading';this.reading.tabIndex=-1;this.navigation.setAttribute('aria-label','Reading destinations');
+     for(const value of ['system','light','dark']){const option=el('option',value[0]!.toUpperCase()+value.slice(1));option.value=value;this.theme.append(option);}this.theme.addEventListener('change',()=>this.savePreferences({...this.prefs.current(),theme:this.theme.value as 'system'|'light'|'dark'}));
+     const tools=el('div',undefined,'reader-tools'),help=el('details');help.append(el('summary','Reader help'),el('p','Read-only project knowledge. Approved is a recorded lifecycle, not verified truth. Relationships do not grant execution authority. Source changed means a version mismatch, not that a claim is false.'),el('p','Local links need the correct running local reader and a current reading session. Stable IDs identify entries independently of a port.'),el('p','To reopen an expired or stopped reader, use the project’s explicit local explore --open command. This page cannot restart Python.'),el('p','If the installed package is incomplete, use the selected Explorer BUILD.md maintenance instructions.'));
+     tools.append(labeled('Theme',this.theme),button('Reset presentation preferences',()=>{this.client.state.preferences=this.prefs.reset();this.presentPreferences();this.mapView?.show(this.prefs.current().relationship_view,false);}),help,this.close);
+-    const header=el('header',undefined,'site-header');header.append(this.projectName,this.search.element);
+-    const rail=el('aside',undefined,'rail');rail.append(this.navigation,tools);
++    const header=el('header',undefined,'site-header');header.append(this.projectName,this.navigationToggle,this.search.element);
++    this.navigationDrawer.id='reading-navigation';this.navigationDrawer.setAttribute('aria-label','Reading navigation');this.navigationToggle.setAttribute('aria-controls',this.navigationDrawer.id);this.navigationToggle.setAttribute('aria-expanded','false');
++    this.navigationClose.className='navigation-close';this.rail.append(this.navigationClose,this.navigation,tools);
++    this.navigationDrawer.addEventListener('cancel',event=>{event.preventDefault();this.closeNavigation();});
+     const workspace=el('div',undefined,'workspace');workspace.append(this.reading,this.source.element);
+     const content=el('div',undefined,'content');content.append(this.status,workspace,this.announce);
+-    const shell=el('div',undefined,'shell');shell.append(rail,content);
+-    const skip=el('a','Skip to reading','skip-link');skip.href='#reading';skip.addEventListener('click',event=>{event.preventDefault();focus(this.reading);});root.append(skip,header,shell);
++    this.shell.append(this.rail,content);
++    const skip=el('a','Skip to reading','skip-link');skip.href='#reading';skip.addEventListener('click',event=>{event.preventDefault();focus(this.reading);});root.append(skip,header,this.shell,this.navigationDrawer);
++    this.narrow.addEventListener('change',()=>this.responsiveLayout());this.responsiveLayout();
+     this.color.addEventListener('change',()=>this.presentPreferences());this.motion.addEventListener('change',()=>this.updateMap());
+     window.addEventListener('popstate',()=>this.restoreBrowserHistory());
+     window.addEventListener('hashchange',()=>{const next=captureFragment();if(next.bootstrap!==null||next.invalid){void this.start(next);return;}if(this.context&&next.desired!==this.currentHash()){const parsed=parseRoute(next.desired,this.context.project.id);if(parsed.ok)void this.go(parsed.route,false);else this.client.disconnect('This link belongs to another project. Open its correct local reader.');}});
++  }
++  private openNavigation():void {if(!this.narrow.matches||this.navigationDrawer.open)return;this.navigationDrawer.showModal();this.navigationToggle.setAttribute('aria-expanded','true');focus(this.navigationClose);this.navigationClose.scrollIntoView({block:'start'});}
++  private closeNavigation():void {if(!this.navigationDrawer.open)return;this.navigationDrawer.close();this.navigationToggle.setAttribute('aria-expanded','false');if(this.narrow.matches){focus(this.navigationToggle);this.navigationToggle.scrollIntoView({block:'nearest'});}}
++  private async closeReadingSession():Promise<void> {
++    const serial=this.routeSerial;this.closeNavigation();const target=document.activeElement;
++    await this.client.close();
++    // A later navigation or deliberate focus change owns focus. Otherwise make
++    // the close result visible after the session button becomes unavailable.
++    if(serial===this.routeSerial&&!this.client.connected&&!this.navigationDrawer.open&&(document.activeElement===target||document.activeElement===document.body)){focus(this.status);this.status.scrollIntoView({block:'center'});}
++  }
++  private responsiveLayout():void {
++    const active=document.activeElement instanceof HTMLElement?document.activeElement:null,wasInRail=!!active&&this.rail.contains(active),wasToggle=active===this.navigationToggle;
++    if(this.navigationDrawer.open)this.navigationDrawer.close();this.navigationToggle.setAttribute('aria-expanded','false');
++    this.navigationToggle.hidden=!this.narrow.matches;this.navigationClose.hidden=!this.narrow.matches;
++    if(this.narrow.matches){this.navigationDrawer.append(this.rail);if(wasInRail){focus(this.navigationToggle);this.navigationToggle.scrollIntoView({block:'nearest'});}}
++    else {this.shell.prepend(this.rail);if(wasInRail||wasToggle){const target=wasInRail&&active!==this.navigationClose?active:this.navigation.querySelector<HTMLElement>('[aria-current=page]')??this.navigation.querySelector<HTMLElement>('a');focus(target??this.search.input);}}
++    this.presentDetails();
++  }
++  private presentDetails():void {
++    if(!this.mapDetails||!this.detailsToggle||!this.detailsClose)return;
++    const active=document.activeElement,hide=this.narrow.matches&&!this.detailsOpen;
++    this.detailsToggle.hidden=!this.narrow.matches;
++    if(hide&&this.mapDetails.contains(active)){focus(this.detailsToggle);this.detailsToggle.scrollIntoView({block:'center'});}
++    this.mapDetails.hidden=hide;
++    if(!this.narrow.matches&&(active===this.detailsToggle||active===this.detailsClose))focus(this.entryFocusTarget());
++    this.detailsClose.hidden=!this.narrow.matches;
++    this.detailsToggle.textContent=hide?'Show selected details':'Hide selected details';this.detailsToggle.setAttribute('aria-expanded',String(!hide));
++  }
++  private setDetailsOpen(open:boolean,moveFocus=true):void {
++    this.detailsOpen=open;this.presentDetails();if(!moveFocus||!this.narrow.matches)return;
++    const target=open?this.entryFocusTarget():this.detailsToggle;focus(target);target?.scrollIntoView({block:'center'});
++  }
++  private entryFocusTarget():HTMLElement {
++    for(const target of [this.entry?.title,this.retainedEntry?.querySelector<HTMLElement>('h2'),this.detailsHeading,this.reading.querySelector<HTMLElement>('h2')])if(target?.isConnected&&!target.closest('[hidden]'))return target;
++    return this.reading;
++  }
++  private sourceReturnTarget(trigger:HTMLElement|null):HTMLElement|null {
++    if(trigger?.isConnected){if(this.mapDetails?.contains(trigger)&&this.mapDetails.hidden)this.setDetailsOpen(true,false);if(!trigger.closest('[hidden]')&&!trigger.matches(':disabled'))return trigger;}
++    if(this.mapDetails?.hidden)return this.detailsToggle;return this.entryFocusTarget();
++  }
++  private mapFrame():HTMLElement {
++    const frame=el('div',undefined,'map-layout'),primary=el('div',undefined,'map-primary');
++    this.detailsToggle=button('Hide selected details',()=>this.setDetailsOpen(!this.detailsOpen));this.detailsToggle.id='selected-details-toggle';this.detailsToggle.setAttribute('aria-controls','selected-map-details');
++    this.detailsClose=button('Close selected details',()=>this.setDetailsOpen(false));this.detailsHeading=heading('Selected details',3);this.detailsHeading.id='selected-details-title';
++    this.mapDetails=el('section',undefined,'map-selected-details');this.mapDetails.id='selected-map-details';this.mapDetails.setAttribute('aria-labelledby',this.detailsHeading.id);
++    this.mapDetails.append(this.detailsClose,this.detailsHeading,this.entryHost);this.mapDetails.addEventListener('keydown',event=>{if(event.key==='Escape'&&this.narrow.matches&&!event.defaultPrevented){event.preventDefault();event.stopPropagation();this.setDetailsOpen(false);}});
++    primary.append(this.detailsToggle,this.mapView!.element);frame.append(primary,this.mapDetails);this.presentDetails();return frame;
+   }
+   private currentHash():string {const s=this.client.state;if(!s.route||!s.project)return '';const route=encodeRoute(s.route,s.project.id);return route.ok?route.hash:'';}
+   private options():Route['options'] {const s=this.client.state;return {q:s.query??'',category:s.filters.category??'all',lifecycles:s.filters.lifecycles,fact_kinds:s.filters.fact_kinds,predicates:s.filters.predicate_ids,direction:s.filters.direction};}
+   private route(destination:Destination,id?:string):Route {return {project_id:this.context!.project.id,destination,...(id?{id}:{}),options:this.options()};}
+   async start(fragment:CapturedFragment):Promise<void> {
+-    ++this.routeSerial;this.search.cancelTimer();this.search.hide();const desired=fragment.desired;
++    this.closeNavigation();++this.routeSerial;this.search.cancelTimer();this.search.hide();const desired=fragment.desired;
+     const context=await this.client.connect(fragment);if(!context||context.operation!=='context')return;
+     const route=desired?parseRoute(desired,context.project.id):{ok:true as const,route:{project_id:context.project.id,destination:'overview' as const,options:{}}};
+     if(!route.ok){this.client.disconnect('This link belongs to another project. Open its correct local reader.');return;}
+@@ -76,7 +129,7 @@
+   }
+   private nav():void {if(!this.context)return;this.navigation.replaceChildren();for(const [destination,label] of [['overview','Overview'],['terms','Terms'],['processes','Processes'],['map','Map']] as const){const route=this.route(destination,destination==='map'?this.client.state.focus_id??this.client.state.selection?.id:undefined);if(destination==='map'&&this.client.state.focus_id&&this.client.state.selection)route.options.selected=this.client.state.selection.id;const link=routeLink(label,route,value=>void this.go(value));link.dataset.destination=destination;this.navigation.append(link);}}
+   private connectionChanged():void {
+-    const state=this.client.state;this.catalog?.sync();this.close.hidden=!this.client.connected;this.status.replaceChildren();
++    const state=this.client.state,terminalNavigation=state.freshness==='disconnected'&&this.navigationDrawer.open;if(terminalNavigation)this.closeNavigation();this.catalog?.sync();this.close.hidden=!this.client.connected;this.status.replaceChildren();
+     if(state.freshness==='disconnected')this.status.append(warning(this.client.message));
+     else if(state.refresh)this.status.append(el('p','Refreshing a coherent reading view. The previous snapshot remains visible.'));
+     else if(state.freshness==='stale'){this.status.append(warning('This displayed knowledge view is stale. Refresh to read a coherent current snapshot.'),button('Refresh reading view',()=>void this.refresh()));}
+@@ -85,6 +138,7 @@
+     for(const [region,code] of Object.entries(state.regional_errors)){this.status.append(warning(region+': '+errorText(code)));}
+     if(state.snapshot){const snapshot=el('details');snapshot.append(el('summary','Displayed knowledge version'),el('code',state.snapshot,'identity'));this.status.append(snapshot);}
+     if(state.project&&!state.refresh&&state.freshness==='current')this.status.append(button('Refresh knowledge',()=>void this.refresh(),'quiet'));
++    if(terminalNavigation){focus(this.status);this.status.scrollIntoView({block:'center'});}
+   }
+   private say(text:string):void {if(text!==this.announcement){this.announcement=text;this.announce.textContent=text;}}
+   private savePreferences(preferences:ReturnType<typeof this.prefs.current>):void {this.client.state.preferences=this.prefs.save(preferences);this.presentPreferences();}
+@@ -97,14 +151,14 @@
+   }
+   private rememberCurrent():void {if(this.currentHistory!==null){const safe=safeHistory(this.client.state);if(safe){this.browserHistory.set(this.currentHistory,safe);this.historyModels.set(this.currentHistory,this.modelRevision);}}}
+   private restoreBrowserHistory():void {
+-    if(!this.context)return;this.rememberCurrent();this.search.cancelTimer();this.search.hide();const id=history.state?.explorer;const safe=typeof id==='number'?this.browserHistory.get(id):undefined;
++    if(!this.context)return;this.closeNavigation();this.rememberCurrent();this.search.cancelTimer();this.search.hide();const id=history.state?.explorer;const safe=typeof id==='number'?this.browserHistory.get(id):undefined;
+     if(safe){const old=this.client.state,transition=restoreHistory({...old,history:[safe],history_index:0},0);if(transition.accepted){this.client.apply(transition);this.currentHistory=id;const sameMap=old.route?.destination==='map'&&transition.state.route?.destination==='map'&&old.focus_id===transition.state.focus_id&&stableJson(old.filters)===stableJson(transition.state.filters)&&stableJson(old.expanded_ids)===stableJson(transition.state.expanded_ids)&&this.historyModels.get(id)===this.modelRevision;
+       ++this.routeSerial;++this.sourceSerial;this.source.close();this.search.setValue(transition.state.query??'',true);if(transition.state.freshness==='stale'){this.say('This history entry belongs to an older snapshot. Refresh to restore its reading view.');return;}
+-      void this.renderRoute(sameMap,true,safe.expanded_ids).then(()=>{if(safe.focus_target)focus(document.getElementById(safe.focus_target));else focus(this.entry?.title??this.reading.querySelector<HTMLElement>('h2'));});return;}}
++      void this.renderRoute(sameMap,true,safe.expanded_ids).then(()=>{const target=safe.focus_target?document.getElementById(safe.focus_target):this.entry?.title??this.reading.querySelector<HTMLElement>('h2');focus(target?.closest('[hidden]')?this.detailsToggle:target);});return;}}
+     const captured=captureFragment();if(captured.bootstrap||captured.invalid){void this.start(captured);return;}const parsed=parseRoute(captured.desired,this.context.project.id);if(parsed.ok)void this.go(parsed.route,false);
+   }
+   async go(route:Route,push=true):Promise<void> {
+-    if(!this.context)return;this.rememberCurrent();const previous=this.client.state,next=hydrateRoute(previous,route);if(!next){this.say('This local route is invalid for the authenticated project.');return;}
++    if(!this.context)return;this.closeNavigation();this.rememberCurrent();const previous=this.client.state,next=hydrateRoute(previous,route);if(!next){this.say('This local route is invalid for the authenticated project.');return;}
+     const sameMap=previous.route?.destination==='map'&&next.route?.destination==='map'&&previous.focus_id===next.focus_id&&stableJson(previous.filters)===stableJson(next.filters);
+     this.client.apply({state:next,accepted:true,history:push?'push':'replace',abort:['context','search','entry','relationships','neighborhood','source']});++this.routeSerial;++this.sourceSerial;this.source.close();this.sourceCursor=null;this.search.cancelTimer();this.search.hide();this.search.setValue(next.query??'',true);if(!push)this.currentHistory=null;this.saveBrowserHistory(push);this.nav();
+     await this.renderRoute(sameMap,false,[]);
+@@ -113,23 +167,23 @@
+     const state=this.client.state,route=state.route;if(!route||!this.context)return;const serial=this.routeSerial;
+     this.catalog?.dispose();this.catalog=null;
+     for(const item of this.navigation.querySelectorAll<HTMLElement>('[data-destination]')){const active=route.destination==='entry'?'terms':route.destination==='process'?'processes':route.destination;item.setAttribute('aria-current',item.dataset.destination===active?'page':'false');}
+-    if(route.destination!=='map'){this.mapView?.dispose();this.mapView=null;this.model=null;this.continuation=null;}
++    if(route.destination!=='map'){this.mapView?.dispose();this.mapView=null;this.model=null;this.continuation=null;this.mapDetails=null;this.detailsToggle=null;this.detailsClose=null;this.detailsHeading=null;this.detailsOpen=true;}
+     if(route.destination==='overview'){this.entry=null;this.retainedEntry=null;this.reading.replaceChildren(overview(this.context,r=>void this.go(r)));}
+     else if(route.destination==='terms'){this.entry=null;this.retainedEntry=null;this.searchResults=el('div');this.reading.replaceChildren(heading(state.query?'Search results':'Terms'),filterControl(this.context,state.filters,value=>this.changeFilters(value)),this.searchResults);await this.searchPage(null);}
+     else if(route.destination==='processes'){this.entry=null;this.retainedEntry=null;this.showProcessCatalog(this.context);}
+     else if(route.destination==='entry'||route.destination==='process'){this.reading.replaceChildren();this.makeEntry();this.reading.append(this.entryHost);await this.loadEntry(route.destination==='process');}
+     else if(route.destination==='map'){
+-      if(!state.focus_id){this.mapView?.dispose();this.mapView=null;this.model=null;this.entry=null;const picker=el('section');picker.append(heading('Choose a focus'),el('p','Choose a starting term or search for an exact entry. The first map reads only its bounded one-step neighborhood.'));for(const item of this.context.data.starting_points)picker.append(button(item.label,()=>this.focusHere(item.id)));picker.append(button('Browse terms',()=>void this.go(this.route('terms'))));this.reading.replaceChildren(picker);}
++      if(!state.focus_id){this.mapView?.dispose();this.mapView=null;this.model=null;this.entry=null;this.mapDetails=null;this.detailsToggle=null;this.detailsClose=null;this.detailsHeading=null;const picker=el('section');picker.append(heading('Choose a focus'),el('p','Choose a starting term or search for an exact entry. The first map reads only its bounded one-step neighborhood.'));for(const item of this.context.data.starting_points)picker.append(button(item.label,()=>this.focusHere(item.id)));picker.append(button('Browse terms',()=>void this.go(this.route('terms'))));this.reading.replaceChildren(picker);}
+       else {
+         if(!sameMap&&!await this.normalizeMapFocus(state.focus_id))return;
+         if(serial!==this.routeSerial)return;
+-        if(!sameMap||!this.mapView){if(restoring)this.client.state.expanded_ids=[];this.mapView?.dispose();this.model=null;this.continuation=null;this.makeEntry();this.mapView=new MapView((intent,trigger)=>void this.graphIntent(intent,trigger),camera=>{this.client.apply(navigate(this.client.state,{kind:'camera',camera}));this.saveBrowserHistory(false);},mode=>this.savePreferences({...this.prefs.current(),relationship_view:mode}));this.graphControls=el('div');const frame=el('div',undefined,'map-layout');frame.append(this.mapView.element,this.entryHost);this.reading.replaceChildren(filterControl(this.context,state.filters,value=>this.changeFilters(value),true),this.graphControls,frame);await this.graphRead(state.focus_id,null,false);if(serial!==this.routeSerial)return;this.mapView.show(this.prefs.current().relationship_view,false);}
++        if(!sameMap||!this.mapView){if(restoring)this.client.state.expanded_ids=[];this.mapView?.dispose();this.model=null;this.continuation=null;this.makeEntry();this.mapView=new MapView((intent,trigger)=>void this.graphIntent(intent,trigger),camera=>{this.client.apply(navigate(this.client.state,{kind:'camera',camera}));this.saveBrowserHistory(false);},mode=>this.savePreferences({...this.prefs.current(),relationship_view:mode}));this.graphControls=el('div');this.reading.replaceChildren(filterControl(this.context,state.filters,value=>this.changeFilters(value),true),this.graphControls,this.mapFrame());await this.graphRead(state.focus_id,null,false);if(serial!==this.routeSerial)return;this.mapView.show(this.prefs.current().relationship_view,false);}
+         else {this.mapView.select(state.selection?.id??null);this.mapView.setCamera(state.camera);}
+         if(serial!==this.routeSerial)return;await this.loadEntry(false);
+         if(restoring&&serial===this.routeSerial){for(const id of expansions){if(id!==state.focus_id&&this.model?.nodes[id]&&!this.model.local_reasons.length){await this.graphRead(id,null,true);if(serial!==this.routeSerial)break;}}if(!sameMap)this.graphControls.append(el('p','Connections were re-read for this history view. Continue from the returned page to read more.'));}
+       }
+     }
+-    if(serial===this.routeSerial&&!sameMap&&!restoring)focus(this.entry?.title??this.reading.querySelector<HTMLElement>('h2'));
++    if(serial===this.routeSerial&&!sameMap&&!restoring)focus(this.mapDetails?.hidden?this.detailsToggle:this.entryFocusTarget());
+   }
+   private showProcessCatalog(context:ContextResponse):void {this.catalog?.dispose();this.catalog=new ProcessCatalog(context,this.client.processCatalog(),route=>void this.go(route));this.reading.replaceChildren(this.catalog.element);}
+   private makeEntry():void {this.entry?.pending(true);const retained=this.retainedEntry,previous=retained??this.entry?.element??null;this.entry=new EntryView({section:(section,cursor)=>void this.loadSection(section,cursor??null),source:(owner,reference,trigger)=>void this.openSource(owner,reference,trigger),map:()=>this.focusHere(this.client.state.selection!.id),relationships:()=>void this.entryRelationships(),copyId:()=>void this.copy(this.client.state.selection!.id,'Stable ID copied.'),copyLink:()=>void this.copyLocalLink()});this.entryHost=el('div',undefined,'entry-host');if(previous){this.retainedEntry=retained??el('section',undefined,'retained-entry');if(!retained)this.retainedEntry.append(warning('Previous recorded entry retained while the new selection is read. Its controls are temporarily unavailable.'),previous);this.entry.element.hidden=true;this.entryHost.append(this.retainedEntry);}this.entryHost.append(this.entry.element);}
+--- original/SKILLS-depo/ontology/explorer/src/sources.ts
++++ current/SKILLS-depo/ontology/explorer/src/sources.ts
+@@ -4,7 +4,7 @@
+ export class SourceDrawer {
+   readonly element=el('aside',undefined,'source-drawer');private title=heading('Source evidence');private body=el('div');private trigger:HTMLElement|null=null;
+   private closeButton:HTMLButtonElement;
+-  constructor(private closeAction:()=>void,private more:()=>void){
++  constructor(private closeAction:()=>void,private more:()=>void,private returnTarget?:(trigger:HTMLElement|null)=>HTMLElement|null){
+     this.element.hidden=true;this.element.setAttribute('aria-label','Source evidence');this.title.id='source-title';
+     this.closeButton=button('Close source',()=>this.closeAction());this.element.append(this.closeButton,this.title,this.body);
+     this.element.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();this.closeAction();}});
+@@ -23,7 +23,7 @@
+   }
+   progress(text:string,more?:()=>void):void {this.body.replaceChildren(el('p',text));if(more)this.body.append(button('Continue source discovery',more));}
+   error(text:string):void {this.body.append(warning(text));}
+-  close():void {const wasOpen=!this.element.hidden;this.element.hidden=true;this.body.replaceChildren();const trigger=this.trigger;this.trigger=null;if(wasOpen){const target=trigger?.isConnected?trigger:document.querySelector<HTMLElement>('#entry-title');if(target){focus(target);target.scrollIntoView({block:'center'});}}}
++  close():void {const wasOpen=!this.element.hidden;this.element.hidden=true;this.body.replaceChildren();const trigger=this.trigger;this.trigger=null;if(wasOpen){const target=this.returnTarget?this.returnTarget(trigger):trigger?.isConnected?trigger:document.querySelector<HTMLElement>('#entry-title');if(target){focus(target);target.scrollIntoView({block:'center'});}}}
+ }
+ 
+ import {isWire} from './contracts';
+--- original/SKILLS-depo/ontology/explorer/src/styles.css
++++ current/SKILLS-depo/ontology/explorer/src/styles.css
+@@ -10,3 +10,8 @@
+ /* Search stays available while reading long entries or source passages. */
+ .site-header{position:sticky;top:0;z-index:20}.project-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}:focus-visible,h2,h3,.source-drawer,.source-text{scroll-margin-top:10rem}.source-drawer{top:8rem;max-height:calc(100vh - 9rem)}
+ @media(max-width:1250px){.source-drawer{position:static;max-height:none}}
++
++/* Narrow navigation is a native dialog; closed drawer controls are not tabbable. */
++.navigation-drawer{position:fixed;inset:0 auto 0 0;margin:0;width:min(24rem,100%);max-width:100%;height:100dvh;max-height:100dvh;padding:0;border:0;border-right:1px solid var(--line);background:var(--panel);color:var(--ink);overflow:auto}
++.navigation-drawer::backdrop{background:#0006}.navigation-drawer .rail{min-height:100%;border:0}.navigation-close{margin-bottom:1rem}.map-primary,.map-selected-details{min-width:0}.map-selected-details>h3{margin:.5rem 0}.map-selected-details>button{margin-bottom:.5rem}
++@media(max-width:760px){.site-header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.65rem}.site-header>.project-name{min-width:0;margin:0}.site-header>button{margin:0}.site-header>.search-box{grid-column:1/-1;width:100%}.navigation-drawer .rail{padding:1rem}.navigation-drawer nav{flex-direction:column}.navigation-drawer .reader-tools{display:grid;margin-top:1.5rem}.map-selected-details>h3{font-size:1.2rem}.map-selected-details{scroll-margin-top:12rem}}
+--- original/SKILLS-depo/ontology/explorer/tests/frontend/narrow.cjs
++++ current/SKILLS-depo/ontology/explorer/tests/frontend/narrow.cjs
+@@ -0,0 +1,34 @@
++const assert=require('node:assert/strict'),path=require('node:path');
++const {ExplorerApp}=require(path.join(process.argv[2],'app.js'));
++const {SourceDrawer}=require(path.join(process.argv[2],'sources.js'));
++const checks=[];
++class Element {
++ constructor(tag){this.tag=tag;this.children=[];this.parentElement=null;this.hidden=false;this.open=false;this.attrs={};this.handlers={};this.textContent='';this.isConnected=true;}
++ append(...nodes){for(const node of nodes){node.parentElement?.removeChild(node);this.children.push(node);node.parentElement=this;}}
++ prepend(node){node.parentElement?.removeChild(node);this.children.unshift(node);node.parentElement=this;}
++ removeChild(node){this.children=this.children.filter(x=>x!==node);node.parentElement=null;}
++ replaceChildren(...nodes){for(const node of this.children)node.parentElement=null;this.children=[];this.append(...nodes);}
++ contains(node){return node===this||this.children.some(c=>c.contains(node));}
++ setAttribute(k,v){this.attrs[k]=v;}addEventListener(k,fn){this.handlers[k]=fn;}
++ closest(selector){for(let n=this;n;n=n.parentElement)if(selector==='[hidden]'&&n.hidden)return n;return null;}
++ matches(selector){return selector===':disabled'&&this.disabled===true;}
++ querySelector(selector){return this.children.flatMap(c=>[c,c.querySelector(selector)]).find(c=>c&&(selector==='a'?c.tag==='a':selector==='h2'?c.tag==='h2':c.attrs['aria-current']==='page'))??null;}
++ focus(){for(let n=this;n;n=n.parentElement)if(n.hidden||(n.tag==='dialog'&&!n.open))return;document.activeElement=this;}
++ scrollIntoView(){}
++ showModal(){this.invoker=document.activeElement;this.open=true;}
++ close(){this.open=false;this.invoker?.focus();}
++}
++global.HTMLElement=Element;global.document={body:new Element('body'),activeElement:null,createElement:tag=>new Element(tag)};
++function app(){const a=Object.create(ExplorerApp.prototype);Object.assign(a,{narrow:{matches:true},navigationDrawer:new Element('dialog'),navigationToggle:new Element('button'),navigationClose:new Element('button'),navigation:new Element('nav'),rail:new Element('aside'),shell:new Element('div'),search:{input:new Element('input')},reading:new Element('main'),mapDetails:new Element('section'),detailsToggle:new Element('button'),detailsClose:new Element('button'),detailsHeading:new Element('h3'),detailsOpen:true,entry:{element:new Element('article'),title:new Element('h2')},retainedEntry:null,status:new Element('div'),close:new Element('button'),routeSerial:1,client:{connected:true,message:'Reader unavailable.',state:{freshness:'current',regional_requests:{},regional_errors:{},selection:{id:'exact'},focus_id:'focus',snapshot:'snapshot',query:'recorded',filters:{direction:'both'},expanded_ids:['neighbor'],source_selection:{reference_id:'source'},camera:{zoom:1},history:[{route:'safe'}]}},model:{nodes:{exact:{}},edges:{relation:{}}},mapView:{exact:true}});a.rail.append(a.navigationClose,a.navigation);a.navigationDrawer.append(a.rail);a.entry.element.append(a.entry.title);a.mapDetails.append(a.detailsClose,a.detailsHeading,a.entry.element);const link=new Element('a');link.setAttribute('aria-current','page');a.navigation.append(link);return a;}
++async function test(name,fn){try{await fn();checks.push({name,status:'passed'});}catch(e){checks.push({name,status:'failed',reason:e.message});}}
++(async()=>{
++await test('drawer open close and responsive move restore a visible navigation or exact control target',()=>{const a=app(),link=a.navigation.querySelector('a');a.navigationToggle.focus();a.openNavigation();assert.equal(document.activeElement,a.navigationClose);assert.equal(a.navigationDrawer.open,true);a.closeNavigation();assert.equal(document.activeElement,a.navigationToggle);assert.equal(a.navigationToggle.attrs['aria-expanded'],'false');a.openNavigation();link.focus();a.narrow.matches=false;a.responsiveLayout();assert.equal(a.navigationDrawer.open,false);assert.equal(a.rail.parentElement,a.shell);assert.equal(document.activeElement,link);assert.equal(a.navigationToggle.hidden,true);a.narrow.matches=true;a.responsiveLayout();assert.equal(document.activeElement,a.navigationToggle);assert.equal(a.rail.parentElement,a.navigationDrawer);assert.equal(a.navigationDrawer.open,false);});
++await test('details dismissal and both resize directions preserve state model history and visible focus',()=>{const a=app(),state=a.client.state,model=a.model,map=a.mapView,before=JSON.stringify(state);a.presentDetails();a.entry.title.focus();a.setDetailsOpen(false);assert.equal(document.activeElement,a.detailsToggle);assert.equal(a.mapDetails.hidden,true);assert.equal(a.detailsToggle.attrs['aria-expanded'],'false');a.narrow.matches=false;a.presentDetails();assert.equal(a.mapDetails.hidden,false);assert.equal(document.activeElement,a.entry.title);assert.equal(a.detailsToggle.hidden,true);a.narrow.matches=true;a.presentDetails();assert.equal(a.mapDetails.hidden,true);assert.equal(document.activeElement,a.detailsToggle);assert.equal(a.detailsToggle.hidden,false);a.setDetailsOpen(true);assert.equal(document.activeElement,a.entry.title);assert.equal(a.client.state,state);assert.equal(JSON.stringify(state),before);assert.equal(a.model,model);assert.equal(a.mapView,map);});
++await test('source close re-exposes the same evidence trigger after parent details dismissal',()=>{const a=app(),trigger=new Element('button');a.entry.element.append(trigger);const drawer=new SourceDrawer(()=>drawer.close(),()=>{},t=>a.sourceReturnTarget(t));a.presentDetails();trigger.focus();drawer.open(trigger);a.setDetailsOpen(false);assert.equal(a.mapDetails.hidden,true);assert.equal(drawer.element.hidden,false);drawer.close();assert.equal(a.mapDetails.hidden,false);assert.equal(document.activeElement,trigger);assert.equal(drawer.element.hidden,true);assert.equal(a.client.state.source_selection.reference_id,'source');});
++await test('detached retained heading cannot steal focus from the current idless Map picker',()=>{const a=app(),old=new Element('h2'),picker=new Element('h2');a.entry=null;a.detailsHeading=null;a.retainedEntry=new Element('section');a.retainedEntry.append(old);old.isConnected=false;a.reading.append(picker);assert.equal(a.entryFocusTarget(),picker);a.entryFocusTarget().focus();assert.equal(document.activeElement,picker);});
++await test('explicit session close exits navigation before reply and exposes status without stealing later route focus',async()=>{const a=app();a.rail.append(a.close);let finish;a.client.close=async()=>{await new Promise(r=>finish=r);a.client.connected=false;a.client.state.freshness='disconnected';a.connectionChanged();};a.navigationToggle.focus();a.openNavigation();a.close.focus();const pending=a.closeReadingSession();assert.equal(a.navigationDrawer.open,false);assert.equal(document.activeElement,a.navigationToggle);finish();await pending;assert.equal(document.activeElement,a.status);assert.equal(a.close.hidden,true);const b=app();let release;b.client.close=async()=>{await new Promise(r=>release=r);b.client.connected=false;};const old=b.closeReadingSession();b.routeSerial++;b.search.input.focus();release();await old;assert.equal(document.activeElement,b.search.input);});
++await test('passive terminal state closes navigation before hiding its focused session control and exposes status',()=>{const a=app();a.rail.append(a.close);a.navigationToggle.focus();a.openNavigation();a.close.focus();a.client.connected=false;a.client.state.freshness='disconnected';a.connectionChanged();assert.equal(a.navigationDrawer.open,false);assert.equal(a.close.hidden,true);assert.equal(document.activeElement,a.status);assert.equal(a.status.hidden,false);});
++
++console.log(JSON.stringify({status:checks.every(c=>c.status==='passed')?'passed':'failed',checks,qualification:'Actual compiled UI methods with an explicit DOM double that rejects focus into hidden ancestors. Native dialog, CSS and real keyboard behavior require the frozen production browser check.'},null,2));process.exitCode=checks.every(c=>c.status==='passed')?0:1;
++
++})().catch(()=>{console.log(JSON.stringify({status:'failed',reason:'narrow_unit_runner_failed'}));process.exitCode=1;});

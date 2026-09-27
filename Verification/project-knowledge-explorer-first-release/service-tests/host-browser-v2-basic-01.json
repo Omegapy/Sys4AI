@@ -1,0 +1,37 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-service-v2-browser-01/host-playwright-driver-v2.py",
+    "basic"
+  ],
+  "stage": "/private/tmp/explorer-service-v2-browser-01",
+  "manifest": {
+    "path": "/private/tmp/explorer-service-v2-browser-01/inputs.json",
+    "sha256": "39d1d97bb196d9a1a1d850f56a8f92d58f082f017cdd083448574b9c472eebf6"
+  },
+  "inputs_count": 110,
+  "external_test_tools": [
+    {
+      "path": "/Users/alex.omegapy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "sha256": "27db838bb204ef7c21df2931f5656e4c8fb32e6e947f363a402b49714d32b5b1"
+    },
+    {
+      "path": "/Users/alex.omegapy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/package.json",
+      "sha256": "ca170ec143a88ed3043ac953eb3b2377b2b97304104f4e1e23316684ce2c35af"
+    },
+    {
+      "path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "sha256": "9965cd7587f254eb0354d5fd53688790d363170ecfe3fe4b93152f241af00d2f"
+    }
+  ],
+  "timeout_seconds": 100,
+  "intended_writes": [
+    "One independent disposable /private/tmp/explorer-http-* fixture tree and private bootstrap files; one fresh Playwright temporary Chrome profile. No production/evidence writes by host."
+  ],
+  "credential_boundary": "Private URLs read inside Node only from exact0600 files. No token/body/raw error/URL output, trace/HAR or screenshot. For race cases a real HTTP response is delayed only in browser memory while abort is intentionally ignored.",
+  "cleanup": "Close owned context/browser; stop/reap owned service worker; reconcile only recorded descendant identities; audit unchanged stage and fixture bytes/mtimes. Each command owns a separate fixture/process tree.",
+  "scope": "Current full UI bootstrap/session/copy-link and late response guards; OS launch and native zoom are separate.",
+  "same_product_inputs_as": "host-batch-v2-01.json"
+}

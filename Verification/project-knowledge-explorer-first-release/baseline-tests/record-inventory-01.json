@@ -1,0 +1,5516 @@
+[
+  {
+    "definition": "A vocabulary category describing an action. Modeling it does not install execution interception or pre-execution semantic gates.",
+    "id": "urn:sys4ai:ontology:core:ActionType",
+    "kind": "concept",
+    "label": "ActionType",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/0",
+    "source_indices": [
+      19
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A running or defined assistant acting within explicitly assigned scope and current instructions. A title or capability alone grants no write or execution authority.",
+    "id": "urn:sys4ai:ontology:core:Agent",
+    "kind": "concept",
+    "label": "Agent",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/1",
+    "source_indices": [
+      20
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A concrete document, file, record or other reviewable work product. Its filesystem path is a binding and may change without changing semantic identity.",
+    "id": "urn:sys4ai:ontology:core:Artifact",
+    "kind": "concept",
+    "label": "Artifact",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/2",
+    "source_indices": [
+      21
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "The current permission to take a scoped action, established by user instructions and governing project, role, skill or confirmed Task contracts. Ontology describes authority and grants none.",
+    "id": "urn:sys4ai:ontology:core:Authority",
+    "kind": "concept",
+    "label": "Authority",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/3",
+    "source_indices": [
+      22
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A described ability that helps discover an appropriate skill or role. Resolving a capability does not invoke it or grant permission to execute it.",
+    "id": "urn:sys4ai:ontology:core:Capability",
+    "kind": "concept",
+    "label": "Capability",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/4",
+    "source_indices": [
+      23
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A user-visible Codex task, chat or conversation. Its conversation state is distinct from a canonical Sys4AI Task and does not determine the Task writer.",
+    "id": "urn:sys4ai:ontology:core:CodexConversation",
+    "kind": "concept",
+    "label": "CodexConversation",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/5",
+    "source_indices": [
+      24
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "An explicit selected course or settled interpretation supported by evidence and the current authorized owner.",
+    "id": "urn:sys4ai:ontology:core:Decision",
+    "kind": "concept",
+    "label": "Decision",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/6",
+    "source_indices": [
+      25
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "An identified observation, source or measured result supporting a claim at a stated version and verification level.",
+    "id": "urn:sys4ai:ontology:core:Evidence",
+    "kind": "concept",
+    "label": "Evidence",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/7",
+    "source_indices": [
+      26
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A versioned mapping of requirements to implementation work, dependencies, artifacts, risks and verification evidence. Plan readiness is distinct from execution authorization and implementation completion.",
+    "id": "urn:sys4ai:ontology:core:ImplementationPlan",
+    "kind": "concept",
+    "label": "ImplementationPlan",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/8",
+    "source_indices": [
+      27
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "An evidence-backed finding about a decision, failure or verified outcome with a concrete improvement disposition. Learning and memory retain their own acceptance and publication boundaries.",
+    "id": "urn:sys4ai:ontology:core:Lesson",
+    "kind": "concept",
+    "label": "Lesson",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/9",
+    "source_indices": [
+      28
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "The capability to publish accepted project memory changes only through its own current exact-payload and scoped publication authority. An ontology grant is insufficient.",
+    "id": "urn:sys4ai:ontology:core:MemoryPublication",
+    "kind": "concept",
+    "label": "MemoryPublication",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/10",
+    "source_indices": [
+      29
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept",
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "A project memory record retaining historical evidence, decisions or lessons in its own canonical store. Memory recall is evidence, not current governing authority; memory publication cannot redefine ontology semantics.",
+    "id": "urn:sys4ai:ontology:core:MemoryRecord",
+    "kind": "concept",
+    "label": "MemoryRecord",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/11",
+    "source_indices": [
+      30
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "The capability to retrieve permitted project memory evidence through the installed memory read and search interfaces, retaining provenance, lifecycle and source restrictions.",
+    "id": "urn:sys4ai:ontology:core:MemoryRetrieval",
+    "kind": "concept",
+    "label": "MemoryRetrieval",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/12",
+    "source_indices": [
+      31
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept",
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "A conversation runtime objective managed independently of canonical Sys4AI Task state. A native goal is neither a Task record nor document approval.",
+    "id": "urn:sys4ai:ontology:core:NativeGoal",
+    "kind": "concept",
+    "label": "NativeGoal",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/13",
+    "source_indices": [
+      32
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A stable semantic meaning with a preferred label, definition, module ownership, lifecycle and source provenance. Concepts are not substituted with directory locations.",
+    "id": "urn:sys4ai:ontology:core:OntologyConcept",
+    "kind": "concept",
+    "label": "OntologyConcept",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/14",
+    "source_indices": [
+      33
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "The capability to publish accepted ontology changes through its separate exact-payload, current-owner and source-version gates. A memory grant is insufficient.",
+    "id": "urn:sys4ai:ontology:core:OntologyPublication",
+    "kind": "concept",
+    "label": "OntologyPublication",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/15",
+    "source_indices": [
+      34
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept",
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "The capability to retrieve explicit definitions, aliases and typed relationships from the selected local ontology without invoking the represented skills.",
+    "id": "urn:sys4ai:ontology:core:OntologyRetrieval",
+    "kind": "concept",
+    "label": "OntologyRetrieval",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/16",
+    "source_indices": [
+      35
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept",
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "A selected unit of work with its own identity, purpose, governing sources and change boundary. Registration describes a project; it does not grant authority over its files.",
+    "id": "urn:sys4ai:ontology:core:Project",
+    "kind": "concept",
+    "label": "Project",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/17",
+    "source_indices": [
+      36
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "The current project director coordinating authorized work, project boundaries, delegation and acceptance. A confirmed Task manager owns its assigned execution; the host retains unassigned project decisions.",
+    "id": "urn:sys4ai:ontology:core:ProjectDirector",
+    "kind": "concept",
+    "label": "ProjectDirector",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/18",
+    "source_indices": [
+      37
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "An ordinary native child with one bounded assignment and a stopping condition. It returns evidence and has no ungranted canonical Task, role or ontology publication authority.",
+    "id": "urn:sys4ai:ontology:core:ProjectSubAgent",
+    "kind": "concept",
+    "label": "ProjectSubAgent",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/19",
+    "source_indices": [
+      38
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A reusable neutral starter from which a selected project receives explicitly adopted capability and governing assets. Existing projects do not update merely because the template changes.",
+    "id": "urn:sys4ai:ontology:core:ProjectTemplate",
+    "kind": "concept",
+    "label": "ProjectTemplate",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/20",
+    "source_indices": [
+      39
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A named field or characteristic in the supported local ontology profile. Unsupported JSON-LD features are rejected rather than interpreted as arbitrary semantics.",
+    "id": "urn:sys4ai:ontology:core:Property",
+    "kind": "concept",
+    "label": "Property",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/21",
+    "source_indices": [
+      40
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A directed, typed assertion between stable endpoint identities, carrying a registered predicate, fact classification and source provenance.",
+    "id": "urn:sys4ai:ontology:core:Relationship",
+    "kind": "concept",
+    "label": "Relationship",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/22",
+    "source_indices": [
+      41
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A stable predicate definition specifying allowed source and target types, qualifiers, cardinality and whether cycles are forbidden.",
+    "id": "urn:sys4ai:ontology:core:RelationshipType",
+    "kind": "concept",
+    "label": "RelationshipType",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/23",
+    "source_indices": [
+      43
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "An explicit expected outcome or constraint with a source and observable acceptance criterion.",
+    "id": "urn:sys4ai:ontology:core:Requirement",
+    "kind": "concept",
+    "label": "Requirement",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/24",
+    "source_indices": [
+      44
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A project-local function defined by a paired AGENTS.md and ROLE.md source, with capabilities, inputs, outputs, scope and stopping conditions. An index is navigation rather than role authority.",
+    "id": "urn:sys4ai:ontology:core:Role",
+    "kind": "concept",
+    "label": "Role",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/25",
+    "source_indices": [
+      45
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "An explicit boundary of permitted inputs, outputs, artifacts, actions and stopping conditions.",
+    "id": "urn:sys4ai:ontology:core:Scope",
+    "kind": "concept",
+    "label": "Scope",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/26",
+    "source_indices": [
+      46
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A reusable instruction and tool workflow for a bounded purpose. The Skill type, an installed skill instance and the SKILL.md artifact describing it are distinct entities.",
+    "id": "urn:sys4ai:ontology:core:Skill",
+    "kind": "concept",
+    "label": "Skill",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/27",
+    "source_indices": [
+      47
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "Identified evidence used to support a definition or assertion. A local source reference records exact path, SHA256 and a useful locator; changed bytes must be reported.",
+    "id": "urn:sys4ai:ontology:core:Source",
+    "kind": "concept",
+    "label": "Source",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/28",
+    "source_indices": [
+      48
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A canonical connection between a semantic entity and explicitly selected current project source bytes. It never recursively imports a child project or executes a discovered skill.",
+    "id": "urn:sys4ai:ontology:core:SourceBinding",
+    "kind": "concept",
+    "label": "SourceBinding",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/29",
+    "source_indices": [
+      49
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A governing description of required properties, constraints and interfaces. Current project specifications retain operational authority over a recalled ontology definition.",
+    "id": "urn:sys4ai:ontology:core:Specification",
+    "kind": "concept",
+    "label": "Specification",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/30",
+    "source_indices": [
+      50
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "A Task Requirement Document capturing explicit requirements and acceptance criteria. Approval settles the requirements document; it does not activate a Task, authorize implementation or prove completion.",
+    "id": "urn:sys4ai:ontology:core:TRD",
+    "kind": "concept",
+    "label": "TRD",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/31",
+    "source_indices": [
+      51
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "The capability to capture requirements with the explicitly selected to-trd workflow. Creating a TRD does not create or activate a Task.",
+    "id": "urn:sys4ai:ontology:core:TRDCreation",
+    "kind": "concept",
+    "label": "TRDCreation",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/32",
+    "source_indices": [
+      52
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept",
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "A canonical Sys4AI managed work record with definition of done, execution state and confirmed owner. A Task is distinct from a TRD, implementation plan, native goal and Codex conversation. Document approval does not activate a Task or establish implementation completion.",
+    "id": "urn:sys4ai:ontology:core:Task",
+    "kind": "concept",
+    "label": "Task",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/33",
+    "source_indices": [
+      53
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "The capability to manage canonical Task execution through the current installed Task interfaces and confirmed ownership gates.",
+    "id": "urn:sys4ai:ontology:core:TaskManagement",
+    "kind": "concept",
+    "label": "TaskManagement",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/34",
+    "source_indices": [
+      54
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept",
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "A real native manager with confirmed activation, execution generation, assignment and canonical writer ownership for one Task. An ordinary child is not promoted by reading root guidance.",
+    "id": "urn:sys4ai:ontology:core:TaskManager",
+    "kind": "concept",
+    "label": "TaskManager",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/35",
+    "source_indices": [
+      55
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "An initial-release compatibility spelling for the TRD concept. Use TRD as the preferred concept; this identity is retained and is never reassigned.",
+    "id": "urn:sys4ai:ontology:core:TaskRequirementDocument",
+    "kind": "concept",
+    "label": "TaskRequirementDocument",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/36",
+    "source_indices": [
+      56
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "Checking that the result solves the intended problem and is fit for the intended user and use. A structural check alone is not evidence of end-to-end fitness.",
+    "id": "urn:sys4ai:ontology:core:Validation",
+    "kind": "concept",
+    "label": "Validation",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/37",
+    "source_indices": [
+      57
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "Checking that work conforms to the stated requirements, design and project contracts. Verification checks conformance; validation checks fitness for the intended use.",
+    "id": "urn:sys4ai:ontology:core:Verification",
+    "kind": "concept",
+    "label": "Verification",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/38",
+    "source_indices": [
+      58
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "Point to a broader meaning in an explicitly acyclic hierarchy.",
+    "id": "urn:sys4ai:ontology:core:broader",
+    "kind": "predicate",
+    "label": "broader",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/39",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Connect a meaning or instance to the selected source artifact that defines it.",
+    "id": "urn:sys4ai:ontology:core:definedBy",
+    "kind": "predicate",
+    "label": "defined by",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/40",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Describe explicit derivation from selected reusable source material.",
+    "id": "urn:sys4ai:ontology:core:derivesFrom",
+    "kind": "predicate",
+    "label": "derives from",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/41",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Connect a source artifact with the semantic entity it describes.",
+    "id": "urn:sys4ai:ontology:core:describes",
+    "kind": "predicate",
+    "label": "describes",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/42",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Describe the source of current operational rules without granting that authority.",
+    "id": "urn:sys4ai:ontology:core:governedBy",
+    "kind": "predicate",
+    "label": "governed by",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/43",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Relate a project, agent or Task to a role; canonical assignment controls ownership.",
+    "id": "urn:sys4ai:ontology:core:hasRole",
+    "kind": "predicate",
+    "label": "has role",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/44",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Describe a role responsible for managed work subject to confirmed activation.",
+    "id": "urn:sys4ai:ontology:core:manages",
+    "kind": "predicate",
+    "label": "manages",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/45",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Point to a narrower meaning in an explicitly acyclic hierarchy.",
+    "id": "urn:sys4ai:ontology:core:narrower",
+    "kind": "predicate",
+    "label": "narrower",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/46",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Describe an output kind without claiming an operation ran.",
+    "id": "urn:sys4ai:ontology:core:produces",
+    "kind": "predicate",
+    "label": "produces",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/47",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Connect a skill to a capability it describes; discovery never invokes the skill.",
+    "id": "urn:sys4ai:ontology:core:providesCapability",
+    "kind": "predicate",
+    "label": "provides capability",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/48",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Connect related meanings without asserting equivalence or authority.",
+    "id": "urn:sys4ai:ontology:core:relatedTo",
+    "kind": "predicate",
+    "label": "related to",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/49",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+    "id": "urn:sys4ai:ontology:core:relation-1",
+    "kind": "relation",
+    "label": "Task relatedTo TRD",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/50",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+    "id": "urn:sys4ai:ontology:core:relation-2",
+    "kind": "relation",
+    "label": "Task relatedTo MemoryRecord",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/51",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+    "id": "urn:sys4ai:ontology:core:relation-3",
+    "kind": "relation",
+    "label": "Verification relatedTo Validation",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/52",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+    "id": "urn:sys4ai:ontology:core:relation-4",
+    "kind": "relation",
+    "label": "TaskManager manages Task",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/53",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+    "id": "urn:sys4ai:ontology:core:relation-5",
+    "kind": "relation",
+    "label": "MemoryRetrieval retrieves MemoryRecord",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/54",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+    "id": "urn:sys4ai:ontology:core:relation-6",
+    "kind": "relation",
+    "label": "MemoryPublication requiresAuthority Authority",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/55",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+    "id": "urn:sys4ai:ontology:core:relation-7",
+    "kind": "relation",
+    "label": "OntologyPublication requiresAuthority Authority",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/56",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+    "id": "urn:sys4ai:ontology:core:relation-8",
+    "kind": "relation",
+    "label": "TaskRequirementDocument replacedBy TRD",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/57",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+    "id": "urn:sys4ai:ontology:core:relation-9",
+    "kind": "relation",
+    "label": "ProjectTemplate derivesFrom Artifact",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/58",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Identify a replacement while retaining the historical identity and meaning.",
+    "id": "urn:sys4ai:ontology:core:replacedBy",
+    "kind": "predicate",
+    "label": "replaced by",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/59",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Describe the governing authority needed before an operation.",
+    "id": "urn:sys4ai:ontology:core:requiresAuthority",
+    "kind": "predicate",
+    "label": "requires authority",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/60",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Describe the evidence or meaning a capability can return.",
+    "id": "urn:sys4ai:ontology:core:retrieves",
+    "kind": "predicate",
+    "label": "retrieves",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/61",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Extend a meaning through an explicit acyclic type specialization.",
+    "id": "urn:sys4ai:ontology:core:subtypeOf",
+    "kind": "predicate",
+    "label": "subtype of",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/62",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Connect a result with checks of fitness for intended use.",
+    "id": "urn:sys4ai:ontology:core:validatedBy",
+    "kind": "predicate",
+    "label": "validated by",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/63",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Connect a work product or requirement with conformance verification evidence.",
+    "id": "urn:sys4ai:ontology:core:verifiedBy",
+    "kind": "predicate",
+    "label": "verified by",
+    "location": "ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph/64",
+    "source_indices": [
+      42
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "A generated ontology wiki page is an Artifact subtype; it is rebuildable and does not replace canonical records.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:GeneratedWikiPage",
+    "kind": "concept",
+    "label": "Generated ontology wiki page",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/87",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:OntologyConcept"
+    ]
+  },
+  {
+    "definition": "Canonical Task ledger operations uses the shared capability meaning",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:agent-task-capability-meaning",
+    "kind": "relation",
+    "label": "Canonical Task ledger operations uses the shared capability meaning",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/0",
+    "source_indices": [
+      1
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "agent-task skill is defined by its installed SKILL.md",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:agent-task-defined-by",
+    "kind": "relation",
+    "label": "agent-task skill is defined by its installed SKILL.md",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/1",
+    "source_indices": [
+      1
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "agent-task operations follow current installed source instructions",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:agent-task-governed-by",
+    "kind": "relation",
+    "label": "agent-task operations follow current installed source instructions",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/2",
+    "source_indices": [
+      1
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "agent-task skill provides Canonical Task ledger operations",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:agent-task-provides",
+    "kind": "relation",
+    "label": "agent-task skill provides Canonical Task ledger operations",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/3",
+    "source_indices": [
+      1
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "agent-task skill implements the shared TaskManagement capability",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:agent-task-provides-shared",
+    "kind": "relation",
+    "label": "agent-task skill implements the shared TaskManagement capability",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/4",
+    "source_indices": [
+      1
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at AGENTS.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-agents",
+    "kind": "instance",
+    "label": "Root project instructions",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/5",
+    "source_indices": [
+      16
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-core-module",
+    "kind": "instance",
+    "label": "Selected reusable core module",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/6",
+    "source_indices": [
+      18
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at ROLE.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-director-role",
+    "kind": "instance",
+    "label": "Root Director role definition",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/7",
+    "source_indices": [
+      59
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at Roles/project-sub-agent/AGENTS.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-project-sub-agent-agents",
+    "kind": "instance",
+    "label": "project-sub-agent AGENTS.md source",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/8",
+    "source_indices": [
+      66
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at Roles/project-sub-agent/ROLE.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-project-sub-agent-role",
+    "kind": "instance",
+    "label": "project-sub-agent ROLE.md source",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/9",
+    "source_indices": [
+      67
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at depot/projects.json.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-registry",
+    "kind": "instance",
+    "label": "Factual workspace registry",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/10",
+    "source_indices": [
+      77
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at .agents/skills/agent-task/SKILL.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-agent-task",
+    "kind": "instance",
+    "label": "Installed agent-task skill source",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/11",
+    "source_indices": [
+      1
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at .agents/skills/memory/SKILL.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-memory",
+    "kind": "instance",
+    "label": "Installed memory skill source",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/12",
+    "source_indices": [
+      9
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at .agents/skills/ontology/SKILL.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-ontology",
+    "kind": "instance",
+    "label": "Installed ontology skill source",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/13",
+    "source_indices": [
+      12
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at .agents/skills/task/SKILL.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-task",
+    "kind": "instance",
+    "label": "Installed task skill source",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/14",
+    "source_indices": [
+      13
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at .agents/skills/to-trd/SKILL.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-skill-to-trd",
+    "kind": "instance",
+    "label": "Installed to-trd skill source",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/15",
+    "source_indices": [
+      15
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at SOUL.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-soul",
+    "kind": "instance",
+    "label": "Root reasoning and verification guidance",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/16",
+    "source_indices": [
+      72
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at SPECS.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-specifications",
+    "kind": "instance",
+    "label": "Root technical specifications",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/17",
+    "source_indices": [
+      73
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Specification"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at Roles/task-manager/AGENTS.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-agents",
+    "kind": "instance",
+    "label": "task-manager AGENTS.md source",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/18",
+    "source_indices": [
+      69
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at Roles/task-manager/ROLE.md.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-task-manager-role",
+    "kind": "instance",
+    "label": "task-manager ROLE.md source",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/19",
+    "source_indices": [
+      71
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "The selected project-local source at depot/template-update.json.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:artifact-template-mapping",
+    "kind": "instance",
+    "label": "Explicit Template update mapping",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/20",
+    "source_indices": [
+      78
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-agents",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-agents",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/0",
+    "source_indices": [
+      16
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-core-module",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-core-module",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/1",
+    "source_indices": [
+      18
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-director-role",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-director-role",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/2",
+    "source_indices": [
+      59
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-project-sub-agent-agents",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-project-sub-agent-agents",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/3",
+    "source_indices": [
+      66
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-project-sub-agent-role",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-project-sub-agent-role",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/4",
+    "source_indices": [
+      67
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-registry",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-registry",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/5",
+    "source_indices": [
+      77
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-skill-agent-task",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-skill-agent-task",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/6",
+    "source_indices": [
+      1
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-skill-memory",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-skill-memory",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/7",
+    "source_indices": [
+      9
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-skill-ontology",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-skill-ontology",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/8",
+    "source_indices": [
+      12
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-skill-task",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-skill-task",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/9",
+    "source_indices": [
+      13
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-skill-to-trd",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-skill-to-trd",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/10",
+    "source_indices": [
+      15
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-soul",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-soul",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/11",
+    "source_indices": [
+      72
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-specifications",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-specifications",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/12",
+    "source_indices": [
+      73
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-task-manager-agents",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-task-manager-agents",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/13",
+    "source_indices": [
+      69
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-task-manager-role",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-task-manager-role",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/14",
+    "source_indices": [
+      71
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-artifact-template-mapping",
+    "kind": "binding",
+    "label": "Source binding binding-artifact-template-mapping",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/15",
+    "source_indices": [
+      78
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "A Codex conversation is not the canonical project Task ledger.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-CodexConversation",
+    "kind": "binding",
+    "label": "Source binding binding-concept-CodexConversation",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/16",
+    "source_indices": [
+      59
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "A managed implementation plan records planned work; its state is separate from execution and Task state.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-ImplementationPlan",
+    "kind": "binding",
+    "label": "Source binding binding-concept-ImplementationPlan",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/17",
+    "source_indices": [
+      14
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Project memory retains portable historical evidence; current governance and Task ownership remain controlling.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-MemoryRecord",
+    "kind": "binding",
+    "label": "Source binding binding-concept-MemoryRecord",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/18",
+    "source_indices": [
+      9
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Native goal state is separate from managed plans, TRDs, Tasks and Git state.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-NativeGoal",
+    "kind": "binding",
+    "label": "Source binding binding-concept-NativeGoal",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/19",
+    "source_indices": [
+      59
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "The root is a depot manager; registration is factual inventory and grants no project write authority.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-Project",
+    "kind": "binding",
+    "label": "Source binding binding-concept-Project",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/20",
+    "source_indices": [
+      16
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "A TRD captures approved requirements. Creating or approving it does not create a Task or authorize implementation.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-TRD",
+    "kind": "binding",
+    "label": "Source binding binding-concept-TRD",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/21",
+    "source_indices": [
+      15
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "A governed Task requires explicit activation and remains separate from a TRD, implementation plan, native goal and conversation.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-Task",
+    "kind": "binding",
+    "label": "Source binding binding-concept-Task",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/22",
+    "source_indices": [
+      13
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This explicit binding traces the selected entity to its current local source.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-TaskManager",
+    "kind": "binding",
+    "label": "Source binding binding-concept-TaskManager",
+    "location": "ONTOLOGY/bindings/roles.json#/@graph/0",
+    "source_indices": [
+      69,
+      71
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Validation checks fitness for the user's intended project use.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-Validation",
+    "kind": "binding",
+    "label": "Source binding binding-concept-Validation",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/23",
+    "source_indices": [
+      72
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Verification checks conformance to requirements and the stated design.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-concept-Verification",
+    "kind": "binding",
+    "label": "Source binding binding-concept-Verification",
+    "location": "ONTOLOGY/bindings/artifacts.json#/@graph/24",
+    "source_indices": [
+      72
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "This persisted role can coordinate exactly one assigned Task only after a real native receipt and explicit manager activation. Reading the role does not establish a live manager.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-confirmed-task-manager",
+    "kind": "binding",
+    "label": "Source binding binding-confirmed-task-manager",
+    "location": "ONTOLOGY/bindings/roles.json#/@graph/1",
+    "source_indices": [
+      69,
+      71
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "The host frames project work and owns workspace registration and reusable adoption decisions; an activated Task manager owns its exact assigned execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-host-director",
+    "kind": "binding",
+    "label": "Source binding binding-host-director",
+    "location": "ONTOLOGY/bindings/roles.json#/@graph/2",
+    "source_indices": [
+      16,
+      59
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "An ordinary child performs one bounded assignment and returns evidence; it has no canonical Task, role-index or shared publication ownership.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-ordinary-child",
+    "kind": "binding",
+    "label": "Source binding binding-ordinary-child",
+    "location": "ONTOLOGY/bindings/roles.json#/@graph/3",
+    "source_indices": [
+      66,
+      67
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Registry representation of Sys4AI depot at .. This record describes factual inventory only; it imports no internal vocabulary and grants no read, write or publication authority over that project.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-project-sys4ai-depot",
+    "kind": "binding",
+    "label": "Source binding binding-project-sys4ai-depot",
+    "location": "ONTOLOGY/bindings/projects.json#/@graph/0",
+    "source_indices": [
+      77
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Registry representation of Sys4AI Template Project at Projects/Sys4AI-Template-Project. This record describes factual inventory only; it imports no internal vocabulary and grants no read, write or publication authority over that project.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-project-sys4ai-template-project",
+    "kind": "binding",
+    "label": "Source binding binding-project-sys4ai-template-project",
+    "location": "ONTOLOGY/bindings/projects.json#/@graph/1",
+    "source_indices": [
+      77
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Inspect or mutate the canonical project Task ledger using its current helper and exact actor, revision and execution gates.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-skill-agent-task",
+    "kind": "binding",
+    "label": "Source binding binding-skill-agent-task",
+    "location": "ONTOLOGY/bindings/skills.json#/@graph/0",
+    "source_indices": [
+      1
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Retrieve current eligible project memory with source evidence and explicit limitations. Historical records grant no execution or publication authority.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-skill-memory",
+    "kind": "binding",
+    "label": "Source binding binding-skill-memory",
+    "location": "ONTOLOGY/bindings/skills.json#/@graph/1",
+    "source_indices": [
+      9
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Resolve selected ontology definitions, capabilities and typed relationships without invoking discovered operations or granting authority.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-skill-ontology",
+    "kind": "binding",
+    "label": "Source binding binding-skill-ontology",
+    "location": "ONTOLOGY/bindings/skills.json#/@graph/2",
+    "source_indices": [
+      12
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Route explicitly activated project Task work under the installed ownership and required-team gates. Mentioning a task does not activate this workflow.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-skill-task",
+    "kind": "binding",
+    "label": "Source binding binding-skill-task",
+    "location": "ONTOLOGY/bindings/skills.json#/@graph/3",
+    "source_indices": [
+      13
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Discover user intent and create a managed TRD only through explicit to-trd activation. TRD creation does not create a Task or authorize implementation.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:binding-skill-to-trd",
+    "kind": "binding",
+    "label": "Source binding binding-skill-to-trd",
+    "location": "ONTOLOGY/bindings/skills.json#/@graph/4",
+    "source_indices": [
+      15
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Retrieve current eligible project memory with source evidence and explicit limitations. Historical records grant no execution or publication authority.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-memory-retrieval",
+    "kind": "instance",
+    "label": "Project memory retrieval",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/21",
+    "source_indices": [
+      9
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Declared ontology, memory, Task, TRD, plan, role, Template and setup helper boundaries validate semantic conditions and current authority before their owning mutation.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-guards",
+    "kind": "instance",
+    "label": "Guarded helper dispatch",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/83",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Finite type and declared property inference from approved premises, with inspectable derivations, exact versions, and conflict/incomplete diagnostics.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-inference",
+    "kind": "instance",
+    "label": "Formal ontology inference",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/77",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "A native agent generates attributed candidates from explicitly selected inputs, with validation, directed revision, exact review, and separately authorized publication.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-proposals",
+    "kind": "instance",
+    "label": "Sourced ontology proposals",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/81",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Resolve selected ontology definitions, capabilities and typed relationships without invoking discovered operations or granting authority.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-retrieval",
+    "kind": "instance",
+    "label": "Project ontology retrieval",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/22",
+    "source_indices": [
+      12
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "A selected local embedding model ranks approved ontology records; similarity grants neither identity equivalence nor authority.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-semantic",
+    "kind": "instance",
+    "label": "Semantic ontology retrieval",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/79",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Project-local RDF datasets, read-only SPARQL queries, loss-aware interchange, and SHACL validation using the separately selected pinned standards backend.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-standards",
+    "kind": "instance",
+    "label": "Local RDF SPARQL SHACL",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/75",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "A local browser service searches definitions, inspects relationships and derivations, preserves draft revisions, reviews diffs, and publishes through the same guarded interfaces.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-ontology-workbench",
+    "kind": "instance",
+    "label": "Ontology visual workbench",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/85",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Inspect or mutate the canonical project Task ledger using its current helper and exact actor, revision and execution gates.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-task-ledger",
+    "kind": "instance",
+    "label": "Canonical Task ledger operations",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/23",
+    "source_indices": [
+      1
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Route explicitly activated project Task work under the installed ownership and required-team gates. Mentioning a task does not activate this workflow.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-task-management",
+    "kind": "instance",
+    "label": "Governed Task management",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/24",
+    "source_indices": [
+      13
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Discover user intent and create a managed TRD only through explicit to-trd activation. TRD creation does not create a Task or authorize implementation.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:capability-trd-creation",
+    "kind": "instance",
+    "label": "TRD creation",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/25",
+    "source_indices": [
+      15
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "This persisted role can coordinate exactly one assigned Task only after a real native receipt and explicit manager activation. Reading the role does not establish a live manager.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager",
+    "kind": "instance",
+    "label": "Sys4AI confirmed Task manager role",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/26",
+    "source_indices": [
+      69,
+      71
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Role"
+    ]
+  },
+  {
+    "definition": "Sys4AI confirmed Task manager role is defined by its selected source 1",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager-defined-by-0",
+    "kind": "relation",
+    "label": "Sys4AI confirmed Task manager role is defined by its selected source 1",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/27",
+    "source_indices": [
+      69
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Sys4AI confirmed Task manager role is defined by its selected source 2",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:confirmed-task-manager-defined-by-1",
+    "kind": "relation",
+    "label": "Sys4AI confirmed Task manager role is defined by its selected source 2",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/28",
+    "source_indices": [
+      71
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for correct.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-correct",
+    "kind": "binding",
+    "label": "Curator source binding correct",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/19",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for log-list.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-log-list",
+    "kind": "binding",
+    "label": "Curator source binding log-list",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/26",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for log-query.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-log-query",
+    "kind": "binding",
+    "label": "Curator source binding log-query",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/28",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for log-register.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-log-register",
+    "kind": "binding",
+    "label": "Curator source binding log-register",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/25",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for log-summary.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-log-summary",
+    "kind": "binding",
+    "label": "Curator source binding log-summary",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/27",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-curate.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-curate",
+    "kind": "binding",
+    "label": "Curator source binding owner-curate",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/1",
+    "source_indices": [
+      60,
+      61
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-integration.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-integration",
+    "kind": "binding",
+    "label": "Curator source binding owner-integration",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/3",
+    "source_indices": [
+      62,
+      63
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-logs.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-logs",
+    "kind": "binding",
+    "label": "Curator source binding owner-logs",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/5",
+    "source_indices": [
+      60,
+      61
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-memory.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-memory",
+    "kind": "binding",
+    "label": "Curator source binding owner-memory",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/7",
+    "source_indices": [
+      64,
+      65
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-ontology.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-ontology",
+    "kind": "binding",
+    "label": "Curator source binding owner-ontology",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/9",
+    "source_indices": [
+      64,
+      65
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-products.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-products",
+    "kind": "binding",
+    "label": "Curator source binding owner-products",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/11",
+    "source_indices": [
+      64,
+      65
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-skill-curate.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-skill-curate",
+    "kind": "binding",
+    "label": "Curator source binding owner-skill-curate",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/2",
+    "source_indices": [
+      3
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-skill-integration.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-skill-integration",
+    "kind": "binding",
+    "label": "Curator source binding owner-skill-integration",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/4",
+    "source_indices": [
+      3
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-skill-logs.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-skill-logs",
+    "kind": "binding",
+    "label": "Curator source binding owner-skill-logs",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/6",
+    "source_indices": [
+      3
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-skill-memory.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-skill-memory",
+    "kind": "binding",
+    "label": "Curator source binding owner-skill-memory",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/8",
+    "source_indices": [
+      8
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-skill-ontology.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-skill-ontology",
+    "kind": "binding",
+    "label": "Curator source binding owner-skill-ontology",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/10",
+    "source_indices": [
+      11
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-skill-products.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-skill-products",
+    "kind": "binding",
+    "label": "Curator source binding owner-skill-products",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/12",
+    "source_indices": [
+      11
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-skill-task.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-skill-task",
+    "kind": "binding",
+    "label": "Curator source binding owner-skill-task",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/14",
+    "source_indices": [
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for owner-task.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-owner-task",
+    "kind": "binding",
+    "label": "Curator source binding owner-task",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/13",
+    "source_indices": [
+      68,
+      70
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for pause.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-pause",
+    "kind": "binding",
+    "label": "Curator source binding pause",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/21",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for resume.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-resume",
+    "kind": "binding",
+    "label": "Curator source binding resume",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/22",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for retry.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-retry",
+    "kind": "binding",
+    "label": "Curator source binding retry",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/20",
+    "source_indices": [
+      2,
+      7
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for review.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-review",
+    "kind": "binding",
+    "label": "Curator source binding review",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/17",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for session-catch-up.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-session-catch-up",
+    "kind": "binding",
+    "label": "Curator source binding session-catch-up",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/24",
+    "source_indices": [
+      2,
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for skill.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-skill",
+    "kind": "binding",
+    "label": "Curator source binding skill",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/0",
+    "source_indices": [
+      3
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for status.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-status",
+    "kind": "binding",
+    "label": "Curator source binding status",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/15",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for tick.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-tick",
+    "kind": "binding",
+    "label": "Curator source binding tick",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/23",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for update.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-update",
+    "kind": "binding",
+    "label": "Curator source binding update",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/18",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Exact current source evidence for validate.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-binding-validate",
+    "kind": "binding",
+    "label": "Curator source binding validate",
+    "location": "ONTOLOGY/bindings/curator.jsonld#/@graph/16",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:SourceBinding"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-correct-consumes",
+    "kind": "relation",
+    "label": "Curator correct-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/98",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-correct-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator correct-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/101",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-correct-maintains",
+    "kind": "relation",
+    "label": "Curator correct-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/100",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-correct-owner-memory",
+    "kind": "relation",
+    "label": "Curator correct-owner-memory",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/105",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-correct-owner-ontology",
+    "kind": "relation",
+    "label": "Curator correct-owner-ontology",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/106",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-correct-owner-products",
+    "kind": "relation",
+    "label": "Curator correct-owner-products",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/107",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-correct-produces",
+    "kind": "relation",
+    "label": "Curator correct-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/99",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-correct-provided",
+    "kind": "relation",
+    "label": "Curator correct-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/97",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-correct-public-owner",
+    "kind": "relation",
+    "label": "Curator correct-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/104",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-correct-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator correct-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/103",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-correct-triggeredBy",
+    "kind": "relation",
+    "label": "Curator correct-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/102",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-list-consumes",
+    "kind": "relation",
+    "label": "Curator log-list-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/167",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-list-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator log-list-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/170",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-list-maintains",
+    "kind": "relation",
+    "label": "Curator log-list-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/169",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-list-produces",
+    "kind": "relation",
+    "label": "Curator log-list-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/168",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-list-provided",
+    "kind": "relation",
+    "label": "Curator log-list-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/166",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-list-public-owner",
+    "kind": "relation",
+    "label": "Curator log-list-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/173",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-list-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator log-list-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/172",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-list-triggeredBy",
+    "kind": "relation",
+    "label": "Curator log-list-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/171",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-query-consumes",
+    "kind": "relation",
+    "label": "Curator log-query-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/185",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-query-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator log-query-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/188",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-query-maintains",
+    "kind": "relation",
+    "label": "Curator log-query-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/187",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-query-produces",
+    "kind": "relation",
+    "label": "Curator log-query-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/186",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-query-provided",
+    "kind": "relation",
+    "label": "Curator log-query-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/184",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-query-public-owner",
+    "kind": "relation",
+    "label": "Curator log-query-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/191",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-query-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator log-query-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/190",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-query-triggeredBy",
+    "kind": "relation",
+    "label": "Curator log-query-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/189",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-register-consumes",
+    "kind": "relation",
+    "label": "Curator log-register-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/158",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-register-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator log-register-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/161",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-register-maintains",
+    "kind": "relation",
+    "label": "Curator log-register-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/160",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-register-produces",
+    "kind": "relation",
+    "label": "Curator log-register-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/159",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-register-provided",
+    "kind": "relation",
+    "label": "Curator log-register-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/157",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-register-public-owner",
+    "kind": "relation",
+    "label": "Curator log-register-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/164",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-register-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator log-register-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/163",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-register-triggeredBy",
+    "kind": "relation",
+    "label": "Curator log-register-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/162",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-summary-consumes",
+    "kind": "relation",
+    "label": "Curator log-summary-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/176",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-summary-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator log-summary-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/179",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-summary-maintains",
+    "kind": "relation",
+    "label": "Curator log-summary-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/178",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-summary-produces",
+    "kind": "relation",
+    "label": "Curator log-summary-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/177",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-summary-provided",
+    "kind": "relation",
+    "label": "Curator log-summary-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/175",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-summary-public-owner",
+    "kind": "relation",
+    "label": "Curator log-summary-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/182",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-summary-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator log-summary-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/181",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-log-summary-triggeredBy",
+    "kind": "relation",
+    "label": "Curator log-summary-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/180",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-pause-consumes",
+    "kind": "relation",
+    "label": "Curator pause-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/122",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-pause-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator pause-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/125",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-pause-maintains",
+    "kind": "relation",
+    "label": "Curator pause-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/124",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-pause-produces",
+    "kind": "relation",
+    "label": "Curator pause-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/123",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-pause-provided",
+    "kind": "relation",
+    "label": "Curator pause-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/121",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-pause-public-owner",
+    "kind": "relation",
+    "label": "Curator pause-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/128",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-pause-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator pause-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/127",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-pause-triggeredBy",
+    "kind": "relation",
+    "label": "Curator pause-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/126",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-process",
+    "kind": "relation",
+    "label": "Curator process",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/3",
+    "source_indices": [
+      17,
+      76,
+      75,
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-project-identity",
+    "kind": "relation",
+    "label": "Curator project-identity",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/11",
+    "source_indices": [
+      17,
+      76,
+      75,
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-resume-consumes",
+    "kind": "relation",
+    "label": "Curator resume-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/131",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-resume-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator resume-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/134",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-resume-maintains",
+    "kind": "relation",
+    "label": "Curator resume-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/133",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-resume-produces",
+    "kind": "relation",
+    "label": "Curator resume-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/132",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-resume-provided",
+    "kind": "relation",
+    "label": "Curator resume-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/130",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-resume-public-owner",
+    "kind": "relation",
+    "label": "Curator resume-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/137",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-resume-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator resume-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/136",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-resume-triggeredBy",
+    "kind": "relation",
+    "label": "Curator resume-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/135",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-retry-consumes",
+    "kind": "relation",
+    "label": "Curator retry-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/110",
+    "source_indices": [
+      2,
+      7
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-retry-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator retry-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/113",
+    "source_indices": [
+      2,
+      7
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-retry-maintains",
+    "kind": "relation",
+    "label": "Curator retry-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/112",
+    "source_indices": [
+      2,
+      7
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-retry-owner-memory",
+    "kind": "relation",
+    "label": "Curator retry-owner-memory",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/117",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-retry-owner-ontology",
+    "kind": "relation",
+    "label": "Curator retry-owner-ontology",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/118",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-retry-owner-products",
+    "kind": "relation",
+    "label": "Curator retry-owner-products",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/119",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-retry-produces",
+    "kind": "relation",
+    "label": "Curator retry-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/111",
+    "source_indices": [
+      2,
+      7
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-retry-provided",
+    "kind": "relation",
+    "label": "Curator retry-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/109",
+    "source_indices": [
+      2,
+      7
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-retry-public-owner",
+    "kind": "relation",
+    "label": "Curator retry-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/116",
+    "source_indices": [
+      2,
+      7
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-retry-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator retry-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/115",
+    "source_indices": [
+      2,
+      7
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-retry-triggeredBy",
+    "kind": "relation",
+    "label": "Curator retry-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/114",
+    "source_indices": [
+      2,
+      7
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-review-consumes",
+    "kind": "relation",
+    "label": "Curator review-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/77",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-review-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator review-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/80",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-review-maintains",
+    "kind": "relation",
+    "label": "Curator review-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/79",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-review-produces",
+    "kind": "relation",
+    "label": "Curator review-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/78",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-review-provided",
+    "kind": "relation",
+    "label": "Curator review-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/76",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-review-public-owner",
+    "kind": "relation",
+    "label": "Curator review-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/83",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-review-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator review-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/82",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-review-triggeredBy",
+    "kind": "relation",
+    "label": "Curator review-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/81",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-session-catch-up-consumes",
+    "kind": "relation",
+    "label": "Curator session-catch-up-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/149",
+    "source_indices": [
+      2,
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-session-catch-up-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator session-catch-up-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/152",
+    "source_indices": [
+      2,
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-session-catch-up-maintains",
+    "kind": "relation",
+    "label": "Curator session-catch-up-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/151",
+    "source_indices": [
+      2,
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-session-catch-up-produces",
+    "kind": "relation",
+    "label": "Curator session-catch-up-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/150",
+    "source_indices": [
+      2,
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-session-catch-up-provided",
+    "kind": "relation",
+    "label": "Curator session-catch-up-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/148",
+    "source_indices": [
+      2,
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-session-catch-up-public-owner",
+    "kind": "relation",
+    "label": "Curator session-catch-up-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/155",
+    "source_indices": [
+      2,
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-session-catch-up-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator session-catch-up-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/154",
+    "source_indices": [
+      2,
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-session-catch-up-triggeredBy",
+    "kind": "relation",
+    "label": "Curator session-catch-up-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/153",
+    "source_indices": [
+      2,
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-status-consumes",
+    "kind": "relation",
+    "label": "Curator status-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/59",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-status-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator status-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/62",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-status-maintains",
+    "kind": "relation",
+    "label": "Curator status-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/61",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-status-produces",
+    "kind": "relation",
+    "label": "Curator status-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/60",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-status-provided",
+    "kind": "relation",
+    "label": "Curator status-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/58",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-status-public-owner",
+    "kind": "relation",
+    "label": "Curator status-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/65",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-status-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator status-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/64",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-status-triggeredBy",
+    "kind": "relation",
+    "label": "Curator status-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/63",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-tick-consumes",
+    "kind": "relation",
+    "label": "Curator tick-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/140",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-tick-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator tick-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/143",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-tick-maintains",
+    "kind": "relation",
+    "label": "Curator tick-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/142",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-tick-produces",
+    "kind": "relation",
+    "label": "Curator tick-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/141",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-tick-provided",
+    "kind": "relation",
+    "label": "Curator tick-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/139",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-tick-public-owner",
+    "kind": "relation",
+    "label": "Curator tick-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/146",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-tick-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator tick-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/145",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-tick-triggeredBy",
+    "kind": "relation",
+    "label": "Curator tick-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/144",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-update-consumes",
+    "kind": "relation",
+    "label": "Curator update-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/86",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-update-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator update-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/89",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-update-maintains",
+    "kind": "relation",
+    "label": "Curator update-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/88",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-update-owner-memory",
+    "kind": "relation",
+    "label": "Curator update-owner-memory",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/93",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-update-owner-ontology",
+    "kind": "relation",
+    "label": "Curator update-owner-ontology",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/94",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-update-owner-products",
+    "kind": "relation",
+    "label": "Curator update-owner-products",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/95",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-update-produces",
+    "kind": "relation",
+    "label": "Curator update-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/87",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-update-provided",
+    "kind": "relation",
+    "label": "Curator update-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/85",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-update-public-owner",
+    "kind": "relation",
+    "label": "Curator update-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/92",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-update-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator update-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/91",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-update-triggeredBy",
+    "kind": "relation",
+    "label": "Curator update-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/90",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-validate-consumes",
+    "kind": "relation",
+    "label": "Curator validate-consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/68",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-validate-coordinatesOwner",
+    "kind": "relation",
+    "label": "Curator validate-coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/71",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-validate-maintains",
+    "kind": "relation",
+    "label": "Curator validate-maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/70",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-validate-produces",
+    "kind": "relation",
+    "label": "Curator validate-produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/69",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-validate-provided",
+    "kind": "relation",
+    "label": "Curator validate-provided",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/67",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-validate-public-owner",
+    "kind": "relation",
+    "label": "Curator validate-public-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/74",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-validate-requiresPrerequisite",
+    "kind": "relation",
+    "label": "Curator validate-requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/73",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared relationship; current owner evidence is required before execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-edge-validate-triggeredBy",
+    "kind": "relation",
+    "label": "Curator validate-triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/72",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Route exact reviewed integration or canonical lifecycle corrections through the current owner.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-correct",
+    "kind": "instance",
+    "label": "Curator correct",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/96",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "List registered log metadata within the selected bounds.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-log-list",
+    "kind": "instance",
+    "label": "Curator log-list",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/165",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Query bounded registered log records using exact filters and pagination.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-log-query",
+    "kind": "instance",
+    "label": "Curator log-query",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/183",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Register an exact permitted log source using the bounded existing log owner protocol.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-log-register",
+    "kind": "instance",
+    "label": "Curator log-register",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/156",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Read a bounded summary of a registered log while preserving full underlying logs.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-log-summary",
+    "kind": "instance",
+    "label": "Curator log-summary",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/174",
+    "source_indices": [
+      2,
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Pause existing Task lifecycle with interruption and reconciliation of current native write owners.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-pause",
+    "kind": "instance",
+    "label": "Curator pause",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/120",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Resume existing Task through its lifecycle owner after current native ownership reconciliation.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-resume",
+    "kind": "instance",
+    "label": "Curator resume",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/129",
+    "source_indices": [
+      2,
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Recover the original exact operation and prior journal through its known owner recovery pair.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-retry",
+    "kind": "instance",
+    "label": "Curator retry",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/108",
+    "source_indices": [
+      2,
+      7
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Review scoped metadata or authenticated bounded source ownership; no canonical writes.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-review",
+    "kind": "instance",
+    "label": "Curator review",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/75",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Collect changed-input observations at session start or return and retain deliveries; current-owner evaluation and selected dispatch are separate.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-session-catch-up",
+    "kind": "instance",
+    "label": "Curator session-catch-up",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/147",
+    "source_indices": [
+      2,
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Inspect bounded selected policy and current metadata without repair or model analysis.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-status",
+    "kind": "instance",
+    "label": "Curator status",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/57",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Dispatch selected maintenance within cadence and budget through an actual host actor or Broker callback.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-tick",
+    "kind": "instance",
+    "label": "Curator tick",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/138",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Route exact reviewed updates to existing integration, memory, ontology or derived-product owner.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-update",
+    "kind": "instance",
+    "label": "Curator update",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/84",
+    "source_indices": [
+      2,
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Validate selected policy structure without admitting or performing maintenance.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-function-validate",
+    "kind": "instance",
+    "label": "Curator validate",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/66",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Persisted curator-manager supporting role proposes work for the curate route; canonical publication remains with the current Director or confirmed Task manager.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-curate",
+    "kind": "instance",
+    "label": "Curator owner route curate",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/12",
+    "source_indices": [
+      60,
+      61
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Role"
+    ]
+  },
+  {
+    "definition": "Persisted improvement-maintenance supporting role proposes work for the integration route; canonical publication remains with the current Director or confirmed Task manager.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-integration",
+    "kind": "instance",
+    "label": "Curator owner route integration",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/14",
+    "source_indices": [
+      62,
+      63
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Role"
+    ]
+  },
+  {
+    "definition": "Persisted curator-manager supporting role proposes work for the logs route; canonical publication remains with the current Director or confirmed Task manager.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-logs",
+    "kind": "instance",
+    "label": "Curator owner route logs",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/16",
+    "source_indices": [
+      60,
+      61
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Role"
+    ]
+  },
+  {
+    "definition": "Persisted knowledge-curator supporting role proposes work for the memory route; canonical publication remains with the current Director or confirmed Task manager.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-memory",
+    "kind": "instance",
+    "label": "Curator owner route memory",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/18",
+    "source_indices": [
+      64,
+      65
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Role"
+    ]
+  },
+  {
+    "definition": "Persisted knowledge-curator supporting role proposes work for the ontology route; canonical publication remains with the current Director or confirmed Task manager.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-ontology",
+    "kind": "instance",
+    "label": "Curator owner route ontology",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/20",
+    "source_indices": [
+      64,
+      65
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Role"
+    ]
+  },
+  {
+    "definition": "Persisted knowledge-curator supporting role proposes work for the products route; canonical publication remains with the current Director or confirmed Task manager.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-products",
+    "kind": "instance",
+    "label": "Curator owner route products",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/22",
+    "source_indices": [
+      64,
+      65
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Role"
+    ]
+  },
+  {
+    "definition": "Installed curate public owner contract.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-skill-curate",
+    "kind": "instance",
+    "label": "Curator curate owner skill",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/13",
+    "source_indices": [
+      3
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "Installed curate public owner contract.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-skill-integration",
+    "kind": "instance",
+    "label": "Curator integration owner skill",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/15",
+    "source_indices": [
+      3
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "Installed curate public owner contract.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-skill-logs",
+    "kind": "instance",
+    "label": "Curator logs owner skill",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/17",
+    "source_indices": [
+      3
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "Installed memory public owner contract.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-skill-memory",
+    "kind": "instance",
+    "label": "Curator memory owner skill",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/19",
+    "source_indices": [
+      8
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "Installed ontology public owner contract.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-skill-ontology",
+    "kind": "instance",
+    "label": "Curator ontology owner skill",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/21",
+    "source_indices": [
+      11
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "Installed ontology public owner contract.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-skill-products",
+    "kind": "instance",
+    "label": "Curator products owner skill",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/23",
+    "source_indices": [
+      11
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "Installed agent-task public owner contract.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-skill-task",
+    "kind": "instance",
+    "label": "Curator task owner skill",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/25",
+    "source_indices": [
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "Persisted task-manager supporting role proposes work for the task route; canonical publication remains with the current Director or confirmed Task manager.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-owner-task",
+    "kind": "instance",
+    "label": "Curator owner route task",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/24",
+    "source_indices": [
+      68,
+      70
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Role"
+    ]
+  },
+  {
+    "definition": "Curator function consumes relationship.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-predicate-consumes",
+    "kind": "predicate",
+    "label": "Curator consumes",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/4",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Curator function coordinatesOwner relationship.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-predicate-coordinatesOwner",
+    "kind": "predicate",
+    "label": "Curator coordinatesOwner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/7",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Curator function forProject relationship.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-predicate-forProject",
+    "kind": "predicate",
+    "label": "Curator forProject",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/8",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Curator function maintains relationship.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-predicate-maintains",
+    "kind": "predicate",
+    "label": "Curator maintains",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/6",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Curator function produces relationship.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-predicate-produces",
+    "kind": "predicate",
+    "label": "Curator produces",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/5",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Curator function requiresPrerequisite relationship.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-predicate-requiresPrerequisite",
+    "kind": "predicate",
+    "label": "Curator requiresPrerequisite",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/10",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Curator function triggeredBy relationship.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-predicate-triggeredBy",
+    "kind": "predicate",
+    "label": "Curator triggeredBy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/9",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:RelationshipType"
+    ]
+  },
+  {
+    "definition": "Bounded project-local coordination of maintenance observations, current-owner evaluation and separately authorized execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-process",
+    "kind": "instance",
+    "label": "Curator process",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/1",
+    "source_indices": [
+      17,
+      76,
+      75,
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Capability"
+    ]
+  },
+  {
+    "definition": "Manage reusable Sys4AI assets and factual local project inventory.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-project",
+    "kind": "instance",
+    "label": "Curator project Sys4AI depot",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/0",
+    "source_indices": [
+      76
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Project"
+    ]
+  },
+  {
+    "definition": "Category of scope used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-scope-original-targets",
+    "kind": "instance",
+    "label": "Curator category original-targets",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/41",
+    "source_indices": [
+      7
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Scope"
+    ]
+  },
+  {
+    "definition": "Category of scope used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-scope-selected-log",
+    "kind": "instance",
+    "label": "Curator category selected-log",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/52",
+    "source_indices": [
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Scope"
+    ]
+  },
+  {
+    "definition": "Category of scope used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-scope-selected-owner-targets",
+    "kind": "instance",
+    "label": "Curator category selected-owner-targets",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/37",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Scope"
+    ]
+  },
+  {
+    "definition": "Category of scope used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-scope-selected-project",
+    "kind": "instance",
+    "label": "Curator category selected-project",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/28",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Scope"
+    ]
+  },
+  {
+    "definition": "Category of scope used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-scope-selected-source-scope",
+    "kind": "instance",
+    "label": "Curator category selected-source-scope",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/33",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Scope"
+    ]
+  },
+  {
+    "definition": "Category of scope used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-scope-selected-task",
+    "kind": "instance",
+    "label": "Curator category selected-task",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/44",
+    "source_indices": [
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Scope"
+    ]
+  },
+  {
+    "definition": "Project-local public Curator entry point.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-skill",
+    "kind": "instance",
+    "label": "Installed curate skill",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/2",
+    "source_indices": [
+      3
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "Category of input used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-changed-input-observation",
+    "kind": "instance",
+    "label": "Curator category changed-input-observation",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/47",
+    "source_indices": [
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Current bound Director or confirmed Task manager, exact current grant and applicable native owner checks are required.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-current-grant",
+    "kind": "instance",
+    "label": "Curator category current-grant",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/38",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Authority"
+    ]
+  },
+  {
+    "definition": "Current bound Director or confirmed Task manager, exact current grant and applicable native owner checks are required.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-current-owner",
+    "kind": "instance",
+    "label": "Curator category current-owner",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/34",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Authority"
+    ]
+  },
+  {
+    "definition": "Category of output used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-lifecycle-result",
+    "kind": "instance",
+    "label": "Curator category lifecycle-result",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/43",
+    "source_indices": [
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Current bound Director or confirmed Task manager, exact current grant and applicable native owner checks are required.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-live-actor-budget",
+    "kind": "instance",
+    "label": "Curator category live-actor-budget",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/46",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Authority"
+    ]
+  },
+  {
+    "definition": "Category of output used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-log-metadata",
+    "kind": "instance",
+    "label": "Curator category log-metadata",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/53",
+    "source_indices": [
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of input used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-log-query",
+    "kind": "instance",
+    "label": "Curator category log-query",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/55",
+    "source_indices": [
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of output used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-log-results",
+    "kind": "instance",
+    "label": "Curator category log-results",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/56",
+    "source_indices": [
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of input used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-log-selection",
+    "kind": "instance",
+    "label": "Curator category log-selection",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/50",
+    "source_indices": [
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of output used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-log-summary",
+    "kind": "instance",
+    "label": "Curator category log-summary",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/54",
+    "source_indices": [
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of input used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-original-intent",
+    "kind": "instance",
+    "label": "Curator category original-intent",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/40",
+    "source_indices": [
+      7
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of output used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-owner-receipt",
+    "kind": "instance",
+    "label": "Curator category owner-receipt",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/36",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of input used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-policy",
+    "kind": "instance",
+    "label": "Curator category policy",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/26",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of output used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-policy-status",
+    "kind": "instance",
+    "label": "Curator category policy-status",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/27",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Selected read scope or configured session budget is required; inspection alone grants no execution authority.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-read-scope",
+    "kind": "instance",
+    "label": "Curator category read-scope",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/29",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Authority"
+    ]
+  },
+  {
+    "definition": "Category of output used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-registered-log",
+    "kind": "instance",
+    "label": "Curator category registered-log",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/51",
+    "source_indices": [
+      6
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of output used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-retained-delivery",
+    "kind": "instance",
+    "label": "Curator category retained-delivery",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/48",
+    "source_indices": [
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of output used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-review-findings",
+    "kind": "instance",
+    "label": "Curator category review-findings",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/32",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of input used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-review-request",
+    "kind": "instance",
+    "label": "Curator category review-request",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/31",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of input used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-reviewed-change",
+    "kind": "instance",
+    "label": "Curator category reviewed-change",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/35",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of input used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-reviewed-correction",
+    "kind": "instance",
+    "label": "Curator category reviewed-correction",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/39",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of input used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-selected-dispatch",
+    "kind": "instance",
+    "label": "Curator category selected-dispatch",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/45",
+    "source_indices": [
+      4
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Selected read scope or configured session budget is required; inspection alone grants no execution authority.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-session-enabled-budget",
+    "kind": "instance",
+    "label": "Curator category session-enabled-budget",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/49",
+    "source_indices": [
+      5
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Authority"
+    ]
+  },
+  {
+    "definition": "Category of input used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-task-selection",
+    "kind": "instance",
+    "label": "Curator category task-selection",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/42",
+    "source_indices": [
+      0
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Category of output used by Curator; no actual receipt or runtime state is asserted.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:curator-source-validation-result",
+    "kind": "instance",
+    "label": "Curator category validation-result",
+    "location": "ONTOLOGY/modules/project/curator.jsonld#/@graph/30",
+    "source_indices": [
+      2
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Artifact"
+    ]
+  },
+  {
+    "definition": "Registry representation of Sys4AI depot at .. This record describes factual inventory only; it imports no internal vocabulary and grants no read, write or publication authority over that project.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:depot",
+    "kind": "instance",
+    "label": "Registered Sys4AI depot",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/29",
+    "source_indices": [
+      77
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Project"
+    ]
+  },
+  {
+    "definition": "The depot host has its local Director role",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:depot-has-director",
+    "kind": "relation",
+    "label": "The depot host has its local Director role",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/30",
+    "source_indices": [
+      59
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Every generated ontology wiki page is an Artifact.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:generated-wiki-page-artifact",
+    "kind": "relation",
+    "label": "Generated wiki page is an Artifact",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/88",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "The host frames project work and owns workspace registration and reusable adoption decisions; an activated Task manager owns its exact assigned execution.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:host-director",
+    "kind": "instance",
+    "label": "Sys4AI host Project Director",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/31",
+    "source_indices": [
+      16,
+      59
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Role"
+    ]
+  },
+  {
+    "definition": "Sys4AI host Project Director is defined by its selected source 1",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:host-director-defined-by-0",
+    "kind": "relation",
+    "label": "Sys4AI host Project Director is defined by its selected source 1",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/32",
+    "source_indices": [
+      16
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Sys4AI host Project Director is defined by its selected source 2",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:host-director-defined-by-1",
+    "kind": "relation",
+    "label": "Sys4AI host Project Director is defined by its selected source 2",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/33",
+    "source_indices": [
+      59
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Inspect or mutate the canonical project Task ledger using its current helper and exact actor, revision and execution gates.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-agent-task",
+    "kind": "instance",
+    "label": "Installed agent-task skill",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/34",
+    "source_indices": [
+      1
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "Retrieve current eligible project memory with source evidence and explicit limitations. Historical records grant no execution or publication authority.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-memory",
+    "kind": "instance",
+    "label": "Installed memory skill",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/35",
+    "source_indices": [
+      9
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "Resolve selected ontology definitions, capabilities and typed relationships without invoking discovered operations or granting authority.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-ontology",
+    "kind": "instance",
+    "label": "Installed ontology skill",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/36",
+    "source_indices": [
+      12
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "Route explicitly activated project Task work under the installed ownership and required-team gates. Mentioning a task does not activate this workflow.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-task",
+    "kind": "instance",
+    "label": "Installed task skill",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/37",
+    "source_indices": [
+      13
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "Discover user intent and create a managed TRD only through explicit to-trd activation. TRD creation does not create a Task or authorize implementation.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:installed-to-trd",
+    "kind": "instance",
+    "label": "Installed to-trd skill",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/38",
+    "source_indices": [
+      15
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Skill"
+    ]
+  },
+  {
+    "definition": "A confirmed Task manager coordinates its assigned governed Task",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:manager-manages-task",
+    "kind": "relation",
+    "label": "A confirmed Task manager coordinates its assigned governed Task",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/39",
+    "source_indices": [
+      69
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Project memory retrieval uses the shared capability meaning",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-capability-meaning",
+    "kind": "relation",
+    "label": "Project memory retrieval uses the shared capability meaning",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/40",
+    "source_indices": [
+      9
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "memory skill is defined by its installed SKILL.md",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-defined-by",
+    "kind": "relation",
+    "label": "memory skill is defined by its installed SKILL.md",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/41",
+    "source_indices": [
+      9
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "memory operations follow current installed source instructions",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-governed-by",
+    "kind": "relation",
+    "label": "memory operations follow current installed source instructions",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/42",
+    "source_indices": [
+      9
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "memory skill provides Project memory retrieval",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-provides",
+    "kind": "relation",
+    "label": "memory skill provides Project memory retrieval",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/43",
+    "source_indices": [
+      9
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "memory skill implements the shared MemoryRetrieval capability",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-provides-shared",
+    "kind": "relation",
+    "label": "memory skill implements the shared MemoryRetrieval capability",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/44",
+    "source_indices": [
+      9
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "The memory publisher requires reviewed record bytes and a current memory-only grant. It does not publish or redefine ontology semantics.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-publication-authority",
+    "kind": "instance",
+    "label": "Scoped memory publication authority",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/45",
+    "source_indices": [
+      10
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Authority"
+    ]
+  },
+  {
+    "definition": "Memory publication requires its own current grant",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-publish-requires-authority",
+    "kind": "relation",
+    "label": "Memory publication requires its own current grant",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/46",
+    "source_indices": [
+      10
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Project memory retrieval retrieves MemoryRecord",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:memory-retrieves",
+    "kind": "relation",
+    "label": "Project memory retrieval retrieves MemoryRecord",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/47",
+    "source_indices": [
+      9
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Project ontology retrieval uses the shared capability meaning",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-capability-meaning",
+    "kind": "relation",
+    "label": "Project ontology retrieval uses the shared capability meaning",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/48",
+    "source_indices": [
+      12
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "ontology skill is defined by its installed SKILL.md",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-defined-by",
+    "kind": "relation",
+    "label": "ontology skill is defined by its installed SKILL.md",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/49",
+    "source_indices": [
+      12
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "ontology operations follow current installed source instructions",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-governed-by",
+    "kind": "relation",
+    "label": "ontology operations follow current installed source instructions",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/50",
+    "source_indices": [
+      12
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "ontology skill provides Project ontology retrieval",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides",
+    "kind": "relation",
+    "label": "ontology skill provides Project ontology retrieval",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/51",
+    "source_indices": [
+      12
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Declared ontology, memory, Task, TRD, plan, role, Template and setup helper boundaries validate semantic conditions and current authority before their owning mutation.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-guards",
+    "kind": "relation",
+    "label": "Ontology skill provides Guarded helper dispatch",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/84",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Finite type and declared property inference from approved premises, with inspectable derivations, exact versions, and conflict/incomplete diagnostics.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-inference",
+    "kind": "relation",
+    "label": "Ontology skill provides Formal ontology inference",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/78",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "A native agent generates attributed candidates from explicitly selected inputs, with validation, directed revision, exact review, and separately authorized publication.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-proposals",
+    "kind": "relation",
+    "label": "Ontology skill provides Sourced ontology proposals",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/82",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "A selected local embedding model ranks approved ontology records; similarity grants neither identity equivalence nor authority.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-semantic",
+    "kind": "relation",
+    "label": "Ontology skill provides Semantic ontology retrieval",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/80",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "ontology skill implements the shared OntologyRetrieval capability",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-shared",
+    "kind": "relation",
+    "label": "ontology skill implements the shared OntologyRetrieval capability",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/52",
+    "source_indices": [
+      12
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Project-local RDF datasets, read-only SPARQL queries, loss-aware interchange, and SHACL validation using the separately selected pinned standards backend.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-standards",
+    "kind": "relation",
+    "label": "Ontology skill provides Local RDF SPARQL SHACL",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/76",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "A local browser service searches definitions, inspects relationships and derivations, preserves draft revisions, reviews diffs, and publishes through the same guarded interfaces.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-provides-workbench",
+    "kind": "relation",
+    "label": "Ontology skill provides Ontology visual workbench",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/86",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "A current local Director or confirmed Task manager may publish only an exact reviewed ontology change within its granted scope. Validation and memory publication grants do not provide this authority.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-publication-authority",
+    "kind": "instance",
+    "label": "Scoped ontology publication authority",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/53",
+    "source_indices": [
+      59,
+      73
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Authority"
+    ]
+  },
+  {
+    "definition": "Ontology publication requires its own reviewed grant",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-publish-requires-authority",
+    "kind": "relation",
+    "label": "Ontology publication requires its own reviewed grant",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/54",
+    "source_indices": [
+      73
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Project ontology retrieval retrieves OntologyConcept",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-retrieves",
+    "kind": "relation",
+    "label": "Project ontology retrieval retrieves OntologyConcept",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/55",
+    "source_indices": [
+      12
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "The rebuildable ONTOLOGY/WIKI/INDEX.md is a generated ontology wiki page.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ontology-wiki-index",
+    "kind": "instance",
+    "label": "Generated ontology wiki index",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/89",
+    "source_indices": [
+      74
+    ],
+    "types": [
+      "urn:sys4ai:ontology:project:sys4ai-depot:GeneratedWikiPage"
+    ]
+  },
+  {
+    "definition": "An ordinary child performs one bounded assignment and returns evidence; it has no canonical Task, role-index or shared publication ownership.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child",
+    "kind": "instance",
+    "label": "Sys4AI ordinary project sub-agent role",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/56",
+    "source_indices": [
+      66,
+      67
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Role"
+    ]
+  },
+  {
+    "definition": "Sys4AI ordinary project sub-agent role is defined by its selected source 1",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child-defined-by-0",
+    "kind": "relation",
+    "label": "Sys4AI ordinary project sub-agent role is defined by its selected source 1",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/57",
+    "source_indices": [
+      66
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Sys4AI ordinary project sub-agent role is defined by its selected source 2",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:ordinary-child-defined-by-1",
+    "kind": "relation",
+    "label": "Sys4AI ordinary project sub-agent role is defined by its selected source 2",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/58",
+    "source_indices": [
+      67
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Registry representation of Sys4AI Template Project at Projects/Sys4AI-Template-Project. This record describes factual inventory only; it imports no internal vocabulary and grants no read, write or publication authority over that project.",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:registered-template",
+    "kind": "instance",
+    "label": "Registered Sys4AI Template Project",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/59",
+    "source_indices": [
+      77
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:ProjectTemplate"
+    ]
+  },
+  {
+    "definition": "The registry describes Sys4AI depot",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:registry-describes-depot",
+    "kind": "relation",
+    "label": "The registry describes Sys4AI depot",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/60",
+    "source_indices": [
+      77
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "The registry describes Sys4AI Template Project",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:registry-describes-registered-template",
+    "kind": "relation",
+    "label": "The registry describes Sys4AI Template Project",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/61",
+    "source_indices": [
+      77
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Governed Task management uses the shared capability meaning",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:task-capability-meaning",
+    "kind": "relation",
+    "label": "Governed Task management uses the shared capability meaning",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/62",
+    "source_indices": [
+      13
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "task skill is defined by its installed SKILL.md",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:task-defined-by",
+    "kind": "relation",
+    "label": "task skill is defined by its installed SKILL.md",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/63",
+    "source_indices": [
+      13
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "task operations follow current installed source instructions",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:task-governed-by",
+    "kind": "relation",
+    "label": "task operations follow current installed source instructions",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/64",
+    "source_indices": [
+      13
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "task skill provides Governed Task management",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:task-provides",
+    "kind": "relation",
+    "label": "task skill provides Governed Task management",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/65",
+    "source_indices": [
+      13
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "task skill implements the shared TaskManagement capability",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:task-provides-shared",
+    "kind": "relation",
+    "label": "task skill implements the shared TaskManagement capability",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/66",
+    "source_indices": [
+      13
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Template vocabulary derives from the selected reusable core source",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:template-derives-core",
+    "kind": "relation",
+    "label": "Template vocabulary derives from the selected reusable core source",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/67",
+    "source_indices": [
+      18,
+      78
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "Template distribution follows the explicit reusable source mapping",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:template-derives-mapping",
+    "kind": "relation",
+    "label": "Template distribution follows the explicit reusable source mapping",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/68",
+    "source_indices": [
+      78
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "TRD creation uses the shared capability meaning",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-capability-meaning",
+    "kind": "relation",
+    "label": "TRD creation uses the shared capability meaning",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/69",
+    "source_indices": [
+      15
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "to-trd skill is defined by its installed SKILL.md",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-defined-by",
+    "kind": "relation",
+    "label": "to-trd skill is defined by its installed SKILL.md",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/70",
+    "source_indices": [
+      15
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "to-trd operations follow current installed source instructions",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-governed-by",
+    "kind": "relation",
+    "label": "to-trd operations follow current installed source instructions",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/71",
+    "source_indices": [
+      15
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "TRD creation produces a requirements document",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-produces",
+    "kind": "relation",
+    "label": "TRD creation produces a requirements document",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/72",
+    "source_indices": [
+      15
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "to-trd skill provides TRD creation",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-provides",
+    "kind": "relation",
+    "label": "to-trd skill provides TRD creation",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/73",
+    "source_indices": [
+      15
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  },
+  {
+    "definition": "to-trd skill implements the shared TRDCreation capability",
+    "id": "urn:sys4ai:ontology:project:sys4ai-depot:to-trd-provides-shared",
+    "kind": "relation",
+    "label": "to-trd skill implements the shared TRDCreation capability",
+    "location": "ONTOLOGY/modules/project/project.jsonld#/@graph/74",
+    "source_indices": [
+      15
+    ],
+    "types": [
+      "urn:sys4ai:ontology:core:Relationship"
+    ]
+  }
+]

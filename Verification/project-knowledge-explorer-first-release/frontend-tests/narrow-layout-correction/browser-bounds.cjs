@@ -1,0 +1,33 @@
+// Real production browser checks. Private launch URL never enters diagnostics.
+const fs=require('node:fs');
+const {chromium}=require('/Users/alex.omegapy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const metadata=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
+let browser,context,page,phase='private_file',checks=[],http=[],errors=0,remote=0,csp=[];
+const need=(ok,code)=>{if(!ok){const error=new Error();error.safeCode=code;throw error;}};
+const pass=(name,details={})=>checks.push({name,status:'passed',...details});
+process.once('SIGTERM',()=>void(async()=>{try{await browser?.close();}catch{}process.exit(2);})());
+(async()=>{
+ let report;
+ try {
+  const fd=fs.openSync(metadata.private_file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let entry;try{const st=fs.fstatSync(fd);need(st.isFile()&&st.nlink===1&&st.size<=8192&&(st.mode&0o777)===0o600,'private_file');entry=JSON.parse(fs.readFileSync(fd,'utf8'));}finally{fs.closeSync(fd);}
+  need(new URL(entry.url).origin===metadata.origin,'origin');
+  browser=await chromium.launch({executablePath:'/Users/alex.omegapy/Library/Caches/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-mac-arm64/chrome-headless-shell',headless:true,args:['--disable-background-networking','--disable-component-update','--no-first-run']});
+  need(browser.version()==='151.0.7922.34','admitted_browser_version');context=await browser.newContext({viewport:{width:1360,height:900}});
+  await context.route('**/*',route=>{if(new URL(route.request().url()).origin!==metadata.origin){remote++;return route.abort();}return route.continue();});
+  await context.addInitScript(()=>{window.__csp=[];document.addEventListener('securitypolicyviolation',event=>window.__csp.push({directive:event.effectiveDirective,blocked:event.blockedURI==='inline'?'inline':'resource'}));});
+  page=await context.newPage();page.setDefaultTimeout(8000);page.on('pageerror',()=>errors++);page.on('response',r=>{const operation=new URL(r.url()).pathname.split('/').pop();if(['session','session-resume','context','search','entry','relationships','neighborhood','source'].includes(operation))http.push({operation,status:r.status()});});
+  phase='bootstrap';const response=await page.goto(entry.url+'&route='+encodeURIComponent(metadata.desired_route),{waitUntil:'domcontentloaded',timeout:15000});entry=null;
+  await page.waitForFunction(()=>!location.hash.includes('bootstrap='));await page.getByRole('heading',{name:metadata.project_name,exact:true}).waitFor();
+  need(!page.url().includes('bootstrap='),'fragment');need(await page.getByRole('navigation',{name:'Reading destinations'}).getByRole('link').count()===4,'four_destinations');
+  need(await page.locator('canvas').count()===0,'lazy_initial_map');pass('bootstrap_overview_four_reading_destinations_lazy_graph');
+  phase='bounded_map';await page.locator('.cards a').first().click();await page.locator('.entry .exact-text').waitFor();await page.getByRole('button',{name:'View on map',exact:true}).click();await page.locator('.relationship-rows>li').first().waitFor();await page.getByRole('button',{name:'Map',exact:true}).click();await page.waitForFunction(()=>!!document.querySelector('.map-canvas')?._cyreg?.cy);need(await page.locator('.node-list>li').count()<=5,'initial_node_policy');let pages=1;
+  while(await page.getByRole('button',{name:'Continue connections',exact:true}).count()){const reads=await page.locator('.model-summary .scope').count();await page.getByRole('button',{name:'Continue connections',exact:true}).click();await page.waitForFunction(count=>document.querySelectorAll('.model-summary .scope').length>count,reads);need(++pages<20,'bounded_expansion_progress');}
+  need(await page.locator('.node-list>li').count()<=10&&await page.locator('.relationship-rows>li').count()<=12,'cumulative_model_bounds');await page.getByRole('button',{name:'Reset returned scope and read remaining page',exact:true}).waitFor();const idsBefore=await page.locator('.relationship-rows>li').evaluateAll(nodes=>nodes.map(x=>x.dataset.relationId));await page.getByRole('button',{name:'Reset returned scope and read remaining page',exact:true}).click();await page.waitForFunction(()=>document.querySelectorAll('.model-summary .scope').length===1);need(await page.locator('.relationship-rows>li').count()>0,'retry_page_retained');pass('high_degree_continuation_stops_at_tighter_display_budget_and_rereads_unconsumed_page',{pages});
+  phase='canvas_loss';await page.locator('.map-canvas canvas').first().evaluate(canvas=>canvas.dispatchEvent(new Event('contextlost',{bubbles:false})));await page.getByText('The visual map is unavailable.',{exact:false}).waitFor();need(await page.locator('.relationship-rows>li').count()>0,'canvas_loss_list');await page.getByRole('button',{name:'Retry map',exact:true}).click();await page.waitForFunction(()=>!!document.querySelector('.map-canvas')?._cyreg?.cy);pass('lost_canvas_disposes_renderer_and_retry_keeps_list_model');
+  phase='layout_deadline';const failed=await context.newPage();await failed.addInitScript(()=>{let clock=0;Object.defineProperty(performance,'now',{value:()=>clock+=301});});await failed.goto(metadata.origin+'/#/p/explorer-bounds/map/'+encodeURIComponent('urn:sys4ai:ontology:project:explorer-bounds:entry-00000'),{waitUntil:'domcontentloaded'});await failed.getByText('The visual map is unavailable.',{exact:false}).waitFor();need(await failed.locator('.relationship-rows>li').count()>0,'deadline_list');need(await failed.locator('canvas').count()===0,'deadline_no_simulation');await failed.close();pass('injected_layout_deadline_refuses_visual_layout_and_keeps_list');
+  csp=await page.evaluate(()=>window.__csp);need(errors===0&&remote===0,'browser_errors');need(csp.length===0,'csp_violations');
+  report={status:'passed',browser:browser.version(),checks,http,page_errors:errors,nonlocal_requests:remote,csp_violations:csp,qualification:'Actual isolated headless Chrome production frontend. No OS dispatch, VoiceOver or human usability claim.'};
+ } catch(error){let clean=false;try{clean=await page?.evaluate(()=>!location.hash.includes('bootstrap='));if(clean)csp=await page.evaluate(()=>window.__csp);}catch{}report={status:'failed',phase,reason:error.safeCode||'browser_operation_failed',checks,http,page_errors:errors,nonlocal_requests:remote,fragment_removed:clean,csp_violations:csp,qualification:'Raw navigation errors, URLs, headers and credentials suppressed.'};}
+ finally{try{await context?.close();}catch{}try{await browser?.close();}catch{}}
+ console.log(JSON.stringify(report));process.exitCode=report.status==='passed'?0:1;
+})().catch(()=>{console.log(JSON.stringify({status:'failed',reason:'runner_failed',phase}));process.exitCode=1;});

@@ -1,0 +1,59 @@
+{
+  "kind": "manager-P1-receipt-order-review",
+  "state": "passed_for_host_assessment",
+  "packet": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-order-corrected/scope.packet.json",
+    "sha256": "4ef1943e647a826d0ec1de7853b5e99ddd6a844e083c7e4145bb1d884c58d26d"
+  },
+  "canonical_sha256": "5683806a66716d9a6c4401b7287501cc363e7b7e928d830a8b13bfb0855d03b8",
+  "evidence": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-order-corrected/index.json",
+    "sha256": "8c569a11adf7190a25a70767bba715ac34848d0981f750f640ee52bd1a61b220"
+  },
+  "bindings": {
+    "sources": 42,
+    "execution_sources": 80,
+    "verify_packet": "passed",
+    "changed_sources": [
+      "SKILLS-depo/curate/tests/test_broker.py",
+      "SKILLS-depo/curate/tests/test_native_protocol.py",
+      "Verification/project-curator-release/run-native-proof.py"
+    ],
+    "broker_implementation": "unchanged",
+    "bounds": "unchanged",
+    "sequence": "only steps7/8 reordered;61 total",
+    "instruction_effective_paths": "exact ordered full bound list",
+    "prior_ids": 8
+  },
+  "independent_tests": [
+    {
+      "name": "manager-owner-order",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-order-corrected/manager-owner-order-manager.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-order-corrected/manager-owner-order-manager.stderr",
+        "sha256": "118946b98bc38f89110554e2c2bcce38f21f31aa5ee91d53cb04cdbdfcfd2f5d"
+      }
+    },
+    {
+      "name": "order-and-denial",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-order-corrected/order-and-denial-manager.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-order-corrected/order-and-denial-manager.stderr",
+        "sha256": "0c6dcc59e2cb8628645bb36af60bac05562fb84b3b6bc8225e0a18f51a5eb702"
+      }
+    }
+  ],
+  "native_operations": 0,
+  "limitations": [
+    "Both previous P1 attempts remain blocked.",
+    "No retry authorization; full native/category and foundation remain incomplete."
+  ]
+}

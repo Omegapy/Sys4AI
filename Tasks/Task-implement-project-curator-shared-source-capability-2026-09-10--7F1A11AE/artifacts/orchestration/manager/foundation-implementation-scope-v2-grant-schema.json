@@ -1,0 +1,24 @@
+{
+  "kind": "manager_bounded_assignment_dependency_adjustment",
+  "acceptance_id": "foundation_acceptance_v2",
+  "target_unchanged": true,
+  "additional_write": "CURATION-depo/schema/grant-v1.json",
+  "baseline_snapshot": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/frozen-foundation-r2-grant-v1.json",
+    "sha256": "5d54f14e51c9052c039e59aa36f9b135a71a84f7b16de788ae08e7b0b6902caf"
+  },
+  "reason": "Accepted native protocol/live-call v2 requires an explicit nested call-v2 schema alternative. The current strict legacy eight-field call schema would reject that accepted implementation. The original outer and legacy branch semantics remain unchanged; unknown and mixed forms must fail. This path is already within the current foundation baseline writes; proposal explicitly permits adjusted manager assignment for required paths.",
+  "checks": [
+    "Valid legacy call remains accepted with its exact shape.",
+    "Valid explicit call schema_version2 binds broker run, actor connection/load epoch/kernel and frame locator.",
+    "Malformed, unknown and mixed legacy/v2 fields fail before any mutation."
+  ],
+  "additional_current_source_findings": [
+    {
+      "source": "SKILLS-depo/agent-task/scripts/native_observations.py",
+      "observed_sha256": "5df6bd9facd68f2b7fcf8cafc0620f83cd4410dddb5011adf0b4efcb2d336ac3",
+      "reproduction": "A complete v2 observation with kind={} raises TypeError at set membership; TransportAuthorityV2.capture with a structurally complete callback and id={} raises TypeError at pending-key lookup. Both synthetic in-memory probes only.",
+      "required_fix": "Validate discriminator and request-id types before hash/set operations; return bounded NativeError and include meaningful v2 malformed-input tests. Existing accepted strict malformed-input criteria unchanged."
+    }
+  ]
+}

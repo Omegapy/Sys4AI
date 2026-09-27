@@ -1,0 +1,503 @@
+{
+  "schema_version": 1,
+  "task_id": "TASK-20260910-7F1A11AE",
+  "subtask_id": "foundation_native",
+  "assignment_id": "foundation_reviewer_b",
+  "reviewer": "/root/curator_manager/foundation_reviewer_b",
+  "round": 2,
+  "generation": 1,
+  "created_at": "2026-09-11T05:53:52.949840+00:00",
+  "outcome": "passed",
+  "review_level": "implementation_design_only",
+  "summary": "The revised candidate addresses all 21 mandatory design criteria with a concrete versioned native-fork and per-actor runtime mechanism. No mandatory contradiction, omitted criterion, invented required protocol field or unauthorized implementation scope expansion was found. This pass does not establish runtime feasibility or any native/publication/confinement pass.",
+  "binding": {
+    "baseline": {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/baseline_5f5b585a11fb163884395a7b285d26a5276d64dd19dd6293a6c81b7ca4621d7b.json",
+      "sha256": "5f5b585a11fb163884395a7b285d26a5276d64dd19dd6293a6c81b7ca4621d7b"
+    },
+    "common_context": {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-r2-common-context.json",
+      "sha256": "4094635338a3b5967b902604280cc23796b0115b628cd19fd79256c4b9e2e5a2"
+    },
+    "candidate": {
+      "candidate_id": "foundation_b_v2",
+      "artifact_id": "foundation_candidate_b_v2",
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v2.md",
+      "sha256": "77a70a83140d280db7488639b460dbf25e2a3ef40895f1af1a21a271cf9d72ae",
+      "producer": "foundation_solver_b"
+    },
+    "criteria": {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_criteria_b_v2.json",
+      "sha256": "3ab5a08430cf9c5ae0d27740df45f14b3946138d369cb4a294b188c56d112819"
+    },
+    "input_packet": {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/foundation_reviewer_b-r2-input-payload.json",
+      "sha256": "b03fbd5139b59b3e95d2d1e532e5b3b57a92801c56a37b5715c058544cf6d27e"
+    },
+    "assignment_observation": {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/task.json",
+      "revision": 91,
+      "sha256": "b1494eac2975a2360db16d3a7a5930feb0ae43366169289c4dbf33d35dc4b75c"
+    }
+  },
+  "role_reads": {
+    "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+    "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+  },
+  "role_read_confirmation": "All three sources reopened completely and exact digests returned to manager after round-2 activation. Original role pair and inherited settings preserved.",
+  "mandatory_findings": [],
+  "criteria": [
+    {
+      "id": "FND-01",
+      "criterion": "Neutral starter has no live identity/branch set, standing grant, schedule or autonomous-write permission.",
+      "plan_task": "TASK-005",
+      "design_outcome": "passed",
+      "assessment": "Neutral identity, selection, branch, entitlement, schedule and autonomous-write defaults are preserved.",
+      "candidate_lines": [
+        34,
+        36
+      ],
+      "required_verification": "policy/classification source and existing reported F-POLICY",
+      "retained_checkpoint_state": "passed",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-02",
+      "criterion": "Missing, malformed, expired or incompatible selections produce precise unavailable/blocked diagnostics.",
+      "plan_task": "TASK-005",
+      "design_outcome": "passed",
+      "assessment": "Strict read-only diagnostics remain; storage/authentication, epoch and unsupported-bound failures are explicitly named.",
+      "candidate_lines": [
+        36,
+        38
+      ],
+      "required_verification": "F-POLICY, F-PROTOCOL regression",
+      "retained_checkpoint_state": "passed",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-03",
+      "criterion": "Project specialization is capability-only; standing entitlements remain absent until deliberately accepted at adoption.",
+      "plan_task": "TASK-005",
+      "design_outcome": "passed",
+      "assessment": "Capability-only specialization and prior protected acceptance remain distinct from operational authority.",
+      "candidate_lines": [
+        36,
+        38
+      ],
+      "required_verification": "F-POLICY regression",
+      "retained_checkpoint_state": "passed",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-04",
+      "criterion": "AGENTS.md, README sections, generated wiki and Task responses have distinct owners and update routes.",
+      "plan_task": "TASK-006",
+      "design_outcome": "passed",
+      "assessment": "The exact AGENTS, README section, generated wiki and Task-history routes remain with their existing owners.",
+      "candidate_lines": [
+        40,
+        40
+      ],
+      "required_verification": "F-CLASS regression",
+      "retained_checkpoint_state": "passed",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-05",
+      "criterion": "Overrides, generators, stable identities and protected sections resolve conservatively; unknown/mixed targets hold unsafe edits.",
+      "plan_task": "TASK-006",
+      "design_outcome": "passed",
+      "assessment": "Stable identity, source/section bindings, protected classification floor and ambiguous-target holds are retained; actual profile proof remains pending.",
+      "candidate_lines": [
+        40,
+        40
+      ],
+      "required_verification": "F-CLASS and NP-011/012",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-06",
+      "criterion": "Grants bind actor/project/branch/policy/source/payload/scope/owner and freshness; valid standing entitlements avoid redundant approval.",
+      "plan_task": "TASK-007",
+      "design_outcome": "passed",
+      "assessment": "Exact grants and accepted standing entitlements are preserved; new calls bind the current connection/load epoch without changing old grant meaning.",
+      "candidate_lines": [
+        38,
+        44
+      ],
+      "required_verification": "F-BROKER, F-POLICY and owner regression",
+      "retained_checkpoint_state": "passed",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-07",
+      "criterion": "Candidate-controlled code and environment cannot alter broker policy, credentials or effective approval logic.",
+      "plan_task": "TASK-007",
+      "design_outcome": "passed",
+      "assessment": "Protected runtime cwd/config/imports, per-actor companions and enforced tool profiles keep approving code outside candidate control by design; native enforcement remains a required gate.",
+      "candidate_lines": [
+        42,
+        44
+      ],
+      "required_verification": "NP-010/011/012, helper-state isolation",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-08",
+      "criterion": "Broker routes canonical mutations to their existing helper owners and rejects arbitrary shell instructions.",
+      "plan_task": "TASK-007",
+      "design_outcome": "passed",
+      "assessment": "Existing canonical helpers remain the publishers. New runtime controls are finite and event-specific; no raw shell, configuration or protocol proxy is introduced.",
+      "candidate_lines": [
+        42,
+        44
+      ],
+      "required_verification": "F-BROKER/F-TASK/F-MEMORY/F-ONTOLOGY",
+      "retained_checkpoint_state": "passed",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-09",
+      "criterion": "Caller identity comes from the trusted native request envelope and current manager binding, not an actor string in model arguments; workers cannot read private grants or broker credentials.",
+      "plan_task": "TASK-007",
+      "design_outcome": "passed",
+      "assessment": "Protocol v2 separates broker run, connection, kernel process identity, thread/session and load epoch; actual transport creates live authority. Serialized observations and caller arguments cannot authenticate.",
+      "candidate_lines": [
+        88,
+        119
+      ],
+      "required_verification": "NP-009/010/011 and broker negative cases",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-10",
+      "criterion": "One controller/charter is selected per execution; reading a charter does not activate it.",
+      "plan_task": "TASK-008",
+      "design_outcome": "passed",
+      "assessment": "One selected charter/controller and Director default remain explicit; reading a charter neither activates it nor transfers an owner.",
+      "candidate_lines": [
+        44,
+        46
+      ],
+      "required_verification": "F-ROLE and NP-002/003",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-11",
+      "criterion": "Specialist responsibilities, qualifications, role reads, scope and stopping rules are explicit; generic Director use and category rules are preserved.",
+      "plan_task": "TASK-008",
+      "design_outcome": "passed",
+      "assessment": "The qualified source role pairs, fresh catalog/fit checks, exact role reads, skill/tool checks and complete category rules are preserved.",
+      "candidate_lines": [
+        44,
+        46
+      ],
+      "required_verification": "F-ROLE and NP-003/004/005/006",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-12",
+      "criterion": "New provenance is schema-versioned and validated; historical records retain bytes/meaning and unknown fields are rejected.",
+      "plan_task": "TASK-009",
+      "design_outcome": "passed",
+      "assessment": "Explicit Task/protocol/observation/live-call version tuples retain legacy validation and history. Actual forkedFromId is not relabeled as AgentControl parentage or a collaboration receipt.",
+      "candidate_lines": [
+        86,
+        119
+      ],
+      "required_verification": "F-TASK plus delivery/conflict/reconciliation version matrix",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-13",
+      "criterion": "Curator bootstrap reserves exactly one manager, activates only the real receipt identity and relinquishes canonical Task writing.",
+      "plan_task": "TASK-009",
+      "design_outcome": "passed",
+      "assessment": "A current canonical reservation precedes the actual fork request. Authentic creation correlation, metadata and child acknowledgement precede manager activation and sole-writer transfer.",
+      "candidate_lines": [
+        50,
+        69
+      ],
+      "required_verification": "NP-003/008 and stale/duplicate/unreserved denial",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-14",
+      "criterion": "Existing record/configuration schemas keep their meaning; any changed grant envelope has explicit version dispatch.",
+      "plan_task": "TASK-010",
+      "design_outcome": "passed",
+      "assessment": "Existing owner record/config and grant envelopes retain meaning; their new nested protocol version is dispatched explicitly and unsupported combinations fail.",
+      "candidate_lines": [
+        88,
+        119
+      ],
+      "required_verification": "F-MEMORY/F-ONTOLOGY compatibility regression",
+      "retained_checkpoint_state": "passed",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-15",
+      "criterion": "Only the current confirmed manager with exact operation scope can publish Curator knowledge; ordinary workers and forged provenance fail.",
+      "plan_task": "TASK-010",
+      "design_outcome": "passed",
+      "assessment": "Only the current loaded manager/channel/epoch with exact Task generation, writer, role reads, source/payload/config and independent owner grant can publish. Older epochs and ordinary workers remain rejected.",
+      "candidate_lines": [
+        113,
+        119
+      ],
+      "required_verification": "NP-009 and actor/epoch/payload/source negatives",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-16",
+      "criterion": "Activation, manager/child discovery, supervision, interrupt and resume observations are mapped without forging collaboration receipts.",
+      "plan_task": "TASK-011",
+      "design_outcome": "passed",
+      "assessment": "Event-specific delivery, conflict, observation, interruption, release and resume replace the current generic status-receipt conversion. Resume preserves the native ID and uses actual thread/resume.",
+      "candidate_lines": [
+        101,
+        135
+      ],
+      "required_verification": "F-PROTOCOL and NP-001/003/008",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-17",
+      "criterion": "Effective model/effort and independent contexts are checked; missing capabilities hold work.",
+      "plan_task": "TASK-011",
+      "design_outcome": "passed",
+      "assessment": "Parent model/effort are explicitly propagated before fork creation, then compared with actual responses and loaded metadata. Identical completed history cuts and full input bytes are separately checked. Missing capability holds work.",
+      "candidate_lines": [
+        54,
+        84
+      ],
+      "required_verification": "NP-007 and mismatch/cross-state negative cases",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-18",
+      "criterion": "Real observations establish identities, reservation-before-launch, one canonical writer, full required teams, settings inheritance and isolated solver input.",
+      "plan_task": "TASK-012",
+      "design_outcome": "passed",
+      "assessment": "Stage 1 is clearly a narrow mechanism diagnostic. Full generic/complex/extra-complex teams, manager acceptance, dedicated implementation, isolated inputs and actual publications remain mandatory in the complete NP proof.",
+      "candidate_lines": [
+        174,
+        187
+      ],
+      "required_verification": "NP-002 through NP-009",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-19",
+      "criterion": "Capacity queuing preserves every required agent; uncertain or absent observations are named non-passes.",
+      "plan_task": "TASK-012",
+      "design_outcome": "passed",
+      "assessment": "Local admission counts creating/loaded/unloading/uncertain runtimes; verified targeted runtime/helper closure may release only that local slot. Native IDs and queued roles persist, and uncertainty remains occupied.",
+      "candidate_lines": [
+        121,
+        143
+      ],
+      "required_verification": "capacity/load-epoch regression and NP-007/008",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-20",
+      "criterion": "Candidate writes to trusted policy/broker, canonical ledgers, control records, grants and credentials are denied by the enforced boundary.",
+      "plan_task": "TASK-013",
+      "design_outcome": "passed",
+      "assessment": "Candidate read/write denial includes trusted runtime/helper/config/private/canonical storage and all exposed native channels. Paired positive/negative actual enforcement and final canary checks remain mandatory.",
+      "candidate_lines": [
+        137,
+        145
+      ],
+      "required_verification": "NP-010/012 paired positive/negative cases",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    },
+    {
+      "id": "FND-21",
+      "criterion": "Malicious branch/diff/note/config, process execution and broker-request cases cannot gain authority or bypass publication.",
+      "plan_task": "TASK-013",
+      "design_outcome": "passed",
+      "assessment": "The original malicious content, policy, grant, process, path, import and network cases remain, with added intrinsic control and helper-state probes tied to actual execution arguments/results.",
+      "candidate_lines": [
+        137,
+        145
+      ],
+      "required_verification": "NP-011/012 and current final-source repetition",
+      "retained_checkpoint_state": "blocked",
+      "new_runtime_proof": "not_run"
+    }
+  ],
+  "mechanism_assessments": [
+    {
+      "topic": "Real native creation and lineage",
+      "design_outcome": "passed",
+      "assessment": "The pinned ThreadForkParams supports threadId, the mutually exclusive cut fields, model, config, cwd, permissions and runtimeWorkspaceRoots. It does not expose a direct effort or allowProviderModelFallback field; the candidate uses the supported config override for effort and explicitly does not invent the absent fields. The tagged fork constructor records forked_from_thread_id separately from parent_thread_id. The candidate preserves that distinction in a new dialect. Tagged source is supporting evidence only.",
+      "candidate_lines": [
+        19,
+        29,
+        54,
+        69,
+        88,
+        99
+      ],
+      "sources": [
+        "manager/native-route-r2-inputs/schemas/ThreadForkParams.json#/properties",
+        "manager/native-route-r2-inputs/schemas/ThreadReadResponse.json#/definitions/Thread",
+        "manager/native-route-r2-inputs/upstream/app-server/src/request_processors/thread_processor.rs:4687-4990",
+        "manager/native-route-r2-inputs/upstream/core/src/thread_manager.rs:1354-1401"
+      ]
+    },
+    {
+      "topic": "Actual settings and no fallback",
+      "design_outcome": "passed",
+      "assessment": "Thread/read loaded model and reasoningEffort fields describe configured settings, not per-turn telemetry. The design binds these precreation observations, compares fork response and loaded metadata, denies mismatch rather than repairing it, and still requires actual unavailable-model/fallback proof. StartThreadOptions defaults allow_provider_model_fallback to false and the tagged fork uses that constructor; this is not a pinned-binary proof. The required gate remains unproven.",
+      "candidate_lines": [
+        21,
+        24,
+        58,
+        63,
+        174,
+        183
+      ],
+      "sources": [
+        "manager/native-route-r2-inputs/schemas/ThreadReadResponse.json#/definitions/Thread/properties/model",
+        "manager/native-route-r2-inputs/schemas/ThreadReadResponse.json#/definitions/Thread/properties/reasoningEffort",
+        "manager/native-route-r2-inputs/upstream/core/src/thread_manager.rs:246-263,1388-1401",
+        "manager/native-route-r2-inputs/upstream/core/src/session/mod.rs:704-718"
+      ]
+    },
+    {
+      "topic": "Persistence and existing account reuse",
+      "design_outcome": "passed_with_required_unproven_gate",
+      "assessment": "The candidate correctly identifies persisted source history as a prerequisite and selects test-owned protected storage without guessing a relocation key. It requires non-model verification of the exact storage and existing supported account reuse, forbids credential copying/symlinking/reconstruction, user-task creation, new provider/login and silent normal-store fallback, and supplies named failures before charged work. The supplied packet establishes no successful storage/account combination. The route is a coherent conditional design, not a feasibility claim.",
+      "candidate_lines": [
+        71,
+        84,
+        172,
+        183
+      ],
+      "sources": [
+        "manager/native-route-r2-inputs/upstream/app-server/src/request_processors/thread_processor.rs:4723-4809",
+        "manager/native-route-r2-inputs/host-fork-route-assessment.md#Conditions for the next reviewed diagnostic"
+      ]
+    },
+    {
+      "topic": "Independent input and helper state",
+      "design_outcome": "passed",
+      "assessment": "Both initial solvers use the same completed source cut and complete actual history/input digest. The candidate requires complete supported history reads without deleting model-visible differences, and separate actor-owned companions with real fixed-program store/load probes, cross-actor denial and reset-on-resume tests. Intrinsic peer/control routes remain disabled and tested through all exposed channels. No model self-report or artifact echo is accepted as execution proof.",
+      "candidate_lines": [
+        54,
+        69,
+        137,
+        145
+      ]
+    },
+    {
+      "topic": "Per-actor release, native unsubscribe and provider completion",
+      "design_outcome": "passed",
+      "assessment": "The candidate explicitly distinguishes interrupt/turn outcome, unsubscribe, native loaded state, verified runtime/helper process termination, owner reconciliation, broker authority closure and local admission release. Tagged unsubscribe only removes a subscription. Verified actor-owned process absence can free the selected local runtime slot while preserving the native identity; it does not prove remote provider completion or billing cancellation. Uncertain descendants or process identity prohibit release. A fresh runtime uses actual same-ID resume with a new load epoch, without a new fork disguised as resume.",
+      "candidate_lines": [
+        121,
+        143
+      ],
+      "sources": [
+        "manager/native-route-r2-inputs/upstream/app-server/src/request_processors/thread_processor.rs:998-1037",
+        "manager/native-route-r2-inputs/schemas/ThreadUnsubscribeResponse.json",
+        "manager/native-route-r2-inputs/schemas/ThreadResumeParams.json"
+      ]
+    },
+    {
+      "topic": "Owner compatibility and typed receipts",
+      "design_outcome": "passed",
+      "assessment": "The design addresses actual current incompatibilities: scalar receipt_sequence currently becomes a status notification, receipt() cannot represent an outbound fork response, native session binding assumes one connection, and unsolicited started identities enter the control map. Its explicit protocol-v2, per-connection/load-epoch pool and event-specific frame decoding cover creation, inputs, conflicts, reconciliation, resume and independent publisher guards, with old branches preserved.",
+      "candidate_lines": [
+        27,
+        30,
+        86,
+        119,
+        149,
+        168
+      ],
+      "sources": [
+        "manager/native-route-r2-inputs/current-source/SKILLS-depo/curate/scripts/curator_broker.py:233-300",
+        "manager/native-route-r2-inputs/current-source/SKILLS-depo/curate/scripts/curator_runtime_codex.py:339-340,518-552",
+        "manager/native-route-r2-inputs/current-source/SKILLS-depo/agent-task/scripts/native_observations.py:50-90"
+      ]
+    },
+    {
+      "topic": "Scope and honest bounds",
+      "design_outcome": "passed",
+      "assessment": "The new proof packet must be independently materialized and assessed by the host. Stage 1 states twelve broker turn/start requests, twenty minutes, three loaded/creating runtimes and fixed I/O/stop limits as local selected bounds, not provider calls/tokens or host collaboration capacity. Production model_calls semantics remain unchanged and unsupported hard bounds block the relevant mode. The narrow diagnostic does not include real project publication and cannot replace full NP-001 through NP-014, independent memory/ontology grants or final-source repetition.",
+      "candidate_lines": [
+        158,
+        187
+      ]
+    }
+  ],
+  "required_unproven_gates": [
+    "Exact test-owned persistence/state isolation with the normal selected account and no credential copying or ordinary user task creation.",
+    "Actual pinned-binary fork, precreation model/effort/profile equality, unavailable-model no-fallback behavior, supported history cuts and restored dynamic callbacks.",
+    "Actual actor-private helper state and complete native tool/filesystem/process/network isolation with positive/negative observations.",
+    "Verified targeted runtime/helper termination, other-actor continuity, preserved native IDs and same-ID resume with stale-epoch rejection.",
+    "Full required category teams, authenticated manager handoff and independent owner publications, all adversarial cases and current final release source bindings."
+  ],
+  "checks_performed": [
+    {
+      "name": "Reopened SOUL and exact role pair and returned digests",
+      "result": "passed"
+    },
+    {
+      "name": "All 27 canonical round-2 assignment context hashes",
+      "result": "passed",
+      "count": 27
+    },
+    {
+      "name": "All 204 supplied source-reference hashes",
+      "result": "passed",
+      "count": 204
+    },
+    {
+      "name": "All 111 indexed Python occurrences parsed with ast.parse without module execution",
+      "result": "passed",
+      "count": 111
+    },
+    {
+      "name": "Exact 21 criterion order/text equality between current baseline and candidate matrix",
+      "result": "passed",
+      "count": 21
+    },
+    {
+      "name": "Candidate and matrix design review plus pinned schema/tagged source interface comparison",
+      "result": "passed"
+    },
+    {
+      "name": "New source suites, runtime/model launches, actor launches, native publication and enforcement",
+      "result": "not_run",
+      "reason": "Analysis-only review scope."
+    }
+  ],
+  "prior_evidence_limit": "The prior frozen 7 passed / 14 blocked criteria and reported owner-suite counts are attributed checkpoint evidence, not this reviewer reruns or new runtime passes.",
+  "highest_verification_level": "Static source-binding and parse checks passed; implementation design reviewed. No new runtime behavior verified.",
+  "optional_notes": [],
+  "files_changed": [
+    "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/work/foundation_reviewer_b/review-r2.json"
+  ],
+  "preservation": "Original review, candidate revisions, frozen inputs, source modules, canonical Task/plan/TRD, active root/product installations and memory remain unmodified by this review.",
+  "stopping_condition": "All 21 mandatory design criteria and stated actual proof gates assessed. No optional improvements pursued."
+}

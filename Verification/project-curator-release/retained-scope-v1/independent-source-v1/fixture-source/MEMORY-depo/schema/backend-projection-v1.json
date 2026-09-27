@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sys4AI disposable Basic Memory projection",
+  "type": "object",
+  "required": ["schema_version", "project_id", "config_sha256", "entries", "classification"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "project_id": {"type": "string", "minLength": 1},
+    "config_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "classification": {"const": "rebuildable-projection"},
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["projection_path", "projection_sha256", "path", "sha256", "kind", "source_identity", "metadata", "created", "modified", "title", "permalink", "segments", "limitations"],
+        "additionalProperties": false,
+        "properties": {
+          "projection_path": {"type": "string", "pattern": "^[a-f0-9]{64}\\.md$"},
+          "projection_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "path": {"type": "string"},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "kind": {"enum": ["source", "memory"]},
+          "source_identity": {"type": "string"},
+          "metadata": {"type": "object"},
+          "created": {"type": "string"},
+          "modified": {"type": "string"},
+          "title": {"type": "string"},
+          "permalink": {"type": "string"},
+          "segments": {"type": "array", "items": {"type": "object"}},
+          "limitations": {"type": "array"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,303 @@
+{
+  "kind": "p1_source_derived_wire_static_preflight",
+  "state": "passed",
+  "packet_sha256": "5683806a66716d9a6c4401b7287501cc363e7b7e928d830a8b13bfb0855d03b8",
+  "runtime_processes": 0,
+  "model_turns": 0,
+  "native_allocations": 0,
+  "fixture_values_are_not_native_evidence": true,
+  "loaded_method_schemas": [
+    "ConfigReadParams",
+    "ConfigReadResponse",
+    "EnvironmentInfoParams",
+    "EnvironmentInfoResponse",
+    "EnvironmentStatusParams",
+    "EnvironmentStatusResponse",
+    "GetAccountParams",
+    "GetAccountResponse",
+    "InitializeParams",
+    "InitializeResponse",
+    "ModelListParams",
+    "ModelListResponse",
+    "ThreadForkParams",
+    "ThreadForkResponse",
+    "ThreadListParams",
+    "ThreadListResponse",
+    "ThreadReadParams",
+    "ThreadReadResponse",
+    "ThreadResumeParams",
+    "ThreadResumeResponse",
+    "ThreadStartParams",
+    "ThreadStartResponse",
+    "ThreadTurnsListParams",
+    "ThreadTurnsListResponse",
+    "TurnInterruptParams",
+    "TurnInterruptResponse",
+    "TurnStartParams",
+    "TurnStartResponse",
+    "TurnSteerParams",
+    "TurnSteerResponse"
+  ],
+  "requests": [
+    {
+      "method": "initialize",
+      "schema": "InitializeParams",
+      "source_case": "CodexAdapter.start",
+      "fields": [
+        "capabilities",
+        "clientInfo"
+      ],
+      "payload_sha256": "b4123157eec0af60390ab000451b3fbaef2cbefbf8aafc3bd0c3d81382bf7e45",
+      "state": "valid"
+    },
+    {
+      "method": "config/read",
+      "schema": "ConfigReadParams",
+      "source_case": "CodexAdapter.inspect_tool_configuration",
+      "fields": [
+        "cwd",
+        "includeLayers"
+      ],
+      "payload_sha256": "d2cd4d9e731c2c7cc9887cc63097b6a6d483422dd0931b80cd7c057c2a2d2477",
+      "state": "valid"
+    },
+    {
+      "method": "model/list",
+      "schema": "ModelListParams",
+      "source_case": "CodexAdapter.inspect_model",
+      "fields": [
+        "includeHidden",
+        "limit"
+      ],
+      "payload_sha256": "bb0184da0a8c58d326d686e34d73b2d365f8f509d23ea46b70647208dc9e2d65",
+      "state": "valid"
+    },
+    {
+      "method": "thread/read",
+      "schema": "ThreadReadParams",
+      "source_case": "CodexAdapter.observe",
+      "fields": [
+        "includeTurns",
+        "threadId"
+      ],
+      "payload_sha256": "cdda9812457933aeb889990832023781637e2d97081eeff0463dfcd67e8de06b",
+      "state": "valid"
+    },
+    {
+      "method": "turn/interrupt",
+      "schema": "TurnInterruptParams",
+      "source_case": "CodexAdapter.interrupt",
+      "fields": [
+        "threadId",
+        "turnId"
+      ],
+      "payload_sha256": "b243ea72f9b35edd47166a513843c8b5412617c052341d69b22c0931c1020b7a",
+      "state": "valid"
+    },
+    {
+      "method": "turn/steer",
+      "schema": "TurnSteerParams",
+      "source_case": "CodexAdapter.message",
+      "fields": [
+        "expectedTurnId",
+        "input",
+        "threadId"
+      ],
+      "payload_sha256": "264221f9363ac1c68641fb27ab9523a8dbf32e74a26cea1063971259257e44b9",
+      "state": "valid"
+    },
+    {
+      "method": "account/read",
+      "schema": "GetAccountParams",
+      "source_case": "ForkCodexAdapter.verify_prelaunch",
+      "fields": [
+        "refreshToken"
+      ],
+      "payload_sha256": "78a1ebcbb0a7f48c57df90c2cfb43cd119fe45a50d87e6c0e0b23c1884edab03",
+      "state": "valid"
+    },
+    {
+      "method": "thread/start",
+      "schema": "ThreadStartParams",
+      "source_case": "ForkCodexAdapter.start_seed",
+      "fields": [
+        "allowProviderModelFallback",
+        "approvalPolicy",
+        "baseInstructions",
+        "config",
+        "cwd",
+        "dynamicTools",
+        "environments",
+        "ephemeral",
+        "historyMode",
+        "model",
+        "modelProvider",
+        "permissions",
+        "runtimeWorkspaceRoots"
+      ],
+      "payload_sha256": "904bb953dda40c7c4c6e960766925869da871503e0bbe9c2dab72d9611c2c8ca",
+      "state": "valid"
+    },
+    {
+      "method": "thread/read",
+      "schema": "ThreadReadParams",
+      "source_case": "ForkCodexAdapter.persist_history",
+      "fields": [
+        "includeTurns",
+        "threadId"
+      ],
+      "payload_sha256": "202d95acf950a238686b8734a104abc882e95dc3b8f96ac87c0c8cc16d2676c9",
+      "state": "valid"
+    },
+    {
+      "method": "thread/fork",
+      "schema": "ThreadForkParams",
+      "source_case": "ForkCodexAdapter.fork_reserved",
+      "fields": [
+        "approvalPolicy",
+        "config",
+        "cwd",
+        "deferGoalContinuation",
+        "ephemeral",
+        "excludeTurns",
+        "lastTurnId",
+        "model",
+        "modelProvider",
+        "permissions",
+        "runtimeWorkspaceRoots",
+        "threadId"
+      ],
+      "payload_sha256": "798daa3543bb85eb1a1f3a3b7bace05b695c4451b289b90875075caa5bcb28e9",
+      "state": "valid"
+    },
+    {
+      "method": "thread/turns/list",
+      "schema": "ThreadTurnsListParams",
+      "source_case": "ForkCodexAdapter.full_history",
+      "fields": [
+        "itemsView",
+        "limit",
+        "sortDirection",
+        "threadId"
+      ],
+      "payload_sha256": "ee4d3861c118d65975ca430784714989eac65b292b07fa80b299a75c70f7ef20",
+      "state": "valid"
+    },
+    {
+      "method": "thread/turns/list",
+      "schema": "ThreadTurnsListParams",
+      "source_case": "ForkCodexAdapter.full_history.next_page",
+      "fields": [
+        "cursor",
+        "itemsView",
+        "limit",
+        "sortDirection",
+        "threadId"
+      ],
+      "payload_sha256": "984d50da619b18fea3b6951936a248bd21811e97b11adb0eb5b5ec0a50eacc89",
+      "state": "valid"
+    },
+    {
+      "method": "environment/status",
+      "schema": "EnvironmentStatusParams",
+      "source_case": "ForkCodexAdapter.inspect_local_environment",
+      "fields": [
+        "environmentId"
+      ],
+      "payload_sha256": "3ad3f4248f8723c2da48847a5fce6cd5e7b21caef68a8aea22fff5db529454ce",
+      "state": "valid"
+    },
+    {
+      "method": "environment/info",
+      "schema": "EnvironmentInfoParams",
+      "source_case": "ForkCodexAdapter.inspect_local_environment",
+      "fields": [
+        "environmentId"
+      ],
+      "payload_sha256": "3ad3f4248f8723c2da48847a5fce6cd5e7b21caef68a8aea22fff5db529454ce",
+      "state": "valid"
+    },
+    {
+      "method": "turn/start",
+      "schema": "TurnStartParams",
+      "source_case": "ForkCodexAdapter.followup",
+      "fields": [
+        "cwd",
+        "environments",
+        "input",
+        "runtimeWorkspaceRoots",
+        "threadId"
+      ],
+      "payload_sha256": "5ff9082e8d20fecd9df0146e5d49bceebcf31bb053d55885ea62b6ea24c89107",
+      "state": "valid"
+    },
+    {
+      "method": "thread/resume",
+      "schema": "ThreadResumeParams",
+      "source_case": "ForkCodexAdapter.resume_owned",
+      "fields": [
+        "approvalPolicy",
+        "config",
+        "cwd",
+        "excludeTurns",
+        "model",
+        "modelProvider",
+        "permissions",
+        "runtimeWorkspaceRoots",
+        "threadId"
+      ],
+      "payload_sha256": "775213815bc1ccb9f324c64a08f4dbbf2ae9be3bfb04ad6f93d78165e4c91e28",
+      "state": "valid"
+    }
+  ],
+  "tool_shapes": [
+    {
+      "schema": "DynamicToolCallResponse",
+      "success": true,
+      "state": "valid"
+    },
+    {
+      "schema": "DynamicToolCallResponse",
+      "success": false,
+      "state": "valid"
+    },
+    {
+      "schema": "DynamicToolCallParams",
+      "success": null,
+      "state": "valid"
+    }
+  ],
+  "environment_shapes": [
+    {
+      "schema": "EnvironmentStatusResponse",
+      "state": "valid"
+    },
+    {
+      "schema": "EnvironmentInfoResponse",
+      "state": "valid"
+    }
+  ],
+  "source_bindings": {
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-curator-release/run-native-proof.py": "5290c37c9fb1604075fd6693d9152a0bbc82e41afaeb4a0e6f4f182a975c0e34",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_runtime_codex.py": "362674513ea1b1372e35f7acaec818e150b1bafff13e8686a0c98177bbcf90e5",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/agent-task/scripts/native_observations.py": "cc3bf1eaad4ac248c44c84da356d35a9a8186a181d214ff3fb15ed0ca0436e31",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-r2-pdxnr210/p1_wire_preflight.py": "7b40392f3961dd95c194f05e1a8827eb65ba7785200eb0438693d61f15b4a9bc"
+  },
+  "dynamic_tool_names": [
+    "artifact_read",
+    "artifact_submit",
+    "policy_inspect",
+    "role_acknowledge",
+    "runtime_delegate",
+    "runtime_followup",
+    "runtime_interrupt",
+    "runtime_message",
+    "runtime_observe",
+    "runtime_reconcile",
+    "runtime_release",
+    "runtime_resume",
+    "task_create",
+    "task_event",
+    "task_response"
+  ]
+}

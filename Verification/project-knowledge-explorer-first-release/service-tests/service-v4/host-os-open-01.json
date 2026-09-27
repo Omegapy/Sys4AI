@@ -1,0 +1,53 @@
+{
+  "kind": "service_native",
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-service-v4-os-open-01/host-browser-driver.py"
+  ],
+  "stage": "/private/tmp/explorer-service-v4-os-open-01",
+  "manifest": {
+    "path": "/private/tmp/explorer-service-v4-os-open-01/inputs.json",
+    "sha256": "2585368a32a54ed0d91ef0ed0cbd34a9ac08e0f5b97df801c2342bc67b4cf57d"
+  },
+  "inputs_count": 109,
+  "runtime_manifest": {
+    "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+    "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+    "bytes": 1508
+  },
+  "external_tools": [
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "resolved": "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+      "sha256": "31b9c9a8d50289f3a13f014b3efd8ea3534fc3eea7ca7d9809e166139910b805",
+      "bytes": 52448
+    },
+    {
+      "path": "/bin/ps",
+      "resolved": "/bin/ps",
+      "sha256": "3bbba882e30d91fc4ff6e6844ca7c59fef4351b9a3fea35dca55708d6d487d1c",
+      "bytes": 170432
+    }
+  ],
+  "timeout_seconds": 480,
+  "output_limits": {
+    "safe_stdout_bytes": 250000,
+    "stderr_expected_bytes": 0
+  },
+  "intended_writes": [
+    "One private disposable fixture/runtime/owned service; ordinary OS default browser opens one created tab. Native UI changes limited to test zoom and, if needed, reversible test-window bounds."
+  ],
+  "inspection": [
+    "After browser_ready, select only actual OS-created tab and positively verify clean URL before text/screenshot output. Do not navigate a substitute tab.",
+    "Record initial native browser zoom and test-window bounds. Set/observe actual200percent native zoom. If needed to expose the current narrow breakpoint, resize only the test window with exact original bounds recorded, then restore them before completion. No CSS/page-scale/viewport emulation substitute for native zoom.",
+    "Inspect Open navigation modal, close/dismiss and route-focus behavior. From Alignment enter its current Map/List reading route and inspect selected-details hide/reopen controls with exact selected identity retained; record only directly observed control behavior, not general native Map/List usability.",
+    "Inspect recorded Processes catalog, ordered process/steps and both step-source and ordinary Alignment source text, source-heading focus and exact visible-trigger return with vertical reading. No Safari Theme diagnostic or long VoiceOver protocol in this job.",
+    "Restore/positively observe exact initial zoom and any changed window bounds. Close only created test tab, stop exact owned driver with normal SIGTERM, wait for cleanup/exit and verify tab absence."
+  ],
+  "credential_boundary": "No private URLs or credentials in output; inspect only after positive fragment removal. Native default-browser dispatch is distinct from the admitted automated Shell151 runtime.",
+  "cleanup": "Inner420-second bound; outer480seconds. Normal exact-driver stop closes listener/private files and reaps reader. Root verifies stage/live/selected tools/fixture and restores exact native settings before owned tab closure.",
+  "attribution": "Verified in-process command(... explore --open) OS dispatch; public CLI subprocess separately tested in current V4 batch01. System Chrome launcher nlink2 automated admission remains unresolved; no browser/app/xattr/link alteration or full native browser-package admission is claimed. Root attributes actual default-browser/native UI observation.",
+  "scope": "Current bundle native200percent zoom and bounded navigation/details/source/process controls. No Safari/VoiceOver/speech/human/full-release claim; native Map/List200percent usability only if separately directly observed."
+}

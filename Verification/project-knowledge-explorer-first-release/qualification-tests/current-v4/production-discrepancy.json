@@ -1,0 +1,91 @@
+{
+  "status": "unexplained_original_failure_with_two_current_diagnostic_passes",
+  "build_id": "c02987099e81beb795595984e64bb81fcf2e64f4adee04d4c9fa607c16e72d5a",
+  "failed_run": {
+    "receipt": {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-06-failed/receipt.json",
+      "sha256": "db3261ed2f8dd615acb188ad2e6708039f0006b4e33cf23d4b3cfbc6d49209bc",
+      "bytes": 2450
+    },
+    "raw": {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-06-failed/stdout.json",
+      "sha256": "1d9e887bbf08b59942eb1201785567316dec4372f0ce9347fcd714a30d8fb263",
+      "bytes": 101725
+    },
+    "attribution": {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-06-failed/attribution.json",
+      "sha256": "0829cb717d2e5a804f5c4e5cf6c59c3d370df148319601c4418d2436cbd9ea65",
+      "bytes": 2278
+    }
+  },
+  "failed_observation": {
+    "phase": "deterministic_search",
+    "reason": "browser_operation_failed",
+    "completed_groups": 1,
+    "successful_search_responses": 20,
+    "type_frame_query_repetition_page_and_operation": "not captured by original generic error handler"
+  },
+  "passing_runs": [
+    {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07/stdout.json",
+        "sha256": "8e74f5f23ca8736255d246903cc257ab7e9370b13e40ec5a8f447b2fd7e26aec",
+        "bytes": 132069
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07/receipt.json",
+        "sha256": "d0e4879d385b09112ac2b3c4f595c3bab0b6dc3d783d2f72732e5b6a625c5e83",
+        "bytes": 2451
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07/reviewed-job.json",
+        "sha256": "6214b70320049b2535daffe08cf59f21a92d605647773ee6d9a0081ea9860432",
+        "bytes": 15400
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07/attribution.json",
+        "sha256": "75d30c3156494ff0521d818d53a6afa0b0857d2352cf3d12db35eaf486823eb6",
+        "bytes": 4897
+      }
+    },
+    {
+      "raw": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07-confirmation/stdout.json",
+        "sha256": "deee4ba22598420c99a95f61ba00c56d32123928261080f4b8288af1c05ce6e5",
+        "bytes": 132108
+      },
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07-confirmation/receipt.json",
+        "sha256": "e24f8a1d6c3d4e46e0bc0da2453a8739205afa520c2e061e883832cc4713e92e",
+        "bytes": 2552
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07-confirmation/reviewed-job.json",
+        "sha256": "6214b70320049b2535daffe08cf59f21a92d605647773ee6d9a0081ea9860432",
+        "bytes": 15400
+      },
+      "attribution": {
+        "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/actual-production-07-confirmation/attribution.json",
+        "sha256": "a274f103bf44ed52e63ce3e4114d029bbcf7e3bc89f3906fce3c689b4dc82c73",
+        "bytes": 5263
+      }
+    }
+  ],
+  "reviewed_driver": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/production-browser-diagnostic.cjs",
+    "sha256": "d881f631e41fe7eeb5918da29cc402e6f06ceaa066708beafcd85119470548ad",
+    "bytes": 14851
+  },
+  "original_driver": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/production-browser.cjs",
+    "sha256": "c63e2f1a89e9792ebfd1e3e23290055566bf97315ef918a46d1a16814e14b84b",
+    "bytes": 12555
+  },
+  "assessment": "No concrete deterministic cause is established. Original06 failed before the first deterministic-search group completed. Diagnostic07 retained queries, fixture, assertion semantics, product and runtime pins, and added safe operation diagnostics and outstanding-promise rejection handling. Both separately authorized fresh-fixture runs passed all nine groups. Instrumentation and timing differ, so these passes do not explain or prove a fix for06.",
+  "limits": [
+    "Original06 failure and all raw bytes remain preserved.",
+    "No raw exception type/frame or exact failed page/action can be reconstructed.",
+    "No product defect, resolved defect or universal reliability is asserted.",
+    "No further repetition was run or requested."
+  ]
+}

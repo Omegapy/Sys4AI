@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "urn:sys4ai:ontology:action:repair-v1",
+  "operations": [
+    "guard-setup",
+    "guard-repair"
+  ],
+  "allowed_prefixes": [
+    ".agents/skills/ontology/scripts",
+    ".agents/skills/memory/scripts",
+    ".agents/skills/agent-task/scripts",
+    ".agents/skills/to-trd/scripts",
+    ".agents/skills/to-implementation-plan/scripts",
+    ".agents/skills/manage-subagent-roles/scripts",
+    ".agents/skills/init-new-project/scripts",
+    "tools/template_update.py",
+    "reference-assets/ONTOLOGY-depo/actions",
+    "control_records/ontology/guard-bootstrap"
+  ],
+  "configuration": "ontology-advanced.yaml",
+  "maximum_changes": 100,
+  "retain_pre_post": true,
+  "missing_backend": "blocked",
+  "unknown_current_bytes": "blocked",
+  "profile_disable": "forbidden",
+  "authority": "current separately reviewed exact setup grant; existing Director or Task owner and native/time checks"
+}

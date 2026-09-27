@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "module_id": "what-did-you-learn",
+  "module_version": "1.0.0",
+  "required_resources": [
+    "contract.json",
+    "README.md",
+    "policy.md",
+    "review-contract.md",
+    "assets/lesson-body-template.md"
+  ],
+  "skill": {
+    "name": "what-did-you-learn",
+    "version": "1.0.0",
+    "required_resources": [
+      "SKILL.md",
+      "README.md",
+      "agents/openai.yaml",
+      "references/module-resolution.md",
+      "references/improvement-and-reuse.md",
+      "scripts/learning_contract.py"
+    ]
+  },
+  "memory": {
+    "record_schema_version": 1,
+    "config_schema_version": 1,
+    "required_resources": [
+      "SKILL.md",
+      "README.md",
+      "agents/openai.yaml",
+      "scripts/memory.py",
+      "scripts/memory_capture.py",
+      "scripts/memory_core.py",
+      "scripts/memory_evidence.py",
+      "scripts/memory_maintenance.py",
+      "scripts/memory_normalization.py",
+      "scripts/memory_normalize_html.py",
+      "scripts/memory_normalize_pdf.py",
+      "scripts/memory_normalize_tex.py",
+      "scripts/memory_packet.py",
+      "scripts/memory_paths.py",
+      "scripts/memory_publish.py",
+      "scripts/memory_recovery.py",
+      "scripts/memory_search.py",
+      "scripts/basic_memory_adapter.py",
+      "scripts/basic_memory_projection.py",
+      "references/automatic-capture.md",
+      "references/task-integration.md",
+      "references/evidence-and-lifecycle.md",
+      "references/publication-examples.md",
+      "references/operations.md",
+      "references/state-paths.md",
+      "references/basic-memory-pilot.md",
+      "requirements-extraction.txt",
+      "requirements-backend-pilot.txt"
+    ],
+    "contract_resources": [
+      "README.md",
+      "policy.md",
+      "publication-and-recovery.md",
+      "schema/record-v1.json",
+      "schema/config-v1.json"
+    ],
+    "helper_commands": [
+      "health", "search", "read", "validate", "propose", "capture-status",
+      "capture", "publish", "supersede", "retract", "recover"
+    ],
+    "capture_triggers": [
+      "work-completed", "task-completed", "decision-recorded", "failure-observed"
+    ],
+    "shared_checkpoint": "references/automatic-capture.md",
+    "checkpoint_contract": "learning-review-v1"
+  }
+}

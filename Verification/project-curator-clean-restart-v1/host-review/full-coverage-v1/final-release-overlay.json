@@ -1,0 +1,379 @@
+{
+  "kind": "FinalReleaseEvidenceOverlayForManagerAcceptance",
+  "observed_at": "2026-09-12T21:42:40.249694+00:00",
+  "source_reports": {
+    "original_coverage": {
+      "path": "Verification/project-curator-clean-restart-v1/host-review/full-coverage-v1/coverage.json",
+      "sha256": "7f0cef78696144c3a85d9ae4b3f005cc1cb805fac6dbe1a941815294720b4b29"
+    },
+    "publication_manifest": {
+      "path": ".curator-supported-CD80544E/publication/manifest-v2.json",
+      "sha256": "86741d1a66d3b920b809951fb0b7b492d59778f6b30bc631fba4693de369157f"
+    },
+    "source_inventory": {
+      "path": "Verification/project-curator-supported-release-v1/manager/publication-final-inventory-v2.json",
+      "sha256": "1dec5bc5091999954bde89c2747ac3edda6fe97eb828337155699229e5b5a7b2"
+    },
+    "independent_preservation": {
+      "path": "Verification/project-curator-clean-restart-v1/host-review/final-preservation-v1/result-v2.json",
+      "sha256": "5ead7d2257d981c3fa967ece1d94b86c20b873fd792074ff60d7e16bf3bc22fa"
+    },
+    "root_owner_recovery": {
+      "path": ".curator-supported-CD80544E/publication/root-tool-rollback-v1.json",
+      "sha256": "75c4b967ea497f6d41c6e3fd6ad59986eb7fbb5e28bd0272d493ece4090f9ec8"
+    },
+    "live_owner_check": {
+      "path": ".curator-supported-CD80544E/publication/v2-final-check-after-completion.json",
+      "sha256": "1bdf1ab1210d9d80d7a1176dd921f0d4f3f0abf90b89379bcf3ec004e8ce51a4"
+    },
+    "fresh_shipped_setup": {
+      "path": ".curator-supported-CD80544E/publication/v2-shipped-package-result.json",
+      "sha256": "5479dd9f4aab49448abd67a602ca4d9c7db22f835de9c49ffc68028ab3d93dd6"
+    },
+    "template_tests": {
+      "path": ".curator-supported-CD80544E/publication/v2-template-tests.json",
+      "sha256": "3601b12003f65d6bdf03d30b6c6b33cd05baa067aec7a89dd2fc286aedde6972"
+    }
+  },
+  "verification_step_updates": [
+    {
+      "step_id": "TASK-039:V1",
+      "verification_step": "Run updater check and inspect the complete additions/updates/deletions before apply.",
+      "text_sha256": "5939902211d192966044120b0c47d0b989ebd2f59edfc3c77d8237cdb752de06",
+      "previous_classification": "not_exercised",
+      "classification": "passed",
+      "evidence_ids": [
+        "publication_manifest",
+        "live_owner_check",
+        "fresh_shipped_setup",
+        "template_tests",
+        "independent_preservation"
+      ],
+      "scope": "Actual preserved root owner accepted identical inspected49-addition/27-update/9-removal mapping preview; normal apply completed; final check current, five Template checks and fresh actual shipped-source v10 setup passed. All406 final live hashes/modes and exact protected boundaries independently matched."
+    },
+    {
+      "step_id": "TASK-039:V2",
+      "verification_step": "Validate no active-root or product path is in the change manifest.",
+      "text_sha256": "6a1ce4658d90d749e2b50d455cb0cc8381f8371be73d98b256545cd888e635dc",
+      "previous_classification": "partial",
+      "classification": "passed",
+      "evidence_ids": [
+        "publication_manifest",
+        "live_owner_check",
+        "fresh_shipped_setup",
+        "template_tests",
+        "independent_preservation"
+      ],
+      "scope": "Actual preserved root owner accepted identical inspected49-addition/27-update/9-removal mapping preview; normal apply completed; final check current, five Template checks and fresh actual shipped-source v10 setup passed. All406 final live hashes/modes and exact protected boundaries independently matched."
+    },
+    {
+      "step_id": "TASK-041:V1",
+      "verification_step": "Run .venv/bin/python tools/template_update.py check, inspect, apply under release authority, then check again.",
+      "text_sha256": "dbcd8fab9e9ad216afe1bf17448f3d36c6217fcedb3529a05e6127e6bfefdf70",
+      "previous_classification": "not_exercised",
+      "classification": "passed",
+      "evidence_ids": [
+        "publication_manifest",
+        "live_owner_check",
+        "fresh_shipped_setup",
+        "template_tests",
+        "independent_preservation"
+      ],
+      "scope": "Actual preserved root owner accepted identical inspected49-addition/27-update/9-removal mapping preview; normal apply completed; final check current, five Template checks and fresh actual shipped-source v10 setup passed. All406 final live hashes/modes and exact protected boundaries independently matched."
+    },
+    {
+      "step_id": "TASK-041:V2",
+      "verification_step": "Run the Template contract test and exact source/destination inventory comparison.",
+      "text_sha256": "a19816308e5d39dcc23dca863b4f5eee7fc7ad56b58421af7dc75a959f620dcd",
+      "previous_classification": "partial",
+      "classification": "passed",
+      "evidence_ids": [
+        "publication_manifest",
+        "live_owner_check",
+        "fresh_shipped_setup",
+        "template_tests",
+        "independent_preservation"
+      ],
+      "scope": "Actual preserved root owner accepted identical inspected49-addition/27-update/9-removal mapping preview; normal apply completed; final check current, five Template checks and fresh actual shipped-source v10 setup passed. All406 final live hashes/modes and exact protected boundaries independently matched."
+    },
+    {
+      "step_id": "TASK-042:V2",
+      "verification_step": "Review fresh updater check/apply/check after source initializer changes.",
+      "text_sha256": "ff7d344d5b33ea521e36121f91e40dcc496cba014d589e2604cc381c08ee7e2d",
+      "previous_classification": "not_exercised",
+      "classification": "passed",
+      "evidence_ids": [
+        "publication_manifest",
+        "live_owner_check",
+        "fresh_shipped_setup",
+        "template_tests",
+        "independent_preservation"
+      ],
+      "scope": "Actual preserved root owner accepted identical inspected49-addition/27-update/9-removal mapping preview; normal apply completed; final check current, five Template checks and fresh actual shipped-source v10 setup passed. All406 final live hashes/modes and exact protected boundaries independently matched."
+    },
+    {
+      "step_id": "TASK-045:V2",
+      "verification_step": "Repeat source updater check/apply/check and Template contract tests after initializer integration.",
+      "text_sha256": "fb3d5d186fd5be8bebcad2b978d3c42ab0c196f40568a290b97e981699c6977a",
+      "previous_classification": "not_exercised",
+      "classification": "passed",
+      "evidence_ids": [
+        "publication_manifest",
+        "live_owner_check",
+        "fresh_shipped_setup",
+        "template_tests",
+        "independent_preservation"
+      ],
+      "scope": "Actual preserved root owner accepted identical inspected49-addition/27-update/9-removal mapping preview; normal apply completed; final check current, five Template checks and fresh actual shipped-source v10 setup passed. All406 final live hashes/modes and exact protected boundaries independently matched."
+    }
+  ],
+  "criterion_updates": [
+    {
+      "criterion_id": "TASK-039:1",
+      "criterion": "CURATOR.md, curator.yaml, document-ownership.json and Roles pairs have exact source owners.",
+      "text_sha256": "15008b1eae37ee4915205997724c7e8de3629bd82fb831cfb69afb380b9d84b2",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "TASK-039:2",
+      "criterion": "Skill/reference discovery and generated role index remain with existing owners; no static mapping owns Roles/INDEX.md.",
+      "text_sha256": "d73c77ca32f84a6ad851ba958456898cb547b5fa1525a2ccbbd531766dfea453",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "TASK-041:1",
+      "criterion": "Template contains complete charter/configuration/skills/roles/contracts with correct Roles entries.",
+      "text_sha256": "2b4173b9dea32a1cf378d533c079dfb6652ece8f821f1f95fb77281f98411850",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "TASK-041:2",
+      "criterion": "Template assets are neutral and inactive.",
+      "text_sha256": "4aee982308797f0e7b511b72bb9eefe6b2c383367dfea39f7afe28e4c3a13aa2",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "TASK-042:1",
+      "criterion": "Earlier receipts keep their edition, original inventory, licensing, custom packages, Roles provenance and capture choice.",
+      "text_sha256": "d2c018ee7f895134f420f2164ff1b138369cc0d5ade8a56967454d07db23eb14",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "TASK-042:2",
+      "criterion": "New projects receive the selected starter edition. Old edition behavior remains unchanged.",
+      "text_sha256": "2626238ec1dc09233eb6852a71c5682705aaadd5e68398ffc5430fa0649fb805",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "TASK-043:1",
+      "criterion": "Adoption records exact source/destination/package/charter boundary in existing setup history and preserves old base edition.",
+      "text_sha256": "28cfbe51dd99c1f6ae0b85f19b9631817eaa31643589325ac07cc5552bf61941",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "TASK-043:2",
+      "criterion": "Static assessment executes no unknown customized project Python and distinguishes installed, configured, authorized, compatible and runtime-observed states.",
+      "text_sha256": "2b3a631cf103fd7f4a37bd01982072bd3239da0db6638dacde8e9584a454470c",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "TASK-044:1",
+      "criterion": "Same-operation retry preserves original and later edits, project identity, records, settings and licensing.",
+      "text_sha256": "a31488307a11a53c59d5db4d945b1fcd42e1b47cc355104aa880fcf411958e48",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "TASK-044:2",
+      "criterion": "Changed sources or unexpected pre/post bytes block replay; completed reruns do not refresh new editions implicitly.",
+      "text_sha256": "c5148e26712e9a516042b8b67599130a604689ca843e11a27e15a782a949fb90",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "TASK-045:1",
+      "criterion": "No real depot/product registration, service, hook, environment or external state is changed.",
+      "text_sha256": "aa005c6c319c1991aa46ed570bc683cebf6c56acaf51fc53f3a4ade286ed17df",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "TASK-045:2",
+      "criterion": "Separate project profiles have equivalent core contracts and distinct local data. No real service, environment or project adoption occurs during plan preparation.",
+      "text_sha256": "96fcec8c8a81781b8d746a552081a8bdd2b3078015c9a6e6ff09ca57aa8ad399",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "REQ-001:2",
+      "criterion": "The final change manifest separates shared/distribution changes from active installations and proves that existing product content and active root installations were not adopted or refreshed.",
+      "text_sha256": "3ced760db9ec701f9c2a159cac6d8bf8fd262baf73df879e4371962b3bd8d69b",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "REQ-002:1",
+      "criterion": "The Template receives the declared charter, configuration, role pairs, skills, and contracts from owned sources; required active starter paths are explicitly mapped and generated role navigation comes from its owner.",
+      "text_sha256": "f745ad4e398273b8db2cd247e6690fe887dee96447c7868eef6beb8a4849c16b",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "REQ-002:2",
+      "criterion": "A reviewed updater check/apply/check sequence confirms the intended mappings and preservation; customized destinations, missing source collections, unavailable volumes, and interrupted publication retain existing protection.",
+      "text_sha256": "e4521dbabd9943ba209eab487fef070c209866b7ddc9d6f1891aa5ef478df524",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "REQ-002:3",
+      "criterion": "Distribute an inactive, project-neutral Template capability.",
+      "text_sha256": "de37768d5a1f906ba4fa331b94937325be34e843d9801167aad181f138b2be07",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    },
+    {
+      "criterion_id": "REQ-044:3",
+      "criterion": "Final evidence distinguishes source capability, Template distribution, disposable adoption/runtime checks, unperformed root/product adoption, and later operational benefit; no production rollout is claimed.",
+      "text_sha256": "f56f46c6e1cd80a220df89246e61eb60cfe3abb60e4c1e7adbfe2c4acadd3c3b",
+      "assessment": "release_evidence_ready_for_manager_acceptance",
+      "evidence_ids": [
+        "publication_manifest",
+        "source_inventory",
+        "fresh_shipped_setup",
+        "independent_preservation"
+      ],
+      "scope": "Replaces only the earlier pending-live-release boundary; earlier ordinary/disposable behavior evidence and its limits remain distinct."
+    }
+  ],
+  "source_link_correction": {
+    "task_id": "TASK-048",
+    "sources": [
+      {
+        "path": "SKILLS-depo/curate/scripts/curator.py",
+        "sha256": "48bc2a4072726f799f0d20990aa0e388ee5243133286507b3d37c15a6c8639d0"
+      },
+      {
+        "path": "SKILLS-depo/curate/tests/test_supported_workflows.py",
+        "sha256": "b1cd9f8daf93d4e60e47cc257e6df3a81f62a3dcc17cbb0738b034f5cc33ad13"
+      },
+      {
+        "path": "SKILLS-depo/curate/tests/test_direct_owner_routes.py",
+        "sha256": "568e46f7dee5c530b23509e595d5257b1d154af573470d463a5c850532af41ae"
+      }
+    ]
+  },
+  "release_counts": {
+    "selected_package_paths": 89,
+    "preserved_active_root_updater": 1,
+    "net_source_copies": 68,
+    "actual_live_bindings": 406,
+    "prepared_bindings_matched": 387
+  },
+  "preservation": "Active root updater was restored exactly to its prior registered version. Root runtime registration, installed root helper/role trees and existing projects stayed unchanged. New reusable updater remains in its shared source and Template. Nine duplicate role reference files were intentionally removed by their owner mappings.",
+  "acceptance_boundary": "Manager retains canonical Task/plan acceptance and final verification decisions. All other prior partial verification-step limits remain; this overlay does not claim broad unexecuted cases or native/full checkout/service/backend readiness."
+}

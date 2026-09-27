@@ -1,0 +1,776 @@
+{
+  "schema_version": 1,
+  "checkpoint": "partial_foundation",
+  "task_id": "TASK-20260910-7F1A11AE",
+  "plan_id": "PLAN-20260910-FAE2A15B",
+  "assignment_id": "foundation_implementer",
+  "acceptance_id": "foundation_acceptance_v1",
+  "created_at": "2026-09-11T05:03:00.026536+00:00",
+  "state": "blocked",
+  "production_readiness": "not_proven",
+  "proof_is_not_release_or_adoption_authority": true,
+  "scope": "TASK-005 through TASK-013, complete accepted 21-criterion foundation scope",
+  "implementation_complete": false,
+  "release_complete": false,
+  "criteria_counts": {
+    "passed": 7,
+    "blocked": 14
+  },
+  "implemented": [
+    "Neutral policy, strict ownership classification and private grants; protected routing floors and bounded malformed-input handling.",
+    "Finite authenticated wire-to-owner dispatcher; exact automatic origin, owner-specific outcomes, current post-state and replay/recovery checks.",
+    "Explicit Task orchestration-v2, memory grant-v2 and ontology grant-v3 owner branches with preserved legacy behavior.",
+    "Reusable Curator charter/roles and pure status/validate discovery; no active root/product adoption.",
+    "Pinned App Server transport, effective surface closure, actual one-turn command/artifact diagnostics, exact companion kernel ancestry and scoped stop checks.",
+    "Exact observed non-login shell-wrapper matcher and conservative bound-session capacity admission."
+  ],
+  "bindings": {
+    "current_changed_files": [
+      {
+        "path": "AGENTS-depo/project-template-AGENTS.md",
+        "sha256": "8482c83ca43e991db0605b6baea7eb557ac6fab04e0e27477dcdafbaf881ccaf",
+        "before_sha256": "fb709c430777c2a4ae5782f82485faf8f0aa533b446400b3bde16cfa895a16a6",
+        "change": "modified"
+      },
+      {
+        "path": "CURATION-depo/documentation.md",
+        "sha256": "ca8ecdb6c7924fd54ac9061062041435e417b3222459bb12db7c6318ca03bd3b",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "CURATION-depo/schema/config-v1.json",
+        "sha256": "d40c2ee14326da89e115e618d11c4a231d1fbbea2a4b69c1d8a148dc2e66386c",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "CURATION-depo/schema/grant-v1.json",
+        "sha256": "5d54f14e51c9052c039e59aa36f9b135a71a84f7b16de788ae08e7b0b6902caf",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "CURATION-depo/starter/curator.yaml",
+        "sha256": "fe7503972c7a61bba1c0fe4a8595440d3131893288e78f55d4402986d9f88f90",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "CURATION-depo/starter/document-ownership.json",
+        "sha256": "795b429ae9b997feac5c39569a117d6a0e6332d38af718320a66945980b44916",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "MEMORY-depo/publication-and-recovery.md",
+        "sha256": "669b2beb36313f675c16dbe98f773bb5a6ffd4f83e1a9780bc5572231e36f123",
+        "before_sha256": "89b65d36de332e8331b47fb77f9a7f1ac455f497cb880bddffab1a5404457cc6",
+        "change": "modified"
+      },
+      {
+        "path": "ONTOLOGY-depo/publication-and-recovery.md",
+        "sha256": "b25ea6e4198f430915b57d984fe6d994528386eee8ed81176999cec3c8a649bd",
+        "before_sha256": "42087e6a1105dfe83e13397c383e42578356d64b56fa82fa595348a7ea428d0f",
+        "change": "modified"
+      },
+      {
+        "path": "ROLES-depo/curator-manager-AGENTS.md",
+        "sha256": "c8b3f8e260830bb5681438571057bc9474db46fdb909632e81148f67dfc7f78a",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "ROLES-depo/curator-manager-ROLE.md",
+        "sha256": "4eeaac17b71df6eb89728bfa3b4ed7eb5551b083515ab6078794afa2a044756a",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "ROLES-depo/documentation-curator-AGENTS.md",
+        "sha256": "e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "ROLES-depo/documentation-curator-ROLE.md",
+        "sha256": "d90978bd3ad1a47c7a8752821a4ceba0ca39cf7afcf6aca91709e259e91498ae",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "ROLES-depo/improvement-maintenance-AGENTS.md",
+        "sha256": "e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "ROLES-depo/improvement-maintenance-ROLE.md",
+        "sha256": "034dd7b3ce155cd9b8576d5917f9bb208400241bfeb1599bf0d1e413b096b098",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "ROLES-depo/knowledge-curator-AGENTS.md",
+        "sha256": "e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "ROLES-depo/knowledge-curator-ROLE.md",
+        "sha256": "b6d509eff7984b1ad02ce9b2a9893c299af045de0ebefa87accd0b45ba3d3c75",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "ROLES-depo/project-curator-CURATOR.md",
+        "sha256": "f8f7ec848e88404b89f7202929695d8a21d490e1d90e27b3a81a06b6da9711f7",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "ROLES-depo/project-director-ROLE.md",
+        "sha256": "4735ce95dd8c371cfdf3227b639417820f8d493d98fd629cb305dd5d6d36b1d1",
+        "before_sha256": "09d8ff13a82a03946d84c8320b9a2192c56bc330a9ab9f4c70c8583cb39e010b",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/agent-task/references/orchestration-contract.md",
+        "sha256": "1d927efce3f66648dc7e30f9f582b2bb98956e35b34ceffd63452517b7f223ba",
+        "before_sha256": "bce509c5049c330a7320fe0d295af8501bd824d5729952828d6b604a17472d13",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/agent-task/scripts/native_observations.py",
+        "sha256": "7826825071e48b12984e79daa69a3ddbd6910508f29e2a6f6f44918a65570750",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+        "sha256": "86120598bed820a04ca588b920ec1b3c5ba3565fdbcac919215e56936fe60223",
+        "before_sha256": "9e2ad68ec90980c736ec5fc6bb1396aff0ea98e90918a20f3adc75b685546368",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/agent-task/scripts/task_state.py",
+        "sha256": "58813d942fca8874f0662da85d62e8b83fd75c9cf6beed583e699c4556df09a3",
+        "before_sha256": "6b79ddccd4f4dda135c10ea12dd95b3ba266525cdc6013f1e7139e77dc9afadb",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/agent-task/tests/test_orchestration_state.py",
+        "sha256": "5cdbc70ec831bf76f55701f3361d645ece9d2eed959af32086ffb90b46406971",
+        "before_sha256": "e483ce592ceb2bc149b0fb5ebe2dededcba23da9263ba6434170c09fa2d049eb",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/agent-task/tests/test_task_state.py",
+        "sha256": "30fdf456dc026507f0b7445412a81cd2596d9dcfea9c9731c19eb6d39768fe95",
+        "before_sha256": "14734c121a959b93522802678d0b4d3e83983675e7eae5644d19cf9b0b172450",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/curate/SKILL.md",
+        "sha256": "270f7efa95413c0aa5dc1570884145a81095bb268ef3a9851517973ed8c829a1",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/references/foundation-interfaces.md",
+        "sha256": "f030837dbd9755e59d03f41765f6b8bbb842ae63b08103ab027030c92c36a1dd",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/references/native-protocol-v1.md",
+        "sha256": "96a0368d6875fbb74d634c4a71c9f188db80b6e6be33d67fe3da0c6f84449e77",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/scripts/curator.py",
+        "sha256": "caea9ab8f7d5e509c6eb3e425455eea402628e1d84839358d14d04581799ac39",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/scripts/curator_broker.py",
+        "sha256": "116651f07a3db53f2596d55111ff49b957aa80e07995bb17fc316be7dea5bbcb",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/scripts/curator_classification.py",
+        "sha256": "00fbfcd59e69e510781e35da03c5207ae8b929956c3b40b7643405a3a0d5c858",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/scripts/curator_confinement.py",
+        "sha256": "e12f479f5a69b851959db7a16aaa546bc8516d77e395e6a38b99db83ae3a4b7d",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/scripts/curator_grants.py",
+        "sha256": "efdd82116688ae3f897011a372db4f49432b81719a6a88538ab31374cde35d8f",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/scripts/curator_policy.py",
+        "sha256": "6abbb157522ae151e60b3fc82704b6d9eb968c212cca27879dcd093985db568b",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/scripts/curator_runtime.py",
+        "sha256": "69a5c15c2357635c6abf7db89d7e5965dab7047cc979589058682a547b16b71f",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/scripts/curator_runtime_codex.py",
+        "sha256": "84fc25ab0b8628e1143ea8aabd0f9f77943a26de760d3c0962db7262111857a4",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/tests/test_broker.py",
+        "sha256": "37865bc4cadfe581af6ac76251bbf40fca77fae495b9d4da7e252ed5b5279c0c",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/tests/test_classification.py",
+        "sha256": "f428120b03bd1bdfa8713c0904bece194200bcc52244584a46cc642ac79b9a91",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/tests/test_confinement_contract.py",
+        "sha256": "86878cac1899fb7dd867bf714fd327bf2f99a976bbe624d1057b2c043ac8c8e5",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/tests/test_foundation_policy.py",
+        "sha256": "b30732a112a47ebebfa53c1efa2ed63c8449f28cde05f38509be3b637cace508",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/tests/test_foundation_roles.py",
+        "sha256": "9621be1adf4c0c8bfc9bdfa78acbb13a5ce337cb5b7abfa21707a085ec046692",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/curate/tests/test_native_protocol.py",
+        "sha256": "783147bc4168b9c584344b5ac9208a14b4a06d3b58552aa5ec48a88d85d9da65",
+        "before_sha256": null,
+        "change": "added"
+      },
+      {
+        "path": "SKILLS-depo/manage-subagent-roles/references/role-schema.md",
+        "sha256": "71b327019e8e793b0cedba192f358f79e6b7a6f84b697da52bfdf7b8203bce54",
+        "before_sha256": "d2c0416585c89621ed25835ce97d2842798e0a54971803f8a9695d677b575186",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/memory/scripts/memory_evidence.py",
+        "sha256": "28f30641a83a640e669611a932293501293246936b27d5098645fe28a854ae3b",
+        "before_sha256": "978ad22d79d5fccdaab7bdc5946c9ae187316e2aa6a5964765e72a210d9d2be7",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/memory/scripts/memory_publish.py",
+        "sha256": "c452ab0dec96fb5ccea8d01991d7c75fcc559152a979fc65cc6e6d0bb8dcdd62",
+        "before_sha256": "e8677752709cecea1bb7ed5ebab55dbf68cf6d714aec84ceafd17a07b14abf4c",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/memory/tests/test_automatic_capture.py",
+        "sha256": "885117a8f3cbc0b720656d8fa02e1a4511d5d42720096987f7ef1f457a3840f2",
+        "before_sha256": "769eaa9911552548f1746628bfe41e78a3e7029f77afc4c62fd94153cc4f4da7",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/memory/tests/test_publication.py",
+        "sha256": "e198465a4e8deac351833b2f0a4cc50c48cb294472da0a2d17528af7af87f6ac",
+        "before_sha256": "a1d761d1fe64985f3f8f762687bae3417a3fb087b8276b8d1c18cd4370c56d11",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/memory/tests/test_recovery.py",
+        "sha256": "d47df96bfbe25855409333ed9b45fe55acedaf2be2fe79e9808963f9b2b4a6c3",
+        "before_sha256": "dca6a3d2f33b6fd4beeb22baab5193cef0ef60fa817d7b1d2bd1ffbd37b45dcd",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/memory/tests/test_task_integration.py",
+        "sha256": "0b154b070346d7aaff63a0efd538ad566dcbd994154d1c7175add775568bf30d",
+        "before_sha256": "3f9130bc715968e8e7cb7cab6f5a789785893c61b7f4d552c8361b73fa477ed4",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/ontology/scripts/ontology_authority.py",
+        "sha256": "efeff7c714c15686cc15b902598e6450b80e3a0265f7e82a48bf0a9c4ca20f42",
+        "before_sha256": "fcd0bc8cbc3afa27e24e5b7e89fba6c9c69e2d862acfb852be5be446a8df59cf",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/ontology/tests/test_advanced_publication.py",
+        "sha256": "c04631309df9a97c1cf839a5bb389bc1bd30d31d1a11a6bba171d8f482ec4b5a",
+        "before_sha256": "265666c6a0cdd2a13ed9785f1521b8559ae1797e95c3a8bd33e60efd2cbafab0",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/ontology/tests/test_authority.py",
+        "sha256": "7af9de7954b15ceec96c6a0769939d8de19b72067698653aa47f94630d978656",
+        "before_sha256": "32f2e0dbed963bf35a7ad2cf32bc60c54fb2a7ff6dcd5dc9e86e0703d0ee8faa",
+        "change": "modified"
+      },
+      {
+        "path": "SKILLS-depo/task/SKILL.md",
+        "sha256": "7ab4d1ded926be29662b7d30eef7c2d84a94278660029c65c7a17b50547a9840",
+        "before_sha256": "8446c25bd2af75e484e64f5832f6ba5e07de487f4ea61c695dbe2f8b9cce3490",
+        "change": "modified"
+      },
+      {
+        "path": "Verification/project-curator-release/run-native-proof.py",
+        "sha256": "f20ab479dbebd4cd63c119eedc0f9c5f501a08e4602eee5989eb1d319892fef4",
+        "before_sha256": null,
+        "change": "added"
+      }
+    ],
+    "historical_native_packet": {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/scope.packet.json",
+      "sha256": "e6a828ffd8557426f38fe6163e8342a021686ca237ee31de720d047059f28ec3"
+    },
+    "historical_native_packet_canonical_sha256": "86716a07abfb0d3e120909470fb91369cb19a08d1e7e2ec9989e29e8aeddcec5",
+    "historical_runtime": {
+      "path": "/Applications/ChatGPT.app/Contents/Resources/codex",
+      "sha256": "87a08119b8effa519f0ecb552dc98043f58a8200bf2ec5da60f76890c33e9c3a",
+      "version": "codex-cli 0.153.4"
+    },
+    "historical_profiles": {
+      "bootstrap": {
+        "id": "curator-proof-bootstrap",
+        "override": "permissions.curator-proof-bootstrap={filesystem={\":root\"=\"deny\",\":minimal\"=\"read\",\"/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12\"=\"read\",\"/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/shared\"=\"read\"},network={enabled=false}}",
+        "sha256": "71b5e7a91165a1ac7a4b23fac9d5e95c14e369298acce69f3bb12265996e8de8",
+        "filesystem": {
+          ":root": "deny",
+          ":minimal": "read",
+          "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12": "read",
+          "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/shared": "read"
+        },
+        "network": {
+          "enabled": false
+        }
+      },
+      "solver_a": {
+        "id": "curator-proof-solver-a",
+        "override": "permissions.curator-proof-solver-a={filesystem={\":root\"=\"deny\",\":minimal\"=\"read\",\"/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12\"=\"read\",\"/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/shared\"=\"read\",\"/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/solver_a\"=\"write\"},network={enabled=false}}",
+        "sha256": "62366377452b72b09531755a18b4ebe18ac4e5c8034035332e8adf2d06f01c95",
+        "filesystem": {
+          ":root": "deny",
+          ":minimal": "read",
+          "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12": "read",
+          "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/shared": "read",
+          "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/solver_a": "write"
+        },
+        "network": {
+          "enabled": false
+        }
+      },
+      "solver_b": {
+        "id": "curator-proof-solver-b",
+        "override": "permissions.curator-proof-solver-b={filesystem={\":root\"=\"deny\",\":minimal\"=\"read\",\"/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12\"=\"read\",\"/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/shared\"=\"read\",\"/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/solver_b\"=\"write\"},network={enabled=false}}",
+        "sha256": "a160a557656a1e16ee7df870d28c94b105b3431dce50e8d62e71f6d621b86f21",
+        "filesystem": {
+          ":root": "deny",
+          ":minimal": "read",
+          "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12": "read",
+          "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/shared": "read",
+          "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/solver_b": "write"
+        },
+        "network": {
+          "enabled": false
+        }
+      }
+    },
+    "historical_native_result": {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/native-feasibility-result.json",
+      "sha256": "2a0d5274e3d440c89a06bae3a1b7abc9776cf6162eeea3f1f03b391fa585448d"
+    },
+    "offline_exact_command_review": {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/offline-command-evidence-review.json",
+      "sha256": "75ff1a08a975808e6f6b88496b314c0908c4850bb0aa070ced95ab5b17f1a639"
+    },
+    "host_acceptance": {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-tool-diagnostic-host-acceptance-v12.json",
+      "sha256": "7bf092e1254de95363fea4351e906d44e23a344635f67c6c9e7f5275e4b19fed"
+    }
+  },
+  "criteria": [
+    {
+      "id": "FND-01",
+      "task": "TASK-005",
+      "criterion": "Neutral starter has no live identity/branch set, standing grant, schedule or autonomous-write permission.",
+      "checks": [
+        "F-POLICY"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-02",
+      "task": "TASK-005",
+      "criterion": "Missing, malformed, expired or incompatible selections produce precise unavailable/blocked diagnostics.",
+      "checks": [
+        "F-POLICY",
+        "F-PROTOCOL"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-03",
+      "task": "TASK-005",
+      "criterion": "Project specialization is capability-only; standing entitlements remain absent until deliberately accepted at adoption.",
+      "checks": [
+        "F-POLICY"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-04",
+      "task": "TASK-006",
+      "criterion": "AGENTS.md, README sections, generated wiki and Task responses have distinct owners and update routes.",
+      "checks": [
+        "F-CLASS"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-05",
+      "task": "TASK-006",
+      "criterion": "Overrides, generators, stable identities and protected sections resolve conservatively; unknown/mixed targets hold unsafe edits.",
+      "checks": [
+        "F-CLASS",
+        "F-CONFINEMENT",
+        "NP-011",
+        "NP-012"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-06",
+      "task": "TASK-007",
+      "criterion": "Grants bind actor/project/branch/policy/source/payload/scope/owner and freshness; valid standing entitlements avoid redundant approval.",
+      "checks": [
+        "F-POLICY",
+        "F-BROKER"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-07",
+      "task": "TASK-007",
+      "criterion": "Candidate-controlled code and environment cannot alter broker policy, credentials or effective approval logic.",
+      "checks": [
+        "F-BROKER",
+        "F-CONFINEMENT",
+        "NP-010",
+        "NP-011",
+        "NP-012"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-08",
+      "task": "TASK-007",
+      "criterion": "Broker routes canonical mutations to their existing helper owners and rejects arbitrary shell instructions.",
+      "checks": [
+        "F-BROKER",
+        "F-TASK",
+        "F-MEMORY",
+        "F-ONTOLOGY"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-09",
+      "task": "TASK-007",
+      "criterion": "Caller identity comes from the trusted native request envelope and current manager binding, not an actor string in model arguments; workers cannot read private grants or broker credentials.",
+      "checks": [
+        "F-BROKER",
+        "NP-009",
+        "NP-010",
+        "NP-011"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-10",
+      "task": "TASK-008",
+      "criterion": "One controller/charter is selected per execution; reading a charter does not activate it.",
+      "checks": [
+        "F-ROLE",
+        "F-TASK",
+        "NP-002"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-11",
+      "task": "TASK-008",
+      "criterion": "Specialist responsibilities, qualifications, role reads, scope and stopping rules are explicit; generic Director use and category rules are preserved.",
+      "checks": [
+        "F-ROLE",
+        "NP-003",
+        "NP-004",
+        "NP-005",
+        "NP-006"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-12",
+      "task": "TASK-009",
+      "criterion": "New provenance is schema-versioned and validated; historical records retain bytes/meaning and unknown fields are rejected.",
+      "checks": [
+        "F-TASK",
+        "F-MEMORY",
+        "F-ONTOLOGY"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-TYPED-CONTROLS",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-13",
+      "task": "TASK-009",
+      "criterion": "Curator bootstrap reserves exactly one manager, activates only the real receipt identity and relinquishes canonical Task writing.",
+      "checks": [
+        "F-TASK",
+        "NP-003",
+        "NP-008"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-14",
+      "task": "TASK-010",
+      "criterion": "Existing record/configuration schemas keep their meaning; any changed grant envelope has explicit version dispatch.",
+      "checks": [
+        "F-MEMORY",
+        "F-ONTOLOGY"
+      ],
+      "state": "passed",
+      "evidence_level": "deterministic source/helper verification",
+      "remaining": []
+    },
+    {
+      "id": "FND-15",
+      "task": "TASK-010",
+      "criterion": "Only the current confirmed manager with exact operation scope can publish Curator knowledge; ordinary workers and forged provenance fail.",
+      "checks": [
+        "F-BROKER",
+        "F-MEMORY",
+        "F-ONTOLOGY",
+        "NP-009"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-16",
+      "task": "TASK-011",
+      "criterion": "Activation, manager/child discovery, supervision, interrupt and resume observations are mapped without forging collaboration receipts.",
+      "checks": [
+        "F-PROTOCOL",
+        "NP-001",
+        "NP-003",
+        "NP-008"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-TYPED-CONTROLS",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-17",
+      "task": "TASK-011",
+      "criterion": "Effective model/effort and independent contexts are checked; missing capabilities hold work.",
+      "checks": [
+        "F-PROTOCOL",
+        "NP-007"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-18",
+      "task": "TASK-012",
+      "criterion": "Real observations establish identities, reservation-before-launch, one canonical writer, full required teams, settings inheritance and isolated solver input.",
+      "checks": [
+        "NP-002",
+        "NP-003",
+        "NP-004",
+        "NP-005",
+        "NP-006",
+        "NP-007",
+        "NP-009"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-19",
+      "task": "TASK-012",
+      "criterion": "Capacity queuing preserves every required agent; uncertain or absent observations are named non-passes.",
+      "checks": [
+        "F-TASK",
+        "F-PROTOCOL",
+        "NP-007",
+        "NP-008"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-20",
+      "task": "TASK-013",
+      "criterion": "Candidate writes to trusted policy/broker, canonical ledgers, control records, grants and credentials are denied by the enforced boundary.",
+      "checks": [
+        "NP-010",
+        "NP-012"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    },
+    {
+      "id": "FND-21",
+      "task": "TASK-013",
+      "criterion": "Malicious branch/diff/note/config, process execution and broker-request cases cannot gain authority or bypass publication.",
+      "checks": [
+        "F-CLASS",
+        "F-BROKER",
+        "NP-011",
+        "NP-012"
+      ],
+      "state": "blocked",
+      "evidence_level": "partial deterministic coverage; required native/design gate unfulfilled",
+      "remaining": [
+        "G-NATIVE-PROOF",
+        "G-NATIVE-ROUTE"
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "id": "G-NATIVE-ROUTE",
+      "state": "blocked",
+      "detail": "Astra v2 does not provide the accepted legacy agent_type spawn contract. Protected child configuration, actual lineage and peer/context-control isolation are not established. Tagged default-role overrides do not supply the required native-delegation disable. The alternative thread/fork proposal awaits manager revalidation; it is neither implemented nor launched."
+    },
+    {
+      "id": "G-NATIVE-PROOF",
+      "state": "blocked",
+      "detail": "No complete Curator bootstrap, confirmed native manager handoff, full generic/complex/extra-complex teams, identical isolated solver inputs, native owner publication, adversarial process/tool confinement or final NP reconciliation has passed."
+    },
+    {
+      "id": "G-TYPED-CONTROLS",
+      "state": "blocked",
+      "detail": "The complete accepted native input-delivery/follow-up/conflict/reconciliation event mapping and resume semantics remain incomplete pending the native-route redesign. Legacy-shaped synthetic event fixtures cannot certify actual Astra v2 behavior."
+    },
+    {
+      "id": "G-CAPACITY",
+      "state": "blocked",
+      "detail": "Bound native sessions retain their logical capacity through readiness, idle, interruption and failure. A supported trusted observation of native slot release and enforceable dispatch/work bounds are still required; coordinator counters do not enforce a native spawn cap."
+    },
+    {
+      "id": "G-TEMPLATE",
+      "state": "passed",
+      "detail": "Fresh read-only Template check returned current, with no additions, updates, deletions, adoptions or conflicts; no updater or Template mutation was performed by this evidence correction."
+    },
+    {
+      "id": "G-HISTORICAL-SOURCE",
+      "state": "blocked",
+      "detail": "The executed v12 packet binds the historical runner digest and was verified before launch. The exact pre-matcher runner byte copy was not retained by this implementer; no reconstructed copy is claimed. Current runner/coordinator bytes differ and historical proof is not relabeled current release evidence."
+    }
+  ],
+  "source_edits_stopped_pending_native_route_reassessment": true,
+  "new_native_launches_authorized_by_this_checkpoint": false,
+  "canonical_task_writes_by_implementer": false,
+  "source_git_publication": false,
+  "root_or_product_adoption": false,
+  "persistent_service_or_dependency_installation": false
+}

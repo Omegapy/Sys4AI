@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-service-v2-batch-01/host-runner.py"
+  ],
+  "staging_root": "/private/tmp/explorer-service-v2-batch-01",
+  "manifest": {
+    "path": "/private/tmp/explorer-service-v2-batch-01/inputs.json",
+    "sha256": "3e19ae0feba8a89df04bebfcdaffa0c639c1a23c50c89efeeb04b64721c12b16"
+  },
+  "inputs_count": 108,
+  "intended_writes": [
+    "Fresh isolated test processes create/remove only /private/tmp/explorer-http-* fixture trees and their explicitly owned loopback listeners, private runtime files, worker/CLI children; every child is reaped."
+  ],
+  "source_writes": false,
+  "credentials": "Only process memory and private runtime files; never command/output/evidence.",
+  "timeout_seconds": 300
+}

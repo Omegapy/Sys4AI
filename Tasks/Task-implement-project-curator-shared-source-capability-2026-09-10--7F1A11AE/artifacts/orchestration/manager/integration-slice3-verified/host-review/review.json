@@ -1,0 +1,40 @@
+{
+  "kind": "host_frozen_owner_broker_slice3_review",
+  "state": "passed_at_deterministic_slice_level",
+  "slice_sha256": "128bd56ac7babc41312d2695fe4c050f075091a46f7f9bf7103008157970af31",
+  "verified_bindings": {
+    "source_files": 11,
+    "original_logs": 10,
+    "copied_source_test_files": 188
+  },
+  "suite": {
+    "name": "ForkBrokerTests",
+    "passed": 8,
+    "seconds": 6.501
+  },
+  "verified_behavior": [
+    "Unregistered ordinary callback namespace rejects before Task mutation.",
+    "Runtime observations return only the safe descriptor and its handle drives an actual disposable Task-owner update.",
+    "The original release response remains pending; later release completion is observed through Broker and submitted to Task after ACK/cleanup.",
+    "Task creation returns bounded identity/path/revision metadata.",
+    "Successive actual Task-owner updates reconcile via verified before/after and revision edges, independent of collection order; missing link, wrong epoch and unexplained edit reject.",
+    "Closed typed receipt fields and original operation identity remain enforced."
+  ],
+  "evidence": [
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-owner-slice3-review-vvgysecp/manifest.json",
+      "sha256": "92477648c9fd65ad3f8be1f93e4aa5ead40656a1b2484318629c6e08cf8ef750"
+    },
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-owner-slice3-review-vvgysecp/broker.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-owner-slice3-review-vvgysecp/broker.stderr.txt",
+      "sha256": "090413a602b02b212bc71e5c55088f66cb12bd38eb70f2e148099f0196ade81a"
+    }
+  ],
+  "limits": "Synthetic transport and cleanup fixture; no actual native P1, helper privacy, full team or release claim. Manager separately reviews archive/protocol and resumed memory/ontology cases.",
+  "native_operations": 0,
+  "project_writes": 0
+}

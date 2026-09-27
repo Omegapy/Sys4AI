@@ -1,0 +1,5 @@
+# Current worker assignment restriction
+
+This narrows the publication scope in worker-delegation-v2.md for this initial assignment. Preserve the complete capture objective, exact sources, settled user choice and frozen baseline. Current fit.writes is only Verification/scalability-trd-20260913/worker. Prepare the complete title/body JSON payload for trd.py, a readable body, source coverage and semantic readiness evidence in that directory. Do not write TRDs or invoke a managed mutation yet. Another cancelled Task retains an unresolved assignment over TRDs; the host is addressing ownership. No bypass, lock removal, code fix or unrelated state mutation is authorized.
+
+Return prepared artifact paths and hashes, exact role-read hashes, coverage and checks, then stop without claiming a canonical TRD exists. After publication ownership is resolved, this same generic worker may receive an exact input rebind authorizing trd.py publication and verification. This is temporary sequencing under the same bounded objective, not cancellation, a second worker or completed delivery.

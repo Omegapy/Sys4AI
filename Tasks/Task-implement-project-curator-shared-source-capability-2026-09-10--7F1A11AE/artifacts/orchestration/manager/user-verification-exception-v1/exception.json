@@ -1,0 +1,113 @@
+{
+  "kind": "UserDirectedVerificationException",
+  "recorded_at": "2026-09-12T13:41:17.857815+00:00",
+  "authority": {
+    "source": "Explicit user steering relayed by the active root Project Director in this task",
+    "exact_user_text": "What you were doing was flagged see image so skip.",
+    "image_inspected_by_this_manager": false,
+    "root_direction": "Skip flagged G3 adversarial/security probes and related bypass testing; keep the remaining broader implementation goal and existing runtime/permission gates."
+  },
+  "plan": {
+    "path": "Implementation_Plans/Plan_sys4ai-project-curator-shared-source-capability_2026-09-10_FAE2A15B/plan.json",
+    "sha256": "71b7ca5cafa0eae40f82335089261bce4fe94b9e24e63251e50c7837cce6d539"
+  },
+  "status": "skipped_by_explicit_user_instruction",
+  "passed": false,
+  "scope": [
+    {
+      "id": "G3",
+      "checks": "Entire selected adversarial/security-probe run, including OS/confinement/descriptor/signal/network/helper probes and related bypass tests.",
+      "status": "skipped_by_explicit_user_instruction"
+    },
+    {
+      "id": "NP-010",
+      "checks": "Native protected-boundary adversarial proof.",
+      "status": "skipped_by_explicit_user_instruction"
+    },
+    {
+      "id": "NP-011",
+      "checks": "Malicious candidate/configuration/identity/replay bypass attempts.",
+      "status": "skipped_by_explicit_user_instruction"
+    },
+    {
+      "id": "NP-012",
+      "checks": "Alias/descendant/import/native-helper/network probe cases.",
+      "status": "skipped_by_explicit_user_instruction"
+    },
+    {
+      "id": "NP-009",
+      "checks": "Only G3 adversarial portions; ordinary independent owner publication/recovery work remains in scope.",
+      "status": "partially_skipped_by_explicit_user_instruction"
+    },
+    {
+      "id": "TASK-013",
+      "checks": "Adversarial proof action and its two criteria/verification steps; existing implementation controls remain unchanged.",
+      "status": "verification_skipped_by_explicit_user_instruction"
+    },
+    {
+      "id": "TASK-047",
+      "checks": "Only repetition of skipped security/confinement/bypass probes at release; normal native identities/topology/readiness/recovery observations remain in scope.",
+      "status": "partially_skipped_by_explicit_user_instruction"
+    }
+  ],
+  "original_task013": {
+    "acceptance_criteria": [
+      "Candidate writes to trusted policy/broker, canonical ledgers, control records, grants and credentials are denied by the enforced boundary.",
+      "Malicious branch/diff/note/config, process execution and broker-request cases cannot gain authority or bypass publication."
+    ],
+    "action": "Run adversarial candidates under the actual selected host confinement profile and prove the trusted broker cannot be modified or impersonated.",
+    "blocker_reason": null,
+    "completed_at": null,
+    "dependencies": [
+      "TASK-007",
+      "TASK-011",
+      "TASK-012"
+    ],
+    "design_basis": [],
+    "evidence": [],
+    "parallel_group": null,
+    "pause_reason": null,
+    "phase_id": "PHASE-003",
+    "requirement_ids": [
+      "REQ-009",
+      "REQ-012",
+      "REQ-023",
+      "REQ-039"
+    ],
+    "risks": [
+      "If the selected host cannot enforce the boundary, unattended mutating support stays incomplete and blocked."
+    ],
+    "skip_authority": null,
+    "skip_reason": null,
+    "status": "planned",
+    "target_artifacts": [
+      "Verification/project-curator-release/enforcement-proof.json",
+      "SKILLS-depo/curate/scripts/curator_confinement.py",
+      "CURATION-depo/trust-boundary.md"
+    ],
+    "task_id": "TASK-013",
+    "title": "Prove broker and candidate isolation",
+    "verification_steps": [
+      "Observe positive scoped candidate writes and negative prohibited filesystem/process/network actions on the supported host.",
+      "Attempt request spoofing, symlink/hardlink escape, environment/import injection and grant replay against frozen trusted code.",
+      "Use synthetic canaries to prove protected read denial, caller impersonation rejection and independent tool-network enforcement; inspect actual effective sandbox policy."
+    ]
+  },
+  "preservation": [
+    "Do not execute skipped probes through another route or relabel them as passing.",
+    "Preserve all existing controls, historical failed and offline evidence, raw logs and frozen editions.",
+    "No bypass or weakening of runtime readiness, actor provenance, permission, publication, stop or recovery gates.",
+    "Do not report the original full verification baseline as passed. Final coverage must cite this exception and distinguish implemented controls from unperformed proof."
+  ],
+  "continues": [
+    "Ordinary application control, setup/distribution, metrics, standalone runtime functionality and normal recovery.",
+    "Required unskipped native and final integration work under exact scope review, with no real service adoption or publication."
+  ],
+  "current_state": {
+    "root": "running observed by actual collaboration.list_agents",
+    "foundation_worker": "completed",
+    "application_worker": "completed",
+    "canonical_revision": 217
+  },
+  "source_changes_in_this_exception": []
+}

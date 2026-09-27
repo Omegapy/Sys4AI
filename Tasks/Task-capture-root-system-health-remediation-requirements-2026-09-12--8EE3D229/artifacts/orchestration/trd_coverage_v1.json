@@ -1,0 +1,344 @@
+{
+  "schema_version": 1,
+  "task_id": "TASK-20260912-8EE3D229",
+  "assignment_id": "health_trd_worker",
+  "baseline": {
+    "path": "Tasks/Task-capture-root-system-health-remediation-requirements-2026-09-12--8EE3D229/artifacts/orchestration/baseline_cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82.json",
+    "sha256": "cbbd2caea899a26e8009e3aa29c2e9e9f765194eaac275600b06f562ee5c4c82"
+  },
+  "payload": {
+    "path": "Verification/root-health-trd-worker-20260912-v1/trd-input.json",
+    "sha256": "54ebcd80fb6739a819ba208030368461e33e36c902f9750f9ddc0126143d0b81",
+    "bytes": 20646
+  },
+  "role_reads": {
+    "agents_path": "Roles/project-sub-agent/AGENTS.md",
+    "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "role_path": "Roles/project-sub-agent/ROLE.md",
+    "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+    "gate_task_revision": 9
+  },
+  "checks": {
+    "result": "passed",
+    "method": "Root .venv Python 3.12, installed trd.py pure load_payload/normalized_body/validate_body/completion_blockers calls; direct hash, path and source-identity comparisons. Python bytecode writing disabled. No managed helper mutation or system behavior tests.",
+    "current_trd_body_schema": 2,
+    "json_title_body_keys_exact": true,
+    "requirements": 8,
+    "required_sections": 10,
+    "content_ready": true,
+    "content_blockers": [],
+    "baseline_inputs_match": 22,
+    "retained_manifest_sources_match": 13,
+    "markdown_links_resolve_from_managed_TRDs_directory": 21,
+    "exact_snapshot_event_ids_and_hashes_match": 2,
+    "exact_staged_response_path_matches": true,
+    "all_requirements_have_source_and_acceptance": true,
+    "dependency_graph_valid": true,
+    "no_unconfirmed_assumptions": true,
+    "no_unspecified_requirements": true
+  },
+  "source_to_requirements": [
+    {
+      "source": "U01 and H01 item 1; E01",
+      "material": "Missing Curator capability",
+      "requirements": [
+        "REQ-001"
+      ],
+      "sections": [
+        "Captured user intent",
+        "In scope"
+      ]
+    },
+    {
+      "source": "U01 and H01 item 2; E02",
+      "material": "Exact two pending signals, metadata-only coverage, owner completion unobserved",
+      "requirements": [
+        "REQ-002",
+        "REQ-006",
+        "REQ-008"
+      ],
+      "sections": [
+        "Context and sources",
+        "Decisions"
+      ]
+    },
+    {
+      "source": "U01 and H01 item 3; E03",
+      "material": "Exact cancelled-Task staged response and retained warning",
+      "requirements": [
+        "REQ-003",
+        "REQ-008"
+      ],
+      "sections": [
+        "Context and sources",
+        "In scope"
+      ]
+    },
+    {
+      "source": "E04; G01",
+      "material": "Historical canonical active assignments without current native stop proof",
+      "requirements": [
+        "REQ-003",
+        "REQ-007"
+      ],
+      "sections": [
+        "Context and sources",
+        "Out of scope"
+      ]
+    },
+    {
+      "source": "U01 and H01 advanced result; E05",
+      "material": "On-demand browser evidence gap; backend probes pass; writes unexercised",
+      "requirements": [
+        "REQ-004",
+        "REQ-005",
+        "REQ-008"
+      ],
+      "sections": [
+        "Decisions",
+        "Out of scope"
+      ]
+    },
+    {
+      "source": "H01 memory/core results; E06, E07, E09; G01",
+      "material": "Preserve healthy memory, ontology and source integrity",
+      "requirements": [
+        "REQ-005",
+        "REQ-008"
+      ],
+      "sections": [
+        "Destination",
+        "In scope"
+      ]
+    },
+    {
+      "source": "H01 Curator result; E02, E08; G01",
+      "material": "Preserve enabled project-session mode, budgets, opt-outs, disabled unattended operation; distinguish fixtures from live work",
+      "requirements": [
+        "REQ-006",
+        "REQ-008"
+      ],
+      "sections": [
+        "In scope",
+        "Out of scope"
+      ]
+    },
+    {
+      "source": "U01; G01, G02",
+      "material": "Document-only current authority, exact later owner scope, root-only boundary and separate document approval",
+      "requirements": [
+        "REQ-007",
+        "REQ-008"
+      ],
+      "sections": [
+        "Captured user intent",
+        "Out of scope",
+        "Decisions"
+      ]
+    },
+    {
+      "source": "H01, E02, E03, E09",
+      "material": "Snapshot chronology and limits; original zero nonterminal count does not describe new capture Task",
+      "requirements": [
+        "REQ-008"
+      ],
+      "sections": [
+        "Context and sources",
+        "Decisions"
+      ]
+    }
+  ],
+  "requirements_to_sources": [
+    {
+      "requirement": "REQ-001",
+      "title": "Make the installed Curator capability discoverable",
+      "sources": [
+        "U01; H01 item 1; E01; G01 ontology ownership and capability-discovery boundaries."
+      ],
+      "acceptance_count": 2,
+      "depends_on": [
+        "REQ-007"
+      ]
+    },
+    {
+      "requirement": "REQ-002",
+      "title": "Resolve the identified catch-up signals through their owner",
+      "sources": [
+        "U01; H01 item 2; E02 signals C1 and C2; G01 Curator session checkpoint and owner boundaries."
+      ],
+      "acceptance_count": 3,
+      "depends_on": [
+        "REQ-007"
+      ]
+    },
+    {
+      "requirement": "REQ-003",
+      "title": "Give the staged Task response an exact transaction disposition",
+      "sources": [
+        "U01; H01 item 3; E03 exact staged artifact; E04 historical owner limitation; G01 Task recovery and ownership rules."
+      ],
+      "acceptance_count": 3,
+      "depends_on": [
+        "REQ-007"
+      ]
+    },
+    {
+      "requirement": "REQ-004",
+      "title": "Demonstrate on-demand ontology workbench operation",
+      "sources": [
+        "U01; H01 ontology advanced finding and verification scope; E05; G01 ontology second-release specification."
+      ],
+      "acceptance_count": 3,
+      "depends_on": [
+        "REQ-007"
+      ]
+    },
+    {
+      "requirement": "REQ-005",
+      "title": "Preserve healthy memory and ontology behavior",
+      "sources": [
+        "U01; H01 system results; E05, E06, E07 and E09; G01 memory and ontology ownership specifications."
+      ],
+      "acceptance_count": 3,
+      "depends_on": []
+    },
+    {
+      "requirement": "REQ-006",
+      "title": "Preserve Curator project-session operation",
+      "sources": [
+        "U01; H01 Curator result and verification scope; E02, E08 and E09; G01 Curator session checkpoint."
+      ],
+      "acceptance_count": 3,
+      "depends_on": []
+    },
+    {
+      "requirement": "REQ-007",
+      "title": "Preserve exact ownership and action authority",
+      "sources": [
+        "U01; E04; G01 project ownership, Task activation and recovery rules; G02 document and Task authority boundaries."
+      ],
+      "acceptance_count": 3,
+      "depends_on": []
+    },
+    {
+      "requirement": "REQ-008",
+      "title": "Report health from exact evidence and retain limits",
+      "sources": [
+        "U01; H01 verification scope; E01 through E09; G01 evidence and completion rules; G02 separation of document approval and implementation."
+      ],
+      "acceptance_count": 3,
+      "depends_on": []
+    }
+  ],
+  "input_hashes": [
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/request.md",
+      "sha256": "5ac27446b31eef15ded8c0576f603c3469f81f700546bb0adca75eb141f39f9b"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/REPORT.md",
+      "sha256": "38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/verification_summary.json",
+      "sha256": "f39197f503276a8613e5a72bfd05d24ef8ec37fe135a42b9a652df46ae892b81"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json",
+      "sha256": "672d9d1b8a52177005269be390f9568128e416198042df17b912e9a282b6a6a8"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/curator_session.json",
+      "sha256": "e717a8ba66a2c125c04c6e0ea9531e930fe865ad83fd55de0f7b779fde082122"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/memory_search.json",
+      "sha256": "ad8bee8c4dd5f1f48f9ff41e27069c3fe88e884421f8667b53bcc942b2384166"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json",
+      "sha256": "9f4f5c5f43c052ca484ad356abead2fdcf2fa6c5af4d46bc7cc30b388e5a542b"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/task_status.json",
+      "sha256": "12f371a4380c951e68040d4bb3d7772de3cd5141ee37a0561771cc75a633c1c7"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json",
+      "sha256": "bee4c38377e8b790f70f684b4fcc185fe211e6228b95b05143f89e497345c822"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "595f213c164e0c5e3e9b0f1bf69c13197edfd8f3c95a27388a4fbd9937105d37"
+    },
+    {
+      "path": "SOUL.md",
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+    },
+    {
+      "path": "ROLE.md",
+      "sha256": "15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b"
+    },
+    {
+      "path": "SPECS.md",
+      "sha256": "704ec05373b0b7089f1470da3c80f10d942b5684846ef5b7824c72a08fbe3408"
+    },
+    {
+      "path": ".agents/skills/task/SKILL.md",
+      "sha256": "a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121"
+    },
+    {
+      "path": ".agents/skills/to-trd/SKILL.md",
+      "sha256": "195df865d985545bb2aff1ac4f40211015f6c33e63d12387b1b1a48916195c41"
+    },
+    {
+      "path": ".agents/skills/to-trd/references/wayfinding.md",
+      "sha256": "d05957376b7393fc122f11ee8425bd4a799ea07708a169d2369045260e3f8cec"
+    },
+    {
+      "path": ".agents/skills/to-trd/references/trd-contract.md",
+      "sha256": "4a17e57a4c7f0626ab5c7d427874e0bda6e6a73e2ee15811cd2bb33edb57a0b9"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/source-manifest.json",
+      "sha256": "572e6657c482fac410f79d772bd4294e0d4e2af081d49f7193de9ca32b451794"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/ontology_core.json",
+      "sha256": "49e6d11984389324f0e211369f7034f076404b7c9cc119c3bee7fab08199fc29"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/memory_operational.json",
+      "sha256": "7ddd523b171a81d6c790fdde70f0062b523292f8756e2ba4a8cb44dd51ef875c"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/curator_status.json",
+      "sha256": "0451ffdcd1bbdc8598d9cdc0a5760a675c7c3239d758ec30b6dc97ee8f94237e"
+    },
+    {
+      "path": "Verification/root-health-followup-trd-20260912-v1/curator_tests.stderr",
+      "sha256": "d4b9562980f0dfa50e3daaa6e5156546952aec901ff71658f01708c8a6c8b2ce"
+    }
+  ],
+  "source_manifest": {
+    "path": "Verification/root-health-followup-trd-20260912-v1/source-manifest.json",
+    "sha256": "572e6657c482fac410f79d772bd4294e0d4e2af081d49f7193de9ca32b451794"
+  },
+  "semantic_review": {
+    "scope": "Compared all report findings, negative boundaries, dated observations and current assignment limitations against the payload. Implementation choices remain Decisions; no source is treated as new action authority.",
+    "result": "All material captured findings and exclusions have destinations; every normative requirement has a stated source basis.",
+    "approval": "No user approval is claimed. Manager must inspect and publish the exact accepted payload with the official helper, then present the exact managed draft revision."
+  },
+  "limitations": [
+    "Highest verification: static checks passed for the input payload.",
+    "No canonical TRD, TRD index, Task state, ontology, memory, historical owner or system configuration was written by this worker.",
+    "The body references the retained September 12 health evidence; no current system behavior was retested.",
+    "No browser operation, owner maintenance, canonical publication/recovery, service start, dependency installation, Git, external action or child-project behavior was exercised.",
+    "The source-manifest hashes bind retained diagnostics. Original /tmp equivalence was supplied by the manager and was not independently re-read by this worker.",
+    "Canonical document identity, revision, hash and index validation belong to manager integration."
+  ],
+  "files_written": [
+    "Verification/root-health-trd-worker-20260912-v1/trd-input.json",
+    "Verification/root-health-trd-worker-20260912-v1/coverage-checks.json"
+  ]
+}

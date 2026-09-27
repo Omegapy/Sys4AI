@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "assignment_id": "PACKAGE_TOOLS_WORKER_G3",
+  "subtask_id": "PACKAGE_TOOLS",
+  "baseline": "77f8889eb7dedf47aefb4f1f773b451bf41f8b5dc462b69bc047ed29107cc8d9",
+  "native_id": "/root/explorer_manager_g3/package_tools_worker",
+  "app_thread_id": "01a0bf4e-e2f5-76a1-ae22-3fb53ef73a91",
+  "outcome": "implemented_and_verified_for_manager_acceptance",
+  "highest_verification": "Actual disposable production typecheck/build/publication and targeted runtime/publisher behavior observed; full product/HTTP/browser not exercised.",
+  "tests": 27,
+  "skipped": 0,
+  "criteria": [
+    {
+      "criterion": "Asset validation accepts only the exact closed manifest shape, safe no-follow single-link bounded files, correct paths/MIME/hashes/entry/import closure, excluding metadata and repository paths from the runtime map.",
+      "status": "passed_for_assigned_tooling_scope",
+      "evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/suite-delivery-v1.log",
+          "sha256": "d0a67f5b41636e012c08227626f1b0576d5df1e320f40105950988a713144e9c",
+          "bytes": 3685
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/schema-identity-result.json",
+          "sha256": "0e10ff4db36e8f4eec7beff92986b38540ba3d9cfd4d1d9eecaf32e7d6491dcb",
+          "bytes": 585
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/verification-result.json",
+          "sha256": "4a8a0d5f9a50531aaf78a4fbf30914aee4fc5f5810aff0ab299ddd4b52213350",
+          "bytes": 7473
+        }
+      ]
+    },
+    {
+      "criterion": "Build tools compute exact source_digest and noncircular build_id, inject build/schema identity, use pinned existing Node/npm/Vite/TypeScript and stage/validate complete output before manifest-last publication; only prior reviewed manifest-owned assets may be removed.",
+      "status": "passed_for_assigned_tooling_scope",
+      "evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/verification-result.json",
+          "sha256": "4a8a0d5f9a50531aaf78a4fbf30914aee4fc5f5810aff0ab299ddd4b52213350",
+          "bytes": 7473
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/minimal-build-receipt.json",
+          "sha256": "7545898f3c6ad29107c149c7dc31f30c826aada1d662b98171f54ad7cd8e63ca",
+          "bytes": 3424
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/minimal-runtime-manifest.json",
+          "sha256": "5a47456b4a01b492e39922b52178508c66f50ca1d986c1900be7e247fcf13f66",
+          "bytes": 1308
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/suite-delivery-v1.log",
+          "sha256": "d0a67f5b41636e012c08227626f1b0576d5df1e320f40105950988a713144e9c",
+          "bytes": 3685
+        }
+      ]
+    },
+    {
+      "criterion": "Neutral starter is exact strict schema version1, project_id null and empty mappings; active specialization is separate. No depot identity, browser authority, hooks or runtime dependencies are introduced.",
+      "status": "passed_for_assigned_tooling_scope",
+      "evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/schema-identity-result.json",
+          "sha256": "0e10ff4db36e8f4eec7beff92986b38540ba3d9cfd4d1d9eecaf32e7d6491dcb",
+          "bytes": 585
+        }
+      ]
+    },
+    {
+      "criterion": "Actual disposable minimal Vite production build and publisher tests prove deterministic identities, valid closed package, tamper/traversal/symlink/hardlink/unknown/missing/over-budget rejection and preservation outside the owned output inventory. This is tooling evidence, not final product/browser/HTTP acceptance.",
+      "status": "passed_for_assigned_tooling_scope",
+      "evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/verification-result.json",
+          "sha256": "4a8a0d5f9a50531aaf78a4fbf30914aee4fc5f5810aff0ab299ddd4b52213350",
+          "bytes": 7473
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/suite-delivery-v1.log",
+          "sha256": "d0a67f5b41636e012c08227626f1b0576d5df1e320f40105950988a713144e9c",
+          "bytes": 3685
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/failure-history.json",
+          "sha256": "0ada74ae754d979e6b17a8e4883f595f546e2917dd3849805e26726acc4256b9",
+          "bytes": 2333
+        }
+      ]
+    }
+  ],
+  "immutable_contract_inputs_verified": [
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/baseline_77f8889eb7dedf47aefb4f1f773b451bf41f8b5dc462b69bc047ed29107cc8d9.json",
+      "sha256": "77f8889eb7dedf47aefb4f1f773b451bf41f8b5dc462b69bc047ed29107cc8d9"
+    },
+    {
+      "path": "Implementation_Plans/Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA/plan.json",
+      "sha256": "35d6fe54aaa9871867d5fe1d1f0d4e96e58790a0baf8e9585561f75672b6c78b"
+    },
+    {
+      "path": "TRDs/trd_project-knowledge-explorer-full-first-release_2026-09-19.md",
+      "sha256": "bc074393b6eb7210154d93ef904b0959db86e0d845f449be56e071b8548c8d4d"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/ART_CONTRACTS_SYNTHESIS_V1.md",
+      "sha256": "21238a8c00030d433315c8ffa3abb5237e8001fea0cee6b9f9153550e1d64785"
+    },
+    {
+      "path": "SKILLS-depo/ontology/references/explorer-contract.md",
+      "sha256": "de02c72a60fb30a707d6d83bae915cac358eaab09378788e826640654ee8ae00"
+    },
+    {
+      "path": "ONTOLOGY-depo/schema/explorer-v1.json",
+      "sha256": "8e6d0ceb47c98e77d518f4d7c935986ab6982d1a1c15e12377a726e90fbbb7a4"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/package.json",
+      "sha256": "ff9936a6af6c1d2939b60e00e043b6ad9f730b942dc233a80071f2368a66f70b"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/package-lock.json",
+      "sha256": "c56e429ba8b70fe0e56ab5f879853f5267083eb7facbc0a6da36322b94afdbf9"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/THIRD_PARTY_NOTICES.md",
+      "sha256": "3cfd499b3e29a659bf0ca25b379e5cfcc2c2b008da3d4713413b241b2b0aa746"
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/fixtures/explorer/validation/delivery.json",
+      "sha256": "3f6e471217bda741a031de41e2ba360103c261e99c0d2b634f0aff8a9aa513f9"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/contracts-delivery-acceptance.json",
+      "sha256": "13758f6578e984330b30ae46d2ebfe5494e982fa1e0df7057307543bc2f0f4cc"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/host-dependency-runtime-receipt.json",
+      "sha256": "e377bb1b138589065fdfe133e94c437dc837623884080d007a664bf3ea692054"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/canonical-serialization-handoff.json",
+      "sha256": "e588334225874f92b14d61ce80b99689fe0267ff571dfe19ad1bacda5b63b76f"
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/user-command-approval-scope.json",
+      "sha256": "32056cf5231c577f301d8f3ddfc8723286a71d768dae5a8af42a3b63ec1b4b57"
+    }
+  ],
+  "production_consumer_obligations": [
+    "Bind all real schema/lock/notices metadata in load_assets.",
+    "Validate the complete service code epoch around every static response and make package_changed sticky.",
+    "Redirect document aliases to the canonical nested entry URL when relative imports would otherwise change meaning.",
+    "Source config/module/asset additions outside this helper are not covered by these frozen file hashes.",
+    "Asset publication requires one writer and preserves unowned output; interruption may leave a fail-closed incomplete package."
+  ],
+  "limitations": [
+    "No network provisioning or npm hooks were executed. This does not claim a browser ran with its network disabled.",
+    "Compiler targets are configuration; actual browser/CSP/HTTP/whole-service epoch checks remain later gates.",
+    "No application src/index/assets, root adoption, Template, canonical knowledge, memory, Task or Git publication was written by this worker.",
+    "Existing all-helper closure may change concurrently; these tests bind their own exact selected helper and production-tooling inputs.",
+    "Publication is a single-writer operation; interruption can leave a fail-closed incomplete package rather than automatic rollback."
+  ],
+  "plan_scope": "Pure independent TASK-010 tooling slice only. Final application production assets, service HTTP/headers/CSP, offline browser behavior, distribution/adoption, initializer and remaining TASK-010 requirements remain with their assigned later owners.",
+  "worker_writes_stopped_after_delivery": true,
+  "failure_history": {
+    "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/failure-history.json",
+    "sha256": "0ada74ae754d979e6b17a8e4883f595f546e2917dd3849805e26726acc4256b9",
+    "bytes": 2333
+  },
+  "current_live_source_evidence": [
+    {
+      "path": "SKILLS-depo/ontology/explorer/vite.config.ts",
+      "bytes": 772,
+      "sha256": "ef4f8269d6833830f71543dbfc31ae26d6d9d9d2e6d459032481ea9d377a0ae1"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/tsconfig.json",
+      "bytes": 399,
+      "sha256": "ead2bf413dce4eaa13809dd8dad154b91dd21ae55721d5ced2de4ceca8b40d84"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/BUILD.md",
+      "bytes": 6274,
+      "sha256": "14a40861315c91fc6a1b232992d18c6564a4b2bd819789206f16af2cc4aea3fb"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/scripts/package-runtime.mjs",
+      "bytes": 17803,
+      "sha256": "7346ed8159e14f3457a2d6315fe40ceda0fbc7af2082efd9b605ff1cc1ae3147"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/package.json",
+      "bytes": 473,
+      "sha256": "ff9936a6af6c1d2939b60e00e043b6ad9f730b942dc233a80071f2368a66f70b"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/package-lock.json",
+      "bytes": 38104,
+      "sha256": "c56e429ba8b70fe0e56ab5f879853f5267083eb7facbc0a6da36322b94afdbf9"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/THIRD_PARTY_NOTICES.md",
+      "bytes": 235876,
+      "sha256": "3cfd499b3e29a659bf0ca25b379e5cfcc2c2b008da3d4713413b241b2b0aa746"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_explorer_assets.py",
+      "bytes": 23795,
+      "sha256": "215f2f5043c9f7de4abb02b32e9d28961733d11c120e3b0dec5a0e1b90894db6"
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_explorer_assets.py",
+      "bytes": 19298,
+      "sha256": "387fd495e1905bbcce70a1cf48131e88b46fbb57d52f90dfc27d49b24b4f364e"
+    },
+    {
+      "path": "ONTOLOGY-depo/starter/ontology-explorer.yaml",
+      "bytes": 184,
+      "sha256": "4f830593830da0ba679a2c8699e52d9cd7d9a458ac9a6467db16f5df8a6a0b0a"
+    }
+  ],
+  "diff_check_exit_code": 0
+}

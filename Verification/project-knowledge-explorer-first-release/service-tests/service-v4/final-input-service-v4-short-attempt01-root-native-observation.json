@@ -1,0 +1,32 @@
+{
+  "actor": "/root",
+  "baseline_browser_tab_ids": [
+    "1492113069",
+    "1492113022",
+    "1492113080",
+    "1492113066",
+    "1492113063",
+    "1492113060"
+  ],
+  "host_receipt": "/private/tmp/explorer-service-v4-native-no-geometry-host-p3h0ny0u/receipt.json",
+  "host_receipt_sha256": "7b33aed89ad884bdae144cba36412cb8f0f5e74dcc6824be70ef8d755988f749",
+  "limitations": [
+    "Normal STOP was sent 128.3 seconds after host start, beyond the reviewed latest 120-second stop gate; this attempt fails.",
+    "CUA gave no stable native numeric window ID or exact full frame; the earlier failed window-restoration observation remains false and unresolved.",
+    "This observation does not establish accessibility acceptance or full PLAN completion."
+  ],
+  "observations": [
+    "CUA native Chrome super+n created a disposable window showing one selected New Tab.",
+    "Browser inventory showed new blank tab 1492113084 at chrome://newtab/.",
+    "After browser_ready, browser inventory showed test tab 1492113085 at the clean overview route; blank tab 1492113084 was absent.",
+    "CUA AX for the test tab showed Project Knowledge Explorer fixture heading and connected status.",
+    "CUA native Chrome AX showed a selected Project Knowledge Explorer window with only the test tab.",
+    "CUA tab.close closed only test tab 1492113085; fresh inventory showed both owned tabs absent and all six baseline tabs present.",
+    "CUA native Window menu after close listed the user ChatGPT window, not Project Knowledge Explorer. The menu was cancelled.",
+    "No geometry, zoom, preference, display, tile or window size actions were taken in this attempt."
+  ],
+  "owned_blank_tab_id": "1492113084",
+  "owned_test_tab_id": "1492113085",
+  "status": "observed_cleanup_but_deadline_failed",
+  "test_route": "http://127.0.0.1:53164/#/p/explorer-browser-smoke/overview"
+}

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "status": "failed",
+  "stage": "/private/tmp/explorer-client-foundations-nx25iyjd",
+  "toolchain": {
+    "node": "25.9.0",
+    "npm": "11.12.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.0",
+    "cytoscape": "3.34.3"
+  },
+  "checks": [
+    {
+      "name": "strict_exact_project_config",
+      "command": [
+        "node",
+        "/private/tmp/explorer-client-foundations-nx25iyjd/node_modules/typescript/bin/tsc",
+        "--project",
+        "/private/tmp/explorer-client-foundations-nx25iyjd/tsconfig.json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "deliberate_negative_types",
+      "command": [
+        "node",
+        "/private/tmp/explorer-client-foundations-nx25iyjd/node_modules/typescript/bin/tsc",
+        "--strict",
+        "--noUncheckedIndexedAccess",
+        "--target",
+        "ES2022",
+        "--module",
+        "Node16",
+        "--moduleResolution",
+        "node16",
+        "--lib",
+        "ES2022,DOM",
+        "--noEmit",
+        "/private/tmp/explorer-client-foundations-nx25iyjd/negative.ts"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 2,
+      "stdout": "error TS5112: tsconfig.json is present but will not be loaded if files are specified on commandline. Use '--ignoreConfig' to skip this error.\n",
+      "stderr": ""
+    },
+    {
+      "name": "runner_failure",
+      "error": "deliberate_negative_types failed"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/contracts.ts",
+      "sha256": "357ed765839938da327aa73dbd0318cf05ac6b313ed357949aa16f8dc9a64a7c",
+      "bytes": 157102
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/model.ts",
+      "sha256": "441ed7ce0ff9ca9b54a4d8ad1bf503a2c6ee1f684eba2b4a9210aafb5b9e6c91",
+      "bytes": 6854
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/preferences.ts",
+      "sha256": "3326130b95927a5fd3d94b507e4c2b1bda1f523736155d51cb59ae9ef6d42544",
+      "bytes": 2884
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/routes.ts",
+      "sha256": "77e117c0d138a1d57fe234309e0f1f0b62852445db55acfdd7bc77e92f3e2078",
+      "bytes": 5582
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/state.ts",
+      "sha256": "e6d06f945bd59aa54af5b6216d251a7f6d7450ac1479706d8164745ce1d930a4",
+      "bytes": 16261
+    }
+  ]
+}

@@ -1,0 +1,665 @@
+{
+  "kind": "P1-frozen-preparation-checkpoint",
+  "state": "prepared_not_authorized",
+  "packet": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/scope.packet.json",
+  "canonical_sha256": "359d6209bd18688de18c1a21cd8ea44713f8d2666d191d948e245f22b469f083",
+  "packet_file_sha256": "f69921f43d72a628caafd1740d427bea0a4f5df95afc7c66ea0c1030d3f4b8c4",
+  "checks": [
+    {
+      "name": "candidate-workspaces-owner-flow",
+      "argv": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "SKILLS-depo/curate/tests",
+        "-p",
+        "test_broker.py",
+        "-k",
+        "test_task_creation_returns_only_safe_identity_and_revision_for_the_next_native_call",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/candidate-workspaces-owner-flow.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/candidate-workspaces-owner-flow.stderr.txt",
+        "sha256": "d49c14fb65a493e47c654ec847fca4f354e373f95fbec9ab7649a8fa72091026"
+      },
+      "tests": 1,
+      "terminal": "OK"
+    },
+    {
+      "name": "wire-preflight",
+      "argv": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-I",
+        "-B",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-r2-pdxnr210/p1_wire_preflight.py",
+        "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/scope.packet.json"
+      ],
+      "exit_code": 0,
+      "stdout": {
+        "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/wire-preflight.stdout.txt",
+        "sha256": "869b5c1a590f6a80cd9be74e6085b106590650f81db5d4701b6e69da1ec59555"
+      },
+      "stderr": {
+        "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/wire-preflight.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "role_content_checks": {
+    "controller": {
+      "complete_text_and_hashes": true,
+      "required_paths": [
+        ".agents/skills/agent-task/SKILL.md",
+        ".agents/skills/communication/SKILL.md",
+        ".agents/skills/manage-subagent-roles/SKILL.md",
+        ".agents/skills/task/SKILL.md",
+        "AGENTS.md",
+        "CURATOR.md",
+        "ROLE.md",
+        "SOUL.md",
+        "Verification/common-input.txt",
+        "curator.yaml"
+      ],
+      "selected_bytes": 88551,
+      "actual_output_sha256": "b244345e1df5304c82e1a3237dd8d9559c8a06db8a4ef77c9767304597de8576",
+      "reads": {
+        "CURATOR.md": "f8f7ec848e88404b89f7202929695d8a21d490e1d90e27b3a81a06b6da9711f7",
+        "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+        "ROLE.md": "41b772020af3289d36ebb93b383b7565ef3ab0b540f6d3d2aa17f6f251c68977",
+        "AGENTS.md": "41b772020af3289d36ebb93b383b7565ef3ab0b540f6d3d2aa17f6f251c68977",
+        "Verification/common-input.txt": "3a397122ea602a96731dcc96106ce45ddbd27bcaf2b22323e2df954db78dddaa",
+        ".agents/skills/communication/SKILL.md": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+        "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+        "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+        ".agents/skills/task/SKILL.md": "7ab4d1ded926be29662b7d30eef7c2d84a94278660029c65c7a17b50547a9840",
+        ".agents/skills/agent-task/SKILL.md": "31370fd69d2446ba129d77e94df8943cca15db98470020eae3ad5203d2ad2b7f",
+        ".agents/skills/manage-subagent-roles/SKILL.md": "3c848ab961e0fd8dc653e5b49caa63c975b37f273cfea3689ab1f3eb2e93a84a",
+        "curator.yaml": "7afe10b5f4689052a00c2a34bd864be5d2e18a68e1197a4184c77eb1ab2bdb1e"
+      }
+    },
+    "manager": {
+      "complete_text_and_hashes": true,
+      "required_paths": [
+        ".agents/skills/agent-task/SKILL.md",
+        ".agents/skills/communication/SKILL.md",
+        ".agents/skills/manage-subagent-roles/SKILL.md",
+        ".agents/skills/task/SKILL.md",
+        "AGENTS.md",
+        "CURATOR.md",
+        "ROLE.md",
+        "SOUL.md",
+        "Verification/common-input.txt",
+        "curator.yaml"
+      ],
+      "selected_bytes": 93432,
+      "actual_output_sha256": "55b36b119018585d799e4935e04221db8d3f6d149ea9a12432a7fef14a383986",
+      "reads": {
+        "CURATOR.md": "f8f7ec848e88404b89f7202929695d8a21d490e1d90e27b3a81a06b6da9711f7",
+        "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+        "ROLE.md": "41b772020af3289d36ebb93b383b7565ef3ab0b540f6d3d2aa17f6f251c68977",
+        "AGENTS.md": "41b772020af3289d36ebb93b383b7565ef3ab0b540f6d3d2aa17f6f251c68977",
+        "Verification/common-input.txt": "3a397122ea602a96731dcc96106ce45ddbd27bcaf2b22323e2df954db78dddaa",
+        ".agents/skills/communication/SKILL.md": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+        "Roles/curator-manager/AGENTS.md": "c8b3f8e260830bb5681438571057bc9474db46fdb909632e81148f67dfc7f78a",
+        "Roles/curator-manager/ROLE.md": "4eeaac17b71df6eb89728bfa3b4ed7eb5551b083515ab6078794afa2a044756a",
+        ".agents/skills/task/SKILL.md": "7ab4d1ded926be29662b7d30eef7c2d84a94278660029c65c7a17b50547a9840",
+        ".agents/skills/agent-task/SKILL.md": "31370fd69d2446ba129d77e94df8943cca15db98470020eae3ad5203d2ad2b7f",
+        ".agents/skills/manage-subagent-roles/SKILL.md": "3c848ab961e0fd8dc653e5b49caa63c975b37f273cfea3689ab1f3eb2e93a84a",
+        "curator.yaml": "7afe10b5f4689052a00c2a34bd864be5d2e18a68e1197a4184c77eb1ab2bdb1e"
+      }
+    },
+    "solver_a": {
+      "complete_text_and_hashes": true,
+      "required_paths": [
+        ".agents/skills/communication/SKILL.md",
+        "AGENTS.md",
+        "CURATOR.md",
+        "ROLE.md",
+        "SOUL.md",
+        "Verification/common-input.txt",
+        "curator.yaml"
+      ],
+      "selected_bytes": 55810,
+      "actual_output_sha256": "33f45bea6721c2fd74b1c8daa4a93b31b629c63c6464c39ce4f13d27841a6259",
+      "reads": {
+        "CURATOR.md": "f8f7ec848e88404b89f7202929695d8a21d490e1d90e27b3a81a06b6da9711f7",
+        "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+        "ROLE.md": "41b772020af3289d36ebb93b383b7565ef3ab0b540f6d3d2aa17f6f251c68977",
+        "AGENTS.md": "41b772020af3289d36ebb93b383b7565ef3ab0b540f6d3d2aa17f6f251c68977",
+        "Verification/common-input.txt": "3a397122ea602a96731dcc96106ce45ddbd27bcaf2b22323e2df954db78dddaa",
+        ".agents/skills/communication/SKILL.md": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+        "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+        "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+        "curator.yaml": "7afe10b5f4689052a00c2a34bd864be5d2e18a68e1197a4184c77eb1ab2bdb1e"
+      }
+    },
+    "solver_b": {
+      "complete_text_and_hashes": true,
+      "required_paths": [
+        ".agents/skills/communication/SKILL.md",
+        "AGENTS.md",
+        "CURATOR.md",
+        "ROLE.md",
+        "SOUL.md",
+        "Verification/common-input.txt",
+        "curator.yaml"
+      ],
+      "selected_bytes": 55810,
+      "actual_output_sha256": "33f45bea6721c2fd74b1c8daa4a93b31b629c63c6464c39ce4f13d27841a6259",
+      "reads": {
+        "CURATOR.md": "f8f7ec848e88404b89f7202929695d8a21d490e1d90e27b3a81a06b6da9711f7",
+        "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+        "ROLE.md": "41b772020af3289d36ebb93b383b7565ef3ab0b540f6d3d2aa17f6f251c68977",
+        "AGENTS.md": "41b772020af3289d36ebb93b383b7565ef3ab0b540f6d3d2aa17f6f251c68977",
+        "Verification/common-input.txt": "3a397122ea602a96731dcc96106ce45ddbd27bcaf2b22323e2df954db78dddaa",
+        ".agents/skills/communication/SKILL.md": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+        "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+        "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+        "curator.yaml": "7afe10b5f4689052a00c2a34bd864be5d2e18a68e1197a4184c77eb1ab2bdb1e"
+      }
+    }
+  },
+  "sources": {
+    "CURATION-depo/schema/grant-v1.json": {
+      "sha256": "5f444b5afadac60420a8c94cf145c51a2293d91408dcae2f8593c7eb9db9cc9f",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/CURATION-depo/schema/grant-v1.json"
+    },
+    "MEMORY-depo/publication-and-recovery.md": {
+      "sha256": "669b2beb36313f675c16dbe98f773bb5a6ffd4f83e1a9780bc5572231e36f123",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/MEMORY-depo/publication-and-recovery.md"
+    },
+    "ONTOLOGY-depo/publication-and-recovery.md": {
+      "sha256": "b25ea6e4198f430915b57d984fe6d994528386eee8ed81176999cec3c8a649bd",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/ONTOLOGY-depo/publication-and-recovery.md"
+    },
+    "ROLES-depo/curator-manager-AGENTS.md": {
+      "sha256": "c8b3f8e260830bb5681438571057bc9474db46fdb909632e81148f67dfc7f78a",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/ROLES-depo/curator-manager-AGENTS.md"
+    },
+    "ROLES-depo/curator-manager-ROLE.md": {
+      "sha256": "4eeaac17b71df6eb89728bfa3b4ed7eb5551b083515ab6078794afa2a044756a",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/ROLES-depo/curator-manager-ROLE.md"
+    },
+    "ROLES-depo/project-curator-CURATOR.md": {
+      "sha256": "f8f7ec848e88404b89f7202929695d8a21d490e1d90e27b3a81a06b6da9711f7",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/ROLES-depo/project-curator-CURATOR.md"
+    },
+    "SKILLS-depo/agent-task/references/orchestration-contract.md": {
+      "sha256": "1d927efce3f66648dc7e30f9f582b2bb98956e35b34ceffd63452517b7f223ba",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/agent-task/references/orchestration-contract.md"
+    },
+    "SKILLS-depo/agent-task/scripts/native_observations.py": {
+      "sha256": "cc3bf1eaad4ac248c44c84da356d35a9a8186a181d214ff3fb15ed0ca0436e31",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/agent-task/scripts/native_observations.py"
+    },
+    "SKILLS-depo/agent-task/scripts/orchestration_state.py": {
+      "sha256": "d4901e205c1ed23f9f11a7da5043883dd2df6c8f4e168830ab46913dbc2965f8",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/agent-task/scripts/orchestration_state.py"
+    },
+    "SKILLS-depo/agent-task/scripts/task_state.py": {
+      "sha256": "58813d942fca8874f0662da85d62e8b83fd75c9cf6beed583e699c4556df09a3",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/agent-task/scripts/task_state.py"
+    },
+    "SKILLS-depo/agent-task/tests/test_orchestration_state.py": {
+      "sha256": "df61cbd098c6e2e10b70a2cbdd4f1a9f03c48c7f4aae8ce6fab9bd30203945b0",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/agent-task/tests/test_orchestration_state.py"
+    },
+    "SKILLS-depo/agent-task/tests/test_task_state.py": {
+      "sha256": "30fdf456dc026507f0b7445412a81cd2596d9dcfea9c9731c19eb6d39768fe95",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/agent-task/tests/test_task_state.py"
+    },
+    "SKILLS-depo/curate/SKILL.md": {
+      "sha256": "270f7efa95413c0aa5dc1570884145a81095bb268ef3a9851517973ed8c829a1",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/curate/SKILL.md"
+    },
+    "SKILLS-depo/curate/references/foundation-interfaces.md": {
+      "sha256": "f030837dbd9755e59d03f41765f6b8bbb842ae63b08103ab027030c92c36a1dd",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/curate/references/foundation-interfaces.md"
+    },
+    "SKILLS-depo/curate/scripts/curator_broker.py": {
+      "sha256": "039872343328b6b84e25bdb14895c7376491457bad98da678e2120af7149e5ce",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/curate/scripts/curator_broker.py"
+    },
+    "SKILLS-depo/curate/scripts/curator_confinement.py": {
+      "sha256": "bdb27764a92dda41092eb45d1837dc63d548974c6f533396b9cb1299b7dd88f3",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/curate/scripts/curator_confinement.py"
+    },
+    "SKILLS-depo/curate/scripts/curator_grants.py": {
+      "sha256": "39fc9d7eee8c128752127b85ab73ba9aa2a71ded4a79d39ab90e535785804691",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/curate/scripts/curator_grants.py"
+    },
+    "SKILLS-depo/curate/scripts/curator_runtime.py": {
+      "sha256": "a1a7a9bed3a72139646d12db41ac7951525e042164f41a4c436504dd8fe0e77b",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/curate/scripts/curator_runtime.py"
+    },
+    "SKILLS-depo/curate/scripts/curator_runtime_codex.py": {
+      "sha256": "362674513ea1b1372e35f7acaec818e150b1bafff13e8686a0c98177bbcf90e5",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/curate/scripts/curator_runtime_codex.py"
+    },
+    "SKILLS-depo/curate/tests/test_broker.py": {
+      "sha256": "1d4433d1affd4a09afcb07947411c509a47d851dc0a60d8f88fdd4378b0eaf0a",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/curate/tests/test_broker.py"
+    },
+    "SKILLS-depo/curate/tests/test_confinement_contract.py": {
+      "sha256": "5446d88b95955bd53d61a5d87616a35786dfb039583c0c22ef21d94178173048",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/curate/tests/test_confinement_contract.py"
+    },
+    "SKILLS-depo/curate/tests/test_native_protocol.py": {
+      "sha256": "16e1477ee983f365a2dd21db26a9bfc1378ce6f353acca0cd7552a6cd0f6d2f8",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/curate/tests/test_native_protocol.py"
+    },
+    "SKILLS-depo/curate/tests/test_runtime_lifecycle.py": {
+      "sha256": "f9c361be798124a9ac2a58f0ec1f7751505a39b55c5850f094b69ffde385a9d3",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/curate/tests/test_runtime_lifecycle.py"
+    },
+    "SKILLS-depo/memory/scripts/memory_evidence.py": {
+      "sha256": "28f30641a83a640e669611a932293501293246936b27d5098645fe28a854ae3b",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/memory/scripts/memory_evidence.py"
+    },
+    "SKILLS-depo/memory/scripts/memory_publish.py": {
+      "sha256": "12df681916ef98e1163b3786fd2cc06692086aff01aead66eb5042434bde0096",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/memory/scripts/memory_publish.py"
+    },
+    "SKILLS-depo/memory/tests/test_publication.py": {
+      "sha256": "2e7ff64eaf2e00f54f965757ba985df5078e5886fc07b9b8410ebee15b6cdcf1",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/memory/tests/test_publication.py"
+    },
+    "SKILLS-depo/memory/tests/test_recovery.py": {
+      "sha256": "d47df96bfbe25855409333ed9b45fe55acedaf2be2fe79e9808963f9b2b4a6c3",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/memory/tests/test_recovery.py"
+    },
+    "SKILLS-depo/memory/tests/test_task_integration.py": {
+      "sha256": "0b154b070346d7aaff63a0efd538ad566dcbd994154d1c7175add775568bf30d",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/memory/tests/test_task_integration.py"
+    },
+    "SKILLS-depo/ontology/scripts/ontology_authority.py": {
+      "sha256": "c5eda42e85d5b3d02d2950e958c59ee52dfa58837580b19146a3b9f7adee289a",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/ontology/scripts/ontology_authority.py"
+    },
+    "SKILLS-depo/ontology/tests/test_advanced_publication.py": {
+      "sha256": "c04631309df9a97c1cf839a5bb389bc1bd30d31d1a11a6bba171d8f482ec4b5a",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/ontology/tests/test_advanced_publication.py"
+    },
+    "SKILLS-depo/ontology/tests/test_authority.py": {
+      "sha256": "7ef6899d33763c23fd14947c632f58cb5d0c1c1375dfeb175667a7c0f8db7c91",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/ontology/tests/test_authority.py"
+    },
+    "Verification/project-curator-release/enforcement-proof.json": {
+      "sha256": "b2a1b0b13603a8990748364530e5c98a99c246fe8832019a5b3a909a47f8c1ce",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/Verification/project-curator-release/enforcement-proof.json"
+    },
+    "Verification/project-curator-release/foundation-checks.json": {
+      "sha256": "da5bafeb0f34cb4c22d402d6b2b0b9765918b9245e7f509fee8e840aa57bec87",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/Verification/project-curator-release/foundation-checks.json"
+    },
+    "Verification/project-curator-release/foundation-results.json": {
+      "sha256": "499a2d39440af6a6c93f026d42f23834387c72b7cd1adbdfcfb9d1d5ab0aa773",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/Verification/project-curator-release/foundation-results.json"
+    },
+    "Verification/project-curator-release/native-publication.json": {
+      "sha256": "076f0946bee95b9d2ed0d2be832c3b83998b40cd382f8dcc411e8293a218e12a",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/Verification/project-curator-release/native-publication.json"
+    },
+    "Verification/project-curator-release/native-settings-context.json": {
+      "sha256": "c6dd4345e4cbfb9d62889fb534b22303366a0331a20a2293ae6d40985a8dd02b",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/Verification/project-curator-release/native-settings-context.json"
+    },
+    "Verification/project-curator-release/native-topology.json": {
+      "sha256": "9bc827f648c99bab9352642fff2a20eebbfbd60a578d565f999b6ca2d33fb275",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/Verification/project-curator-release/native-topology.json"
+    },
+    "Verification/project-curator-release/run-native-proof.py": {
+      "sha256": "58f858ec6f657e61bffac7e46f0ee8d61477f8ea336168a0f0687277ba74e06b",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/Verification/project-curator-release/run-native-proof.py"
+    },
+    "SKILLS-depo/task/SKILL.md": {
+      "sha256": "7ab4d1ded926be29662b7d30eef7c2d84a94278660029c65c7a17b50547a9840",
+      "read_only_dependency": true
+    },
+    "SKILLS-depo/agent-task/SKILL.md": {
+      "sha256": "31370fd69d2446ba129d77e94df8943cca15db98470020eae3ad5203d2ad2b7f",
+      "read_only_dependency": true
+    },
+    "SKILLS-depo/manage-subagent-roles/SKILL.md": {
+      "sha256": "3c848ab961e0fd8dc653e5b49caa63c975b37f273cfea3689ab1f3eb2e93a84a",
+      "read_only_dependency": true
+    },
+    "SKILLS-depo/communication/SKILL.md": {
+      "sha256": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+      "read_only_dependency": true
+    }
+  },
+  "remaining_unwritten_scope_paths": [
+    "SKILLS-depo/curate/references/native-protocol-v2.md"
+  ],
+  "execution_sources": {
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/CURATION-depo/starter/curator.yaml": "fe7503972c7a61bba1c0fe4a8595440d3131893288e78f55d4402986d9f88f90",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/CURATION-depo/starter/document-ownership.json": "795b429ae9b997feac5c39569a117d6a0e6332d38af718320a66945980b44916",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLES-depo/curator-manager-AGENTS.md": "c8b3f8e260830bb5681438571057bc9474db46fdb909632e81148f67dfc7f78a",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLES-depo/curator-manager-ROLE.md": "4eeaac17b71df6eb89728bfa3b4ed7eb5551b083515ab6078794afa2a044756a",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLES-depo/project-curator-CURATOR.md": "f8f7ec848e88404b89f7202929695d8a21d490e1d90e27b3a81a06b6da9711f7",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLES-depo/project-sub-agent-AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLES-depo/project-sub-agent-ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/agent-task/SKILL.md": "31370fd69d2446ba129d77e94df8943cca15db98470020eae3ad5203d2ad2b7f",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/agent-task/scripts/native_observations.py": "cc3bf1eaad4ac248c44c84da356d35a9a8186a181d214ff3fb15ed0ca0436e31",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/agent-task/scripts/orchestration_state.py": "d4901e205c1ed23f9f11a7da5043883dd2df6c8f4e168830ab46913dbc2965f8",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/agent-task/scripts/task_state.py": "58813d942fca8874f0662da85d62e8b83fd75c9cf6beed583e699c4556df09a3",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/communication/SKILL.md": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator.py": "caea9ab8f7d5e509c6eb3e425455eea402628e1d84839358d14d04581799ac39",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_broker.py": "039872343328b6b84e25bdb14895c7376491457bad98da678e2120af7149e5ce",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_classification.py": "00fbfcd59e69e510781e35da03c5207ae8b929956c3b40b7643405a3a0d5c858",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_confinement.py": "bdb27764a92dda41092eb45d1837dc63d548974c6f533396b9cb1299b7dd88f3",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_grants.py": "39fc9d7eee8c128752127b85ab73ba9aa2a71ded4a79d39ab90e535785804691",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_policy.py": "6abbb157522ae151e60b3fc82704b6d9eb968c212cca27879dcd093985db568b",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_runtime.py": "a1a7a9bed3a72139646d12db41ac7951525e042164f41a4c436504dd8fe0e77b",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_runtime_codex.py": "362674513ea1b1372e35f7acaec818e150b1bafff13e8686a0c98177bbcf90e5",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/manage-subagent-roles/SKILL.md": "3c848ab961e0fd8dc653e5b49caa63c975b37f273cfea3689ab1f3eb2e93a84a",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py": "b649dc368d9b4f2d8eec032aaf2ae28e08ff493bbaf07d20ef21a55a52fd0cb2",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/basic_memory_adapter.py": "6020b9e0619450da051febdc7f5ea6328cbd97647cb3ad38292c9e7e6fa699db",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/basic_memory_projection.py": "a3e254131a88936f6a1a1eb292afea2d3645261ebde99632cae847b278dce512",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory.py": "7c1acf6889b566d29b5eb1ca2b98407009cb4fc5cd4b320fe3560ceffa4d3125",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_capture.py": "0d3340dc4657205698416b870d1315d752aa641367d9b70ffc10e479a2967c70",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_core.py": "48592604ac950e32e4c80aab24edd2e90d26d09df1b6af912dcad24bbc490a54",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_evidence.py": "28f30641a83a640e669611a932293501293246936b27d5098645fe28a854ae3b",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_maintenance.py": "700dffc0bd5d208731f9103002d534f52c22d4cb677298035fc0ad89f58c9073",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_normalization.py": "36bfb9800dc04fce004075295e00a5e830979c2b34fd66d1d5b6a1760bb48cda",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_normalize_html.py": "34f82652d31b797f5b07ace50f0043e16766a8710c7ab3774e0cf3ef38b391af",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_normalize_pdf.py": "cac3e93c9cb3318ec6466a01e6f719491ac6368156f9be5a2b55c63c009b5a8d",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_normalize_tex.py": "c1fb0c6ed6f10c43586a6419f80a328119f1d0eccc2fcf265ae2a70f28bc8241",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_packet.py": "d0a7c7f0ada939263e55a557cf482438f6a41d129942e196c11c70b0ac8a1a2a",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_paths.py": "5e7c01db65adf4296d97b166945a80a18875055a46811eeb30c701ab7040f7de",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_publish.py": "12df681916ef98e1163b3786fd2cc06692086aff01aead66eb5042434bde0096",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_recovery.py": "4a288ac8aaa33e1055f0ef878e90726df6d808385781c9f6a7b0e76be8ae2005",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_search.py": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/check_ontology.py": "7962c2792bc7f72875d517bb9c264973cf9654373199d73aba4342a7ce08b03a",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology.py": "9b1c193f7cb420b0afb090ab74cf069ba49eea449994f747316a7e1ff3db3bce",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_advanced.py": "af4fa591f80d09dc4e051a12e23ff7c1014e5fc5fe6e8c19ae7b475c9773fb48",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_advanced_cli.py": "af57d0d25cd246feb864373ee898f7026a1bce8e97f14a58ef83e878c6eb3f94",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_advanced_packet.py": "988188226bd4d4fcaf9597e708522425e87092c12e2953d36bce4cfc277f14b0",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_authority.py": "c5eda42e85d5b3d02d2950e958c59ee52dfa58837580b19146a3b9f7adee289a",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_backend.py": "4ba6ce8879c2248442a17a4098ae8246831947553476ef051c140dc0730ce35b",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_build.py": "c899b17a3717cac8e843820ce102a1cce41e493f163a63210bd4335e573b4e93",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_core.py": "15336a6fbb542cb8abccf6db8cd4227fc846758f60868ef9e3782580ea18be1d",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_derivations.py": "dc2449e18bedc961a9b43330b4e6b6b3f7600d607de7425308096d3ac4a9f07c",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_generation.py": "625340e3b6ec4b360413f0acd0b30ac3c408c70d3eac1ad009a9fc8b188ca364",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_graph.py": "4f286af79661a539a19c0b1658a7377817ff16c54d1fb650dfdff67b55245886",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_guard_setup.py": "1cd332edc0775021f58df4bb493a34d4caaf4f71a904bcf2acb21adefbafacbf",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_guards.py": "f42506f6dde32f74a24c00cc1d0e046a12004fa9d03f00a5a49131607677442a",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_health.py": "0ffe775f485de64d326fccebe13c35a7974e2ebb8ff432c562b5f75e7a32e0d0",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_interchange.py": "51ca7df70ee4e133a686ff867a324e58f3a8fba6f3910653c0db4730745cba0a",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_knowledge.py": "feb9d2c2e5f7570db49d3d07c3961ee2f38c1ee629f3a135915ea003645c0d55",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_lifecycle.py": "eef2aa64e3d94e9b378db3a90ad17fd3ceb060ad4ade861ee80fa502a92d0a98",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_limits.py": "bfc60e0d200e58e222479ecc06bc5dfd1ee9bed4a74f415bed7e8bd57ec5f7bf",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_memory.py": "9e9e0e9b6d684ddc33106941a03c6cac47950316feaf03923c83bd96d5c37aa7",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_modules.py": "d4cba6775bf4ed42bd4392ef37134ba19dd6b7d84cd82eb5997f4c8a23e47194",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_packet.py": "51287087f1f96fd3d58db7fe6ebf7521e6a15eb8027a55995832b84d444c1e3d",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_profiles.py": "770c9604f2e8ea8ce16a3953858ae1e2019049a318dda5ea481857a524aa7ea8",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_proposal_validation.py": "ba12ad682a9e11ded50893633bc11969587a9e34cff0d68cddfc62819ace65b1",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_proposals.py": "1606da118489f758145d102594e806f33fe170f8d12a1f6629cd61b7b9b346d8",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_provenance.py": "637882f7f76224a7b339447e0c4e642b909cfb0facde45b4cb13e519ab073908",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_publication.py": "e9d8a2520807a4598a11890ddc9e6d470eeaa6611d6e67f6847aed3220a4b936",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_rdf.py": "426b411a6e0746c563cd4be1293c997fc2ffc5ce619fdb248f3853f2227db5e1",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_reasoning.py": "166f8e435a4144dd0141636cc83a7e3b7b2a7668a496d62e60b5fd1cef0a665c",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_retrieval.py": "43e6693e7a6d625e0a829e48e430f8e5d319a77e8d0679dfc29d7224a389da4f",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_semantic.py": "2a4df63c4c67922b1fa30ba251cfe800519ab5fe68546efef9d4a3260136f4fd",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_semantic_worker.py": "55a7e69d876f0530bc677cbe3fd1390f6e2185e8c96f935a7f42d4d8c52ccb12",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_shacl.py": "0fac0205a07a05859f84a82a5743e675ed538d1a0cce5ca01c160b765958b669",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_sparql.py": "13550789b9ad504ab07b6e6550f96b23854faac2b977adea0a380ede54f8678a",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_standards.py": "b1874e4c51ce5a002eb5b3183624129ccbbee99aef767b6337eb744390431351",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_validate.py": "33aea8e2878fa914ecdf370ba2e6be409ef5f14d12d732b34b61a5272e14bdfd",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_wiki.py": "67b1aead617f920329d00b8034731cf1f36490c9718f6d2c42de0919ee171092",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_workbench.py": "9b75ffd7e58b61c0f67f77bb809ce571a89659f262a22725581552fa973a5bc7",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_worker.py": "489ef392c7b15b7ad45f7dcd151ef947d10eab0020ec601c96aabf5d98b983d4",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/task/SKILL.md": "7ab4d1ded926be29662b7d30eef7c2d84a94278660029c65c7a17b50547a9840",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-curator-release/run-native-proof.py": "58f858ec6f657e61bffac7e46f0ee8d61477f8ea336168a0f0687277ba74e06b"
+  },
+  "scope_note": {
+    "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/foundation-implementation-scope-v2-lifecycle-tests.json",
+    "sha256": "4c97f8e92d256d618e90eba5ce3159565313f9e95ab25362a420c238f867e232"
+  },
+  "wire_preflight": {
+    "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/wire-preflight.json",
+    "sha256": "7b627aad9ce4cf12de2355fa503bc101e02d486c4107080ef9d3bce7a1b23c06"
+  },
+  "work_limits": {
+    "host_turn_starts": 64,
+    "expected_native_identities": 4,
+    "supervised_seconds": 1800,
+    "stop_grace_seconds": 60,
+    "io_wait_seconds": 30,
+    "frame_bytes": 2000000,
+    "artifact_bytes": 20000,
+    "hard_model_call_or_token_cap": "not exposed by inspected protocol",
+    "native_spawn_total_cap": "Three admitted fork operations and one same-ID resume, with intrinsic delegation disabled; no provider/global cap claimed.",
+    "history_turns": 100,
+    "history_bytes": 16000000,
+    "final_storage_reserved_seconds": 15,
+    "owned_runtime_incarnations": 5,
+    "loaded_actors": 4,
+    "history_pages": 100,
+    "wire_archive_bytes": 32000000,
+    "total_wire_archive_bytes": 128000000,
+    "owned_log_bytes": 64000000,
+    "helper_program_bytes": 20000,
+    "selected_instruction_bytes": 160000,
+    "engine_output_tokens": 40000,
+    "dynamic_callbacks": 256,
+    "helper_cells": 256
+  },
+  "native_allocations": 0,
+  "model_calls": 0,
+  "native_processes": 0,
+  "output_route_sources": [
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/p1-outer-output-correction-context.json",
+      "sha256": "19f27af55c44e23ef2bfe0124497f6ced76e77a9a9eb1437ba7ce216c0d76d1c"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-initial-frozen/outer-output-host-assessment.json",
+      "sha256": "9579f83e35bdce3d240c170ae6ed8062034c4efa93ae99ffde713426eca5c8fd"
+    },
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-p1-outer-output-source-o_4dmd8l/execute_handler.rs",
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/core/src/tools/code_mode/execute_handler.rs",
+      "sha256": "217655094d20f95d79bf0a4ba3c8b4aab7a0d1b3f4a65f8d1e309479a8c00f19"
+    },
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-p1-outer-output-source-o_4dmd8l/execute_spec.rs",
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/core/src/tools/code_mode/execute_spec.rs",
+      "sha256": "f9a083fa1766e5381eacd47055b71cbf954be7f78926fa472482aae6fc5f2b44"
+    },
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-p1-outer-output-source-o_4dmd8l/mod.rs",
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/core/src/tools/code_mode/mod.rs",
+      "sha256": "be419aef3b8100ec9cd59bb3706ee55e3c28facadb13eb25e68fc87b0c300eba"
+    },
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-p1-outer-output-source-o_4dmd8l/response_adapter.rs",
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/core/src/tools/code_mode/response_adapter.rs",
+      "sha256": "48b6b28b8271ad0c3d1686e48c26a769acf163081729c4151d0766de9e9ee272"
+    },
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-p1-outer-output-source-o_4dmd8l/unified_exec_mod.rs",
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/core/src/unified_exec/mod.rs",
+      "sha256": "612caa3475c086a9860f92be871ac5f8d1b08c71c6c20765c06ed4b081ee696c"
+    }
+  ],
+  "limitations": [
+    "P1 is not executed or approved.",
+    "Source-only handoff structure check; actual actor receipt remains a native gate.",
+    "Full category, canonical conflict workflow, full native confinement/publication and all foundation criteria remain open."
+  ],
+  "changed_sources": {
+    "SKILLS-depo/curate/tests/test_broker.py": {
+      "sha256": "1d4433d1affd4a09afcb07947411c509a47d851dc0a60d8f88fdd4378b0eaf0a",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/SKILLS-depo/curate/tests/test_broker.py"
+    },
+    "Verification/project-curator-release/run-native-proof.py": {
+      "sha256": "58f858ec6f657e61bffac7e46f0ee8d61477f8ea336168a0f0687277ba74e06b",
+      "frozen_path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/frozen-checks/source/Verification/project-curator-release/run-native-proof.py"
+    }
+  },
+  "unchanged_prior_checks": {
+    "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-i0v2gyin/frozen-checks/receipt.json",
+    "sha256": "44b3542db29589cb79e24e03596b536230ec48ec3ddb82bfe53ff5acbea95142",
+    "not_rerun": [
+      "pool",
+      "caller",
+      "storage-retained-id",
+      "p1-evidence"
+    ]
+  },
+  "role_read_receipt": {
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+  },
+  "role_catalog": {
+    "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/foundation_implementer_p1_candidate_workspace-catalog.json",
+    "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397"
+  },
+  "unchanged_limits": true,
+  "prepared_instruction_metadata": {
+    "state": "observed_exact",
+    "sources": [
+      "/Users/alex.omegapy/.codex/AGENTS.md",
+      "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/shared/AGENTS.md"
+    ],
+    "contents_copied": false,
+    "evidence_level": "Static constructed selection against actual file identities; native observation remains required."
+  },
+  "instruction_selection_sources": [
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/p1-instruction-selection-correction-context.json",
+      "sha256": "6a7cf5c573ac0735d1aadb3aeaef01fd611d71a3fac4a722238d95a68bbe7978"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt1/index.json",
+      "sha256": "8e5c2fd357082fd649d884b82685cfb73cd76fb91519b798a132712673e6116d"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt1/addendum.json",
+      "sha256": "03be3892f380afeb889a96a7715a4c378c0ef4ddf3b7ea12ba3619ee00fb6ffe"
+    }
+  ],
+  "unadmitted_prior_allocations": [
+    {
+      "native_allocation": {
+        "id": "01a09045-7dba-7970-86ec-35f18f77e1ee",
+        "path": "/Users/alex.omegapy/.codex/sessions/2026/09/11/rollout-2026-09-11T05-41-08-01a09045-7dba-7970-86ec-35f18f77e1ee.jsonl",
+        "stage": "created_before_admission_rejected",
+        "model": "gpt-6-astra",
+        "reasoning_effort": "xhigh",
+        "provider": "openai",
+        "request_id": 7,
+        "request_raw_sha256": "7365e5224a8b070cd00e9464d28d0456c943215d848a2f4e9b5402aa98b59d48",
+        "response_raw_sha256": "f10670a70c30fdf10d638da932b468b44241694dc3f99be038283398325f6cd1"
+      },
+      "poststop_observation": {
+        "pid_5958": "absent_signal0",
+        "pgid_5958": "absent_signal0",
+        "exact_returned_log": "absent_lstat",
+        "exact_state_5_row_count": 0
+      },
+      "evidence": {
+        "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt1/addendum.json",
+        "sha256": "03be3892f380afeb889a96a7715a4c378c0ef4ddf3b7ea12ba3619ee00fb6ffe"
+      }
+    }
+  ],
+  "manager_receipt_order_sources": [
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/p1-manager-receipt-order-correction-context.json",
+      "sha256": "a564c169882a39d0a63e1f4b0f206adc3aa7b7cd705542c0c30dfabb1bf50d36"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt2/summary.json",
+      "sha256": "19c422b9b5d68e99eb251aba93548e0f8b61b54a1afc53108ca9b46f0f7ce40d"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt2/manifest-000.json",
+      "sha256": "bfa030a7b2e941c7ec0a7852bc9be4525d7f87f8fae4d8123c9d94a9dcb0716d"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt2/manifest-001.json",
+      "sha256": "2ab14a6e3d0b24305c114f8070bb0e0f8bdcf0853227adc975c79a051a1f8067"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt2/manifest-002.json",
+      "sha256": "e49fa29024058923229e8d02fb3af47840f8524445ab6af872a6bf094702085c"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt2/evidence/native-fork-p1-result.json",
+      "sha256": "71c6dc13fd32579a71a8e0a643f112bf0eaae13761dc9bcc8900b8cd1a3b5962"
+    }
+  ],
+  "prior_returned_native_ids": [
+    "01a08f58-bb9c-7bd0-84fd-6c41df4b87d0",
+    "01a08f70-cfc3-7131-aae7-f04123be27f3",
+    "01a08f8e-304a-7d73-a1c7-af91f8593f99",
+    "01a08fa8-e8a3-74c2-a213-f6ad7f868023",
+    "01a08faa-89b1-7e13-a22e-ccd468af5bdd",
+    "01a09045-7dba-7970-86ec-35f18f77e1ee",
+    "01a0904f-6a50-7122-ae1c-1e9307f36922",
+    "01a09051-dcbf-7083-8ffd-b65c16967552",
+    "01a0905f-177b-7113-afed-c122021e3c7c",
+    "01a09061-89fc-7b52-b565-ad75769a0cdf",
+    "01a09071-38da-7780-8733-28784c80bc2c",
+    "01a09073-cd01-7270-8b39-f11d5c31d777"
+  ],
+  "candidate_workspace_sources": [
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/p1-candidate-workspace-correction-context.json",
+      "sha256": "f18d7054861f3e4c50ea912b4d7a17e81eff241d2b9826b30f6f264a40172e47"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt3/summary.json",
+      "sha256": "ae9b149bf70610ecdfebf3087efb35ddae59eace24f26cb36cd535b5cb56e11f"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt3/manifest-000.json",
+      "sha256": "8e87b803c3228b45a5d408bae3d21c7ec9731d583a488518df17b1fe72ee1f3c"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt3/manifest-001.json",
+      "sha256": "1a45c0956c517942e46ff897ff4d957d7effb0c7faaded9131c8dfeb1a95f45f"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt3/evidence/native-fork-p1-result.json",
+      "sha256": "6d71948b1bcfb172788c7221543c20a1d127bcb809d45c2d50e97be2cbb04ac2"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt4/summary.json",
+      "sha256": "ae6a61dee4741d58347c46a135b8b0fbecf97cb956e37ece2d7bd8e0052eb97e"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt4/manifest-000.json",
+      "sha256": "2d8d13f4c820beb5bfbf95752c75867feb5342004c591ef179aa8433bb2db7c4"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt4/manifest-001.json",
+      "sha256": "c1cf84cd09e9d997a7936b456c023a04b535574406767feed6725279849e4c51"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt4/manifest-002.json",
+      "sha256": "0ddb8f85cdf4350099149e343d3bb49ac1dfd6beb359138ccf598e2ba2577a44"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt4/manifest-003.json",
+      "sha256": "1e1ebdb190184cff8fa077f728ee6c3d8b695fc4e69366f564b92aba03ce0466"
+    },
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt4/evidence/native-fork-p1-result.json",
+      "sha256": "8c92dafa3e891c7ac64cd725a34c5d8166c1aa0ac96d42a4e46797893aab3bab"
+    }
+  ]
+}

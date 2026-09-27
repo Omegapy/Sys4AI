@@ -1,0 +1,24 @@
+{
+  "status": "failed_historical",
+  "command": ".venv/bin/python -B -m unittest discover -s SKILLS-depo/ontology/tests -p test_explorer_snapshot.py -v",
+  "tests": 32,
+  "failures": 1,
+  "errors": 5,
+  "seconds": 6.629,
+  "inputs": [
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_explorer_snapshot.py",
+      "sha256": "ea64a1a7cc1480f99226ce4a9611772a8790c181ccfb6faff85e8fd30900a0f0"
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_explorer_snapshot.py",
+      "sha256": "5b279ac510f310dcd76f26b7d2ebcfab2f181ae03438eeab21dc8a302b5f4c2a"
+    }
+  ],
+  "log_sha256": "a356ec6b252eb8632ede56dbc4ae5246dd10c82609d54b9d0ebff909fb317dd6",
+  "findings": [
+    "Ordinary publisher records a task field not present in integration publisher; observer was overstrict.",
+    "Actual publisher lock refusal is operation_locked, not the test expectation operation_busy."
+  ],
+  "qualification": "These failed checks are retained; no passing acceptance is inferred."
+}

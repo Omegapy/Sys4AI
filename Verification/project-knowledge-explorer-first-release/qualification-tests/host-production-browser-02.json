@@ -1,0 +1,60 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-qualification-production-browser-02/host-production-browser.py"
+  ],
+  "staging_root": "/private/tmp/explorer-qualification-production-browser-02",
+  "manifest": {
+    "path": "/private/tmp/explorer-qualification-production-browser-02/inputs.json",
+    "sha256": "967dd2ac3bc0db99deb165aab9d4e4689329192eaa04dcc6255fa91a59c68dd1"
+  },
+  "inputs_count": 107,
+  "external_tools": [
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "resolved": "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+      "sha256": "31b9c9a8d50289f3a13f014b3efd8ea3534fc3eea7ca7d9809e166139910b805",
+      "bytes": 52448
+    },
+    {
+      "path": "/bin/ps",
+      "resolved": "/bin/ps",
+      "sha256": "3bbba882e30d91fc4ff6e6844ca7c59fef4351b9a3fea35dca55708d6d487d1c",
+      "bytes": 170432
+    },
+    {
+      "path": "/Users/alex.omegapy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "resolved": "/Users/alex.omegapy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "sha256": "27db838bb204ef7c21df2931f5656e4c8fb32e6e947f363a402b49714d32b5b1",
+      "bytes": 121306800
+    },
+    {
+      "path": "/Users/alex.omegapy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/package.json",
+      "resolved": "/Users/alex.omegapy/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/package.json",
+      "sha256": "ca170ec143a88ed3043ac953eb3b2377b2b97304104f4e1e23316684ce2c35af",
+      "bytes": 1416
+    },
+    {
+      "path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "resolved": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "sha256": "af09314952c541583cc380057318e0a812a2dd1d7627327d564fc2e991736345",
+      "bytes": 367696
+    }
+  ],
+  "timeout_seconds": 180,
+  "source_writes": false,
+  "intended_writes": [
+    "Owned disposable explorer-http-* fixture; actual loopback service and Chrome child/profile; bounded cleanup/reaping."
+  ],
+  "credentials": "Bootstrap URL only in 0600 per-instance file/process memory, no raw errors, headers, response bytes, traces or HAR.",
+  "scenarios": [
+    "AT-01/32 read-only capabilities with optional services absent",
+    "AT-02 deterministic preferred/alias/ID/definition searches",
+    "AT-04/05/06 exact filtered continuation completeness",
+    "AT-09 explicit draft/inferred visibility",
+    "AT-14 incoming canonical endpoints",
+    "AT-22 real abort-insensitive entry race"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "status": "released_one_root_host_execution",
+  "task_revision": 235,
+  "task_scope": "TASK020 current V4 qualification; no TASK021/022 release or pass implied",
+  "job": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/host-security-08.json",
+    "sha256": "0845ad2941aaf7626c3174202123dbcfd53c2aa5567d27e6c994b082c13d81ec"
+  },
+  "manifest": {
+    "path": "/private/tmp/explorer-qualification-security-08/inputs.json",
+    "sha256": "36728358b378faebff37efdb8fddb97bfa1c90f49c519155220062b67d33cfd8"
+  },
+  "stage_members": 107,
+  "live_members_verified": 107,
+  "external_tools": [
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "resolved": "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+      "sha256": "31b9c9a8d50289f3a13f014b3efd8ea3534fc3eea7ca7d9809e166139910b805",
+      "bytes": 52448
+    },
+    {
+      "path": "/bin/ps",
+      "resolved": "/bin/ps",
+      "sha256": "3bbba882e30d91fc4ff6e6844ca7c59fef4351b9a3fea35dca55708d6d487d1c",
+      "bytes": 170432
+    }
+  ],
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-qualification-security-08/host-security-runner.py"
+  ],
+  "timeout_seconds": 300,
+  "actual_test_cases": [
+    "test_explorer_security.SecurityTests.test_at24_every_old_write_family_is_closed",
+    "test_explorer_security.SecurityTests.test_at25_host_origin_credentials_and_root_selection",
+    "test_explorer_security.SecurityTests.test_at26_paths_and_registered_source_owner",
+    "test_explorer_security.SecurityTests.test_at26_source_replacement_never_follows_or_repairs",
+    "test_explorer_security.SecurityTests.test_at27_inert_wire_text_and_minimal_csp",
+    "test_explorer_security.CallAuditTests.test_actual_reader_forbidden_call_instrumentation"
+  ],
+  "source_runner": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/host-security-runner.py",
+    "sha256": "99ac15f63621d3f5b4a20ffa404d00e395fd2e700c7303981fa524a05b6128f4"
+  },
+  "source_test": {
+    "path": "SKILLS-depo/ontology/tests/test_explorer_security.py",
+    "sha256": "8d8f0f90a0b42074d147c039c033349975530bf0523e115118d22b85d6d25204"
+  },
+  "review": "Full runner reread, unchanged tests/runner matched prior accepted07; descriptor-safe stable no-follow single-link SHA/size checks across107 staged/live members. Only3 old/new generated chunk paths and index/manifest differ. Six original cases, variant-specific oversized503/resource_limit, safe exception reporting and isolated cleanup retained. Root wrapper admits/captures exact stage before actual execution, checks original/captured/live/tool bytes afterward and preserves safe stdout before assertions.",
+  "changed_stage_paths_vs_07": [
+    "SKILLS-depo/ontology/explorer/assets/chunks/index-BE-phhqX.css",
+    "SKILLS-depo/ontology/explorer/assets/chunks/index-BzpN-_fY.css",
+    "SKILLS-depo/ontology/explorer/assets/chunks/index-Dj7bsFrK.js",
+    "SKILLS-depo/ontology/explorer/assets/chunks/index-pSVjymv6.js",
+    "SKILLS-depo/ontology/explorer/assets/chunks/renderer-3Z0JhDKk.js",
+    "SKILLS-depo/ontology/explorer/assets/chunks/renderer-CCjOUb_r.js",
+    "SKILLS-depo/ontology/explorer/assets/index.html",
+    "SKILLS-depo/ontology/explorer/assets/manifest.json"
+  ],
+  "write_boundary": "Owned disposable fixtures/services and root-private receipt/captured-stage only; no production/Task/Q historical/host setting writes. Same reviewed300second limit; no silent retry."
+}

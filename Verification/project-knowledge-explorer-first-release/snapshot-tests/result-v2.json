@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "task_id": "TASK-004",
+  "assignment_id": "SNAPSHOT_WORKER_G3",
+  "status": "implemented_and_snapshot_checks_passed",
+  "tests": 40,
+  "latest_run": "run-06.json",
+  "live_root_observation": "live-root-read-03.json",
+  "criteria": [
+    {
+      "criterion": "Mixed-version inputs yield snapshot_changed/knowledge_updating; entry/relations/graph/cursor output never silently mixes snapshots.",
+      "status": "snapshot_layer_passed",
+      "tests": [
+        "test_byte_capture_never_loads_mid_read_replacement",
+        "test_continuous_churn_stops_after_three_attempts",
+        "test_unchanged_mtime_bytes_invalidate_expected_snapshot",
+        "test_source_only_observation_does_not_advance_view_or_allow_canonical_change",
+        "test_malformed_module_manifest_containers_are_fixed_errors",
+        "test_malformed_graph_and_source_containers_are_fixed_errors",
+        "test_malformed_nested_config_and_identity_containers_are_fixed_errors"
+      ]
+    },
+    {
+      "criterion": "Cache keys include selected root/project, snapshot, helper/adapter and presentation versions; cache memory/concurrency/lifetime are bounded.",
+      "status": "snapshot_layer_passed",
+      "tests": [
+        "test_no_read_writes_and_deep_immutable_cache",
+        "test_two_view_lifetime_reader_failure_and_capacity",
+        "test_same_identity_other_root_isolated",
+        "test_package_helper_schema_asset_and_set_drift_sticky",
+        "test_semantic_validator_runs_before_current_swap",
+        "test_selected_and_view_resources_are_bounded"
+      ]
+    },
+    {
+      "criterion": "Stale evidence does not erase safe canonical definitions and no read creates publication locks, repairs hashes or builds products.",
+      "status": "snapshot_layer_passed",
+      "tests": [
+        "test_stale_and_missing_sources_preserve_recorded_definition",
+        "test_no_read_writes_and_deep_immutable_cache",
+        "test_source_file_and_full_tuple_limits_are_independent"
+      ]
+    },
+    {
+      "criterion": "Interrupted multi-file publication with stable bytes is rejected until existing owner state establishes completion or recovery; malformed or unreadable relevant coordination returns a safe bounded diagnostic.",
+      "status": "snapshot_layer_passed",
+      "tests": [
+        "test_ordinary_partial_stable_commit_and_retained_recovery",
+        "test_integration_partial_multifile_and_recovery_receipt_shapes",
+        "test_all_target_bytes_without_receipt_remain_unresolved",
+        "test_malformed_orphan_and_mismatched_journals_fail_closed",
+        "test_complete_historical_receipt_accepts_later_superseding_publication",
+        "test_disjoint_unresolved_actual_transaction_is_excluded"
+      ]
+    },
+    {
+      "criterion": "Read-only coordination brackets materialization and covers missing-to-present lock races; ordinary browsing creates no lock, intent, receipt, repaired source hash or generated output.",
+      "status": "snapshot_layer_passed",
+      "tests": [
+        "test_existing_exclusive_lock_is_busy_and_read_does_not_replace_it",
+        "test_shared_lock_blocks_actual_publisher_through_postcheck",
+        "test_missing_lock_actual_completed_publication_retries",
+        "test_missing_lock_barrier_with_active_actual_publisher",
+        "test_absent_parent_creation_retries_without_creating_lock",
+        "test_unsafe_coordination_is_bounded_refusal"
+      ]
+    }
+  ],
+  "verification_steps_verbatim": [
+    "Inject concurrent selected-file replacement and publication-boundary changes; prove complete view or specific bounded failure with route-refresh semantics.",
+    "Test stale source bytes, unchanged-mtime content changes, helper/mapping change and retired snapshot lifecycle; compare protected hashes/timestamps.",
+    "Use deterministic barriers with actual publication/recovery helpers on disposable fixtures for active writes, interrupted partial commits with stable digests, missing-lock creation races, relevant versus unrelated transactions and continuous churn. Assert a complete version or specific bounded refusal, never a mixed version."
+  ],
+  "additional_security_checks": [
+    "test_captured_helper_digest_checked_before_any_execution",
+    "test_deadline_before_opaque_work",
+    "test_invalid_canonical_and_presentation_preserve_previous_current",
+    "test_journal_aggregate_bound_across_families",
+    "test_loaded_closure_rejects_ambient_core_and_never_reuses_bytecode",
+    "test_module_file_set_addition_and_unknown_cached_input_rejected",
+    "test_optional_identity_appearance_and_presentation_bytes_change",
+    "test_package_capture_enforces_budget_before_next_allocation",
+    "test_preloaded_fake_stdlib_module_is_rejected",
+    "test_replaced_root_requires_new_epoch_lifecycle",
+    "test_stdlib_import_cannot_execute_ambient_path_or_custom_finder",
+    "test_tightened_journal_and_deadline_policy_applies_first_request",
+    "test_zero_relationships_is_valid_policy_but_refuses_nine_core_relations"
+  ],
+  "static_checks": {
+    "ast_parse_source": true,
+    "ast_parse_tests": true,
+    "git_diff_check_exit": 0
+  },
+  "limitations": [
+    "Full reader presentation semantic validation must be supplied through validate_view before candidate publication; absent validator refuses nonempty configured mappings.",
+    "Actual entry/relationship/graph/cursor wire consumers and route refresh are later integration work; these tests prove immutable coherent source views and expected-snapshot refusal.",
+    "The service supervisor must verify its initial bootstrap, full installed package manifest and worker handshake, enforce opaque-operation deadline/RSS, and own sticky package-change session/asset shutdown. Standalone open_store does not prove that entire production lifecycle.",
+    "The default tested compiled read closure contains core/modules/validate/snapshot. New package helpers intentionally change the epoch; later integration needs fresh startup and affected current checks.",
+    "Actual publisher calls targeted disposable fixtures only. The live-root check compares selected bytes and mtimes across cached reads, not the release-wide preservation manifest or a performance gate.",
+    "Standard-library/interpreter runtime is trusted; project modules are compiled from captured verified source without ambient project imports or pyc. Tests directly reject ambient stdlib shadowing and preloaded fake stdlib origins.",
+    "Historical failed diagnostic runs remain unchanged and are not current acceptance evidence."
+  ],
+  "writes": [
+    "SKILLS-depo/ontology/scripts/ontology_explorer_snapshot.py",
+    "SKILLS-depo/ontology/tests/test_explorer_snapshot.py",
+    "Verification/project-knowledge-explorer-first-release/snapshot-tests"
+  ],
+  "stopping_condition": "Bounded snapshot implementation and direct deterministic checks complete; manager acceptance and later full-service integration remain separate.",
+  "delivery_version": 2,
+  "current_source": {
+    "path": "SKILLS-depo/ontology/scripts/ontology_explorer_snapshot.py",
+    "sha256": "d684c3039680b28c24680222e8f47a4de78638259d5e7426d33576399687324d",
+    "bytes": 53121
+  },
+  "current_tests": {
+    "path": "SKILLS-depo/ontology/tests/test_explorer_snapshot.py",
+    "sha256": "757f1f8fbd9b85244e824b5a8442cd539302f0ddc12238b694cf24945c734077",
+    "bytes": 33237
+  },
+  "previous_delivery": {
+    "path": "Verification/project-knowledge-explorer-first-release/snapshot-tests/delivery.json",
+    "sha256": "29cba3f88b1cc256243746c0a61dedd5de1f8e92d241849f2031afa67c8ede93",
+    "bytes": 7344
+  },
+  "correction": {
+    "reason": "Manager reproduced raw AttributeError for a selected module manifest whose JSON value was an array.",
+    "change": "Guard untrusted configuration, optional identity, module manifest, graph and source containers before discovery access; preserve complete canonical loader validation. No blanket AttributeError catch was added.",
+    "new_tests": [
+      "test_malformed_module_manifest_containers_are_fixed_errors",
+      "test_malformed_graph_and_source_containers_are_fixed_errors",
+      "test_malformed_nested_config_and_identity_containers_are_fixed_errors"
+    ],
+    "malformed_shape_subcases": 41,
+    "required_outcome": "Exact store.error_type with fixed canonical_invalid message; previous store.current identity unchanged.",
+    "historical_evidence_preserved": true,
+    "historical_source": {
+      "path": "Verification/project-knowledge-explorer-first-release/snapshot-tests/source-v1.py.txt",
+      "sha256": "44eb178d170f1348a8f86c28ff0450b537809f2cc9a799e2de81be8ca1f6144b",
+      "bytes": 51042
+    },
+    "historical_tests": {
+      "path": "Verification/project-knowledge-explorer-first-release/snapshot-tests/tests-v1.py.txt",
+      "sha256": "6b2974c04d6e4d6ffd9c152868f76e4fb1970af18ddc30b58685ce972d734e47",
+      "bytes": 29859
+    }
+  }
+}

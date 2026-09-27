@@ -1,0 +1,16 @@
+{
+  "stage": "/private/tmp/explorer-frontend-build-tsa2der7",
+  "checks": [
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 1,
+      "stdout": "\n> @sys4ai/project-knowledge-explorer@1.0.0 build\n> npm run typecheck && vite build\n\n\n> @sys4ai/project-knowledge-explorer@1.0.0 typecheck\n> tsc --noEmit\n\nsrc/map/renderer.ts(12,3): error TS2578: Unused '@ts-expect-error' directive.\nsrc/map/renderer.ts(14,19): error TS2352: Conversion of type 'typeof cytoscape' to type '(options: unknown) => Core' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.\n  Type 'cytoscape.Core' is not comparable to type 'Core'.\n    Types of property 'off' are incompatible.\n      Type '{ (events: string, handler?: EventHandler | undefined): Core; (events: string, selector: string, handler?: EventHandler | undefined): Core; (eventsMap: { ...; }, selector?: string | undefined): Core; }' is not comparable to type '() => void'.\n        Target signature provides too few arguments. Expected 1 or more, but got 0.\n",
+      "stderr": ""
+    }
+  ],
+  "status": "failed"
+}

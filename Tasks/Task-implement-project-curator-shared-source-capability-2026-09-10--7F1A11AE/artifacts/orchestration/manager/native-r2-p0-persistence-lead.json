@@ -1,0 +1,14 @@
+{
+  "kind": "bound_tagged_source_P0_storage_allocation_lead",
+  "source": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-route-r2-inputs/upstream/app-server/src/request_processors/thread_processor.rs",
+    "sha256": "b7257eb4e93317d6162bba17462abb4607b9083621d11ddfe7bbc04777cc930c"
+  },
+  "source_lines": [
+    2992,
+    3016
+  ],
+  "finding": "Host inspected apply_thread_read_store_fields: includeTurns=true on a loaded paginated thread calls thread_store.persist_thread with PersistContext::Standard before returning turns. This is a concrete candidate to materialize native history without a charged turn, not observed installed behavior.",
+  "scope_rule": "Treat thread/read(includeTurns=true) under this selected mode as an allocation mutation in the exact P0 packet, not read-only. No native allocation before host scope assessment. Actual returned path/inode/visibility/account preservation gates remain.",
+  "target_unchanged": true
+}

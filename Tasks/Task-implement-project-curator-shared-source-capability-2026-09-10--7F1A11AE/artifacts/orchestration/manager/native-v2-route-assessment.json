@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-11T03:56:46.238392+00:00",
+  "kind": "native_v2_route_assessment",
+  "state": "unresolved",
+  "runtime": {
+    "path": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "sha256": "87a08119b8effa519f0ecb552dc98043f58a8200bf2ec5da60f76890c33e9c3a",
+    "version": "codex-cli 0.153.4"
+  },
+  "model": "gpt-6-astra",
+  "effort": "xhigh",
+  "observed": [
+    "The selected model catalog explicitly reports multiAgentVersion v2.",
+    "Installed features list reports multi_agent true and multi_agent_v2 false. This does not prove which tool contract a model-bearing turn receives.",
+    "Installed experimental ThreadResumeParams supports config overrides; ConfigReadParams selects cwd and has no thread selector.",
+    "Installed ThreadItem supports functionCallOutput and subAgentActivity alongside legacy collabAgentToolCall.",
+    "The prior run completed without recognized required readiness evidence; four generic item completions do not establish absence of attempted tools.",
+    "The protected child configuration is currently selected through legacy agent_type, which is absent from the host-observed v2 spawn signature. Detached behavior remains unobserved."
+  ],
+  "limitations": [
+    "Post-launch resume overrides do not prove protected configuration at child launch.",
+    "Current official hook documentation says SubagentStart cannot block startup and specialized paths may bypass tool hooks; no hook enforcement claim is made.",
+    "No accepted native child, broker owner-publication or complete topology/confinement proof exists."
+  ],
+  "next_gate": "Prepare and independently review one-controller one-turn basic tool-routing diagnosis; no children or release-proof claim.",
+  "host_authority": "Parent /root confirmed this reduced diagnostic is a strict subset of existing synthetic authority on this continuation. Same selected model, no fallback, closed external/image surfaces, unchanged time/stop ceilings.",
+  "references": [
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/v9-tool-route-metadata.json",
+      "sha256": "ca91ff4912c5ded55e636b2d5c6c4384216e5836c31b90acae418544c82a20e8"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/v9-multi-agent-version-diagnostic.json",
+      "sha256": "4ac35d3ddd9e5aa02aece9d097a2d6be3097b9a12cc64d92b307b5a4a728b6c2"
+    }
+  ],
+  "official_sources": [
+    "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+    "https://learn.chatgpt.com/docs/hooks"
+  ]
+}

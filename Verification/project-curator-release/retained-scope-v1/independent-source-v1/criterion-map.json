@@ -1,0 +1,4501 @@
+{
+  "kind": "RetainedPartialCriterionMap",
+  "plan_id": "PLAN-20260912-3CF9C73F",
+  "plan_revision": 6,
+  "plan_sha256": "4b53e29f8c4762758965d731c42ef4313e24ae25ca00038f02311cc3e01ce465",
+  "counts": {
+    "tasks": 40,
+    "requirements": 37,
+    "task_criteria": 86,
+    "requirement_criteria": 106
+  },
+  "all_37_requirements_40_tasks_accepted": false,
+  "tasks": [
+    {
+      "task_id": "TASK-001",
+      "title": "Capture the implementation baseline",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-043",
+        "REQ-023",
+        "REQ-044"
+      ],
+      "assets": [
+        {
+          "target": "Verification/project-curator-release/baseline.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        },
+        {
+          "target": "Verification/project-curator-release/preservation-manifest.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        },
+        {
+          "target": "Verification/project-curator-release/requirement-coverage.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-001.AC01",
+          "text": "All 37 retained requirements and every acceptance criterion have stable evidence rows.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "partial_source_and_result_mapping",
+          "evidence": [
+            "source-manifest.json",
+            "preservation.json",
+            "test-receipt.json"
+          ],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        },
+        {
+          "criterion_id": "TASK-001.AC02",
+          "text": "Record the reduced implementation scope and current project baseline.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "partial_source_and_result_mapping",
+          "evidence": [
+            "source-manifest.json",
+            "preservation.json",
+            "test-receipt.json"
+          ],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-002",
+      "title": "Define module and interface ownership",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-005",
+        "REQ-006",
+        "REQ-043",
+        "REQ-017"
+      ],
+      "assets": [
+        {
+          "target": "CURATION-depo/contract.json",
+          "current_sha256": "221bd027783c3e42f2305158c8546119e115301224b9649505fffa21756b9f27",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/README.md",
+          "current_sha256": "c24fdc496b744f44179da5d8dd3cb8c3bdac0451f273abc69960bc0057a5c816",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/state-paths.md",
+          "current_sha256": "839c8ec48e2bc05629993992d9bda3b3066d1543680301af1877643a8c8355d2",
+          "kind": "source"
+        },
+        {
+          "target": "Verification/project-curator-release/source-destination-manifest.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-002.AC01",
+          "text": "One Curator source module and one coordinating skill are identified with exact destination inventory.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "partial_source_and_result_mapping",
+          "evidence": [
+            "source-manifest.json",
+            "preservation.json",
+            "test-receipt.json"
+          ],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        },
+        {
+          "criterion_id": "TASK-002.AC02",
+          "text": "Task, memory, ontology, role catalog and setup remain their existing canonical owners; queue records own delivery only.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "partial_source_and_result_mapping",
+          "evidence": [
+            "source-manifest.json",
+            "preservation.json",
+            "test-receipt.json"
+          ],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-005",
+      "title": "Implement neutral policy validation",
+      "requirement_ids": [
+        "REQ-005",
+        "REQ-022",
+        "REQ-034"
+      ],
+      "assets": [
+        {
+          "target": "CURATION-depo/starter/curator.yaml",
+          "current_sha256": "fe7503972c7a61bba1c0fe4a8595440d3131893288e78f55d4402986d9f88f90",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/schema/config-v1.json",
+          "current_sha256": "d40c2ee14326da89e115e618d11c4a231d1fbbea2a4b69c1d8a148dc2e66386c",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_policy.py",
+          "current_sha256": "6abbb157522ae151e60b3fc82704b6d9eb968c212cca27879dcd093985db568b",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-005.AC01",
+          "text": "Configuration defaults are inactive and valid.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "disposable_updater_pass",
+          "evidence": [
+            "distribution-v1.txt"
+          ],
+          "remaining_or_limit": "Neutral fixture distribution and actual role-index generation checked; no live Template or project adoption."
+        },
+        {
+          "criterion_id": "TASK-005.AC02",
+          "text": "Selected cadence and budget values are handled consistently.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "disposable_updater_pass",
+          "evidence": [
+            "distribution-v1.txt"
+          ],
+          "remaining_or_limit": "Neutral fixture distribution and actual role-index generation checked; no live Template or project adoption."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-008",
+      "title": "Add controller charters and reusable specialist roles",
+      "requirement_ids": [
+        "REQ-004",
+        "REQ-005",
+        "REQ-006",
+        "REQ-015"
+      ],
+      "assets": [
+        {
+          "target": "ROLES-depo/project-curator-CURATOR.md",
+          "current_sha256": "f8f7ec848e88404b89f7202929695d8a21d490e1d90e27b3a81a06b6da9711f7",
+          "kind": "source"
+        },
+        {
+          "target": "ROLES-depo/curator-manager-AGENTS.md",
+          "current_sha256": "c8b3f8e260830bb5681438571057bc9474db46fdb909632e81148f67dfc7f78a",
+          "kind": "source"
+        },
+        {
+          "target": "ROLES-depo/curator-manager-ROLE.md",
+          "current_sha256": "4eeaac17b71df6eb89728bfa3b4ed7eb5551b083515ab6078794afa2a044756a",
+          "kind": "source"
+        },
+        {
+          "target": "ROLES-depo/documentation-curator-AGENTS.md",
+          "current_sha256": "e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd",
+          "kind": "source"
+        },
+        {
+          "target": "ROLES-depo/documentation-curator-ROLE.md",
+          "current_sha256": "d90978bd3ad1a47c7a8752821a4ceba0ca39cf7afcf6aca91709e259e91498ae",
+          "kind": "source"
+        },
+        {
+          "target": "ROLES-depo/knowledge-curator-AGENTS.md",
+          "current_sha256": "e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd",
+          "kind": "source"
+        },
+        {
+          "target": "ROLES-depo/knowledge-curator-ROLE.md",
+          "current_sha256": "b6d509eff7984b1ad02ce9b2a9893c299af045de0ebefa87accd0b45ba3d3c75",
+          "kind": "source"
+        },
+        {
+          "target": "ROLES-depo/improvement-maintenance-AGENTS.md",
+          "current_sha256": "e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd",
+          "kind": "source"
+        },
+        {
+          "target": "ROLES-depo/improvement-maintenance-ROLE.md",
+          "current_sha256": "034dd7b3ce155cd9b8576d5917f9bb208400241bfeb1599bf0d1e413b096b098",
+          "kind": "source"
+        },
+        {
+          "target": "AGENTS-depo/project-template-AGENTS.md",
+          "current_sha256": "8482c83ca43e991db0605b6baea7eb557ac6fab04e0e27477dcdafbaf881ccaf",
+          "kind": "source"
+        },
+        {
+          "target": "ROLES-depo/project-director-ROLE.md",
+          "current_sha256": "4735ce95dd8c371cfdf3227b639417820f8d493d98fd629cb305dd5d6d36b1d1",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/SKILL.md",
+          "current_sha256": "fb430c1356245052f2ab480531d4ff2afc5abe6aecfbe1dcf1e36e7b003de481",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-008.AC01",
+          "text": "One controller/charter is selected per execution; reading a charter does not activate it.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "disposable_updater_pass",
+          "evidence": [
+            "distribution-v1.txt"
+          ],
+          "remaining_or_limit": "Neutral fixture distribution and actual role-index generation checked; no live Template or project adoption."
+        },
+        {
+          "criterion_id": "TASK-008.AC02",
+          "text": "Specialist responsibilities, qualifications, role reads, scope and stopping rules are explicit; generic Director use and category rules are preserved.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "disposable_updater_pass",
+          "evidence": [
+            "distribution-v1.txt"
+          ],
+          "remaining_or_limit": "Neutral fixture distribution and actual role-index generation checked; no live Template or project adoption."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-009",
+      "title": "Version Task provenance and Curator intake",
+      "requirement_ids": [
+        "REQ-004",
+        "REQ-008",
+        "REQ-043",
+        "REQ-014",
+        "REQ-015"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/task/SKILL.md",
+          "current_sha256": "e9615709a293f3d39dab926ac91ef6496f839e261446c6ecbed804c31a7e8afa",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/agent-task/scripts/task_state.py",
+          "current_sha256": "90c077df7c725b9ed260aaddfcbdf7e5b65e36a7d8d2ba8fb2f02ad8a3f25556",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+          "current_sha256": "d4901e205c1ed23f9f11a7da5043883dd2df6c8f4e168830ab46913dbc2965f8",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/agent-task/references/orchestration-contract.md",
+          "current_sha256": "1d927efce3f66648dc7e30f9f582b2bb98956e35b34ceffd63452517b7f223ba",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-009.AC01",
+          "text": "New provenance is schema-versioned and validated; historical records retain bytes/meaning and unknown fields are rejected.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "selected_source_only",
+          "evidence": [],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        },
+        {
+          "criterion_id": "TASK-009.AC02",
+          "text": "Curator bootstrap reserves exactly one manager, activates only the real receipt identity and relinquishes canonical Task writing.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "selected_source_only",
+          "evidence": [],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-014",
+      "title": "Implement durable transport and cursors",
+      "requirement_ids": [
+        "REQ-014",
+        "REQ-017",
+        "REQ-038"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_queue.py",
+          "current_sha256": "731914209668fd45a7fa068da97a10eaac039793e7991ec016fd1feecd672aaf",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/schema/event-v1.json",
+          "current_sha256": "af40e2c3abda5e6791ee3a6597903a4b630c10edfc09b6b3349a0599b0307b2d",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/state-paths.md",
+          "current_sha256": "839c8ec48e2bc05629993992d9bda3b3066d1543680301af1877643a8c8355d2",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-014.AC01",
+          "text": "Manual corrections survive restart; project/repository/branch/snapshot/causal/policy/source IDs are retained.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_durable_correction_restart_and_cursor"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-014.AC02",
+          "text": "Transport cannot claim Task lifecycle or canonical publication outcomes; cache cleanup cannot erase durable events.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_durable_correction_restart_and_cursor"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-015",
+      "title": "Implement bounded local event adapters",
+      "requirement_ids": [
+        "REQ-016",
+        "REQ-017",
+        "REQ-032"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_events.py",
+          "current_sha256": "15a74065e77baac8aa67f6f2c5c422d603756eec48a3815adebfd91f59ffa3e2",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_git.py",
+          "current_sha256": "3d60cd7b19cd2f943b4bba13beae5c5a462feacc1fe52cf8ecc791aada54717e",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/adapters/local-events.md",
+          "current_sha256": "3f5493cda531552cfb84e4c6b691363f6ad6e102acc9aa81f6e7be1b26b90b18",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-015.AC01",
+          "text": "Existing hook managers are preserved; no live hook or service is installed by distribution.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_event_preflight_and_causal_followthrough"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-015.AC02",
+          "text": "Collect selected local events with bounded read-only adapters.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_event_preflight_and_causal_followthrough"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-016",
+      "title": "Implement branch and snapshot checkpoints",
+      "requirement_ids": [
+        "REQ-019",
+        "REQ-023",
+        "REQ-040"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_snapshots.py",
+          "current_sha256": "f687cf9d3f7973c70c04094c983cf3733ca6b2e36064a65dbfae8fc655abeb4e",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/schema/checkpoint-v1.json",
+          "current_sha256": "883b6d2e25e09c7d4a3362d568558d4c509053c1b97513cbcc3b141cb0c0ac4b",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-016.AC01",
+          "text": "Rebase, squash, force update, rename, deletion and branch switch recompute affected obligations.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_checkpoint_stages_preserve_prior_observations"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-016.AC02",
+          "text": "Feature-branch knowledge does not become another branch current; assessment alone never advances reconciliation.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_checkpoint_stages_preserve_prior_observations"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-017",
+      "title": "Implement deterministic preflight and coalescing",
+      "requirement_ids": [
+        "REQ-007",
+        "REQ-018",
+        "REQ-022"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_preflight.py",
+          "current_sha256": "602efe8f1b932fecbea4ae78cf2e9a1362a215c9ad90211b26aecf0b425d4e10",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-017.AC01",
+          "text": "No relevant delta, due check or pending work yields zero model calls, Tasks, knowledge records or content rewrite.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_event_preflight_and_causal_followthrough"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-017.AC02",
+          "text": "Unknown classes hold or receive bounded assessment; cache/control timestamps do not cause full reanalysis.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_event_preflight_and_causal_followthrough"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-018",
+      "title": "Implement causal deduplication and stopping",
+      "requirement_ids": [
+        "REQ-018",
+        "REQ-019",
+        "REQ-020",
+        "REQ-031",
+        "REQ-042"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_causality.py",
+          "current_sha256": "d820c02da9c43af76badf568cd1a61f84f0eb7a3e1164286cf5a44c729bf71ec",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_metrics.py",
+          "current_sha256": "3bc1543ffc33cf8df1670b11d6b2085172940bff30e6da5ad06de47d53323990",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-018.AC01",
+          "text": "Duplicate/retried/out-of-order deliveries produce one logical outcome.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_event_preflight_and_causal_followthrough"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-018.AC02",
+          "text": "A code repair still receives documentation/knowledge follow-through; derivative-only follow-up does not restart the repair.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_event_preflight_and_causal_followthrough"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-018.AC03",
+          "text": "Unchanged failures/output and selected limits stop expansion with the unresolved finding retained.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_event_preflight_and_causal_followthrough"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-019",
+      "title": "Coordinate one ledger across worktrees",
+      "requirement_ids": [
+        "REQ-014",
+        "REQ-023"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_workspace.py",
+          "current_sha256": "12beabf09bebb1385eaba4a84034f3c4e1e7f52e147e3d74cb2f0dafd9437362",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/coordination.md",
+          "current_sha256": "f4c804adbf99d582497e8e89c91d7681836a2d69a8ccaf9988586273fb470e6b",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-019.AC01",
+          "text": "Overlapping, paused and uncertain Director/Curator owners block or route through their current owner.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "selected_source_only",
+          "evidence": [],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        },
+        {
+          "criterion_id": "TASK-019.AC02",
+          "text": "Dirty/staged/unrelated edits survive; unsupported multi-clone/local-remote ownership is held.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "selected_source_only",
+          "evidence": [],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-020",
+      "title": "Integrate exact revalidated candidates",
+      "requirement_ids": [
+        "REQ-011",
+        "REQ-023",
+        "REQ-040"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_integration.py",
+          "current_sha256": "2ad157cfa61c7aff2a0e799c1983db8b0fb6286c4bb4d299cb852ce850e62e8b",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-020.AC01",
+          "text": "Changed targets invalidate affected passes; later human edits are preserved and require revalidation.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_connected_interface",
+          "evidence": [
+            "../ordinary-interface-blocker-v1/receipt-corrected.json"
+          ],
+          "remaining_or_limit": "Current shared Broker does not accept application_controls or establish the selected required control interface. Required caller condition is preserved."
+        },
+        {
+          "criterion_id": "TASK-020.AC02",
+          "text": "Selected changes match their current candidate and project snapshot. Partial integration and later human edits remain visible.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_connected_interface",
+          "evidence": [
+            "../ordinary-interface-blocker-v1/receipt-corrected.json"
+          ],
+          "remaining_or_limit": "Current shared Broker does not accept application_controls or establish the selected required control interface. Required caller condition is preserved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-021",
+      "title": "Implement pause and exact partial recovery",
+      "requirement_ids": [
+        "REQ-008",
+        "REQ-017",
+        "REQ-023",
+        "REQ-027",
+        "REQ-038"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_recovery.py",
+          "current_sha256": "05996dfa5d5a1e72f368c0cf84672571f25cd57b0e70ebfc65992cb40319e306",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/recovery.md",
+          "current_sha256": "fb5fbf167a0cfe335acb7ee116e6414400c116c1f1fb65426f89de0995373af6",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-021.AC01",
+          "text": "Retries use original operation identity and exact pre/post bytes; partial publication and later human edits remain visible.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_connected_interface",
+          "evidence": [
+            "../ordinary-interface-blocker-v1/receipt-corrected.json"
+          ],
+          "remaining_or_limit": "Current shared Broker does not accept application_controls or establish the selected required control interface. Required caller condition is preserved."
+        },
+        {
+          "criterion_id": "TASK-021.AC02",
+          "text": "Ordinary pause closes new work while preserving pending state. Retry retains the original operation and recorded partial results.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_connected_interface",
+          "evidence": [
+            "../ordinary-interface-blocker-v1/receipt-corrected.json"
+          ],
+          "remaining_or_limit": "Current shared Broker does not accept application_controls or establish the selected required control interface. Required caller condition is preserved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-022",
+      "title": "Expose read-only and governed manual commands",
+      "requirement_ids": [
+        "REQ-007",
+        "REQ-008",
+        "REQ-034",
+        "REQ-038"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator.py",
+          "current_sha256": "853cab37f3591b48e3daf3b6bf0153f539c60ba1c9d8e2f65e65e00305e73aa2",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/ACTIONS.md",
+          "current_sha256": "e169ddeccf3f79d40f29516c156887a800d6a7265103150de6a5a19d2a800891",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/references/commands.md",
+          "current_sha256": "b30b8ba06cdd825da42277b1bca837d2d063ea3ccf16d0bf967feba9503ed055",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-022.AC01",
+          "text": "Status does not run model analysis or repair; explicit review does only bounded requested analysis without canonical writes.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "metadata_cli_pass",
+          "evidence": [
+            "retained-cli-v1.txt"
+          ],
+          "remaining_or_limit": "Actual neutral CLI status/review are read-only; explicit analytical review and owner dispatch remain blocked by the current Application API."
+        },
+        {
+          "criterion_id": "TASK-022.AC02",
+          "text": "Manual mutations and exact retries use the same authorization and publication gates as automatic operations.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "metadata_cli_pass",
+          "evidence": [
+            "retained-cli-v1.txt"
+          ],
+          "remaining_or_limit": "Actual neutral CLI status/review are read-only; explicit analytical review and owner dispatch remain blocked by the current Application API."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-023",
+      "title": "Route knowledge and derived-only decisions",
+      "requirement_ids": [
+        "REQ-024",
+        "REQ-028"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_knowledge.py",
+          "current_sha256": "bf016ef5fc10e4f699ec791884e3c93f4215bcf607ca1cafca8ca14c7b9101d3",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/knowledge.md",
+          "current_sha256": "1ac34c7d3c6e72fde15a4a6b63586396ade2374524b3546213e5e86eba27865a",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-023.AC01",
+          "text": "Commits and validator passes alone create no assertion; ordinary children return proposals.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_knowledge_routes_and_actual_lifecycle_owner"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-023.AC02",
+          "text": "Stale products without new knowledge route only to their owner maintenance operation.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_knowledge_routes_and_actual_lifecycle_owner"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-024",
+      "title": "Preserve knowledge history and identity",
+      "requirement_ids": [
+        "REQ-024",
+        "REQ-025",
+        "REQ-028"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/memory/references/evidence-and-lifecycle.md",
+          "current_sha256": "44ed75122bbeafc8a087425a92e12ae44041f1038b6a84f3b3379bbcd122b80e",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/ontology/references/knowledge-routing.md",
+          "current_sha256": "f2a8e8821f305d97eef2eff9be33fb898701dde6e1f882e402958bb85ad0f567",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_knowledge.py",
+          "current_sha256": "bf016ef5fc10e4f699ec791884e3c93f4215bcf607ca1cafca8ca14c7b9101d3",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-024.AC01",
+          "text": "Historical meaning, stable identities, replacement relationships, uncertainty and authored/inferred provenance survive.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_knowledge_routes_and_actual_lifecycle_owner"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-024.AC02",
+          "text": "Source rebinding verifies applicable semantics rather than merely replacing a hash.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_knowledge_routes_and_actual_lifecycle_owner"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-025",
+      "title": "Reconcile selected dependent products",
+      "requirement_ids": [
+        "REQ-019",
+        "REQ-024",
+        "REQ-025",
+        "REQ-027",
+        "REQ-040"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_products.py",
+          "current_sha256": "5897873ca4cb855922c68887bcc2ad87f376c31f8025e49f92aada2ae048bff2",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-025.AC01",
+          "text": "Canonical/historical changes precede selected recertification and required derived maintenance.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_product_order_and_aborted_outcome_stays_pending"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-025.AC02",
+          "text": "Failed required rebuilds remain pending; disabled optional backends stay disabled.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_product_order_and_aborted_outcome_stays_pending"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-025.AC03",
+          "text": "Final product inputs and source snapshot are rechecked after documentation/integration changes.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_product_order_and_aborted_outcome_stays_pending"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-026",
+      "title": "Update source-backed descriptive documentation",
+      "requirement_ids": [
+        "REQ-006",
+        "REQ-029",
+        "REQ-030"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_documentation.py",
+          "current_sha256": "7b2cf33b0e1ec7a3e0696cb29b0836ae007a1258de20b782ca3d113bd456c87e",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/documentation.md",
+          "current_sha256": "ca8ecdb6c7924fd54ac9061062041435e417b3222459bb12db7c6318ca03bd3b",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-026.AC01",
+          "text": "Rename, interface and governance changes receive distinct routes.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "selected_source_only",
+          "evidence": [],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        },
+        {
+          "criterion_id": "TASK-026.AC02",
+          "text": "Generated outputs use their generator; historical reports receive successors/annotations that preserve prior meaning.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "selected_source_only",
+          "evidence": [],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-027",
+      "title": "Connect one learning disposition to improvement",
+      "requirement_ids": [
+        "REQ-020",
+        "REQ-026",
+        "REQ-031"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/what-did-you-learn/references/improvement-and-reuse.md",
+          "current_sha256": "ef9cefa3b510d147bc2d2103cbb06382f13aec2adab4b1ee5e5426585c0ce08a",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/memory/references/automatic-capture.md",
+          "current_sha256": "77ce520b9fcc9e3af69acae975828755a01e53bcc97b4d27f64938b24e7209a5",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_learning.py",
+          "current_sha256": "75ff1d3a9eaac195fd8afb0755e22563231bcdf4e2169b1e4b016b33ba256484",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-027.AC01",
+          "text": "Capture off prevents equivalent automatic persistence; explicit corrections keep their own authority.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_one_learning_disposition_preserves_opt_out_and_owner"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-027.AC02",
+          "text": "Match objective/artifact/source versions; coordinate active owners, do not reopen terminal work for activity.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_one_learning_disposition_preserves_opt_out_and_owner"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-027.AC03",
+          "text": "Already-repaired findings get only remaining obligations; suspected causes enter bounded investigation and later benefit remains unobserved.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_one_learning_disposition_preserves_opt_out_and_owner"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-028",
+      "title": "Implement bounded technical repair",
+      "requirement_ids": [
+        "REQ-011",
+        "REQ-015",
+        "REQ-023",
+        "REQ-031"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/references/technical-maintenance.md",
+          "current_sha256": "561d4e00d8d94bcec227c59aa8ed04ef88787e2b944f2372473ee17762ff249e",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_maintenance.py",
+          "current_sha256": "3448d19e293f3cb3d6aa7197238701d824763918bceb51525ebb736860190647",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-028.AC01",
+          "text": "Only selected classes/paths/tools/budgets are used; existing interfaces and unrelated work survive.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_cached_release_and_isolated_candidate_choices"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-028.AC02",
+          "text": "Suspected cause stays investigation until established; speculative refactoring is excluded.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_cached_release_and_isolated_candidate_choices"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-030",
+      "title": "Assess due external dependency evidence",
+      "requirement_ids": [
+        "REQ-016",
+        "REQ-018",
+        "REQ-032"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_dependencies.py",
+          "current_sha256": "2ec97c14d813684df829b15dcc16e5ebdfba1caaac067eb6b1562834b9d9801c",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/dependencies.md",
+          "current_sha256": "bab4ab08e1f044b7be765f03df7157f658e0ff29eb5425947f689cd2c27e0c83",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-030.AC01",
+          "text": "A due release or compatibility finding includes source, time and version.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_cached_release_and_isolated_candidate_choices"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-030.AC02",
+          "text": "An observation does not install or upgrade software.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_cached_release_and_isolated_candidate_choices"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-031",
+      "title": "Verify isolated dependency candidates",
+      "requirement_ids": [
+        "REQ-011",
+        "REQ-023",
+        "REQ-027",
+        "REQ-032",
+        "REQ-033"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/references/dependency-maintenance.md",
+          "current_sha256": "cf9362d92f320ca34cb1d0c277e486182eedbb17c230427e3ee4c34d450d283b",
+          "kind": "source"
+        },
+        {
+          "target": "Verification/project-curator-release/dependency-candidate-results.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-031.AC01",
+          "text": "Disposable candidate results retain compatibility and affected-product evidence.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_cached_release_and_isolated_candidate_choices"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        },
+        {
+          "criterion_id": "TASK-031.AC02",
+          "text": "The real environment remains unchanged.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_independent_function_pass",
+          "evidence": [
+            "retained-functions-v1.txt#test_cached_release_and_isolated_candidate_choices"
+          ],
+          "remaining_or_limit": "Function evidence only. Supplied observations are synthetic except actual durable queue storage and the actual ontology lifecycle function; connected owner execution is unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-032",
+      "title": "Implement portable bounded scheduling",
+      "requirement_ids": [
+        "REQ-018",
+        "REQ-020",
+        "REQ-022",
+        "REQ-034"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_scheduler.py",
+          "current_sha256": "058bb47b2c394ab63ab0a7c5e96af8377c3d4be27ea76dca7ba74837f4e2c00c",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/scheduling.md",
+          "current_sha256": "0493c652504df50c1e2593bdc22521a2c050952645de3ff3cc51e1287c3c54b4",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-032.AC01",
+          "text": "No active schedule or selected project exists in the starter.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "supporting_direct_function_pass",
+          "evidence": [
+            "supporting-root-results.json"
+          ],
+          "remaining_or_limit": "Matched source hashes for root direct synthetic function cases; no operational scheduler or external notice transport."
+        },
+        {
+          "criterion_id": "TASK-032.AC02",
+          "text": "Budget/iteration limits and unavailable runtime preserve pending work and prevent further unauthorized dispatch.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "supporting_direct_function_pass",
+          "evidence": [
+            "supporting-root-results.json"
+          ],
+          "remaining_or_limit": "Matched source hashes for root direct synthetic function cases; no operational scheduler or external notice transport."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-033",
+      "title": "Implement the inactive macOS host adapter",
+      "requirement_ids": [
+        "REQ-016",
+        "REQ-022",
+        "REQ-038"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_host_macos.py",
+          "current_sha256": "21839dd889f858391b84ca719a9d99f9b822775ff18d2486050dda85d022cac8",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/adapters/macos.md",
+          "current_sha256": "d78c12156644ccc76002e18df667b2cc0f0a09756075f2bbe9a9f8d6e7ec6819",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-033.AC01",
+          "text": "Status distinguishes idle/pending/unavailable/blocked/ready with fresh runtime checks.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "selected_source_only",
+          "evidence": [],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        },
+        {
+          "criterion_id": "TASK-033.AC02",
+          "text": "Relocation revalidates identity; detached external volumes retain pending state and cannot trigger deletion.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "selected_source_only",
+          "evidence": [],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        },
+        {
+          "criterion_id": "TASK-033.AC03",
+          "text": "Distribution installs no service or hook.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "selected_source_only",
+          "evidence": [],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-034",
+      "title": "Implement quiet impact-based notices",
+      "requirement_ids": [
+        "REQ-007",
+        "REQ-034"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_notices.py",
+          "current_sha256": "7e6e48fb4c49e0e3e2346c084dcaa92fd6ac6ac0e78242ed82c30c39bb3d34b6",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-034.AC01",
+          "text": "Meaningful changes, failures/conflicts and required actions include concise impact and exact item.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "supporting_direct_function_pass",
+          "evidence": [
+            "supporting-root-results.json"
+          ],
+          "remaining_or_limit": "Matched source hashes for root direct synthetic function cases; no operational scheduler or external notice transport."
+        },
+        {
+          "criterion_id": "TASK-034.AC02",
+          "text": "Optional digest/channel is selected configuration; starter enables no external destination.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "supporting_direct_function_pass",
+          "evidence": [
+            "supporting-root-results.json"
+          ],
+          "remaining_or_limit": "Matched source hashes for root direct synthetic function cases; no operational scheduler or external notice transport."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-035",
+      "title": "Add read-only intake and resume awareness",
+      "requirement_ids": [
+        "REQ-007",
+        "REQ-014",
+        "REQ-023",
+        "REQ-034",
+        "REQ-035"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/task/SKILL.md",
+          "current_sha256": "e9615709a293f3d39dab926ac91ef6496f839e261446c6ecbed804c31a7e8afa",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/agent-task/scripts/task_state.py",
+          "current_sha256": "90c077df7c725b9ed260aaddfcbdf7e5b65e36a7d8d2ba8fb2f02ad8a3f25556",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_awareness.py",
+          "current_sha256": "7e44001a0f549fb364cf19204d8150a2407a4d193ab3af73eb80fd2fc8eb1178",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-035.AC01",
+          "text": "Unrelated work proceeds silently; exact relevant notices show scope/impact/action.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "read_only_collection_pass",
+          "evidence": [
+            "retained-collection-v1.txt"
+          ],
+          "remaining_or_limit": "Actual queue to awareness, local notice and original-work retention checked. Actual Task intake/activation and maintenance completion remain unproved."
+        },
+        {
+          "criterion_id": "TASK-035.AC02",
+          "text": "Conflicting active/uncertain ownership and invalid required infrastructure block dependent execution only.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "read_only_collection_pass",
+          "evidence": [
+            "retained-collection-v1.txt"
+          ],
+          "remaining_or_limit": "Actual queue to awareness, local notice and original-work retention checked. Actual Task intake/activation and maintenance completion remain unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-036",
+      "title": "Resolve exact conversational selection",
+      "requirement_ids": [
+        "REQ-008",
+        "REQ-014",
+        "REQ-035",
+        "REQ-036"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/references/conversation.md",
+          "current_sha256": "b92f338b66fb411e6589ea3a768b3abe9cb65e677445c376c91dac7d7841a0b2",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_handoff.py",
+          "current_sha256": "a257cbcdb183d0517feb8f75c9747f65122b1d6c26249e64e131dc10216e83fa",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-036.AC01",
+          "text": "Clear do-it selection works without mandatory command syntax.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "read_only_collection_pass",
+          "evidence": [
+            "retained-collection-v1.txt"
+          ],
+          "remaining_or_limit": "Actual queue to awareness, local notice and original-work retention checked. Actual Task intake/activation and maintenance completion remain unproved."
+        },
+        {
+          "criterion_id": "TASK-036.AC02",
+          "text": "Multiple/stale/conflicting offers and read-only questions cannot cause guessed execution.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "read_only_collection_pass",
+          "evidence": [
+            "retained-collection-v1.txt"
+          ],
+          "remaining_or_limit": "Actual queue to awareness, local notice and original-work retention checked. Actual Task intake/activation and maintenance completion remain unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-037",
+      "title": "Preserve original work through maintenance",
+      "requirement_ids": [
+        "REQ-019",
+        "REQ-023",
+        "REQ-036",
+        "REQ-037"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_handoff.py",
+          "current_sha256": "a257cbcdb183d0517feb8f75c9747f65122b1d6c26249e64e131dc10216e83fa",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/references/conversation.md",
+          "current_sha256": "b92f338b66fb411e6589ea3a768b3abe9cb65e677445c376c91dac7d7841a0b2",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-037.AC01",
+          "text": "Original work remains recoverable without a competing execution or fabricated consent.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "read_only_collection_pass",
+          "evidence": [
+            "retained-collection-v1.txt"
+          ],
+          "remaining_or_limit": "Actual queue to awareness, local notice and original-work retention checked. Actual Task intake/activation and maintenance completion remain unproved."
+        },
+        {
+          "criterion_id": "TASK-037.AC02",
+          "text": "Completion/blocked maintenance returns to a fresh relevant integrity/scope/assumption check; remaining blockers prevent dependent continuation.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "read_only_collection_pass",
+          "evidence": [
+            "retained-collection-v1.txt"
+          ],
+          "remaining_or_limit": "Actual queue to awareness, local notice and original-work retention checked. Actual Task intake/activation and maintenance completion remain unproved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-038",
+      "title": "Complete source package and compatibility manifests",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-006",
+        "REQ-043"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/README.md",
+          "current_sha256": "1c843e374d1928059fefbf8b68b08dd25be0211d0af5bb13f13d1693f022a7cd",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/curate/agents/openai.yaml",
+          "current_sha256": "e746467921668b0d376bd1f1c53d50b857b318d7ffb38f75cb35650ad6057b3c",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/contract.json",
+          "current_sha256": "221bd027783c3e42f2305158c8546119e115301224b9649505fffa21756b9f27",
+          "kind": "source"
+        },
+        {
+          "target": "SPECS-depo/project-template-SPECS.md",
+          "current_sha256": "2bfab709d5c30e6e3ecb4463a27b038cc4d8157b9301e09fa5138989733509db",
+          "kind": "source"
+        },
+        {
+          "target": "SPECS-depo/project-template-README.md",
+          "current_sha256": "21dac4caf558a841f136cf6cdf7fcb2b6ec0d6f92d2c394a31271419ab4f9ab8",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-038.AC01",
+          "text": "One complete discoverable skill and neutral module inventory cover all operating responsibilities.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "partial_source_and_result_mapping",
+          "evidence": [
+            "source-manifest.json",
+            "preservation.json",
+            "test-receipt.json"
+          ],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        },
+        {
+          "criterion_id": "TASK-038.AC02",
+          "text": "Existing owners declare compatible provenance/adapter versions; no unsupported runtime is labeled ready.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "partial_source_and_result_mapping",
+          "evidence": [
+            "source-manifest.json",
+            "preservation.json",
+            "test-receipt.json"
+          ],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-039",
+      "title": "Add exact active Template mappings",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002"
+      ],
+      "assets": [
+        {
+          "target": "depot/template-update.json",
+          "current_sha256": "8919da5fdb2c2b76ed7b5abfe9c4a8497990da59bd78875c301cbe9b1e40fce0",
+          "kind": "source"
+        },
+        {
+          "target": "depot/template-update.md",
+          "current_sha256": "5dd7f86fd15a1fd54bc37959efd2c2fb5b61de4132f2ff205d24dad3d8a02b5e",
+          "kind": "source"
+        },
+        {
+          "target": "tools/template_update.py",
+          "current_sha256": "e3e3ef91f86943147f7b08bab8a485d5f80f6b345bc4edf14effdcf11e384e55",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/init-new-project/assets/template_update.py",
+          "current_sha256": "e3e3ef91f86943147f7b08bab8a485d5f80f6b345bc4edf14effdcf11e384e55",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-039.AC01",
+          "text": "CURATOR.md, curator.yaml, document-ownership.json and Roles pairs have exact source owners.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "disposable_updater_pass",
+          "evidence": [
+            "distribution-v1.txt"
+          ],
+          "remaining_or_limit": "Neutral fixture distribution and actual role-index generation checked; no live Template or project adoption."
+        },
+        {
+          "criterion_id": "TASK-039.AC02",
+          "text": "Skill/reference discovery and generated role index remain with existing owners; no static mapping owns Roles/INDEX.md.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "disposable_updater_pass",
+          "evidence": [
+            "distribution-v1.txt"
+          ],
+          "remaining_or_limit": "Neutral fixture distribution and actual role-index generation checked; no live Template or project adoption."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-040",
+      "title": "Verify updater preservation and recovery",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-023",
+        "REQ-038"
+      ],
+      "assets": [
+        {
+          "target": "tests/test_template_update.py",
+          "current_sha256": "a5f1f5e3ccb5ac20cc84a870650dc4773f64ca3456a4205f5e30120bc59cf899",
+          "kind": "source"
+        },
+        {
+          "target": "Verification/project-curator-release/distribution-recovery.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-040.AC01",
+          "text": "All existing conflict and recovery protections remain effective for Curator resources.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "disposable_updater_pass",
+          "evidence": [
+            "distribution-v1.txt"
+          ],
+          "remaining_or_limit": "Neutral fixture distribution and actual role-index generation checked; no live Template or project adoption."
+        },
+        {
+          "criterion_id": "TASK-040.AC02",
+          "text": "Verify updater preservation and exact recovery.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "disposable_updater_pass",
+          "evidence": [
+            "distribution-v1.txt"
+          ],
+          "remaining_or_limit": "Neutral fixture distribution and actual role-index generation checked; no live Template or project adoption."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-041",
+      "title": "Publish and inspect neutral Template assets",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-005",
+        "REQ-006",
+        "REQ-044"
+      ],
+      "assets": [
+        {
+          "target": "Projects/Sys4AI-Template-Project",
+          "current_sha256": null,
+          "kind": "container"
+        },
+        {
+          "target": "SPECS-depo/template-tests/test_template_contract.py",
+          "current_sha256": "2994b244fad01d2ee135a4339affa5e0be66cc5be047cb90435009c3b59f05db",
+          "kind": "source"
+        },
+        {
+          "target": "Verification/project-curator-release/template-distribution.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-041.AC01",
+          "text": "Template contains complete charter/configuration/skills/roles/contracts with correct Roles entries.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "pending_root_delivery",
+          "evidence": [
+            "distribution-v1.txt"
+          ],
+          "remaining_or_limit": "Disposable updater evidence only; root explicitly preserves working shared/default initializer and Template because this package is incomplete."
+        },
+        {
+          "criterion_id": "TASK-041.AC02",
+          "text": "Template assets are neutral and inactive.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "pending_root_delivery",
+          "evidence": [
+            "distribution-v1.txt"
+          ],
+          "remaining_or_limit": "Disposable updater evidence only; root explicitly preserves working shared/default initializer and Template because this package is incomplete."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-042",
+      "title": "Add the Curator starter edition",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-005",
+        "REQ-043",
+        "REQ-026"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/init-new-project/scripts/init_new_project.py",
+          "current_sha256": "b826f7c1b2bba7815f6bde00d8533ab7a688de216816b6d012c5ac3132301c1a",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/init-new-project/scripts/init_curator.py",
+          "current_sha256": "f43b03a4e509f37c214cf443879eea0d562725efdebe0c37cb827a74640ab746",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/init-new-project/assets/baseline-assets.json",
+          "current_sha256": "29b54759c1c5fbdbdc390fbbeface36e38124c82690cfe13514f0cbc96496a96",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/init-new-project/assets/initialization-receipt.schema.json",
+          "current_sha256": "af16bea39ff0858618fdb6999e959e7a96cd698ee3ad2eeda97c9e6ab78b0043",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-042.AC01",
+          "text": "Earlier receipts keep their edition, original inventory, licensing, custom packages, Roles provenance and capture choice.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_setup_prerequisite",
+          "evidence": [
+            "setup-two-domains-v4.txt",
+            "static-pin-differences-v1.json"
+          ],
+          "remaining_or_limit": "Required curator_governance.py is absent; three opaque dependency editions differ from preserved pins. No initializer compatibility acceptance, alternate implementation, old source substitution or promotion."
+        },
+        {
+          "criterion_id": "TASK-042.AC02",
+          "text": "New projects receive the selected starter edition. Old edition behavior remains unchanged.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_setup_prerequisite",
+          "evidence": [
+            "setup-two-domains-v4.txt",
+            "static-pin-differences-v1.json"
+          ],
+          "remaining_or_limit": "Required curator_governance.py is absent; three opaque dependency editions differ from preserved pins. No initializer compatibility acceptance, alternate implementation, old source substitution or promotion."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-043",
+      "title": "Add selected adoption and static assessment",
+      "requirement_ids": [
+        "REQ-003",
+        "REQ-043",
+        "REQ-026"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/init-new-project/scripts/init_curator.py",
+          "current_sha256": "f43b03a4e509f37c214cf443879eea0d562725efdebe0c37cb827a74640ab746",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/init-new-project/scripts/init_static_health.py",
+          "current_sha256": "b5264a988496a2448b052014191ad4b5fa1bf6a2602397c93d4f2274b2057ea5",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/init-new-project/assets/static-capability-v1.json",
+          "current_sha256": "81fa4096e3bf4755e57a3f5651f6c6f04d8005d17251d19c80f6ddfac1b18240",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/init-new-project/SKILL.md",
+          "current_sha256": "6a5f5868b847ade174723cf910b8bf3915abb6435eb27f423c6282c1bd6802b5",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-043.AC01",
+          "text": "Adoption records exact source/destination/package/charter boundary in existing setup history and preserves old base edition.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_setup_prerequisite",
+          "evidence": [
+            "setup-two-domains-v4.txt",
+            "static-pin-differences-v1.json"
+          ],
+          "remaining_or_limit": "Required curator_governance.py is absent; three opaque dependency editions differ from preserved pins. No initializer compatibility acceptance, alternate implementation, old source substitution or promotion."
+        },
+        {
+          "criterion_id": "TASK-043.AC02",
+          "text": "Static assessment executes no unknown customized project Python and distinguishes installed, configured, authorized, compatible and runtime-observed states.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_setup_prerequisite",
+          "evidence": [
+            "setup-two-domains-v4.txt",
+            "static-pin-differences-v1.json"
+          ],
+          "remaining_or_limit": "Required curator_governance.py is absent; three opaque dependency editions differ from preserved pins. No initializer compatibility acceptance, alternate implementation, old source substitution or promotion."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-044",
+      "title": "Prove adoption preservation and recovery",
+      "requirement_ids": [
+        "REQ-003",
+        "REQ-023",
+        "REQ-026",
+        "REQ-038"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/init-new-project/tests/test_curator_adoption.py",
+          "current_sha256": "d5f75e3d80838f9c7888d5e73795b1f12b1a642e10c8655bd2e0691d6b397f68",
+          "kind": "source"
+        },
+        {
+          "target": "SKILLS-depo/init-new-project/tests/test_curator_recovery.py",
+          "current_sha256": "2ab8bebf65e9ffc137f16ffbe374f3fddb7710b4b150ab3b1c69e05b61b1c6d9",
+          "kind": "source"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-044.AC01",
+          "text": "Same-operation retry preserves original and later edits, project identity, records, settings and licensing.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_setup_prerequisite",
+          "evidence": [
+            "setup-two-domains-v4.txt",
+            "static-pin-differences-v1.json"
+          ],
+          "remaining_or_limit": "Required curator_governance.py is absent; three opaque dependency editions differ from preserved pins. No initializer compatibility acceptance, alternate implementation, old source substitution or promotion."
+        },
+        {
+          "criterion_id": "TASK-044.AC02",
+          "text": "Changed sources or unexpected pre/post bytes block replay; completed reruns do not refresh new editions implicitly.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_setup_prerequisite",
+          "evidence": [
+            "setup-two-domains-v4.txt",
+            "static-pin-differences-v1.json"
+          ],
+          "remaining_or_limit": "Required curator_governance.py is absent; three opaque dependency editions differ from preserved pins. No initializer compatibility acceptance, alternate implementation, old source substitution or promotion."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-045",
+      "title": "Verify separate domain specializations",
+      "requirement_ids": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-005",
+        "REQ-044"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/init-new-project/tests/test_curator_setup.py",
+          "current_sha256": "b96c11c1e38675d59a8addf6c2f9364a77dcdca5533b9aa0de7d888a8fb828c2",
+          "kind": "source"
+        },
+        {
+          "target": "Verification/project-curator-release/initialization-results.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-045.AC01",
+          "text": "No real depot/product registration, service, hook, environment or external state is changed.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_setup_prerequisite",
+          "evidence": [
+            "setup-two-domains-v4.txt",
+            "static-pin-differences-v1.json"
+          ],
+          "remaining_or_limit": "Required curator_governance.py is absent; three opaque dependency editions differ from preserved pins. No initializer compatibility acceptance, alternate implementation, old source substitution or promotion."
+        },
+        {
+          "criterion_id": "TASK-045.AC02",
+          "text": "Separate project profiles have equivalent core contracts and distinct local data. No real service, environment or project adoption occurs during plan preparation.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_setup_prerequisite",
+          "evidence": [
+            "setup-two-domains-v4.txt",
+            "static-pin-differences-v1.json"
+          ],
+          "remaining_or_limit": "Required curator_governance.py is absent; three opaque dependency editions differ from preserved pins. No initializer compatibility acceptance, alternate implementation, old source substitution or promotion."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-046",
+      "title": "Run the requirement and failure matrix",
+      "requirement_ids": [
+        "REQ-018",
+        "REQ-019",
+        "REQ-020",
+        "REQ-023",
+        "REQ-025",
+        "REQ-026",
+        "REQ-027",
+        "REQ-028",
+        "REQ-038",
+        "REQ-044"
+      ],
+      "assets": [
+        {
+          "target": "Verification/project-curator-release/requirement-coverage.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        },
+        {
+          "target": "Verification/project-curator-release/test-results.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        },
+        {
+          "target": "SKILLS-depo/curate/tests",
+          "current_sha256": null,
+          "kind": "container"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-046.AC01",
+          "text": "No-op/inactivity, irrelevant/renamed data, missed/duplicate/reordered events, rewritten history, opt-out, already-fixed lessons and stale products have explicit results.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "partial_source_and_result_mapping",
+          "evidence": [
+            "source-manifest.json",
+            "preservation.json",
+            "test-receipt.json"
+          ],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        },
+        {
+          "criterion_id": "TASK-046.AC02",
+          "text": "Each active ordinary criterion has a mapped meaningful check. Historical failures and partial outcomes remain distinct from current results.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "partial_source_and_result_mapping",
+          "evidence": [
+            "source-manifest.json",
+            "preservation.json",
+            "test-receipt.json"
+          ],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-048",
+      "title": "Exercise complete maintenance and conversational flows",
+      "requirement_ids": [
+        "REQ-008",
+        "REQ-024",
+        "REQ-025",
+        "REQ-027",
+        "REQ-030",
+        "REQ-031",
+        "REQ-033",
+        "REQ-034",
+        "REQ-035",
+        "REQ-036",
+        "REQ-037",
+        "REQ-040",
+        "REQ-044"
+      ],
+      "assets": [
+        {
+          "target": "Verification/project-curator-release/integrated-scenarios.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        },
+        {
+          "target": "Verification/project-curator-release/conversation-observations.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-048.AC01",
+          "text": "Clear selection enters normal owned execution; ambiguity asks only the missing choice and original work resumes only when gates permit.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_connected_interface",
+          "evidence": [
+            "../ordinary-interface-blocker-v1/receipt-corrected.json"
+          ],
+          "remaining_or_limit": "Current shared Broker does not accept application_controls or establish the selected required control interface. Required caller condition is preserved."
+        },
+        {
+          "criterion_id": "TASK-048.AC02",
+          "text": "Canonical integration, required derivatives and current final snapshots agree for each fully reconciled outcome.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_connected_interface",
+          "evidence": [
+            "../ordinary-interface-blocker-v1/receipt-corrected.json"
+          ],
+          "remaining_or_limit": "Current shared Broker does not accept application_controls or establish the selected required control interface. Required caller condition is preserved."
+        },
+        {
+          "criterion_id": "TASK-048.AC03",
+          "text": "Blocked/partial outcomes remain truthful and recoverable without duplicate work.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "blocked_connected_interface",
+          "evidence": [
+            "../ordinary-interface-blocker-v1/receipt-corrected.json"
+          ],
+          "remaining_or_limit": "Current shared Broker does not accept application_controls or establish the selected required control interface. Required caller condition is preserved."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-049",
+      "title": "Verify bounded operational measures",
+      "requirement_ids": [
+        "REQ-018",
+        "REQ-020",
+        "REQ-034",
+        "REQ-040",
+        "REQ-042"
+      ],
+      "assets": [
+        {
+          "target": "SKILLS-depo/curate/scripts/curator_metrics.py",
+          "current_sha256": "3bc1543ffc33cf8df1670b11d6b2085172940bff30e6da5ad06de47d53323990",
+          "kind": "source"
+        },
+        {
+          "target": "CURATION-depo/metrics.md",
+          "current_sha256": "dd7344251f987b6e98e70e5b75a4de9f956647057b3dea13170e435aa208cf4b",
+          "kind": "source"
+        },
+        {
+          "target": "Verification/project-curator-release/metric-scenarios.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-049.AC01",
+          "text": "Measures retain explicit evidence, counts, timing and attribution limits.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_metric_collection_pass",
+          "evidence": [
+            "metric-scenarios.json",
+            "retained-collection-v1.txt",
+            "supporting-root-results.json"
+          ],
+          "remaining_or_limit": "Caller-selected projections with exact source attribution and synthetic rows labeled; no global totals, connected runtime collection or benefit baseline."
+        },
+        {
+          "criterion_id": "TASK-049.AC02",
+          "text": "Metric reads and inactivity checks do not create Task or knowledge work.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "targeted_metric_collection_pass",
+          "evidence": [
+            "metric-scenarios.json",
+            "retained-collection-v1.txt",
+            "supporting-root-results.json"
+          ],
+          "remaining_or_limit": "Caller-selected projections with exact source attribution and synthetic rows labeled; no global totals, connected runtime collection or benefit baseline."
+        }
+      ]
+    },
+    {
+      "task_id": "TASK-050",
+      "title": "Audit every criterion and release boundary",
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-008",
+        "REQ-011",
+        "REQ-043",
+        "REQ-014",
+        "REQ-015",
+        "REQ-016",
+        "REQ-017",
+        "REQ-018",
+        "REQ-019",
+        "REQ-020",
+        "REQ-022",
+        "REQ-023",
+        "REQ-024",
+        "REQ-025",
+        "REQ-026",
+        "REQ-027",
+        "REQ-028",
+        "REQ-029",
+        "REQ-030",
+        "REQ-031",
+        "REQ-032",
+        "REQ-033",
+        "REQ-034",
+        "REQ-035",
+        "REQ-036",
+        "REQ-037",
+        "REQ-038",
+        "REQ-040",
+        "REQ-044",
+        "REQ-042"
+      ],
+      "assets": [
+        {
+          "target": "Verification/project-curator-release/RELEASE.md",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        },
+        {
+          "target": "Verification/project-curator-release/requirement-coverage.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        },
+        {
+          "target": "Verification/project-curator-release/final-preservation.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        },
+        {
+          "target": "Verification/project-curator-release/source-destination-manifest.json",
+          "current_sha256": null,
+          "kind": "new_retained_result"
+        }
+      ],
+      "criteria": [
+        {
+          "criterion_id": "TASK-050.AC01",
+          "text": "Every active requirement maps to current artifacts and ordinary results.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "partial_source_and_result_mapping",
+          "evidence": [
+            "source-manifest.json",
+            "preservation.json",
+            "test-receipt.json"
+          ],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        },
+        {
+          "criterion_id": "TASK-050.AC02",
+          "text": "Existing files and user-approved preservation exceptions are reported accurately.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "partial_source_and_result_mapping",
+          "evidence": [
+            "source-manifest.json",
+            "preservation.json",
+            "test-receipt.json"
+          ],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        },
+        {
+          "criterion_id": "TASK-050.AC03",
+          "text": "Removed IDs have no active execution or proof obligation.",
+          "acceptance": "pending_manager_verification",
+          "observed_level": "partial_source_and_result_mapping",
+          "evidence": [
+            "source-manifest.json",
+            "preservation.json",
+            "test-receipt.json"
+          ],
+          "remaining_or_limit": "Selected source is preserved, but this checkpoint does not establish every intended owner/operating outcome."
+        }
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "requirement_id": "REQ-001",
+      "title": "Keep first delivery in shared sources",
+      "outcome": "Maintain Curator additions and reusable changes in their declared shared source collections, with an explicit inventory of ownership and required distribution integration.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-001.AC01",
+          "text": "The deliverable identifies each reusable source, its owning collection, and mapped destination; overlapping competing Curator source collections are absent.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-039.AC01",
+            "TASK-039.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-001.AC02",
+          "text": "The final change manifest separates shared/distribution changes from active installations and proves that existing product content and active root installations were not adopted or refreshed.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-039.AC01",
+            "TASK-039.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-002",
+      "title": "Distribute a neutral Template capability",
+      "outcome": "Deliver the complete neutral Curator starter through the existing source-to-Template pipeline and its conflict/recovery checks.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-002.AC01",
+          "text": "The Template receives the declared charter, configuration, role pairs, skills, and contracts from owned sources; required active starter paths are explicitly mapped and generated role navigation comes from its owner.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-039.AC01",
+            "TASK-039.AC02",
+            "TASK-040.AC01",
+            "TASK-040.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-045.AC01",
+            "TASK-045.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-002.AC02",
+          "text": "A reviewed updater check/apply/check sequence confirms the intended mappings and preservation; customized destinations, missing source collections, unavailable volumes, and interrupted publication retain existing protection.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-039.AC01",
+            "TASK-039.AC02",
+            "TASK-040.AC01",
+            "TASK-040.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-045.AC01",
+            "TASK-045.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-002.AC03",
+          "text": "Distribute an inactive, project-neutral Template capability.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-039.AC01",
+            "TASK-039.AC02",
+            "TASK-040.AC01",
+            "TASK-040.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-045.AC01",
+            "TASK-045.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-003",
+      "title": "Prepare consistent initialization and selected adoption",
+      "outcome": "Provide reusable initialization and explicit Curator adoption support that specializes project identity and preserves existing setup editions, local content, and settings.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-003.AC01",
+          "text": "Disposable existing-project tests prove selected adoption, preservation of customizations and earlier receipt editions, exact source/destination records, and safe same-operation recovery.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-043.AC01",
+            "TASK-043.AC02",
+            "TASK-044.AC01",
+            "TASK-044.AC02",
+            "TASK-045.AC01",
+            "TASK-045.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-003.AC02",
+          "text": "Prepare compatible new-project setup and separately selected adoption.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-043.AC01",
+            "TASK-043.AC02",
+            "TASK-044.AC01",
+            "TASK-044.AC02",
+            "TASK-045.AC01",
+            "TASK-045.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-004",
+      "title": "Provide peer controller routing",
+      "outcome": "Give the Curator and Director separate controller identities and activation contexts at the same project-controller tier while preserving the Director as the default delivery contact.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-004.AC01",
+          "text": "Observed routing selects one controller and charter for an execution; reading another charter or assuming a role name cannot activate either controller.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-008.AC01",
+            "TASK-008.AC02",
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-004.AC02",
+          "text": "Both controllers can initiate authorized improvements, neither silently takes over the other's work, and existing Director-only use remains valid.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-008.AC01",
+            "TASK-008.AC02",
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-004.AC03",
+          "text": "The reusable integration does not copy the depot's automatic Task-intake or age-closure policy into generic product behavior.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-008.AC01",
+            "TASK-008.AC02",
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-005",
+      "title": "Supply a specialized Curator charter",
+      "outcome": "Provide CURATOR.md as the root Curator charter in adopting starter layouts, retaining ROLE.md for the Director and one reusable Curator core with project specialization.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-005.AC01",
+          "text": "The charter defines continuity, maintenance, evidence, ownership, publication, recovery, notification, delegation, and stopping responsibilities and prohibits busywork and self-expansion of authority.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-005.AC01",
+            "TASK-005.AC02",
+            "TASK-008.AC01",
+            "TASK-008.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-045.AC01",
+            "TASK-045.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-005.AC02",
+          "text": "New configuration remains inactive until separately selected. The charter identifies the project and its maintenance responsibilities.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-005.AC01",
+            "TASK-005.AC02",
+            "TASK-008.AC01",
+            "TASK-008.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-045.AC01",
+            "TASK-045.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-006",
+      "title": "Provide qualified Curator specialist responsibilities",
+      "outcome": "Provide discoverable Documentation Curator, Knowledge Curator, and Improvement and Maintenance responsibilities through valid reusable role pairs and required workflows.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-006.AC01",
+          "text": "Fresh filesystem-backed role discovery and fit checks govern each selection; required skills/tools are verified separately from a role description.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-008.AC01",
+            "TASK-008.AC02",
+            "TASK-026.AC01",
+            "TASK-026.AC02",
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-006.AC02",
+          "text": "Documentation, knowledge, and technical outputs have distinct scope/evidence even when one qualified role covers more than one bounded responsibility; a narrow Curator manager references its root charter without duplicating it.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-008.AC01",
+            "TASK-008.AC02",
+            "TASK-026.AC01",
+            "TASK-026.AC02",
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-006.AC03",
+          "text": "Required role directory casing remains Roles; historical provenance and generated-index ownership are preserved.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-008.AC01",
+            "TASK-008.AC02",
+            "TASK-026.AC01",
+            "TASK-026.AC02",
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-007",
+      "title": "Keep inspection routes read-only",
+      "outcome": "Provide manual Curator status and review operations that expose readiness, pending work, ownership, and selected-snapshot findings without altering project content or activating execution.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-007.AC01",
+          "text": "Keep inspection and status routes read-only.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-017.AC01",
+            "TASK-017.AC02",
+            "TASK-022.AC01",
+            "TASK-022.AC02",
+            "TASK-034.AC01",
+            "TASK-034.AC02",
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-008",
+      "title": "Use one governed maintenance entry path",
+      "outcome": "Route explicit updates, corrections, and exact-operation retries through the same policy, evidence, ownership, and recovery controls as automatic work.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-008.AC01",
+          "text": "A correction retains its selected subject and evidence, and retry reconnects the exact operation and committed state rather than creating a duplicate.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-022.AC01",
+            "TASK-022.AC02",
+            "TASK-036.AC01",
+            "TASK-036.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-008.AC02",
+          "text": "Manual and selected scheduled work use the same operation flow. Inspection-only requests do not start work.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-022.AC01",
+            "TASK-022.AC02",
+            "TASK-036.AC01",
+            "TASK-036.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-011",
+      "title": "Support bounded technical maintenance",
+      "outcome": "Permit technical maintenance of code, dependencies, and non-governance skill implementation within explicitly selected classes, paths, tools, budgets, and integration targets.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-011.AC01",
+          "text": "A supported defect or compatibility need can become an isolated repair with a bounded definition of done, preserved interfaces, applicable regression evidence, and reversible integration.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-020.AC01",
+            "TASK-020.AC02",
+            "TASK-028.AC01",
+            "TASK-028.AC02",
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-011.AC02",
+          "text": "Speculative refactoring and unselected classes remain outside the operation; a suspected cause can enter bounded investigation without being treated as a proven repair.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-020.AC01",
+            "TASK-020.AC02",
+            "TASK-028.AC01",
+            "TASK-028.AC02",
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-014",
+      "title": "Retain one canonical execution owner",
+      "outcome": "Use the existing Task ledger and real manager reservation, launch receipt, activation, version, writer, and completion gates for mutating Curator work.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-014.AC01",
+          "text": "After acceptance into a Task, that Task owns execution/completion state; queue and assessment records reference it and cannot supply conflicting lifecycle status.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-014.AC01",
+            "TASK-014.AC02",
+            "TASK-019.AC01",
+            "TASK-019.AC02",
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-036.AC01",
+            "TASK-036.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-014.AC02",
+          "text": "Read-only inspection and unchanged/no-op events do not create Tasks; Curator intake is explicitly selected without broadening unrelated Task activation.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-014.AC01",
+            "TASK-014.AC02",
+            "TASK-019.AC01",
+            "TASK-019.AC02",
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-036.AC01",
+            "TASK-036.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-014.AC03",
+          "text": "Selected work resolves its current canonical owner. Concurrent work does not create a duplicate writable ledger.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-014.AC01",
+            "TASK-014.AC02",
+            "TASK-019.AC01",
+            "TASK-019.AC02",
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-036.AC01",
+            "TASK-036.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-015",
+      "title": "Preserve teams and independent evidence",
+      "outcome": "Retain the established generic, complex, and extra-complex team rules, exact inherited model/reasoning settings, independent solver contexts, and version-bound review and acceptance.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-015.AC01",
+          "text": "Generic work has one execution worker; complex work retains independent full-problem solvers and a distinct senior; extra-complex work additionally retains distinct reviewer coverage and current passes.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-008.AC01",
+            "TASK-008.AC02",
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-028.AC01",
+            "TASK-028.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-015.AC02",
+          "text": "Material input/candidate changes invalidate affected evidence; implementation targets the accepted current proposal through the existing distinct-worker rules.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-008.AC01",
+            "TASK-008.AC02",
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-028.AC01",
+            "TASK-028.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-015.AC03",
+          "text": "Applicable role and team requirements are retained for ordinary work. Independent contributions remain distinguishable.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-008.AC01",
+            "TASK-008.AC02",
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-028.AC01",
+            "TASK-028.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-016",
+      "title": "Collect relevant local events",
+      "outcome": "Provide reusable inputs for human/agent commits, merge/history/branch transitions, accepted-work completion, manual requests, startup/catch-up, due dependency checks, and deterministic stale-data findings.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-016.AC01",
+          "text": "Selected input adapters recover missed events and retain pending work when the runtime is unavailable; no real hook or persistent service is installed merely by distributing the capability.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-015.AC01",
+            "TASK-015.AC02",
+            "TASK-030.AC01",
+            "TASK-030.AC02",
+            "TASK-033.AC01",
+            "TASK-033.AC02",
+            "TASK-033.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-016.AC02",
+          "text": "Collect relevant local project events.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-015.AC01",
+            "TASK-015.AC02",
+            "TASK-030.AC01",
+            "TASK-030.AC02",
+            "TASK-033.AC01",
+            "TASK-033.AC02",
+            "TASK-033.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-017",
+      "title": "Keep delivery durable without duplicating execution state",
+      "outcome": "Maintain durable event transport with retry, cursors, causality, snapshot identity, and references to canonical executions and publication receipts.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-017.AC01",
+          "text": "Queue records identify the project/repository, branch, source snapshot, event/operation identity, causal parent, policy/source hashes, disposition, and Task/receipt references where applicable.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-014.AC01",
+            "TASK-014.AC02",
+            "TASK-015.AC01",
+            "TASK-015.AC02",
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-017.AC02",
+          "text": "Pending manual corrections survive restart and are not lost through cache cleanup; Git catch-up reconstructs missed repository events.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-014.AC01",
+            "TASK-014.AC02",
+            "TASK-015.AC01",
+            "TASK-015.AC02",
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-017.AC03",
+          "text": "Assessment and transport records preserve their own meaning while canonical Task and publication journals remain authoritative for execution and actual writes.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-014.AC01",
+            "TASK-014.AC02",
+            "TASK-015.AC01",
+            "TASK-015.AC02",
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-018",
+      "title": "Avoid unnecessary inference and content churn",
+      "outcome": "Run inexpensive deterministic preflight before automatic model invocation and permit a correct no-change outcome.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-018.AC01",
+          "text": "No relevant delta, no due external check, and no relevant pending work results in zero model calls and no content rewrite, Task, memory note, or ontology assertion.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-017.AC01",
+            "TASK-017.AC02",
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-030.AC01",
+            "TASK-030.AC02",
+            "TASK-032.AC01",
+            "TASK-032.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-018.AC02",
+          "text": "An irrelevant commit can finish with a transport disposition; unknown file classes or changed dependencies are examined conservatively, while cache/generated/control timestamps alone do not cause full semantic reanalysis.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-017.AC01",
+            "TASK-017.AC02",
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-030.AC01",
+            "TASK-030.AC02",
+            "TASK-032.AC01",
+            "TASK-032.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-018.AC03",
+          "text": "Avoid unnecessary model use and content churn.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-017.AC01",
+            "TASK-017.AC02",
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-030.AC01",
+            "TASK-030.AC02",
+            "TASK-032.AC01",
+            "TASK-032.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-019",
+      "title": "Track snapshot-specific reconciliation",
+      "outcome": "Keep separate observed, assessed, canonically integrated, and fully reconciled checkpoints for each selected project and branch.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-019.AC01",
+          "text": "Rename, interface change, rebase, squash, force update, deletion, and branch switch cases use actual snapshots and ancestry to reassess affected obligations.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-016.AC01",
+            "TASK-016.AC02",
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-037.AC01",
+            "TASK-037.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-019.AC02",
+          "text": "Knowledge and derivatives remain bound to the approved branch snapshot; feature-branch content cannot silently become another branch's current knowledge.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-016.AC01",
+            "TASK-016.AC02",
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-037.AC01",
+            "TASK-037.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-019.AC03",
+          "text": "A commit observed or assessed cannot advance full reconciliation while integration, required products, ownership, or recovery remains unresolved.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-016.AC01",
+            "TASK-016.AC02",
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-037.AC01",
+            "TASK-037.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-020",
+      "title": "Prevent duplicates and self-trigger loops",
+      "outcome": "Recognize repeated deliveries and already satisfied work using operation identity, hashes, versions, and causal provenance without suppressing all Curator-originated changes.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-020.AC01",
+          "text": "Duplicate, retried, and out-of-order events cause one logical maintenance outcome and do not duplicate Tasks, lessons, or canonical assertions.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-027.AC01",
+            "TASK-027.AC02",
+            "TASK-027.AC03",
+            "TASK-032.AC01",
+            "TASK-032.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-020.AC02",
+          "text": "A Curator code repair receives necessary documentation/knowledge follow-through; its derivative-only follow-up does not restart the satisfied repair.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-027.AC01",
+            "TASK-027.AC02",
+            "TASK-027.AC03",
+            "TASK-032.AC01",
+            "TASK-032.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-020.AC03",
+          "text": "Unchanged output/failure and configured iteration or resource limits stop further expansion while retaining the unresolved finding.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-027.AC01",
+            "TASK-027.AC02",
+            "TASK-027.AC03",
+            "TASK-032.AC01",
+            "TASK-032.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-022",
+      "title": "Provide an inactive portable scheduling capability",
+      "outcome": "Supply platform-independent scheduling policy and a separate macOS per-checkout host adapter with explicit installation, readiness, relocation, and unavailable-volume behavior.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-022.AC01",
+          "text": "The reusable policy validates selected project/branch sets, debounce, catch-up and dependency cadences, bounded model/work budgets, operation entitlements, notifications, and runtime compatibility before activation.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-005.AC01",
+            "TASK-005.AC02",
+            "TASK-017.AC01",
+            "TASK-017.AC02",
+            "TASK-032.AC01",
+            "TASK-032.AC02",
+            "TASK-033.AC01",
+            "TASK-033.AC02",
+            "TASK-033.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-022.AC02",
+          "text": "Neutral configuration has no live project/branch selection, installed service, active schedule, or autonomous-write entitlement; required operating selections are reported as missing rather than guessed.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-005.AC01",
+            "TASK-005.AC02",
+            "TASK-017.AC01",
+            "TASK-017.AC02",
+            "TASK-032.AC01",
+            "TASK-032.AC02",
+            "TASK-033.AC01",
+            "TASK-033.AC02",
+            "TASK-033.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-022.AC03",
+          "text": "Disposable adapter checks distinguish idle, pending, unavailable, blocked, and ready; detached input cannot imply deletion, relocation preserves identity checks, and the existing Template watcher remains independent.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-005.AC01",
+            "TASK-005.AC02",
+            "TASK-017.AC01",
+            "TASK-017.AC02",
+            "TASK-032.AC01",
+            "TASK-032.AC02",
+            "TASK-033.AC01",
+            "TASK-033.AC02",
+            "TASK-033.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-023",
+      "title": "Coordinate concurrent owners and isolated integration",
+      "outcome": "Preserve one canonical coordination location and publication owner per logical project/branch while executing scoped changes in an isolated workspace.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-023.AC01",
+          "text": "Concurrent worktrees do not create competing writable Task ledgers; overlapping Director/Curator scopes wait or reconcile through their current owners, including paused or uncertain owners.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-016.AC01",
+            "TASK-016.AC02",
+            "TASK-019.AC01",
+            "TASK-019.AC02",
+            "TASK-020.AC01",
+            "TASK-020.AC02",
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-028.AC01",
+            "TASK-028.AC02",
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-037.AC01",
+            "TASK-037.AC02",
+            "TASK-040.AC01",
+            "TASK-040.AC02",
+            "TASK-044.AC01",
+            "TASK-044.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-023.AC02",
+          "text": "Dirty user working trees, staged content, unrelated files, and later human edits survive; no automatic stash, reset, clean, or blind integration is used to gain access.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-016.AC01",
+            "TASK-016.AC02",
+            "TASK-019.AC01",
+            "TASK-019.AC02",
+            "TASK-020.AC01",
+            "TASK-020.AC02",
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-028.AC01",
+            "TASK-028.AC02",
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-037.AC01",
+            "TASK-037.AC02",
+            "TASK-040.AC01",
+            "TASK-040.AC02",
+            "TASK-044.AC01",
+            "TASK-044.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-023.AC03",
+          "text": "Overlapping current work is coordinated before edits. Dirty, staged and unrelated files remain preserved.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-016.AC01",
+            "TASK-016.AC02",
+            "TASK-019.AC01",
+            "TASK-019.AC02",
+            "TASK-020.AC01",
+            "TASK-020.AC02",
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-028.AC01",
+            "TASK-028.AC02",
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-037.AC01",
+            "TASK-037.AC02",
+            "TASK-040.AC01",
+            "TASK-040.AC02",
+            "TASK-044.AC01",
+            "TASK-044.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-024",
+      "title": "Use owned memory and ontology publication",
+      "outcome": "Make separate evidence-based decisions for memory, ontology, and derived-only maintenance and use their existing lifecycle and publication helpers.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-024.AC01",
+          "text": "A change may justify neither, either, or both kinds of canonical knowledge; a commit or passed validator alone cannot establish truth or acceptance.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-023.AC01",
+            "TASK-023.AC02",
+            "TASK-024.AC01",
+            "TASK-024.AC02",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-024.AC02",
+          "text": "A stale derivative alone triggers its owning maintenance operation without fabricating a new memory lesson or ontology assertion.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-023.AC01",
+            "TASK-023.AC02",
+            "TASK-024.AC01",
+            "TASK-024.AC02",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-024.AC03",
+          "text": "Knowledge changes use the existing owner operations. Derived-only updates remain separate from source changes.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-023.AC01",
+            "TASK-023.AC02",
+            "TASK-024.AC01",
+            "TASK-024.AC02",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-025",
+      "title": "Preserve knowledge history and identity",
+      "outcome": "Retain source provenance, applicability, uncertainty, temporal meaning, and replacement relationships when knowledge changes.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-025.AC01",
+          "text": "Manual correction and automatic upkeep use appropriate supersession, retraction, deprecation, or replacement while preserving the earlier record's meaning and stable identity relationships.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-024.AC01",
+            "TASK-024.AC02",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-025.AC02",
+          "text": "Authored, inferred, externally sourced, and derived material remain distinguishable; historical evidence is not retroactively rewritten to claim new results.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-024.AC01",
+            "TASK-024.AC02",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-025.AC03",
+          "text": "Preserve knowledge history and stable record identities.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-024.AC01",
+            "TASK-024.AC02",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-026",
+      "title": "Respect memory capture choices",
+      "outcome": "Preserve automatic-capture preferences and existing persistence ownership across learning and Curator integrations.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-026.AC01",
+          "text": "Capture off prevents equivalent automatic persistence through a renamed Curator path; independently authorized explicit corrections remain possible.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-027.AC01",
+            "TASK-027.AC02",
+            "TASK-027.AC03",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-043.AC01",
+            "TASK-043.AC02",
+            "TASK-044.AC01",
+            "TASK-044.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-026.AC02",
+          "text": "A distinct entitlement that changes an earlier preference requires deliberate selection and disclosure; starter distribution and ordinary setup reruns cannot silently override an existing choice.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-027.AC01",
+            "TASK-027.AC02",
+            "TASK-027.AC03",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-043.AC01",
+            "TASK-043.AC02",
+            "TASK-044.AC01",
+            "TASK-044.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-026.AC03",
+          "text": "Respect existing memory capture preferences.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-027.AC01",
+            "TASK-027.AC02",
+            "TASK-027.AC03",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-043.AC01",
+            "TASK-043.AC02",
+            "TASK-044.AC01",
+            "TASK-044.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-027",
+      "title": "Reconcile all selected dependent products",
+      "outcome": "Complete required dependent maintenance in source-aware order and distinguish canonical publication from full readiness.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-027.AC01",
+          "text": "Canonical changes and historical disposition precede any separately authorized recertification and required memory projections, ontology compilation/wiki, semantic products, and derived associations.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-027.AC02",
+          "text": "Final checks bind the selected products to their actual input versions and recheck the source snapshot after documentation or integration changes.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-027.AC03",
+          "text": "A failed required rebuild remains pending even when a note or assertion was saved; disabled optional profiles are not installed or activated to make status appear current.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-028",
+      "title": "Hold unsupported semantic changes",
+      "outcome": "Keep conflicting, uncertain, or unsupported semantic changes out of approved canonical content until adequate evidence and required authority exist.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-028.AC01",
+          "text": "A held proposal states the exact evidence gap or decision needed, affected source versions, and the bounded correction/review route.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-023.AC01",
+            "TASK-023.AC02",
+            "TASK-024.AC01",
+            "TASK-024.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-028.AC02",
+          "text": "Structural, SHACL, relationship, or schema conformance is reported separately from factual truth; an inference cannot silently become an approved authored assertion.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-023.AC01",
+            "TASK-023.AC02",
+            "TASK-024.AC01",
+            "TASK-024.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-028.AC03",
+          "text": "Unresolved meaning is not repaired by broad speculative edits, erased history, or weakened validators.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-023.AC01",
+            "TASK-023.AC02",
+            "TASK-024.AC01",
+            "TASK-024.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-029",
+      "title": "Classify documentation by purpose and ownership",
+      "outcome": "Provide a project-owned classification and dependency map for governance, descriptive documentation, canonical knowledge, generated views, historical evidence, and mixed/unknown material.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-029.AC01",
+          "text": "AGENTS.md, a README, a generated wiki page, and a completed Task response receive different update routes independent of their extension.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-026.AC01",
+            "TASK-026.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-029.AC02",
+          "text": "Explicit section/file ownership and overrides take precedence over broad defaults; mixed or unknown content uses the stricter applicable boundary or holds ambiguous edits.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-026.AC01",
+            "TASK-026.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-029.AC03",
+          "text": "Descriptive documentation has an identified source owner.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-026.AC01",
+            "TASK-026.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-030",
+      "title": "Maintain source-backed descriptive documentation",
+      "outcome": "Detect documentation affected by selected changes and update factual descriptions through the declared documentation or generator owner.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-030.AC01",
+          "text": "Review covers affected commands, path casing, links, prerequisites, diagrams, examples, interfaces, and status claims, combining deterministic checks with semantic source comparison.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-026.AC01",
+            "TASK-026.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-030.AC02",
+          "text": "Generated outputs are rebuilt through their owner; historical reports preserve earlier meaning and receive successors or annotations instead of false retrospective claims.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-026.AC01",
+            "TASK-026.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-030.AC03",
+          "text": "Representative rename, changed-interface, and policy-change fixtures produce appropriate distinct outcomes, including the reported role-link casing example without requiring a live-root README repair.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-026.AC01",
+            "TASK-026.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-031",
+      "title": "Connect learning to supported improvements",
+      "outcome": "Consume the existing learning/completion disposition once and connect unresolved findings to appropriately owned repair or investigation and later observed outcomes.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-031.AC01",
+          "text": "A finding can be traced through review, allowed persistence, disposition, authorized repair/investigation, validation, and any later observed outcome without duplicate lessons or Tasks.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-027.AC01",
+            "TASK-027.AC02",
+            "TASK-027.AC03",
+            "TASK-028.AC01",
+            "TASK-028.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-031.AC02",
+          "text": "Matching considers objective, artifact, and source version; an active owner's work is coordinated through that owner and terminal work is not reopened merely to create Curator activity.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-027.AC01",
+            "TASK-027.AC02",
+            "TASK-027.AC03",
+            "TASK-028.AC01",
+            "TASK-028.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-031.AC03",
+          "text": "Already repaired work receives only its remaining obligations; suspected causes receive bounded investigation, and later benefit remains unobserved until real evidence exists.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-027.AC01",
+            "TASK-027.AC02",
+            "TASK-027.AC03",
+            "TASK-028.AC01",
+            "TASK-028.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-032",
+      "title": "Assess external dependency changes",
+      "outcome": "Provide due dependency/advisory assessment that can identify relevant candidates while repository content is unchanged.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-032.AC01",
+          "text": "The inventory covers declared/locked dependencies, selected optional backends and models, external tools, workflow actions, skill editions, and relevant compatibility constraints.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-015.AC01",
+            "TASK-015.AC02",
+            "TASK-030.AC01",
+            "TASK-030.AC02",
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-032.AC02",
+          "text": "Due external release information identifies source, time and version.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-015.AC01",
+            "TASK-015.AC02",
+            "TASK-030.AC01",
+            "TASK-030.AC02",
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-032.AC03",
+          "text": "Compatibility findings remain separate from an instruction to install.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-015.AC01",
+            "TASK-015.AC02",
+            "TASK-030.AC01",
+            "TASK-030.AC02",
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-033",
+      "title": "Validate and isolate dependency changes",
+      "outcome": "Process selected dependency candidates through isolated declaration/lock changes, compatibility checks, and appropriate behavioral verification.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-033.AC01",
+          "text": "Declaration updates, runtime installation, new package sources, and starting services are separately authorized; failed candidates leave live environments and unrelated content intact.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-033.AC02",
+          "text": "Major versions, backend swaps, storage/schema changes, and certification implications take the higher-risk path; patch-version labels cannot replace regression checks.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-033.AC03",
+          "text": "Checks include a clean candidate environment when dependencies change and any required recertification or derived maintenance before claiming integrated readiness.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-031.AC01",
+            "TASK-031.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-034",
+      "title": "Keep routine notifications quiet",
+      "outcome": "Report Curator outcomes according to their material impact and suppress routine successful or irrelevant maintenance chatter.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-034.AC01",
+          "text": "Idle checks, irrelevant backlog, and routine successful upkeep stay quiet; significant changes, failures, conflicts, and required user actions are visible with concise impact and next action.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-005.AC01",
+            "TASK-005.AC02",
+            "TASK-022.AC01",
+            "TASK-022.AC02",
+            "TASK-032.AC01",
+            "TASK-032.AC02",
+            "TASK-034.AC01",
+            "TASK-034.AC02",
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-034.AC02",
+          "text": "Information, warning, and blocking are distinguishable: information does not interrupt execution, warnings permit safe continuation, and blockers prevent conflicting or invalid execution.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-005.AC01",
+            "TASK-005.AC02",
+            "TASK-022.AC01",
+            "TASK-022.AC02",
+            "TASK-032.AC01",
+            "TASK-032.AC02",
+            "TASK-034.AC01",
+            "TASK-034.AC02",
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-034.AC03",
+          "text": "An optional selected digest or notification channel remains configuration; no external message destination or periodic status flood is enabled by the starter.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-005.AC01",
+            "TASK-005.AC02",
+            "TASK-022.AC01",
+            "TASK-022.AC02",
+            "TASK-032.AC01",
+            "TASK-032.AC02",
+            "TASK-034.AC01",
+            "TASK-034.AC02",
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-035",
+      "title": "Check relevant pending work at intake and resume",
+      "outcome": "Add a lightweight read-only Curator-awareness check when project Task work starts or resumes, using existing queue/Task metadata and affected scope.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-035.AC01",
+          "text": "No relevant item produces no interruption and no model review merely to find notices; unrelated work proceeds normally.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-036.AC01",
+            "TASK-036.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-035.AC02",
+          "text": "A relevant notice identifies the exact item, affected component, impact level, and available action; warnings offer prior maintenance only when useful.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-036.AC01",
+            "TASK-036.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-035.AC03",
+          "text": "Check relevant pending work during intake and resume.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-035.AC01",
+            "TASK-035.AC02",
+            "TASK-036.AC01",
+            "TASK-036.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-036",
+      "title": "Resolve clear conversational Curator selection",
+      "outcome": "Accept natural-language selection of one exact Curator item just surfaced with an explicit offer to execute it.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-036.AC01",
+          "text": "When one item was clearly offered, replies such as do it or do the task select that item and enter the normal Task, ownership, role, authority, and verification pipeline.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-036.AC01",
+            "TASK-036.AC02",
+            "TASK-037.AC01",
+            "TASK-037.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-036.AC02",
+          "text": "If multiple items are eligible, the offer is no longer applicable, or the phrase could refer to the original work, the system asks the smallest disambiguating question instead of guessing.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-036.AC01",
+            "TASK-036.AC02",
+            "TASK-037.AC01",
+            "TASK-037.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-036.AC03",
+          "text": "Explicit Curator commands remain available but are not mandatory for an unambiguous conversational selection; read-only questions do not imply execution consent.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-036.AC01",
+            "TASK-036.AC02",
+            "TASK-037.AC01",
+            "TASK-037.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-037",
+      "title": "Preserve and resume the original request",
+      "outcome": "Retain the user's original work intent and its authority while an intervening Curator item is handled.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-037.AC01",
+          "text": "The original objective, constraints, and existing Task selection remain recoverable without a competing execution or fabricated new authorization.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-037.AC01",
+            "TASK-037.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-037.AC02",
+          "text": "After a truthful terminal or blocked Curator outcome, the original request is reassessed and continues when prior authority, relevant assumptions, and required integrity gates still permit it.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-037.AC01",
+            "TASK-037.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-037.AC03",
+          "text": "Retain the original request through intervening maintenance.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-037.AC01",
+            "TASK-037.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-038",
+      "title": "Support truthful pause and exact recovery",
+      "outcome": "Provide explicit pause/resume and recovery behavior that preserves actors, operation identities, journals, and partial results.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-038.AC01",
+          "text": "Status distinguishes queued, launched, confirmed, held/blocked, stopped, partially published, integrated, and fully reconciled observations without inventing new competing Task terminal states.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-014.AC01",
+            "TASK-014.AC02",
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-022.AC01",
+            "TASK-022.AC02",
+            "TASK-033.AC01",
+            "TASK-033.AC02",
+            "TASK-033.AC03",
+            "TASK-040.AC01",
+            "TASK-040.AC02",
+            "TASK-044.AC01",
+            "TASK-044.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-038.AC02",
+          "text": "Recovery preserves later human edits and history; cross-subsystem operations report their real partial-commit boundaries rather than claiming nonexistent atomicity.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-014.AC01",
+            "TASK-014.AC02",
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-022.AC01",
+            "TASK-022.AC02",
+            "TASK-033.AC01",
+            "TASK-033.AC02",
+            "TASK-033.AC03",
+            "TASK-040.AC01",
+            "TASK-040.AC02",
+            "TASK-044.AC01",
+            "TASK-044.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-038.AC03",
+          "text": "Pause and restart retain pending work and partial outcomes.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-014.AC01",
+            "TASK-014.AC02",
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-022.AC01",
+            "TASK-022.AC02",
+            "TASK-033.AC01",
+            "TASK-033.AC02",
+            "TASK-033.AC03",
+            "TASK-040.AC01",
+            "TASK-040.AC02",
+            "TASK-044.AC01",
+            "TASK-044.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-038.AC04",
+          "text": "An ordinary retry uses its original operation identity.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-014.AC01",
+            "TASK-014.AC02",
+            "TASK-021.AC01",
+            "TASK-021.AC02",
+            "TASK-022.AC01",
+            "TASK-022.AC02",
+            "TASK-033.AC01",
+            "TASK-033.AC02",
+            "TASK-033.AC03",
+            "TASK-040.AC01",
+            "TASK-040.AC02",
+            "TASK-044.AC01",
+            "TASK-044.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-040",
+      "title": "Report complete reconciliation from current evidence",
+      "outcome": "Declare a maintenance batch fully reconciled only when every required integrated outcome and dependency is verified at the final source snapshot.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-040.AC01",
+          "text": "The predicate includes actually integrated canonical changes, valid authority/receipts, applicable checks on the integrated result, current required derivatives, no unresolved owner/partial publication/recovery, and a final source recheck.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-016.AC01",
+            "TASK-016.AC02",
+            "TASK-020.AC01",
+            "TASK-020.AC02",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-040.AC02",
+          "text": "A source change after a candidate pass invalidates affected evidence; observed, proposed, tested, integrated, and fully reconciled remain distinct claims.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-016.AC01",
+            "TASK-016.AC02",
+            "TASK-020.AC01",
+            "TASK-020.AC02",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-040.AC03",
+          "text": "Readiness/status reads do not repair or install components to satisfy the predicate.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-016.AC01",
+            "TASK-016.AC02",
+            "TASK-020.AC01",
+            "TASK-020.AC02",
+            "TASK-025.AC01",
+            "TASK-025.AC02",
+            "TASK-025.AC03",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-042",
+      "title": "Measure useful maintenance outcomes",
+      "outcome": "Expose bounded operational evidence that allows later deployments to assess maintenance benefit and resource use without using edit volume as success.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-042.AC01",
+          "text": "The reusable release verifies metric meaning and collection on representative scenarios; live service targets and benefit baselines require later measured deployment and are not invented here.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-042.AC02",
+          "text": "Measures cover unresolved staleness, duplicates, reversals, reconciliation delay, repeated failures and inactivity model use.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-042.AC03",
+          "text": "Missing or unattributed evidence is reported explicitly.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-018.AC01",
+            "TASK-018.AC02",
+            "TASK-018.AC03",
+            "TASK-049.AC01",
+            "TASK-049.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-043",
+      "title": "Preserve schemas and bind Curator provenance",
+      "outcome": "Preserve schema compatibility and recorded project history.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-043.AC01",
+          "text": "Strict existing records reject unknown fields; historical Task, memory, ontology, and setup semantics remain intact and are not rewritten to manufacture Curator provenance.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-043.AC01",
+            "TASK-043.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-043.AC02",
+          "text": "Existing manager publication routes validate the Curator execution's actual authority inputs; neither a forged Director identity nor the manager label alone is accepted.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-043.AC01",
+            "TASK-043.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-043.AC03",
+          "text": "Required schema extensions and any explicit conversion route retain provenance and do not silently migrate old records.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-002.AC01",
+            "TASK-002.AC02",
+            "TASK-009.AC01",
+            "TASK-009.AC02",
+            "TASK-038.AC01",
+            "TASK-038.AC02",
+            "TASK-042.AC01",
+            "TASK-042.AC02",
+            "TASK-043.AC01",
+            "TASK-043.AC02",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    },
+    {
+      "requirement_id": "REQ-044",
+      "title": "Verify the complete reusable capability",
+      "outcome": "Verify the remaining reusable application scope.",
+      "criteria": [
+        {
+          "criterion_id": "REQ-044.AC01",
+          "text": "Verification maps each requirement to concrete source artifacts and checks, covering no-op/inactivity, irrelevant and renamed inputs, duplicate/missed/out-of-order events, rewritten history, corrections, opt-out, already-fixed lessons, and stale derivatives.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-045.AC01",
+            "TASK-045.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-044.AC02",
+          "text": "Conversational cases cover unrelated/relevant pending work, each notification level, clear and ambiguous selection, and original-intent continuation after assumptions change.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-045.AC01",
+            "TASK-045.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-044.AC03",
+          "text": "Final evidence distinguishes source capability, Template distribution, disposable adoption/runtime checks, unperformed root/product adoption, and later operational benefit; no production rollout is claimed.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-045.AC01",
+            "TASK-045.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-044.AC04",
+          "text": "Every active requirement maps to current source and appropriate ordinary evidence.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-045.AC01",
+            "TASK-045.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        },
+        {
+          "criterion_id": "REQ-044.AC05",
+          "text": "Removed category records remain outside the active work and acceptance graph.",
+          "acceptance": "pending",
+          "supporting_task_criteria": [
+            "TASK-001.AC01",
+            "TASK-001.AC02",
+            "TASK-041.AC01",
+            "TASK-041.AC02",
+            "TASK-045.AC01",
+            "TASK-045.AC02",
+            "TASK-046.AC01",
+            "TASK-046.AC02",
+            "TASK-048.AC01",
+            "TASK-048.AC02",
+            "TASK-048.AC03",
+            "TASK-050.AC01",
+            "TASK-050.AC02",
+            "TASK-050.AC03"
+          ],
+          "limitation": "Task-level source and ordinary evidence is partial; no full retained acceptance is inferred."
+        }
+      ]
+    }
+  ]
+}

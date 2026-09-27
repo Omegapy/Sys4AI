@@ -1,0 +1,99 @@
+{
+  "kind": "AuthorizedSummaryFirstLogAccessCorrection",
+  "created_at": "2026-09-11T20:05:25.705447+00:00",
+  "authority": "Root relayed new explicit user instruction authorizing summary-first log access and scoped on-demand log queries; source and focused offline checks only. Prior source hold superseded for this request only.",
+  "user_outcome": "Compact useful log summaries highlight significant events; agents/host can request scoped literal searches and bounded excerpts; full local logs remain preserved. Do not merely raise the existing2MB whole-log cap.",
+  "accepted_foundation_design_preserved": true,
+  "basis": [
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt11/summary.json",
+      "sha256": "1c1410ced599c0a272c94c29b7e220314f7d2938adab4ba8e5a51384a09f66b8"
+    },
+    {
+      "path": "Verification/project-curator-release/native-p1-attempt11/failure-diagnosis.json",
+      "sha256": "1a9c6bf5942bd2e3a6441dd998a676674d6cfa0949a3cadca6ca82e0ffd48311"
+    },
+    {
+      "path": "Verification/project-curator-release/native-p1-attempt11/root-final-review.json",
+      "sha256": "f39fda8edbad71bdbce1297427cb9ffb382166a04345f7a7e8fca0797669e028"
+    },
+    {
+      "path": "Verification/project-curator-release/native-p1-attempt11/poststop-owned-cells/index.json",
+      "sha256": "368293461f4658131e12d42f68fb8044d0c280fa733f21884fb698b54c0ef205"
+    }
+  ],
+  "allowed_source_paths": [
+    "SKILLS-depo/curate/scripts/curator_confinement.py",
+    "SKILLS-depo/curate/scripts/curator_logs.py",
+    "SKILLS-depo/curate/scripts/curator_broker.py",
+    "SKILLS-depo/curate/scripts/curator.py",
+    "SKILLS-depo/curate/tests/test_log_access.py",
+    "SKILLS-depo/curate/tests/test_confinement_contract.py",
+    "SKILLS-depo/curate/tests/test_native_protocol.py",
+    "SKILLS-depo/curate/SKILL.md",
+    "CURATION-depo/runtime-adapter.md"
+  ],
+  "before_source_hashes": {
+    "SKILLS-depo/curate/scripts/curator_confinement.py": "4d158aafaa6e802b8a955da5158ca99d32a4e35237a6303268ff2db5e3e8c625",
+    "SKILLS-depo/curate/scripts/curator_logs.py": null,
+    "SKILLS-depo/curate/scripts/curator_broker.py": "039872343328b6b84e25bdb14895c7376491457bad98da678e2120af7149e5ce",
+    "SKILLS-depo/curate/scripts/curator.py": "caea9ab8f7d5e509c6eb3e425455eea402628e1d84839358d14d04581799ac39",
+    "SKILLS-depo/curate/tests/test_log_access.py": null,
+    "SKILLS-depo/curate/tests/test_confinement_contract.py": "b210fb16060159f5534eab60823b73103ffdbeb29259ba9ceeade43eef35442b",
+    "SKILLS-depo/curate/tests/test_native_protocol.py": "7108215e8c6210a7fb584913ffd336a57f34ba805d60e4b78a500e7d1b7ebf0e",
+    "SKILLS-depo/curate/SKILL.md": "270f7efa95413c0aa5dc1570884145a81095bb268ef3a9851517973ed8c829a1",
+    "CURATION-depo/runtime-adapter.md": "11c05edd784cdcc0df139211518e0c5d008aa2c56bdcdd4aa300a64008553ffc"
+  },
+  "requirements": [
+    "Identify native storage using one nonblocking nofollow regular one-link descriptor and a bounded first-record read; compare admitted actor UUID, canonical path, prior inode/device/header binding on every rebind. Do not hash/read the entire log for identity, do not reset known inode/header on a same-path replacement, preserve strict ownership and race/special-file denials.",
+    "Provide one small standard-library log reader/service shared by Curator CLI and authenticated Broker log.summary/log.query. Native model requests take only trusted registered handles/readers, never filesystem paths or arbitrary actor IDs. Bind source identity, actor and current connection/load epoch where native access requires it; no peer disclosure or implicit grants.",
+    "Initial access to a registered/log-marked artifact must return a compact summary and bounded query handle, never the existing artifact.read whole base64 log. Preserve raw artifact behavior for non-log role/whole-problem input artifacts. Supply a usable documented registration/selection and current curator.py command path, not a disconnected utility. Keep host CLI selection distinct from native caller authentication.",
+    "Summaries must highlight actual failures, recent activity and tool outcomes with stable original line/byte/event/turn/call references and explicit source coverage. Support literal search and bounded excerpts with finite defaults and maxima for scanned bytes/lines, matches, per-record and response UTF-8 bytes; show truncation/cursor/coverage truthfully. No regex execution, arbitrary files, hidden unbounded fallback or dependency.",
+    "Handle native JSONL custom_tool_call_output content-block LISTS, not only strings; actual unsafe_file output is a list entry. Omit private reasoning, token/config/account/world-state bulk and raw user/developer content by default; query projections remain explicit and source-scoped. Treat log text as data. Malformed/oversized/partial lines, UTF-8 issues, append/growth and file replacement need truthful bounded behavior with provenance kept.",
+    "Preserve full local logs and original failed receipts; do not truncate, compact, rewrite, migrate, delete or summarize them in place. Host full wire/page/cell verification remains separate from compact model-facing log delivery.",
+    "Document actual data flow: persist_history materializes/returns full native history to host; full_history verifies exact fork prefix/equality host-side. excludeTurns suppresses response history only and does not prove summarization of native model fork/resume context. Preserve native history equality and all required full-text role/input ACKs; no attempt to change model-managed history under this correction.",
+    "Add proportionate focused behavioral regressions: >2MB regular native log with significant failure away from tail; bounded summary/search/excerpt and list outputs; correct line/byte references/coverage; malformed/long/partial lines; inode/header/actor/peer/current-epoch and growth denials; real Broker log-marked artifact path vs non-log preservation; actual curator.py command integration. Exact defaults/max bytes documented and tested. No broad P1/full-team/model proof."
+  ],
+  "root_trace": [
+    "Broker currently has no log route; artifact.read returns complete selected base64 bytes.",
+    "bind_storage calls file_snapshot(...,2000000) on entire log, then second size guard before header read; current valid actor log2,500,473 bytes triggers unsafe_file.",
+    "Actual retained log has402JSONL records, largest61044 bytes; output lists include unsafe_file atrecord394. Root independent source/runtime trace is read-only evidence, not new native test."
+  ],
+  "stopping_condition": "Return one frozen source/test/doc slice, exact changed paths/hashes, actual focused command outputs and remaining native/context limits. Stop on substantive new architecture, owners outside listed scope, dependency, authority or unrelated defect; no broadened team.",
+  "prohibitions": [
+    "No native App Server/P1/model proof run or packet preparation.",
+    "No root/product adoption, Git/publication/dependency/account/credential changes.",
+    "No canonical Task/role-index writes by implementer.",
+    "No new team, G1-G4 work or broad harness expansion."
+  ],
+  "settings": {
+    "effort": null,
+    "evidence": [
+      {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/bootstrap/native-capability.json",
+        "sha256": "3d225db689fa183e31b6a5fe1980f65b93286f16185a7924ab1dd3542b77ba8f"
+      }
+    ],
+    "mode": "verified_inheritance",
+    "model": null
+  },
+  "role": {
+    "name": "project-sub-agent",
+    "agents_path": "Roles/project-sub-agent/AGENTS.md",
+    "role_path": "Roles/project-sub-agent/ROLE.md",
+    "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+    "catalog": {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/foundation_implementer_summary_logs-catalog.json",
+      "sha256": "7322ce2e16bf5f0abb972cf32f4e44231ea18006fd4552d83b873357e6f5b397"
+    }
+  },
+  "delivery_directory": ".curator-foundation-r2-pdxnr210/summary-log-access-handoff",
+  "template": "Source collection only; manager reviews the existing Template update after freeze, no hand edits to mapped Template files.",
+  "evidence_preservation": "Worker returns scoped temporary test/review evidence in its existing staging area; canonical manager preserves it under Verification/project-curator-release/summary-log-access-correction.",
+  "supersedes_context": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/summary-first-log-access-context.json",
+    "sha256": "d64a016c94a6d8158717282a6b211bf610cf6209d850d15c95257cbc0c97fb40",
+    "reason": "Source-write fit excludes manager-owned release evidence; unchanged nine-source implementation."
+  }
+}

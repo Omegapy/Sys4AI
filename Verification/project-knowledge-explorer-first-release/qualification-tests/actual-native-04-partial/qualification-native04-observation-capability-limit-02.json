@@ -1,0 +1,26 @@
+{
+  "status": "host_reported_native_observation_capability_limit",
+  "producer": "/root",
+  "compiler": "/root/explorer_manager_g3",
+  "facts": [
+    "Root reviewed current CUA documentation: macOS getApp screenshots are scoped to app windows, with no documented full-desktop capture or audio transcription API.",
+    "Root previously attempted getApp for the running VoiceOver app and it timed out. Safari app screenshot omitted the separate caption panel.",
+    "Actual spoken/caption words therefore remain unobserved. No announcement may be inferred from Safari AX text."
+  ],
+  "disposition": "Assess a documented allowed safe observable method first, without system-app modification or disclosure of unrelated clipboard/desktop content. If unavailable, a real participant/user report of actual utterances is needed. Remaining keyboard/source-focus/List/theme/narrow observations can be prepared separately, but full TASK022 stays incomplete.",
+  "previous_record": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-native04-observation-capability-limit.json",
+    "sha256": "394b5f878dcc3c909a6ed4d889bf6be06eb66e10060286b527bc36d63589ebe5"
+  },
+  "targeted_followup_observation": {
+    "producer": "/root",
+    "voiceover_enabled": "System Settings; Quickstart Use VoiceOver completed",
+    "os_process_observation": [
+      "VoiceOver running",
+      "scrod running"
+    ],
+    "cua_observation": "listApps/getState reported VoiceOver isRunning=false and no windows; getApp com.apple.VoiceOver timed out. No accessible caption panel surfaced.",
+    "restoration": "VoiceOver restored off and System Settings closed.",
+    "scope": "Actual current CUA spoken/caption observation unavailable; no user utterance report yet. This does not mean VoiceOver itself failed to run or speech did not occur."
+  }
+}

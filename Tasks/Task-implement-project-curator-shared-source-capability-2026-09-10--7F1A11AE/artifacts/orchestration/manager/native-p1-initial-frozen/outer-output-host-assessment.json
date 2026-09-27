@@ -1,0 +1,36 @@
+{
+  "kind": "host-p1-outer-output-source-assessment",
+  "state": "verified_source_issue_not_native_execution",
+  "rejected_packet_canonical_sha256": "a60bc0182eea5f6213ef3b12445230b333eabd44dd4b8af1ad4e983d87c84a9f",
+  "sources": [
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-p1-outer-output-source-o_4dmd8l/execute_handler.rs",
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/core/src/tools/code_mode/execute_handler.rs",
+      "sha256": "217655094d20f95d79bf0a4ba3c8b4aab7a0d1b3f4a65f8d1e309479a8c00f19"
+    },
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-p1-outer-output-source-o_4dmd8l/execute_spec.rs",
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/core/src/tools/code_mode/execute_spec.rs",
+      "sha256": "f9a083fa1766e5381eacd47055b71cbf954be7f78926fa472482aae6fc5f2b44"
+    },
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-p1-outer-output-source-o_4dmd8l/mod.rs",
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/core/src/tools/code_mode/mod.rs",
+      "sha256": "be419aef3b8100ec9cd59bb3706ee55e3c28facadb13eb25e68fc87b0c300eba"
+    },
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-p1-outer-output-source-o_4dmd8l/response_adapter.rs",
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/core/src/tools/code_mode/response_adapter.rs",
+      "sha256": "48b6b28b8271ad0c3d1686e48c26a769acf163081729c4151d0766de9e9ee272"
+    },
+    {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-p1-outer-output-source-o_4dmd8l/unified_exec_mod.rs",
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/core/src/unified_exec/mod.rs",
+      "sha256": "612caa3475c086a9860f92be871ac5f8d1b08c71c6c20765c06ed4b081ee696c"
+    }
+  ],
+  "finding": "Code-mode outer output resolves missing max_output_tokens to 10000 independently of nested exec_command output. Existing bootstrap did not bind this outer limit or verify complete actor-visible output.",
+  "bounded_correction": "Bind the existing 40000 token allowance at both output layers and compare parsed actual native exec output reads and contents to the exact selected input text. Fail on missing, malformed or truncated output.",
+  "native_allocations": 0,
+  "model_calls": 0
+}

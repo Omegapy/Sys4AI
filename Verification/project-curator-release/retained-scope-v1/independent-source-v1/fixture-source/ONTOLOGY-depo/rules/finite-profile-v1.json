@@ -1,0 +1,36 @@
+{
+  "conflicts": [
+    "disjoint_types",
+    "disjoint_properties",
+    "negative_assertion",
+    "inconsistent_identity"
+  ],
+  "engine": "ontology_reasoning.infer",
+  "id": "finite-profile-v1",
+  "oracle": {
+    "package": "owlrl",
+    "use": "Differential positive-case oracle only; it does not supply unexplained trusted conclusions.",
+    "version": "7.6.2"
+  },
+  "rules": {
+    "cax-sco": "Instance type propagation.",
+    "eq-rep-o": "Replace equal named individual object.",
+    "eq-rep-s": "Replace equal named individual subject.",
+    "eq-sym": "Approved individual equality is symmetric.",
+    "eq-trans": "Approved individual equality is transitive.",
+    "prp-inv1": "Forward inverse assertion.",
+    "prp-inv2": "Reverse inverse assertion.",
+    "prp-spo1": "Property assertion propagation.",
+    "prp-symp": "Declared symmetric property.",
+    "prp-trp": "Declared transitive property.",
+    "scm-eqc1": "Equivalent classes imply forward subclass.",
+    "scm-eqc2": "Equivalent classes imply reverse subclass.",
+    "scm-eqp1": "Equivalent properties imply forward subproperty.",
+    "scm-eqp2": "Equivalent properties imply reverse subproperty.",
+    "scm-sco": "Subclass transitivity.",
+    "scm-spo": "Subproperty transitivity."
+  },
+  "schema_version": 1,
+  "semantics": "Named classes/properties and approved individual equality; open-world absence; no full OWL 2 RL conformance claim.",
+  "version": "1.0.0"
+}

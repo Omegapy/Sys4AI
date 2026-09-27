@@ -1,0 +1,63 @@
+{
+  "kind": "same_accepted_target_complete_P0_history_index_scope",
+  "target": "foundation_acceptance_v2",
+  "target_unchanged": true,
+  "prior_complete_context": [
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/baseline_5f5b585a11fb163884395a7b285d26a5276d64dd19dd6293a6c81b7ca4621d7b.json",
+      "sha256": "5f5b585a11fb163884395a7b285d26a5276d64dd19dd6293a6c81b7ca4621d7b"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_proposal_v2.md",
+      "sha256": "ae3e9aeb730cdf7a68a2d1e678ab5b92a84ce7930059664750e305fa8e6578f8"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-fork-p0-v2-correction-context.json",
+      "sha256": "4052ed1a8c1bdd3194dde6c8e84364f828dff3813259c4b87e826d027cfd2f13"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-fork-p0-v3-small-correction-handoff.json",
+      "sha256": "7eb7477515a3b9cd70f4a182ec4deaa5732c24a28bdaa89c6ad29b033f6e5b27"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-fork-p0-history-index-schema.json",
+      "sha256": "871ff0c0fe7d0bdbb97d927bef288cfa7dcb22020319e58515be18b7f3823fb6"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-fork-p0-history-index-counts.json",
+      "sha256": "9ae8d713138bf4096c878f4e133be47d382a57a4604aea8d427fc655a86b04fa"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-fork-p0-history-index-scan-feasibility.json",
+      "sha256": "3d1f0fff777802b60eabe4d657612e1b0858b4b0dd5c468c2092ac9daa3ef24d"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-fork-p0-history-index-host-owned-rows.json",
+      "sha256": "cbf296cdbbf8c07f9b2ebefcca330fe9e362f72a8d3f1e9fe0460228c4dae0d6"
+    }
+  ],
+  "actual_surface": {
+    "path": "/Users/alex.omegapy/.codex/thread_history_1.sqlite",
+    "device": 16777231,
+    "inode": 114358773,
+    "predates_attempts": true,
+    "meaning": "Native projector writes turn/item/projection metadata here separately from state_5.sqlite and JSONL. Both known old seeds have exact projection offset1038/ordinal1 but no turns/items/realtime rows. No prior unrelated preservation baseline exists for this database."
+  },
+  "required_implementation": [
+    "Bind canonical existing history database identity and supported schema/migration metadata explicitly in the next storage scope. Preserve existing runtime/account/mode; no new history DB, migration or compression.",
+    "Before startup and after final owned runtime/helper stop, inspect only explicit metadata columns from four selected tables, plus schema/migration metadata. Never select, hash or apply expressions to unrelated item_json/error_json bodies; never hash the whole database.",
+    "Use ordered streaming count/digest summaries for unlisted rows and an explicit 350000 total metadata-row budget for this history index, with deadlines/progress handlers and one read-only transaction per snapshot. This is separate from unchanged Agent Task/evidence byte limits and existing state-index limits. Exceeding the scope holds.",
+    "Exclude only actual admitted native IDs for owned projection effects, and the same exact three provenance-bound concurrent execution IDs for separately reported legitimate progress. Preserve prior concurrent row identities/stable metadata and reject deletion/regression from the fresh freeze; permit only specified monotonic progress and append behavior. Unknown/unlisted row or schema changes hold.",
+    "Retain exact owned-ID projection metadata/counts at storage checkpoints. Preserve both historical seeds as unlisted protected records in each new baseline; do not resume/delete/modify them.",
+    "Reserve sufficient time inside the same shared20-second stop grace for this measured roughly4-second metadata scan; do not extend the deadline. Final unavailable/mismatched storage or uncertain process stop vetoes pass.",
+    "Add focused changes/insertions/deletions/identity/row-bound/concurrent-regression/late-timeout checks using synthetic databases. Keep exact absent-row pre-user handling and normal successful post-user metadata/listing required.",
+    "Prepare the exact next P0 packet after these changes, with new history-index effects/fields/bounds and all original runtime/tool/model/account/actor/turn/time restrictions explicit; wait for manager/host review before any native operation."
+  ],
+  "limitations": [
+    "Earlier addenda prove only their selected state-index/JSONL metadata; do not retroactively claim history-index preservation.",
+    "Read-only schema/count/scan feasibility is not a native fork or confinement pass.",
+    "All21 foundation criteria, P1/full NP001-014 and remaining37 plan tasks remain required."
+  ]
+}

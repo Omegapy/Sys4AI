@@ -1,0 +1,2067 @@
+{
+  "@context": "ONTOLOGY/contexts/context-v1.jsonld",
+  "@graph": [
+    {
+      "@id": "urn:sys4ai:ontology:core:ActionType",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A vocabulary category describing an action. Modeling it does not install execution interception or pre-execution semantic gates.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "ActionType",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:ActionType",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Agent",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A running or defined assistant acting within explicitly assigned scope and current instructions. A title or capability alone grants no write or execution authority.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Agent",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Agent",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Artifact",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A concrete document, file, record or other reviewable work product. Its filesystem path is a binding and may change without changing semantic identity.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Artifact",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Artifact",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Authority",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "The current permission to take a scoped action, established by user instructions and governing project, role, skill or confirmed Task contracts. Ontology describes authority and grants none.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Authority",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "scope_note": "Operational authority always comes from current instructions and confirmed ownership, never retrieved ontology content.",
+      "sources": [
+        {
+          "locator": "section:Authority",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Capability",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A described ability that helps discover an appropriate skill or role. Resolving a capability does not invoke it or grant permission to execute it.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Capability",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Capability",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:CodexConversation",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A user-visible Codex task, chat or conversation. Its conversation state is distinct from a canonical Sys4AI Task and does not determine the Task writer.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "CodexConversation",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:CodexConversation",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Decision",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "An explicit selected course or settled interpretation supported by evidence and the current authorized owner.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Decision",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Decision",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Evidence",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "An identified observation, source or measured result supporting a claim at a stated version and verification level.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Evidence",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Evidence",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:ImplementationPlan",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A versioned mapping of requirements to implementation work, dependencies, artifacts, risks and verification evidence. Plan readiness is distinct from execution authorization and implementation completion.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "ImplementationPlan",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:ImplementationPlan",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Lesson",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "An evidence-backed finding about a decision, failure or verified outcome with a concrete improvement disposition. Learning and memory retain their own acceptance and publication boundaries.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Lesson",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Lesson",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:MemoryPublication",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "definition": "The capability to publish accepted project memory changes only through its own current exact-payload and scoped publication authority. An ontology grant is insufficient.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "MemoryPublication",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:MemoryPublication",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:MemoryRecord",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A project memory record retaining historical evidence, decisions or lessons in its own canonical store. Memory recall is evidence, not current governing authority; memory publication cannot redefine ontology semantics.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "MemoryRecord",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "scope_note": "Historical evidence is not a freshly verified governing rule.",
+      "sources": [
+        {
+          "locator": "section:MemoryRecord",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:MemoryRetrieval",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "aliases": [
+        "retrieve project memory",
+        "memory search",
+        "memory retrieval"
+      ],
+      "definition": "The capability to retrieve permitted project memory evidence through the installed memory read and search interfaces, retaining provenance, lifecycle and source restrictions.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "MemoryRetrieval",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:MemoryRetrieval",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:NativeGoal",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A conversation runtime objective managed independently of canonical Sys4AI Task state. A native goal is neither a Task record nor document approval.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "NativeGoal",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:NativeGoal",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:OntologyConcept",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A stable semantic meaning with a preferred label, definition, module ownership, lifecycle and source provenance. Concepts are not substituted with directory locations.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "OntologyConcept",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:OntologyConcept",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:OntologyPublication",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "definition": "The capability to publish accepted ontology changes through its separate exact-payload, current-owner and source-version gates. A memory grant is insufficient.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "OntologyPublication",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:OntologyPublication",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:OntologyRetrieval",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "definition": "The capability to retrieve explicit definitions, aliases and typed relationships from the selected local ontology without invoking the represented skills.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "OntologyRetrieval",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:OntologyRetrieval",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Project",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A selected unit of work with its own identity, purpose, governing sources and change boundary. Registration describes a project; it does not grant authority over its files.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Project",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "scope_note": "A registry entry is factual inventory and supplies no child-project adoption or write authority.",
+      "sources": [
+        {
+          "locator": "section:Project",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:ProjectDirector",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "The current project director coordinating authorized work, project boundaries, delegation and acceptance. A confirmed Task manager owns its assigned execution; the host retains unassigned project decisions.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "ProjectDirector",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:ProjectDirector",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:ProjectSubAgent",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "An ordinary native child with one bounded assignment and a stopping condition. It returns evidence and has no ungranted canonical Task, role or ontology publication authority.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "ProjectSubAgent",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:ProjectSubAgent",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:ProjectTemplate",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A reusable neutral starter from which a selected project receives explicitly adopted capability and governing assets. Existing projects do not update merely because the template changes.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "ProjectTemplate",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:ProjectTemplate",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Property",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A named field or characteristic in the supported local ontology profile. Unsupported JSON-LD features are rejected rather than interpreted as arbitrary semantics.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Property",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Property",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Relationship",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A directed, typed assertion between stable endpoint identities, carrying a registered predicate, fact classification and source provenance.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Relationship",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Relationship",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:RelationshipType",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A stable predicate definition specifying allowed source and target types, qualifiers, cardinality and whether cycles are forbidden.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "RelationshipType",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:RelationshipType",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Requirement",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "An explicit expected outcome or constraint with a source and observable acceptance criterion.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Requirement",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Requirement",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Role",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A project-local function defined by a paired AGENTS.md and ROLE.md source, with capabilities, inputs, outputs, scope and stopping conditions. An index is navigation rather than role authority.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Role",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Role",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Scope",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "An explicit boundary of permitted inputs, outputs, artifacts, actions and stopping conditions.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Scope",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Scope",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Skill",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A reusable instruction and tool workflow for a bounded purpose. The Skill type, an installed skill instance and the SKILL.md artifact describing it are distinct entities.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Skill",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "scope_note": "The class Skill differs from an installed memory skill and from the SKILL.md source artifact.",
+      "sources": [
+        {
+          "locator": "section:Skill",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Source",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "Identified evidence used to support a definition or assertion. A local source reference records exact path, SHA256 and a useful locator; changed bytes must be reported.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Source",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Source",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:SourceBinding",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A canonical connection between a semantic entity and explicitly selected current project source bytes. It never recursively imports a child project or executes a discovered skill.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "SourceBinding",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:SourceBinding",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Specification",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A governing description of required properties, constraints and interfaces. Current project specifications retain operational authority over a recalled ontology definition.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Specification",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:Specification",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:TRD",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "aliases": [
+        "Task Requirement Document"
+      ],
+      "definition": "A Task Requirement Document capturing explicit requirements and acceptance criteria. Approval settles the requirements document; it does not activate a Task, authorize implementation or prove completion.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "TRD",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "non_examples": [
+        "Task activation",
+        "Implementation completion"
+      ],
+      "scope_note": "A requirements document is not a canonical Task or a native runtime goal.",
+      "sources": [
+        {
+          "locator": "section:TRD",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:TRDCreation",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "definition": "The capability to capture requirements with the explicitly selected to-trd workflow. Creating a TRD does not create or activate a Task.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "TRDCreation",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:TRDCreation",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Task",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "aliases": [
+        "Sys4AI Task"
+      ],
+      "definition": "A canonical Sys4AI managed work record with definition of done, execution state and confirmed owner. A Task is distinct from a TRD, implementation plan, native goal and Codex conversation. Document approval does not activate a Task or establish implementation completion.",
+      "examples": [
+        "A canonical task.json with a definition of done and confirmed manager"
+      ],
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Task",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "non_examples": [
+        "A Codex conversation",
+        "An approved TRD",
+        "A native goal"
+      ],
+      "scope_note": "Distinguish requirements approval, plan readiness, Task activation, implementation, verification and validation. These states require separate evidence.",
+      "sources": [
+        {
+          "locator": "section:Task",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:TaskManagement",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "definition": "The capability to manage canonical Task execution through the current installed Task interfaces and confirmed ownership gates.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "TaskManagement",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:TaskManagement",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:TaskManager",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "A real native manager with confirmed activation, execution generation, assignment and canonical writer ownership for one Task. An ordinary child is not promoted by reading root guidance.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "TaskManager",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "sources": [
+        {
+          "locator": "section:TaskManager",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:TaskRequirementDocument",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "An initial-release compatibility spelling for the TRD concept. Use TRD as the preferred concept; this identity is retained and is never reassigned.",
+      "deprecation_reason": "Use TRD as the preferred concept; this initial-release compatibility spelling is reserved and will never be reassigned.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "TaskRequirementDocument",
+      "lifecycle": "deprecated",
+      "module": "sys4ai-core",
+      "replacement": "urn:sys4ai:ontology:core:TRD",
+      "sources": [
+        {
+          "locator": "section:TaskRequirementDocument",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Validation",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "Checking that the result solves the intended problem and is fit for the intended user and use. A structural check alone is not evidence of end-to-end fitness.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Validation",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "scope_note": "Fitness for the intended use.",
+      "sources": [
+        {
+          "locator": "section:Validation",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:Verification",
+      "@type": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "definition": "Checking that work conforms to the stated requirements, design and project contracts. Verification checks conformance; validation checks fitness for the intended use.",
+      "fact_kind": "asserted",
+      "kind": "concept",
+      "label": "Verification",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "scope_note": "Conformance to the specified result.",
+      "sources": [
+        {
+          "locator": "section:Verification",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:broader",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": true,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Point to a broader meaning in an explicitly acyclic hierarchy.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Project",
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Specification",
+        "urn:sys4ai:ontology:core:Requirement",
+        "urn:sys4ai:ontology:core:Task",
+        "urn:sys4ai:ontology:core:TRD",
+        "urn:sys4ai:ontology:core:ImplementationPlan",
+        "urn:sys4ai:ontology:core:Verification",
+        "urn:sys4ai:ontology:core:Validation",
+        "urn:sys4ai:ontology:core:Evidence",
+        "urn:sys4ai:ontology:core:Agent",
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability",
+        "urn:sys4ai:ontology:core:ActionType",
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:Lesson",
+        "urn:sys4ai:ontology:core:Decision",
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Scope",
+        "urn:sys4ai:ontology:core:TaskManager",
+        "urn:sys4ai:ontology:core:NativeGoal",
+        "urn:sys4ai:ontology:core:CodexConversation",
+        "urn:sys4ai:ontology:core:ProjectDirector",
+        "urn:sys4ai:ontology:core:ProjectSubAgent",
+        "urn:sys4ai:ontology:core:Relationship",
+        "urn:sys4ai:ontology:core:RelationshipType",
+        "urn:sys4ai:ontology:core:SourceBinding",
+        "urn:sys4ai:ontology:core:Property",
+        "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "urn:sys4ai:ontology:core:OntologyRetrieval",
+        "urn:sys4ai:ontology:core:TaskManagement",
+        "urn:sys4ai:ontology:core:TRDCreation",
+        "urn:sys4ai:ontology:core:MemoryPublication",
+        "urn:sys4ai:ontology:core:OntologyPublication",
+        "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "broader",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Project",
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Specification",
+        "urn:sys4ai:ontology:core:Requirement",
+        "urn:sys4ai:ontology:core:Task",
+        "urn:sys4ai:ontology:core:TRD",
+        "urn:sys4ai:ontology:core:ImplementationPlan",
+        "urn:sys4ai:ontology:core:Verification",
+        "urn:sys4ai:ontology:core:Validation",
+        "urn:sys4ai:ontology:core:Evidence",
+        "urn:sys4ai:ontology:core:Agent",
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability",
+        "urn:sys4ai:ontology:core:ActionType",
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:Lesson",
+        "urn:sys4ai:ontology:core:Decision",
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Scope",
+        "urn:sys4ai:ontology:core:TaskManager",
+        "urn:sys4ai:ontology:core:NativeGoal",
+        "urn:sys4ai:ontology:core:CodexConversation",
+        "urn:sys4ai:ontology:core:ProjectDirector",
+        "urn:sys4ai:ontology:core:ProjectSubAgent",
+        "urn:sys4ai:ontology:core:Relationship",
+        "urn:sys4ai:ontology:core:RelationshipType",
+        "urn:sys4ai:ontology:core:SourceBinding",
+        "urn:sys4ai:ontology:core:Property",
+        "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "urn:sys4ai:ontology:core:OntologyRetrieval",
+        "urn:sys4ai:ontology:core:TaskManagement",
+        "urn:sys4ai:ontology:core:TRDCreation",
+        "urn:sys4ai:ontology:core:MemoryPublication",
+        "urn:sys4ai:ontology:core:OntologyPublication",
+        "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:definedBy",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Connect a meaning or instance to the selected source artifact that defines it.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Project",
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Specification",
+        "urn:sys4ai:ontology:core:Requirement",
+        "urn:sys4ai:ontology:core:Task",
+        "urn:sys4ai:ontology:core:TRD",
+        "urn:sys4ai:ontology:core:ImplementationPlan",
+        "urn:sys4ai:ontology:core:Verification",
+        "urn:sys4ai:ontology:core:Validation",
+        "urn:sys4ai:ontology:core:Evidence",
+        "urn:sys4ai:ontology:core:Agent",
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability",
+        "urn:sys4ai:ontology:core:ActionType",
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:Lesson",
+        "urn:sys4ai:ontology:core:Decision",
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Scope",
+        "urn:sys4ai:ontology:core:TaskManager",
+        "urn:sys4ai:ontology:core:NativeGoal",
+        "urn:sys4ai:ontology:core:CodexConversation",
+        "urn:sys4ai:ontology:core:ProjectDirector",
+        "urn:sys4ai:ontology:core:ProjectSubAgent",
+        "urn:sys4ai:ontology:core:Relationship",
+        "urn:sys4ai:ontology:core:RelationshipType",
+        "urn:sys4ai:ontology:core:SourceBinding",
+        "urn:sys4ai:ontology:core:Property",
+        "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "urn:sys4ai:ontology:core:OntologyRetrieval",
+        "urn:sys4ai:ontology:core:TaskManagement",
+        "urn:sys4ai:ontology:core:TRDCreation",
+        "urn:sys4ai:ontology:core:MemoryPublication",
+        "urn:sys4ai:ontology:core:OntologyPublication",
+        "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "defined by",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Specification"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:derivesFrom",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": true,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Describe explicit derivation from selected reusable source material.",
+      "domain": [
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "derives from",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:describes",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Connect a source artifact with the semantic entity it describes.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "describes",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Project",
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Specification",
+        "urn:sys4ai:ontology:core:Requirement",
+        "urn:sys4ai:ontology:core:Task",
+        "urn:sys4ai:ontology:core:TRD",
+        "urn:sys4ai:ontology:core:ImplementationPlan",
+        "urn:sys4ai:ontology:core:Verification",
+        "urn:sys4ai:ontology:core:Validation",
+        "urn:sys4ai:ontology:core:Evidence",
+        "urn:sys4ai:ontology:core:Agent",
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability",
+        "urn:sys4ai:ontology:core:ActionType",
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:Lesson",
+        "urn:sys4ai:ontology:core:Decision",
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Scope",
+        "urn:sys4ai:ontology:core:TaskManager",
+        "urn:sys4ai:ontology:core:NativeGoal",
+        "urn:sys4ai:ontology:core:CodexConversation",
+        "urn:sys4ai:ontology:core:ProjectDirector",
+        "urn:sys4ai:ontology:core:ProjectSubAgent",
+        "urn:sys4ai:ontology:core:Relationship",
+        "urn:sys4ai:ontology:core:RelationshipType",
+        "urn:sys4ai:ontology:core:SourceBinding",
+        "urn:sys4ai:ontology:core:Property",
+        "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "urn:sys4ai:ontology:core:OntologyRetrieval",
+        "urn:sys4ai:ontology:core:TaskManagement",
+        "urn:sys4ai:ontology:core:TRDCreation",
+        "urn:sys4ai:ontology:core:MemoryPublication",
+        "urn:sys4ai:ontology:core:OntologyPublication",
+        "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:governedBy",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Describe the source of current operational rules without granting that authority.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Project",
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Specification",
+        "urn:sys4ai:ontology:core:Requirement",
+        "urn:sys4ai:ontology:core:Task",
+        "urn:sys4ai:ontology:core:TRD",
+        "urn:sys4ai:ontology:core:ImplementationPlan",
+        "urn:sys4ai:ontology:core:Verification",
+        "urn:sys4ai:ontology:core:Validation",
+        "urn:sys4ai:ontology:core:Evidence",
+        "urn:sys4ai:ontology:core:Agent",
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability",
+        "urn:sys4ai:ontology:core:ActionType",
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:Lesson",
+        "urn:sys4ai:ontology:core:Decision",
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Scope",
+        "urn:sys4ai:ontology:core:TaskManager",
+        "urn:sys4ai:ontology:core:NativeGoal",
+        "urn:sys4ai:ontology:core:CodexConversation",
+        "urn:sys4ai:ontology:core:ProjectDirector",
+        "urn:sys4ai:ontology:core:ProjectSubAgent",
+        "urn:sys4ai:ontology:core:Relationship",
+        "urn:sys4ai:ontology:core:RelationshipType",
+        "urn:sys4ai:ontology:core:SourceBinding",
+        "urn:sys4ai:ontology:core:Property",
+        "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "urn:sys4ai:ontology:core:OntologyRetrieval",
+        "urn:sys4ai:ontology:core:TaskManagement",
+        "urn:sys4ai:ontology:core:TRDCreation",
+        "urn:sys4ai:ontology:core:MemoryPublication",
+        "urn:sys4ai:ontology:core:OntologyPublication",
+        "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "governed by",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:Specification",
+        "urn:sys4ai:ontology:core:Artifact"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:hasRole",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Relate a project, agent or Task to a role; canonical assignment controls ownership.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Project",
+        "urn:sys4ai:ontology:core:Agent",
+        "urn:sys4ai:ontology:core:Task"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "has role",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Role"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:manages",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Describe a role responsible for managed work subject to confirmed activation.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:TaskManager"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "manages",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Task"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:narrower",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": true,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Point to a narrower meaning in an explicitly acyclic hierarchy.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Project",
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Specification",
+        "urn:sys4ai:ontology:core:Requirement",
+        "urn:sys4ai:ontology:core:Task",
+        "urn:sys4ai:ontology:core:TRD",
+        "urn:sys4ai:ontology:core:ImplementationPlan",
+        "urn:sys4ai:ontology:core:Verification",
+        "urn:sys4ai:ontology:core:Validation",
+        "urn:sys4ai:ontology:core:Evidence",
+        "urn:sys4ai:ontology:core:Agent",
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability",
+        "urn:sys4ai:ontology:core:ActionType",
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:Lesson",
+        "urn:sys4ai:ontology:core:Decision",
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Scope",
+        "urn:sys4ai:ontology:core:TaskManager",
+        "urn:sys4ai:ontology:core:NativeGoal",
+        "urn:sys4ai:ontology:core:CodexConversation",
+        "urn:sys4ai:ontology:core:ProjectDirector",
+        "urn:sys4ai:ontology:core:ProjectSubAgent",
+        "urn:sys4ai:ontology:core:Relationship",
+        "urn:sys4ai:ontology:core:RelationshipType",
+        "urn:sys4ai:ontology:core:SourceBinding",
+        "urn:sys4ai:ontology:core:Property",
+        "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "urn:sys4ai:ontology:core:OntologyRetrieval",
+        "urn:sys4ai:ontology:core:TaskManagement",
+        "urn:sys4ai:ontology:core:TRDCreation",
+        "urn:sys4ai:ontology:core:MemoryPublication",
+        "urn:sys4ai:ontology:core:OntologyPublication",
+        "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "narrower",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Project",
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Specification",
+        "urn:sys4ai:ontology:core:Requirement",
+        "urn:sys4ai:ontology:core:Task",
+        "urn:sys4ai:ontology:core:TRD",
+        "urn:sys4ai:ontology:core:ImplementationPlan",
+        "urn:sys4ai:ontology:core:Verification",
+        "urn:sys4ai:ontology:core:Validation",
+        "urn:sys4ai:ontology:core:Evidence",
+        "urn:sys4ai:ontology:core:Agent",
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability",
+        "urn:sys4ai:ontology:core:ActionType",
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:Lesson",
+        "urn:sys4ai:ontology:core:Decision",
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Scope",
+        "urn:sys4ai:ontology:core:TaskManager",
+        "urn:sys4ai:ontology:core:NativeGoal",
+        "urn:sys4ai:ontology:core:CodexConversation",
+        "urn:sys4ai:ontology:core:ProjectDirector",
+        "urn:sys4ai:ontology:core:ProjectSubAgent",
+        "urn:sys4ai:ontology:core:Relationship",
+        "urn:sys4ai:ontology:core:RelationshipType",
+        "urn:sys4ai:ontology:core:SourceBinding",
+        "urn:sys4ai:ontology:core:Property",
+        "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "urn:sys4ai:ontology:core:OntologyRetrieval",
+        "urn:sys4ai:ontology:core:TaskManagement",
+        "urn:sys4ai:ontology:core:TRDCreation",
+        "urn:sys4ai:ontology:core:MemoryPublication",
+        "urn:sys4ai:ontology:core:OntologyPublication",
+        "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:produces",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Describe an output kind without claiming an operation ran.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Task"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "produces",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:TRD",
+        "urn:sys4ai:ontology:core:ImplementationPlan",
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:Evidence"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:providesCapability",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Connect a skill to a capability it describes; discovery never invokes the skill.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Skill"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "provides capability",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:relatedTo",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Connect related meanings without asserting equivalence or authority.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Project",
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Specification",
+        "urn:sys4ai:ontology:core:Requirement",
+        "urn:sys4ai:ontology:core:Task",
+        "urn:sys4ai:ontology:core:TRD",
+        "urn:sys4ai:ontology:core:ImplementationPlan",
+        "urn:sys4ai:ontology:core:Verification",
+        "urn:sys4ai:ontology:core:Validation",
+        "urn:sys4ai:ontology:core:Evidence",
+        "urn:sys4ai:ontology:core:Agent",
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability",
+        "urn:sys4ai:ontology:core:ActionType",
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:Lesson",
+        "urn:sys4ai:ontology:core:Decision",
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Scope",
+        "urn:sys4ai:ontology:core:TaskManager",
+        "urn:sys4ai:ontology:core:NativeGoal",
+        "urn:sys4ai:ontology:core:CodexConversation",
+        "urn:sys4ai:ontology:core:ProjectDirector",
+        "urn:sys4ai:ontology:core:ProjectSubAgent",
+        "urn:sys4ai:ontology:core:Relationship",
+        "urn:sys4ai:ontology:core:RelationshipType",
+        "urn:sys4ai:ontology:core:SourceBinding",
+        "urn:sys4ai:ontology:core:Property",
+        "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "urn:sys4ai:ontology:core:OntologyRetrieval",
+        "urn:sys4ai:ontology:core:TaskManagement",
+        "urn:sys4ai:ontology:core:TRDCreation",
+        "urn:sys4ai:ontology:core:MemoryPublication",
+        "urn:sys4ai:ontology:core:OntologyPublication",
+        "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "related to",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Project",
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Specification",
+        "urn:sys4ai:ontology:core:Requirement",
+        "urn:sys4ai:ontology:core:Task",
+        "urn:sys4ai:ontology:core:TRD",
+        "urn:sys4ai:ontology:core:ImplementationPlan",
+        "urn:sys4ai:ontology:core:Verification",
+        "urn:sys4ai:ontology:core:Validation",
+        "urn:sys4ai:ontology:core:Evidence",
+        "urn:sys4ai:ontology:core:Agent",
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability",
+        "urn:sys4ai:ontology:core:ActionType",
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:Lesson",
+        "urn:sys4ai:ontology:core:Decision",
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Scope",
+        "urn:sys4ai:ontology:core:TaskManager",
+        "urn:sys4ai:ontology:core:NativeGoal",
+        "urn:sys4ai:ontology:core:CodexConversation",
+        "urn:sys4ai:ontology:core:ProjectDirector",
+        "urn:sys4ai:ontology:core:ProjectSubAgent",
+        "urn:sys4ai:ontology:core:Relationship",
+        "urn:sys4ai:ontology:core:RelationshipType",
+        "urn:sys4ai:ontology:core:SourceBinding",
+        "urn:sys4ai:ontology:core:Property",
+        "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "urn:sys4ai:ontology:core:OntologyRetrieval",
+        "urn:sys4ai:ontology:core:TaskManagement",
+        "urn:sys4ai:ontology:core:TRDCreation",
+        "urn:sys4ai:ontology:core:MemoryPublication",
+        "urn:sys4ai:ontology:core:OntologyPublication",
+        "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:relation-1",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Task relatedTo TRD",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "object": "urn:sys4ai:ontology:core:TRD",
+      "predicate": "urn:sys4ai:ontology:core:relatedTo",
+      "qualifiers": {
+        "scope": "conceptual"
+      },
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:core:Task"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:relation-2",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Task relatedTo MemoryRecord",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "object": "urn:sys4ai:ontology:core:MemoryRecord",
+      "predicate": "urn:sys4ai:ontology:core:relatedTo",
+      "qualifiers": {
+        "scope": "conceptual"
+      },
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:core:Task"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:relation-3",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "Verification relatedTo Validation",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "object": "urn:sys4ai:ontology:core:Validation",
+      "predicate": "urn:sys4ai:ontology:core:relatedTo",
+      "qualifiers": {
+        "scope": "conceptual"
+      },
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:core:Verification"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:relation-4",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "TaskManager manages Task",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "object": "urn:sys4ai:ontology:core:Task",
+      "predicate": "urn:sys4ai:ontology:core:manages",
+      "qualifiers": {
+        "scope": "conceptual"
+      },
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:core:TaskManager"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:relation-5",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "MemoryRetrieval retrieves MemoryRecord",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "object": "urn:sys4ai:ontology:core:MemoryRecord",
+      "predicate": "urn:sys4ai:ontology:core:retrieves",
+      "qualifiers": {
+        "scope": "conceptual"
+      },
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:core:MemoryRetrieval"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:relation-6",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "MemoryPublication requiresAuthority Authority",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "object": "urn:sys4ai:ontology:core:Authority",
+      "predicate": "urn:sys4ai:ontology:core:requiresAuthority",
+      "qualifiers": {
+        "scope": "conceptual"
+      },
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:core:MemoryPublication"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:relation-7",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "OntologyPublication requiresAuthority Authority",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "object": "urn:sys4ai:ontology:core:Authority",
+      "predicate": "urn:sys4ai:ontology:core:requiresAuthority",
+      "qualifiers": {
+        "scope": "conceptual"
+      },
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:core:OntologyPublication"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:relation-8",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "TaskRequirementDocument replacedBy TRD",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "object": "urn:sys4ai:ontology:core:TRD",
+      "predicate": "urn:sys4ai:ontology:core:replacedBy",
+      "qualifiers": {
+        "scope": "conceptual"
+      },
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:core:TaskRequirementDocument"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:relation-9",
+      "@type": [
+        "urn:sys4ai:ontology:core:Relationship"
+      ],
+      "definition": "A type-level relationship between the named meanings; current instances require separate evidence.",
+      "fact_kind": "asserted",
+      "kind": "relation",
+      "label": "ProjectTemplate derivesFrom Artifact",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "object": "urn:sys4ai:ontology:core:Artifact",
+      "predicate": "urn:sys4ai:ontology:core:derivesFrom",
+      "qualifiers": {
+        "scope": "conceptual"
+      },
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ],
+      "subject": "urn:sys4ai:ontology:core:ProjectTemplate"
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:replacedBy",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Identify a replacement while retaining the historical identity and meaning.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Project",
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Specification",
+        "urn:sys4ai:ontology:core:Requirement",
+        "urn:sys4ai:ontology:core:Task",
+        "urn:sys4ai:ontology:core:TRD",
+        "urn:sys4ai:ontology:core:ImplementationPlan",
+        "urn:sys4ai:ontology:core:Verification",
+        "urn:sys4ai:ontology:core:Validation",
+        "urn:sys4ai:ontology:core:Evidence",
+        "urn:sys4ai:ontology:core:Agent",
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability",
+        "urn:sys4ai:ontology:core:ActionType",
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:Lesson",
+        "urn:sys4ai:ontology:core:Decision",
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Scope",
+        "urn:sys4ai:ontology:core:TaskManager",
+        "urn:sys4ai:ontology:core:NativeGoal",
+        "urn:sys4ai:ontology:core:CodexConversation",
+        "urn:sys4ai:ontology:core:ProjectDirector",
+        "urn:sys4ai:ontology:core:ProjectSubAgent",
+        "urn:sys4ai:ontology:core:Relationship",
+        "urn:sys4ai:ontology:core:RelationshipType",
+        "urn:sys4ai:ontology:core:SourceBinding",
+        "urn:sys4ai:ontology:core:Property",
+        "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "urn:sys4ai:ontology:core:OntologyRetrieval",
+        "urn:sys4ai:ontology:core:TaskManagement",
+        "urn:sys4ai:ontology:core:TRDCreation",
+        "urn:sys4ai:ontology:core:MemoryPublication",
+        "urn:sys4ai:ontology:core:OntologyPublication",
+        "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "replaced by",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Project",
+        "urn:sys4ai:ontology:core:ProjectTemplate",
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Source",
+        "urn:sys4ai:ontology:core:Specification",
+        "urn:sys4ai:ontology:core:Requirement",
+        "urn:sys4ai:ontology:core:Task",
+        "urn:sys4ai:ontology:core:TRD",
+        "urn:sys4ai:ontology:core:ImplementationPlan",
+        "urn:sys4ai:ontology:core:Verification",
+        "urn:sys4ai:ontology:core:Validation",
+        "urn:sys4ai:ontology:core:Evidence",
+        "urn:sys4ai:ontology:core:Agent",
+        "urn:sys4ai:ontology:core:Role",
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability",
+        "urn:sys4ai:ontology:core:ActionType",
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:Lesson",
+        "urn:sys4ai:ontology:core:Decision",
+        "urn:sys4ai:ontology:core:OntologyConcept",
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Scope",
+        "urn:sys4ai:ontology:core:TaskManager",
+        "urn:sys4ai:ontology:core:NativeGoal",
+        "urn:sys4ai:ontology:core:CodexConversation",
+        "urn:sys4ai:ontology:core:ProjectDirector",
+        "urn:sys4ai:ontology:core:ProjectSubAgent",
+        "urn:sys4ai:ontology:core:Relationship",
+        "urn:sys4ai:ontology:core:RelationshipType",
+        "urn:sys4ai:ontology:core:SourceBinding",
+        "urn:sys4ai:ontology:core:Property",
+        "urn:sys4ai:ontology:core:MemoryRetrieval",
+        "urn:sys4ai:ontology:core:OntologyRetrieval",
+        "urn:sys4ai:ontology:core:TaskManagement",
+        "urn:sys4ai:ontology:core:TRDCreation",
+        "urn:sys4ai:ontology:core:MemoryPublication",
+        "urn:sys4ai:ontology:core:OntologyPublication",
+        "urn:sys4ai:ontology:core:TaskRequirementDocument"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:requiresAuthority",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Describe the governing authority needed before an operation.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability",
+        "urn:sys4ai:ontology:core:ActionType"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "requires authority",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Authority",
+        "urn:sys4ai:ontology:core:Scope"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:retrieves",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Describe the evidence or meaning a capability can return.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Skill",
+        "urn:sys4ai:ontology:core:Capability"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "retrieves",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:MemoryRecord",
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:subtypeOf",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": true,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Extend a meaning through an explicit acyclic type specialization.",
+      "domain": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "subtype of",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:OntologyConcept"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:validatedBy",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Connect a result with checks of fitness for intended use.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Task"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "validated by",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Validation"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    },
+    {
+      "@id": "urn:sys4ai:ontology:core:verifiedBy",
+      "@type": [
+        "urn:sys4ai:ontology:core:RelationshipType"
+      ],
+      "acyclic": false,
+      "cardinality": {
+        "max": null,
+        "min": 0
+      },
+      "definition": "Connect a work product or requirement with conformance verification evidence.",
+      "domain": [
+        "urn:sys4ai:ontology:core:Artifact",
+        "urn:sys4ai:ontology:core:Requirement",
+        "urn:sys4ai:ontology:core:Task"
+      ],
+      "fact_kind": "asserted",
+      "kind": "predicate",
+      "label": "verified by",
+      "lifecycle": "approved",
+      "module": "sys4ai-core",
+      "qualifiers": {
+        "scope": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "range": [
+        "urn:sys4ai:ontology:core:Verification",
+        "urn:sys4ai:ontology:core:Evidence"
+      ],
+      "sources": [
+        {
+          "locator": "section:Relationship vocabulary",
+          "path": "ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md",
+          "sha256": "fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896"
+        }
+      ]
+    }
+  ]
+}

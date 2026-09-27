@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "checkpoint": "partial_foundation",
+  "task_id": "TASK-20260910-7F1A11AE",
+  "plan_id": "PLAN-20260910-FAE2A15B",
+  "assignment_id": "foundation_implementer",
+  "acceptance_id": "foundation_acceptance_v1",
+  "created_at": "2026-09-11T05:03:00.026536+00:00",
+  "state": "blocked",
+  "production_readiness": "not_proven",
+  "proof_is_not_release_or_adoption_authority": true,
+  "cases": [
+    {
+      "id": "NP-010",
+      "state": "not_run"
+    },
+    {
+      "id": "NP-011",
+      "state": "not_run"
+    },
+    {
+      "id": "NP-012",
+      "state": "not_run"
+    },
+    {
+      "id": "NP-013",
+      "state": "not_run"
+    },
+    {
+      "id": "NP-014",
+      "state": "not_run"
+    }
+  ],
+  "primitive_only": {
+    "receipt": {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-01534-primitive-v79w4jll/receipt.json",
+      "sha256": "b889682379df1fb31ab8ef4831e0941c0eb278edac4c88ab5d27131b023900d2"
+    },
+    "meaning": "Actual installed-runtime OS primitive canaries; no model-backed full native confinement proof."
+  },
+  "actual_reduced_native_evidence": {
+    "command_probes": [
+      {
+        "sequence": 13,
+        "thread_id": "01a08ecb-f778-7580-88d5-eabd0a516766",
+        "item_id": "exec-b45c418d-595b-41d6-8798-f3d0c0b9ef91",
+        "command": "/bin/zsh -c '/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/bin/python3.12 -I -B /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/shared/read-probe.py /private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/shared/common-input.txt'",
+        "exit_code": 0,
+        "output": "{\"content\": \"eyJyZWFkcyI6eyIvcHJpdmF0ZS92YXIvZm9sZGVycy8yay9qajlzMXp6czVzeGRiXzdnNTU3eTUzM2MwMDAwZ24vVC9jdXJhdG9yLW5hdGl2ZS1mZWFzaWJpbGl0eS1zd2RlM2Z3bS9zaGFyZWQvY29tbW9uLWlucHV0LnR4dCI6IjNlM2YxNTE4MmI4NTlmYmQwYTUxNGNlNDFjN2RhYzk1NzMzMTc5OGI1ZTFiMjRmM2E2OWQxZGYxMjE4NzMyOTYifX0=\", \"sha256\": \"e5793b845a3929ad0533d5a1e00d9a16ccb8b4f1e19d5ab962b5a498fc82490e\"}\n",
+        "raw_sha256": "99feca55c6955c7358bf47829f46e731bd645c41686f0bf7f85f54a121706ef4"
+      }
+    ],
+    "companion_cleanup": {
+      "pid": 83939,
+      "process_group": 83939,
+      "state": "owned_process_group_stopped",
+      "parent_returncode": 0,
+      "companion": {
+        "observed": true,
+        "processes": [
+          {
+            "pid": 83965,
+            "parent": 83939,
+            "group": 83965,
+            "uid": 501,
+            "started": [
+              1789102134,
+              866896
+            ],
+            "executable": "/Applications/ChatGPT.app/Contents/Resources/codex-code-mode-host",
+            "sha256": "038b9c6b60baacbfacba1fe81cf603c22b73697810e013d4efda040f1a7294e7"
+          }
+        ],
+        "groups": [
+          {
+            "group": 83965,
+            "state": "stopped"
+          }
+        ],
+        "state": "owned_companion_stopped",
+        "identity_checks": [
+          {
+            "pid": 83965,
+            "started": [
+              1789102134,
+              866896
+            ],
+            "state": "original_identity_absent"
+          }
+        ],
+        "identity_uncertain": false
+      }
+    },
+    "canaries_unchanged": true,
+    "machine_result_state": "blocked",
+    "machine_result_code": "diagnostic_read_unobserved",
+    "offline_review": {
+      "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-feasibility-swde3fwm/offline-command-evidence-review.json",
+      "sha256": "75ff1a08a975808e6f6b88496b314c0908c4850bb0aa070ced95ab5b17f1a639"
+    }
+  },
+  "required_protected_native_attempts_performed": false,
+  "required_external_and_peer_control_denials_observed": false
+}

@@ -1,0 +1,326 @@
+{
+  "status": "all_scoped_checks_passed",
+  "current_product_manifest": {
+    "path": "Verification/project-knowledge-explorer-first-release/service-tests/output-manifest.json",
+    "sha256": "f98b373e3d0999d09905c8be45588a2126e6380571c27431abe218b2789c1d14",
+    "bytes": 2675
+  },
+  "checks": [
+    {
+      "id": "service_http",
+      "status": "passed",
+      "executor": "Primary host /root ordinary exec_command under the reviewed host-execution protocol.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-host-batch-05-result.json",
+        "sha256": "a50431c7c942dddc2b49d3ef97881ee81826a368bd1b41979b8cac76183dba4c",
+        "bytes": 1105
+      },
+      "report": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-host-batch-05-output.json",
+        "sha256": "e71613f23d917c260c87eaaf1bdf4c216b9259936ce85e33ad3bdd61523a8bf5",
+        "bytes": 22607
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/stage-batch-05-inputs.json",
+        "sha256": "6c696103ce45fcb317c27a7f2262c4ab355311e5f51cc446f0ee40f2a8c1ed69",
+        "bytes": 19210
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/host-batch-05.json",
+        "sha256": "72529b0c0c798985e6df3728c55a446ea41f9ac10449fbf3e8aa407588a4355f",
+        "bytes": 799
+      },
+      "tests_run": 28,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "timed_out": false,
+      "case_ids": [
+        "test_explorer_service.AdditionalPackageTests.test_optional_config_defaults_and_explicit_private_path_confinement",
+        "test_explorer_service.AdditionalPackageTests.test_schema_or_asset_or_helper_addition_is_sticky",
+        "test_explorer_service.PackageRaceTests.test_missing_assets_and_invalid_configuration",
+        "test_explorer_service.PackageRaceTests.test_mutated_snapshot_never_executes_before_child_admission",
+        "test_explorer_service.PackageRaceTests.test_nested_manifest_entry_redirect",
+        "test_explorer_service.QualifierTests.test_1025_scalar_qualifiers_survive_reader_ipc_http",
+        "test_explorer_service.ResourceTests.test_actual_worker_rss_overshoot_killed_and_reaped",
+        "test_explorer_service.ResourceTests.test_header_body_absolute_timeout_and_eight_socket_cap",
+        "test_explorer_service.ServiceTests.test_actual_parent_rss_refuses_new_work",
+        "test_explorer_service.ServiceTests.test_closed_transport_and_error_bounds",
+        "test_explorer_service.ServiceTests.test_nonmutation_private_modes_and_cleanup",
+        "test_explorer_service.ServiceTests.test_raw_header_limits_duplicates_and_paths",
+        "test_explorer_service.ServiceTests.test_sticky_helper_schema_asset_drift",
+        "test_explorer_service.ServiceTests.test_success_all_operations_and_safe_assets",
+        "test_explorer_service.ServiceTests.test_worker_timeout_discards_preexisting_queue",
+        "test_explorer_sessions.SessionTests.test_cancel_or_expire_a_preserves_healthy_worker_for_b",
+        "test_explorer_sessions.SessionTests.test_capacity_does_not_evict_and_close_is_isolated",
+        "test_explorer_sessions.SessionTests.test_replay_replacement_resume_and_expiry",
+        "test_explorer_sessions.SessionTests.test_two_root_cookie_csrf_bootstrap_cursor_isolation",
+        "test_explorer_sessions.SessionTests.test_worker_drift_survives_discarded_client",
+        "test_explorer_health.HealthTests.test_cli_launch_and_no_optional_imports",
+        "test_explorer_health.HealthTests.test_missing_bundle_health_facts_and_legacy_help",
+        "test_explorer_health.HealthTests.test_slow_health_peer_has_absolute_header_body_deadline",
+        "test_explorer_health.HealthTests.test_static_and_endpoint_facts_preserve_files",
+        "test_explorer_health.HealthTests.test_wrong_selected_configuration_and_neutral",
+        "test_explorer_health.InstalledLayoutTests.test_installed_package_serves_and_cli_health_reads_real_root_contracts",
+        "test_explorer_health.LauncherRaceTests.test_documented_reader_cli_rejects_ambient_stdlib_shadows",
+        "test_explorer_health.LauncherRaceTests.test_public_cli_captures_before_selected_service_execution"
+      ],
+      "all_owned_children_reaped": true,
+      "stage_inputs_match_current_live_sources": true,
+      "qualification": "Actual disposable loopback HTTP, private reader processes and controlled faults. Timing establishes operational bounds observed here, not general release performance."
+    },
+    {
+      "id": "browser",
+      "status": "passed",
+      "executor": "Primary host /root ran frozen Playwright driver with existing test-only tools.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-host-browser-03-result.json",
+        "sha256": "1b19be2a5baa968163179b386f19b91a073e52cece8db84890f61746465dc27d",
+        "bytes": 1072
+      },
+      "report": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/browser-host-03-output.json",
+        "sha256": "3a0beb66d0cd593074b507285dbdd35c6ba12bb6f8e2e858b766ee693a2b57c0",
+        "bytes": 1708
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/stage-browser-03-inputs.json",
+        "sha256": "537d15e664acc3aa469554b7cc9ac2f204d091b1004ef7a3f70559658129c06d",
+        "bytes": 19526
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/host-browser-job-03.json",
+        "sha256": "94c044f48175636345363900c5d0d5f6d74561cfd4fe4e951260ef36b0dcdc04",
+        "bytes": 2176
+      },
+      "browser_version": "153.0.8010.52",
+      "playwright_version": "1.62.1",
+      "same_document_fragment_removed": true,
+      "same_document_consumed_token_rejected": true,
+      "new_document_consumed_token_rejected": true,
+      "resume_and_isolated_close": true,
+      "page_errors": 0,
+      "nonlocal_page_requests": 0,
+      "qualification": "Real isolated headless Chrome using direct Playwright goto. This does not test OS default-browser --open dispatch or full frontend UX/accessibility/offline release."
+    },
+    {
+      "id": "os_open",
+      "status": "passed",
+      "executor": "Primary host /root ran frozen production command handler and inspected the resulting existing Chrome tab with native CUA.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/os-open-01-host-receipt.json",
+        "sha256": "8dc17a6c05090a635d029394a6f78f1d7da92a5e52415ad0041b9d3d87724ca7",
+        "bytes": 651
+      },
+      "report": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/os-open-01-output.jsonl",
+        "sha256": "3deb880ec9036731204c3476c99180f6631b8050aea0458460ae858d9520349d",
+        "bytes": 791
+      },
+      "native_observation": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/os-open-01-native-observation.json",
+        "sha256": "00da1446ddfbf77029e654d4b31d1523e4657944b58a1a89fd28b4770e065c44",
+        "bytes": 922
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/stage-os-open-01-inputs.json",
+        "sha256": "5d752d47fa2ac797a6d55190cdc4bb86ce10374c1a49a7221798cc5daa50fb90",
+        "bytes": 19367
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/host-os-open-job-01.json",
+        "sha256": "c9d7486713502d3cad91341b4cb16c3826c25eda62266df34639bdef6bd0c726",
+        "bytes": 2605
+      },
+      "created_test_tab_closed": true,
+      "owned_driver_and_worker_reaped": true,
+      "qualification": "Actual OS default-browser --open dispatch through verified in-process service command; native Chrome observed afterward. Public ontology.py subprocess startup is independently tested by service batch05. Minimal bootstrap only."
+    },
+    {
+      "id": "bundle_bootstrap",
+      "status": "passed",
+      "executor": "Assigned worker, existing bundled Node runtime.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/bootstrap-check.json",
+        "sha256": "8c182f4c0df04675ef936b2fa29fc065d761c25b186ff218e8c9b63542352517",
+        "bytes": 2165
+      },
+      "script": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/check-bootstrap.cjs",
+        "sha256": "2713f3b3beb876f059784cd8b9843c0de5f7f74043f4bf128d99bb563e0fd988",
+        "bytes": 6966
+      },
+      "fixture": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/bootstrap-context-fixture.json",
+        "sha256": "423a586579808da0219baedaebc05120f04880bee279acbf8b77d41b00eefc0e",
+        "bytes": 5232
+      },
+      "cases": 11,
+      "asset_sha256": "219e5de9bc536da39d647df55f82968c48f55ac61c1c8f15df76047734d6ee6d",
+      "qualification": "Actual built JavaScript with instrumented browser boundaries and intentionally abort-insensitive deferred responses. No claim of real browser history, HTTP authentication, accessibility or full UI."
+    },
+    {
+      "id": "build",
+      "status": "passed",
+      "executor": "Assigned worker, exact previously approved existing dependency staging.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/production-build-02.json",
+        "sha256": "8952904cc4b98c17b3497b450080e2b08f5348ec04729e1e24b2c5b2071a1bb0",
+        "bytes": 2638
+      },
+      "publisher_receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/production-build-receipt-02.json",
+        "sha256": "ded9a54bc3fa2b9c92cfcd7807898435036ad10e1c314b657634034cb1c58dc4",
+        "bytes": 3781
+      },
+      "build_id": "85ba54ca2d05a3f4b302f37b7061e21092452571d4d78a18d3a633a97e37bd2a",
+      "manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "212c096f81896a9d0eae68a2506b49a1456609075f6359ad281f9f6307bd90c7",
+        "bytes": 923
+      },
+      "source_inputs_current": 16,
+      "commands": [
+        "npm run build",
+        "npm run package:runtime"
+      ],
+      "exit_codes": [
+        0,
+        0
+      ],
+      "qualification": "Production build and manifest-last exact scoped source transfer. No runtime build/install or Template/root adoption."
+    },
+    {
+      "id": "error_bounds",
+      "status": "passed",
+      "executor": "Assigned worker, exact current error formatter and schema maxima.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/error-bounds.json",
+        "sha256": "e5f3a5770d40bbe0d97d8b9147754159c6482a2425a36d415d4792d916df2f3d",
+        "bytes": 422
+      },
+      "cases": 186,
+      "maximum_utf8_bytes": 659
+    },
+    {
+      "id": "discovery",
+      "status": "passed",
+      "executor": "Assigned worker, exact unchanged discovery predicate/constants only.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/template-discovery.json",
+        "sha256": "34ed82d187b57207462c9656736ddbb73785df59a43e6c15da14388c79e929d5",
+        "bytes": 1423
+      },
+      "qualification": "Discovery inclusion/exclusion only; actual Template update is later owner work."
+    },
+    {
+      "id": "local_health",
+      "status": "passed",
+      "executor": "Assigned worker, disposable no-listener health and absent-bundle launch.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/local-health-check.json",
+        "sha256": "bcb16b8cd70d0e2f514917fce816ba557ef71b0aa58b35b082f792223a8f7e80",
+        "bytes": 1253
+      },
+      "script": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/check-health-local.py",
+        "sha256": "02dc5f0c6d6ac3c3d4b3f0649cc1e21016e6ea20a5026d0d913ae12d1f389653",
+        "bytes": 1821
+      },
+      "qualification": "No listener or private runtime files; bounded disposable worker reaped."
+    },
+    {
+      "id": "legacy_cli",
+      "status": "passed",
+      "executor": "Assigned worker, disposable ordinary CLI read comparison with original CLI source.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/legacy-cli-check.json",
+        "sha256": "28388157d543d093eae46c5fdf09c371823922b22e4d47b5ed683dafcee59320",
+        "bytes": 1388
+      },
+      "script": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/check-legacy-cli.py",
+        "sha256": "530378c5772c7d558d6621b60f6a88846dbbf2154819aa33f33eea795d3acad0",
+        "bytes": 2171
+      },
+      "qualification": "Three ordinary reads plus separately exercised workbench help. No authoring mutation, workbench retirement or broad optional-backend certification claimed."
+    }
+  ],
+  "selected_actual_observations": [
+    {
+      "case": "canonical_1025_qualifiers_http",
+      "full_edge": true,
+      "qualifiers": 1025,
+      "response_bytes": 14484
+    },
+    {
+      "case": "worker_rss",
+      "elapsed_seconds": 0.0669508749851957,
+      "limit_bytes": 268435456,
+      "max_observation_gap_seconds": 0.030428583035245538,
+      "overshoot_bytes": 68616192,
+      "owned_pid_reaped": true,
+      "peak_bytes": 337051648,
+      "qualification": "Trusted disposable fault fixture allocates resident pages; operational sampling, not prevention of transient overshoot."
+    },
+    {
+      "case": "parent_rss",
+      "limit": 67108864,
+      "observed_peak_bytes": 118734848,
+      "sticky_refusal": true
+    },
+    {
+      "case": "all_operations_assets",
+      "loaded": {
+        "epoch": "0bc2cc6b0fdb10b1f929125ee75a6cf305fc0acc8feedf407a483cf71083fc8e",
+        "loaded": {
+          "ontology_core": "09bc25023e873e4d7b1fcf9163e90be9f3ae46c23b8bbbe1928695c5d92e8e52",
+          "ontology_explorer": "4ec47b1468e41f24d586e694179af3e5f163da4e50ca31b77c577ddf3a812a7d",
+          "ontology_explorer_assets": "215f2f5043c9f7de4abb02b32e9d28961733d11c120e3b0dec5a0e1b90894db6",
+          "ontology_explorer_health": "d68773b85a10d5e69c3634cf53a48db100e9b139d73a6dcf1d4fdc3523cae79f",
+          "ontology_explorer_read": "2fd6393a842dd34575e147293299945f98afbccf452cca28e4c8fc7321723dab",
+          "ontology_explorer_snapshot": "d684c3039680b28c24680222e8f47a4de78638259d5e7426d33576399687324d",
+          "ontology_explorer_source": "393082592bcd1d0630dec628379e6626f116f6b60bfba098125264dd73a6b1f8",
+          "ontology_explorer_worker": "1ddebaa60b18b8578582765185f57388fae67767e959f3ccdd722bf9d23896df",
+          "ontology_modules": "d4cba6775bf4ed42bd4392ef37134ba19dd6b7d84cd82eb5997f4c8a23e47194",
+          "ontology_retrieval": "43e6693e7a6d625e0a829e48e430f8e5d319a77e8d0679dfc29d7224a389da4f",
+          "ontology_validate": "33aea8e2878fa914ecdf370ba2e6be409ef5f14d12d732b34b61a5272e14bdfd"
+        }
+      },
+      "max_observation_gap_seconds": 0.03015966701786965,
+      "observations": 109,
+      "parent_peak": 43679744,
+      "worker_peak": 43810816
+    },
+    {
+      "case": "bounded_health_probe",
+      "elapsed_seconds": 2.002517291926779,
+      "peer_mode": "trickle",
+      "rejected": true
+    },
+    {
+      "case": "bounded_health_probe",
+      "elapsed_seconds": 0.0007642499404028058,
+      "peer_mode": "oversized",
+      "rejected": true
+    },
+    {
+      "case": "bounded_health_probe",
+      "elapsed_seconds": 0.0005867920117452741,
+      "peer_mode": "transfer",
+      "rejected": true
+    },
+    {
+      "case": "bounded_health_probe",
+      "elapsed_seconds": 0.00038220896385610104,
+      "peer_mode": "redirect",
+      "rejected": true
+    }
+  ],
+  "qualifications": [
+    "Host execution attribution is retained; child sandbox did not supply actual socket/browser evidence.",
+    "RSS peaks may overshoot ceilings between observations. Current fault peak 337051648 bytes exceeded 268435456 by 68616192 bytes; supervisor killed and reaped the worker.",
+    "The current 28-case stage and 16-source production build identity were rechecked against live files.",
+    "Full frontend, List/Map, accessibility, human walkthrough, release performance, Template/root adoption and workbench cutover remain later assignments."
+  ]
+}

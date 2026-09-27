@@ -1,0 +1,91 @@
+{
+  "kind": "manager_post_stop_P0_v2_inspection",
+  "original_result_state": "blocked",
+  "original_result_sha256": "ae5dc347af5b00a90bc5486b0811a5f6abc007477740a43678baacfb4dcfbe94",
+  "not_a_P0_pass": true,
+  "native_allocations_observed": 1,
+  "model_turns": 0,
+  "forks": 0,
+  "actual_id": "01a08f70-cfc3-7131-aae7-f04123be27f3",
+  "owned_returned_storage": {
+    "actor": "01a08f70-cfc3-7131-aae7-f04123be27f3",
+    "path": "2026/09/11/rollout-2026-09-11T01-48-50-01a08f70-cfc3-7131-aae7-f04123be27f3.jsonl",
+    "sha256": "d47535f28df60c70100010ca93529f8cfa8d0715386bcc67a1d259ab6a9b19e5",
+    "device": 16777231,
+    "inode": 130849099,
+    "size": 1038,
+    "mode": 420
+  },
+  "exact_index_row": [],
+  "process_observation": {
+    "pid": 93339,
+    "process_group": 93339,
+    "signal_zero_absent": {
+      "pid": true,
+      "pgid": true
+    },
+    "actual_signals_sent": false
+  },
+  "comparison": {
+    "state": "unchanged_unlisted_metadata",
+    "sha256": "b44828f70b7d6e961f45396363699820520c41e97aa1ed18e098a215d3680331",
+    "concurrent_progress": {
+      "01a08dc4-5141-7cb3-acb9-1c22eca82a5a": {
+        "execution_role": "host",
+        "updated_at_before": 1789109521,
+        "updated_at_observed": 1789113066,
+        "size_before": 15549572,
+        "size_observed": 17301671,
+        "mtime_before": 1789109521506875917,
+        "mtime_observed": 1789113066410272774
+      },
+      "01a08dc8-ebb8-7543-8002-3b6945675f4c": {
+        "execution_role": "manager",
+        "updated_at_before": 1789109502,
+        "updated_at_observed": 1789113068,
+        "size_before": 19650413,
+        "size_observed": 23291414,
+        "mtime_before": 1789109502636785459,
+        "mtime_observed": 1789113068756729054
+      },
+      "01a08e06-998b-7951-8a40-09988971957e": {
+        "execution_role": "implementer",
+        "updated_at_before": 1789109513,
+        "updated_at_observed": 1789112812,
+        "size_before": 15085910,
+        "size_observed": 19067499,
+        "mtime_before": 1789109513917548127,
+        "mtime_observed": 1789112812517559648
+      }
+    },
+    "level": "metadata-only; no unrelated credential or transcript contents inspected"
+  },
+  "diagnostic_addendum": {
+    "observed_code": -32601,
+    "retained_diagnostic": {
+      "method": "thread/read",
+      "request_id": 6,
+      "locator": {
+        "direction": "received",
+        "sequence": 15,
+        "raw_sha256": "7d13b5198f2f654d19fbce5698036f17c6aa3b4ea0dc8295d88f502a42434dfa",
+        "canonical_sha256": "44520f371aaeb7ea4869bb4fe1bf6272683ab98424b789785a876ea9d979875c"
+      },
+      "rpc_code": -32601,
+      "category": "unclassified_native_error",
+      "text": "[unrecognized RPC error text omitted]",
+      "message_sha256": "c82d1cc7cb99800445758cc2a93c5fbcc676b14afac6373faaa32040cf2d3493",
+      "message_bytes": 31,
+      "data_present": false,
+      "unselected_error_values_retained": false
+    },
+    "exact_text_recovered": "list_turns is not supported yet",
+    "method": "Public tagged-source error template and operation name produce an exact byte-count/SHA256 match to the retained wire-message digest. No new native request was made.",
+    "meaning": "Paginated turn listing unsupported by this observed path; not the expected pre-user history error. Further storage-capability diagnosis is required."
+  },
+  "limitations": [
+    "No helper/model turn/fork/history equality/callback was observed.",
+    "Original machine final preservation remained unproven because allocation ownership was not bound before the error. This separate metadata-only addendum attributes only the actual returned file and preserves that blocked report."
+  ],
+  "actual_response_path": "/Users/alex.omegapy/.codex/sessions/2026/09/11/rollout-2026-09-11T01-48-50-01a08f70-cfc3-7131-aae7-f04123be27f3.jsonl"
+}

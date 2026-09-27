@@ -1,0 +1,575 @@
+{
+  "schema_version": 1,
+  "kind": "MeasuredP1TotalWallTimeAssessment",
+  "state": "proposal_requires_exact_host_scope_assessment",
+  "basis": {
+    "scope": {
+      "path": "Verification/project-curator-release/native-p1-attempt9/run/scope.packet.json",
+      "sha256": "35a7c4c81597a679c48c36152928157a7b94c7c996292eb2dd3a6ebed60488bc"
+    },
+    "blocked_result": {
+      "path": "Verification/project-curator-release/native-p1-attempt9/run/native-fork-p1-result.json",
+      "sha256": "59c8d0a93c4ce1d87e48670cf884653b1b5b1beb6374d0a74a8a061439580ea7"
+    },
+    "complete_preservation_index": {
+      "path": "Verification/project-curator-release/native-p1-attempt9/index.json",
+      "sha256": "281e185aa2e43f7821bc156f598e0814f6322e0848a08666788f8bff4736cf3d"
+    },
+    "native_turn_timing": {
+      "path": "Verification/project-curator-release/native-p1-attempt9/turn-timing.json",
+      "sha256": "8add195dd2ee8b75c5c2b25203ea95de93658ead629e086752632b1c4fe28a58"
+    },
+    "poststop_process_observation": {
+      "path": "Verification/project-curator-release/native-p1-attempt9/run/manager-poststop-process-observation.json",
+      "sha256": "d53e02f10f752e0c79d58439d8cb177fcb87a3059400f09d935dfd55de011326"
+    }
+  },
+  "observed": {
+    "primary_failure": {
+      "stage": "execution",
+      "code": "native_deadline",
+      "diagnostic": "P1 absolute work deadline reached."
+    },
+    "secondary_failure": [],
+    "starts": 34,
+    "completed_turns": 33,
+    "aborted_sequence_number": 34,
+    "callbacks": 32,
+    "validated_exec_cells": 95,
+    "actual_native_identities": {
+      "controller": "01a0913b-3d41-7d80-af10-6833a255b7b5",
+      "manager": "01a0913f-7d21-7643-9835-2ca7c4e7b35e",
+      "solver_a": "01a09146-a9ae-70c3-bfdc-05e830e97128",
+      "solver_b": "01a09146-e21c-7183-88d1-6676e1e8a4aa"
+    },
+    "actual_incarnations": 4,
+    "configured_deadline_seconds": 1800,
+    "category_timings": {
+      "bootstrap": {
+        "observed_completed": 4,
+        "observed_sum_seconds": 587.527,
+        "observed_median_seconds": 148.5205,
+        "observed_max_seconds": 169.232,
+        "planned_total": 6,
+        "full_sequence_at_observed_max_seconds": 1015.392
+      },
+      "helper": {
+        "observed_completed": 6,
+        "observed_sum_seconds": 298.47,
+        "observed_median_seconds": 49.325500000000005,
+        "observed_max_seconds": 51.717,
+        "planned_total": 8,
+        "full_sequence_at_observed_max_seconds": 413.736
+      },
+      "ordinary": {
+        "observed_completed": 23,
+        "observed_sum_seconds": 360.354,
+        "observed_median_seconds": 12.034,
+        "observed_max_seconds": 35.406,
+        "planned_total": 47,
+        "full_sequence_at_observed_max_seconds": 1664.082
+      }
+    },
+    "summed_including_aborted_turn_seconds": 1365.23,
+    "timing_limits": "Native durations include actual model/tool time; nested controller/target intervals can overlap, so summing is conservative for elapsed use. Remaining configured time includes allocation, host review, history/owner processing and scheduling; it is not assigned solely to the model.",
+    "archive_raw_bytes": {
+      "controller-1-CURATOR-P1-151894877b64023b": 4773029,
+      "manager-1-CURATOR-P1-151894877b64023b": 16958248,
+      "solver_a-1-CURATOR-P1-151894877b64023b": 9592321,
+      "solver_b-1-CURATOR-P1-151894877b64023b": 7876219
+    },
+    "total_archive_raw_bytes": 39199817,
+    "final_storage": {
+      "state": "unchanged_unlisted_metadata",
+      "initial_baseline_sha256": "d5dd2b69ac7f9f3587f39c89dd89b71fe5a6fb41040e4d575ae47776ebfb8b79",
+      "ambient_receipts": 0,
+      "last_receipt_sha256": null,
+      "checkpoints": 42,
+      "sha256": "58a509377489f23e0c49d36af11f3e372dbd1b9eb2c54b20b5fa1caa81193570",
+      "level": "exact selected metadata; baseline plus ordered host-reviewed additions"
+    },
+    "canaries_unchanged": true,
+    "all_observed_runtime_and_companion_identities_stopped": true,
+    "source_hashes_unchanged": 80
+  },
+  "partial_verified_checks": [
+    "Sole manager handoff and old-controller denial.",
+    "Both solver forks use the same selected native lastTurnId history cut with complete retained parent pages.",
+    "Four initial complete-text bootstrap acknowledgements and current owner role records.",
+    "Ordinary-manager controller release denied; explicitly authorized host release reconciled.",
+    "Fresh distinct hidden-value engine digests; common-key/selector/handle cross-actor denial; both actors persist and A recheck matches.",
+    "Typed input delivery and actual owner input update through sequence33."
+  ],
+  "unfinished": [
+    "Rebound complete-text acknowledgement at sequence34 was interrupted at deadline.",
+    "Common conflict transport, native interruption, release/completion delivery, same-ID resume/new epoch, fresh role reads and helper reset remain unproven.",
+    "Final Task lifecycle and complete P1 mechanism gate remain incomplete.",
+    "All full NP001-014/foundation and later plan requirements remain unchanged."
+  ],
+  "proposed_budget": {
+    "supervised_seconds": 4200,
+    "calculation": {
+      "full61turns_at_observed_category_maxima_seconds": 3093.21,
+      "allocation_host_review_history_owner_scheduling_reserve_seconds": 600,
+      "remaining_variance_and_unobserved_operation_reserve_seconds": 506.79
+    },
+    "stop_grace_seconds": 60,
+    "final_storage_reserved_seconds": 15,
+    "single_absolute_deadline": true,
+    "all_admission_reviews_inside_work_deadline": true,
+    "new_run_only": true,
+    "claim": "Measured planning estimate, not a guaranteed completion time or native pass. The current timed-out run remains blocked and unchanged."
+  },
+  "unchanged_constraints": {
+    "sources": {
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/CURATION-depo/starter/curator.yaml": "fe7503972c7a61bba1c0fe4a8595440d3131893288e78f55d4402986d9f88f90",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/CURATION-depo/starter/document-ownership.json": "795b429ae9b997feac5c39569a117d6a0e6332d38af718320a66945980b44916",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLES-depo/curator-manager-AGENTS.md": "c8b3f8e260830bb5681438571057bc9474db46fdb909632e81148f67dfc7f78a",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLES-depo/curator-manager-ROLE.md": "4eeaac17b71df6eb89728bfa3b4ed7eb5551b083515ab6078794afa2a044756a",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLES-depo/project-curator-CURATOR.md": "f8f7ec848e88404b89f7202929695d8a21d490e1d90e27b3a81a06b6da9711f7",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLES-depo/project-sub-agent-AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/ROLES-depo/project-sub-agent-ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/agent-task/SKILL.md": "31370fd69d2446ba129d77e94df8943cca15db98470020eae3ad5203d2ad2b7f",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/agent-task/scripts/native_observations.py": "cc3bf1eaad4ac248c44c84da356d35a9a8186a181d214ff3fb15ed0ca0436e31",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/agent-task/scripts/orchestration_state.py": "d4901e205c1ed23f9f11a7da5043883dd2df6c8f4e168830ab46913dbc2965f8",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/agent-task/scripts/task_state.py": "58813d942fca8874f0662da85d62e8b83fd75c9cf6beed583e699c4556df09a3",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/communication/SKILL.md": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator.py": "caea9ab8f7d5e509c6eb3e425455eea402628e1d84839358d14d04581799ac39",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_broker.py": "039872343328b6b84e25bdb14895c7376491457bad98da678e2120af7149e5ce",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_classification.py": "00fbfcd59e69e510781e35da03c5207ae8b929956c3b40b7643405a3a0d5c858",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_confinement.py": "9b0e073a8445f34e07c57cfe7b600698d6800f1c470a2230c330325ea7ecb224",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_grants.py": "39fc9d7eee8c128752127b85ab73ba9aa2a71ded4a79d39ab90e535785804691",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_policy.py": "6abbb157522ae151e60b3fc82704b6d9eb968c212cca27879dcd093985db568b",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_runtime.py": "a1a7a9bed3a72139646d12db41ac7951525e042164f41a4c436504dd8fe0e77b",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/curate/scripts/curator_runtime_codex.py": "362674513ea1b1372e35f7acaec818e150b1bafff13e8686a0c98177bbcf90e5",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/manage-subagent-roles/SKILL.md": "3c848ab961e0fd8dc653e5b49caa63c975b37f273cfea3689ab1f3eb2e93a84a",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/manage-subagent-roles/scripts/role_catalog.py": "b649dc368d9b4f2d8eec032aaf2ae28e08ff493bbaf07d20ef21a55a52fd0cb2",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/basic_memory_adapter.py": "6020b9e0619450da051febdc7f5ea6328cbd97647cb3ad38292c9e7e6fa699db",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/basic_memory_projection.py": "a3e254131a88936f6a1a1eb292afea2d3645261ebde99632cae847b278dce512",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory.py": "7c1acf6889b566d29b5eb1ca2b98407009cb4fc5cd4b320fe3560ceffa4d3125",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_capture.py": "0d3340dc4657205698416b870d1315d752aa641367d9b70ffc10e479a2967c70",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_core.py": "48592604ac950e32e4c80aab24edd2e90d26d09df1b6af912dcad24bbc490a54",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_evidence.py": "28f30641a83a640e669611a932293501293246936b27d5098645fe28a854ae3b",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_maintenance.py": "700dffc0bd5d208731f9103002d534f52c22d4cb677298035fc0ad89f58c9073",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_normalization.py": "36bfb9800dc04fce004075295e00a5e830979c2b34fd66d1d5b6a1760bb48cda",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_normalize_html.py": "34f82652d31b797f5b07ace50f0043e16766a8710c7ab3774e0cf3ef38b391af",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_normalize_pdf.py": "cac3e93c9cb3318ec6466a01e6f719491ac6368156f9be5a2b55c63c009b5a8d",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_normalize_tex.py": "c1fb0c6ed6f10c43586a6419f80a328119f1d0eccc2fcf265ae2a70f28bc8241",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_packet.py": "d0a7c7f0ada939263e55a557cf482438f6a41d129942e196c11c70b0ac8a1a2a",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_paths.py": "5e7c01db65adf4296d97b166945a80a18875055a46811eeb30c701ab7040f7de",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_publish.py": "12df681916ef98e1163b3786fd2cc06692086aff01aead66eb5042434bde0096",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_recovery.py": "4a288ac8aaa33e1055f0ef878e90726df6d808385781c9f6a7b0e76be8ae2005",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/memory/scripts/memory_search.py": "3a30af00ded1616e58aea8767eb929c9f6ff9e46722434af11a5f9a9a918f0ca",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/check_ontology.py": "7962c2792bc7f72875d517bb9c264973cf9654373199d73aba4342a7ce08b03a",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology.py": "9b1c193f7cb420b0afb090ab74cf069ba49eea449994f747316a7e1ff3db3bce",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_advanced.py": "af4fa591f80d09dc4e051a12e23ff7c1014e5fc5fe6e8c19ae7b475c9773fb48",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_advanced_cli.py": "af57d0d25cd246feb864373ee898f7026a1bce8e97f14a58ef83e878c6eb3f94",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_advanced_packet.py": "988188226bd4d4fcaf9597e708522425e87092c12e2953d36bce4cfc277f14b0",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_authority.py": "c5eda42e85d5b3d02d2950e958c59ee52dfa58837580b19146a3b9f7adee289a",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_backend.py": "4ba6ce8879c2248442a17a4098ae8246831947553476ef051c140dc0730ce35b",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_build.py": "c899b17a3717cac8e843820ce102a1cce41e493f163a63210bd4335e573b4e93",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_core.py": "15336a6fbb542cb8abccf6db8cd4227fc846758f60868ef9e3782580ea18be1d",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_derivations.py": "dc2449e18bedc961a9b43330b4e6b6b3f7600d607de7425308096d3ac4a9f07c",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_generation.py": "625340e3b6ec4b360413f0acd0b30ac3c408c70d3eac1ad009a9fc8b188ca364",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_graph.py": "4f286af79661a539a19c0b1658a7377817ff16c54d1fb650dfdff67b55245886",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_guard_setup.py": "1cd332edc0775021f58df4bb493a34d4caaf4f71a904bcf2acb21adefbafacbf",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_guards.py": "f42506f6dde32f74a24c00cc1d0e046a12004fa9d03f00a5a49131607677442a",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_health.py": "0ffe775f485de64d326fccebe13c35a7974e2ebb8ff432c562b5f75e7a32e0d0",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_interchange.py": "51ca7df70ee4e133a686ff867a324e58f3a8fba6f3910653c0db4730745cba0a",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_knowledge.py": "feb9d2c2e5f7570db49d3d07c3961ee2f38c1ee629f3a135915ea003645c0d55",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_lifecycle.py": "eef2aa64e3d94e9b378db3a90ad17fd3ceb060ad4ade861ee80fa502a92d0a98",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_limits.py": "bfc60e0d200e58e222479ecc06bc5dfd1ee9bed4a74f415bed7e8bd57ec5f7bf",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_memory.py": "9e9e0e9b6d684ddc33106941a03c6cac47950316feaf03923c83bd96d5c37aa7",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_modules.py": "d4cba6775bf4ed42bd4392ef37134ba19dd6b7d84cd82eb5997f4c8a23e47194",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_packet.py": "51287087f1f96fd3d58db7fe6ebf7521e6a15eb8027a55995832b84d444c1e3d",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_profiles.py": "770c9604f2e8ea8ce16a3953858ae1e2019049a318dda5ea481857a524aa7ea8",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_proposal_validation.py": "ba12ad682a9e11ded50893633bc11969587a9e34cff0d68cddfc62819ace65b1",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_proposals.py": "1606da118489f758145d102594e806f33fe170f8d12a1f6629cd61b7b9b346d8",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_provenance.py": "637882f7f76224a7b339447e0c4e642b909cfb0facde45b4cb13e519ab073908",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_publication.py": "e9d8a2520807a4598a11890ddc9e6d470eeaa6611d6e67f6847aed3220a4b936",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_rdf.py": "426b411a6e0746c563cd4be1293c997fc2ffc5ce619fdb248f3853f2227db5e1",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_reasoning.py": "166f8e435a4144dd0141636cc83a7e3b7b2a7668a496d62e60b5fd1cef0a665c",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_retrieval.py": "43e6693e7a6d625e0a829e48e430f8e5d319a77e8d0679dfc29d7224a389da4f",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_semantic.py": "2a4df63c4c67922b1fa30ba251cfe800519ab5fe68546efef9d4a3260136f4fd",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_semantic_worker.py": "55a7e69d876f0530bc677cbe3fd1390f6e2185e8c96f935a7f42d4d8c52ccb12",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_shacl.py": "0fac0205a07a05859f84a82a5743e675ed538d1a0cce5ca01c160b765958b669",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_sparql.py": "13550789b9ad504ab07b6e6550f96b23854faac2b977adea0a380ede54f8678a",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_standards.py": "b1874e4c51ce5a002eb5b3183624129ccbbee99aef767b6337eb744390431351",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_validate.py": "33aea8e2878fa914ecdf370ba2e6be409ef5f14d12d732b34b61a5272e14bdfd",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_wiki.py": "67b1aead617f920329d00b8034731cf1f36490c9718f6d2c42de0919ee171092",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_workbench.py": "9b75ffd7e58b61c0f67f77bb809ce571a89659f262a22725581552fa973a5bc7",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/scripts/ontology_worker.py": "489ef392c7b15b7ad45f7dcd151ef947d10eab0020ec601c96aabf5d98b983d4",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/task/SKILL.md": "7ab4d1ded926be29662b7d30eef7c2d84a94278660029c65c7a17b50547a9840",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+      "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-curator-release/run-native-proof.py": "6ffc45abbaddcbe490ae4e16f5e7b5ef9f9c803f907dda4ef2f73641ee34bf41"
+    },
+    "runtime": {
+      "path": "/Applications/ChatGPT.app/Contents/Resources/codex",
+      "sha256": "87a08119b8effa519f0ecb552dc98043f58a8200bf2ec5da60f76890c33e9c3a",
+      "version": "codex-cli 0.153.4"
+    },
+    "settings": {
+      "effort": "xhigh",
+      "model": "gpt-6-astra",
+      "receipt_path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/host-effective-settings.json",
+      "receipt_sha256": "648ae038f8dc4dc5825a280a81b322bcc6dfa6665e4c24e8d32e0e37950c5409"
+    },
+    "sequence": [
+      {
+        "actor": "controller",
+        "number": 1,
+        "operation": "complete input read and role acknowledgement"
+      },
+      {
+        "actor": "controller",
+        "number": 2,
+        "operation": "Task create"
+      },
+      {
+        "actor": "controller",
+        "number": 3,
+        "operation": "native running observation"
+      },
+      {
+        "actor": "controller",
+        "number": 4,
+        "operation": "manager reservation"
+      },
+      {
+        "actor": "controller",
+        "number": 5,
+        "operation": "manager fork"
+      },
+      {
+        "actor": "manager",
+        "number": 6,
+        "operation": "complete input read and role acknowledgement"
+      },
+      {
+        "actor": "controller",
+        "number": 7,
+        "operation": "manager creation receipt"
+      },
+      {
+        "actor": "controller",
+        "number": 8,
+        "operation": "manager role handle lookup"
+      },
+      {
+        "actor": "controller",
+        "number": 9,
+        "operation": "manager activation"
+      },
+      {
+        "actor": "controller",
+        "number": 10,
+        "operation": "old-writer denial"
+      },
+      {
+        "actor": "manager",
+        "number": 11,
+        "operation": "complex baseline definition"
+      },
+      {
+        "actor": "manager",
+        "number": 12,
+        "operation": "solver A reservation"
+      },
+      {
+        "actor": "manager",
+        "number": 13,
+        "operation": "solver B reservation"
+      },
+      {
+        "actor": "manager",
+        "number": 14,
+        "operation": "solver A fork from frozen common cut"
+      },
+      {
+        "actor": "manager",
+        "number": 15,
+        "operation": "solver B fork from same frozen cut"
+      },
+      {
+        "actor": "solver_a",
+        "number": 16,
+        "operation": "complete input read and role acknowledgement"
+      },
+      {
+        "actor": "manager",
+        "number": 17,
+        "operation": "solver_a creation receipt"
+      },
+      {
+        "actor": "manager",
+        "number": 18,
+        "operation": "solver_a role handle lookup"
+      },
+      {
+        "actor": "manager",
+        "number": 19,
+        "operation": "solver_a role-read owner record"
+      },
+      {
+        "actor": "solver_b",
+        "number": 20,
+        "operation": "complete input read and role acknowledgement"
+      },
+      {
+        "actor": "manager",
+        "number": 21,
+        "operation": "solver_b creation receipt"
+      },
+      {
+        "actor": "manager",
+        "number": 22,
+        "operation": "solver_b role handle lookup"
+      },
+      {
+        "actor": "manager",
+        "number": 23,
+        "operation": "solver_b role-read owner record"
+      },
+      {
+        "actor": "manager",
+        "number": 24,
+        "operation": "ordinary controller-release denial"
+      },
+      {
+        "actor": "solver_a",
+        "number": 25,
+        "operation": "store hidden value and publish engine digest"
+      },
+      {
+        "actor": "solver_b",
+        "number": 26,
+        "operation": "common-key/selector/handle miss before own store"
+      },
+      {
+        "actor": "solver_b",
+        "number": 27,
+        "operation": "store own hidden value and publish engine digest"
+      },
+      {
+        "actor": "solver_a",
+        "number": 28,
+        "operation": "persistence/selector/handle probe"
+      },
+      {
+        "actor": "solver_b",
+        "number": 29,
+        "operation": "reverse persistence/selector/handle probe"
+      },
+      {
+        "actor": "solver_a",
+        "number": 30,
+        "operation": "recheck original digest"
+      },
+      {
+        "actor": "manager",
+        "number": 31,
+        "operation": "solver A typed input delivery"
+      },
+      {
+        "actor": "solver_a",
+        "number": 32,
+        "operation": "received bounded input control"
+      },
+      {
+        "actor": "manager",
+        "number": 33,
+        "operation": "canonical input rebind"
+      },
+      {
+        "actor": "solver_a",
+        "number": 34,
+        "operation": "complete rebound input read and acknowledgement"
+      },
+      {
+        "actor": "manager",
+        "number": 35,
+        "operation": "fresh role handle lookup"
+      },
+      {
+        "actor": "manager",
+        "number": 36,
+        "operation": "fresh role-read owner record"
+      },
+      {
+        "actor": "manager",
+        "number": 37,
+        "operation": "solver A common conflict transport"
+      },
+      {
+        "actor": "solver_a",
+        "number": 38,
+        "operation": "received common conflict control"
+      },
+      {
+        "actor": "manager",
+        "number": 39,
+        "operation": "solver B common conflict transport"
+      },
+      {
+        "actor": "solver_b",
+        "number": 40,
+        "operation": "received common conflict control"
+      },
+      {
+        "actor": "manager",
+        "number": 41,
+        "operation": "two fixed calls: start and interrupt solver A"
+      },
+      {
+        "actor": "solver_a",
+        "number": 42,
+        "operation": "actual target interruption turn"
+      },
+      {
+        "actor": "manager",
+        "number": 43,
+        "operation": "solver A release request"
+      },
+      {
+        "actor": "manager",
+        "number": 44,
+        "operation": "solver A release completion lookup"
+      },
+      {
+        "actor": "manager",
+        "number": 45,
+        "operation": "solver A release owner record"
+      },
+      {
+        "actor": "manager",
+        "number": 46,
+        "operation": "same-ID solver A native resume"
+      },
+      {
+        "actor": "solver_a",
+        "number": 47,
+        "operation": "complete resumed input read and acknowledgement"
+      },
+      {
+        "actor": "manager",
+        "number": 48,
+        "operation": "same-ID resume owner record"
+      },
+      {
+        "actor": "manager",
+        "number": 49,
+        "operation": "resumed role handle lookup"
+      },
+      {
+        "actor": "manager",
+        "number": 50,
+        "operation": "resumed role-read owner record"
+      },
+      {
+        "actor": "solver_a",
+        "number": 51,
+        "operation": "common-key reset and selector/handle misses"
+      },
+      {
+        "actor": "solver_b",
+        "number": 52,
+        "operation": "untargeted helper state recheck"
+      },
+      {
+        "actor": "manager",
+        "number": 53,
+        "operation": "solver_a final release request"
+      },
+      {
+        "actor": "manager",
+        "number": 54,
+        "operation": "solver_a final release completion lookup"
+      },
+      {
+        "actor": "manager",
+        "number": 55,
+        "operation": "solver_a final release owner record"
+      },
+      {
+        "actor": "manager",
+        "number": 56,
+        "operation": "solver_b final release request"
+      },
+      {
+        "actor": "manager",
+        "number": 57,
+        "operation": "solver_b final release completion lookup"
+      },
+      {
+        "actor": "manager",
+        "number": 58,
+        "operation": "solver_b final release owner record"
+      },
+      {
+        "actor": "manager",
+        "number": 59,
+        "operation": "Task stop request"
+      },
+      {
+        "actor": "manager",
+        "number": 60,
+        "operation": "Task stop finish"
+      },
+      {
+        "actor": "manager",
+        "number": 61,
+        "operation": "acknowledged manager self-release"
+      }
+    ],
+    "bounds_except_supervised_seconds": {
+      "artifact_bytes": 20000,
+      "dynamic_callbacks": 256,
+      "engine_output_tokens": 40000,
+      "expected_native_identities": 4,
+      "final_storage_reserved_seconds": 15,
+      "frame_bytes": 2000000,
+      "hard_model_call_or_token_cap": "not exposed by inspected protocol",
+      "helper_cells": 256,
+      "helper_program_bytes": 20000,
+      "history_bytes": 16000000,
+      "history_pages": 100,
+      "history_turns": 100,
+      "host_turn_starts": 64,
+      "io_wait_seconds": 30,
+      "loaded_actors": 4,
+      "native_spawn_total_cap": "Three admitted fork operations and one same-ID resume, with intrinsic delegation disabled; no provider/global cap claimed.",
+      "owned_log_bytes": 64000000,
+      "owned_runtime_incarnations": 5,
+      "selected_instruction_bytes": 160000,
+      "stop_grace_seconds": 60,
+      "total_wire_archive_bytes": 128000000,
+      "wire_archive_bytes": 64000000
+    },
+    "ambient": {
+      "kind": "AmbientMetadataReview",
+      "limits": {
+        "ambient_review_batches": 4,
+        "challenge_or_receipt_bytes": 200000,
+        "metadata_checkpoints_total": 96,
+        "new_external_ids_per_batch": 2,
+        "new_external_ids_total": 8,
+        "new_native_projects_total": 4,
+        "new_project_roots_total": 8,
+        "project_metadata_rows": 10000
+      },
+      "observation_protocol": 2,
+      "observer": "host",
+      "protected_roots": [
+        "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-qlhjan6o"
+      ],
+      "schema_version": 1
+    },
+    "no_new_operation_actor_tool_network_install_account_or_publication_authority": true
+  },
+  "preparation_required": [
+    "No implementation source change is justified by this deadline result. Use the same stopped writer and source hashes.",
+    "Only after scope assessment, prepare a fresh exact fixture and budget/source/prerequisite packet; preserve all24 actual returned prior IDs with their true persisted/unpersisted provenance.",
+    "Refresh exact selected initial external accounting metadata and instruction source bindings without expanding exceptions.",
+    "Keep complete raw archives and original failed result. No automatic retry, deadline reset, category reduction or reuse of a partial pass as full P1."
+  ]
+}

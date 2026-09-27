@@ -1,0 +1,179 @@
+{
+  "status": "reviewed_exact_unobscured_contrast_evidence_only",
+  "finding": "Three light-theme color-contrast incomplete nodes report bgOverlap while the suggestions overlay is open. Ratio0 in that incomplete result is not a measured contrast failure.",
+  "original_incomplete": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "nodes": [
+        {
+          "checks": [
+            {
+              "data": {
+                "contrastRatio": 0,
+                "expectedContrastRatio": "4.5:1",
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "messageKey": "bgOverlap"
+              },
+              "id": "color-contrast",
+              "impact": "serious"
+            }
+          ],
+          "targets": [
+            "#read-status > details > summary"
+          ]
+        },
+        {
+          "checks": [
+            {
+              "data": {
+                "contrastRatio": 0,
+                "expectedContrastRatio": "4.5:1",
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "messageKey": "bgOverlap"
+              },
+              "id": "color-contrast",
+              "impact": "serious"
+            }
+          ],
+          "targets": [
+            ".quiet"
+          ]
+        },
+        {
+          "checks": [
+            {
+              "data": {
+                "contrastRatio": 0,
+                "expectedContrastRatio": "3:1",
+                "fontSize": "21.6pt (28.8px)",
+                "fontWeight": "bold",
+                "messageKey": "bgOverlap"
+              },
+              "id": "color-contrast",
+              "impact": "serious"
+            }
+          ],
+          "targets": [
+            "#reading > h2"
+          ]
+        }
+      ],
+      "tags": [
+        "cat.color",
+        "wcag2aa",
+        "wcag143",
+        "TTv5",
+        "TT13.c",
+        "EN-301-549",
+        "EN-9.1.4.3",
+        "ACT",
+        "RGAAv4",
+        "RGAA-3.2.1"
+      ]
+    }
+  ],
+  "unobscured_exact_selector_observations": [
+    {
+      "state": "terms_browse",
+      "theme": "light",
+      "selector": "#read-status > details > summary",
+      "actual_contrast_checks": [
+        {
+          "fgColor": "#19334d",
+          "bgColor": "#f5f7fa",
+          "contrastRatio": 12.06,
+          "fontSize": "12.0pt (16px)",
+          "fontWeight": "normal",
+          "expectedContrastRatio": "4.5:1"
+        }
+      ],
+      "complete_raw_sha256": "2775d3043fcaded805f2d4efe7c7e98c2d468e6add55a21ca5eb690c3daabb91"
+    },
+    {
+      "state": "terms_browse",
+      "theme": "light",
+      "selector": ".quiet",
+      "actual_contrast_checks": [
+        {
+          "fgColor": "#12627c",
+          "bgColor": "#ffffff",
+          "contrastRatio": 6.85,
+          "fontSize": "10.2pt (13.6px)",
+          "fontWeight": "normal",
+          "expectedContrastRatio": "4.5:1"
+        }
+      ],
+      "complete_raw_sha256": "2775d3043fcaded805f2d4efe7c7e98c2d468e6add55a21ca5eb690c3daabb91"
+    },
+    {
+      "state": "terms_browse",
+      "theme": "light",
+      "selector": "#reading > h2",
+      "actual_contrast_checks": [
+        {
+          "fgColor": "#19334d",
+          "bgColor": "#f5f7fa",
+          "contrastRatio": 12.06,
+          "fontSize": "21.6pt (28.8px)",
+          "fontWeight": "bold",
+          "expectedContrastRatio": "3:1"
+        }
+      ],
+      "complete_raw_sha256": "2775d3043fcaded805f2d4efe7c7e98c2d468e6add55a21ca5eb690c3daabb91"
+    },
+    {
+      "state": "ambiguous_search",
+      "theme": "light",
+      "selector": "#read-status > details > summary",
+      "actual_contrast_checks": [
+        {
+          "fgColor": "#19334d",
+          "bgColor": "#f5f7fa",
+          "contrastRatio": 12.06,
+          "fontSize": "12.0pt (16px)",
+          "fontWeight": "normal",
+          "expectedContrastRatio": "4.5:1"
+        }
+      ],
+      "complete_raw_sha256": "5ac02be589fd7ebae3d388786c143c9880027de17ecd1f6c8d8d35fbd895efdd"
+    },
+    {
+      "state": "ambiguous_search",
+      "theme": "light",
+      "selector": ".quiet",
+      "actual_contrast_checks": [
+        {
+          "fgColor": "#12627c",
+          "bgColor": "#ffffff",
+          "contrastRatio": 6.85,
+          "fontSize": "10.2pt (13.6px)",
+          "fontWeight": "normal",
+          "expectedContrastRatio": "4.5:1"
+        }
+      ],
+      "complete_raw_sha256": "5ac02be589fd7ebae3d388786c143c9880027de17ecd1f6c8d8d35fbd895efdd"
+    },
+    {
+      "state": "ambiguous_search",
+      "theme": "light",
+      "selector": "#reading > h2",
+      "actual_contrast_checks": [
+        {
+          "fgColor": "#19334d",
+          "bgColor": "#f5f7fa",
+          "contrastRatio": 12.06,
+          "fontSize": "21.6pt (28.8px)",
+          "fontWeight": "bold",
+          "expectedContrastRatio": "3:1"
+        }
+      ],
+      "complete_raw_sha256": "5ac02be589fd7ebae3d388786c143c9880027de17ecd1f6c8d8d35fbd895efdd"
+    }
+  ],
+  "review": "Each exact selector passes contrast before and after closing suggestions in this actual current-build run. This resolves the underlying unobscured color ratios for these three elements; it does not by itself prove keyboard focus is unobscured while the menu is open. Native keyboard/VoiceOver observation remains pending.",
+  "scanner_run_status": "failed later on invalid empty-query test assumption; five completed raw scans remain valid within their exact state scope.",
+  "full_report_index": "Verification/project-knowledge-explorer-first-release/qualification-tests/actual-accessibility-08-failed/axe-complete-report-index.json"
+}

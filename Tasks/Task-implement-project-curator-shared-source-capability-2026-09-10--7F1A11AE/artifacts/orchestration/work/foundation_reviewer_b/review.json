@@ -1,0 +1,620 @@
+{
+  "schema_version": 1,
+  "reviewer": "/root/curator_manager/foundation_reviewer_b",
+  "function": "independent_reviewer_b",
+  "assignment_id": "foundation_reviewer_b",
+  "task_id": "TASK-20260910-7F1A11AE",
+  "subtask_id": "foundation_native",
+  "created_at": "2026-09-11T00:56:13.619668+00:00",
+  "outcome": "passed",
+  "review_kind": "implementation_design_only",
+  "summary": "Candidate B passes the bounded design review. No mandatory contradiction, unsafe asserted trust assumption, omitted foundation criterion or unauthorized source expansion was found. This pass establishes design eligibility only; implementation, actual native behavior and enforced isolation remain unverified.",
+  "binding": {
+    "baseline": {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/baseline_28958166623093a6d3d90c6c1c3c1ee99f9f36b2b20eb1d4c718e147866f5841.json",
+      "sha256": "28958166623093a6d3d90c6c1c3c1ee99f9f36b2b20eb1d4c718e147866f5841"
+    },
+    "candidate": {
+      "candidate_id": "foundation_b_v1",
+      "assignment_id": "foundation_solver_b",
+      "artifact_id": "foundation_candidate_b_v1",
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+      "sha256": "c2f8707fbf8ad318f529a92d50c0a46d8cf581d5298c56dc75f326eefddc0573",
+      "round": 1
+    },
+    "supporting_artifacts": [
+      {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_manifest_b_v1.json",
+        "sha256": "7e2a2e0303e47e70fef8c37b5ae2f9721257c6fb8342fb7c6df855dff3639b0a"
+      },
+      {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_coverage_b_v1.json",
+        "sha256": "07d96b77d28db3f3c011463ef59fd0e57c5528a072731748182ca94001238a6e"
+      }
+    ],
+    "plan": {
+      "path": "Implementation_Plans/Plan_sys4ai-project-curator-shared-source-capability_2026-09-10_FAE2A15B/plan.json",
+      "sha256": "71b7ca5cafa0eae40f82335089261bce4fe94b9e24e63251e50c7837cce6d539"
+    },
+    "task_snapshot": {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/task.json",
+      "revision": 42,
+      "sha256": "e6b2af8aa9a13e63afd71acf053d6efc2d7a6e7bc652d1c987c27c9b4f287b82",
+      "purpose": "Assignment and registration observation only; later unrelated Task revisions do not change the frozen baseline."
+    }
+  },
+  "role_reads": {
+    "SOUL.md": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2",
+    "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2",
+    "recorded_confirmation": {
+      "agents_sha256": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+      "evidence": "Actual native reviewer confirmed complete SOUL and role reads with corrected transcription matching exact canonical role digests.",
+      "role_sha256": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+    },
+    "communication_skill": ".agents/skills/communication/SKILL.md"
+  },
+  "mandatory_findings": [],
+  "criteria": [
+    {
+      "criterion_id": "FND-01",
+      "criterion": "Neutral starter has no live identity/branch set, standing grant, schedule or autonomous-write permission.",
+      "plan_task": "TASK-005",
+      "design_assessment": "passed",
+      "assessment": "The starter is explicitly unselected: identities, branches, schedules, budgets, entitlements and autonomous writes do not become active defaults.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          31,
+          35
+        ]
+      },
+      "required_checks": [
+        "F-POLICY"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-02",
+      "criterion": "Missing, malformed, expired or incompatible selections produce precise unavailable/blocked diagnostics.",
+      "plan_task": "TASK-005",
+      "design_assessment": "passed",
+      "assessment": "Strict parsing and select_operation return exact missing, malformed, expired, incompatible and unavailable conditions without status side effects.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          29,
+          35
+        ]
+      },
+      "required_checks": [
+        "F-POLICY",
+        "F-PROTOCOL"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-03",
+      "criterion": "Project specialization is capability-only; standing entitlements remain absent until deliberately accepted at adoption.",
+      "plan_task": "TASK-005",
+      "design_assessment": "passed",
+      "assessment": "Capability specialization is descriptive; only a previously accepted protected issuer record can create standing authority.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          31,
+          35
+        ]
+      },
+      "required_checks": [
+        "F-POLICY"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-04",
+      "criterion": "AGENTS.md, README sections, generated wiki and Task responses have distinct owners and update routes.",
+      "plan_task": "TASK-006",
+      "design_assessment": "passed",
+      "assessment": "AGENTS governance, scoped factual README sections, generated wiki sources and append-only Task history use distinct routes.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          40,
+          42
+        ]
+      },
+      "required_checks": [
+        "F-CLASS"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-05",
+      "criterion": "Overrides, generators, stable identities and protected sections resolve conservatively; unknown/mixed targets hold unsafe edits.",
+      "plan_task": "TASK-006",
+      "design_assessment": "passed",
+      "assessment": "Source-bound sections, an immutable protected minimum, conservative override precedence, stable identity and mixed/unknown holds satisfy the classification design.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          40,
+          42
+        ]
+      },
+      "required_checks": [
+        "F-CLASS",
+        "F-CONFINEMENT",
+        "NP-011",
+        "NP-012"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-06",
+      "criterion": "Grants bind actor/project/branch/policy/source/payload/scope/owner and freshness; valid standing entitlements avoid redundant approval.",
+      "plan_task": "TASK-007",
+      "design_assessment": "passed",
+      "assessment": "The exact grant binds native identity, project/branch, current policy and classification, source/payload, scope/budget, current owner and freshness. Accepted standing entitlements can mint fresh grants without another approval.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          44,
+          52
+        ]
+      },
+      "required_checks": [
+        "F-POLICY",
+        "F-BROKER"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-07",
+      "criterion": "Candidate-controlled code and environment cannot alter broker policy, credentials or effective approval logic.",
+      "plan_task": "TASK-007",
+      "design_assessment": "passed",
+      "assessment": "The broker owns transport, uses closed requests and frozen owner imports, clean environment and pinned executables. Confinement and import-injection proofs remain required.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          44,
+          50
+        ]
+      },
+      "required_checks": [
+        "F-BROKER",
+        "F-CONFINEMENT",
+        "NP-010",
+        "NP-011",
+        "NP-012"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-08",
+      "criterion": "Broker routes canonical mutations to their existing helper owners and rejects arbitrary shell instructions.",
+      "plan_task": "TASK-007",
+      "design_assessment": "passed",
+      "assessment": "Typed dispatch retains the Task closed event union and existing memory/ontology publishers and journals. Arbitrary shell/protocol forwarding is explicitly excluded.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          46,
+          66
+        ]
+      },
+      "required_checks": [
+        "F-BROKER",
+        "F-TASK",
+        "F-MEMORY",
+        "F-ONTOLOGY"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-09",
+      "criterion": "Caller identity comes from the trusted native request envelope and current manager binding, not an actor string in model arguments; workers cannot read private grants or broker credentials.",
+      "plan_task": "TASK-007",
+      "design_assessment": "passed",
+      "assessment": "AuthenticatedCall is transport-created, correlated with an active native request and canonical assignment. Actor arguments are rejected; grants and credentials are excluded from candidate reads.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          44,
+          50
+        ]
+      },
+      "required_checks": [
+        "F-BROKER",
+        "NP-009",
+        "NP-010",
+        "NP-011"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-10",
+      "criterion": "One controller/charter is selected per execution; reading a charter does not activate it.",
+      "plan_task": "TASK-008",
+      "design_assessment": "passed",
+      "assessment": "Controller origin and charter are versioned execution facts. Explicit routing keeps Director default and charter reading cannot activate a controller.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          58,
+          76
+        ]
+      },
+      "required_checks": [
+        "F-ROLE",
+        "F-TASK",
+        "NP-002"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-11",
+      "criterion": "Specialist responsibilities, qualifications, role reads, scope and stopping rules are explicit; generic Director use and category rules are preserved.",
+      "plan_task": "TASK-008",
+      "design_assessment": "passed",
+      "assessment": "Narrow specialist duties, exact role pairs, fresh catalog/fit checks, separate skills/tools checks and unchanged category topology are explicit.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          70,
+          88
+        ]
+      },
+      "required_checks": [
+        "F-ROLE",
+        "NP-003",
+        "NP-004",
+        "NP-005",
+        "NP-006"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-12",
+      "criterion": "New provenance is schema-versioned and validated; historical records retain bytes/meaning and unknown fields are rejected.",
+      "plan_task": "TASK-009",
+      "design_assessment": "passed",
+      "assessment": "Task schema 2 receives orchestration version 2; native observations and grants dispatch explicitly. Historical Task/record/config/grant semantics and strict unknown-field rejection are retained.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          56,
+          66
+        ]
+      },
+      "required_checks": [
+        "F-TASK",
+        "F-MEMORY",
+        "F-ONTOLOGY"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-13",
+      "criterion": "Curator bootstrap reserves exactly one manager, activates only the real receipt identity and relinquishes canonical Task writing.",
+      "plan_task": "TASK-009",
+      "design_assessment": "passed",
+      "assessment": "Reservation precedes launch; actual native lineage and role/charter acknowledgement gate activation. The controller relinquishes the sole Task writer role.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          58,
+          62
+        ]
+      },
+      "required_checks": [
+        "F-TASK",
+        "NP-003",
+        "NP-008"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-14",
+      "criterion": "Existing record/configuration schemas keep their meaning; any changed grant envelope has explicit version dispatch.",
+      "plan_task": "TASK-010",
+      "design_assessment": "passed",
+      "assessment": "Memory grant 2 and ontology grant 3 extend native provenance; ontology core/advanced profiles preserve their distinct prior guards. Record/config schemas and old grant paths keep their meaning.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          56,
+          66
+        ]
+      },
+      "required_checks": [
+        "F-MEMORY",
+        "F-ONTOLOGY"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-15",
+      "criterion": "Only the current confirmed manager with exact operation scope can publish Curator knowledge; ordinary workers and forged provenance fail.",
+      "plan_task": "TASK-010",
+      "design_assessment": "passed",
+      "assessment": "Publication compares the transport caller with current Task writer/execution/generation, activation, exact source/config/proposal and separate owner grant/scope; ordinary workers remain proposal-only.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          64,
+          68
+        ]
+      },
+      "required_checks": [
+        "F-BROKER",
+        "F-MEMORY",
+        "F-ONTOLOGY",
+        "NP-009"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-16",
+      "criterion": "Activation, manager/child discovery, supervision, interrupt and resume observations are mapped without forging collaboration receipts.",
+      "plan_task": "TASK-011",
+      "design_assessment": "passed",
+      "assessment": "The adapter preserves real App Server IDs and current observations, rejects forged legacy receipts and uses version-pinned control mappings. Missing complete protocol support blocks the affected path.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          78,
+          90
+        ]
+      },
+      "required_checks": [
+        "F-PROTOCOL",
+        "NP-001",
+        "NP-003",
+        "NP-008"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-17",
+      "criterion": "Effective model/effort and independent contexts are checked; missing capabilities hold work.",
+      "plan_task": "TASK-011",
+      "design_assessment": "passed",
+      "assessment": "Requested settings are distinguished from effective settings; null effort and unverified inheritance block dispatch. Identical frozen solver inputs and sibling exclusion have separate proof obligations.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          82,
+          86
+        ]
+      },
+      "required_checks": [
+        "F-PROTOCOL",
+        "NP-007"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-18",
+      "criterion": "Real observations establish identities, reservation-before-launch, one canonical writer, full required teams, settings inheritance and isolated solver input.",
+      "plan_task": "TASK-012",
+      "design_assessment": "passed",
+      "assessment": "The unchanged NP protocol requires actual controller/manager identities, reservation order, full disjoint teams, one writer, effective settings, isolated solver input and real owner publication. These observations are not claimed yet.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          88,
+          139
+        ]
+      },
+      "required_checks": [
+        "NP-002",
+        "NP-003",
+        "NP-004",
+        "NP-005",
+        "NP-006",
+        "NP-007",
+        "NP-009"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-19",
+      "criterion": "Capacity queuing preserves every required agent; uncertain or absent observations are named non-passes.",
+      "plan_task": "TASK-012",
+      "design_assessment": "passed",
+      "assessment": "Capacity queues retain all distinct required agents. Missing, stale or uncertain observations do not establish stopping, publisher leases or successful completion.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          88,
+          90
+        ]
+      },
+      "required_checks": [
+        "F-TASK",
+        "F-PROTOCOL",
+        "NP-007",
+        "NP-008"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-20",
+      "criterion": "Candidate writes to trusted policy/broker, canonical ledgers, control records, grants and credentials are denied by the enforced boundary.",
+      "plan_task": "TASK-013",
+      "design_assessment": "passed",
+      "assessment": "The proposed enforced profile protects broker/policy/helper/grant/credential/canonical paths for actual candidates and descendants, with paired positive actions and actual denial plus unchanged canary inventories.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          92,
+          111
+        ]
+      },
+      "required_checks": [
+        "NP-010",
+        "NP-012"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    },
+    {
+      "criterion_id": "FND-21",
+      "criterion": "Malicious branch/diff/note/config, process execution and broker-request cases cannot gain authority or bypass publication.",
+      "plan_task": "TASK-013",
+      "design_assessment": "passed",
+      "assessment": "Adversarial obligations cover malicious text, self-approval, impersonation/replay, direct execution, path aliases, import injection, egress, sibling access and uncertain recovery without substituting JSON rejection for OS denial.",
+      "candidate_locator": {
+        "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_candidate_b_v1.md",
+        "lines": [
+          98,
+          111
+        ]
+      },
+      "required_checks": [
+        "F-CLASS",
+        "F-BROKER",
+        "NP-011",
+        "NP-012"
+      ],
+      "implementation_status": "not_implemented_by_candidate",
+      "runtime_proof_status": "not_run"
+    }
+  ],
+  "focused_assessments": [
+    {
+      "topic": "Existing owner compatibility",
+      "assessment": "The explicit version split is compatible with the current strict owner entry points if implemented as specified. Current memory authorize requires grant 1; ontology authorize dispatches grant 1/2, advanced conditions and exact scope; Task orchestration validates version 1 and actual legacy receipts. Candidate lines 56-66 preserve those paths and introduce distinct Curator branches instead of relabeling App Server IDs or Curator origin. No alternative publisher or lifecycle journal is introduced.",
+      "sources": [
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py:98-124,194-218",
+        "SKILLS-depo/agent-task/scripts/task_state.py:164-165,831-850",
+        "SKILLS-depo/memory/scripts/memory_publish.py:63-125,236-245",
+        "SKILLS-depo/ontology/scripts/ontology_authority.py:90-205"
+      ]
+    },
+    {
+      "topic": "All native tool channels",
+      "assessment": "The design does not equate a restricted shell or an authenticated dynamic tool with whole-runtime isolation. It holds support if built-in sibling/control-message access remains possible, denies raw client protocol execution, disables unselected connectors/external tools and requires actual descendant enforcement. Implementation proof must inventory every enabled native channel, including commandExecution, fileChange, dynamicToolCall, mcpToolCall, collabAgentToolCall, webSearch, imageView, imageGeneration and permission-escalation requests. The supplied schema contains these channels; no OS proof is inferred from a named profile.",
+      "candidate_lines": [
+        80,
+        111
+      ],
+      "source": "artifacts/orchestration/manager/experimental-native-types.json#/definitions/v2/ThreadItem and #/definitions/ServerRequest"
+    },
+    {
+      "topic": "Output and input isolation",
+      "assessment": "Candidate lines 84-86 put shared immutable inputs and candidate output outside sibling read scopes, with authenticated assignment-gated artifact transfer. They also identify native control messages and inherited context as separate leakage channels. This is a sound fail-closed design obligation; whether the selected runtime can enforce it remains an actual proof gate.",
+      "candidate_lines": [
+        84,
+        88
+      ]
+    },
+    {
+      "topic": "Frozen transitive imports",
+      "assessment": "Candidate lines 16,50 and 96 expressly freeze the entire dynamically loaded owner/guard closure and its path/environment resolution. Current memory_evidence.installed_helper, ontology_authority.read_task, orchestration_state.role and decorated Task/memory guards load project-installed helpers. The later manifest must bind these copies and imports in the disposable trusted layout; hashing only curator_broker.py would violate the candidate.",
+      "sources": [
+        "SKILLS-depo/memory/scripts/memory_evidence.py:14-38",
+        "SKILLS-depo/ontology/scripts/ontology_authority.py:12-27",
+        "SKILLS-depo/agent-task/scripts/orchestration_state.py:142-169",
+        "SKILLS-depo/agent-task/scripts/task_state.py:3137-3208",
+        "SKILLS-depo/memory/scripts/memory_publish.py:273-344"
+      ]
+    },
+    {
+      "topic": "Inherited settings and publisher authentication",
+      "assessment": "Requested child settings, nullable thread settings, stale thread history and last-known collab states are explicitly insufficient. The design requires effective equality or a verified runtime-specific inheritance guarantee, and publication requires a current transport-correlated native call plus the exact active manager and owner grant. These checks avoid treating model arguments or ordinary observation JSON as authentication.",
+      "candidate_lines": [
+        17,
+        21,
+        44,
+        66,
+        82,
+        90
+      ]
+    },
+    {
+      "topic": "Runtime bounds",
+      "assessment": "The proposed 40 charged turns, 60 minutes and 250000 observed tokens are a request to prepare, not an enforceable grant already present. Candidate line 153 explicitly blocks launch if the token cap cannot be enforced and requires an explicit host-supported bound. Charged-turn accounting must include native descendants; post-turn usage alone cannot prove a hard token cap. The deadline must close admission and reconcile ongoing owners. This is a preserved prelaunch gate, not a runtime pass.",
+      "candidate_lines": [
+        149,
+        161
+      ]
+    },
+    {
+      "topic": "Disposable proof scope and publication grants",
+      "assessment": "This reviewer has only its review directory and no proof, publication or canonical-write scope. The current foundation baseline source/evidence inventory does not itself instantiate the candidate proposed foundation_implementer/native-proof directory or its synthetic manager assignment. The manager must later reserve the exact implementer path and operation scope, and create the synthetic project-local manager assignment with exact MEMORY/ONTOLOGY/control-record writes checked by their owners. Separate Task/memory/ontology grants must reference that synthetic project and its current writer; a proof directory under an implementer artifact path is not itself a knowledge publication grant. Candidate lines 145-159 already require the exact host-authorized request before model/network work, so this is an execution prerequisite rather than a design rejection.",
+      "candidate_lines": [
+        143,
+        163
+      ]
+    }
+  ],
+  "checks_performed": [
+    {
+      "check": "All registered candidate, manifest and coverage text read in full",
+      "result": "passed"
+    },
+    {
+      "check": "All 14 canonical assignment context SHA256 bindings rechecked",
+      "result": "passed",
+      "count": 14
+    },
+    {
+      "check": "All 25 candidate manifest source bindings rechecked",
+      "result": "passed",
+      "count": 25
+    },
+    {
+      "check": "All 21 baseline criteria match coverage and canonical plan TASK-005 through TASK-013 criteria in exact order",
+      "result": "passed",
+      "count": 21
+    },
+    {
+      "check": "Five bound owner modules parsed with ast.parse under selected .venv Python, without importing owner code",
+      "result": "passed",
+      "count": 5
+    },
+    {
+      "check": "Candidate registration, exact baseline, current assignment and recorded role reads verified",
+      "result": "passed"
+    },
+    {
+      "check": "Owner behavior suites, native sessions, publication and confinement",
+      "result": "not_run",
+      "reason": "Review scope is a design candidate; these remain implementation/proof obligations."
+    }
+  ],
+  "highest_verification_level": "Static structure and source-binding checks passed; design inspected; no implementation/runtime behavior verified.",
+  "optional_notes": [],
+  "limits": [
+    "This report approves no source integration, native execution, grants, publication, adoption, install or external action.",
+    "A design pass cannot satisfy the live-observation acceptance criteria. Missing native/confinement capabilities must keep affected work blocked and release incomplete.",
+    "No memory retrieval beyond the supplied frozen empty packet and no memory mutation occurred.",
+    "No sibling candidate or review contents were used. Canonical registration metadata was observed while locating the assigned record."
+  ],
+  "files_changed": [
+    "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/work/foundation_reviewer_b/review.json"
+  ],
+  "stopping_condition": "All 21 foundation criteria assessed at the design stage; mandatory findings are empty; optional review stopped."
+}

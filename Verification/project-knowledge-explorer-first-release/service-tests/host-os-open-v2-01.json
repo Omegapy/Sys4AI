@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-service-v2-os-open-01/host-browser-driver-v2.py"
+  ],
+  "stage": "/private/tmp/explorer-service-v2-os-open-01",
+  "manifest": {
+    "path": "/private/tmp/explorer-service-v2-os-open-01/inputs.json",
+    "sha256": "0c90dd0e3c41849f5fe6541b3d0a790743cca147bcb850d1cf74a70747ad234b"
+  },
+  "inputs_count": 109,
+  "same_products_as": "host-batch-v2-01.json",
+  "timeout_seconds": 360,
+  "intended_writes": [
+    "Only disposable /private/tmp/explorer-http-* fixture tree, its exact owned private runtime files and service/read worker. The ordinary OS default browser opens one new tab using its existing settings."
+  ],
+  "credential_boundary": "Actual command handler calls explore --open and passes private URL to stdlib webbrowser in process memory. It emits no bootstrap URL/token. Do not inventory or inspect the new browser tab before browser_ready has confirmed the context request; if no ready event, report unavailable inspection and let the 300-second lifetime close the service.",
+  "inspection": [
+    "Wait for browser_ready, select only the actual OS-created tab at the expected clean URL, and positively verify absence of bootstrap before any URL/text/screenshot output. Do not navigate a replacement tab.",
+    "Observe and record actual native browser zoom value. Set actual browser zoom to 200 percent and verify the native UI value; no CSS font-size, pageScaleFactor or viewport-only substitute. Do not change browser defaults or accessibility settings.",
+    "At200percent inspect labeled Search, navigation and session controls. Open the Starting points Alignment entry, Sources, and first recorded source; inspect source text, source heading/return controls and horizontal reflow. Close source, open Processes, then first recorded process; inspect ordered text/process reading controls and reflow. Only synthetic fixture content is displayed.",
+    "Restore and positively verify the exact prior browser zoom value before closing only the created tab. Restore prior focus when practical. Record any unsupported observations explicitly.",
+    "Stop exact owned driver with normal SIGTERM after inspection, wait for browser_cleanup/exit0, and verify created test tab absence. The driver also has a bounded300-second lifetime."
+  ],
+  "cleanup": "SIGTERM to exact started driver PID or its 300-second bounded lifetime sets production service stopping; normal command closes socket/private files/worker. Driver compares fixture regular bytes and reaps worker, then removes only its disposable fixture. Host verifies owned driver exit and closes the exact created browser tab.",
+  "attribution": "Actual OS default-browser dispatch through in-process verified production command(... explore --open), with native browser inspection separate. Literal public CLI startup is independently covered by service batch05; this job must not be relabeled a public CLI subprocess invocation.",
+  "scope": "Current full production frontend on unchanged SERVICE package; actual native200percent browser zoom and exact prior-setting restoration. No VoiceOver/human comprehension/performance/release acceptance."
+}

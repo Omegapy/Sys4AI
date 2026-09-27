@@ -1,0 +1,25 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix action: <urn:sys4ai:ontology:action:> .
+action:RequestShape a sh:NodeShape ; sh:targetClass action:Request ;
+  sh:property [ sh:path action:family ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("ontology" "memory" "task" "trd" "plan" "role" "template" "setup") ] ;
+  sh:property [ sh:path action:operation ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path action:requestDigest ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "^[0-9a-f]{64}$" ] ;
+  sh:property [ sh:path action:targetDigest ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "^[0-9a-f]{64}$" ] ;
+  sh:property [ sh:path action:target; sh:minCount 1; sh:datatype xsd:string; sh:minLength 1 ];
+  sh:property [ sh:path action:targetType; sh:minCount 1; sh:datatype xsd:string ];
+  sh:property [ sh:path action:inputType; sh:minCount 1; sh:maxCount 1; sh:datatype xsd:string ];
+  sh:property [ sh:path action:inputValid; sh:minCount 1; sh:maxCount 1; sh:datatype xsd:boolean; sh:hasValue true; sh:message "Current owning input, target identity, exact version or lifecycle semantics are invalid." ];
+  sh:property [ sh:path action:requiredCapability; sh:minCount 1; sh:maxCount 1; sh:nodeKind sh:IRI ];
+  sh:property [ sh:path action:governingSource; sh:minCount 3; sh:maxCount 3; sh:nodeKind sh:IRI ];
+  sh:property [ sh:path action:governingSourceCount; sh:minCount 1; sh:maxCount 1; sh:datatype xsd:integer; sh:hasValue 3 ] .
+
+# Inputs above are observations from current owning read interfaces. The exact
+# selected action adds its declared type, capability and lifecycle constraints.
+# Guard bootstrap and repair use a distinct immutable request and native grant.
+action:GuardSetupShape a sh:NodeShape;
+  sh:targetClass action:GuardSetupRequest;
+  sh:property [ sh:path action:family; sh:hasValue "setup" ];
+  sh:property [ sh:path action:operation; sh:minCount 1; sh:maxCount 1; sh:in ("guard-setup" "guard-repair") ];
+  sh:property [ sh:path action:requestDigest; sh:minCount 1; sh:maxCount 1; sh:pattern "^[0-9a-f]{64}$" ];
+  sh:property [ sh:path action:targetDigest; sh:minCount 1; sh:maxCount 1; sh:pattern "^[0-9a-f]{64}$" ] .

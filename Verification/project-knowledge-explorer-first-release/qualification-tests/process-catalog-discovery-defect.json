@@ -1,0 +1,39 @@
+{
+  "status": "confirmed_product_correction_required_by_manager_and_root",
+  "source": {
+    "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+    "sha256": "f0a77dc83d2e5abe8b330e753384175b892b01f1e6febde6e945c8f2843e4772",
+    "bytes": 3178
+  },
+  "source_locator": "line8 processCatalog resolves a name only from starting_points, then falls back to the ID",
+  "actual_keyboard_failure": {
+    "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-host-keyboard-01-stdout.json",
+    "sha256": "e6aef2753f8a9c133f011b62cbfaf00756d6c186f90645c69ddf2c0169bb5903",
+    "bytes": 4747
+  },
+  "actual_failure_phase": "keyboard_ordered_process",
+  "actual_passed_groups": [
+    {
+      "name": "AT-29 actual keyboard typing, Escape, submit and result-to-entry",
+      "status": "passed"
+    },
+    {
+      "name": "AT-29 source read and exact Escape return by keyboard",
+      "status": "passed"
+    },
+    {
+      "name": "AT-29 renderer-independent keyboard List selection, More connections and Focus here",
+      "status": "passed"
+    }
+  ],
+  "fixture_source": {
+    "path": "SKILLS-depo/ontology/tests/explorer_support.py",
+    "sha256": "c41e45aeb143e6d8203e4178730ac8bd1ffe34a4472bbba11bd23a7ad928aaba",
+    "bytes": 18585
+  },
+  "finding": "The legitimate ordered process has a recorded human label but is not a starting point. Keyboard discovery by that label failed. Current catalog source displays the canonical URI fallback instead of obtaining the recorded label.",
+  "evidence_boundary": "Keyboard failure and three preceding groups are directly observed; fallback cause is established from current source and exact canonical fixture construction. Prepared keyboard02 would capture visible link text by observed href but has NOT executed.",
+  "required_owner": "Original frontend worker, coordinated by the manager",
+  "root_direction": "Correct finite canonical process-label reads, honest pending/errors, snapshot/navigation cancellation and exact ID retention. Do not alter starting_ids or count raw-ID targeting as adequate final discovery.",
+  "qualification_worker_production_changes": false
+}

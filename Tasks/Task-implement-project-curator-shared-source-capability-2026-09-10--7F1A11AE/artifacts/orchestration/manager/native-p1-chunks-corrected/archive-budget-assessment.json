@@ -1,0 +1,145 @@
+{
+  "kind": "observed-archive-headroom-assessment",
+  "source_attempt": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt5/summary.json",
+    "sha256": "caeea37fe8dd1541b21b3fdfc3126dcd9ae1fe0baabf8ead6e8515180e9124d0"
+  },
+  "source_archive": {
+    "path": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-native-p1-w8m2ljhn/trusted/wire/manager-1-CURATOR-P1-64cb4efa4e3f150e/index.json",
+    "sha256": "8a9a213fb7e7ea7cf6cab20db96bf30f32fa0c84fc53c396623ba3f2d939a48d",
+    "bytes": 6599878,
+    "records": 195,
+    "history_reads": 4
+  },
+  "observed": {
+    "manager_starts": 6,
+    "archive_bytes": 6599878,
+    "history_reply_table": [
+      {
+        "sequence": 19,
+        "method": "thread/read",
+        "includeTurns": false,
+        "raw_sha256": "cf5edf86c4c4cca3b0955876c630abe91998289c4824efa913ad46d3443e05ba",
+        "stored_record_bytes": 2299,
+        "history_turns": 0
+      },
+      {
+        "sequence": 21,
+        "method": "thread/turns/list",
+        "includeTurns": null,
+        "raw_sha256": "96708af2b856ba03aada04bef1220478807deefc0d067e3cf558b4f0ae755db1",
+        "stored_record_bytes": 242589,
+        "history_turns": 2
+      },
+      {
+        "sequence": 57,
+        "method": "thread/read",
+        "includeTurns": true,
+        "raw_sha256": "7d10cc9d703573e888295cd9038448fc9ec96f1405ceba4c2e0b9db92e99e12c",
+        "stored_record_bytes": 566185,
+        "history_turns": 3
+      },
+      {
+        "sequence": 86,
+        "method": "thread/read",
+        "includeTurns": true,
+        "raw_sha256": "0e6a88bbbd6e3a4d1f2ba2ee397eb5457c868f6a30c0fcc5aaa1be8dc3dc92fc",
+        "stored_record_bytes": 584783,
+        "history_turns": 4
+      },
+      {
+        "sequence": 115,
+        "method": "thread/read",
+        "includeTurns": true,
+        "raw_sha256": "0184ab1c5305107b1bc7ea69970a61e9699390f25a0c1e8097ef668bc6fd358c",
+        "stored_record_bytes": 608305,
+        "history_turns": 5
+      },
+      {
+        "sequence": 144,
+        "method": "thread/read",
+        "includeTurns": true,
+        "raw_sha256": "a101179cbfd49a3e9646e5d8616c8b55aea418a4481c2002eba27a328bb25181",
+        "stored_record_bytes": 631826,
+        "history_turns": 6
+      },
+      {
+        "sequence": 146,
+        "method": "thread/turns/list",
+        "includeTurns": null,
+        "raw_sha256": "6aa0e58e03f6fac3ccdddf511579074095625d47a67ebf8b5bbc67c44b617409",
+        "stored_record_bytes": 619135,
+        "history_turns": 6
+      },
+      {
+        "sequence": 156,
+        "method": "thread/read",
+        "includeTurns": false,
+        "raw_sha256": "fdaa394c43af2bd7ee530ef581f51805c0e44c61331841abb966162c1f458a45",
+        "stored_record_bytes": 13453,
+        "history_turns": 0
+      },
+      {
+        "sequence": 158,
+        "method": "thread/turns/list",
+        "includeTurns": null,
+        "raw_sha256": "3827d24bd55f55cd2479150f73b367fe23d539df306dc1de6b3c9d8b2931cbb8",
+        "stored_record_bytes": 627444,
+        "history_turns": 7
+      },
+      {
+        "sequence": 179,
+        "method": "thread/read",
+        "includeTurns": true,
+        "raw_sha256": "dc82ee2dc664098118e50f151cc2bf96dc4ab3246792721026038262a640c313",
+        "stored_record_bytes": 642450,
+        "history_turns": 7
+      },
+      {
+        "sequence": 189,
+        "method": "thread/read",
+        "includeTurns": false,
+        "raw_sha256": "cdd114b5a1a4b1381288b5047d4e7eca541e7e2f13d6b0401683b0c701468072",
+        "stored_record_bytes": 13453,
+        "history_turns": 0
+      },
+      {
+        "sequence": 191,
+        "method": "thread/turns/list",
+        "includeTurns": null,
+        "raw_sha256": "65c9046acc975dbd7940230d661707516f7f055a0804cb2a3b9a3c6e669e48f0",
+        "stored_record_bytes": 638068,
+        "history_turns": 8
+      },
+      {
+        "sequence": 212,
+        "method": "thread/read",
+        "includeTurns": true,
+        "raw_sha256": "0f83a99e081cb5cdaac235f686004f8181bbed92c66692cee4f12979e6f159c4",
+        "stored_record_bytes": 653069,
+        "history_turns": 8
+      }
+    ],
+    "last_full_reply_bytes": 653069,
+    "largest_observed_adjacent_growth": 23522
+  },
+  "planning_scenario": {
+    "planned_actor_starts": {
+      "controller": 9,
+      "manager": 36,
+      "solver_a": 10,
+      "solver_b": 6
+    },
+    "remaining_manager_starts": 30,
+    "assumption": "Each remaining completed-history reply starts at the last observed size and grows by the largest observed adjacent increment; this is an extrapolation scenario, not measured future traffic or a worst-case guarantee.",
+    "additional_full_reply_bytes": 30529800,
+    "archive_plus_extrapolated_replies": 37129678,
+    "excludes": "Additional chunk, mid-turn flush, other reply and event growth; final actual accounting remains mandatory."
+  },
+  "selected_change": {
+    "wire_archive_bytes_before": 32000000,
+    "wire_archive_bytes_after": 64000000,
+    "total_wire_archive_bytes_unchanged": 128000000
+  },
+  "unchanged": "Complete raw records; all operations/model/cell/text/time/actor/profile limits. Existing archive parser already accepts this finite per-archive bound. Overflow still holds."
+}

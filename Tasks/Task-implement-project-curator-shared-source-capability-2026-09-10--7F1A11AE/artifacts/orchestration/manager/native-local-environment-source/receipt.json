@@ -1,0 +1,31 @@
+{
+  "kind": "manager_tagged_local_environment_route_inspection",
+  "tag": "rust-v0.153.4",
+  "files": [
+    {
+      "source_url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/core/src/environment_selection.rs",
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-local-environment-source/core/src/environment_selection.rs",
+      "sha256": "4030838ad4dbac5a58ee7ac69596993839ac2c282d15db3182c4e295510b9fd3",
+      "bytes": 80700
+    },
+    {
+      "source_url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/exec-server/src/environment.rs",
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-local-environment-source/exec-server/src/environment.rs",
+      "sha256": "3b7fceb0502f6bae88c2274a48d4ca33b03f8277f3534127f5fbd1cc079ed0b7",
+      "bytes": 74463
+    }
+  ],
+  "configuration": {
+    "path": "/Users/alex.omegapy/.codex/environments.toml",
+    "state": "absent",
+    "contents_read": false
+  },
+  "source_findings": [
+    "ThreadStartParams explicitly says an empty environments array disables environment access; P0 selected it, while the observed working v12 launch omitted it.",
+    "EnvironmentManager reserves local for its local executor; provider-supplied remote transports may not use that ID. Default discovery reads CODEX_HOME/environments.toml when present, otherwise environment variables.",
+    "The P0 process environment is an explicit minimal map that does not include exec-server/noise routing variables; bind the absent environments.toml condition before any revised startup.",
+    "A revised packet can select exactly environmentId local with fixture cwd/runtime roots, after status/info metadata checks; actual command/callback/native fork behavior still requires proof."
+  ],
+  "native_operations": 0,
+  "model_turns": 0
+}

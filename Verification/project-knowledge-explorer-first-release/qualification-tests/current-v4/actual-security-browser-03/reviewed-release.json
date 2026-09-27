@@ -1,0 +1,65 @@
+{
+  "status": "released_one_root_host_execution",
+  "task_revision": 235,
+  "job": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/host-security-browser-03.json",
+    "sha256": "f3d96a0a229935d5e37e0bc28d102b5db41a65dc429cbc25cacaca099a795999"
+  },
+  "manifest": {
+    "path": "/private/tmp/explorer-qualification-security-browser-03/inputs.json",
+    "sha256": "e51a0c0d2560327b74bdedd5403d2a57eff5186545e6cb88656ef1cdfebb3998",
+    "bytes": 19955
+  },
+  "stage_members": 109,
+  "live_source_mapping": {
+    "host-security-browser.py": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/host-security-browser.py",
+    "security-browser.cjs": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/security-browser.cjs",
+    "test-browser-runtime.json": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/test-browser-runtime.json"
+  },
+  "external_tools": 28,
+  "runtime_inventory_count": 20,
+  "runtime": {
+    "name": "Chrome Headless Shell",
+    "revision": "1234",
+    "expected_version": "151.0.7922.34",
+    "executable": "/Users/alex.omegapy/Library/Caches/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+    "complete_inventory_root": "/Users/alex.omegapy/Library/Caches/ms-playwright/chromium_headless_shell-1234",
+    "complete_file_count": 20,
+    "inventory_stage_file": "test-browser-runtime.json",
+    "pre_post_required": true,
+    "qualification": "Explicit admitted test runtime; no system Chrome or native Safari equivalence."
+  },
+  "actual_group_names": [
+    "AT-27 malicious label is literal heading text without executable elements",
+    "AT-27 hostile source HTML and javascript link are plain text with entry retained",
+    "AT-27 malicious search result label remains inert literal text",
+    "AT-27 real production CSP has no violations and no script/dialog/external execution"
+  ],
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-qualification-security-browser-03/host-security-browser.py"
+  ],
+  "timeout_seconds": 100,
+  "review": "Both complete Python and CJS drivers read. Python exact accepted browser02; CJS differs only pinned runtime JSON/executable and actual151 version assertion. Four original AT27 groups unchanged. All109 stage/live refs,28 externalpins and complete20 runtime files verified stable no-follow single-link hash/size.",
+  "changed_stage_paths_vs_02": [
+    "SKILLS-depo/ontology/explorer/assets/chunks/index-BE-phhqX.css",
+    "SKILLS-depo/ontology/explorer/assets/chunks/index-BzpN-_fY.css",
+    "SKILLS-depo/ontology/explorer/assets/chunks/index-Dj7bsFrK.js",
+    "SKILLS-depo/ontology/explorer/assets/chunks/index-pSVjymv6.js",
+    "SKILLS-depo/ontology/explorer/assets/chunks/renderer-3Z0JhDKk.js",
+    "SKILLS-depo/ontology/explorer/assets/chunks/renderer-CCjOUb_r.js",
+    "SKILLS-depo/ontology/explorer/assets/index.html",
+    "SKILLS-depo/ontology/explorer/assets/manifest.json",
+    "security-browser.cjs",
+    "test-browser-runtime.json"
+  ],
+  "root_requirements": [
+    "Capture admitted exact stage to root-private execution tree; retain original source_mapping checks and complete109files.",
+    "Verify full28tools and exact20runtime inventory before/after; no systemChrome replacement or equivalence.",
+    "Bound safe stdout and suppress raw stderr/URLs/headers/response values; retain raw safe stdout before result assertions.",
+    "Require exact4 groups, actual151.0.7922.34, zero pageerrors/dialogs/nonlocal/CSP, stage/fixture preservation and ownedchild/readworker cleanup.",
+    "Actual current TASK020 browser qualification only. No TASK021/022/native/VoiceOver/participant acceptance. One actual execution, no unchanged retries."
+  ]
+}

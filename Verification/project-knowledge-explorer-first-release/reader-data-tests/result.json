@@ -1,0 +1,209 @@
+{
+  "assignment": "READER_DATA_WORKER_G3",
+  "subtask": "READER_DATA",
+  "baseline": "b233451edb8f7838bd33f034e2004c4fcca8785ccf432c044fc9ae159a44f71d",
+  "outcome": "bounded implementation delivered for manager acceptance",
+  "criteria": [
+    {
+      "criterion": "Exact IDs, labels, aliases and lexical definitions retain deterministic order/reasons; duplicates remain distinct and aliases retain preferred identity.",
+      "observed": "passed in run-08",
+      "tests": [
+        "SearchTests.test_duplicates_aliases_preferred_identity_and_canonical_ranking",
+        "SearchTests.test_exact_query_case_interior_whitespace_and_outer_whitespace"
+      ]
+    },
+    {
+      "criterion": "Category/lifecycle filters apply before paging; one snapshot has no duplicate/skipped IDs and byte-limited empty output is explicitly incomplete.",
+      "observed": "passed in run-08",
+      "tests": [
+        "SearchTests.test_filters_before_paging_and_oversized_label_consumes_once",
+        "SearchTests.test_deferred_fitting_items_never_become_markers",
+        "SearchTests.test_oversized_summary_byte_marker_preserves_later_identities",
+        "ReadTests.test_atomic_1024_refusal_and_all_fixed_error_envelopes"
+      ]
+    },
+    {
+      "criterion": "Changing query, filters, direction, sort, project/root, snapshot, service instance or reading session invalidates a cursor; endpoint bounds never widen agent contracts.",
+      "observed": "passed in run-08",
+      "tests": [
+        "SearchTests.test_scope_session_service_root_policy_and_tampering",
+        "SearchTests.test_cursor_expiry_and_graph_direction",
+        "ReadTests.test_deadline_and_lowered_canonical_limits_never_widen"
+      ]
+    },
+    {
+      "criterion": "Entry fields are faithful, missing sections are absent, deprecated history/replacement survives exact-ID access, and fact/lifecycle/freshness remain distinct.",
+      "observed": "passed in run-08",
+      "tests": [
+        "ReadTests.test_exact_header_deprecated_details_history_and_status",
+        "ReadTests.test_lossless_unicode_text_and_optional_absence"
+      ]
+    },
+    {
+      "criterion": "Parallel relations retain individual IDs; incoming traversal does not reverse semantic direction; loops/cycles/high-degree data stay bounded with meaningful coverage.",
+      "observed": "passed in run-08",
+      "tests": [
+        "ReadTests.test_exact_relations_loops_parallel_qualifiers_and_direction",
+        "ReadTests.test_neighborhood_node_limit_markers_and_scope",
+        "ReadTests.test_tight_graph_final_coverage_fits_without_skipping_identities",
+        "ReadTests.test_unsafe_numeric_qualifiers_mark_edge_and_preserve_exact_detail"
+      ]
+    },
+    {
+      "criterion": "No whole-project browser response is used for layout/start selection; list and map receive the same normalized records and omission semantics.",
+      "observed": "passed in run-08",
+      "tests": [
+        "ReadTests.test_context_is_compact_exact_and_no_whole_graph",
+        "ReadTests.test_exact_relations_loops_parallel_qualifiers_and_direction"
+      ]
+    },
+    {
+      "criterion": "A source request cannot browse arbitrary paths or another record/project; recorded/current hashes and freshness are distinct.",
+      "observed": "passed in run-08",
+      "tests": [
+        "SourceTests.test_full_tuple_identity_direct_binding_and_owner_projection",
+        "SourceTests.test_missing_binary_symlink_and_canonical_drift_fail_safely",
+        "SourceTests.test_source_only_change_keeps_reference_snapshot_and_continuation_hash"
+      ]
+    },
+    {
+      "criterion": "Exact supported section/line/JSON locators yield precise evidence; unreliable extraction labels bounded excerpt; changed bytes remain visibly stale without repairing provenance.",
+      "observed": "passed in run-08",
+      "tests": [
+        "SourceTests.test_source_exact_json_lines_sections_and_inert_text",
+        "SourceTests.test_ambiguous_nonheading_and_markdown_structural_boundaries",
+        "SourceTests.test_canonical_json_legacy_pointer_semantics_and_resolved_containment",
+        "SourceTests.test_source_only_change_keeps_reference_snapshot_and_continuation_hash"
+      ]
+    },
+    {
+      "criterion": "Text is escaped, sizes are bounded, source bodies stay transient and no external link is fetched automatically.",
+      "observed": "passed in run-08",
+      "tests": [
+        "SourceTests.test_source_exact_json_lines_sections_and_inert_text",
+        "SourceTests.test_source_page_aggregate_bytes_and_exact_continuation",
+        "SourceTests.test_many_refs_paged_and_source_body_not_retained",
+        "ReadTests.test_no_write_or_optional_imports_and_same_mtime_snapshot_change"
+      ]
+    },
+    {
+      "criterion": "Backend process sections follow the accepted exact configured identities, relation/source field support, ordered-source verification and missing/partial/stale states; UI rendering and keyboard/source-drawer acceptance remain explicit later TASK-016 obligations.",
+      "observed": "passed in run-08",
+      "tests": [
+        "ProcessTests.test_ordered_unordered_partial_stale_states_and_exact_purpose",
+        "ProcessTests.test_process_support_and_text_fragments_page_losslessly",
+        "ProcessTests.test_configured_identity_not_name_or_type_and_invalid_selector_rejected",
+        "ProcessTests.test_invalid_source_owner_widening_and_overlapping_steps_rejected",
+        "ProcessTests.test_source_change_during_candidate_callback_never_accepts_mixed_order",
+        "ProcessTests.test_process_missing_source_retains_definition_and_no_order"
+      ]
+    }
+  ],
+  "current_implementation_and_tests": [
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_explorer_read.py",
+      "sha256": "2fd6393a842dd34575e147293299945f98afbccf452cca28e4c8fc7321723dab",
+      "bytes": 50400
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_explorer_source.py",
+      "sha256": "393082592bcd1d0630dec628379e6626f116f6b60bfba098125264dd73a6b1f8",
+      "bytes": 9025
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_explorer_read.py",
+      "sha256": "be2f65d4d2beeb4907e819c43cc18fe3383f749a4df149c4c93006b67ca77592",
+      "bytes": 14894
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_explorer_search.py",
+      "sha256": "661c70e3c3ec0b3f69a3409d1dfed3b9ecc44ba436cacc93c082cfa2ddd2625c",
+      "bytes": 7906
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_explorer_sources.py",
+      "sha256": "df45d25aba871b3787231473b2f7f975049e0d63811ebe50ab2ddd13b8776031",
+      "bytes": 7996
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_explorer_processes.py",
+      "sha256": "2d3df1529801a64a437a6ea2028effcf6e42207bad517181eb64987c53df676f",
+      "bytes": 5039
+    }
+  ],
+  "verification": {
+    "tests": 32,
+    "passed": 32,
+    "failed": 0,
+    "duration_seconds": 36.06276825000532,
+    "inputs_unchanged": true,
+    "independent_schema": "jsonschema Draft202012Validator in the existing test-only .venv-memory-pilot environment",
+    "fixed_errors": {
+      "cases": 186,
+      "maximum_compact_utf8_bytes": 659,
+      "minimum_response_budget": 1024,
+      "all_fit": true,
+      "reader_sha256": "2fd6393a842dd34575e147293299945f98afbccf452cca28e4c8fc7321723dab",
+      "qualification": "Actual Reader.error_response fixed envelopes; HTTP transport not exercised."
+    },
+    "current_root": {
+      "context_status": "ok",
+      "context_bytes": 4133,
+      "initial_context_seconds": 0.11509233305696398,
+      "records": 412,
+      "relations": 181,
+      "categories": 14,
+      "process_ids": [],
+      "search_status": "incomplete",
+      "search_returned": 5,
+      "entry_status": "ok",
+      "selected_bytes_mtimes_unchanged_after_context": true,
+      "loaded_modules": {
+        "ontology_explorer_snapshot": "d684c3039680b28c24680222e8f47a4de78638259d5e7426d33576399687324d",
+        "ontology_core": "09bc25023e873e4d7b1fcf9163e90be9f3ae46c23b8bbbe1928695c5d92e8e52",
+        "ontology_retrieval": "43e6693e7a6d625e0a829e48e430f8e5d319a77e8d0679dfc29d7224a389da4f",
+        "ontology_explorer_source": "393082592bcd1d0630dec628379e6626f116f6b60bfba098125264dd73a6b1f8",
+        "ontology_explorer_read": "2fd6393a842dd34575e147293299945f98afbccf452cca28e4c8fc7321723dab",
+        "ontology_modules": "d4cba6775bf4ed42bd4392ef37134ba19dd6b7d84cd82eb5997f4c8a23e47194",
+        "ontology_validate": "33aea8e2878fa914ecdf370ba2e6be409ef5f14d12d732b34b61a5272e14bdfd"
+      },
+      "qualification": "One read-only live-root observation. Timing includes startup materialization, not repeated cold/warm service performance. Selected comparison begins after context; not complete protected-state, production bootstrap, HTTP or release proof."
+    },
+    "syntax": "all six files parsed",
+    "artifact_size_limit": 250000
+  },
+  "historical_failures": [
+    "run-02: unconfigured process section returned null metadata forbidden by closed process branch; corrected to empty items with missing ProcessMeta, without advertising process on its header.",
+    "run-04: final stopping metadata exposed a tightly packed oversized-summary case. Prospective envelope accounting was corrected.",
+    "run-06: a tight graph marker probe isolated mutable diagnostics sharing through snapshot.thaw, which only converts frozen tuples. Reader response templates now use independent deep copies; failed candidate probes cannot mutate prior accepted pages."
+  ],
+  "remaining_gates": [
+    "Manager direct acceptance and any requested corrections.",
+    "Production bootstrap/loaded-byte worker handshake, HTTP/session/Origin/CSRF/asset transport and hard supervisor deadline/RSS enforcement.",
+    "TASK-016 frontend process display, keyboard and source drawer; full Map/List/browser/CSP and actual accessibility observations.",
+    "Repeated workload performance, real owner/participant tasks, exact Template/root adoption, cutover, rollback and full release preservation audit."
+  ],
+  "qualifications": [
+    "No canonical knowledge, memory, root-installed assets, Template, Task, Git or role files were edited. Disposable fixture writes and assigned implementation/test/evidence files only.",
+    "Plain source text is preserved in JSON and tagged text/plain; frontend text-node rendering and production nosniff/CSP remain consumer checks.",
+    "Scoped total may be null when its optional count must yield space to final coverage metadata; identities/items/cursors are retained.",
+    "Large canonical integers and negative-zero qualifiers use existing detail markers and exact canonical_json text; no canonical or public schema change.",
+    "Current-root selected comparison begins after initial context; it is not the final entire protected-state audit. Root has no configured process IDs, so none were inferred.",
+    "Precision wire fixture comes from real adapter calls on disposable synthetic data; client integration acceptance is separate."
+  ],
+  "handoff": {
+    "path": "Verification/project-knowledge-explorer-first-release/reader-data-tests/HANDOFF.md",
+    "sha256": "cbf84823422e2c161804ffd7a70a1128bb8c5340a544e724a059db5dedebe816",
+    "bytes": 9109
+  },
+  "current_test_run": {
+    "path": "Verification/project-knowledge-explorer-first-release/reader-data-tests/run-08.json",
+    "sha256": "66c4ffec8b2a78b34c1e5db8ad8a8e4bc9feb0d507c92d1f7730c4632078b8cb",
+    "bytes": 2345
+  },
+  "precision_fixture": {
+    "path": "Verification/project-knowledge-explorer-first-release/reader-data-tests/precision-wire-fixture.json",
+    "sha256": "9a202830fb975063e05175be68dc6f8f1a63dabb0ff35ff6f9eb7b32327adf36",
+    "bytes": 38022
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "stage": "/private/tmp/explorer-frontend-build-nrcofi8q",
+  "checks": [
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 1,
+      "stdout": "\n> @sys4ai/project-knowledge-explorer@1.0.0 build\n> npm run typecheck && vite build\n\n\n> @sys4ai/project-knowledge-explorer@1.0.0 typecheck\n> tsc --noEmit\n\nsrc/map/renderer.ts(20,66): error TS2322: Type '({ group: string; data: { id: string; canonicalId: string; label: string; kind: RecordKind; }; position: { x: number; y: number; } | undefined; } | { group: string; data: { id: string; canonicalId: string; ... 6 more ...; fact_kind: FactKind; }; classes: string; })[]' is not assignable to type 'ElementDefinition[]'.\n  Type '{ group: string; data: { id: string; canonicalId: string; label: string; kind: RecordKind; }; position: { x: number; y: number; } | undefined; } | { group: string; data: { id: string; canonicalId: string; ... 6 more ...; fact_kind: FactKind; }; classes: string; }' is not assignable to type 'ElementDefinition'.\n    Type '{ group: string; data: { id: string; canonicalId: string; label: string; kind: RecordKind; }; position: { x: number; y: number; } | undefined; }' is not assignable to type 'ElementDefinition'.\n      Types of property 'group' are incompatible.\n        Type 'string' is not assignable to type 'ElementGroup | undefined'.\nsrc/map/renderer.ts(26,159): error TS2322: Type 'number' is not assignable to type 'PropertyValue<NodeSingular, string> | undefined'.\nsrc/map/renderer.ts(27,289): error TS2322: Type 'number' is not assignable to type 'PropertyValue<EdgeSingular, string> | undefined'.\nsrc/map/renderer.ts(38,78): error TS2322: Type 'Map<string, { x: number; y: number; }>' is not assignable to type 'void | boolean'.\n",
+      "stderr": ""
+    }
+  ],
+  "status": "failed"
+}

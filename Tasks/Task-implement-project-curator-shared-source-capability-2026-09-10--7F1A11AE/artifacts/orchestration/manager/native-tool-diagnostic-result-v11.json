@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "stage": "tool-routing-diagnostic",
+  "scope_sha256": "24a1f360bc05ab1010828c615b05b4313fbebf513e72fd919165d05844fc83d0",
+  "started_at": "2026-09-11T04:11:13.657408+00:00",
+  "state": "blocked",
+  "identities": {
+    "controller": "01a08ea9-95d2-7d60-87f9-c5e703d243b0"
+  },
+  "settings": {
+    "controller": {
+      "model": "gpt-6-astra",
+      "reasoningEffort": "xhigh",
+      "activePermissionProfile": {
+        "id": "curator-proof-bootstrap",
+        "extends": null
+      }
+    }
+  },
+  "artifacts": {},
+  "native_controls": [],
+  "command_probes": [],
+  "stopping": {},
+  "turns": {
+    "01a08ea9-95d2-7d60-87f9-c5e703d243b0": {
+      "id": "01a08ea9-963a-76d1-86f6-00f3f5e3e40e",
+      "status": "completed",
+      "item_types": [
+        "agentMessage"
+      ],
+      "error": null,
+      "final_diagnostics": [
+        {
+          "type": "agentMessage",
+          "id": "msg_052c4c7c5f4a53d7016aa37f6cb13c87d092c114bbd0e33e7b",
+          "phase": "final_answer",
+          "final_diagnostic": {
+            "text": "7of9: `functions.exec` failed: \u201ccode-mode host is disabled.\u201d The command and `artifact_submit` were not executed.",
+            "truncated": false,
+            "bytes": 117,
+            "sha256": "02ab6026c838cf228309aa595848964011ac307ffe0debf6f03b2b94d578574e",
+            "authority": "diagnostic self-report only"
+          }
+        }
+      ],
+      "assistant_messages": [
+        {
+          "bytes": 117,
+          "sha256": "02ab6026c838cf228309aa595848964011ac307ffe0debf6f03b2b94d578574e",
+          "refusal_phrase_observed": false
+        }
+      ]
+    }
+  },
+  "checkpoints": [
+    {
+      "kind": "effective_tool_closure_passed",
+      "at": "2026-09-11T04:11:13.719153+00:00"
+    },
+    {
+      "kind": "selected_model_advertised",
+      "at": "2026-09-11T04:11:13.731792+00:00",
+      "model": "gpt-6-astra",
+      "effort": "xhigh"
+    },
+    {
+      "kind": "controller_created",
+      "at": "2026-09-11T04:11:13.840211+00:00",
+      "actor": "01a08ea9-95d2-7d60-87f9-c5e703d243b0",
+      "settings": {
+        "model": "gpt-6-astra",
+        "reasoningEffort": "xhigh",
+        "activePermissionProfile": {
+          "id": "curator-proof-bootstrap",
+          "extends": null
+        }
+      }
+    },
+    {
+      "kind": "turn_accepted",
+      "at": "2026-09-11T04:11:13.852309+00:00",
+      "actor": "01a08ea9-95d2-7d60-87f9-c5e703d243b0",
+      "turn": {
+        "id": "01a08ea9-963a-76d1-86f6-00f3f5e3e40e",
+        "status": "inProgress",
+        "item_types": [],
+        "error": null,
+        "final_diagnostics": [],
+        "assistant_messages": []
+      }
+    },
+    {
+      "kind": "turn_terminal",
+      "at": "2026-09-11T04:11:25.376795+00:00",
+      "actor": "01a08ea9-95d2-7d60-87f9-c5e703d243b0",
+      "turn": {
+        "id": "01a08ea9-963a-76d1-86f6-00f3f5e3e40e",
+        "status": "completed",
+        "item_types": [
+          "agentMessage"
+        ],
+        "error": null,
+        "final_diagnostics": [
+          {
+            "type": "agentMessage",
+            "id": "msg_052c4c7c5f4a53d7016aa37f6cb13c87d092c114bbd0e33e7b",
+            "phase": "final_answer",
+            "final_diagnostic": {
+              "text": "7of9: `functions.exec` failed: \u201ccode-mode host is disabled.\u201d The command and `artifact_submit` were not executed.",
+              "truncated": false,
+              "bytes": 117,
+              "sha256": "02ab6026c838cf228309aa595848964011ac307ffe0debf6f03b2b94d578574e",
+              "authority": "diagnostic self-report only"
+            }
+          }
+        ],
+        "assistant_messages": [
+          {
+            "bytes": 117,
+            "sha256": "02ab6026c838cf228309aa595848964011ac307ffe0debf6f03b2b94d578574e",
+            "refusal_phrase_observed": false
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "token_usage": {
+    "01a08ea9-95d2-7d60-87f9-c5e703d243b0": {
+      "total": {
+        "totalTokens": 9719,
+        "inputTokens": 9458,
+        "cachedInputTokens": 4480,
+        "outputTokens": 261,
+        "reasoningOutputTokens": 68
+      },
+      "last": {
+        "totalTokens": 4918,
+        "inputTokens": 4816,
+        "cachedInputTokens": 4480,
+        "outputTokens": 102,
+        "reasoningOutputTokens": 68
+      }
+    }
+  },
+  "item_type_counts": {
+    "userMessage": 1,
+    "reasoning": 1,
+    "agentMessage": 1
+  },
+  "item_diagnostics": [
+    {
+      "sequence": 46,
+      "thread_id": "01a08ea9-95d2-7d60-87f9-c5e703d243b0",
+      "raw_sha256": "97fce94d77d0440bb1f0f5e4989f9ec8458e29f442d02eda9a162c426532dccb",
+      "item": {
+        "type": "agentMessage",
+        "id": "msg_052c4c7c5f4a53d7016aa37f6cb13c87d092c114bbd0e33e7b",
+        "phase": "final_answer",
+        "final_diagnostic": {
+          "text": "7of9: `functions.exec` failed: \u201ccode-mode host is disabled.\u201d The command and `artifact_submit` were not executed.",
+          "truncated": false,
+          "bytes": 117,
+          "sha256": "02ab6026c838cf228309aa595848964011ac307ffe0debf6f03b2b94d578574e",
+          "authority": "diagnostic self-report only"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "host_turn_starts": 1,
+    "expected_native_identities": 1,
+    "supervised_seconds": 420,
+    "stop_grace_seconds": 20,
+    "io_wait_seconds": 30,
+    "frame_bytes": 2000000,
+    "artifact_bytes": 20000,
+    "hard_model_call_or_token_cap": "not exposed by inspected protocol",
+    "native_spawn_total_cap": "not established; observed identity count triggers stop, not a claimed hard native cap"
+  },
+  "production_readiness": "not_proven",
+  "effective_tool_configuration": {
+    "features": {
+      "apps": false,
+      "plugins": false,
+      "hooks": false,
+      "memories": false,
+      "chronicle": false,
+      "image_generation": false,
+      "browser_use": false,
+      "browser_use_external": false,
+      "computer_use": false,
+      "in_app_browser": false,
+      "remote_plugin": false,
+      "goals": false,
+      "browser_use_full_cdp_access": false,
+      "enable_mcp_apps": false,
+      "realtime_conversation": false,
+      "code_mode": false,
+      "code_mode_host": false,
+      "code_mode_only": false,
+      "code_mode_prewarm": false,
+      "code_mode_interrupt": false,
+      "plugin_sharing": false,
+      "recommended_plugins": false,
+      "skill_mcp_dependency_install": false,
+      "in_app_local_automation": false,
+      "in_app_chat": false,
+      "tool_suggest": false,
+      "auth_elicitation": false,
+      "shell_snapshot": false,
+      "view_image": false
+    },
+    "delegation": {
+      "multi_agent": false,
+      "multi_agent_v2": false,
+      "agents_enabled": false
+    },
+    "mcp_servers": {
+      "linear": false,
+      "notebooklm": false,
+      "node_repl": false,
+      "computer-use": false
+    },
+    "web_search": "disabled",
+    "surfaces": {
+      "browser_default": "deny",
+      "browser_history": false,
+      "browser_origin_overrides": 0,
+      "computer_default": "deny",
+      "apps_enabled": false,
+      "desktop_voice_screen_context": false,
+      "desktop_remote_awake": false,
+      "desktop_ui_keys": [
+        "appearanceLightChromeTheme",
+        "appearanceLightCodeThemeId",
+        "avatar-overlay-mascot-width-px",
+        "conversationDetailMode",
+        "dock-icon-preference",
+        "enabled-reasoning-efforts",
+        "followUpQueueMode",
+        "keepRemoteControlAwakeWhilePluggedIn",
+        "microphoneInputDeviceId",
+        "open-in-target-preferences",
+        "preventSleepWhileRunning",
+        "realtimeVoiceScreenContextEnabled",
+        "selected-avatar-id",
+        "show-context-window-usage",
+        "toys-audio-visualizer-enabled",
+        "toys-confetti-enabled"
+      ],
+      "configured_tool_keys": []
+    }
+  },
+  "model_catalog": {
+    "model": "gpt-6-astra",
+    "effort": "xhigh",
+    "advertised": true,
+    "multi_agent_version": "v2",
+    "provider_execution": "not_yet_observed"
+  },
+  "code": "native_readiness_unobserved",
+  "message": "A native turn completed without its required authenticated proof artifact.",
+  "method_counts": {
+    "response": 5,
+    "remoteControl/status/changed": 1,
+    "thread/started": 1,
+    "warning": 1,
+    "thread/status/changed": 2,
+    "turn/started": 1,
+    "item/started": 3,
+    "item/completed": 3,
+    "thread/tokenUsage/updated": 2,
+    "account/rateLimits/updated": 2,
+    "item/agentMessage/delta": 28,
+    "turn/completed": 1
+  },
+  "request_counts": {
+    "initialize": 1,
+    "config/read": 1,
+    "model/list": 1,
+    "thread/start": 1,
+    "turn/start": 1
+  },
+  "final_turns": {
+    "01a08ea9-95d2-7d60-87f9-c5e703d243b0": {
+      "id": "01a08ea9-963a-76d1-86f6-00f3f5e3e40e",
+      "status": "completed",
+      "item_types": [
+        "agentMessage"
+      ],
+      "error": null,
+      "final_diagnostics": [
+        {
+          "type": "agentMessage",
+          "id": "msg_052c4c7c5f4a53d7016aa37f6cb13c87d092c114bbd0e33e7b",
+          "phase": "final_answer",
+          "final_diagnostic": {
+            "text": "7of9: `functions.exec` failed: \u201ccode-mode host is disabled.\u201d The command and `artifact_submit` were not executed.",
+            "truncated": false,
+            "bytes": 117,
+            "sha256": "02ab6026c838cf228309aa595848964011ac307ffe0debf6f03b2b94d578574e",
+            "authority": "diagnostic self-report only"
+          }
+        }
+      ],
+      "assistant_messages": [
+        {
+          "bytes": 117,
+          "sha256": "02ab6026c838cf228309aa595848964011ac307ffe0debf6f03b2b94d578574e",
+          "refusal_phrase_observed": false
+        }
+      ]
+    }
+  },
+  "cleanup": {
+    "pid": 81763,
+    "process_group": 81763,
+    "state": "owned_process_group_stopped",
+    "parent_returncode": 0
+  },
+  "canaries_unchanged": true,
+  "finished_at": "2026-09-11T04:11:25.451118+00:00",
+  "host_turn_starts": 1
+}

@@ -1,0 +1,268 @@
+{
+  "status": "passed",
+  "task": "TASK-020",
+  "acceptance_scenarios": {
+    "AT-24": {
+      "status": "passed",
+      "case": "test_at24_every_old_write_family_is_closed",
+      "evidence": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-host-security-06-stdout.json",
+        "sha256": "0689936fb3b345ceb0f03a680ff3ca4fe181640df8e6e856e842d219be5daca4",
+        "bytes": 7094
+      },
+      "locator": "cases[1];40 direct old/write family requests; complete synthetic protected inventory comparison"
+    },
+    "AT-25": {
+      "status": "passed",
+      "case": "test_at25_host_origin_credentials_and_root_selection",
+      "evidence": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-host-security-06-stdout.json",
+        "sha256": "0689936fb3b345ceb0f03a680ff3ca4fe181640df8e6e856e842d219be5daca4",
+        "bytes": 7094
+      },
+      "locator": "cases[2];9 hostile headers,6 root selectors,two simultaneous selected namespaces,exact differing canonical definitions,cookie/CSRF/cursor/identity isolation"
+    },
+    "AT-26": {
+      "status": "passed",
+      "cases": [
+        "test_at26_paths_and_registered_source_owner",
+        "test_at26_source_replacement_never_follows_or_repairs"
+      ],
+      "evidence": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-host-security-06-stdout.json",
+        "sha256": "0689936fb3b345ceb0f03a680ff3ca4fe181640df8e6e856e842d219be5daca4",
+        "bytes": 7094
+      },
+      "locator": "cases[3:5];11 paths,wrong owner/reference and4 selectors; exact four status/error pairs and no source repair"
+    },
+    "AT-27": {
+      "status": "passed",
+      "wire_evidence": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-host-security-06-stdout.json",
+        "sha256": "0689936fb3b345ceb0f03a680ff3ca4fe181640df8e6e856e842d219be5daca4",
+        "bytes": 7094
+      },
+      "wire_locator": "cases[5]",
+      "browser_evidence": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-host-security-browser-01-stdout.json",
+        "sha256": "6ee429b57501b319deaaaaf9209519f8025f98632c4d08a29c73c383efd9e954",
+        "bytes": 1319
+      },
+      "browser_locator": "checks[0:4];literal hostile headings/source/search;0 dialogs,errors,external requests,CSP violations"
+    }
+  },
+  "checks": {
+    "test_actual_reader_forbidden_call_instrumentation": {
+      "status": "passed",
+      "case": "test_explorer_security.CallAuditTests.test_actual_reader_forbidden_call_instrumentation",
+      "observations": [
+        {
+          "actual_loaded_modules": [
+            "ontology_core",
+            "ontology_explorer",
+            "ontology_explorer_assets",
+            "ontology_explorer_health",
+            "ontology_explorer_read",
+            "ontology_explorer_snapshot",
+            "ontology_explorer_source",
+            "ontology_explorer_worker",
+            "ontology_modules",
+            "ontology_retrieval",
+            "ontology_validate"
+          ],
+          "actual_reader_operations": 6,
+          "case": "forbidden-call-audit",
+          "deferred_optional_imports": "ontology_retrieval.search lines119/124 are conditional on semantic; Explorer uses semantic=False and neither module loaded or ran",
+          "forbidden_calls": 0,
+          "forbidden_function_names": [
+            "atomic_write",
+            "atomic_write_json",
+            "build_wiki",
+            "draft",
+            "ensure_backend",
+            "execute",
+            "generate",
+            "proposal",
+            "provision",
+            "publish",
+            "recover",
+            "run_agent",
+            "run_skill",
+            "write_json"
+          ],
+          "lexical_project_imports": [
+            "ontology_advanced_packet",
+            "ontology_core",
+            "ontology_explorer",
+            "ontology_explorer_snapshot",
+            "ontology_explorer_source",
+            "ontology_modules",
+            "ontology_retrieval",
+            "ontology_semantic",
+            "ontology_validate"
+          ],
+          "profiled_function_count": 116,
+          "protected_files_unchanged": true,
+          "qualification": "Instrumentation observes exact captured in-process Reader. Real service transport is tested separately; no instrumented source replaces accepted production bytes."
+        }
+      ]
+    },
+    "test_at24_every_old_write_family_is_closed": {
+      "status": "passed",
+      "case": "test_explorer_security.SecurityTests.test_at24_every_old_write_family_is_closed",
+      "observations": [
+        {
+          "case": "AT-24",
+          "families": [
+            "draft",
+            "proposal",
+            "validate",
+            "decide",
+            "publish",
+            "recover",
+            "generate",
+            "advanced",
+            "import",
+            "rdf-import",
+            "profile",
+            "task",
+            "task-mutate",
+            "execute",
+            "dispatch",
+            "skill",
+            "agent",
+            "build",
+            "wiki",
+            "memory"
+          ],
+          "protected_files_unchanged": true,
+          "requests": 40
+        }
+      ]
+    },
+    "test_at25_host_origin_credentials_and_root_selection": {
+      "status": "passed",
+      "case": "test_explorer_security.SecurityTests.test_at25_host_origin_credentials_and_root_selection",
+      "observations": [
+        {
+          "case": "AT-25",
+          "credential_cursor_and_identity_isolation": true,
+          "hostile_headers": 9,
+          "root_selector_fields": 6,
+          "simultaneous_namespaces": 2
+        }
+      ]
+    },
+    "test_at26_paths_and_registered_source_owner": {
+      "status": "passed",
+      "case": "test_explorer_security.SecurityTests.test_at26_paths_and_registered_source_owner",
+      "observations": [
+        {
+          "browser_file_selector_fields_denied": 4,
+          "case": "AT-26-route-authority",
+          "path_variants": 11,
+          "wrong_owner_and_reference_denied": true
+        }
+      ]
+    },
+    "test_at26_source_replacement_never_follows_or_repairs": {
+      "status": "passed",
+      "case": "test_explorer_security.SecurityTests.test_at26_source_replacement_never_follows_or_repairs",
+      "observations": [
+        {
+          "case": "AT-26-file-authority",
+          "no_provenance_repair": true,
+          "symlink_escape_oversize_binary_missing_denied": true,
+          "variants": [
+            {
+              "http_status": 422,
+              "observed_error_code": "source_unavailable",
+              "variant": "symlink"
+            },
+            {
+              "http_status": 503,
+              "observed_error_code": "resource_limit",
+              "variant": "oversized"
+            },
+            {
+              "http_status": 422,
+              "observed_error_code": "source_unavailable",
+              "variant": "binary"
+            },
+            {
+              "http_status": 422,
+              "observed_error_code": "source_unavailable",
+              "variant": "missing"
+            }
+          ]
+        }
+      ]
+    },
+    "test_at27_inert_wire_text_and_minimal_csp": {
+      "status": "passed",
+      "case": "test_explorer_security.SecurityTests.test_at27_inert_wire_text_and_minimal_csp",
+      "observations": [
+        {
+          "case": "AT-27-wire",
+          "plain_text_preserves_script_and_link_bytes": true,
+          "qualification": "Browser execution/DOM assertions are recorded separately.",
+          "strict_production_csp": true
+        }
+      ]
+    }
+  },
+  "host_receipts": [
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-host-security-06-receipt.json",
+      "sha256": "a478fa64308d10cf80971bedef34eaeda8ea30915428749752626e1f7af62d7e",
+      "bytes": 3059
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-host-security-browser-01-receipt.json",
+      "sha256": "28d9cdca88045c6ef4ad1ebf4d146089a72c91ae2f622d02d462aa813ad63056",
+      "bytes": 3895
+    }
+  ],
+  "runtime_audit": {
+    "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/security-live-runtime-audit.json",
+    "sha256": "962f8526f2f73189a84021a8cbf47473787a69da6508d1976f3fbf29b7e3c86a",
+    "bytes": 2607
+  },
+  "runtime_manifest_sha256": "fef0f1d09cea73772f8ee2f38287bec89c972376daceec92a85162760de955e8",
+  "build_id": "fb069176e3595796b934ac82243b20aab6571d2dfa6156fac8dbf3a5002cfc9d",
+  "resource_supervision_existing_evidence": [
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v2-host-batch01-output.json",
+      "sha256": "a4e87ca37910d092d2930e419367cfc2b8975ef4681061a0a42585e0a638a298",
+      "bytes": 22611
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v2-host-batch01-executor.json",
+      "sha256": "73b73d63f49e856412d5baa8352af5a314176d41298da1800b90f771b1aa6964",
+      "bytes": 1390
+    }
+  ],
+  "failure_history": [
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-host-security-05-stdout.json",
+      "sha256": "a2e44f7075e4fbb0c87e7fe30133307a116bf8fcffdb8d8e2ea40655413c069b",
+      "bytes": 7649
+    },
+    {
+      "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/qualification-host-security05-enum-result.json",
+      "sha256": "f8215dc8f362911b1ae36da90a7c8ebb71abf17e9ced9ee157c3336712806b04",
+      "bytes": 3140
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/qualification-tests/security-at26-expectation-correction.json",
+      "sha256": "2615734e901be0d5098a4697b8d14420ddedef71c160f99b095e6f6b907aeafc",
+      "bytes": 1368
+    }
+  ],
+  "attribution": "Actual HTTP/browser executor /root used byte-identical captured stages from frozen worker jobs. Exact actual and logical paths/tool postchecks reside in root receipts. Worker reviewed results and executed separate current live-runtime audit.",
+  "limitations": [
+    "Preservation here covers complete synthetic selected fixtures for security reads; complete live depot browser preservation remains TASK023.",
+    "Call instrumentation profiles exact captured in-process Reader; real HTTP transport is separate. Deferred lexical optional imports are documented and were not loaded or invoked.",
+    "Explicit runtime audit verifies every asset including434861-byte Cytoscape; helper evidence-reference checks alone do not recursively establish large-member freshness."
+  ]
+}

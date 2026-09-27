@@ -1,0 +1,502 @@
+{
+  "kind": "CleanRetainedInterfaceStoppedReceipt",
+  "state": "stopped_at_existing_api_mismatch",
+  "baseline_sha256": "fd206beffc765cd4d47bb907fe850e8311dcfac609dfa5754e1a99beb704caa1",
+  "handoff_sha256": "f594e0cb82f35f07728178826ec8270b92b336c02f331b3c014de14c1276255c",
+  "dependency": {
+    "source": "SKILLS-depo/curate/scripts/curator_broker.py",
+    "sha256": "ef3c1b21de3f5634b16e2a03f3e5a7018b565b80f45b599fb87bad7a46ee9c84",
+    "treatment": "Opaque current API; implementation not inspected or changed."
+  },
+  "caller_requirements": [
+    {
+      "source": "SKILLS-depo/curate/scripts/curator.py",
+      "sha256": "853cab37f3591b48e3daf3b6bf0153f539c60ba1c9d8e2f65e65e00305e73aa2",
+      "lines": [
+        112,
+        117,
+        171,
+        191,
+        192
+      ]
+    },
+    {
+      "source": "SKILLS-depo/curate/references/commands.md",
+      "sha256": "e32b9383379d2cf95dcdfd1f02883d541c4b1d737672309a27d6afbc41efb312",
+      "lines": [
+        14
+      ]
+    },
+    {
+      "source": "CURATION-depo/recovery.md",
+      "sha256": "ae7fd7efd478593bd6c69688f8275bfe7af5cc328199defc1c398d5afed7df97",
+      "lines": [
+        82
+      ]
+    }
+  ],
+  "ordinary_reproduction": {
+    "constructor": "(*, owners, adapter, policy_path, ownership_map, manifest, profile, runtime_binding, enforcement_proof, private_directory, issuer, accepted_operations, artifacts=None, verification_admission=None, runtime_pool=None)",
+    "requested_option": "application_controls=True",
+    "result": {
+      "exception": "TypeError",
+      "message": "got an unexpected keyword argument 'application_controls'",
+      "scope": "Public callable signature binding only; no Broker constructed and no owner dispatched."
+    }
+  },
+  "secondary_selected_source_inconsistency": {
+    "description": "Selected initializer and updater require CURATION-depo/contract-v2.json, while clean selection includes only CURATION-depo/contract.json. No unselected contract read or copied.",
+    "sources": [
+      "SKILLS-depo/init-new-project/scripts/init_curator.py",
+      "tools/template_update.py",
+      "CURATION-depo/contract.json"
+    ]
+  },
+  "source_manifest": [
+    {
+      "source": "AGENTS-depo/project-template-AGENTS.md",
+      "sha256": "8482c83ca43e991db0605b6baea7eb557ac6fab04e0e27477dcdafbaf881ccaf",
+      "bytes": 5622
+    },
+    {
+      "source": "CURATION-depo/README.md",
+      "sha256": "ebf3dd45c9af9c098d97cbf4c90b78599cf5cedfba35e3b2f548e7d73814df3d",
+      "bytes": 2119
+    },
+    {
+      "source": "CURATION-depo/adapters/local-events.md",
+      "sha256": "3f5493cda531552cfb84e4c6b691363f6ad6e102acc9aa81f6e7be1b26b90b18",
+      "bytes": 12745
+    },
+    {
+      "source": "CURATION-depo/adapters/macos.md",
+      "sha256": "d78c12156644ccc76002e18df667b2cc0f0a09756075f2bbe9a9f8d6e7ec6819",
+      "bytes": 4372
+    },
+    {
+      "source": "CURATION-depo/contract.json",
+      "sha256": "869241deee717a83df97a1b1f899c62cfbce5ff0bf0ea2c508b117224531a71a",
+      "bytes": 7628
+    },
+    {
+      "source": "CURATION-depo/coordination.md",
+      "sha256": "f4c804adbf99d582497e8e89c91d7681836a2d69a8ccaf9988586273fb470e6b",
+      "bytes": 1713
+    },
+    {
+      "source": "CURATION-depo/dependencies.md",
+      "sha256": "bab4ab08e1f044b7be765f03df7157f658e0ff29eb5425947f689cd2c27e0c83",
+      "bytes": 1090
+    },
+    {
+      "source": "CURATION-depo/documentation.md",
+      "sha256": "ca8ecdb6c7924fd54ac9061062041435e417b3222459bb12db7c6318ca03bd3b",
+      "bytes": 1250
+    },
+    {
+      "source": "CURATION-depo/knowledge.md",
+      "sha256": "1ac34c7d3c6e72fde15a4a6b63586396ade2374524b3546213e5e86eba27865a",
+      "bytes": 1429
+    },
+    {
+      "source": "CURATION-depo/metrics.md",
+      "sha256": "dd7344251f987b6e98e70e5b75a4de9f956647057b3dea13170e435aa208cf4b",
+      "bytes": 3117
+    },
+    {
+      "source": "CURATION-depo/recovery.md",
+      "sha256": "ae7fd7efd478593bd6c69688f8275bfe7af5cc328199defc1c398d5afed7df97",
+      "bytes": 6136
+    },
+    {
+      "source": "CURATION-depo/scheduling.md",
+      "sha256": "0493c652504df50c1e2593bdc22521a2c050952645de3ff3cc51e1287c3c54b4",
+      "bytes": 2778
+    },
+    {
+      "source": "CURATION-depo/schema/checkpoint-v1.json",
+      "sha256": "883b6d2e25e09c7d4a3362d568558d4c509053c1b97513cbcc3b141cb0c0ac4b",
+      "bytes": 14539
+    },
+    {
+      "source": "CURATION-depo/schema/config-v1.json",
+      "sha256": "d40c2ee14326da89e115e618d11c4a231d1fbbea2a4b69c1d8a148dc2e66386c",
+      "bytes": 10424
+    },
+    {
+      "source": "CURATION-depo/schema/event-v1.json",
+      "sha256": "af40e2c3abda5e6791ee3a6597903a4b630c10edfc09b6b3349a0599b0307b2d",
+      "bytes": 9014
+    },
+    {
+      "source": "CURATION-depo/starter/curator.yaml",
+      "sha256": "fe7503972c7a61bba1c0fe4a8595440d3131893288e78f55d4402986d9f88f90",
+      "bytes": 836
+    },
+    {
+      "source": "CURATION-depo/state-paths.md",
+      "sha256": "839c8ec48e2bc05629993992d9bda3b3066d1543680301af1877643a8c8355d2",
+      "bytes": 4886
+    },
+    {
+      "source": "ROLES-depo/curator-manager-AGENTS.md",
+      "sha256": "c8b3f8e260830bb5681438571057bc9474db46fdb909632e81148f67dfc7f78a",
+      "bytes": 2890
+    },
+    {
+      "source": "ROLES-depo/curator-manager-ROLE.md",
+      "sha256": "4eeaac17b71df6eb89728bfa3b4ed7eb5551b083515ab6078794afa2a044756a",
+      "bytes": 8592
+    },
+    {
+      "source": "ROLES-depo/documentation-curator-AGENTS.md",
+      "sha256": "e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd",
+      "bytes": 2374
+    },
+    {
+      "source": "ROLES-depo/documentation-curator-ROLE.md",
+      "sha256": "d90978bd3ad1a47c7a8752821a4ceba0ca39cf7afcf6aca91709e259e91498ae",
+      "bytes": 6530
+    },
+    {
+      "source": "ROLES-depo/improvement-maintenance-AGENTS.md",
+      "sha256": "e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd",
+      "bytes": 2374
+    },
+    {
+      "source": "ROLES-depo/improvement-maintenance-ROLE.md",
+      "sha256": "034dd7b3ce155cd9b8576d5917f9bb208400241bfeb1599bf0d1e413b096b098",
+      "bytes": 6509
+    },
+    {
+      "source": "ROLES-depo/knowledge-curator-AGENTS.md",
+      "sha256": "e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd",
+      "bytes": 2374
+    },
+    {
+      "source": "ROLES-depo/knowledge-curator-ROLE.md",
+      "sha256": "b6d509eff7984b1ad02ce9b2a9893c299af045de0ebefa87accd0b45ba3d3c75",
+      "bytes": 6499
+    },
+    {
+      "source": "ROLES-depo/project-curator-CURATOR.md",
+      "sha256": "f8f7ec848e88404b89f7202929695d8a21d490e1d90e27b3a81a06b6da9711f7",
+      "bytes": 1830
+    },
+    {
+      "source": "ROLES-depo/project-director-ROLE.md",
+      "sha256": "4735ce95dd8c371cfdf3227b639417820f8d493d98fd629cb305dd5d6d36b1d1",
+      "bytes": 14364
+    },
+    {
+      "source": "SKILLS-depo/agent-task/references/orchestration-contract.md",
+      "sha256": "1d927efce3f66648dc7e30f9f582b2bb98956e35b34ceffd63452517b7f223ba",
+      "bytes": 25944
+    },
+    {
+      "source": "SKILLS-depo/agent-task/scripts/orchestration_state.py",
+      "sha256": "d4901e205c1ed23f9f11a7da5043883dd2df6c8f4e168830ab46913dbc2965f8",
+      "bytes": 90363
+    },
+    {
+      "source": "SKILLS-depo/agent-task/scripts/task_state.py",
+      "sha256": "90c077df7c725b9ed260aaddfcbdf7e5b65e36a7d8d2ba8fb2f02ad8a3f25556",
+      "bytes": 172135
+    },
+    {
+      "source": "SKILLS-depo/curate/ACTIONS.md",
+      "sha256": "ac90cd66d19bfcccab507c174291a0207e65d9b625f6640d0392ded596cabdaa",
+      "bytes": 1422
+    },
+    {
+      "source": "SKILLS-depo/curate/README.md",
+      "sha256": "9ab9833acc54874de25a607d6ea662883448db441915bf3313e12cf29d556851",
+      "bytes": 2330
+    },
+    {
+      "source": "SKILLS-depo/curate/SKILL.md",
+      "sha256": "06d3df49c41319d5ba5b0d431543011ade8f94ea3abbe82c787656d886ae43e5",
+      "bytes": 6795
+    },
+    {
+      "source": "SKILLS-depo/curate/agents/openai.yaml",
+      "sha256": "e746467921668b0d376bd1f1c53d50b857b318d7ffb38f75cb35650ad6057b3c",
+      "bytes": 295
+    },
+    {
+      "source": "SKILLS-depo/curate/references/commands.md",
+      "sha256": "e32b9383379d2cf95dcdfd1f02883d541c4b1d737672309a27d6afbc41efb312",
+      "bytes": 2896
+    },
+    {
+      "source": "SKILLS-depo/curate/references/conversation.md",
+      "sha256": "b92f338b66fb411e6589ea3a768b3abe9cb65e677445c376c91dac7d7841a0b2",
+      "bytes": 1096
+    },
+    {
+      "source": "SKILLS-depo/curate/references/dependency-maintenance.md",
+      "sha256": "cf9362d92f320ca34cb1d0c277e486182eedbb17c230427e3ee4c34d450d283b",
+      "bytes": 806
+    },
+    {
+      "source": "SKILLS-depo/curate/references/technical-maintenance.md",
+      "sha256": "561d4e00d8d94bcec227c59aa8ed04ef88787e2b944f2372473ee17762ff249e",
+      "bytes": 745
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator.py",
+      "sha256": "853cab37f3591b48e3daf3b6bf0153f539c60ba1c9d8e2f65e65e00305e73aa2",
+      "bytes": 23526
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_awareness.py",
+      "sha256": "7e44001a0f549fb364cf19204d8150a2407a4d193ab3af73eb80fd2fc8eb1178",
+      "bytes": 2454
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_causality.py",
+      "sha256": "d820c02da9c43af76badf568cd1a61f84f0eb7a3e1164286cf5a44c729bf71ec",
+      "bytes": 5656
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_dependencies.py",
+      "sha256": "2ec97c14d813684df829b15dcc16e5ebdfba1caaac067eb6b1562834b9d9801c",
+      "bytes": 6395
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_documentation.py",
+      "sha256": "7b2cf33b0e1ec7a3e0696cb29b0836ae007a1258de20b782ca3d113bd456c87e",
+      "bytes": 1540
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_events.py",
+      "sha256": "15a74065e77baac8aa67f6f2c5c422d603756eec48a3815adebfd91f59ffa3e2",
+      "bytes": 5632
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_git.py",
+      "sha256": "3d60cd7b19cd2f943b4bba13beae5c5a462feacc1fe52cf8ecc791aada54717e",
+      "bytes": 19918
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_handoff.py",
+      "sha256": "a257cbcdb183d0517feb8f75c9747f65122b1d6c26249e64e131dc10216e83fa",
+      "bytes": 2907
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_host_macos.py",
+      "sha256": "21839dd889f858391b84ca719a9d99f9b822775ff18d2486050dda85d022cac8",
+      "bytes": 25245
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_integration.py",
+      "sha256": "2ad157cfa61c7aff2a0e799c1983db8b0fb6286c4bb4d299cb852ce850e62e8b",
+      "bytes": 19353
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_knowledge.py",
+      "sha256": "bf016ef5fc10e4f699ec791884e3c93f4215bcf607ca1cafca8ca14c7b9101d3",
+      "bytes": 3042
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_learning.py",
+      "sha256": "75ff1d3a9eaac195fd8afb0755e22563231bcdf4e2169b1e4b016b33ba256484",
+      "bytes": 1865
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_maintenance.py",
+      "sha256": "3448d19e293f3cb3d6aa7197238701d824763918bceb51525ebb736860190647",
+      "bytes": 1953
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_metrics.py",
+      "sha256": "3bc1543ffc33cf8df1670b11d6b2085172940bff30e6da5ad06de47d53323990",
+      "bytes": 10675
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_notices.py",
+      "sha256": "7e6e48fb4c49e0e3e2346c084dcaa92fd6ac6ac0e78242ed82c30c39bb3d34b6",
+      "bytes": 1039
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_policy.py",
+      "sha256": "6abbb157522ae151e60b3fc82704b6d9eb968c212cca27879dcd093985db568b",
+      "bytes": 13423
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_preflight.py",
+      "sha256": "602efe8f1b932fecbea4ae78cf2e9a1362a215c9ad90211b26aecf0b425d4e10",
+      "bytes": 4670
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_products.py",
+      "sha256": "5897873ca4cb855922c68887bcc2ad87f376c31f8025e49f92aada2ae048bff2",
+      "bytes": 4534
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_queue.py",
+      "sha256": "731914209668fd45a7fa068da97a10eaac039793e7991ec016fd1feecd672aaf",
+      "bytes": 15028
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_recovery.py",
+      "sha256": "05996dfa5d5a1e72f368c0cf84672571f25cd57b0e70ebfc65992cb40319e306",
+      "bytes": 9112
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_scheduler.py",
+      "sha256": "058bb47b2c394ab63ab0a7c5e96af8377c3d4be27ea76dca7ba74837f4e2c00c",
+      "bytes": 2234
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_snapshots.py",
+      "sha256": "f687cf9d3f7973c70c04094c983cf3733ca6b2e36064a65dbfae8fc655abeb4e",
+      "bytes": 7299
+    },
+    {
+      "source": "SKILLS-depo/curate/scripts/curator_workspace.py",
+      "sha256": "12beabf09bebb1385eaba4a84034f3c4e1e7f52e147e3d74cb2f0dafd9437362",
+      "bytes": 8295
+    },
+    {
+      "source": "SKILLS-depo/init-new-project/SKILL.md",
+      "sha256": "3d6ccdf5ed943d7107fc1cfba0cf71f59b8c592cec09a02cc6afdf4d0ce0b0f4",
+      "bytes": 25452
+    },
+    {
+      "source": "SKILLS-depo/init-new-project/assets/baseline-assets.json",
+      "sha256": "29b54759c1c5fbdbdc390fbbeface36e38124c82690cfe13514f0cbc96496a96",
+      "bytes": 2720
+    },
+    {
+      "source": "SKILLS-depo/init-new-project/assets/initialization-receipt.schema.json",
+      "sha256": "af16bea39ff0858618fdb6999e959e7a96cd698ee3ad2eeda97c9e6ab78b0043",
+      "bytes": 25213
+    },
+    {
+      "source": "SKILLS-depo/init-new-project/assets/static-capability-v1.json",
+      "sha256": "966b1cc5662af5679228b9d144f8a95af0ccf302138a37ac72ffadf1928e2622",
+      "bytes": 36524
+    },
+    {
+      "source": "SKILLS-depo/init-new-project/assets/template_update.py",
+      "sha256": "619edd14aa74a76357223ef768cc979a4c18a8bb76eda9315b5def7c5d4745af",
+      "bytes": 61516
+    },
+    {
+      "source": "SKILLS-depo/init-new-project/scripts/init_curator.py",
+      "sha256": "1e4bb21b335fe598c1437a0fcb8e9f7f491bd6ab9b118709d08ce37eb821a1fa",
+      "bytes": 15356
+    },
+    {
+      "source": "SKILLS-depo/init-new-project/scripts/init_new_project.py",
+      "sha256": "b826f7c1b2bba7815f6bde00d8533ab7a688de216816b6d012c5ac3132301c1a",
+      "bytes": 176183
+    },
+    {
+      "source": "SKILLS-depo/init-new-project/scripts/init_static_health.py",
+      "sha256": "77fcf5d16e5ebd879809a0feaeae9a29e796abbee00ee6461c155e3cb081273f",
+      "bytes": 10532
+    },
+    {
+      "source": "SKILLS-depo/init-new-project/tests/test_curator_adoption.py",
+      "sha256": "d5f75e3d80838f9c7888d5e73795b1f12b1a642e10c8655bd2e0691d6b397f68",
+      "bytes": 9814
+    },
+    {
+      "source": "SKILLS-depo/init-new-project/tests/test_curator_recovery.py",
+      "sha256": "2ab8bebf65e9ffc137f16ffbe374f3fddb7710b4b150ab3b1c69e05b61b1c6d9",
+      "bytes": 3666
+    },
+    {
+      "source": "SKILLS-depo/init-new-project/tests/test_curator_setup.py",
+      "sha256": "b96c11c1e38675d59a8addf6c2f9364a77dcdca5533b9aa0de7d888a8fb828c2",
+      "bytes": 8665
+    },
+    {
+      "source": "SKILLS-depo/memory/references/automatic-capture.md",
+      "sha256": "77ce520b9fcc9e3af69acae975828755a01e53bcc97b4d27f64938b24e7209a5",
+      "bytes": 10515
+    },
+    {
+      "source": "SKILLS-depo/memory/references/evidence-and-lifecycle.md",
+      "sha256": "44ed75122bbeafc8a087425a92e12ae44041f1038b6a84f3b3379bbcd122b80e",
+      "bytes": 9323
+    },
+    {
+      "source": "SKILLS-depo/ontology/references/knowledge-routing.md",
+      "sha256": "f2a8e8821f305d97eef2eff9be33fb898701dde6e1f882e402958bb85ad0f567",
+      "bytes": 3485
+    },
+    {
+      "source": "SKILLS-depo/task/SKILL.md",
+      "sha256": "e9615709a293f3d39dab926ac91ef6496f839e261446c6ecbed804c31a7e8afa",
+      "bytes": 15271
+    },
+    {
+      "source": "SKILLS-depo/what-did-you-learn/references/improvement-and-reuse.md",
+      "sha256": "ef9cefa3b510d147bc2d2103cbb06382f13aec2adab4b1ee5e5426585c0ce08a",
+      "bytes": 5225
+    },
+    {
+      "source": "SPECS-depo/project-template-README.md",
+      "sha256": "21dac4caf558a841f136cf6cdf7fcb2b6ec0d6f92d2c394a31271419ab4f9ab8",
+      "bytes": 11308
+    },
+    {
+      "source": "SPECS-depo/project-template-SPECS.md",
+      "sha256": "2bfab709d5c30e6e3ecb4463a27b038cc4d8157b9301e09fa5138989733509db",
+      "bytes": 10374
+    },
+    {
+      "source": "SPECS-depo/template-tests/test_template_contract.py",
+      "sha256": "2994b244fad01d2ee135a4339affa5e0be66cc5be047cb90435009c3b59f05db",
+      "bytes": 15828
+    },
+    {
+      "source": "depot/template-update.json",
+      "sha256": "8919da5fdb2c2b76ed7b5abfe9c4a8497990da59bd78875c301cbe9b1e40fce0",
+      "bytes": 3594
+    },
+    {
+      "source": "depot/template-update.md",
+      "sha256": "5dd7f86fd15a1fd54bc37959efd2c2fb5b61de4132f2ff205d24dad3d8a02b5e",
+      "bytes": 14964
+    },
+    {
+      "source": "tests/test_template_update.py",
+      "sha256": "a5f1f5e3ccb5ac20cc84a870650dc4773f64ca3456a4205f5e30120bc59cf899",
+      "bytes": 61831
+    },
+    {
+      "source": "tools/template_update.py",
+      "sha256": "619edd14aa74a76357223ef768cc979a4c18a8bb76eda9315b5def7c5d4745af",
+      "bytes": 61516
+    }
+  ],
+  "changes": {
+    "copied_selected_files": 84,
+    "modified_selected_files": 0,
+    "added_test_files": 0
+  },
+  "validation": {
+    "ordinary_behavior_cases": "not_run_due_to_required_interface_stop",
+    "copy_hash_verification": "84/84 exact",
+    "root_metric_support": "reported by manager; not independently read or claimed as clean acceptance"
+  },
+  "preservation": {
+    "old_stages": "not_read_or_changed",
+    "live_sources": "no writes",
+    "canonical_records": "no writes",
+    "native_service_git_product_operations": "none"
+  },
+  "remaining": "All retained source integration and ordinary criterion validation remain pending; no candidate acceptance claimed.",
+  "raw": {
+    "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-clean-stage/evidence/ordinary-interface-blocker-v1/raw.json",
+    "sha256": "9eac3d750a009ca019f00812479969c0f0a6ded8d0702bbc3185fa123331a967"
+  },
+  "metadata_correction": {
+    "predecessor_sha256": "9185ed0ae0c2665410502d316ac9c783a3c640a227abd1938f3f918ec0b3af40",
+    "reason": "Use observed exact curator.py line numbers for already-recorded caller requirements; source and API result unchanged."
+  }
+}

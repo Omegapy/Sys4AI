@@ -1,0 +1,1092 @@
+{
+  "definitions": {
+    "DynamicToolCallParams": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "DynamicToolCallParams",
+      "type": "object",
+      "required": [
+        "arguments",
+        "callId",
+        "threadId",
+        "tool",
+        "turnId"
+      ],
+      "properties": {
+        "arguments": true,
+        "callId": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "threadId": {
+          "type": "string"
+        },
+        "tool": {
+          "type": "string"
+        },
+        "turnId": {
+          "type": "string"
+        }
+      }
+    },
+    "DynamicToolCallResponse": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "DynamicToolCallResponse",
+      "type": "object",
+      "required": [
+        "contentItems",
+        "success"
+      ],
+      "properties": {
+        "contentItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2/DynamicToolCallOutputContentItem"
+          }
+        },
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "InitializeCapabilities": {
+      "description": "Client-declared capabilities negotiated during initialize.",
+      "type": "object",
+      "properties": {
+        "experimentalApi": {
+          "description": "Opt into receiving experimental API methods and fields.",
+          "default": false,
+          "type": "boolean"
+        },
+        "optOutNotificationMethods": {
+          "description": "Exact notification method names that should be suppressed for this connection (for example `thread/started`).",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "requestAttestation": {
+          "description": "Opt into `attestation/generate` requests for upstream `x-oai-attestation`.",
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
+    "InitializeParams": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "InitializeParams",
+      "type": "object",
+      "required": [
+        "clientInfo"
+      ],
+      "properties": {
+        "capabilities": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/InitializeCapabilities"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "clientInfo": {
+          "$ref": "#/definitions/ClientInfo"
+        }
+      }
+    },
+    "ServerRequest": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ServerRequest",
+      "description": "Request initiated from the server and sent to the client.",
+      "oneOf": [
+        {
+          "description": "NEW APIs Sent when approval is requested for a specific command execution. This request is used for Turns started via turn/start.",
+          "type": "object",
+          "required": [
+            "id",
+            "method",
+            "params"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/v2/RequestId"
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "item/commandExecution/requestApproval"
+              ],
+              "title": "Item/commandExecution/requestApprovalRequestMethod"
+            },
+            "params": {
+              "$ref": "#/definitions/CommandExecutionRequestApprovalParams"
+            }
+          },
+          "title": "Item/commandExecution/requestApprovalRequest"
+        },
+        {
+          "description": "Sent when approval is requested for a specific file change. This request is used for Turns started via turn/start.",
+          "type": "object",
+          "required": [
+            "id",
+            "method",
+            "params"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/v2/RequestId"
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "item/fileChange/requestApproval"
+              ],
+              "title": "Item/fileChange/requestApprovalRequestMethod"
+            },
+            "params": {
+              "$ref": "#/definitions/FileChangeRequestApprovalParams"
+            }
+          },
+          "title": "Item/fileChange/requestApprovalRequest"
+        },
+        {
+          "description": "EXPERIMENTAL - Request input from the user for a tool call.",
+          "type": "object",
+          "required": [
+            "id",
+            "method",
+            "params"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/v2/RequestId"
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "item/tool/requestUserInput"
+              ],
+              "title": "Item/tool/requestUserInputRequestMethod"
+            },
+            "params": {
+              "$ref": "#/definitions/ToolRequestUserInputParams"
+            }
+          },
+          "title": "Item/tool/requestUserInputRequest"
+        },
+        {
+          "description": "Request input for an MCP server elicitation.",
+          "type": "object",
+          "required": [
+            "id",
+            "method",
+            "params"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/v2/RequestId"
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "mcpServer/elicitation/request"
+              ],
+              "title": "McpServer/elicitation/requestRequestMethod"
+            },
+            "params": {
+              "$ref": "#/definitions/McpServerElicitationRequestParams"
+            }
+          },
+          "title": "McpServer/elicitation/requestRequest"
+        },
+        {
+          "description": "Request approval for additional permissions from the user.",
+          "type": "object",
+          "required": [
+            "id",
+            "method",
+            "params"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/v2/RequestId"
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "item/permissions/requestApproval"
+              ],
+              "title": "Item/permissions/requestApprovalRequestMethod"
+            },
+            "params": {
+              "$ref": "#/definitions/PermissionsRequestApprovalParams"
+            }
+          },
+          "title": "Item/permissions/requestApprovalRequest"
+        },
+        {
+          "description": "Execute a dynamic tool call on the client.",
+          "type": "object",
+          "required": [
+            "id",
+            "method",
+            "params"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/v2/RequestId"
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "item/tool/call"
+              ],
+              "title": "Item/tool/callRequestMethod"
+            },
+            "params": {
+              "$ref": "#/definitions/DynamicToolCallParams"
+            }
+          },
+          "title": "Item/tool/callRequest"
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "method",
+            "params"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/v2/RequestId"
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "account/chatgptAuthTokens/refresh"
+              ],
+              "title": "Account/chatgptAuthTokens/refreshRequestMethod"
+            },
+            "params": {
+              "$ref": "#/definitions/ChatgptAuthTokensRefreshParams"
+            }
+          },
+          "title": "Account/chatgptAuthTokens/refreshRequest"
+        },
+        {
+          "description": "Generate a fresh upstream attestation result on demand.",
+          "type": "object",
+          "required": [
+            "id",
+            "method",
+            "params"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/v2/RequestId"
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "attestation/generate"
+              ],
+              "title": "Attestation/generateRequestMethod"
+            },
+            "params": {
+              "$ref": "#/definitions/AttestationGenerateParams"
+            }
+          },
+          "title": "Attestation/generateRequest"
+        },
+        {
+          "description": "DEPRECATED APIs below Request to approve a patch. This request is used for Turns started via the legacy APIs (i.e. SendUserTurn, SendUserMessage).",
+          "type": "object",
+          "required": [
+            "id",
+            "method",
+            "params"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/v2/RequestId"
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "applyPatchApproval"
+              ],
+              "title": "ApplyPatchApprovalRequestMethod"
+            },
+            "params": {
+              "$ref": "#/definitions/ApplyPatchApprovalParams"
+            }
+          },
+          "title": "ApplyPatchApprovalRequest"
+        },
+        {
+          "description": "Request to exec a command. This request is used for Turns started via the legacy APIs (i.e. SendUserTurn, SendUserMessage).",
+          "type": "object",
+          "required": [
+            "id",
+            "method",
+            "params"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/v2/RequestId"
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "execCommandApproval"
+              ],
+              "title": "ExecCommandApprovalRequestMethod"
+            },
+            "params": {
+              "$ref": "#/definitions/ExecCommandApprovalParams"
+            }
+          },
+          "title": "ExecCommandApprovalRequest"
+        }
+      ]
+    },
+    "v2": {
+      "ThreadItem": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "content",
+              "id",
+              "type"
+            ],
+            "properties": {
+              "clientId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "content": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/v2/UserInput"
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "userMessage"
+                ],
+                "title": "UserMessageThreadItemType"
+              }
+            },
+            "title": "UserMessageThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "fragments",
+              "id",
+              "type"
+            ],
+            "properties": {
+              "fragments": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/v2/HookPromptFragment"
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "hookPrompt"
+                ],
+                "title": "HookPromptThreadItemType"
+              }
+            },
+            "title": "HookPromptThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "text",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "memoryCitation": {
+                "default": null,
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/v2/MemoryCitation"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "phase": {
+                "default": null,
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/v2/MessagePhase"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "text": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "agentMessage"
+                ],
+                "title": "AgentMessageThreadItemType"
+              }
+            },
+            "title": "AgentMessageThreadItem"
+          },
+          {
+            "description": "EXPERIMENTAL - proposed plan item content. The completed plan item is authoritative and may not match the concatenation of `PlanDelta` text.",
+            "type": "object",
+            "required": [
+              "id",
+              "text",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "plan"
+                ],
+                "title": "PlanThreadItemType"
+              }
+            },
+            "title": "PlanThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "type"
+            ],
+            "properties": {
+              "content": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "summary": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "reasoning"
+                ],
+                "title": "ReasoningThreadItemType"
+              }
+            },
+            "title": "ReasoningThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "command",
+              "commandActions",
+              "cwd",
+              "id",
+              "status",
+              "type"
+            ],
+            "properties": {
+              "aggregatedOutput": {
+                "description": "The command's output, aggregated from stdout and stderr.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "command": {
+                "description": "The command to be executed.",
+                "type": "string"
+              },
+              "commandActions": {
+                "description": "A best-effort parsing of the command to understand the action(s) it will perform. This returns a list of CommandAction objects because a single shell command may be composed of many commands piped together.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/v2/CommandAction"
+                }
+              },
+              "cwd": {
+                "description": "The command's working directory.",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/v2/AbsolutePathBuf"
+                  }
+                ]
+              },
+              "durationMs": {
+                "description": "The duration of the command execution in milliseconds.",
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "int64"
+              },
+              "exitCode": {
+                "description": "The command's exit code.",
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "int32"
+              },
+              "id": {
+                "type": "string"
+              },
+              "processId": {
+                "description": "Identifier for the underlying PTY process (when available).",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": "agent",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/v2/CommandExecutionSource"
+                  }
+                ]
+              },
+              "status": {
+                "$ref": "#/definitions/v2/CommandExecutionStatus"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "commandExecution"
+                ],
+                "title": "CommandExecutionThreadItemType"
+              }
+            },
+            "title": "CommandExecutionThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "changes",
+              "id",
+              "status",
+              "type"
+            ],
+            "properties": {
+              "changes": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/v2/FileUpdateChange"
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "status": {
+                "$ref": "#/definitions/v2/PatchApplyStatus"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "fileChange"
+                ],
+                "title": "FileChangeThreadItemType"
+              }
+            },
+            "title": "FileChangeThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "arguments",
+              "id",
+              "server",
+              "status",
+              "tool",
+              "type"
+            ],
+            "properties": {
+              "arguments": true,
+              "durationMs": {
+                "description": "The duration of the MCP tool call in milliseconds.",
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "int64"
+              },
+              "error": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/v2/McpToolCallError"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "mcpAppResourceUri": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "pluginId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "result": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/v2/McpToolCallResult"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "server": {
+                "type": "string"
+              },
+              "status": {
+                "$ref": "#/definitions/v2/McpToolCallStatus"
+              },
+              "tool": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "mcpToolCall"
+                ],
+                "title": "McpToolCallThreadItemType"
+              }
+            },
+            "title": "McpToolCallThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "arguments",
+              "id",
+              "status",
+              "tool",
+              "type"
+            ],
+            "properties": {
+              "arguments": true,
+              "contentItems": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "$ref": "#/definitions/v2/DynamicToolCallOutputContentItem"
+                }
+              },
+              "durationMs": {
+                "description": "The duration of the dynamic tool call in milliseconds.",
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "int64"
+              },
+              "id": {
+                "type": "string"
+              },
+              "namespace": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "$ref": "#/definitions/v2/DynamicToolCallStatus"
+              },
+              "success": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "tool": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "dynamicToolCall"
+                ],
+                "title": "DynamicToolCallThreadItemType"
+              }
+            },
+            "title": "DynamicToolCallThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "agentsStates",
+              "id",
+              "receiverThreadIds",
+              "senderThreadId",
+              "status",
+              "tool",
+              "type"
+            ],
+            "properties": {
+              "agentsStates": {
+                "description": "Last known status of the target agents, when available.",
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/definitions/v2/CollabAgentState"
+                }
+              },
+              "id": {
+                "description": "Unique identifier for this collab tool call.",
+                "type": "string"
+              },
+              "model": {
+                "description": "Model requested for the spawned agent, when applicable.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "prompt": {
+                "description": "Prompt text sent as part of the collab tool call, when available.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "reasoningEffort": {
+                "description": "Reasoning effort requested for the spawned agent, when applicable.",
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/v2/ReasoningEffort"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "receiverThreadIds": {
+                "description": "Thread ID of the receiving agent, when applicable. In case of spawn operation, this corresponds to the newly spawned agent.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "senderThreadId": {
+                "description": "Thread ID of the agent issuing the collab request.",
+                "type": "string"
+              },
+              "status": {
+                "description": "Current status of the collab tool call.",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/v2/CollabAgentToolCallStatus"
+                  }
+                ]
+              },
+              "tool": {
+                "description": "Name of the collab tool that was invoked.",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/v2/CollabAgentTool"
+                  }
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "collabAgentToolCall"
+                ],
+                "title": "CollabAgentToolCallThreadItemType"
+              }
+            },
+            "title": "CollabAgentToolCallThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "query",
+              "type"
+            ],
+            "properties": {
+              "action": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/v2/WebSearchAction"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "query": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "webSearch"
+                ],
+                "title": "WebSearchThreadItemType"
+              }
+            },
+            "title": "WebSearchThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "path",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "path": {
+                "$ref": "#/definitions/v2/AbsolutePathBuf"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "imageView"
+                ],
+                "title": "ImageViewThreadItemType"
+              }
+            },
+            "title": "ImageViewThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "result",
+              "status",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "result": {
+                "type": "string"
+              },
+              "revisedPrompt": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "savedPath": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/v2/AbsolutePathBuf"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "status": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "imageGeneration"
+                ],
+                "title": "ImageGenerationThreadItemType"
+              }
+            },
+            "title": "ImageGenerationThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "review",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "review": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "enteredReviewMode"
+                ],
+                "title": "EnteredReviewModeThreadItemType"
+              }
+            },
+            "title": "EnteredReviewModeThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "review",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "review": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "exitedReviewMode"
+                ],
+                "title": "ExitedReviewModeThreadItemType"
+              }
+            },
+            "title": "ExitedReviewModeThreadItem"
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "contextCompaction"
+                ],
+                "title": "ContextCompactionThreadItemType"
+              }
+            },
+            "title": "ContextCompactionThreadItem"
+          }
+        ]
+      },
+      "ThreadReadParams": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "title": "ThreadReadParams",
+        "type": "object",
+        "required": [
+          "threadId"
+        ],
+        "properties": {
+          "includeTurns": {
+            "description": "When true, include turns and their items from rollout history.",
+            "type": "boolean"
+          },
+          "threadId": {
+            "type": "string"
+          }
+        }
+      },
+      "ThreadReadResponse": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "title": "ThreadReadResponse",
+        "type": "object",
+        "required": [
+          "thread"
+        ],
+        "properties": {
+          "thread": {
+            "$ref": "#/definitions/v2/Thread"
+          }
+        }
+      },
+      "DynamicToolSpec": {
+        "type": "object",
+        "required": [
+          "description",
+          "inputSchema",
+          "name"
+        ],
+        "properties": {
+          "deferLoading": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "inputSchema": true,
+          "name": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

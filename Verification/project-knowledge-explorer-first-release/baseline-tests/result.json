@@ -1,0 +1,710 @@
+{
+  "allowed_write_boundary": [
+    "Verification/project-knowledge-explorer-first-release/baseline.json",
+    "Verification/project-knowledge-explorer-first-release/caller-inventory.json",
+    "Verification/project-knowledge-explorer-first-release/process-content-inventory.json",
+    "Verification/project-knowledge-explorer-first-release/baseline-tests/"
+  ],
+  "captured_at": "2026-09-20T05:01:53.875694+00:00",
+  "checkout": {
+    "dirty_classification": "The three tracked indexes were modified before this worker. Untracked prior plan/TRD/Task artifacts are prior work; paths under this evidence directory are worker outputs. Never erase existing edits.",
+    "dirty_state_log": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-status.stdout.log",
+    "head": "744c8b06d5fda905201145ed313a2da8de2e601f",
+    "matches_recommendation_snapshot": true,
+    "recommendation_source_head": "744c8b06d5fda905201145ed313a2da8de2e601f",
+    "tracked_dirty_paths": [
+      "Implementation_Plans/INDEX.md",
+      "TRDs/INDEX.md",
+      "Tasks/INDEX.md"
+    ]
+  },
+  "checks": [
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 0.012,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "git-head",
+      "observed_at": "2026-09-20T04:48:41.987279+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-head.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-head.stdout.log",
+      "stdout_sha256": "f2c7253fb89c1c95217331d632824e9836e69ead13cacbdf8652560f86f592a6"
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--untracked-files=all"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 0.393,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "git-status",
+      "observed_at": "2026-09-20T04:48:42.397851+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-status.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-status.stdout.log",
+      "stdout_sha256": "eb928c22ba593dbd4f18a21083c3ca49fe27fffbdce395080125928d297ed643"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--stat"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 0.033,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "git-diff-stat",
+      "observed_at": "2026-09-20T04:48:42.450568+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-diff-stat.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-diff-stat.stdout.log",
+      "stdout_sha256": "e68c9b7dcf8b3f8303daa73d0527154744e7a38a2262b1d9d19579e83947659e"
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "--version"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 0.009,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "python-version",
+      "observed_at": "2026-09-20T04:48:42.476804+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/python-version.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/python-version.stdout.log",
+      "stdout_sha256": "55ae85cf4bdb38743edbcd53ea68ff36511997ec6c21b1e83d8bebc939bf056b"
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "SKILLS-depo/ontology/tests",
+        "-p",
+        "test_query_retrieval.py",
+        "-v"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 2.142,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "query-retrieval-tests",
+      "observed_at": "2026-09-20T04:48:44.635449+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/query-retrieval-tests.stderr.log",
+      "stderr_sha256": "df166b65c2f8f007360b0e2fc83f80c6d022880ebc6b44e20d4f871578f64287",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/query-retrieval-tests.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "SKILLS-depo/ontology/tests",
+        "-p",
+        "test_publication.py",
+        "-v"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 3.459,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "publication-tests",
+      "observed_at": "2026-09-20T04:48:48.111507+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/publication-tests.stderr.log",
+      "stderr_sha256": "6d94a9990772226b5610f5d4044eab0447ca09879ede3bb7583b35ae5bebc494",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/publication-tests.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/template_update.py",
+        "check"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 1.015,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "template-check",
+      "observed_at": "2026-09-20T04:48:49.144118+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/template-check.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/template-check.stdout.log",
+      "stdout_sha256": "ca5a7dc7edaca2c33a85ff5d93def34666fdff3072166ec2df15acfd66d6f542"
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        ".agents/skills/ontology/scripts/check_ontology.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 0.258,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "installed-core-check",
+      "observed_at": "2026-09-20T04:48:49.420144+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/installed-core-check.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/installed-core-check.stdout.log",
+      "stdout_sha256": "987323cfc074d2a5cc84e579612091cdfeb55abbf231413769069297e1bbaf1d"
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        ".agents/skills/ontology/scripts/ontology.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI",
+        "health"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 0.652,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "core-health",
+      "observed_at": "2026-09-20T04:48:50.130802+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/core-health.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/core-health.stdout.log",
+      "stdout_sha256": "0ea7570664f612281b9214036e5095d8b864a84b5e3c4de6b3bcbea279f80067"
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        ".agents/skills/ontology/scripts/ontology.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI",
+        "advanced-health"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 1.498,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "advanced-health",
+      "observed_at": "2026-09-20T04:48:51.646899+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/advanced-health.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/advanced-health.stdout.log",
+      "stdout_sha256": "654f8ab833276645d58b366e369b10201e3a3c2b0b941491c612c3cae0271ee0"
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        ".agents/skills/ontology/scripts/ontology.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI",
+        "workbench",
+        "--help"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 0.046,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "workbench-help",
+      "observed_at": "2026-09-20T04:48:51.711085+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/workbench-help.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/workbench-help.stdout.log",
+      "stdout_sha256": "702d29bad2c06ce51c99726ef1fe7bd72bb7a3f01f9530f2993a79d8c80cc144"
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        ".agents/skills/ontology/scripts/ontology.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI",
+        "term",
+        "Task"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 0.083,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "term-task",
+      "observed_at": "2026-09-20T04:48:51.811830+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/term-task.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/term-task.stdout.log",
+      "stdout_sha256": "13852bf9298608df7beb088f260855ffff311206d3de85e0b57dbfaefd4b4fd9"
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        ".agents/skills/ontology/scripts/ontology.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI",
+        "read",
+        "urn:sys4ai:ontology:project:sys4ai-depot:curator-process"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 0.083,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "process-read",
+      "observed_at": "2026-09-20T04:48:51.912432+00:00",
+      "returncode": 0,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/process-read.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/process-read.stdout.log",
+      "stdout_sha256": "e8d3c2f1531e9c8938bf5b37a5584f309dfacff93a0e8879108f8747fca6a2e0"
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        ".agents/skills/ontology/scripts/ontology.py",
+        "--project-root",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI",
+        "advanced-health",
+        "--workbench-url",
+        "http://127.0.0.1:53698"
+      ],
+      "cwd": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "duration_seconds": 1.475,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "name": "workbench-existing-identity",
+      "observed_at": "2026-09-20T04:54:37.609050+00:00",
+      "returncode": 1,
+      "state": "completed",
+      "stderr": "Verification/project-knowledge-explorer-first-release/baseline-tests/workbench-existing-identity.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Verification/project-knowledge-explorer-first-release/baseline-tests/workbench-existing-identity.stdout.log",
+      "stdout_sha256": "49af4d8b6016e06a47da77d0ace4e09070214256c1f7591351647bea42f72260"
+    }
+  ],
+  "criteria": [
+    {
+      "criterion": 1,
+      "evidence": [
+        "baseline.json",
+        "caller-inventory.json"
+      ],
+      "result": "Current checkout, pre-existing edits, named checks, launch/source behavior and active/historical caller classification captured."
+    },
+    {
+      "criterion": 2,
+      "evidence": [
+        "process-content-inventory.json"
+      ],
+      "result": "Each selected process/function field is source-backed, absent in the selected canonical representation, or explicitly unexamined; partial source ordering is distinguished from complete sequence."
+    },
+    {
+      "counts": {
+        "complete_loaded": 412,
+        "complete_loaded_non_binding": 347,
+        "imported_core": 65,
+        "local_bindings": 65,
+        "local_files": 7,
+        "local_records_including_bindings": 347
+      },
+      "criterion": 3,
+      "evidence": [
+        "process-content-inventory.json"
+      ],
+      "result": "The seven selected local files contain 347 records INCLUDING 65 bindings: project.jsonld 90 + curator.jsonld 192 + five binding files 65. The full loader adds 65 imported-core records for 412 total. The full loaded non-binding count is also 347 (412 minus 65 bindings), a distinct coincidental count. Neither inventory proves process ordering. Curator process is typed Capability; its identity does not prove ordered steps."
+    }
+  ],
+  "existing_endpoint_observation": {
+    "check": "workbench-existing-identity",
+    "diagnostic": "service_unreachable / PermissionError",
+    "escalation": "Read-only retry approval was interrupted; no retry command completion or retry output files were observed. The manager instructed this worker not to replay it.",
+    "interpretation": "Inconclusive endpoint liveness: the sandbox denied the loopback connection. This observation does not prove service stopped.",
+    "provenance": "baseline-tests/workbench-existing-identity.stdout.log",
+    "returncode": 1
+  },
+  "generated_comparison": {
+    "added": [],
+    "changed": [],
+    "removed": []
+  },
+  "generated_preservation_timing": "Generated hash/stat baseline begins after earlier named checks. Its before/after equality covers the later permitted inspection interval only; it is not retroactive proof of earlier-check non-mutation.",
+  "limitations": [
+    "No browser interaction or frontend usability baseline was exercised.",
+    "Read-only scope does not start, repair, build or stop the existing service.",
+    "Full ontology/advanced suites were not needed for this baseline; existing advanced configuration/certification was assessed statically only.",
+    "Independent non-Template product projects and model weight cache bytes were excluded from this bounded baseline.",
+    "Protected Task files may later change through authorized manager bookkeeping; classify those separately from product mutations.",
+    "Existing workbench liveness could not be proved: loopback health probe returned PermissionError; approval retry was interrupted and not replayed."
+  ],
+  "no_product_or_canonical_writes": true,
+  "outputs": [
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/advanced-health.receipt.json",
+      "sha256": "8e244df3bfcb0a730f9842a49195bd5b5547b0ca3fd7e6e92238f661fe776f6d"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/advanced-health.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/advanced-health.stdout.log",
+      "sha256": "654f8ab833276645d58b366e369b10201e3a3c2b0b941491c612c3cae0271ee0"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/caller-entries-01.json",
+      "sha256": "0e82b568f6cdbd886cc70d35c38035bf46b7095a072322626fe56f4e49d9895e"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/caller-entries-02.json",
+      "sha256": "46f4f6cd6c137d28b398384bced9dd4c724711d80ab621896f4f28be1c4b2bbe"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/collect_baseline.py",
+      "sha256": "3993c18b9ef5487b73a2ca7dcb105d9576f8b13b38cc50b39c87ba616b40b4da"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/collect_inventories.py",
+      "sha256": "66df587a9aaa60fddbe529b592f1722af05a6e9e28b8c91305b60eaff31104e4"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/core-health.receipt.json",
+      "sha256": "3bc6636a88cf985ae3b97c5506fddb75637b9cb2c13910e66fc736b46f127192"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/core-health.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/core-health.stdout.log",
+      "sha256": "0ea7570664f612281b9214036e5095d8b864a84b5e3c4de6b3bcbea279f80067"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/finalize_baseline.py",
+      "sha256": "8ea0ce846c9ee04383c3d6bc9e5269cb19f893a99de0006306f3cf3b7852d054"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/generated-after-01.json",
+      "sha256": "0d83b5ed9b91ad4d31fb640a2de10b347cea7615df2e1dc601c5e79c1d5eae14"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/generated-before-01.json",
+      "sha256": "0d83b5ed9b91ad4d31fb640a2de10b347cea7615df2e1dc601c5e79c1d5eae14"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/generated-preservation.json",
+      "sha256": "d7ea8599087e3e21022a1d8b724951c1c161ba8ec0f59038c5c15b85c86f8ce6"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-diff-stat.receipt.json",
+      "sha256": "5c685483434ca9e998aa1f1938dd3825494c03381a2af5c55990cd9a18b30730"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-diff-stat.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-diff-stat.stdout.log",
+      "sha256": "e68c9b7dcf8b3f8303daa73d0527154744e7a38a2262b1d9d19579e83947659e"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-head.receipt.json",
+      "sha256": "46003498d39e0a702b6df3365f49b78cf4dd897bae9992e98390bdee0d5e0f1c"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-head.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-head.stdout.log",
+      "sha256": "f2c7253fb89c1c95217331d632824e9836e69ead13cacbdf8652560f86f592a6"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-status.receipt.json",
+      "sha256": "57892cb7db848d6c5cfbadd2115d2264bb0dfd5ca7e45af86074423d501f18f2"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-status.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/git-status.stdout.log",
+      "sha256": "eb928c22ba593dbd4f18a21083c3ca49fe27fffbdce395080125928d297ed643"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/installed-core-check.receipt.json",
+      "sha256": "53f3e524403c95f8f24415f79b7ca1adb950796ad26532a32016701b9fb7ccd7"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/installed-core-check.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/installed-core-check.stdout.log",
+      "sha256": "987323cfc074d2a5cc84e579612091cdfeb55abbf231413769069297e1bbaf1d"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/process-read.receipt.json",
+      "sha256": "ac0ae673b92fc99be0a108392823cffab37bd8bb04066e323b4befcda1a8161e"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/process-read.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/process-read.stdout.log",
+      "sha256": "e8d3c2f1531e9c8938bf5b37a5584f309dfacff93a0e8879108f8747fca6a2e0"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-after-01.json",
+      "sha256": "186cc2ad3a58c309c8c0d892af90d71691c2e3fe26ee7d7f609a7c266be96815"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-after-02.json",
+      "sha256": "9ff39ea4b9fd9caee3ee9b05b636e5c3c6dfb5e8d8db1e8e69fe2d6382806c5a"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-after-03.json",
+      "sha256": "499c6a8e3a7a2dd0f8763dc5cefc62c490c32ac2c97e94e6d7cceb7bd422ace0"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-after-04.json",
+      "sha256": "3ca11def0e18b9c1e3579d5b6859ad20495697dea0ac120f1cfb8a1be59b8359"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-after-05.json",
+      "sha256": "1f4211522d12a16c759a0d364fee2dc3291792f1b5de45b558fe956942929afd"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-after-06.json",
+      "sha256": "97826bf4c05315896fd7375d81e0a7b82710d0a5498d357006f5cb2f711cb6f1"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-after-07.json",
+      "sha256": "1aebf8d579279058549b2e2d251b659b4310811fdba077c77dc68debb2d15c2c"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-after-08.json",
+      "sha256": "e4ec48e8c6185b7f62a30f726f5e544a8397bb839cd64686ca308d470fbabf65"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-after-09.json",
+      "sha256": "f55c40cce5c90f1519747a03722be8e1bed3f3893674a4357b2bb2ef4a4c8246"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-after-10.json",
+      "sha256": "032db5c36f2f548181d35578bde00189e9bd52de30e05f2498e5a68dc1da91fd"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-after-11.json",
+      "sha256": "0bc447b726b25af1c4e27e0f8f0004cf2dc71891562cf91c29c9f8a8c2d03d52"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-before-01.json",
+      "sha256": "186cc2ad3a58c309c8c0d892af90d71691c2e3fe26ee7d7f609a7c266be96815"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-before-02.json",
+      "sha256": "9ff39ea4b9fd9caee3ee9b05b636e5c3c6dfb5e8d8db1e8e69fe2d6382806c5a"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-before-03.json",
+      "sha256": "499c6a8e3a7a2dd0f8763dc5cefc62c490c32ac2c97e94e6d7cceb7bd422ace0"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-before-04.json",
+      "sha256": "3ca11def0e18b9c1e3579d5b6859ad20495697dea0ac120f1cfb8a1be59b8359"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-before-05.json",
+      "sha256": "1f4211522d12a16c759a0d364fee2dc3291792f1b5de45b558fe956942929afd"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-before-06.json",
+      "sha256": "97826bf4c05315896fd7375d81e0a7b82710d0a5498d357006f5cb2f711cb6f1"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-before-07.json",
+      "sha256": "1aebf8d579279058549b2e2d251b659b4310811fdba077c77dc68debb2d15c2c"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-before-08.json",
+      "sha256": "e4ec48e8c6185b7f62a30f726f5e544a8397bb839cd64686ca308d470fbabf65"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-before-09.json",
+      "sha256": "f55c40cce5c90f1519747a03722be8e1bed3f3893674a4357b2bb2ef4a4c8246"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-before-10.json",
+      "sha256": "032db5c36f2f548181d35578bde00189e9bd52de30e05f2498e5a68dc1da91fd"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/protected-before-11.json",
+      "sha256": "0bc447b726b25af1c4e27e0f8f0004cf2dc71891562cf91c29c9f8a8c2d03d52"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/publication-recovery-inventory.json",
+      "sha256": "cc7ecaac6e7f455f090f4d919801edc63add5218ebb1a7a230d0721222b654d9"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/publication-tests.receipt.json",
+      "sha256": "4e81cfe31c6f16c93e0792e4bade69c5163e43875e09a634cfac0b2fb9037b80"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/publication-tests.stderr.log",
+      "sha256": "6d94a9990772226b5610f5d4044eab0447ca09879ede3bb7583b35ae5bebc494"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/publication-tests.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/python-version.receipt.json",
+      "sha256": "40f64d69c033af0a4e581abb369bb4931ae599b8e499cd0e4f77b69446c5c569"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/python-version.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/python-version.stdout.log",
+      "sha256": "55ae85cf4bdb38743edbcd53ea68ff36511997ec6c21b1e83d8bebc939bf056b"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/query-retrieval-tests.receipt.json",
+      "sha256": "2dbfc63e048084dd0a7cec2ab805b8b0bab15c5704cc7425c9efeecc2df82235"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/query-retrieval-tests.stderr.log",
+      "sha256": "df166b65c2f8f007360b0e2fc83f80c6d022880ebc6b44e20d4f871578f64287"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/query-retrieval-tests.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/record-inventory-01.json",
+      "sha256": "92fcf80008dddffb46bc2a529397a1f8fc4721e4e7fef8a3a83fb9079dba8df5"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/template-check.receipt.json",
+      "sha256": "bc5f4a0ff7f42e9ece4919b75882a8045a6f32abf5008f958556e0249a02fe2b"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/template-check.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/template-check.stdout.log",
+      "sha256": "ca5a7dc7edaca2c33a85ff5d93def34666fdff3072166ec2df15acfd66d6f542"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/term-task.receipt.json",
+      "sha256": "733a21152fda28f7e46b3560fca085153763e80997cd6340f8460f7f2c2a3cbe"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/term-task.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/term-task.stdout.log",
+      "sha256": "13852bf9298608df7beb088f260855ffff311206d3de85e0b57dbfaefd4b4fd9"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/workbench-existing-identity.receipt.json",
+      "sha256": "6b49e05ca2a311f1f553dffbdde13dddcc384ba1d0bbfbf74e9caa908ee6cc6c"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/workbench-existing-identity.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/workbench-existing-identity.stdout.log",
+      "sha256": "49af4d8b6016e06a47da77d0ace4e09070214256c1f7591351647bea42f72260"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/workbench-help.receipt.json",
+      "sha256": "7b2c8f911ca4636c86ea230a7c1aa8bf217856edb7e7f07d1e17d0c1f6f036c4"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/workbench-help.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline-tests/workbench-help.stdout.log",
+      "sha256": "702d29bad2c06ce51c99726ef1fe7bd72bb7a3f01f9530f2993a79d8c80cc144"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/baseline.json",
+      "sha256": "4ad6cd20681048fc79c4329683ad660a325f4801dc612344d4618a0e92664fd7"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/caller-inventory.json",
+      "sha256": "8ae7f26798823771a8f4e1ecae5091920f216e5ec2d0db599ccc490c58b2a617"
+    },
+    {
+      "path": "Verification/project-knowledge-explorer-first-release/process-content-inventory.json",
+      "sha256": "74ac863158a239d7d5e92713ee3f65ff0b9f521e975a2685845a31dc07e3c6a9"
+    }
+  ],
+  "plan_task": "TASK-001",
+  "protected_comparison": {
+    "added": [],
+    "changed": [],
+    "interpretation": "Concurrent manager Task writes must be distinguished from this worker. These commands do not grant repair or mutation authority.",
+    "removed": []
+  },
+  "schema_version": 1,
+  "status": "stopped_with_completed_baseline",
+  "task_id": "TASK-20260919-1FA1F620",
+  "verification_level": "7 retrieval tests and 8 publication tests passed; 48 installed core competency cases passed; Template and static health checks passed; core term/read queries observed. Existing service liveness is inconclusive and frontend runtime was not exercised.",
+  "worker": "/root/explorer_manager_g3/baseline_worker"
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "stage": "initial-native-feasibility",
+  "scope_sha256": "14813a0c19a7d44c4d12e46bdf3394cdc742a5205eaa907b8f099992561d1cb3",
+  "started_at": "2026-09-11T02:58:22.093884+00:00",
+  "state": "failed",
+  "identities": {
+    "controller": "01a08e66-e2c2-73d1-b0ac-64116120f039"
+  },
+  "settings": {
+    "controller": {
+      "model": "gpt-6-astra",
+      "reasoningEffort": "xhigh",
+      "activePermissionProfile": {
+        "id": "curator-proof-bootstrap",
+        "extends": null
+      }
+    }
+  },
+  "artifacts": {},
+  "native_controls": [],
+  "command_probes": [],
+  "stopping": {},
+  "limits": {
+    "host_turn_starts": 5,
+    "expected_native_identities": 3,
+    "supervised_seconds": 420,
+    "stop_grace_seconds": 20,
+    "io_wait_seconds": 30,
+    "frame_bytes": 2000000,
+    "artifact_bytes": 20000,
+    "hard_model_call_or_token_cap": "not exposed by inspected protocol",
+    "native_spawn_total_cap": "not established; observed identity count triggers stop, not a claimed hard native cap"
+  },
+  "production_readiness": "not_proven",
+  "effective_tool_configuration": {
+    "features": {
+      "apps": false,
+      "plugins": false,
+      "hooks": false,
+      "memories": false,
+      "chronicle": false,
+      "image_generation": false,
+      "browser_use": false,
+      "browser_use_external": false,
+      "computer_use": false,
+      "in_app_browser": false,
+      "remote_plugin": false,
+      "goals": false
+    },
+    "mcp_servers": {
+      "notebooklm": false,
+      "linear": false,
+      "node_repl": false,
+      "computer-use": false
+    },
+    "web_search": "disabled"
+  },
+  "code": "native_deadline",
+  "message": "Overall runtime deadline reached.",
+  "cleanup": {
+    "pid": 78464,
+    "process_group": 78464,
+    "state": "owned_process_group_stopped",
+    "parent_returncode": 0
+  },
+  "canaries_unchanged": true,
+  "finished_at": "2026-09-11T03:05:22.088312+00:00",
+  "host_turn_starts": 1
+}

@@ -1,0 +1,2677 @@
+{
+  "assignment_id": "FRONTEND_WORKER_G3",
+  "baseline": "d548997fff1e19b519c26586ca35e96bde3220cef8f5db2ecd1ebfb44c5ae79c",
+  "round": 5,
+  "criteria_count": 29,
+  "criteria_verbatim_and_original_order": true,
+  "criteria": [
+    {
+      "index": 1,
+      "task": "TASK-012",
+      "criterion": "Pure state transitions preserve distinct identity/focus/query/filter/snapshot/expansion/source/preference fields and reject obsolete response sequences even when cancellation loses a race.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Pure foundations are unchanged; current20 units cover abort-insensitive response/session/discovery/catalog identity races. Current production refresh and retained-context flows pass; details dismissal retains state/model/history and late entry responses do not reopen it.",
+      "check_ids": [
+        "existing_unit",
+        "browser16",
+        "current_closure",
+        "service_v4_browser_late_session",
+        "service_v4_browser_late_context",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-07.json",
+          "sha256": "3a130e763337d1da3bfa539c32b371ec58c3f7f5f1a70c682dd1381fa90216aa",
+          "bytes": 6811
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-session-stdout.json",
+          "sha256": "cacc219698b1ee92d440bb5592ad4035f8bdf83249d61c4f303d453b7889cf48",
+          "bytes": 1554
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-session-receipt.json",
+          "sha256": "c967628c23dcd3d03c0fa6ff2fb018ef25ded9cd9e0d25dd819554401c4e7ce5",
+          "bytes": 2071
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-context-stdout.json",
+          "sha256": "84a5bcdc77c6b7cd2a7031cba05023c1f93f9eff2d6e04271ab0c9544092e352",
+          "bytes": 1595
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-context-receipt.json",
+          "sha256": "9a35d7513ba4fd2e6d0f37b9d1163212c408aab0b66ed489d1f6d5ea0d2bd5b1",
+          "bytes": 2071
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 2,
+      "task": "TASK-012",
+      "criterion": "Route codecs encode exact IDs and safe view state; bootstrap/session values and source bodies cannot enter copied links, history state or durable preference storage.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current exact route hydration/fragment erasure unit checks and production new-tab/copy-route flows pass. Current narrow jobs positively assert fragment removal before capture. No new route/history/storage field was added.",
+      "check_ids": [
+        "existing_unit",
+        "browser16",
+        "browser15",
+        "current_closure",
+        "service_v4_browser_basic",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-07.json",
+          "sha256": "3a130e763337d1da3bfa539c32b371ec58c3f7f5f1a70c682dd1381fa90216aa",
+          "bytes": 6811
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-basic-stdout.json",
+          "sha256": "7f3e7f5cc9d89ecb438f97a2157284fb78020df88ea08e85701f7e0d80dfee93",
+          "bytes": 2000
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-basic-receipt.json",
+          "sha256": "12a136e15d936c035270e4d7ef645fd6c6b74143ce447c79ac34610c8d372b0a",
+          "bytes": 2036
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 3,
+      "task": "TASK-012",
+      "criterion": "Selection emits one navigation event, camera changes emit none, snapshot conflict retains old coherent context, and explicit refresh discards incompatible cursor/expansion state atomically.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Actual selection creates one history item and retains camera; current snapshot conflict/atomic refresh update retained IDs and remove obsolete category scope. Details presentation creates no history/model/state transition.",
+      "check_ids": [
+        "browser16",
+        "focused_unit",
+        "browser15",
+        "current_closure",
+        "service_v4_browser_late_context",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-06.json",
+          "sha256": "4016e95f5b0030ee1848334194bc6ce9c04d25ebf9647907d7d1af1924a74381",
+          "bytes": 4800
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-context-stdout.json",
+          "sha256": "84a5bcdc77c6b7cd2a7031cba05023c1f93f9eff2d6e04271ab0c9544092e352",
+          "bytes": 1595
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-context-receipt.json",
+          "sha256": "9a35d7513ba4fd2e6d0f37b9d1163212c408aab0b66ed489d1f6d5ea0d2bd5b1",
+          "bytes": 2071
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 4,
+      "task": "TASK-012",
+      "criterion": "Only the shared read client initiates allowed reads; later screens and renderer consume state and emit intentions. Browser-level Back/Forward and focus integration are assigned to TASK-019.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "ReadClient remains the single fetch owner; unchanged finite independent catalog and source discovery admission is covered by current20 unit groups. New drawer/details methods perform presentation and emit existing intentions only.",
+      "check_ids": [
+        "existing_unit",
+        "build03",
+        "current_closure",
+        "service_v4_service_http",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-07.json",
+          "sha256": "3a130e763337d1da3bfa539c32b371ec58c3f7f5f1a70c682dd1381fa90216aa",
+          "bytes": 6811
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/build-03.json",
+          "sha256": "097ac576b94e0fedc71aab4cf32ef4654edba0845d90ea5e49425d0e7198f00b",
+          "bytes": 4582
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/service-host-output.json",
+          "sha256": "fb2b2200a5ef321051dff2b7b3fcc70073621b12107fd9e448fd710b3b31d182",
+          "bytes": 22611
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/service-host-receipt.json",
+          "sha256": "e5d2d3484cca21d872d7d8eac970cf7f1ab43417e65b5b254e0bade1d50e26e0",
+          "bytes": 1992
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 5,
+      "task": "TASK-013",
+      "criterion": "The first screen exposes only reading destinations and no authoring/advanced modules; no giant graph or management counters are initial navigation.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current authenticated first screen exposes Overview, Terms, Processes and Map with persistent labeled search and no initial canvas. Narrow navigation is an actual labeled keyboard-operable native dialog, with reading content outside it.",
+      "check_ids": [
+        "browser16",
+        "browser18",
+        "browser15",
+        "current_closure",
+        "native_200_subset",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/overview.ts",
+          "sha256": "b231e76ebc9fac9e47320c649be806d8bb8acd7d40cf4929420765182ed7b6cd",
+          "bytes": 1966
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "2e4c62b5d62e8b23094c1cb29eeca1f1006576f142d8264f35a1bcb75362ca4b",
+          "bytes": 10787
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/stdout.json",
+          "sha256": "0870417237844cb2d17e7e05b53a32611c897070424522d75618fd92b2630db5",
+          "bytes": 1342
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/receipt.json",
+          "sha256": "df4e18e43fc11b898337711a686ffb6b28736debbced02303613e1b002bc7d9e",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/final-input-service-v4-native-attempt02-native-observation.json",
+          "sha256": "07e4f0a704dfccb7db068c4c641dc3d4bfb5bd6dfcf79213e0ab056b019fb3f1",
+          "bytes": 3052
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/final-input-service-v4-native-attempt02-receipt.json",
+          "sha256": "dd07d0503d649c6f2c726d2412b3eb1b49f64670ded9bdb93feea31fb017f38c",
+          "bytes": 2146
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 6,
+      "task": "TASK-013",
+      "criterion": "Overview uses validated project purpose/starting IDs; empty local graph explains imported core vocabulary and offers categories/search.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current normal and neutral fixtures use recorded project purpose/starting IDs. Neutral Overview explains imported vocabulary and retains categories/search; no local process catalog is invented.",
+      "check_ids": [
+        "browser18",
+        "browser16",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/overview.ts",
+          "sha256": "b231e76ebc9fac9e47320c649be806d8bb8acd7d40cf4929420765182ed7b6cd",
+          "bytes": 1966
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "2e4c62b5d62e8b23094c1cb29eeca1f1006576f142d8264f35a1bcb75362ca4b",
+          "bytes": 10787
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/stdout.json",
+          "sha256": "0870417237844cb2d17e7e05b53a32611c897070424522d75618fd92b2630db5",
+          "bytes": 1342
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/receipt.json",
+          "sha256": "df4e18e43fc11b898337711a686ffb6b28736debbced02303613e1b002bc7d9e",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 7,
+      "task": "TASK-014",
+      "criterion": "Visible labeled search and submit work without shortcuts; autocomplete follows Arrow/Enter/Escape behavior without deleting query.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current unit regressions cover autocomplete generations, initial ArrowUp/Down, Escape and duplicate identity labels. Current production explicit search and actual keyboard drawer/search navigation pass; query is preserved.",
+      "check_ids": [
+        "existing_unit",
+        "browser16",
+        "browser15",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/search.ts",
+          "sha256": "2fcd835d9f01dfff4c79439e4e097e9a9c820e01a37afce61ea6e1a41563150c",
+          "bytes": 8965
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-07.json",
+          "sha256": "3a130e763337d1da3bfa539c32b371ec58c3f7f5f1a70c682dd1381fa90216aa",
+          "bytes": 6811
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 8,
+      "task": "TASK-014",
+      "criterion": "Results show supported category, preferred label, recorded excerpt and distinctions; lower-frequency filters remain under one control.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current production search preserves two exact Alignment identities with recorded display content. Current20 units cover exact duplicate autocomplete/catalog IDs, recorded non-starting names, truthful label truncation/full-entry access and stable focused links.",
+      "check_ids": [
+        "existing_unit",
+        "browser16",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/search.ts",
+          "sha256": "2fcd835d9f01dfff4c79439e4e097e9a9c820e01a37afce61ea6e1a41563150c",
+          "bytes": 8965
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-07.json",
+          "sha256": "3a130e763337d1da3bfa539c32b371ec58c3f7f5f1a70c682dd1381fa90216aa",
+          "bytes": 6811
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 9,
+      "task": "TASK-014",
+      "criterion": "All bound/incomplete/empty cases preserve query and offer useful narrow/clear/continue actions without invented totals.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current empty search retains query/clear actions. High-degree continuation stops at tighter display limits and rereads unconsumed pages; shared-content refusal is rejected. No totals or exhaustive absence are invented.",
+      "check_ids": [
+        "existing_unit",
+        "browser18",
+        "browser17",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/search.ts",
+          "sha256": "2fcd835d9f01dfff4c79439e4e097e9a9c820e01a37afce61ea6e1a41563150c",
+          "bytes": 8965
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-07.json",
+          "sha256": "3a130e763337d1da3bfa539c32b371ec58c3f7f5f1a70c682dd1381fa90216aa",
+          "bytes": 6811
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/stdout.json",
+          "sha256": "0870417237844cb2d17e7e05b53a32611c897070424522d75618fd92b2630db5",
+          "bytes": 1342
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/receipt.json",
+          "sha256": "df4e18e43fc11b898337711a686ffb6b28736debbced02303613e1b002bc7d9e",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/stdout.json",
+          "sha256": "d6e8d287f00cabfb6aafb27901510597a7eea2145bb391d626d1a78e3b613f98",
+          "bytes": 1405
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/receipt.json",
+          "sha256": "a9a8b6e79615b2e8abad12fbce0c2b338f7d623a51ec3b638aa93d62a3845695",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 10,
+      "task": "TASK-015",
+      "criterion": "Definitions/aliases/scope/examples/non-examples remain exact; historical status, source freshness and authority meanings are distinct with warnings by affected information.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current browser16 verifies exact definition/aliases/scope/examples/non-examples, historical replacement and independent authority warning; long definition preserves66023UTF8bytes over3pages. Changed source freshness remains distinct. Earlier15011byte full-catalog-name browser proof is historical; unchanged catalog/entry code and current unit closure are explicit.",
+      "check_ids": [
+        "browser16",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/entry.ts",
+          "sha256": "499073e0aac71490487b19a36864eb4c3077bb96d09250a803e1b02bee1aac59",
+          "bytes": 5554
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/feedback.ts",
+          "sha256": "76e2de9f7cef5ef1f6fe603036f1b7f3a54c880a750e44eed63f713a3d912ac8",
+          "bytes": 4721
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 11,
+      "task": "TASK-015",
+      "criterion": "Relationship member, qualifier, direction and exact ID are independently inspectable; lengthy qualifiers remain accessible and cannot look unconditional.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current production List/canvas and entry assertions inspect exact member IDs, direction, qualifiers and descriptors. Long qualifiers preserve44066UTF8bytes over2pages; current lossless endpoint unit checks reject gaps/duplicates and avoid unsafe-number rounding.",
+      "check_ids": [
+        "browser16",
+        "existing_unit",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/entry.ts",
+          "sha256": "499073e0aac71490487b19a36864eb4c3077bb96d09250a803e1b02bee1aac59",
+          "bytes": 5554
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/feedback.ts",
+          "sha256": "76e2de9f7cef5ef1f6fe603036f1b7f3a54c880a750e44eed63f713a3d912ac8",
+          "bytes": 4721
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-07.json",
+          "sha256": "3a130e763337d1da3bfa539c32b371ec58c3f7f5f1a70c682dd1381fa90216aa",
+          "bytes": 6811
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 12,
+      "task": "TASK-015",
+      "criterion": "Opening source retains entry, moves focus meaningfully, escapes text and returns focus to exact trigger on close.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current actual headless entry/source tests preserve escaped text, heading focus, retained entry and exact source-trigger return, including a dismissed parent details region. The failed long native attempt directly observed current ordinary and process-step source reading at native 200%, with return to their triggers. Its STOP/frame failure remains disclosed; no native stable IDs or speech are invented.",
+      "check_ids": [
+        "browser16",
+        "browser15",
+        "focused_unit",
+        "current_closure",
+        "native_200_subset",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/entry.ts",
+          "sha256": "499073e0aac71490487b19a36864eb4c3077bb96d09250a803e1b02bee1aac59",
+          "bytes": 5554
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/feedback.ts",
+          "sha256": "76e2de9f7cef5ef1f6fe603036f1b7f3a54c880a750e44eed63f713a3d912ac8",
+          "bytes": 4721
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-06.json",
+          "sha256": "4016e95f5b0030ee1848334194bc6ce9c04d25ebf9647907d7d1af1924a74381",
+          "bytes": 4800
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/final-input-service-v4-native-attempt02-native-observation.json",
+          "sha256": "07e4f0a704dfccb7db068c4c641dc3d4bfb5bd6dfcf79213e0ab056b019fb3f1",
+          "bytes": 3052
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/final-input-service-v4-native-attempt02-receipt.json",
+          "sha256": "dd07d0503d649c6f2c726d2412b3eb1b49f64670ded9bdb93feea31fb017f38c",
+          "bytes": 2146
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 13,
+      "task": "TASK-016",
+      "criterion": "Purpose/applicability/roles/inputs/outputs/skills/documents/order each link to exact selected canonical or source support; unsupported fields are omitted.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current ordered process/direct binding and later-field-owner discovery flows preserve exact selected support. Current units cover bounded source discovery windows and independent recorded-name catalog admission. No unsupported field or ordering is manufactured. Current native 200% observation adds visible ordered-process and numbered step-source reading, with the failed-attempt limitations preserved.",
+      "check_ids": [
+        "existing_unit",
+        "browser16",
+        "current_closure",
+        "native_200_subset",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-07.json",
+          "sha256": "3a130e763337d1da3bfa539c32b371ec58c3f7f5f1a70c682dd1381fa90216aa",
+          "bytes": 6811
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/final-input-service-v4-native-attempt02-native-observation.json",
+          "sha256": "07e4f0a704dfccb7db068c4c641dc3d4bfb5bd6dfcf79213e0ab056b019fb3f1",
+          "bytes": 3052
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/final-input-service-v4-native-attempt02-receipt.json",
+          "sha256": "dd07d0503d649c6f2c726d2412b3eb1b49f64670ded9bdb93feea31fb017f38c",
+          "bytes": 2146
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 14,
+      "task": "TASK-016",
+      "criterion": "Absent ordering displays exactly: An ordered description has not been recorded. These are the documented relationships.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current production unordered-process check asserts the complete required sentence verbatim.",
+      "check_ids": [
+        "browser16",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 15,
+      "task": "TASK-016",
+      "criterion": "Paths/dependencies/layout are never inferred as process execution order; process pages execute nothing, and no additional graph library or authoring is introduced.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Process pages remain read-only renderers of recorded fields/order. Current source/toolchain correspondence preserves the single existing graph library; no execution, extra dependency, protocol or authoring was added.",
+      "check_ids": [
+        "build03",
+        "browser16",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/build-03.json",
+          "sha256": "097ac576b94e0fedc71aab4cf32ef4654edba0845d90ea5e49425d0e7198f00b",
+          "bytes": 4582
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 16,
+      "task": "TASK-017",
+      "criterion": "The normalized model retains all returned node/relation IDs, canonical endpoints/predicates/direction, qualifiers, sources, warnings, filters and limits without inferring completeness.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current actual DOM/canvas comparison verifies exact nodes/relations, endpoints, direction, qualifiers, sources, classifications, warnings, filters and returned scope. Budget/incomplete metadata stays distinct from completeness.",
+      "check_ids": [
+        "browser16",
+        "browser17",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/stdout.json",
+          "sha256": "d6e8d287f00cabfb6aafb27901510597a7eea2145bb391d626d1a78e3b613f98",
+          "bytes": 1405
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/receipt.json",
+          "sha256": "a9a8b6e79615b2e8abad12fbce0c2b338f7d623a51ec3b638aa93d62a3845695",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 17,
+      "task": "TASK-017",
+      "criterion": "List entry/evidence/focus/expand actions work using keyboard and the shared read/state layer with the renderer module absent; no canvas/drag/hover/double-click is required.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current browser15 positively blocks one renderer import in a fresh document. Keyboard More connections appends exact returned scope, then different Focus here replaces it; List entry/source/details remain usable. Current canvas-loss/layout-refusal cases retain List.",
+      "check_ids": [
+        "browser15",
+        "browser16",
+        "browser17",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/stdout.json",
+          "sha256": "d6e8d287f00cabfb6aafb27901510597a7eea2145bb391d626d1a78e3b613f98",
+          "bytes": 1405
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/receipt.json",
+          "sha256": "a9a8b6e79615b2e8abad12fbce0c2b338f7d623a51ec3b638aa93d62a3845695",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 18,
+      "task": "TASK-017",
+      "criterion": "Selection and returned scope survive switching intentions; actual Map/List parity is a required integration gate in TASK-019 after the renderer is connected.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current selection/scope/history/filter and copied explicit focus/selection flows pass. Dismiss/reopen retains exact List DOM nodes and current renderer/camera/returned identities.",
+      "check_ids": [
+        "browser15",
+        "browser16",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 19,
+      "task": "TASK-018",
+      "criterion": "Initial Map uses a selected ID or reviewed picker and one-step bounded data; selecting updates details without camera/focus change.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Map remains lazy, starts from exact focus or visible picker and bounded one-step data. Selection updates details without moving camera; ID-less Map after failed entry now ignores a detached retained heading and focuses visible Choose a focus.",
+      "check_ids": [
+        "browser16",
+        "browser15",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 20,
+      "task": "TASK-018",
+      "criterion": "Focus here deliberately replaces neighborhood; expansion preserves existing positions where practical, stops bounded layout and respects cumulative 100-node/200-edge proposed ceiling and tighter service limits.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current keyboard Focus here replaces scope and More connections appends it. High-degree continuation respects tighter service/display limits; injected layout deadline retains List. Existing renderer positions and ceiling policy are unchanged.",
+      "check_ids": [
+        "browser15",
+        "browser17",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/stdout.json",
+          "sha256": "d6e8d287f00cabfb6aafb27901510597a7eea2145bb391d626d1a78e3b613f98",
+          "bytes": 1405
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/receipt.json",
+          "sha256": "a9a8b6e79615b2e8abad12fbce0c2b338f7d623a51ec3b638aa93d62a3845695",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 21,
+      "task": "TASK-018",
+      "criterion": "Parallel IDs, self-loops, cycles, conditional qualifiers, direction and selected/adjacent labels remain faithful; no continuous hidden simulation or unsupported semantic position claim.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current production parity covers exact parallel IDs, self-loop, direction, qualifiers, genuine relation-as-endpoint identity and retained-edge retargeting. The unchanged preset renderer preserves semantic data; dense-fit label crowding remains a stated human-comprehension qualification.",
+      "check_ids": [
+        "browser16",
+        "browser17",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/stdout.json",
+          "sha256": "d6e8d287f00cabfb6aafb27901510597a7eea2145bb391d626d1a78e3b613f98",
+          "bytes": 1405
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/receipt.json",
+          "sha256": "a9a8b6e79615b2e8abad12fbce0c2b338f7d623a51ec3b638aa93d62a3845695",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 22,
+      "task": "TASK-018",
+      "criterion": "Renderer reads the normalized model and emits intentions; it never initiates source/ontology reads. Legend and guidance retain: Select a term to read it. Use Focus here to explore its connections.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Renderer source remains unchanged and consumes model/intentions without fetch. Current authored legend retains the exact guidance and visible focus/expand controls; generated runtime is bound to this source.",
+      "check_ids": [
+        "build03",
+        "browser16",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/build-03.json",
+          "sha256": "097ac576b94e0fedc71aab4cf32ef4654edba0845d90ea5e49425d0e7198f00b",
+          "bytes": 4582
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 23,
+      "task": "TASK-019",
+      "criterion": "AT-21, AT-22, AT-23, AT-34 preserve useful context, reject stale responses and mixed snapshots, discard incompatible expansions/cursors on refresh and keep List/evidence usable if renderer fails.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current production conflict/refresh, blocked import, canvas loss and layout refusal retain coherent reading and useful evidence/List. Actual narrow session close exposes visible focused status; passive disconnect and later-route focus ownership have focused unit coverage. Actual expiry timing is not claimed. Accepted SERVICE V4 adds actual current absolute expiry/isolation, replay/resume and abort-insensitive late session/context checks; it does not turn the frontend passive modal unit into a separate real-expiry UI test.",
+      "check_ids": [
+        "existing_unit",
+        "browser14",
+        "browser15",
+        "browser16",
+        "browser17",
+        "focused_unit",
+        "current_closure",
+        "service_v4_browser_basic",
+        "service_v4_browser_late_session",
+        "service_v4_browser_late_context",
+        "service_v4_service_http",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "2e4c62b5d62e8b23094c1cb29eeca1f1006576f142d8264f35a1bcb75362ca4b",
+          "bytes": 10787
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-07.json",
+          "sha256": "3a130e763337d1da3bfa539c32b371ec58c3f7f5f1a70c682dd1381fa90216aa",
+          "bytes": 6811
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-14/stdout.json",
+          "sha256": "fd9a03fb10fbb8b718a32bfc83b098e036127988ff33562d509768a74f0d9864",
+          "bytes": 1317
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-14/receipt.json",
+          "sha256": "5e03403604e4e4c7492c66f0783d1e7a26cf524f1a44b98a741887aa77847d67",
+          "bytes": 2216
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/stdout.json",
+          "sha256": "d6e8d287f00cabfb6aafb27901510597a7eea2145bb391d626d1a78e3b613f98",
+          "bytes": 1405
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/receipt.json",
+          "sha256": "a9a8b6e79615b2e8abad12fbce0c2b338f7d623a51ec3b638aa93d62a3845695",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-06.json",
+          "sha256": "4016e95f5b0030ee1848334194bc6ce9c04d25ebf9647907d7d1af1924a74381",
+          "bytes": 4800
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-basic-stdout.json",
+          "sha256": "7f3e7f5cc9d89ecb438f97a2157284fb78020df88ea08e85701f7e0d80dfee93",
+          "bytes": 2000
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-basic-receipt.json",
+          "sha256": "12a136e15d936c035270e4d7ef645fd6c6b74143ce447c79ac34610c8d372b0a",
+          "bytes": 2036
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-session-stdout.json",
+          "sha256": "cacc219698b1ee92d440bb5592ad4035f8bdf83249d61c4f303d453b7889cf48",
+          "bytes": 1554
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-session-receipt.json",
+          "sha256": "c967628c23dcd3d03c0fa6ff2fb018ef25ded9cd9e0d25dd819554401c4e7ce5",
+          "bytes": 2071
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-context-stdout.json",
+          "sha256": "84a5bcdc77c6b7cd2a7031cba05023c1f93f9eff2d6e04271ab0c9544092e352",
+          "bytes": 1595
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-late-context-receipt.json",
+          "sha256": "9a35d7513ba4fd2e6d0f37b9d1163212c408aab0b66ed489d1f6d5ea0d2bd5b1",
+          "bytes": 2071
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/service-host-output.json",
+          "sha256": "fb2b2200a5ef321051dff2b7b3fcc70073621b12107fd9e448fd710b3b31d182",
+          "bytes": 22611
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/service-host-receipt.json",
+          "sha256": "e5d2d3484cca21d872d7d8eac970cf7f1ab43417e65b5b254e0bade1d50e26e0",
+          "bytes": 1992
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 24,
+      "task": "TASK-019",
+      "criterion": "When no relationships are recorded in the returned view, say No relationships are recorded in this view; byte/time/traversal limits and incomplete data are distinguished from absence.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current neutral job verifies complete empty ActionType scope before the exact absence message. Current bounded/high-degree paths disclose refusal/incomplete state and continuation separately.",
+      "check_ids": [
+        "browser18",
+        "browser17",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "2e4c62b5d62e8b23094c1cb29eeca1f1006576f142d8264f35a1bcb75362ca4b",
+          "bytes": 10787
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/stdout.json",
+          "sha256": "0870417237844cb2d17e7e05b53a32611c897070424522d75618fd92b2630db5",
+          "bytes": 1342
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/receipt.json",
+          "sha256": "df4e18e43fc11b898337711a686ffb6b28736debbced02303613e1b002bc7d9e",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/stdout.json",
+          "sha256": "d6e8d287f00cabfb6aafb27901510597a7eea2145bb391d626d1a78e3b613f98",
+          "bytes": 1405
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/receipt.json",
+          "sha256": "a9a8b6e79615b2e8abad12fbce0c2b338f7d623a51ec3b638aa93d62a3845695",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 25,
+      "task": "TASK-019",
+      "criterion": "320 CSS-pixel layouts, substantial zoom, both themes and reduced motion preserve controls, reading, narrow drawers and vertically flowing process/source text.",
+      "status": "current_320px_and_native200_reading_subset_supported_with_explicit_native_limits",
+      "explanation": "Current actual 320 CSS-pixel production tests verify drawer/details keyboard behavior, both resize directions, source return, themes and reduced motion. Separate current native Chrome 90% to 200% to 90% observations verify the listed navigation, process/source reading and selected-details hide/reopen subset at 730 CSS-pixel inner width (723 document/client width). The long attempt remains failed for STOP and original frame restoration remains false/unresolved. Separate 17.9496-second no-change lifecycle proves shutdown/owned cleanup only, with restoration not applicable. Full native Map/List 200% usability, Safari and speech are unobserved.",
+      "check_ids": [
+        "browser15",
+        "browser16",
+        "browser18",
+        "focused_unit",
+        "current_closure",
+        "native_200_subset",
+        "native_no_change_lifecycle",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "2e4c62b5d62e8b23094c1cb29eeca1f1006576f142d8264f35a1bcb75362ca4b",
+          "bytes": 10787
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/stdout.json",
+          "sha256": "0870417237844cb2d17e7e05b53a32611c897070424522d75618fd92b2630db5",
+          "bytes": 1342
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/receipt.json",
+          "sha256": "df4e18e43fc11b898337711a686ffb6b28736debbced02303613e1b002bc7d9e",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-06.json",
+          "sha256": "4016e95f5b0030ee1848334194bc6ce9c04d25ebf9647907d7d1af1924a74381",
+          "bytes": 4800
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/final-input-service-v4-native-attempt02-native-observation.json",
+          "sha256": "07e4f0a704dfccb7db068c4c641dc3d4bfb5bd6dfcf79213e0ab056b019fb3f1",
+          "bytes": 3052
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/final-input-service-v4-native-attempt02-receipt.json",
+          "sha256": "dd07d0503d649c6f2c726d2412b3eb1b49f64670ded9bdb93feea31fb017f38c",
+          "bytes": 2146
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/final-input-service-v4-short-attempt02-root-native-observation.json",
+          "sha256": "e0f9632d1ce51d2afb23a84891b998194cb56b464ff991e5cf57649e350db4ad",
+          "bytes": 2242
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/final-input-service-v4-short-attempt02-receipt.json",
+          "sha256": "1fac17c6bc7ec0a6f6e0f00cecbe0ceb6fea05c23b66dad4d252799486b6fb71",
+          "bytes": 2246
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 26,
+      "task": "TASK-019",
+      "criterion": "Back/Forward restores useful reading/map context; deliberate node selection pushes one history item while camera movements do not spam history.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current repeated Back/Forward restores same-focus filter/selection context and cancels pending focused-search preview. Node selection pushes once; camera changes do not spam history. Presentation-only details dismissal leaves history intact.",
+      "check_ids": [
+        "browser16",
+        "browser15",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "2e4c62b5d62e8b23094c1cb29eeca1f1006576f142d8264f35a1bcb75362ca4b",
+          "bytes": 10787
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 27,
+      "task": "TASK-019",
+      "criterion": "Terms/Map switching preserves exact identity; credentials are absent from safe routes and copied links; normal new-tab entry links work after authentication where practical.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current Terms/Map and copied relation-subject route checks preserve exact identity, including relation-kind focus endpoints. Authenticated ordinary new-tab entry succeeds; copied routes contain no credential material.",
+      "check_ids": [
+        "browser16",
+        "current_closure",
+        "service_v4_browser_basic",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "2e4c62b5d62e8b23094c1cb29eeca1f1006576f142d8264f35a1bcb75362ca4b",
+          "bytes": 10787
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-basic-stdout.json",
+          "sha256": "7f3e7f5cc9d89ecb438f97a2157284fb78020df88ea08e85701f7e0d80dfee93",
+          "bytes": 2000
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-basic-receipt.json",
+          "sha256": "12a136e15d936c035270e4d7ef645fd6c6b74143ce447c79ac34610c8d372b0a",
+          "bytes": 2036
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 28,
+      "task": "TASK-019",
+      "criterion": "Theme light/dark/system and reset affect presentation only; source bodies and knowledge are not persisted to browser databases/storage.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current storage checks and neutral light/system/reset plus dark/reduced-motion flow show presentation-only preferences and no persisted knowledge/source bodies. Native Theme keyboard selection did not change in the separate headless diagnostic; no success or app defect is inferred.",
+      "check_ids": [
+        "browser15",
+        "browser16",
+        "browser18",
+        "existing_unit",
+        "current_closure",
+        "service_v4_browser_basic",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "2e4c62b5d62e8b23094c1cb29eeca1f1006576f142d8264f35a1bcb75362ca4b",
+          "bytes": 10787
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/stdout.json",
+          "sha256": "0870417237844cb2d17e7e05b53a32611c897070424522d75618fd92b2630db5",
+          "bytes": 1342
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-18/receipt.json",
+          "sha256": "df4e18e43fc11b898337711a686ffb6b28736debbced02303613e1b002bc7d9e",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/unit-07.json",
+          "sha256": "3a130e763337d1da3bfa539c32b371ec58c3f7f5f1a70c682dd1381fa90216aa",
+          "bytes": 6811
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-basic-stdout.json",
+          "sha256": "7f3e7f5cc9d89ecb438f97a2157284fb78020df88ea08e85701f7e0d80dfee93",
+          "bytes": 2000
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/browser-basic-receipt.json",
+          "sha256": "12a136e15d936c035270e4d7ef645fd6c6b74143ce447c79ac34610c8d372b0a",
+          "bytes": 2036
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    },
+    {
+      "index": 29,
+      "task": "TASK-019",
+      "criterion": "AT-16 and AT-29 compare exact Map/List relation IDs, direction, qualifiers, sources, warnings, filters, selection and returned scope. Every substantive map action remains usable through List when graph import or rendering fails.",
+      "status": "current_scoped_evidence_ready_for_manager_acceptance_with_stated_limits",
+      "explanation": "Current production exact Map/List IDs, direction, qualifiers, sources, warnings, filters, selection and scope comparisons pass. Fresh blocked-renderer, lost-canvas and refused-layout runs preserve substantive keyboard List entry/evidence/focus/expand actions and phone details access.",
+      "check_ids": [
+        "browser15",
+        "browser16",
+        "browser17",
+        "current_closure",
+        "accepted_service_v4",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+          "bytes": 44942
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "14117d509809cd93cc31ba0dd4ad32f6115af58f99b9065974feaa307da1d93d",
+          "bytes": 9202
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "2e4c62b5d62e8b23094c1cb29eeca1f1006576f142d8264f35a1bcb75362ca4b",
+          "bytes": 10787
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        }
+      ],
+      "direct_current_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/stdout.json",
+          "sha256": "8ca0bc0f3b3ec855f0f550461d16828698b886c8b0b4948a4445caad32680f0a",
+          "bytes": 5896
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-15/receipt.json",
+          "sha256": "2e04c008568b43b48424a218daa13ab3b77a67c45288fdbb0a13aa073e36cb18",
+          "bytes": 2878
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/stdout.json",
+          "sha256": "5558c08fd4e056aa0414bf8979ffcf928bdb27f518e4fad38255db4a3a161f16",
+          "bytes": 6461
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-16/receipt.json",
+          "sha256": "dbb280d7a7f0f462c4ee6eae8f2ec5639da3fb956365c2e44a268918498d0fdd",
+          "bytes": 1994
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/stdout.json",
+          "sha256": "d6e8d287f00cabfb6aafb27901510597a7eea2145bb391d626d1a78e3b613f98",
+          "bytes": 1405
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/host-17/receipt.json",
+          "sha256": "a9a8b6e79615b2e8abad12fbce0c2b338f7d623a51ec3b638aa93d62a3845695",
+          "bytes": 1993
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/current-audit.json",
+          "sha256": "5c22d1c82f7f5ed50380bb45eada61ee3067520d8f2ac08f1f3154a90d68c980",
+          "bytes": 26175
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+          "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+          "bytes": 123359
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-audit.json",
+          "sha256": "0540b4a4f5aed295d56dc8bae22790a4440441875f92da8f21f66f804edf17e0",
+          "bytes": 25488
+        }
+      ],
+      "current_runtime_manifest": {
+        "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+        "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+        "bytes": 1508
+      },
+      "acceptance_boundary": "Accepted SERVICE V4 current dependency; manager FRONTEND acceptance and later qualification/full-release gates remain separate.",
+      "current_service_acceptance": {
+        "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v4.json",
+        "sha256": "78dc3417cccf6f1594a05329c40e7bbffbf8fdc6ec6c46540072174265cd4a8c",
+        "bytes": 123359
+      }
+    }
+  ],
+  "current_checks": {
+    "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/current-checks.json",
+    "sha256": "a1919c3aeb9c2f7defd708452057bf6ec5faa6801c2b8c5c4a26d2d967c2ce44",
+    "bytes": 56193
+  },
+  "native_qualification": {
+    "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/native-qualification.json",
+    "sha256": "a69a13020673cfb592570a8b2e57518321d0b97711d227ec7912a8c873795ac8",
+    "bytes": 7413
+  },
+  "limits": [
+    "This is the same owner final FRONTEND evidence package for independent manager acceptance. SERVICE V4 is accepted with all 14 criteria; qualification and full-release gates remain separate.",
+    "Current production Headless Shell 151 checks prove 320 CSS-pixel behavior, narrow/wide transitions, exact identities, both themes and reduced motion. Native 200% observations cover only the listed controls/process/source/details subset on the current build, from the failed long attempt. Exact stable entity IDs were not recorded in that native subset; complete native Map/List usability at 200% is not claimed.",
+    "The native long attempt remains failed for missing normal STOP before the 420-second inner deadline. Native Chrome zoom 90% to 200% to 90% was directly observed, but exact original window frame/origin/identity restoration remains false/unresolved. Positive zoom restoration is not frame restoration.",
+    "The first short native attempt remains failed at 128.30 seconds under the unchanged 120-second STOP limit. The later successful short check stopped at 17.949551375 seconds and verified owned cleanup without any geometry or zoom actions. Its restoration is not applicable; it neither repeats the 200% walkthrough nor repairs the previous frame failure.",
+    "Theme native keyboard selection remains unproved. Headless app and minimal native select made no change for the recorded sequence; the alternative also made no app selection change. This is a diagnostic, excluded from behavioral pass counts. No Theme-specific code was changed. Native Safari keyboard, actual VoiceOver speech and participant comprehension are not supplied.",
+    "Dense captions can crowd in the 25-node/26-edge initial-fit Map. Exact List/canvas parity and selected/peripheral label behavior do not establish every association is unobscured or human comprehension. TASK-025 remains mandatory.",
+    "Six focused unit groups use an explicit DOM double; 20 existing groups use mocked network/DOM. Catalog timer callback and passive-disconnect unit evidence are not real deadline or expiry timing. Prior real catalog timing remains historical and is not relabeled current.",
+    "The 53 frontend browser groups and nine SERVICE V4 browser groups are reported groups across separate runs, including repeated bootstrap coverage, not counts of distinct requirements. Browser16 permits three exact disposable fixture paths to change, proving other-file preservation rather than every field in those three files.",
+    "SERVICE V4 actual runner passed 28 cases, but its original wrapper receipt remains failed for an order-only validation assumption. Root adjudication and exact retained-case-set verification support the pass without a rerun. Initial browser driver failure and all native failures remain preserved.",
+    "Operational worker RSS sampling permits transient overshoot; retained fault observations are not broad performance acceptance. Full 49 requirements, 36 acceptance tests, 33 tasks, eight phases and original qualification full 16 remain. No root/Template adoption, watcher restart, publication, retirement, participant/performance or main Task completion is claimed."
+  ],
+  "manager_acceptance_separate": true
+}

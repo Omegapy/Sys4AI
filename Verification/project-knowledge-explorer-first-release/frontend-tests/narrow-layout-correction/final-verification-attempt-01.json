@@ -1,0 +1,42 @@
+{
+  "status": "failed_historical_verifier_attempt",
+  "command": [
+    ".venv/bin/python",
+    "-I",
+    "-B",
+    "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/finalize-provisional.py"
+  ],
+  "exit_code": 1,
+  "script": {
+    "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/finalize-provisional.py",
+    "sha256": "96910aaee86be0bf0b6a6a132c8543fee868c168e63868c5b2b1b2a856cb5b0d",
+    "bytes": 7964
+  },
+  "failed_assertion": "AssertionError: SKILLS-depo/ontology/explorer/src/app.ts",
+  "location": "finalize-provisional.py line75, a.verify(row)",
+  "containing_document": {
+    "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/implementation-review-current.json",
+    "sha256": "1a32d4484db19c83157e4df295eb03a5b007076d236359dfe962456febdcb01d",
+    "bytes": 7751
+  },
+  "json_field": "$.changes[0].previous",
+  "claimed_base": "Repository-relative previous source identity, explicitly marked previous, with sibling preimage reference; not an unmarked current binding.",
+  "previous": {
+    "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+    "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+    "bytes": 38466
+  },
+  "current": {
+    "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+    "sha256": "a39d01541e87c36b08591169e12e52885bfc35723ae298d133a821035203c02f",
+    "bytes": 44942
+  },
+  "preimage": {
+    "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/preimages/SKILLS-depo/ontology/explorer/src/app.ts",
+    "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+    "bytes": 38466
+  },
+  "diagnosis": "Generic recursive current-document verifier treated the explicitly previous source tuple as current live bytes. The exact historical preimage and current tuple independently match. No product defect or drift found.",
+  "next": "Successor explicitly validates each previous tuple against its preserved preimage; all current tuples remain verified against live repository bytes. No product/test/build/browser rerun.",
+  "writes_before_failure": "No final-verification/evidence-inventory/delivery output written by attempt01."
+}

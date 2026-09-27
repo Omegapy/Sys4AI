@@ -1,0 +1,154 @@
+---
+schema_version: 2
+trd_id: "TRD-20260912-483C93BD"
+title: "Root ontology, memory and Curator health follow-up"
+slug: "root-ontology-memory-and-curator-health-follow-up"
+created_at: "2026-09-12T21:42:58-06:00"
+updated_at: "2026-09-12T21:46:39-06:00"
+status: "draft"
+revision: 2
+last_action_id: "TO-TRD-003"
+status_reason: "Created as a draft from an explicit user request."
+---
+
+# Task Requirement Document: Root ontology, memory and Curator health follow-up
+
+## Destination
+
+Bring the Sys4AI depot root's Curator integration and reported health follow-up to a verifiable state: Curator is discoverable through ontology, the identified maintenance and historical Task warning receive exact owner dispositions, and the on-demand ontology workbench has direct operational evidence. Preserve the working memory and ontology systems and the current Curator project-session mode.
+
+## Captured user intent
+
+U01: The user explicitly invoked `$task` and `$to-trd` based on the linked root health report. This captures requirements for the report's findings and verification gaps in `/Volumes/P-SSD/AngryOwl/Sys4AI`. The current operation is Task bookkeeping and a managed requirements document. Repairs, implementation planning, service startup and other downstream actions need their own authority. The [capture summary](../Verification/root-health-followup-trd-20260912-v1/request.md) records this interpretation; it is a summary, not an additional user instruction.
+
+The requirements below describe the desired follow-up outcomes. Their inclusion does not claim they are implemented or authorize their execution. The managed TRD remains draft until the user approves its exact presented revision.
+
+## Context and sources
+
+The original health check ran on September 12, 2026, America/Denver. H01 is the retained [root health report](../Verification/root-health-followup-trd-20260912-v1/REPORT.md), originally `/tmp/sys4ai-root-health-SxmX9h/REPORT.md`, SHA-256 `38d69cc7f78fd998dce0df8b6e32179324f7b3e6d10cc0906367bd9f9a6a0bb7`. The [source manifest](../Verification/root-health-followup-trd-20260912-v1/source-manifest.json) retains original locations and exact hashes for its diagnostic files. These are dated observations. The two pending signals and zero nonterminal Tasks belong to that health-check snapshot; this later capture creates separate new Task state.
+
+| Source | Locator and supported observation |
+| --- | --- |
+| E01 | [Curator ontology discovery](../Verification/root-health-followup-trd-20260912-v1/ontology_curator_discovery.json), `query`, `status`, `results`: `capability curator` returned `no_match`. H01 also records no Curator/curate entry in canonical ontology modules or bindings. |
+| E02 | [Curator live startup](../Verification/root-health-followup-trd-20260912-v1/curator_session.json), `events`, `coverage`, `source_validation_pending`, `triage`, `next_action`: `pending_owner` with two pending catch-up signals, no observed live owner runtime and no completed owner operation. |
+| E03 | [Task status](../Verification/root-health-followup-trd-20260912-v1/task_status.json), `warnings`, `integrity`, `counts`: valid ledger with `STAGED_RESPONSE` for cancelled Task `TASK-20260910-7F1A11AE`. H01 records revision 238, a 1,425-byte staged file and no top-level transaction file in that Task folder at inspection. |
+| E04 | [Historical owner observation](../Verification/root-health-followup-trd-20260912-v1/terminal-owner-observation.json), `observations`, `boundary`: completed Task `TASK-20260912-CD80544E` retains active assignment `supported_manager_v2` for `/root/supported_curator_manager`; cancelled Task `TASK-20260910-7F1A11AE` retains active assignment `curator_manager` for `/root/curator_manager`. This records canonical assignments, without current native stop or live-process proof. No owner was altered. |
+| E05 | [Advanced ontology health](../Verification/root-health-followup-trd-20260912-v1/ontology_advanced.json), `assessment.components`, `profiles.workbench`: backend probes pass. Aggregate `degraded` reflects an enabled on-demand workbench with `service_state: not_assessed`, `running: null` and `observed_operation: not_exercised`. Guard validation was read-only; guarded dispatch was not exercised. |
+| E06 | [Memory operational health](../Verification/root-health-followup-trd-20260912-v1/memory_operational.json), `components`, and [memory search](../Verification/root-health-followup-trd-20260912-v1/memory_search.json), `mode`, `status`, `limitations`, `results`: operational components were ready; actual hybrid retrieval succeeded without fallback limitations. Retrieved memory remains source data, not current action authority. |
+| E07 | [Ontology core health](../Verification/root-health-followup-trd-20260912-v1/ontology_core.json), `validation`, `generated`, `ready`: canonical validation passed; compiled output, wiki and memory links were current. |
+| E08 | [Curator policy status](../Verification/root-health-followup-trd-20260912-v1/curator_status.json), `state`, `session`, `unattended_state`: valid `installed_session_enabled`, project-session mode, unattended background AI off. The unattended selection fields remain unselected; `allowed: false` is not a requirement to enable unattended dispatch. [Installation file checks](../Verification/root-health-followup-trd-20260912-v1/curator_manifest_check.json) matched 127 references, and [installed session tests](../Verification/root-health-followup-trd-20260912-v1/curator_tests.stderr) passed four tests using disposable fixtures. |
+| E09 | [Verification summary](../Verification/root-health-followup-trd-20260912-v1/verification_summary.json): assessed memory/ontology input hashes were unchanged; root maintenance completion, browser operation and canonical publication/recovery were not exercised. |
+| G01 | [Root instructions](../AGENTS.md), project ownership, Task, TRD and Curator session sections; [Director role](../ROLE.md), authority and supervision/recovery sections; [specifications](../SPECS.md), memory and ontology sections. These define root ownership, current actor/revision checks, local environments and separate publication boundaries. |
+| G02 | [To-TRD skill](../.agents/skills/to-trd/SKILL.md), activation and lifecycle sections; [TRD contract](../.agents/skills/to-trd/references/trd-contract.md), document completion gate; [Task skill](../.agents/skills/task/SKILL.md), ownership and stopping gates. Document approval, Task state and implementation authority remain separate. |
+
+E02 identifies these exact snapshot signals:
+
+| Signal | Event ID | Event-record SHA-256 |
+| --- | --- | --- |
+| C1 | `evt-5ac240328f9da702aed2ba13448ceebc5b21b7c3913040b1d31a461622020fa5` | `abcf602ff0b501f237c265cb1f0ec32cf97bfb93edb8b903f6da62f3998b5df1` |
+| C2 | `evt-11d7a288ee424dd1d9b19c5b7437ed6be292f4c02968e77a114464a5489edd89` | `c0a647ceee1396b005192f879bb601dbd6c97aafcc3d78ecc58a7e7abb7d9341` |
+
+E03 identifies the staged artifact as `Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/responses/.Task-Response-0188-2026-09-11T18-04-21-06-00.md.qncw_xfn.txn`. Its exact current bytes, ownership and transaction state remain inputs to the later authorized owner inspection; the file's presence alone proves neither corruption nor safe deletion.
+
+The Curator scan recorded 42,406 changed-path metadata records and returned the first 50. Source validation remained pending. These figures describe bounded metadata coverage, not a count of failures. The reported 5 indexed memory entities, 42 vector chunks, 127 matched installation files and four passed tests are historical evidence, not fixed future performance or corpus-size requirements.
+
+## In scope
+
+- Root Curator capability discovery with current ontology source bindings and accurate authority limits.
+- Exact current owner assessment and disposition of C1 and C2, including source validation and preserved pending state when work cannot finish.
+- Exact owner inspection and supported disposition of the identified cancelled-Task staged response, with historical ownership reconciliation before affected writes.
+- Direct evidence of the existing on-demand ontology workbench's root-project browser operation.
+- Preservation of healthy memory and ontology behavior, project-session Curator settings, configured work bounds, existing opt-outs and independent project ownership.
+- Evidence that clearly states completed outcomes, blockers and unexercised behavior.
+
+## Out of scope
+
+This capture performs no repair, implementation plan, service startup, dependency or model installation, ontology/memory publication, historical Task-owner alteration, Git action, external message or deployment. TRD approval alone authorizes none of those actions. It does not resume or complete the cancelled Curator implementation Task.
+
+The follow-up does not introduce unattended background AI, scheduling, permanent workbench operation, a new memory or ontology architecture, bulk cleanup of changed paths, new product-project adoption, or edits to child projects, reusable collections, the Template or project registration. Such changes require a separate explicitly bounded request. Broad canonical publication/recovery exercises beyond the exact authorized follow-up are not added merely because the health check did not exercise them.
+
+## Task requirements
+
+### REQ-001 — Make the installed Curator capability discoverable
+- Requirement: The root ontology capability catalog represents the installed Curator project-session capability with current project-local sources and its actual action-authority boundary.
+- Source: U01; H01 item 1; E01; G01 ontology ownership and capability-discovery boundaries.
+- Acceptance: A current root `capability curator` lookup returns the relevant Curator capability with resolvable provenance to the installed entry and session behavior; it no longer returns `no_match` for the installed capability.
+- Acceptance: Canonical validation and applicable generated-state checks accept the addition. The returned entry does not imply unattended operation, a live owner runtime, maintenance completion or permission to execute an action.
+- Depends on: REQ-007
+
+### REQ-002 — Resolve the identified catch-up signals through their owner
+- Requirement: Each identified root catch-up signal receives an exact, source-validated disposition through the current authorized project owner, with its queue state reflecting the work actually performed.
+- Source: U01; H01 item 2; E02 signals C1 and C2; G01 Curator session checkpoint and owner boundaries.
+- Acceptance: Each signal has a current identity/version comparison to its snapshot and a traceable owner receipt for performed eligible maintenance or a justified disposition supported by the installed owner interface. Any intervening consumption or replacement is demonstrated by exact existing evidence, without duplicate owner work.
+- Acceptance: Metadata-only path observations are not treated as validated source content or as failures. A disposition claiming completed maintenance includes the source validation and actual owner-operation evidence needed for that claim; collection and fixture success alone do not suffice.
+- Acceptance: If the current owner, required authority, source evidence or configured budget is unavailable, unfinished work remains pending with its exact blocker and continuation condition. That outcome is reported as incomplete maintenance and cannot be relabeled as a completed signal.
+- Depends on: REQ-007
+
+### REQ-003 — Give the staged Task response an exact transaction disposition
+- Requirement: The identified staged response under cancelled Task `TASK-20260910-7F1A11AE` receives an owner-led transaction inspection and supported disposition that preserves its canonical Task history and truthful cancellation state.
+- Source: U01; H01 item 3; E03 exact staged artifact; E04 historical owner limitation; G01 Task recovery and ownership rules.
+- Acceptance: The disposition identifies the current staged path and hash, current Task revision, related response/transaction evidence and reconciled write owner. It explains whether the file is part of an unfinished transaction or another supported condition; the earlier absence of a top-level transaction file is not used alone to justify removal.
+- Acceptance: Any authorized recovery or cleanup uses the installed Task owner's supported transaction route and records exact before/after evidence. A fresh read-only Task check confirms ledger integrity and accounts for the specific `STAGED_RESPONSE` warning without discarding response history or turning cancellation into completion.
+- Acceptance: If ownership cannot be reconciled or no supported authorized disposition is available, the artifact and history remain preserved and the exact warning remains an explicit non-complete blocker. No broad temporary-file deletion or fabricated stop evidence is permitted.
+- Depends on: REQ-007
+
+### REQ-004 — Demonstrate on-demand ontology workbench operation
+- Requirement: The existing enabled ontology workbench has direct operational evidence for its intended on-demand root-project browser use while retaining its configured on-demand lifecycle.
+- Source: U01; H01 ontology advanced finding and verification scope; E05; G01 ontology second-release specification.
+- Acceptance: Under separately authorized operation, a root-bound loopback endpoint is observed and its browser view successfully exposes current root ontology information through a representative supported read interaction. Evidence identifies the actual process/endpoint, project root, observed interaction and result.
+- Acceptance: The evidence distinguishes a stopped or unassessed on-demand service from a tested failure. It records the resulting service state and continued on-demand configuration; successful verification does not depend on permanent background enablement or weakening a health check.
+- Acceptance: Browser-read evidence does not claim that guarded writes, canonical publication or recovery were exercised. Any inaccessible endpoint, failed interaction or unavailable prerequisite remains an explicit verification failure or gap, rather than a proved healthy browser service.
+- Depends on: REQ-007
+
+### REQ-005 — Preserve healthy memory and ontology behavior
+- Requirement: The follow-up preserves the root's working memory retrieval, canonical memory records and configuration, and the ontology capabilities already shown ready, except for exact separately authorized changes needed for the captured findings.
+- Source: U01; H01 system results; E05, E06, E07 and E09; G01 memory and ontology ownership specifications.
+- Acceptance: Proportionate current checks continue to show memory canonical/evidence/projection/index/backend readiness and successful actual hybrid retrieval without an unexplained new fallback limitation. Existing records, automatic-capture choice and project identity retain their meaning.
+- Acceptance: Ontology canonical validation, applicable compiled/wiki/memory-link freshness and the previously passing selected backend probes remain valid after the authorized follow-up. Any necessary regenerated output has current input provenance; unrelated authored semantics and records are preserved.
+- Acceptance: Changed-artifact review accounts for the exact authorized difference. Historical entity/chunk counts and test timings are not imposed as new fixed targets, and an unrelated source change is reported instead of being silently overwritten.
+- Depends on: None.
+
+### REQ-006 — Preserve Curator project-session operation
+- Requirement: Curator remains enabled for bounded live project-session maintenance, with existing opt-outs and configured budgets preserved and unattended AI, scheduler and service operation disabled.
+- Source: U01; H01 Curator result and verification scope; E02, E08 and E09; G01 Curator session checkpoint.
+- Acceptance: Current policy and session checks retain project-session mode, its configured finite work/model limits, pending-work preservation and quiet routine behavior. Existing opt-outs are respected.
+- Acceptance: The unattended selection fields may remain unselected. No unattended provisioning, scheduled run or permanent background service is introduced to remove `selection_required`, `runtime_unavailable` or an unassessed on-demand endpoint.
+- Acceptance: Installation integrity, successful session collection, owner-runtime observation and completed maintenance are reported as separate facts. Applicable focused checks support any changed session behavior without treating fixture consumption as completion of C1 or C2.
+- Depends on: None.
+
+### REQ-007 — Preserve exact ownership and action authority
+- Requirement: Follow-up actions stay within separately granted root-project scope and current owning interfaces, with known write owners reconciled before any affected ownership or state change.
+- Source: U01; E04; G01 project ownership, Task activation and recovery rules; G02 document and Task authority boundaries.
+- Acceptance: The current requirements-capture operation and its draft or approved TRD grant no downstream repair, planning, service-start, installation, publication, historical-owner or external-action authority. Any later operation identifies its actual authorization and exact project/file boundary before execution.
+- Acceptance: Before touching scopes held by the historical assignments in E04, current native observations and the applicable ownership protocol establish the responsible writer and any completed stop/transfer. A terminal Task status, old timestamp or absent roster entry alone does not establish revocation or a stopped process.
+- Acceptance: Task mutations, where separately authorized, retain current actor/generation/revision and helper checks. Memory and ontology grants remain separate. Unrelated Tasks, canonical histories, reusable source collections, the Template, registry and child projects are preserved.
+- Depends on: None.
+
+### REQ-008 — Report health from exact evidence and retain limits
+- Requirement: The follow-up result accounts for every captured finding using current, root-specific evidence and explicitly separates resolved outcomes from preserved pending work, blockers and unexercised behavior.
+- Source: U01; H01 verification scope; E01 through E09; G01 evidence and completion rules; G02 separation of document approval and implementation.
+- Acceptance: Each finding maps to an exact artifact/version and its observed check or owner receipt. The result separately identifies static validation, backend probes, browser interaction, owner maintenance and any actually exercised canonical write/recovery behavior.
+- Acceptance: The result preserves the dated provenance of the original report and does not reuse its two pending signals, zero nonterminal Tasks, process observation or healthy component values as unverified current facts. New Task state from this capture remains separately identified.
+- Acceptance: An aggregate ready/degraded value is interpreted with its component diagnostics. No warning, guard or required check is suppressed to obtain a healthy label. Any unresolved finding or unexercised action remains visible with its practical limit.
+- Depends on: None.
+
+## Decisions
+
+- This is a requirements-capture operation under the user's combined Task and To-TRD activation. All listed findings and relevant verification gaps are included; no repair has been authorized or performed by this document.
+- The workbench finding is an evidence gap. Its retained `not_assessed` state and absent matching CLI process do not establish a failed service. The desired outcome is demonstrated on-demand use, without permanent background enablement.
+- Exact Curator ontology entity names, relation choices, owner-route implementation, transaction-recovery mechanics and browser interaction details remain implementation choices within REQ-001 through REQ-007. Their final design does not change the settled outcomes, preservation rules or acceptance boundaries and is not required for document approval.
+- The later owner inspection must use current versions for C1, C2 and the staged response because they can change after the snapshot. The known identities and required disposition are settled; current operational evidence is a verification input, not a missing user preference.
+- The root-only boundary follows the requested project and installed ownership rules. Reusable or product-project adoption is not inferred from directory names or matching content.
+- Structural content readiness means the requirements can be presented for semantic review. Only explicit user approval of the exact unchanged managed revision permits `trd_done`; that state records document completion alone.
+
+## Open questions
+
+None.
+
+## Not yet specified
+
+None.
+
+## Assumptions
+
+None.

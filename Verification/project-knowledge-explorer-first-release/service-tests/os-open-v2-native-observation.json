@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "executor": "/root primary host 7of9; actual native Chrome through cua_repl, ordinary reviewed frozen host exec",
+  "job": {
+    "path": "Verification/project-knowledge-explorer-first-release/service-tests/host-os-open-v2-01.json",
+    "sha256": "afc48353924f117dfed6f36a1dd9e017a082d0f15a4a9e913307bdd095f79abc"
+  },
+  "executor_receipt": "/private/tmp/explorer-service-v2-os-open-01-host-w5jutcs9/receipt.json",
+  "session_id": 36804,
+  "driver_pid": 17919,
+  "tab_id": "1492112270",
+  "browser_id": "1",
+  "browser": "Google Chrome",
+  "browser_version_from_verified_same_binary": "153.0.8010.52",
+  "entry": {
+    "actual_os_default_dispatch": true,
+    "controller": "MacOSXOSAScript/default",
+    "BROWSER_override_present": false,
+    "inspection_after_browser_ready": true,
+    "clean_initial_url": "http://127.0.0.1:51354/#/p/explorer-browser-smoke/overview",
+    "no_replacement_tab": true
+  },
+  "zoom": {
+    "initial_percent": 90,
+    "initial_native_evidence": "Chrome toolbar button Zoom: 90%, then native zoom popup Zoom: 90%.",
+    "target_percent": 200,
+    "target_native_evidence": "Native Make Text Larger clicks produced visible values 100,110,125,150,175,200. Native popup and later toolbar both read Zoom: 200%.",
+    "restored_percent": 90,
+    "restoration_native_evidence": "Native Reset returned 100%, Make Text Smaller returned 90%; popup positively read Zoom: 90% before closing.",
+    "css_font_override_used": false,
+    "page_scale_override_used": false
+  },
+  "observations": [
+    "At actual200%, labeled Search and Search button remained visible in fixed header; Overview, Terms, Processes and Map remained accessible; Close reading session was visible after vertical scrolling.",
+    "Overview document clientWidth935 and scrollWidth935; innerWidth943 innerHeight384. Vertical scrolling is needed at this actual window and zoom; no document horizontal overflow.",
+    "Opened Starting points Alignment, Sources, first recorded SPECS.md section:Specification source. Source evidence heading received focus and remained below the fixed header; Close source control was visible. Source text wrapped, exact synthetic statement visible.",
+    "Source document clientWidth935 and scrollWidth935; pre clientWidth636 and scrollWidth636, left264 right901.5. Closing source restored focus to the exact first SPECS.md source button and scrolled it into unobscured view.",
+    "Opened Processes, first recorded process entry-00014, Process section. Fixture ordered inspection showed recorded purpose/scope/applicability, all three exact numbered steps and labeled reading links. Process document clientWidth935 and scrollWidth935.",
+    "At200%, selected second Read step source. Loaded docs/process-ordered.md section:Ordered inspection as exact section, source heading focused and unobscured. Closing restored focus to the exact second Read step source control, visible under Recorded step2.",
+    "Restored original90%, dismissed popup, closed only actual test tab1492112270, then extension tab inventory confirmed its absence. Did not select or modify unrelated tabs.",
+    "SIGTERM sent only to owned driver17919 after matching recorded process start identity. Exit0, no wrapper timeout, no stderr; worker reaped, fixture regular files unchanged,109 stage files and3 external tools reverified."
+  ],
+  "evidence_form": "Direct live native accessibility values, live page accessibility, screenshots inspected in cua_repl results, and read-only DOM geometry. Screenshots were inspected in conversation; no separate screenshot artifact saved by root.",
+  "qualification": "Synthetic fixture using existing native Chrome profile (pre-existing extensions visible). Actual native zoom and OS dispatch observation only; no Safari, VoiceOver, human comprehension, native offline/CSP, release-performance or whole-task acceptance claim. Public CLI subprocess proof is current service V2 batch01; native job's historical batch05 text is not its current attribution.",
+  "highest_verification": "actual OS default-browser dispatch and actual native Chrome200% zoom with exact original-setting restoration and owned cleanup"
+}

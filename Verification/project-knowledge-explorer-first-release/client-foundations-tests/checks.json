@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "stage": "/private/tmp/explorer-client-foundations-u194tx8_",
+  "toolchain": {
+    "node": "25.9.0",
+    "npm": "11.12.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.0",
+    "cytoscape": "3.34.3"
+  },
+  "checks": [
+    {
+      "name": "unchanged_dependency_copy",
+      "regular_files": 1006,
+      "inventory_sha256": "0c6d67b7992c218a31034efda91660e8242e63dcf804edfe7221fd505a320252",
+      "status": "passed"
+    },
+    {
+      "name": "strict_exact_project_config",
+      "command": [
+        "node",
+        "/private/tmp/explorer-client-foundations-u194tx8_/node_modules/typescript/bin/tsc",
+        "--project",
+        "/private/tmp/explorer-client-foundations-u194tx8_/tsconfig.json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "deliberate_negative_types",
+      "command": [
+        "node",
+        "/private/tmp/explorer-client-foundations-u194tx8_/node_modules/typescript/bin/tsc",
+        "--ignoreConfig",
+        "--strict",
+        "--noUncheckedIndexedAccess",
+        "--target",
+        "ES2022",
+        "--module",
+        "Node16",
+        "--moduleResolution",
+        "node16",
+        "--lib",
+        "ES2022,DOM",
+        "--noEmit",
+        "/private/tmp/explorer-client-foundations-u194tx8_/negative.ts"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "stdout": "negative.ts(2,7): error TS2322: Type '\"sideways\"' is not assignable to type 'Direction'.\nnegative.ts(3,29): error TS2322: Type 'boolean' is not assignable to type 'string'.\n",
+      "stderr": ""
+    },
+    {
+      "name": "isolated_runtime_compile",
+      "command": [
+        "node",
+        "/private/tmp/explorer-client-foundations-u194tx8_/node_modules/typescript/bin/tsc",
+        "--ignoreConfig",
+        "--strict",
+        "--noUncheckedIndexedAccess",
+        "--target",
+        "ES2022",
+        "--module",
+        "Node16",
+        "--moduleResolution",
+        "node16",
+        "--lib",
+        "ES2022,DOM",
+        "--outDir",
+        "/private/tmp/explorer-client-foundations-u194tx8_/out",
+        "/private/tmp/explorer-client-foundations-u194tx8_/src/contracts.ts",
+        "/private/tmp/explorer-client-foundations-u194tx8_/src/model.ts",
+        "/private/tmp/explorer-client-foundations-u194tx8_/src/preferences.ts",
+        "/private/tmp/explorer-client-foundations-u194tx8_/src/routes.ts",
+        "/private/tmp/explorer-client-foundations-u194tx8_/src/state.ts"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "pure_runtime_tests",
+      "command": [
+        "node",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/ontology/explorer/tests/client-foundations/client-foundations.test.cjs"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"kind\": \"pure_client_foundations\",\n  \"status\": \"passed\",\n  \"tests\": 21,\n  \"assertions\": 766,\n  \"results\": [\n    {\n      \"name\": \"valid operation shapes and full request-response correlations\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"closed objects and operation discriminants reject injection\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"strict duplicate keys, UTF8, Unicode, depth, integer token and byte limits\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"numeric tokens preserve value and canonical_json text preserves digits\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"canonical base64url padding bits, opaque cursors and session byte cap\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"all 31 fixed errors across six operations and safe failure output\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"page counts, coverage, markers, graph endpoint/direction and filter coherence\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"source identity, observed hashes, stale status and exact ref digest\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"exact query canonical casefold and scope isolation\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"entry chunks and process branches remain exact and lossless\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"routes round trip exact IDs and safe normalized filter state\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"route injection, duplicate/unknown keys, decode once and 2048-byte fallback\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"preferences exact root key, whitelist, storage denial and own-key reset\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"regional sequence rejects late A after B even without cancellation\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"same normalized query still invalidates earlier request and scope\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"wrong project root epoch session service request or snapshot is rejected\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"refresh stages separately, commits all required regions atomically and rolls back failure\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"safe history is bounded and credential/source/cursor free; camera does not push\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"graph model preserves parallel edges, loop, qualifiers, exact endpoints and source references\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"complete graph prefix retains marker and retries before discarded page suffix\",\n      \"status\": \"passed\"\n    },\n    {\n      \"name\": \"graph scope conflicts and accumulated display ceilings\",\n      \"status\": \"passed\"\n    }\n  ],\n  \"qualifications\": [\n    \"No service, fetch/session lifecycle, DOM, actual browser, List or Cytoscape integration was exercised.\",\n    \"Runtime test credentials are generated in memory and are not serialized into this report.\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "independent_json_schema",
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv-memory-pilot/bin/python",
+        "-B",
+        "-c",
+        "import json,sys\nfrom pathlib import Path\nfrom jsonschema import Draft202012Validator\nschema=json.loads(Path(sys.argv[1]).read_text())\nDraft202012Validator.check_schema(schema)\nv=Draft202012Validator({'$ref':'#/$defs/ReadResponse','$defs':schema['$defs']})\nexamples=json.loads(Path(sys.argv[2]).read_text())\nfor x in examples:v.validate(x)\nprint(json.dumps({'schema':'Draft202012Validator','validated_success_and_fixed_error_examples':len(examples),'status':'passed'}))\n",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/ONTOLOGY-depo/schema/explorer-v1.json",
+        "/private/tmp/explorer-client-foundations-u194tx8_/wire-examples.json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "{\"schema\": \"Draft202012Validator\", \"validated_success_and_fixed_error_examples\": 37, \"status\": \"passed\"}\n",
+      "stderr": ""
+    },
+    {
+      "name": "source_whitespace_check",
+      "command": [
+        "git",
+        "-C",
+        "/Volumes/P-SSD/AngryOwl/Sys4AI",
+        "diff",
+        "--check",
+        "--",
+        "SKILLS-depo/ontology/explorer/src",
+        "SKILLS-depo/ontology/explorer/tests/client-foundations"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "compiled_api_manifest",
+      "files": [
+        {
+          "path": "/private/tmp/explorer-client-foundations-u194tx8_/out/contracts.js",
+          "sha256": "52dfcb332ddcb64daeff6fbc159777c8c2e2957d05a8cb71a1e22eae38a4ec7d",
+          "bytes": 139270
+        },
+        {
+          "path": "/private/tmp/explorer-client-foundations-u194tx8_/out/model.js",
+          "sha256": "26ee44ef2b5b8f21e96ad7e6051117712249387a226d24f81bcba50226ff95b9",
+          "bytes": 6321
+        },
+        {
+          "path": "/private/tmp/explorer-client-foundations-u194tx8_/out/preferences.js",
+          "sha256": "fc91a3449a64fa2011924268e8568f9e9c69159d496e5de07926648b4c5bed20",
+          "bytes": 3298
+        },
+        {
+          "path": "/private/tmp/explorer-client-foundations-u194tx8_/out/routes.js",
+          "sha256": "5764cf982e82a1c56a71b0627bb6ef13d922e34ec60b493b4c25231ef4517293",
+          "bytes": 6031
+        },
+        {
+          "path": "/private/tmp/explorer-client-foundations-u194tx8_/out/state.js",
+          "sha256": "20dd08715c43d4905a4c2313dff849e0401367083fdc1acc7f528fd0122f15dc",
+          "bytes": 17268
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/contracts.ts",
+      "sha256": "5ac271b7c461797bbceba5ae7afae8c3b8ef2ecaadf26d07a2b48d1dfd3f914b",
+      "bytes": 157119
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/model.ts",
+      "sha256": "441ed7ce0ff9ca9b54a4d8ad1bf503a2c6ee1f684eba2b4a9210aafb5b9e6c91",
+      "bytes": 6854
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/preferences.ts",
+      "sha256": "3326130b95927a5fd3d94b507e4c2b1bda1f523736155d51cb59ae9ef6d42544",
+      "bytes": 2884
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/routes.ts",
+      "sha256": "77e117c0d138a1d57fe234309e0f1f0b62852445db55acfdd7bc77e92f3e2078",
+      "bytes": 5582
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/src/state.ts",
+      "sha256": "942452d77292e7d4b140550028bcf63cd53f99eb0a3f77da96c174e5324cf8d7",
+      "bytes": 16676
+    }
+  ]
+}

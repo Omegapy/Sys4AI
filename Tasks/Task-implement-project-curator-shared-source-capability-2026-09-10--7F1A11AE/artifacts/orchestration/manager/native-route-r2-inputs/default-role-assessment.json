@@ -1,0 +1,43 @@
+{
+  "kind": "read_only_default_role_assessment",
+  "model_turns": 0,
+  "child_launches": 0,
+  "architecture_changed": false,
+  "runtime": {
+    "path": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "version": "0.153.4",
+    "sha256": "87a08119b8effa519f0ecb552dc98043f58a8200bf2ec5da60f76890c33e9c3a"
+  },
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.153.4/codex-rs/core/src/agent/role.rs",
+      "local_copy": "/private/var/folders/2k/jj9s1zzs5sxdb_7g557y533c0000gn/T/curator-default-role-assessment-s_5fznor/role.rs",
+      "sha256": "274720be5d0633cab5fc6a9259a9756bdbd8b9b1d2b1c69afc48580b5ec86352",
+      "kind": "tagged_upstream_source_not_binary_equivalence"
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+      "kind": "current_official_documentation"
+    }
+  ],
+  "observations": {
+    "upstream_omitted_role_defaults_to_default": true,
+    "typed_overrides_contain_agents": false,
+    "typed_overrides_contain_sandbox": false,
+    "permitted_disabled_feature_variants": [
+      "ShellTool",
+      "Apps",
+      "Personality",
+      "Plugins",
+      "MemoryTool",
+      "RequestPermissionsTool"
+    ],
+    "native_delegation_feature_in_allowlist": false
+  },
+  "assessment": "The documented discovery and built-in name precedence do not establish the required isolated child controls. Tagged 0.153.4 role application omits agents and sandbox settings and filters feature disables to six other variants; default.toml therefore does not supply the required delegation-disable route in that source. No child launch is warranted from discovery alone.",
+  "limitations": [
+    "The installed binary was not proven equivalent to the tagged source.",
+    "No child role application, actual child launch configuration, inherited context exclusion, peer-control denial or full confinement was exercised.",
+    "The host-proposed startup model catalog legacy-mode hypothesis remains unassessed and unselected."
+  ]
+}

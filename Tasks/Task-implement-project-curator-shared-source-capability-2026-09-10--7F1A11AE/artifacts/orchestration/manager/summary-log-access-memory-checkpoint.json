@@ -1,0 +1,50 @@
+{
+  "kind": "ScopedProjectMemoryCheckpointProposal",
+  "created_at": "2026-09-11T20:52:14.698783+00:00",
+  "trigger": "work-completed",
+  "feature": "Summary-first log access and on-demand bounded queries",
+  "state": "proposal_retained_not_published",
+  "automatic_capture": {
+    "enabled": true,
+    "read_only_capture_status_rechecked": true,
+    "config_sha256": "3989830df89045033f5e53f7fc53be143f33b553acd7f5405a591fb14cdd475a"
+  },
+  "evidence": [
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/summary-log-access-final-review.json",
+      "sha256": "7e64d9f60b45686dadfaebfbe032e006310acfdcc48c2763f80bae86b9a92480"
+    },
+    {
+      "path": "Verification/project-curator-release/summary-log-access-correction/index.json",
+      "sha256": "f3b4ca1e5009af8c4830c998014db86033a69f6578495ac4e502213daca31018"
+    }
+  ],
+  "expected": "A valid owned growing log can be identified safely and inspected without routinely delivering its complete content.",
+  "observed": "The prior native attempt stopped when identity binding applied a 2 MB whole-file cap to a valid 2.5 MB log. The corrected feature binds only a bounded UTF-8 header and retained file identity, while separate summary/query budgets govern inspection. Focused offline checks pass; native proof was not rerun.",
+  "proposed_findings": [
+    {
+      "finding": "Separate file identity, whole-log evidence integrity, bounded operator/model-facing projections, and native model context.",
+      "disposition": "targeted improvement implemented and offline verified; native context and full-history evidence requirements explicitly unchanged."
+    },
+    {
+      "finding": "Search permitted content before clipping; pagination must retain every undispatched record with its exact pre-read cursor state.",
+      "disposition": "Focused regressions cover early literals, scan and response boundaries, oversized records, and independent CLI invocations."
+    }
+  ],
+  "duplicate_check": {
+    "method": "Installed memory lexical search for log header summary cursor plus bounded comparison with existing notes",
+    "outcome": "No matching prior log/cursor finding identified; historical automatic-capture note is a different topic."
+  },
+  "authority": {
+    "canonical_revision": 150,
+    "writer": "/root/curator_manager",
+    "manager_writes": [
+      "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager"
+    ],
+    "publication_disposition": "No MEMORY write or operation was attempted. Current manager write fit does not grant MEMORY publication; root agreed to a scoped unpublished proposal without changing grants or configuration."
+  },
+  "published_record": null,
+  "personal_memory_written": false,
+  "task_completion_claim": false,
+  "handoff_blocker": false
+}

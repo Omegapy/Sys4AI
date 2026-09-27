@@ -1,0 +1,112 @@
+{
+  "kind": "IndependentNeutralPackagePublicReview",
+  "result": "pass_with_explicit_limits",
+  "manifest_sha256": "5eca600ae34da0f40d30a356b1eafc4b84146cfe83c0de2566cbb0cf02846f04",
+  "snapshots_verified": 14,
+  "contract_schema": 2,
+  "configuration_schema": 1,
+  "required_skill_resources": 36,
+  "required_contract_resources": 17,
+  "unchanged_shared_resource_references": [
+    {
+      "path": "SKILLS-depo/curate/scripts/curator_broker.py",
+      "sha256": "ef3c1b21de3f5634b16e2a03f3e5a7018b565b80f45b599fb87bad7a46ee9c84"
+    },
+    {
+      "path": "SKILLS-depo/curate/scripts/curator_classification.py",
+      "sha256": "00fbfcd59e69e510781e35da03c5207ae8b929956c3b40b7643405a3a0d5c858"
+    },
+    {
+      "path": "SKILLS-depo/curate/scripts/curator_confinement.py",
+      "sha256": "6fe4c3161d9ed43aa8b4fea89559b272780c157e3922c84f5ff7f25c1e82f872"
+    },
+    {
+      "path": "SKILLS-depo/curate/scripts/curator_grants.py",
+      "sha256": "39fc9d7eee8c128752127b85ab73ba9aa2a71ded4a79d39ab90e535785804691"
+    },
+    {
+      "path": "SKILLS-depo/curate/scripts/curator_logs.py",
+      "sha256": "d2326f2d91206d389f476b14d905eb191df9753dc54c25782aab8cb413de1c93"
+    },
+    {
+      "path": "CURATION-depo/starter/document-ownership.json",
+      "sha256": "795b429ae9b997feac5c39569a117d6a0e6332d38af718320a66945980b44916"
+    }
+  ],
+  "entrypoints_match_existing_static_checker": [
+    {
+      "path": ".curator-clean-stage/SKILLS-depo/curate/scripts/curator.py",
+      "names": [
+        "metadata_status",
+        "operation_preview",
+        "tick_preview",
+        "main"
+      ],
+      "sha256": "853cab37f3591b48e3daf3b6bf0153f539c60ba1c9d8e2f65e65e00305e73aa2"
+    },
+    {
+      "path": ".curator-clean-stage/SKILLS-depo/curate/scripts/curator_queue.py",
+      "names": [
+        "enqueue",
+        "record_delivery",
+        "status",
+        "advance_cursor"
+      ],
+      "sha256": "731914209668fd45a7fa068da97a10eaac039793e7991ec016fd1feecd672aaf"
+    },
+    {
+      "path": ".curator-clean-stage/SKILLS-depo/curate/scripts/curator_preflight.py",
+      "names": [
+        "preflight"
+      ],
+      "sha256": "602efe8f1b932fecbea4ae78cf2e9a1362a215c9ad90211b26aecf0b425d4e10"
+    },
+    {
+      "path": ".curator-clean-stage/SKILLS-depo/curate/scripts/curator_knowledge.py",
+      "names": [
+        "decision",
+        "semantic_rebind",
+        "ontology_transition"
+      ],
+      "sha256": "bf016ef5fc10e4f699ec791884e3c93f4215bcf607ca1cafca8ca14c7b9101d3"
+    },
+    {
+      "path": ".curator-clean-stage/SKILLS-depo/curate/scripts/curator_products.py",
+      "names": [
+        "plan",
+        "next_operation",
+        "observe"
+      ],
+      "sha256": "5897873ca4cb855922c68887bcc2ad87f376c31f8025e49f92aada2ae048bff2"
+    },
+    {
+      "path": ".curator-clean-stage/SKILLS-depo/curate/scripts/curator_handoff.py",
+      "names": [
+        "select",
+        "retain_original",
+        "continue_original"
+      ],
+      "sha256": "a257cbcdb183d0517feb8f75c9747f65122b1d6c26249e64e131dc10216e83fa"
+    },
+    {
+      "path": ".curator-clean-stage/SKILLS-depo/curate/scripts/curator_metrics.py",
+      "names": [
+        "metrics",
+        "operational_measures"
+      ],
+      "sha256": "3bc1543ffc33cf8df1670b11d6b2085172940bff30e6da5ad06de47d53323990"
+    }
+  ],
+  "inventory_resource_sets_match_contract": true,
+  "all_other_inventory_fields_and_pins_preserved": true,
+  "inventory_checksum_current": true,
+  "updater_mirrors_equal": true,
+  "scope": "Public package declaration and caller alignment only; dependency bodies not inspected.",
+  "limits": [
+    "Connected interface unavailable.",
+    "Full setup compatibility remains unavailable; resource declaration checks do not establish complete static inventory compatibility.",
+    "Two updater passes observed; exact case identity to be retained with final runner provenance.",
+    "Two initial setup failures remain retained; no completed setup claim.",
+    "No source/Template promotion or full release acceptance."
+  ]
+}

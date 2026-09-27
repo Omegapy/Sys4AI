@@ -1,0 +1,32 @@
+{
+  "status": "failed_verifier_path_base_attempt_preserved",
+  "command": [
+    ".venv/bin/python",
+    "-I",
+    "-B",
+    "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/audit.py"
+  ],
+  "exit_code": 1,
+  "script": {
+    "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/narrow-layout-correction/final-v4/audit.py",
+    "sha256": "d4419f622cd20c3e67d8539bef81f51063729becaca2c58f0e901f3f8fcadba3",
+    "bytes": 15065
+  },
+  "containing_document": {
+    "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v4/output-manifest.json",
+    "sha256": "f71faca7b1821f748309482179b5d203a5c0b080086f76cac3fb74d534540279",
+    "bytes": 11518
+  },
+  "json_field": "$.all_runtime_members[0].path",
+  "observed_error": "FileNotFoundError: [Errno 2] No such file or directory: 'chunks'",
+  "wrong_attempted_base": "Repository root",
+  "proven_base": "SKILLS-depo/ontology/explorer/assets",
+  "proof": "The entire all_runtime_members array is byte-value equal to the exact pinned runtime manifest assets array, whose paths are manifest-relative. The ordinary files array remains repository-relative.",
+  "runtime_manifest": {
+    "path": "SKILLS-depo/ontology/explorer/assets/manifest.json",
+    "sha256": "b27225ad7b3d57277cb962f4cebbff0b778563a327ec4b0dce0cfa324cdbcb37",
+    "bytes": 1508
+  },
+  "native_or_product_execution": false,
+  "new_evidence_before_failure": "Only audit.py; no completed audit output."
+}

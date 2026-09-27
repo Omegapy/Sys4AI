@@ -1,0 +1,38 @@
+{
+  "kind": "manager-frozen-P1-output-correction-review",
+  "state": "passed_for_host_scope_assessment",
+  "packet": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-output-corrected/scope.packet.json",
+    "sha256": "b48e510744830c02972a50428fffa220d660d21afd8310ac7459a3f5d6fcada7"
+  },
+  "canonical_sha256": "6344e31acae62a0bad8cdebda85c2ef89459ace6bf38828e55e845e141bf024b",
+  "evidence": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-output-corrected/index.json",
+    "sha256": "21421b47cf2b8c19234fd4d28d2252436f3ee10300ba9937a52acdec291c1309"
+  },
+  "verified": {
+    "source_manifest_entries": 42,
+    "execution_sources": 80,
+    "source_changes": [
+      "Verification/project-curator-release/run-native-proof.py",
+      "SKILLS-depo/curate/tests/test_native_protocol.py"
+    ],
+    "verify_packet": "passed_read_only",
+    "bounds_and_sequence": "exactly_unchanged",
+    "outer_output": "both bootstrap cells have max_output_tokens 40000; unique completed successful actual exec output must decode exactly to full reads and contents",
+    "independent_tests": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B -m unittest discover -s SKILLS-depo/curate/tests -p test_native_protocol.py -k P1EvidenceTests -v",
+      "exit_code": 0,
+      "tests": 4,
+      "seconds": 0.199,
+      "terminal": "OK",
+      "evidence_origin": "manager exec_command terminal observation; no rerun of unchanged suites"
+    }
+  },
+  "writer_observation": "Actual collaboration.list_agents reports completed/source writes stopped.",
+  "native_allocations": 0,
+  "limitations": [
+    "No P1 execution or authorization yet.",
+    "P1 mechanism does not pass full category/native gates or remaining foundation criteria."
+  ]
+}

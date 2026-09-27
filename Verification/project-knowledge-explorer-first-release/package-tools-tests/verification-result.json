@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "scope": "PACKAGE_TOOLS only; disposable minimal production build and publisher, no application/HTTP/browser acceptance",
+  "fixture": "/private/tmp/explorer-package-tools-g3-final/ontology/explorer",
+  "tests": 27,
+  "skipped": 0,
+  "checks": [
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/build-delivery-v1.log",
+        "bytes": 595,
+        "sha256": "a97d799dae2c2514071edb335ed152077b8a070d2561e20c6e240a045ff82c38"
+      }
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "package:runtime"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/publish-delivery-v1.log",
+        "bytes": 306,
+        "sha256": "0b904826dc0d2245dee1df9100759cc1d2139c9236577c534576a2afc55dc8bf"
+      }
+    },
+    {
+      "command": [
+        "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "SKILLS-depo/ontology/tests",
+        "-p",
+        "test_explorer_assets.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/suite-delivery-v1.log",
+        "bytes": 3685,
+        "sha256": "d0a67f5b41636e012c08227626f1b0576d5df1e320f40105950988a713144e9c"
+      }
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 1,
+      "log": {
+        "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/typecheck-negative-delivery-v1.log",
+        "bytes": 152,
+        "sha256": "6311ed210f2bfa8dd7571cb4994edab1ac4d6682f5d05827f6a9fa60aca69813"
+      }
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/repeat-build-delivery-v1.log",
+        "bytes": 595,
+        "sha256": "89a8f7d155392f6a7dc3955634f5a4de48cafa7b8923e88df3e49c47f8f7a42b"
+      }
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "package:runtime"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/repeat-publish-delivery-v1.log",
+        "bytes": 306,
+        "sha256": "0b904826dc0d2245dee1df9100759cc1d2139c9236577c534576a2afc55dc8bf"
+      }
+    },
+    {
+      "command": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import{canonicalBytes}from './scripts/package-runtime.mjs';process.stdout.write(canonicalBytes({z:'\u65e5\u672c\u8a9e \ud83d\ude00',a:[1,null,false]}));"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "Verification/project-knowledge-explorer-first-release/package-tools-tests/javascript-canonical-delivery-v1.log",
+        "bytes": 69,
+        "sha256": "f2639b1920024100c520a816343dc1f442a532e1af65f342cfb2eea0b94bb7d3"
+      }
+    }
+  ],
+  "same_host_repeat": "byte-identical runtime manifest and complete input/output build receipt",
+  "build_id": "568b6ea45815a9e07119fd9656b987cbc549024bdbb5326c84dc868a9a629c3c",
+  "source_digest": "260af093fcc827b2ecd929eeb87d0384879262631ff04a8338a0467eac6c314d",
+  "manifest_sha256": "5a47456b4a01b492e39922b52178508c66f50ca1d986c1900be7e247fcf13f66",
+  "receipt_sha256": "7545898f3c6ad29107c149c7dc31f30c826aada1d662b98171f54ad7cd8e63ca",
+  "schema_sha256": "8e6d0ceb47c98e77d518f4d7c935986ab6982d1a1c15e12377a726e90fbbb7a4",
+  "toolchain": {
+    "node": "25.9.0",
+    "npm": "11.12.1"
+  },
+  "lazy_cytoscape_chunk": [
+    {
+      "bytes": 434861,
+      "mime": "text/javascript",
+      "path": "chunks/cytoscape.esm-D6xx22XN.js",
+      "sha256": "5ba18b66a21161c446ce21283f6835cfb0e0bf604ab7ea90227aa125f34b3e5b"
+    }
+  ],
+  "production_literals_verified": true,
+  "python_js_core_canonical_bytes_verified": true,
+  "all_real_metadata_bindings_verified": true,
+  "runtime_members": [
+    {
+      "bytes": 434861,
+      "mime": "text/javascript",
+      "path": "chunks/cytoscape.esm-D6xx22XN.js",
+      "sha256": "5ba18b66a21161c446ce21283f6835cfb0e0bf604ab7ea90227aa125f34b3e5b"
+    },
+    {
+      "bytes": 59,
+      "mime": "text/css",
+      "path": "chunks/index-Biaswudd.css",
+      "sha256": "239aa7db133239d20daa4a0c7df1e12bbbcf42be1202247574773db99ec388f1"
+    },
+    {
+      "bytes": 1902,
+      "mime": "text/javascript",
+      "path": "chunks/index-mDLa1tTZ.js",
+      "sha256": "87e5ac7f4642e1c5054286bb638226c36a16d9589119ef58b1ace795ecaffb83"
+    },
+    {
+      "bytes": 351,
+      "mime": "text/html",
+      "path": "index.html",
+      "sha256": "eb4a0855c0b4c745c323bf69080c2fcfc2a44c2a6092ab06a8ec0940216be256"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "SKILLS-depo/ontology/explorer/vite.config.ts",
+      "bytes": 772,
+      "sha256": "ef4f8269d6833830f71543dbfc31ae26d6d9d9d2e6d459032481ea9d377a0ae1"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/tsconfig.json",
+      "bytes": 399,
+      "sha256": "ead2bf413dce4eaa13809dd8dad154b91dd21ae55721d5ced2de4ceca8b40d84"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/BUILD.md",
+      "bytes": 6274,
+      "sha256": "14a40861315c91fc6a1b232992d18c6564a4b2bd819789206f16af2cc4aea3fb"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/scripts/package-runtime.mjs",
+      "bytes": 17803,
+      "sha256": "7346ed8159e14f3457a2d6315fe40ceda0fbc7af2082efd9b605ff1cc1ae3147"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/package.json",
+      "bytes": 473,
+      "sha256": "ff9936a6af6c1d2939b60e00e043b6ad9f730b942dc233a80071f2368a66f70b"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/package-lock.json",
+      "bytes": 38104,
+      "sha256": "c56e429ba8b70fe0e56ab5f879853f5267083eb7facbc0a6da36322b94afdbf9"
+    },
+    {
+      "path": "SKILLS-depo/ontology/explorer/THIRD_PARTY_NOTICES.md",
+      "bytes": 235876,
+      "sha256": "3cfd499b3e29a659bf0ca25b379e5cfcc2c2b008da3d4713413b241b2b0aa746"
+    },
+    {
+      "path": "SKILLS-depo/ontology/scripts/ontology_explorer_assets.py",
+      "bytes": 23795,
+      "sha256": "215f2f5043c9f7de4abb02b32e9d28961733d11c120e3b0dec5a0e1b90894db6"
+    },
+    {
+      "path": "SKILLS-depo/ontology/tests/test_explorer_assets.py",
+      "bytes": 19298,
+      "sha256": "387fd495e1905bbcce70a1cf48131e88b46fbb57d52f90dfc27d49b24b4f364e"
+    },
+    {
+      "path": "ONTOLOGY-depo/starter/ontology-explorer.yaml",
+      "bytes": 184,
+      "sha256": "4f830593830da0ba679a2c8699e52d9cd7d9a458ac9a6467db16f5df8a6a0b0a"
+    }
+  ],
+  "qualification": [
+    "No network provisioning or npm hooks were executed. This does not claim a browser ran with its network disabled.",
+    "Compiler targets are configuration; actual browser/CSP/HTTP/whole-service epoch checks remain later gates.",
+    "No application src/index/assets, root adoption, Template, canonical knowledge, memory, Task or Git publication was written by this worker.",
+    "Existing all-helper closure may change concurrently; these tests bind their own exact selected helper and production-tooling inputs.",
+    "Publication is a single-writer operation; interruption can leave a fail-closed incomplete package rather than automatic rollback."
+  ]
+}

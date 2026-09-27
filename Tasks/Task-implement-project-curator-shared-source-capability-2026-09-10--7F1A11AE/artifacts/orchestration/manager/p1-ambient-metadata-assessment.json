@@ -1,0 +1,102 @@
+{
+  "kind": "bounded_P1_ambient_metadata_accounting_assessment",
+  "state": "reviewable_implementation_correction_not_native_authorization",
+  "authority": "Existing implementation goal; DEC006 bounded runtime/process mechanism, DEC015 AppServerv2, DEC016 confinement and REQ021 actual identity evidence remain unchanged. No globally idle account requirement is added. REQ020 stops repeated unchanged static-list retries.",
+  "accepted_target": {
+    "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/foundation_proposal_v2.md",
+    "sha256": "ae3e9aeb730cdf7a68a2d1e678ab5b92a84ce7930059664750e305fa8e6578f8"
+  },
+  "evidence": [
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt6/summary.json",
+      "sha256": "1d1b0c0f627f900fac736ff1938f8f8066b3166ff4438f66b291c8493e7d072c"
+    },
+    {
+      "path": "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/native-p1-attempt7/summary.json",
+      "sha256": "68c09c6ed08bd04d34fb18a04a837696ce988accc70f1cae020b61f270cb5039"
+    },
+    {
+      "path": "Verification/project-curator-release/native-p1-attempt7/poststop-difference.json",
+      "sha256": "047862217fdc3fdc82640df461f39cf6560da7773ed1b6d0262b72aafd8dc155"
+    }
+  ],
+  "finding": "Static exact concurrency lists cannot account for newly user-created external tasks/projects after a run baseline. Attempt7 added one external row/log and project/root counts with no changed prior thread/log entries. Counts alone cannot identify project additions or preservation.",
+  "unchanged_requirements": [
+    "All21 foundation criteria and full NP001-014 remain required; P1 stays mechanism-only.",
+    "Actual controller/fork/manager handoff, equal settings, context/helper isolation, owner calls and local stop evidence remain mandatory.",
+    "Immutable initial metadata baseline, current protected source/profile/tool bindings, original deadlines and all runtime/model/cell/archive limits remain.",
+    "No automatic unknown-thread allowlist, global ignore, unrelated task control, archive/rename allowance, body/title/config/credential reads or index edits."
+  ],
+  "smallest_mechanism": [
+    "Add an opt-in P1-only AmbientMetadataReview selection to the existing NativeStorageAdmission verification class; without it preserve the current unconditional mismatch rejection. Runtime actors receive no new capability or tool.",
+    "Freeze the existing baseline plus exact selected project metadata at launch. Retain immutable baseline bytes/digests. Represent later host-reviewed ambient additions in a separate ordered append-only delta chain; never replace initial inventories or clear mismatches.",
+    "Check selected metadata before new supervised turn admission and at existing visibility/final gates. If a new unexplained delta appears, close all new proof model/allocation/owner-tool admission first. Offer a host-review hold only when every owned native turn is observed terminal, no pending native/owner mutation/callback/release is unresolved, and no actor status is uncertain. Otherwise preserve failure and stop.",
+    "While held, permit only bounded diagnostic metadata reads, safe native status/error/stop handling, and trusted host receipt polling. A model tool callback received during the hold cannot dispatch an owner mutation, consume a grant, allocate an actor or resume work. No extra prompt/model turn is used to ask for the host decision.",
+    "Construct one bounded challenge from the immutable baseline plus prior reviewed deltas: exact new thread IDs/stable metadata, JSONL path/device/inode/UID/mode/link/size/mtime, exact new projects/project_roots rows, current selected history-index metadata for only those external IDs, proof actor/operation ledger exclusion and checkpoint quiescence evidence. Preserve raw metadata observation and challenge digest in trusted storage.",
+    "Root independently observes each candidate external native ID in the actual app listing and verifies its scoped metadata/path and associated project allocation. A host decision is ingested through the existing protected manager/host receipt path, not a native caller-supplied field. App visibility is bounded evidence and does not prove writer causation or confer control authority.",
+    "Accept only the exact current challenge using a fresh exclusive regular receipt bound to packet digest, immutable baseline digest, ordered previous-receipt digest, batch number, challenge digest and exact IDs/rows. Reopen metadata after receipt. Reject unexplained additional changes; only selected monotonic external progress from the frozen challenge observation may advance. Commit the next delta receipt without editing the baseline.",
+    "Reopen admission only after the complete current comparison equals baseline plus validated proof-owned records and the cumulative explicitly reviewed ambient delta chain. Keep external IDs outside pool reservations/owners/grants/capacity and apply the existing identity-preserving monotonic progress rules. Unknown final cleanup changes remain failures; final cleanup never starts a new review wait or extends its deadline."
+  ],
+  "project_metadata_selection": {
+    "projects": [
+      "id",
+      "position",
+      "created_at_ms",
+      "updated_at_ms"
+    ],
+    "project_roots": [
+      "project_id",
+      "position",
+      "path"
+    ],
+    "excluded": [
+      "projects.name",
+      "projects.metadata",
+      "thread title/preview/body",
+      "history item contents",
+      "configuration/credentials"
+    ],
+    "rules": [
+      "All baseline selected project/root rows stay exactly fixed. Only fully identified additions associated with explicitly reviewed external task cwd paths may be appended. Counts must equal the exact row inventories.",
+      "Native thread.project_id may be null. Native project ID and app project ID remain distinct; bind exact project_roots path association and each observation source, never assume identical IDs.",
+      "Removal, rename/archive, altered existing project/root row, duplicate root mapping, unrelated new project or unexplained count change fails."
+    ],
+    "observed_example": {
+      "external_native_id": "01a090d9-67f0-76a1-9226-5731c0a448e4",
+      "native_thread_project_id": null,
+      "native_project_id": "01a090d9-27c2-7f83-92c7-da5d72d573b0",
+      "app_project_id": "822fc580-f3e2-47a4-8600-db0f2103ca48",
+      "path": "/Volumes/P-SSD/Omegapy/Images-to-PDF"
+    }
+  },
+  "proposed_finite_limits": {
+    "ambient_review_batches": 4,
+    "new_external_ids_per_batch": 2,
+    "new_external_ids_total": 8,
+    "new_native_projects_total": 4,
+    "new_project_roots_total": 8,
+    "challenge_or_receipt_bytes": 200000,
+    "metadata_checkpoints_total": 96,
+    "project_metadata_rows": 10000,
+    "deadline": "Every hold, observation and recheck consumes the original1800-second work budget; no timer reset. Existing60-second cleanup/final15-second metadata reserve unchanged.",
+    "existing_limits": "All selected per-scan/file/row/history/wire/turn/cell/tool limits remain. Over-budget evidence holds/fails; no truncation."
+  },
+  "changed_file_scope": [
+    "SKILLS-depo/curate/scripts/curator_confinement.py",
+    "Verification/project-curator-release/run-native-proof.py",
+    "SKILLS-depo/curate/tests/test_confinement_contract.py",
+    "SKILLS-depo/curate/tests/test_native_protocol.py"
+  ],
+  "acceptance_cases": [
+    "Actual disposable metadata mismatch yields a challenge with admission closed and immutable baseline bytes untouched; the exact current root receipt accepts only its additions.",
+    "Exercise baseline plus two ordered review batches and later allowed external progress; exact cumulative replay reconstructs the expected state. Independent app/native IDs and null native thread.project_id remain distinct.",
+    "Reject changed/removal of baseline rows/logs, old-file substitution, aliases/hardlinks/special paths, archival/root changes, unselected project rows, count-only ambiguity and unknown schema fields without accepting a delta.",
+    "Reject wrong scope/baseline/previous receipt/challenge/IDs, duplicate or stale receipt, proof-owned actor as external, path under proof/protected candidate roots and missing independent external observation.",
+    "Prove pending hold denies a model start, native allocation and actual Broker-to-owner mutation before effect/grant consumption; active or uncertain actor/callback/release state cannot enter a resumable hold.",
+    "Reopen immediately before adoption and catch additional unlisted change; bound allowed monotonic growth to the challenge baseline and reject regression even if above an older host receipt.",
+    "Rejection, absent receipt, exhausted batch/byte/checkpoint budget or shared deadline causes bounded cleanup and original failed evidence; unknown final-storage change cannot preserve a pass.",
+    "Rerun affected existing storage preservation, concurrency progress, chunk/pre-ACK and owner-order tests; frozen source-derived wire preflight must remain valid. No broad unrelated test rewrite."
+  ],
+  "implementation_disposition": "Bounded correction to verification accounting within the accepted target, owned by the same dedicated implementer after current stopped-instance/context rebind. No new product workflow or source guard limit change. Freeze source/checks and a new exact one-attempt packet for independent manager/host assessment before any native run.",
+  "open_scope": "None for this assessment. Concrete native launch remains unapproved; any inability to meet the exact bounds or quiescence/receipt gates must be returned before implementation expands."
+}

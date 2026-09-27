@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "phase_id": "PHASE-001",
+  "completed_at": "2026-09-11T00:22:21.815105+00:00",
+  "verification_level": "static_checks_passed",
+  "checks": [
+    {
+      "check_id": "P001-C01",
+      "name": "Frozen approved source identities",
+      "result": "pass",
+      "details": {
+        "plan_revision": 3,
+        "trd_revision": 2
+      }
+    },
+    {
+      "check_id": "P001-C02",
+      "name": "Exact criterion identity and source equality",
+      "result": "pass",
+      "details": {
+        "requirements": 42,
+        "criteria": 124
+      }
+    },
+    {
+      "check_id": "P001-C03",
+      "name": "Criterion evidence routes without unsupported passes",
+      "result": "pass",
+      "details": {
+        "routed_rows": 124,
+        "full_requirement_passes_claimed": 0
+      }
+    },
+    {
+      "check_id": "P001-C04",
+      "name": "Unique exact Template-only mappings and owned generated index",
+      "result": "pass",
+      "details": {
+        "source_destinations": 396,
+        "generated_role_indexes": 1
+      }
+    },
+    {
+      "check_id": "P001-C05",
+      "name": "Canonical ownership and neutral installation",
+      "result": "pass",
+      "details": {
+        "owners": [
+          "curation-contract",
+          "curate",
+          "role-catalog",
+          "task",
+          "memory",
+          "ontology",
+          "learning",
+          "setup",
+          "template-distribution"
+        ],
+        "coordinating_skill": "curate"
+      }
+    },
+    {
+      "check_id": "P001-C06",
+      "name": "Authority classes and threat contract review",
+      "result": "pass",
+      "details": {
+        "documents": [
+          "authority.md",
+          "trust-boundary.md",
+          "state-paths.md"
+        ],
+        "denial_topics": [
+          "untrusted inputs",
+          "trusted issuer",
+          "sole logical canonical writer",
+          "private grants",
+          "symlinks",
+          "hardlinks",
+          "network",
+          "technical maintenance",
+          "protected governance",
+          "data/documentation",
+          "new execution boundary",
+          "process/spawn",
+          "thread/shellCommand",
+          "self-approval"
+        ],
+        "level": "contract_static_only",
+        "check_correction": "Whitespace normalization corrected an initial false negative on Markdown line wrapping. An intermediate check command had a syntax error before execution; this current command is the observed result."
+      }
+    },
+    {
+      "check_id": "P001-C07",
+      "name": "Native proof obligations and explicit non-pass",
+      "result": "pass",
+      "details": {
+        "proof_cases": 14,
+        "native_cases_run": 0,
+        "alias_and_venv_case": "NP-012"
+      }
+    },
+    {
+      "check_id": "P001-C08",
+      "name": "Authored Markdown links",
+      "result": "pass",
+      "details": {
+        "missing_links": []
+      }
+    },
+    {
+      "check_id": "P001-C09",
+      "name": "Protected and existing source bytes",
+      "result": "pass",
+      "details": {
+        "protected_entries": 81735,
+        "existing_source_entries": 324,
+        "unexpected_changes": [],
+        "source_changes": [],
+        "manager_owned_Task_updates": [
+          "Tasks/Task-implement-project-curator-shared-source-capability-2026-09-10--7F1A11AE/artifacts/orchestration/manager/runtime-prerequisites.json"
+        ]
+      }
+    },
+    {
+      "check_id": "P001-C10",
+      "name": "Git index preserved",
+      "result": "pass",
+      "details": {
+        "sha256": "1ab63c15d2fec0699dac825eef1727f603ec941488509ba87f57f1d1e3da1c86"
+      }
+    }
+  ],
+  "summary": {
+    "checks": 10,
+    "passed": 10,
+    "failed": 0,
+    "native_tests": 0
+  },
+  "method": "Python 3.12 direct canonical equality, SHA256 reinspection, ownership/mapping/Markdown static checks; no native runtime execution."
+}

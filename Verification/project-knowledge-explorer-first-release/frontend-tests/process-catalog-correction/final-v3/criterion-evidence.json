@@ -1,0 +1,3576 @@
+{
+  "assignment_id": "FRONTEND_WORKER_G3",
+  "baseline": "d548997fff1e19b519c26586ca35e96bde3220cef8f5db2ecd1ebfb44c5ae79c",
+  "round": 3,
+  "criteria_count": 29,
+  "criteria_verbatim_and_original_order": true,
+  "criteria": [
+    {
+      "index": 1,
+      "task": "TASK-012",
+      "criterion": "Pure state transitions preserve distinct identity/focus/query/filter/snapshot/expansion/source/preference fields and reject obsolete response sequences even when cancellation loses a race.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "State/request generations reject obsolete entry, catalog, session and context replies even when abort is ignored. Catalog headers have an independent finite allowlist and cannot change selection/history/entry state.",
+      "check_ids": [
+        "unit",
+        "catalog07",
+        "advanced03",
+        "service_v3_browser_late_session",
+        "service_v3_browser_late_context",
+        "accepted_foundations",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/unit-01.json",
+          "sha256": "739e59cb567a5122e0f867a22ab046bdde899946b41d26865059d9be5e504fd0",
+          "bytes": 6795
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-stdout.json",
+          "sha256": "565d340f81544d5f48a873182bbd90ee7809f7724dc1a111ff935e2660863845",
+          "bytes": 1799
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-receipt.json",
+          "sha256": "1a4dc1f8a29aa2328c16957e89b6386bf6c15b2f824b82e91957bb97afec52aa",
+          "bytes": 4094
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/attribution.json",
+          "sha256": "6dfc408332f25bcf6c623f725359e1b61dc448742642ad1539cea2d1a203220e",
+          "bytes": 3004
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-07-inputs.json",
+          "sha256": "1d8d8687cfb8e8b009669b77985ea76921467e5b685fd33be32e94f39661628e",
+          "bytes": 20285
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-07.json",
+          "sha256": "dfa4e23447c9700904dd62b95f871d9fd9eb1ac29d210a095c86b8b4548e740f",
+          "bytes": 1513
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-late-session-receipt.json",
+          "sha256": "0aae6913ccf8bff597a9ea07c2e2b1ca36a516d8f04f15125bec5542e8c66e5d",
+          "bytes": 1458
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-late-session-stdout.json",
+          "sha256": "d3f5b2b82f7c8acc305f6c16aa81bbc892aafac27479bd55cb5b82a80796070e",
+          "bytes": 1254
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-browser-late_session-01.json",
+          "sha256": "076d92218b935cb30a32b972cf87887f38d621e9a1563b586993640ccfca4b2a",
+          "bytes": 1928
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/stage-browser-01-inputs.json",
+          "sha256": "d8c82cfa105c1a8ae517245e3c37faa5118828e5b4551054ce26278adeba2e29",
+          "bytes": 20131
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-late-context-receipt.json",
+          "sha256": "75a234ffa8fa3aa09aa3d7fcca606852e8ef5fb7b78d92350a96b958d74ea106",
+          "bytes": 1457
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-late-context-stdout.json",
+          "sha256": "9b3de2023bb776830cefdee1d06211184be5ebcca453ca7a71ae79e0898611e8",
+          "bytes": 1295
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-browser-late_context-01.json",
+          "sha256": "3aae9369b409639b69b138a906da5eebdb0760cd433d474715940bbac5d2fd2e",
+          "bytes": 1928
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/client-foundations-tests/delivery.json",
+          "sha256": "da5dcc999baea3196c47797d567bec7e206407a66f324a9b5c2f0e2ee5a65145",
+          "bytes": 12320
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/client-foundations-acceptance.json",
+          "sha256": "e0d699693fed6483a4c6918cc556e62ef945477db9c26d03a531be94dc963d0c",
+          "bytes": 4657
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 2,
+      "task": "TASK-012",
+      "criterion": "Route codecs encode exact IDs and safe view state; bootstrap/session values and source bodies cannot enter copied links, history state or durable preference storage.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Exact route hydration, synchronous fragment erasure and safe history are checked; ordinary new-tab entry resumes authentication and copied links exclude bootstrap/session data.",
+      "check_ids": [
+        "unit",
+        "advanced03",
+        "service_v3_browser_basic",
+        "accepted_foundations",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/unit-01.json",
+          "sha256": "739e59cb567a5122e0f867a22ab046bdde899946b41d26865059d9be5e504fd0",
+          "bytes": 6795
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-basic-receipt.json",
+          "sha256": "7171bf2eb22f2e2f0a1e97064c012d759253e53e9c800a67b360767373fbf470",
+          "bytes": 1443
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-basic-stdout.json",
+          "sha256": "8b1ec89b6f6a90893235fb7c538a6c6b79b9ea871b794bfa4eb74d94ec7a8a51",
+          "bytes": 1613
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-browser-basic-01.json",
+          "sha256": "2db3a38f7d18cbdf4adcf64bf2471a24e52fdb1426a58bc55c6190c2481ed4af",
+          "bytes": 1921
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/stage-browser-01-inputs.json",
+          "sha256": "d8c82cfa105c1a8ae517245e3c37faa5118828e5b4551054ce26278adeba2e29",
+          "bytes": 20131
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/client-foundations-tests/delivery.json",
+          "sha256": "da5dcc999baea3196c47797d567bec7e206407a66f324a9b5c2f0e2ee5a65145",
+          "bytes": 12320
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/client-foundations-acceptance.json",
+          "sha256": "e0d699693fed6483a4c6918cc556e62ef945477db9c26d03a531be94dc963d0c",
+          "bytes": 4657
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 3,
+      "task": "TASK-012",
+      "criterion": "Selection emits one navigation event, camera changes emit none, snapshot conflict retains old coherent context, and explicit refresh discards incompatible cursor/expansion state atomically.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Actual selection creates one history item while the camera stays fixed. Snapshot conflict retains the old view; atomic refresh updates retained graph identities and resets incompatible category/cursor/expansion state.",
+      "check_ids": [
+        "advanced03",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 4,
+      "task": "TASK-012",
+      "criterion": "Only the shared read client initiates allowed reads; later screens and renderer consume state and emit intentions. Browser-level Back/Forward and focus integration are assigned to TASK-019.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "ReadClient owns all fetch paths, including separately cancelled finite catalog reads. Screens and renderer emit intentions. Current keyboard, navigation and late-reply flows use that shared owner.",
+      "check_ids": [
+        "unit",
+        "catalog07",
+        "advanced03",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/unit-01.json",
+          "sha256": "739e59cb567a5122e0f867a22ab046bdde899946b41d26865059d9be5e504fd0",
+          "bytes": 6795
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-stdout.json",
+          "sha256": "565d340f81544d5f48a873182bbd90ee7809f7724dc1a111ff935e2660863845",
+          "bytes": 1799
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-receipt.json",
+          "sha256": "1a4dc1f8a29aa2328c16957e89b6386bf6c15b2f824b82e91957bb97afec52aa",
+          "bytes": 4094
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/attribution.json",
+          "sha256": "6dfc408332f25bcf6c623f725359e1b61dc448742642ad1539cea2d1a203220e",
+          "bytes": 3004
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-07-inputs.json",
+          "sha256": "1d8d8687cfb8e8b009669b77985ea76921467e5b685fd33be32e94f39661628e",
+          "bytes": 20285
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-07.json",
+          "sha256": "dfa4e23447c9700904dd62b95f871d9fd9eb1ac29d210a095c86b8b4548e740f",
+          "bytes": 1513
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 5,
+      "task": "TASK-013",
+      "criterion": "The first screen exposes only reading destinations and no authoring/advanced modules; no giant graph or management counters are initial navigation.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Bootstrap exposes Overview, Terms, Processes and Map with visible search and no initial canvas. Neutral empty-local data retains reading navigation rather than management counters.",
+      "check_ids": [
+        "advanced03",
+        "neutral05",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/overview.ts",
+          "sha256": "b231e76ebc9fac9e47320c649be806d8bb8acd7d40cf4929420765182ed7b6cd",
+          "bytes": 1966
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "1bbcf6fc0fa1508895d749f73fbcd31d08e3833e940af89c4b5ef18b83bd0d7d",
+          "bytes": 9723
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/process-catalog-host-neutral05-passed-stdout.json",
+          "sha256": "895948f8a4bdc96148bc164c19b12a5996c004b382b0ba17b5d85f858cb2ff46",
+          "bytes": 1302
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/process-catalog-host-neutral05-passed-receipt.json",
+          "sha256": "5945e5cac55a38adf7592449d7678bff7edbbef3e3f95d83fd8287deffcbe0be",
+          "bytes": 3940
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/attribution.json",
+          "sha256": "8483b3509ae4de5555ba9f404783a59eeda8d1e9d3c89a93e6def1456751bde5",
+          "bytes": 2731
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-05-inputs.json",
+          "sha256": "e07d8524815c70c69cc85b0400f035a93901dfbbfbbb2ceb03393fe94b1484af",
+          "bytes": 19979
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-05.json",
+          "sha256": "b075b7741a6249742381f02eb757e691e3326c556e6af7e414457dfd17958564",
+          "bytes": 1181
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 6,
+      "task": "TASK-013",
+      "criterion": "Overview uses validated project purpose/starting IDs; empty local graph explains imported core vocabulary and offers categories/search.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Validated context supplies purpose and starting IDs; the neutral fixture explains imported vocabulary, offers Terms/categories/search and truthfully reports no configured process catalog.",
+      "check_ids": [
+        "advanced03",
+        "neutral05",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/overview.ts",
+          "sha256": "b231e76ebc9fac9e47320c649be806d8bb8acd7d40cf4929420765182ed7b6cd",
+          "bytes": 1966
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "1bbcf6fc0fa1508895d749f73fbcd31d08e3833e940af89c4b5ef18b83bd0d7d",
+          "bytes": 9723
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/process-catalog-host-neutral05-passed-stdout.json",
+          "sha256": "895948f8a4bdc96148bc164c19b12a5996c004b382b0ba17b5d85f858cb2ff46",
+          "bytes": 1302
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/process-catalog-host-neutral05-passed-receipt.json",
+          "sha256": "5945e5cac55a38adf7592449d7678bff7edbbef3e3f95d83fd8287deffcbe0be",
+          "bytes": 3940
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/attribution.json",
+          "sha256": "8483b3509ae4de5555ba9f404783a59eeda8d1e9d3c89a93e6def1456751bde5",
+          "bytes": 2731
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-05-inputs.json",
+          "sha256": "e07d8524815c70c69cc85b0400f035a93901dfbbfbbb2ceb03393fe94b1484af",
+          "bytes": 19979
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-05.json",
+          "sha256": "b075b7741a6249742381f02eb757e691e3326c556e6af7e414457dfd17958564",
+          "bytes": 1181
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 7,
+      "task": "TASK-014",
+      "criterion": "Visible labeled search and submit work without shortcuts; autocomplete follows Arrow/Enter/Escape behavior without deleting query.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Actual keyboard typing, Escape, submit and result-to-entry work without shortcuts. Unit generation/Arrow endpoint regressions preserve query and reject dismissed or obsolete suggestions.",
+      "check_ids": [
+        "keyboard01",
+        "unit",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/search.ts",
+          "sha256": "2fcd835d9f01dfff4c79439e4e097e9a9c820e01a37afce61ea6e1a41563150c",
+          "bytes": 8965
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/process-catalog-keyboard01-passed-stdout.json",
+          "sha256": "50f5f8ee9fdd4f5c2b695bcab88e0f90c5e848091b092bbb6bc9243a61df02b4",
+          "bytes": 6314
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/process-catalog-keyboard01-passed-receipt.json",
+          "sha256": "572956372dcc876dd134a58e6c1fd3ecd8842baf1dbba56b2aad3e49d6a1f4f4",
+          "bytes": 3860
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/attribution.json",
+          "sha256": "4cbff2564eab633d9c4b6ae862df56c532f50bc103ee484681146fb228fd1f7e",
+          "bytes": 9509
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-01-inputs.json",
+          "sha256": "82806df7d6993d1375f140aed11a3adf862a230384771e607e9e34fbd1d31c07",
+          "bytes": 19980
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-01.json",
+          "sha256": "e30f6e7106c95ec743c3e4db720a7d47077fc74cc0ea75a3da2f08354f6b34f6",
+          "bytes": 1182
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/unit-01.json",
+          "sha256": "739e59cb567a5122e0f867a22ab046bdde899946b41d26865059d9be5e504fd0",
+          "bytes": 6795
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 8,
+      "task": "TASK-014",
+      "criterion": "Results show supported category, preferred label, recorded excerpt and distinctions; lower-frequency filters remain under one control.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Two Alignment results retain exact identities, recorded excerpts and filter controls. Duplicate autocomplete and configured-process labels remain distinguishable by exact ID; non-starting process names are read from headers.",
+      "check_ids": [
+        "advanced03",
+        "unit",
+        "catalog07",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/search.ts",
+          "sha256": "2fcd835d9f01dfff4c79439e4e097e9a9c820e01a37afce61ea6e1a41563150c",
+          "bytes": 8965
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/unit-01.json",
+          "sha256": "739e59cb567a5122e0f867a22ab046bdde899946b41d26865059d9be5e504fd0",
+          "bytes": 6795
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-stdout.json",
+          "sha256": "565d340f81544d5f48a873182bbd90ee7809f7724dc1a111ff935e2660863845",
+          "bytes": 1799
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-receipt.json",
+          "sha256": "1a4dc1f8a29aa2328c16957e89b6386bf6c15b2f824b82e91957bb97afec52aa",
+          "bytes": 4094
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/attribution.json",
+          "sha256": "6dfc408332f25bcf6c623f725359e1b61dc448742642ad1539cea2d1a203220e",
+          "bytes": 3004
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-07-inputs.json",
+          "sha256": "1d8d8687cfb8e8b009669b77985ea76921467e5b685fd33be32e94f39661628e",
+          "bytes": 20285
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-07.json",
+          "sha256": "dfa4e23447c9700904dd62b95f871d9fd9eb1ac29d210a095c86b8b4548e740f",
+          "bytes": 1513
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 9,
+      "task": "TASK-014",
+      "criterion": "All bound/incomplete/empty cases preserve query and offer useful narrow/clear/continue actions without invented totals.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Empty search retains query/clear action; bounded continuation preserves the unconsumed page and offers deliberate narrowed/reset progress. Shared content-budget refusal is not admitted as success.",
+      "check_ids": [
+        "neutral05",
+        "bounds04",
+        "unit",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/search.ts",
+          "sha256": "2fcd835d9f01dfff4c79439e4e097e9a9c820e01a37afce61ea6e1a41563150c",
+          "bytes": 8965
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/process-catalog-host-neutral05-passed-stdout.json",
+          "sha256": "895948f8a4bdc96148bc164c19b12a5996c004b382b0ba17b5d85f858cb2ff46",
+          "bytes": 1302
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/process-catalog-host-neutral05-passed-receipt.json",
+          "sha256": "5945e5cac55a38adf7592449d7678bff7edbbef3e3f95d83fd8287deffcbe0be",
+          "bytes": 3940
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/attribution.json",
+          "sha256": "8483b3509ae4de5555ba9f404783a59eeda8d1e9d3c89a93e6def1456751bde5",
+          "bytes": 2731
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-05-inputs.json",
+          "sha256": "e07d8524815c70c69cc85b0400f035a93901dfbbfbbb2ceb03393fe94b1484af",
+          "bytes": 19979
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-05.json",
+          "sha256": "b075b7741a6249742381f02eb757e691e3326c556e6af7e414457dfd17958564",
+          "bytes": 1181
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-stdout.json",
+          "sha256": "4fa7aa954442d1536239278cb9c72d31452e9d30ed09a498d8dbe98d239c38b3",
+          "bytes": 1365
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-receipt.json",
+          "sha256": "0b643deae8884393c2ee78b37d2cf7bb4a0a01b8461ba6ec93ffdd08b4a0ce24",
+          "bytes": 3856
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/attribution.json",
+          "sha256": "6eabc884c5f0895057a8ba7f20bb10b7bee4f594c1bda4313ac5c5eef13ea12d",
+          "bytes": 2716
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-04-inputs.json",
+          "sha256": "b5429596492463574686c4af23f573995343a58a7e7b035b927fa9e18dcaf197",
+          "bytes": 19978
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-04.json",
+          "sha256": "b323ed69cd25e57b95eb1890459c24a0fcff17da84b9d39896d9fc4e6dd31426",
+          "bytes": 1180
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/unit-01.json",
+          "sha256": "739e59cb567a5122e0f867a22ab046bdde899946b41d26865059d9be5e504fd0",
+          "bytes": 6795
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 10,
+      "task": "TASK-015",
+      "criterion": "Definitions/aliases/scope/examples/non-examples remain exact; historical status, source freshness and authority meanings are distinct with warnings by affected information.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Exact definition, aliases, scope, examples and non-examples, historical replacement/authority warnings and changed source freshness are observed. Definition spans three pages/66,023 UTF-8 bytes; catalog full-name access reads 15,011 exact bytes after preview disclosure.",
+      "check_ids": [
+        "advanced03",
+        "catalog07",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/entry.ts",
+          "sha256": "499073e0aac71490487b19a36864eb4c3077bb96d09250a803e1b02bee1aac59",
+          "bytes": 5554
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/feedback.ts",
+          "sha256": "76e2de9f7cef5ef1f6fe603036f1b7f3a54c880a750e44eed63f713a3d912ac8",
+          "bytes": 4721
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-stdout.json",
+          "sha256": "565d340f81544d5f48a873182bbd90ee7809f7724dc1a111ff935e2660863845",
+          "bytes": 1799
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-receipt.json",
+          "sha256": "1a4dc1f8a29aa2328c16957e89b6386bf6c15b2f824b82e91957bb97afec52aa",
+          "bytes": 4094
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/attribution.json",
+          "sha256": "6dfc408332f25bcf6c623f725359e1b61dc448742642ad1539cea2d1a203220e",
+          "bytes": 3004
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-07-inputs.json",
+          "sha256": "1d8d8687cfb8e8b009669b77985ea76921467e5b685fd33be32e94f39661628e",
+          "bytes": 20285
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-07.json",
+          "sha256": "dfa4e23447c9700904dd62b95f871d9fd9eb1ac29d210a095c86b8b4548e740f",
+          "bytes": 1513
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 11,
+      "task": "TASK-015",
+      "criterion": "Relationship member, qualifier, direction and exact ID are independently inspectable; lengthy qualifiers remain accessible and cannot look unconditional.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Map/List and entry retain exact direction/member IDs/qualifiers and sources. Two qualifier pages preserve 44,066 UTF-8 bytes; unsafe numeric qualifiers are not rounded while endpoint strings are projected losslessly.",
+      "check_ids": [
+        "advanced03",
+        "unit",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/entry.ts",
+          "sha256": "499073e0aac71490487b19a36864eb4c3077bb96d09250a803e1b02bee1aac59",
+          "bytes": 5554
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/feedback.ts",
+          "sha256": "76e2de9f7cef5ef1f6fe603036f1b7f3a54c880a750e44eed63f713a3d912ac8",
+          "bytes": 4721
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/unit-01.json",
+          "sha256": "739e59cb567a5122e0f867a22ab046bdde899946b41d26865059d9be5e504fd0",
+          "bytes": 6795
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 12,
+      "task": "TASK-015",
+      "criterion": "Opening source retains entry, moves focus meaningfully, escapes text and returns focus to exact trigger on close.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Source opens with heading focus, escaped exact text, retained entry and exact trigger return. Current native 200% observations cover ordinary source and process-step source with visible vertical reading and focus return.",
+      "check_ids": [
+        "keyboard01",
+        "advanced03",
+        "service_v3_os_open_zoom",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/entry.ts",
+          "sha256": "499073e0aac71490487b19a36864eb4c3077bb96d09250a803e1b02bee1aac59",
+          "bytes": 5554
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/feedback.ts",
+          "sha256": "76e2de9f7cef5ef1f6fe603036f1b7f3a54c880a750e44eed63f713a3d912ac8",
+          "bytes": 4721
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/process-catalog-keyboard01-passed-stdout.json",
+          "sha256": "50f5f8ee9fdd4f5c2b695bcab88e0f90c5e848091b092bbb6bc9243a61df02b4",
+          "bytes": 6314
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/process-catalog-keyboard01-passed-receipt.json",
+          "sha256": "572956372dcc876dd134a58e6c1fd3ecd8842baf1dbba56b2aad3e49d6a1f4f4",
+          "bytes": 3860
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/attribution.json",
+          "sha256": "4cbff2564eab633d9c4b6ae862df56c532f50bc103ee484681146fb228fd1f7e",
+          "bytes": 9509
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-01-inputs.json",
+          "sha256": "82806df7d6993d1375f140aed11a3adf862a230384771e607e9e34fbd1d31c07",
+          "bytes": 19980
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-01.json",
+          "sha256": "e30f6e7106c95ec743c3e4db720a7d47077fc74cc0ea75a3da2f08354f6b34f6",
+          "bytes": 1182
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-os-open-01.json",
+          "sha256": "ea86254647e28ef02ee0413bcfb96c3651e84489fa5263c4bc28dee99f3232d6",
+          "bytes": 3058
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/stage-os-open-01-inputs.json",
+          "sha256": "3bea7f844ce518da483da770f25b2dfe3b9e5479fc81d7a030255eedefcc9b4f",
+          "bytes": 19971
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/os-open-host-receipt.json",
+          "sha256": "1c1467cf7cc9970659b5e08c95b64b69e83670337823706feea2ffa137066e1c",
+          "bytes": 1497
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/os-open-host-output.jsonl",
+          "sha256": "6a141156bc52fba1e9b282c4645436b0b58cf3d5d3fcb063952b992d0afb4115",
+          "bytes": 965
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/native-observation.json",
+          "sha256": "d56735dab832bcf287ea9d4fdc353004684c2b537dd6bc53128795c3264240e6",
+          "bytes": 2514
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/native-check.json",
+          "sha256": "fdf63346346831bb237756bd0d607059a153237abe37d07d2f3e1a9acd4044a0",
+          "bytes": 1811
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 13,
+      "task": "TASK-016",
+      "criterion": "Purpose/applicability/roles/inputs/outputs/skills/documents/order each link to exact selected canonical or source support; unsupported fields are omitted.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Documented process fields and order resolve exact canonical/direct-binding support, including an owner found through a later field. Bounded discovery preserves incomplete continuation. Current catalog resolves recorded non-starting names and the native run reads recorded ordered steps and their source.",
+      "check_ids": [
+        "advanced03",
+        "unit",
+        "catalog07",
+        "service_v3_os_open_zoom",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/unit-01.json",
+          "sha256": "739e59cb567a5122e0f867a22ab046bdde899946b41d26865059d9be5e504fd0",
+          "bytes": 6795
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-stdout.json",
+          "sha256": "565d340f81544d5f48a873182bbd90ee7809f7724dc1a111ff935e2660863845",
+          "bytes": 1799
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-receipt.json",
+          "sha256": "1a4dc1f8a29aa2328c16957e89b6386bf6c15b2f824b82e91957bb97afec52aa",
+          "bytes": 4094
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/attribution.json",
+          "sha256": "6dfc408332f25bcf6c623f725359e1b61dc448742642ad1539cea2d1a203220e",
+          "bytes": 3004
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-07-inputs.json",
+          "sha256": "1d8d8687cfb8e8b009669b77985ea76921467e5b685fd33be32e94f39661628e",
+          "bytes": 20285
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-07.json",
+          "sha256": "dfa4e23447c9700904dd62b95f871d9fd9eb1ac29d210a095c86b8b4548e740f",
+          "bytes": 1513
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-os-open-01.json",
+          "sha256": "ea86254647e28ef02ee0413bcfb96c3651e84489fa5263c4bc28dee99f3232d6",
+          "bytes": 3058
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/stage-os-open-01-inputs.json",
+          "sha256": "3bea7f844ce518da483da770f25b2dfe3b9e5479fc81d7a030255eedefcc9b4f",
+          "bytes": 19971
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/os-open-host-receipt.json",
+          "sha256": "1c1467cf7cc9970659b5e08c95b64b69e83670337823706feea2ffa137066e1c",
+          "bytes": 1497
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/os-open-host-output.jsonl",
+          "sha256": "6a141156bc52fba1e9b282c4645436b0b58cf3d5d3fcb063952b992d0afb4115",
+          "bytes": 965
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/native-observation.json",
+          "sha256": "d56735dab832bcf287ea9d4fdc353004684c2b537dd6bc53128795c3264240e6",
+          "bytes": 2514
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/native-check.json",
+          "sha256": "fdf63346346831bb237756bd0d607059a153237abe37d07d2f3e1a9acd4044a0",
+          "bytes": 1811
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 14,
+      "task": "TASK-016",
+      "criterion": "Absent ordering displays exactly: An ordered description has not been recorded. These are the documented relationships.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "The actual unordered-process flow asserts the complete required sentence verbatim, without converting recorded relationships into an execution sequence.",
+      "check_ids": [
+        "advanced03",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 15,
+      "task": "TASK-016",
+      "criterion": "Paths/dependencies/layout are never inferred as process execution order; process pages execute nothing, and no additional graph library or authoring is introduced.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Process pages render only recorded supported fields/order and execute no process. Source/import and locked build correspondence retain the single Cytoscape dependency and read-only architecture.",
+      "check_ids": [
+        "advanced03",
+        "build",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/build-01.json",
+          "sha256": "ecbeca4d7f32ed07259974023b3c48173aa050a0f0d8fa33ef628501e8651d97",
+          "bytes": 4366
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/build-inputs-01.json",
+          "sha256": "430a49fa2c48f54f117218eaf468138092c775f69ccbca70802ffadfe32501b3",
+          "bytes": 6308
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/build01-dependency-admission.json",
+          "sha256": "a598fab8c726bcd671a1110c5d00cb0a54d22c5527c3e85cb1c8c0c303c24903",
+          "bytes": 11423
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 16,
+      "task": "TASK-017",
+      "criterion": "The normalized model retains all returned node/relation IDs, canonical endpoints/predicates/direction, qualifiers, sources, warnings, filters and limits without inferring completeness.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Actual DOM/canvas comparison retains canonical node/relation IDs, endpoints, direction, qualifiers, sources, classification, warnings and returned scope; normalized model and refusal metadata remain current.",
+      "check_ids": [
+        "advanced03",
+        "accepted_foundations",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/client-foundations-tests/delivery.json",
+          "sha256": "da5dcc999baea3196c47797d567bec7e206407a66f324a9b5c2f0e2ee5a65145",
+          "bytes": 12320
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/client-foundations-acceptance.json",
+          "sha256": "e0d699693fed6483a4c6918cc556e62ef945477db9c26d03a531be94dc963d0c",
+          "bytes": 4657
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 17,
+      "task": "TASK-017",
+      "criterion": "List entry/evidence/focus/expand actions work using keyboard and the shared read/state layer with the renderer module absent; no canvas/drag/hover/double-click is required.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "With renderer import blocked, keyboard List selection, source reading, More connections, Focus here and useful return remain operational. Canvas loss/layout refusal retain the same readable List model.",
+      "check_ids": [
+        "keyboard01",
+        "advanced03",
+        "bounds04",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/process-catalog-keyboard01-passed-stdout.json",
+          "sha256": "50f5f8ee9fdd4f5c2b695bcab88e0f90c5e848091b092bbb6bc9243a61df02b4",
+          "bytes": 6314
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/process-catalog-keyboard01-passed-receipt.json",
+          "sha256": "572956372dcc876dd134a58e6c1fd3ecd8842baf1dbba56b2aad3e49d6a1f4f4",
+          "bytes": 3860
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/attribution.json",
+          "sha256": "4cbff2564eab633d9c4b6ae862df56c532f50bc103ee484681146fb228fd1f7e",
+          "bytes": 9509
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-01-inputs.json",
+          "sha256": "82806df7d6993d1375f140aed11a3adf862a230384771e607e9e34fbd1d31c07",
+          "bytes": 19980
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-01.json",
+          "sha256": "e30f6e7106c95ec743c3e4db720a7d47077fc74cc0ea75a3da2f08354f6b34f6",
+          "bytes": 1182
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-stdout.json",
+          "sha256": "4fa7aa954442d1536239278cb9c72d31452e9d30ed09a498d8dbe98d239c38b3",
+          "bytes": 1365
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-receipt.json",
+          "sha256": "0b643deae8884393c2ee78b37d2cf7bb4a0a01b8461ba6ec93ffdd08b4a0ce24",
+          "bytes": 3856
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/attribution.json",
+          "sha256": "6eabc884c5f0895057a8ba7f20bb10b7bee4f594c1bda4313ac5c5eef13ea12d",
+          "bytes": 2716
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-04-inputs.json",
+          "sha256": "b5429596492463574686c4af23f573995343a58a7e7b035b927fa9e18dcaf197",
+          "bytes": 19978
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-04.json",
+          "sha256": "b323ed69cd25e57b95eb1890459c24a0fcff17da84b9d39896d9fc4e6dd31426",
+          "bytes": 1180
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 18,
+      "task": "TASK-017",
+      "criterion": "Selection and returned scope survive switching intentions; actual Map/List parity is a required integration gate in TASK-019 after the renderer is connected.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Exact current Map/List semantic parity and selection/scope survive route switching, copied explicit focus/selection, filter history and same-ID refreshed content.",
+      "check_ids": [
+        "advanced03",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 19,
+      "task": "TASK-018",
+      "criterion": "Initial Map uses a selected ID or reviewed picker and one-step bounded data; selecting updates details without camera/focus change.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Map loads lazily from an exact selected ID or picker and bounded neighborhood. Selecting updates entry details and exactly one history item without a camera/focus change.",
+      "check_ids": [
+        "advanced03",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 20,
+      "task": "TASK-018",
+      "criterion": "Focus here deliberately replaces neighborhood; expansion preserves existing positions where practical, stops bounded layout and respects cumulative 100-node/200-edge proposed ceiling and tighter service limits.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Keyboard Focus here replaces scope; More connections appends bounded scope. High-degree continuation stops at the tighter display budget and rereads unconsumed data after reset. Renderer keeps surviving positions and prunes removed positions; layout deadline retains List.",
+      "check_ids": [
+        "keyboard01",
+        "advanced03",
+        "bounds04",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/process-catalog-keyboard01-passed-stdout.json",
+          "sha256": "50f5f8ee9fdd4f5c2b695bcab88e0f90c5e848091b092bbb6bc9243a61df02b4",
+          "bytes": 6314
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/process-catalog-keyboard01-passed-receipt.json",
+          "sha256": "572956372dcc876dd134a58e6c1fd3ecd8842baf1dbba56b2aad3e49d6a1f4f4",
+          "bytes": 3860
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/attribution.json",
+          "sha256": "4cbff2564eab633d9c4b6ae862df56c532f50bc103ee484681146fb228fd1f7e",
+          "bytes": 9509
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-01-inputs.json",
+          "sha256": "82806df7d6993d1375f140aed11a3adf862a230384771e607e9e34fbd1d31c07",
+          "bytes": 19980
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-01.json",
+          "sha256": "e30f6e7106c95ec743c3e4db720a7d47077fc74cc0ea75a3da2f08354f6b34f6",
+          "bytes": 1182
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-stdout.json",
+          "sha256": "4fa7aa954442d1536239278cb9c72d31452e9d30ed09a498d8dbe98d239c38b3",
+          "bytes": 1365
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-receipt.json",
+          "sha256": "0b643deae8884393c2ee78b37d2cf7bb4a0a01b8461ba6ec93ffdd08b4a0ce24",
+          "bytes": 3856
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/attribution.json",
+          "sha256": "6eabc884c5f0895057a8ba7f20bb10b7bee4f594c1bda4313ac5c5eef13ea12d",
+          "bytes": 2716
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-04-inputs.json",
+          "sha256": "b5429596492463574686c4af23f573995343a58a7e7b035b927fa9e18dcaf197",
+          "bytes": 19978
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-04.json",
+          "sha256": "b323ed69cd25e57b95eb1890459c24a0fcff17da84b9d39896d9fc4e6dd31426",
+          "bytes": 1180
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 21,
+      "task": "TASK-018",
+      "criterion": "Parallel IDs, self-loops, cycles, conditional qualifiers, direction and selected/adjacent labels remain faithful; no continuous hidden simulation or unsupported semantic position claim.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Production canvas/List agree on parallel relation IDs, self-loop, canonical direction, unsafe qualifiers and relation-as-endpoint identities; retargeted retained edges update actual endpoints. Current unchanged renderer uses bounded preset positions, visible unusual-kind markers and peripheral/selected labels. Dense-fit comprehension remains qualified.",
+      "check_ids": [
+        "advanced03",
+        "bounds04",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-stdout.json",
+          "sha256": "4fa7aa954442d1536239278cb9c72d31452e9d30ed09a498d8dbe98d239c38b3",
+          "bytes": 1365
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-receipt.json",
+          "sha256": "0b643deae8884393c2ee78b37d2cf7bb4a0a01b8461ba6ec93ffdd08b4a0ce24",
+          "bytes": 3856
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/attribution.json",
+          "sha256": "6eabc884c5f0895057a8ba7f20bb10b7bee4f594c1bda4313ac5c5eef13ea12d",
+          "bytes": 2716
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-04-inputs.json",
+          "sha256": "b5429596492463574686c4af23f573995343a58a7e7b035b927fa9e18dcaf197",
+          "bytes": 19978
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-04.json",
+          "sha256": "b323ed69cd25e57b95eb1890459c24a0fcff17da84b9d39896d9fc4e6dd31426",
+          "bytes": 1180
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/visual-qualification.json",
+          "sha256": "0e1e75f862320044ccc8f5ddcdf5fa47c15b36b026a5b8d8400eeec9f232de85",
+          "bytes": 2195
+        }
+      ],
+      "qualification": "Dense inner map captions can still crowd in the 25-node/26-edge initial-fit view. Exact model/List parity and selected/peripheral label handling do not establish human comprehension or every association being unobscured. TASK-025 remains mandatory."
+    },
+    {
+      "index": 22,
+      "task": "TASK-018",
+      "criterion": "Renderer reads the normalized model and emits intentions; it never initiates source/ontology reads. Legend and guidance retain: Select a term to read it. Use Focus here to explore its connections.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Renderer consumes normalized model only. Authored controls retain the exact required guidance, clear legend and deliberate focus/expansion actions; renderer has no source or ontology fetch path.",
+      "check_ids": [
+        "advanced03",
+        "build",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/controller.ts",
+          "sha256": "42e8852f041a2eaeca813ae952db3e0628125057820bc3e6fa6a719620ad9dd6",
+          "bytes": 6025
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/build-01.json",
+          "sha256": "ecbeca4d7f32ed07259974023b3c48173aa050a0f0d8fa33ef628501e8651d97",
+          "bytes": 4366
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/build-inputs-01.json",
+          "sha256": "430a49fa2c48f54f117218eaf468138092c775f69ccbca70802ffadfe32501b3",
+          "bytes": 6308
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/build01-dependency-admission.json",
+          "sha256": "a598fab8c726bcd671a1110c5d00cb0a54d22c5527c3e85cb1c8c0c303c24903",
+          "bytes": 11423
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 23,
+      "task": "TASK-019",
+      "criterion": "AT-21, AT-22, AT-23, AT-34 preserve useful context, reject stale responses and mixed snapshots, discard incompatible expansions/cursors on refresh and keep List/evidence usable if renderer fails.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Session/snapshot/route races retain useful recorded views and reject mixed or late responses; refresh uses new context and lower limits. Import failure, canvas loss and bounded layout refusal preserve List/source actions.",
+      "check_ids": [
+        "catalog07",
+        "advanced03",
+        "bounds04",
+        "service_v3_browser_late_session",
+        "service_v3_browser_late_context",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "1bbcf6fc0fa1508895d749f73fbcd31d08e3833e940af89c4b5ef18b83bd0d7d",
+          "bytes": 9723
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-stdout.json",
+          "sha256": "565d340f81544d5f48a873182bbd90ee7809f7724dc1a111ff935e2660863845",
+          "bytes": 1799
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-receipt.json",
+          "sha256": "1a4dc1f8a29aa2328c16957e89b6386bf6c15b2f824b82e91957bb97afec52aa",
+          "bytes": 4094
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/attribution.json",
+          "sha256": "6dfc408332f25bcf6c623f725359e1b61dc448742642ad1539cea2d1a203220e",
+          "bytes": 3004
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-07-inputs.json",
+          "sha256": "1d8d8687cfb8e8b009669b77985ea76921467e5b685fd33be32e94f39661628e",
+          "bytes": 20285
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-07.json",
+          "sha256": "dfa4e23447c9700904dd62b95f871d9fd9eb1ac29d210a095c86b8b4548e740f",
+          "bytes": 1513
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-stdout.json",
+          "sha256": "4fa7aa954442d1536239278cb9c72d31452e9d30ed09a498d8dbe98d239c38b3",
+          "bytes": 1365
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-receipt.json",
+          "sha256": "0b643deae8884393c2ee78b37d2cf7bb4a0a01b8461ba6ec93ffdd08b4a0ce24",
+          "bytes": 3856
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/attribution.json",
+          "sha256": "6eabc884c5f0895057a8ba7f20bb10b7bee4f594c1bda4313ac5c5eef13ea12d",
+          "bytes": 2716
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-04-inputs.json",
+          "sha256": "b5429596492463574686c4af23f573995343a58a7e7b035b927fa9e18dcaf197",
+          "bytes": 19978
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-04.json",
+          "sha256": "b323ed69cd25e57b95eb1890459c24a0fcff17da84b9d39896d9fc4e6dd31426",
+          "bytes": 1180
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-late-session-receipt.json",
+          "sha256": "0aae6913ccf8bff597a9ea07c2e2b1ca36a516d8f04f15125bec5542e8c66e5d",
+          "bytes": 1458
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-late-session-stdout.json",
+          "sha256": "d3f5b2b82f7c8acc305f6c16aa81bbc892aafac27479bd55cb5b82a80796070e",
+          "bytes": 1254
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-browser-late_session-01.json",
+          "sha256": "076d92218b935cb30a32b972cf87887f38d621e9a1563b586993640ccfca4b2a",
+          "bytes": 1928
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/stage-browser-01-inputs.json",
+          "sha256": "d8c82cfa105c1a8ae517245e3c37faa5118828e5b4551054ce26278adeba2e29",
+          "bytes": 20131
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-late-context-receipt.json",
+          "sha256": "75a234ffa8fa3aa09aa3d7fcca606852e8ef5fb7b78d92350a96b958d74ea106",
+          "bytes": 1457
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-late-context-stdout.json",
+          "sha256": "9b3de2023bb776830cefdee1d06211184be5ebcca453ca7a71ae79e0898611e8",
+          "bytes": 1295
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-browser-late_context-01.json",
+          "sha256": "3aae9369b409639b69b138a906da5eebdb0760cd433d474715940bbac5d2fd2e",
+          "bytes": 1928
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 24,
+      "task": "TASK-019",
+      "criterion": "When no relationships are recorded in the returned view, say No relationships are recorded in this view; byte/time/traversal limits and incomplete data are distinguished from absence.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "The accepted Reader proves the ActionType returned view complete and empty before the exact absence sentence is asserted. High-degree/local budget/incomplete paths retain their limit disclosure and continuation rather than claiming absence.",
+      "check_ids": [
+        "neutral05",
+        "bounds04",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "1bbcf6fc0fa1508895d749f73fbcd31d08e3833e940af89c4b5ef18b83bd0d7d",
+          "bytes": 9723
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/process-catalog-host-neutral05-passed-stdout.json",
+          "sha256": "895948f8a4bdc96148bc164c19b12a5996c004b382b0ba17b5d85f858cb2ff46",
+          "bytes": 1302
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/process-catalog-host-neutral05-passed-receipt.json",
+          "sha256": "5945e5cac55a38adf7592449d7678bff7edbbef3e3f95d83fd8287deffcbe0be",
+          "bytes": 3940
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/attribution.json",
+          "sha256": "8483b3509ae4de5555ba9f404783a59eeda8d1e9d3c89a93e6def1456751bde5",
+          "bytes": 2731
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-05-inputs.json",
+          "sha256": "e07d8524815c70c69cc85b0400f035a93901dfbbfbbb2ceb03393fe94b1484af",
+          "bytes": 19979
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-05.json",
+          "sha256": "b075b7741a6249742381f02eb757e691e3326c556e6af7e414457dfd17958564",
+          "bytes": 1181
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-stdout.json",
+          "sha256": "4fa7aa954442d1536239278cb9c72d31452e9d30ed09a498d8dbe98d239c38b3",
+          "bytes": 1365
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-receipt.json",
+          "sha256": "0b643deae8884393c2ee78b37d2cf7bb4a0a01b8461ba6ec93ffdd08b4a0ce24",
+          "bytes": 3856
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/attribution.json",
+          "sha256": "6eabc884c5f0895057a8ba7f20bb10b7bee4f594c1bda4313ac5c5eef13ea12d",
+          "bytes": 2716
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-04-inputs.json",
+          "sha256": "b5429596492463574686c4af23f573995343a58a7e7b035b927fa9e18dcaf197",
+          "bytes": 19978
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-04.json",
+          "sha256": "b323ed69cd25e57b95eb1890459c24a0fcff17da84b9d39896d9fc4e6dd31426",
+          "bytes": 1180
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 25,
+      "task": "TASK-019",
+      "criterion": "320 CSS-pixel layouts, substantial zoom, both themes and reduced motion preserve controls, reading, narrow drawers and vertically flowing process/source text.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Separate current 320 CSS-pixel/dark/reduced-motion and light/system/reset checks complement actual native Chrome 90% to 200% to 90% controls/catalog/ordered-process/source reading. Native Map/List at 200% remains unexercised; no CSS zoom substitution.",
+      "check_ids": [
+        "advanced03",
+        "neutral05",
+        "service_v3_os_open_zoom",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "1bbcf6fc0fa1508895d749f73fbcd31d08e3833e940af89c4b5ef18b83bd0d7d",
+          "bytes": 9723
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/process-catalog-host-neutral05-passed-stdout.json",
+          "sha256": "895948f8a4bdc96148bc164c19b12a5996c004b382b0ba17b5d85f858cb2ff46",
+          "bytes": 1302
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/process-catalog-host-neutral05-passed-receipt.json",
+          "sha256": "5945e5cac55a38adf7592449d7678bff7edbbef3e3f95d83fd8287deffcbe0be",
+          "bytes": 3940
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/attribution.json",
+          "sha256": "8483b3509ae4de5555ba9f404783a59eeda8d1e9d3c89a93e6def1456751bde5",
+          "bytes": 2731
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-05-inputs.json",
+          "sha256": "e07d8524815c70c69cc85b0400f035a93901dfbbfbbb2ceb03393fe94b1484af",
+          "bytes": 19979
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-05.json",
+          "sha256": "b075b7741a6249742381f02eb757e691e3326c556e6af7e414457dfd17958564",
+          "bytes": 1181
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-os-open-01.json",
+          "sha256": "ea86254647e28ef02ee0413bcfb96c3651e84489fa5263c4bc28dee99f3232d6",
+          "bytes": 3058
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/stage-os-open-01-inputs.json",
+          "sha256": "3bea7f844ce518da483da770f25b2dfe3b9e5479fc81d7a030255eedefcc9b4f",
+          "bytes": 19971
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/os-open-host-receipt.json",
+          "sha256": "1c1467cf7cc9970659b5e08c95b64b69e83670337823706feea2ffa137066e1c",
+          "bytes": 1497
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/os-open-host-output.jsonl",
+          "sha256": "6a141156bc52fba1e9b282c4645436b0b58cf3d5d3fcb063952b992d0afb4115",
+          "bytes": 965
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/native-observation.json",
+          "sha256": "d56735dab832bcf287ea9d4fdc353004684c2b537dd6bc53128795c3264240e6",
+          "bytes": 2514
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/native-check.json",
+          "sha256": "fdf63346346831bb237756bd0d607059a153237abe37d07d2f3e1a9acd4044a0",
+          "bytes": 1811
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/visual-qualification.json",
+          "sha256": "0e1e75f862320044ccc8f5ddcdf5fa47c15b36b026a5b8d8400eeec9f232de85",
+          "bytes": 2195
+        }
+      ],
+      "qualification": "Native Chrome zoom was 90% to 200% and restored to the actual original 90%. Current controls, corrected process catalog, ordered process reading and both source paths were observed. Native Map/List usability at 200% was not exercised. The separate current advanced03 check covers 320 CSS pixels, dark theme and reduced motion; neutral05 covers light/system/reset. Earlier 200% text sizing is not native browser zoom."
+    },
+    {
+      "index": 26,
+      "task": "TASK-019",
+      "criterion": "Back/Forward restores useful reading/map context; deliberate node selection pushes one history item while camera movements do not spam history.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Repeated Back/Forward restores selection, same-focus filter scope and useful map context; focused-search Back cancels pending preview and restores query. Node selection pushes once; camera motion does not push history.",
+      "check_ids": [
+        "advanced03",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "1bbcf6fc0fa1508895d749f73fbcd31d08e3833e940af89c4b5ef18b83bd0d7d",
+          "bytes": 9723
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 27,
+      "task": "TASK-019",
+      "criterion": "Terms/Map switching preserves exact identity; credentials are absent from safe routes and copied links; normal new-tab entry links work after authentication where practical.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Terms/Map and copied relation-subject routes preserve exact focus/selection identities, including a relation used as a genuine endpoint. Normal new-tab entry resumes an authenticated session and copied routes are secret-free.",
+      "check_ids": [
+        "advanced03",
+        "service_v3_browser_basic",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "1bbcf6fc0fa1508895d749f73fbcd31d08e3833e940af89c4b5ef18b83bd0d7d",
+          "bytes": 9723
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-basic-receipt.json",
+          "sha256": "7171bf2eb22f2e2f0a1e97064c012d759253e53e9c800a67b360767373fbf470",
+          "bytes": 1443
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-basic-stdout.json",
+          "sha256": "8b1ec89b6f6a90893235fb7c538a6c6b79b9ea871b794bfa4eb74d94ec7a8a51",
+          "bytes": 1613
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-browser-basic-01.json",
+          "sha256": "2db3a38f7d18cbdf4adcf64bf2471a24e52fdb1426a58bc55c6190c2481ed4af",
+          "bytes": 1921
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/stage-browser-01-inputs.json",
+          "sha256": "d8c82cfa105c1a8ae517245e3c37faa5118828e5b4551054ce26278adeba2e29",
+          "bytes": 20131
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 28,
+      "task": "TASK-019",
+      "criterion": "Theme light/dark/system and reset affect presentation only; source bodies and knowledge are not persisted to browser databases/storage.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Light/dark/system/reset affect presentation only, with preference-only storage. Theme updates preserve catalog in-flight identity and focused links; source bodies and ontology content are not stored in browser databases.",
+      "check_ids": [
+        "neutral05",
+        "advanced03",
+        "unit",
+        "catalog07",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "1bbcf6fc0fa1508895d749f73fbcd31d08e3833e940af89c4b5ef18b83bd0d7d",
+          "bytes": 9723
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/processes.ts",
+          "sha256": "b192f3d7ce2c8af71b06f627eeae3f5fc9d7af90173e6c63ead5576c86fa6b05",
+          "bytes": 5757
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/process-catalog-host-neutral05-passed-stdout.json",
+          "sha256": "895948f8a4bdc96148bc164c19b12a5996c004b382b0ba17b5d85f858cb2ff46",
+          "bytes": 1302
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/process-catalog-host-neutral05-passed-receipt.json",
+          "sha256": "5945e5cac55a38adf7592449d7678bff7edbbef3e3f95d83fd8287deffcbe0be",
+          "bytes": 3940
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-neutral05/attribution.json",
+          "sha256": "8483b3509ae4de5555ba9f404783a59eeda8d1e9d3c89a93e6def1456751bde5",
+          "bytes": 2731
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-05-inputs.json",
+          "sha256": "e07d8524815c70c69cc85b0400f035a93901dfbbfbbb2ceb03393fe94b1484af",
+          "bytes": 19979
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-05.json",
+          "sha256": "b075b7741a6249742381f02eb757e691e3326c556e6af7e414457dfd17958564",
+          "bytes": 1181
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/unit-01.json",
+          "sha256": "739e59cb567a5122e0f867a22ab046bdde899946b41d26865059d9be5e504fd0",
+          "bytes": 6795
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-stdout.json",
+          "sha256": "565d340f81544d5f48a873182bbd90ee7809f7724dc1a111ff935e2660863845",
+          "bytes": 1799
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/process-catalog-host-catalog07-passed-receipt.json",
+          "sha256": "1a4dc1f8a29aa2328c16957e89b6386bf6c15b2f824b82e91957bb97afec52aa",
+          "bytes": 4094
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-catalog07/attribution.json",
+          "sha256": "6dfc408332f25bcf6c623f725359e1b61dc448742642ad1539cea2d1a203220e",
+          "bytes": 3004
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-07-inputs.json",
+          "sha256": "1d8d8687cfb8e8b009669b77985ea76921467e5b685fd33be32e94f39661628e",
+          "bytes": 20285
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-07.json",
+          "sha256": "dfa4e23447c9700904dd62b95f871d9fd9eb1ac29d210a095c86b8b4548e740f",
+          "bytes": 1513
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    },
+    {
+      "index": 29,
+      "task": "TASK-019",
+      "criterion": "AT-16 and AT-29 compare exact Map/List relation IDs, direction, qualifiers, sources, warnings, filters, selection and returned scope. Every substantive map action remains usable through List when graph import or rendering fails.",
+      "status": "verified_with_stated_scope_limits_for_manager_review",
+      "explanation": "Current exact Map/List relation IDs, endpoints, direction, qualifiers, source descriptors, warnings, filters, selection and scope are compared in production Chrome. Blocked import, canvas loss and layout refusal all retain useful keyboard List actions and entry/source reading.",
+      "check_ids": [
+        "advanced03",
+        "keyboard01",
+        "bounds04",
+        "accepted_service_v3",
+        "final_live_closure"
+      ],
+      "implementation": [
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/app.ts",
+          "sha256": "c0573614c46fe4853cd6a2954046ee96a0ae518fbf34937f54683e3a6014d97f",
+          "bytes": 38466
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/api.ts",
+          "sha256": "18cbc2836b43784b70b8d6a80b76557d2be0796522294cde4275c17653060af9",
+          "bytes": 18810
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/sources.ts",
+          "sha256": "3bc012eaf32517e5bfab79aea1ecd7df665e0be3c64797d20e271db17914fc49",
+          "bytes": 9090
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/styles.css",
+          "sha256": "1bbcf6fc0fa1508895d749f73fbcd31d08e3833e940af89c4b5ef18b83bd0d7d",
+          "bytes": 9723
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/list.ts",
+          "sha256": "3d11a3c33f04f8ad1df93c418120cf3b58f84e66873a1261aeddf8d88779fbd5",
+          "bytes": 4838
+        },
+        {
+          "path": "SKILLS-depo/ontology/explorer/src/map/renderer.ts",
+          "sha256": "6f86d4a91b8b3ae8d45fdb1f657c9d8faee5861d2689926aec51e5e1b24d11f8",
+          "bytes": 8928
+        }
+      ],
+      "direct_evidence": [
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-stdout.json",
+          "sha256": "3553be423d0f414d2f40f0d03c9bf00ac94c299b6b9493854b831aaf5a4f371a",
+          "bytes": 6382
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/process-catalog-host-advanced03-passed-receipt.json",
+          "sha256": "1636a25775fa86bf5a4f5952b451da96b6fe22bf87ae1ecad50edb92af2b5ac4",
+          "bytes": 5250
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-advanced03/attribution.json",
+          "sha256": "52afdb7c82e5915dd298fe010801350be84917317047b38508a9b98184c7434f",
+          "bytes": 2782
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-03-inputs.json",
+          "sha256": "1e3f131bf382c7d90ea35dfc7fe06d08d74ed3ba8a0d54e903c4cbd029d3cb55",
+          "bytes": 20279
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-03.json",
+          "sha256": "3dc0609d5e44a55b3d6c62012ad7f9773143672f5d8cf6d2b909a450fd18b9b9",
+          "bytes": 1304
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/process-catalog-keyboard01-passed-stdout.json",
+          "sha256": "50f5f8ee9fdd4f5c2b695bcab88e0f90c5e848091b092bbb6bc9243a61df02b4",
+          "bytes": 6314
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/process-catalog-keyboard01-passed-receipt.json",
+          "sha256": "572956372dcc876dd134a58e6c1fd3ecd8842baf1dbba56b2aad3e49d6a1f4f4",
+          "bytes": 3860
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-keyboard01/attribution.json",
+          "sha256": "4cbff2564eab633d9c4b6ae862df56c532f50bc103ee484681146fb228fd1f7e",
+          "bytes": 9509
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-01-inputs.json",
+          "sha256": "82806df7d6993d1375f140aed11a3adf862a230384771e607e9e34fbd1d31c07",
+          "bytes": 19980
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-01.json",
+          "sha256": "e30f6e7106c95ec743c3e4db720a7d47077fc74cc0ea75a3da2f08354f6b34f6",
+          "bytes": 1182
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-stdout.json",
+          "sha256": "4fa7aa954442d1536239278cb9c72d31452e9d30ed09a498d8dbe98d239c38b3",
+          "bytes": 1365
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/process-catalog-host-bounds04-passed-receipt.json",
+          "sha256": "0b643deae8884393c2ee78b37d2cf7bb4a0a01b8461ba6ec93ffdd08b4a0ce24",
+          "bytes": 3856
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-bounds04/attribution.json",
+          "sha256": "6eabc884c5f0895057a8ba7f20bb10b7bee4f594c1bda4313ac5c5eef13ea12d",
+          "bytes": 2716
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/stage-browser-04-inputs.json",
+          "sha256": "b5429596492463574686c4af23f573995343a58a7e7b035b927fa9e18dcaf197",
+          "bytes": 19978
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/host-browser-job-04.json",
+          "sha256": "b323ed69cd25e57b95eb1890459c24a0fcff17da84b9d39896d9fc4e6dd31426",
+          "bytes": 1180
+        },
+        {
+          "path": "Tasks/Task-implement-project-knowledge-explorer-full-first-release-2026-09-19--1FA1F620/artifacts/orchestration/manager/service-package-acceptance-v3.json",
+          "sha256": "bc5dd45c5c7c2d4b6c15e530e16957cb3e26a934be05d52567b09c3f51b1c73d",
+          "bytes": 85268
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/criterion-evidence.json",
+          "sha256": "97e7957a0307b9243f19657e4681a9a85fb871f78229c4f3b46bfa6860502b1b",
+          "bytes": 13282
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/delivery.json",
+          "sha256": "65f0e0cb76c20091e424ce43149477ff0290b27de8aa59fab2d543fdb2ec9add",
+          "bytes": 20775
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-audit.json",
+          "sha256": "8cc51d337c4992829790f6def01439cd693af369c6ddb1693a0abd4cffbfe552",
+          "bytes": 11847
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/live-runtime-raw.json",
+          "sha256": "9b5880eb5153cafc57fd33204bcc384c173473511627252be73edf8452c035c5",
+          "bytes": 2573
+        },
+        {
+          "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/service-input-closure.json",
+          "sha256": "0a1d525c1ac798686381437d7bc1b6d57d59124949965fea7fe06378e4122a93",
+          "bytes": 4169
+        }
+      ],
+      "qualification": "Observed scope is bounded by the referenced receipts; full release and later original gates are separate."
+    }
+  ],
+  "current_checks": {
+    "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/final-v3/current-checks.json",
+    "sha256": "ae515699260b53774f6e59c55559ce6ad80349a2b7d5cd48eb73561929a8d26f",
+    "bytes": 39225
+  },
+  "limits": [
+    "Native Chrome zoom was 90% to 200% and restored to the actual original 90%. Current controls, corrected process catalog, ordered process reading and both source paths were observed. Native Map/List usability at 200% was not exercised.",
+    "The separate current advanced03 check covers 320 CSS pixels, dark theme and reduced motion; neutral05 covers light/system/reset. Earlier 200% text sizing is not native browser zoom.",
+    "Dense inner map captions can still crowd in the 25-node/26-edge initial-fit view. Exact model/List parity and selected/peripheral label handling do not establish human comprehension or every association being unobscured. TASK-025 remains mandatory.",
+    "Safari, VoiceOver, real-human usability, release-wide performance/security/accessibility qualification, adoption, retirement, rollback and final release are not established by this frontend package.",
+    "The 20 unit groups use actual compiled modules with mocked network/DOM; their deadline callback is mocked. Catalog07 uses a real authenticated response held by declared abort-insensitive instrumentation. Its 10,915 ms observation is first catalog request to Retry visible, including subsequent finite headers after the unmodified 10,000 ms timer, not a timer callback timestamp.",
+    "Catalog07 checks the final parsed fixture equals exactly the original with only process14 label changed. Advanced03 permits exactly three declared fixture paths; that is path-level preservation, not the stronger catalog whole-document assertion."
+  ],
+  "manager_acceptance_separate": true
+}

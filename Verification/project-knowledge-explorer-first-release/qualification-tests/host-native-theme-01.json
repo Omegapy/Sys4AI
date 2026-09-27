@@ -1,0 +1,61 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "-I",
+    "-B",
+    "/private/tmp/explorer-qualification-native-theme-01/host-native-theme-driver.py"
+  ],
+  "staging_root": "/private/tmp/explorer-qualification-native-theme-01",
+  "manifest": {
+    "path": "/private/tmp/explorer-qualification-native-theme-01/inputs.json",
+    "sha256": "df18c548dbef07f596f693f83f029c7d8fafebe85fbac02076405af301801934"
+  },
+  "inputs_count": 107,
+  "external_tools": [
+    {
+      "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+      "resolved": "/opt/homebrew/Cellar/python@3.12/3.12.13/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+      "sha256": "31b9c9a8d50289f3a13f014b3efd8ea3534fc3eea7ca7d9809e166139910b805",
+      "bytes": 52448
+    },
+    {
+      "path": "/bin/ps",
+      "resolved": "/bin/ps",
+      "sha256": "3bbba882e30d91fc4ff6e6844ca7c59fef4351b9a3fea35dca55708d6d487d1c",
+      "bytes": 170432
+    },
+    {
+      "path": "/usr/bin/osascript",
+      "resolved": "/usr/bin/osascript",
+      "sha256": "7e61a052c46d860f5e74a9039b716244041a5825afaf38237bf0302af53fb924",
+      "bytes": 175296
+    },
+    {
+      "path": "/Applications/Safari.app/Contents/MacOS/Safari",
+      "resolved": "/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app/Contents/MacOS/Safari",
+      "sha256": "73e3bbbd755b3c91db56f0eb68de8b554542c35a64f90d6878be93010737b2b4",
+      "bytes": 192032
+    }
+  ],
+  "timeout_seconds": 180,
+  "driver_lifetime_seconds": 120,
+  "latest_stop_seconds": 90,
+  "source_mapping": {
+    "host-native-theme-driver.py": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/host-native-theme-driver.py",
+    "native-theme-protocol-01.md": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/native-theme-protocol-01.md"
+  },
+  "protocol": {
+    "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/project-knowledge-explorer-first-release/qualification-tests/current-v4/native-theme-protocol-01.md",
+    "sha256": "0a81bb77f7ff966d7f86f7db68b350f0faaeb15f4278de5385473088d50ead2d",
+    "bytes": 5829
+  },
+  "source_writes": false,
+  "intended_writes": [
+    "Owned disposable fixture/service and one owned Safari document. Only its Theme setting may change and must be restored. Preserve window dimensions, zoom, system/app settings and unrelated documents. Close owned document and obtain receipt before final Safari running-state restoration."
+  ],
+  "credentials": "Bootstrap only in0600 per-instance file/process memory; no private URL, raw errors, cookies, storage, headers, trace, HAR or clipboard inspection.",
+  "scenarios": [
+    "One actual focused Theme control/menu/key/value observation with intermediate native state and exact restoration. No repeated blind sequence or other native walkthrough."
+  ],
+  "gate": "TASK022 only after current TASK021 acceptance and exact manager review/release. Root alone operates native UI. Driver success proves owned lifecycle only; actual method-specific Theme outcome supplied separately. No speech/fullTASK022 or later-gate execution."
+}

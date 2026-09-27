@@ -1,0 +1,298 @@
+{
+  "connection": "SQLite URI mode=ro; query_only=ON",
+  "database": {
+    "birthtime": "2026-08-23T00:48:11.853361+00:00",
+    "device": 16777231,
+    "inode": 114358773,
+    "path": "/Users/alex.omegapy/.codex/thread_history_1.sqlite",
+    "size": 1388863488
+  },
+  "exact_owned_ids": [
+    {
+      "counts": {
+        "thread_items": 0,
+        "thread_realtime_items": 0,
+        "thread_turns": 0
+      },
+      "native_id": "01a08f58-bb9c-7bd0-84fd-6c41df4b87d0",
+      "projection": [
+        {
+          "next_rollout_byte_offset": 1038,
+          "next_rollout_ordinal": 1,
+          "thread_id": "01a08f58-bb9c-7bd0-84fd-6c41df4b87d0"
+        }
+      ]
+    },
+    {
+      "counts": {
+        "thread_items": 0,
+        "thread_realtime_items": 0,
+        "thread_turns": 0
+      },
+      "native_id": "01a08f70-cfc3-7131-aae7-f04123be27f3",
+      "projection": [
+        {
+          "next_rollout_byte_offset": 1038,
+          "next_rollout_ordinal": 1,
+          "thread_id": "01a08f70-cfc3-7131-aae7-f04123be27f3"
+        }
+      ]
+    }
+  ],
+  "kind": "read_only_exact_p0_history_index_metadata",
+  "limit": "No before-run baseline for this database was collected by the old P0 packets; this does not prove preservation of unrelated existing rows.",
+  "native_operations": 0,
+  "observed_at": "2026-09-11T07:58:28.615169+00:00",
+  "schema_version": 1,
+  "selected_table_schemas": {
+    "thread_history_projection_state": [
+      {
+        "cid": 0,
+        "dflt_value": null,
+        "name": "thread_id",
+        "notnull": 0,
+        "pk": 1,
+        "type": "TEXT"
+      },
+      {
+        "cid": 1,
+        "dflt_value": null,
+        "name": "next_rollout_byte_offset",
+        "notnull": 1,
+        "pk": 0,
+        "type": "INTEGER"
+      },
+      {
+        "cid": 2,
+        "dflt_value": null,
+        "name": "next_rollout_ordinal",
+        "notnull": 1,
+        "pk": 0,
+        "type": "INTEGER"
+      }
+    ],
+    "thread_items": [
+      {
+        "cid": 0,
+        "dflt_value": null,
+        "name": "thread_id",
+        "notnull": 1,
+        "pk": 1,
+        "type": "TEXT"
+      },
+      {
+        "cid": 1,
+        "dflt_value": null,
+        "name": "turn_id",
+        "notnull": 1,
+        "pk": 2,
+        "type": "TEXT"
+      },
+      {
+        "cid": 2,
+        "dflt_value": null,
+        "name": "item_id",
+        "notnull": 1,
+        "pk": 3,
+        "type": "TEXT"
+      },
+      {
+        "cid": 3,
+        "dflt_value": null,
+        "name": "rollout_ordinal",
+        "notnull": 1,
+        "pk": 0,
+        "type": "INTEGER"
+      },
+      {
+        "cid": 4,
+        "dflt_value": null,
+        "name": "created_at_ms",
+        "notnull": 1,
+        "pk": 0,
+        "type": "INTEGER"
+      },
+      {
+        "cid": 5,
+        "dflt_value": null,
+        "name": "item_json",
+        "notnull": 1,
+        "pk": 0,
+        "type": "TEXT"
+      },
+      {
+        "cid": 6,
+        "dflt_value": "''",
+        "name": "item_type",
+        "notnull": 1,
+        "pk": 0,
+        "type": "TEXT"
+      },
+      {
+        "cid": 7,
+        "dflt_value": "0",
+        "name": "updated_at_ordinal",
+        "notnull": 1,
+        "pk": 0,
+        "type": "INTEGER"
+      }
+    ],
+    "thread_realtime_items": [
+      {
+        "cid": 0,
+        "dflt_value": null,
+        "name": "thread_id",
+        "notnull": 1,
+        "pk": 1,
+        "type": "TEXT"
+      },
+      {
+        "cid": 1,
+        "dflt_value": null,
+        "name": "item_id",
+        "notnull": 1,
+        "pk": 2,
+        "type": "TEXT"
+      },
+      {
+        "cid": 2,
+        "dflt_value": null,
+        "name": "rollout_ordinal",
+        "notnull": 1,
+        "pk": 0,
+        "type": "INTEGER"
+      },
+      {
+        "cid": 3,
+        "dflt_value": null,
+        "name": "created_at_ms",
+        "notnull": 1,
+        "pk": 0,
+        "type": "INTEGER"
+      },
+      {
+        "cid": 4,
+        "dflt_value": null,
+        "name": "item_type",
+        "notnull": 1,
+        "pk": 0,
+        "type": "TEXT"
+      },
+      {
+        "cid": 5,
+        "dflt_value": null,
+        "name": "item_json",
+        "notnull": 1,
+        "pk": 0,
+        "type": "TEXT"
+      }
+    ],
+    "thread_turns": [
+      {
+        "cid": 0,
+        "dflt_value": null,
+        "name": "thread_id",
+        "notnull": 1,
+        "pk": 1,
+        "type": "TEXT"
+      },
+      {
+        "cid": 1,
+        "dflt_value": null,
+        "name": "turn_id",
+        "notnull": 1,
+        "pk": 2,
+        "type": "TEXT"
+      },
+      {
+        "cid": 2,
+        "dflt_value": null,
+        "name": "rollout_ordinal",
+        "notnull": 1,
+        "pk": 0,
+        "type": "INTEGER"
+      },
+      {
+        "cid": 3,
+        "dflt_value": null,
+        "name": "status",
+        "notnull": 1,
+        "pk": 0,
+        "type": "TEXT"
+      },
+      {
+        "cid": 4,
+        "dflt_value": null,
+        "name": "error_json",
+        "notnull": 0,
+        "pk": 0,
+        "type": "TEXT"
+      },
+      {
+        "cid": 5,
+        "dflt_value": null,
+        "name": "started_at",
+        "notnull": 0,
+        "pk": 0,
+        "type": "INTEGER"
+      },
+      {
+        "cid": 6,
+        "dflt_value": null,
+        "name": "completed_at",
+        "notnull": 0,
+        "pk": 0,
+        "type": "INTEGER"
+      },
+      {
+        "cid": 7,
+        "dflt_value": null,
+        "name": "duration_ms",
+        "notnull": 0,
+        "pk": 0,
+        "type": "INTEGER"
+      },
+      {
+        "cid": 8,
+        "dflt_value": null,
+        "name": "first_user_item_id",
+        "notnull": 0,
+        "pk": 0,
+        "type": "TEXT"
+      },
+      {
+        "cid": 9,
+        "dflt_value": null,
+        "name": "final_agent_item_id",
+        "notnull": 0,
+        "pk": 0,
+        "type": "TEXT"
+      },
+      {
+        "cid": 10,
+        "dflt_value": null,
+        "name": "rollout_byte_offset",
+        "notnull": 0,
+        "pk": 0,
+        "type": "INTEGER"
+      },
+      {
+        "cid": 11,
+        "dflt_value": null,
+        "name": "rollout_end_ordinal",
+        "notnull": 0,
+        "pk": 0,
+        "type": "INTEGER"
+      },
+      {
+        "cid": 12,
+        "dflt_value": null,
+        "name": "rollout_end_byte_offset",
+        "notnull": 0,
+        "pk": 0,
+        "type": "INTEGER"
+      }
+    ]
+  },
+  "transcript_or_item_bodies_read": false
+}

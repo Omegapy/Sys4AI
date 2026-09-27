@@ -1,0 +1,529 @@
+{
+  "status": "native_pending_no_partial_acceptance",
+  "checks": [
+    {
+      "id": "service_http",
+      "status": "passed",
+      "executor": "Primary host /root under exact reviewed frozen-job protocol.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/service-host-receipt.json",
+        "sha256": "b25d91638fc53fd47bf102e317c6df7e7a3f464e303f9d2c367d1667e7d8d0a5",
+        "bytes": 1599
+      },
+      "report": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/service-host-output.json",
+        "sha256": "c8737da61e1cd3cff9960e26c1e03914782583afa415ce7fee27a13d42b39c7b",
+        "bytes": 22606
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-batch-01.json",
+        "sha256": "962dd457bfeefbca65873231c262318a0078367f03fcecb59f84e8989f5d06b3",
+        "bytes": 1021
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/stage-batch-01-inputs.json",
+        "sha256": "edf2fc332aeb15fda29dd3b1f5983e735e5d4de92745c0bbf4f4b51507e0ae5e",
+        "bytes": 19814
+      },
+      "tests_run": 28,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "case_ids": [
+        "test_explorer_service.AdditionalPackageTests.test_optional_config_defaults_and_explicit_private_path_confinement",
+        "test_explorer_service.AdditionalPackageTests.test_schema_or_asset_or_helper_addition_is_sticky",
+        "test_explorer_service.PackageRaceTests.test_missing_assets_and_invalid_configuration",
+        "test_explorer_service.PackageRaceTests.test_mutated_snapshot_never_executes_before_child_admission",
+        "test_explorer_service.PackageRaceTests.test_nested_manifest_entry_redirect",
+        "test_explorer_service.QualifierTests.test_1025_scalar_qualifiers_survive_reader_ipc_http",
+        "test_explorer_service.ResourceTests.test_actual_worker_rss_overshoot_killed_and_reaped",
+        "test_explorer_service.ResourceTests.test_header_body_absolute_timeout_and_eight_socket_cap",
+        "test_explorer_service.ServiceTests.test_actual_parent_rss_refuses_new_work",
+        "test_explorer_service.ServiceTests.test_closed_transport_and_error_bounds",
+        "test_explorer_service.ServiceTests.test_nonmutation_private_modes_and_cleanup",
+        "test_explorer_service.ServiceTests.test_raw_header_limits_duplicates_and_paths",
+        "test_explorer_service.ServiceTests.test_sticky_helper_schema_asset_drift",
+        "test_explorer_service.ServiceTests.test_success_all_operations_and_safe_assets",
+        "test_explorer_service.ServiceTests.test_worker_timeout_discards_preexisting_queue",
+        "test_explorer_sessions.SessionTests.test_cancel_or_expire_a_preserves_healthy_worker_for_b",
+        "test_explorer_sessions.SessionTests.test_capacity_does_not_evict_and_close_is_isolated",
+        "test_explorer_sessions.SessionTests.test_replay_replacement_resume_and_expiry",
+        "test_explorer_sessions.SessionTests.test_two_root_cookie_csrf_bootstrap_cursor_isolation",
+        "test_explorer_sessions.SessionTests.test_worker_drift_survives_discarded_client",
+        "test_explorer_health.HealthTests.test_cli_launch_and_no_optional_imports",
+        "test_explorer_health.HealthTests.test_missing_bundle_health_facts_and_legacy_help",
+        "test_explorer_health.HealthTests.test_slow_health_peer_has_absolute_header_body_deadline",
+        "test_explorer_health.HealthTests.test_static_and_endpoint_facts_preserve_files",
+        "test_explorer_health.HealthTests.test_wrong_selected_configuration_and_neutral",
+        "test_explorer_health.InstalledLayoutTests.test_installed_package_serves_and_cli_health_reads_real_root_contracts",
+        "test_explorer_health.LauncherRaceTests.test_documented_reader_cli_rejects_ambient_stdlib_shadows",
+        "test_explorer_health.LauncherRaceTests.test_public_cli_captures_before_selected_service_execution"
+      ],
+      "all_owned_cleanup_verified": true
+    },
+    {
+      "id": "browser_basic",
+      "status": "passed",
+      "executor": "Primary host /root, actual current Chrome isolated Playwright context.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-basic-receipt.json",
+        "sha256": "7171bf2eb22f2e2f0a1e97064c012d759253e53e9c800a67b360767373fbf470",
+        "bytes": 1443
+      },
+      "report": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-basic-stdout.json",
+        "sha256": "8b1ec89b6f6a90893235fb7c538a6c6b79b9ea871b794bfa4eb74d94ec7a8a51",
+        "bytes": 1613
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-browser-basic-01.json",
+        "sha256": "2db3a38f7d18cbdf4adcf64bf2471a24e52fdb1426a58bc55c6190c2481ed4af",
+        "bytes": 1921
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/stage-browser-01-inputs.json",
+        "sha256": "d8c82cfa105c1a8ae517245e3c37faa5118828e5b4551054ce26278adeba2e29",
+        "bytes": 20131
+      },
+      "groups": 6,
+      "checks": [
+        {
+          "name": "full_ui_bootstrap_clean_route_cookie",
+          "status": "passed"
+        },
+        {
+          "name": "copied_local_link_has_safe_route_only",
+          "status": "passed"
+        },
+        {
+          "name": "resume_retains_exact_entry_route",
+          "status": "passed"
+        },
+        {
+          "name": "isolated_close_retains_recorded_entry",
+          "status": "passed"
+        },
+        {
+          "name": "same_document_fragment_cleared_and_consumed_token_rejected",
+          "status": "passed"
+        },
+        {
+          "name": "new_document_fragment_cleared_and_consumed_token_rejected",
+          "status": "passed"
+        }
+      ],
+      "browser_version": "154.0.8037.57",
+      "qualification": "Current actual production full UI over real HTTP in isolated Chrome. Clipboard capture and abort-insensitive response delay are explicitly test instrumentation. No native zoom, OS dispatch, VoiceOver, release or human usability claim."
+    },
+    {
+      "id": "browser_late_session",
+      "status": "passed",
+      "executor": "Primary host /root, actual current Chrome isolated Playwright context.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-late-session-receipt.json",
+        "sha256": "0aae6913ccf8bff597a9ea07c2e2b1ca36a516d8f04f15125bec5542e8c66e5d",
+        "bytes": 1458
+      },
+      "report": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-late-session-stdout.json",
+        "sha256": "d3f5b2b82f7c8acc305f6c16aa81bbc892aafac27479bd55cb5b82a80796070e",
+        "bytes": 1254
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-browser-late_session-01.json",
+        "sha256": "076d92218b935cb30a32b972cf87887f38d621e9a1563b586993640ccfca4b2a",
+        "bytes": 1928
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/stage-browser-01-inputs.json",
+        "sha256": "d8c82cfa105c1a8ae517245e3c37faa5118828e5b4551054ce26278adeba2e29",
+        "bytes": 20131
+      },
+      "groups": 1,
+      "checks": [
+        {
+          "abort_ignored_intentionally": true,
+          "context_requests": 1,
+          "current_route_and_text_retained": true,
+          "name": "late_session_ignored_after_fresh_same_document_connection",
+          "real_http_response_held": true,
+          "status": "passed"
+        }
+      ],
+      "browser_version": "154.0.8037.57",
+      "qualification": "Current actual production full UI over real HTTP in isolated Chrome. Clipboard capture and abort-insensitive response delay are explicitly test instrumentation. No native zoom, OS dispatch, VoiceOver, release or human usability claim."
+    },
+    {
+      "id": "browser_late_context",
+      "status": "passed",
+      "executor": "Primary host /root, actual current Chrome isolated Playwright context.",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-late-context-receipt.json",
+        "sha256": "75a234ffa8fa3aa09aa3d7fcca606852e8ef5fb7b78d92350a96b958d74ea106",
+        "bytes": 1457
+      },
+      "report": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/browser-late-context-stdout.json",
+        "sha256": "9b3de2023bb776830cefdee1d06211184be5ebcca453ca7a71ae79e0898611e8",
+        "bytes": 1295
+      },
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-browser-late_context-01.json",
+        "sha256": "3aae9369b409639b69b138a906da5eebdb0760cd433d474715940bbac5d2fd2e",
+        "bytes": 1928
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/stage-browser-01-inputs.json",
+        "sha256": "d8c82cfa105c1a8ae517245e3c37faa5118828e5b4551054ce26278adeba2e29",
+        "bytes": 20131
+      },
+      "groups": 1,
+      "checks": [
+        {
+          "abort_ignored_intentionally": true,
+          "context_requests": 2,
+          "current_route_and_text_retained": true,
+          "name": "late_context_ignored_after_fresh_same_document_connection",
+          "real_http_response_held": true,
+          "status": "passed"
+        }
+      ],
+      "browser_version": "154.0.8037.57",
+      "qualification": "Current actual production full UI over real HTTP in isolated Chrome. Clipboard capture and abort-insensitive response delay are explicitly test instrumentation. No native zoom, OS dispatch, VoiceOver, release or human usability claim."
+    },
+    {
+      "id": "os_open_zoom",
+      "status": "pending_native_observation",
+      "executor": "Primary host /root actual OS-created tab/native browser controls.",
+      "job": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/host-os-open-01.json",
+        "sha256": "ea86254647e28ef02ee0413bcfb96c3651e84489fa5263c4bc28dee99f3232d6",
+        "bytes": 3058
+      },
+      "inputs": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/stage-os-open-01-inputs.json",
+        "sha256": "3bea7f844ce518da483da770f25b2dfe3b9e5479fc81d7a030255eedefcc9b4f",
+        "bytes": 19971
+      },
+      "evidence": [],
+      "observation_admission": null,
+      "qualification": "Public CLI subprocess is current V3 service batch01. OS-open uses the verified in-process command handler; direct Playwright navigation and native zoom are separately attributed. Native Map/List200percent is not inferred."
+    },
+    {
+      "id": "live_runtime",
+      "status": "passed",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/live-runtime-admission.json",
+        "sha256": "69ea9a4240b935ff4c0fd499345e7a1944380b7ea225747d1486d3311d327412",
+        "bytes": 3419
+      },
+      "script": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/audit-live-runtime.py",
+        "sha256": "254c07109033e34f69d59f718cb79c0e5777134196cfeed50832a1df2b48f515",
+        "bytes": 5134
+      },
+      "runtime_members": 5,
+      "oversized_runtime_member_bytes": 434861,
+      "qualification": "Accepted helper validates actual current no-follow regular single-link bytes, full imports and identity. No new build/publish."
+    },
+    {
+      "id": "authored_build",
+      "status": "passed",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/current-audit-admission.json",
+        "sha256": "b513ad01d1c4dff5194d22460b062c82b88a303447d75441ab62a55a038463ed",
+        "bytes": 5911
+      },
+      "script": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/audit-inputs.py",
+        "sha256": "d1ef674e867ea6939b661a7250dd6cd0f176331b5387e65bf064fc58f58abf39",
+        "bytes": 6715
+      },
+      "build_receipt": {
+        "bytes": 4366,
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/build-01.json",
+        "sha256": "ecbeca4d7f32ed07259974023b3c48173aa050a0f0d8fa33ef628501e8651d97"
+      },
+      "build_inputs_receipt": {
+        "bytes": 6308,
+        "path": "Verification/project-knowledge-explorer-first-release/frontend-tests/process-catalog-correction/build-inputs-01.json",
+        "sha256": "430a49fa2c48f54f117218eaf468138092c775f69ccbca70802ffadfe32501b3"
+      },
+      "source_members": 28,
+      "source_digest": "949c04ffca69b13e38574153ab63c85e5260cb1dc318dd2c6fc333d3ba519311",
+      "build_id": "09b4571b34594b39e9d19be3320f334bf7d608a333e0d06902dfda0a361259b8",
+      "qualification": "Current correspondence to correction build01 executed by original frontend owner. Earlier build19/current-V2 source preimages are historical."
+    },
+    {
+      "id": "error_bounds",
+      "status": "passed",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/current-audit-admission.json",
+        "sha256": "b513ad01d1c4dff5194d22460b062c82b88a303447d75441ab62a55a038463ed",
+        "bytes": 5911
+      },
+      "result": {
+        "cases": 186,
+        "maximum_utf8_bytes": 659,
+        "source": {
+          "bytes": 44535,
+          "path": "SKILLS-depo/ontology/scripts/ontology_explorer.py",
+          "sha256": "4ec47b1468e41f24d586e694179af3e5f163da4e50ca31b77c577ddf3a812a7d"
+        },
+        "tested_policy_maxima": {
+          "page_items": 100,
+          "request_seconds": 5,
+          "response_bytes": 32000,
+          "visited_nodes": 100
+        }
+      }
+    },
+    {
+      "id": "discovery",
+      "status": "passed",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/current-audit-admission.json",
+        "sha256": "b513ad01d1c4dff5194d22460b062c82b88a303447d75441ab62a55a038463ed",
+        "bytes": 5911
+      },
+      "result": {
+        "excluded": [
+          {
+            "excluded": true,
+            "path": "dist/index.html"
+          },
+          {
+            "excluded": true,
+            "path": "build/a.js"
+          },
+          {
+            "excluded": true,
+            "path": "node_modules/a.js"
+          }
+        ],
+        "included": [
+          {
+            "excluded": false,
+            "path": "SKILLS-depo/ontology/explorer/assets/manifest.json"
+          },
+          {
+            "excluded": false,
+            "path": "SKILLS-depo/ontology/explorer/THIRD_PARTY_NOTICES.md"
+          },
+          {
+            "excluded": false,
+            "path": "SKILLS-depo/ontology/explorer/package-lock.json"
+          },
+          {
+            "excluded": false,
+            "path": "SKILLS-depo/ontology/explorer/BUILD.md"
+          },
+          {
+            "excluded": false,
+            "path": "SKILLS-depo/ontology/explorer/assets/chunks/cytoscape.esm-D6xx22XN.js"
+          },
+          {
+            "excluded": false,
+            "path": "SKILLS-depo/ontology/explorer/assets/chunks/index-BzpN-_fY.css"
+          },
+          {
+            "excluded": false,
+            "path": "SKILLS-depo/ontology/explorer/assets/chunks/index-pSVjymv6.js"
+          },
+          {
+            "excluded": false,
+            "path": "SKILLS-depo/ontology/explorer/assets/chunks/renderer-CCjOUb_r.js"
+          },
+          {
+            "excluded": false,
+            "path": "SKILLS-depo/ontology/explorer/assets/index.html"
+          }
+        ],
+        "source": {
+          "bytes": 64184,
+          "path": "tools/template_update.py",
+          "sha256": "2542e3bc60ddb0c5dc85ee20b5cae9970ada9da9571b4b2d066e16974bf811ff"
+        }
+      },
+      "qualification": "Only unchanged discovery predicate/constants executed; watcher remains held, no Template adoption."
+    },
+    {
+      "id": "local_health",
+      "status": "passed",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/local-health.json",
+        "sha256": "24c2aeb07c535e27a03dd24b53a78ca573be0d853f53db115ec02f539d7dd0ff",
+        "bytes": 1497
+      },
+      "script": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/check-health-local.py",
+        "sha256": "d4fc5e6304ead00af4cba1e3ebf685566c4111cd9d298a43ac1629e171903616",
+        "bytes": 3165
+      },
+      "qualification": "Current captured test/helper bytes, no listener, bounded owned read worker and unchanged fixture."
+    },
+    {
+      "id": "legacy_cli",
+      "status": "passed",
+      "receipt": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/legacy-cli.json",
+        "sha256": "94455f8fa24b66029ecf2545536e2f2a2d9893f2a3d77d5362547a9238b783d7",
+        "bytes": 1727
+      },
+      "script": {
+        "path": "Verification/project-knowledge-explorer-first-release/service-tests/service-v3/check-legacy-cli.py",
+        "sha256": "e2c51d0c1287dd69484c4e174faf4bc6f0a5ec52051749fd405a810b4a84b795",
+        "bytes": 3514
+      },
+      "qualification": "Three ordinary legacy reads; knowledge/metadata identical except asserted actual helper snapshot digest. No authoring mutation or retirement."
+    }
+  ],
+  "actual_service_observations": [
+    {
+      "case": "verify_load_race",
+      "member": "ontology_explorer.py",
+      "unverified_candidate_executed": false
+    },
+    {
+      "case": "verify_load_race",
+      "member": "ontology_explorer_snapshot.py",
+      "unverified_candidate_executed": false
+    },
+    {
+      "case": "verify_load_race",
+      "member": "ontology_explorer_read.py",
+      "unverified_candidate_executed": false
+    },
+    {
+      "case": "canonical_1025_qualifiers_http",
+      "full_edge": true,
+      "qualifiers": 1025,
+      "response_bytes": 14484
+    },
+    {
+      "case": "worker_rss",
+      "elapsed_seconds": 0.06453395797871053,
+      "limit_bytes": 268435456,
+      "max_observation_gap_seconds": 0.030209874967113137,
+      "overshoot_bytes": 69206016,
+      "owned_pid_reaped": true,
+      "peak_bytes": 337641472,
+      "qualification": "Trusted disposable fault fixture allocates resident pages; operational sampling, not prevention of transient overshoot."
+    },
+    {
+      "case": "parent_rss",
+      "limit": 67108864,
+      "observed_peak_bytes": 120291328,
+      "sticky_refusal": true
+    },
+    {
+      "case": "all_operations_assets",
+      "loaded": {
+        "epoch": "f250ec8c7ba9641664ecc7f16a06a9281cc0aeacae61f2addf75e91b194ad1e2",
+        "loaded": {
+          "ontology_core": "09bc25023e873e4d7b1fcf9163e90be9f3ae46c23b8bbbe1928695c5d92e8e52",
+          "ontology_explorer": "4ec47b1468e41f24d586e694179af3e5f163da4e50ca31b77c577ddf3a812a7d",
+          "ontology_explorer_assets": "215f2f5043c9f7de4abb02b32e9d28961733d11c120e3b0dec5a0e1b90894db6",
+          "ontology_explorer_health": "d68773b85a10d5e69c3634cf53a48db100e9b139d73a6dcf1d4fdc3523cae79f",
+          "ontology_explorer_read": "2fd6393a842dd34575e147293299945f98afbccf452cca28e4c8fc7321723dab",
+          "ontology_explorer_snapshot": "d684c3039680b28c24680222e8f47a4de78638259d5e7426d33576399687324d",
+          "ontology_explorer_source": "393082592bcd1d0630dec628379e6626f116f6b60bfba098125264dd73a6b1f8",
+          "ontology_explorer_worker": "1ddebaa60b18b8578582765185f57388fae67767e959f3ccdd722bf9d23896df",
+          "ontology_modules": "d4cba6775bf4ed42bd4392ef37134ba19dd6b7d84cd82eb5997f4c8a23e47194",
+          "ontology_retrieval": "43e6693e7a6d625e0a829e48e430f8e5d319a77e8d0679dfc29d7224a389da4f",
+          "ontology_validate": "33aea8e2878fa914ecdf370ba2e6be409ef5f14d12d732b34b61a5272e14bdfd"
+        }
+      },
+      "max_observation_gap_seconds": 0.03050962509587407,
+      "observations": 128,
+      "parent_peak": 47120384,
+      "worker_peak": 46137344
+    },
+    {
+      "case": "deadline_replacement",
+      "loaded_reverified": true,
+      "old_pid_reaped": true
+    },
+    {
+      "case": "two_session_cancellation_expiry",
+      "same_worker_retained": true
+    },
+    {
+      "case": "cli",
+      "child_reaped": true,
+      "explicit_service_launch": true,
+      "health_read_only": true
+    },
+    {
+      "case": "bounded_health_probe",
+      "elapsed_seconds": 2.002109375083819,
+      "peer_mode": "trickle",
+      "rejected": true
+    },
+    {
+      "case": "bounded_health_probe",
+      "elapsed_seconds": 0.0006479169242084026,
+      "peer_mode": "oversized",
+      "rejected": true
+    },
+    {
+      "case": "bounded_health_probe",
+      "elapsed_seconds": 0.0005660409806296229,
+      "peer_mode": "transfer",
+      "rejected": true
+    },
+    {
+      "case": "bounded_health_probe",
+      "elapsed_seconds": 0.0003924159100279212,
+      "peer_mode": "redirect",
+      "rejected": true
+    },
+    {
+      "case": "health",
+      "facts": {
+        "configured": true,
+        "endpoint": {
+          "build_id": "09b4571b34594b39e9d19be3320f334bf7d608a333e0d06902dfda0a361259b8",
+          "service_instance": "95ac54d9836464b8fa3de209e25e83e8",
+          "status": "running"
+        },
+        "installed": true,
+        "local": {
+          "project_id": "explorer-fixture",
+          "root_scope_id": "268771bd2dbd21a437d8c390a96fbc0e7ba19ebdfa1af81fbf5859d549daf459",
+          "status": "readable"
+        },
+        "mutated": false,
+        "operation": "explorer-health",
+        "readable": true,
+        "running": true,
+        "service": "sys4ai-project-knowledge-explorer",
+        "stale": false,
+        "unavailable": false,
+        "wrong_project": false
+      }
+    },
+    {
+      "actual_installed_cli_health": true,
+      "actual_service_context": true,
+      "case": "installed_layout",
+      "schema_relative_to_root": "reference-assets/ONTOLOGY-depo/schema/explorer-v1.json"
+    },
+    {
+      "case": "ordinary_reader_cli_shadow_isolation",
+      "modules": [
+        "argparse",
+        "json",
+        "pathlib",
+        "hashlib"
+      ],
+      "unmanifested_execution": false
+    },
+    {
+      "case": "public_cli_verify_load_race",
+      "fixed_capture_bootstrap": true,
+      "unverified_service_executed": false
+    }
+  ],
+  "qualification": "Root supplied actual listener/browser execution; native execution remains pending until its exact receipt. Local static checks do not claim that runtime capability. Operational RSS sampling can overshoot; no broad release-performance or main-Task completion claim."
+}

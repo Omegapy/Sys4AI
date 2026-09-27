@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "TASK-20260912-8EE3D229",
+  "assignment_id": "health_trd_worker",
+  "assignment_inputs_gate_task_revision": 11,
+  "correction_context": {
+    "path": "Verification/root-health-followup-trd-20260912-v1/worker-correction-context.json",
+    "sha256": "b5a12608b55516984fb251d72993a22872c62f1a0c139f69e6a58006790fe69f"
+  },
+  "correction": {
+    "path": "Verification/root-health-followup-trd-20260912-v1/worker-correction.md",
+    "sha256": "08fc681303aeb531bba9bd33d1b58ec2fcbe72eae21ac588f5c3d1115d79c4cd",
+    "change": "Only the C1/C2 table header changes from Snapshot SHA-256 to Event-record SHA-256. Retained values are curator_session.json events[].sha256."
+  },
+  "prior_payload": {
+    "path": "Verification/root-health-trd-worker-20260912-v1/trd-input.json",
+    "sha256": "54ebcd80fb6739a819ba208030368461e33e36c902f9750f9ddc0126143d0b81"
+  },
+  "prior_coverage": {
+    "path": "Verification/root-health-trd-worker-20260912-v1/coverage-checks.json",
+    "sha256": "034026b52a88e9d719957e748d7e5c3cd6ee6e9c28ba401e008005b4aa11e243",
+    "mapping_status": "Prior bidirectional source/requirement coverage remains applicable because all requirement objects and source values are unchanged. Broad source and system checks were not repeated."
+  },
+  "payload": {
+    "path": "Verification/root-health-trd-worker-20260912-v1/trd-input-v2.json",
+    "sha256": "9d5cc93827bc5cb51b8564e9411545625a4a47d1254b688e93a587ddf3c75bb7",
+    "bytes": 20650
+  },
+  "focused_checks": {
+    "result": "passed",
+    "single_exact_header_replacement": true,
+    "title_unchanged": true,
+    "all_eight_requirement_objects_unchanged": true,
+    "event_record_hashes_and_ids_match_source": 2,
+    "current_schema": 2,
+    "required_sections": 10,
+    "requirement_count": 8,
+    "content_ready": true,
+    "content_blockers": [],
+    "v1_files_preserved": true,
+    "method": "Installed trd.py pure load_payload/validate_body/completion_blockers functions and exact payload/source comparisons under root .venv Python with bytecode writing disabled."
+  },
+  "limits": [
+    "Static payload/source-header checks only. No system tests, canonical TRD/Task writes or new requirement content.",
+    "The manager owns the official managed TRD content update and exact revision review."
+  ],
+  "files_written": [
+    "Verification/root-health-trd-worker-20260912-v1/trd-input-v2.json",
+    "Verification/root-health-trd-worker-20260912-v1/coverage-checks-v2.json"
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "boundary": "Live loopback HTTP and API checks; browser rendering and authoring not exercised.",
+  "canonical_mutations": false,
+  "checks": [
+    {
+      "bytes": 4196,
+      "endpoint": "/",
+      "sha256": "d626d3fa2fb95c940cd12e221c430e295927a5b006d7258d4b99b9fc0af7d9d3",
+      "status": 200
+    },
+    {
+      "bytes": 9083,
+      "endpoint": "/app.js",
+      "sha256": "84ec3b7992922059f5e610fd4f021e5c2b546540d14251c434667a68ee850b96",
+      "status": 200
+    },
+    {
+      "bytes": 11160,
+      "endpoint": "/editor.js",
+      "sha256": "bff1bb18d4c33c9e696a3582b5d258370512545663ee95663cd00fb1a90f448c",
+      "status": 200
+    },
+    {
+      "bytes": 7361,
+      "endpoint": "/review.js",
+      "sha256": "188c24ea4766d1898fa31d74070916689db8de6774ac4b46710076b9a70e96c7",
+      "status": 200
+    },
+    {
+      "bytes": 6277,
+      "endpoint": "/advanced.js",
+      "sha256": "6e15158a4ca41b8812468894eaf62474140e9ba466025d04dcd4b116c1d34b75",
+      "status": 200
+    },
+    {
+      "bytes": 5720,
+      "endpoint": "/styles.css",
+      "sha256": "e33f0dfb0723602972c836c2746e0d4f4f5145058fc7fe1cd78cf89e3e08ed54",
+      "status": 200
+    },
+    {
+      "authoring": false,
+      "endpoint": "/api/state",
+      "project_id": "sys4ai-depot",
+      "readiness": "ready",
+      "status": 200
+    },
+    {
+      "endpoint": "/api/records",
+      "expected_task_found": true,
+      "records": 20,
+      "status": 200
+    }
+  ],
+  "operational_health": {
+    "aggregate": "ready",
+    "components": {
+      "canonical": {
+        "ready": true,
+        "required": true
+      },
+      "guards": {
+        "ready": true,
+        "required": true
+      },
+      "inference": {
+        "ready": true,
+        "required": true
+      },
+      "semantic": {
+        "ready": true,
+        "required": true
+      },
+      "standards": {
+        "ready": true,
+        "required": true
+      },
+      "workbench": {
+        "ready": true,
+        "required": true
+      }
+    },
+    "failed_required": [],
+    "receipt": "live/ontology-advanced-operational.receipt.json"
+  },
+  "project_id": "sys4ai-depot",
+  "service_stopped": true,
+  "session_persisted": false,
+  "status": "passed",
+  "stopped_service": {
+    "aggregate": "degraded",
+    "exit_code": 1,
+    "expected_negative_control": true,
+    "state": "stopped"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "checkpoint": "partial_foundation",
+  "task_id": "TASK-20260910-7F1A11AE",
+  "plan_id": "PLAN-20260910-FAE2A15B",
+  "assignment_id": "foundation_implementer",
+  "acceptance_id": "foundation_acceptance_v1",
+  "created_at": "2026-09-11T05:03:00.026536+00:00",
+  "state": "blocked",
+  "production_readiness": "not_proven",
+  "proof_is_not_release_or_adoption_authority": true,
+  "cases": [
+    {
+      "id": "NP-009",
+      "state": "not_run"
+    }
+  ],
+  "actual_native_owner_mutations": [],
+  "actual_authenticated_artifact": {
+    "actor": "01a08ecb-f778-7580-88d5-eabd0a516766",
+    "sha256": "e5793b845a3929ad0533d5a1e00d9a16ccb8b4f1e19d5ab962b5a498fc82490e",
+    "bytes": 197,
+    "call": {
+      "session_id": "01a08ecb-f778-7580-88d5-eabd0a516766",
+      "request_id": 0,
+      "call_id": "exec-0ec0c29e-49e8-4744-869c-3ad19cfca105",
+      "thread_id": "01a08ecb-f778-7580-88d5-eabd0a516766",
+      "turn_id": "01a08ecb-f7e1-7160-9269-883e37b018d3",
+      "tool": "artifact_submit",
+      "sequence": 17,
+      "raw_sha256": "1d8bf619e87951fdc050871ea5d8bbfaad1a380766cea5d7adc9ae34917c3eef"
+    }
+  },
+  "distinction": "The artifact callback is actual native transport evidence. Task/memory/ontology publication fixtures use synthetic native envelopes and establish owner behavior only.",
+  "owner_fixture_suites": [
+    {
+      "group": "F-TASK",
+      "state": "passed",
+      "tests_run": 96,
+      "skipped": 0,
+      "seconds": 89.421,
+      "evidence": {
+        "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-xpc9n6vn/task-final-checks.txt",
+        "sha256": "c4301f5d76d34675305c3695e28326cab40f2c60e80302884a236a097a2aeed5"
+      },
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/agent-task/tests -v",
+      "evidence_level": "deterministic fixtures and actual disposable owner/helper operations; synthetic native envelopes"
+    },
+    {
+      "group": "F-MEMORY",
+      "state": "passed",
+      "tests_run": 100,
+      "skipped": 0,
+      "seconds": 28.503,
+      "evidence": {
+        "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-xpc9n6vn/memory-final-checks.txt",
+        "sha256": "1cbb82931dd5e87a16107fdb82ae0b9dfaedec771d460b2d56bd8208fda15722"
+      },
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/memory/tests -v",
+      "evidence_level": "deterministic fixtures and actual disposable owner/helper operations; synthetic native envelopes"
+    },
+    {
+      "group": "F-ONTOLOGY",
+      "state": "passed",
+      "tests_run": 183,
+      "skipped": 1,
+      "seconds": 353.632,
+      "evidence": {
+        "path": "/Volumes/P-SSD/AngryOwl/Sys4AI/.curator-foundation-xpc9n6vn/ontology-tests-final.txt",
+        "sha256": "2ed235c9734c3d15e1db0765c785bd9ef46ab09b7c71867840000e8c4a2d45b4"
+      },
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/ontology/tests -v",
+      "evidence_level": "deterministic fixtures and actual disposable owner/helper operations; synthetic native envelopes"
+    }
+  ]
+}

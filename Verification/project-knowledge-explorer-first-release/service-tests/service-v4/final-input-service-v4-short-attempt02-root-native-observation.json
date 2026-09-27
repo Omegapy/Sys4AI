@@ -1,0 +1,32 @@
+{
+  "actor": "/root",
+  "assessment": "native_ui_observed_pending_manager_gate_review",
+  "baseline_browser_tab_ids": [
+    "1492113069",
+    "1492113022",
+    "1492113080",
+    "1492113066",
+    "1492113063",
+    "1492113060"
+  ],
+  "host_receipt": "/private/tmp/explorer-service-v4-native-no-geometry-host-j7k4p8v6/receipt.json",
+  "host_receipt_sha256": "1fac17c6bc7ec0a6f6e0f00cecbe0ceb6fea05c23b66dad4d252799486b6fb71",
+  "limitations": [
+    "CUA did not expose a stable native numeric window ID or exact full frame; do not claim exact historical frame restoration.",
+    "The earlier failed 420-second host/restoration observation and first short attempt 128.3-second STOP failure remain separate and unresolved.",
+    "This narrowed check establishes no new 200% control walkthrough, Safari, VoiceOver, participant or full-service acceptance."
+  ],
+  "observations": [
+    "CUA native Chrome super+n created a disposable window with one selected New Tab; browser inventory difference identified blank tab 1492113092 at chrome://newtab/.",
+    "After browser_ready, browser inventory difference showed only test tab 1492113093 at clean route http://127.0.0.1:53465/#/p/explorer-browser-smoke/overview; blank tab 1492113092 was absent.",
+    "CUA AX of test tab showed Project Knowledge Explorer and heading Explorer fixture explorer-browser-smoke.",
+    "CUA native Chrome AX showed selected Project Knowledge Explorer window at that route with one selected test tab, before STOP.",
+    "Normal STOP was sent immediately after route, heading and native association; host receipt gives stop elapsed 17.949551375000738 seconds, before 120-second latest.",
+    "After STOP, CUA closed only test tab 1492113093. Fresh browser inventory showed both owned tab IDs absent and all six baseline tab IDs present.",
+    "After close, CUA native Chrome selected user ChatGPT window; Window menu listed that window and no Project Knowledge Explorer window. Menu was cancelled.",
+    "No geometry, zoom, preference, display, tile or window size actions were taken in this retry."
+  ],
+  "owned_blank_tab_id": "1492113092",
+  "owned_test_tab_id": "1492113093",
+  "wrapper_sha256": "e52abfab902d372650803e284ced716234273091bb4baaf0d4b99f5200729a7a"
+}

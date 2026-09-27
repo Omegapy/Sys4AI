@@ -1,0 +1,30 @@
+{
+  "native_roster": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        }
+      ]
+    }
+  },
+  "tools": [
+    "spawn_agent",
+    "list_agents",
+    "send_message",
+    "followup_task",
+    "interrupt_agent",
+    "wait_agent"
+  ],
+  "tool_contract": "The active collaboration tool supports nested child spawning. Four concurrency slots are available including the root. Full-history fork inherits the parent model and reasoning effort and does not accept overrides.",
+  "settings_inspection": {
+    "agent_default_model": null,
+    "agent_default_reasoning_effort": null,
+    "custom_agent_names": []
+  },
+  "context": "Manager receives full existing user/research context; no sibling candidate exists in this execution. Manager must assess context and settings independently for later worker dispatch.",
+  "depth": 2,
+  "available_slots": 3
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "failures": [
+    {
+      "evidence": "build-initial.log",
+      "observed": "npm run build executed from depot root, where no package.json exists; exit254",
+      "correction": "Run build in the explicitly prepared disposable explorer directory."
+    },
+    {
+      "evidence": "tool observation",
+      "observed": "First parseSync probe passed source/options instead of the pinned API filename/source/options signature; conversion error",
+      "correction": "Inspected installed pinned parser and used parseSync(filename, sourceText, options)."
+    },
+    {
+      "evidence": "tool observation",
+      "observed": "Initial lexer probe missed an import following a semicolon-free named export",
+      "correction": "Consume only the named export construct and push back the following token; positive/remote negative regression cases pass."
+    },
+    {
+      "evidence": "publish-run1.log",
+      "observed": "Actual Vite output used no-substitution backtick template imports; initial AST check rejected these as computed imports",
+      "correction": "Accept exact literal no-expression templates and retain rejection of substituted/computed imports."
+    },
+    {
+      "evidence": "publish-run2.log",
+      "observed": "Cytoscape output contains nested templates; initial runtime lexer rejected them",
+      "correction": "Bounded recursive template scanning checks executable expressions and keeps plain template text inert."
+    },
+    {
+      "evidence": "suite-run1.log",
+      "observed": "Manifest failure-injection wrapper used global old, clobbered by the tested embedded body; failed before intended commit point",
+      "correction": "Use a distinct wrapper variable; assert injected final-commit error, missing manifest, existing earlier asset and clean temporary files."
+    },
+    {
+      "evidence": "verification-driver-initial-failure.log",
+      "observed": "Driver expected typecheck error exit2 but npm/TypeScript returned exit1 with TS2322",
+      "correction": "Record the observed exit1; restore source in finally and rerun the complete current verification successfully."
+    }
+  ],
+  "current_result": "verification-result.json",
+  "qualification": "Historical failed probes are preserved; final pass claims refer only to exact current delivery file hashes and final logs."
+}

@@ -1,0 +1,81 @@
+{
+  "stage": "/private/tmp/explorer-frontend-build-o27w9awp",
+  "checks": [
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "stdout": "\n> @sys4ai/project-knowledge-explorer@1.0.0 build\n> npm run typecheck && vite build\n\n\n> @sys4ai/project-knowledge-explorer@1.0.0 typecheck\n> tsc --noEmit\n\nvite v8.3.0 building client environment for production...\ntransforming...\n\u2713 22 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                          0.51 kB \u2502 gzip:   0.34 kB\ndist/chunks/index-BoPR_xC6.css           9.61 kB \u2502 gzip:   2.83 kB\ndist/chunks/renderer-Hf8aXliv.js         5.28 kB \u2502 gzip:   2.29 kB\ndist/chunks/index-DQq3Jyqg.js          177.58 kB \u2502 gzip:  47.98 kB\ndist/chunks/cytoscape.esm-D6xx22XN.js  434.86 kB \u2502 gzip: 137.79 kB\n\n\u2713 built in 553ms\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "package:runtime"
+      ],
+      "exit_code": 0,
+      "stdout": "\n> @sys4ai/project-knowledge-explorer@1.0.0 package:runtime\n> node scripts/package-runtime.mjs\n\n{\"status\":\"published\",\"manifest_sha256\":\"f7a581572759e2e93c4daf7bc10a6d321ed0fe54bd01bc5adadb21bf0f77fc2b\",\"build_id\":\"e6f69ecd1cc1305b484f0c0d2d001c21b953066c7f89388ae93cda9e0fd76985\",\"assets\":5,\"removed\":[]}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "reviewed publisher fixed Python body",
+        "source asset transfer"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"published\", \"manifest_sha256\": \"f7a581572759e2e93c4daf7bc10a6d321ed0fe54bd01bc5adadb21bf0f77fc2b\", \"build_id\": \"e6f69ecd1cc1305b484f0c0d2d001c21b953066c7f89388ae93cda9e0fd76985\", \"assets\": 5, \"removed\": [\"chunks/index-Dpgk9YQm.js\", \"chunks/renderer-BwA_sMH2.js\"]}\n",
+      "stderr": ""
+    }
+  ],
+  "status": "passed",
+  "manifest": {
+    "api_version": 1,
+    "assets": [
+      {
+        "bytes": 434861,
+        "mime": "text/javascript",
+        "path": "chunks/cytoscape.esm-D6xx22XN.js",
+        "sha256": "5ba18b66a21161c446ce21283f6835cfb0e0bf604ab7ea90227aa125f34b3e5b"
+      },
+      {
+        "bytes": 9614,
+        "mime": "text/css",
+        "path": "chunks/index-BoPR_xC6.css",
+        "sha256": "819c59f9d0085c2167f753d19dcbf3fa2a219906c803d3184624c597f1feacbe"
+      },
+      {
+        "bytes": 177582,
+        "mime": "text/javascript",
+        "path": "chunks/index-DQq3Jyqg.js",
+        "sha256": "69cd8dd01b603b60e2b2b7befaa10b3505016117ff3e82167f79212286c40005"
+      },
+      {
+        "bytes": 5281,
+        "mime": "text/javascript",
+        "path": "chunks/renderer-Hf8aXliv.js",
+        "sha256": "d88f317db3f238a27193c6660627d19c4a1bf2343c577fde9b4fd62eb860354c"
+      },
+      {
+        "bytes": 517,
+        "mime": "text/html",
+        "path": "index.html",
+        "sha256": "3dc2101ecf328e22f711c9bd1dc252627210546ec98e2a61471677c919ea9347"
+      }
+    ],
+    "build_command": "npm run build && npm run package:runtime",
+    "build_id": "e6f69ecd1cc1305b484f0c0d2d001c21b953066c7f89388ae93cda9e0fd76985",
+    "entry": "index.html",
+    "lock_sha256": "c56e429ba8b70fe0e56ab5f879853f5267083eb7facbc0a6da36322b94afdbf9",
+    "notices_sha256": "3cfd499b3e29a659bf0ca25b379e5cfcc2c2b008da3d4713413b241b2b0aa746",
+    "schema_version": 1,
+    "source_digest": "d6e5fb8782025a91dfa25be8cc55017f577dfdc7405003db04bdb952a00f5c8f",
+    "toolchain": {
+      "node": "25.9.0",
+      "npm": "11.12.1"
+    }
+  }
+}
