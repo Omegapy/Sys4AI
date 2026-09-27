@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "assignment": "solver_a",
+  "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+  "task_id": "TASK-20260926-7014404F",
+  "execution": "EXEC_CLOCK_ENABLED",
+  "generation": 1,
+  "recorded_at": "2026-09-26T22:55:39.128307+00:00",
+  "continuation": "Same-ID unchanged assignment.resume committed revision33 before manager followup_task; current assignment active at initial observed revision34. No material input rebind.",
+  "own_assignment_snapshot": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/peer-own-assignment.json",
+    "sha256": "4fab97f33669671ad93a6391c3d0c496d264155b0f2204f2585f6a062bd5851f"
+  },
+  "checkpoint_sources": [
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/peer-checkpoint-start.json",
+      "sha256": "88f64910210f5f15081b3ff5813306f7c89ec8e5b1b2432fda9e29c80465ed3c"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/peer-checkpoint-interface.json",
+      "sha256": "5462af2b9369b3d148fdc0e757a349acaa2c2b9cd11dec39a07e00a340d2b684"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/peer-checkpoint-reply.json",
+      "sha256": "904a3a95f4bc56b5e9643879e5ab5db0cd64fb197d558e4329df7aed5ad21815"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/peer-checkpoint-handoff.json",
+      "sha256": "d67d4cafbc59e23460503b86d2010ac50b3d302545cfc2c423765f639917ea30"
+    }
+  ],
+  "mailbox_notice": {
+    "actually_observed": true,
+    "message_id": "solver_b.clockclarification1",
+    "message_sha256": "37545a776f5b3bc8bc21acc75a8c58030848a541d9bbee5fc2bee36c91355193",
+    "observation": "The manager routine peer notice with this exact durable source reference appeared in this native mailbox before the explicit followup task. No writes were initiated by that notice; work began only under the subsequent same-ID continuation.",
+    "transport_limit": "Own mailbox visibility confirms the metadata notice was received. The sender API empty result and native pending_init are not proof of an executing lease or earlier task execution. Native roster timing/activation is manager-owned evidence; this solver did not independently poll it."
+  },
+  "exact_challenge": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/collaboration/messages/clockclarification1.json",
+    "sha256": "37545a776f5b3bc8bc21acc75a8c58030848a541d9bbee5fc2bee36c91355193"
+  },
+  "exact_target": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+    "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+  },
+  "reply": {
+    "message_id": "solver_a.clock_confirmation_v1",
+    "source": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/clock_confirmation_v1.json",
+      "sha256": "9d325b95d0cc7a7589b679e3571dd8b05f1c26342afe6a1cde24de09b9f0800f"
+    }
+  },
+  "answered_communication_receipt": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/receipts/clock_clarification_answered_v1.json",
+    "sha256": "6632eef2ef5eaca933612d791dbbcbe59f3a0414a26042407960e87edb2d23d4"
+  },
+  "original_candidate": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/candidate-v1.json",
+    "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+  },
+  "original_checkpoint_evidence": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/checkpoint-evidence.json",
+    "sha256": "f642e62d103347e947120bfaa06dff24d362fd0846da943af6e0b1c7e3826d0a"
+  },
+  "board_validation": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/peer-board-validation.json",
+    "sha256": "48e2a3a40f206759758eb5f98346b6a247c17c5dc6ad2804df38f7898966a6a0"
+  },
+  "native_calls_this_continuation": {
+    "send_message": 0,
+    "followup_task": 0,
+    "interrupt_agent": 0,
+    "spawn_agent": 0
+  },
+  "delivery_state": "Reply durable with no native delivery claim to B. No extra sends/retries/wakes; failed and uncertain prior challenge receipts remain immutable and pending ownership is retained.",
+  "formal_decision_limit": "Reply answers the precise clarification and alleges no defect. Answered receipt remains communication only; current senior/manager disposition against the exact target is still required.",
+  "checks": [
+    "Reopened active unchanged own assignment",
+    "Filtered board read and exact two recipient acknowledgements",
+    "One reply and one answered communication receipt observed",
+    "Original candidate/checkpoint byte hashes unchanged",
+    "Four continued checkpoints and pure board validation observed"
+  ],
+  "stop": "One bounded reply produced, no candidate edit, stopping condition reached."
+}

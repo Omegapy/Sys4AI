@@ -11,7 +11,7 @@ Module: project (project-local). Source freshness: current.
 
 Retrieve current eligible project memory with source evidence and explicit limitations. Historical records grant no execution or publication authority.
 
-Canonical edit location: [ONTOLOGY/bindings/skills.json#/@graph/1](<../../ONTOLOGY/bindings/skills.json>) `/@graph/1`
+Canonical edit location: [ONTOLOGY/bindings/skills.json#/@graph/2](<../../ONTOLOGY/bindings/skills.json>) `/@graph/2`
 
 ## Relationships
 

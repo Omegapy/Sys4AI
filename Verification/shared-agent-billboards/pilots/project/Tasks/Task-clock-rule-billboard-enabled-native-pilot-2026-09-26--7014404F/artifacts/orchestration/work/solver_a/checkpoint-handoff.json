@@ -1,0 +1,96 @@
+{
+  "checkpoint": "before_final_handoff",
+  "observed_at": "2026-09-26T22:27:54.953989+00:00",
+  "canonical_revision": 9,
+  "observed_digest": {
+    "checkpoint": "5d95d3cad1a896db04127ff10e5c41d371ff09399d44e4679c9cbba3ac3447c0",
+    "items": [
+      {
+        "handling": [
+          {
+            "assignment": "solver_a",
+            "evidence": "Native send_message was invoked with exact message path/hash metadata only. The caller-visible tool result contained no structured confirmation; this receipt does not claim transport delivery.",
+            "execution": "EXEC_CLOCK_ENABLED",
+            "generation": 1,
+            "message_id": "solver_a.missing_clock_v1",
+            "message_sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872",
+            "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+            "native_receipt": {
+              "native_id": "/root/billboards_manager/enabled_manager",
+              "result": null,
+              "tool": "collaboration.send_message"
+            },
+            "operation_id": "notice_manager_uncertain_v1",
+            "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipient": "enabled_manager",
+            "state": "uncertain",
+            "task": "TASK-20260926-7014404F",
+            "version": 1
+          }
+        ],
+        "message": {
+          "assignment": "solver_a",
+          "body": "The source assigns x(n)=nL for integer n>=0 and a length scale L, but assigns no t(n). A proposed uniform interval tau>0 would give the conditional step ratio L/tau. Different positive time intervals yield different speeds while preserving every source position; no speed c is identified by the packet. Treat any time rule as a proposed assumption.",
+          "evidence": [
+            {
+              "path": "clock-rule-packet.json",
+              "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+            }
+          ],
+          "execution": "EXEC_CLOCK_ENABLED",
+          "generation": 1,
+          "limitations": [
+            "Algebra and dimensional reasoning only; no assigned physical clock or validated physical propagation speed."
+          ],
+          "material": true,
+          "message_id": "solver_a.missing_clock_v1",
+          "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+          "operation_id": "missing_clock_v1",
+          "phase": "independent",
+          "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+          "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+          "recipients": [
+            "enabled_manager",
+            "solver_b",
+            "senior"
+          ],
+          "reply_to": null,
+          "requested_response": "At the released peer phase, distinguish an assigned clock rule from a proposed clock rule against this exact source; stop after one evidence reply.",
+          "subtask": "CLOCK",
+          "supersedes": null,
+          "targets": [
+            {
+              "path": "clock-rule-packet.json",
+              "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+            }
+          ],
+          "task": "TASK-20260926-7014404F",
+          "thread_id": "clock_rule",
+          "title": "Time map is unassigned in the frozen source",
+          "type": "finding",
+          "urgency": "routine",
+          "version": 1,
+          "visibility": "findings"
+        },
+        "reported_reading": false,
+        "source": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/missing_clock_v1.json",
+          "sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872"
+        }
+      }
+    ],
+    "limits": {
+      "output_bytes": 32768,
+      "page_items": 20,
+      "record_bytes": 65536
+    },
+    "offset": 0,
+    "remaining": 0,
+    "returned": 1,
+    "total": 1,
+    "version": 1
+  },
+  "receipts": [],
+  "receipt_limit": "No peer message addressed to solver_a is eligible. Own authored message is readable but not acknowledged because solver_a is outside its recipient set."
+}

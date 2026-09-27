@@ -1,0 +1,66 @@
+{
+  "native_id": "/root/billboards_manager/generic_manager/report_worker",
+  "sequence": [
+    {
+      "step": 1,
+      "operation": "list_agents running; interrupt_agent previous_status running; list_agents interrupted",
+      "evidence": {
+        "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/native-interruption.json",
+        "sha256": "3783b7dcfa5290f8c4e781dc972b652912656069abbf4614f995f74cecf82423"
+      }
+    },
+    {
+      "step": 2,
+      "operation": "assignment.observe stopped",
+      "canonical_revision": 16
+    },
+    {
+      "step": 3,
+      "operation": "material subtask revision",
+      "canonical_revision": 18
+    },
+    {
+      "step": 4,
+      "operation": "send_message exact packet/context while interrupted; no wake",
+      "evidence": {
+        "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/material-send-receipt.json",
+        "sha256": "630c930b4b0ed9106199f88fdee9022410556317383d8ad8de424d7e3fc7e7bd"
+      }
+    },
+    {
+      "step": 5,
+      "operation": "assignment.inputs committed exact context",
+      "canonical_revision": 19,
+      "evidence": {
+        "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/material-inputs-commit.json",
+        "sha256": "3bf5f6930ee7d8818ffc4adaddb15e90439abc442174ff40f1ee780c7a8e1473"
+      }
+    },
+    {
+      "step": 6,
+      "operation": "followup_task same native ID after commit",
+      "evidence": {
+        "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/material-followup-receipt.json",
+        "sha256": "c07aca2710b4fdb272f9190cb88b3b7c807773940f50beaf880c1e42578d3de2"
+      }
+    }
+  ],
+  "pending_survival": {
+    "before": {
+      "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/recovery-pending-before-interrupt.json",
+      "sha256": "9c4acd541494f11e4e412be77ac334a6b0a25ebe202aab1ee095273c2c934dd6"
+    },
+    "stopped_gate": {
+      "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/stopped-pending-gate.json",
+      "sha256": "94edf35ed644a854500d4da36e16c51c2b8783f2186be49ee0bc0a2138157879"
+    },
+    "after_rebind": {
+      "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/recovery-pending-after-rebind.json",
+      "sha256": "21a7aaaec86adad7c454b201ed83edc64ffbfaec72fa1965d8467b84dde9c4a9"
+    },
+    "same_source": {
+      "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/collaboration/messages/manager_recovery_pending.json",
+      "sha256": "a2871dbbb1afd68c17c2f4b0ff79ea6926ae109e6bc602f9864a96c285dbc71b"
+    }
+  }
+}

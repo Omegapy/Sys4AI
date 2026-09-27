@@ -217,3 +217,20 @@ for launch and package adoption, [the reader contract](./.agents/skills/ontology
 for API/resource rules, and [BUILD.md](./.agents/skills/ontology/explorer/BUILD.md)
 for explicit production builds. Static installation and package checks do not
 establish live browser, accessibility, performance, or participant validation.
+
+## Default Task collaboration
+
+The complete collaborate package and Task/Agent Task collaboration instructions
+are neutral starter assets. Current initializer create and prepare routes enable
+collaboration automatically after complete package and exact owner compatibility
+checks. Selected earlier completed setup receipts gain the capability through
+an additive module transaction; their base edition and history remain preserved.
+Custom, incomplete or unsupported package/guidance/owner combinations block
+readiness without execution or overwrite. No populated board, Task assignment,
+policy, grant, learned record, backend or service belongs to this starter.
+
+The installed collaboration health check verifies recorded package inventory,
+one complete reviewed owner profile and default instruction markers. Static
+readiness enables the habit; actual Task execution still binds manager-produced
+policy, current native assignments, scoped grants and independence checkpoints.
+Posts, notification, reported reading and canonical decisions remain distinct.

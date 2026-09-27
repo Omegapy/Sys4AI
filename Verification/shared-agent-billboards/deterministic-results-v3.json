@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "evidence_revision": 3,
+  "checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/collaborate/tests -p test_gate_corrections.py",
+      "exit_code": 0,
+      "tests": 3,
+      "seconds": 7.187
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/collaborate/tests -p test_collaboration_acceptance.py -k D2",
+      "exit_code": 0,
+      "tests": 1,
+      "seconds": 3.397
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/collaborate/tests -p test_collaboration_acceptance.py -k D3",
+      "exit_code": 0,
+      "tests": 1,
+      "seconds": 4.635
+    }
+  ],
+  "passed_tests": 5,
+  "evidence_level": "Targeted deterministic corrections passed; no native rerun.",
+  "reused": "Unchanged D1/D4 behavioral results and manager-owned completed actual native fixtures, with explicit current-vs-historical profile limits.",
+  "test_files": [
+    {
+      "path": "SKILLS-depo/collaborate/tests/test_gate_corrections.py",
+      "sha256": "57341a8cc5a93efd879980ab7bb2627c12db64856531c726fcdfc2a1a3c89e0e"
+    },
+    {
+      "path": "SKILLS-depo/collaborate/tests/test_collaboration_acceptance.py",
+      "sha256": "4f8fe2a048174039a0147746ae69b71f52620905e6c9295ba519758831ff3087"
+    }
+  ],
+  "prior_evidence_preserved": [
+    {
+      "path": "Verification/shared-agent-billboards/package-worker-result.json",
+      "sha256": "08b78456a037770afe5ef6f4379b0e0996287895ede8b18cdf18247a13276c3b"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/compatibility-manifest.json",
+      "sha256": "0513b713a6bc35738d9e84893d1853ecd58462cf9934d5c7ea005e6af38eddfc"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/deterministic-results.json",
+      "sha256": "20a43fd9ee5b124efee09c2397222fee5fe2a326575c52399dcce113a7913e09"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/package-worker-result-v2.json",
+      "sha256": "2fbc2dfbcf2013d6db9702c8c582d79e9816236688ffcc8adaf2c9303f3ef39a"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/compatibility-manifest-v2.json",
+      "sha256": "c7f3b3397ba15782925d6e5d5f459eaa521df9c554c3cbe6877d7df3707540c8"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/deterministic-results-v2.json",
+      "sha256": "acb8da9a6d0414561fced1031ae40332fd4fd915a84e2db7f7bf1596b6cece5b"
+    }
+  ],
+  "no_native_or_fixture_writes": true,
+  "limits": "Synthetic tests do not establish native independence/authentication/comprehension; old pilot code is not byte-identical to final corrected source."
+}

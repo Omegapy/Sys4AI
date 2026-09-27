@@ -2,7 +2,7 @@
 
 # Roles
 
-Catalog SHA-256: `b593fc5f7ee1c3777e9e042b0a766bfaeaa40b5a446d58490ee0d966a9185736`
+Catalog SHA-256: `dec72f20347f78ab937424e9ddf35d6af980e89c0e92e34f690b29d645bb1267`
 
 | Role | Selection | AGENTS.md | ROLE.md | AGENTS SHA-256 | ROLE SHA-256 |
 | --- | --- | --- | --- | --- | --- |
@@ -10,8 +10,8 @@ Catalog SHA-256: `b593fc5f7ee1c3777e9e042b0a766bfaeaa40b5a446d58490ee0d966a91857
 | documentation-curator | Inspect and propose evidence-backed factual prose, section-bound documentation and declared generated-view maintenance. Use only for the explicitly assigned scope. | [AGENTS.md](./documentation-curator/AGENTS.md) | [ROLE.md](./documentation-curator/ROLE.md) | `e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd` | `d90978bd3ad1a47c7a8752821a4ceba0ca39cf7afcf6aca91709e259e91498ae` |
 | improvement-maintenance | Inspect and implement explicitly selected technical maintenance in the assigned isolated candidate workspace. Use only for the explicitly assigned scope. | [AGENTS.md](./improvement-maintenance/AGENTS.md) | [ROLE.md](./improvement-maintenance/ROLE.md) | `e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd` | `034dd7b3ce155cd9b8576d5917f9bb208400241bfeb1599bf0d1e413b096b098` |
 | knowledge-curator | Inspect source-backed memory and ontology corrections and prepare independent owner publication proposals. Use only for the explicitly assigned scope. | [AGENTS.md](./knowledge-curator/AGENTS.md) | [ROLE.md](./knowledge-curator/ROLE.md) | `e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd` | `b6d509eff7984b1ad02ce9b2a9893c299af045de0ebefa87accd0b45ba3d3c75` |
-| project-sub-agent | General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required. | [AGENTS.md](./project-sub-agent/AGENTS.md) | [ROLE.md](./project-sub-agent/ROLE.md) | `7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2` | `4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2` |
-| task-manager | Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution. | [AGENTS.md](./task-manager/AGENTS.md) | [ROLE.md](./task-manager/ROLE.md) | `b615a3be1cf9cd7430e874729e94ec567456370667a2478e4744abd73fdf9b49` | `3318312ec377438c2d5ca31313a745e68ae7fcfa1b48d0e0217e27b75d9c6443` |
+| project-sub-agent | General-purpose sub-agent for bounded project analysis, implementation, documentation, and verification when no narrower specialized role is required. | [AGENTS.md](./project-sub-agent/AGENTS.md) | [ROLE.md](./project-sub-agent/ROLE.md) | `8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1` | `6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547` |
+| task-manager | Coordinate one explicitly assigned project Task as its confirmed native manager, not as an unassigned replacement for the host or another execution. | [AGENTS.md](./task-manager/AGENTS.md) | [ROLE.md](./task-manager/ROLE.md) | `e32b9ca48926cd3d9e2cdc38a0cf86e022ed43c6024cfd04779d861d00dc0027` | `b5c16cec654e20c671daef4e61308200eb2149efa2fbb1949dc259766469007d` |
 
 ## Invalid bundles
 

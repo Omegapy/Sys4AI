@@ -1,0 +1,404 @@
+{
+  "version": 2,
+  "assignment": "senior",
+  "native_id": "/root/billboards_manager/enabled_manager/senior",
+  "task": "TASK-20260926-7014404F",
+  "execution": "EXEC_CLOCK_ENABLED",
+  "generation": 1,
+  "subtask": "CLOCK",
+  "baseline": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3",
+  "round": 1,
+  "created_at_utc": "2026-09-26T23:16:17.942069+00:00",
+  "source_versions": [
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+      "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+    },
+    {
+      "path": "clock-rule-packet.json",
+      "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+    },
+    {
+      "path": "comparison-protocol.json",
+      "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+      "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_B_V1.json",
+      "sha256": "9228ff2df6161086ab65bbb131500f6113b7a767ea611297e460d339c2c7d899"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/REVIEW_B_V1.json",
+      "sha256": "1c19f38ab158ecef396a5f47cc311d2285ce44e18125ce580a71e6fa67fed66f"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V2.json",
+      "sha256": "27ddee1dabc0e2684ce82e8632f696af0680269bf447e00292dcc38f5e36731b"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/REVIEW_A_V2.json",
+      "sha256": "066a20c9d973a24391e2b51952725e4abe0e436e5cc4d680260f78eaad23ca8f"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/OBJECTIONS_V2.json",
+      "sha256": "1b10511d3e8696e7c12db76573893b4d855d37c368a0f59a574d36a1929e5ce6"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/MATERIAL_PACKET_V2.json",
+      "sha256": "ae66444a42cabc5edca3a47eab35f854b6730f5b621487cf4f0557d1868f1b98"
+    }
+  ],
+  "original_candidates": [
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/candidate-v1.json",
+      "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/candidate-v1.json",
+      "sha256": "9228ff2df6161086ab65bbb131500f6113b7a767ea611297e460d339c2c7d899"
+    }
+  ],
+  "current_candidates": [
+    "CAND_A_V2",
+    "CAND_B_V1"
+  ],
+  "current_assigned_reviews": [
+    "REVIEW_A_V2",
+    "REVIEW_B_V1"
+  ],
+  "answer": "The unchanged position-index source still determines neither speed nor physical c. Distinct proposed clock maps yield different conditional interval velocities: the uniform map gives L/tau, while the new nonlinear map gives L/[tau(2n+1)]. Neither map is source-assigned. Physical identification of c requires additional independent meaning and evidence.",
+  "assigned_source_facts": [
+    "For integer n>=0, x(n)=nL.",
+    "L is a length scale. No t(n) or clock interval is assigned."
+  ],
+  "source_derivations": [
+    "An index increment gives delta x=L. The index is dimensionless, so this difference has length units and no assigned elapsed-time denominator.",
+    "For nonzero L, two proposed positive clock intervals tau and 2 tau preserve every source position but give L/tau and L/(2 tau). This counterexample proves mathematical nonidentifiability of a unique interval velocity from the position source."
+  ],
+  "proposed_assumptions": [
+    {
+      "id": "N1",
+      "assumption": "Propose t_N(n)=tau*n^2, tau>0 and [tau]=time, for integer n>=0.",
+      "status": "unassigned additional nonlinear hypothesis requested by exact material packet"
+    },
+    {
+      "id": "U1",
+      "assumption": "As a distinct alternative propose t_U(n)=n*tau, tau>0 and [tau]=time.",
+      "status": "unassigned uniform hypothesis retained from originals"
+    },
+    {
+      "id": "D1",
+      "assumption": "Associate x(n) and t(n) with the same modeled event and define successive finite-difference interval velocity.",
+      "status": "proposed interpretation and definition"
+    }
+  ],
+  "conditional_derivation": {
+    "shared": "Source delta x=L, dimensionless n. Each proposal below is conditional on its own time map and D1; they are alternatives, not simultaneous assigned clocks.",
+    "nonlinear": {
+      "premises": [
+        "assigned x(n)=nL",
+        "proposed N1",
+        "proposed D1"
+      ],
+      "steps": [
+        "delta t_N=tau[(n+1)^2-n^2]=tau(2n+1)>0 for n>=0",
+        "v_n=L/[tau(2n+1)]",
+        "speed_n=|L|/[tau(2n+1)]"
+      ],
+      "units": "length/time because 2n+1 is dimensionless",
+      "index_cases": "n=0 gives |L|/tau; n=1 gives |L|/(3tau). For nonzero L the magnitudes decrease with n toward zero; no single constant nonzero interval speed follows under N1."
+    },
+    "uniform": {
+      "premises": [
+        "assigned x(n)=nL",
+        "proposed U1",
+        "proposed D1"
+      ],
+      "steps": [
+        "delta t_U=tau>0",
+        "v_U=L/tau",
+        "speed_U=|L|/tau"
+      ],
+      "units": "length/time",
+      "scope": "Uniform conditional ratio belongs only to U1. Positive-L convention permits speed_U=L/tau."
+    },
+    "zero_length": "For L=0 either proposed clock gives zero interval velocity; no clock or physical propagation constant becomes source-assigned.",
+    "status": "Finite-difference algebra conditional on proposed clocks; no instantaneous motion or physical validation inferred."
+  },
+  "identifying_c": {
+    "definition_route": "For U1 define a model parameter c:=|L|/tau explicitly; for N1 use index-dependent c_n if desired. These definitions label selected conditional ratios, not derive or measure a pre-existing propagation constant.",
+    "evidence_route": "If c denotes a specified physical propagation speed, supply its meaning, a physical event interpretation, calibrated length and time scales, and independent evidence or a governing relation showing that this process has that propagation speed.",
+    "circularity": "Choosing tau=|L|/c from a preselected positive c imposes the ratio when |L|>0. It cannot derive c from the source. At L=0 that positive-clock construction does not apply.",
+    "assigned_evidence": "None of those identifying physical inputs is supplied in the frozen packet.",
+    "nonlinear_boundary": "For nonzero L and fixed tau>0, N1 cannot equal one fixed positive c at all intervals. One may define c_n:=|L|/[tau(2n+1)], explicitly an index-dependent model parameter. Matching one selected interval by choosing tau=|L|/[c(2n+1)] imposes that interval value; it does not derive a physical c or a global constant."
+  },
+  "limits": [
+    "tau=0 makes the quotient undefined; tau>0 is explicitly proposed.",
+    "For nonzero L, varying proposed tau changes the ratio without changing any source position. Parameter limits tau toward zero or infinity are mathematical limits, not physically achievable speed evidence.",
+    "If L=0, sampled positions coincide. A time map and physical interpretation remain unassigned; no physical propagation constant is identified.",
+    "Unequal positive clock intervals give v_n=L/[t(n+1)-t(n)]. The source does not establish a uniform interval speed.",
+    "A discrete interval quotient does not establish instantaneous motion between indices without additional interpolation or dynamics.",
+    "No external research, experiment, validated physics or Aether-Flow result is supplied or claimed.",
+    "N1 and U1 are competing optional clock hypotheses. For nonzero L they agree on the n=0 step interval but predict different later ratios; neither can be presented as the unique source-assigned clock.",
+    "The nonzero sampled nonlinear interval at n=0 is tau; a continuous derivative of a speculative interpolation is not the discrete denominator."
+  ],
+  "candidate_contributions": [
+    {
+      "candidate": "CAND_A_V2",
+      "retained": [
+        "Explicit unchanged-source versus new N1 hypothesis separation",
+        "Positive nonlinear finite difference tau(2n+1), units, n=0/n=1 and varying interval magnitudes",
+        "No one fixed positive c across all nonlinear intervals for nonzero L",
+        "Uniform clock preserved as separate proposed alternative, original A1/peer/notice history retained"
+      ],
+      "omitted": [
+        "Duplicate dimensional/nonidentifiability algebra is stated once with attribution retained; no substantive finding discarded."
+      ]
+    },
+    {
+      "candidate": "CAND_B_V1",
+      "retained": [
+        "Independent two-clock nonidentifiability counterexample",
+        "Sign/magnitude and zero-length convention",
+        "Nonuniform clocks, discrete and mathematical parameter limits",
+        "Model-definition route separate from calibrated physical-evidence route"
+      ],
+      "omitted": [
+        "Repeated uniform-clock quotient expressed once under U1, preserving every premise/result."
+      ]
+    }
+  ],
+  "material_thread_dispositions": [
+    {
+      "message_id": "solver_a.changed_hypothesis_v2",
+      "source": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/changed_hypothesis_v2.json",
+        "sha256": "37bf84560937ec00686cbb877d8f388a45a3689880b0ab01e0068e8eacf41018"
+      },
+      "targets": [
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+          "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/MATERIAL_PACKET_V2.json",
+          "sha256": "ae66444a42cabc5edca3a47eab35f854b6730f5b621487cf4f0557d1868f1b98"
+        }
+      ],
+      "target_dispositions": [
+        {
+          "target": {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+            "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+          },
+          "proposed_disposition": "obsolete",
+          "reason": "The notice identifies the prior A1 scope now superseded by exact A2 and its assigned A2 review. A1 remains immutable history, with no alleged original defect. The current proposal includes the nonlinear addition without using old synthesis/acceptance as current."
+        },
+        {
+          "target": {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/MATERIAL_PACKET_V2.json",
+            "sha256": "ae66444a42cabc5edca3a47eab35f854b6730f5b621487cf4f0557d1868f1b98"
+          },
+          "proposed_disposition": "addressed",
+          "reason": "Exact material packet request is incorporated: N1 has delta t=tau(2n+1)>0, v_n=L/[tau(2n+1)], explicit index dependence/units/limits; U1 remains a distinct unassigned alternative. Current A2 review passed and this synthesis retains all exact evidence."
+        }
+      ],
+      "formal_state": "Current senior assess awaits canonical SYNTH_V2; manager disposition/acceptance remain separate."
+    },
+    {
+      "message_id": "solver_a.missing_clock_v1",
+      "source": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/missing_clock_v1.json",
+        "sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872"
+      },
+      "targets": [
+        {
+          "path": "clock-rule-packet.json",
+          "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+        }
+      ],
+      "target_dispositions": [
+        {
+          "target": {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          "proposed_disposition": "addressed",
+          "reason": "The exact frozen source still assigns no clock. This synthesis retains the missing-time/nonidentifiability finding and derives U1/N1 ratios only conditionally; no source-derived speed or c is claimed."
+        }
+      ],
+      "formal_state": "Current senior assess awaits canonical SYNTH_V2; manager disposition/acceptance remain separate."
+    },
+    {
+      "message_id": "solver_b.clockclarification1",
+      "source": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/collaboration/messages/clockclarification1.json",
+        "sha256": "37545a776f5b3bc8bc21acc75a8c58030848a541d9bbee5fc2bee36c91355193"
+      },
+      "targets": [
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+          "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+        }
+      ],
+      "target_dispositions": [
+        {
+          "target": {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+            "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+          },
+          "proposed_disposition": "obsolete",
+          "reason": "This exact challenge targets historical A1, not current A2. A1 already made the unassigned uniform-clock/circularity distinction and its exact peer reply confirms it. Current A2 separately preserves U1 and labels N1 unassigned; the semantic caution is retained, but the old target is not current-candidate review evidence."
+        }
+      ],
+      "formal_state": "Current senior assess awaits canonical SYNTH_V2; manager disposition/acceptance remain separate."
+    },
+    {
+      "message_id": "solver_b.finding1",
+      "source": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/collaboration/messages/finding1.json",
+        "sha256": "456066af06c5ce8caed7057a44c9429e89f9b08a5e0bdb1be7accc2f2f3dd712"
+      },
+      "targets": [
+        {
+          "path": "clock-rule-packet.json",
+          "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+        }
+      ],
+      "target_dispositions": [
+        {
+          "target": {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          "proposed_disposition": "addressed",
+          "reason": "The exact frozen source still assigns no clock. This synthesis retains the missing-time/nonidentifiability finding and derives U1/N1 ratios only conditionally; no source-derived speed or c is claimed."
+        }
+      ],
+      "formal_state": "Current senior assess awaits canonical SYNTH_V2; manager disposition/acceptance remain separate."
+    }
+  ],
+  "peer_reply": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/peer-reply-evidence.json",
+    "sha256": "d6c69e1bf356341d33e8fbd5d19a2f1901b05388d1658c5b5f67986639cbb6fd"
+  },
+  "criterion_coverage": [
+    {
+      "criterion": 1,
+      "evidence": [
+        "assigned_source_facts",
+        "source_derivations",
+        "proposed_assumptions",
+        "conditional_derivation"
+      ],
+      "assessment": "Source facts, proposals and conditional deductions are separated."
+    },
+    {
+      "criterion": 2,
+      "evidence": [
+        "source_derivations"
+      ],
+      "assessment": "Missing time denominator and two-clock counterexample rule out a source-derived speed or c."
+    },
+    {
+      "criterion": 3,
+      "evidence": [
+        "proposed_assumptions",
+        "conditional_derivation",
+        "limits"
+      ],
+      "assessment": "Requested positive nonlinear clock gives index-dependent ratio with units and limits; separate uniform alternative preserves L/tau without assigning either clock to the source."
+    },
+    {
+      "criterion": 4,
+      "evidence": [
+        "identifying_c",
+        "limits"
+      ],
+      "assessment": "Definition/evidence routes and circularity are explicit; physical validation is not claimed."
+    },
+    {
+      "criterion": 5,
+      "evidence": [
+        "source_versions",
+        "preserved_v1_evidence",
+        "original_candidates",
+        "current_original_candidates",
+        "current_assigned_reviews",
+        "material_thread_dispositions",
+        "peer_reply"
+      ],
+      "assessment": "Both original candidates, current A2+B1, preserved first reviews/current A2+B1 review and all four material messages/five exact targets inspected. Historical A1 targets explicitly obsolete with their semantic cautions retained. Formal senior SYNTH_V2 assessment and manager acceptance remain separate next gates."
+    }
+  ],
+  "differences": {
+    "complementary": [
+      "A2 concrete nonlinear clock implements B1 generic nonuniform-clock caution; both demonstrate the source lacks a unique elapsed-time rule."
+    ],
+    "terminology": [
+      "Use signed interval velocity v_n versus speed magnitude |v_n| consistently; model c_n is index-dependent under N1."
+    ],
+    "scope": [
+      "Retain U1 constant conditional ratio and N1 varying ratio as separately labeled proposed alternatives; selecting a physical clock remains outside packet evidence."
+    ],
+    "evidence": [
+      "No assigned evidence dispute: source facts unchanged, A2 assigned review and unchanged B1 assigned review pass with no mandatory defect."
+    ],
+    "exclusive": [
+      "For nonzero L, U1 and N1 cannot both describe the same single clock sequence at n>=2 with the same tau. The synthesis makes no simultaneous-clock commitment and selects neither as established physical truth."
+    ]
+  },
+  "unresolved_mandatory_analysis_conflicts": [],
+  "formal_gate_limits": [
+    "This artifact is the current senior proposal, not self acceptance.",
+    "Senior exact-target Board assess awaits canonical SYNTH_V2; manager disposition and acceptance remain separate owner gates.",
+    "Preserved v1 synthesis/review/acceptance evidence cannot substitute for current changed A2 gates."
+  ],
+  "checks": [
+    "Matched every exact current assignment.context hash after committed material rebind/followup.",
+    "Reopened unchanged B1 candidate/pass and inspected new A2 with its assigned A2 review.",
+    "Matched original/current candidate byte hashes and preserved v1 own synthesis/decision/checkpoint hashes.",
+    "Inspected nonlinear finite differences, positivity, units/index cases, conditional alternatives and every frozen criterion.",
+    "Reinspected exact original findings/challenge/reply and new notice; all four material messages/five target dispositions covered."
+  ],
+  "verification_level": "Inspected algebra and exact artifacts; runtime permitted board reads and explicit acknowledgements observed.",
+  "preserved_v1_evidence": [
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/senior/synthesis-v1.json",
+      "sha256": "56ad80142094d61752c849f3b75f4f46a1a47682e3f354a01ef74b12f0962eb5"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/senior/canonical-dispositions-v1.json",
+      "sha256": "1654a842abd4d244812dba2d0ab62ceb366ad72cf53815c6dd21a236533f5530"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/senior/decision-evidence-v1.json",
+      "sha256": "b25234d1cbac92e8f70c6e6f2b7cc45166dc0e5ea5e399ad11ea5066271a1671"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/senior/checkpoint-evidence-v1.json",
+      "sha256": "e1caede9dfa35b88e9b9c514cd7beed12606cff1ed7dcc83ffdef759af451240"
+    }
+  ],
+  "current_original_candidates": [
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/candidate-v2.json",
+      "sha256": "27ddee1dabc0e2684ce82e8632f696af0680269bf447e00292dcc38f5e36731b"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/candidate-v1.json",
+      "sha256": "9228ff2df6161086ab65bbb131500f6113b7a767ea611297e460d339c2c7d899"
+    }
+  ],
+  "material_revision": {
+    "packet": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/MATERIAL_PACKET_V2.json",
+      "sha256": "ae66444a42cabc5edca3a47eab35f854b6730f5b621487cf4f0557d1868f1b98"
+    },
+    "status": "One controlled proposed-hypothesis addition; no initial defect and no source-fact change. A2 and its assigned A2 review replace only A1 eligibility. Unchanged B1 and its assigned review retained.",
+    "previous_synthesis_status": "v1 bytes preserved as historical evidence; this v2 proposal does not count v1 acceptance or assessment as current."
+  }
+}

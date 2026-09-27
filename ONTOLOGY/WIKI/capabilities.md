@@ -19,6 +19,7 @@
 - [Local RDF SPARQL SHACL](capability-ontology-standards-43c823cff304.md) (instance; approved)
 - [Ontology visual workbench](capability-ontology-workbench-ebfeeb597640.md) (instance; deprecated)
 - [Project Knowledge Explorer](capability-project-knowledge-explorer-9dbae96fcfc8.md) (instance; approved)
+- [Shared agent billboard collaboration](capability-shared-agent-billboards-5e8c97f40cb6.md) (instance; approved)
 - [Canonical Task ledger operations](capability-task-ledger-e5e3ed20ff24.md) (instance; approved)
 - [Governed Task management](capability-task-management-bf2e6d56022e.md) (instance; approved)
 - [TRD creation](capability-trd-creation-0a9ec805436f.md) (instance; approved)
@@ -50,3 +51,4 @@
 - [Installed ontology skill](installed-ontology-42d57dd9a77d.md) (instance; approved)
 - [Installed task skill](installed-task-fe21ab67c604.md) (instance; approved)
 - [Installed to-trd skill](installed-to-trd-d10f52460c58.md) (instance; approved)
+- [Reusable collaborate skill](reusable-collaborate-b2ea0864c0c5.md) (instance; approved)

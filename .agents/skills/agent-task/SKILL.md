@@ -163,3 +163,17 @@ for queued solvers, and reconciles material changes through existing version and
 input gates. Record actual publication receipts only. Optional memory recovery
 does not replay a Task event or reopen completed work. Read-only Task commands
 do not initialize or invoke a backend that writes state.
+
+## Collaboration message and owner gates
+
+<!-- sys4ai:collaboration-owner-gates-v1 -->
+
+Enabled collaboration uses the installed collaborate skill with a registered
+manager policy, exact current baseline/input references and existing namespace
+grants. The Task helper remains the sole canonical owner. Posts, reported reads,
+recipient-observed notifications and snapshots do not mutate assignments,
+current candidates, reviews, acceptance or Task lifecycle. Preserve the four
+participant checkpoints and independent first-pass barriers. Route material
+changes through the existing owner invalidation and input-before-wake gates.
+Missing or unsupported installed owner bytes block collaboration readiness;
+v1 compatibility does not claim v2 broker or context-read attestation.

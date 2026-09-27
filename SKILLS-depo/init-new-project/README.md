@@ -7,13 +7,13 @@ starters only from the registered Template, specializes project identity,
 maintains factual registration and verifies local files.
 
 Both routes preserve existing project documents, packages, Tasks, configuration,
-data and repository metadata. New projects receive ten complete skill packages
+data and repository metadata. New projects receive the complete current governance skill packages
 and the generic and task-manager roles with a generated index. The helper does not create an environment, install software
 or contact a service. It uses Git only for read-only observations when a child
 repository already exists.
 
 The [receipt schema](assets/initialization-receipt.schema.json) defines schema-1
-`governance-starter-v9` receipts at `control_records/project-setup.json`. Source
+`governance-starter-v12` base receipts at `control_records/project-setup.json`. Source
 provenance, original adoption hashes and current observed hashes have separate
 fields. Partial asset adoption resumes only against the same source inventory
 and unchanged target bytes. Completed reruns preserve project edits and observe
@@ -275,3 +275,15 @@ Selected v11 installations enable [bounded session maintenance](../curate/refere
 The Template remains neutral; explicit opt-outs and earlier setup receipts retain
 their choices. The unattended scheduler, services and runtime installation remain
 separate.
+
+## Default collaboration
+
+`create` and `prepare-existing` automatically install and enable the complete
+collaboration capability for a supported selected destination. Earlier completed
+receipts retain their base editions and gain an additive `collaborate` operation
+in `module_adoptions`. Customized or incomplete packages and unsupported Task
+owners are preserved and reported as blockers.
+
+Use `assess-collaboration --destination ABSOLUTE_PROJECT_PATH` for a pure static
+assessment. Enabled setup still requires manager policy and assignment grants
+when a Task executes; setup starts no broker or service and creates no board.

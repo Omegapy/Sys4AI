@@ -1,0 +1,204 @@
+{
+  "checkpoint": "d8609c7ef6ad70dfcd7f8ab8440086166fb08fac3495f2ca6fb71023f5f07f62",
+  "items": [
+    {
+      "handling": [
+        {
+          "assignment": "generic_manager_v2",
+          "evidence": "",
+          "execution": "EXEC_GENERIC_PILOT",
+          "generation": 2,
+          "message_id": "generic_manager_v2.manager_interface_note",
+          "message_sha256": "0d161d2a72dc0ccf7834426347471284740de2b797f1a7249727a68cf5ad2d4f",
+          "native_id": "/root/billboards_manager/generic_manager",
+          "native_receipt": {
+            "native_id": "/root/billboards_manager/generic_manager/report_worker",
+            "result": {},
+            "tool": "collaboration.send_message"
+          },
+          "operation_id": "notify_interface_note",
+          "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+          "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+          "recipient": "generic_worker",
+          "state": "notified",
+          "task": "TASK-20260926-B9F05B47",
+          "version": 1
+        },
+        {
+          "assignment": "generic_worker",
+          "evidence": "Read exact v1 boundary; reported reading only, no comprehension or incorporation claim.",
+          "execution": "EXEC_GENERIC_PILOT",
+          "generation": 2,
+          "message_id": "generic_manager_v2.manager_interface_note",
+          "message_sha256": "0d161d2a72dc0ccf7834426347471284740de2b797f1a7249727a68cf5ad2d4f",
+          "native_id": "/root/billboards_manager/generic_manager/report_worker",
+          "native_receipt": null,
+          "operation_id": "ack_interface_note_v1",
+          "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+          "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+          "recipient": "generic_worker",
+          "state": "acknowledged",
+          "task": "TASK-20260926-B9F05B47",
+          "version": 1
+        }
+      ],
+      "message": {
+        "assignment": "generic_manager_v2",
+        "body": "Version1 explicitly leaves units unassigned. Preserve the count value without guessing a unit. A later owner-gated material packet may assign explicit units.",
+        "evidence": [
+          {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v1.json",
+            "sha256": "89de5bd84efc80911d4e3a238d09e8b1b1547cf85e9247b52a4a7830cc4d1543"
+          }
+        ],
+        "execution": "EXEC_GENERIC_PILOT",
+        "generation": 2,
+        "limitations": [
+          "Fixture report only; no real product interface."
+        ],
+        "material": false,
+        "message_id": "generic_manager_v2.manager_interface_note",
+        "native_id": "/root/billboards_manager/generic_manager",
+        "operation_id": "manager_interface_note",
+        "phase": "component",
+        "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+        "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+        "recipients": [
+          "generic_worker"
+        ],
+        "reply_to": null,
+        "requested_response": "Inspect exact v1 interface and flag the affected omission with its target; stop after one bounded units exchange.",
+        "subtask": "REPORT",
+        "supersedes": null,
+        "targets": [
+          {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v1.json",
+            "sha256": "89de5bd84efc80911d4e3a238d09e8b1b1547cf85e9247b52a4a7830cc4d1543"
+          }
+        ],
+        "task": "TASK-20260926-B9F05B47",
+        "thread_id": "report_units",
+        "title": "Current interface units boundary",
+        "type": "note",
+        "urgency": "routine",
+        "version": 1,
+        "visibility": "findings"
+      },
+      "reported_reading": false,
+      "source": {
+        "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/collaboration/messages/manager_interface_note.json",
+        "sha256": "0d161d2a72dc0ccf7834426347471284740de2b797f1a7249727a68cf5ad2d4f"
+      }
+    },
+    {
+      "handling": [],
+      "message": {
+        "assignment": "generic_worker",
+        "body": "The exact report-interface-v1 fields are name and count, and units_assigned is false. Inferring units would add unsupported meaning. The preliminary report will retain widgets count 3 without a units field; a unit change requires a current owner input binding.",
+        "evidence": [
+          {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v1.json",
+            "sha256": "89de5bd84efc80911d4e3a238d09e8b1b1547cf85e9247b52a4a7830cc4d1543"
+          }
+        ],
+        "execution": "EXEC_GENERIC_PILOT",
+        "generation": 2,
+        "limitations": [
+          "Tiny fixture report only; current interface does not assign units."
+        ],
+        "material": true,
+        "message_id": "generic_worker.units_finding_v1",
+        "native_id": "/root/billboards_manager/generic_manager/report_worker",
+        "operation_id": "units_finding_v1",
+        "phase": "component",
+        "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+        "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+        "recipients": [
+          "generic_manager_v2"
+        ],
+        "reply_to": null,
+        "requested_response": "Owner: assess the exact v1 omission and whether units must be explicitly assigned; stop after one current-target reply.",
+        "subtask": "REPORT",
+        "supersedes": null,
+        "targets": [
+          {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v1.json",
+            "sha256": "89de5bd84efc80911d4e3a238d09e8b1b1547cf85e9247b52a4a7830cc4d1543"
+          }
+        ],
+        "task": "TASK-20260926-B9F05B47",
+        "thread_id": "report_units",
+        "title": "Version1 count has no assigned units",
+        "type": "finding",
+        "urgency": "routine",
+        "version": 1,
+        "visibility": "findings"
+      },
+      "reported_reading": false,
+      "source": {
+        "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/messages/units_finding_v1.json",
+        "sha256": "cf5ed0ebf330ae3ef74f68a830e97640bc3c1400fd928038a08f4ee696a9acb1"
+      }
+    },
+    {
+      "handling": [],
+      "message": {
+        "assignment": "generic_worker",
+        "body": "For report-interface-v1 with units_assigned false, may count units be inferred or must the owner assign them? The current report can preserve count 3 without units.",
+        "evidence": [
+          {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v1.json",
+            "sha256": "89de5bd84efc80911d4e3a238d09e8b1b1547cf85e9247b52a4a7830cc4d1543"
+          }
+        ],
+        "execution": "EXEC_GENERIC_PILOT",
+        "generation": 2,
+        "limitations": [
+          "Tiny fixture report only; current interface does not assign units."
+        ],
+        "material": false,
+        "message_id": "generic_worker.units_help_v1",
+        "native_id": "/root/billboards_manager/generic_manager/report_worker",
+        "operation_id": "units_help_v1",
+        "phase": "component",
+        "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+        "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+        "recipients": [
+          "generic_manager_v2"
+        ],
+        "reply_to": null,
+        "requested_response": "Answer infer versus owner-assigned for this exact interface target; stop after one reply or target change.",
+        "subtask": "REPORT",
+        "supersedes": null,
+        "targets": [
+          {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v1.json",
+            "sha256": "89de5bd84efc80911d4e3a238d09e8b1b1547cf85e9247b52a4a7830cc4d1543"
+          }
+        ],
+        "task": "TASK-20260926-B9F05B47",
+        "thread_id": "report_units",
+        "title": "May count units be inferred?",
+        "type": "help-request",
+        "urgency": "routine",
+        "version": 1,
+        "visibility": "findings"
+      },
+      "reported_reading": false,
+      "source": {
+        "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/messages/units_help_v1.json",
+        "sha256": "930cddcde3918e6821b76d7e63550e7c6a9deedb6cb454f3b56951cdd440ff71"
+      }
+    }
+  ],
+  "limits": {
+    "output_bytes": 32768,
+    "page_items": 20,
+    "record_bytes": 65536
+  },
+  "offset": 0,
+  "remaining": 0,
+  "returned": 3,
+  "total": 3,
+  "version": 1
+}

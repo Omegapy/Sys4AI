@@ -278,3 +278,42 @@ When automatic capture is on, include a bounded memory/evidence write scope in
 the manager reservation. The manager performs the memory skill's automatic
 checkpoint after verification and before its terminal response, using its current
 publication grant. This changes neither the category team nor Task event schema.
+
+## Task collaboration ownership
+
+<!-- sys4ai:collaboration-default-v1 -->
+
+Collaboration is enabled by default when the complete installed collaborate
+capability passes its static health check. Before worker dispatch, the manager
+checks the installed provider and common store, registers a scoped policy and
+binds it to participant baselines/inputs and exact namespace grants. Include the
+collaboration skill in participant contracts. If required capability is missing,
+customized or incompatible, report blocked collaboration readiness; copying
+files alone is not an enabled result. This starts no background service or
+global board and gives no policy or write authority to unassigned agents.
+
+Adopt the [collaboration skill](../collaborate/SKILL.md) only with a manager-
+produced registered policy, exact baseline/input bindings and existing read/write
+grants. Keep generic workers/implementers in their Task-specific granted evidence
+area outside canonical Tasks/; solver/reviewer/senior writes retain their fixed
+Task work namespaces. Shared-store and inherited-context proof are separate.
+
+Require the four participant checkpoints: before starting/resuming, before using
+a shared interface, before candidate revision and before final handoff. Encourage
+prompt affected-peer notices and bounded help; select a concrete exchange stopping
+condition. Component-interface sharing follows the selected policy. Independent
+candidates remain sealed until the current complete canonical candidate set;
+each assigned reviewer preserves its own first assessment before other verdicts.
+
+Retain exactly the current category teams, sole writer, effective settings, actual
+native receipts, assigned review and separate authorized multi-solution implementer.
+Routine communication creates no new assignment, casual Task event or idle wakeup.
+Material changes require observed stop/reconciliation, exact send_message, committed
+assignment.inputs and followup_task; unchanged continuation retains assignment.resume.
+
+Provide seniors all current candidates and material objections. Before acceptance
+and completion, inspect exact selected snapshots and record attributable current
+owner dispositions for unresolved/answered/deferred material threads. Recheck only
+affected gates after version changes. Discussion closure, votes and claimed approval
+cannot replace evidence. Route selected memory/ontology/Curator proposals through
+separately authorized existing owners; unavailable owners leave them pending.

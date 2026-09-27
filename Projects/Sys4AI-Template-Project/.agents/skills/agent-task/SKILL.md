@@ -131,6 +131,20 @@ lock from age alone, guess missing intent, overwrite a stale writer or claim a
 partial operation fully succeeded. Report exact errors and the smallest safe
 recovery step.
 
+## Collaboration message and owner gates
+
+<!-- sys4ai:collaboration-owner-gates-v1 -->
+
+Enabled collaboration uses the installed collaborate skill with a registered
+manager policy, exact current baseline/input references and existing namespace
+grants. The Task helper remains the sole canonical owner. Posts, reported reads,
+recipient-observed notifications and snapshots do not mutate assignments,
+current candidates, reviews, acceptance or Task lifecycle. Preserve the four
+participant checkpoints and independent first-pass barriers. Route material
+changes through the existing owner invalidation and input-before-wake gates.
+Missing or unsupported installed owner bytes block collaboration readiness;
+v1 compatibility does not claim v2 broker or context-read attestation.
+
 ## Memory evidence references
 
 The optional [memory integration contract](../memory/references/task-integration.md)

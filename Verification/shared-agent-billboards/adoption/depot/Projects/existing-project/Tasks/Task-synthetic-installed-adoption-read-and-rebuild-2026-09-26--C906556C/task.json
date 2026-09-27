@@ -1,0 +1,441 @@
+{
+  "schema_version": 2,
+  "task_id": "TASK-20260926-C906556C",
+  "name": "Synthetic installed adoption read and rebuild",
+  "original_name": "Synthetic installed adoption read and rebuild",
+  "slug": "synthetic-installed-adoption-read-and-rebuild",
+  "folder_name": "Task-synthetic-installed-adoption-read-and-rebuild-2026-09-26--C906556C",
+  "description": "Active deterministic lease for bounded package check only.",
+  "definition_of_done": [
+    "Inspect derived-only rebuild."
+  ],
+  "created_at": "2026-09-26T18:27:37-06:00",
+  "updated_at": "2026-09-26T18:27:37-06:00",
+  "status": "open",
+  "parent_task_id": null,
+  "revision": 6,
+  "response_count": 5,
+  "last_response": {
+    "response_id": "RESP-0005",
+    "sequence": 5,
+    "created_at": "2026-09-26T18:27:37-06:00",
+    "path": "responses/Task-Response-0005-2026-09-26T18-27-37-06-00.md",
+    "supersedes_response_id": null
+  },
+  "current_summary": "The current bounded work unit is complete.",
+  "next_step": "Continue with the next approved work unit.",
+  "blockers": [],
+  "open_questions": [],
+  "thread_refs": [],
+  "orchestration": {
+    "acceptances": {},
+    "artifacts": {
+      "baseline_0dd823cc5d3b90682d33e072dd1767c2f51e8e8dd595cdbdfdf4f851688576ab": {
+        "assignment_id": "manager1",
+        "generation": 1,
+        "path": "artifacts/orchestration/baseline_0dd823cc5d3b90682d33e072dd1767c2f51e8e8dd595cdbdfdf4f851688576ab.json",
+        "sha256": "0dd823cc5d3b90682d33e072dd1767c2f51e8e8dd595cdbdfdf4f851688576ab",
+        "size": 785
+      },
+      "policy1": {
+        "assignment_id": "manager1",
+        "generation": 1,
+        "path": "artifacts/orchestration/policy1.json",
+        "sha256": "3cd36776fb126f3bc61526ff8c22cde725a6257298b6f84a2af58da3e7646a25",
+        "size": 721
+      }
+    },
+    "assignments": {
+      "manager1": {
+        "acceptance_id": null,
+        "assignment_id": "manager1",
+        "baseline": "6b573576a32e417fe023752775580aeb35df2643265197cd2838bda84fc05338",
+        "context": [
+          {
+            "path": "evidence.txt",
+            "sha256": "57cb8389e975dee824aa8dc9b8db9a44de57e84adeb71b764723794751deba99"
+          }
+        ],
+        "fit": {
+          "authority": "Only fixture writes",
+          "capabilities": [
+            "focused verification"
+          ],
+          "deliverable": "Evidence artifact",
+          "objective": "Bounded fixture",
+          "rationale": "This test role fits focused checks.",
+          "reads": [
+            "evidence.txt",
+            "Tasks/Task-synthetic-installed-adoption-read-and-rebuild-2026-09-26--C906556C"
+          ],
+          "risk": "Disposable fixture",
+          "skills": [],
+          "stop": "Return the artifact",
+          "tools": [
+            "native collaboration"
+          ],
+          "writes": [
+            "Tasks/Task-synthetic-installed-adoption-read-and-rebuild-2026-09-26--C906556C/artifacts/orchestration/manager"
+          ]
+        },
+        "function": "manager",
+        "generation": 1,
+        "input_receipt": null,
+        "native_id": "/root/manager1",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/manager1"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "observations": [],
+        "perspective": "Project Director",
+        "role": {
+          "agents_path": "Roles/task-manager/AGENTS.md",
+          "agents_sha256": "e32b9ca48926cd3d9e2cdc38a0cf86e022ed43c6024cfd04779d861d00dc0027",
+          "catalog": {
+            "path": "catalog.json",
+            "sha256": "44a12397aee8a92da96b8aef32cbb9b6a81c1813e78001fb7aee564fd479e989"
+          },
+          "name": "task-manager",
+          "role_path": "Roles/task-manager/ROLE.md",
+          "role_sha256": "b5c16cec654e20c671daef4e61308200eb2149efa2fbb1949dc259766469007d"
+        },
+        "role_reads": {
+          "agents_sha256": "e32b9ca48926cd3d9e2cdc38a0cf86e022ed43c6024cfd04779d861d00dc0027",
+          "evidence": "Fixture reports explicit pair read.",
+          "role_sha256": "b5c16cec654e20c671daef4e61308200eb2149efa2fbb1949dc259766469007d"
+        },
+        "round": 0,
+        "runtime": {
+          "available_slots": 2,
+          "depth": 2,
+          "evidence": [
+            {
+              "path": "evidence.txt",
+              "sha256": "57cb8389e975dee824aa8dc9b8db9a44de57e84adeb71b764723794751deba99"
+            }
+          ],
+          "tools": [
+            "spawn_agent",
+            "list_agents",
+            "send_message",
+            "followup_task",
+            "interrupt_agent"
+          ]
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "evidence.txt",
+              "sha256": "57cb8389e975dee824aa8dc9b8db9a44de57e84adeb71b764723794751deba99"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "slot": "manager",
+        "state": "active",
+        "subtask_id": null
+      }
+    },
+    "authority": "Explicit fixture work",
+    "blockers": [],
+    "bootstrap": "/root",
+    "candidates": {},
+    "conflicts": {},
+    "context": [
+      {
+        "path": "evidence.txt",
+        "sha256": "57cb8389e975dee824aa8dc9b8db9a44de57e84adeb71b764723794751deba99"
+      }
+    ],
+    "events": [
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "manager1",
+          "authority": "Explicit fixture work",
+          "bootstrap_receipt": {
+            "result": {
+              "agents": [
+                {
+                  "agent_name": "/root",
+                  "agent_status": "running"
+                }
+              ]
+            },
+            "tool": "collaboration.list_agents"
+          },
+          "context": [
+            {
+              "path": "evidence.txt",
+              "sha256": "57cb8389e975dee824aa8dc9b8db9a44de57e84adeb71b764723794751deba99"
+            }
+          ],
+          "fit": {
+            "authority": "Only fixture writes",
+            "capabilities": [
+              "focused verification"
+            ],
+            "deliverable": "Evidence artifact",
+            "objective": "Bounded fixture",
+            "rationale": "This test role fits focused checks.",
+            "reads": [
+              "evidence.txt",
+              "Tasks/Task-synthetic-installed-adoption-read-and-rebuild-2026-09-26--C906556C"
+            ],
+            "risk": "Disposable fixture",
+            "skills": [],
+            "stop": "Return the artifact",
+            "tools": [
+              "native collaboration"
+            ],
+            "writes": [
+              "Tasks/Task-synthetic-installed-adoption-read-and-rebuild-2026-09-26--C906556C/artifacts/orchestration/manager"
+            ]
+          },
+          "role": {
+            "agents_path": "Roles/task-manager/AGENTS.md",
+            "agents_sha256": "e32b9ca48926cd3d9e2cdc38a0cf86e022ed43c6024cfd04779d861d00dc0027",
+            "catalog": {
+              "path": "catalog.json",
+              "sha256": "44a12397aee8a92da96b8aef32cbb9b6a81c1813e78001fb7aee564fd479e989"
+            },
+            "name": "task-manager",
+            "role_path": "Roles/task-manager/ROLE.md",
+            "role_sha256": "b5c16cec654e20c671daef4e61308200eb2149efa2fbb1949dc259766469007d"
+          },
+          "runtime": {
+            "available_slots": 2,
+            "depth": 2,
+            "evidence": [
+              {
+                "path": "evidence.txt",
+                "sha256": "57cb8389e975dee824aa8dc9b8db9a44de57e84adeb71b764723794751deba99"
+              }
+            ],
+            "tools": [
+              "spawn_agent",
+              "list_agents",
+              "send_message",
+              "followup_task",
+              "interrupt_agent"
+            ]
+          },
+          "settings": {
+            "effort": null,
+            "evidence": [
+              {
+                "path": "evidence.txt",
+                "sha256": "57cb8389e975dee824aa8dc9b8db9a44de57e84adeb71b764723794751deba99"
+              }
+            ],
+            "mode": "verified_inheritance",
+            "model": null
+          },
+          "source_refs": [
+            {
+              "path": "evidence.txt",
+              "sha256": "57cb8389e975dee824aa8dc9b8db9a44de57e84adeb71b764723794751deba99"
+            }
+          ]
+        },
+        "event_id": "event1",
+        "execution_id": "execution1",
+        "generation": 1,
+        "kind": "manager.reserve",
+        "revision": 2,
+        "sha256": "3ce1c6a1793c172ee92b62b82cada5bd159d902314ff460b350f8ce0e3093a39"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "manager1",
+          "receipt": {
+            "result": {
+              "task_name": "/root/manager1"
+            },
+            "tool": "collaboration.spawn_agent"
+          }
+        },
+        "event_id": "event2",
+        "execution_id": "execution1",
+        "generation": 1,
+        "kind": "manager.receipt",
+        "revision": 3,
+        "sha256": "16510133d580a49b83af61554e5a6f7ceb18adebff2fa8ff2c84aabd641551e0"
+      },
+      {
+        "actor": "/root",
+        "data": {
+          "assignment_id": "manager1",
+          "role_reads": {
+            "agents_sha256": "e32b9ca48926cd3d9e2cdc38a0cf86e022ed43c6024cfd04779d861d00dc0027",
+            "evidence": "Fixture reports explicit pair read.",
+            "role_sha256": "b5c16cec654e20c671daef4e61308200eb2149efa2fbb1949dc259766469007d"
+          }
+        },
+        "event_id": "event3",
+        "execution_id": "execution1",
+        "generation": 1,
+        "kind": "manager.activate",
+        "revision": 4,
+        "sha256": "2fdc4dcace1a46ca495fffe1b3d2f6a2f347decaf4d6ed4a98e13f9b11048435"
+      },
+      {
+        "actor": "/root/manager1",
+        "data": {
+          "artifact_id": "policy1",
+          "assignment_id": "manager1",
+          "source_path": "Tasks/Task-synthetic-installed-adoption-read-and-rebuild-2026-09-26--C906556C/artifacts/orchestration/manager/policy.json"
+        },
+        "event_id": "event4",
+        "execution_id": "execution1",
+        "generation": 1,
+        "kind": "artifact.register",
+        "revision": 5,
+        "sha256": "4c431f6a72a067463107ce190e5f89f60314b09d790fef1f7d656f7d2e5d9830"
+      },
+      {
+        "actor": "/root/manager1",
+        "data": {
+          "baseline": {
+            "authority": "Fixture only",
+            "category": "generic",
+            "criteria": [
+              "Subtask done."
+            ],
+            "deliverable": "Result and evidence",
+            "dependencies": [],
+            "implementation_required": true,
+            "inputs": [
+              {
+                "path": "evidence.txt",
+                "sha256": "57cb8389e975dee824aa8dc9b8db9a44de57e84adeb71b764723794751deba99"
+              },
+              {
+                "path": "Tasks/Task-synthetic-installed-adoption-read-and-rebuild-2026-09-26--C906556C/artifacts/orchestration/policy1.json",
+                "sha256": "3cd36776fb126f3bc61526ff8c22cde725a6257298b6f84a2af58da3e7646a25"
+              }
+            ],
+            "objective": "Deliver bounded result",
+            "protected": [
+              "evidence.txt"
+            ],
+            "rationale": "Fixture exercises the chosen workflow.",
+            "reads": [
+              "evidence.txt"
+            ],
+            "requirements": [
+              "REQ-fixture"
+            ],
+            "slots": [
+              {
+                "function": "worker",
+                "perspective": "execute",
+                "slot": "worker",
+                "solver_slot": null
+              }
+            ],
+            "stop": "Return result",
+            "writes": [
+              "output"
+            ]
+          },
+          "subtask_id": "subtask1"
+        },
+        "event_id": "event5",
+        "execution_id": "execution1",
+        "generation": 1,
+        "kind": "subtask.define",
+        "revision": 6,
+        "sha256": "f74ec10888475103f979bae256fc3966da442c2a0e6247238be404bb04727c29"
+      }
+    ],
+    "execution_id": "execution1",
+    "generation": 1,
+    "history": [],
+    "manager_id": "manager1",
+    "results": {},
+    "reviews": {},
+    "settings": {
+      "effort": null,
+      "evidence": [
+        {
+          "path": "evidence.txt",
+          "sha256": "57cb8389e975dee824aa8dc9b8db9a44de57e84adeb71b764723794751deba99"
+        }
+      ],
+      "mode": "verified_inheritance",
+      "model": null
+    },
+    "source_refs": [
+      {
+        "path": "evidence.txt",
+        "sha256": "57cb8389e975dee824aa8dc9b8db9a44de57e84adeb71b764723794751deba99"
+      }
+    ],
+    "stage": "active",
+    "subtasks": {
+      "subtask1": {
+        "active_conflicts": [],
+        "baseline": {
+          "authority": "Fixture only",
+          "category": "generic",
+          "criteria": [
+            "Subtask done."
+          ],
+          "deliverable": "Result and evidence",
+          "dependencies": [],
+          "implementation_required": true,
+          "inputs": [
+            {
+              "path": "evidence.txt",
+              "sha256": "57cb8389e975dee824aa8dc9b8db9a44de57e84adeb71b764723794751deba99"
+            },
+            {
+              "path": "Tasks/Task-synthetic-installed-adoption-read-and-rebuild-2026-09-26--C906556C/artifacts/orchestration/policy1.json",
+              "sha256": "3cd36776fb126f3bc61526ff8c22cde725a6257298b6f84a2af58da3e7646a25"
+            }
+          ],
+          "objective": "Deliver bounded result",
+          "protected": [
+            "evidence.txt"
+          ],
+          "rationale": "Fixture exercises the chosen workflow.",
+          "reads": [
+            "evidence.txt"
+          ],
+          "requirements": [
+            "REQ-fixture"
+          ],
+          "slots": [
+            {
+              "function": "worker",
+              "perspective": "execute",
+              "slot": "worker",
+              "solver_slot": null
+            }
+          ],
+          "stop": "Return result",
+          "writes": [
+            "output"
+          ]
+        },
+        "dependency_versions": {},
+        "digest": "0dd823cc5d3b90682d33e072dd1767c2f51e8e8dd595cdbdfdf4f851688576ab",
+        "round": 1,
+        "task_digest": "6b573576a32e417fe023752775580aeb35df2643265197cd2838bda84fc05338",
+        "verified": [],
+        "versions": []
+      }
+    },
+    "syntheses": {},
+    "task_digest": "6b573576a32e417fe023752775580aeb35df2643265197cd2838bda84fc05338",
+    "verifications": [],
+    "version": 1,
+    "writer": "/root/manager1"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "operation_id": "manager_idle_notice",
+  "thread_id": "idle_delivery",
+  "reply_to": null,
+  "supersedes": null,
+  "subtask": "REPORT",
+  "type": "note",
+  "title": "Retain current report during idle",
+  "body": "Preserved v1 remains the current preliminary report. This routine notice asks no new work and grants no resume. Read it at the next authorized checkpoint.",
+  "phase": "component",
+  "visibility": "findings",
+  "recipients": [
+    "generic_worker"
+  ],
+  "requested_response": "At next owner-gated active checkpoint report reading this exact notice; no immediate work.",
+  "urgency": "routine",
+  "targets": [
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/report-v1.json",
+      "sha256": "c02987ae2e2fe9179370b806710e06ad61d8c6f9c0d89cd5a73f85f096a6cb2e"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/report-v1.json",
+      "sha256": "c02987ae2e2fe9179370b806710e06ad61d8c6f9c0d89cd5a73f85f096a6cb2e"
+    }
+  ],
+  "limitations": [
+    "Routine communication does not renew write ownership."
+  ],
+  "material": false
+}

@@ -1,0 +1,76 @@
+test_conflict_and_unsupported_owner_refuse_without_overwrite (test_collaboration_setup.CollaborationSetupTests.test_conflict_and_unsupported_owner_refuse_without_overwrite) ... ERROR
+test_create_first_prepare_and_current_rerun (test_collaboration_setup.CollaborationSetupTests.test_create_first_prepare_and_current_rerun) ... ERROR
+test_earlier_completed_receipt_adopts_preserves_and_resumes_partial (test_collaboration_setup.CollaborationSetupTests.test_earlier_completed_receipt_adopts_preserves_and_resumes_partial) ... ERROR
+
+======================================================================
+ERROR: test_conflict_and_unsupported_owner_refuse_without_overwrite (test_collaboration_setup.CollaborationSetupTests.test_conflict_and_unsupported_owner_refuse_without_overwrite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-refusal-v4hyuzfm/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2792, in _run_initialization_base
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-refusal-v4hyuzfm/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 211, in _static
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-refusal-v4hyuzfm/Sys4AI/SKILLS-depo/init-new-project/scripts/init_static_health.py", line 175, in apply
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-refusal-v4hyuzfm/Sys4AI/SKILLS-depo/init-new-project/scripts/init_static_health.py", line 135, in assess
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-refusal-v4hyuzfm/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 207, in _collaboration
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-refusal-v4hyuzfm/Sys4AI/SKILLS-depo/init-new-project/scripts/init_collaboration.py", line 134, in assess
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-refusal-v4hyuzfm/Sys4AI/SKILLS-depo/init-new-project/assets/collaboration_install.py", line 114, in assess_project
+ValueError: Expected inventory must use complete project-relative collaborate paths
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_collaboration_setup.py", line 102, in test_conflict_and_unsupported_owner_refuse_without_overwrite
+    root,h,_,_,_=compose(temp);dest,_,args=self.legacy(root,h)
+                                           ^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_collaboration_setup.py", line 71, in legacy
+    completed=h._run_initialization_base(**args)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-refusal-v4hyuzfm/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2812, in _run_initialization_base
+curator_fixture_initializer_8566530554205087233.InitializationError: project setup is incomplete; working state was retained
+
+======================================================================
+ERROR: test_create_first_prepare_and_current_rerun (test_collaboration_setup.CollaborationSetupTests.test_create_first_prepare_and_current_rerun)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_collaboration_setup.py", line 33, in test_create_first_prepare_and_current_rerun
+    first=h.run_initialization(**args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-v_w8zuqv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2910, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-v_w8zuqv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2836, in run_initialization
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-v_w8zuqv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2910, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-v_w8zuqv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2521, in run_module_adoption
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-v_w8zuqv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2246, in validate_module_adoptions
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-v_w8zuqv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 207, in _collaboration
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-v_w8zuqv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_collaboration.py", line 176, in validate_operation
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-v_w8zuqv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 927, in destination_file
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-v_w8zuqv/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 259, in file_bytes
+curator_fixture_initializer_5005943947038210763.InitializationError: inputs must be regular non-aliased files
+
+======================================================================
+ERROR: test_earlier_completed_receipt_adopts_preserves_and_resumes_partial (test_collaboration_setup.CollaborationSetupTests.test_earlier_completed_receipt_adopts_preserves_and_resumes_partial)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-prior-9_qjqkt6/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2792, in _run_initialization_base
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-prior-9_qjqkt6/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 211, in _static
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-prior-9_qjqkt6/Sys4AI/SKILLS-depo/init-new-project/scripts/init_static_health.py", line 175, in apply
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-prior-9_qjqkt6/Sys4AI/SKILLS-depo/init-new-project/scripts/init_static_health.py", line 135, in assess
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-prior-9_qjqkt6/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 207, in _collaboration
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-prior-9_qjqkt6/Sys4AI/SKILLS-depo/init-new-project/scripts/init_collaboration.py", line 134, in assess
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-prior-9_qjqkt6/Sys4AI/SKILLS-depo/init-new-project/assets/collaboration_install.py", line 114, in assess_project
+ValueError: Expected inventory must use complete project-relative collaborate paths
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_collaboration_setup.py", line 78, in test_earlier_completed_receipt_adopts_preserves_and_resumes_partial
+    root,h,_,_,_=compose(temp);dest,base,args=self.legacy(root,h)
+                                              ^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_collaboration_setup.py", line 71, in legacy
+    completed=h._run_initialization_base(**args)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-prior-9_qjqkt6/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2812, in _run_initialization_base
+curator_fixture_initializer_3557181520250747209.InitializationError: project setup is incomplete; working state was retained
+
+----------------------------------------------------------------------
+Ran 3 tests in 34.054s
+
+FAILED (errors=3)

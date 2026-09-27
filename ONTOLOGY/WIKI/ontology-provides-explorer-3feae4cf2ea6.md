@@ -20,7 +20,7 @@ Canonical edit location: [ONTOLOGY/modules/project/project.jsonld#/@graph/91](<.
 ## Sources
 
 - [.agents/skills/ontology/SKILL.md](<../../.agents/skills/ontology/SKILL.md>) `section:Ontology` SHA256 `6b8c22d082031a46c7cf702f6e40f4ea33537c8dad2e3bd08cfd91614676f4a7` (current)
-- [SPECS.md](<../../SPECS.md>) `section:Project Knowledge Explorer and initialization v13` SHA256 `0b70e312ab29785f4d003b4ea4dc7b920a239c6b1a5cceeec69a173f12a96bf6` (current)
+- [SPECS.md](<../../SPECS.md>) `section:Project Knowledge Explorer and initialization v13` SHA256 `20aba9628de8d556d394715aa01d2bc01ed3ddeea5c5bcab4624430dca34d6c4` (current)
 
 ## Backlinks
 

@@ -1,0 +1,46 @@
+test_conflict_and_unsupported_owner_refuse_without_overwrite (test_collaboration_setup.CollaborationSetupTests.test_conflict_and_unsupported_owner_refuse_without_overwrite) ... FAIL
+test_create_first_prepare_and_current_rerun (test_collaboration_setup.CollaborationSetupTests.test_create_first_prepare_and_current_rerun) ... ERROR
+test_earlier_completed_receipt_adopts_preserves_and_resumes_partial (test_collaboration_setup.CollaborationSetupTests.test_earlier_completed_receipt_adopts_preserves_and_resumes_partial) ... ERROR
+
+======================================================================
+ERROR: test_create_first_prepare_and_current_rerun (test_collaboration_setup.CollaborationSetupTests.test_create_first_prepare_and_current_rerun)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_collaboration_setup.py", line 31, in test_create_first_prepare_and_current_rerun
+    first=h.run_initialization(**args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-idpnbau8/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2910, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-idpnbau8/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2836, in run_initialization
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-idpnbau8/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2910, in guarded
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-idpnbau8/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 2498, in run_module_adoption
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-idpnbau8/Sys4AI/SKILLS-depo/init-new-project/scripts/init_new_project.py", line 207, in _collaboration
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-idpnbau8/Sys4AI/SKILLS-depo/init-new-project/scripts/init_collaboration.py", line 77, in plan
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/collaboration-enablement-20260927/initializer/fixtures/curator-collaboration-defaults-idpnbau8/Sys4AI/SKILLS-depo/init-new-project/scripts/init_collaboration.py", line 41, in source_files
+curator_fixture_initializer_2499074432031267024.InitializationError: Template collaboration is incomplete or incompatible: [{'code': 'COLLAB_PACKAGE_INCOMPLETE', 'paths': ['.agents/skills/collaborate/README.md']}]
+
+======================================================================
+ERROR: test_earlier_completed_receipt_adopts_preserves_and_resumes_partial (test_collaboration_setup.CollaborationSetupTests.test_earlier_completed_receipt_adopts_preserves_and_resumes_partial)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_collaboration_setup.py", line 84, in test_earlier_completed_receipt_adopts_preserves_and_resumes_partial
+    partial=json.loads((dest/h.RECORD).read_text());self.assertEqual(partial['status'],'completed');self.assertEqual(partial['module_adoptions'][-1]['status'],'partial')
+                                                                                                                     ~~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'module_adoptions'
+
+======================================================================
+FAIL: test_conflict_and_unsupported_owner_refuse_without_overwrite (test_collaboration_setup.CollaborationSetupTests.test_conflict_and_unsupported_owner_refuse_without_overwrite)
+----------------------------------------------------------------------
+curator_fixture_initializer_1996505403638133712.InitializationError: Template collaboration is incomplete or incompatible: [{'code': 'COLLAB_PACKAGE_INCOMPLETE', 'paths': ['.agents/skills/collaborate/README.md']}]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Volumes/P-SSD/AngryOwl/Sys4AI/SKILLS-depo/init-new-project/tests/test_collaboration_setup.py", line 98, in test_conflict_and_unsupported_owner_refuse_without_overwrite
+    with self.assertRaisesRegex(h.InitializationError,'customized/incomplete'):h.run_initialization(**args)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "customized/incomplete" does not match "Template collaboration is incomplete or incompatible: [{'code': 'COLLAB_PACKAGE_INCOMPLETE', 'paths': ['.agents/skills/collaborate/README.md']}]"
+
+----------------------------------------------------------------------
+Ran 3 tests in 42.209s
+
+FAILED (failures=1, errors=2)

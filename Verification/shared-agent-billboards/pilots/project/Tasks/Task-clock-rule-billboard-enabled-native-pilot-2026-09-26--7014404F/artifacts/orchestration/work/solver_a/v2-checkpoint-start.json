@@ -1,0 +1,254 @@
+{
+  "checkpoint": "before_material_resumed_work",
+  "time": "2026-09-26T23:03:04.884947+00:00",
+  "revision": 47,
+  "context": [
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+      "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+    },
+    {
+      "path": "clock-rule-packet.json",
+      "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+    },
+    {
+      "path": "comparison-protocol.json",
+      "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+      "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/MATERIAL_PACKET_V2.json",
+      "sha256": "ae66444a42cabc5edca3a47eab35f854b6730f5b621487cf4f0557d1868f1b98"
+    }
+  ],
+  "input_receipt": {
+    "artifact_sha256s": [
+      "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3",
+      "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618",
+      "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7",
+      "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+      "ae66444a42cabc5edca3a47eab35f854b6730f5b621487cf4f0557d1868f1b98"
+    ],
+    "evidence": "Actual exact full material context sent through send_message to original solverA; API returned empty/null, next roster pending_init retained separately, no turn triggered before committed gate.",
+    "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+    "tool": "collaboration.send_message"
+  },
+  "digest": {
+    "checkpoint": "c51988dc35c0ee166285a6668b5251527e7ee639010ef4258d49abf5f0fe0a59",
+    "items": [
+      {
+        "handling": [
+          {
+            "assignment": "senior",
+            "evidence": "Read exact addressed permitted version before starting senior synthesis. Reading only; no acceptance or formal disposition.",
+            "execution": "EXEC_CLOCK_ENABLED",
+            "generation": 1,
+            "message_id": "solver_a.clock_confirmation_v1",
+            "message_sha256": "9d325b95d0cc7a7589b679e3571dd8b05f1c26342afe6a1cde24de09b9f0800f",
+            "native_id": "/root/billboards_manager/enabled_manager/senior",
+            "native_receipt": null,
+            "operation_id": "start_v1_2",
+            "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipient": "senior",
+            "state": "acknowledged",
+            "task": "TASK-20260926-7014404F",
+            "version": 1
+          }
+        ],
+        "message": {
+          "assignment": "solver_a",
+          "body": "Confirmed against the exact preserved candidate and frozen packet: t(n)=n tau with tau>0 is a proposed additional clock; it is not assigned by x(n)=nL. It permits the conditional step ratio v=L/tau. Choosing tau=L/c for a preselected positive c imposes that ratio and cannot derive c from the source. Candidate-v1 already states this distinction, so this clarification requires no candidate edit.",
+          "evidence": [
+            {
+              "path": "clock-rule-packet.json",
+              "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+            },
+            {
+              "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+              "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+            }
+          ],
+          "execution": "EXEC_CLOCK_ENABLED",
+          "generation": 1,
+          "limitations": [
+            "No candidate defect alleged or new candidate version produced.",
+            "Communication answer is not formal review, synthesis, acceptance or validated physics."
+          ],
+          "material": false,
+          "message_id": "solver_a.clock_confirmation_v1",
+          "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+          "operation_id": "clock_confirmation_v1",
+          "phase": "peer-exchange",
+          "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+          "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+          "recipients": [
+            "solver_b",
+            "enabled_manager",
+            "senior"
+          ],
+          "reply_to": "solver_b.clockclarification1",
+          "requested_response": "One evidence confirmation is supplied; stop this unchanged exchange. Current senior and manager must independently assess the exact material target at their formal gates.",
+          "subtask": "CLOCK",
+          "supersedes": null,
+          "targets": [
+            {
+              "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+              "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+            }
+          ],
+          "task": "TASK-20260926-7014404F",
+          "thread_id": "clock_rule",
+          "title": "Uniform clock and c remain proposed inputs",
+          "type": "note",
+          "urgency": "routine",
+          "version": 1,
+          "visibility": "findings"
+        },
+        "reported_reading": false,
+        "source": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/clock_confirmation_v1.json",
+          "sha256": "9d325b95d0cc7a7589b679e3571dd8b05f1c26342afe6a1cde24de09b9f0800f"
+        }
+      },
+      {
+        "handling": [
+          {
+            "assignment": "enabled_manager",
+            "evidence": "Direct exact visible message read after both solver and first-reviewer dispatch barriers. Does not imply comprehension/incorporation or formal disposition.",
+            "execution": "EXEC_CLOCK_ENABLED",
+            "generation": 1,
+            "message_id": "solver_a.missing_clock_v1",
+            "message_sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872",
+            "native_id": "/root/billboards_manager/enabled_manager",
+            "native_receipt": null,
+            "operation_id": "read_solver_a_missing_clock_v1",
+            "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipient": "enabled_manager",
+            "state": "acknowledged",
+            "task": "TASK-20260926-7014404F",
+            "version": 1
+          },
+          {
+            "assignment": "solver_a",
+            "evidence": "Native send_message was invoked with exact message path/hash metadata only. The caller-visible tool result contained no structured confirmation; this receipt does not claim transport delivery.",
+            "execution": "EXEC_CLOCK_ENABLED",
+            "generation": 1,
+            "message_id": "solver_a.missing_clock_v1",
+            "message_sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872",
+            "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+            "native_receipt": {
+              "native_id": "/root/billboards_manager/enabled_manager",
+              "result": null,
+              "tool": "collaboration.send_message"
+            },
+            "operation_id": "notice_manager_uncertain_v1",
+            "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipient": "enabled_manager",
+            "state": "uncertain",
+            "task": "TASK-20260926-7014404F",
+            "version": 1
+          },
+          {
+            "assignment": "solver_b",
+            "evidence": "Read the now released exact original finding after immutable candidate/reviewer gates. Reading does not accept or incorporate it.",
+            "execution": "EXEC_CLOCK_ENABLED",
+            "generation": 1,
+            "message_id": "solver_a.missing_clock_v1",
+            "message_sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872",
+            "native_id": "/root/billboards_manager/enabled_manager/solver_b",
+            "native_receipt": null,
+            "operation_id": "peerackmissingclock1",
+            "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipient": "solver_b",
+            "state": "acknowledged",
+            "task": "TASK-20260926-7014404F",
+            "version": 1
+          },
+          {
+            "assignment": "senior",
+            "evidence": "Read exact addressed permitted version before starting senior synthesis. Reading only; no acceptance or formal disposition.",
+            "execution": "EXEC_CLOCK_ENABLED",
+            "generation": 1,
+            "message_id": "solver_a.missing_clock_v1",
+            "message_sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872",
+            "native_id": "/root/billboards_manager/enabled_manager/senior",
+            "native_receipt": null,
+            "operation_id": "start_v1_3",
+            "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipient": "senior",
+            "state": "acknowledged",
+            "task": "TASK-20260926-7014404F",
+            "version": 1
+          }
+        ],
+        "message": {
+          "assignment": "solver_a",
+          "body": "The source assigns x(n)=nL for integer n>=0 and a length scale L, but assigns no t(n). A proposed uniform interval tau>0 would give the conditional step ratio L/tau. Different positive time intervals yield different speeds while preserving every source position; no speed c is identified by the packet. Treat any time rule as a proposed assumption.",
+          "evidence": [
+            {
+              "path": "clock-rule-packet.json",
+              "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+            }
+          ],
+          "execution": "EXEC_CLOCK_ENABLED",
+          "generation": 1,
+          "limitations": [
+            "Algebra and dimensional reasoning only; no assigned physical clock or validated physical propagation speed."
+          ],
+          "material": true,
+          "message_id": "solver_a.missing_clock_v1",
+          "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+          "operation_id": "missing_clock_v1",
+          "phase": "independent",
+          "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+          "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+          "recipients": [
+            "enabled_manager",
+            "solver_b",
+            "senior"
+          ],
+          "reply_to": null,
+          "requested_response": "At the released peer phase, distinguish an assigned clock rule from a proposed clock rule against this exact source; stop after one evidence reply.",
+          "subtask": "CLOCK",
+          "supersedes": null,
+          "targets": [
+            {
+              "path": "clock-rule-packet.json",
+              "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+            }
+          ],
+          "task": "TASK-20260926-7014404F",
+          "thread_id": "clock_rule",
+          "title": "Time map is unassigned in the frozen source",
+          "type": "finding",
+          "urgency": "routine",
+          "version": 1,
+          "visibility": "findings"
+        },
+        "reported_reading": false,
+        "source": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/missing_clock_v1.json",
+          "sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872"
+        }
+      }
+    ],
+    "limits": {
+      "output_bytes": 32768,
+      "page_items": 20,
+      "record_bytes": 65536
+    },
+    "offset": 0,
+    "remaining": 0,
+    "returned": 2,
+    "total": 2,
+    "version": 1
+  }
+}

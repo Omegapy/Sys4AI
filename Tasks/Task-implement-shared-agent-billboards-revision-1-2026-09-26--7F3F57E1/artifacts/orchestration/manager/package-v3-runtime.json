@@ -1,0 +1,35 @@
+{
+  "actual_roster": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/billboards_manager",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/billboards_manager/enabled_manager",
+          "agent_status": "completed"
+        },
+        {
+          "agent_name": "/root/billboards_manager/package_worker",
+          "agent_status": "pending_init"
+        }
+      ]
+    }
+  },
+  "raw_completed_evidence": "Enabled actual final status/receipt was observed; bounded status projection above retains enum. Package pending_init is verbatim, unsupported as a Task status receipt.",
+  "resource_accounting": {
+    "observed_running": 2,
+    "retained_enabled_identity": 1,
+    "restored_original_package_target": 1,
+    "available_for_same_target_continuation": 1,
+    "general_new_spawn_capacity": "unconfirmed"
+  },
+  "last_package_completed_observation": "Main actual assignment.observe revision13; no subsequent worker turn/writes before current no-turn send.",
+  "guarantee": "collaboration.send_message delivers without triggering idle turn. Actual same-ID target restoration accepted; retained context and effective settings unchanged. Existing explicit assignment.inputs precedes one followup. No pending_init normalization/claim stopped."
+}

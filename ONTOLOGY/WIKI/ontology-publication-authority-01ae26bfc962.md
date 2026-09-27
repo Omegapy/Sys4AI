@@ -20,7 +20,7 @@ Canonical edit location: [ONTOLOGY/modules/project/project.jsonld#/@graph/53](<.
 ## Sources
 
 - [ROLE.md](<../../ROLE.md>) `section:Authority and non-authority` SHA256 `15213209210b9d191e21498ae03a375977584abffc0c1b5de1018d252546191b` (current)
-- [SPECS.md](<../../SPECS.md>) `section:Ontology first release and initialization v8` SHA256 `0b70e312ab29785f4d003b4ea4dc7b920a239c6b1a5cceeec69a173f12a96bf6` (current)
+- [SPECS.md](<../../SPECS.md>) `section:Ontology first release and initialization v8` SHA256 `20aba9628de8d556d394715aa01d2bc01ed3ddeea5c5bcab4624430dca34d6c4` (current)
 
 ## Backlinks
 

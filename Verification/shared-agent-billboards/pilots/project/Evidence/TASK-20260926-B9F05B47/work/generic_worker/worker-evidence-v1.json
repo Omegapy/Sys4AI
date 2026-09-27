@@ -1,0 +1,86 @@
+{
+  "stage": "initial-v1-stopped-after-handoff",
+  "recorded_at": "2026-09-26T21:52:51.674101+00:00",
+  "assignment": "generic_worker",
+  "native_id": "/root/billboards_manager/generic_manager/report_worker",
+  "generation": 2,
+  "task": "TASK-20260926-B9F05B47",
+  "current_baseline": "dd0f3df41a9921f2f1ff60eb91cba4327dbb08359c88ef79c30805bde336f03b",
+  "input_reading": {
+    "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/input-reading-v1.json",
+    "sha256": "1e8db02215d6b39bab1d40d3f79c00083dd5db857ad8d64b325756eaea4272d1"
+  },
+  "checkpoint_refs": [
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/checkpoint-before-start-v1.json",
+      "sha256": "7082094fbb58a39088cedf0de0fa5608e9622fca459e5ee6568c630aa65999c7"
+    },
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/checkpoint-before-interface-v1.json",
+      "sha256": "9f47a873d661801eb14cbdaca387a5b089ffa69269a5e376fa6810de433c1046"
+    },
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/checkpoint-before-candidate-v1.json",
+      "sha256": "3fae14e1c663ce2f07822e6fafb0ef7d7fd7b6a44df6fc3cc2092f4c9c3a04ef"
+    },
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/checkpoint-before-handoff-v1.json",
+      "sha256": "0b1fcc888527dedc2a05547cb3d23b97828c0b4e8d67a978e677218e26d7cf7b"
+    }
+  ],
+  "reported_reading_receipts": [
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/receipts/ack_interface_note_v1.json",
+      "sha256": "5a96956fd7a774db8c1745a105afa6bc910ebd6e399a2a37529463448b336609"
+    },
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/receipts/ack_units_reply_v1.json",
+      "sha256": "aa9b016a91b45f9ca781a4030965453602cc335615fa8c5d5215e96e913287a7"
+    }
+  ],
+  "direct_posts": [
+    {
+      "message_id": "generic_worker.units_finding_v1",
+      "source": {
+        "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/messages/units_finding_v1.json",
+        "sha256": "cf5ed0ebf330ae3ef74f68a830e97640bc3c1400fd928038a08f4ee696a9acb1"
+      }
+    },
+    {
+      "message_id": "generic_worker.units_help_v1",
+      "source": {
+        "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/messages/units_help_v1.json",
+        "sha256": "930cddcde3918e6821b76d7e63550e7c6a9deedb6cb454f3b56951cdd440ff71"
+      }
+    }
+  ],
+  "actual_native_notification_receipts": [
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/receipts/notify_units_finding_v1.json",
+      "sha256": "4804a525a9c51bd6be9431f04012c8df03de3cf10198e50f0400779e52fa1cab"
+    },
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/receipts/notify_units_help_v1.json",
+      "sha256": "f54b6c6c7a4883df79bdeca65882f673822bb8778aeec87d2b3afb7338075033"
+    }
+  ],
+  "one_owner_reply": {
+    "message_id": "generic_manager_v2.manager_units_reply",
+    "source_sha256": "15f6b343bcc62146e16b466cc237464763b799452511c54786403dbb22f55375"
+  },
+  "claimed_comprehension": "Worker reports understanding the current v1 units boundary; acknowledgement alone is no proof.",
+  "observed_incorporation": {
+    "report": {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/report-v1.json",
+      "sha256": "c02987ae2e2fe9179370b806710e06ad61d8c6f9c0d89cd5a73f85f096a6cb2e"
+    },
+    "checked": "Reopened JSON items equal interface-v1 items, exact name/count keys, no inferred units."
+  },
+  "changes_only_in_own_evidence_namespace": true,
+  "limitations": [
+    "Fixture report only; no clock solution, external/product behavior or source tests.",
+    "V2 is not implemented until a stopped-worker exact input rebind and followup gate.",
+    "No canonical Task mutation or project-level completion claim."
+  ],
+  "helper_error_and_recovery": "One COLLAB_PATH from absolute payload-file; relative project payload path accepted."
+}

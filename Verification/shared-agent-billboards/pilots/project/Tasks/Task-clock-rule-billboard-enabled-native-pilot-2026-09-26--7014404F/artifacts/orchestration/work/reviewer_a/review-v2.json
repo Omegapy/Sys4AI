@@ -1,0 +1,175 @@
+{
+  "version": 2,
+  "assignment": "reviewer_a",
+  "function": "reviewer",
+  "native_id": "/root/billboards_manager/enabled_manager/reviewer_a",
+  "task": "TASK-20260926-7014404F",
+  "execution": "EXEC_CLOCK_ENABLED",
+  "generation": 1,
+  "subtask": "CLOCK",
+  "round": 1,
+  "baseline_sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3",
+  "candidate_id": "CAND_A_V2",
+  "candidate": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V2.json",
+    "sha256": "27ddee1dabc0e2684ce82e8632f696af0680269bf447e00292dcc38f5e36731b"
+  },
+  "solver_assignment": "solver_a",
+  "outcome": "passed",
+  "mandatory_defects": [],
+  "created_at": "2026-09-26T23:10:26.889927+00:00",
+  "inputs": [
+    {
+      "path": "clock-rule-packet.json",
+      "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+    },
+    {
+      "path": "comparison-protocol.json",
+      "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+      "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V2.json",
+      "sha256": "27ddee1dabc0e2684ce82e8632f696af0680269bf447e00292dcc38f5e36731b"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+      "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+    }
+  ],
+  "role_refs": [
+    {
+      "path": "SOUL.md",
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+    },
+    {
+      "path": "Roles/project-sub-agent/AGENTS.md",
+      "sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1"
+    },
+    {
+      "path": "Roles/project-sub-agent/ROLE.md",
+      "sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+    }
+  ],
+  "criterion_assessments": [
+    {
+      "criterion": "Separate every assigned source fact from proposed assumptions and established derivations.",
+      "outcome": "passed",
+      "candidate_sections": [
+        "source_facts",
+        "proposed_assumptions",
+        "established_derivations",
+        "limits[2]"
+      ],
+      "evidence": "The exact unchanged source facts are separated from N1 nonlinear and U1 uniform proposals and D1 discrete interval definition. Their conditional derivations state the respective premises; neither time map is called source-assigned."
+    },
+    {
+      "criterion": "Explain why position-versus-index alone does not determine speed or c.",
+      "outcome": "passed",
+      "candidate_sections": [
+        "answer",
+        "established_derivations[0]"
+      ],
+      "evidence": "A dimensionless index supplies delta x=L but no time denominator. Free positive proposed time scales preserve x(n) and alter nonzero ratios, so neither a speed nor c is source-determined."
+    },
+    {
+      "criterion": "Give a dimensionally consistent conditional proposal, such as t(n)=n tau with tau>0 and v=L/tau, without claiming that clock rule is assigned.",
+      "outcome": "passed",
+      "candidate_sections": [
+        "proposed_assumptions",
+        "established_derivations[1]",
+        "established_derivations[2]",
+        "established_derivations[3]"
+      ],
+      "evidence": "For proposed N1, (n+1)^2-n^2=2n+1, so delta t=tau(2n+1)>0 for n>=0,tau>0; v_n=L/[tau(2n+1)] and magnitude abs(L)/[tau(2n+1)] have length/time units. The n=0 and n=1 ratios and decreasing magnitude correctly establish index dependence for nonzero L. The L=0 case is stated. U1 separately gives delta t=tau and v_U=L/tau; its constant ratio is not attributed to N1."
+    },
+    {
+      "criterion": "State what evidence or definition would be needed to identify v with c; make no validated physics or Aether-Flow result claim.",
+      "outcome": "passed",
+      "candidate_sections": [
+        "identifying_c",
+        "limits"
+      ],
+      "evidence": "A physical interpretation, c definition and independent calibrated time intervals or constraining law/measurement are required. The nonlinear ratios cannot equal one fixed positive c at all intervals for nonzero L; matching one chosen interval imposes its value. The separate positive-L uniform construction is also imposed. No validated physics, continuous instantaneous speed or Aether-Flow conclusion is claimed."
+    },
+    {
+      "criterion": "Preserve initial candidates and exact objection/target versions; required independent reviews and senior/manager dispositions resolve mandatory defects.",
+      "outcome": "passed_for_candidate_and_this_current_review",
+      "candidate_sections": [
+        "material_revision",
+        "preservation_and_handoff",
+        "limits[4]"
+      ],
+      "evidence": "A1, A2 original/imported bytes, original review, missing-clock objection and changed-hypothesis notice retain exact hashes. This exact A2 re-review is distinct from the preserved A1 assessment and runs after committed material inputs; the current first-review gate is observed false before submission. Senior/manager current dispositions remain later formal gates."
+    }
+  ],
+  "preservation_checks": {
+    "original_candidate_A1": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+      "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+    },
+    "original_review_A1": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/reviewer_a/review-v1.json",
+      "sha256": "3f96e3a85e5d12cea8a5c6179d0c8000ea3e96069fdf962147e1b0f91f1582b2"
+    },
+    "new_original_candidate_A2": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/candidate-v2.json",
+      "sha256": "27ddee1dabc0e2684ce82e8632f696af0680269bf447e00292dcc38f5e36731b"
+    },
+    "current_imported_candidate_A2": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V2.json",
+      "sha256": "27ddee1dabc0e2684ce82e8632f696af0680269bf447e00292dcc38f5e36731b"
+    },
+    "material_packet": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/MATERIAL_PACKET_V2.json",
+      "sha256": "ae66444a42cabc5edca3a47eab35f854b6730f5b621487cf4f0557d1868f1b98"
+    },
+    "original_exact_objection": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/missing_clock_v1.json",
+      "sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872"
+    },
+    "changed_hypothesis_notice": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/changed_hypothesis_v2.json",
+      "sha256": "37bf84560937ec00686cbb877d8f388a45a3689880b0ab01e0068e8eacf41018"
+    },
+    "linked_peer_message_bodies_opened": false
+  },
+  "current_gate_checks": {
+    "assignment_inputs_commit_revision": 51,
+    "exact_current_context_and_hashes_inspected": true,
+    "first_review_before_submission": false,
+    "only_own_old_verdict_visible_at_pre_review_checkpoints": true,
+    "first_assessment_replaced_as_current_but_preserved": true
+  },
+  "independence": {
+    "initial_first_assessment_preserved": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/reviewer_a/review-v1.json",
+      "sha256": "3f96e3a85e5d12cea8a5c6179d0c8000ea3e96069fdf962147e1b0f91f1582b2"
+    },
+    "current_reseal_observed": true,
+    "prior_legitimate_review_history_erased": false,
+    "no_peer_body_opened_during_this_re_review": true,
+    "settings": "Same original native instance and inherited effective settings; no overrides."
+  },
+  "checks": {
+    "performed": [
+      "Exact current context, unchanged inputs/roles, candidate and preserved evidence hash inspection",
+      "Manual algebra, positive interval, units, index dependence and conditional scope review against every frozen criterion",
+      "Three current filtered checkpoints with observed first-review reseal"
+    ],
+    "verification_level": "Inspected algebra and criteria; native board current gate behavior observed.",
+    "not_claimed": [
+      "Task completion",
+      "Senior synthesis or manager acceptance",
+      "Physical or product validation",
+      "New initial-history isolation"
+    ]
+  },
+  "limitations": [
+    "Current final workflow gates remain with the senior and manager.",
+    "No original candidate defect is alleged; A2 adds one controlled proposed hypothesis within unchanged source facts."
+  ]
+}

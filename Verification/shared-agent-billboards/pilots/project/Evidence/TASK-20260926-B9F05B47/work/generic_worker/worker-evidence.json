@@ -1,0 +1,111 @@
+{
+  "stage": "current-v2-final-handoff",
+  "recorded_at": "2026-09-26T21:59:34.926608+00:00",
+  "assignment": "generic_worker",
+  "native_id": "/root/billboards_manager/generic_manager/report_worker",
+  "task": "TASK-20260926-B9F05B47",
+  "execution": "EXEC_GENERIC_PILOT",
+  "generation": 2,
+  "round": 2,
+  "current_baseline": "7af872e0877e823a1ca6e6ceee0e8013b8c8c7d19a1b30fd820bccbe3cee9cbe",
+  "canonical_revision_inspected": 19,
+  "input_reading": {
+    "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/input-reading-v2.json",
+    "sha256": "c18ebe64ddc17fd6444a69e26dda8a4edc34c1b0f47bbaf018441b65e0a6f74b"
+  },
+  "same_native_recovery": {
+    "unchanged_resume_checkpoint": {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/checkpoint-before-resume-v1.json",
+      "sha256": "84c35352999734a17bda362611b46417e760980a57454b63148284fd98f5cebd"
+    },
+    "worker_observed": "Controlled interruption aborted the active read-only wait; no execution process remained running.",
+    "canonical_input_receipt": {
+      "artifact_sha256s": [
+        "7af872e0877e823a1ca6e6ceee0e8013b8c8c7d19a1b30fd820bccbe3cee9cbe",
+        "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+        "d571fcd4ab62c4d45c2837514882f341495e15a0709cbbd6c8eb4f644d1958b9",
+        "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618",
+        "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+      ],
+      "evidence": "Actual send_message queued exact five current context refs plus bounded material packet while native worker interrupted; returned no body. No followup called yet.",
+      "native_id": "/root/billboards_manager/generic_manager/report_worker",
+      "tool": "collaboration.send_message"
+    },
+    "material_packet": {
+      "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/material-context-v2.json",
+      "sha256": "b76cb7469c1c1532355c946ce2018c2cffb8635516e6e0f3be307f71784918cb"
+    },
+    "continued_only_after": "Exact parent followup after committed assignment.inputs, with current actor/baseline confirmed."
+  },
+  "checkpoint_refs": [
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/checkpoint-before-resume-v2.json",
+      "sha256": "e521df5df1069db7f7730c55f1957b144822e293b32a7bbcd47ae6b5692b870f"
+    },
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/checkpoint-before-interface-v2.json",
+      "sha256": "b65d267908bcd684bbf4773b04708ab937d0997909de80b632abd7f2c26cad26"
+    },
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/checkpoint-before-candidate-v2.json",
+      "sha256": "dbb01d7fa78fb8882496f10b96c92cd23a73dcc19f53ad0364cccab05f81c463"
+    },
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/checkpoint-before-handoff-v2.json",
+      "sha256": "cd4edbf47fcd1fc96a8ea67a5f38e8e601d0e1f3fcc2355177091a21eebc3058"
+    }
+  ],
+  "reported_reading_receipts": [
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/receipts/ack_manager_interface_change_v2_v2.json",
+      "sha256": "25a2576b9af07d423930e06564c7bd31279b2bfa1602de431cd4759d4cac28a9"
+    },
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/receipts/ack_manager_recovery_pending_v2.json",
+      "sha256": "c6ed257a39b644cc6a582c13392d1851aab84c13cebb25e02e14525c30b90821"
+    }
+  ],
+  "actual_native_notification_receipt": {
+    "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/receipts/notify_units_incorporated_v2.json",
+    "sha256": "3b5802137038c4812efb1bd2e25079d94273a099de74a3744bee6e31e7da616a"
+  },
+  "direct_affected_version_reply": {
+    "message_id": "generic_worker.units_incorporated_v2",
+    "source": {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/messages/units_incorporated_v2.json",
+      "sha256": "b14e766dfba403a6b79a04c86cbf6f2069c80c1c5ff83aec326978a5e1006243"
+    }
+  },
+  "claimed_comprehension": "Worker reports understanding that the owner now explicitly assigns pieces and schema_version 2. This self-report and reading receipts are distinct from incorporation.",
+  "observed_incorporation": {
+    "report": {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/report-v2.json",
+      "sha256": "a8d31d100735acd18336272f6d4800f8776071a25512e1f648c9ffdd1c9105b8"
+    },
+    "interface": {
+      "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v2.json",
+      "sha256": "d571fcd4ab62c4d45c2837514882f341495e15a0709cbbd6c8eb4f644d1958b9"
+    },
+    "checks": "Reopened report JSON equals assigned items, uses exact name/count/unit fields, pieces for every unit, schema_version 2 and matching report_id. Static checks passed."
+  },
+  "preserved_v1": [
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/report-v1.json",
+      "sha256": "c02987ae2e2fe9179370b806710e06ad61d8c6f9c0d89cd5a73f85f096a6cb2e"
+    },
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/worker-evidence-v1.json",
+      "sha256": "dca76db81c04edd9cfe9b2d577fd4a085996693a46b1e6f376b004bec4267b17"
+    },
+    {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/input-reading-v1.json",
+      "sha256": "1e8db02215d6b39bab1d40d3f79c00083dd5db857ad8d64b325756eaea4272d1"
+    }
+  ],
+  "authority": "Only own Task-specific Evidence namespace written; sole generic worker unchanged. No canonical ledger/source/role/memory/external edits.",
+  "limitations": [
+    "Fixture report only; no clock solution, product validation, external actions or broader tests.",
+    "Current manager must inspect exact outputs and record dispositions/Task completion separately."
+  ],
+  "stopping_condition": "Current v2 and evidence delivered; stop idle, no additional work."
+}

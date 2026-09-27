@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "assignment": "reviewer_a",
+  "function": "reviewer",
+  "native_id": "/root/billboards_manager/enabled_manager/reviewer_a",
+  "task": "TASK-20260926-7014404F",
+  "execution": "EXEC_CLOCK_ENABLED",
+  "generation": 1,
+  "subtask": "CLOCK",
+  "round": 1,
+  "baseline_sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3",
+  "candidate_id": "CAND_A_V1",
+  "candidate": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+    "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+  },
+  "solver_assignment": "solver_a",
+  "outcome": "passed",
+  "mandatory_defects": [],
+  "created_at": "2026-09-26T22:36:44.533391+00:00",
+  "inputs": [
+    {
+      "path": "clock-rule-packet.json",
+      "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+    },
+    {
+      "path": "comparison-protocol.json",
+      "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+      "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+      "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+      "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+    }
+  ],
+  "role_refs": [
+    {
+      "path": "SOUL.md",
+      "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+    },
+    {
+      "path": "Roles/project-sub-agent/AGENTS.md",
+      "sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1"
+    },
+    {
+      "path": "Roles/project-sub-agent/ROLE.md",
+      "sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+    }
+  ],
+  "criterion_assessments": [
+    {
+      "criterion": "Separate every assigned source fact from proposed assumptions and established derivations.",
+      "outcome": "passed",
+      "candidate_sections": [
+        "source_facts",
+        "proposed_assumptions",
+        "established_derivations"
+      ],
+      "evidence": "The packet facts are labeled separately. P1 supplies a proposed uniform clock; P2 supplies a proposed discrete velocity definition. Each derivation states its premises and conditional scope."
+    },
+    {
+      "criterion": "Explain why position-versus-index alone does not determine speed or c.",
+      "outcome": "passed",
+      "candidate_sections": [
+        "established_derivations[0]",
+        "established_derivations[2]"
+      ],
+      "evidence": "A dimensionless index leaves delta x=L with length units and no time denominator. The alternatives tau and 2 tau preserve x(n) but change a nonzero step ratio, establishing non-identifiability."
+    },
+    {
+      "criterion": "Give a dimensionally consistent conditional proposal, such as t(n)=n tau with tau>0 and v=L/tau, without claiming that clock rule is assigned.",
+      "outcome": "passed",
+      "candidate_sections": [
+        "proposed_assumptions[0]",
+        "proposed_assumptions[1]",
+        "established_derivations[1]",
+        "limits[0]"
+      ],
+      "evidence": "Under the explicitly unassigned t(n)=n tau, tau>0 and [tau]=time, delta t=tau, so v=L/tau has length/time units. The speed magnitude is abs(L)/tau; the discrete ratio does not prove an interpolated instantaneous speed."
+    },
+    {
+      "criterion": "State what evidence or definition would be needed to identify v with c; make no validated physics or Aether-Flow result claim.",
+      "outcome": "passed",
+      "candidate_sections": [
+        "identifying_c",
+        "limits"
+      ],
+      "evidence": "The candidate requires a definition of c, physical interpretation and independent clock calibration or constraining law/measurement. Choosing tau=L/c is identified as imposed rather than derived. No validated physics or Aether-Flow claim appears."
+    },
+    {
+      "criterion": "Preserve initial candidates and exact objection/target versions; required independent reviews and senior/manager dispositions resolve mandatory defects.",
+      "outcome": "passed_for_candidate_and_this_review",
+      "candidate_sections": [
+        "exact_objection",
+        "preservation_and_handoff",
+        "limits[3]"
+      ],
+      "evidence": "Imported and original candidate bytes have the same exact hash; the attributed missing-clock message and its packet target hashes are preserved. This distinct reviewer assesses only the bound candidate and records its first assessment before peer release. Senior/manager dispositions and current final acceptance remain their later gates."
+    }
+  ],
+  "preservation_checks": {
+    "original_candidate": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/candidate-v1.json",
+      "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+    },
+    "imported_candidate": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+      "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+    },
+    "exact_objection": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/missing_clock_v1.json",
+      "sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872"
+    },
+    "message_body_opened": false,
+    "exact_objection_target": {
+      "path": "clock-rule-packet.json",
+      "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+    }
+  },
+  "independence": {
+    "only_assigned_candidate_opened": true,
+    "peer_candidate_or_review_body_opened": false,
+    "pre_assessment_filtered_checkpoints_empty": true,
+    "first_assessment_written_before_peer_release": true,
+    "settings": "Inherited exact parent effective model and reasoning effort; no overrides."
+  },
+  "checks": {
+    "performed": [
+      "Exact input/role/candidate/objection hash checks",
+      "Manual algebra, dimensions, discrete-speed scope and circularity review",
+      "Each frozen criterion assessed against exact assigned bytes",
+      "Three permitted filtered checkpoints before first-assessment submission"
+    ],
+    "verification_level": "Inspected algebra and criteria; runtime filtered board behavior observed.",
+    "not_claimed": [
+      "Task completion",
+      "Senior synthesis or manager acceptance",
+      "Physical or product validation",
+      "Peer findings inspection"
+    ]
+  },
+  "limitations": [
+    "The complete workflow criterion still requires canonical current reviews and senior/manager dispositions. This artifact is this reviewer's first exact assessment, not acceptance."
+  ]
+}

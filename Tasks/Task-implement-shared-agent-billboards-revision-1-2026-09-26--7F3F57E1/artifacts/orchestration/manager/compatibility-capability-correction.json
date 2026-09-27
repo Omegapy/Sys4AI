@@ -1,0 +1,15 @@
+{
+  "objective": "Make unsupported older installed Task owner profiles fail with constant bounded COLLAB_OWNER rather than missing-attribute traceback; qualify current supported helper interface and exact source hashes.",
+  "evidence": "Protected active-root .agents/skills/agent-task/scripts/orchestration_state.py lacks versioned; source reviewed helper exposes it. collaboration_task.Context.call currently assumes it unconditionally. No live root adoption or write is requested.",
+  "scope": [
+    "SKILLS-depo/collaborate/scripts/collaboration_task.py",
+    "SKILLS-depo/collaborate/tests/test_collaboration_acceptance.py",
+    "SKILLS-depo/collaborate/references/task-integration.md",
+    "Verification/shared-agent-billboards/compatibility-manifest.json",
+    "Verification/shared-agent-billboards/deterministic-results.json",
+    "Verification/shared-agent-billboards/package-worker-result-v2.json"
+  ],
+  "checks": "One existing D3 method rerun with a behavioral unsupported-owner negative; do not rerun unchanged D1/D2/D4/native generic pilot.",
+  "preservation": "No Task validator/root-package changes; existing supported-profile behavior remains identical. Any dormant pilot overlay refresh is exactly manifested and never occurs while a native owner is running.",
+  "status": "Bounded correction packet prepared; dispatch awaits completed current generic pilot and available capacity."
+}

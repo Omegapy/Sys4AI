@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "assignment": "solver_a",
+  "function": "solver",
+  "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+  "subtask": "CLOCK",
+  "round": 1,
+  "baseline_sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3",
+  "created_at": "2026-09-26T22:27:10.274987+00:00",
+  "perspective": "Units and identifiability",
+  "inputs": [
+    {
+      "path": "clock-rule-packet.json",
+      "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+    },
+    {
+      "path": "comparison-protocol.json",
+      "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+      "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+    }
+  ],
+  "answer": "The assigned position sequence cannot determine a speed or identify c. A proposed uniform clock supplies a conditional step speed; its interval remains a free assumption.",
+  "source_facts": [
+    {
+      "claim": "x(n)=nL for integers n>=0.",
+      "source": {
+        "path": "clock-rule-packet.json",
+        "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+      }
+    },
+    {
+      "claim": "L is a length scale; neither t(n) nor a clock interval is assigned.",
+      "source": {
+        "path": "clock-rule-packet.json",
+        "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+      }
+    }
+  ],
+  "proposed_assumptions": [
+    {
+      "id": "P1",
+      "claim": "For an illustrative uniform clock, propose t(n)=n tau with tau>0 and [tau]=time. This rule is additional to the source.",
+      "status": "proposed_unassigned"
+    },
+    {
+      "id": "P2",
+      "claim": "Use x(n+1)-x(n) and t(n+1)-t(n) to define a discrete step velocity. Interpreting it as physical propagation requires a further physical interpretation and clock calibration.",
+      "status": "proposed_definition"
+    }
+  ],
+  "established_derivations": [
+    {
+      "premises": [
+        "source x(n)=nL"
+      ],
+      "derivation": "n is a dimensionless index, so x(n+1)-x(n)=L has units of length. The source gives no time denominator and thus no quantity with speed units.",
+      "claim_scope": "Algebra and dimensions of the assigned sequence only."
+    },
+    {
+      "premises": [
+        "source x(n)=nL",
+        "proposed P1",
+        "proposed P2"
+      ],
+      "derivation": "For every n, delta x=L and delta t=tau. The proposed discrete step velocity is v=L/tau, with units length/time. If L is a positive length scale, its speed magnitude is L/tau; generally the magnitude of the signed step velocity is abs(L)/tau.",
+      "claim_scope": "Conditional on the proposed clock and definition."
+    },
+    {
+      "premises": [
+        "source x(n)=nL",
+        "proposed P1"
+      ],
+      "derivation": "Two admissible proposed intervals tau and 2 tau produce step ratios L/tau and L/(2 tau) while preserving the same position sequence. Therefore the position source cannot identify a unique speed when L is nonzero. Even for L=0, a clock is needed to define a time-based velocity.",
+      "claim_scope": "Mathematical non-identifiability; no measurement or physical law."
+    }
+  ],
+  "identifying_c": {
+    "required": "A definition of what c denotes, a physical interpretation of the position index sequence, and independently supplied time calibration or a law/measurement constraining tau would be needed to identify the conditional speed with a physical c.",
+    "circularity": "Choosing tau=L/c for a preselected positive c imposes the desired value; it does not derive c from the source.",
+    "status": "No identifying evidence is assigned; no value of c is derived."
+  },
+  "limits": [
+    "The packet assigns discrete positions only. Constant step ratios under P1 do not prove an instantaneous speed between indices without an added interpolation or dynamics.",
+    "The proposed clock is unassigned; tau may be selected freely, so there is no unique numerical or universal propagation speed.",
+    "No external research, experiment, validated physics result or Aether-Flow product conclusion is supplied or claimed.",
+    "Reviews, synthesis and manager acceptance are required owner gates outside this solver assignment; their later results are not preclaimed."
+  ],
+  "exact_objection": {
+    "message_id": "solver_a.missing_clock_v1",
+    "message_source": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/missing_clock_v1.json",
+      "sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872"
+    },
+    "target": {
+      "path": "clock-rule-packet.json",
+      "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+    },
+    "status": "Own sealed missing-assumption finding; original bytes preserved, later owner disposition required."
+  },
+  "criterion_coverage": [
+    {
+      "criterion": 1,
+      "evidence": [
+        "source_facts",
+        "proposed_assumptions",
+        "established_derivations"
+      ],
+      "result": "Explicit source/proposal/conditional-derivation separation."
+    },
+    {
+      "criterion": 2,
+      "evidence": [
+        "established_derivations[0]",
+        "established_derivations[2]"
+      ],
+      "result": "Missing time dimension and non-identifiability explained."
+    },
+    {
+      "criterion": 3,
+      "evidence": [
+        "proposed_assumptions[0]",
+        "established_derivations[1]"
+      ],
+      "result": "Positive uniform interval and dimensionally consistent conditional ratio; clock remains proposed."
+    },
+    {
+      "criterion": 4,
+      "evidence": [
+        "identifying_c",
+        "limits"
+      ],
+      "result": "Required calibration/definition distinguished from absent physical identification."
+    },
+    {
+      "criterion": 5,
+      "evidence": [
+        "exact_objection",
+        "preservation_and_handoff"
+      ],
+      "result": "Own immutable candidate and exact objection/target retained; assigned reviewers and senior/manager dispositions remain later owner gates."
+    }
+  ],
+  "preservation_and_handoff": {
+    "initial_path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/candidate-v1.json",
+    "immutable": "No overwrite or deletion is authorized. A mandatory revision must produce a new path and preserve this original.",
+    "formal_decisions": "Return only exact path/hash/status for canonical candidate import and assigned independent review. This candidate does not accept itself."
+  },
+  "checks": {
+    "performed": [
+      "Reopened exact source/policy/baseline/role digests",
+      "Reviewed algebra and dimensions against each of the five frozen criteria",
+      "Used filtered board checkpoints; no raw sibling artifacts opened"
+    ],
+    "not_run": [
+      "No external research or product/physics experiments",
+      "No executable tests needed for this algebra-only assigned answer"
+    ],
+    "verification_level": "Inspected algebra and criterion coverage; runtime board operations observed."
+  }
+}

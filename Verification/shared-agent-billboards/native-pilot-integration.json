@@ -1,0 +1,1465 @@
+{
+  "version": 1,
+  "assignment": "pilot_evidence_worker",
+  "main_task": "TASK-20260926-7F3F57E1",
+  "execution": "EXEC_BILLBOARDS_R1",
+  "generation": 1,
+  "status": "complete_bounded_evidence_integration",
+  "observed_at_utc": "2026-09-27T00:13:22.535531+00:00",
+  "activation": "Parent committed actual assignment.reads at main revision36 before these writes.",
+  "scope": "TASK-011 and TASK-012 exact completed native evidence integration only. No rerun or fixture/source/ledger mutation.",
+  "reservation": {
+    "path": "Tasks/Task-implement-shared-agent-billboards-revision-1-2026-09-26--7F3F57E1/artifacts/orchestration/manager/pilot_evidence_worker-reservation.json",
+    "sha256": "144b8cbdaf335688cd920658b667159a8c0e612f319ed52ebf985713c350772b"
+  },
+  "contract": {
+    "path": "Tasks/Task-implement-shared-agent-billboards-revision-1-2026-09-26--7F3F57E1/artifacts/orchestration/manager/pilot-evidence-worker-contract.json",
+    "sha256": "f240bde98ad9e796e7328c54b97e7fbe06df1b1330d83e895a83a5e0b5d14796"
+  },
+  "baseline": {
+    "path": "Tasks/Task-implement-shared-agent-billboards-revision-1-2026-09-26--7F3F57E1/artifacts/orchestration/baseline_2fdd2cae394a43ffd7ef7bf1d7d59bd32aaea98965aa331e0619e31be22278af.json",
+    "sha256": "2fdd2cae394a43ffd7ef7bf1d7d59bd32aaea98965aa331e0619e31be22278af"
+  },
+  "plan": {
+    "path": "Implementation_Plans/Plan_shared-agent-billboards-task-governed-collaboration_2026-09-26_40C61316/plan.json",
+    "sha256": "990ad3a38e7174cb0a27afcfecdb80068bc2fdd7053fbf6943e8a201cd4760b6"
+  },
+  "requirements": [
+    "REQ-001",
+    "REQ-002",
+    "REQ-003",
+    "REQ-004",
+    "REQ-005",
+    "REQ-007",
+    "REQ-008",
+    "REQ-009",
+    "REQ-010",
+    "REQ-011",
+    "REQ-012",
+    "REQ-013",
+    "REQ-014",
+    "REQ-015",
+    "REQ-016",
+    "REQ-017",
+    "REQ-019",
+    "REQ-022",
+    "REQ-024",
+    "REQ-025",
+    "REQ-026",
+    "REQ-027",
+    "REQ-028",
+    "REQ-029",
+    "REQ-030",
+    "REQ-031",
+    "REQ-032",
+    "REQ-035",
+    "REQ-036",
+    "REQ-037",
+    "REQ-038",
+    "REQ-039",
+    "REQ-040",
+    "REQ-041",
+    "REQ-042",
+    "REQ-043",
+    "REQ-044",
+    "REQ-045",
+    "REQ-048",
+    "REQ-050",
+    "REQ-054",
+    "REQ-055",
+    "REQ-056",
+    "REQ-059",
+    "REQ-060",
+    "REQ-062",
+    "REQ-063"
+  ],
+  "source_copies": [
+    {
+      "original": {
+        "path": "Verification/shared-agent-billboards/pilots/project/Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/generic-native-evidence.json",
+        "sha256": "f4ff0202417bef837bb6aab006a88b8a276f6f092dc5cfd9e81eea7b7da5030d"
+      },
+      "copy": {
+        "path": "Verification/shared-agent-billboards/pilots/generic-evidence.json",
+        "sha256": "f4ff0202417bef837bb6aab006a88b8a276f6f092dc5cfd9e81eea7b7da5030d"
+      },
+      "byte_identical": true,
+      "nested_reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+    },
+    {
+      "original": {
+        "path": "Verification/shared-agent-billboards/pilots/project/Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/native-multi-solver-evidence.json",
+        "sha256": "dc7028e520c4ad61c426d31390bf70c19d3e59084cb65e2d674b146ff227da46"
+      },
+      "copy": {
+        "path": "Verification/shared-agent-billboards/pilots/multi-solver-evidence.json",
+        "sha256": "dc7028e520c4ad61c426d31390bf70c19d3e59084cb65e2d674b146ff227da46"
+      },
+      "byte_identical": true,
+      "nested_reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+    },
+    {
+      "original": {
+        "path": "Verification/shared-agent-billboards/pilots/project/Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/owner-proposal-examples.json",
+        "sha256": "a4a19ba05c5c4f9eb9f2c6be6609c3b93c8d79e3a80d06e3500332e89fb01dd7"
+      },
+      "copy": {
+        "path": "Verification/shared-agent-billboards/pilots/owner-proposal-examples.json",
+        "sha256": "a4a19ba05c5c4f9eb9f2c6be6609c3b93c8d79e3a80d06e3500332e89fb01dd7"
+      },
+      "byte_identical": true,
+      "nested_reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+    }
+  ],
+  "installation_manifest": {
+    "path": "Verification/shared-agent-billboards/pilots/current-installation-manifest.json",
+    "sha256": "9f4589678984e4d7cc7a7c6d70a6d10b2c18ca81fbb5efad7e2b831b9b76ab33"
+  },
+  "parent_current_hash_inspection": {
+    "path": "Tasks/Task-implement-shared-agent-billboards-revision-1-2026-09-26--7F3F57E1/artifacts/orchestration/manager/pilot-exact-current-source-hashes.json",
+    "sha256": "8b5c2a3afc77c39f686e68a1f9cfeda087aa3ee1922259eb8e2060b0137c3133"
+  },
+  "current_canonical_status": [
+    {
+      "task": "TASK-20260926-B9F05B47",
+      "status": "completed",
+      "revision": 29,
+      "stage": "finished",
+      "writer": "/root/billboards_manager/generic_manager",
+      "canonical_task": {
+        "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/task.json",
+        "sha256": "251c2721e5a6c2b1ef56acf7a58e31986e758781b73d3aa9f150bc4a6ae5065c",
+        "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+      },
+      "terminal_validation": {
+        "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/canonical-final-validation.json",
+        "sha256": "999830c46a3dfd99bfee796af426cb358890adb5b930a5daa1ea2744638ee2c0",
+        "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+      },
+      "history": "Generation1 bootstrap manager revoked before worker launch; generation2 distinct confirmed manager owns the single worker execution."
+    },
+    {
+      "task": "TASK-20260926-7014404F",
+      "status": "completed",
+      "revision": 68,
+      "stage": "finished",
+      "writer": "/root/billboards_manager/enabled_manager",
+      "canonical_task": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/task.json",
+        "sha256": "c5f47b86fbbac38541cf3afd288d8571196d4e6fd014ee50339862f41db98d68",
+        "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+      },
+      "terminal_validation": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/validation-terminal.json",
+        "sha256": "fdf7cc30239ae09b6d2a35ab82cd516aa58f44933a3c144b1622cae08dec63bc",
+        "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+      },
+      "manager_completion_observation": {
+        "path": "Tasks/Task-implement-shared-agent-billboards-revision-1-2026-09-26--7F3F57E1/artifacts/orchestration/manager/enabled-parent-inspection.json",
+        "sha256": "18ac45b3447e4ef9e45e8b0ad4a91c2fdb85cef71b0a09214d97032ceee3837e"
+      },
+      "history": "Final source evidence originally written while manager handing off; later parent actual list_agents completion observation is separate, preserved attribution."
+    }
+  ],
+  "common_store": {
+    "absolute_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+    "all_eight_actual_current_participants": [
+      {
+        "task": "TASK-20260926-B9F05B47",
+        "assignment": "generic_manager_v2",
+        "function": "manager",
+        "native_id": "/root/billboards_manager/generic_manager",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/billboards_manager/generic_manager"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "canonical_state": "active",
+        "canonical_task": {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/task.json",
+          "sha256": "251c2721e5a6c2b1ef56acf7a58e31986e758781b73d3aa9f150bc4a6ae5065c",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "initial_assignment_event": "EV_5_manager_reserve",
+        "initial_assignment_revision": 5,
+        "initial_context": [
+          {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/delegation-contract-v2.json",
+            "sha256": "a5d0f4491e5317c6e613d49e21473b8db4bd8d09190fd98edeb1ea595d74dd11"
+          },
+          {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/bootstrap-runtime-v2.json",
+            "sha256": "2357378be5de8cd4838dfeff9be11368781a082c786657fd7c384e1cfb528a68"
+          },
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          }
+        ],
+        "actual_read_evidence": {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/manager-packet-read-ack.json",
+          "sha256": "96ba948586eafc35ec59601b7df8153d77c47288ed7a13595d270428fe0eb094",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "reported_first_read_digests": [
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          },
+          {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/delegation-contract-v2.json",
+            "sha256": "a5d0f4491e5317c6e613d49e21473b8db4bd8d09190fd98edeb1ea595d74dd11"
+          }
+        ],
+        "role_read_acknowledgement": {
+          "agents_sha256": "e32b9ca48926cd3d9e2cdc38a0cf86e022ed43c6024cfd04779d861d00dc0027",
+          "evidence": "Actual distinct native manager acknowledged complete source/role/delegation/canonical reads and common packet/protocol exact hashes while still running read-only. Corrected Task-owned evidence grants present; no worker launched.",
+          "role_sha256": "b5c16cec654e20c671daef4e61308200eb2149efa2fbb1949dc259766469007d"
+        },
+        "role": {
+          "agents_path": "Roles/task-manager/AGENTS.md",
+          "agents_sha256": "e32b9ca48926cd3d9e2cdc38a0cf86e022ed43c6024cfd04779d861d00dc0027",
+          "catalog": {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/bootstrap-catalog-v2.json",
+            "sha256": "44a12397aee8a92da96b8aef32cbb9b6a81c1813e78001fb7aee564fd479e989"
+          },
+          "name": "task-manager",
+          "role_path": "Roles/task-manager/ROLE.md",
+          "role_sha256": "b5c16cec654e20c671daef4e61308200eb2149efa2fbb1949dc259766469007d"
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/bootstrap-runtime-v2.json",
+              "sha256": "2357378be5de8cd4838dfeff9be11368781a082c786657fd7c384e1cfb528a68"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "claim_limit": "These are actual participant reports and exact canonical bindings on one shared filesystem. Hash equality proves matching bytes, not comprehension, OS confinement or raw-filesystem independence."
+      },
+      {
+        "task": "TASK-20260926-B9F05B47",
+        "assignment": "generic_worker",
+        "function": "worker",
+        "native_id": "/root/billboards_manager/generic_manager/report_worker",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/billboards_manager/generic_manager/report_worker"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "canonical_state": "completed",
+        "canonical_task": {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/task.json",
+          "sha256": "251c2721e5a6c2b1ef56acf7a58e31986e758781b73d3aa9f150bc4a6ae5065c",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "initial_assignment_event": "GEN_11_assignment_reserve",
+        "initial_assignment_revision": 11,
+        "initial_context": [
+          {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/baseline_dd0f3df41a9921f2f1ff60eb91cba4327dbb08359c88ef79c30805bde336f03b.json",
+            "sha256": "dd0f3df41a9921f2f1ff60eb91cba4327dbb08359c88ef79c30805bde336f03b"
+          },
+          {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/generic_policy_v1.json",
+            "sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995"
+          },
+          {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v1.json",
+            "sha256": "89de5bd84efc80911d4e3a238d09e8b1b1547cf85e9247b52a4a7830cc4d1543"
+          },
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          }
+        ],
+        "actual_read_evidence": {
+          "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/input-reading-v1.json",
+          "sha256": "1e8db02215d6b39bab1d40d3f79c00083dd5db857ad8d64b325756eaea4272d1",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "reported_first_read_digests": [],
+        "role_read_acknowledgement": {
+          "agents_sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1",
+          "evidence": "Actual native worker send_message acknowledged both full role files, root/skills/contract and all five exact context refs including baseline, policy, interface, common clock and protocol hashes; read-only until binding.",
+          "role_sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+        },
+        "role": {
+          "agents_path": "Roles/project-sub-agent/AGENTS.md",
+          "agents_sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1",
+          "catalog": {
+            "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/worker-catalog-v2.json",
+            "sha256": "44a12397aee8a92da96b8aef32cbb9b6a81c1813e78001fb7aee564fd479e989"
+          },
+          "name": "project-sub-agent",
+          "role_path": "Roles/project-sub-agent/ROLE.md",
+          "role_sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/bootstrap-runtime-v2.json",
+              "sha256": "2357378be5de8cd4838dfeff9be11368781a082c786657fd7c384e1cfb528a68"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "claim_limit": "These are actual participant reports and exact canonical bindings on one shared filesystem. Hash equality proves matching bytes, not comprehension, OS confinement or raw-filesystem independence."
+      },
+      {
+        "task": "TASK-20260926-7014404F",
+        "assignment": "enabled_manager",
+        "function": "manager",
+        "native_id": "/root/billboards_manager/enabled_manager",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/billboards_manager/enabled_manager"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "canonical_state": "active",
+        "canonical_task": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/task.json",
+          "sha256": "c5f47b86fbbac38541cf3afd288d8571196d4e6fd014ee50339862f41db98d68",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "initial_assignment_event": "EV_2_manager_reserve",
+        "initial_assignment_revision": 2,
+        "initial_context": [
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/delegation-contract.json",
+            "sha256": "da4d3a9a009e32f7158ad05dbb6f2d2a6d746b39f1795b4cda0c899409474d0e"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/bootstrap-runtime.json",
+            "sha256": "0d142a95a9d4f1fc6d2ebafc327d882c7be4c351f98f8421aee1cb1a22455905"
+          },
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          }
+        ],
+        "actual_read_evidence": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/native-pilot-precompletion-evidence.json",
+          "sha256": "c59f96d150e36bbde4f84cfe8ca98d372c86b3ffccd6856198eb51a535032a12",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "reported_first_read_digests": [
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          }
+        ],
+        "role_read_acknowledgement": {
+          "agents_sha256": "e32b9ca48926cd3d9e2cdc38a0cf86e022ed43c6024cfd04779d861d00dc0027",
+          "evidence": "Actual native manager acknowledged complete required source/role/contract/canonical reads and exact common packet/protocol hashes, running read-only; no analysis or children before activation.",
+          "role_sha256": "b5c16cec654e20c671daef4e61308200eb2149efa2fbb1949dc259766469007d"
+        },
+        "role": {
+          "agents_path": "Roles/task-manager/AGENTS.md",
+          "agents_sha256": "e32b9ca48926cd3d9e2cdc38a0cf86e022ed43c6024cfd04779d861d00dc0027",
+          "catalog": {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/bootstrap-catalog.json",
+            "sha256": "44a12397aee8a92da96b8aef32cbb9b6a81c1813e78001fb7aee564fd479e989"
+          },
+          "name": "task-manager",
+          "role_path": "Roles/task-manager/ROLE.md",
+          "role_sha256": "b5c16cec654e20c671daef4e61308200eb2149efa2fbb1949dc259766469007d"
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/bootstrap-runtime.json",
+              "sha256": "0d142a95a9d4f1fc6d2ebafc327d882c7be4c351f98f8421aee1cb1a22455905"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "claim_limit": "These are actual participant reports and exact canonical bindings on one shared filesystem. Hash equality proves matching bytes, not comprehension, OS confinement or raw-filesystem independence."
+      },
+      {
+        "task": "TASK-20260926-7014404F",
+        "assignment": "reviewer_a",
+        "function": "reviewer",
+        "native_id": "/root/billboards_manager/enabled_manager/reviewer_a",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/billboards_manager/enabled_manager/reviewer_a"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "canonical_state": "completed",
+        "canonical_task": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/task.json",
+          "sha256": "c5f47b86fbbac38541cf3afd288d8571196d4e6fd014ee50339862f41db98d68",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "initial_assignment_event": "EV_19_assignment_reserve",
+        "initial_assignment_revision": 19,
+        "initial_context": [
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+            "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+          },
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+            "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+            "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+          }
+        ],
+        "actual_read_evidence": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/reviewer_a/review-v1.json",
+          "sha256": "3f96e3a85e5d12cea8a5c6179d0c8000ea3e96069fdf962147e1b0f91f1582b2",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "reported_first_read_digests": [
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+            "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+            "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+            "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+          }
+        ],
+        "role_read_acknowledgement": {
+          "agents_sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1",
+          "evidence": "Actual native child explicitly acknowledged both complete role files, SOUL and exact registered policy/frozen packet.",
+          "role_sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+        },
+        "role": {
+          "agents_path": "Roles/project-sub-agent/AGENTS.md",
+          "agents_sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1",
+          "catalog": {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/catalog-reviewer_a-v2-50.json",
+            "sha256": "44a12397aee8a92da96b8aef32cbb9b6a81c1813e78001fb7aee564fd479e989"
+          },
+          "name": "project-sub-agent",
+          "role_path": "Roles/project-sub-agent/ROLE.md",
+          "role_sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/bootstrap-runtime.json",
+              "sha256": "0d142a95a9d4f1fc6d2ebafc327d882c7be4c351f98f8421aee1cb1a22455905"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "claim_limit": "These are actual participant reports and exact canonical bindings on one shared filesystem. Hash equality proves matching bytes, not comprehension, OS confinement or raw-filesystem independence."
+      },
+      {
+        "task": "TASK-20260926-7014404F",
+        "assignment": "reviewer_b",
+        "function": "reviewer",
+        "native_id": "/root/billboards_manager/enabled_manager/reviewer_b",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/billboards_manager/enabled_manager/reviewer_b"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "canonical_state": "completed",
+        "canonical_task": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/task.json",
+          "sha256": "c5f47b86fbbac38541cf3afd288d8571196d4e6fd014ee50339862f41db98d68",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "initial_assignment_event": "EV_25_assignment_reserve",
+        "initial_assignment_revision": 25,
+        "initial_context": [
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+            "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+          },
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+            "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_B_V1.json",
+            "sha256": "9228ff2df6161086ab65bbb131500f6113b7a767ea611297e460d339c2c7d899"
+          }
+        ],
+        "actual_read_evidence": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/reviewer_b/canonical-inspection-before-review.json",
+          "sha256": "6a13bb88d7c97f7988bd27d4ee254bd1c55b951cf8fa128edbd0d5293b328370",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "reported_first_read_digests": [
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+            "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+          },
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+            "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_B_V1.json",
+            "sha256": "9228ff2df6161086ab65bbb131500f6113b7a767ea611297e460d339c2c7d899"
+          }
+        ],
+        "role_read_acknowledgement": {
+          "agents_sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1",
+          "evidence": "Actual native child explicitly acknowledged both complete role files, SOUL and exact registered policy/frozen packet.",
+          "role_sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+        },
+        "role": {
+          "agents_path": "Roles/project-sub-agent/AGENTS.md",
+          "agents_sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1",
+          "catalog": {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/catalog-reviewer_b-24.json",
+            "sha256": "44a12397aee8a92da96b8aef32cbb9b6a81c1813e78001fb7aee564fd479e989"
+          },
+          "name": "project-sub-agent",
+          "role_path": "Roles/project-sub-agent/ROLE.md",
+          "role_sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/bootstrap-runtime.json",
+              "sha256": "0d142a95a9d4f1fc6d2ebafc327d882c7be4c351f98f8421aee1cb1a22455905"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "claim_limit": "These are actual participant reports and exact canonical bindings on one shared filesystem. Hash equality proves matching bytes, not comprehension, OS confinement or raw-filesystem independence."
+      },
+      {
+        "task": "TASK-20260926-7014404F",
+        "assignment": "senior",
+        "function": "senior",
+        "native_id": "/root/billboards_manager/enabled_manager/senior",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/billboards_manager/enabled_manager/senior"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "canonical_state": "completed",
+        "canonical_task": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/task.json",
+          "sha256": "c5f47b86fbbac38541cf3afd288d8571196d4e6fd014ee50339862f41db98d68",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "initial_assignment_event": "EV_37_assignment_reserve",
+        "initial_assignment_revision": 37,
+        "initial_context": [
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+            "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+          },
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+            "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+            "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_B_V1.json",
+            "sha256": "9228ff2df6161086ab65bbb131500f6113b7a767ea611297e460d339c2c7d899"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/REVIEW_A_V1.json",
+            "sha256": "3f96e3a85e5d12cea8a5c6179d0c8000ea3e96069fdf962147e1b0f91f1582b2"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/REVIEW_B_V1.json",
+            "sha256": "1c19f38ab158ecef396a5f47cc311d2285ce44e18125ce580a71e6fa67fed66f"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/OBJECTIONS_V1.json",
+            "sha256": "c2c7b31ff04295dc68e62a0132865c13829f002b0d0d8d112913bbdfc36e389e"
+          }
+        ],
+        "actual_read_evidence": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/senior/synthesis-v1.json",
+          "sha256": "56ad80142094d61752c849f3b75f4f46a1a47682e3f354a01ef74b12f0962eb5",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "reported_first_read_digests": [
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+            "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+          },
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+            "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+            "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_B_V1.json",
+            "sha256": "9228ff2df6161086ab65bbb131500f6113b7a767ea611297e460d339c2c7d899"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/REVIEW_A_V1.json",
+            "sha256": "3f96e3a85e5d12cea8a5c6179d0c8000ea3e96069fdf962147e1b0f91f1582b2"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/REVIEW_B_V1.json",
+            "sha256": "1c19f38ab158ecef396a5f47cc311d2285ce44e18125ce580a71e6fa67fed66f"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/OBJECTIONS_V1.json",
+            "sha256": "c2c7b31ff04295dc68e62a0132865c13829f002b0d0d8d112913bbdfc36e389e"
+          }
+        ],
+        "role_read_acknowledgement": {
+          "agents_sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1",
+          "evidence": "Actual native child explicitly acknowledged both complete role files, SOUL and exact registered policy/frozen packet.",
+          "role_sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+        },
+        "role": {
+          "agents_path": "Roles/project-sub-agent/AGENTS.md",
+          "agents_sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1",
+          "catalog": {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/catalog-senior-v2-56.json",
+            "sha256": "44a12397aee8a92da96b8aef32cbb9b6a81c1813e78001fb7aee564fd479e989"
+          },
+          "name": "project-sub-agent",
+          "role_path": "Roles/project-sub-agent/ROLE.md",
+          "role_sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/bootstrap-runtime.json",
+              "sha256": "0d142a95a9d4f1fc6d2ebafc327d882c7be4c351f98f8421aee1cb1a22455905"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "claim_limit": "These are actual participant reports and exact canonical bindings on one shared filesystem. Hash equality proves matching bytes, not comprehension, OS confinement or raw-filesystem independence."
+      },
+      {
+        "task": "TASK-20260926-7014404F",
+        "assignment": "solver_a",
+        "function": "solver",
+        "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/billboards_manager/enabled_manager/solver_a"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "canonical_state": "completed",
+        "canonical_task": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/task.json",
+          "sha256": "c5f47b86fbbac38541cf3afd288d8571196d4e6fd014ee50339862f41db98d68",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "initial_assignment_event": "EV_7_assignment_reserve",
+        "initial_assignment_revision": 7,
+        "initial_context": [
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+            "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+          },
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+            "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+          }
+        ],
+        "actual_read_evidence": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/checkpoint-evidence.json",
+          "sha256": "f642e62d103347e947120bfaa06dff24d362fd0846da943af6e0b1c7e3826d0a",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "reported_first_read_digests": [
+          {
+            "path": "SOUL.md",
+            "sha256": "3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2"
+          },
+          {
+            "path": "AGENTS.md",
+            "sha256": "1b22cd9ed10c6e774d69c3b878e7051e970bb8a504726dacd9fe976fd28285b7"
+          },
+          {
+            "path": "ROLE.md",
+            "sha256": "8d7c10f78e4de18ba8cfeaed6e9235a01d2f68f96f4fce180d3582ec07129cd0"
+          },
+          {
+            "path": "SPECS.md",
+            "sha256": "501fdeb9c1f03afc9a3ed4fc78e5a9355daba371f9b91da264a2a9a0c3f7a6d3"
+          },
+          {
+            "path": "Roles/project-sub-agent/AGENTS.md",
+            "sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1"
+          },
+          {
+            "path": "Roles/project-sub-agent/ROLE.md",
+            "sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+          },
+          {
+            "path": ".agents/skills/collaborate/SKILL.md",
+            "sha256": "f8cb5b9c60b757927c6a5f3242dec87763afc3d3e185c39b36e5ebda4a57ec5f"
+          },
+          {
+            "path": ".agents/skills/collaborate/references/collaboration-contract.md",
+            "sha256": "630ee1cdf4e22bb1e74d3ed843948c4874dce3aa96a5659e1a40eb75532c1fe9"
+          },
+          {
+            "path": ".agents/skills/collaborate/references/commands.md",
+            "sha256": "75319bb3d1b12775276aed1e8b17059aa0b152e5f9195c7624f748997737da32"
+          },
+          {
+            "path": ".agents/skills/collaborate/references/task-integration.md",
+            "sha256": "081b10f1a28fd7dc1a8bb72f98c52e8d871005fe2b6c16a80b9190cfaf4bd13a"
+          },
+          {
+            "path": ".agents/skills/collaborate/references/native-delivery.md",
+            "sha256": "54b194aeabee3aa3c961388078c02ec75317d3bd2f1b8c8aa9ae898e1bfa140d"
+          },
+          {
+            "path": ".agents/skills/collaborate/references/knowledge-and-maintenance.md",
+            "sha256": "ca67a1317ae31f24686ff72784bbec8fbd383eb317475bf4747b6cd68772d7fc"
+          },
+          {
+            "path": ".agents/skills/communication/SKILL.md",
+            "sha256": "fa5ee878c52ed0cb4fbf1affd147fb6a41eb6b4cb519b81382c8618d3308167c"
+          },
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+            "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+            "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+          }
+        ],
+        "role_read_acknowledgement": {
+          "agents_sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1",
+          "evidence": "Actual native child explicitly acknowledged both complete role files, SOUL and exact registered policy/frozen packet.",
+          "role_sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+        },
+        "role": {
+          "agents_path": "Roles/project-sub-agent/AGENTS.md",
+          "agents_sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1",
+          "catalog": {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/catalog-solver_a-v2-45.json",
+            "sha256": "44a12397aee8a92da96b8aef32cbb9b6a81c1813e78001fb7aee564fd479e989"
+          },
+          "name": "project-sub-agent",
+          "role_path": "Roles/project-sub-agent/ROLE.md",
+          "role_sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/bootstrap-runtime.json",
+              "sha256": "0d142a95a9d4f1fc6d2ebafc327d882c7be4c351f98f8421aee1cb1a22455905"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "claim_limit": "These are actual participant reports and exact canonical bindings on one shared filesystem. Hash equality proves matching bytes, not comprehension, OS confinement or raw-filesystem independence."
+      },
+      {
+        "task": "TASK-20260926-7014404F",
+        "assignment": "solver_b",
+        "function": "solver",
+        "native_id": "/root/billboards_manager/enabled_manager/solver_b",
+        "native_receipt": {
+          "result": {
+            "task_name": "/root/billboards_manager/enabled_manager/solver_b"
+          },
+          "tool": "collaboration.spawn_agent"
+        },
+        "canonical_state": "completed",
+        "canonical_task": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/task.json",
+          "sha256": "c5f47b86fbbac38541cf3afd288d8571196d4e6fd014ee50339862f41db98d68",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "initial_assignment_event": "EV_11_assignment_reserve",
+        "initial_assignment_revision": 11,
+        "initial_context": [
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+            "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+          },
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+            "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+          }
+        ],
+        "actual_read_evidence": {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/checkpoint-evidence.json",
+          "sha256": "ab16b2e86f3811585848737bbc324c784fdfcc7a04ad4b0d512ade251670aacb",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        "reported_first_read_digests": [
+          {
+            "path": "clock-rule-packet.json",
+            "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+          },
+          {
+            "path": "comparison-protocol.json",
+            "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+          },
+          {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+            "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+          }
+        ],
+        "role_read_acknowledgement": {
+          "agents_sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1",
+          "evidence": "Actual native child explicitly acknowledged both complete role files, SOUL and exact registered policy/frozen packet.",
+          "role_sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+        },
+        "role": {
+          "agents_path": "Roles/project-sub-agent/AGENTS.md",
+          "agents_sha256": "8805e75917354bc6b0c5a034f340bd95d10b446b4d71fb4cfad90b1589c404d1",
+          "catalog": {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/catalog-solver_b-10.json",
+            "sha256": "44a12397aee8a92da96b8aef32cbb9b6a81c1813e78001fb7aee564fd479e989"
+          },
+          "name": "project-sub-agent",
+          "role_path": "Roles/project-sub-agent/ROLE.md",
+          "role_sha256": "6ee3620b8d3f1eba006d11aca44f1f2f672263cf247711031d1c78806d066547"
+        },
+        "settings": {
+          "effort": null,
+          "evidence": [
+            {
+              "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/bootstrap-runtime.json",
+              "sha256": "0d142a95a9d4f1fc6d2ebafc327d882c7be4c351f98f8421aee1cb1a22455905"
+            }
+          ],
+          "mode": "verified_inheritance",
+          "model": null
+        },
+        "claim_limit": "These are actual participant reports and exact canonical bindings on one shared filesystem. Hash equality proves matching bytes, not comprehension, OS confinement or raw-filesystem independence."
+      }
+    ],
+    "frozen_packet": {
+      "path": "clock-rule-packet.json",
+      "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618",
+      "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+    },
+    "frozen_protocol": {
+      "path": "comparison-protocol.json",
+      "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7",
+      "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+    },
+    "full_installation_inventory": {
+      "path": "Verification/shared-agent-billboards/pilots/current-installation-manifest.json",
+      "sha256": "9f4589678984e4d7cc7a7c6d70a6d10b2c18ca81fbb5efad7e2b831b9b76ab33"
+    },
+    "context_independence": "Only original enabled solver/reviewer first passes; independent barriers and no peer body/title/verdict exposure separately evidenced. Re-sealing current A reviewer does not erase legitimate prior native history. Generic example makes no independent-solver claim.",
+    "settings": "All current assignments mode verified_inheritance, model/effort null means observed full-history runtime guarantee with omitted overrides, not unavailable settings claimed as concrete model values.",
+    "participant_nested_reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+  },
+  "reference_inspection": {
+    "generic": {
+      "unique_exact_refs": 97,
+      "canonical_Task_relative_artifact_records": 10,
+      "all_matched": true,
+      "mismatches": []
+    },
+    "enabled": {
+      "unique_exact_refs": 206,
+      "canonical_Task_relative_artifact_records": 17,
+      "all_matched": true,
+      "mismatches": []
+    }
+  },
+  "reference_root_rules": [
+    "Copied public pilot JSON references resolve relative to original absolute fixture root; copies remain byte-identical.",
+    "Canonical artifact records carrying assignment_id/generation/size with artifacts/ paths resolve relative to their owning selected Task folder.",
+    "Exactly the frozen protocol.packet path Verification/shared-agent-billboards/pilots/project/clock-rule-packet.json is original outer-depot provenance. It resolves to the same physical packet as fixture clock-rule-packet.json."
+  ],
+  "inspection_correction": "First worker recursive pass treated canonical artifacts/ records as project-relative and reported missing paths. Corrected documented Task-relative artifact root; all97 generic and206 enabled refs match. This was an inspection assumption, not a source or fixture defect; no failed check is represented as initially passed.",
+  "criteria": [
+    {
+      "criterion": "TASK-011: Actual native identities/settings, direct posts/replies and checkpoints are linked to current Task decisions and integrated worker output.",
+      "status": "verified_with_declared_boundary",
+      "evidence_level": "native_observed",
+      "finding": "Native manager/worker distinct identities and inherited settings recorded; exact direct posts/replies, four checkpoints and version2 unit incorporation link to current REPORT decision.",
+      "references": [
+        {
+          "path": "Verification/shared-agent-billboards/pilots/generic-evidence.json",
+          "sha256": "f4ff0202417bef837bb6aab006a88b8a276f6f092dc5cfd9e81eea7b7da5030d"
+        },
+        {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/manager-integration-inspection.json",
+          "sha256": "a1edbcfd7307abf49d20ffc1d8388b44515e0561a2908bd3bf9c05d7d6ff62e7",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/manager-report-inspection.json",
+          "sha256": "1f4c5e6595d931124a9852f8dc8874d98e5fca157db170050b1db951bbde879a",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        }
+      ]
+    },
+    {
+      "criterion": "TASK-011: Routine notice leaves an idle agent idle; pending messages survive interruption; material resume follows observed stop, exact packet delivery, assignment.inputs, then followup_task.",
+      "status": "verified_with_declared_boundary",
+      "evidence_level": "native_observed",
+      "finding": "Actual completed worker remained completed after routine send_message. Running interruption observed before exact five-ref material packet, assignment.inputs revision19 and same-ID followup; durable pending source retained. Stopped-recipient pending query remains gated until legitimate rebind.",
+      "references": [
+        {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/native-idle-before.json",
+          "sha256": "aec0a452026b8b6e3f2344dee872a3e99745e0244778bb537efc3ab252231323",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/native-idle-after-notify.json",
+          "sha256": "ccf6911165f901eec6aea2ee59507181bd37ef4a879998e1feb6284a93331c29",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/material-order-evidence.json",
+          "sha256": "2c6b3807c3fe3b0601e5dce47f38cca6beef77aab099b99e0de5a30a16603d63",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/stopped-pending-gate.json",
+          "sha256": "94edf35ed644a854500d4da36e16c51c2b8783f2186be49ee0bc0a2138157879",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        }
+      ]
+    },
+    {
+      "criterion": "TASK-011: Persistence, delivery, reported reading, comprehension and incorporation remain distinct; the generic category creates no second worker, solver, reviewer or senior.",
+      "status": "verified_with_declared_boundary",
+      "evidence_level": "native_observed_plus_forward_targeted_tests",
+      "finding": "Eight immutable posts, actual call returns, exact recipient acknowledgements, labelled worker comprehension self-report and independently inspected report incorporation remain separate. One worker, no solver/reviewer/senior/second worker. Empty {} is unconfirmed sender evidence despite historical notified label.",
+      "references": [
+        {
+          "path": "Verification/shared-agent-billboards/pilots/generic-evidence.json",
+          "sha256": "f4ff0202417bef837bb6aab006a88b8a276f6f092dc5cfd9e81eea7b7da5030d"
+        },
+        {
+          "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/worker-evidence-v2.json",
+          "sha256": "d4616deaf466fb2e4f1e6ce1518b1c119c23aec5b412b97be81ddf8b7e90c2ac",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/manager-report-inspection.json",
+          "sha256": "1f4c5e6595d931124a9852f8dc8874d98e5fca157db170050b1db951bbde879a",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-implement-shared-agent-billboards-revision-1-2026-09-26--7F3F57E1/artifacts/orchestration/manager/empty-native-return-assessment.json",
+          "sha256": "86f358ce519b6cd2d082bab2efd065ab8afa84ac93601a3baefa659171aa86dc"
+        },
+        {
+          "path": "Verification/shared-agent-billboards/deterministic-results-v4.json",
+          "sha256": "b5ef775000e5f66fd32ca72b606c1a5b94b4416c7b1deb8d168e5ce8b1d5acf2"
+        }
+      ]
+    },
+    {
+      "criterion": "TASK-011: Different already authorized component assignments may share interface information under their policy; no shared-interface discussion expands the generic assignment.",
+      "status": "verified_with_declared_boundary",
+      "evidence_level": "contract_and_authorized_native_pair",
+      "finding": "Current component-phase policy audience is exact authorized manager and report worker; shared interface discussion and changed material input stay within the one REPORT assignment. Conditional cross-component sharing does not grant another worker or expand scope. No separate native cross-component team is claimed.",
+      "references": [
+        {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/generic_policy_v1.json",
+          "sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/task.json",
+          "sha256": "251c2721e5a6c2b1ef56acf7a58e31986e758781b73d3aa9f150bc4a6ae5065c",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/manager-integration-inspection.json",
+          "sha256": "a1edbcfd7307abf49d20ffc1d8388b44515e0561a2908bd3bf9c05d7d6ff62e7",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        }
+      ]
+    },
+    {
+      "criterion": "TASK-012: Every required solver preserves a versioned independent candidate before release; each assigned reviewer preserves its first assessment before receiving other verdicts, including queued agents.",
+      "status": "verified_with_declared_boundary",
+      "evidence_level": "native_observed_with_context_audit",
+      "finding": "Two distinct original independent candidates retained before release; each distinct assigned first reviewer dispatched before prior verdict/body entered queued parent context. Exact canonical candidate/review mappings preserved; helper pass vocabulary normalization retains B original bytes.",
+      "references": [
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/initial-solver-dispatch-barrier.json",
+          "sha256": "c05c69ba871fc9de3dacd104b52b8d5b418a700d4e2543bea1f5f194cbb4b0f5",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/initial-context-notice-audit.json",
+          "sha256": "a80c7aaa84b466cb3da5d25636c2f07d66645c8392daf67dd0491f53a007d050",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/first-review-dispatch-barrier.json",
+          "sha256": "699e7681ce7ac45a03b8762851f97cbed0a8e4bb2682c582da0b1f4562902ae0",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/initial-team-checkpoint-inspection.json",
+          "sha256": "918c3a10f1b346dba3077e318512638e8ed88a27175e2cbdf7e3869d631e4f71",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/review-b-outcome-vocabulary.json",
+          "sha256": "826f04807d1f5fab1b6faa4cede48e15b830bc563e627a462bc2a19436312c84",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/task.json",
+          "sha256": "c5f47b86fbbac38541cf3afd288d8571196d4e6fd014ee50339862f41db98d68",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        }
+      ]
+    },
+    {
+      "criterion": "TASK-012: A formerly sealed earlier post becomes unread after other messages were handled; exact native context evidence and deterministic route negatives jointly establish the declared isolation boundary.",
+      "status": "verified_with_declared_boundary",
+      "evidence_level": "native_observed_plus_targeted_route_tests",
+      "finding": "Solver B previously acknowledged later operational notice while A sealed finding remained hidden. Released peer continuation shows exact earlier A finding reported_reading false, then exact acknowledgement. Native fork notice/title audit and complementary D2/V3 route negatives establish declared cooperative isolation, without claiming raw-filesystem confinement.",
+      "references": [
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/checkpoint-evidence.json",
+          "sha256": "ab16b2e86f3811585848737bbc324c784fdfcc7a04ad4b0d512ade251670aacb",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/peer-exchange-evidence.json",
+          "sha256": "72ad3e4532459a06971a1e1262cd0a7d6401b7d4fbdf773ad5d45853f5aed069",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/initial-context-notice-audit.json",
+          "sha256": "a80c7aaa84b466cb3da5d25636c2f07d66645c8392daf67dd0491f53a007d050",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Verification/shared-agent-billboards/deterministic-results.json",
+          "sha256": "20a43fd9ee5b124efee09c2397222fee5fe2a326575c52399dcce113a7913e09"
+        },
+        {
+          "path": "Verification/shared-agent-billboards/deterministic-results-v3.json",
+          "sha256": "777908a35726dd40b0636ac7d8158187d55b8ceef62edee894f2eabd74c660d0"
+        }
+      ]
+    },
+    {
+      "criterion": "TASK-012: One material assumption objection and one candidate/source change exercise current review/synthesis/acceptance invalidation, version-specific senior disposition and owner resolution; informal closure cannot clear the gate.",
+      "status": "verified_with_declared_boundary",
+      "evidence_level": "native_observed_plus_canonical_gate_tests",
+      "finding": "One exact assumption challenge/reply retained. Actual A2 candidate supersession at revision50 invalidated candidate/review/synthesis/acceptance; old SYNTH_V1/ACCEPT_V1 remain ineligible after current A2 re-review and current SYNTH_V2/ACCEPT_V2 restoration. Separate senior and manager assess four material messages/five exact targets. Informal communication closure is explicitly not resolution; unchanged B bytes remain.",
+      "references": [
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/peer-reply-evidence.json",
+          "sha256": "d6c69e1bf356341d33e8fbd5d19a2f1901b05388d1658c5b5f67986639cbb6fd",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/peer-exchange-evidence.json",
+          "sha256": "72ad3e4532459a06971a1e1262cd0a7d6401b7d4fbdf773ad5d45853f5aed069",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/candidate-supersession-invalidation.json",
+          "sha256": "08907c3b9d4bbff18a1417e6e7df749b3a28b5e440a6afa4a55fa797895a5b95",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/current-acceptance-restoration.json",
+          "sha256": "647be3b14916bc342b9f755d0291bb55ef3426f7e265259aa7dc71ea87ae2664",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/manager-decision-evidence-v2.json",
+          "sha256": "d0528b3502e158c7de4679f28b84b8d88a6eb0b79cea55061783712a1cb7ef9e",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/senior/decision-evidence-v2.json",
+          "sha256": "8418709c80df256cf5658b227bc5aae83f69a3ed90129b8859002f34fc9c6ccb",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Verification/shared-agent-billboards/deterministic-results-v3.json",
+          "sha256": "777908a35726dd40b0636ac7d8158187d55b8ceef62edee894f2eabd74c660d0"
+        }
+      ]
+    },
+    {
+      "criterion": "TASK-012: The senior sees all current candidates and objections; illustrative reasoning is labeled proposed/hypothetical and grants no physics, ontology or Aether-Flow authority.",
+      "status": "verified_with_declared_boundary",
+      "evidence_level": "native_observed_analysis_only",
+      "finding": "Distinct current senior exact context contains A2+B1, their assigned current passes and all current objections. Synthesis distinguishes unassigned alternative clock proposals and physical evidence/definition limits, with no validated physics or Aether-Flow claim. Required source facts remain unchanged.",
+      "references": [
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/task.json",
+          "sha256": "c5f47b86fbbac38541cf3afd288d8571196d4e6fd014ee50339862f41db98d68",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/senior/synthesis-v2.json",
+          "sha256": "017c1264750bc57a9b006952ea7b11c835b34851b37156b64733dbc0efd59096",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/senior/decision-evidence-v2.json",
+          "sha256": "8418709c80df256cf5658b227bc5aae83f69a3ed90129b8859002f34fc9c6ccb",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/fixture-completion-criterion-evidence.json",
+          "sha256": "25b67ac14a5f1024429c72c9c92df0539ea1f7bdac581e5a3b0f02d8c4075b44",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        }
+      ]
+    },
+    {
+      "criterion": "TASK-012: Memory, ontology and maintenance proposal examples reach only their existing owner boundary; no actual publication or maintenance execution is claimed.",
+      "status": "verified_with_declared_boundary",
+      "evidence_level": "native_proposals_only",
+      "finding": "Source-linked memory, ontology and Curator examples are pending_owner, published false and owner_invoked false; actual capability absence and publication scope limit remain explicit. No knowledge-owner publication or maintenance execution is claimed.",
+      "references": [
+        {
+          "path": "Verification/shared-agent-billboards/pilots/owner-proposal-examples.json",
+          "sha256": "a4a19ba05c5c4f9eb9f2c6be6609c3b93c8d79e3a80d06e3500332e89fb01dd7"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/owner-proposal-examples.json",
+          "sha256": "a4a19ba05c5c4f9eb9f2c6be6609c3b93c8d79e3a80d06e3500332e89fb01dd7",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        }
+      ]
+    },
+    {
+      "criterion": "TASK-012: Preserve the full required extra-complex team and queue within current capacity; no implementation child is needed for this analysis-only pilot, while the dedicated implementer requirement remains enforced for authorized implementation.",
+      "status": "verified_with_declared_boundary",
+      "evidence_level": "native_team_observed_and_unchanged_owner_contract",
+      "finding": "Full two-solver/two-assigned-reviewer/distinct-senior team retained and queued with actual inherited settings/capacity receipts; canonical CLOCK analysis_only implementation_required false. Dedicated implementer requirement for authorized multi-solution implementation remains the unchanged owner contract, not an implementation child added to this analysis pilot.",
+      "references": [
+        {
+          "path": "Verification/shared-agent-billboards/pilots/multi-solver-evidence.json",
+          "sha256": "dc7028e520c4ad61c426d31390bf70c19d3e59084cb65e2d674b146ff227da46"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/task.json",
+          "sha256": "c5f47b86fbbac38541cf3afd288d8571196d4e6fd014ee50339862f41db98d68",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/initial-solver-dispatch-barrier.json",
+          "sha256": "c05c69ba871fc9de3dacd104b52b8d5b418a700d4e2543bea1f5f194cbb4b0f5",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/first-review-dispatch-barrier.json",
+          "sha256": "699e7681ce7ac45a03b8762851f97cbed0a8e4bb2682c582da0b1f4562902ae0",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/bootstrap-runtime.json",
+          "sha256": "0d142a95a9d4f1fc6d2ebafc327d882c7be4c351f98f8421aee1cb1a22455905",
+          "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+        },
+        {
+          "path": "Verification/shared-agent-billboards/package-worker-result-v4.json",
+          "sha256": "25dd1caaad62bf744ee17a52100eb680b1bd645f33f8b5ee63bdc9d685444cb8"
+        }
+      ]
+    }
+  ],
+  "criteria_count": 10,
+  "current_versus_native": {
+    "generic": "Original pre-refresh overlay; no generic repeat.",
+    "enabled": "V2 three-file refresh; no finalV3/V4 native execution.",
+    "current_package": {
+      "path": "Verification/shared-agent-billboards/package-worker-result-v4.json",
+      "sha256": "25dd1caaad62bf744ee17a52100eb680b1bd645f33f8b5ee63bdc9d685444cb8"
+    },
+    "four_forward_corrections": [
+      {
+        "route": "native pending",
+        "change": "Substantive native requests withheld until complete initial candidate and required first-review gates, including current manager recipient. Fixed closed operational remains; hidden counts excluded.",
+        "current_proof": "Focused gate-correction test; prior actual pilots used opaque pre-fork notices. Generic no-independence branch remains permitted."
+      },
+      {
+        "route": "material owner assessment",
+        "change": "All material=True types assessed. New material posts require exact target; valid old targetless records have explicit target:null attributable disposition.",
+        "current_proof": "Focused test covers all eight types, informal answer cannot resolve, harmless speculation excluded. Historical pilots exercised only change-notice/finding/challenge material types."
+      },
+      {
+        "route": "actual installed provider",
+        "change": "Exact reviewed installed Task/orchestration/native/role helper byte set required; verified frozen target buffers only. Unknown/absent/changed target refused before execution and caches recheck bytes.",
+        "current_proof": "Focused marker negative and cached-provider dependency change. Actual old root unsupported; actual pilot installed profile matches. No root/provider code changed."
+      },
+      {
+        "route": "notification receipt and pending evidence",
+        "required_behavior": "Receipt schema2 recipient-observed notified with exact ID/hash and current addressed recipient lease, concise actual-mailbox assertion, native_receipt:null. Independent from reading.",
+        "future_sender_rule": "Empty/null returned API results cannot publish notified; actual return data can be kept raw in attempted/uncertain receipts.",
+        "legacy_rule": "Version1 raw notified state/result bytes retained, derived notification_confirmation marks empty/null unconfirmed; such state alone cannot suppress retry.",
+        "pending_rule": "Exact recipient-observed version2 or qualifying nonempty sender API evidence clears that recipient only; unread still waits for independent reading/handling receipt.",
+        "compatibility": "New reader supports receipt schemas1/2; older schema1-only reader unsupported for v2 and requires separately selected exact helper adoption. Message/policy remain1; Task/native protocol unchanged.",
+        "proof": "One focused recipient-owned receipt deterministic test plus affected D2 visibility/immutability assurance. Actual previous pilot mailbox observations retained, not rerun or relabeled as executing final V4 code.",
+        "limits": "Recipient observation remains attributed cooperative evidence requiring known real mailbox observation, not OS authentication or comprehension proof."
+      }
+    ],
+    "targeted_checks": [
+      {
+        "path": "Verification/shared-agent-billboards/deterministic-results.json",
+        "sha256": "20a43fd9ee5b124efee09c2397222fee5fe2a326575c52399dcce113a7913e09"
+      },
+      {
+        "path": "Verification/shared-agent-billboards/deterministic-results-v2.json",
+        "sha256": "acb8da9a6d0414561fced1031ae40332fd4fd915a84e2db7f7bf1596b6cece5b"
+      },
+      {
+        "path": "Verification/shared-agent-billboards/deterministic-results-v3.json",
+        "sha256": "777908a35726dd40b0636ac7d8158187d55b8ceef62edee894f2eabd74c660d0"
+      },
+      {
+        "path": "Verification/shared-agent-billboards/deterministic-results-v4.json",
+        "sha256": "b5ef775000e5f66fd32ca72b606c1a5b94b4416c7b1deb8d168e5ce8b1d5acf2"
+      }
+    ],
+    "schema_attribution": "Communication receipt schema2 is a new forward contract with schema1 compatibility. Message/policy schema1 and canonical Task/native schemas/events unchanged. [] schema_or_event_extensions in package result refers to canonical Task/native only.",
+    "exercised_material_types": "Historical native cases use finding/change-notice/challenge; other material message types are covered by separate V3 targeted deterministic tests, not native assertions."
+  },
+  "delivery_state_correction": {
+    "assessment": {
+      "path": "Tasks/Task-implement-shared-agent-billboards-revision-1-2026-09-26--7F3F57E1/artifacts/orchestration/manager/empty-native-return-assessment.json",
+      "sha256": "86f358ce519b6cd2d082bab2efd065ab8afa84ac93601a3baefa659171aa86dc"
+    },
+    "generic_empty_object_receipt": {
+      "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/receipts/notify_units_finding_v1.json",
+      "sha256": "4804a525a9c51bd6be9431f04012c8df03de3cf10198e50f0400779e52fa1cab",
+      "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+    },
+    "enabled_empty_null_receipt": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/receipts/notice_manager_uncertain_v1.json",
+      "sha256": "b8bd1bf975a89d6a4d8d39aaf36ef3c02c69540984af7aa270fd6abc38a9ce47",
+      "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+    },
+    "actual_enabled_recipient_mailbox_observation": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/manager-post-dispatch-checkpoint.json",
+      "sha256": "dd5a71bdf8a2627277ba044ed1f940ef6d20e47544a5040f1743c125e1318894",
+      "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+    },
+    "generic_exact_reported_reading": {
+      "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/collaboration/receipts/manager_ack_units_finding_v1.json",
+      "sha256": "4e86a7c2bc282d974334177e26e63a2a08906c012aa6ab32e1bc488e215da263",
+      "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+    },
+    "enabled_exact_reported_reading": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/collaboration/receipts/read_solver_a_missing_clock_v1.json",
+      "sha256": "195f0864849abcd6fc192ec822be623b3fa3133508f8593c9f3036c17319c8c8",
+      "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+    },
+    "generic_incorporation": {
+      "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/manager-report-inspection.json",
+      "sha256": "1f4c5e6595d931124a9852f8dc8874d98e5fca157db170050b1db951bbde879a",
+      "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+    },
+    "enabled_current_owner_incorporation": [
+      {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/manager/manager-decision-evidence-v2.json",
+        "sha256": "d0528b3502e158c7de4679f28b84b8d88a6eb0b79cea55061783712a1cb7ef9e",
+        "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+      },
+      {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/senior/decision-evidence-v2.json",
+        "sha256": "8418709c80df256cf5658b227bc5aae83f69a3ed90129b8859002f34fc9c6ccb",
+        "reference_root": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project"
+      }
+    ],
+    "interpretation": "Empty {} and null provide equally no sender delivery confirmation. Historical notified/uncertain labels and bytes stay unchanged. Exact mailbox observation, reported reading, comprehension self-report, incorporation and pending reconstruction are separate facts. Do not count bookkeeping representation difference as an improvement.",
+    "forward_contract": "Current V4 recipient-owned receipt2 may record attributed actual mailbox observation for exact message ID/hash/current addressed lease with native_receipt:null. Notification does not mark read; acknowledgement remains separate. Future empty sender results cannot publish notified; legacy raw labels derive unconfirmed and cannot alone suppress pending.",
+    "forward_evidence": {
+      "path": "Verification/shared-agent-billboards/deterministic-results-v4.json",
+      "sha256": "b5ef775000e5f66fd32ca72b606c1a5b94b4416c7b1deb8d168e5ce8b1d5acf2"
+    },
+    "current_fixture_limit": "No recipient-observed receipt2 was backfilled, no fixture upgrade, no V4 pending rebuild or native rerun by this worker. Earlier native mailbox/read/incorporation observations complement forward deterministic route tests."
+  },
+  "comparison_boundary": "No baseline or comparison analysis performed by this assignment. Original enabled initial acceptance and later controlled A2/re-review/recovery validation workloads remain separate; no total elapsed-cost benefit or token estimate inferred.",
+  "timing_correction": {
+    "path": "Tasks/Task-implement-shared-agent-billboards-revision-1-2026-09-26--7F3F57E1/artifacts/orchestration/manager/bootstrap-thread-timing-correction.json",
+    "sha256": "a865feacee84203d5c0245138622060327dd7bbe9756e4eb234ca72cf08f2c78"
+  },
+  "checks_performed": [
+    {
+      "check": "Exact reservation/context hashes before work",
+      "result": "all15 matched; additional parent hash observation exact matched"
+    },
+    {
+      "check": "Current canonical terminal Task/state/team/candidate/review/acceptance checks",
+      "result": "generic29 and enabled68 finished; required teams and current version mappings matched"
+    },
+    {
+      "check": "Recursive exact evidence refs with declared root schemas",
+      "result": {
+        "generic": {
+          "unique_exact_refs": 97,
+          "canonical_Task_relative_artifact_records": 10,
+          "all_matched": true,
+          "mismatches": []
+        },
+        "enabled": {
+          "unique_exact_refs": 206,
+          "canonical_Task_relative_artifact_records": 17,
+          "all_matched": true,
+          "mismatches": []
+        }
+      }
+    },
+    {
+      "check": "Parent source hash attribution and direct50 installed destination hashes",
+      "result": "matched; source collection reads stayed in collaborate scope"
+    },
+    {
+      "check": "Public copy equality/JSON parse",
+      "result": "three exact byte-identical copies; two created JSON outputs parsed"
+    },
+    {
+      "check": "Read-only selected native source/fixture preservation",
+      "result": "306 unique selected physical source paths unchanged across this write operation"
+    }
+  ],
+  "test_reruns": false,
+  "native_calls_or_dispatch": false,
+  "source_or_fixture_writes": false,
+  "ledger_or_role_index_writes": false,
+  "memory_or_ontology_publication": false,
+  "highest_verification": "Static exact-reference/hash/JSON conformance checks performed by this worker, integrating previously observed end-to-end controlled native workflow and separately passed current targeted tests. Final corrected-source native workflow was not exercised.",
+  "limitations": [
+    "Cooperative common filesystem/grants; no OS authentication or raw-filesystem confinement.",
+    "No independent proof of comprehension; recipient reading and owner-observed incorporation remain separate.",
+    "No separate native cross-component worker or dedicated implementation pilot; conditional existing assignment scope and unchanged owner requirements inspected.",
+    "No baseline completion, package aggregation/Template/adoption/comparison/release completion by this assignment.",
+    "No live memory retrieval/isolation, active root installation, product consumer, Aether-Flow changes, cross-host, services/dependencies/Git/external actions."
+  ],
+  "blockers": [],
+  "unresolved_required_clauses": [],
+  "stopping_condition": "Both current canonical native fixtures are completed; all ten assigned criteria inspected and exact five outputs produced. Return to main manager for direct acceptance."
+}

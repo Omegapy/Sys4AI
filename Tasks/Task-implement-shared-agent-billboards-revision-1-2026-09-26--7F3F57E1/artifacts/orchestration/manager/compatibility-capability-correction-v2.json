@@ -1,0 +1,25 @@
+{
+  "objective": "Correct two mandatory boundaries in the existing adapter: unsupported older owner API must fail constant/bounded; current assigned re-review must release after a same-baseline candidate supersedes an old reviewed version.",
+  "evidence": [
+    {
+      "path": "SKILLS-depo/collaborate/scripts/collaboration_task.py",
+      "finding": "Context.call assumes orch.versioned; protected older active-root helper lacks that symbol. Unsupported older installation should fail preflight with constant diagnostic, no fallback or validator edit."
+    },
+    {
+      "path": "SKILLS-depo/collaborate/scripts/collaboration_task.py",
+      "finding": "first_review iterates first historical same-baseline/round record and candidate_current throws on superseded candidate, never reaching a later valid current re-review."
+    }
+  ],
+  "scope": [
+    "SKILLS-depo/collaborate/scripts/collaboration_task.py",
+    "SKILLS-depo/collaborate/tests/test_collaboration_acceptance.py",
+    "SKILLS-depo/collaborate/references/task-integration.md",
+    "Verification/shared-agent-billboards/compatibility-manifest-v2.json",
+    "Verification/shared-agent-billboards/deterministic-results-v2.json",
+    "Verification/shared-agent-billboards/package-worker-result-v2.json"
+  ],
+  "checks": "Only existing D2 and D3 methods for these new mandatory behavioral negatives and restored supported current behavior. Reuse passing D1/D4 and actual generic pilot, whose generic path never uses first_review and whose reviewed owner interface is unchanged.",
+  "preservation": "No source/active Task validator or root package changes. Preserve original result/compatibility/deterministic JSON bytes; write fresh v2 records. No pilot overlay mutation while native owner is running.",
+  "result": "Updated all-current source file/hash list and criterion coverage for original PACKAGE_PREP baseline plus targeted check evidence, with exact correction/diff references.",
+  "status": "Packet prepared; deliver/rebind original completed generic worker after generic native pilot completion/capacity release."
+}

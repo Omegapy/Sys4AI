@@ -250,7 +250,8 @@
               "static-capability:memory",
               "static-capability:what-did-you-learn",
               "static-capability:ontology",
-              "static-capability:ontology-advanced"
+              "static-capability:ontology-advanced",
+              "static-capability:collaborate"
             ]
           },
           "outcome": {
@@ -673,7 +674,8 @@
             "what-did-you-learn",
             "ontology",
             "ontology-advanced",
-            "project-curator"
+            "project-curator",
+            "collaborate"
           ]
         },
         "module_version": {
@@ -1008,6 +1010,12 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "guidance_contents": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -1137,6 +1145,38 @@
                     "curator_integration"
                   ]
                 }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "module_id": {
+                "const": "collaborate"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "guidance_contents"
+            ],
+            "properties": {
+              "new_memory": {
+                "const": false
+              },
+              "refresh_dependencies": {
+                "const": []
+              },
+              "module_version": {
+                "const": "1.0.0"
+              }
+            }
+          },
+          "else": {
+            "not": {
+              "required": [
+                "guidance_contents"
               ]
             }
           }

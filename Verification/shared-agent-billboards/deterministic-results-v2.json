@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "evidence_revision": 2,
+  "evidence_level": "Targeted deterministic D2/D3 tests passed; synthetic receipts only.",
+  "previous_evidence": {
+    "path": "Verification/shared-agent-billboards/deterministic-results.json",
+    "sha256": "20a43fd9ee5b124efee09c2397222fee5fe2a326575c52399dcce113a7913e09"
+  },
+  "checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/collaborate/tests -p test_collaboration_acceptance.py -k D2",
+      "tests": 1,
+      "exit_code": 0,
+      "seconds": 3.327,
+      "new_case": "Unsupported older owner missing versioned returns constant diagnostic and preserves all fixture bytes; supported current owner still works."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/collaborate/tests -p test_collaboration_acceptance.py -k D3",
+      "tests": 1,
+      "exit_code": 0,
+      "seconds": 4.164,
+      "new_case": "Superseding same-baseline candidate remains sealed before exact assigned re-review; later valid current re-review releases while old record is unchanged."
+    }
+  ],
+  "reused": [
+    "D1 publication/storage branch unchanged",
+    "D4 vocabulary/filter/handling branch unchanged",
+    "Completed actual generic pilot remains manager-owned evidence; worker did not rerun or modify it."
+  ],
+  "test_sha256": "275614713f4c15306a36e44bdd3fcaf74a7231c5597f0d8d60d2b85b4d1007fc",
+  "limits": [
+    "No actual older root adoption performed. Unsupported interface tested by substituting a module with missing required API in a labeled deterministic fixture.",
+    "No current extra-complex native claim established by deterministic tests.",
+    "Original pilot overlay unchanged by this worker; manager must select refreshed source bytes for later affected native pilot."
+  ]
+}

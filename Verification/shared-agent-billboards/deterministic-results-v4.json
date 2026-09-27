@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "evidence_revision": 4,
+  "checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/collaborate/tests -p test_gate_corrections.py -k recipient_observed",
+      "exit_code": 0,
+      "tests": 1,
+      "seconds": 1.155,
+      "covers": [
+        "receipt2 publication/current addressed actor/message hash",
+        "independent notification/read/ack/unread/per-recipient state",
+        "payload-bound idempotency/conflicting retry",
+        "sender/blank/invented native result/unknown receipt version denial",
+        "future empty/null result denial and exact legacy v1 preservation/unconfirmed pending"
+      ]
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s SKILLS-depo/collaborate/tests -p test_collaboration_acceptance.py -k D2",
+      "exit_code": 0,
+      "tests": 1,
+      "seconds": 3.545,
+      "reason": "Changed receipt reader/derived metadata path requires original pre-exposure/readonly/generation/identity negative controls."
+    }
+  ],
+  "passed_tests": 2,
+  "evidence_level": "Targeted fourth-route deterministic checks passed; no native fixture rerun.",
+  "previous_checks": [
+    {
+      "path": "Verification/shared-agent-billboards/deterministic-results-v3.json",
+      "sha256": "777908a35726dd40b0636ac7d8158187d55b8ceef62edee894f2eabd74c660d0",
+      "reuse": "V3 three-gate negatives, D3 canonical material/current-review checks unchanged."
+    },
+    {
+      "path": "Verification/shared-agent-billboards/deterministic-results.json",
+      "sha256": "20a43fd9ee5b124efee09c2397222fee5fe2a326575c52399dcce113a7913e09",
+      "reuse": "D1 immutable storage and D4 vocabulary/filter/handling behavior; changed receipt route independently covered above."
+    }
+  ],
+  "prior_records_preserved": [
+    {
+      "path": "Verification/shared-agent-billboards/package-worker-result.json",
+      "sha256": "08b78456a037770afe5ef6f4379b0e0996287895ede8b18cdf18247a13276c3b"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/compatibility-manifest.json",
+      "sha256": "0513b713a6bc35738d9e84893d1853ecd58462cf9934d5c7ea005e6af38eddfc"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/deterministic-results.json",
+      "sha256": "20a43fd9ee5b124efee09c2397222fee5fe2a326575c52399dcce113a7913e09"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/package-worker-result-v2.json",
+      "sha256": "2fbc2dfbcf2013d6db9702c8c582d79e9816236688ffcc8adaf2c9303f3ef39a"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/compatibility-manifest-v2.json",
+      "sha256": "c7f3b3397ba15782925d6e5d5f459eaa521df9c554c3cbe6877d7df3707540c8"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/deterministic-results-v2.json",
+      "sha256": "acb8da9a6d0414561fced1031ae40332fd4fd915a84e2db7f7bf1596b6cece5b"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/package-worker-result-v3.json",
+      "sha256": "80bfa5a0093538f4db5222f9e3d6f482e72c66c025f2c119ffaa592cca1c26b0"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/compatibility-manifest-v3.json",
+      "sha256": "a1e5ad102927f8c30909096972349a71d51ccee4aa77cde9c4454f5219c8d380"
+    },
+    {
+      "path": "Verification/shared-agent-billboards/deterministic-results-v3.json",
+      "sha256": "777908a35726dd40b0636ac7d8158187d55b8ceef62edee894f2eabd74c660d0"
+    }
+  ],
+  "test_sha256": "5d843acdf60c90e8eb6903388a61ca040ffd9b62f333d6bfd371cddb28daf072",
+  "message_policy_task_native_versions_unchanged": true,
+  "native_fixture_change": false,
+  "limitations": "Synthetic receipt observation text is labeled deterministic, never actual native mailbox execution proof."
+}

@@ -18,7 +18,7 @@ Canonical edit location: [ONTOLOGY/bindings/skills.json#/@graph/0](<../../ONTOLO
 
 ## Sources
 
-- [.agents/skills/agent-task/SKILL.md](<../../.agents/skills/agent-task/SKILL.md>) `section:Authority and root` SHA256 `3f74b076a6fc2d008dc194c8a316bea16008a3e435cc11169555918ed0b879fa` (current)
+- [.agents/skills/agent-task/SKILL.md](<../../.agents/skills/agent-task/SKILL.md>) `section:Authority and root` SHA256 `6c29de4374b3e8761a82fade464892cfe38f44fff64781d9548e9cacf9d931f1` (current)
 
 ## Backlinks
 

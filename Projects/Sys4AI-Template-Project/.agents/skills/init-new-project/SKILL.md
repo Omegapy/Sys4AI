@@ -2,7 +2,7 @@
 name: init-new-project
 description: Create or prepare a selected Sys4AI project using Template governance assets, preserved project content and factual registration.
 metadata:
-  version: 12.0.0
+  version: 13.0.0
 ---
 
 # Initialize a Sys4AI project
@@ -233,6 +233,30 @@ pre/post bytes. Changed authored data, configuration, source packages or unknown
 target edits stop replay and retain both the pending receipt and project work.
 The existing setup receipt and guarded transaction entry points own this flow;
 there is no second setup ledger.
+
+## Default collaboration activation
+
+Create and first preparation install and enable the complete collaboration
+capability automatically. An ordinary selected `prepare-existing` also adopts a
+missing capability for a previously completed setup. No adoption flag is required.
+This additive `collaborate` operation uses the existing receipt's `module_adoptions`;
+it preserves the original base edition, source hashes, archived receipts and
+project identity. A supported current Task owner and the marked Task/Agent Task
+collaboration instructions are required for enabled readiness.
+
+An existing source-equal complete package is retained. Customized, incomplete or
+unsupported packages and owner interfaces remain untouched and block readiness.
+Missing instruction sections may be appended only to unchanged receipt-owned
+Task guidance. Unknown project Python never executes during this assessment.
+`assess-collaboration --destination ABSOLUTE_PROJECT_PATH` reports current static
+installation, enabled readiness and exact diagnostics. Runtime is not exercised.
+
+The manager still registers each Task policy and exact assignment grants. Setup
+creates no board, Task, native binding, background service or idle-agent wakeup.
+The automatic operation resumes through the same setup request after interruption;
+its frozen source/target hashes reject changed sources or conflicting edits.
+Reruns preserve base provenance and complete module identity, without refreshing
+installed packages or replacing later project edits.
 
 ## Completion and receipts
 

@@ -1,0 +1,51 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory.py",
+    "--project-root",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI",
+    "capture",
+    "Verification/collaboration-enablement-20260927/memory-payload.json",
+    "--trigger",
+    "work-completed",
+    "--grant-file",
+    "Verification/collaboration-enablement-20260927/memory-grant.json",
+    "--actor",
+    "/root"
+  ],
+  "exit_code": 2,
+  "result": {
+    "error": {
+      "code": "evidence_unqualified",
+      "details": {
+        "diagnostics": [
+          {
+            "code": "sensitive_content",
+            "expected_sha256": "4f8fe2a048174039a0147746ae69b71f52620905e6c9295ba519758831ff3087",
+            "message": "Selected retained proof is absent, altered, unsafe, or unavailable.",
+            "path": ".agents/skills/collaborate/tests/test_collaboration_acceptance.py",
+            "receipt_path": "Verification/collaboration-enablement-20260927/enablement-verification.json",
+            "retained_path": "Verification/collaboration-enablement-20260927/memory-retained/017-test_collaboration_acceptance.py",
+            "severity": "warning"
+          },
+          {
+            "code": "historical_evidence_unsupported",
+            "expected_sha256": "4f8fe2a048174039a0147746ae69b71f52620905e6c9295ba519758831ff3087",
+            "message": "Exact observed bytes are not accessible as valid proof.",
+            "path": ".agents/skills/collaborate/tests/test_collaboration_acceptance.py",
+            "receipt_path": "Verification/collaboration-enablement-20260927/enablement-verification.json",
+            "severity": "warning"
+          },
+          {
+            "code": "claim_unsupported",
+            "message": "Accessible cited evidence does not support the stated claim level.",
+            "severity": "error"
+          }
+        ]
+      },
+      "message": "Publication requires supported evidence and real origin references."
+    },
+    "ok": false
+  },
+  "stderr": ""
+}

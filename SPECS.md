@@ -256,3 +256,75 @@ owns explicit builds. Current package identity is recorded in
 [the runtime manifest](./.agents/skills/ontology/explorer/assets/manifest.json).
 The original full-release verification remains incomplete under the user's
 testing-stop instruction; historical evidence is not upgraded by this documentation.
+
+## Shared agent billboards and collaboration release
+
+The reusable [collaborate skill](./SKILLS-depo/collaborate/SKILL.md) supplies
+Task-governed collaboration through immutable participant posts, scoped reads,
+reply/correction links, bounded derived views and exact owner snapshots.
+Participants use an existing native assignment and a registered manager policy;
+posting grants no Task lifecycle, publication or external-action authority.
+The common filesystem and actor bindings are cooperative checks, without OS
+authentication or raw-filesystem confinement. Initial candidates and assigned
+first reviews remain sealed until their independence gates pass.
+
+An immutable collaboration post retains its author, Task/subtask, version,
+visibility and source references. A collaboration reading receipt acknowledges
+one exact message version; it establishes reported reading rather than independent
+comprehension or incorporation. A recipient-observed notification receipt uses
+receipt schema 2 for actual addressed-mailbox observation, independently of reading.
+Empty sender API returns remain unconfirmed. Message/policy schemas remain 1;
+current readers explicitly support receipt schemas 1 and 2.
+
+Material collaboration evidence identifies an affected exact candidate/version.
+Current owners assess all material message types; affected reviews, synthesis and
+acceptance must pass the existing invalidation and revalidation gates. A
+collaboration owner snapshot binds selected visible posts, objections and exact
+versions for the responsible senior/manager. It grants no new decision authority.
+A pending collaboration knowledge proposal identifies evidence for memory,
+ontology or Curator review. A post, reply, acknowledgement or accepted discussion
+does not publish knowledge or run maintenance; each system retains its own owner
+and publication grant.
+
+PLAN-20260926-40C61316 revision 1 was implemented in completed
+TASK-20260926-7F3F57E1, revision 56. The [release evidence](./Verification/shared-agent-billboards/RELEASE.md)
+maps 63 requirements and 17 plan tasks. Verification includes focused deterministic
+checks, actual governed generic/extra-complex pilots and one original baseline,
+scoped aggregation, 53 checked source-to-Template mappings and two disposable
+package adoptions. Both original comparison cases met the same semantic criteria;
+the single descriptive pair establishes no performance or quality advantage.
+
+The reusable source, neutral Template and depot root now contain the complete
+capability. The root installation is enabled through exact package inventory,
+reviewed depot-v1 Task-owner compatibility and default Task/Agent Task
+collaboration instructions. Its read-only `health` assessment passes. The existing
+root Task helper, all canonical Task records, role pairs and root governance
+remain preserved; version 1 compatibility grants no version 2 native broker proof.
+
+The current initializer automatically enables collaboration on create and first
+prepare-existing, and adds missing capability to the selected earlier completed
+setup through its existing module adoption transaction. Base receipt editions,
+identity, history, configurations and project-owned content remain preserved.
+A complete reviewed package, one whole exact owner profile and default instruction
+markers are required. Customized, incomplete or unsupported package/guidance/owner
+combinations block enabled readiness without execution or overwrite. Reruns are
+idempotent; interrupted collaboration adoption resumes the same frozen operation.
+No other registered product is refreshed implicitly.
+
+Static-ready installation enables the default working habit. Each Task manager
+still verifies common-store topology, registers its scoped policy, binds exact
+baseline/current inputs and supplies participant grants before dispatch. Required
+read checkpoints, independent candidate/first-review seals, material owner
+assessment and input-before-wake gates remain in force. Setup starts no service,
+installs no dependency/model, creates no Task and provides no automatic idle wake.
+
+[Enablement verification](./Verification/collaboration-enablement-20260927/RESULT.md)
+covers actual root static preflight, current owner gates, scoped depot-v1 exchange,
+initializer create/prepare/earlier-receipt/recovery/idempotence/conflict cases and
+exact Source/Template/root adoption. Confined receipts and injected failures are
+deterministic evidence. Historical generic V1/extra-complex V2 native results and
+current package deterministic/adoption checks remain distinct; this enablement
+performs no new native pilot and claims no performance or quality advantage.
+See [commands](./.agents/skills/collaborate/references/commands.md),
+[Task integration](./.agents/skills/collaborate/references/task-integration.md) and
+[knowledge proposals](./.agents/skills/collaborate/references/knowledge-and-maintenance.md).

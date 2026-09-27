@@ -209,6 +209,15 @@ upgrade. Native goals, plans, TRDs and Task state remain separate.
 
 ## Project memory
 
+The completed [collaboration release](./Verification/shared-agent-billboards/RELEASE.md)
+has [project-local technical documentation](./SPECS.md#shared-agent-billboards-and-collaboration-release).
+Collaboration is now [installed and enabled in this root](./.agents/skills/collaborate/SKILL.md).
+The current [initializer](./.agents/skills/init-new-project/SKILL.md) enables it
+for new and selected existing projects automatically. The complete neutral
+Template supplies its package and default Task instructions. See the
+[enablement evidence](./Verification/collaboration-enablement-20260927/RESULT.md).
+Memory and ontology retain the current state and historical release boundaries.
+
 The [memory skill](./.agents/skills/memory/SKILL.md) provides project-owned
 [canonical records](./MEMORY/README.md), exact source retrieval and a guarded
 local Basic Memory adapter. [Configuration](./memory.yaml) and the

@@ -18,7 +18,7 @@ Canonical edit location: [ONTOLOGY/bindings/artifacts.json#/@graph/9](<../../ONT
 
 ## Sources
 
-- [.agents/skills/task/SKILL.md](<../../.agents/skills/task/SKILL.md>) `section:Intake and mode` SHA256 `a6f658f186542aa682581290298022b9ab949edde05766be7918b486fcd38121` (current)
+- [.agents/skills/task/SKILL.md](<../../.agents/skills/task/SKILL.md>) `section:Intake and mode` SHA256 `b026e51de5d2c72a430a84cd25736590246d284aad83d62d9ab3944357e74b54` (current)
 
 ## Backlinks
 

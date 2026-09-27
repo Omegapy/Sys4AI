@@ -1,0 +1,76 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory.py",
+    "--project-root",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI",
+    "health"
+  ],
+  "exit_code": 2,
+  "result": {
+    "aggregate": "invalid",
+    "assessment": {
+      "components": {},
+      "input_versions": {
+        "memory.yaml": "6c1f2c48a58c1cce12f8f7eb0b977a96b3e8d3d97a7acc40bae4e411102407cb",
+        "reference-assets/MEMORY-depo/README.md": "c938096597a6c04c2fbadd70fbb2e933e11b8d5ce95ce0574893e612f115e825",
+        "reference-assets/MEMORY-depo/policy.md": "34f7a798b298a11fad9fa570de6b615765ecb98addfd5e8ae7fe251715a8c2f8",
+        "reference-assets/MEMORY-depo/publication-and-recovery.md": "89b65d36de332e8331b47fb77f9a7f1ac455f497cb880bddffab1a5404457cc6",
+        "reference-assets/MEMORY-depo/schema/config-v1.json": "9e0891e0ef6c0b9415510ad84272afbbc3f430306253ddd958229f0b3478140f",
+        "reference-assets/MEMORY-depo/schema/record-v1.json": "5170551e6536484798e60d07dfb70fbb0542d49528cd51cb93dd413a2afef59f"
+      },
+      "inputs": {
+        "memory.yaml": "6c1f2c48a58c1cce12f8f7eb0b977a96b3e8d3d97a7acc40bae4e411102407cb",
+        "reference-assets/MEMORY-depo/README.md": "c938096597a6c04c2fbadd70fbb2e933e11b8d5ce95ce0574893e612f115e825",
+        "reference-assets/MEMORY-depo/policy.md": "34f7a798b298a11fad9fa570de6b615765ecb98addfd5e8ae7fe251715a8c2f8",
+        "reference-assets/MEMORY-depo/publication-and-recovery.md": "89b65d36de332e8331b47fb77f9a7f1ac455f497cb880bddffab1a5404457cc6",
+        "reference-assets/MEMORY-depo/schema/config-v1.json": "9e0891e0ef6c0b9415510ad84272afbbc3f430306253ddd958229f0b3478140f",
+        "reference-assets/MEMORY-depo/schema/record-v1.json": "5170551e6536484798e60d07dfb70fbb0542d49528cd51cb93dd413a2afef59f"
+      },
+      "level": "static",
+      "observed_at": "2026-09-27T06:52:13.654547+00:00",
+      "project": {
+        "id": "sys4ai-depot",
+        "root": "/Volumes/P-SSD/AngryOwl/Sys4AI"
+      },
+      "project_id": "sys4ai-depot",
+      "project_root": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+      "required": [],
+      "scope": "selected"
+    },
+    "components": {},
+    "diagnostics": [],
+    "error": {
+      "code": "recovery_required",
+      "details": {
+        "pending": [
+          {
+            "operation_id": "MEMOP-20260927-collaboration-enable-v3",
+            "path": ".sys4ai/memory/maintenance/transactions/MEMOP-20260927-collaboration-enable-v3.json",
+            "records": [
+              {
+                "path": "MEMORY/MEM-20260927-40EAB117.md",
+                "sha256": "a2c4c85ee7d053477195b653e89a4ddcf1f6ce895a79420124780fcfc58ef90e",
+                "state": "committed"
+              },
+              {
+                "path": "MEMORY/MEM-20260927-63C61316.md",
+                "sha256": "693f46f5daabebcbd3b4caa5df0ff333f2a8fcceac70c74cd8fd4cb3717e66c4",
+                "state": "pending"
+              }
+            ]
+          }
+        ]
+      },
+      "message": "Shared recall is suspended while a canonical transaction needs recovery."
+    },
+    "failed_required": [
+      "assessment"
+    ],
+    "health_schema_version": 2,
+    "read_only": true,
+    "ready": false,
+    "status": "invalid"
+  },
+  "stderr": ""
+}

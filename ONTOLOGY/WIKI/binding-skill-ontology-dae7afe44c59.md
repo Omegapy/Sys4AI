@@ -11,7 +11,7 @@ Module: project (project-local). Source freshness: current.
 
 Resolve selected ontology definitions, capabilities and typed relationships without invoking discovered operations or granting authority.
 
-Canonical edit location: [ONTOLOGY/bindings/skills.json#/@graph/2](<../../ONTOLOGY/bindings/skills.json>) `/@graph/2`
+Canonical edit location: [ONTOLOGY/bindings/skills.json#/@graph/3](<../../ONTOLOGY/bindings/skills.json>) `/@graph/3`
 
 ## Relationships
 

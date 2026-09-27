@@ -24,6 +24,7 @@ Canonical edit location: [ONTOLOGY/modules/sys4ai-core/1.0.0/core.jsonld#/@graph
 
 - [agent-task skill provides Canonical Task ledger operations](agent-task-provides-1cee4eb50799.md)
 - [agent-task skill implements the shared TaskManagement capability](agent-task-provides-shared-11d44ab066ca.md)
+- [Reusable collaborate source provides Shared agent billboard collaboration](collaborate-provides-d6935c17a1ff.md)
 - [Curator correct-provided](curator-edge-correct-provided-dc979381065d.md)
 - [Curator log-list-provided](curator-edge-log-list-provided-da6fd0b0b5bd.md)
 - [Curator log-query-provided](curator-edge-log-query-provided-7faf283cea5a.md)

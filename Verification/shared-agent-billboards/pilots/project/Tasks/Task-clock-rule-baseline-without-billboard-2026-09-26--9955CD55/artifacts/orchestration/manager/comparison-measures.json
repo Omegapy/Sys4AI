@@ -1,0 +1,138 @@
+{
+  "task_id": "TASK-20260926-9955CD55",
+  "protocol_ref": {
+    "path": "comparison-protocol.json",
+    "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+  },
+  "packet_ref": {
+    "path": "clock-rule-packet.json",
+    "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+  },
+  "permission_to_first_actual_acceptance": {
+    "start_at": "2026-09-27T00:37:16.330331+00:00",
+    "end_at": "2026-09-27T01:01:14.508417+00:00",
+    "seconds": 1438.178086,
+    "interpretation": "Inclusive original-case governed delivery window. Includes slot queueing, waits, later read-only child preflights, owner handoffs and two mandatory envelope repairs; not model computation speed. No subphase subtraction or outer Goal timer."
+  },
+  "earlier_excluded_preparation": {
+    "task_created_at": "2026-09-26T15:35:40-06:00",
+    "manager_activated_at": "2026-09-26T15:38:40-06:00",
+    "manager_reconnected_at": "2026-09-26T18:33:11-06:00",
+    "first_solver_permission_at": "2026-09-27T00:37:16.330331+00:00",
+    "interpretation": "Preparation/parking before first actual solver permission is excluded. Boundaries are ledger response timestamps and explicitly recorded permission."
+  },
+  "child_bootstrap_gate_windows": [
+    {
+      "assignment_id": "solver_a",
+      "reserve_at": "2026-09-26T18:35:36-06:00",
+      "first_work_resume_gate_at": "2026-09-26T18:37:16-06:00",
+      "gate_window_seconds": 100.0,
+      "interpretation": "Inclusive observed reservation/read-only bootstrap/owner handoff window; not model compute or a subtraction from total."
+    },
+    {
+      "assignment_id": "solver_b",
+      "reserve_at": "2026-09-26T18:39:13-06:00",
+      "first_work_resume_gate_at": "2026-09-26T18:42:11-06:00",
+      "gate_window_seconds": 178.0,
+      "interpretation": "Inclusive observed reservation/read-only bootstrap/owner handoff window; not model compute or a subtraction from total."
+    },
+    {
+      "assignment_id": "reviewer_a",
+      "reserve_at": "2026-09-26T18:44:39-06:00",
+      "first_work_resume_gate_at": "2026-09-26T18:46:26-06:00",
+      "gate_window_seconds": 107.0,
+      "interpretation": "Inclusive observed reservation/read-only bootstrap/owner handoff window; not model compute or a subtraction from total."
+    },
+    {
+      "assignment_id": "reviewer_b",
+      "reserve_at": "2026-09-26T18:48:00-06:00",
+      "first_work_resume_gate_at": "2026-09-26T18:50:24-06:00",
+      "gate_window_seconds": 144.0,
+      "interpretation": "Inclusive observed reservation/read-only bootstrap/owner handoff window; not model compute or a subtraction from total."
+    },
+    {
+      "assignment_id": "senior",
+      "reserve_at": "2026-09-26T18:53:46-06:00",
+      "first_work_resume_gate_at": "2026-09-26T18:55:29-06:00",
+      "gate_window_seconds": 103.0,
+      "interpretation": "Inclusive observed reservation/read-only bootstrap/owner handoff window; not model compute or a subtraction from total."
+    }
+  ],
+  "missing_assumption_detection": {
+    "source_declaration": "Missing time assignment is already explicit in the frozen packet; no artificial contradiction was introduced.",
+    "first_native_candidate_notice_at": "2026-09-27T00:37:41+00:00",
+    "stage": "solver_a original analysis before candidate handoff",
+    "time_provenance": "Solver-recorded recognition timestamp in preserved original, not independent model telemetry.",
+    "first_notice_artifact": {
+      "path": "Tasks/Task-clock-rule-baseline-without-billboard-2026-09-26--9955CD55/artifacts/orchestration/candidate_a_v1.json",
+      "sha256": "8ac3d75ff6fffd2d2b128f2e072fd34be8e544cb0700394506af6f36d278464e"
+    },
+    "first_candidate_observed_completed_at": "2026-09-26T18:39:13-06:00"
+  },
+  "late_dependency_discovery": {
+    "new_source_or_interface_dependency": false,
+    "operational_items": [
+      "Original candidate envelope requested round0 although canonical round1; same owner corrected only round field.",
+      "Reviewer requested the pre-existing absolute interpreter path; supplied without installation or new evidence.",
+      "Senior unresolved array held no-conflict/status prose; same owner corrected only schema representation."
+    ],
+    "limits": "No source/interface dependency discovered after handoff; envelope overhead remains included in the case."
+  },
+  "relevant_finding_reuse": {
+    "current_synthesis": {
+      "path": "Tasks/Task-clock-rule-baseline-without-billboard-2026-09-26--9955CD55/artifacts/orchestration/synthesis_gate_corrected.json",
+      "sha256": "f7170445838d6af89f4f5a357dc271aaf6f0003da8c7ad6c5b3381b3932bc724"
+    },
+    "evidence": "Senior retained exact attributed candidate contributions and both assigned current reviews, including the historical-round provenance observation; all current material dispositions directly inspected."
+  },
+  "final_criteria_satisfaction": {
+    "all_main_criteria_verified": true,
+    "inspection": {
+      "path": "Tasks/Task-clock-rule-baseline-without-billboard-2026-09-26--9955CD55/artifacts/orchestration/manager/inspection.json",
+      "sha256": "a9330113ba0d1147051a4e063da4a388a5470d25b582a16fcee6b91031411a4c"
+    },
+    "live_output_inspection": {
+      "path": "Tasks/Task-clock-rule-baseline-without-billboard-2026-09-26--9955CD55/artifacts/orchestration/manager/inspection-live-output.json",
+      "sha256": "816bdb8090adb072427cba0cb4f726330cfe3dbece890021f4b13ea97fb03749"
+    }
+  },
+  "recovery_context": {
+    "same_manager_reconnect": "2026-09-26T18:33:11-06:00",
+    "original_four_contexts_retained": true,
+    "controlled_interrupt": false,
+    "material_input_change": false,
+    "interpretation": "Earlier clean manager parking and actual same-ID unchanged reconnect exercised; no optional interruption/new-case recovery or material rebinding claimed."
+  },
+  "communication_cost": {
+    "scope": "This manager native calls from first solver work permission through first actual original-case acceptance. Excludes earlier startup/parking and all child internal tools.",
+    "manager_native_operation_counts": {
+      "spawn_agent": 4,
+      "followup_task": 7,
+      "list_agents": 11,
+      "wait_agent": 22,
+      "send_message": 4,
+      "interrupt_agent": 0
+    },
+    "manager_native_operations_total": 48,
+    "opaque_completed_handoff_receipt_count": 11,
+    "opaque_completed_handoff_status_utf8_bytes": 5870,
+    "byte_scope": "Exactly the raw completed status text stored from each actual assignment.observe receipt within the window; not full prompts, JSON wire framing, thoughts or all transcripts.",
+    "native_full_prompt_byte_total": null,
+    "native_full_prompt_byte_limitation": "Not instrumented as a complete aggregate; no estimated value is substituted.",
+    "billboard_posts": 0,
+    "billboard_receipts": 0,
+    "billboard_exchange_utf8_bytes": 0,
+    "token_telemetry": null,
+    "token_limitation": "Native token telemetry unavailable; no token efficiency inference."
+  },
+  "budget_preservation": {
+    "original_full_problem_candidates_per_solver": 1,
+    "first_assessments_per_solver": 1,
+    "original_senior_solutions": 1,
+    "mandatory_schema_envelope_corrections": 2,
+    "semantic_candidate_revisions": 0,
+    "new_cases": 0,
+    "helper_rejected_operations_within_window": 3
+  },
+  "interpretation": "One matched descriptive baseline only. No efficacy, physics, future-project or performance-improvement claim. Child started/finished fields are self-reported artifact stamps, not trusted model phase durations."
+}

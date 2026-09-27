@@ -25,7 +25,7 @@ Replacement: [Ontology skill provides Project Knowledge Explorer](ontology-provi
 
 ## Sources
 
-- [SPECS.md](<../../SPECS.md>) `section:Ontology second release and initialization v9` SHA256 `0b70e312ab29785f4d003b4ea4dc7b920a239c6b1a5cceeec69a173f12a96bf6` (current)
+- [SPECS.md](<../../SPECS.md>) `section:Ontology second release and initialization v9` SHA256 `20aba9628de8d556d394715aa01d2bc01ed3ddeea5c5bcab4624430dca34d6c4` (current)
 
 ## Backlinks
 

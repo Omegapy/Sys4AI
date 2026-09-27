@@ -11,7 +11,7 @@ Module: project (project-local). Source freshness: current.
 
 Discover user intent and create a managed TRD only through explicit to-trd activation. TRD creation does not create a Task or authorize implementation.
 
-Canonical edit location: [ONTOLOGY/bindings/skills.json#/@graph/4](<../../ONTOLOGY/bindings/skills.json>) `/@graph/4`
+Canonical edit location: [ONTOLOGY/bindings/skills.json#/@graph/5](<../../ONTOLOGY/bindings/skills.json>) `/@graph/5`
 
 ## Relationships
 

@@ -1,0 +1,32 @@
+{
+  "command": [
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.venv/bin/python",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI/.agents/skills/memory/scripts/memory.py",
+    "--project-root",
+    "/Volumes/P-SSD/AngryOwl/Sys4AI",
+    "capture",
+    "Verification/collaboration-enablement-20260927/memory-payload.json",
+    "--trigger",
+    "work-completed",
+    "--grant-file",
+    "Verification/collaboration-enablement-20260927/memory-grant.json",
+    "--actor",
+    "/root"
+  ],
+  "exit_code": 2,
+  "result": {
+    "error": {
+      "code": "guard_stale",
+      "details": {
+        "action_id": "urn:sys4ai:ontology:action:memory:capture",
+        "contract": {
+          "path": "reference-assets/ONTOLOGY-depo/actions/contracts-v1.json",
+          "sha256": "1d7c133b1ad5e3c150c6364529ff9b9731bb68974b9b234c0b71d3b03c318275"
+        }
+      },
+      "message": "Ontology, rules, source or authority context changed before dispatch. [condition=guard_stale; action=urn:sys4ai:ontology:action:memory:capture; source=reference-assets/ONTOLOGY-depo/actions/contracts-v1.json@1d7c133b1ad5e3c150c6364529ff9b9731bb68974b9b234c0b71d3b03c318275]"
+    },
+    "ok": false
+  },
+  "stderr": ""
+}

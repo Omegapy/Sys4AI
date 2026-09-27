@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "task_schema_versions": {
+    "1": "Preserved; read-only owner inspection only, explicit upgrade required for collaboration.",
+    "2": "Actual strict owner validator and current input/native gates used."
+  },
+  "orchestration_versions": {
+    "1": "Supported cooperative common-store Task adapter.",
+    "2": "Current protected live broker/role/input context mandatory; no bypass or standalone serialized-receipt claim."
+  },
+  "new_task_fields": [],
+  "new_events": [],
+  "validator_changes": [],
+  "validator_sha256": {
+    "SKILLS-depo/agent-task/scripts/native_observations.py": "cc3bf1eaad4ac248c44c84da356d35a9a8186a181d214ff3fb15ed0ca0436e31",
+    "SKILLS-depo/agent-task/scripts/orchestration_state.py": "d4901e205c1ed23f9f11a7da5043883dd2df6c8f4e168830ab46913dbc2965f8",
+    "SKILLS-depo/agent-task/scripts/task_state.py": "90c077df7c725b9ed260aaddfcbdf7e5b65e36a7d8d2ba8fb2f02ad8a3f25556"
+  },
+  "existing_events": [
+    "artifact.register",
+    "subtask.define",
+    "subtask.revise",
+    "assignment.inputs",
+    "assignment.resume",
+    "candidate.record",
+    "review.record",
+    "synthesis.record",
+    "acceptance.record",
+    "subtask.verify"
+  ],
+  "casual_messages_append_events": false,
+  "limits": {
+    "task_bytes": 2000000,
+    "evidence_bytes": 250000,
+    "references": 200,
+    "record_default": 65536,
+    "output_default": 32768,
+    "page_default": 20
+  },
+  "scope_design": {
+    "solver_reviewer_senior": "Task artifacts/orchestration/work/<assignment>/collaboration under existing exact function grant.",
+    "generic_worker_implementer": "Evidence/<task_id>/work/<assignment>/collaboration under explicit baseline/fit grants outside protected canonical Tasks/.",
+    "manager": "Exact current manager-owned granted policy/snapshot/output namespace."
+  },
+  "topology": "common-store-cooperative",
+  "native_claims": "No deterministic fixture proves native isolation, identity authentication, comprehension or pilot completion."
+}

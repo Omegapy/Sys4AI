@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 INVENTORY = "assets/static-capability-v1.json"
-INVENTORY_SHA256 = "dc72345c40c10c1ea7745b9676e6b2dedf7f70bfe4287704eeb44d9b7dcb066e"
+INVENTORY_SHA256 = "62889df082ea56221c737da0fc43db22befc9972e176933ebc23a352d1073a42"
 
 
 def inventory(h, *, legacy=False):
@@ -43,6 +43,8 @@ def validate_source(h, files, *, contract=None):
 
 
 def _paths(h, module):
+    if module == h.COLLABORATION_MODULE:
+        return (h.COLLABORATION.ROOT, *h.COLLABORATION.GUIDANCE)
     if module == h.CURATOR_MODULE:
         return (*h.CURATOR.SPECIAL_FILES, *h.CURATOR.PACKAGES)
     if module == "memory":
@@ -69,6 +71,7 @@ def assess(h, destination, record, *, operation=None):
         selected += ([h.ADVANCED_MODULE] if contract in h.ADVANCED_CONTRACTS else [])
         selected += ([h.CURATOR_MODULE] if contract in h.CURATOR_CONTRACTS else [])
         selected += [op["module_id"] for op in record.get("module_adoptions", [])]
+        selected += [h.COLLABORATION_MODULE]
     source_rows = operation["sources"] if operation else record["sources"]
     if operation is None:
         current_sources = {row["destination"]: row for row in source_rows}
@@ -126,6 +129,11 @@ def assess(h, destination, record, *, operation=None):
                 available = available and detail["shared_automatic_checkpoint"] == "available" and detail["director_binding"] == "current"
             elif detail["shared_automatic_checkpoint"] == "unavailable":
                 detail["excluded_dependency"] = "Preserved memory was not selected for compatible refresh; shared capture is unverified."
+        elif module == h.COLLABORATION_MODULE:
+            current_operation = operation or next((op for op in reversed(record.get("module_adoptions", [])) if op["module_id"] == module), None)
+            expected = None if current_operation else {row["destination"]: row["source_sha256"] for row in sources if row["destination"].startswith(h.COLLABORATION.ROOT + "/")}
+            detail = h._collaboration("assess", destination, current_operation, expected_inventory=expected)
+            available = detail["enabled"]
         elif module == h.CURATOR_MODULE:
             detail = h._curator("assess", destination, integration_required=integrated)
             available = detail["structural_readiness"] == "available" and detail["compatible"]
@@ -136,6 +144,10 @@ def assess(h, destination, record, *, operation=None):
                 available = available and detail.get("director_binding") == "current"
         available = available and not diagnostics
         required = operation is not None or not preserved
+        if module == h.COLLABORATION_MODULE and operation is None and not any(op["module_id"] == module for op in record.get("module_adoptions", [])):
+            # Base recovery completes before its additive default operation.
+            # Its current readiness already reports missing/preserved blockers.
+            required = False
         outcome = "passed" if available else "failed" if required else "preserved-unverified"
         if not available:
             diagnostics.extend(detail.get("diagnostics", []))

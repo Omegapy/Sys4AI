@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+  "task": "TASK-20260926-B9F05B47",
+  "execution": "EXEC_GENERIC_PILOT",
+  "generation": 2,
+  "manager": "generic_manager_v2",
+  "participants": {
+    "generic_manager_v2": {
+      "namespace": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/manager/collaboration",
+      "subtask_id": null
+    },
+    "generic_worker": {
+      "namespace": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration",
+      "subtask_id": "REPORT"
+    }
+  },
+  "subtasks": {
+    "REPORT": {
+      "phase": "component",
+      "audience": [
+        "generic_manager_v2",
+        "generic_worker"
+      ],
+      "independent_first_pass": false,
+      "reviewer_first_pass": false,
+      "exchange_stop": "One report-interface question, one reply and affected-version notice; stop after report version2 is incorporated and current owner assesses exact threads."
+    }
+  },
+  "bounds": {
+    "record_bytes": 65536,
+    "output_bytes": 32768,
+    "page_items": 20
+  },
+  "topology": "common-store-cooperative"
+}

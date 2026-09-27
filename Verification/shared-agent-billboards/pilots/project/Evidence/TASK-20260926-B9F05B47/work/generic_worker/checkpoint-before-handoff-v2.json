@@ -1,0 +1,296 @@
+{
+  "checkpoint": "before-final-handoff-v2",
+  "task_revision": 19,
+  "observed_digest": {
+    "checkpoint": "97c206353f65291416d0ffc85a1e6e076f7335646f9cb1f342ae644ec3fb7cf6",
+    "items": [
+      {
+        "handling": [
+          {
+            "assignment": "generic_manager_v2",
+            "evidence": "Read exact v1 units finding/help; no unit inferred, material rebind pending after observed stopping.",
+            "execution": "EXEC_GENERIC_PILOT",
+            "generation": 2,
+            "message_id": "generic_worker.units_finding_v1",
+            "message_sha256": "cf5ed0ebf330ae3ef74f68a830e97640bc3c1400fd928038a08f4ee696a9acb1",
+            "native_id": "/root/billboards_manager/generic_manager",
+            "native_receipt": null,
+            "operation_id": "manager_ack_units_finding_v1",
+            "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipient": "generic_manager_v2",
+            "state": "acknowledged",
+            "task": "TASK-20260926-B9F05B47",
+            "version": 1
+          },
+          {
+            "assignment": "generic_worker",
+            "evidence": "Actual native message informed current manager of both exact durable posts.",
+            "execution": "EXEC_GENERIC_PILOT",
+            "generation": 2,
+            "message_id": "generic_worker.units_finding_v1",
+            "message_sha256": "cf5ed0ebf330ae3ef74f68a830e97640bc3c1400fd928038a08f4ee696a9acb1",
+            "native_id": "/root/billboards_manager/generic_manager/report_worker",
+            "native_receipt": {
+              "native_id": "/root/billboards_manager/generic_manager",
+              "result": {},
+              "tool": "collaboration.send_message"
+            },
+            "operation_id": "notify_units_finding_v1",
+            "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipient": "generic_manager_v2",
+            "state": "notified",
+            "task": "TASK-20260926-B9F05B47",
+            "version": 1
+          }
+        ],
+        "message": {
+          "assignment": "generic_worker",
+          "body": "The exact report-interface-v1 fields are name and count, and units_assigned is false. Inferring units would add unsupported meaning. The preliminary report will retain widgets count 3 without a units field; a unit change requires a current owner input binding.",
+          "evidence": [
+            {
+              "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v1.json",
+              "sha256": "89de5bd84efc80911d4e3a238d09e8b1b1547cf85e9247b52a4a7830cc4d1543"
+            }
+          ],
+          "execution": "EXEC_GENERIC_PILOT",
+          "generation": 2,
+          "limitations": [
+            "Tiny fixture report only; current interface does not assign units."
+          ],
+          "material": true,
+          "message_id": "generic_worker.units_finding_v1",
+          "native_id": "/root/billboards_manager/generic_manager/report_worker",
+          "operation_id": "units_finding_v1",
+          "phase": "component",
+          "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+          "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+          "recipients": [
+            "generic_manager_v2"
+          ],
+          "reply_to": null,
+          "requested_response": "Owner: assess the exact v1 omission and whether units must be explicitly assigned; stop after one current-target reply.",
+          "subtask": "REPORT",
+          "supersedes": null,
+          "targets": [
+            {
+              "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v1.json",
+              "sha256": "89de5bd84efc80911d4e3a238d09e8b1b1547cf85e9247b52a4a7830cc4d1543"
+            }
+          ],
+          "task": "TASK-20260926-B9F05B47",
+          "thread_id": "report_units",
+          "title": "Version1 count has no assigned units",
+          "type": "finding",
+          "urgency": "routine",
+          "version": 1,
+          "visibility": "findings"
+        },
+        "reported_reading": false,
+        "source": {
+          "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/messages/units_finding_v1.json",
+          "sha256": "cf5ed0ebf330ae3ef74f68a830e97640bc3c1400fd928038a08f4ee696a9acb1"
+        }
+      },
+      {
+        "handling": [
+          {
+            "assignment": "generic_manager_v2",
+            "evidence": "Read exact v1 units finding/help; no unit inferred, material rebind pending after observed stopping.",
+            "execution": "EXEC_GENERIC_PILOT",
+            "generation": 2,
+            "message_id": "generic_worker.units_help_v1",
+            "message_sha256": "930cddcde3918e6821b76d7e63550e7c6a9deedb6cb454f3b56951cdd440ff71",
+            "native_id": "/root/billboards_manager/generic_manager",
+            "native_receipt": null,
+            "operation_id": "manager_ack_units_help_v1",
+            "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipient": "generic_manager_v2",
+            "state": "acknowledged",
+            "task": "TASK-20260926-B9F05B47",
+            "version": 1
+          },
+          {
+            "assignment": "generic_worker",
+            "evidence": "Actual native message informed current manager of both exact durable posts.",
+            "execution": "EXEC_GENERIC_PILOT",
+            "generation": 2,
+            "message_id": "generic_worker.units_help_v1",
+            "message_sha256": "930cddcde3918e6821b76d7e63550e7c6a9deedb6cb454f3b56951cdd440ff71",
+            "native_id": "/root/billboards_manager/generic_manager/report_worker",
+            "native_receipt": {
+              "native_id": "/root/billboards_manager/generic_manager",
+              "result": {},
+              "tool": "collaboration.send_message"
+            },
+            "operation_id": "notify_units_help_v1",
+            "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipient": "generic_manager_v2",
+            "state": "notified",
+            "task": "TASK-20260926-B9F05B47",
+            "version": 1
+          }
+        ],
+        "message": {
+          "assignment": "generic_worker",
+          "body": "For report-interface-v1 with units_assigned false, may count units be inferred or must the owner assign them? The current report can preserve count 3 without units.",
+          "evidence": [
+            {
+              "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v1.json",
+              "sha256": "89de5bd84efc80911d4e3a238d09e8b1b1547cf85e9247b52a4a7830cc4d1543"
+            }
+          ],
+          "execution": "EXEC_GENERIC_PILOT",
+          "generation": 2,
+          "limitations": [
+            "Tiny fixture report only; current interface does not assign units."
+          ],
+          "material": false,
+          "message_id": "generic_worker.units_help_v1",
+          "native_id": "/root/billboards_manager/generic_manager/report_worker",
+          "operation_id": "units_help_v1",
+          "phase": "component",
+          "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+          "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+          "recipients": [
+            "generic_manager_v2"
+          ],
+          "reply_to": null,
+          "requested_response": "Answer infer versus owner-assigned for this exact interface target; stop after one reply or target change.",
+          "subtask": "REPORT",
+          "supersedes": null,
+          "targets": [
+            {
+              "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v1.json",
+              "sha256": "89de5bd84efc80911d4e3a238d09e8b1b1547cf85e9247b52a4a7830cc4d1543"
+            }
+          ],
+          "task": "TASK-20260926-B9F05B47",
+          "thread_id": "report_units",
+          "title": "May count units be inferred?",
+          "type": "help-request",
+          "urgency": "routine",
+          "version": 1,
+          "visibility": "findings"
+        },
+        "reported_reading": false,
+        "source": {
+          "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/messages/units_help_v1.json",
+          "sha256": "930cddcde3918e6821b76d7e63550e7c6a9deedb6cb454f3b56951cdd440ff71"
+        }
+      },
+      {
+        "handling": [
+          {
+            "assignment": "generic_manager_v2",
+            "evidence": "Read exact current v2/report-target incorporation notice; direct final artifact inspection and canonical verification still required.",
+            "execution": "EXEC_GENERIC_PILOT",
+            "generation": 2,
+            "message_id": "generic_worker.units_incorporated_v2",
+            "message_sha256": "b14e766dfba403a6b79a04c86cbf6f2069c80c1c5ff83aec326978a5e1006243",
+            "native_id": "/root/billboards_manager/generic_manager",
+            "native_receipt": null,
+            "operation_id": "manager_ack_units_incorporated_v2",
+            "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipient": "generic_manager_v2",
+            "state": "acknowledged",
+            "task": "TASK-20260926-B9F05B47",
+            "version": 1
+          },
+          {
+            "assignment": "generic_worker",
+            "evidence": "Actual native send_message delivered exact posted notice/report refs to current manager; returned no body.",
+            "execution": "EXEC_GENERIC_PILOT",
+            "generation": 2,
+            "message_id": "generic_worker.units_incorporated_v2",
+            "message_sha256": "b14e766dfba403a6b79a04c86cbf6f2069c80c1c5ff83aec326978a5e1006243",
+            "native_id": "/root/billboards_manager/generic_manager/report_worker",
+            "native_receipt": {
+              "native_id": "/root/billboards_manager/generic_manager",
+              "result": {},
+              "tool": "collaboration.send_message"
+            },
+            "operation_id": "notify_units_incorporated_v2",
+            "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipient": "generic_manager_v2",
+            "state": "notified",
+            "task": "TASK-20260926-B9F05B47",
+            "version": 1
+          }
+        ],
+        "message": {
+          "assignment": "generic_worker",
+          "body": "After observed interruption, exact queued packet, committed assignment.inputs and this same-native followup, report-v2 now has schema_version 2 and unit pieces per item. The original report-v1 bytes remain preserved. This report is a fixture result awaiting current manager inspection; acknowledgement alone did not prove incorporation.",
+          "evidence": [
+            {
+              "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v2.json",
+              "sha256": "d571fcd4ab62c4d45c2837514882f341495e15a0709cbbd6c8eb4f644d1958b9"
+            },
+            {
+              "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/report-v2.json",
+              "sha256": "a8d31d100735acd18336272f6d4800f8776071a25512e1f648c9ffdd1c9105b8"
+            }
+          ],
+          "execution": "EXEC_GENERIC_PILOT",
+          "generation": 2,
+          "limitations": [
+            "Fixture report only; no clock solution or product/runtime claim.",
+            "This reply is not canonical acceptance."
+          ],
+          "material": true,
+          "message_id": "generic_worker.units_incorporated_v2",
+          "native_id": "/root/billboards_manager/generic_manager/report_worker",
+          "operation_id": "units_incorporated_v2",
+          "phase": "component",
+          "policy_sha256": "3e645cb74d13d8e6bb00dfd375823272df2fa10c56bff2be4736317986ae6995",
+          "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+          "recipients": [
+            "generic_manager_v2"
+          ],
+          "reply_to": "generic_manager_v2.manager_interface_change_v2",
+          "requested_response": "Manager: inspect the exact v2 report against the current interface and disposition the exact affected versions; stop after current v2 handoff.",
+          "subtask": "REPORT",
+          "supersedes": null,
+          "targets": [
+            {
+              "path": "Tasks/Task-generic-collaboration-and-recovery-native-pilot-2026-09-26--B9F05B47/artifacts/orchestration/report_interface_v2.json",
+              "sha256": "d571fcd4ab62c4d45c2837514882f341495e15a0709cbbd6c8eb4f644d1958b9"
+            },
+            {
+              "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/report-v2.json",
+              "sha256": "a8d31d100735acd18336272f6d4800f8776071a25512e1f648c9ffdd1c9105b8"
+            }
+          ],
+          "task": "TASK-20260926-B9F05B47",
+          "thread_id": "report_units",
+          "title": "Exact version2 report incorporates pieces",
+          "type": "change-notice",
+          "urgency": "routine",
+          "version": 1,
+          "visibility": "findings"
+        },
+        "reported_reading": false,
+        "source": {
+          "path": "Evidence/TASK-20260926-B9F05B47/work/generic_worker/collaboration/messages/units_incorporated_v2.json",
+          "sha256": "b14e766dfba403a6b79a04c86cbf6f2069c80c1c5ff83aec326978a5e1006243"
+        }
+      }
+    ],
+    "limits": {
+      "output_bytes": 32768,
+      "page_items": 20,
+      "record_bytes": 65536
+    },
+    "offset": 0,
+    "remaining": 0,
+    "returned": 3,
+    "total": 3,
+    "version": 1
+  },
+  "new_reported_reading_receipts": []
+}

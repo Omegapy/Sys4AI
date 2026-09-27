@@ -182,6 +182,10 @@ CURATOR_MODULE = CURATOR.MODULE
 _integration_spec = importlib.util.spec_from_file_location("_sys4ai_initializer_integration", Path(__file__).with_name("init_curator_integration.py"))
 INTEGRATION = importlib.util.module_from_spec(_integration_spec)
 _integration_spec.loader.exec_module(INTEGRATION)
+_collaboration_spec = importlib.util.spec_from_file_location("_sys4ai_initializer_collaboration", Path(__file__).with_name("init_collaboration.py"))
+COLLABORATION = importlib.util.module_from_spec(_collaboration_spec)
+_collaboration_spec.loader.exec_module(COLLABORATION)
+COLLABORATION_MODULE = COLLABORATION.MODULE
 _static_spec = importlib.util.spec_from_file_location("_sys4ai_initializer_static", Path(__file__).with_name("init_static_health.py"))
 STATIC = importlib.util.module_from_spec(_static_spec)
 _static_spec.loader.exec_module(STATIC)
@@ -197,6 +201,10 @@ def _curator(name, *args, **kwargs):
 
 def _integration(name, *args, **kwargs):
     return getattr(INTEGRATION, name)(types.SimpleNamespace(**globals()), *args, **kwargs)
+
+
+def _collaboration(name, *args, **kwargs):
+    return getattr(COLLABORATION, name)(types.SimpleNamespace(**globals()), *args, **kwargs)
 
 
 def _static(name, *args, **kwargs):
@@ -1987,6 +1995,8 @@ MODULE_FROZEN = ("module_id", "module_version", "project_root", "identity", "bas
 
 
 def module_packages(operation: dict[str, Any]) -> tuple[str, ...]:
+    if isinstance(operation, dict) and operation.get("module_id") == COLLABORATION_MODULE:
+        return (COLLABORATION.ROOT,)
     if isinstance(operation, dict) and operation.get("module_id") == CURATOR_MODULE:
         return CURATOR.LEGACY_PACKAGES if operation.get("schema_version") == 1 else CURATOR.PACKAGES
     if isinstance(operation, dict) and operation.get("module_id") == ADVANCED_MODULE:
@@ -1995,6 +2005,8 @@ def module_packages(operation: dict[str, Any]) -> tuple[str, ...]:
 
 
 def module_frozen(operation: dict[str, Any]) -> tuple[str, ...]:
+    if isinstance(operation, dict) and operation.get("module_id") == COLLABORATION_MODULE:
+        return MODULE_FROZEN + COLLABORATION.FROZEN
     if isinstance(operation, dict) and operation.get("module_id") == CURATOR_MODULE:
         return MODULE_FROZEN + CURATOR.FROZEN + (("integration_edition", "refresh_modules", "generated_contents") if operation.get("schema_version") == 2 else ())
     if isinstance(operation, dict) and operation.get("module_id") == ADVANCED_MODULE:
@@ -2230,6 +2242,12 @@ def validate_module_adoptions(record: dict[str, Any], destination: Path) -> None
         raise InitializationError("invalid module adoption collection")
     seen = set()
     for index, operation in enumerate(operations):
+        if isinstance(operation, dict) and operation.get("module_id") == COLLABORATION_MODULE:
+            _collaboration("validate_operation", record, destination, operation, index)
+            if operation["operation_id"] in seen:
+                raise InitializationError("duplicate collaboration module operation")
+            seen.add(operation["operation_id"])
+            continue
         required = {"schema_version", "operation_id", "manifest_sha256", "status", "completed_stages", "active_stage", "checks", "created_at", *module_frozen(operation)}
         optional = {"capabilities", "current_files", "verified_at", "recovery", "rerun", "static_health"} | ({"curator_integration"} if operation.get("module_id") == CURATOR_MODULE and operation.get("schema_version") == 2 else set())
         if (not isinstance(operation, dict) or not required <= operation.keys() or not operation.keys() <= required | optional
@@ -2423,7 +2441,8 @@ def check_module_state(destination: Path, operation: dict[str, Any], *, complete
 
 
 def check_module_sources(depot: Path, operation: dict[str, Any]) -> dict[str, bytes]:
-    original = (_curator("selected_source_files", depot, operation) if operation["module_id"] == CURATOR_MODULE else
+    original = (_collaboration("source_files", depot) if operation["module_id"] == COLLABORATION_MODULE else
+                _curator("selected_source_files", depot, operation) if operation["module_id"] == CURATOR_MODULE else
                 ontology_source_files(depot) if operation["module_id"] == ONTOLOGY_MODULE else
                 _advanced("selected_source_files", depot, operation) if operation["module_id"] == ADVANCED_MODULE else
                 module_source_files(depot, new_memory=operation["new_memory"]))
@@ -2435,7 +2454,8 @@ def check_module_sources(depot: Path, operation: dict[str, Any]) -> dict[str, by
 
 def verify_module_current(destination: Path, operation: dict[str, Any], record: dict[str, Any] | None = None) -> None:
     operation["current_files"] = {name: digest for root in module_packages(operation) for name, digest in package_inventory(destination, root).items()}
-    operation["capabilities"] = (_curator("assess", destination, integration_required=operation.get("schema_version")==2) if operation["module_id"] == CURATOR_MODULE else
+    operation["capabilities"] = (_collaboration("assess", destination, operation) if operation["module_id"] == COLLABORATION_MODULE else
+                                 _curator("assess", destination, integration_required=operation.get("schema_version")==2) if operation["module_id"] == CURATOR_MODULE else
                                  assess_ontology(destination) if operation["module_id"] == ONTOLOGY_MODULE else
                                  _advanced("assess", destination) if operation["module_id"] == ADVANCED_MODULE else assess_learning(destination))
     operation["checks"] = [{"check": name, "outcome": "passed"} for name in ("module-manifest", "current-project-identity")]
@@ -2475,14 +2495,16 @@ def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], 
                 original, _, _, _, _ = template_sources(depot)
                 if module_id == LEARNING_MODULE:
                     check_existing_role_layout(destination, original[ROLE_HELPER])
-                operation, proposed = (_curator("plan", depot, destination, record, previous_raw, refresh_modules) if module_id == CURATOR_MODULE else
+                operation, proposed = (_collaboration("plan", depot, destination, record, previous_raw) if module_id == COLLABORATION_MODULE else
+                                       _curator("plan", depot, destination, record, previous_raw, refresh_modules) if module_id == CURATOR_MODULE else
                                        plan_ontology_adoption(depot, destination, record, previous_raw, refresh_modules)
                                        if module_id == ONTOLOGY_MODULE else
                                        _advanced("plan", depot, destination, record, previous_raw) if module_id == ADVANCED_MODULE else
                                        plan_module_adoption(depot, destination, record, previous_raw, refresh_dependencies))
                 record.setdefault("module_adoptions", []).append(operation)
             else:
-                proposed = (_curator("proposed_files", destination, record["identity"], check_module_sources(depot, operation), new_curator_files=operation["new_curator_files"]) if module_id == CURATOR_MODULE else
+                proposed = (_collaboration("proposed_files", check_module_sources(depot, operation), operation) if module_id == COLLABORATION_MODULE else
+                            _curator("proposed_files", destination, record["identity"], check_module_sources(depot, operation), new_curator_files=operation["new_curator_files"]) if module_id == CURATOR_MODULE else
                             ontology_proposed_files(destination, record["identity"], check_module_sources(depot, operation), new_ontology=operation["new_ontology"])
                             if module_id == ONTOLOGY_MODULE else
                             _advanced("proposed_files", destination, record["identity"], check_module_sources(depot, operation), new_ontology=operation["new_ontology"], new_advanced=operation["new_advanced"]) if module_id == ADVANCED_MODULE else
@@ -2510,6 +2532,8 @@ def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], 
                 verify_project(destination, deepcopy(record), allow_module_gaps=True)
                 verify_module_current(destination, operation, record)
                 operation["rerun"] = "verified-current-module-without-refresh"
+                if module_id == COLLABORATION_MODULE:
+                    _static("apply", destination, record)
                 checkpoint()
                 return record
             checkpoint()
@@ -2551,6 +2575,8 @@ def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], 
             checkpoint()
             operation.update(status="completed", active_stage=None)
             operation.pop("recovery", None)
+            if module_id == COLLABORATION_MODULE:
+                _static("apply", destination, record)
             checkpoint()
             return record
         except (InitializationError, OSError, ValueError, KeyError) as error:
@@ -2567,7 +2593,7 @@ def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], 
                                       report={**record, "status": "partial", "base_setup_status": record["status"]}) from error
 
 
-def run_initialization(
+def _run_initialization_base(
     *, mode: str, destination: Path, project_id: str, project_name: str, purpose: str,
     adopt_module: str | None = None, refresh_dependency: list[str] | None = None,
     refresh_module: list[str] | None = None,
@@ -2581,8 +2607,8 @@ def run_initialization(
     refresh_modules = sorted(set(CURATOR_MODULE if item == "curator" else item for item in (refresh_module or [])))
     if refresh_modules in ([ONTOLOGY_MODULE],[CURATOR_MODULE]) and adopt_module is None:
         adopt_module = refresh_modules[0]
-    if (adopt_module not in {None, LEARNING_MODULE, ONTOLOGY_MODULE, ADVANCED_MODULE, CURATOR_MODULE} or refresh not in ([], ["memory"])
-            or refresh_modules not in ([], [ONTOLOGY_MODULE], [CURATOR_MODULE]) or adopt_module is not None and mode != "prepare-existing"
+    if (adopt_module not in {None, LEARNING_MODULE, ONTOLOGY_MODULE, ADVANCED_MODULE, CURATOR_MODULE, COLLABORATION_MODULE} or refresh not in ([], ["memory"])
+            or refresh_modules not in ([], [ONTOLOGY_MODULE], [CURATOR_MODULE]) or adopt_module is not None and mode != "prepare-existing" and adopt_module != COLLABORATION_MODULE
             or refresh and adopt_module != LEARNING_MODULE or refresh_modules and refresh_modules != [adopt_module]):
         raise InitializationError("refresh requires its exact selected prepare-existing module; memory is a separate learning dependency")
     depot, skill = installed_locations()
@@ -2785,6 +2811,31 @@ def run_initialization(
                     record["recovery"]["record_update"] = "failed; preserve the existing setup receipt"
                 raise InitializationError("project setup is incomplete; working state was retained", report=record) from error
 
+def run_initialization(
+    *, mode: str, destination: Path, project_id: str, project_name: str, purpose: str,
+    adopt_module: str | None = None, refresh_dependency: list[str] | None = None,
+    refresh_module: list[str] | None = None,
+    integration_grant_file=None, integration_proposal_file=None,
+) -> dict[str, Any]:
+    """Preserve the base edition, then enable the selected project's collaboration."""
+    arguments = dict(mode=mode, destination=destination, project_id=project_id,
+        project_name=project_name, purpose=purpose, adopt_module=adopt_module,
+        refresh_dependency=refresh_dependency, refresh_module=refresh_module,
+        integration_grant_file=integration_grant_file, integration_proposal_file=integration_proposal_file)
+    record_path = destination_file(destination, RECORD)
+    # The automatic selection must also resume its exact partial module.
+    if record_path.is_file() and arguments.get("adopt_module") is None and not arguments.get("refresh_module") and not arguments.get("refresh_dependency"):
+        current = unique_json(file_bytes(record_path))
+        pending = [op for op in current.get("module_adoptions", []) if op.get("status") != "completed"]
+        if pending and pending[0].get("module_id") == COLLABORATION_MODULE:
+            return _run_initialization_base(**{**arguments, "adopt_module": COLLABORATION_MODULE})
+    record = _run_initialization_base(**arguments)
+    if record["status"] != "completed":
+        return record
+    depot, _ = installed_locations()
+    return run_module_adoption(depot, destination, record, file_bytes(record_path), [], module_id=COLLABORATION_MODULE)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="mode", required=True)
@@ -2795,7 +2846,7 @@ def main(argv: list[str] | None = None) -> int:
         route.add_argument("--project-name", required=True)
         route.add_argument("--purpose", required=True)
         if mode == "prepare-existing":
-            route.add_argument("--adopt-module", choices=[LEARNING_MODULE, ONTOLOGY_MODULE, ADVANCED_MODULE, CURATOR_MODULE, "curator"])
+            route.add_argument("--adopt-module", choices=[LEARNING_MODULE, ONTOLOGY_MODULE, ADVANCED_MODULE, CURATOR_MODULE, COLLABORATION_MODULE, "curator"])
             route.add_argument("--refresh-dependency", action="append", choices=["memory"])
             route.add_argument("--refresh-module", action="append", choices=[ONTOLOGY_MODULE, CURATOR_MODULE, "curator"])
             route.add_argument("--integration-grant-file")
@@ -2808,14 +2859,17 @@ def main(argv: list[str] | None = None) -> int:
     advanced_assessment.add_argument("--destination", type=Path, required=True)
     curator_assessment = commands.add_parser("assess-curator", help="Inspect installed Curator identity and owner compatibility without writes or runtime activation")
     curator_assessment.add_argument("--destination", type=Path, required=True)
+    collaboration_assessment = commands.add_parser("assess-collaboration", help="Inspect complete default collaboration and supported owner without executing target code")
+    collaboration_assessment.add_argument("--destination", type=Path, required=True)
     arguments = vars(parser.parse_args(argv))
     try:
-        result = (_curator("assess", arguments["destination"]) if arguments["mode"] == "assess-curator" else
+        result = (_collaboration("assess", arguments["destination"]) if arguments["mode"] == "assess-collaboration" else
+                  _curator("assess", arguments["destination"]) if arguments["mode"] == "assess-curator" else
                   assess_learning(arguments["destination"]) if arguments["mode"] == "assess-learning" else
                   assess_ontology(arguments["destination"]) if arguments["mode"] == "assess-ontology" else
                   _advanced("assess", arguments["destination"]) if arguments["mode"] == "assess-ontology-advanced" else run_initialization(**arguments))
         print(encoded(result).decode(), end="")
-        return 1 if result.get("static_ready") is False else 0
+        return 1 if result.get("static_ready") is False or arguments["mode"] == "assess-collaboration" and not result["enabled"] else 0
     except (InitializationError, OSError, subprocess.TimeoutExpired) as error:
         result = {"status": "failed", "error_type": type(error).__name__}
         if isinstance(error, InitializationError):

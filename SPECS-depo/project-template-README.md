@@ -229,3 +229,12 @@ provenance and capture preference remain project-owned. `$curate` status and
 scoped review read metadata without model analysis or canonical writes. Exact
 manual and automatic mutations share current owner and authorization gates.
 Static/disposable checks do not establish native runtime or host-service readiness.
+
+## Default collaboration
+
+The [collaborate capability](./.agents/skills/collaborate/SKILL.md) is included
+with default Task instructions. The current initializer enables it automatically
+for new and selected existing projects, preserving old setup editions and custom
+files. See [the specifications](./SPECS.md#default-task-collaboration) and the
+[initializer guide](./.agents/skills/init-new-project/README.md) for checked adoption
+and static health. Execution retains each Task manager's policy and grants.

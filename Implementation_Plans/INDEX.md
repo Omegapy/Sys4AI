@@ -17,3 +17,4 @@
 | `PLAN-20260912-3CF9C73F` | Project Curator retained application plan | `completed` | 228 | 2026-09-12T22:51:49.148699Z | `Plan_project-curator-retained-application_2026-09-12_3CF9C73F` | 10 | 40 | `pass` |
 | `PLAN-20260913-64A6385B` | Integrated Project Curator, ontology and project initialization | `draft` | 1 | 2026-09-13T16:05:55.769210Z | `Plan_integrated-curator-ontology-project-initialization_2026-09-13_64A6385B` | 7 | 23 | `unresolved` |
 | `PLAN-20260920-9B9964BA` | Project Knowledge Explorer - full first release | `draft` | 1 | 2026-09-20T02:47:38.906176Z | `Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA` | 8 | 33 | `unresolved` |
+| `PLAN-20260926-40C61316` | Shared agent billboards with Task-governed collaboration | `draft` | 1 | 2026-09-26T16:28:54.101663Z | `Plan_shared-agent-billboards-task-governed-collaboration_2026-09-26_40C61316` | 5 | 17 | `unresolved` |

@@ -1,0 +1,35 @@
+{
+  "operation_id": "missing_clock_v1",
+  "thread_id": "clock_rule",
+  "reply_to": null,
+  "supersedes": null,
+  "subtask": "CLOCK",
+  "type": "finding",
+  "title": "Time map is unassigned in the frozen source",
+  "body": "The source assigns x(n)=nL for integer n>=0 and a length scale L, but assigns no t(n). A proposed uniform interval tau>0 would give the conditional step ratio L/tau. Different positive time intervals yield different speeds while preserving every source position; no speed c is identified by the packet. Treat any time rule as a proposed assumption.",
+  "phase": "independent",
+  "visibility": "findings",
+  "recipients": [
+    "enabled_manager",
+    "solver_b",
+    "senior"
+  ],
+  "requested_response": "At the released peer phase, distinguish an assigned clock rule from a proposed clock rule against this exact source; stop after one evidence reply.",
+  "urgency": "routine",
+  "targets": [
+    {
+      "path": "clock-rule-packet.json",
+      "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "clock-rule-packet.json",
+      "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+    }
+  ],
+  "limitations": [
+    "Algebra and dimensional reasoning only; no assigned physical clock or validated physical propagation speed."
+  ],
+  "material": true
+}

@@ -1,0 +1,218 @@
+{
+  "version": 2,
+  "assignment": "solver_a",
+  "function": "solver",
+  "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+  "subtask": "CLOCK",
+  "round": 1,
+  "baseline_sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3",
+  "created_at": "2026-09-26T23:05:44.623530+00:00",
+  "perspective": "Units and identifiability with controlled nonlinear clock hypothesis",
+  "inputs": [
+    {
+      "path": "clock-rule-packet.json",
+      "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/MATERIAL_PACKET_V2.json",
+      "sha256": "ae66444a42cabc5edca3a47eab35f854b6730f5b621487cf4f0557d1868f1b98"
+    },
+    {
+      "path": "comparison-protocol.json",
+      "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+      "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+    }
+  ],
+  "question": "Can a propagation speed c be derived from this source? State what additional proposed assumption would permit a conditional speed, with units and limits.",
+  "answer": "The source alone cannot determine a speed or c because it assigns no time map. The newly proposed nonlinear clock t(n)=tau*n^2 gives a conditional index-dependent step velocity. A separate proposed uniform clock gives a different, constant step ratio. Neither clock is source-assigned or identifies physical c.",
+  "source_facts": [
+    {
+      "claim": "x(n)=nL for integer n>=0.",
+      "source": {
+        "path": "clock-rule-packet.json",
+        "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+      }
+    },
+    {
+      "claim": "L is a length scale. No t(n) or clock interval is assigned.",
+      "source": {
+        "path": "clock-rule-packet.json",
+        "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+      }
+    }
+  ],
+  "proposed_assumptions": [
+    {
+      "id": "N1",
+      "claim": "Propose t_N(n)=tau*n^2, with tau>0 and [tau]=time, for integer n>=0. This new concrete hypothesis is requested by the material packet; it is not assigned by the source.",
+      "status": "proposed_unassigned",
+      "requested_by": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/MATERIAL_PACKET_V2.json",
+        "sha256": "ae66444a42cabc5edca3a47eab35f854b6730f5b621487cf4f0557d1868f1b98"
+      }
+    },
+    {
+      "id": "U1",
+      "claim": "As a distinct illustrative alternative, propose t_U(n)=n*tau with tau>0 and [tau]=time. This retained original uniform clock is not the nonlinear clock and neither is source-assigned.",
+      "status": "proposed_unassigned"
+    },
+    {
+      "id": "D1",
+      "claim": "Define the discrete interval velocity between events n and n+1 as delta x/delta t; its magnitude is the corresponding conditional step speed. A physical interpretation/calibration is additional evidence.",
+      "status": "proposed_definition"
+    }
+  ],
+  "established_derivations": [
+    {
+      "premises": [
+        "source x(n)=nL"
+      ],
+      "derivation": "The index n is dimensionless, so delta x=x(n+1)-x(n)=L has units of length. Without delta t the source defines no speed quantity. Two positive proposed clock scales preserve the position source but give different ratios for nonzero L, so speed is not identifiable.",
+      "claim_scope": "Algebra and dimensional non-identifiability of the assigned source."
+    },
+    {
+      "premises": [
+        "source x(n)=nL",
+        "proposed N1",
+        "proposed D1"
+      ],
+      "derivation": "delta t_N=tau*((n+1)^2-n^2)=tau*(2n+1). Since n>=0 and tau>0, delta t_N>0, including delta t_N=tau at n=0. Thus v_n=L/[tau*(2n+1)] and the conditional speed magnitude is abs(L)/[tau*(2n+1)]. Both have units length/time because 2n+1 is dimensionless.",
+      "claim_scope": "Conditional algebra under the new proposed nonlinear clock; no physical validation."
+    },
+    {
+      "premises": [
+        "source x(n)=nL",
+        "proposed N1",
+        "proposed D1"
+      ],
+      "derivation": "For nonzero L, each successive denominator increases: the magnitude is abs(L)/tau at n=0 and abs(L)/(3*tau) at n=1, then decreases with index and tends to zero as n grows. The signed velocity retains the sign of L. There is no one constant nonzero step speed under this nonlinear proposal. For L=0 the conditional interval velocity is zero, but the time rule still is proposed.",
+      "claim_scope": "Index dependence of the discrete interval ratios only."
+    },
+    {
+      "premises": [
+        "source x(n)=nL",
+        "proposed U1",
+        "proposed D1"
+      ],
+      "derivation": "Under the separate uniform proposal, delta t_U=tau and v_U=L/tau, with speed magnitude abs(L)/tau and units length/time. This constant ratio belongs to U1, not N1.",
+      "claim_scope": "Retained distinct uniform conditional alternative."
+    }
+  ],
+  "identifying_c": {
+    "required": "Define what c represents and independently supply the physical meaning of x and the index events plus calibrated time intervals or a justified law/measurement linking them to the propagation quantity. No such identifying evidence is in the source.",
+    "nonlinear_limit": "For nonzero L the nonlinear interval speed varies with n, so it cannot equal one fixed positive c at every interval. Choosing tau=abs(L)/[c*(2n+1)] to match one selected interval imposes a value for that interval and does not derive c or make it a global constant.",
+    "uniform_limit": "Choosing tau=L/c for positive L and a preselected positive c makes v_U=c by construction. It imposes the clock value rather than deriving c from x(n)=nL.",
+    "status": "No source-derived numerical or physical c is established."
+  },
+  "limits": [
+    "The result describes discrete event intervals only. No continuous interpolation, instantaneous velocity or physical dynamics is assigned.",
+    "The nonlinear clock is an explicitly added hypothesis. Its interval speeds depend on n and the free positive parameter tau. The source alone selects neither this map nor the uniform map.",
+    "Both proposals are alternatives, not simultaneous source facts. The new packet changes this candidate scope without changing the original assigned facts.",
+    "No experiment, external research, validated physics or Aether-Flow result is claimed.",
+    "The original answer is preserved; no original defect is alleged. Assigned A re-review and current senior/manager dispositions remain formal owner gates outside this solver assignment."
+  ],
+  "material_revision": {
+    "previous_candidate": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+      "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+    },
+    "material_packet": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/MATERIAL_PACKET_V2.json",
+      "sha256": "ae66444a42cabc5edca3a47eab35f854b6730f5b621487cf4f0557d1868f1b98"
+    },
+    "reason": "One required controlled concrete hypothesis revision within the original frozen question, not a source change or initial defect.",
+    "changed_hypothesis_notice": {
+      "message_id": "solver_a.changed_hypothesis_v2",
+      "source": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/changed_hypothesis_v2.json",
+        "sha256": "37bf84560937ec00686cbb877d8f388a45a3689880b0ab01e0068e8eacf41018"
+      }
+    },
+    "earlier_objection": {
+      "message_id": "solver_a.missing_clock_v1",
+      "source": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/missing_clock_v1.json",
+        "sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872"
+      },
+      "target": {
+        "path": "clock-rule-packet.json",
+        "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+      },
+      "status": "Missing-clock fact remains valid against unchanged source."
+    },
+    "peer_clarification": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/peer-reply-evidence.json",
+      "sha256": "d6c69e1bf356341d33e8fbd5d19a2f1901b05388d1658c5b5f67986639cbb6fd"
+    },
+    "formal_gate_requirement": "Manager supersedes only the A candidate and proves current review/synthesis/acceptance eligibility. A assigned reviewer re-reviews A2; unchanged B candidate/pass remains historical/current as allowed. This candidate neither verifies nor accepts those gates."
+  },
+  "criterion_coverage": [
+    {
+      "criterion": 1,
+      "evidence": [
+        "source_facts",
+        "proposed_assumptions",
+        "established_derivations"
+      ],
+      "result": "Every source fact is sourced; proposed clock alternatives and conditional derivations separated."
+    },
+    {
+      "criterion": 2,
+      "evidence": [
+        "answer",
+        "established_derivations[0]"
+      ],
+      "result": "Position-index dimensions and free clocks rule out a source-determined speed/c."
+    },
+    {
+      "criterion": 3,
+      "evidence": [
+        "proposed_assumptions[0]",
+        "established_derivations[1]",
+        "established_derivations[2]",
+        "established_derivations[3]"
+      ],
+      "result": "Requested nonlinear positive denominator, units and index dependence derived; uniform clock retained as distinct proposed alternative."
+    },
+    {
+      "criterion": 4,
+      "evidence": [
+        "identifying_c",
+        "limits"
+      ],
+      "result": "Needed physical/time evidence and imposed-value limits specified; no physics/product claim."
+    },
+    {
+      "criterion": 5,
+      "evidence": [
+        "material_revision",
+        "preservation_and_handoff"
+      ],
+      "result": "Original candidate and exact notice/objection/target versions preserved. Current independent A re-review and senior/manager dispositions must follow through owner gates."
+    }
+  ],
+  "preservation_and_handoff": {
+    "previous_own_path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/candidate-v1.json",
+    "previous_sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03",
+    "new_path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/candidate-v2.json",
+    "immutable": "New candidate-v2 only; no original, review, peer receipt or source overwritten.",
+    "formal_decisions": "Return exact paths/hashes for owner canonical import/current assigned review; do not self-accept."
+  },
+  "checks": {
+    "performed": [
+      "Live current assignment/context/input_receipt reopened after committed material-input gate",
+      "All five exact bound input hashes matched",
+      "Original candidate and initial checkpoint/peer evidence hashes retained",
+      "Algebra, positivity, units and index cases inspected against every frozen criterion",
+      "Four filtered checkpoints and material notice used within current Task phase"
+    ],
+    "not_run": [
+      "No external research, physical experiment or product modifications",
+      "No executable tests required for this algebra-only answer"
+    ],
+    "verification_level": "Inspected algebra and criterion coverage; runtime board operations observed."
+  }
+}

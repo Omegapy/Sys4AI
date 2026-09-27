@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-09-26T22:54:00.970772+00:00",
+  "actual_before": "pending_init",
+  "canonical_resume_revision": 33,
+  "actual_call": {
+    "tool": "collaboration.followup_task",
+    "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+    "result": null
+  },
+  "actual_after": {
+    "tool": "collaboration.list_agents",
+    "result": {
+      "agents": [
+        {
+          "agent_name": "/root",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/billboards_manager",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/billboards_manager/enabled_manager",
+          "agent_status": "running"
+        },
+        {
+          "agent_name": "/root/billboards_manager/enabled_manager/solver_a",
+          "agent_status": "running"
+        }
+      ]
+    }
+  },
+  "claim": "Same original native identity becomes actually running only after committed unchanged resume and explicit followup. Pending_init never coerced; empty API result not structured success.",
+  "new_spawn_capacity_claim": false
+}

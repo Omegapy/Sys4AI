@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "task": "TASK-20260926-7014404F",
+  "execution": "EXEC_CLOCK_ENABLED",
+  "generation": 1,
+  "assignment": "reviewer_b",
+  "native_id": "/root/billboards_manager/enabled_manager/reviewer_b",
+  "baseline": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3",
+  "round": 1,
+  "completed_at_utc": "2026-09-26T22:44:03.298906+00:00",
+  "checkpoints": [
+    {
+      "stage": "before-starting",
+      "evidence": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/reviewer_b/checkpoint-before-starting.json",
+        "sha256": "c134e0fe584cb3947364b285971923f96f01023ce406bc59ccffa46d24c7518c"
+      },
+      "eligible_messages": 0
+    },
+    {
+      "stage": "before-relying-on-shared-interface",
+      "evidence": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/reviewer_b/checkpoint-before-interface.json",
+        "sha256": "e3d053e241c710e42d593c6c7519039715d8adf9e5b7e25708f2af3387dcd1fd"
+      },
+      "eligible_messages": 0,
+      "timing": "Candidate was opened for initial inspection after starting checkpoint; this checkpoint preceded criterion assessment relying on its interface."
+    },
+    {
+      "stage": "before-submitting-review-version",
+      "evidence": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/reviewer_b/checkpoint-before-submission.json",
+        "sha256": "15ec2cff431c5c04e6fa0c1a12bc6c6d3976084fdbc3458e7415103e29aa8d64"
+      },
+      "eligible_messages": 0
+    },
+    {
+      "stage": "before-final-handoff",
+      "evidence": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/reviewer_b/checkpoint-before-handoff.json",
+        "sha256": "b0eb6d2d8632ec33ed2683e087cc62bcb774ef61ec21923d641f2816c3ceca50"
+      },
+      "eligible_messages": 2,
+      "addressed_peer_messages_read": [
+        "reviewer_a.verdict_a_v1"
+      ],
+      "own_authored_message_not_acknowledged": "reviewer_b.verdictb1 is visible as author but is not addressed to reviewer_b."
+    }
+  ],
+  "canonical_inspection": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/reviewer_b/canonical-inspection-before-review.json",
+    "sha256": "6a13bb88d7c97f7988bd27d4ee254bd1c55b951cf8fa128edbd0d5293b328370"
+  },
+  "first_assessment": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/reviewer_b/review-v1.json",
+    "sha256": "1c19f38ab158ecef396a5f47cc311d2285ce44e18125ce580a71e6fa67fed66f"
+  },
+  "verdict_post_result": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/reviewer_b/verdict-post-result.json",
+    "sha256": "ad7080c3dbe3b4a4e043a591374bc4a528db5fd1e23544f24599e11bdcb27105"
+  },
+  "acknowledgements": [
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/reviewer_b/collaboration/receipts/read_a_verdict_after_first_review.json",
+      "sha256": "11a4d7fc414f4477a4474e38c647bc4974d027d6f116c51f6f3d6671b6978eba"
+    }
+  ],
+  "own_canonical_review_metadata": [
+    {
+      "assignment_id": "reviewer_b",
+      "baseline": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3",
+      "candidate_id": "CAND_B_V1",
+      "findings": "REVIEW_B_V1",
+      "outcome": "passed",
+      "review_id": "REVIEW_B_V1",
+      "round": 1
+    }
+  ],
+  "canonical_outcome_vocabulary": "Original immutable review uses pass; manager transparently normalized to canonical passed with original evidence and no conclusion/content alteration.",
+  "independence_evidence": {
+    "before_first_assessment": "No peer candidate/finding/verdict bodies/titles or review outcomes in supplied history or outputs. Programmatic canonical inspection emitted only own assignment, CLOCK baseline/round and policy/frozen metadata. All three filtered initial checkpoints contained zero eligible messages.",
+    "release": "Only after canonical own first review and Context.first_review true did final checkpoint expose addressed A verdict.",
+    "settings": "Full-history inheritance with no model/effort override; actual receipt and effective-settings proof owned by manager."
+  },
+  "checks": [
+    "Exact role/SOUL/baseline/policy/packet/protocol hashes matched dispatched values.",
+    "Exact assigned candidate B hash matched before assessment submission.",
+    "Discrete algebra, dimension consistency, two-clock counterexample and stated limits independently checked.",
+    "Actual filtered native-session read/release and explicit acknowledgment performed."
+  ],
+  "limitations": [
+    "Review scope is assigned candidate B; project acceptance and senior dispositions remain owner gates.",
+    "Acknowledgment reports reading only; raw shared filesystem grants are cooperative.",
+    "No external science, product modification, ledger mutation, source or role writes, publication or nested agent work."
+  ],
+  "stopping_condition_reached": true
+}

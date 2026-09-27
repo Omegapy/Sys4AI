@@ -1,0 +1,546 @@
+{
+  "version": 1,
+  "assignment": "solver_b",
+  "native_id": "/root/billboards_manager/enabled_manager/solver_b",
+  "task": "TASK-20260926-7014404F",
+  "execution": "EXEC_CLOCK_ENABLED",
+  "generation": 1,
+  "resume_revision_observed": 31,
+  "baseline": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3",
+  "inputs": [
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/baseline_21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3.json",
+      "sha256": "21cf38986243425617a99d2f57fd18dab008050768d270984850b08572e00bf3"
+    },
+    {
+      "path": "clock-rule-packet.json",
+      "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+    },
+    {
+      "path": "comparison-protocol.json",
+      "sha256": "57f36336a69779709fce578b3f52ff73781a8ea8948a6eb90d753e7d353afdf7"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/POLICY_V1.json",
+      "sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6"
+    }
+  ],
+  "checkpoints": [
+    {
+      "checkpoint": "before-resuming",
+      "time_utc": "2026-09-26T22:47:21.305591+00:00",
+      "query": {
+        "version": 1,
+        "items": [
+          {
+            "message": {
+              "assignment": "solver_a",
+              "body": "The source assigns x(n)=nL for integer n>=0 and a length scale L, but assigns no t(n). A proposed uniform interval tau>0 would give the conditional step ratio L/tau. Different positive time intervals yield different speeds while preserving every source position; no speed c is identified by the packet. Treat any time rule as a proposed assumption.",
+              "evidence": [
+                {
+                  "path": "clock-rule-packet.json",
+                  "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+                }
+              ],
+              "execution": "EXEC_CLOCK_ENABLED",
+              "generation": 1,
+              "limitations": [
+                "Algebra and dimensional reasoning only; no assigned physical clock or validated physical propagation speed."
+              ],
+              "material": true,
+              "message_id": "solver_a.missing_clock_v1",
+              "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+              "operation_id": "missing_clock_v1",
+              "phase": "independent",
+              "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+              "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+              "recipients": [
+                "enabled_manager",
+                "solver_b",
+                "senior"
+              ],
+              "reply_to": null,
+              "requested_response": "At the released peer phase, distinguish an assigned clock rule from a proposed clock rule against this exact source; stop after one evidence reply.",
+              "subtask": "CLOCK",
+              "supersedes": null,
+              "targets": [
+                {
+                  "path": "clock-rule-packet.json",
+                  "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+                }
+              ],
+              "task": "TASK-20260926-7014404F",
+              "thread_id": "clock_rule",
+              "title": "Time map is unassigned in the frozen source",
+              "type": "finding",
+              "urgency": "routine",
+              "version": 1,
+              "visibility": "findings"
+            },
+            "source": {
+              "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/missing_clock_v1.json",
+              "sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872"
+            },
+            "handling": [
+              {
+                "assignment": "enabled_manager",
+                "evidence": "Direct exact visible message read after both solver and first-reviewer dispatch barriers. Does not imply comprehension/incorporation or formal disposition.",
+                "execution": "EXEC_CLOCK_ENABLED",
+                "generation": 1,
+                "message_id": "solver_a.missing_clock_v1",
+                "message_sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872",
+                "native_id": "/root/billboards_manager/enabled_manager",
+                "native_receipt": null,
+                "operation_id": "read_solver_a_missing_clock_v1",
+                "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+                "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+                "recipient": "enabled_manager",
+                "state": "acknowledged",
+                "task": "TASK-20260926-7014404F",
+                "version": 1
+              },
+              {
+                "assignment": "solver_a",
+                "evidence": "Native send_message was invoked with exact message path/hash metadata only. The caller-visible tool result contained no structured confirmation; this receipt does not claim transport delivery.",
+                "execution": "EXEC_CLOCK_ENABLED",
+                "generation": 1,
+                "message_id": "solver_a.missing_clock_v1",
+                "message_sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872",
+                "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+                "native_receipt": {
+                  "native_id": "/root/billboards_manager/enabled_manager",
+                  "result": null,
+                  "tool": "collaboration.send_message"
+                },
+                "operation_id": "notice_manager_uncertain_v1",
+                "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+                "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+                "recipient": "enabled_manager",
+                "state": "uncertain",
+                "task": "TASK-20260926-7014404F",
+                "version": 1
+              }
+            ],
+            "reported_reading": false
+          }
+        ],
+        "total": 1,
+        "returned": 1,
+        "remaining": 0,
+        "offset": 0,
+        "checkpoint": "5d95d3cad1a896db04127ff10e5c41d371ff09399d44e4679c9cbba3ac3447c0",
+        "limits": {
+          "record_bytes": 65536,
+          "output_bytes": 32768,
+          "page_items": 20
+        }
+      },
+      "acknowledgment": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/collaboration/receipts/peerackmissingclock1.json",
+        "sha256": "1aae1f325231a74aed141cb1b7239cefbe4f8990f88236fe4dcc5715ed43ab8b"
+      },
+      "after_ack_query": {
+        "version": 1,
+        "items": [],
+        "total": 0,
+        "returned": 0,
+        "remaining": 0,
+        "offset": 0,
+        "checkpoint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "limits": {
+          "record_bytes": 65536,
+          "output_bytes": 32768,
+          "page_items": 20
+        }
+      }
+    },
+    {
+      "checkpoint": "before-shared-interface",
+      "time_utc": "2026-09-26T22:47:21.305769+00:00",
+      "query": {
+        "version": 1,
+        "items": [
+          {
+            "message": {
+              "assignment": "solver_b",
+              "body": "Two proposed clocks t1(n)=n tau and t2(n)=2n tau, tau>0, preserve the same x(n)=nL and yield different interval velocities for nonzero L. A fixed clock gives a conditional length/time ratio only; identifying it with c needs an explicit definition or independent evidence.",
+              "evidence": [
+                {
+                  "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/candidate-v1.json",
+                  "sha256": "9228ff2df6161086ab65bbb131500f6113b7a767ea611297e460d339c2c7d899"
+                }
+              ],
+              "execution": "EXEC_CLOCK_ENABLED",
+              "generation": 1,
+              "limitations": [
+                "Algebra and dimensions only; proposed clocks are unassigned.",
+                "No validated physics or Aether-Flow result."
+              ],
+              "material": true,
+              "message_id": "solver_b.finding1",
+              "native_id": "/root/billboards_manager/enabled_manager/solver_b",
+              "operation_id": "finding1",
+              "phase": "independent",
+              "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+              "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+              "recipients": [
+                "enabled_manager",
+                "solver_a",
+                "senior"
+              ],
+              "reply_to": null,
+              "requested_response": "Preserve this exact initial finding and candidate; after canonical candidate release, use one exact assumption objection/reply if needed, then current assigned review and owner disposition. Stop unchanged debate.",
+              "subtask": "CLOCK",
+              "supersedes": null,
+              "targets": [
+                {
+                  "path": "clock-rule-packet.json",
+                  "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+                }
+              ],
+              "task": "TASK-20260926-7014404F",
+              "thread_id": "clock-rule",
+              "title": "Position index leaves clock interval unassigned",
+              "type": "finding",
+              "urgency": "routine",
+              "version": 1,
+              "visibility": "findings"
+            },
+            "source": {
+              "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/collaboration/messages/finding1.json",
+              "sha256": "456066af06c5ce8caed7057a44c9429e89f9b08a5e0bdb1be7accc2f2f3dd712"
+            },
+            "handling": [
+              {
+                "assignment": "enabled_manager",
+                "evidence": "Direct exact visible message read after both solver and first-reviewer dispatch barriers. Does not imply comprehension/incorporation or formal disposition.",
+                "execution": "EXEC_CLOCK_ENABLED",
+                "generation": 1,
+                "message_id": "solver_b.finding1",
+                "message_sha256": "456066af06c5ce8caed7057a44c9429e89f9b08a5e0bdb1be7accc2f2f3dd712",
+                "native_id": "/root/billboards_manager/enabled_manager",
+                "native_receipt": null,
+                "operation_id": "read_solver_b_finding1",
+                "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+                "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+                "recipient": "enabled_manager",
+                "state": "acknowledged",
+                "task": "TASK-20260926-7014404F",
+                "version": 1
+              }
+            ],
+            "reported_reading": false
+          }
+        ],
+        "total": 1,
+        "returned": 1,
+        "remaining": 0,
+        "offset": 0,
+        "checkpoint": "c1975bbf44b8708e99600bccaff816e97e9ebe22898aaf5a05ba3eacbee27c47",
+        "limits": {
+          "record_bytes": 65536,
+          "output_bytes": 32768,
+          "page_items": 20
+        }
+      },
+      "source_link_read": {
+        "message_id": "solver_a.missing_clock_v1",
+        "reference": {
+          "path": "clock-rule-packet.json",
+          "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+        }
+      },
+      "candidate_reference": {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+        "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+      }
+    },
+    {
+      "checkpoint": "before-candidate-revision-or-peer-submission",
+      "time_utc": "2026-09-26T22:47:21.327119+00:00",
+      "query": {
+        "version": 1,
+        "items": [
+          {
+            "message": {
+              "assignment": "solver_b",
+              "body": "Two proposed clocks t1(n)=n tau and t2(n)=2n tau, tau>0, preserve the same x(n)=nL and yield different interval velocities for nonzero L. A fixed clock gives a conditional length/time ratio only; identifying it with c needs an explicit definition or independent evidence.",
+              "evidence": [
+                {
+                  "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/candidate-v1.json",
+                  "sha256": "9228ff2df6161086ab65bbb131500f6113b7a767ea611297e460d339c2c7d899"
+                }
+              ],
+              "execution": "EXEC_CLOCK_ENABLED",
+              "generation": 1,
+              "limitations": [
+                "Algebra and dimensions only; proposed clocks are unassigned.",
+                "No validated physics or Aether-Flow result."
+              ],
+              "material": true,
+              "message_id": "solver_b.finding1",
+              "native_id": "/root/billboards_manager/enabled_manager/solver_b",
+              "operation_id": "finding1",
+              "phase": "independent",
+              "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+              "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+              "recipients": [
+                "enabled_manager",
+                "solver_a",
+                "senior"
+              ],
+              "reply_to": null,
+              "requested_response": "Preserve this exact initial finding and candidate; after canonical candidate release, use one exact assumption objection/reply if needed, then current assigned review and owner disposition. Stop unchanged debate.",
+              "subtask": "CLOCK",
+              "supersedes": null,
+              "targets": [
+                {
+                  "path": "clock-rule-packet.json",
+                  "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+                }
+              ],
+              "task": "TASK-20260926-7014404F",
+              "thread_id": "clock-rule",
+              "title": "Position index leaves clock interval unassigned",
+              "type": "finding",
+              "urgency": "routine",
+              "version": 1,
+              "visibility": "findings"
+            },
+            "source": {
+              "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/collaboration/messages/finding1.json",
+              "sha256": "456066af06c5ce8caed7057a44c9429e89f9b08a5e0bdb1be7accc2f2f3dd712"
+            },
+            "handling": [
+              {
+                "assignment": "enabled_manager",
+                "evidence": "Direct exact visible message read after both solver and first-reviewer dispatch barriers. Does not imply comprehension/incorporation or formal disposition.",
+                "execution": "EXEC_CLOCK_ENABLED",
+                "generation": 1,
+                "message_id": "solver_b.finding1",
+                "message_sha256": "456066af06c5ce8caed7057a44c9429e89f9b08a5e0bdb1be7accc2f2f3dd712",
+                "native_id": "/root/billboards_manager/enabled_manager",
+                "native_receipt": null,
+                "operation_id": "read_solver_b_finding1",
+                "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+                "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+                "recipient": "enabled_manager",
+                "state": "acknowledged",
+                "task": "TASK-20260926-7014404F",
+                "version": 1
+              }
+            ],
+            "reported_reading": false
+          }
+        ],
+        "total": 1,
+        "returned": 1,
+        "remaining": 0,
+        "offset": 0,
+        "checkpoint": "c1975bbf44b8708e99600bccaff816e97e9ebe22898aaf5a05ba3eacbee27c47",
+        "limits": {
+          "record_bytes": 65536,
+          "output_bytes": 32768,
+          "page_items": 20
+        }
+      },
+      "candidate_revision": false
+    }
+  ],
+  "unread_release": {
+    "earlier_checkpoint_evidence": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/checkpoint-evidence.json",
+      "sha256": "ab16b2e86f3811585848737bbc324c784fdfcc7a04ad4b0d512ade251670aacb"
+    },
+    "earlier_later_operational_notice_handled": true,
+    "newly_visible_original": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/missing_clock_v1.json",
+      "sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872"
+    },
+    "exact_before_ack": {
+      "version": 1,
+      "items": [
+        {
+          "message": {
+            "assignment": "solver_a",
+            "body": "The source assigns x(n)=nL for integer n>=0 and a length scale L, but assigns no t(n). A proposed uniform interval tau>0 would give the conditional step ratio L/tau. Different positive time intervals yield different speeds while preserving every source position; no speed c is identified by the packet. Treat any time rule as a proposed assumption.",
+            "evidence": [
+              {
+                "path": "clock-rule-packet.json",
+                "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+              }
+            ],
+            "execution": "EXEC_CLOCK_ENABLED",
+            "generation": 1,
+            "limitations": [
+              "Algebra and dimensional reasoning only; no assigned physical clock or validated physical propagation speed."
+            ],
+            "material": true,
+            "message_id": "solver_a.missing_clock_v1",
+            "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+            "operation_id": "missing_clock_v1",
+            "phase": "independent",
+            "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+            "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+            "recipients": [
+              "enabled_manager",
+              "solver_b",
+              "senior"
+            ],
+            "reply_to": null,
+            "requested_response": "At the released peer phase, distinguish an assigned clock rule from a proposed clock rule against this exact source; stop after one evidence reply.",
+            "subtask": "CLOCK",
+            "supersedes": null,
+            "targets": [
+              {
+                "path": "clock-rule-packet.json",
+                "sha256": "32d27d64e2675b396bd95463783ada78a9715c6c895d0c93c33e4d6e3a694618"
+              }
+            ],
+            "task": "TASK-20260926-7014404F",
+            "thread_id": "clock_rule",
+            "title": "Time map is unassigned in the frozen source",
+            "type": "finding",
+            "urgency": "routine",
+            "version": 1,
+            "visibility": "findings"
+          },
+          "source": {
+            "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/collaboration/messages/missing_clock_v1.json",
+            "sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872"
+          },
+          "handling": [
+            {
+              "assignment": "enabled_manager",
+              "evidence": "Direct exact visible message read after both solver and first-reviewer dispatch barriers. Does not imply comprehension/incorporation or formal disposition.",
+              "execution": "EXEC_CLOCK_ENABLED",
+              "generation": 1,
+              "message_id": "solver_a.missing_clock_v1",
+              "message_sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872",
+              "native_id": "/root/billboards_manager/enabled_manager",
+              "native_receipt": null,
+              "operation_id": "read_solver_a_missing_clock_v1",
+              "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+              "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+              "recipient": "enabled_manager",
+              "state": "acknowledged",
+              "task": "TASK-20260926-7014404F",
+              "version": 1
+            },
+            {
+              "assignment": "solver_a",
+              "evidence": "Native send_message was invoked with exact message path/hash metadata only. The caller-visible tool result contained no structured confirmation; this receipt does not claim transport delivery.",
+              "execution": "EXEC_CLOCK_ENABLED",
+              "generation": 1,
+              "message_id": "solver_a.missing_clock_v1",
+              "message_sha256": "082f1bb5ceb2916f3bfe2f345a054d9d1a157655991a820aa86b13ea8ce76872",
+              "native_id": "/root/billboards_manager/enabled_manager/solver_a",
+              "native_receipt": {
+                "native_id": "/root/billboards_manager/enabled_manager",
+                "result": null,
+                "tool": "collaboration.send_message"
+              },
+              "operation_id": "notice_manager_uncertain_v1",
+              "policy_sha256": "c59ed4ed3301f3c5030a6f1998da2cfd9c6fabef17a5d9c764be1c394f28a5e6",
+              "project": "/Volumes/P-SSD/AngryOwl/Sys4AI/Verification/shared-agent-billboards/pilots/project",
+              "recipient": "enabled_manager",
+              "state": "uncertain",
+              "task": "TASK-20260926-7014404F",
+              "version": 1
+            }
+          ],
+          "reported_reading": false
+        }
+      ],
+      "total": 1,
+      "returned": 1,
+      "remaining": 0,
+      "offset": 0,
+      "checkpoint": "5d95d3cad1a896db04127ff10e5c41d371ff09399d44e4679c9cbba3ac3447c0",
+      "limits": {
+        "record_bytes": 65536,
+        "output_bytes": 32768,
+        "page_items": 20
+      }
+    },
+    "ack": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/collaboration/receipts/peerackmissingclock1.json",
+      "sha256": "1aae1f325231a74aed141cb1b7239cefbe4f8990f88236fe4dcc5715ed43ab8b"
+    },
+    "exact_after_ack": {
+      "version": 1,
+      "items": [],
+      "total": 0,
+      "returned": 0,
+      "remaining": 0,
+      "offset": 0,
+      "checkpoint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "limits": {
+        "record_bytes": 65536,
+        "output_bytes": 32768,
+        "page_items": 20
+      }
+    },
+    "result": "Previously sealed original finding became unread after release despite later operational notice handling."
+  },
+  "candidate_A": {
+    "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/CANDIDATE_A_V1.json",
+    "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+  },
+  "candidate_A_read_under": "Canonical current complete candidate release and explicit parent authorization; exact registered bytes inspected.",
+  "originals_preserved": [
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/candidate-v1.json",
+      "sha256": "9228ff2df6161086ab65bbb131500f6113b7a767ea611297e460d339c2c7d899"
+    },
+    {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/checkpoint-evidence.json",
+      "sha256": "ab16b2e86f3811585848737bbc324c784fdfcc7a04ad4b0d512ade251670aacb"
+    }
+  ],
+  "challenge": {
+    "message_id": "solver_b.clockclarification1",
+    "source": {
+      "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_b/collaboration/messages/clockclarification1.json",
+      "sha256": "37545a776f5b3bc8bc21acc75a8c58030848a541d9bbee5fc2bee36c91355193"
+    }
+  },
+  "challenge_posted_at_utc": "2026-09-26T22:47:21.347989+00:00",
+  "last_known_solver_A_native_completion": {
+    "changes": [
+      {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/candidate-v1.json",
+        "sha256": "f4fd8ec266d8069782c6669ed3fca80e0dc7e5f2c44b643ff9b1f2e493434c03"
+      },
+      {
+        "path": "Tasks/Task-clock-rule-billboard-enabled-native-pilot-2026-09-26--7014404F/artifacts/orchestration/work/solver_a/checkpoint-evidence.json",
+        "sha256": "f642e62d103347e947120bfaa06dff24d362fd0846da943af6e0b1c7e3826d0a"
+      }
+    ],
+    "receipt": {
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/billboards_manager",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/billboards_manager/enabled_manager",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/billboards_manager/enabled_manager/solver_a",
+            "agent_status": "completed"
+          }
+        ]
+      },
+      "tool": "collaboration.list_agents"
+    }
+  },
+  "interpretation": "The last recorded actual roster says completed before this notice. Later roster absence alone does not establish continued completion or revocation.",
+  "answer_status": "Pending one explicitly resumed peer answer; no write lease or idle wake requested by the routine notice."
+}
