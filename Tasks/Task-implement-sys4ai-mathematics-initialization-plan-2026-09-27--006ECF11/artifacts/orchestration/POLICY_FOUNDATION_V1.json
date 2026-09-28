@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "project": "/Volumes/P-SSD/AngryOwl/Sys4AI",
+  "task": "TASK-20260927-006ECF11",
+  "execution": "EXEC_MATH_INIT_R1",
+  "generation": 1,
+  "manager": "MATH_INIT_MANAGER",
+  "participants": {
+    "MATH_INIT_MANAGER": {
+      "namespace": "Tasks/Task-implement-sys4ai-mathematics-initialization-plan-2026-09-27--006ECF11/artifacts/orchestration/manager/collaboration",
+      "subtask_id": null
+    },
+    "FOUNDATION_WORKER": {
+      "namespace": "Projects/Sys4AI-Mathematics/Verification/mathematics-initialization/foundation-work/collaboration",
+      "subtask_id": "FOUNDATION"
+    }
+  },
+  "subtasks": {
+    "FOUNDATION": {
+      "phase": "component",
+      "audience": [
+        "MATH_INIT_MANAGER",
+        "FOUNDATION_WORKER"
+      ],
+      "independent_first_pass": false,
+      "reviewer_first_pass": false,
+      "exchange_stop": "Stop each staged exchange after the exact foundation gate is answered; report material owner conflicts to the manager."
+    }
+  },
+  "bounds": {
+    "record_bytes": 65536,
+    "output_bytes": 32768,
+    "page_items": 20
+  },
+  "topology": "common-store-cooperative"
+}

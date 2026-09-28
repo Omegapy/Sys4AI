@@ -1,38 +1,54 @@
 {
-  "schema_version": 2,
-  "workspace_name": "Sys4AI",
   "projects": [
     {
-      "id": "sys4ai-depot",
-      "name": "Sys4AI depot",
-      "path": ".",
-      "kind": "depot-manager",
-      "registered": true,
-      "repository": {
-        "status": "initialized",
-        "remote": "git@github-omegapy:Omegapy/Sys4AI.git"
-      },
       "github_pages": {
         "status": "not_configured",
         "url": null
       },
-      "notes": "The workspace root contains reusable source collections and workspace inventory; active project files remain project-local."
+      "id": "sys4ai-depot",
+      "kind": "depot-manager",
+      "name": "Sys4AI depot",
+      "notes": "The workspace root contains reusable source collections and workspace inventory; active project files remain project-local.",
+      "path": ".",
+      "registered": true,
+      "repository": {
+        "remote": "git@github-omegapy:Omegapy/Sys4AI.git",
+        "status": "initialized"
+      }
     },
     {
-      "id": "sys4ai-template-project",
-      "name": "Sys4AI Template Project",
-      "path": "Projects/Sys4AI-Template-Project",
-      "kind": "project-template",
-      "registered": true,
-      "repository": {
-        "status": "not_initialized",
-        "remote": null
-      },
       "github_pages": {
         "status": "not_configured",
         "url": null
       },
-      "notes": "Reusable starter for future Sys4AI product projects. Files are tracked in the parent Omegapy/Sys4AI repository; no independent Git repository or remote is configured."
+      "id": "sys4ai-template-project",
+      "kind": "project-template",
+      "name": "Sys4AI Template Project",
+      "notes": "Reusable starter for future Sys4AI product projects. Files are tracked in the parent Omegapy/Sys4AI repository; no independent Git repository or remote is configured.",
+      "path": "Projects/Sys4AI-Template-Project",
+      "registered": true,
+      "repository": {
+        "remote": null,
+        "status": "not_initialized"
+      }
+    },
+    {
+      "github_pages": {
+        "status": "not_configured",
+        "url": null
+      },
+      "id": "sys4ai-mathematics",
+      "kind": "product-project",
+      "name": "Sys4AI-Mathematics",
+      "notes": "Mathematics research and problem solving with governed agents and readable LaTeX/PDF results.",
+      "path": "Projects/Sys4AI-Mathematics",
+      "registered": true,
+      "repository": {
+        "remote": "git@github-omegapy:Omegapy/Sys4AI-Mathematics.git",
+        "status": "initialized"
+      }
     }
-  ]
+  ],
+  "schema_version": 2,
+  "workspace_name": "Sys4AI"
 }

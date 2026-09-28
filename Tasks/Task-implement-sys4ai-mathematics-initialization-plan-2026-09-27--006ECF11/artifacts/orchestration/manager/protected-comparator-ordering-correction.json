@@ -1,0 +1,12 @@
+{
+  "original_baseline": {
+    "path": "Tasks/Task-implement-sys4ai-mathematics-initialization-plan-2026-09-27--006ECF11/artifacts/orchestration/manager/bounded-protected-baseline.json",
+    "sha256": "1ac6c178fac6c65ba99a716b710b5264b61b523e8ee5a5870980d71d2cc12940"
+  },
+  "initial_actual_diagnostic": {
+    "path": "Tasks/Task-implement-sys4ai-mathematics-initialization-plan-2026-09-27--006ECF11/artifacts/orchestration/manager/final-root-preservation-first-20260928.json",
+    "sha256": "dd48c508b9f5c5b7a74cbc71c539cd9ea4cb48b469a9265c56b3e45ae19f7279"
+  },
+  "cause": "Global lexical path sorting is not the original sorted os.walk traversal order. All6 apparent directory differences had identical regular-file counts; recomputing original traversal yielded all12 exact original directory aggregates. Original baseline and all protected bytes are preserved; no rollback, source edit or new baseline.",
+  "exact_original_algorithm": "os.walk(followlinks=False); sort/prune dirs; per-directory sorted files; append [relative_path,sha256,size] in traversal order; compact UTF8 JSON with no newline. Reject symlinks and special files; reuse exact original exclusions."
+}

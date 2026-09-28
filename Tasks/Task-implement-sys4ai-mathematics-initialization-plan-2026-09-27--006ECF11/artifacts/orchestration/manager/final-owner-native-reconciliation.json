@@ -1,0 +1,72 @@
+{
+  "observed_at": "2026-09-28T19:57:28.742551+00:00",
+  "source": "Actual collaboration.list_agents result in this same active turn after Main FINAL_ANSWER; no inferred completion from absence.",
+  "actual_visible_roster": [
+    {
+      "native": "/root",
+      "state": "running"
+    },
+    {
+      "native": "/root/mathematics_init_manager",
+      "state": "running"
+    },
+    {
+      "native": "/root/mathematics_init_manager/mathematics_research_manager",
+      "state": "completed",
+      "actual_return_handoff": {
+        "path": "Projects/Sys4AI-Mathematics/Tasks/Task-deliver-mathematics-runtime-and-native-qualification-2026-09-28--721B2517/artifacts/orchestration/manager/final-child-delivered-handoff.json",
+        "sha256": "27e5333f2ec1839f9b641148b2a3550c9effc714f277d83e4be518354b7acba8"
+      }
+    },
+    {
+      "native": "/root/mathematics_init_manager/mathematics_research_manager/clean_dispatcher",
+      "state": "completed",
+      "actual_return_handoff": {
+        "path": "Projects/Sys4AI-Mathematics/Verification/mathematics-initialization/TASK-20260928-721B2517/work/CLEAN_DISPATCHER/final-bundle-handoff.json",
+        "sha256": "31153cc26460e4b88c0b2a731376015c0ecf070aaa213176a4d91dcf8d3a0bef"
+      }
+    }
+  ],
+  "root_canonical_ordinary_workers": {
+    "FOUNDATION_WORKER": {
+      "state": "completed",
+      "native": "/root/mathematics_init_manager/foundation_worker"
+    }
+  },
+  "child_canonical_ordinary_workers": {
+    "CLEAN_DISPATCHER": {
+      "state": "completed",
+      "native": "/root/mathematics_init_manager/mathematics_research_manager/clean_dispatcher"
+    },
+    "DEPTH_LEAF": {
+      "state": "completed",
+      "native": "/root/mathematics_init_manager/mathematics_research_manager/clean_dispatcher/depth_admission_leaf"
+    },
+    "GENERIC_MATH_WORKER": {
+      "state": "completed",
+      "native": "/root/mathematics_init_manager/mathematics_research_manager/generic_math_worker"
+    },
+    "KNOWLEDGE_WORKER": {
+      "state": "completed",
+      "native": "/root/mathematics_init_manager/mathematics_research_manager/knowledge_evidence_worker"
+    },
+    "PDF_WORKER": {
+      "state": "completed",
+      "native": "/root/mathematics_init_manager/mathematics_research_manager/early_pdf_worker"
+    },
+    "PRIME_ALGEBRA_SOLVER": {
+      "state": "revoked",
+      "native": null
+    },
+    "PRIME_COMPUTE_SOLVER": {
+      "state": "revoked",
+      "native": null
+    },
+    "RECORDS_WORKER": {
+      "state": "completed",
+      "native": "/root/mathematics_init_manager/mathematics_research_manager/records_workflow_worker"
+    }
+  },
+  "manager_state_boundary": "Root canonical manager assignment is active before closure; native manager is running until its real final return. Child manager canonical assignment remains active as historical binding in a completed Task/finished execution; its actual native turn is completed. Terminal lifecycle prohibits further writes; no fabricated revoked/completed assignment or replacement.",
+  "memory_write_disposition": "Child alone published one shared completion capture; Root never resumed child memory writes. Root/global memory untouched."
+}

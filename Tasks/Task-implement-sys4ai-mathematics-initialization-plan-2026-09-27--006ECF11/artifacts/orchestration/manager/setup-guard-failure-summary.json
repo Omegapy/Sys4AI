@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-28T05:58:26.225054+00:00",
+  "requirement": "REQ-043",
+  "classification": "actual-owner-cli-failed-tail-after-completed-base",
+  "actor": "/root/mathematics_init_manager",
+  "first_command_exit_code": 2,
+  "original_failure": {
+    "path": "Tasks/Task-implement-sys4ai-mathematics-initialization-plan-2026-09-27--006ECF11/artifacts/orchestration/manager/setup-first.json",
+    "sha256": "825d3f5dc32bc38af6fa77a581beef8716970a11689197b73ec907b722a56666"
+  },
+  "action_id": "urn:sys4ai:ontology:action:setup:run_module_adoption",
+  "reason": "guard_violation: Enabled semantic validation did not establish conformance; restore the backend or resolve its findings before retrying. [condition=guard_violation; action=urn:sys4ai:ontology:action:setup:run_module_adoption; source=reference-assets/ONTOLOGY-depo/actions/contracts-v1.json@1d7c133b1ad5e3c150c6364529ff9b9731bb68974b9b234c0b71d3b03c318275; backend=violation; findings=HasValueConstraintComponent]",
+  "contract": {
+    "path": "reference-assets/ONTOLOGY-depo/actions/contracts-v1.json",
+    "sha256": "1d7c133b1ad5e3c150c6364529ff9b9731bb68974b9b234c0b71d3b03c318275"
+  },
+  "completed_base_receipt": {
+    "path": "Projects/Sys4AI-Mathematics/control_records/project-setup.json",
+    "sha256": "3088f2c06ca1d46b6afa1a3f5482bf8231b18bde5786de7c227d91e2f957c9d3"
+  },
+  "base_state": {
+    "operation_id": "project-setup-f288721e3c6649a9a088ea8873807ec1",
+    "status": "completed",
+    "setup_contract": "governance-starter-v12",
+    "completed_stages": [
+      "assets",
+      "registration",
+      "verification"
+    ],
+    "static_ready": true,
+    "aggregate": "ready",
+    "module_adoptions": null
+  },
+  "owning_guard_path": ".agents/skills/ontology/scripts/ontology_guards.py",
+  "observed_mismatch": "setup/run_module_adoption accepted only learning, ontology and advanced ontology IDs, while the initializer also invokes supported Curator and collaboration module IDs.",
+  "disposition": "Host owns exact installed-root compatibility correction and supported pinned guard binding update. No initializer retry or root canonical mutation until its verified actual runtime result is received. Original receipt/source/Template/enablement are preserved.",
+  "runtime_limit": "Completed base static readiness does not establish successful full initializer tail or child native research/runtime delivery."
+}

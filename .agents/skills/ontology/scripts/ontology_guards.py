@@ -1012,7 +1012,7 @@ def schema_check(namespace, family, operation, root, arguments):
             facts["input_valid"] &= record.get("status") == "completed" and record.get("completed_stages") == namespace["STAGES"]
             facts["input_valid"] &= receipt.is_file() and receipt.read_bytes() == arguments["previous_raw"]
             selected = arguments.get("module_id", namespace["LEARNING_MODULE"])
-            facts["input_valid"] &= selected in {namespace["LEARNING_MODULE"], namespace["ONTOLOGY_MODULE"], namespace["ADVANCED_MODULE"]}
+            facts["input_valid"] &= selected in {namespace["LEARNING_MODULE"], namespace["ONTOLOGY_MODULE"], namespace["ADVANCED_MODULE"], namespace["CURATOR_MODULE"], namespace["COLLABORATION_MODULE"]}
     elif family == "template":
         if operation == "update":
             fail(arguments["command"] in {"check", "apply"}, "guard_schema", "Unsupported Template operation.")

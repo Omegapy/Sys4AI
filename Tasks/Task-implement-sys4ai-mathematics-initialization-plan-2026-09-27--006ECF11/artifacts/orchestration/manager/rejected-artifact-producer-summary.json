@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "actual_rejection": "guard_violation on task:response_transaction",
+  "failed_payload": {
+    "path": "Tasks/Task-implement-sys4ai-mathematics-initialization-plan-2026-09-27--006ECF11/artifacts/orchestration/manager/payload_MATH_artifact_register_21.json",
+    "sha256": "4b09b4ef8e78f6d085e9b70d675a1dbf9d8f7d9163ca97c31afc14dd45b673d5"
+  },
+  "unchanged_canonical_revision": 20,
+  "cause": "artifact.register requires an actual producer assignment owning its source path; null producer was invalid.",
+  "correction": "Use existing active MATH_INIT_MANAGER for its own evidence namespace; preserve the rejected payload and use a new event ID.",
+  "guard_disposition": "No guard repair/bypass/disablement. Current guard correctly rejects invalid owner input."
+}
