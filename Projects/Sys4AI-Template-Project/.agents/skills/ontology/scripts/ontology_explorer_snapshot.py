@@ -255,7 +255,7 @@ def _tree(root, relative, max_files):
 class VerifiedPackage:
     """Trusted startup input, never populated from a browser or canonical document.
 
-    Captures all ontology*.py helper bytes. Only explicitly named modules may
+    Captures all ontology*.py and project_app*.py helper bytes. Only explicitly named modules may
     execute, through a private import function; normal sys.modules entries and
     bytecode caches are ignored. Other package members (schema, assets, CLI,
     package/lock/build) are supplied by the launcher as an exact path map.
@@ -305,7 +305,7 @@ class VerifiedPackage:
         try:
             with os.scandir(fd) as items:
                 for item in items:
-                    if item.name.startswith("ontology") and item.name.endswith(".py"):
+                    if item.name.startswith(("ontology", "project_app")) and item.name.endswith(".py"):
                         _need(len(names) < 512, "resource_limit")
                         st = item.stat(follow_symlinks=False)
                         _need(stat.S_ISREG(st.st_mode) and st.st_nlink == 1)
@@ -380,7 +380,7 @@ class VerifiedPackage:
         module.__file__ = str(self.scripts / (name + ".py"))
         module.__package__ = ""
         def checked_import(selected, globals=None, locals=None, fromlist=(), level=0):
-            if selected.startswith("ontology"):
+            if selected.startswith(("ontology", "project_app")):
                 _need(level == 0, "package_incomplete")
                 return self.load(selected)
             _need(level == 0 and selected.split(".")[0] in sys.stdlib_module_names, "package_incomplete")
@@ -823,7 +823,9 @@ class SnapshotStore:
             project = self.core.load_project(self.root, expected_project_id=self.expected_project_id, validate=True)
         finally:
             self._active_bytes = None
-        _need(project.context()["helpers"] == package.helpers, "package_changed")
+        # The canonical ontology compiler records its ontology-owned helpers only.
+        # App helpers are independently bound by the verified executing package.
+        _need(project.context()["helpers"] == {k:v for k,v in package.helpers.items() if k.startswith("ontology")}, "package_changed")
         identity = (project.project_id, project.namespace)
         if self._selected_identity is not None and identity != self._selected_identity:
             package.changed = True

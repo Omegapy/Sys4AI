@@ -238,3 +238,20 @@ for new and selected existing projects, preserving old setup editions and custom
 files. See [the specifications](./SPECS.md#default-task-collaboration) and the
 [initializer guide](./.agents/skills/init-new-project/README.md) for checked adoption
 and static health. Execution retains each Task manager's policy and grants.
+
+## Project app
+
+Open **Launch Project.command** in Finder to read this project's Home, Work,
+Project knowledge, Health and setup, and Tools and help. Search and source
+previews stay within the selected project's permitted information.
+
+Closing a tab leaves the reading session active. **Close reading session**
+revokes that session; **Stop app** stops this project's owned reader service.
+Opening the launcher again reuses a compatible service or starts a fresh one.
+If a prerequisite is missing, the launcher opens **Project App Setup.html**.
+
+Home explanations live in `project-app.json`. A project owner reviews the text
+and its source references; changed sources show a review notice. Empty starter
+content is labeled until reviewed. See the
+[Project app operations](./.agents/skills/ontology/references/project-app-operations.md)
+for build, selected adoption and recovery instructions.

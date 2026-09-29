@@ -98,3 +98,13 @@ The neutral `ontology-explorer.yaml` uses `project_id:null`. It permits static
 starter inspection and cannot activate a reader until separately specialized.
 Template discovery, root adoption, full frontend production/CSP checks and live
 browser acceptance each require their own current evidence.
+
+## Shared Project app
+
+The same build serves standalone Knowledge Explorer and the Project app. The
+Project app source identity additionally includes its seven reader/entry modules,
+the shared transport, worker and snapshot modules, and its content schema and
+reviewed owner compatibility manifest, neutral content, launcher and setup guide. These are recorded under `$project-app/`
+logical paths in the build receipt. Rebuild and publish explicitly after any of
+those inputs change. Project-owned Home prose is runtime data and is never baked
+into the reusable build.

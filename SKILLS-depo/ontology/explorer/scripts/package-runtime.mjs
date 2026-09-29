@@ -83,8 +83,20 @@ export function buildInputs(root) {
   requireThat(authored.every(p => /\.(ts|css|html|json)$/.test(p)), 'unsupported authored source');
   const files = [...fixed, ...authored].sort().map(p => { const b = regular(path.join(root, p)); return { path: p, bytes: b.length, sha256: sha(b) }; });
   const schema = regular(schemaPath(root));
+  const appSchema = regular(path.join(path.dirname(schemaPath(root)), 'project-app-v1.json'));
+  files.push({ path: '$schema/project-app-v1.json', bytes: appSchema.length, sha256: sha(appSchema) });
   const helper = regular(path.resolve(root, '../scripts/ontology_explorer_assets.py'));
   files.push({ path: '$schema/explorer-v1.json', bytes: schema.length, sha256: sha(schema) }, { path: '$tooling/ontology_explorer_assets.py', bytes: helper.length, sha256: sha(helper) });
+  // The shared Project app build binds its reader contract and executing closure.
+  const appFiles = ['project_app', 'project_app_core', 'project_app_work', 'project_app_knowledge', 'project_app_sources', 'project_app_search', 'project_app_capabilities', 'ontology_explorer', 'ontology_explorer_worker', 'ontology_explorer_snapshot'];
+  for (const name of appFiles) {
+    const raw = regular(path.resolve(root, '../scripts/' + name + '.py'));
+    files.push({ path: '$project-app/scripts/' + name + '.py', bytes: raw.length, sha256: sha(raw) });
+  }
+  for (const name of ['project-app.schema.json', 'owner-compatibility.json', 'project-app.json', 'Launch Project.command', 'Project App Setup.html']) {
+    const raw = regular(path.resolve(root, '../assets/project-app/' + name));
+    files.push({ path: '$project-app/assets/' + name, bytes: raw.length, sha256: sha(raw) });
+  }
   files.sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0);
   requireThat(files.reduce((n, f) => n + f.bytes, 0) <= 67108864, 'build source byte limit');
   const record = { domain: 'sys4ai-explorer-sources-v1', files, toolchain };

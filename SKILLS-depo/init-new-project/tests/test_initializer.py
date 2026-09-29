@@ -17,7 +17,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 SOURCE_SKILL = Path(__file__).resolve().parents[1]
-BASELINE = ("curate", "agent-task", "communication", "init-new-project", "manage-subagent-roles",
+BASELINE = ("collaborate", "curate", "agent-task", "communication", "init-new-project", "manage-subagent-roles",
             "memory", "ontology", "task", "to-implementation-plan", "to-trd", "what-did-you-learn")
 
 
@@ -45,7 +45,13 @@ def fixture_depot(base: Path) -> Path:
     (root / "Projects").mkdir()
     template = root / "Projects/Sys4AI-Template-Project"
     template.mkdir()
-    ignore = shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc")
+    ignored_names = shutil.ignore_patterns("__pycache__", ".DS_Store", "*.pyc", "node_modules", "dist")
+    def ignore(directory, names):
+        skipped = set(ignored_names(directory, names))
+        # Match the production updater's exclusion of retained generated Explorer evidence.
+        if Path(directory).as_posix().endswith("ontology/tests/fixtures"):
+            skipped.add("explorer")
+        return skipped
     for name in BASELINE:
         source = SOURCE_SKILL if name == "init-new-project" else SOURCE_DEPOT / "SKILLS-depo" / name
         shutil.copytree(source, root / "SKILLS-depo" / name, ignore=ignore)
@@ -56,6 +62,8 @@ def fixture_depot(base: Path) -> Path:
     policy = json.loads((SOURCE_SKILL / "assets/baseline-assets.json").read_text())
     mapping = json.loads((SOURCE_DEPOT / "depot/template-update.json").read_text())["overrides"]
     mapped = {destination: source for source, destination in mapping.items()}
+    mirrors = json.loads((SOURCE_DEPOT / "depot/template-update.json").read_text())["mirrors"]
+    mapped.update({destination: source for source, destination in mirrors.items()})
     mapped.update({"memory.yaml": "MEMORY-depo/starter/memory.yaml",
                    "MEMORY/README.md": "MEMORY-depo/starter/MEMORY/README.md",
                    "ontology-advanced.yaml": "ONTOLOGY-depo/starter/ontology-advanced.yaml",
@@ -70,7 +78,7 @@ def fixture_depot(base: Path) -> Path:
         target = template / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         source = SOURCE_DEPOT / mapped[relative] if relative in mapped else SOURCE_DEPOT / "Projects/Sys4AI-Template-Project" / relative
-        shutil.copyfile(source, target)
+        shutil.copy2(source, target)
     # Starter mappings override their reference destinations; only their active
     # MEMORY/README.md and memory.yaml copies belong to this Template edition.
     shutil.copytree(SOURCE_DEPOT / "MEMORY-depo", template / "reference-assets/MEMORY-depo",
@@ -84,6 +92,11 @@ def fixture_depot(base: Path) -> Path:
             target = template / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(SOURCE_DEPOT / source, target)
+    for source, relative in mirrors.items():
+        if relative.startswith("reference-assets/"):
+            target = template / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(SOURCE_DEPOT / source, target)
     role_script = template / ".agents/skills/manage-subagent-roles/scripts/role_catalog.py"
     role_spec = importlib.util.spec_from_file_location("fixture_role_catalog", role_script)
     role_helper = importlib.util.module_from_spec(role_spec)

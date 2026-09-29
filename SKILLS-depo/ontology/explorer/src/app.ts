@@ -46,7 +46,7 @@ export class ExplorerApp {
   private detailsOpen=true;private mapDetails:HTMLElement|null=null;private detailsToggle:HTMLButtonElement|null=null;private detailsClose:HTMLButtonElement|null=null;private detailsHeading:HTMLElement|null=null;
   private color=matchMedia('(prefers-color-scheme: dark)');private motion=matchMedia('(prefers-reduced-motion: reduce)');
   private announcement='';
-  constructor(root:HTMLElement,build:string,schema:string){
+  constructor(root:HTMLElement,build:string,schema:string,private embedded?:{navigate:(hash:string,push:boolean)=>void}){
     this.client=new ReadClient(build,schema,()=>this.connectionChanged());
     let storage:Storage|undefined;try{storage=localStorage;}catch{/* Presentation remains memory-only. */}this.prefs=createPreferences(null,storage);
     this.search=new SearchBox((text,generation)=>void this.previewSearch(text,generation),text=>this.submitSearch(text),id=>this.openEntry(id));
@@ -56,6 +56,7 @@ export class ExplorerApp {
     for(const value of ['system','light','dark']){const option=el('option',value[0]!.toUpperCase()+value.slice(1));option.value=value;this.theme.append(option);}this.theme.addEventListener('change',()=>this.savePreferences({...this.prefs.current(),theme:this.theme.value as 'system'|'light'|'dark'}));
     const tools=el('div',undefined,'reader-tools'),help=el('details');help.append(el('summary','Reader help'),el('p','Read-only project knowledge. Approved is a recorded lifecycle, not verified truth. Relationships do not grant execution authority. Source changed means a version mismatch, not that a claim is false.'),el('p','Local links need the correct running local reader and a current reading session. Stable IDs identify entries independently of a port.'),el('p','The reading session stays open until you use Close reading session or stop the local service. To reopen a stopped reader, use the project’s explicit local explore --open command. This page cannot restart Python.'),el('p','If the installed package is incomplete, use the selected Explorer BUILD.md maintenance instructions.'));
     tools.append(labeled('Theme',this.theme),button('Reset presentation preferences',()=>{this.client.state.preferences=this.prefs.reset();this.presentPreferences();this.mapView?.show(this.prefs.current().relationship_view,false);}),help,this.close);
+    if(this.embedded){help.remove();this.close.remove();root.classList.add('embedded-knowledge');}
     const header=el('header',undefined,'site-header');header.append(this.projectName,this.navigationToggle,this.search.element);
     this.navigationDrawer.id='reading-navigation';this.navigationDrawer.setAttribute('aria-label','Reading navigation');this.navigationToggle.setAttribute('aria-controls',this.navigationDrawer.id);this.navigationToggle.setAttribute('aria-expanded','false');
     this.navigationClose.className='navigation-close';this.rail.append(this.navigationClose,this.navigation,tools);
@@ -66,8 +67,18 @@ export class ExplorerApp {
     const skip=el('a','Skip to reading','skip-link');skip.href='#reading';skip.addEventListener('click',event=>{event.preventDefault();focus(this.reading);});root.append(skip,header,this.shell,this.navigationDrawer);
     this.narrow.addEventListener('change',()=>this.responsiveLayout());this.responsiveLayout();
     this.color.addEventListener('change',()=>this.presentPreferences());this.motion.addEventListener('change',()=>this.updateMap());
-    window.addEventListener('popstate',()=>this.restoreBrowserHistory());
-    window.addEventListener('hashchange',()=>{const next=captureFragment();if(next.bootstrap!==null||next.invalid){void this.start(next);return;}if(this.context&&next.desired!==this.currentHash()){const parsed=parseRoute(next.desired,this.context.project.id);if(parsed.ok)void this.go(parsed.route,false);else this.client.disconnect('This link belongs to another project. Open its correct local reader.');}});
+    if(!this.embedded){
+      window.addEventListener('popstate',()=>this.restoreBrowserHistory());
+      window.addEventListener('hashchange',()=>{const next=captureFragment();if(next.bootstrap!==null||next.invalid){void this.start(next);return;}if(this.context&&next.desired!==this.currentHash()){const parsed=parseRoute(next.desired,this.context.project.id);if(parsed.ok)void this.go(parsed.route,false);else this.client.disconnect('This link belongs to another project. Open its correct local reader.');}});
+    }
+  }
+  /** The shared app owns browser history and invalidates hidden knowledge reads. */
+  suspend():void {++this.routeSerial;++this.sourceSerial;this.closeNavigation();this.search.cancelTimer();this.search.hide();this.source.close();this.catalog?.dispose();this.catalog=null;this.mapView?.dispose();this.mapView=null;this.client.disconnect('Knowledge reading is paused.');}
+  async openRoute(hash:string):Promise<void> {
+    if(!this.context||!this.client.connected){await this.start({bootstrap:null,desired:hash,invalid:false});return;}
+    const route=parseRoute(hash,this.context.project.id);
+    if(route.ok)await this.go(route.route,false);
+    else this.client.disconnect('This link belongs to another project. Open its correct local reader.');
   }
   private openNavigation():void {if(!this.narrow.matches||this.navigationDrawer.open)return;this.navigationDrawer.showModal();this.navigationToggle.setAttribute('aria-expanded','true');focus(this.navigationClose);this.navigationClose.scrollIntoView({block:'start'});}
   private closeNavigation():void {if(!this.navigationDrawer.open)return;this.navigationDrawer.close();this.navigationToggle.setAttribute('aria-expanded','false');if(this.narrow.matches){focus(this.navigationToggle);this.navigationToggle.scrollIntoView({block:'nearest'});}}
@@ -146,6 +157,7 @@ export class ExplorerApp {
   private updateMap(expansionSource?:string):void {if(this.mapView&&this.model)this.mapView.update(this.model,this.client.state.focus_id,this.client.state.selection?.id??null,{dark:document.documentElement.dataset.theme==='dark',reduced:this.motion.matches,camera:this.client.state.camera},expansionSource);}
   private saveBrowserHistory(push:boolean):void {
     const safe=safeHistory(this.client.state,document.activeElement instanceof HTMLElement?document.activeElement.id||null:null);if(!safe)return;
+    if(this.embedded){this.embedded.navigate(safe.route,push);return;}
     const id=push||this.currentHistory===null?++this.historySerial:this.currentHistory;this.currentHistory=id;this.browserHistory.set(id,safe);this.historyModels.set(id,this.modelRevision);while(this.browserHistory.size>50){const oldest=this.browserHistory.keys().next().value!;this.browserHistory.delete(oldest);this.historyModels.delete(oldest);}
     history[push?'pushState':'replaceState']({explorer:id},'',location.pathname+safe.route);
   }
@@ -277,7 +289,7 @@ const response=await this.client.read('search',this.searchParams(null));if(respo
   }
 
   private async copy(value:string,message:string):Promise<void> {try{await navigator.clipboard.writeText(value);this.say(message);}catch{const text=el('textarea');text.readOnly=true;text.value=value;const box=el('div');box.append(labeled('Select and copy',text),button('Close copy field',()=>box.remove()));this.status.append(box);text.focus();text.select();}}
-  private async copyLocalLink():Promise<void> {const state=this.client.state;if(!state.route||!state.project)return;const route=encodeRoute(state.route,state.project.id);if(!route.ok)return;await this.copy(location.origin+location.pathname+route.hash,'Local link copied. It needs the correct running local reader and a current session.'+(route.notice?' '+route.notice:''));}
+  private async copyLocalLink():Promise<void> {const state=this.client.state;if(!state.route||!state.project)return;const route=encodeRoute(state.route,state.project.id);if(!route.ok)return;await this.copy(location.origin+location.pathname+(this.embedded?'?app=1':'')+route.hash,'Local link copied. It needs the correct running local reader and a current session.'+(route.notice?' '+route.notice:''));}
   private async refresh():Promise<void> {
     if(!this.context||!this.client.connected)return;const route=this.client.state.route,serial=this.routeSerial;if(!route)return;
     const required:Region[]=[];if(route.destination==='terms')required.push('search');if(this.client.state.selection&&(route.destination==='entry'||route.destination==='process'||route.destination==='map'))required.push('entry');if(route.destination==='map'&&this.client.state.focus_id)required.push('neighborhood');

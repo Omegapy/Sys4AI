@@ -247,3 +247,10 @@ Curator integration resources under ONTOLOGY-depo/integrations/curator/1.0.0 are
 neutral source material mapped through the existing reference-assets distribution.
 The v12 initializer generates project-local semantic records after specialization;
 no populated Curator graph or receipt is distributed as a Template starter.
+
+The shared Project app adds exact mirrors from the ontology package's
+`assets/project-app/` directory to neutral `project-app.json`, executable
+`Launch Project.command`, and static `Project App Setup.html` at the Template
+root. The package retains its source assets. Hold this checkout's watcher while
+coordinating code, schema, build, launcher and initializer changes; inspect and
+apply the complete mapping through the existing owner before restoring it.

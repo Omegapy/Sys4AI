@@ -2,9 +2,9 @@
 
 # Task Requirement Documents
 
-Canonical snapshot: 2026-09-26T10:12:59-06:00.
+Canonical snapshot: 2026-09-28T20:14:58-06:00.
 
-draft: 4 | trd_done: 11 | retired: 0
+draft: 4 | trd_done: 12 | retired: 0
 
 | TRD ID | Name | State | Schema compatibility | Created | Updated | Revision |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -12,6 +12,7 @@ draft: 4 | trd_done: 11 | retired: 0
 | TRD-20260907-B18FEF5C | [To-TRD intent discovery and conversational verification](trd_to-trd-intent-discovery-and-conversational-verification_2026-09-07.md) | draft | current | 2026-09-07T21:49:11-06:00 | 2026-09-07T21:49:11-06:00 | 1 |
 | TRD-20260828-D209CF52 | [Tracked implementation-plan skill](trd_tracked-implementation-plan-skill_2026-08-28.md) | draft | current | 2026-08-28T21:30:06-06:00 | 2026-09-04T15:34:27-06:00 | 2 |
 | TRD-20260902-C2F3AF2B | [Task-triggered Project Director orchestration](trd_task-triggered-project-director-orchestration_2026-09-02.md) | draft | current | 2026-09-02T09:54:52-06:00 | 2026-09-04T15:34:26-06:00 | 7 |
+| TRD-20260928-92C32D18 | [Shared Project app homepage and Knowledge integration](trd_shared-project-app-homepage-and-knowledge-integration_2026-09-28.md) | trd_done | current | 2026-09-28T19:21:16-06:00 | 2026-09-28T20:14:58-06:00 | 2 |
 | TRD-20260926-5A1422F9 | [Shared agent billboards with Task-governed collaboration](trd_shared-agent-billboards-with-task-governed-collaboration_2026-09-26.md) | trd_done | current | 2026-09-26T09:37:56-06:00 | 2026-09-26T10:12:59-06:00 | 2 |
 | TRD-20260919-B6D51106 | [Project Knowledge Explorer - full first release](trd_project-knowledge-explorer-full-first-release_2026-09-19.md) | trd_done | current | 2026-09-19T19:17:23-06:00 | 2026-09-19T19:53:52-06:00 | 2 |
 | TRD-20260913-C85981B3 | [Integrated Project Curator, ontology and project initialization](trd_integrated-project-curator-ontology-and-project-initializati_2026-09-13.md) | trd_done | current | 2026-09-13T08:52:09-06:00 | 2026-09-13T09:02:47-06:00 | 2 |

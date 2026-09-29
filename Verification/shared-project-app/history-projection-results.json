@@ -1,0 +1,97 @@
+{
+  "actual_root_reads": [
+    {
+      "coverage": "Latest Task response metadata only. Earlier responses and historical document bytes are not returned by this route.",
+      "created_at": "2026-09-26T19:30:29-06:00",
+      "current_revision": 56,
+      "current_source_sha256": "27fb8a4fb15d9967cc690554cc80b2448f0bd76267e3a8a3d6e8dcaa313ae200",
+      "history_entries": 1,
+      "metadata_matches_owner": true,
+      "public_fields_only": true,
+      "response_bytes": 6697,
+      "response_id": "RESP-0055",
+      "seconds": 0.95,
+      "selector": "TASK-20260926-7F3F57E1",
+      "sequence": 55,
+      "source_hash_matches_current": true,
+      "status": "ready",
+      "supersedes_response_id": null,
+      "wire_valid": true
+    },
+    {
+      "coverage": "Latest up to 12 entries from the current canonical plan history. Earlier entries may be omitted; historical document bytes are not loaded.",
+      "current_revision": 3,
+      "current_source_sha256": "c53f906aa63a81866fc97594982c3b4473c67d1bbd448ecc95ea0d94fd266ef4",
+      "history_entries": 3,
+      "metadata_matches_owner": true,
+      "public_fields_only": true,
+      "response_bytes": 5329,
+      "revisions": [
+        1,
+        2,
+        3
+      ],
+      "seconds": 3.424,
+      "selector": "PLAN-20260929-F690CD02",
+      "source_hash_matches_current": true,
+      "status": "ready",
+      "wire_valid": true
+    },
+    {
+      "current_revision": 2,
+      "current_source_sha256": "51426d97bf528a8c2cb92ae557e8e60ec4dfc76abc8a6fff2e16d35fd3af556f",
+      "history_route_limitation": "History is unavailable through the supported TRD show route. The current document revision and source hash are shown above.",
+      "limitation_is_explicit": true,
+      "response_bytes": 11417,
+      "seconds": 0.112,
+      "selector": "TRD-20260928-92C32D18",
+      "source_hash_matches_current": true,
+      "status": "ready",
+      "wire_valid": true
+    }
+  ],
+  "canonical_sha256_after": {
+    "PLAN-20260929-F690CD02": "c53f906aa63a81866fc97594982c3b4473c67d1bbd448ecc95ea0d94fd266ef4",
+    "TASK-20260926-7F3F57E1": "27fb8a4fb15d9967cc690554cc80b2448f0bd76267e3a8a3d6e8dcaa313ae200",
+    "TRD-20260928-92C32D18": "51426d97bf528a8c2cb92ae557e8e60ec4dfc76abc8a6fff2e16d35fd3af556f"
+  },
+  "canonical_sha256_before": {
+    "PLAN-20260929-F690CD02": "c53f906aa63a81866fc97594982c3b4473c67d1bbd448ecc95ea0d94fd266ef4",
+    "TASK-20260926-7F3F57E1": "27fb8a4fb15d9967cc690554cc80b2448f0bd76267e3a8a3d6e8dcaa313ae200",
+    "TRD-20260928-92C32D18": "51426d97bf528a8c2cb92ae557e8e60ec4dfc76abc8a6fff2e16d35fd3af556f"
+  },
+  "canonical_sources": {
+    "PLAN-20260929-F690CD02": "Implementation_Plans/Plan_shared-project-app-homepage-and-knowledge-integration_2026-09-29_F690CD02/plan.json",
+    "TASK-20260926-7F3F57E1": "Tasks/Task-implement-shared-agent-billboards-revision-1-2026-09-26--7F3F57E1/task.json",
+    "TRD-20260928-92C32D18": "TRDs/trd_shared-project-app-homepage-and-knowledge-integration_2026-09-28.md"
+  },
+  "canonical_sources_unchanged": true,
+  "changed_source_sha256": {
+    "SKILLS-depo/ontology/scripts/project_app_work.py": "e618be0c04682ad098bc5bbc12d48aafa06774942eee99f0f1092efbadbb28f9",
+    "SKILLS-depo/ontology/tests/test_project_app_readers.py": "d9a955b204b3c065934a0676aee4866b635ed93a2eb643263a670f093b0f5936"
+  },
+  "correction": "Bounded public Task and plan history projection with explicit TRD route limitation",
+  "focused_tests": {
+    "command": ".venv/bin/python -B -m unittest discover -s SKILLS-depo/ontology/tests -p test_project_app_readers.py",
+    "new_assertions": [
+      "Latest Task metadata with bounded coverage",
+      "Plan latest-12 projection and allowed public fields",
+      "Authority/native fields and private counts excluded",
+      "TRD supported-route history limitation"
+    ],
+    "passed": true,
+    "tests": 6
+  },
+  "limitations": [
+    "Task history contains only current last_response metadata, not the complete response catalog or historical response bytes.",
+    "Plan history is limited to its latest 12 canonical entries; earlier document bytes are not opened.",
+    "TRD history is not exposed by its supported show route.",
+    "No frontend, installed package, Template, managed records or build outputs were changed."
+  ],
+  "observed_at": "2026-09-29T05:23:06.834513+00:00",
+  "role_hashes": {
+    "Roles/project-sub-agent/AGENTS.md": "7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2",
+    "Roles/project-sub-agent/ROLE.md": "4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2"
+  },
+  "schema_version": 1
+}

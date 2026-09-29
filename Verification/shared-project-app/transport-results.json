@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-29T05:14:47.462723+00:00",
+  "scope": "Shared Project app transport, lazy Knowledge integration, launcher, private instance handshake and owned stop",
+  "owned_files": [
+    "SKILLS-depo/ontology/scripts/project_app.py",
+    "SKILLS-depo/ontology/scripts/ontology_explorer.py",
+    "SKILLS-depo/ontology/scripts/ontology_explorer_worker.py",
+    "SKILLS-depo/ontology/scripts/ontology_explorer_snapshot.py",
+    "SKILLS-depo/ontology/tests/test_project_app_service.py",
+    "SKILLS-depo/ontology/assets/project-app/Launch Project.command",
+    "SKILLS-depo/ontology/assets/project-app/Project App Setup.html"
+  ],
+  "final_inspected_sources": {
+    "SKILLS-depo/ontology/scripts/project_app.py": {
+      "sha256": "316e5276874e0729e0775664c63b5d63801e31dd168d9deaf677b986807bf04d",
+      "mode": "0o644"
+    },
+    "SKILLS-depo/ontology/scripts/ontology_explorer.py": {
+      "sha256": "f92e85ddcaa3c6cb04cd7732923b2e7f8eac1dc92f217bdf44f0bed1bbd07705",
+      "mode": "0o644"
+    },
+    "SKILLS-depo/ontology/scripts/ontology_explorer_worker.py": {
+      "sha256": "6f3644b3a1b7789ed0e3c6debf9baf42e710421f033f9ad7c64d814acaa248e0",
+      "mode": "0o644"
+    },
+    "SKILLS-depo/ontology/scripts/ontology_explorer_snapshot.py": {
+      "sha256": "65ba857f70e38e31ac33780e94a9b9ea51153d07399d210e04c5e26c5af04525",
+      "mode": "0o644"
+    },
+    "SKILLS-depo/ontology/tests/test_project_app_service.py": {
+      "sha256": "ca1b6bb02be4762c2450e22a1db8d418c1749fab70a988f3bbb51cc87a8b56eb",
+      "mode": "0o644"
+    },
+    "SKILLS-depo/ontology/assets/project-app/Launch Project.command": {
+      "sha256": "edd89fbc93ba64873ddfe2986bf819fda99a2e47ba8011bbb0170f23ad4f5bb9",
+      "mode": "0o755"
+    },
+    "SKILLS-depo/ontology/assets/project-app/Project App Setup.html": {
+      "sha256": "04e83320003857f8e84338c0db913a5c10b3fa4bd12f08f31a82c542efcf3562",
+      "mode": "0o644"
+    },
+    "SKILLS-depo/ontology/scripts/project_app_capabilities.py": {
+      "sha256": "936800f8cdf01c1a39eb367849d50ae55312d14ca0daf1fb113e17cbcf5adfe7",
+      "mode": "0o644"
+    },
+    "SKILLS-depo/ontology/scripts/project_app_core.py": {
+      "sha256": "49bf221923279d49d94969a33b353ffe7e4a340d565199288db8013ec06154c7",
+      "mode": "0o644"
+    },
+    "SKILLS-depo/ontology/scripts/project_app_knowledge.py": {
+      "sha256": "76b2849644c309f59b937766ee04cba20ddf5ee2b8416cbb54df281f0b5b32cd",
+      "mode": "0o644"
+    },
+    "SKILLS-depo/ontology/scripts/project_app_search.py": {
+      "sha256": "946211d370857fe2ceb290ba0fb06dfcfca6a8f17e561502d672324b793c2122",
+      "mode": "0o644"
+    },
+    "SKILLS-depo/ontology/scripts/project_app_sources.py": {
+      "sha256": "0bfa4e209f0185e501a0b3b297d55ad97f2b3d03b4126d0c903a7d4c04124288",
+      "mode": "0o644"
+    },
+    "SKILLS-depo/ontology/scripts/project_app_work.py": {
+      "sha256": "1f63a46b2a787757a75048d03af1faeabb3f24afe219c8209e1b308bfa38701d",
+      "mode": "0o644"
+    },
+    "ONTOLOGY-depo/schema/project-app-v1.json": {
+      "sha256": "830474e8afea9aff66c89c0684f77f849cfc472d46f8bc1b3be640eb2f240c9d",
+      "mode": "0o644"
+    }
+  },
+  "checks": [
+    {
+      "command": ".venv/bin/python -I -S -B SKILLS-depo/ontology/tests/test_project_app_service.py",
+      "result": "passed",
+      "cases": 3,
+      "seconds": 19.441,
+      "observed_cases": [
+        "independent Home with invalid optional ontology; unchanged Host/Origin/CSRF protections; reading-session close discards pending response; browser owned stop and private cleanup",
+        "authenticated reopen; wrong project, instance, credential and package rejection; authenticated private stop after package replacement",
+        "standalone Knowledge with app package; actual CLI launch, authenticated reopen, private owned stop"
+      ]
+    },
+    {
+      "command": ".venv/bin/python -I -S -B SKILLS-depo/ontology/tests/test_project_app_service.py ProjectAppServiceTests.test_new_package_retains_standalone_and_cli_owned_launch_stop",
+      "result": "passed",
+      "cases": 1,
+      "seconds": 11.452,
+      "observed_cases": [
+        "standalone Knowledge on final app package",
+        "positive embedded Knowledge route and unified lexical Knowledge results through one lazy reader",
+        "actual CLI daemon launch, authenticated reopen, and private owned stop"
+      ],
+      "reason_for_recheck": "Added positive shared Knowledge/search integration coverage; fixed required relevance sort and preservation of valid incomplete reader results. Unchanged boundary cases were not rerun."
+    },
+    {
+      "command": "/bin/zsh -n SKILLS-depo/ontology/assets/project-app/Launch Project.command; compile() of five owned Python sources; git diff --check on existing changed scripts",
+      "result": "passed",
+      "launcher_mode": "0755"
+    }
+  ],
+  "repairs": [
+    "Synthetic project.json fixture was corrected to existing owner schema and exact ontology identity; no product identity relaxation.",
+    "App default policy now includes inherited visited_nodes and default_page_items required by safe error envelopes.",
+    "Canonical ontology helper comparison retains exact ontology-only inventory; complete app executing bytes remain pinned by VerifiedPackage.",
+    "Unified nonempty Knowledge query uses existing required relevance sort. Reader-owned projection preserves incomplete/ambiguous results and definition_excerpt."
+  ],
+  "cleanup": "Disposable service fixtures were closed and removed. CLI services received authenticated owned stop; no unrelated PID was signaled.",
+  "caveats": [
+    "First three-case pass preceded the later positive integration extension; only the affected combined compatibility case was repeated. Final inspected source hashes are recorded separately.",
+    "No final frontend build, root adoption, macOS double-click/browser observation, or broad Explorer qualification is claimed by this receipt.",
+    "Stop acknowledgement means shutdown was accepted; browser UI reports uncertainty when acknowledgement is unavailable.",
+    "No dependencies or models were installed, and no existing shared service, governed record, Task state, project registry or unrelated project installation was changed by this worker."
+  ]
+}

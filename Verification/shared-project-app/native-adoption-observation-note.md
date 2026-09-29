@@ -1,0 +1,1 @@
+The receipt retains the exact /root running row from the current collaboration.list_agents output. All three component workers were observed completed; their completed-message bodies are omitted from the authorization packet. No manager or worker was running.

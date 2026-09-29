@@ -451,3 +451,24 @@ grant leaves a resumable `curator_integration.preview` in the setup receipt. Sup
 request after exact review. API callers may supply a trusted current grant callback.
 This route adds no installation, background AI, Git or unselected-project authority.
 Static semantic success is separate from current runtime execution.
+
+## Shared Project app edition
+
+New and first-prepared projects use `governance-starter-v14`, carrying the
+shared reader package plus `project-app.json`, `Launch Project.command` and
+`Project App Setup.html`. Identity is specialized; explanatory starter sections
+remain labeled gaps until the project owner supplies reviewed source-linked text.
+The new launcher is published with recorded mode 0755. Existing launcher modes
+and user-authored content are preserved.
+
+Use `prepare-existing --adopt-module project-app` with the normal destination
+and identity arguments for one selected earlier completed setup. Its base
+receipt edition is preserved. The module reuses the existing locks, immutable
+base receipt, frozen source/target manifests, idempotence and interrupted-operation
+recovery. A complete unchanged receipt-owned ontology/Explorer package may be
+refreshed as one unit. Unknown, incomplete or customized packages are held for
+separate reviewed adoption. A completed rerun preserves later Home edits.
+
+`assess-project-app --destination ABSOLUTE_PROJECT_PATH` reads static files and
+launcher mode; it starts no runtime. The app module does not widen the existing
+child-project destination boundary or create knowledge, Tasks or services.

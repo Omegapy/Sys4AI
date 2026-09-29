@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sys4ai:project-app:1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_id",
+    "home",
+    "documents",
+    "start_here"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "project_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z][a-z0-9-]{0,99}$"
+    },
+    "home": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "purpose",
+        "scope",
+        "audience",
+        "sections"
+      ],
+      "properties": {
+        "purpose": {
+          "$ref": "#/$defs/Section"
+        },
+        "scope": {
+          "$ref": "#/$defs/Section"
+        },
+        "audience": {
+          "$ref": "#/$defs/Section"
+        },
+        "sections": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/$defs/Section"
+          }
+        }
+      }
+    },
+    "documents": {
+      "type": "array",
+      "maxItems": 24,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "path"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "path": {
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      }
+    },
+    "start_here": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "path"
+          ],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "path": {
+              "type": "string",
+              "maxLength": 500
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "Section": {
+      "type": "object",
+      "required": [
+        "text",
+        "sources",
+        "reviewed_sha256",
+        "reviewed_at"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "text": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "sources": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string",
+                "maxLength": 500
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        },
+        "reviewed_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "reviewed_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 80
+        }
+      }
+    },
+    "Response": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "status",
+        "project_id",
+        "observed_at",
+        "issues",
+        "operation"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "status": {
+          "enum": [
+            "ready",
+            "partial",
+            "unavailable",
+            "disabled",
+            "error"
+          ]
+        },
+        "project_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "observed_at": {
+          "type": "string"
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "operation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "description": "Closed operation payloads are projected and validated by project_app_core.validate_response; maximum encoded response is 65536 bytes."
+    }
+  }
+}

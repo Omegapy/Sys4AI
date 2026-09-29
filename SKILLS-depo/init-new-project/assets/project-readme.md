@@ -57,3 +57,20 @@ and canonical publication require their own current project scope.
 Automatic memory capture defaults on for a new installation. The agent records
 useful evidence-backed findings at substantive work completion. Ask to turn it
 off; current configuration in `memory.yaml` determines the actual preference.
+
+## Project app
+
+Open **Launch Project.command** in Finder to read this project's Home, Work,
+Project knowledge, Health and setup, and Tools and help. Search and source
+previews stay within the selected project's permitted information.
+
+Closing a tab leaves the reading session active. **Close reading session**
+revokes that session; **Stop app** stops this project's owned reader service.
+Opening the launcher again reuses a compatible service or starts a fresh one.
+If a prerequisite is missing, the launcher opens **Project App Setup.html**.
+
+Home explanations live in `project-app.json`. A project owner reviews the text
+and its source references; changed sources show a review notice. Empty starter
+content is labeled until reviewed. See the
+[Project app operations](./.agents/skills/ontology/references/project-app-operations.md)
+for build, selected adoption and recovery instructions.

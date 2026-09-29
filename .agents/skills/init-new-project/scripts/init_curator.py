@@ -255,7 +255,7 @@ def assess(h, destination, *, integration_required=None):
         if integration_required is None:
             receipt = h.destination_file(destination,h.RECORD)
             saved = h.unique_json(h.file_bytes(receipt)) if receipt.exists() else {}
-            integration_required = saved.get('setup_contract') == h.SETUP_CONTRACT or any(op.get('integration_edition') == h.INTEGRATION.EDITION for op in saved.get('module_adoptions',[]))
+            integration_required = saved.get('setup_contract') in {h.INTEGRATED_CONTRACT, h.SETUP_CONTRACT} or any(op.get('integration_edition') == h.INTEGRATION.EDITION for op in saved.get('module_adoptions',[]))
         locked = h._static('inventory', legacy=not integration_required).get('curator_locked_resources', {})
         current_locked=h._static('inventory').get('curator_locked_resources',{})
         fail(h, bool(locked) and all(name in files and h.sha(files[name]) in ({expected,current_locked.get(name)} if not integration_required else {expected}) for name,expected in locked.items()),

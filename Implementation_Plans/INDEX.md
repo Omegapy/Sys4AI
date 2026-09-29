@@ -18,3 +18,4 @@
 | `PLAN-20260913-64A6385B` | Integrated Project Curator, ontology and project initialization | `draft` | 1 | 2026-09-13T16:05:55.769210Z | `Plan_integrated-curator-ontology-project-initialization_2026-09-13_64A6385B` | 7 | 23 | `unresolved` |
 | `PLAN-20260920-9B9964BA` | Project Knowledge Explorer - full first release | `draft` | 1 | 2026-09-20T02:47:38.906176Z | `Plan_project-knowledge-explorer-full-first-release_2026-09-20_9B9964BA` | 8 | 33 | `unresolved` |
 | `PLAN-20260926-40C61316` | Shared agent billboards with Task-governed collaboration | `draft` | 1 | 2026-09-26T16:28:54.101663Z | `Plan_shared-agent-billboards-task-governed-collaboration_2026-09-26_40C61316` | 5 | 17 | `unresolved` |
+| `PLAN-20260929-F690CD02` | Shared Project app homepage and Knowledge integration | `ready` | 3 | 2026-09-29T04:35:38.809698Z | `Plan_shared-project-app-homepage-and-knowledge-integration_2026-09-29_F690CD02` | 6 | 19 | `pass` |

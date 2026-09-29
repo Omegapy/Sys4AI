@@ -43,7 +43,8 @@ STARTER_FILES = {
 }
 IDENTITY = "project.json"
 RECORD = "control_records/project-setup.json"
-SETUP_CONTRACT = "governance-starter-v12"
+INTEGRATED_CONTRACT = "governance-starter-v12"
+SETUP_CONTRACT = "governance-starter-v14"
 CURATOR_SESSION_CONTRACT = "governance-starter-v11"
 CURATOR_BASE_CONTRACT = "governance-starter-v10"
 ADVANCED_CONTRACT = "governance-starter-v9"
@@ -63,6 +64,9 @@ LOWERCASE_CONTRACT = "governance-starter-v2"
 LEGACY_CONTRACT = "governance-starter-v1"
 ROLE_ROOTS = {CURATOR_SESSION_CONTRACT: "Roles", SETUP_CONTRACT: "Roles", CURATOR_BASE_CONTRACT: "Roles", ADVANCED_CONTRACT: "Roles", ONTOLOGY_CONTRACT: "Roles", LEARNING_CONTRACT: "Roles", CAPTURE_CONTRACT: "Roles", MEMORY_CONTRACT: "Roles", LICENSE_CONTRACT: "Roles", PRE_LICENSE_CONTRACT: "Roles", LOWERCASE_CONTRACT: "roles",
               LEGACY_CONTRACT: "sub-agent-roles"}
+for _contracts in (CURATOR_CONTRACTS, MEMORY_CONTRACTS, CAPTURE_CONTRACTS, LEARNING_CONTRACTS, ONTOLOGY_CONTRACTS, ADVANCED_CONTRACTS):
+    _contracts.add(INTEGRATED_CONTRACT)
+ROLE_ROOTS[INTEGRATED_CONTRACT] = "Roles"
 LICENSE_CONTRACTS = {LICENSE_CONTRACT, *MEMORY_CONTRACTS}
 LICENSE_FILES = {"LICENSE", "LICENSE-CODE", "LICENSE-DOCS"}
 MEMORY_FILES = {"memory.yaml", "MEMORY/README.md"}
@@ -122,7 +126,7 @@ ROLE_INSPECTOR_SHA256 = {
     "roles": "65f39e7f394b851e1b9018d896417eb67449406f73e32bd981ebe4ddbce37352",
     "sub-agent-roles": "ed0bd7f33650afbed0808d6bb83f8a8be5bd0404294efbeb26dd95fba28e7368",
 }
-SPECIALIZED_FILES = {"README.md", IDENTITY, "memory.yaml", "ontology.yaml", "ontology-advanced.yaml", "curator.yaml", "curator-session.yaml", "Roles/INDEX.md", "AGENTS.md"}
+SPECIALIZED_FILES = {"README.md", IDENTITY, "memory.yaml", "ontology.yaml", "ontology-advanced.yaml", "curator.yaml", "curator-session.yaml", "Roles/INDEX.md", "AGENTS.md", "project-app.json"}
 LICENSE_MARKER = re.compile(
     r"(?:licen[cs]e(?:s|[._-].+)?|copying(?:[._-].+)?|copyright(?:[._-].+)?|unlicense(?:[._-].+)?)",
     re.IGNORECASE,
@@ -186,6 +190,10 @@ _collaboration_spec = importlib.util.spec_from_file_location("_sys4ai_initialize
 COLLABORATION = importlib.util.module_from_spec(_collaboration_spec)
 _collaboration_spec.loader.exec_module(COLLABORATION)
 COLLABORATION_MODULE = COLLABORATION.MODULE
+_app_spec = importlib.util.spec_from_file_location("_sys4ai_initializer_project_app", Path(__file__).with_name("init_project_app.py"))
+PROJECT_APP = importlib.util.module_from_spec(_app_spec)
+_app_spec.loader.exec_module(PROJECT_APP)
+APP_MODULE = PROJECT_APP.MODULE
 _static_spec = importlib.util.spec_from_file_location("_sys4ai_initializer_static", Path(__file__).with_name("init_static_health.py"))
 STATIC = importlib.util.module_from_spec(_static_spec)
 _static_spec.loader.exec_module(STATIC)
@@ -205,6 +213,10 @@ def _integration(name, *args, **kwargs):
 
 def _collaboration(name, *args, **kwargs):
     return getattr(COLLABORATION, name)(types.SimpleNamespace(**globals()), *args, **kwargs)
+
+
+def _app(name, *args, **kwargs):
+    return getattr(PROJECT_APP, name)(types.SimpleNamespace(**globals()), *args, **kwargs)
 
 
 def _static(name, *args, **kwargs):
@@ -623,6 +635,8 @@ def template_sources(
         or optional_files != []
     ):
         raise InitializationError("template starter file allowlist is invalid")
+    if contract == SETUP_CONTRACT and stat.S_IMODE(safe(template / PROJECT_APP.LAUNCHER).stat().st_mode) != 0o755:
+        raise InitializationError("Template Project launcher must retain reviewed executable mode 0755")
     copied: dict[str, bytes] = {}
     origins: dict[str, Path] = {}
     versions: dict[str, str] = {}
@@ -683,7 +697,7 @@ def template_sources(
 
 def required_starters(contract: str) -> set[str]:
     # Older receipts retain the file inventory of their original edition.
-    return (STARTER_FILES | ({INTEGRATION.RECIPE + "/" + name for name in ("recipe.json", "locators.json", "competency.json", "manifest.json", "contract.md")} if contract == SETUP_CONTRACT else set()) | (LICENSE_FILES if contract in LICENSE_CONTRACTS else set())
+    return (STARTER_FILES | (PROJECT_APP.STARTERS if contract == SETUP_CONTRACT else set()) | ({INTEGRATION.RECIPE + "/" + name for name in ("recipe.json", "locators.json", "competency.json", "manifest.json", "contract.md")} if contract in {INTEGRATED_CONTRACT, SETUP_CONTRACT} else set()) | (LICENSE_FILES if contract in LICENSE_CONTRACTS else set())
             | (MEMORY_FILES if contract in MEMORY_CONTRACTS else set())
             | (LEARNING_FILES if contract in LEARNING_CONTRACTS else set())
             | (ONTOLOGY_FILES if contract in ONTOLOGY_CONTRACTS else set())
@@ -855,8 +869,10 @@ def source_snapshot(
             destination=destination, owned_governance=owned_governance | ({"AGENTS.md"} if proposed["AGENTS.md"] != original["AGENTS.md"] else set()))
     if contract in CURATOR_CONTRACTS:
         proposed[CURATOR.CONFIG] = _curator("specialize", original[CURATOR.CONFIG], identity, destination=destination)
-        if contract in {SETUP_CONTRACT, CURATOR_SESSION_CONTRACT}:
+        if contract in {INTEGRATED_CONTRACT, SETUP_CONTRACT, CURATOR_SESSION_CONTRACT}:
             proposed[CURATOR.SESSION] = _curator("specialize_session", original[CURATOR.SESSION], identity)
+    if contract == SETUP_CONTRACT:
+        proposed[PROJECT_APP.CONFIG] = _app("specialize", original[PROJECT_APP.CONFIG], identity)
     records = [
         {
             "source": source.relative_to(depot).as_posix(),
@@ -864,6 +880,7 @@ def source_snapshot(
             "destination": relative,
             "destination_sha256": sha(proposed[relative]),
             "source_version": versions[relative],
+            **({"source_mode": 0o755, "destination_mode": 0o755} if relative == PROJECT_APP.LAUNCHER else {}),
         }
         for relative, source in sorted(origins.items())
     ]
@@ -1995,6 +2012,8 @@ MODULE_FROZEN = ("module_id", "module_version", "project_root", "identity", "bas
 
 
 def module_packages(operation: dict[str, Any]) -> tuple[str, ...]:
+    if isinstance(operation, dict) and operation.get("module_id") == APP_MODULE:
+        return (PROJECT_APP.ROOT,)
     if isinstance(operation, dict) and operation.get("module_id") == COLLABORATION_MODULE:
         return (COLLABORATION.ROOT,)
     if isinstance(operation, dict) and operation.get("module_id") == CURATOR_MODULE:
@@ -2005,6 +2024,8 @@ def module_packages(operation: dict[str, Any]) -> tuple[str, ...]:
 
 
 def module_frozen(operation: dict[str, Any]) -> tuple[str, ...]:
+    if isinstance(operation, dict) and operation.get("module_id") == APP_MODULE:
+        return MODULE_FROZEN + PROJECT_APP.FROZEN
     if isinstance(operation, dict) and operation.get("module_id") == COLLABORATION_MODULE:
         return MODULE_FROZEN + COLLABORATION.FROZEN
     if isinstance(operation, dict) and operation.get("module_id") == CURATOR_MODULE:
@@ -2242,6 +2263,12 @@ def validate_module_adoptions(record: dict[str, Any], destination: Path) -> None
         raise InitializationError("invalid module adoption collection")
     seen = set()
     for index, operation in enumerate(operations):
+        if isinstance(operation, dict) and operation.get("module_id") == APP_MODULE:
+            _app("validate_operation", record, destination, operation, index)
+            if operation["operation_id"] in seen:
+                raise InitializationError("duplicate Project app module operation")
+            seen.add(operation["operation_id"])
+            continue
         if isinstance(operation, dict) and operation.get("module_id") == COLLABORATION_MODULE:
             _collaboration("validate_operation", record, destination, operation, index)
             if operation["operation_id"] in seen:
@@ -2415,6 +2442,8 @@ def validate_module_adoptions(record: dict[str, Any], destination: Path) -> None
 
 
 def check_module_state(destination: Path, operation: dict[str, Any], *, complete: bool = False) -> None:
+    if operation["module_id"] == APP_MODULE:
+        _app("check_modes", destination, operation, complete=complete)
     if operation["module_id"] == CURATOR_MODULE:
         _curator("check_protected", destination, operation)
     if operation["module_id"] == ADVANCED_MODULE:
@@ -2441,7 +2470,8 @@ def check_module_state(destination: Path, operation: dict[str, Any], *, complete
 
 
 def check_module_sources(depot: Path, operation: dict[str, Any]) -> dict[str, bytes]:
-    original = (_collaboration("source_files", depot) if operation["module_id"] == COLLABORATION_MODULE else
+    original = (_app("source_files", depot) if operation["module_id"] == APP_MODULE else
+                _collaboration("source_files", depot) if operation["module_id"] == COLLABORATION_MODULE else
                 _curator("selected_source_files", depot, operation) if operation["module_id"] == CURATOR_MODULE else
                 ontology_source_files(depot) if operation["module_id"] == ONTOLOGY_MODULE else
                 _advanced("selected_source_files", depot, operation) if operation["module_id"] == ADVANCED_MODULE else
@@ -2454,7 +2484,8 @@ def check_module_sources(depot: Path, operation: dict[str, Any]) -> dict[str, by
 
 def verify_module_current(destination: Path, operation: dict[str, Any], record: dict[str, Any] | None = None) -> None:
     operation["current_files"] = {name: digest for root in module_packages(operation) for name, digest in package_inventory(destination, root).items()}
-    operation["capabilities"] = (_collaboration("assess", destination, operation) if operation["module_id"] == COLLABORATION_MODULE else
+    operation["capabilities"] = (_app("assess", destination, operation) if operation["module_id"] == APP_MODULE else
+                                 _collaboration("assess", destination, operation) if operation["module_id"] == COLLABORATION_MODULE else
                                  _curator("assess", destination, integration_required=operation.get("schema_version")==2) if operation["module_id"] == CURATOR_MODULE else
                                  assess_ontology(destination) if operation["module_id"] == ONTOLOGY_MODULE else
                                  _advanced("assess", destination) if operation["module_id"] == ADVANCED_MODULE else assess_learning(destination))
@@ -2495,7 +2526,8 @@ def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], 
                 original, _, _, _, _ = template_sources(depot)
                 if module_id == LEARNING_MODULE:
                     check_existing_role_layout(destination, original[ROLE_HELPER])
-                operation, proposed = (_collaboration("plan", depot, destination, record, previous_raw) if module_id == COLLABORATION_MODULE else
+                operation, proposed = (_app("plan", depot, destination, record, previous_raw) if module_id == APP_MODULE else
+                                       _collaboration("plan", depot, destination, record, previous_raw) if module_id == COLLABORATION_MODULE else
                                        _curator("plan", depot, destination, record, previous_raw, refresh_modules) if module_id == CURATOR_MODULE else
                                        plan_ontology_adoption(depot, destination, record, previous_raw, refresh_modules)
                                        if module_id == ONTOLOGY_MODULE else
@@ -2503,7 +2535,8 @@ def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], 
                                        plan_module_adoption(depot, destination, record, previous_raw, refresh_dependencies))
                 record.setdefault("module_adoptions", []).append(operation)
             else:
-                proposed = (_collaboration("proposed_files", check_module_sources(depot, operation), operation) if module_id == COLLABORATION_MODULE else
+                proposed = (_app("proposed_files", check_module_sources(depot, operation), operation) if module_id == APP_MODULE else
+                            _collaboration("proposed_files", check_module_sources(depot, operation), operation) if module_id == COLLABORATION_MODULE else
                             _curator("proposed_files", destination, record["identity"], check_module_sources(depot, operation), new_curator_files=operation["new_curator_files"]) if module_id == CURATOR_MODULE else
                             ontology_proposed_files(destination, record["identity"], check_module_sources(depot, operation), new_ontology=operation["new_ontology"])
                             if module_id == ONTOLOGY_MODULE else
@@ -2551,7 +2584,7 @@ def run_module_adoption(depot: Path, destination: Path, record: dict[str, Any], 
                         _ontology_checkpoint(targets=False)
                         target.unlink()
                     else:
-                        atomic_write(target, proposed[name], current)
+                        atomic_write(target, proposed[name], current, mode=operation.get("modes", {}).get(name, 0o644))
                 for package in operation["packages"].values():
                     for name in sorted(package["before"].keys() - package["after"].keys(), key=lambda value: len(Path(value).parts), reverse=True):
                         target = safe(destination / name)
@@ -2607,7 +2640,7 @@ def _run_initialization_base(
     refresh_modules = sorted(set(CURATOR_MODULE if item == "curator" else item for item in (refresh_module or [])))
     if refresh_modules in ([ONTOLOGY_MODULE],[CURATOR_MODULE]) and adopt_module is None:
         adopt_module = refresh_modules[0]
-    if (adopt_module not in {None, LEARNING_MODULE, ONTOLOGY_MODULE, ADVANCED_MODULE, CURATOR_MODULE, COLLABORATION_MODULE} or refresh not in ([], ["memory"])
+    if (adopt_module not in {None, LEARNING_MODULE, ONTOLOGY_MODULE, ADVANCED_MODULE, CURATOR_MODULE, COLLABORATION_MODULE, APP_MODULE} or refresh not in ([], ["memory"])
             or refresh_modules not in ([], [ONTOLOGY_MODULE], [CURATOR_MODULE]) or adopt_module is not None and mode != "prepare-existing" and adopt_module != COLLABORATION_MODULE
             or refresh and adopt_module != LEARNING_MODULE or refresh_modules and refresh_modules != [adopt_module]):
         raise InitializationError("refresh requires its exact selected prepare-existing module; memory is a separate learning dependency")
@@ -2659,7 +2692,7 @@ def _run_initialization_base(
                     proposed=proposed_all, original=original, saved_identity=saved_identity,
                     preserved_licenses=preserved_licenses)
                 integration, generated = (_integration("prepare", destination, identity, proposed, original, preserved, before)
-                                          if contract == SETUP_CONTRACT else (None, {}))
+                                          if contract in {INTEGRATED_CONTRACT, SETUP_CONTRACT} else (None, {}))
                 record = {"schema_version": 1, "setup_contract": SETUP_CONTRACT,
                           "status": "partial", "mode": mode, "operation_id": "project-setup-" + uuid4().hex,
                           "identity": identity, "project_root": str(destination), "sources": sources,
@@ -2677,6 +2710,8 @@ def _run_initialization_base(
                     name = entry["destination"]
                     if name in preserved:
                         entry.update(adoption="preserved-project-owned", destination_sha256=preserved[name])
+                        if name == PROJECT_APP.LAUNCHER:
+                            entry["destination_mode"] = stat.S_IMODE(destination_file(destination, name).stat().st_mode)
                     elif name not in proposed:
                         entry.update(adoption="skipped-existing-license" if name in LICENSE_FILES
                                      else "skipped-existing-package", destination_sha256=None)
@@ -2692,7 +2727,7 @@ def _run_initialization_base(
                 if contract != LEGACY_CONTRACT:
                     role_index = ROLE_ROOTS[contract] + "/INDEX.md"
                     proposed_all[role_index] = planned_role_index(destination, proposed_all, record["owned_files"], contract=contract)
-                if contract == SETUP_CONTRACT and record.get("generated_files"):
+                if contract in {INTEGRATED_CONTRACT, SETUP_CONTRACT} and record.get("generated_files"):
                     effective = dict(proposed_all)
                     for name in effective:
                         path = destination_file(destination, name)
@@ -2760,14 +2795,14 @@ def _run_initialization_base(
                         if present != after:
                             if (sha(present) if present is not None else None) != expected:
                                 raise InitializationError("owned asset changed during interrupted adoption")
-                            atomic_write(target, after, present)
+                            atomic_write(target, after, present, mode=0o755 if name == PROJECT_APP.LAUNCHER else 0o644)
                     check_sources(depot, record["sources"], contract=contract)
                     check_license_adoption(destination, record)
                     check_memory_adoption(destination, record)
                     check_learning_adoption(destination, record)
                     check_ontology_adoption(destination, record)
                     checkpoint("assets")
-                if contract == SETUP_CONTRACT:
+                if contract in {INTEGRATED_CONTRACT, SETUP_CONTRACT}:
                     _integration("complete", destination, record, checkpoint, integration_grant_file, integration_proposal_file)
                 template_guard.close()
                 begin("registration")
@@ -2830,7 +2865,7 @@ def run_initialization(
         if pending and pending[0].get("module_id") == COLLABORATION_MODULE:
             return _run_initialization_base(**{**arguments, "adopt_module": COLLABORATION_MODULE})
     record = _run_initialization_base(**arguments)
-    if record["status"] != "completed":
+    if record["status"] != "completed" or adopt_module == APP_MODULE:
         return record
     depot, _ = installed_locations()
     return run_module_adoption(depot, destination, record, file_bytes(record_path), [], module_id=COLLABORATION_MODULE)
@@ -2846,7 +2881,7 @@ def main(argv: list[str] | None = None) -> int:
         route.add_argument("--project-name", required=True)
         route.add_argument("--purpose", required=True)
         if mode == "prepare-existing":
-            route.add_argument("--adopt-module", choices=[LEARNING_MODULE, ONTOLOGY_MODULE, ADVANCED_MODULE, CURATOR_MODULE, COLLABORATION_MODULE, "curator"])
+            route.add_argument("--adopt-module", choices=[LEARNING_MODULE, ONTOLOGY_MODULE, ADVANCED_MODULE, CURATOR_MODULE, COLLABORATION_MODULE, APP_MODULE, "curator"])
             route.add_argument("--refresh-dependency", action="append", choices=["memory"])
             route.add_argument("--refresh-module", action="append", choices=[ONTOLOGY_MODULE, CURATOR_MODULE, "curator"])
             route.add_argument("--integration-grant-file")
@@ -2861,9 +2896,12 @@ def main(argv: list[str] | None = None) -> int:
     curator_assessment.add_argument("--destination", type=Path, required=True)
     collaboration_assessment = commands.add_parser("assess-collaboration", help="Inspect complete default collaboration and supported owner without executing target code")
     collaboration_assessment.add_argument("--destination", type=Path, required=True)
+    app_assessment = commands.add_parser("assess-project-app", help="Inspect static Project app files and launcher without starting a service")
+    app_assessment.add_argument("--destination", type=Path, required=True)
     arguments = vars(parser.parse_args(argv))
     try:
-        result = (_collaboration("assess", arguments["destination"]) if arguments["mode"] == "assess-collaboration" else
+        result = (_app("assess", arguments["destination"]) if arguments["mode"] == "assess-project-app" else
+                  _collaboration("assess", arguments["destination"]) if arguments["mode"] == "assess-collaboration" else
                   _curator("assess", arguments["destination"]) if arguments["mode"] == "assess-curator" else
                   assess_learning(arguments["destination"]) if arguments["mode"] == "assess-learning" else
                   assess_ontology(arguments["destination"]) if arguments["mode"] == "assess-ontology" else

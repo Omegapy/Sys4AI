@@ -1,0 +1,455 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sys4ai:project-app-wire:1",
+  "$defs": {
+    "Request": {
+      "type": "object",
+      "required": [
+        "operation",
+        "params"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "enum": [
+            "context",
+            "home",
+            "work",
+            "task",
+            "search",
+            "source",
+            "health",
+            "help",
+            "memory",
+            "knowledge"
+          ]
+        },
+        "params": {
+          "type": "object"
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "operation": {
+              "const": "context"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {}
+            }
+          }
+        },
+        {
+          "properties": {
+            "operation": {
+              "const": "home"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {}
+            }
+          }
+        },
+        {
+          "properties": {
+            "operation": {
+              "const": "work"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {}
+            }
+          }
+        },
+        {
+          "properties": {
+            "operation": {
+              "const": "task"
+            },
+            "params": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "(?:TASK|TRD|PLAN)-[0-9]{8}-[A-Fa-f0-9]{8}"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "operation": {
+              "const": "search"
+            },
+            "params": {
+              "type": "object",
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "query": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "operation": {
+              "const": "source"
+            },
+            "params": {
+              "type": "object",
+              "required": [
+                "source_id"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "source_id": {
+                  "type": "string",
+                  "pattern": "[0-9a-f]{40}"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "operation": {
+              "const": "health"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {}
+            }
+          }
+        },
+        {
+          "properties": {
+            "operation": {
+              "const": "help"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {}
+            }
+          }
+        },
+        {
+          "properties": {
+            "operation": {
+              "const": "memory"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "query": {
+                  "type": "string",
+                  "maxLength": 300
+                },
+                "source_id": {
+                  "type": "string",
+                  "pattern": "[0-9a-f]{40}"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "operation": {
+              "const": "knowledge"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {}
+            }
+          }
+        }
+      ]
+    },
+    "Response": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "status",
+        "project_id",
+        "observed_at",
+        "issues",
+        "operation"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "status": {
+          "enum": [
+            "ready",
+            "partial",
+            "unavailable",
+            "disabled",
+            "error"
+          ]
+        },
+        "project_id": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "[a-z][a-z0-9-]{0,79}"
+            }
+          ]
+        },
+        "observed_at": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "issues": {
+          "type": "array",
+          "maxItems": 40,
+          "items": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        },
+        "identity": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "content": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "review": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "work": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "item": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "navigation": {
+          "type": "array",
+          "maxItems": 160,
+          "items": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "maxItems": 160,
+          "items": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 160,
+          "items": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "owners": {
+          "type": "array",
+          "maxItems": 160,
+          "items": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "notices": {
+          "type": "array",
+          "maxItems": 160,
+          "items": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "skills": {
+          "type": "array",
+          "maxItems": 160,
+          "items": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "roles": {
+          "type": "array",
+          "maxItems": 160,
+          "items": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "instructions": {
+          "type": "array",
+          "maxItems": 160,
+          "items": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        "guidance": {
+          "type": "string",
+          "maxLength": 24000
+        },
+        "query": {
+          "type": "string",
+          "maxLength": 24000
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 24000
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 24000
+        },
+        "text": {
+          "type": "string",
+          "maxLength": 24000
+        },
+        "availability": {
+          "type": "string",
+          "maxLength": 24000
+        },
+        "reading": {
+          "type": "string",
+          "maxLength": 24000
+        },
+        "runtime": {
+          "type": "string",
+          "maxLength": 24000
+        },
+        "freshness": {
+          "type": "string",
+          "maxLength": 24000
+        },
+        "coverage": {
+          "oneOf": [
+            {
+              "type": "string",
+              "maxLength": 24000
+            },
+            {
+              "type": "array",
+              "maxItems": 12,
+              "items": {
+                "$ref": "#/$defs/Value"
+              }
+            }
+          ]
+        },
+        "sha256": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "[0-9a-f]{64}"
+            }
+          ]
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "operation": {
+          "oneOf": [
+            {
+              "enum": [
+                "context",
+                "home",
+                "work",
+                "task",
+                "search",
+                "source",
+                "health",
+                "help",
+                "memory",
+                "knowledge"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "description": "Each operation projects only its named public fields. Transport also enforces a 65536-byte serialized response budget. No canonical/private native material is passed through."
+    },
+    "Value": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        {
+          "type": "string",
+          "maxLength": 24000
+        },
+        {
+          "type": "array",
+          "maxItems": 160,
+          "items": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Value"
+          }
+        }
+      ]
+    }
+  }
+}

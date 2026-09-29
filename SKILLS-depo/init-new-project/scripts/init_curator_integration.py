@@ -59,7 +59,7 @@ def prepare(h,destination,identity,selected,original,preserved,before):
 
 def validate_generated(h,record,source_adoptions):
     generated=record.get('generated_files',{})
-    if record['setup_contract']!=CONTRACT:
+    if record['setup_contract'] not in {CONTRACT, h.SETUP_CONTRACT}:
         if generated:raise h.InitializationError('Historical setup cannot acquire generated integration provenance')
         return
     integration=record.get('curator_integration')

@@ -31,6 +31,11 @@ import types
 
 IDENTITY = 'sys4ai-project-knowledge-explorer'
 API = '/api/explorer/v1/'
+APP_API = '/api/project/v1/'
+APP_IDENTITY = 'sys4ai-project-app'
+APP_CLOSURE = ('project_app', 'project_app_core', 'project_app_work', 'project_app_knowledge',
+               'project_app_sources', 'project_app_search', 'project_app_capabilities')
+APP_OPERATIONS = ('context', 'home', 'work', 'task', 'search', 'source', 'health', 'help', 'memory', 'knowledge')
 OPERATIONS = ('context', 'search', 'entry', 'relationships', 'neighborhood', 'source')
 CLOSURE = ('ontology_core', 'ontology_modules', 'ontology_validate', 'ontology_retrieval',
            'ontology_explorer_snapshot', 'ontology_explorer_source', 'ontology_explorer_read',
@@ -180,7 +185,13 @@ def prepare_package(scripts, *, expected_source=None, expected_snapshot=None, ex
         path = item['path']
         need(re.fullmatch(r'[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*', path) and all(p not in ('.', '..') for p in path.split('/')), 'package_incomplete')
         files['asset:' + path] = explorer / 'assets' / path
-    package = module.VerifiedPackage(scripts, files, allowed_modules=CLOSURE)
+    app_present = (scripts / 'project_app.py').exists()
+    if app_present:
+        for name in ('project-app.json', 'project-app.schema.json', 'owner-compatibility.json', 'Launch Project.command', 'Project App Setup.html'):
+            files['app:' + name] = scripts.parent / 'assets/project-app' / name
+        files['app:schema'] = schema.with_name('project-app-v1.json')
+    closure = CLOSURE + APP_CLOSURE if app_present else CLOSURE
+    package = module.VerifiedPackage(scripts, files, allowed_modules=closure)
     need(package.raw['ontology_explorer_snapshot.py'] == raw, 'package_changed')
     if expected_manifest is not None:
         need(package.manifest == expected_manifest, 'package_changed')
@@ -188,7 +199,7 @@ def prepare_package(scripts, *, expected_source=None, expected_snapshot=None, ex
         need(package.raw['ontology_explorer.py'] == expected_source, 'package_changed')
     # No unknown ambient project modules participate. All runtime modules are
     # compiled from the same captured package in both supervisor and worker.
-    for name in CLOSURE: package.load(name)
+    for name in closure: package.load(name)
     assets = package.modules['ontology_explorer_assets']
     asset_package = assets.load_assets(explorer / 'assets',
         schema_sha256=hashlib.sha256(package.member_bytes['schema']).hexdigest(),
@@ -218,8 +229,9 @@ def sanitized_environment():
 
 class PipeWorker:
     """One process, bounded framed pipes, no shell or optional worker profile."""
-    def __init__(self, package, root, instance, started, secret):
+    def __init__(self, package, root, instance, started, secret, *, mode='explorer'):
         self.package, self.root = package, str(root)
+        self.mode = mode
         self.instance, self.started, self.secret = instance, started, secret
         self.process = None; self.buffer = bytearray(); self.outgoing = bytearray()
         self.peak = 0; self.parent_peak = 0; self.observations = 0; self.max_observation_gap = 0.0; self.last_observed = None; self.last_start = -float('inf')
@@ -239,7 +251,7 @@ class PipeWorker:
         for stream in (self.process.stdin, self.process.stdout): os.set_blocking(stream.fileno(), False)
         self.buffer.clear(); self.outgoing.clear(); self.ready = None
         self.send({'kind': 'start', 'root': self.root, 'manifest': self.package.manifest,
-                   'epoch': self.package.code_epoch, 'instance': self.instance, 'started': self.started,
+                   'epoch': self.package.code_epoch, 'instance': self.instance, 'started': self.started, 'mode': self.mode,
                    'secret': base64.b64encode(self.secret).decode(), 'deadline': deadline})
 
     def send(self, value):
@@ -320,12 +332,12 @@ class PipeWorker:
 
 class PrivateFiles:
     """Create only per-instance files and remove only their unchanged identities."""
-    def __init__(self, root):
+    def __init__(self, root, *, mode='explorer'):
         self.root = Path(root); self.files = []; self.created_directories = []; self.fd = None
         fd = directory(self.root)
         try:
             current = self.root
-            for part in ('.sys4ai', 'ontology', 'explorer'):
+            for part in (('.sys4ai', 'project-app') if mode == 'app' else ('.sys4ai', 'ontology', 'explorer')):
                 current = current / part
                 try:
                     os.mkdir(part, 0o700, dir_fd=fd)
@@ -337,7 +349,7 @@ class PrivateFiles:
             self.fd = fd; fd = None
         finally:
             if fd is not None: os.close(fd)
-        self.path = self.root / '.sys4ai/ontology/explorer'
+        self.path = self.root / ('.sys4ai/project-app' if mode == 'app' else '.sys4ai/ontology/explorer')
 
     def create(self, name, value):
         need(re.fullmatch(r'[A-Za-z0-9_-]+\.json', name), 'invalid_request')
@@ -373,15 +385,21 @@ class Connection:
 
 
 class Service:
-    def __init__(self, package, assets, root, port=0, *, session_file=None):
+    def __init__(self, package, assets, root, port=0, *, session_file=None, mode='explorer'):
+        need(mode in ('explorer', 'app'))
+        need(mode != 'app' or 'project_app_core' in package.modules, 'package_incomplete')
+        self.mode = mode
         self.package, self.assets, self.root = package, assets, Path(root).absolute()
         self.module = package.modules['ontology_explorer_read']
         self.schema = strict(package.member_bytes['schema'], arrays=512, members=1024)
+        self.app_schema = strict(package.member_bytes['app:schema'], arrays=512, members=1024) if mode == 'app' else None
         self.errors = {r['properties']['code']['const']: ({k:v['const'] for k,v in r['properties'].items()}, r['x-http-status'])
                        for r in self.schema['$defs']['Error']['oneOf']}
         self.instance = os.urandom(16).hex(); self.started = time.monotonic(); self.changed = False
         self.sessions = {}; self.bootstraps = {}; self.stopping = False
-        self.worker = PipeWorker(package, self.root, self.instance, self.started, os.urandom(32))
+        self.stop_after = None; self.stop_deadline = None
+        self.control_secret = token(); self.control_nonces = {}
+        self.worker = PipeWorker(package, self.root, self.instance, self.started, os.urandom(32), mode=mode)
         self.connections = {}; self.active = None; self.waiting = None; self.listener = None
         self.private = None; self.bootstrap_file = None; self.identity_file = None
         self.root_fd = directory(self.root); st = os.fstat(self.root_fd); self.root_identity = (st.st_dev, st.st_ino)
@@ -395,7 +413,7 @@ class Service:
             self.listener.bind(('127.0.0.1', port)); self.listener.listen(8); self.listener.setblocking(False)
             self.port = self.listener.getsockname()[1]; self.origin = f'http://127.0.0.1:{self.port}'
             self.cookie = f'sys4ai_explorer_{self.port}_{self.instance}'
-            self.private = PrivateFiles(self.root)
+            self.private = PrivateFiles(self.root, mode=mode)
             name = f'bootstrap-{self.instance}.json'
             if session_file is not None:
                 selected = Path(session_file)
@@ -404,13 +422,17 @@ class Service:
                 name = chosen.name
             initial = self.new_bootstrap()
             self.bootstrap_file = self.private.create(name, {'schema_version':1, 'service_instance':self.instance,
-                'url':self.origin + '/' + '#bootstrap=' + initial, 'expires_in':60})
+                'url':self.bootstrap_url(initial), 'expires_in':60})
             self.identity_file = self.private.create(f'service-{self.instance}.json', {'schema_version':1,
-                'service':IDENTITY, 'service_instance':self.instance, 'origin':self.origin, 'pid':os.getpid(),
-                'project_id':self.project, 'root_scope_id':self.root_scope})
+                'service':APP_IDENTITY if mode == 'app' else IDENTITY, 'service_instance':self.instance, 'origin':self.origin, 'pid':os.getpid(),
+                'project_id':self.project, 'root_scope_id':self.root_scope,
+                **({'code_epoch':self.package.code_epoch, 'credential':self.control_secret} if mode == 'app' else {})})
             self.verify()
         except BaseException:
             self.close(); raise
+
+    def bootstrap_url(self, value):
+        return self.origin + ('/?app=1' if self.mode == 'app' else '/') + '#bootstrap=' + value
 
     def now(self): return time.monotonic()
 
@@ -478,7 +500,7 @@ class Service:
         status, raw = self.error(code, c); self.response(c, status, raw)
 
     def health(self):
-        return dict(schema_version=1, service=IDENTITY, service_instance=self.instance,
+        return dict(schema_version=1, service=APP_IDENTITY if self.mode == 'app' else IDENTITY, service_instance=self.instance,
                     build_id=self.assets.manifest['build_id'], protocol=1, status='package_changed' if self.changed else 'running')
 
     def parse_headers(self, c):
@@ -495,6 +517,10 @@ class Service:
             first = lines[0].decode('ascii').split(' ')
             need(len(first) == 3 and first[2] == 'HTTP/1.1')
             c.method, c.target = first[:2]
+            # One fixed presentation selector; no general query routing/root input.
+            if c.target in ('/?app=1', '/index.html?app=1'):
+                need(self.mode == 'app', 'endpoint_unavailable')
+                c.target = c.target.split('?', 1)[0]
             need(re.fullmatch(r'[A-Z]+',c.method))
             need(c.target.startswith('/') and not c.target.startswith('//') and
                  not any(x in c.target for x in ('?', '#', '%', '\\')) and
@@ -569,7 +595,7 @@ class Service:
             if previous: del self.sessions[previous]
             value = token(); session = {'scope':os.urandom(16).hex(), 'csrf':token()}
             self.sessions[value] = session
-            cookie = self.cookie+'='+value+'; HttpOnly; SameSite=Strict; Path='+API
+            cookie = self.cookie+'='+value+'; HttpOnly; SameSite=Strict; Path='+('/api/' if self.mode == 'app' else API)
             result = self.session_result(session)
         elif op == 'session-resume':
             _, session = self.authenticate(c); result = self.session_result(session)
@@ -577,11 +603,17 @@ class Service:
             value, _ = self.authenticate(c,csrf=True)
             need(body['code_epoch'] == self.package.code_epoch,'package_changed')
             del self.sessions[value]; result = dict(schema_version=1,status='closed')
-            cookie = self.cookie+'=; HttpOnly; SameSite=Strict; Path='+API+'; Max-Age=0'
+            cookie = self.cookie+'=; HttpOnly; SameSite=Strict; Path='+('/api/' if self.mode == 'app' else API)+'; Max-Age=0'
         self.verify(); raw = compact(result); need(len(raw)<=1024,'internal_error')
         self.response(c,200,raw,extra=[('Set-Cookie',cookie)] if cookie else ())
 
     def dispatch(self, c):
+        # A private, authenticated stop can retire this frozen owned instance
+        # after a package update. It grants no read or arbitrary process control.
+        if self.mode == 'app' and c.target == APP_API+'instance' and c.method == 'POST':
+            candidate = strict(bytes(c.input))
+            if isinstance(candidate, dict) and candidate.get('action') == 'stop':
+                self.app_route(c); return
         try: self.verify()
         except ServiceError:
             if c.method == 'GET' and c.target == '/health':
@@ -591,6 +623,9 @@ class Service:
             need(c.method == 'GET','method_forbidden')
             self.response(c,200,compact(self.health())); return
         self.admit()
+        need(self.stop_deadline is None, 'session_invalid')
+        if c.target.startswith(APP_API):
+            self.app_route(c); return
         if c.target.startswith(API):
             need(c.method == 'POST','method_forbidden')
             op = c.target[len(API):]
@@ -617,6 +652,58 @@ class Service:
         raw, mime = self.package.modules['ontology_explorer_assets'].read_asset(self.assets,c.target)
         self.verify(); self.response(c,200,raw,mime)
 
+    def app_route(self, c):
+        need(self.mode == 'app', 'endpoint_unavailable')
+        need(c.method == 'POST', 'method_forbidden')
+        op = c.target[len(APP_API):]
+        need(op in ('read', 'stop', 'instance'), 'endpoint_unavailable')
+        body = strict(bytes(c.input))
+        if op == 'instance':
+            result = self.package.modules['project_app'].instance_request(self, body)
+            if body['action'] == 'stop':self.begin_stop(c)
+            else:self.verify()
+            self.response(c, 200, compact(result)); return
+        _, session = self.authenticate(c, csrf=True)
+        c.authenticated = True
+        if op == 'stop':
+            need(body == {}, 'invalid_request')
+            self.begin_stop(c)
+            self.response(c, 200, compact({'schema_version':1, 'status':'stopping', 'stopped':True}))
+            return
+        need(self.module.validate(body, 'Request', self.app_schema))
+        need(body['operation'] in APP_OPERATIONS and type(body['params']) is dict)
+        c.operation = body['operation']
+        need(self.waiting is None, 'service_busy')
+        c.job = {'kind':'app-read', 'operation':c.operation, 'request':body, 'scope':session['scope'],
+                 'deadline':c.accepted + self.policy['request_seconds']}
+        c.stage = 'queued'
+        if self.active is None: self.start_job(c)
+        else: self.waiting = c
+
+    def begin_stop(self, c):
+        self.sessions.clear(); self.bootstraps.clear(); self.control_nonces.clear()
+        self.worker.stop()
+        for pending in (self.active, self.waiting):
+            if pending: self.fail(pending, 'session_invalid')
+        self.active = self.waiting = None
+        self.stop_after = c; self.stop_deadline = self.now() + 2
+
+    def finish_app(self, c, body):
+        need(isinstance(body, dict) and body.get('schema_version') == 1 and
+             body.get('status') in ('ready', 'partial', 'unavailable', 'disabled', 'error') and
+             body.get('project_id') == self.project and body.get('operation') == c.operation and
+             isinstance(body.get('observed_at'), str), 'internal_error')
+        need(self.module.validate(body, 'Response', self.app_schema), 'internal_error')
+        validator = getattr(self.package.modules['project_app_core'], 'validate_response', None)
+        if validator is not None: need(validator(body), 'internal_error')
+        need(self.now() < c.job['deadline'], 'deadline_exceeded')
+        if c.closed:
+            self.active = None; return
+        if not any(s['scope'] == c.job['scope'] for s in self.sessions.values()):
+            self.fail(c, 'session_invalid'); self.active = None; return
+        self.verify(); raw = compact(body); need(len(raw) <= 65536, 'resource_limit')
+        self.response(c, 200, raw); self.active = None
+
     def start_job(self, c):
         self.admit()
         need(self.now() < c.job['deadline'],'deadline_exceeded')
@@ -634,17 +721,21 @@ class Service:
             self.policy = value['policy']; self.worker.ready = value
             self.worker.send(c.job); c.stage = 'running'; return
         need(value.get('kind')=='result' and set(value)=={'kind','epoch','loaded','body','policy'},'internal_error')
-        body = value['body']; need(self.module.validate(body,'ReadResponse',self.schema),'internal_error')
+        body = value['body']
+        if c.job['kind'] == 'app-read':
+            self.finish_app(c, body); return
+        need(self.module.validate(body,'ReadResponse',self.schema),'internal_error')
         if body['status'] == 'error' and body['error']['code'] == 'package_changed':
             self.changed=True;self.sessions.clear();self.bootstraps.clear();self.worker.stop()
             if not c.closed:self.fail(c,'package_changed')
             self.active=None;return
-        need(self.module.validate(value['policy'],'EffectivePolicy',self.schema),'internal_error')
-        self.policy = value['policy']
+        if self.mode == 'explorer':need(self.module.validate(value['policy'],'EffectivePolicy',self.schema),'internal_error')
+        if self.mode == 'explorer': self.policy = value['policy']
         if body['status'] != 'error':
             need(body['request_id'] == c.request_id and body['operation'] == c.operation and
                  body['session_scope'] == c.job['scope'] and body['service_instance'] == self.instance and
-                 body['code_epoch'] == self.package.code_epoch and body['project']['root_scope_id'] == self.root_scope,'package_changed')
+                 body['code_epoch'] == self.package.code_epoch and
+                 (body['project']['id'] == self.project if self.mode == 'app' else body['project']['root_scope_id'] == self.root_scope),'package_changed')
         need(self.now() < c.job['deadline'],'deadline_exceeded')
         if c.closed:
             self.active = None; return
@@ -667,6 +758,8 @@ class Service:
 
     def tick(self):
         now = self.now()
+        if self.stop_deadline is not None and now >= self.stop_deadline:
+            self.stopping = True; return
         if now-self.last_observation >= .01:
             self.last_observation=now
             try: self.worker.observe()
@@ -738,6 +831,7 @@ class Service:
                         try:self.verify()
                         except ServiceError:pass
                         self.disconnect(c)
+                        if self.stop_after is c:self.stopping=True
                 except BlockingIOError:pass
                 except OSError:self.disconnect(c)
 
@@ -797,11 +891,15 @@ def command(argv,package,assets):
     launch=sub.add_parser('explore');launch.add_argument('--port',type=int,default=0)
     launch.add_argument('--session-file');launch.add_argument('--open',action='store_true')
     health=sub.add_parser('explorer-health');health.add_argument('--url')
+    app=sub.add_parser('app');app.add_argument('--port',type=int,default=0);app.add_argument('--open',action='store_true')
+    app.add_argument('--serve',action='store_true');app.add_argument('--stop',action='store_true')
     args=parser.parse_args(argv)
     if args.command=='explorer-health':
         result=package.modules['ontology_explorer_health'].inspect(package,assets,Path(args.project_root),args.url)
         print(json.dumps(result,sort_keys=True,indent=2));return 0 if result['readable'] is True else 1
     need(0<=args.port<=65535)
+    if args.command == 'app':
+        return package.modules['project_app'].command(args, package, assets)
     service=Service(package,assets,args.project_root,args.port,session_file=args.session_file)
     def stop(signum,frame):service.stopping=True
     signal.signal(signal.SIGTERM,stop);signal.signal(signal.SIGINT,stop)

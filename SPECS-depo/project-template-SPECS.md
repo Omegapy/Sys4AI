@@ -234,3 +234,29 @@ one complete reviewed owner profile and default instruction markers. Static
 readiness enables the habit; actual Task execution still binds manager-produced
 policy, current native assignments, scoped grants and independence checkpoints.
 Posts, notification, reported reading and canonical decisions remain distinct.
+
+## Shared Project app and initialization v14
+
+The Project app uses the same reviewed local build as Knowledge Explorer, with
+an independent Home and project context. Primary identity comes from a child's
+`project.json`; the depot alone may use its exact registry self entry. Optional
+knowledge and memory readers retain their own compatible owner, identity and
+source limits. Static availability does not establish running services or agents.
+
+`project-app.json` holds bounded, reviewed Home prose and source hashes. Reader
+requests never revise those records. Work, lexical search, source previews,
+capability notices and help use fixed bounded read integrations. Browser actions
+provide no project-authoring, Task execution, maintenance or publication authority.
+
+Initializer `governance-starter-v14` adds neutral app content, static setup guidance
+and `Launch Project.command` with recorded executable mode 0755. Earlier receipt
+editions retain their meanings. Explicit `prepare-existing --adopt-module
+project-app` adds the app through the existing module transaction; complete
+unchanged receipt-owned reader packages can be refreshed, while custom prose,
+configuration and conflicting packages are preserved. This route retains the
+beneath-Projects boundary. Depot adoption is a separate exact manifest operation.
+
+Installation starts no app, backend or model and installs no dependencies.
+[Operations](./.agents/skills/ontology/references/project-app-operations.md) and
+[the content/read contract](./.agents/skills/ontology/references/project-app-contract.md)
+define supported behavior and limits.

@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 INVENTORY = "assets/static-capability-v1.json"
-INVENTORY_SHA256 = "62889df082ea56221c737da0fc43db22befc9972e176933ebc23a352d1073a42"
+INVENTORY_SHA256 = "cfb19d603010345850a3f5ffd5775b0a4a12b326ed42563c0ec92db8029969e5"
 
 
 def inventory(h, *, legacy=False):
@@ -43,6 +43,8 @@ def validate_source(h, files, *, contract=None):
 
 
 def _paths(h, module):
+    if module == h.APP_MODULE:
+        return (h.PROJECT_APP.ROOT, *h.PROJECT_APP.STARTERS)
     if module == h.COLLABORATION_MODULE:
         return (h.COLLABORATION.ROOT, *h.COLLABORATION.GUIDANCE)
     if module == h.CURATOR_MODULE:
@@ -70,6 +72,7 @@ def assess(h, destination, record, *, operation=None):
         selected += ([h.ONTOLOGY_MODULE] if contract in h.ONTOLOGY_CONTRACTS else [])
         selected += ([h.ADVANCED_MODULE] if contract in h.ADVANCED_CONTRACTS else [])
         selected += ([h.CURATOR_MODULE] if contract in h.CURATOR_CONTRACTS else [])
+        selected += ([h.APP_MODULE] if contract == h.SETUP_CONTRACT else [])
         selected += [op["module_id"] for op in record.get("module_adoptions", [])]
         selected += [h.COLLABORATION_MODULE]
     source_rows = operation["sources"] if operation else record["sources"]
@@ -80,7 +83,7 @@ def assess(h, destination, record, *, operation=None):
             current_sources = {name: row for name, row in current_sources.items() if not _inside(name, roots)}
             current_sources.update({row["destination"]: row for row in adopted["sources"]})
         source_rows = [current_sources[name] for name in sorted(current_sources)]
-    integrated = (operation.get("schema_version") == 2 and operation.get("module_id") == h.CURATOR_MODULE) if operation else contract == h.SETUP_CONTRACT or any(op.get("integration_edition") == h.INTEGRATION.EDITION for op in record.get("module_adoptions",[]))
+    integrated = (operation.get("schema_version") == 2 and operation.get("module_id") == h.CURATOR_MODULE) if operation else contract in {h.INTEGRATED_CONTRACT, h.SETUP_CONTRACT} or any(op.get("integration_edition") == h.INTEGRATION.EDITION for op in record.get("module_adoptions",[]))
     selected_inventory = inventory(h, legacy=not integrated and (operation is None or operation.get("module_id") == h.CURATOR_MODULE and operation.get("schema_version") == 1))
     locked = selected_inventory["locked_resources"]
     components = []
@@ -129,6 +132,9 @@ def assess(h, destination, record, *, operation=None):
                 available = available and detail["shared_automatic_checkpoint"] == "available" and detail["director_binding"] == "current"
             elif detail["shared_automatic_checkpoint"] == "unavailable":
                 detail["excluded_dependency"] = "Preserved memory was not selected for compatible refresh; shared capture is unverified."
+        elif module == h.APP_MODULE:
+            detail = h._app("assess", destination, operation)
+            available = detail["static_ready"]
         elif module == h.COLLABORATION_MODULE:
             current_operation = operation or next((op for op in reversed(record.get("module_adoptions", [])) if op["module_id"] == module), None)
             expected = None if current_operation else {row["destination"]: row["source_sha256"] for row in sources if row["destination"].startswith(h.COLLABORATION.ROOT + "/")}
