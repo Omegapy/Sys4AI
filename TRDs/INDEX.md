@@ -4,7 +4,7 @@
 
 Canonical snapshot: 2026-11-18T09:16:01-07:00.
 
-draft: 4 | trd_done: 13 | retired: 0
+draft: 4 | trd_done: 14 | retired: 0
 
 | TRD ID | Name | State | Schema compatibility | Created | Updated | Revision |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -13,6 +13,7 @@ draft: 4 | trd_done: 13 | retired: 0
 | TRD-20260828-D209CF52 | [Tracked implementation-plan skill](trd_tracked-implementation-plan-skill_2026-08-28.md) | draft | current | 2026-08-28T21:30:06-06:00 | 2026-09-04T15:34:27-06:00 | 2 |
 | TRD-20260902-C2F3AF2B | [Task-triggered Project Director orchestration](trd_task-triggered-project-director-orchestration_2026-09-02.md) | draft | current | 2026-09-02T09:54:52-06:00 | 2026-09-04T15:34:26-06:00 | 7 |
 | TRD-20261118-666F5516 | [Finish requested work across prompts and skills](trd_finish-requested-work-across-prompts-and-skills_2026-11-18.md) | trd_done | current | 2026-11-18T09:15:05-07:00 | 2026-11-18T09:16:01-07:00 | 2 |
+| TRD-20261003-5B3283BB | [Sys4AI full operational project initialization](trd_sys4ai-full-operational-project-initialization_2026-10-03.md) | trd_done | current | 2026-10-03T18:34:17-06:00 | 2026-10-03T20:24:04-06:00 | 2 |
 | TRD-20260928-92C32D18 | [Shared Project app homepage and Knowledge integration](trd_shared-project-app-homepage-and-knowledge-integration_2026-09-28.md) | trd_done | current | 2026-09-28T19:21:16-06:00 | 2026-09-28T20:14:58-06:00 | 2 |
 | TRD-20260926-5A1422F9 | [Shared agent billboards with Task-governed collaboration](trd_shared-agent-billboards-with-task-governed-collaboration_2026-09-26.md) | trd_done | current | 2026-09-26T09:37:56-06:00 | 2026-09-26T10:12:59-06:00 | 2 |
 | TRD-20260919-B6D51106 | [Project Knowledge Explorer - full first release](trd_project-knowledge-explorer-full-first-release_2026-09-19.md) | trd_done | current | 2026-09-19T19:17:23-06:00 | 2026-09-19T19:53:52-06:00 | 2 |
