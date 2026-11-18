@@ -27,8 +27,8 @@ Before performing delegated work:
   owner. Return candidate and review artifacts through the assigned workflow.
 - Keep the exact model and reasoning effort inherited from the Project
   Director. Do not request or configure an override.
-- Do not create nested sub-agents unless the Project Director explicitly
-  delegates that authority.
+- Do not create nested sub-agents. Finish and verify the work within your
+  assignment. Refer additional work to the assigning manager for delegation.
 
 ## Memory within an assignment
 

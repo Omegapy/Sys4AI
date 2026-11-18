@@ -18,7 +18,7 @@ Canonical edit location: [ONTOLOGY/bindings/artifacts.json#/@graph/4](<../../ONT
 
 ## Sources
 
-- [Roles/project-sub-agent/ROLE.md](<../../Roles/project-sub-agent/ROLE.md>) `section:Purpose` SHA256 `4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2` (current)
+- [Roles/project-sub-agent/ROLE.md](<../../Roles/project-sub-agent/ROLE.md>) `section:Purpose` SHA256 `ffc54f51d88976fafcdd5eec40fcfe8e4991bedae8bc20d67d83a343b41f2324` (current)
 
 ## Backlinks
 

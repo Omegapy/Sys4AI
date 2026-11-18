@@ -24,7 +24,7 @@ Canonical edit location: [ONTOLOGY/modules/project/project.jsonld#/@graph/56](<.
 
 ## Sources
 
-- [Roles/project-sub-agent/ROLE.md](<../../Roles/project-sub-agent/ROLE.md>) `section:Purpose` SHA256 `4c3ac5415030ab770d9af7b73fc773da43d07b041889c77a8755974284c874e2` (current)
+- [Roles/project-sub-agent/ROLE.md](<../../Roles/project-sub-agent/ROLE.md>) `section:Purpose` SHA256 `ffc54f51d88976fafcdd5eec40fcfe8e4991bedae8bc20d67d83a343b41f2324` (current)
 - [Roles/project-sub-agent/AGENTS.md](<../../Roles/project-sub-agent/AGENTS.md>) `section:Required first reads` SHA256 `7d064ae5d5954af65fc1a83b2ce1c69562d5c31f085e70ac92c3ad0bf2e7eec2` (current)
 
 ## Backlinks

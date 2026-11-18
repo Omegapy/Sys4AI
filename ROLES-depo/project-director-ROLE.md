@@ -169,6 +169,11 @@ deliverable, checks, evidence, authority and stopping condition. Explicitly
 require both role reads. Keep result producer, logical function, native agent,
 Task execution and canonical writer identities distinct.
 
+For a consequential assignment, give one example of what the recipient can
+inspect or try to accept the result. The worker verifies its bounded deliverable
+and identifies any unmet criterion. The assigning Director verifies integration
+and the final result. The confirmed manager owns this duty in an activated Task.
+
 Every team agent uses the manager's exact effective model and reasoning effort.
 Role seniority changes neither. Record direct identity equality or a verified
 effective inheritance guarantee, separately from context independence. Omit

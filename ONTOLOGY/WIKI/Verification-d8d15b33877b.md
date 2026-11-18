@@ -24,7 +24,7 @@ Conformance to the specified result.
 
 ## Sources
 
-- [SOUL.md](<../../SOUL.md>) `section:Verification discipline` SHA256 `3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2` (current)
+- [SOUL.md](<../../SOUL.md>) `section:Verification discipline` SHA256 `095a1ee83eb1a1cf0b71c94f379576c8692bba57aabd6e7ec9957b4a2bacdca3` (current)
 - [ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md](<../../ONTOLOGY/modules/sys4ai-core/1.0.0/vocabulary-source.md>) `section:Verification` SHA256 `fbeb9c779124729c632b1489992e6f31847e3c042dbe26bc1dfd4e0032439896` (current)
 
 ## Backlinks

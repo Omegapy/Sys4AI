@@ -21,7 +21,7 @@ Canonical edit location: [ONTOLOGY/modules/project/curator.jsonld#/@graph/14](<.
 
 ## Sources
 
-- [Roles/improvement-maintenance/AGENTS.md](<../../Roles/improvement-maintenance/AGENTS.md>) `line:1` SHA256 `e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd` (current)
+- [Roles/improvement-maintenance/AGENTS.md](<../../Roles/improvement-maintenance/AGENTS.md>) `line:1` SHA256 `fc69f5e933c325e526bb30b635571b183ef19209644e0940356a58cb1d797fa3` (current)
 - [Roles/improvement-maintenance/ROLE.md](<../../Roles/improvement-maintenance/ROLE.md>) `line:1` SHA256 `034dd7b3ce155cd9b8576d5917f9bb208400241bfeb1599bf0d1e413b096b098` (current)
 
 ## Backlinks

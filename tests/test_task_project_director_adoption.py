@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import hashlib
 from pathlib import Path
 import re
 import unittest
@@ -23,8 +22,14 @@ PLAN = (
 DESTINATIONS = {
     "sys4ai-root": ROOT,
     "template-project": ROOT / "Projects" / "Sys4AI-Template-Project",
-    "electronics-project": ROOT / "Projects" / "Sys4AI-Electronics-Projects",
 }
+ELECTRONICS_PATH = Path("Projects") / "Sys4AI-Electronics-Projects"
+ADOPTION_REPORT = (
+    ROOT
+    / "Verification"
+    / "task_triggered_project_director_orchestration_adoption_verification_2026-09-02.md"
+)
+ORCHESTRATION_EVIDENCE = ROOT / "Verification" / "task-manager-orchestration"
 
 ROLE_HEADINGS = (
     "## Authority and non-authority", "## Task activation and ownership",
@@ -89,10 +94,21 @@ class TaskProjectDirectorAdoptionTests(unittest.TestCase):
         active = ROOT / ".agents" / "skills" / "task"
         root_text = (active / "SKILL.md").read_text(encoding="utf-8")
         source_text = self.source_skill.decode("utf-8")
-        # The authorized local intake change leaves the adopted execution,
-        # delegation, verification and final-response contract intact.
-        boundary = "## Bootstrap and the real manager"
-        self.assertEqual(source_text.split(boundary, 1)[1], root_text.split(boundary, 1)[1])
+        # The Template has its own Curator selection and handoff guidance.
+        # Compare the entire shared manager and collaboration sections.
+        bootstrap = "\n## Bootstrap and the real manager\n"
+        template_curator_headings = {
+            "## Explicit Curator Task provenance",
+            "## Existing Curator awareness and conversational handoff",
+        }
+        source_sections = re.split(
+            r"(?=^## )", source_text.split(bootstrap, 1)[1], flags=re.MULTILINE
+        )
+        shared_contract = "".join(
+            section for section in source_sections
+            if section.partition("\n")[0] not in template_curator_headings
+        )
+        self.assertEqual(shared_contract, root_text.split(bootstrap, 1)[1])
         self.assertIn("intake --match-task SELECTOR", root_text)
         self.assertIn("close-old-task", root_text)
         self.assertNotIn("Ask whether to reopen the same", root_text)
@@ -101,28 +117,27 @@ class TaskProjectDirectorAdoptionTests(unittest.TestCase):
         self.assertIn("$task", metadata)
 
     def test_active_task_skill_references_resolve_in_every_project(self) -> None:
-        source_text = SOURCE_SKILL.read_text(encoding="utf-8")
-        relative_links = [
-            item
-            for item in re.findall(r"\[[^]]+\]\(([^)]+)\)", source_text)
-            if "://" not in item
-        ]
-        self.assertEqual(
-            {"../agent-task/SKILL.md", "../manage-subagent-roles/SKILL.md", "../agent-task/references/orchestration-contract.md", "references/memory-context.md"},
-            set(relative_links),
-        )
+        required_links = {
+            "../agent-task/SKILL.md",
+            "../manage-subagent-roles/SKILL.md",
+            "../agent-task/references/orchestration-contract.md",
+            "references/memory-context.md",
+            "../collaborate/SKILL.md",
+        }
         for name, project in DESTINATIONS.items():
-            if name == "electronics-project":
-                continue  # Unselected project keeps its historical contract.
             skill_file = project / ".agents" / "skills" / "task" / "SKILL.md"
-            for relative in relative_links:
+            target_links = re.findall(
+                r"\[[^]]+\]\(([^)]+)\)", skill_file.read_text(encoding="utf-8")
+            )
+            relative_links = {item for item in target_links if "://" not in item}
+            with self.subTest(project=name):
+                self.assertLessEqual(required_links, relative_links)
+            for relative in sorted(relative_links):
                 with self.subTest(project=name, relative=relative):
                     self.assertTrue((skill_file.parent / relative).resolve().is_file())
 
     def test_every_project_role_contains_the_orchestration_contract(self) -> None:
         for name, project in DESTINATIONS.items():
-            if name == "electronics-project":
-                continue
             role = (project / "ROLE.md").read_text(encoding="utf-8")
             contract = normalized(
                 (project / ".agents" / "skills" / "task" / "SKILL.md").read_text(
@@ -159,31 +174,58 @@ class TaskProjectDirectorAdoptionTests(unittest.TestCase):
         ):
             self.assertIn(text, role)
 
-    def test_electronics_role_preserves_domain_and_safety_specialization(self) -> None:
-        role = (DESTINATIONS["electronics-project"] / "ROLE.md").read_text(
-            encoding="utf-8"
+    def test_electronics_adoption_records_domain_and_safety_preservation(self) -> None:
+        # The independent Electronics project was a historical adoption target.
+        # The root repository retains its adoption and preservation evidence.
+        report = ADOPTION_REPORT.read_text(encoding="utf-8")
+        role_path = (ELECTRONICS_PATH / "ROLE.md").as_posix()
+        rows = [
+            row for row in report.splitlines() if row.startswith(f"| `{role_path}` |")
+        ]
+        self.assertEqual(1, len(rows))
+        self.assertIn("Reusable orchestration sections merged", rows[0])
+        self.assertIn(
+            "engineering, energized-work, and physical-safety rules preserved", rows[0]
         )
-        for text in (
-            "# Electronics Project Director role",
-            "## Integrated professional perspectives",
-            "## Engineering and repair workflow",
-            "## Safety and stop conditions",
-            "energized work",
-            "physical testing",
-            "Never claim that a physical device",
-        ):
-            self.assertIn(text, role)
+        preservation = normalized(
+            report.split("## Preservation audit\n", 1)[1].split("\n## ", 1)[0]
+        )
+        self.assertIn("electronics role retains its professional perspectives", preservation)
+        self.assertRegex(preservation, r"\bno-unobserved-physical-\s*test rule\b")
+        self.assertIn("energized-work authority limits", preservation)
 
-    def test_unselected_electronics_retains_exact_prior_adoption(self):
-        # Verified against the preimplementation protected manifest. This goal
-        # does not authorize refreshing that product's Task or role contracts.
+    def test_unselected_electronics_adoption_is_recorded_in_release_evidence(self) -> None:
+        # The reviewed publication used these bytes as protected inputs and
+        # published only the selected implementation scope.
         expected = {
             "ROLE.md": "ab5b659b8e4427abfd5e7484ce803aad6675be8771e72ba25f8e4ceeb2847055",
             ".agents/skills/task/SKILL.md": "836b025334143f912975ed076027fd22d4cbaf5c96e26104fa45f3f7d4fed023",
             ".agents/skills/task/agents/openai.yaml": "3882fc74a4c4cfadc6256e2d79b912d706cc4435f64625fb74fc86e772f47ba3",
         }
-        for relative, digest in expected.items():
-            self.assertEqual(digest, hashlib.sha256((DESTINATIONS["electronics-project"] / relative).read_bytes()).hexdigest())
+        baseline = json.loads(
+            (ORCHESTRATION_EVIDENCE / "baseline-and-adoption-manifest.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        protected = baseline["preserved"][f"{ELECTRONICS_PATH.as_posix()}/"]["files"]
+        self.assertEqual(expected, {path: protected[path] for path in expected})
+        publication = json.loads(
+            (ORCHESTRATION_EVIDENCE / "git-publication-scope.json").read_text(encoding="utf-8")
+        )
+        staged = publication["staged_snapshot_validation"]
+        supplied_inputs = {
+            Path(item["path"]).relative_to(ELECTRONICS_PATH).as_posix(): item["sha256"]
+            for item in staged["supplied_workspace_inputs"]
+            if Path(item["path"]).is_relative_to(ELECTRONICS_PATH)
+        }
+        self.assertEqual(expected, supplied_inputs)
+        self.assertEqual(0, staged["retry_exit_code"])
+        self.assertFalse(
+            any(
+                Path(item["path"]).is_relative_to(ELECTRONICS_PATH)
+                for item in publication["files"]
+            )
+        )
 
     def test_all_twenty_three_requirement_ids_remain_contiguous(self) -> None:
         self.assertEqual(

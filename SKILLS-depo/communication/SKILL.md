@@ -192,6 +192,7 @@ These patterns are diagnostic flags, not banned words or universal rules. Keep a
 ## Output discipline
 
 - Return the requested artifact in the requested format.
+- Write a final handoff that stands on its own. State what was completed, what evidence supports it, and which requested result, if any, is still open.
 - Do not add a preface, editing note, summary, or postscript unless the user asks for one or the result needs a material warning.
 - Preserve requested paragraph count, length, headings, lists, line breaks, and citation placement.
 - Use normal paragraphing. Do not create extra blank lines merely to make the text look less dense.

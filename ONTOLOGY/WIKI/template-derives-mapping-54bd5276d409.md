@@ -19,7 +19,7 @@ Canonical edit location: [ONTOLOGY/modules/project/project.jsonld#/@graph/68](<.
 
 ## Sources
 
-- [depot/template-update.json](<../../depot/template-update.json>) `json:/overrides` SHA256 `4dce9d10cff5ded3657112a2c52f4e7a7d0f44ed660c709601a3d1397d895d3c` (current)
+- [depot/template-update.json](<../../depot/template-update.json>) `json:/overrides` SHA256 `ec580bf174fd65951539592dba82bf443db837c11addfcdf2d3900b05533f74d` (current)
 
 ## Backlinks
 

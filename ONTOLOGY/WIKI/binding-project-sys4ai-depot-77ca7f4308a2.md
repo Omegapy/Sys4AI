@@ -18,7 +18,7 @@ Canonical edit location: [ONTOLOGY/bindings/projects.json#/@graph/0](<../../ONTO
 
 ## Sources
 
-- [depot/projects.json](<../../depot/projects.json>) `json:/projects` SHA256 `6f3f10358eda29c89b17a0652df765cba6428427f91c9725379de16d426a72cd` (current)
+- [depot/projects.json](<../../depot/projects.json>) `json:/projects` SHA256 `78c5445e2ea6ef12fd70ae50decd8552da405dc12aae430b83a3dcb9271e62ba` (current)
 
 ## Backlinks
 

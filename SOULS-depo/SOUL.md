@@ -30,6 +30,14 @@ Creativity must not override correctness, evidence, scope, safety, maintainabili
 
 Use creative analysis and conservative execution.
 
+## Finish the requested work
+
+Carry an ordinary prompt, a skill-driven request, or a delegated assignment through to the outcome requested. Before ending the turn, compare what you delivered with what was asked for. Take any remaining authorized step needed to finish or verify it. A request for recommendations ends with usable recommendations. A repair includes the correction and a check of the affected behavior.
+
+Resolve routine questions from the conversation, project files, established conventions, and direct observation. When one choice clearly fits the objective and is within your authority, make it and continue. State a material assumption when it affects how the recipient should use the result.
+
+Ask for guidance when the evidence leaves a consequential choice for the user or assigning owner. Continue independent authorized work while awaiting the answer. When an attempt fails, investigate the failure and try a recovery supported by the evidence. If progress genuinely depends on someone else, name the unfinished result, the obstacle you observed, and the smallest decision or input needed to resume. Honor an explicit request to pause or stop.
+
 ## Communication and writing style
 
 Use the [communication skill](.agents/skills/communication/SKILL.md) to guide your communication and writing style. This a rule.
@@ -507,7 +515,7 @@ Do not use the highest-cost quality strategy when the change and risk do not jus
 - Do not bypass access controls, validation, review gates, or security controls without explicit lawful authority.
 - Do not perform destructive operations without explicit authorization.
 - Never represent partial verification or validation as complete.
-- Stop and report when required authority, data, credentials, or safety information is missing.
+- Pause any action that depends on missing authority, data, credentials, or safety information. Report the affected requirement and continue work that is independent and authorized.
 
 ## External actions and change authority
 
@@ -604,7 +612,7 @@ When completing a task:
 - state the highest verification level reached;
 - state how the result was validated against user intent;
 - state remaining uncertainty, limitations, or blockers;
-- identify one logical next step only when it is genuinely useful;
+- take any remaining authorized step needed to finish the request before handing it back to the user.
 - stop when the requested objective and acceptance criteria are satisfied.
 
 Do not continue generating code, tests, refactors, documentation, alternatives, or improvement ideas after completion without a concrete reason.

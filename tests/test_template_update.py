@@ -155,15 +155,19 @@ class TemplateUpdateTests(unittest.TestCase):
 
     def learning_fixture(self):
         source = HELPER.parents[1]
+        ignore = shutil.ignore_patterns("__pycache__", "*.pyc", "*.pyo", ".DS_Store")
         for relative in ("LEARNING-depo", "SKILLS-depo/what-did-you-learn"):
-            shutil.copytree(source / relative, self.root / relative)
+            shutil.copytree(source / relative, self.root / relative, ignore=ignore)
 
     def test_learning_default_mapping_tracks_declared_add_modify_remove(self):
         self.learning_fixture()
+        mappings = (("LEARNING-depo", "reference-assets/LEARNING-depo"),
+                    ("SKILLS-depo/what-did-you-learn", ".agents/skills/what-did-you-learn"))
+        expected = {origin: file_inventory(self.root / origin) for origin, _ in mappings}
+        put(self.root, "SKILLS-depo/what-did-you-learn/scripts/__pycache__/learning_contract.pyc", "Excluded bytecode\n")
         self.apply()
-        for origin, target in (("LEARNING-depo", "reference-assets/LEARNING-depo"),
-                               ("SKILLS-depo/what-did-you-learn", ".agents/skills/what-did-you-learn")):
-            self.assertEqual(file_inventory(self.root / origin), file_inventory(self.template / target))
+        for origin, target in mappings:
+            self.assertEqual(expected[origin], file_inventory(self.template / target))
         manifest_path = self.root / "LEARNING-depo/contract.json"
         manifest = json.loads(manifest_path.read_text())
         manifest["required_resources"].append("usage.md")
@@ -1067,11 +1071,21 @@ class TemplateUpdateTests(unittest.TestCase):
 class CuratorDistributionTests(unittest.TestCase):
     """The actual generic updater retains its guarantees for the v10 module."""
     def fixture(self):
-        stage=HELPER.parents[1]
-        sys.path.insert(0,str(stage/'SKILLS-depo/init-new-project/tests'))
-        import test_curator_setup
-        temporary=test_curator_setup.fixture_directory('distribution');self.addCleanup(temporary.cleanup)
-        return test_curator_setup.compose(temporary.name)
+        source = HELPER.parents[1]
+        fixture_spec = importlib.util.spec_from_file_location(
+            "curator_distribution_fixture", source / "SKILLS-depo/init-new-project/tests/test_curator_setup.py"
+        )
+        fixtures = importlib.util.module_from_spec(fixture_spec)
+        fixture_spec.loader.exec_module(fixtures)
+        work = tempfile.TemporaryDirectory(prefix="sys4ai-curator-distribution-")
+        self.addCleanup(work.cleanup)
+        with patch.dict(os.environ, {
+            "SYS4AI_CURATOR_TEST_SOURCE": str(source),
+            "SYS4AI_CURATOR_TEST_WORK": str(Path(work.name).resolve()),
+        }):
+            temporary = fixtures.fixture_directory("distribution")
+            self.addCleanup(temporary.cleanup)
+            return fixtures.compose(temporary.name)
 
     def test_curator_missing_inputs_and_customizations_preserve_template(self):
         root,helper,updater,_,_=self.fixture();template=root/updater.TEMPLATE

@@ -18,7 +18,7 @@ Canonical edit location: [ONTOLOGY/bindings/artifacts.json#/@graph/23](<../../ON
 
 ## Sources
 
-- [SOUL.md](<../../SOUL.md>) `section:Verification discipline` SHA256 `3aa4841fa9f2dc177beabaebd341368d797d224cce3bb18b3fd494f34fa473b2` (current)
+- [SOUL.md](<../../SOUL.md>) `section:Verification discipline` SHA256 `095a1ee83eb1a1cf0b71c94f379576c8692bba57aabd6e7ec9957b4a2bacdca3` (current)
 
 ## Backlinks
 

@@ -12,6 +12,41 @@ REQUIREMENTS = ROOT / "Requirements/sys4ai_synchronization_removal_requirements.
 PLAN = ROOT / "Implementation_Plans/sys4ai_synchronization_removal_implementation_plan.md"
 VERIFICATION = ROOT / "Verification/sys4ai_synchronization_removal_verification.md"
 TEMPLATE = ROOT / "Projects/Sys4AI-Template-Project"
+LEARNING_RELEASE = ROOT / "Verification/what-did-you-learn"
+
+# Each pair binds the exact reusable and installed package inventories.
+# The first pair for each skill is from a5d01b84. The second pair is from
+# the verified full-operational depot adoption for release 09392a78.
+DEPOT_SKILL_ADOPTIONS = {
+    "init-new-project": {
+        (
+            "e9f4deafe46f227a30f715fe7d9fd302a675fb188efe2407659e40743680c0b6",
+            "e9f4deafe46f227a30f715fe7d9fd302a675fb188efe2407659e40743680c0b6",
+        ),
+        (
+            "052dd1b7f68b7fd5cb4dc9afb0f044dc3f0a069b3c4c8a82fb9fc615ba20a757",
+            "052dd1b7f68b7fd5cb4dc9afb0f044dc3f0a069b3c4c8a82fb9fc615ba20a757",
+        ),
+    },
+    "memory": {
+        (
+            "1db02bcc971f5a270ad238e16ca6ec47a9eff620997ba910e63ee6157e11143e",
+            "2ac570f074b797d2b27a381466c1d2bb2eec2060e254d14543e7b95f55f6535c",
+        ),
+        (
+            "17341f11635af7dc19ca37414ddb0149d70df160ec42c662edebb14ccf3aecb6",
+            "9bc2de55fca95570e30a52900e01502596f9fad64dc519122b715f2ff1223a05",
+        ),
+    },
+}
+
+
+def package_hashes(folder: Path) -> dict[str, str]:
+    return {
+        item.relative_to(folder).as_posix(): hashlib.sha256(item.read_bytes()).hexdigest()
+        for item in folder.rglob("*")
+        if item.is_file() and "__pycache__" not in item.parts and item.name != ".DS_Store"
+    }
 
 
 class RepositoryContractTests(unittest.TestCase):
@@ -278,54 +313,65 @@ class RepositoryContractTests(unittest.TestCase):
                 resolved = (document.parent / path_text).resolve()
                 self.assertTrue(resolved.exists(), f"{document}: {raw}")
 
+    def read_verified_json(self, path: Path, expected_sha256: str):
+        content = path.read_bytes()
+        self.assertEqual(expected_sha256, hashlib.sha256(content).hexdigest(), str(path))
+        return json.loads(content)
+
+    def assert_depot_skill_adoption(self, skill: str) -> None:
+        source = f"SKILLS-depo/{skill}"
+        destination = f".agents/skills/{skill}"
+        reusable = package_hashes(ROOT / source)
+        self.assertTrue(reusable, source)
+        self.assertEqual(reusable, package_hashes(TEMPLATE / destination))
+
+        active = package_hashes(ROOT / destination)
+        hashes = tuple(
+            hashlib.sha256(json.dumps(inventory, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+            for inventory in (reusable, active)
+        )
+        self.assertIn(hashes, DEPOT_SKILL_ADOPTIONS[skill], skill)
+
     def test_initializer_adoption_is_exact_and_preserves_existing_packages(self) -> None:
-        source = ROOT / "SKILLS-depo/init-new-project"
-        active = ROOT / ".agents/skills/init-new-project"
+        self.assert_depot_skill_adoption("init-new-project")
         record = json.loads((ROOT / "Verification/init-new-project-active-adoption.json").read_text())
-        def manifest(folder: Path) -> dict[str, str]:
-            return {
-                item.relative_to(folder).as_posix(): hashlib.sha256(item.read_bytes()).hexdigest()
-                for item in folder.rglob("*")
-                if item.is_file() and "__pycache__" not in item.parts and item.name != ".DS_Store"
-            }
-        self.assertEqual(manifest(source), manifest(active))
         previous = json.loads((ROOT / "Verification/task-manager-orchestration/root-adoption-manifest.json").read_text())
         current = json.loads((ROOT / "Verification/roles-capitalization/root-adoption.json").read_text())
         licensing = json.loads((ROOT / "Verification/licenses-depot/root-adoption.json").read_text())
         memory_adoption = json.loads((ROOT / "Verification/project-memory/root-adoption-manifest.json").read_text())
         self.assertEqual("PLAN-20260908-5F47ADB2", memory_adoption["plan_id"])
-        expected_current = dict(licensing["initializer_files_sha256"])
+        expected_historical = dict(licensing["initializer_files_sha256"])
         prefix = ".agents/skills/init-new-project/"
         for entry in memory_adoption["entries"]:
             if entry["destination"].startswith(prefix):
                 relative = entry["destination"][len(prefix):]
-                self.assertEqual(expected_current.get(relative), entry["before_sha256"])
-                expected_current[relative] = entry["after_sha256"]
+                self.assertEqual(expected_historical.get(relative), entry["before_sha256"])
+                expected_historical[relative] = entry["after_sha256"]
         automatic_capture = json.loads((ROOT / "Verification/automatic-memory-capture/root-adoption.json").read_text())
         for entry in automatic_capture["entries"]:
             if entry["destination"].startswith(prefix):
                 relative = entry["destination"][len(prefix):]
-                self.assertEqual(expected_current.get(relative), entry["before_sha256"])
-                expected_current[relative] = entry["after_sha256"]
+                self.assertEqual(expected_historical.get(relative), entry["before_sha256"])
+                expected_historical[relative] = entry["after_sha256"]
         learning = json.loads((ROOT / "Verification/what-did-you-learn/active-root-adoption.json").read_text())
         self.assertEqual("PLAN-20260909-2AB7D4CC", learning["plan_id"])
         self.assertEqual("applied", learning["status"])
         for entry in learning["entries"]:
             if entry["destination"].startswith(prefix):
                 relative = entry["destination"][len(prefix):]
-                self.assertEqual(expected_current.get(relative), entry["before_sha256"])
-                expected_current[relative] = entry["after_sha256"]
+                self.assertEqual(expected_historical.get(relative), entry["before_sha256"])
+                expected_historical[relative] = entry["after_sha256"]
         ontology = json.loads((ROOT / "control_records/ontology/root-adoption.json").read_text())
         self.assertEqual("PLAN-20260909-731308FD", ontology["plan_id"])
         self.assertEqual("applied", ontology["status"])
         for entry in ontology["entries"]:
             if entry["destination"].startswith(prefix):
                 relative = entry["destination"][len(prefix):]
-                self.assertEqual(expected_current.get(relative), entry["before_sha256"])
+                self.assertEqual(expected_historical.get(relative), entry["before_sha256"])
                 if entry["after_sha256"] is None:
-                    expected_current.pop(relative, None)
+                    expected_historical.pop(relative, None)
                 else:
-                    expected_current[relative] = entry["after_sha256"]
+                    expected_historical[relative] = entry["after_sha256"]
         advanced_path = ROOT / "Verification/ontology-second-release/root-adoption-manifest.json"
         advanced = json.loads(advanced_path.read_text())
         advanced_receipt = json.loads((ROOT / "Verification/ontology-second-release/root-adoption-receipt.json").read_text())
@@ -335,9 +381,9 @@ class RepositoryContractTests(unittest.TestCase):
         for entry in advanced["changes"]:
             if entry["destination"].startswith(prefix):
                 relative = entry["destination"][len(prefix):]
-                self.assertEqual(expected_current.get(relative), entry["expected_sha256"])
+                self.assertEqual(expected_historical.get(relative), entry["expected_sha256"])
                 self.assertEqual(entry["sha256"], advanced_receipt["reopened"][entry["destination"]])
-                expected_current[relative] = entry["sha256"]
+                expected_historical[relative] = entry["sha256"]
         repair_path = ROOT / "Verification/ontology-health-repairs/change-manifest.json"
         repair = json.loads(repair_path.read_text())
         repair_receipt = json.loads((repair_path.parent / "root-adoption.json").read_text())
@@ -347,10 +393,20 @@ class RepositoryContractTests(unittest.TestCase):
         for entry in repair["changes"]:
             if entry["path"].startswith(prefix):
                 relative = entry["path"][len(prefix):]
-                self.assertEqual(expected_current.get(relative), entry["expected_sha256"])
+                self.assertEqual(expected_historical.get(relative), entry["expected_sha256"])
                 self.assertEqual(entry["sha256"], repair_receipt["reopened"][entry["path"]])
-                expected_current[relative] = entry["sha256"]
-        self.assertEqual(expected_current, manifest(source))
+                expected_historical[relative] = entry["sha256"]
+        # The repair receipt closes the historical chain against its own frozen sources.
+        repair_evidence = repair_path.parent / "initializer"
+        final_suite = json.loads((repair_evidence / "final-suite.receipt.json").read_text())
+        self.assertEqual("passed", final_suite["status"])
+        source_ref = final_suite["source_manifest"]
+        historical = self.read_verified_json(repair_evidence / source_ref["path"], source_ref["sha256"])
+        source_prefix = "SKILLS-depo/init-new-project/"
+        self.assertEqual(expected_historical, {
+            path[len(source_prefix):]: item["sha256"]
+            for path, item in historical.items() if path.startswith(source_prefix)
+        })
         self.assertEqual("applied", licensing["status"])
         self.assertEqual(current["initializer_files_sha256"], licensing["previous_initializer_files_sha256"])
         self.assertNotEqual(current["initializer_files_sha256"], licensing["initializer_files_sha256"])
@@ -439,21 +495,76 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertTrue((ROOT / "Tasks/INDEX.md").is_file())
 
     def test_learning_sources_template_and_selected_root_adoption_match(self) -> None:
-        def inventory(folder):
-            return {p.relative_to(folder).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
-                    for p in folder.rglob("*") if p.is_file()
-                    and "__pycache__" not in p.parts and p.name != ".DS_Store"}
-        for source, destination in (("LEARNING-depo", "reference-assets/LEARNING-depo"),
-                                    ("SKILLS-depo/what-did-you-learn", ".agents/skills/what-did-you-learn"),
-                                    ("SKILLS-depo/memory", ".agents/skills/memory")):
-            expected = inventory(ROOT / source)
-            self.assertTrue(expected)
-            self.assertEqual(expected, inventory(TEMPLATE / destination))
-            self.assertEqual(expected, inventory(ROOT / destination))
-        baseline = json.loads((ROOT / "Verification/what-did-you-learn/baseline.json").read_text())
-        for relative in ("SOUL.md", "AGENTS.md", "ROLE.md", "memory.yaml", "depot/projects.json"):
-            self.assertEqual(baseline["protected"][relative]["sha256"],
-                             hashlib.sha256((ROOT / relative).read_bytes()).hexdigest())
+        contracts = package_hashes(ROOT / "LEARNING-depo")
+        self.assertTrue(contracts)
+        for project in (ROOT, TEMPLATE):
+            self.assertEqual(contracts, package_hashes(project / "reference-assets/LEARNING-depo"))
+
+        learning_skill = ".agents/skills/what-did-you-learn"
+        expected = package_hashes(ROOT / "SKILLS-depo/what-did-you-learn")
+        self.assertEqual(expected, package_hashes(TEMPLATE / learning_skill))
+        receipt = json.loads((LEARNING_RELEASE / "active-root-adoption.json").read_text())
+        self.assertEqual("applied", receipt["status"])
+        manifest = self.read_verified_json(LEARNING_RELEASE / "active-root-manifest.json", receipt["manifest_sha256"])
+        self.assertEqual(manifest["entries"], receipt["entries"])
+        variant = "references/improvement-and-reuse.md"
+        self.assertIn(variant, expected)
+        entry, = [item for item in manifest["entries"] if item["destination"] == f"{learning_skill}/{variant}"]
+        expected[variant] = entry["after_sha256"]
+        self.assertEqual(expected, package_hashes(ROOT / learning_skill))
+        self.assert_depot_skill_adoption("memory")
+
+        baseline_path = LEARNING_RELEASE / "baseline.json"
+        baseline = json.loads(baseline_path.read_text())
+        preservation = json.loads((LEARNING_RELEASE / "preservation-results.json").read_text())
+        self.assertEqual("passed", preservation["status"])
+        self.assertEqual(baseline_path.relative_to(ROOT).as_posix(), preservation["baseline"])
+        protected = {item["path"]: item for item in preservation["protected_paths"]}
+        # The preservation report owns the release-time AGENTS.md and registry bytes.
+        # The governance-binding and project-registry tests check those files in the active depot.
+        for path in ("SOUL.md", "AGENTS.md", "ROLE.md", "memory.yaml", "depot/projects.json"):
+            frozen = json.dumps(baseline["protected"][path], sort_keys=True).encode()
+            digest = hashlib.sha256(frozen).hexdigest()
+            self.assertEqual("preserved", protected[path]["result"])
+            self.assertEqual(digest, protected[path]["before_inventory_sha256"])
+            self.assertEqual(digest, protected[path]["after_inventory_sha256"])
+
+        adoption = json.loads((ROOT / "Verification/finish-requested-work/root-adoption.json").read_text())
+        superseded = adoption["superseded_learning_pins"]
+        self.assertEqual(set(superseded), {"SOUL.md", "ROLE.md", "memory.yaml"})
+        for relative, version in superseded.items():
+            self.assertEqual(baseline["protected"][relative]["sha256"], version["learning_release_sha256"])
+            self.assertEqual(version["adopted_sha256"], hashlib.sha256((ROOT / relative).read_bytes()).hexdigest())
+
+    def test_completion_guidance_reaches_template_and_active_root(self) -> None:
+        adoption = json.loads((ROOT / "Verification/finish-requested-work/root-adoption.json").read_text())
+        markers = {
+            "SOUL.md": "## Finish the requested work",
+            "ROLE.md": "give one example of what the recipient can inspect or try",
+            "Roles/project-sub-agent/ROLE.md": "Finish independent work within the assignment",
+            ".agents/skills/communication/SKILL.md": "Write a final handoff that stands on its own.",
+        }
+        for role in ("documentation-curator", "improvement-maintenance", "knowledge-curator"):
+            markers[f"Roles/{role}/AGENTS.md"] = "Do not create nested sub-agents. Finish and verify"
+        self.assertCountEqual(markers, [row["active_root"] for row in adoption["guidance"]])
+        for row in adoption["guidance"]:
+            with self.subTest(active=row["active_root"]):
+                source = (ROOT / row["source"]).read_bytes()
+                self.assertEqual(source, (TEMPLATE / row["template_path"]).read_bytes())
+                for text in (source.decode(), (ROOT / row["active_root"]).read_text()):
+                    self.assertIn(markers[row["active_root"]], " ".join(text.split()))
+
+        for name in ("memory.yaml", "ontology.yaml", "ontology-advanced.yaml"):
+            with self.subTest(config=name):
+                config = json.loads((ROOT / name).read_text())
+                binding = config["publication"]["director" if name == "memory.yaml" else "binding"]
+                self.assertEqual(binding["actor_id"], "/root")
+                self.assertCountEqual(
+                    (ref["path"] for ref in binding["authority"]), ("SOUL.md", "AGENTS.md", "ROLE.md")
+                )
+                for ref in binding["authority"]:
+                    actual_hash = hashlib.sha256((ROOT / ref["path"]).read_bytes()).hexdigest()
+                    self.assertEqual(ref["sha256"], actual_hash)
 
 
 if __name__ == "__main__":

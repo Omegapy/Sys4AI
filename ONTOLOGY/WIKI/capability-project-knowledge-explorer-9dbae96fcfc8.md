@@ -29,7 +29,7 @@ Closing a browser tab alone does not revoke the server session. Bootstrap links 
 ## Sources
 
 - [.agents/skills/ontology/SKILL.md](<../../.agents/skills/ontology/SKILL.md>) `section:Ontology` SHA256 `6b8c22d082031a46c7cf702f6e40f4ea33537c8dad2e3bd08cfd91614676f4a7` (current)
-- [SPECS.md](<../../SPECS.md>) `section:Project Knowledge Explorer and initialization v13` SHA256 `20aba9628de8d556d394715aa01d2bc01ed3ddeea5c5bcab4624430dca34d6c4` (current)
+- [SPECS.md](<../../SPECS.md>) `section:Project Knowledge Explorer and initialization v13` SHA256 `48d74f0f7b72b1e10fb645371a1b8f8d1b31af97bcecb07979074458f41b0447` (current)
 
 ## Backlinks
 

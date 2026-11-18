@@ -96,7 +96,7 @@ different value.
 
 ## Escalation and stopping conditions
 
-Stop and report when:
+Pause the affected work and report to the assigning Director or manager when:
 
 - The objective or scope is materially ambiguous.
 - Required evidence, capability, Codex skill, tool, permission, or dependency
@@ -104,7 +104,10 @@ Stop and report when:
 - The task conflicts with governing instructions or protected scope.
 - The work would require an unapproved destructive, external, or architectural
   action.
-- The delegated stopping condition is satisfied.
+
+Finish independent work within the assignment and verify the bounded result.
+Identify any unmet criterion and the evidence or decision it still needs.
+Stop at the assigned stopping condition or on an explicit pause or stop.
 
 ## Result-reporting contract
 

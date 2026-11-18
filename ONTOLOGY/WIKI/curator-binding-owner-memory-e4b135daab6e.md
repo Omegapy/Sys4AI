@@ -18,7 +18,7 @@ Canonical edit location: [ONTOLOGY/bindings/curator.jsonld#/@graph/7](<../../ONT
 
 ## Sources
 
-- [Roles/knowledge-curator/AGENTS.md](<../../Roles/knowledge-curator/AGENTS.md>) `line:1` SHA256 `e590b647865b674d8947e0b533ff99ccab873eeabf389e6c5e84eb64dd6fd2dd` (current)
+- [Roles/knowledge-curator/AGENTS.md](<../../Roles/knowledge-curator/AGENTS.md>) `line:1` SHA256 `fc69f5e933c325e526bb30b635571b183ef19209644e0940356a58cb1d797fa3` (current)
 - [Roles/knowledge-curator/ROLE.md](<../../Roles/knowledge-curator/ROLE.md>) `line:1` SHA256 `b6d509eff7984b1ad02ce9b2a9893c299af045de0ebefa87accd0b45ba3d3c75` (current)
 
 ## Backlinks
