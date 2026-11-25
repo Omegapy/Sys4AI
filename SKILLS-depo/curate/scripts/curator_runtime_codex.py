@@ -87,6 +87,20 @@ def shape(value, schema, definitions, depth=0):
     if '$ref' in schema:
         parts = schema['$ref'].split('/')[2:]; selected = definitions
         for part in parts: selected = selected[part]
+        if parts == ['ThreadItem'] and set(selected.get('properties', {})) == {'startedAtMs', 'completedAtMs'}:
+            # The packaged runtime emits lifecycle times beside each tagged item.
+            # Combine the generated sibling definitions before sealing each branch.
+            common = selected['properties']
+            require(set(selected) <= {'description', 'type', 'properties', 'oneOf'}
+                    and selected.get('type') == 'object' and isinstance(selected.get('oneOf'), list),
+                    'wire_schema', 'Unexpected flattened thread item schema.')
+            branches = []
+            for branch in selected['oneOf']:
+                require(branch.get('type') == 'object' and isinstance(branch.get('properties'), dict)
+                        and not set(common) & set(branch['properties']),
+                        'wire_schema', 'Unexpected thread item variant properties.')
+                branches.append({**branch, 'properties': {**branch['properties'], **common}})
+            selected = {'oneOf': branches}
         return shape(value, selected, definitions, depth + 1)
     for union in ('oneOf', 'anyOf'):
         if union in schema:
@@ -498,7 +512,11 @@ class CodexAdapter:
         require(set(apps)<= {'_default'} and isinstance(app_default,dict)
                 and all(app_default.get(key) is False for key in ('enabled','destructive_enabled','open_world_enabled')),
                 'apps_surface_unproven','App tools must be explicitly disabled without per-app overrides.')
-        require(set(desktop)<=DESKTOP_UI_KEYS and desktop.get('realtimeVoiceScreenContextEnabled') is False
+        # This desktop migration marker records a UI preference migration.
+        desktop_keys=set(desktop)
+        if type(desktop.get('migratedFollowUpQueueToSteer')) is bool:
+            desktop_keys.discard('migratedFollowUpQueueToSteer')
+        require(desktop_keys<=DESKTOP_UI_KEYS and desktop.get('realtimeVoiceScreenContextEnabled') is False
                 and desktop.get('keepRemoteControlAwakeWhilePluggedIn') is False,
                 'desktop_surface_unproven','Unselected desktop routes or unknown desktop settings remain.')
         require(set(configured_tools)<= {'web_search'},'tools_surface_unproven','Unknown effective tool configuration.')

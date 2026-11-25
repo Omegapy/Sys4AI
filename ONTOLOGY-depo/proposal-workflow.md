@@ -11,8 +11,13 @@ graph cache. Rebuilding indexes, inference or wiki files cannot remove it.
 decision event. The current head changes through expected-revision checks and
 the publication lock. Earlier revisions retain their bytes and review records.
 Saving a revision invalidates the previous review. Two clients cannot silently
-overwrite the same saved revision. A stale target or draft returns a conflict;
-the browser retains entered text and the earlier saved draft remains available.
+overwrite the same saved revision. A stale expected draft revision returns
+`draft_conflict`. Keep the submitted text and reopen the current proposal
+before comparing revisions. Earlier saved revisions remain available. A saved
+candidate can carry stale target hashes. The local `draft_form` helper returns
+`target_conflict` for a changed target. The publisher's expected-state check in `preview` returns
+`expected_changed` when the target digest or absence differs from
+`expected_sha256`. Reopen the target before preparing a successor.
 
 `open_proposal` and `list_proposals` are read-only. `decide` records distinct
 accept, reject, discard, reopen and supersede outcomes. Accept means that the
@@ -43,8 +48,10 @@ current grant. Creating a new operation to hide a partial commit is unsupported.
 
 ## Native generation and refinement
 
-The [generation reference](../SKILLS-depo/ontology/references/proposal-generation.md)
-defines `prepare` and `capture`. An immutable request freezes selected source
+For native generation and refinement, follow the installed ontology skill's
+**native proposal generation workflow** link to read
+`references/proposal-generation.md` in full. It defines `prepare` and
+`capture`. An immutable request freezes selected source
 bytes, approved ontology context, target documents, runtime attribution and
 the bounded objective. Source instructions remain quoted data. The generator
 receives no publication authority, dependency-installation authority or new

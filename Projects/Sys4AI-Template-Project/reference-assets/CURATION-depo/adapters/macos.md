@@ -18,8 +18,9 @@ The executor uses fixed `/bin/launchctl print`, `bootstrap` and `bootout` comman
 for the derived per-checkout label and its fixed user LaunchAgents path. It has
 no arbitrary command interface.
 
-Install requires an absent owned label/asset, including when an unowned asset
-happens to contain identical bytes. Uninstall requires the exact completed
+Install requires an absent destination asset and an unloaded label. Apply the
+same check at the new destination on relocation. Preserve an occupied
+destination, including an unowned asset with identical bytes. Uninstall requires the exact completed
 installation receipt. For relocation, `selection` identifies the newly reviewed
 checkout and `prior` identifies the old root and completed operation. The new
 asset/load is observed before the old label is unloaded and its exact asset

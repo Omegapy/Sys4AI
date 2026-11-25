@@ -25,6 +25,7 @@ HISTORY_METADATA_COLUMNS = {
 }
 HISTORY_METADATA_KEYS = {'thread_history_projection_state':('thread_id',),'thread_turns':('thread_id','turn_id'),
     'thread_items':('thread_id','turn_id','item_id'),'thread_realtime_items':('thread_id','item_id')}
+DESKTOP_PROOF_HISTORY_LIMITS = (1_000_000, 32)
 
 AMBIENT_LIMITS={'ambient_review_batches':4,'new_external_ids_per_batch':2,'new_external_ids_total':8,
     'new_native_projects_total':4,'new_project_roots_total':8,'challenge_or_receipt_bytes':200000,
@@ -235,7 +236,8 @@ class NativeStorageAdmission:
         if self.history_index is not None:
             h=self.history_index
             exact(h,('schema_version','path','identity','schema_sha256','migrations_sha256','metadata_row_bound','scan_seconds','columns','receipts'))
-            require(h['schema_version']==1 and h['metadata_row_bound']==350000 and h['scan_seconds']==15
+            limits=DESKTOP_PROOF_HISTORY_LIMITS if packet.get('current_host') else (350000,15)
+            require(h['schema_version']==1 and (h['metadata_row_bound'],h['scan_seconds'])==limits
                     and h['columns']=={k:list(v) for k,v in HISTORY_METADATA_COLUMNS.items()}
                     and Path(h['path']).parent==Path(selected['runtime_home']),
                     'native_history_index_scope','Select only the existing history index and exact metadata limits/columns.')
@@ -308,7 +310,7 @@ class NativeStorageAdmission:
                 for row in cursor:
                     total+=1
                     if total%256==0:check()
-                    require(total<=selected['metadata_row_bound'],'native_history_row_bound','History metadata exceeds the separate 350000-row scope.')
+                    require(total<=selected['metadata_row_bound'],'native_history_row_bound','History metadata exceeds its selected row bound.')
                     require(all(value is None or type(value) is int or (type(value) is str and len(value)<=1024) for value in row),
                             'native_history_metadata','Unexpected or oversized metadata scalar.')
                     value=dict(zip(columns,row));actor=value['thread_id']

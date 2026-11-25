@@ -43,13 +43,15 @@ profiles, authority bindings, guard setup, limits and other configuration
 remain separately selected setup operations. Existing extension statement IDs
 retain their exact meanings; extension additions use distinct sourced IDs.
 
-Advanced publication needs `publication: {enabled, binding}` in the advanced
-companion. Its destination-local binding repeats the current actor and exact
-SOUL/AGENTS/ROLE references, with scope exactly `ONTOLOGY/extensions` and
-`ontology-advanced.yaml`. It does not broaden the core binding. The existing
-current Director/confirmed-manager ownership checks still apply. Advanced
-preview and commit run the actual selected standards validation and applicable
-consistency checks; unavailable or incompatible backends cannot publish.
+A Director change to advanced files requires enabled
+`publication: {enabled, binding}` in the companion. The binding names the
+destination-local actor, exact SOUL/AGENTS/ROLE sources and scope
+`ONTOLOGY/extensions` and `ontology-advanced.yaml`. Separate setup owns binding
+changes. A confirmed manager follows the current Task write scope and the
+grant's orchestration checks. Both routes require core publication enablement
+and their current ownership checks. Advanced preview and commit run actual
+selected standards validation and applicable consistency checks. Hold publication
+if a required backend is unavailable or incompatible.
 The reviewed preview binds the advanced rules/shapes, helper context, exact
 certified runtime and returned validation state.
 
@@ -60,8 +62,9 @@ preview and current advanced scope. A saved proposal revision instead requires
 `proposal_review: {proposal_id, revision, revision_sha256, validation_sha256,
 review_sha256}`. `publish_revision` verifies this exact current immutable
 candidate, eligible validation, accepted review and target snapshot before
-calling the transactional publisher. Review acceptance, saving and a browser
-click confer no authority by themselves.
+calling the transactional publisher. The installed `proposal-publish` command
+uses grant schema 2. Review acceptance, saving and a browser click confer
+no authority by themselves.
 
 The accepted proposal revision cannot change after its publication intent is
 saved. Partial and complete receipts retain its review identity. Recovery uses
@@ -77,15 +80,17 @@ target compare-and-swap, receipt and recovery responsibility. A guard's
 conformant semantic result is never a substitute for those checks.
 
 See [the proposal workflow](proposal-workflow.md) for immutable draft storage,
-native generation, browser session controls and lossless RDF staging.
+native generation, local authoring, read-only Explorer entry and lossless RDF
+staging.
 
 ## Native Curator grant version 3
 
 Grant v1 core and grant v2 advanced remain unchanged. Grant v3 explicitly selects
 `owner_profile: core-v1` or `advanced-v2`, plus `controller_origin: curator` and
 a strict ontology-owned broker binding for the current live native call,
-protocol, charter and policy. Only the current confirmed version-2 Task manager
-can use this envelope. A memory grant supplies no ontology authority.
+protocol, charter and policy. Only the current confirmed Curator Task manager
+under orchestration version 2 can use this envelope. A memory grant supplies
+no ontology authority.
 
 The advanced profile retains companion config, proposal review/revision, preview,
 exact-file, lifecycle and publication checks. The grant is never converted into

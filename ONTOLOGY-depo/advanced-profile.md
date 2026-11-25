@@ -44,8 +44,11 @@ The optional `publication` binding has `enabled` and `binding`. Its binding
 names a destination-local actor, the exact scopes `ontology-advanced.yaml` and
 `ONTOLOGY/extensions`, and the current `SOUL.md`, `AGENTS.md`, and `ROLE.md`
 digests. This grants no core, memory, Task, or external authority by itself.
-Semantic publication may change selected extension bytes and their existing
-companion locks only. Profile/authority changes use separately selected setup.
+Version-2 semantic publication can update selected extensions, their existing
+companion locks and already selected local Turtle shapes. A shape edit needs
+the updated shape digest in every extension selecting it and a matching
+companion lock for each changed extension. Use separate setup for new extension or shape selection and
+profile or authority changes.
 
 RDF projection maps compact instance types directly to `rdf:type`. A compact
 `subtypeOf` relation maps explicitly to `rdfs:subClassOf`; other named
@@ -61,8 +64,9 @@ not load another project. Projection and queries do not write a persistent
 alternative authoring graph. Context binds canonical inputs, selected sources,
 module versions, companion/extension digests, profile and rule/shape versions.
 
-Durable proposals remain under `ONTOLOGY/proposals/`; reviewed approvals and
-publication/recovery records remain under `control_records/ontology/`. Derived
+Saved candidate revisions and reviews use
+`control_records/ontology/proposals/ONTPROP-.../`. Publication and recovery
+records use `control_records/ontology/`. Derived
 graphs, closures and indexes belong under `.sys4ai/ontology/`. Rebuilding a
 derived product must not delete a proposal, receipt, canonical record, or memory
 history. Runtime certification/worker capacity slots live in the selected
